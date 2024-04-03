@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.6.1",
+    "version": "14.7.1",
     "data": {
         "Olaf": {
             "id": "Olaf",
@@ -139,12 +139,14 @@
                         "label": [
                             "Damage",
                             "Mana Cost",
-                            "Slow"
+                            "Slow",
+                            "Monster Damage"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cost }} -> {{ costNL }}",
-                            "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%"
+                            "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%",
+                            "{{ monsterdamage }} -> {{ monsterdamageNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -300,13 +302,13 @@
                     ],
                     "cooldownBurn": "16/15/14/13/12",
                     "cost": [
-                        30,
-                        30,
-                        30,
-                        30,
-                        30
+                        50,
+                        50,
+                        50,
+                        50,
+                        50
                     ],
-                    "costBurn": "30",
+                    "costBurn": "50",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -420,7 +422,7 @@
                     "id": "OlafRecklessStrike",
                     "name": "Reckless Swing",
                     "description": "Olaf attacks with such force that it deals true damage to his target and himself, refunding the Health cost if he destroys the target.",
-                    "tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>{{ totaldamage }} true damage</trueDamage>. If the enemy dies, the cost is refunded.<br /><br />Attacks lower the Cooldown of this Ability by 1 second.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Olaf ferociously swings his axes, dealing <trueDamage>{{ totaldamage }} true damage</trueDamage>. If the enemy dies, the cost is refunded.<br /><br />Attacks lower the Cooldown of this Ability by 1 second, increased to 2 seconds when attacking monsters.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -584,11 +586,11 @@
                     ],
                     "cooldownBurn": "100/90/80",
                     "cost": [
-                        0,
-                        0,
-                        0
+                        100,
+                        100,
+                        100
                     ],
-                    "costBurn": "0",
+                    "costBurn": "100",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -657,7 +659,7 @@
                         "0"
                     ],
                     "vars": [],
-                    "costType": "No Cost",
+                    "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
                         400,
@@ -674,7 +676,7 @@
                         "w": 48,
                         "h": 48
                     },
-                    "resource": "No Cost"
+                    "resource": "{{ cost }} {{ abilityresourcename }}"
                 }
             ],
             "passive": {

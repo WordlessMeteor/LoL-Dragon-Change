@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.6.1",
+    "version": "14.7.1",
     "data": {
         "Olaf": {
             "id": "Olaf",
@@ -139,12 +139,14 @@
                         "label": [
                             "伤害",
                             "法力消耗",
-                            "减速"
+                            "减速",
+                            "野怪伤害"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cost }} -> {{ costNL }}",
-                            "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%"
+                            "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%",
+                            "{{ monsterdamage }} -> {{ monsterdamageNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -300,13 +302,13 @@
                     ],
                     "cooldownBurn": "16/15/14/13/12",
                     "cost": [
-                        30,
-                        30,
-                        30,
-                        30,
-                        30
+                        50,
+                        50,
+                        50,
+                        50,
+                        50
                     ],
-                    "costBurn": "30",
+                    "costBurn": "50",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -420,7 +422,7 @@
                     "id": "OlafRecklessStrike",
                     "name": "鲁莽挥击",
                     "description": "奥拉夫以破釜沉舟之势发动进攻，对目标造成真实伤害（不受护甲与魔抗减免），同时，自身也会根据敌方所受的伤害而受到真实伤害的反噬。",
-                    "tooltip": "奥拉夫狂野地挥舞他的双斧，造成<trueDamage>{{ totaldamage }}真实伤害</trueDamage>。如果该敌人阵亡，那么会返还此技能的消耗。<br /><br />攻击会使这个技能的冷却时间缩短1秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "奥拉夫狂野地挥舞他的双斧，造成<trueDamage>{{ totaldamage }}真实伤害</trueDamage>。如果该敌人阵亡，那么会返还此技能的消耗。<br /><br />攻击会使这个技能的冷却时间缩短1秒，在攻击野怪时，缩短值提升至2秒。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -584,11 +586,11 @@
                     ],
                     "cooldownBurn": "100/90/80",
                     "cost": [
-                        0,
-                        0,
-                        0
+                        100,
+                        100,
+                        100
                     ],
-                    "costBurn": "0",
+                    "costBurn": "100",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -657,7 +659,7 @@
                         "0"
                     ],
                     "vars": [],
-                    "costType": "无消耗",
+                    "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
                         400,
@@ -674,7 +676,7 @@
                         "w": 48,
                         "h": 48
                     },
-                    "resource": "无消耗"
+                    "resource": "{{ cost }} {{ abilityresourcename }}"
                 }
             ],
             "passive": {

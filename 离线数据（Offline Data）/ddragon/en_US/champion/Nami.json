@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.6.1",
+    "version": "14.7.1",
     "data": {
         "Nami": {
             "id": "Nami",
@@ -288,7 +288,7 @@
                     "id": "NamiW",
                     "name": "Ebb and Flow",
                     "description": "Unleashes a stream of water that bounces back and forth between allied and enemy champions, healing allies and damaging enemies.",
-                    "tooltip": "Nami unleashes a stream of water that bounces between allied and enemy champions. Each champion can only be hit once, and it hits up to {{ e2 }} targets.<li>Restores <healing>{{ totalhealtooltip }} Health</healing> to allies and will bounce to a nearby enemy champion. <li>Deals <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> to enemies and will bounce to a nearby allied champion.<br />The damage and healing value is modified by {{ bouncescalingtooltip }} each bounce. {{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Nami unleashes a stream of water that bounces between allied and enemy champions. Each champion can only be hit once, and it hits up to {{ maxtargets }} targets.<li>Restores <healing>{{ totalheal }} Health</healing> to allies and will bounce to a nearby enemy champion. <li>Deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to enemies and will bounce to a nearby allied champion.<br />The damage and healing value is modified by {{ bouncescaling }} each bounce. {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Healing",
@@ -322,39 +322,39 @@
                     "effect": [
                         null,
                         [
-                            60,
-                            100,
-                            140,
-                            180,
-                            220
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            55,
-                            75,
-                            95,
-                            115,
-                            135
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.075,
-                            0.075,
-                            0.075,
-                            0.075,
-                            0.075
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -394,11 +394,11 @@
                     ],
                     "effectBurn": [
                         null,
-                        "60/100/140/180/220",
-                        "3",
-                        "55/75/95/115/135",
-                        "15",
-                        "0.08",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -431,7 +431,7 @@
                     "id": "NamiE",
                     "name": "Tidecaller's Blessing",
                     "description": "Empowers an allied champion for a short duration. The ally's basic attacks and spells deal bonus magic damage and slow the target.",
-                    "tooltip": "Nami empowers an allied champion's next {{ e4 }} Attacks and Abilities for {{ e5 }} seconds, causing them to <status>Slow</status> their targets by {{ totalslowtooltip }} for {{ e3 }} second and deal an additional <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage>. {{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Nami empowers an allied champion's next {{ hitcount }} Attacks and Abilities for {{ buffduration }} seconds, causing them to <status>Slow</status> their targets by {{ totalslow }} for {{ slowduration }}s and deal an additional <magicDamage>{{ totaldamage }} magic damage</magicDamage>. {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -439,8 +439,8 @@
                             "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }}% -> {{ e2NL }}%",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ baseslow }}% -> {{ baseslowNL }}%",
                             "{{ cost }} -> {{ costNL }}"
                         ]
                     },
@@ -466,10 +466,10 @@
                         null,
                         [
                             20,
-                            35,
+                            30,
+                            40,
                             50,
-                            65,
-                            80
+                            60
                         ],
                         [
                             15,
@@ -537,7 +537,7 @@
                     ],
                     "effectBurn": [
                         null,
-                        "20/35/50/65/80",
+                        "20/30/40/50/60",
                         "15/20/25/30/35",
                         "1",
                         "3",

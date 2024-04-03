@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.6.1",
+    "version": "14.7.1",
     "data": {
         "Nami": {
             "id": "Nami",
@@ -288,7 +288,7 @@
                     "id": "NamiW",
                     "name": "冲击之潮",
                     "description": "释放一股在友方英雄和敌方英雄之间交替流动的水流，治疗友军并伤害敌军。",
-                    "tooltip": "娜美释放一股在友方英雄和敌方英雄之间交替弹跳的水流。每个目标只会被弹到一次，并且水流至多可弹{{ e2 }}个目标。<li>为友方英雄回复<healing>{{ totalhealtooltip }}生命值</healing>并弹向附近的一名敌方英雄身上。<li>给敌方英雄造成<magicDamage>{{ totaldamagetooltip }}魔法伤害</magicDamage>并弹向附近的一名友方英雄身上。<br />每次弹跳会使伤害和治疗效果修正{{ bouncescalingtooltip }}。 {{ spellmodifierdescriptionappend }}",
+                    "tooltip": "娜美释放一股在友方英雄和敌方英雄之间交替弹跳的水流。每个目标只会被弹到一次，并且水流至多可弹{{ maxtargets }}个目标。<li>为友方英雄回复<healing>{{ totalheal }}生命值</healing>并弹向附近的一名敌方英雄身上。<li>对敌方英雄造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>并弹向附近的一名友方英雄身上。<br />每次弹跳会使伤害和治疗数额修正{{ bouncescaling }}。 {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "治疗效果",
@@ -322,39 +322,39 @@
                     "effect": [
                         null,
                         [
-                            60,
-                            100,
-                            140,
-                            180,
-                            220
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            55,
-                            75,
-                            95,
-                            115,
-                            135
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.075,
-                            0.075,
-                            0.075,
-                            0.075,
-                            0.075
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -394,11 +394,11 @@
                     ],
                     "effectBurn": [
                         null,
-                        "60/100/140/180/220",
-                        "3",
-                        "55/75/95/115/135",
-                        "15",
-                        "0.08",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -431,7 +431,7 @@
                     "id": "NamiE",
                     "name": "唤潮之佑",
                     "description": "短时间里强化一个友军英雄。友军的普通攻击和技能会对其目标造成额外伤害和减速效果。",
-                    "tooltip": "娜美强化一位友方英雄的下{{ e4 }}次普通攻击和技能，持续{{ e5 }}秒，使其可以使目标<status>减速</status>{{ totalslowtooltip }}，持续{{ e3 }}秒，并造成额外的<magicDamage>{{ totaldamagetooltip }}魔法伤害</magicDamage>。 {{ spellmodifierdescriptionappend }}",
+                    "tooltip": "娜美强化一位友方英雄的下{{ hitcount }}次普通攻击和技能，持续{{ buffduration }}秒，使其可以对目标造成持续{{ slowduration }}秒的{{ totalslow }}<status>减速</status>，并造成额外的<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>。 {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -439,8 +439,8 @@
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }}% -> {{ e2NL }}%",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ baseslow }}% -> {{ baseslowNL }}%",
                             "{{ cost }} -> {{ costNL }}"
                         ]
                     },
@@ -466,10 +466,10 @@
                         null,
                         [
                             20,
-                            35,
+                            30,
+                            40,
                             50,
-                            65,
-                            80
+                            60
                         ],
                         [
                             15,
@@ -537,7 +537,7 @@
                     ],
                     "effectBurn": [
                         null,
-                        "20/35/50/65/80",
+                        "20/30/40/50/60",
                         "15/20/25/30/35",
                         "1",
                         "3",

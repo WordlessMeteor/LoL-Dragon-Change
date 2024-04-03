@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.6.1",
+    "version": "14.7.1",
     "data": {
         "Karma": {
             "id": "Karma",
@@ -153,7 +153,7 @@
                     "id": "KarmaQ",
                     "name": "心灵烈焰",
                     "description": "卡尔玛向前方发射一枚灵能法球。这枚法球会在命中第一个敌人时爆炸，并造成伤害。<br><br>梵咒增效：除爆炸之外，梵咒还会提升她的心灵烈焰的破坏力，同时创造出一个火环，火环会在短暂的延时后造成伤害。",
-                    "tooltip": "卡尔玛发射一团能量，对命中的第一个目标及其周围的敌人们造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，以及持续{{ e3 }}秒的{{ e2 }}%<status>减速</status>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "卡尔玛发射一团能量，对命中的第一个目标及其周围的敌人们造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，以及持续{{ slowduration }}秒的{{ slowamount*-100 }}%<status>减速</status>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -187,25 +187,25 @@
                     "effect": [
                         null,
                         [
-                            70,
-                            120,
-                            170,
-                            220,
-                            270
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            35,
-                            35,
-                            35,
-                            35,
-                            35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -259,9 +259,9 @@
                     ],
                     "effectBurn": [
                         null,
-                        "70/120/170/220/270",
-                        "35",
-                        "1.5",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -296,7 +296,7 @@
                     "id": "KarmaSpiritBind",
                     "name": "坚定不移",
                     "description": "卡尔玛在她和目标敌人之间产生一条灵链，同时造成伤害，并使目标暴露。如果灵链在一段时间内没有被破坏，那么目标敌人就会被束缚在原地并再次受到伤害。<br><br>梵咒增效：卡尔玛强化灵链，治疗自身并延长禁锢时长。",
-                    "tooltip": "卡尔玛用灵链来连接她和一名敌方英雄或野怪，造成<magicDamage>{{ initialdamage }}魔法伤害</magicDamage>并使其显形2秒。如果灵链一直未断裂，那么目标会再次受到<magicDamage>{{ initialdamage }}魔法伤害</magicDamage>并被<status>禁锢</status>{{ e2 }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "卡尔玛用灵链来连接她和一名敌方英雄或野怪，造成<magicDamage>{{ initialdamage }}魔法伤害</magicDamage>并使其显形{{ tetherduration }}秒。如果灵链一直未断裂，那么目标会再次受到<magicDamage>{{ initialdamage }}魔法伤害</magicDamage>并被<status>禁锢</status>{{ rootduration }}秒。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -304,8 +304,8 @@
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ effect1amount*0.500000 }} -> {{ effect1amountnl*0.500000 }}",
-                            "{{ e2 }} -> {{ e2NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ rootduration }} -> {{ rootdurationNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
                     },
@@ -330,39 +330,39 @@
                     "effect": [
                         null,
                         [
-                            80,
-                            130,
-                            180,
-                            230,
-                            280
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.4,
-                            1.55,
-                            1.7,
-                            1.85,
-                            2
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            825,
-                            825,
-                            825,
-                            825,
-                            825
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -402,11 +402,11 @@
                     ],
                     "effectBurn": [
                         null,
-                        "80/130/180/230/280",
-                        "1.4/1.55/1.7/1.85/2",
-                        "2",
-                        "2",
-                        "825",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -439,7 +439,7 @@
                     "id": "KarmaSolKimShield",
                     "name": "鼓舞",
                     "description": "卡尔玛召唤一个防御性的护盾来吸收即将到来的伤害，并为目标友军提升移动速度。<br><br>梵咒增效：能量从目标处向外辐射，强化初始护盾，并对附近的友方英雄施加鼓舞效果。",
-                    "tooltip": "卡尔玛为一名友方英雄提供持续{{ e4 }}秒的<shield>{{ totalshield }}护盾值</shield>和持续{{ e2 }}秒的<speed>{{ e3 }}%移动速度</speed>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "卡尔玛为一名友方英雄提供持续{{ shieldduration }}秒的<shield>{{ totalshield }}护盾值</shield>和持续{{ movespeedduration }}秒的<speed>{{ movespeed*100 }}%移动速度</speed>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "护盾值",
@@ -447,7 +447,7 @@
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ baseshield }} -> {{ baseshieldNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -473,32 +473,32 @@
                     "effect": [
                         null,
                         [
-                            80,
-                            125,
-                            170,
-                            215,
-                            260
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            40,
-                            40,
-                            40,
-                            40,
-                            40
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2.5,
-                            2.5,
-                            2.5,
-                            2.5,
-                            2.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -545,10 +545,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "80/125/170/215/260",
-                        "1.5",
-                        "40",
-                        "2.5",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -582,7 +582,7 @@
                     "id": "KarmaMantra",
                     "name": "梵咒",
                     "description": "卡尔玛的下个技能会获得强化，造成额外特效。梵咒在1级时就可以使用，并且不需要投入技能点。",
-                    "tooltip": "卡尔玛增强她在8秒内使用的下一个技能。<br /><li><spellName>心灵烈焰</spellName>：造成额外的<magicDamage>{{ rqtotalimpactdamage }}魔法伤害</magicDamage>并留下一道烈焰圆环，<status>减速</status>敌人并造成额外的<magicDamage>{{ rqfielddamage }}魔法伤害</magicDamage>。<li><spellName>坚定不移</spellName>：卡尔玛将在灵链的开始和结束时回复<healing>{{ rwhealamount }}生命值</healing>，并且<status>禁锢</status>延长至{{ rwtotalroot }}秒。<li><spellName>鼓舞</spellName>：卡尔玛为她的目标提供额外的<shield>{{ rebonusshield }}护盾值</shield>，并且也会为目标附近的友军提供护盾，提供{{ e9 }}%的总<shield>护盾值</shield>和<speed>移动速度</speed>数额。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "卡尔玛增强她在8秒内使用的下一个技能。<br /><li><spellName>心灵烈焰</spellName>：造成额外的<magicDamage>{{ rqimpactdamage }}魔法伤害</magicDamage>并留下一道烈焰圆环，<status>减速</status>敌人并造成额外的<magicDamage>{{ rqfielddamage }}魔法伤害</magicDamage>。<li><spellName>坚定不移</spellName>：卡尔玛将在灵链的开始和结束时回复<healing>{{ rwhealamount }}已损失生命值</healing>，并且<status>禁锢</status>延长{{ rwbonusroot }}秒。<li><spellName>鼓舞</spellName>：卡尔玛为她的目标提供<shield>额外的{{ rebonusshield }}护盾值</shield>，并且还会对目标附近的友军提供护盾，为他们提供<shield>{{ rebonusshieldarea }}护盾值</shield>和<speed>{{ removespeed*100 }}%移动速度</speed>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "灵光闪耀 冲击伤害",
@@ -592,10 +592,10 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }} -> {{ e2NL }}",
-                            "{{ e5 }} -> {{ e5NL }}",
-                            "{{ e7 }} -> {{ e7NL }}",
+                            "{{ qbonusdamage }} -> {{ qbonusdamageNL }}",
+                            "{{ qdetonationdamage }} -> {{ qdetonationdamageNL }}",
+                            "{{ rwbonusroot }} -> {{ rwbonusrootNL }}",
+                            "{{ ebonusshield }} -> {{ ebonusshieldNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -618,78 +618,78 @@
                     "effect": [
                         null,
                         [
-                            40,
-                            100,
-                            160,
-                            220
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            40,
-                            130,
-                            220,
-                            310
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.5,
-                            0.5,
-                            0.5,
-                            0.5
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.5,
-                            0.75,
-                            1,
-                            1.25
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.17,
-                            0.17,
-                            0.17,
-                            0.17
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            50,
-                            90,
-                            130,
-                            170
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.6,
-                            0.6,
-                            0.6,
-                            0.6
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.01,
-                            0.01,
-                            0.01,
-                            0.01
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
-                        "40/100/160/220",
-                        "40/130/220/310",
-                        "0.5",
-                        "1.5",
-                        "0.5/0.75/1/1.25",
-                        "0.17",
-                        "50/90/130/170",
-                        "0.6",
-                        "30",
-                        "0.01"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": "无消耗",
