@@ -3248,6 +3248,7 @@ async def search_profile(connection):
                                 print('正在保存中……\nSaving the ordered workbook ...')
                                 wb.save(os.path.join(folder, excel_name_sorted))
                                 print('排序完成！排好序的工作簿已保存为“%s”。\nOrdering finished! The ordered workbook is saved as "%s".\n' %(excel_name_sorted, excel_name_sorted))
+                                wb.close()
 
 #-----------------------------------------------------------------------------
 # websocket
