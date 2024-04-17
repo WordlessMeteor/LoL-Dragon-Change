@@ -389,15 +389,27 @@ async def fetch_store(connection):
         catalogDicts[inventoryType] = sorted(catalogDicts[inventoryType], key = lambda x: x["itemId"])
         catalogList += catalogDicts[inventoryType]
     txt1name = "Catalog - %s.json" %(get_info_name(info))
-    with open(os.path.join(folder, txt1name), "w", encoding = "utf-8") as fp:
-        json.dump(catalogDicts, fp, indent = 4, ensure_ascii = False)
+    while True:
+        try:
+            with open(os.path.join(folder, txt1name), "w", encoding = "utf-8") as fp:
+                json.dump(catalogDicts, fp, indent = 4, ensure_ascii = False)
+        except FileNotFoundError:
+            os.makedirs(folder, exist_ok = True)
+        else:
+            break
     #with open(os.path.join(folder, txt1name), "w", encoding = "utf-8") as fp:
         #json.dump(catalogList, fp, indent = 4, ensure_ascii = False)
     print('商品信息已保存为“%s”。\nCatalog information is saved as "%s".\n' %(os.path.join(folder, txt1name), os.path.join(folder, txt1name)))
     collection = await (await connection.request("GET", '/lol-inventory/v1/inventory?inventoryTypes=["AUGMENT","AUGMENT_SLOT","BOOST","BUNDLES","CHAMPION","CHAMPION_SKIN","COMPANION","CURRENCY","EMOTE","EVENT_PASS","GIFT","HEXTECH_CRAFTING","MODE_PROGRESSION_REWARD","MYSTERY","QUEUE_ENTRY","RP","SPELL_BOOK_PAGE","STATSTONE","SUMMONER_CUSTOMIZATION","SUMMONER_ICON","TEAM_SKIN_PURCHASE","TFT_DAMAGE_SKIN","TFT_MAP_SKIN","TOURNAMENT_TROPHY","TRANSFER","WARD_SKIN"]')).json()
     txt2name = "Collection - %s.json" %(get_info_name(info))
-    with open(os.path.join(folder, txt2name), "w", encoding = "utf-8") as fp:
-        json.dump(collection, fp, indent = 4, ensure_ascii = False)
+    while True:
+        try:
+            with open(os.path.join(folder, txt2name), "w", encoding = "utf-8") as fp:
+                json.dump(collection, fp, indent = 4, ensure_ascii = False)
+        except FileNotFoundError:
+            os.makedirs(folder, exist_ok = True)
+        else:
+            break
     print('藏品信息已保存为“%s”。\nCollection information is saved as "%s".\n' %(os.path.join(folder, txt2name), os.path.join(folder, txt2name)))
     collection_hashtable = {} #原本的藏品信息中没有记录名称，所以需要借用商品信息中的名称（The original collection information doesn't contain the names, so they're cited from the catalog information）
     for item in catalogList:
