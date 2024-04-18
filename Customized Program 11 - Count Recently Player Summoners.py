@@ -1481,7 +1481,7 @@ async def search_recent_players(connection):
                         matches_to_remove = [] #记录获取成功但不包含主玩家的对局序号（Records the matches that are fetched successfully but don't contain the main player）
                         LoLGameDuration_raw = [] #用于存储未转化成几分几秒格式的游戏持续时间。主要是为了方便可视化时呈现不同玩家的累计游戏时间的图表（Used to store the gameDuration that is not transformed into "(X)X:XX" form. Mainly for convenience of displaying the chart regarding the total time for which a player has accompanied the main player）
                         team_color = {100: "蓝方", 200: "红方"}
-                        subteam_color = {0: "", 1: "魄罗", 2: "小兵", 3: "迅捷蟹", 4: "石甲虫"} #仅用于斗魂竞技场（Only for Soul Fighter mode）
+                        subteam_color = {0: "", 1: "魄罗", 2: "小兵", 3: "迅捷蟹", 4: "石甲虫", 5: "锋喙鸟", 6: "哨卫", 7: "狼", 8: "魔沼蛙"} #仅用于斗魂竞技场（Only for Arena mode）
                         augment_rarity = {0: "白银", 1: "黄金", 2: "棱彩", 4: "黄金", 8: "棱彩"}
                         win = {True: "胜利", False: "失败"}
                         spells = copy.deepcopy(spells_initial)
@@ -1756,7 +1756,7 @@ async def search_recent_players(connection):
                         if not fetched_info:
                             print("未获取到有效对局。请重新输入要查询的对局序号。\nThe program didn't fetch any valid match. Please reinput the match ID to check.")
                             continue
-                        recent_LoLPlayers_statistics_display_order = [17, 11, 18, 16, 15, 21, 2, 0, 1, 7, 3, 4, 6, 5, 147, 19, 20, 28, 22, 23, 47, 48, 49, 50, 51, 52, 53, 103, 104, 105, 106, 107, 108, 109, 110, 24, 29, 132, 133, 57, 54, 58, 37, 36, 41, 40, 39, 38, 34, 136, 122, 67, 141, 126, 134, 128, 101, 61, 138, 127, 100, 60, 137, 56, 31, 30, 130, 135, 129, 102, 62, 139, 32, 142, 145, 144, 123, 143, 44, 45, 131, 63, 65, 64, 140, 46, 59, 98, 99, 68, 69, 73, 74, 78, 79, 83, 84, 88, 89, 93, 94, 27, 35, 125, 42, 43, 146]
+                        recent_LoLPlayers_statistics_display_order = [17, 11, 18, 16, 15, 21, 2, 0, 1, 7, 3, 4, 6, 5, 147, 19, 20, 28, 22, 23, 47, 48, 49, 50, 51, 52, 53, 103, 104, 105, 106, 107, 108, 109, 110, 24, 29, 132, 133, 57, 54, 58, 37, 36, 41, 40, 39, 38, 34, 136, 122, 67, 141, 126, 134, 128, 101, 61, 138, 127, 100, 60, 137, 56, 31, 30, 130, 135, 129, 102, 62, 139, 32, 142, 145, 144, 123, 143, 44, 45, 131, 63, 65, 64, 140, 46, 59, 98, 99, 68, 69, 73, 74, 78, 79, 83, 84, 88, 89, 93, 94, 27, 35, 125, 42, 43, 124, 146]
                         recent_LoLPlayers_data_organized = {}
                         for i in range(len(recent_LoLPlayers_statistics_display_order)):
                             key = LoLGame_info_header_keys[recent_LoLPlayers_statistics_display_order[i]]
