@@ -42,8 +42,7 @@ The following explanations only apply to the current branch. For other details (
 4. 本程序集中的`get_lobby_information.py`提供**反复**获取房间信息的功能。
 5. 本程序集提供了离线数据资源，用于降低资源获取时间。
 	- 离线数据资源包含*CommunityDragon*数据库的<u>pbe</u>文件夹下的<u>cdragon</u>文件夹和<u>plugins/rcp-be-lol-game-data</u>文件夹下的所有**中文和英文json文件**和*DataDragon*数据库的*dragontail存档压缩包*的<u>data</u>文件夹下的所有**中文和英文文件**。
-		- 考虑到程序集可能在美测服运行，这里默认提供CommunityDragon数据库中的美测服的资源。
-		- CommunityDragon数据库的数据资源将跟随<u>美测服的每一次调整</u>而更新，更新周期以**天**计；DataDragon数据库将跟随<u>正式服的每一次停机更新</u>而更新，更新周期以**朔望**计。
+		- CommunityDragon数据库的数据资源将跟随<u>美测服的每一次调整</u>而更新，更新周期以**天**计；DataDragon数据库的数据资源将跟随<u>正式服的每一次停机更新</u>而更新，更新周期以**朔望**计。
 6. 本程序集起源于主目录下的`create_custom_lobby.py`。
 # 注意事项
 1. 本程序集全部为Python程序，需要从[Python官网中](www.python.org)下载最新版本的Python。（不是最新版本也可，但不要太古早～）
@@ -56,10 +55,10 @@ The following explanations only apply to the current branch. For other details (
 			`C:\Users\[用户名]\AppData\Local\Programs\Python\Launcher\`\
 			`C:\Users\[用户名]\AppData\Local\Programs\Python\Python[版本号]\`\
 			`C:\Users\[用户名]\AppData\Local\Programs\Python\Python[版本号]\Scripts`\
-			如我的用户名是`19250`，使用的Python版本是<u>3.11.6</u>，则PATH中包含：\
+			如我的用户名是`19250`，使用的Python版本是<u>3.12.3</u>，则PATH中包含：\
 			`C:\Users\19250\AppData\Local\Programs\Python\Launcher\`\
-			`C:\Users\19250\AppData\Local\Programs\Python\Python311\`\
-			`C:\Users\19250\AppData\Local\Programs\Python\Python311\Scripts\`
+			`C:\Users\19250\AppData\Local\Programs\Python\Python312\`\
+			`C:\Users\19250\AppData\Local\Programs\Python\Python312\Scripts\`
 		5. 保险起见，可以在`系统变量`的`Path`中也添加这三个地址。
 		6. 重启已经打开的<u>命令提示符</u>或<u>终端</u>，即可正常使用Python工具。如pip。
 	- 安装完成并配置好环境变量后，需要使用`pip install [库名]`命令安装本程序集所需的一些Python库。在科学上网的网络环境下，下载Python库应当会比国内环境快很多。本程序集所需的Python库有：
@@ -73,8 +72,8 @@ The following explanations only apply to the current branch. For other details (
 					- 不用担心解压完成之后会不会有一大堆文件分散在文件夹里面。从GitHub上下载的源代码应该已经放在了一个文件夹里面。
 				4. 打开Python存储库的目录。
 					- 一般位于`C:\Users\[用户名]\AppData\Local\Programs\Python\Python[版本号]\Lib\site-packages`。
-						- 如我的用户名是`19250`，使用的Python版本是<u>3.11.6</u>，则应打开\
-						`C:\Users\19250\AppData\Local\Programs\Python\Python311\Lib\site-packages`。
+						- 如我的用户名是`19250`，使用的Python版本是<u>3.12.3</u>，则应打开\
+						`C:\Users\19250\AppData\Local\Programs\Python\Python312\Lib\site-packages`。
 					- 如果上一条方法行不通，请先在命令行中输入`pip install lcu_driver`以安装`lcu_driver`库，再使用[Everything软件](https://www.voidtools.com/zh-cn/)搜索<u>lcu_driver</u>关键字，从而定位到Python存储库的位置。
 				5. 在解压好的文件中找到`lcu_driver`文件夹，将其复制到上面的目录中。如果提示文件已存在，请选择覆盖。
 				6. 若要恢复原始lcu_driver库文件，请先在命令行中输入`pip uninstall lcu_driver`，再输入`pip install lcu_driver`重新安装。
@@ -86,7 +85,7 @@ The following explanations only apply to the current branch. For other details (
 		- urllib
 		- wcwidth
 2. 为提高响应速度，请在命令行环境中，而不是Python IDLE中使用本程序集。
-	- 为方便查看程序的返回信息，避免命令行一闪而过，建议先打开命令提示符（或终端），使用cd命令切换到程序集所在目录，再输入命令`python [文件名]`以使用某个程序。
+	- 为方便查看程序的返回信息，避免命令行一闪而过，建议先打开命令提示符（或终端），使用cd命令切换到程序集所在目录，再输入命令`python [文件名]`或`python -W ignore [文件名]`以使用某个程序。
 3. 所有程序必须在登录英雄联盟客户端后运行。
 4. 本程序集所有打开的py文件均可通过Ctrl + C提前结束进程。一次不行来十次！
 5. 对库文件进行的修改。注意，如果修改后无法解决问题，请**第一时间**撤销对库文件进行的修改！
@@ -96,7 +95,7 @@ The following explanations only apply to the current branch. For other details (
 	- 自定义脚本1**返回通过lcu_driver库获取到的连接信息**。
 	- 自定义脚本2参考了Mario开发的图形化界面的LeagueLobby中**根据Json创建房间**按钮的功能。使用时，需要先在文本编辑器中修改该文件中create_custom_lobby函数中的各参数的值，保存后再双击该文件以尝试创建房间。
 	（图片待完善）
-		- 若要查看创建房间后的返回信息，请选择先打开命令提示符或终端再输入`python [文件名]`。
+		- 若要查看创建房间后的返回信息，请选择先打开命令提示符或终端再输入`python [文件名]`或`python -W ignore [文件名]`。
 	- 自定义脚本3为**探索LCU API**提供了一个基础工具，将**格式化的**返回结果输出到同目录下的`temporary data.txt`，并将变量以**二进制**的形式保存到同目录下的`temporary data.pkl`中。该程序中列出了一些参考的网络请求命令。所有可用API来自[LCU Explorer](https://github.com/HextechDocs/lcu-explorer/releases/tag/1.2.0)。
 		- 请参考示例输入。<font color=#ff0000><b>不合法的输入会导致程序直接退出。</b></font>合法的输入格式有以下要求：
 			- 包含<u>一或两个</u>空格。
@@ -299,7 +298,6 @@ For details about customized programs that is beyond the scope of creating a cus
 4. In this program set, `get_lobby_information.py` allows repeatedly getting lobby information.
 5. This program set provides offline data resources to save the time of preparing data.
 	- The data resources include all **Chinese and English json files** under both <u>cdragon</u> and <u>plugins/rcp-be-lol-game-data</u> folders under <u>pbe</u> folder of *CommunityDragon* database and all **Chinese and English files** under <u>data</u> folder of the *dragontail archived file* of *DataDragon* database.
-		- Considering that the program set might be used when PBE client is running, the data resources of PBE version are provided by default here.
 		- The update of data resources in CommunityDragon database will follow <u>each adjustment of PBE</u> **daily**, and the update of data resources in DataDragon database will follow <u>each patch mainteinance of live servers </u> **about every fortnight**.
 6. The program set is adapted from `create_custom_lobby.py` in the home directory.
 # Notes on Instructions
@@ -313,10 +311,10 @@ For details about customized programs that is beyond the scope of creating a cus
 			`C:\Users\[Username]\AppData\Local\Programs\Python\Launcher\`\
 			`C:\Users\[Username]\AppData\Local\Programs\Python\Python[Version]\`\
 			`C:\Users\[Username]\AppData\Local\Programs\Python\Python[Version]\Scripts`\
-			For example, my username is `19250`, and my Python version is <u>3.11.6</u>. Then the updated PATH should include \
+			For example, my username is `19250`, and my Python version is <u>3.12.3</u>. Then the updated PATH should include \
 			`C:\Users\19250\AppData\Local\Programs\Python\Launcher\`\
-			`C:\Users\19250\AppData\Local\Programs\Python\Python311\`\
-			`C:\Users\19250\AppData\Local\Programs\Python\Python311\Scripts\`
+			`C:\Users\19250\AppData\Local\Programs\Python\Python312\`\
+			`C:\Users\19250\AppData\Local\Programs\Python\Python312\Scripts\`
 		5. Basically, adding the three addresses to `Path` in `系统变量` is of no harm.
 		6. Restart <u>Command Prompt</u> or <u>Terminal</u>. In that case, Python tools, e.g. pip, can be used as normal.
 	- After installation and environment variable configuration of Python, use `pip install [LibraryName]` command to install required libraries for this program set. For Chinese mainland users, using proxies to ignore the GFW should accelerate the downloading stage of Python libraries. Required libraries for this program set are:
@@ -330,8 +328,8 @@ For details about customized programs that is beyond the scope of creating a cus
 					- Don't worry about the chaos after the extraction! The files should have been put in a subfolder.
 				4. Open the directory where Python stores libraries.
 					- Basically, the directory is at `C:\Users\[Username]\AppData\Local\Programs\Python\Python[Version]\Lib\site-packages`.
-						- For example, my username is `19250`, and my Python version is <u>3.11.6</u>. Then the library directory should be \
-						`C:\Users\19250\AppData\Local\Programs\Python\Python311\Lib\site-packages`
+						- For example, my username is `19250`, and my Python version is <u>3.12.3</u>. Then the library directory should be \
+						`C:\Users\19250\AppData\Local\Programs\Python\Python312\Lib\site-packages`
 					- If the last approach doesn't work, please enter the command `pip install lcu_driver` in CMD to install the original `lcu_driver` library and then search for <u>lcu_driver</u> in [Everything App](https://www.voidtools.com/en-us/) to locate to the Python library directory.
 				5. Select `lcu_driver` folder in the extracted files. Copy it to the Python library directory. If files already exist, please select `Replace the files in the destination`.
 				6. If you need to recover the original `lcu_driver` library, please enter `pip uninstall lcu_driver` in CMD to uninstall the modified library, and then enter `pip install lcu_driver` to reinstall the original release of the library.
@@ -343,7 +341,7 @@ For details about customized programs that is beyond the scope of creating a cus
 		- urllib
 		- wcwidth
 2. To improve the speed of reponses, please open any program in this program set by Command Prompt or Terminal, instead of Python IDLE.
-	- To prevent the window from flashing quickly, it's suggested that users first open Command Prompt (or Terminal), switch to the directory of the program set using `cd` command and then open some program by `python [Filename]`. In this way, it's easy check the returned information.
+	- To prevent the window from flashing quickly, it's suggested that users first open Command Prompt (or Terminal), switch to the directory of the program set using `cd` command and then open some program by `python [Filename]` or `python -W ignore [Filename]`. In this way, it's easy check the returned information.
 3. All programs must run after the user logs in the LoL client. 
 4. All opened .py files can be aborted by Ctrl + C while running. (Press for any times you want, until the program exits.)
 5. Modification note on the library. **Note:** If the modification doesn't solve the problem, please redo the modification **at first**!
@@ -353,7 +351,7 @@ For details about customized programs that is beyond the scope of creating a cus
 	- Customized Program 01 **returns the connection information by lcu_driver library**.
 	- Customized Program 02 refers to the **根据Json创建房间** button in the GUI LeagueLobby software by Mario. When using, users need first modify the values of parameters in create_custom_lobby function and then double-click the file after saving the change.
 	(A picture to add)
-		- To check the returned lobby information after creating a lobby, please first open Command Prompt or Terminal and then type `python [Filename]`.
+		- To check the returned lobby information after creating a lobby, please first open Command Prompt or Terminal and then type `python [Filename]` or `python -W ignore [Filename]`.
 	- Customized Program 03 provides a basic tool for **exploration into LCU API**, which saves **formatted** returned result into `temporary data.txt` in the same directory, and also saves the variable into `temporary data.pkl` in the **binary** form in the same directory. Some reference requests are listed in this program. All available APIs are from [LCU Explorer](https://github.com/HextechDocs/lcu-explorer/releases/tag/1.2.0).
 		- Please input according to the examples. <font color=#ff0000><b>Illegal input will cause the program to exit.</b></font> A legal input requires: 
 			- Containing <u>one or two</u> spaces.
