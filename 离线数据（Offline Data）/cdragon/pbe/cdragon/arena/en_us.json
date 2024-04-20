@@ -1212,17 +1212,18 @@
             },
             "dataValues": {
                 "BurnDuration": 5.0,
-                "BurnPercent": 0.05000000074505806,
+                "BurnPercentMax": 0.05000000074505806,
+                "BurnPercentMin": 0.009999999776482582,
                 "Cooldown": 1.5,
                 "Radius": 650.0
             },
-            "desc": "Your <healing>Healing</healing> and <shield>Shielding</shield> apply an infinitely stacking <keywordMajor>Burn</keywordMajor> to a nearby enemy, dealing damage over time.",
+            "desc": "Your <healing>Healing</healing> and <shield>Shielding</shield> apply an infinitely stacking <keywordMajor>Burn</keywordMajor> to a nearby enemy, dealing @BurnPercentMin*100@% to @BurnPercentMax*100@% Max Health over @BurnDuration@ seconds.",
             "iconLarge": "assets/ux/cherry/augments/icons/holyfire_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/holyfire_small.png",
             "id": 198,
             "name": "Holy Fire",
             "rarity": 1,
-            "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
+            "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>Burn damage scales with the relative size of the Heal or Shield against the max health of the champion being aided.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "FeeltheBurn",
@@ -1565,6 +1566,7 @@
             "apiName": "GambaAnvil",
             "calculations": {},
             "dataValues": {
+                "GoldBasisDiscount": 1250.0,
                 "GoldBonus": 1000.0
             },
             "desc": "Gain @GoldBonus@ gold. Prismatic Anvils cost 1000 gold less, and Prismatic Items acquired from now on resell for 500 gold less.",
