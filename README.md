@@ -43,6 +43,15 @@ The following explanations only apply to the current branch. For other details (
 5. 本程序集提供了离线数据资源，用于降低资源获取时间。
 	- 离线数据资源包含*CommunityDragon*数据库的<u>pbe</u>文件夹下的<u>cdragon</u>文件夹和<u>plugins/rcp-be-lol-game-data</u>文件夹下的所有**中文和英文json文件**和*DataDragon*数据库的*dragontail存档压缩包*的<u>data</u>文件夹下的所有**中文和英文文件**。
 		- CommunityDragon数据库的数据资源将跟随<u>美测服的每一次调整</u>而更新，更新周期以**天**计；DataDragon数据库的数据资源将跟随<u>正式服的每一次停机更新</u>而更新，更新周期以**朔望**计。
+	- 离线数据文件夹下的`自动更新离线数据`脚本可简化离线数据资源更新过程。
+		- 该脚本仅供开发者用于更新离线数据资源，感兴趣的用户可自行下载体验。
+		- 该脚本可用于更新CommunityDragon和DataDragon数据库的数据资源。
+			- 在更新CommunityDragon数据库的资源时，用户可以选择【全局扫描】或者【按修改时间更新】。
+				- 【全局扫描】可将在线数据资源与本地数据资源进行**全面对比**，实现数据资源的同步。
+					- 在一台设备上**第一次运行此脚本时，建议首先执行全局扫描**，即使用户已经从该存储库下载了数据资源。
+				- 【按修改时间更新】用于反映本地数据资源和在线数据资源的**变化**。
+					- 如果本地数据资源文件的**修改时间晚于**在线数据资源文件，而本地数据资源文件的**内容实际上早于**在线数据资源文件，那么这些数据资源文件**不会更新**。
+			- 在更新DataDragon数据库的资源时，用户需要**按照程序提示**，先下载DataDragon数据库的最新压缩包，然后解压，并提供解压的目录。
 6. 本程序集起源于主目录下的`create_custom_lobby.py`。
 # 注意事项
 1. 本程序集全部为Python程序，需要从[Python官网中](www.python.org)下载最新版本的Python。（不是最新版本也可，但不要太古早～）
@@ -299,6 +308,15 @@ For details about customized programs that is beyond the scope of creating a cus
 5. This program set provides offline data resources to save the time of preparing data.
 	- The data resources include all **Chinese and English json files** under both <u>cdragon</u> and <u>plugins/rcp-be-lol-game-data</u> folders under <u>pbe</u> folder of *CommunityDragon* database and all **Chinese and English files** under <u>data</u> folder of the *dragontail archived file* of *DataDragon* database.
 		- The update of data resources in CommunityDragon database will follow <u>each adjustment of PBE</u> **daily**, and the update of data resources in DataDragon database will follow <u>each patch mainteinance of live servers </u> **about every fortnight**.
+	- `自动更新离线数据.py` under the `离线数据（Offline Data）` folder simplifies the updating process of data resources.
+		- This program is designed only for the developer to update offline data, but anyone interested is welcome to download and experience it.
+		- This program can be used to update data resources from both CommunityDragon and DataDragon databases.
+			- While updating CommunityDragon data resources, users can select between [Global Scanning] and [Updating According to Modification Time].
+				- [Global Scanning] performs an **entire comparison** between the local and online data resources to achieve the syncronization.
+					- It's highly recommended that **the user perform [Global Scanning] at first when the user is running this program for the first time**, even if he/she has downloaded the data resources from this repository.
+				- [Updating According to Modification Time] is meant to reflect the **changes** between online and local data resources.
+					- In a case where the **modification times** of some local data resources are **later** than those of the corresponding online data resources, whereas the **actual content** of these local data resources is **earlier** than that of their corresponding online data resources, running this mode *won't update* these local data resources.
+			- While updating DataDragon data resources, users need to **follow the hint of the program**: first download the latest compressed tarball of DataDragon database, then decompress it, and finally provide the decompression directory.
 6. The program set is adapted from `create_custom_lobby.py` in the home directory.
 # Notes on Instructions
 1. The whole program set is made of Python programs. Users are highly suggested to download the latest version of Python from [Python official website](www.python.org). (A version that isn't latest is also OK, but please make sure it's not too early, either [xD])
