@@ -93,6 +93,7 @@ The following explanations only apply to the current branch. For other details (
 		- pickle
 		- urllib
 		- wcwidth
+		- bs4
 2. 为提高响应速度，请在命令行环境中，而不是Python IDLE中使用本程序集。
 	- 为方便查看程序的返回信息，避免命令行一闪而过，建议先打开命令提示符（或终端），使用cd命令切换到程序集所在目录，再输入命令`python [文件名]`或`python -W ignore [文件名]`以使用某个程序。
 3. 所有程序必须在登录英雄联盟客户端后运行。
@@ -358,6 +359,7 @@ For details about customized programs that is beyond the scope of creating a cus
 		- pickle
 		- urllib
 		- wcwidth
+		- bs4
 2. To improve the speed of reponses, please open any program in this program set by Command Prompt or Terminal, instead of Python IDLE.
 	- To prevent the window from flashing quickly, it's suggested that users first open Command Prompt (or Terminal), switch to the directory of the program set using `cd` command and then open some program by `python [Filename]` or `python -W ignore [Filename]`. In this way, it's easy check the returned information.
 3. All programs must run after the user logs in the LoL client. 
