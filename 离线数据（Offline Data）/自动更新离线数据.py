@@ -47,10 +47,37 @@ def format_df(df: pd.DataFrame): #按照每列最长字符串的命令行宽度�
         #print() #注意这里的缩进和上一行不同（Note that here the indentation is different from the last line）
     return (result, maxLens)
 
+def getUrl(url: str, log):
+    retry = 0
+    while retry <= 5:
+        try:
+            source = requests.get(url)
+            source.raise_for_status()
+        except requests.exceptions.HTTPError as http_err:
+            retry += 1
+            if http_err.response.status_code == 404:
+                print("文件不存在！正在尝试第%d次重新获取数据！\nFile not found! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
+                log.write("文件不存在！正在尝试第%d次重新获取数据！\nFile not found! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
+        except requests.exceptions.SSLError as ssl_error:
+            retry += 1
+            if "[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol" in str(ssl_error):
+                print("违反协议导致读取中断！正在尝试第%d次重新获取数据！\nEOF occurred in violation of protocol! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
+                log.write("违反协议导致读取中断！正在尝试第%d次重新获取数据！\nEOF occurred in violation of protocol! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
+            elif 'certificate verify failed' in str(ssl_error):
+                print("SSL证书验证失败！正在尝试第%d次重新获取数据！\nSSL certificate verify failed! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
+                log.write("SSL证书验证失败！正在尝试第%d次重新获取数据！\nSSL certificate verify failed! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
+        except requests.exceptions.ProxyError:
+            retry += 1
+            print("无法连接到代理！正在尝试第%d次重新获取数据！\nCannot connect to proxy! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
+            log.write("无法连接到代理！正在尝试第%d次重新获取数据！\nCannot connect to proxy! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
+        else:
+            return (source, True)
+    if retry > 5:
+        return (None, False)
+
 currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+os.makedirs("离线数据（Offline Data）/Update Logs", exist_ok = True)
 log = open(f"离线数据（Offline Data）/Update Logs/{currentTime}.log", "w", encoding = "utf-8")
-if not os.path.exists("离线数据（Offline Data）/Update Logs"):
-    os.mkdir("离线数据（Offline Data）/Update Logs")
 ddragon_hint = True
 while True:
     print("请选择要更新的数据资源，输入空字符串以退出程序：\nPlease select the data resource to update, or submit an empty string to exit the program:\n1\tCommunityDragon\n2\tDataDragon")
@@ -100,7 +127,14 @@ while True:
             log.write("[%d/%d]正在检查文件夹（Checking the folder）：%s\n" %(cnt1, len(cdragon_folders), url))
             line_re = re.compile('<tr><td class="link"><a href=".*" title=".*">.*</a></td><td class="size">.*</td><td class="date">.*</td></tr>')
             table = {"file": [], "size": [], "date": [], "timestamp": []}
-            source = requests.get(url).content.decode()
+            retry = 0
+            source, status = getUrl(url, log)
+            if not status:
+                print("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes." %(url, url))
+                log.write("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes.\n" %(url, url))
+                error_files.append(url)
+                continue
+            source = source.content.decode()
             source_list = list(map(lambda x: x.strip(), source.split("\n")))
             print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
             log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
@@ -142,21 +176,13 @@ while True:
                 print("[%d/%d][%d/%d]正在校对文件（Checking file）： %s" %(cnt1, len(cdragon_folders), cnt2, len(table), urljoin(url, name)))
                 log.write("[%d/%d][%d/%d]正在校对文件（Checking file）： %s\n" %(cnt1, len(cdragon_folders), cnt2, len(table), urljoin(url, name)))
                 update = added = False
-                retry = 0
-                while retry <= 5:
-                    try:
-                        src = requests.get(urljoin(url, name)).json()
-                    except requests.exceptions.SSLError:
-                        retry += 1
-                        print("访问频繁！正在尝试第%d次重新获取数据！\nMax retried exceeded! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, urljoin(url, name), retry))
-                        log.write("访问频繁！正在尝试第%d次重新获取数据！\nMax retried exceeded! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, urljoin(url, name), retry))
-                    else:
-                        break
-                if retry > 5:
+                src, status = getUrl(urljoin(url, name), log)
+                if not status:
                     print("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes." %(urljoin(url, name), urljoin(url, name)))
                     log.write("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes.\n" %(urljoin(url, name), urljoin(url, name)))
                     error_files.append(urljoin(url, name))
                     continue
+                src = src.json()
                 if not name in os.listdir(dir):
                     update = added = True
                 else:
@@ -273,21 +299,13 @@ while True:
         print("[%d]正在校对文件（Checking file）： %s" %(cnt1, version_url))
         log.write("[%d]正在校对文件（Checking file）： %s\n" %(cnt1, version_url))
         update = added = False
-        retry = 0
-        while retry <= 5:
-            try:
-                src = requests.get(version_url).json()
-            except requests.exceptions.SSLError:
-                retry += 1
-                print("访问频繁！正在尝试第%d次重新获取数据！\nMax retried exceeded! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, version_url, retry))
-                log.write("访问频繁！正在尝试第%d次重新获取数据！\nMax retried exceeded! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, version_url, retry))
-            else:
-                break
-        if retry > 5:
+        src, status = getUrl(version_url, log)
+        if not status:
             print("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes." %(version_url, version_url))
             log.write("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes.\n" %(version_url, version_url))
             error_files.append(version_url)
             continue
+        src = src.json()
         if not "versions.json" in os.listdir("离线数据（Offline Data）"):
             update = added = True
         else:
