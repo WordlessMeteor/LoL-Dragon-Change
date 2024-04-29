@@ -52,6 +52,7 @@ The following explanations only apply to the current branch. For other details (
 				- 【按修改时间更新】用于反映本地数据资源和在线数据资源的**变化**。
 					- 如果本地数据资源文件的**修改时间晚于**在线数据资源文件，而本地数据资源文件的**内容实际上早于**在线数据资源文件，那么这些数据资源文件**不会更新**。
 			- 在更新DataDragon数据库的资源时，用户需要**按照程序提示**，先下载DataDragon数据库的最新压缩包，然后解压，并提供解压的目录。
+			- 对于联网更新的资源，**使用适当的代理**可能加速数据资源的获取。
 6. 本程序集起源于主目录下的`create_custom_lobby.py`。
 # 注意事项
 1. 本程序集全部为Python程序，需要从[Python官网中](www.python.org)下载最新版本的Python。（不是最新版本也可，但不要太古早～）
@@ -318,6 +319,7 @@ For details about customized programs that is beyond the scope of creating a cus
 				- [Updating According to Modification Time] is meant to reflect the **changes** between online and local data resources.
 					- In a case where the **modification times** of some local data resources are **later** than those of the corresponding online data resources, whereas the **actual content** of these local data resources is **earlier** than that of their corresponding online data resources, running this mode *won't update* these local data resources.
 			- While updating DataDragon data resources, users need to **follow the hint of the program**: first download the latest compressed tarball of DataDragon database, then decompress it, and finally provide the decompression directory.
+			- For resources updated online, **an appropriate proxy** may accelerate the data capture process.
 6. The program set is adapted from `create_custom_lobby.py` in the home directory.
 # Notes on Instructions
 1. The whole program set is made of Python programs. Users are highly suggested to download the latest version of Python from [Python official website](www.python.org). (A version that isn't latest is also OK, but please make sure it's not too early, either [xD])

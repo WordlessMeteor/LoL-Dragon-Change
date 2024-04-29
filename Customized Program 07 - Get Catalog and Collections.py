@@ -187,7 +187,7 @@ async def fetch_store(connection):
     platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     platformId = platform_config["LoginDataPacket"]["platformId"]
     #下面声明一些数据资源地址（The following code declare some data resources' URLs）
-    URLPatch = "pbe" if platformId == "PBE1" else "latest"
+    URLPatch = "pbe" if platformId == "PBE1" or platformId == "PBE" else "latest"
     language_cdragon = "default" if URLPatch == "en_US" else locale.lower()
     championSkins_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/skins.json" %(URLPatch, language_cdragon)
     companions_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/companions.json" %(URLPatch, language_cdragon)

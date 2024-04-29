@@ -231,7 +231,7 @@ async def search_recent_players(connection):
                 language_option = "28"
             language_code = language_ddragon[int(language_option)]["CODE"]
             #下面声明一些数据资源的地址（The following code declare some data resources' URLs）
-            URLPatch = "pbe" if platformId == "PBE1" else "latest"
+            URLPatch = "pbe" if platformId == "PBE1" or platformId == "PBE" else "latest"
             patches_url = "https://ddragon.leagueoflegends.com/api/versions.json"
             spell_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/summoner-spells.json" %(URLPatch, language_cdragon[language_code]) #CommunityDragon数据库只存储第7赛季及以后的数据（CommunityDragon database only stores data including and after Season 7）
             LoLItem_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/items.json" %(URLPatch, language_cdragon[language_code])
