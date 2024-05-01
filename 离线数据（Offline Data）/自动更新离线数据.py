@@ -101,6 +101,8 @@ while True:
             latest_mod_time = 0
             for root, dirs, files in os.walk("离线数据（Offline Data）"):
                 for file in files:
+                    if "Update Logs" in root or file == "自动更新离线数据.py": #统计修改时间，不能算上刚刚生成的日志文件和本脚本（When summarizing the modification time, the log that has just been created should be taken into account）
+                        continue
                     file_path = os.path.join(root, file)
                     mod_time = os.path.getmtime(file_path)
                     latest_mod_time = mod_time if mod_time > latest_mod_time else latest_mod_time
