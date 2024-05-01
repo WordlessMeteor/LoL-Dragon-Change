@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.8.1",
+    "version": "14.9.1",
     "data": {
         "LeeSin": {
             "id": "LeeSin",
@@ -46,7 +46,7 @@
                     "id": "64004",
                     "num": 4,
                     "name": "Muay Thai Lee Sin",
-                    "chromas": false
+                    "chromas": true
                 },
                 {
                     "id": "64005",
@@ -174,10 +174,10 @@
             },
             "spells": [
                 {
-                    "id": "BlindMonkQOne",
+                    "id": "LeeSinQOne",
                     "name": "Sonic Wave / Resonating Strike",
                     "description": "Sonic Wave: Lee Sin projects a discordant wave of sound to locate his enemies, dealing physical damage to the first enemy it encounters. If Sonic Wave hits, Lee Sin can cast Resonating Strike for the next 3 seconds.<br>Resonating Strike: Lee Sin dashes to the enemy hit by Sonic Wave, dealing physical damage based on the target's missing Health.",
-                    "tooltip": "Lee Sin projects a discordant wave of sound, dealing <physicalDamage>{{ initialdamage }} physical damage</physicalDamage> to the first enemy hit, granting True Sight of them, and allows Lee Sin to <recast>Recast</recast> for the next {{ e7 }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin dashes to the enemy hit by the sound wave, dealing between <physicalDamage>{{ recastdamage }} to {{ empowereddamage }} physical damage</physicalDamage> scaling with the target's missing Health. {{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Lee Sin projects a discordant wave of sound, dealing <physicalDamage>{{ initialdamage }} physical damage</physicalDamage> to the first enemy hit, granting True Sight of them, and allows Lee Sin to <recast>Recast</recast> for the next {{ reactivatetime }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin dashes to the enemy hit by the sound wave, dealing between <physicalDamage>{{ recastdamage }} to {{ empowereddamage }} physical damage</physicalDamage> scaling with the target's missing Health. {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Sonic Wave Damage",
@@ -186,9 +186,9 @@
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }} -> {{ e2NL }}",
-                            "{{ e3 }} -> {{ e3NL }}",
+                            "{{ q1basedamage }} -> {{ q1basedamageNL }}",
+                            "{{ q2basedamage }} -> {{ q2basedamageNL }}",
+                            "{{ q2basedamage*2.000000 }} -> {{ q2basedamagenl*2.000000 }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -213,60 +213,60 @@
                     "effect": [
                         null,
                         [
-                            55,
-                            80,
-                            105,
-                            130,
-                            155
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            55,
-                            80,
-                            105,
-                            130,
-                            155
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            110,
-                            160,
-                            210,
-                            260,
-                            310
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1350,
-                            1350,
-                            1350,
-                            1350,
-                            1350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            400,
-                            400,
-                            400,
-                            400,
-                            400
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1,
-                            1,
-                            1,
-                            1,
-                            1
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -285,14 +285,14 @@
                     ],
                     "effectBurn": [
                         null,
-                        "55/80/105/130/155",
-                        "55/80/105/130/155",
-                        "110/160/210/260/310",
-                        "30",
-                        "1350",
-                        "400",
-                        "3",
-                        "1",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0"
                     ],
@@ -308,7 +308,7 @@
                     ],
                     "rangeBurn": "1100",
                     "image": {
-                        "full": "BlindMonkQOne.png",
+                        "full": "LeeSinQOne.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 0,
@@ -319,10 +319,10 @@
                     "resource": "{{ cost }} {{ abilityresourcename }}"
                 },
                 {
-                    "id": "BlindMonkWOne",
+                    "id": "LeeSinWOne",
                     "name": "Safeguard / Iron Will",
-                    "description": "Safeguard: Lee Sin rushes to target ally, shielding himself from damage. If the ally is a champion, they are also shielded. After using Safeguard, Lee Sin can cast Iron Will for the next 3 seconds.<br>Iron Will: Lee Sin's intense training allows him to thrive in battle. For 4 seconds, Lee Sin gains Life Steal and Spell Vamp.",
-                    "tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>{{ shieldamount }} Shield</shield> for {{ e3 }} seconds and reduces this Ability's Cooldown by {{ e6 }}%. Lee Sin may <recast>Recast</recast> for the next {{ e9 }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin gains {{ lifestealandspellvamp }}% Life Steal and Spell Vamp for {{ e8 }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "description": "Safeguard: Lee Sin rushes to target ally, shielding himself from damage. If the ally is a champion, they are also shielded. After using Safeguard, Lee Sin can cast Iron Will.<br>Iron Will: Lee Sin's intense training allows him to thrive in battle. Lee Sin gains Life Steal and Spell Vamp.",
+                    "tooltip": "Lee Sin dashes to an ally or ward. If the target is a champion, Lee Sin grants them and himself <shield>{{ shieldamount }} Shield</shield> for {{ shieldduration }} seconds and reduces this Ability's Cooldown by {{ w1cooldownrecovered*100 }}%. Lee Sin may <recast>Recast</recast> for the next {{ w1reactivatetime }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin gains {{ lifestealandspellvamp }}% Life Steal and Spell Vamp for {{ lifestealandspellvamptime }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Safeguard Shield Absorption",
@@ -368,32 +368,11 @@
                             0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
-                        ],
-                        [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
-                        ],
-                        [
-                            5,
-                            5,
-                            5,
-                            5,
-                            5
-                        ],
-                        [
-                            50,
-                            50,
-                            50,
-                            50,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -403,39 +382,60 @@
                             0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1350,
-                            1350,
-                            1350,
-                            1350,
-                            1350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
                         "0",
                         "0",
-                        "2",
-                        "30",
-                        "5",
-                        "50",
                         "0",
-                        "4",
-                        "3",
-                        "1350"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
@@ -449,7 +449,7 @@
                     ],
                     "rangeBurn": "700",
                     "image": {
-                        "full": "BlindMonkWOne.png",
+                        "full": "LeeSinWOne.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 48,
@@ -460,10 +460,10 @@
                     "resource": "{{ cost }} {{ abilityresourcename }}"
                 },
                 {
-                    "id": "BlindMonkEOne",
+                    "id": "LeeSinEOne",
                     "name": "Tempest / Cripple",
-                    "description": "Tempest: Lee Sin smashes the ground, sending out a shockwave that deals magic damage and reveals enemy units hit. If Tempest hits an enemy, Lee Sin can cast cripple for the next 3 seconds.<br>Cripple: Lee Sin cripples nearby enemies damaged by Tempest, reducing their Move Speed for 4 seconds. Move Speed recovers gradually over the duration.",
-                    "tooltip": "Lee Sin smashes the ground, sending out a shockwave that deals <magicDamage>{{ initialdamage }} magic damage</magicDamage> and reveals them for 4 seconds. If this hits an enemy, Lee Sin can <recast>Recast</recast> for the next {{ e6 }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin <status>Slows</status> nearby enemies struck by the shockwave by {{ slowamount }}% decaying over {{ e5 }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "description": "Tempest: Lee Sin smashes the ground, sending out a shockwave that deals magic damage and reveals enemy units hit. If Tempest hits an enemy, Lee Sin can cast cripple.<br>Cripple: Lee Sin cripples nearby enemies damaged by Tempest, reducing their Move Speed. Move Speed recovers gradually over the duration.",
+                    "tooltip": "Lee Sin smashes the ground, sending out a shockwave that deals <magicDamage>{{ initialdamage }} magic damage</magicDamage> and reveals them for {{ slowduration }} seconds. If this hits an enemy, Lee Sin can <recast>Recast</recast> for the next {{ reactivatetime }} seconds.<br /><br /><recast>Recast:</recast> Lee Sin <status>Slows</status> nearby enemies struck by the shockwave by {{ slowamount }}% decaying over {{ slowduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Tempest Damage",
@@ -509,32 +509,32 @@
                             0
                         ],
                         [
-                            60,
-                            95,
-                            130,
-                            165,
-                            200
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -569,10 +569,10 @@
                         null,
                         "0",
                         "0",
-                        "60/95/130/165/200",
-                        "30",
-                        "4",
-                        "3",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -582,15 +582,15 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        425,
-                        425,
-                        425,
-                        425,
-                        425
+                        450,
+                        450,
+                        450,
+                        450,
+                        450
                     ],
-                    "rangeBurn": "425",
+                    "rangeBurn": "450",
                     "image": {
-                        "full": "BlindMonkEOne.png",
+                        "full": "LeeSinEOne.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 96,
@@ -601,7 +601,7 @@
                     "resource": "{{ cost }} {{ abilityresourcename }}"
                 },
                 {
-                    "id": "BlindMonkRKick",
+                    "id": "LeeSinR",
                     "name": "Dragon's Rage",
                     "description": "Lee Sin performs a powerful roundhouse kick launching his target back, dealing physical damage to the target and any enemies they collide with. Enemies the target collides with are knocked into the air for a short duration. This technique was taught to him by Jesse Perring, although Lee Sin does not kick players off the map.",
                     "tooltip": "Lee Sin performs a powerful roundhouse kick <status>Knocking Back</status> an enemy champion and dealing <physicalDamage>{{ damage }} physical damage</physicalDamage>.<br /><br />Enemies the target collides with are briefly <status>Knocked Up</status> and take <physicalDamage>{{ damage }} plus {{ percenthpcarrythrough }}% of the kicked enemy's bonus Health as physical damage</physicalDamage>.{{ spellmodifierdescriptionappend }}",
@@ -707,7 +707,7 @@
                     ],
                     "rangeBurn": "375",
                     "image": {
-                        "full": "BlindMonkRKick.png",
+                        "full": "LeeSinR.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 144,

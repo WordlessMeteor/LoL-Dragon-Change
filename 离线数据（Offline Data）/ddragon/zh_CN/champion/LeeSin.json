@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.8.1",
+    "version": "14.9.1",
     "data": {
         "LeeSin": {
             "id": "LeeSin",
@@ -46,7 +46,7 @@
                     "id": "64004",
                     "num": 4,
                     "name": "至高之拳 李青",
-                    "chromas": false
+                    "chromas": true
                 },
                 {
                     "id": "64005",
@@ -174,10 +174,10 @@
             },
             "spells": [
                 {
-                    "id": "BlindMonkQOne",
+                    "id": "LeeSinQOne",
                     "name": "天音波/回音击",
                     "description": "天音波：李青发出刺耳的声波定位敌人，对首个敌人造成物理伤害。如果天音波击中敌人，李青在接下来3秒可施放回音击。<br>回音击：李青冲向被天音波击中的敌人，造成基于该目标已损失生命值的物理伤害。",
-                    "tooltip": "李青发出刺耳的声波定位敌人，对命中的首个敌人造成<physicalDamage>{{ initialdamage }}物理伤害</physicalDamage>，提供目标的真实视野，并使李青可以在接下来的{{ e7 }}秒内<recast>再次施放</recast>。<br /><br /><recast>再次施放：</recast>李青突进向被声波击中的敌人，造成<physicalDamage>{{ recastdamage }}到{{ empowereddamage }}物理伤害</physicalDamage>（基于目标已损失的生命值）。 {{ spellmodifierdescriptionappend }}",
+                    "tooltip": "李青发出刺耳的声波定位敌人，对命中的首个敌人造成<physicalDamage>{{ initialdamage }}物理伤害</physicalDamage>，提供目标的真实视野，并使李青可以在接下来的{{ reactivatetime }}秒内<recast>再次施放</recast>。<br /><br /><recast>再次施放：</recast>李青冲向被音波击中的敌人，造成<physicalDamage>{{ recastdamage }}到{{ empowereddamage }}物理伤害</physicalDamage>（基于目标已损失的生命值）。 {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "天音波伤害",
@@ -186,9 +186,9 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }} -> {{ e2NL }}",
-                            "{{ e3 }} -> {{ e3NL }}",
+                            "{{ q1basedamage }} -> {{ q1basedamageNL }}",
+                            "{{ q2basedamage }} -> {{ q2basedamageNL }}",
+                            "{{ q2basedamage*2.000000 }} -> {{ q2basedamagenl*2.000000 }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -213,60 +213,60 @@
                     "effect": [
                         null,
                         [
-                            55,
-                            80,
-                            105,
-                            130,
-                            155
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            55,
-                            80,
-                            105,
-                            130,
-                            155
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            110,
-                            160,
-                            210,
-                            260,
-                            310
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1350,
-                            1350,
-                            1350,
-                            1350,
-                            1350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            400,
-                            400,
-                            400,
-                            400,
-                            400
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1,
-                            1,
-                            1,
-                            1,
-                            1
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -285,14 +285,14 @@
                     ],
                     "effectBurn": [
                         null,
-                        "55/80/105/130/155",
-                        "55/80/105/130/155",
-                        "110/160/210/260/310",
-                        "30",
-                        "1350",
-                        "400",
-                        "3",
-                        "1",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0"
                     ],
@@ -308,7 +308,7 @@
                     ],
                     "rangeBurn": "1100",
                     "image": {
-                        "full": "BlindMonkQOne.png",
+                        "full": "LeeSinQOne.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 0,
@@ -319,10 +319,10 @@
                     "resource": "{{ cost }} {{ abilityresourcename }}"
                 },
                 {
-                    "id": "BlindMonkWOne",
+                    "id": "LeeSinWOne",
                     "name": "金钟罩/铁布衫",
-                    "description": "金钟罩：李青冲向友军，提供护盾保护自己。如果目标友军是英雄，那么李青和目标都会获得护盾。施放金钟罩后3秒内，李青可施放铁布衫。<br>铁布衫：李青艰苦卓绝的训练让他能在战斗中激发潜能。李青可以在4秒内获得额外生命偷取和法术吸血。",
-                    "tooltip": "李青突进至一名友军或守卫处。如果目标友军是一名英雄，李青会为自己和目标友军提供持续{{ e3 }}秒的<shield>{{ shieldamount }}护盾值</shield>，并且这个技能的冷却时间会减少{{ e6 }}%。李青可以在接下来的{{ e9 }}秒内<recast>再次施放</recast>此技能。<br /><br /><recast>再次施放：</recast>李青获得持续{{ e8 }}秒的{{ lifestealandspellvamp }}%生命偷取和法术吸血。{{ spellmodifierdescriptionappend }}",
+                    "description": "金钟罩：李青冲向目标友军，为他自身提供护盾值。如果该友军是一名英雄，则也会获得护盾值。在使用【金钟罩】后，李青可以施放【铁布衫】。<br>铁布衫：李青艰苦卓绝的训练让他能在战斗中激发潜能。李青获得生命偷取和法术吸血。",
+                    "tooltip": "李青突进至一名友军或守卫处。如果目标友军是一名英雄，李青会为自己和目标友军提供持续{{ shieldduration }}秒的<shield>{{ shieldamount }}护盾值</shield>，并且这个技能的冷却时间会减少{{ w1cooldownrecovered*100 }}%。李青可以在接下来的{{ w1reactivatetime }}秒内<recast>再次施放</recast>此技能。<br /><br /><recast>再次施放：</recast>李青获得持续{{ lifestealandspellvamptime }}秒的{{ lifestealandspellvamp }}%生命偷取和法术吸血。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "金钟罩伤害吸收",
@@ -368,32 +368,11 @@
                             0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
-                        ],
-                        [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
-                        ],
-                        [
-                            5,
-                            5,
-                            5,
-                            5,
-                            5
-                        ],
-                        [
-                            50,
-                            50,
-                            50,
-                            50,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -403,39 +382,60 @@
                             0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1350,
-                            1350,
-                            1350,
-                            1350,
-                            1350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
                         "0",
                         "0",
-                        "2",
-                        "30",
-                        "5",
-                        "50",
                         "0",
-                        "4",
-                        "3",
-                        "1350"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
@@ -449,7 +449,7 @@
                     ],
                     "rangeBurn": "700",
                     "image": {
-                        "full": "BlindMonkWOne.png",
+                        "full": "LeeSinWOne.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 48,
@@ -460,10 +460,10 @@
                     "resource": "{{ cost }} {{ abilityresourcename }}"
                 },
                 {
-                    "id": "BlindMonkEOne",
+                    "id": "LeeSinEOne",
                     "name": "天雷破/摧筋断骨",
-                    "description": "天雷破：李青撞击地面，施放冲击波，造成魔法伤害并使命中的敌方单位显形。如果天雷破击中敌人，李青可以在接下来的3秒内施放摧筋断骨。<br>摧筋断骨：李青致残被天雷破给伤害到的敌人，减少敌人的移动速度，持续4秒。持续期间受影响单位的移动速度会逐渐恢复正常。",
-                    "tooltip": "李青猛击地面，施放冲击波，造成<magicDamage>{{ initialdamage }}魔法伤害</magicDamage>并使命中的敌方单位显形4秒。如果这个技能命中了一名敌人，那么李青可以在接下来的{{ e6 }}秒内<recast>再次施放</recast>此技能。<br /><br /><recast>再次施放：</recast>李青使被冲击波击中的敌人造成在{{ e5 }}秒里持续衰减的{{ slowamount }}%<status>减速</status>。{{ spellmodifierdescriptionappend }}",
+                    "description": "天雷破：李青猛击地面，施放冲击波，造成魔法伤害并使命中的敌方单位显形。如果天雷破命中了一名敌人，那么李青可以施放【摧筋断骨】。<br>摧筋断骨：李青致残被天雷破给伤害到的敌人，减少其移动速度。持续期间受影响单位的移动速度会逐渐恢复正常。",
+                    "tooltip": "李青猛击地面，施放冲击波，造成<magicDamage>{{ initialdamage }}魔法伤害</magicDamage>并使命中的敌方单位显形{{ slowduration }}秒。如果这个技能命中了一名敌人，那么李青可以在接下来的{{ reactivatetime }}秒内<recast>再次施放</recast>此技能。<br /><br /><recast>再次施放：</recast>李青使被冲击波击中的敌人造成在{{ slowduration }}秒里持续衰减的{{ slowamount }}%<status>减速</status>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "天雷破伤害",
@@ -509,32 +509,32 @@
                             0
                         ],
                         [
-                            60,
-                            95,
-                            130,
-                            165,
-                            200
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -569,10 +569,10 @@
                         null,
                         "0",
                         "0",
-                        "60/95/130/165/200",
-                        "30",
-                        "4",
-                        "3",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -582,15 +582,15 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        425,
-                        425,
-                        425,
-                        425,
-                        425
+                        450,
+                        450,
+                        450,
+                        450,
+                        450
                     ],
-                    "rangeBurn": "425",
+                    "rangeBurn": "450",
                     "image": {
-                        "full": "BlindMonkEOne.png",
+                        "full": "LeeSinEOne.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 96,
@@ -601,7 +601,7 @@
                     "resource": "{{ cost }} {{ abilityresourcename }}"
                 },
                 {
-                    "id": "BlindMonkRKick",
+                    "id": "LeeSinR",
                     "name": "猛龙摆尾",
                     "description": "李青用强力的回旋踢击退敌方英雄，对目标以及被目标撞到的任何敌人造成物理伤害。 被目标撞到的敌人会被短暂击飞。这项技艺是春哥教他的，不过李青不能将玩家的英雄踢到地图外面去。",
                     "tooltip": "李青用一记强力的回旋踢<status>击退</status>一名敌方英雄，并造成<physicalDamage>{{ damage }}物理伤害</physicalDamage>。<br /><br />被目标撞到的敌方英雄会被短暂<status>击飞</status>并受到<physicalDamage>物理伤害，伤害值相当于{{ damage }}加上初始目标{{ percenthpcarrythrough }}%的额外生命值</physicalDamage>。{{ spellmodifierdescriptionappend }}",
@@ -707,7 +707,7 @@
                     ],
                     "rangeBurn": "375",
                     "image": {
-                        "full": "BlindMonkRKick.png",
+                        "full": "LeeSinR.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 144,

@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.8.1",
+    "version": "14.9.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -546,7 +546,7 @@
                     ],
                     "vars": [],
                     "costType": "无消耗",
-                    "maxammo": "1",
+                    "maxammo": "-1",
                     "range": [
                         25000,
                         25000,
@@ -1311,10 +1311,10 @@
                     "maxrank": 3,
                     "cooldown": [
                         130,
-                        105,
-                        80
+                        115,
+                        100
                     ],
-                    "cooldownBurn": "130/105/80",
+                    "cooldownBurn": "130/115/100",
                     "cost": [
                         100,
                         100,
@@ -1558,6 +1558,12 @@
                     "num": 71,
                     "name": "至臻 魔女 阿卡丽",
                     "chromas": true
+                },
+                {
+                    "id": "84082",
+                    "num": 82,
+                    "name": "至高天 阿卡丽",
+                    "chromas": false
                 }
             ],
             "lore": "无论是均衡教派的出身，还是暗影之拳的称号，都已被阿卡丽抛弃。如今的阿卡丽独来独往，随时可以成为一柄为同胞所需的夺命利器。她牢牢铭记着从宗师“慎”身上学来的一切，效忠并保护着艾欧尼亚，每次出手都必定会换来敌人的一条性命。她的出击或许悄然无声，但传达的信息却响亮无比：不听命于任何人的刺客，才最为可怕。",
@@ -2247,18 +2253,16 @@
                     "tooltip": "阿克尚掷出一个回旋镖，造成<physicalDamage>{{ finaldamage }}物理伤害</physicalDamage>，每次命中一名敌人时会延长其距离。<br /><br />命中英雄时会为阿克尚提供在{{ hasteduration }}秒里持续衰减的<speed>{{ totalhaste }}移动速度</speed>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
-                            "@AbilityResourceName@消耗",
                             "伤害",
                             "小兵伤害百分比",
-                            "移动速度"
+                            "冷却时间",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ cost }} -> {{ costNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ secondarytargetdamage*100.000000 }}% -> {{ secondarytargetdamagenl*100.000000 }}%",
-                            "{{ hastevalue*100.000000 }}% -> {{ hastevaluenl*100.000000 }}%"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -3645,7 +3649,7 @@
                 "mp": 285,
                 "mpperlevel": 40,
                 "movespeed": 335,
-                "armor": 30,
+                "armor": 33,
                 "armorperlevel": 4,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -3656,7 +3660,7 @@
                 "mpregenperlevel": 0.55,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 53,
+                "attackdamage": 57,
                 "attackdamageperlevel": 3.8,
                 "attackspeedperlevel": 2.18,
                 "attackspeed": 0.736
@@ -8619,7 +8623,7 @@
                     "id": "BardW",
                     "name": "游神圣坛",
                     "description": "升起一座生命圣坛，圣坛会在短时间内持续充能，并在治疗和加速第一个接触它的友军后消失。",
-                    "tooltip": "巴德升起一座生命圣坛，圣坛会为第一个进入的友方英雄提供在{{ movespeed_duration }}秒里持续衰减的<speed>{{ calc_movespeed }}移动速度</speed>并为其回复至少<healing>{{ initialheal }}生命值</healing>。圣坛会不断成长，在存在{{ e8 }}秒后即可满额回复<healing>{{ maxheal }}生命值</healing>。<br /><br />巴德最多可同时拥有{{ e3 }}座圣坛。如果有一名敌方英雄进入圣坛，那么该圣坛就会被摧毁。<br /><br />这个技能有{{ ammo_limit }}层充能。<br /><br />当前已激活的圣坛数：{{ f1 }} / {{ f2 }}{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "巴德升起一座生命圣坛，圣坛会为第一个进入的友方英雄提供在{{ movespeed_duration }}秒里持续衰减的<speed>{{ calc_movespeed }}移动速度</speed>并为其回复至少<healing>{{ initialheal }}生命值</healing>。圣坛会不断成长，在存在{{ chargeuptime }}秒后即可满额回复<healing>{{ maxheal }}生命值</healing>。<br /><br />巴德最多可同时拥有{{ maxpacks }}座圣坛。如果有一名敌方英雄进入圣坛，那么该圣坛就会被摧毁。<br /><br />这个技能有{{ ammo_limit }}层充能。<br /><br />当前已激活的圣坛数：{{ f1 }} / {{ f2 }}{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "基础治疗",
@@ -9106,11 +9110,13 @@
                         "label": [
                             "伤害",
                             "每个方向的冷却时间",
+                            "野怪伤害",
                             "小兵伤害"
                         ],
                         "effect": [
                             "{{ damage }} -> {{ damageNL }}",
                             "{{ persidecooldown }} -> {{ persidecooldownNL }}",
+                            "{{ monstermod }} -> {{ monstermodNL }}",
                             "{{ minonmod*100.000000 }}% -> {{ minonmodnl*100.000000 }}%"
                         ]
                     },
@@ -10462,6 +10468,12 @@
                     "id": "63033",
                     "num": 33,
                     "name": "妖怪艺术家 布兰德",
+                    "chromas": true
+                },
+                {
+                    "id": "63042",
+                    "num": 42,
+                    "name": "至高天 布兰德",
                     "chromas": true
                 }
             ],
@@ -15925,8 +15937,8 @@
                     "chromas": false
                 }
             ],
-            "lore": "若要论谁才是诺克萨斯力量的象征，帝国上下没有人能比德莱厄斯这名久经沙场的指挥官更加适合。他劈开无数敌人的身躯——其中也不乏诺克萨斯人，终从一名无名小卒逐渐成长为如今的诺克萨斯之手。他从不怀疑自己执行的公义，也从不在举起战斧后迟疑。作为崔法利军团的领导者，德莱厄斯绝不会对任何敌人手下留情。",
-            "blurb": "若要论谁才是诺克萨斯力量的象征，帝国上下没有人能比德莱厄斯这名久经沙场的指挥官更加适合。他劈开无数敌人的身躯——其中也不乏诺克萨斯人，终从一名无名小卒逐渐成长为如今的诺克萨斯之手。他从不怀疑自己执行的公义，也从不在举起战斧后迟疑。作为崔法利军团的领导者，德莱厄斯绝不会对任何敌人手下留情。",
+            "lore": "若要论谁才是诺克萨斯武力的象征，帝国上下没有人能比德莱厄斯这名久经沙场的指挥官更加适合。他劈开无数敌人的身躯——其中也不乏诺克萨斯人，终从一名无名小卒逐渐成长为如今的诺克萨斯之手。他从不怀疑自己执行的公义，也从不在举起战斧后迟疑。作为崔法利军团的领导者，德莱厄斯绝不会对任何敌人手下留情。",
+            "blurb": "若要论谁才是诺克萨斯武力的象征，帝国上下没有人能比德莱厄斯这名久经沙场的指挥官更加适合。他劈开无数敌人的身躯——其中也不乏诺克萨斯人，终从一名无名小卒逐渐成长为如今的诺克萨斯之手。他从不怀疑自己执行的公义，也从不在举起战斧后迟疑。作为崔法利军团的领导者，德莱厄斯绝不会对任何敌人手下留情。",
             "allytips": [
                 "- 【大杀四方】是一个非常强力的压制技能。用它的最大作用距离打击敌人时，效果是最好的 。",
                 "- 你对目标施加的【出血】效果越多，【诺克萨斯断头台】的伤害越高。使用【诺克萨斯之力】来造成最大伤害。",
@@ -20384,11 +20396,11 @@
                             2.25
                         ],
                         [
-                            -0.65,
-                            -0.65,
-                            -0.65,
-                            -0.65,
-                            -0.65
+                            -0.45,
+                            -0.45,
+                            -0.45,
+                            -0.45,
+                            -0.45
                         ],
                         [
                             15,
@@ -20444,7 +20456,7 @@
                         null,
                         "2",
                         "1.25/1.5/1.75/2/2.25",
-                        "-0.65",
+                        "-0.45",
                         "15/14/13/12/11",
                         "5",
                         "1.5",
@@ -25974,7 +25986,7 @@
                     "id": "GnarW",
                     "name": "亢奋 /  痛殴",
                     "description": "纳尔的攻击和施法会让他亢奋起来，造成额外伤害并为他提供移动速度加成。<br><br>巨型纳尔已经过于暴怒，所以用不着亢奋了，因此他会用后脚暴跳，并猛击他面前的区域，使区域内的所有敌人晕眩。",
-                    "tooltip": "<keywordMajor>小型纳尔被动：</keywordMajor>对相同敌人的每第三次攻击或技能会造成<magicDamage>{{ spell.gnarw:minitotaldamage }}外加{{ spell.gnarw:minipercenthpdamage*100 }}%最大生命值的魔法伤害</magicDamage>并提供在3秒里持续衰减的<speed>{{ spell.gnarr:rhypermovementspeedpercent }}%移动速度</speed>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>小型纳尔 被动：</keywordMajor>对相同敌人的每第三次攻击或技能造成额外的<magicDamage>{{ spell.gnarw:minitotaldamage }}外加{{ spell.gnarw:minipercenthpdamage*100 }}%最大生命值的魔法伤害</magicDamage>并提供在{{ minihasteduration }}秒里持续衰减的<speed>{{ spell.gnarr:rhypermovementspeedpercent }}%移动速度</speed>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "亢奋伤害",
@@ -27233,7 +27245,7 @@
                 "critperlevel": 0,
                 "attackdamage": 68,
                 "attackdamageperlevel": 4,
-                "attackspeedperlevel": 2.6,
+                "attackspeedperlevel": 3,
                 "attackspeed": 0.475
             },
             "spells": [
@@ -30581,7 +30593,7 @@
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ effect6amount*100.000000 }}% -> {{ effect6amountnl*100.000000 }}%",
+                            "{{ tentacledamageamp*100.000000 }}% -> {{ tentacledamageampnl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -32808,15 +32820,15 @@
                             "伤害",
                             "减速",
                             "被动移动速度",
-                            "@AbilityResourceName@消耗",
-                            "冷却时间"
+                            "冷却时间",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ slowpercent }}% -> {{ slowpercentNL }}%",
                             "{{ mspercent*100.000000 }}% -> {{ mspercentnl*100.000000 }}%",
-                            "{{ cost }} -> {{ costNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -32954,14 +32966,14 @@
                         "label": [
                             "护盾值",
                             "攻击力",
-                            "@AbilityResourceName@消耗",
-                            "冷却时间"
+                            "冷却时间",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
                             "{{ baseshield }} -> {{ baseshieldNL }}",
                             "{{ bonusad }} -> {{ bonusadNL }}",
-                            "{{ cost }} -> {{ costNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -36608,11 +36620,11 @@
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        70,
-                        60,
-                        50
+                        85,
+                        65,
+                        45
                     ],
-                    "cooldownBurn": "70/60/50",
+                    "cooldownBurn": "85/65/45",
                     "cost": [
                         100,
                         100,
@@ -39903,14 +39915,14 @@
                         "label": [
                             "伤害",
                             "减速",
-                            "@AbilityResourceName@消耗",
-                            "冷却时间"
+                            "冷却时间",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ e2 }}% -> {{ e2NL }}%",
-                            "{{ cost }} -> {{ costNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -39934,11 +39946,11 @@
                     "effect": [
                         null,
                         [
-                            60,
-                            90,
-                            120,
-                            150,
-                            180
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             50,
@@ -40006,7 +40018,7 @@
                     ],
                     "effectBurn": [
                         null,
-                        "60/90/120/150/180",
+                        "0",
                         "50/60/70/80/90",
                         "1",
                         "0",
@@ -40995,6 +41007,18 @@
                     "num": 57,
                     "name": "玉剑传说 翼剑仙",
                     "chromas": true
+                },
+                {
+                    "id": "10066",
+                    "num": 66,
+                    "name": "至高天 凯尔",
+                    "chromas": true
+                },
+                {
+                    "id": "10067",
+                    "num": 67,
+                    "name": "至臻 至高天 凯尔",
+                    "chromas": false
                 }
             ],
             "lore": "在符文战争最激烈的时刻，一位巨神星灵诞下了凯尔，她传承了母亲的荣耀，在圣火飞翼的承载下为了正义而战。她和孪生妹妹莫甘娜曾是德玛西亚的保护神——但凡人反反复复的失败最终让凯尔的幻想破灭，彻底抛弃了这个国度。但关于她用火焰长剑惩罚不义之徒的传说依然在流传，关于她终将回归的希望也依然在持续……",
@@ -42810,13 +42834,13 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        200,
-                        200,
-                        200,
-                        200,
-                        200
+                        170,
+                        170,
+                        170,
+                        170,
+                        170
                     ],
-                    "rangeBurn": "200",
+                    "rangeBurn": "170",
                     "image": {
                         "full": "KennenLightningRush.png",
                         "sprite": "spell6.png",
@@ -46411,8 +46435,8 @@
                     "chromas": true
                 }
             ],
-            "lore": "即使是在秘密团体黑色玫瑰的成员内部，乐芙兰也同样保持神秘，而乐芙兰这个名字也只是众多化名之一。这个皮肤惨白的女人自从诺克萨斯建国初期就开始操纵大小人物，推动事态发展。这位女法师能用魔法制造自己的镜像，她可以出现在任何地点、任何人面前、甚至同时现身于许多地方。乐芙兰永远都在暗处密谋策划，而她真正的动机和她变换不定的身份一样令人难以捉摸。",
-            "blurb": "即使是在秘密团体黑色玫瑰的成员内部，乐芙兰也同样保持神秘，而乐芙兰这个名字也只是众多化名之一。这个皮肤惨白的女人自从诺克萨斯建国初期就开始操纵大小人物，推动事态发展。这位女法师能用魔法制造自己的镜像，她可以出现在任何地点、任何人面前、甚至同时现身于许多地方。乐芙兰永远都在暗处密谋策划，而她真正的动机和她变换不定的身份一样令人难以捉摸。",
+            "lore": "即使是在秘密团体黑色玫瑰的成员内部，乐芙兰也同样保持神秘，而乐芙兰这个名字也只是众多化名之一。这个皮肤惨白的女人自从诺克萨斯建国初期就开始操纵大小人物，推动事态发展。这位女法师能用魔法制造自己的镜像，她可以出现在任何地点、任何人面前,甚至同时现身于许多地方。乐芙兰永远都在暗处密谋策划，而她真正的动机和她变换不定的身份一样令人难以捉摸。",
+            "blurb": "即使是在秘密团体黑色玫瑰的成员内部，乐芙兰也同样保持神秘，而乐芙兰这个名字也只是众多化名之一。这个皮肤惨白的女人自从诺克萨斯建国初期就开始操纵大小人物，推动事态发展。这位女法师能用魔法制造自己的镜像，她可以出现在任何地点、任何人面前,甚至同时现身于许多地方。乐芙兰永远都在暗处密谋策划，而她真正的动机和她变换不定的身份一样令人难以捉摸。",
             "allytips": [
                 "- 魔影谜踪和故技重施一起释放，可以让对方难以猜出你要回到哪一个魔影谜踪的法阵上。",
                 "- 使用魔影迷踪可以帮助你有好的站位来施放幻影锁链。",
@@ -47063,7 +47087,7 @@
                     "id": "64004",
                     "num": 4,
                     "name": "至高之拳 李青",
-                    "chromas": false
+                    "chromas": true
                 },
                 {
                     "id": "64005",
@@ -47191,10 +47215,10 @@
             },
             "spells": [
                 {
-                    "id": "BlindMonkQOne",
+                    "id": "LeeSinQOne",
                     "name": "天音波/回音击",
                     "description": "天音波：李青发出刺耳的声波定位敌人，对首个敌人造成物理伤害。如果天音波击中敌人，李青在接下来3秒可施放回音击。<br>回音击：李青冲向被天音波击中的敌人，造成基于该目标已损失生命值的物理伤害。",
-                    "tooltip": "李青发出刺耳的声波定位敌人，对命中的首个敌人造成<physicalDamage>{{ initialdamage }}物理伤害</physicalDamage>，提供目标的真实视野，并使李青可以在接下来的{{ e7 }}秒内<recast>再次施放</recast>。<br /><br /><recast>再次施放：</recast>李青突进向被声波击中的敌人，造成<physicalDamage>{{ recastdamage }}到{{ empowereddamage }}物理伤害</physicalDamage>（基于目标已损失的生命值）。 {{ spellmodifierdescriptionappend }}",
+                    "tooltip": "李青发出刺耳的声波定位敌人，对命中的首个敌人造成<physicalDamage>{{ initialdamage }}物理伤害</physicalDamage>，提供目标的真实视野，并使李青可以在接下来的{{ reactivatetime }}秒内<recast>再次施放</recast>。<br /><br /><recast>再次施放：</recast>李青冲向被音波击中的敌人，造成<physicalDamage>{{ recastdamage }}到{{ empowereddamage }}物理伤害</physicalDamage>（基于目标已损失的生命值）。 {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "天音波伤害",
@@ -47203,9 +47227,9 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }} -> {{ e2NL }}",
-                            "{{ e3 }} -> {{ e3NL }}",
+                            "{{ q1basedamage }} -> {{ q1basedamageNL }}",
+                            "{{ q2basedamage }} -> {{ q2basedamageNL }}",
+                            "{{ q2basedamage*2.000000 }} -> {{ q2basedamagenl*2.000000 }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -47230,60 +47254,60 @@
                     "effect": [
                         null,
                         [
-                            55,
-                            80,
-                            105,
-                            130,
-                            155
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            55,
-                            80,
-                            105,
-                            130,
-                            155
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            110,
-                            160,
-                            210,
-                            260,
-                            310
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1350,
-                            1350,
-                            1350,
-                            1350,
-                            1350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            400,
-                            400,
-                            400,
-                            400,
-                            400
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1,
-                            1,
-                            1,
-                            1,
-                            1
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -47302,14 +47326,14 @@
                     ],
                     "effectBurn": [
                         null,
-                        "55/80/105/130/155",
-                        "55/80/105/130/155",
-                        "110/160/210/260/310",
-                        "30",
-                        "1350",
-                        "400",
-                        "3",
-                        "1",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0"
                     ],
@@ -47325,7 +47349,7 @@
                     ],
                     "rangeBurn": "1100",
                     "image": {
-                        "full": "BlindMonkQOne.png",
+                        "full": "LeeSinQOne.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 0,
@@ -47336,10 +47360,10 @@
                     "resource": "{{ cost }} {{ abilityresourcename }}"
                 },
                 {
-                    "id": "BlindMonkWOne",
+                    "id": "LeeSinWOne",
                     "name": "金钟罩/铁布衫",
-                    "description": "金钟罩：李青冲向友军，提供护盾保护自己。如果目标友军是英雄，那么李青和目标都会获得护盾。施放金钟罩后3秒内，李青可施放铁布衫。<br>铁布衫：李青艰苦卓绝的训练让他能在战斗中激发潜能。李青可以在4秒内获得额外生命偷取和法术吸血。",
-                    "tooltip": "李青突进至一名友军或守卫处。如果目标友军是一名英雄，李青会为自己和目标友军提供持续{{ e3 }}秒的<shield>{{ shieldamount }}护盾值</shield>，并且这个技能的冷却时间会减少{{ e6 }}%。李青可以在接下来的{{ e9 }}秒内<recast>再次施放</recast>此技能。<br /><br /><recast>再次施放：</recast>李青获得持续{{ e8 }}秒的{{ lifestealandspellvamp }}%生命偷取和法术吸血。{{ spellmodifierdescriptionappend }}",
+                    "description": "金钟罩：李青冲向目标友军，为他自身提供护盾值。如果该友军是一名英雄，则也会获得护盾值。在使用【金钟罩】后，李青可以施放【铁布衫】。<br>铁布衫：李青艰苦卓绝的训练让他能在战斗中激发潜能。李青获得生命偷取和法术吸血。",
+                    "tooltip": "李青突进至一名友军或守卫处。如果目标友军是一名英雄，李青会为自己和目标友军提供持续{{ shieldduration }}秒的<shield>{{ shieldamount }}护盾值</shield>，并且这个技能的冷却时间会减少{{ w1cooldownrecovered*100 }}%。李青可以在接下来的{{ w1reactivatetime }}秒内<recast>再次施放</recast>此技能。<br /><br /><recast>再次施放：</recast>李青获得持续{{ lifestealandspellvamptime }}秒的{{ lifestealandspellvamp }}%生命偷取和法术吸血。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "金钟罩伤害吸收",
@@ -47385,32 +47409,11 @@
                             0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
-                        ],
-                        [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
-                        ],
-                        [
-                            5,
-                            5,
-                            5,
-                            5,
-                            5
-                        ],
-                        [
-                            50,
-                            50,
-                            50,
-                            50,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -47420,39 +47423,60 @@
                             0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1350,
-                            1350,
-                            1350,
-                            1350,
-                            1350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
                         "0",
                         "0",
-                        "2",
-                        "30",
-                        "5",
-                        "50",
                         "0",
-                        "4",
-                        "3",
-                        "1350"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
@@ -47466,7 +47490,7 @@
                     ],
                     "rangeBurn": "700",
                     "image": {
-                        "full": "BlindMonkWOne.png",
+                        "full": "LeeSinWOne.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 48,
@@ -47477,10 +47501,10 @@
                     "resource": "{{ cost }} {{ abilityresourcename }}"
                 },
                 {
-                    "id": "BlindMonkEOne",
+                    "id": "LeeSinEOne",
                     "name": "天雷破/摧筋断骨",
-                    "description": "天雷破：李青撞击地面，施放冲击波，造成魔法伤害并使命中的敌方单位显形。如果天雷破击中敌人，李青可以在接下来的3秒内施放摧筋断骨。<br>摧筋断骨：李青致残被天雷破给伤害到的敌人，减少敌人的移动速度，持续4秒。持续期间受影响单位的移动速度会逐渐恢复正常。",
-                    "tooltip": "李青猛击地面，施放冲击波，造成<magicDamage>{{ initialdamage }}魔法伤害</magicDamage>并使命中的敌方单位显形4秒。如果这个技能命中了一名敌人，那么李青可以在接下来的{{ e6 }}秒内<recast>再次施放</recast>此技能。<br /><br /><recast>再次施放：</recast>李青使被冲击波击中的敌人造成在{{ e5 }}秒里持续衰减的{{ slowamount }}%<status>减速</status>。{{ spellmodifierdescriptionappend }}",
+                    "description": "天雷破：李青猛击地面，施放冲击波，造成魔法伤害并使命中的敌方单位显形。如果天雷破命中了一名敌人，那么李青可以施放【摧筋断骨】。<br>摧筋断骨：李青致残被天雷破给伤害到的敌人，减少其移动速度。持续期间受影响单位的移动速度会逐渐恢复正常。",
+                    "tooltip": "李青猛击地面，施放冲击波，造成<magicDamage>{{ initialdamage }}魔法伤害</magicDamage>并使命中的敌方单位显形{{ slowduration }}秒。如果这个技能命中了一名敌人，那么李青可以在接下来的{{ reactivatetime }}秒内<recast>再次施放</recast>此技能。<br /><br /><recast>再次施放：</recast>李青使被冲击波击中的敌人造成在{{ slowduration }}秒里持续衰减的{{ slowamount }}%<status>减速</status>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "天雷破伤害",
@@ -47526,32 +47550,32 @@
                             0
                         ],
                         [
-                            60,
-                            95,
-                            130,
-                            165,
-                            200
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -47586,10 +47610,10 @@
                         null,
                         "0",
                         "0",
-                        "60/95/130/165/200",
-                        "30",
-                        "4",
-                        "3",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -47599,15 +47623,15 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        425,
-                        425,
-                        425,
-                        425,
-                        425
+                        450,
+                        450,
+                        450,
+                        450,
+                        450
                     ],
-                    "rangeBurn": "425",
+                    "rangeBurn": "450",
                     "image": {
-                        "full": "BlindMonkEOne.png",
+                        "full": "LeeSinEOne.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 96,
@@ -47618,7 +47642,7 @@
                     "resource": "{{ cost }} {{ abilityresourcename }}"
                 },
                 {
-                    "id": "BlindMonkRKick",
+                    "id": "LeeSinR",
                     "name": "猛龙摆尾",
                     "description": "李青用强力的回旋踢击退敌方英雄，对目标以及被目标撞到的任何敌人造成物理伤害。 被目标撞到的敌人会被短暂击飞。这项技艺是春哥教他的，不过李青不能将玩家的英雄踢到地图外面去。",
                     "tooltip": "李青用一记强力的回旋踢<status>击退</status>一名敌方英雄，并造成<physicalDamage>{{ damage }}物理伤害</physicalDamage>。<br /><br />被目标撞到的敌方英雄会被短暂<status>击飞</status>并受到<physicalDamage>物理伤害，伤害值相当于{{ damage }}加上初始目标{{ percenthpcarrythrough }}%的额外生命值</physicalDamage>。{{ spellmodifierdescriptionappend }}",
@@ -47724,7 +47748,7 @@
                     ],
                     "rangeBurn": "375",
                     "image": {
-                        "full": "BlindMonkRKick.png",
+                        "full": "LeeSinR.png",
                         "sprite": "spell7.png",
                         "group": "spell",
                         "x": 144,
@@ -51661,7 +51685,7 @@
                         ],
                         "effect": [
                             "{{ e2 }} -> {{ e2NL }}",
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ slowpercent }}% -> {{ slowpercentNL }}%",
                             "{{ cost }} -> {{ costNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
@@ -52715,6 +52739,12 @@
                     "num": 38,
                     "name": "荣誉使者 玛尔扎哈",
                     "chromas": false
+                },
+                {
+                    "id": "90039",
+                    "num": 39,
+                    "name": "至高天 玛尔扎哈",
+                    "chromas": true
                 }
             ],
             "lore": "玛尔扎哈是一名狂热的先知，将自己的全部奉献给一切生命的大一统。他坚信，近来新出现的虚空就是符文之地的救赎。在恕瑞玛的沙漠荒原上，他曾一度追随着脑海中的窃窃私语，一路来到古艾卡西亚。在这片废墟中，他窥见了虚空深处的黑暗核心，被赋予了新的力量和目标。玛尔扎哈现在视自己为迷途羔羊的牧人，将其他人带进畜栏，或是放出藏身地下的虚灵生物。",
@@ -52771,11 +52801,13 @@
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "沉默时长"
+                            "沉默时长",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
                             "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }} -> {{ e2NL }}"
+                            "{{ e2 }} -> {{ e2NL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -52788,13 +52820,13 @@
                     ],
                     "cooldownBurn": "6",
                     "cost": [
-                        80,
-                        80,
-                        80,
-                        80,
+                        60,
+                        65,
+                        70,
+                        75,
                         80
                     ],
-                    "costBurn": "80",
+                    "costBurn": "60/65/70/75/80",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -53066,13 +53098,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        15,
-                        13,
                         11,
+                        10,
                         9,
+                        8,
                         7
                     ],
-                    "cooldownBurn": "15/13/11/9/7",
+                    "cooldownBurn": "11/10/9/8/7",
                     "cost": [
                         60,
                         70,
@@ -63057,6 +63089,12 @@
                     "num": 17,
                     "name": "绝息圣堂 魔腾",
                     "chromas": true
+                },
+                {
+                    "id": "56026",
+                    "num": 26,
+                    "name": "至高天 魔腾",
+                    "chromas": true
                 }
             ],
             "lore": "将一切有知觉的脑海中萦绕的噩梦提取出来，进而融合成一个恶魔般的实体，这就是被人称为魔腾的存在，它已成为一种纯粹邪恶的原始力量。它的外形捉摸不定，一团无面的黑影中睁着一双冰冷的眼睛，身体两侧是一对形状恐怖的刀刃。魔腾摆脱了精神领域的束缚，进入了梦醒后的凡尘世界，寻觅那些在真正的黑暗中疯长的恐惧，作为自己的食粮。",
@@ -64501,15 +64539,15 @@
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "法力消耗",
                             "减速",
-                            "野怪伤害"
+                            "野怪伤害",
+                            "法力消耗"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ cost }} -> {{ costNL }}",
                             "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%",
-                            "{{ monsterdamage }} -> {{ monsterdamageNL }}"
+                            "{{ monsterdamage }} -> {{ monsterdamageNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -68087,21 +68125,21 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        14,
+                        13,
                         12,
                         11,
-                        10,
-                        9,
-                        8
+                        10
                     ],
-                    "cooldownBurn": "12/11/10/9/8",
+                    "cooldownBurn": "14/13/12/11/10",
                     "cost": [
-                        50,
-                        50,
-                        50,
-                        50,
-                        50
+                        65,
+                        65,
+                        65,
+                        65,
+                        65
                     ],
-                    "costBurn": "50",
+                    "costBurn": "65",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -69408,7 +69446,7 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%",
+                            "{{ attackspeedbonus*100.000000 }}% -> {{ attackspeedbonusnl*100.000000 }}%",
                             "{{ effect3amount*100.000000 }}% -> {{ effect3amountnl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
@@ -77544,8 +77582,8 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e3 }} -> {{ e3NL }}",
+                            "{{ basedamageone }} -> {{ basedamageoneNL }}",
+                            "{{ basedamagetwo }} -> {{ basedamagetwoNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -77570,11 +77608,11 @@
                     "effect": [
                         null,
                         [
-                            10,
-                            15,
-                            20,
-                            25,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0.75,
@@ -77584,13 +77622,6 @@
                             0.75
                         ],
                         [
-                            20,
-                            60,
-                            100,
-                            140,
-                            180
-                        ],
-                        [
                             0,
                             0,
                             0,
@@ -77612,18 +77643,25 @@
                             0
                         ],
                         [
-                            0.2,
-                            0.2,
-                            0.2,
-                            0.2,
-                            0.2
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.6,
-                            0.6,
-                            0.6,
-                            0.6,
-                            0.6
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -77642,14 +77680,14 @@
                     ],
                     "effectBurn": [
                         null,
-                        "10/15/20/25/30",
+                        "0",
                         "0.75",
-                        "20/60/100/140/180",
                         "0",
                         "0",
                         "0",
-                        "0.2",
-                        "0.6",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0"
                     ],
@@ -84246,7 +84284,7 @@
                 "hpregen": 7.5,
                 "hpregenperlevel": 0.75,
                 "mpregen": 7.2,
-                "mpregenperlevel": 0.6,
+                "mpregenperlevel": 0.75,
                 "crit": 0,
                 "critperlevel": 0,
                 "attackdamage": 60,
@@ -84410,13 +84448,11 @@
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "减速",
                             "冷却时间",
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ sloweffect*-100.000000 }}% -> {{ sloweffectnl*-100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -86944,8 +86980,8 @@
                     "chromas": true
                 }
             ],
-            "lore": "斯维因是一位高瞻远瞩的帝国统领，他指挥着帝国的战团在前线冲杀。虽然他在艾欧尼亚的战场上受到了重伤，但他靠着一只新生的恶魔手臂以及无情的意志夺得了诺克萨斯的权力。如今，这位统领正在向着只有他一人能看见的黑暗进军。",
-            "blurb": "斯维因是一位高瞻远瞩的帝国统领，他指挥着帝国的战团在前线冲杀。虽然他在艾欧尼亚的战场上受到了重伤，但他靠着一只新生的恶魔手臂以及无情的意志夺得了诺克萨斯的权力。如今，这位统领正在向着只有他一人能看见的黑暗进军。",
+            "lore": "杰里柯·斯维因是诺克萨斯高瞻远瞩的统治者，执掌一个独尊力量的扩张主义国度。虽然他曾在艾欧尼亚战争中被击倒并留下残疾，失去了左臂，但他却成功用无情的决心掌控了整个帝国……也获得了一只新的恶魔之手。现在，斯维因在前线亲自指挥，对抗着只有他才能看到的压境黑暗——只有他才能通过黑影般的渡鸦窥见周围死尸的秘密。在献祭与秘密的漩涡中，最惊天的秘密是，真正的敌人来自内部。",
+            "blurb": "杰里柯·斯维因是诺克萨斯高瞻远瞩的统治者，执掌一个独尊力量的扩张主义国度。虽然他曾在艾欧尼亚战争中被击倒并留下残疾，失去了左臂，但他却成功用无情的决心掌控了整个帝国……也获得了一只新的恶魔之手。现在，斯维因在前线亲自指挥，对抗着只有他才能看到的压境黑暗——只有他才能通过黑影般的渡鸦窥见周围死尸的秘密。在献祭与秘密的漩涡中，最惊天的秘密是，真正的敌人来自内部。",
             "allytips": [
                 "- 如果你很难用【永不复行】来束缚住敌人，可以试试趁着敌人靠近敌方小兵的时候释放该技能，来用爆炸带给TA惊喜。",
                 "- 在兵线上时，尽量试着从一个安全的距离上利用【解脱之手】的穿透伤害来消耗敌人。",
@@ -89722,13 +89758,13 @@
                     ],
                     "cooldownBurn": "7/6/5/4/3",
                     "cost": [
-                        55,
-                        60,
                         65,
                         70,
-                        75
+                        75,
+                        80,
+                        85
                     ],
-                    "costBurn": "55/60/65/70/75",
+                    "costBurn": "65/70/75/80/85",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -91202,7 +91238,7 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }}% -> {{ e1NL }}%",
+                            "{{ armorbonuspercentage*100.000000 }}% -> {{ armorbonuspercentagenl*100.000000 }}%",
                             "{{ e2 }}% -> {{ e2NL }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
@@ -95965,8 +96001,8 @@
                 "difficulty": 6
             },
             "stats": {
-                "hp": 682,
-                "hpperlevel": 100,
+                "hp": 630,
+                "hpperlevel": 104,
                 "mp": 300,
                 "mpperlevel": 40,
                 "movespeed": 330,
@@ -97367,7 +97403,7 @@
                 "mpperlevel": 45,
                 "movespeed": 330,
                 "armor": 36,
-                "armorperlevel": 5.45,
+                "armorperlevel": 5,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 350,
@@ -98036,6 +98072,12 @@
                     "id": "110044",
                     "num": 44,
                     "name": "净雪之月 韦鲁斯",
+                    "chromas": true
+                },
+                {
+                    "id": "110053",
+                    "num": 53,
+                    "name": "至高天 韦鲁斯",
                     "chromas": true
                 }
             ],
@@ -106395,7 +106437,7 @@
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
-                    "maxammo": "1",
+                    "maxammo": "0",
                     "range": [
                         750,
                         750,
@@ -106540,7 +106582,7 @@
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
-                    "maxammo": "1",
+                    "maxammo": "0",
                     "range": [
                         1000,
                         1000,
@@ -106683,7 +106725,7 @@
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
-                    "maxammo": "1",
+                    "maxammo": "0",
                     "range": [
                         1050,
                         1050,
@@ -108311,8 +108353,8 @@
                     "chromas": false
                 }
             ],
-            "lore": "生前，他是永恩，是亚索同母异父的哥哥，是故乡剑术道场的知名弟子。但当他死在弟弟手下以后，却发现自己被精神领域中的恶毒灵体所侵扰，不得不用它自己的刀剑将它弑杀。如今，被诅咒的永恩戴上了它的恶魔面具，开始了不懈的追猎，他要猎尽所有同种的恶魔，从而查清自己究竟成为了什么。",
-            "blurb": "生前，他是永恩，是亚索同母异父的哥哥，是故乡剑术道场的知名弟子。但当他死在弟弟手下以后，却发现自己被精神领域中的恶毒灵体所侵扰，不得不用它自己的刀剑将它弑杀。如今，被诅咒的永恩戴上了它的恶魔面具，开始了不懈的追猎，他要猎尽所有同种的恶魔，从而查清自己究竟成为了什么。",
+            "lore": "生前，他是永恩，是亚索同母异父的哥哥，是故乡剑术道场的知名弟子。但当他死在弟弟手下以后，却发现自己被精神领域中的恶毒灵体所侵扰，不得不拿起恶魔的刀剑将它弑杀。如今，诅咒缠身的永恩戴上了它的恶魔面具，开始了不懈地追猎，他誓要猎尽所有同种的恶魔，以查清自己究竟成为了什么。\\n",
+            "blurb": "生前，他是永恩，是亚索同母异父的哥哥，是故乡剑术道场的知名弟子。但当他死在弟弟手下以后，却发现自己被精神领域中的恶毒灵体所侵扰，不得不拿起恶魔的刀剑将它弑杀。如今，诅咒缠身的永恩戴上了它的恶魔面具，开始了不懈地追猎，他誓要猎尽所有同种的恶魔，以查清自己究竟成为了什么。\\n",
             "allytips": [],
             "enemytips": [],
             "tags": [
