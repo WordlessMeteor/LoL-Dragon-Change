@@ -179,8 +179,8 @@ def FindPostPatch(patch, patchList): #二分查找某个版本号在DataDragon�
     if mid >= 1:
         return patchList[mid - 1]
     else:
-        print("该版本为美测服最新版本，暂未收录在DataDragon数据库中。该函数将返回正式服的最新版本。\nThis version is the latest version on PBE and isn't temporarily archived in DataDragon database. This function will return the latest Live version.")
-        return patchList[0]
+        print("该版本为美测服最新版本，暂未收录在DataDragon数据库中。\nThis version is the latest version on PBE and isn't archived in DataDragon database for now.")
+        return "pbe"
 
 def patch_sort(patchList: list): #利用插入排序算法，根据patch_compare函数对版本列表进行升序排列（Sorts a patch list according to the principle of `patch_compare` function through the insertion sort algorithm）
     bigPatch_re = re.compile("[0-9]*.[0-9]*")
@@ -1016,6 +1016,8 @@ async def search_profile(connection):
     platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
     platform_GARENA = {"PH": "菲律宾服（Philippines）", "SG": "新加坡服（Singapore, Malaysia and Indonesia）", "TW": "台服（Taiwan, Hong Kong and Macau）", "VN": "越南服（Vietnam）", "TH": "泰服（Thailand）"}
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
+    #控制只输出一遍的提示（Control the hint to be displayed only once）
+    puuid_change_warning_printed = False
     print('''在腾讯代理的服务器上，如果查询某名玩家的对局记录，请尝试以下操作：\nTo search for the match history of a player on Tencent servers, try out the following operations:\n1. 在浏览器中打开本地主机网络协议：%s\n   Open the localhost IP in any browser: %s\n2. 尝试用以下用户名和密码登录：\n   Try logining in with the following username and password:\n   用户名（Username）：riot\n   密码（Password）：%s\n3. （如果可以立即知道一位玩家的玩家通用唯一识别码，则可以跳过第3和4步）在浏览器的地址栏中的地址最后，添加“lol-summoner/v1/summoners?name={name}”，其中{name}指的是召唤师名称编码后的字符串。当召唤师名称只包含英文字母和阿拉伯数字时，直接以召唤师名称去空格后的字符串代入{name}即可；当召唤师名称存在非美国标准信息交换代码时，以召唤师名称编码后的字符串代入{name}。\n(If a summoner's puuid can be immediately known, the user may skip Steps 3 and 4) Add to following the last character of the address in the browser's address bar "lol-summoner/v1/summoners?name={name}", where {name} refers to strings encoded from summonerName. When summonerName contains only English letters and Arabic numbers, simply substitute {name} with the strings with the spaces removed from summonerName. When a non-ASCII character exists in summonerName, substitute {name} by encoded summonerName.\n3.1 对于包含非美国标准信息交换代码的召唤师名称，如果可以得到该召唤师的精确名称（如通过复制到剪贴板），那么在Python中可以得知其编码后的字符串。在Python中使用from urllib.parse import quote命令引入quote函数，再使用quote(x)函数获取字符串x编码后的字符串。\nFor summonerNames that include non-ASCII characters, if the exact summonerName can be obtained (e. g. by copying to clipboard), then its encoded string can be returned in Python. In Python console, use "from urllib.parse import quote" to introduce the "quote" function. Then use quote(x) function to get the string encoded from the string x.\n4. 在lol-summoner/v1/summoners?name={name}返回的结果中找到puuid并复制。\n   Find "puuid" in the result returned by "lol-summoner/v1/summoners?name={name}" and copy it.\n5. 将地址栏中4位IP地址后的斜杠后的内容删除，再添加“lol-match-history/v1/products/lol/{puuid}/matches?begIndex=0&endIndex=20”或“lol-match-history/v1/products/tft/{puuid}/matches?begin=0&count=20”，其中{puuid}是事先获知的玩家通用唯一识别码，或者是第4步复制到剪贴板的puuid。\nDelete the content following the slash after the 4-bit IP address in the address bar and then add to the end "lol-match-history/v1/products/lol/{puuid}/matches?begIndex=0&endIndex=20" or "lol-match-history/v1/products/tft/{puuid}/matches?begin=0&count=20", where {puuid} refers to the puuid previously known, or copied to clipboard in Step 4.\n6. 尝试将上一步输入的地址中的“endIndex=”或“count=”后的数字依次替换成21、199、200和500，观察每次替换后返回的网页结果有没有变多。\nTry changing the number following "endIndex=" or "count=" in the last step into 21, 199, 200 and 500 one by one, and observe whether the returned webpage contains more information after each change.\n7. 教程完成，请继续执行本脚本……\n   Instruction finished. Please continue to run this program ...''' %(connection.address, connection.address, connection.auth_key))
     while True:
         #初始化所有数据资源（Initialize all data resources）
@@ -1061,6 +1063,8 @@ async def search_profile(connection):
             elif "accountId" in info:
                 displayName = get_info_name(info) #用于文件名命名（For use of file naming）
                 current_puuid = info["puuid"] #用于核验对局是否包含该召唤师。此外，还用于扫描模式从对局的所有玩家信息中定位到该玩家（For use of checking whether the searched matches include this summoner. In addition, it's used for localization of this player from all players in a match in "scan" mode）
+                current_displayName = info["displayName"] #作用同上，用于模糊定位，主要应用于玩家通用唯一识别码发生变动的大区的扫描模式查询（Acts as the same role as the above variable for a rough localization. It's mainly designed for Scan Mode on servers that changed the players' puuids）
+                current_summonerName = info["gameName"] + "#" + info["tagLine"] #作用同上，用于模糊定位，主要应用于玩家通用唯一识别码发生变动的大区且在尾标引入后注册的主召唤师的对局记录扫描模式（Acts as the same role as the above variable for a rough localization. It's mainly designed for Scan Mode on players that signed up after tagLine was introduced on servers that changed the players' puuids）
                 infos[current_puuid] = info
                 #下面准备一些数据资源（The following code prepare data resources）
                 gamemode = await (await connection.request("GET", "/lol-game-queues/v1/queues")).json()
@@ -1730,7 +1734,7 @@ async def search_profile(connection):
                                         gameIndex.append(gameIndex_iter)
                                         #定位该召唤师（Find the index of this player in a match）
                                         for participantId in range(len(LoLGame_info["participantIdentities"])):
-                                            if LoLGame_info["participantIdentities"][participantId]["player"]["puuid"] == current_puuid:
+                                            if LoLGame_info["participantIdentities"][participantId]["player"]["puuid"] == current_puuid or LoLGame_info["participantIdentities"][participantId]["player"]["summonerName"] == current_displayName or LoLGame_info["participantIdentities"][participantId]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][participantId]["player"]["tagLine"] == current_summonerName:
                                                 break
                                         #获取游戏序号（Capture gameId）
                                         gameID.append(LoLGame_info["gameId"])
@@ -2004,12 +2008,22 @@ async def search_profile(connection):
                                         LoLGame_info_df = pandas.DataFrame(data = LoLGame_info_error)
                                 else:
                                     reserve = True #决定是否保存对局的文本文档。match_reserve_strategy变量决定的是是否将不包含主召唤师的对局记录导出到Excel中（Decides whether to save the matches into json files. The variable match_reserve_strategy decides whether to export the matches which don't include the main summoner into Excel）
-                                    participant = []
+                                    participant_puuid = []
+                                    participant_summonerName = []
+                                    participant_gameName = []
                                     for i in LoLGame_info["participantIdentities"]:
-                                        participant.append(i["player"]["puuid"])
-                                    if current_puuid in participant: #之所以使用玩家通用唯一识别码，而不是用召唤师名称来识别对局是否包含主玩家，是因为该玩家可能使用过改名卡。这里也没有选择帐户序号，这是因为保存在对局中的各玩家的帐户序号竟然是0！（The reason why the puuid instead of the displayName or summonerName is used to identify whether the matches contain the main player is that the player may have used name changing card. AccountId isn't chosen here, because all players' accountIds saved in the match fetched from 127 API is 0, to my surprise!）
+                                        participant_puuid.append(i["player"]["puuid"])
+                                        participant_summonerName.append(i["player"]["summonerName"])
+                                        participant_gameName.append(i["player"]["gameName"] + "#" + i["player"]["tagLine"])
+                                    if current_puuid in participant_puuid: #之所以使用玩家通用唯一识别码，而不是用召唤师名称来识别对局是否包含主玩家，是因为该玩家可能使用过改名卡。这里也没有选择帐户序号，这是因为保存在对局中的各玩家的帐户序号竟然是0！（The reason why the puuid instead of the displayName or summonerName is used to identify whether the matches contain the main player is that the player may have used name changing card. AccountId isn't chosen here, because all players' accountIds saved in the match fetched from 127 API is 0, to my surprise!）
                                         main_player_included[int(matchID)] = True
                                         match_reserve_strategy[int(matchID)] = True
+                                    elif current_displayName in participant_summonerName or current_summonerName in participant_gameName: #在玩家通用唯一识别码发生变动的大区，要识别变动之前的对局是否包含主玩家，最好的办法是依据显示名。因为在引入尾标后，显示名就固定下来，没有办法变动了，玩家只能通过改名卡修改游戏名和尾标。也就是说，显示名可视为玩家的另一种“身份识别码”。对于在引入尾标后注册的玩家，其显示名是空字符串，所以在模糊定位时用游戏名代替（On servers that changed the players' puuids once, to identify whether the matches before this change include this player, the best strategy is to refer to the displayName. This is because after tagLine is introduced, displayName is locked and there's no way of changing it. What the player can change through the Summmoner Name Change is gameName and tagLine. That is to say, displayName may be regarded as another ID of a player. For those who signed up after tagLine was introduced, their displayNames are empty strings. So gameName is taken for the rough localization）
+                                        main_player_included[int(matchID)] = True
+                                        match_reserve_strategy[int(matchID)] = True
+                                        if not puuid_change_warning_printed:
+                                            print("警告：该大区的玩家通用唯一识别码曾发生变动！请检查保存的各对局是否属于该玩家。\nWarning: The puuids of players on this server have been changed! Please check if the saved matches really belong to this player.")
+                                            puuid_change_warning_printed = True
                                     else:
                                         main_player_included[int(matchID)] = False
                                         reserve = False #由于从文本文件中可以提取该召唤师的对局序号，所以需要保证保留下来的文本文件都包含该召唤师。因此，如果一场对局不包含该召唤师，就不应该把这场对局保存下来（Because a summoner's matchIDs can be extracted from the saved json files, it needs to be guaranteed that all saved json files belong to this summoner. Therefore, if a match doesn't include this summoner, then it shouldn't be saved into json files）
@@ -2501,7 +2515,7 @@ async def search_profile(connection):
 
                                 game_info_dfs[int(matchID)] = LoLGame_info_df.copy(deep = True) #这里添加的LoLGame_info_df会在下一次循环中发生改变，这是数据框类型的特性。因此这里采用深复制，将原有内容克隆到另外一个地址，这样能保证每次添加的是不同的对局信息（The added LoLGame_info_df will be modified next time in the loop, which belongs to the characteristics of DataFrame data type. Therefore a deep copy is used here to clone the original contents to another address, so that each time the appended content is different）
                                 game_timeline_dfs[int(matchID)] = LoLGame_timeline_df.copy(deep = True)
-                            if LoLGamePlayed:
+                            if LoLGamePlayed and export_json:
                                 print('对局信息和时间轴已保存在“%s”文件夹下。\nMatch information and timelines are saved in the folder "%s".\n' %(folder, folder))
                             while matches_to_remove != []: #在去除获取异常的对局后，需要在对局序号列表中将这些对局也一并移除（After removing matches that fail to be captured, we need to remove them in matchID list, too）
                                 match_to_remove = matches_to_remove.pop()

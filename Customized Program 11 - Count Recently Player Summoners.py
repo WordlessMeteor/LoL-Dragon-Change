@@ -179,8 +179,8 @@ def FindPostPatch(patch, patchList): #二分查找某个版本号在DataDragon�
     if mid >= 1:
         return patchList[mid - 1]
     else:
-        print("该版本为美测服最新版本，暂未收录在DataDragon数据库中。该函数将返回正式服的最新版本。\nThis version is the latest version on PBE and isn't temporarily archived in DataDragon database. This function will return the latest Live version.")
-        return patchList[0]
+        print("该版本为美测服最新版本，暂未收录在DataDragon数据库中。\nThis version is the latest version on PBE and isn't archived in DataDragon database for now.")
+        return "pbe"
 
 def get_info_name(info: dict, mode = 1) -> str:
     if not isinstance(info, dict) or not all(i in info for i in ["displayName", "gameName", "tagLine"]):
@@ -1019,6 +1019,8 @@ async def search_recent_players(connection):
     platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
     platform_GARENA = {"PH": "菲律宾服（Philippines）", "SG": "新加坡服（Singapore, Malaysia and Indonesia）", "TW": "台服（Taiwan, Hong Kong and Macau）", "VN": "越南服（Vietnam）", "TH": "泰服（Thailand）"}
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
+    #控制只输出一遍的提示（Control the hint to be displayed only once）
+    puuid_change_warning_printed = False
     print("请选择本脚本的使用模式：\nPlease select a mode for use:\n1\t生成模式（Generate Mode）\n2\t检测模式（Detect Mode）")
     detectMode = False
     mode = input()
@@ -1082,6 +1084,8 @@ async def search_recent_players(connection):
             elif "accountId" in info:
                 displayName = get_info_name(info) #用于扫描模式定位到某召唤师（Determines the directory which contains the summoner's data）
                 current_puuid = info["puuid"] #用于核验对局是否包含该召唤师。此外，还用于扫描模式从对局的所有玩家信息中定位到该玩家（For use of checking whether the searched matches include this summoner. In addition, it's used for localization of this player from all players in a match in "scan" mode）
+                current_displayName = info["displayName"] #作用同上，用于模糊定位，主要应用于玩家通用唯一识别码发生变动的大区的扫描模式查询（Acts as the same role as the above variable for a rough localization. It's mainly designed for Scan Mode on servers that changed the players' puuids）
+                current_summonerName = info["gameName"] + "#" + info["tagLine"] #作用同上，用于模糊定位，主要应用于玩家通用唯一识别码发生变动的大区且在尾标引入后注册的主召唤师的对局记录扫描模式（Acts as the same role as the above variable for a rough localization. It's mainly designed for Scan Mode on players that signed up after tagLine was introduced on servers that changed the players' puuids）
                 infos[current_puuid] = info
                 #下面准备一些数据资源（The following code prepare data resources）
                 tier = {"": "", "NONE": "没有段位", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
@@ -1529,7 +1533,7 @@ async def search_recent_players(connection):
                                     participant.append(i["player"]["puuid"])
                                 if current_puuid in participant: #之所以使用玩家通用唯一识别码，而不是用召唤师名称来识别对局是否包含主玩家，是因为该玩家可能使用过改名卡。这里也没有选择帐户序号，这是因为保存在对局中的各玩家的帐户序号竟然是0！（The reason why the puuid instead of the displayName or summonerName is used to identify whether the matches contain the main player is that the player may have used name changing card. AccountId isn't chosen here, because all players' accountIds saved in the match fetched from 127 API is 0, to my surprise!）
                                     for currentParticipantId in range(len(LoLGame_info["participantIdentities"])): #定位主召唤师（Find the index of the main player in a match）
-                                        if LoLGame_info["participantIdentities"][currentParticipantId]["player"]["puuid"] == current_puuid:
+                                        if LoLGame_info["participantIdentities"][currentParticipantId]["player"]["puuid"] == current_puuid or LoLGame_info["participantIdentities"][currentParticipantId]["player"]["summonerName"] == current_displayName or LoLGame_info["participantIdentities"][currentParticipantId]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][currentParticipantId]["tagLine"] == current_summonerName:
                                             break
                                     for i in range(len(LoLGame_info["participants"])): #开始整理数据（Begin to sort out the data）
                                         if LoLGame_info["participantIdentities"][i]["player"]["puuid"] != "00000000-0000-0000-0000-000000000000" and LoLGame_info["participantIdentities"][i]["player"]["puuid"] != current_puuid: #统计玩家，当然指的是不包括自己的人类玩家（Of course, the players counted are human players but not himself / herself）
