@@ -94,22 +94,52 @@ while True:
         log.write(mode + "\n")
         if mode == "" or mode[0] != "1":
             mode = "2"
-            print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-            log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
-            print("正在遍历离线数据资源以获取最新修改时间……\nTraversing the offline data resource files to get the latest modification time ...")
-            log.write("正在遍历离线数据资源以获取最新修改时间……\nTraversing the offline data resource files to get the latest modification time ...\n")
-            latest_mod_time = 0
-            for root, dirs, files in os.walk("离线数据（Offline Data）"):
-                for file in files:
-                    if "Update Logs" in root or file == "自动更新离线数据.py": #统计修改时间，不能算上刚刚生成的日志文件和本脚本（When summarizing the modification time, the log that has just been created should be taken into account）
+            print("请选择一种方式指定修改时间：\nPlease select a method of specifying the modification time:\n1\t自动获取（Automatically get）\n2\t手动输入（Manually input）")
+            log.write("请选择一种方式指定修改时间：\nPlease select a method of specifying the modification time:\n1\t自动获取（Automatically get）\n2\t手动输入（Manually input）\n")
+            time_get_method = input()
+            log.write(time_get_method + "\n")
+            if time_get_method != "" and time_get_method[0] == "2":
+                print('请以“年-月-日 时-分-秒”的格式输入修改时间。示例：2024-05-04 10-26-21。\nPlease input a modification time in the format "%Y-%m-%d %H-%M-%S". Example: 2024-05-04 10-26-21.')
+                log.write('请以“年-月-日 时-分-秒”的格式输入修改时间。示例：2024-05-04 10-26-21。\nPlease input a modification time in the format "%Y-%m-%d %H-%M-%S". Example: 2024-05-04 10-26-21.\n')
+                while True:
+                    latest_mod_time = input()
+                    log.write(latest_mod_time + "\n")
+                    if latest_mod_time == "":
                         continue
-                    file_path = os.path.join(root, file)
-                    mod_time = os.path.getmtime(file_path)
-                    latest_mod_time = mod_time if mod_time > latest_mod_time else latest_mod_time
-            print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-            log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
-            print("最新修改时间（Latest modification time）：%s" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
-            log.write("最新修改时间（Latest modification time）：%s\n" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
+                    try: #允许输入整型或浮点型时间戳（A timestamp of integer or float type is allowed）
+                        latest_mod_time = eval(latest_mod_time)
+                        if isinstance(latest_mod_time, (int, float)):
+                            break
+                    except:
+                        try:
+                            date_obj = datetime.strptime(latest_mod_time, "%Y-%m-%d %H-%M-%S")
+                        except ValueError:
+                            print("您的输入格式有误！请重新输入。\nFormat not matched! Please try again.")
+                            log.write("您的输入格式有误！请重新输入。\nFormat not matched! Please try again.\n")
+                        else:
+                            latest_mod_time = date_obj.timestamp()
+                            break
+                print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+                log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
+                print("指定修改时间（Specified modification time）：%s" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
+                log.write("指定修改时间（Specified modification time）：%s\n" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
+            else:
+                print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+                log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
+                print("正在遍历离线数据资源以获取最新修改时间……\nTraversing the offline data resource files to get the latest modification time ...")
+                log.write("正在遍历离线数据资源以获取最新修改时间……\nTraversing the offline data resource files to get the latest modification time ...\n")
+                latest_mod_time = 0
+                for root, dirs, files in os.walk("离线数据（Offline Data）"):
+                    for file in files:
+                        if "Update Logs" in root or file == "自动更新离线数据.py": #统计修改时间，不能算上刚刚生成的日志文件和本脚本（When summarizing the modification time, the log that has just been created should be taken into account）
+                            continue
+                        file_path = os.path.join(root, file)
+                        mod_time = os.path.getmtime(file_path)
+                        latest_mod_time = mod_time if mod_time > latest_mod_time else latest_mod_time
+                print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+                log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
+                print("最新修改时间（Latest modification time）：%s" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
+                log.write("最新修改时间（Latest modification time）：%s\n" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
         else:
             mode = "1"
         cdragon_folders = ["latest/cdragon/arena/", "latest/cdragon/tft/", "latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/", "latest/plugins/rcp-be-lol-game-data/global/default/v1/map-assets/", "latest/plugins/rcp-be-lol-game-data/global/default/v1/", "latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champions/", "latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/map-assets/", "latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/", "pbe/cdragon/arena/", "pbe/cdragon/tft/", "pbe/plugins/rcp-be-lol-game-data/global/default/v1/champions/", "pbe/plugins/rcp-be-lol-game-data/global/default/v1/map-assets/", "pbe/plugins/rcp-be-lol-game-data/global/default/v1/", "pbe/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champions/", "pbe/plugins/rcp-be-lol-game-data/global/zh_cn/v1/map-assets/", "pbe/plugins/rcp-be-lol-game-data/global/zh_cn/v1/"]
