@@ -99,47 +99,34 @@ while True:
             time_get_method = input()
             log.write(time_get_method + "\n")
             if time_get_method != "" and time_get_method[0] == "2":
+                time_get_method == "2"
                 print('请以“年-月-日 时-分-秒”的格式输入修改时间。示例：2024-05-04 10-26-21。\nPlease input a modification time in the format "%Y-%m-%d %H-%M-%S". Example: 2024-05-04 10-26-21.')
                 log.write('请以“年-月-日 时-分-秒”的格式输入修改时间。示例：2024-05-04 10-26-21。\nPlease input a modification time in the format "%Y-%m-%d %H-%M-%S". Example: 2024-05-04 10-26-21.\n')
                 while True:
-                    latest_mod_time = input()
-                    log.write(latest_mod_time + "\n")
-                    if latest_mod_time == "":
+                    latest_mod_timestamp = input()
+                    log.write(latest_mod_timestamp + "\n")
+                    if latest_mod_timestamp == "":
                         continue
                     try: #允许输入整型或浮点型时间戳（A timestamp of integer or float type is allowed）
-                        latest_mod_time = eval(latest_mod_time)
-                        if isinstance(latest_mod_time, (int, float)):
+                        latest_mod_timestamp = eval(latest_mod_timestamp)
+                        if isinstance(latest_mod_timestamp, (int, float)):
                             break
                     except:
                         try:
-                            date_obj = datetime.strptime(latest_mod_time, "%Y-%m-%d %H-%M-%S")
+                            date_obj = datetime.strptime(latest_mod_timestamp, "%Y-%m-%d %H-%M-%S")
                         except ValueError:
                             print("您的输入格式有误！请重新输入。\nFormat not matched! Please try again.")
                             log.write("您的输入格式有误！请重新输入。\nFormat not matched! Please try again.\n")
                         else:
-                            latest_mod_time = date_obj.timestamp()
+                            latest_mod_timestamp = date_obj.timestamp()
                             break
+                latest_mod_date = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_timestamp))
                 print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                 log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
-                print("指定修改时间（Specified modification time）：%s" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
-                log.write("指定修改时间（Specified modification time）：%s\n" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
+                print("指定修改时间（Specified modification time）：%s" %())
+                log.write("指定修改时间（Specified modification time）：%s\n" %(latest_mod_date))
             else:
-                print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-                log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
-                print("正在遍历离线数据资源以获取最新修改时间……\nTraversing the offline data resource files to get the latest modification time ...")
-                log.write("正在遍历离线数据资源以获取最新修改时间……\nTraversing the offline data resource files to get the latest modification time ...\n")
-                latest_mod_time = 0
-                for root, dirs, files in os.walk("离线数据（Offline Data）"):
-                    for file in files:
-                        if "Update Logs" in root or file == "自动更新离线数据.py": #统计修改时间，不能算上刚刚生成的日志文件和本脚本（When summarizing the modification time, the log that has just been created should be taken into account）
-                            continue
-                        file_path = os.path.join(root, file)
-                        mod_time = os.path.getmtime(file_path)
-                        latest_mod_time = mod_time if mod_time > latest_mod_time else latest_mod_time
-                print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-                log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
-                print("最新修改时间（Latest modification time）：%s" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
-                log.write("最新修改时间（Latest modification time）：%s\n" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(latest_mod_time))))
+                time_get_method = "1"
         else:
             mode = "1"
         cdragon_folders = ["latest/cdragon/arena/", "latest/cdragon/tft/", "latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/", "latest/plugins/rcp-be-lol-game-data/global/default/v1/map-assets/", "latest/plugins/rcp-be-lol-game-data/global/default/v1/", "latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champions/", "latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/map-assets/", "latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/", "pbe/cdragon/arena/", "pbe/cdragon/tft/", "pbe/plugins/rcp-be-lol-game-data/global/default/v1/champions/", "pbe/plugins/rcp-be-lol-game-data/global/default/v1/map-assets/", "pbe/plugins/rcp-be-lol-game-data/global/default/v1/", "pbe/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champions/", "pbe/plugins/rcp-be-lol-game-data/global/zh_cn/v1/map-assets/", "pbe/plugins/rcp-be-lol-game-data/global/zh_cn/v1/"]
@@ -158,7 +145,7 @@ while True:
             print("[%d/%d]正在检查文件夹（Checking the folder）：%s" %(cnt1, len(cdragon_folders), url))
             log.write("[%d/%d]正在检查文件夹（Checking the folder）：%s\n" %(cnt1, len(cdragon_folders), url))
             line_re = re.compile('<tr><td class="link"><a href=".*" title=".*">.*</a></td><td class="size">.*</td><td class="date">.*</td></tr>')
-            table = {"file": [], "size": [], "date": [], "timestamp": []}
+            table = {"file": [], "size": [], "web_date": [], "web_timestamp": [], "local_date": [], "local_timestamp": []}
             retry = 0
             source, status = getUrl(url, log)
             if not status:
@@ -174,24 +161,32 @@ while True:
                 print("页面文件列表如下：\nFile list is as follows:\n网页链接（URL)： %s" %url)
                 log.write("页面文件列表如下：\nFile list is as follows:\n网页链接（URL)： %s\n" %url)
             elif mode == "2":
-                print("最新修改时间后的页面文件列表如下：\nFile list after the latest modification time is as follows:\n网页链接（URL)： %s" %url)
-                log.write("最新修改时间后的页面文件列表如下：\nFile list after the latest modification time is as follows:\n网页链接（URL)： %s\n" %url)
+                if time_get_method == "1":
+                    print("页面新文件列表如下：\nNew file list is as follows:\n网页链接（URL)： %s" %url)
+                    log.write("页面新文件列表如下：\nNew file list is as follows:\n网页链接（URL)： %s\n" %url)
+                elif time_get_method == "2":
+                    print("指定修改时间（%s）后的页面文件列表如下：\nFile list after the specified modification time (%s) is as follows:\n网页链接（URL)： %s" %(latest_mod_date, latest_mod_date, url))
+                    log.write("指定修改时间（%s）后的页面文件列表如下：\nFile list after the specified modification time (%s) is as follows:\n网页链接（URL)： %s\n" %(latest_mod_date, latest_mod_date, url))
             for line in source_list:
                 matchedLine = line_re.search(line)
                 if matchedLine:
                     soup = BeautifulSoup(line, 'lxml')
                     name = soup.find("a")["href"]
                     size = soup.find("td", class_ = "size").text
-                    date = soup.find("td", class_ = "date").text
-                    date_obj = datetime.strptime(date, "%Y-%b-%d %H:%M")
-                    timestamp = date_obj.timestamp()
+                    web_date = soup.find("td", class_ = "date").text
+                    web_date_obj = datetime.strptime(web_date, "%Y-%b-%d %H:%M")
+                    web_timestamp = web_date_obj.timestamp()
+                    local_timestamp = os.path.getmtime(os.path.join(local_prefix, folder, name)) if name in os.listdir(os.path.join(local_prefix, folder)) else 0
+                    local_date = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(local_timestamp))
                     if ".json" in name:
-                        if ("cdragon/arena" in folder or "cdragon/tft" in folder) and (name != "en_us.json" and name != "zh_cn.json") or mode == "2" and timestamp < latest_mod_time:
+                        if ("cdragon/arena" in folder or "cdragon/tft" in folder) and (name != "en_us.json" and name != "zh_cn.json") or mode == "2" and time_get_method == "1" and web_timestamp < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp < latest_mod_timestamp:
                             continue
                         table["file"].append(name)
                         table["size"].append(size)
-                        table["date"].append(date)
-                        table["timestamp"].append(timestamp)
+                        table["web_date"].append(web_date)
+                        table["web_timestamp"].append(web_timestamp)
+                        table["local_date"].append(local_date)
+                        table["local_timestamp"].append(local_timestamp)
             table = pd.DataFrame(table)
             if table.empty:
                 print(table)
@@ -222,9 +217,10 @@ while True:
                         dst = json.load(fp)
                     if src != dst:
                         update = True
-                if update:
+                if mode == "1" and update or mode == "2": #当选择全局扫描时，只更新有变化的文档；当选择根据修改时间更新时，如果网页修改时间超前，那么无论文件内容是否发生变化，都重新保存一次，便于后续按照修改时间更新（When the user selects Global Scan, the program updates the changed files. When the user selects Updating according to modification time, if the web modification time of a file succeeds to the local midification time of that, then save the web content to local, no matter whether the web file is same as the local file in terms of content）
                     with open(os.path.join(dir, name), "w", encoding = "utf-8") as fp:
                         json.dump(src, fp, indent = 4, ensure_ascii = False)
+                if update:
                     if added:
                         print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                         log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
