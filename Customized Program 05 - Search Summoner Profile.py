@@ -1286,6 +1286,7 @@ async def search_profile(connection):
                 
                 game_info_dfs = {}
                 game_timeline_dfs = {}
+                game_event_dfs = {}
                 LoLHistory_searched = True
                 TFTHistory_searched = True
                 info_exist_error = {} #当获取对局记录反复出现异常时，为了保证第二次没有获取到的报错信息在导出时不会覆盖上一次使用该程序时导出的正确工作表，设置该列表。列表中的某个元素为True，代表对应的对局记录将能正常导出。由于对局信息往往比对局时间轴更易接受关注，这里只以LoLGame_info的完整性作为exist_error的追加依据（When the match history service encounters errors frequently, to make sure the error information won't overlay the normally captured match information in the last time using this program, this list is declared here. When some element in this list is True, the corresponding match information / timeline can be exported as usual. Because the LoLGame_info is basically more focused on than LoLGame_timeline, True/False is appended to exist_error only based on the integrity of LoLGame_info）
@@ -2509,12 +2510,147 @@ async def search_profile(connection):
                                         key = LoLGame_timeline_header_keys[i]
                                         LoLGame_timeline_data_organized[key] = [LoLGame_timeline_header[key]] + LoLGame_timeline_data[key]
                                     LoLGame_timeline_df = pandas.DataFrame(data = LoLGame_timeline_data_organized)
-                                else: #当LoLGame_info正常获取而LoLGame_timeline获取异常时，上述程序将导致无法LoLGame_timeline_df未定义。但是最后导出数据时，是根据确定的对局序号列表来生成工作表名称的，因此一定要向game_timeline_dfs中追加某个数据框，即使该数据框没有任何含义。否则不追加的话，时间轴数据框列表的长度与对局记录中的对局数量不相等，会导致时间轴内容和对局序号乱套。考虑到追加的数据框期望呈现出该对局查询时出现问题，这里选择追加LoLGame_info_df（When LoLGame_info is captured as expected but LoLGame_timeline isn't captured, the program above will cause LoLGame_timeline_df not to be defined. But note that during data export, sheet names are specified based on matchIDs. Therefore, some dataframe must be appended to game_timeline_dfs, even if it doesn't have any meaning. Otherwise, the length of game_timeline_dfs will unequal the length of matchIDs, which results in the discordance between the timeline content and the timeline sheet name. Considering the expectation for the appended dataframe to reflect that the program encountered some problem when searching this match, here LoLGame_info_df is choosen to be appended）
+                                    
+                                    LoLGame_event_header = {"assistingParticipantIds": "助攻者序号", "assistingChampion": "助攻者英雄", "assistingChampionAlias": "助攻者英雄名称", "assistingParticipantSummonerName": "助攻者召唤师名", "assistingParticipantGameName#TagLine": "助攻者游戏名", "buildingType": "被摧毁的建筑物类型", "itemId": "购买的装备序号", "item": "获得的装备", "killerId": "击杀者序号", "killerChampion": "击杀者英雄", "killerChampionAlias": "击杀者英雄名称", "killerParticipantSummonerName": "击杀者召唤师名", "killerParticipantGameName#TagLine": "击杀者游戏名", "laneType": "线路位置", "monsterSubType": "野区生物亚型", "monsterType": "野区生物类型", "participantId": "事件参与者序号", "champion": "参与者英雄", "championAlias": "参与者英雄名称", "participantSummonerName": "参与者召唤师名", "participantGameName#TagLine": "参与者游戏名", "position": "位置坐标", "skillSlot": "学习技能槽位", "teamId": "阵营", "timestamp": "时间戳", "time": "时间", "towerType": "防御塔类型", "type": "事件类型", "victimId": "被杀者序号", "victimChampion": "被杀者英雄", "victimChampionAlias": "被杀者英雄名称", "victimParticipantSummonerName": "被杀者召唤师名", "victimParticipantGameName#TagLine": "被杀者游戏名"}
+                                    LoLGame_event_data = {}
+                                    LoLGame_event_header_keys = list(LoLGame_event_header.keys())
+                                    eventTypes = {"CHAMPION_KILL": "击杀英雄", "ELITE_MONSTER_KILL": "击杀史诗级野怪", "BUILDING_KILL": "摧毁建筑物"}
+                                    #eventTypes = {"CHAMPION_KILL": "CHAMPION_SLAIN", "ELITE_MONSTER_KILL": "ELITE_MONSTER_KILL", "BUILDING_KILL": "BUILDING_DESTROY"}
+                                    buildingTypes = {"": "", "TOWER_BUILDING": "防御塔", "INHIBITOR_BUILDING": "召唤水晶"}
+                                    #buildingTypes = {"": "", "TOWER_BUILDING": "Turret", "INHIBITOR_BUILDING": "Inhibitor"}
+                                    laneTypes = {"": "", "TOP_LANE": "上路", "MID_LANE": "中路", "BOT_LANE": "下路"}
+                                    #laneTypes = {"": "", "TOP_LANE": "Top", "MID_LANE": "Middle", "BOT_LANE": "Bottom"}
+                                    monsterSubTypes = {"": "", "EARTH_DRAGON": "山脉亚龙", "CHEMTECH_DRAGON": "炼金科技亚龙", "WATER_DRAGON": "海洋亚龙", "HEXTECH_DRAGON": "海克斯科技亚龙", "AIR_DRAGON": "云霄亚龙", "FIRE_DRAGON": "炼狱亚龙", "ELDER_DRAGON": "远古巨龙", "RUINED_DRAGON": "破败巨龙"}
+                                    #monsterSubTypes = {"": "", "EARTH_DRAGON": "Mountain Drake", "CHEMTECH_DRAGON": "Chemtech Drake", "WATER_DRAGON": "Ocean Drake", "HEXTECH_DRAGON": "Hextech Drake", "AIR_DRAGON": "Cloud Drake", "FIRE_DRAGON": "Infernal Drake", "ELDER_DRAGON": "Elder Dragon", "RUINED_DRAGON": "Ruined Dragon"}
+                                    monsterTypes = {"": "", "RIFTHERALD": "峡谷先锋", "HORDE": "虚空巢虫", "BARON_NASHOR": "纳什男爵", "DRAGON": "巨龙"}
+                                    #monsterTypes = {"": "", "RIFTHERALD": "Rift Herald", "HORDE": "Voidgrub", "BARON_NASHOR": "Baron Nashor", "DRAGON": "Drake"}
+                                    teams = {0: "", 100: "蓝方", 200: "红方"}
+                                    #teams = {0: "", 100: "Blue", 200: "Team"}
+                                    towerTypes = {"": "", "OUTER_TURRET": "外防御塔", "INNER_TURRET": "内防御塔", "BASE_TURRET": "水晶防御塔", "NEXUS_TURRET": "枢纽防御塔"}
+                                    #towerTypes = {"": "", "OUTER_TURRET": "Outer Turret", "INNER_TURRET": "Inner Turret", "BASE_TURRET": "Inhibitor Turret", "NEXUS_TURRET": "Nexus Turret"}
+                                    events = {}
+                                    for frame in frames:
+                                        for event in frame["events"]:
+                                            events[event["timestamp"]] = event
+                                    for i in range(len(LoLGame_event_header)):
+                                        key = LoLGame_event_header_keys[i]
+                                        LoLGame_event_data[key] = [] #各项目初始化（Initialize every feature / column）
+                                        for timestamp in sorted(events.keys()):
+                                            if i <= 4 or i >= 8 and i <= 12 or i >= 16 and i <= 20 or i >= 28 and i <= 32:
+                                                if i in {0, 8, 16, 28}:
+                                                    LoLGame_event_data[key].append(events[timestamp][key])
+                                                elif i in {1, 9, 17, 29}:
+                                                    subkey = LoLGame_event_header_keys[i - 1]
+                                                    if i == 1:
+                                                        LoLGame_event_data[key].append(list(map(lambda x: LoLChampions[LoLGame_info["participants"][x - 1]["championId"]]["name"], events[timestamp][subkey])))
+                                                    else:
+                                                        LoLGame_event_data[key].append(LoLChampions[LoLGame_info["participants"][events[timestamp][subkey] - 1]["championId"]]["name"])
+                                                elif i in {2, 10, 18, 30}:
+                                                    subkey = LoLGame_event_header_keys[i - 2]
+                                                    if i == 2:
+                                                        LoLGame_event_data[key].append(list(map(lambda x: LoLChampions[LoLGame_info["participants"][x - 1]["championId"]]["alias"], events[timestamp][subkey])))
+                                                    else:
+                                                        LoLGame_event_data[key].append(LoLChampions[LoLGame_info["participants"][events[timestamp][subkey] - 1]["championId"]]["alias"])
+                                                elif i in {3, 11, 19, 31}:
+                                                    subkey = LoLGame_event_header_keys[i - 3]
+                                                    if i == 3:
+                                                        LoLGame_event_data[key].append(list(map(lambda x: LoLGame_info["participantIdentities"][x - 1]["player"]["summonerName"], events[timestamp][subkey])))
+                                                    else:
+                                                        LoLGame_event_data[key].append(LoLGame_info["participantIdentities"][events[timestamp][subkey] - 1]["player"]["summonerName"])
+                                                else:
+                                                    subkey = LoLGame_event_header_keys[i - 4]
+                                                    if i == 4:
+                                                        LoLGame_event_data[key].append(list(map(lambda x: "" if LoLGame_info["participantIdentities"][x - 1]["player"]["gameName"] == "" and LoLGame_info["participantIdentities"][x - 1]["player"]["tagLine"] == "" else LoLGame_info["participantIdentities"][x - 1]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][x - 1]["player"]["tagLine"], events[timestamp][subkey])))
+                                                    else:
+                                                        if LoLGame_info["participantIdentities"][events[timestamp][subkey] - 1]["player"]["gameName"] == "" and LoLGame_info["participantIdentities"][events[timestamp][subkey] - 1]["player"]["tagLine"] == "":
+                                                            LoLGame_event_data[key].append("")
+                                                        else:
+                                                            LoLGame_event_data[key].append(LoLGame_info["participantIdentities"][events[timestamp][subkey] - 1]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][events[timestamp][subkey] - 1]["player"]["tagLine"])
+                                            elif i == 5:
+                                                LoLGame_event_data[key].append(buildingTypes[events[timestamp][key]])
+                                            elif i == 6 or i == 7:
+                                                if i == 6:
+                                                    LoLGame_event_data[key].append(events[timestamp][key])
+                                                else:
+                                                    subkey = LoLGame_event_header_keys[i - 1]
+                                                    LoLItemID = events[timestamp][subkey]
+                                                    #下面的部分完全沿用了英雄联盟对局信息中的英雄联盟装备信息获取代码（The following part is directly copied from the LoL item capturing code in LoL game information part）
+                                                    if LoLItemID == 0:
+                                                        LoLGame_event_data[key].append("")
+                                                    else:
+                                                        try:
+                                                            to_append = LoLItems[str(LoLItemID)]["name"]
+                                                        except KeyError:
+                                                            LoLItemPatch_adopted = ".".join(LoLGame_info["gameVersion"].split(".")[:2])
+                                                            LoLItem_recapture = 1
+                                                            print("第%d/%d场对局（对局序号：%s）装备信息（%s）获取失败！正在第%d次尝试改用%s版本的英雄联盟装备信息……\nLoL item information (%s) of Match %d / %d (matchID: %s) capture failed! Changing to LoL items of Patch %s ... Times tried: %d." %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, LoLItemID, LoLItem_recapture, LoLItemPatch_adopted, LoLItemID, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, LoLItemPatch_adopted, LoLItem_recapture))
+                                                            while True:
+                                                                try:
+                                                                    LoLItem = requests.get("https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/items.json" %(LoLItemPatch_adopted, language_cdragon[language_code])).json()
+                                                                except requests.exceptions.JSONDecodeError:
+                                                                    LoLItemPatch_deserted = LoLItemPatch_adopted
+                                                                    LoLItemPatch_adopted = FindPostPatch(LoLItemPatch_adopted, bigPatches)
+                                                                    LoLItem_recapture = 1
+                                                                    print("%s版本文件不存在！正在第%s次尝试转至%s版本……\n%s patch file doesn't exist! Changing to LoL items of Patch %s ... Times tried: %d." %(LoLItemPatch_deserted, LoLItem_recapture, LoLItemPatch_adopted, LoLItemPatch_deserted, LoLItemPatch_adopted, LoLItem_recapture))
+                                                                except requests.exceptions.RequestException:
+                                                                    if LoLItem_recapture < 3:
+                                                                        LoLItem_recapture += 1
+                                                                        print("网络环境异常！正在第%d次尝试改用%s版本的英雄联盟装备信息……\nYour network environment is abnormal! Changing to LoL items of Patch %s ... Times tried: %d." %(LoLItem_recapture, LoLItemPatch_adopted, LoLItemPatch_adopted, LoLItem_recapture))
+                                                                    else:
+                                                                        print("网络环境异常！第%d/%d场对局（对局序号：%s）的装备信息（%s）将采用原始数据！\nNetwork error! The original data will be used for the item (%s) of Match %d / %d (matchID: %s)!" %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, LoLItemID, LoLItemID, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
+                                                                        to_append = LoLItemID
+                                                                        break
+                                                                else:
+                                                                    print("已改用%s版本的英雄联盟装备信息。\nLoL item information changed to Patch %s." %(LoLItemPatch_adopted, LoLItemPatch_adopted))
+                                                                    LoLItems = {}
+                                                                    for LoLItem_iter in LoLItem:
+                                                                        LoLItem_id = LoLItem_iter.pop("id")
+                                                                        LoLItems[str(LoLItem_id)] = LoLItem_iter
+                                                                    try:
+                                                                        to_append = LoLItems[str(LoLItemID)]["name"]
+                                                                    except KeyError:
+                                                                        print("【%d. %s】第%d/%d场对局（对局序号：%s）装备信息（%s）获取失败！将采用原始数据！\n[%d. %s] LoL item information (%s) of Match %d / %d (matchID: %s) capture failed! The original data will be used for this match!" %(i, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, LoLItemID, i, key, LoLItemID, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
+                                                                        to_append = LoLItemID
+                                                                        break
+                                                                    else:
+                                                                        break
+                                                        LoLGame_event_data[key].append(to_append)
+                                            elif i == 13:
+                                                LoLGame_event_data[key].append(laneTypes[events[timestamp][key]])
+                                            elif i == 14:
+                                                LoLGame_event_data[key].append(monsterSubTypes[events[timestamp][key]])
+                                            elif i == 15:
+                                                LoLGame_event_data[key].append(monsterTypes[events[timestamp][key]])
+                                            elif i == 21:
+                                                LoLGame_event_data[key].append("(%s, %s)" %(events[timestamp][key]["x"], events[timestamp][key]["y"]))
+                                            elif i == 22:
+                                                LoLGame_event_data[key].append(events[timestamp][key])
+                                            elif i == 23:
+                                                LoLGame_event_data[key].append(teams[events[timestamp][key]])
+                                            elif i == 24 or i == 25:
+                                                if i == 24:
+                                                    LoLGame_event_data[key].append(events[timestamp][key])
+                                                else:
+                                                    subkey = LoLGame_event_header_keys[i - 1]
+                                                    LoLGame_event_data[key].append(lcuTimestamp(events[timestamp][subkey] // 1000))
+                                            elif i == 26:
+                                                LoLGame_event_data[key].append(towerTypes[events[timestamp][key]])
+                                            else:
+                                                LoLGame_event_data[key].append(eventTypes[events[timestamp][key]])
+                                    LoLGame_event_statistics_display_order = [24, 25, 21, 27, 8, 9, 10, 11, 12, 28, 29, 30, 31, 32, 0, 1, 2, 3, 4, 15, 14, 23, 13, 5, 26]
+                                    LoLGame_event_data_organized = {}
+                                    for i in LoLGame_event_statistics_display_order:
+                                        key = LoLGame_event_header_keys[i]
+                                        LoLGame_event_data_organized[key] = [LoLGame_event_header[key]] + LoLGame_event_data[key]
+                                    LoLGame_event_df = pandas.DataFrame(data = LoLGame_event_data_organized)
+                                else: #当LoLGame_info正常获取而LoLGame_timeline获取异常时，上述程序将导致无法LoLGame_timeline_df未定义。但是最后导出数据时，是根据确定的对局序号列表来生成工作表名称的，因此一定要向game_timeline_dfs中追加某个数据框，即使该数据框没有任何含义。否则不追加的话，时间轴数据框列表的长度与对局记录中的对局数量不相等，会导致时间轴内容和对局序号乱套。考虑到追加的数据框期望呈现出该对局查询时出现问题，这里选择追加LoLGame_info_df（When LoLGame_info is captured as expected but LoLGame_timeline isn't captured, the program above will cause LoLGame_timeline_df not to be defined. But note that during data export, sheet names are specified based on matchIDs. Therefore, some dataframe must be appended to game_timeline_dfs, even if it doesn't have any meaning. Otherwise, the length of game_timeline_dfs will unequal the length of matchIDs, which results in the discordance between the timeline content and the timeline sheet name. Considering the expectation for the appended dataframe to reflect that the program encountered some problem when searching this match, here LoLGame_info_df is chosen to be appended）
                                     LoLGame_timeline_df = LoLGame_info_df.copy(deep = True)
+                                    LoLGame_event_df = LoLGame_info_df.copy(deep = True)
                                     timeline_exist_error[int(matchID)] = True
 
                                 game_info_dfs[int(matchID)] = LoLGame_info_df.copy(deep = True) #这里添加的LoLGame_info_df会在下一次循环中发生改变，这是数据框类型的特性。因此这里采用深复制，将原有内容克隆到另外一个地址，这样能保证每次添加的是不同的对局信息（The added LoLGame_info_df will be modified next time in the loop, which belongs to the characteristics of DataFrame data type. Therefore a deep copy is used here to clone the original contents to another address, so that each time the appended content is different）
                                 game_timeline_dfs[int(matchID)] = LoLGame_timeline_df.copy(deep = True)
+                                game_event_dfs[int(matchID)] = LoLGame_event_df.copy(deep = True)
                             if LoLGamePlayed and export_json:
                                 print('对局信息和时间轴已保存在“%s”文件夹下。\nMatch information and timelines are saved in the folder "%s".\n' %(folder, folder))
                             while matches_to_remove != []: #在去除获取异常的对局后，需要在对局序号列表中将这些对局也一并移除（After removing matches that fail to be captured, we need to remove them in matchID list, too）
@@ -3159,11 +3295,6 @@ async def search_profile(connection):
                                     print("召唤师云顶之弈对局记录导出完成！\nSummoner TFT match history exported!\n")
                                 #print(len(info_exist_error), len(timeline_exist_error), len(main_player_included), len(match_reserve_strategy))
                                 for i in range(len(matchIDs)):
-                                    if match_reserve_strategy[matchIDs[i]]:
-                                        if not info_exist_error[matchIDs[i]]:
-                                            game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
-                                        if not timeline_exist_error[matchIDs[i]]:
-                                            game_timeline_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Timeline")
                                     if not main_player_included[matchIDs[i]]:
                                         if not match_reserve_strategy[matchIDs[i]]:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner and not exported!)" %(i + 1, len(matchIDs)))
@@ -3178,6 +3309,15 @@ async def search_profile(connection):
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information & timeline capture Failure!)" %(i + 1, len(matchIDs)))
                                         else:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)))
+                                    if match_reserve_strategy[matchIDs[i]]:
+                                        if not info_exist_error[matchIDs[i]]:
+                                            game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
+                                            print("对局信息导出完成。\nMatch information exported.")
+                                        if not timeline_exist_error[matchIDs[i]]:
+                                            game_timeline_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Timeline")
+                                            print("对局时间轴导出完成。\nMatch timeline exported.")
+                                            game_event_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Events")
+                                            print("对局事件导出完成。\nMatch events exported.")
                         except PermissionError:
                             print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
                             input()
@@ -3218,11 +3358,6 @@ async def search_profile(connection):
                                     pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "TFT Match History - Manual")
                                     print("已创建云顶之弈对局记录的空白工作表！\nCreated an empty sheet for TFT match history!\n")
                                 for i in range(len(matchIDs)):
-                                    if match_reserve_strategy[matchIDs[i]]:
-                                        if not info_exist_error[matchIDs[i]]:
-                                            game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
-                                        if not timeline_exist_error[matchIDs[i]]:
-                                            game_timeline_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Timeline")
                                     if not main_player_included[matchIDs[i]]:
                                         if not match_reserve_strategy[matchIDs[i]]:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner and not exported!)" %(i + 1, len(matchIDs)))
@@ -3237,6 +3372,15 @@ async def search_profile(connection):
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information & timeline capture Failure!)" %(i + 1, len(matchIDs)))
                                         else:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)))
+                                    if match_reserve_strategy[matchIDs[i]]:
+                                        if not info_exist_error[matchIDs[i]]:
+                                            game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
+                                            print("对局信息导出完成。\nMatch information exported.")
+                                        if not timeline_exist_error[matchIDs[i]]:
+                                            game_timeline_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Timeline")
+                                            print("对局时间轴导出完成。\nMatch timeline exported.")
+                                            game_event_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Events")
+                                            print("对局事件导出完成。\nMatch events exported.")
                             break
                         else:
                             print("对局信息和时间轴导出完成！\nMatch information and timeline exported!")
@@ -3263,12 +3407,26 @@ async def search_profile(connection):
                                 #下面锁定基础信息类的工作表顺序（The following code lock the order of sheets in basic data class）
                                 print("正在创建顺序工作表列表……\nCreating the ordered sheet list ...")
                                 basic_info_list = ["Profile", "Rank", "Champion Mastery", "Recently Played Summoners (LoL)", "Recently Played Summoners (TFT)", "LoL Match History", "LoL Match History - Scan", "LoL Match History - Manual", "TFT Match History", "TFT Match History - Manual"]
-                                sheetnames_sorted = []
+                                match_dict = {}
+                                for sheet_iter in sheetnames:
+                                    if sheet_iter.startswith("Match "):
+                                        matchID = int(sheet_iter.split()[1]) #目前暂不需要考虑对局序号因工作表名长度限制而被截断的问题（Currently the issue that matchID may be cut off due to the sheet name length limit isn't considered）
+                                        key = sheet_iter.split()[3][0] #以工作表名的内容部分的首字母为排序依据（Sort the sheetnames by the initial letter of the content part of the sheet name）
+                                        if not matchID in match_dict:
+                                            match_dict[matchID] = {}
+                                        match_dict[matchID][key] = sheet_iter
+                                sheetnames_sorted = [] #所有工作表的期望顺序存储在sheetnames_sorted变量中（The ordered result of all sheets is stored in the variable `sheetnames_sorted`）
                                 for sheet_iter in basic_info_list:
                                     if sheet_iter in sheetnames:
                                         sheetnames.remove(sheet_iter)
                                         sheetnames_sorted.append(sheet_iter)
-                                sheetnames_sorted += sorted(sheetnames) #所有工作表的期望顺序存储在sheetnames_sorted变量中（The ordered result of all sheets is stored in the variable `sheetnames_sorted`）
+                                for matchID in sorted(match_dict.keys()):
+                                    if "I" in match_dict[matchID]:
+                                        sheetnames_sorted.append(match_dict[matchID]["I"])
+                                    if "T" in match_dict[matchID]:
+                                        sheetnames_sorted.append(match_dict[matchID]["T"])
+                                    if "E" in match_dict[matchID]:
+                                        sheetnames_sorted.append(match_dict[matchID]["E"])
                                 #下面排列所有工作表（The following code arrange all sheets）
                                 print("正在排序……\nOrdering ...")
                                 for i in range(len(sheetnames_sorted)): #排序的思路是每次将一个工作表根据其在原工作表列表中的索引和在顺序工作表列表中的索引的差值进行移动（The main idea of sheets' sorting is to move each sheet according to the difference of the indices between in the original sheet list and in the ordered sheet list）
@@ -3281,7 +3439,6 @@ async def search_profile(connection):
                                 print('正在保存中……\nSaving the ordered workbook ...')
                                 wb.save(os.path.join(folder, excel_name_sorted))
                                 print('排序完成！排好序的工作簿已保存为“%s”。\nOrdering finished! The ordered workbook is saved as "%s".\n' %(excel_name_sorted, excel_name_sorted))
-                                wb.close()
 
 #-----------------------------------------------------------------------------
 # websocket

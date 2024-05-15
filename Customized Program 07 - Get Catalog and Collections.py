@@ -664,7 +664,6 @@ async def fetch_store(connection):
                 print('正在保存中……\nSaving the ordered workbook ...')
                 wb.save(os.path.join(folder, excel_name))
                 print('排序完成！排好序的工作簿已保存为“%s”。请按任意键退出。\nOrdering finished! The ordered workbook is saved as "%s". Press any key to exit ...\n' %(excel_name, excel_name))
-                wb.close()
                 input()
 
 #-----------------------------------------------------------------------------

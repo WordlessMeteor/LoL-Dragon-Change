@@ -120,8 +120,8 @@ The following explanations only apply to the current branch. For other details (
 		- 该脚本支持通过<u>召唤师名称</u>和<u.玩家通用唯一识别码</u>查询。
 		- 由于使用的是LCU API，在国服环境下，即使召唤师生涯**不可见**，仍然能够查询到该召唤师的全部对局记录和段位信息。
 		- 该脚本获取数据所依赖的数据资源主要来自<u>CommunityDragon数据库</u>，支持**离线获取**。如果选择离线获取，<u>请按照程序提示，在主目录下新建文件夹`离线数据（Offline Data）`，打开相应资源的网页，将相应的json文件下载到该文件夹下。</u>
-		- 从13.22版本开始，美测服采用**拳头ID**来替代召唤师名称。因此，如果通过召唤师名称无法查询一名召唤师的信息，**请尝试在玩家名称后加上一个“#”，再加上服务器后缀**。
-			- <b>提示：</b>在客户端中打开一个召唤师的生涯界面，**将鼠标悬停在玩家名称上**，即可看到完整的带有服务器后缀的拳头ID。单击即可复制。粘贴到生涯界面右上方的搜索栏即可搜索该玩家。
+		- 从13.22版本开始，美测服采用**拳头ID**来替代召唤师名称。因此，如果通过召唤师名称无法查询一名召唤师的信息，**请尝试在玩家昵称后加上一个“#”，再加上昵称编号**。
+			- <b>提示：</b>在客户端中打开一个召唤师的生涯界面，**将鼠标悬停在玩家昵称上**，即可看到完整的带有昵称编号的拳头ID。单击即可复制。粘贴到生涯界面右上方的搜索栏即可搜索该玩家。
 		- 在选择导出全部数据的情况下，生成的Excel文件中包含五大部分：
 			- 人物简介（单工作表）
 			- 排位信息（单工作表）
@@ -132,9 +132,10 @@ The following explanations only apply to the current branch. For other details (
 				- 英雄联盟对局记录
 				- 本地重查对局记录
 				- 云顶之弈对局记录
-			- 各对局详细信息（至多双工作表/对局）
+			- 各对局详细信息（至多三工作表/对局）
 				- 对局信息
 				- 对局时间轴
+				- 对局事件
 		- 在运行扫描模式（【本地重查】）之前，请先运行【一键查询】，以避免遗漏最新的对局。（要查看一些名词的含义，请看相应的提交记录描述。）
 			- 不建议使用该程序导出超过2500场正常对局（或5000场斗魂竞技场对局）的信息。
 			- 在运行扫描模式之前，先删除工作簿（到回收站），这样防止原有文件较大而导致程序读取文件和导出工作表的时间过长。
@@ -179,7 +180,7 @@ The following explanations only apply to the current branch. For other details (
 					- 该场景在主目录下产生临时文件“Recentyl Played Summoners in Specified Player List.xlsx”。
 			- 和查战绩脚本相同，该脚本的扫描模式只适用于查询**英雄联盟**对局。
 			- 如果用户在英雄选择阶段因为某些原因（如命令行一闪而过、历史记录无法正常获取等）未能通过【检测模式】获取队友是否曾遇到过的信息，那么在游戏中还可以通过【单独查询】手动输入对局中的召唤师名称来检查曾经遇到过的玩家。
-				- 自美测服13.22版本，对于拳头代理的服务器上的玩家，只输入玩家名称无法正常查询其信息。由于加载资源界面只呈现玩家名称，这时可以**等待游戏开始**后在**计分板**中查看玩家名称及其标语。
+				- 自美测服13.22版本，对于拳头代理的服务器上的玩家，只输入玩家昵称无法正常查询其信息。由于加载资源界面只呈现玩家昵称，这时可以**等待游戏开始**后在**计分板**中查看玩家昵称及其昵称编号。
 	- 自定义脚本12用于**整理战利品信息**。
 		- 该脚本的最终结果是一个**包含部分字段的二维表**，保存在工作簿中。**工作簿的生成路径参照查战绩脚本**。
 		- 该脚本仅作数据的转换和整理，不作任何数据分析。如有需要，<u>请自行使用Excel软件进行分析</u>。
@@ -227,6 +228,10 @@ The following explanations only apply to the current branch. For other details (
 				- 灰色代表`Key`对应的值是自动生成的，不依赖于LCU API。
 				- 绿色代表`Key`来自`LoLGame_info`的一些信息。
 				- 橙色代表`Key`来自`frames[frameId]["participantFrames"][participantId]`的索引。
+		- 下面对查战绩脚本中的`LoLGame_event_df`的结构进行说明。
+			- 工作表`05 - LoLGame_event_header`的主要数据区域设置为白色。
+				- 暗红色字代表`Key`可以直接作为`events[timestamp]`的索引。
+				- 一些键被标记为白色。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`item`不曾出现在对局时间轴的json对象中，但是实际上来自`LoLGame_timeline["frames"]["events"][eventId]`，对应的是索引`"itemId"`。
 		- 下面对查战绩脚本中的`TFTHistory_df`的结构进行说明。
 			- 工作表`05 - TFTHistory_header`的主要数据区域设置了5种颜色。
 				- 无填充代表`Key`不作为LCU API中任何变量的索引。
@@ -399,9 +404,10 @@ For details about customized programs that is beyond the scope of creating a cus
 				- LoL match history
 				- [Local Recheck] match history
 				- TFT match history
-			- Details for each match (At most two sheets for each match)
+			- Details for each match (At most three sheets for each match)
 				- Game information
 				- Game timeline
+				- Game events
 		- Before running the scan mode ([Local Recheck]), please run [One-Key Query] first, in case latest matches are neglected. (For the definition of some terms, check the description of corresponding commit.)
 			- The user isn't advised to export the information and timelines of more than 2500 normal matches (or the information of 5000 Arena matches) using this program.
 			- Right before running the scan mode, please delete the xlsx workbook (into Recycle Bin), in case the original workbook is too big for this program to quickly read and export sheets into.
@@ -493,6 +499,10 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the grey area mean the value corresponding to `Key` is generated automatically and isn't related to LCU API.
 				- Data in the green area mean `Key` comes from `LoLGame_info`.
 				- Data in the orange area mean `Key` is the index of `frames[frameId]["participantFrames"][participantId]`.
+		- `LoLGame_event_df` in Customized Program 05:
+			- The main data area in the sheet `05 - TFTHistory_header` is colored white.
+				- Keys in dark red mean `Key` is the direct index of the variable `events[timestamp]`.
+				- Some keys are colored black. These keys don't belong to the indices of any variable in LCU API, but actually come from them. For example, `item` never occurs in the json object of the game information, but actually originates from `LoLGame_timeline["frames"]["events"][eventId]` and corresponds to the key `"itemId"`.
 		- `TFTHistory_df` in Customized Program 05:
 			- 5 colors are used to divide the main data area in the sheet `05 - TFTHistory_df`.
 				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
