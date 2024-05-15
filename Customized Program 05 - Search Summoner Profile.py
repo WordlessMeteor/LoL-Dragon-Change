@@ -2444,6 +2444,7 @@ async def search_profile(connection):
                                     for i in error_header:
                                         LoLGame_timeline_error = {"项目": list(error_header.values()), "items": list(error_header.keys()), "值": [LoLGame_timeline[j] for j in error_header_keys]}
                                         LoLGame_timeline_df = pandas.DataFrame(data = LoLGame_timeline_error)
+                                        LoLGame_event_df = pandas.DataFrame(data = LoLGame_timeline_error)
                                 elif not "errorCode" in LoLGame_info: #在整理时间轴数据时，需要使用LoLGame_info中的一些数据（While sorting the timeline, some data in LoLGame_info are needed）
                                     timeline_exist_error[int(matchID)] = False
                                     LoLGame_timeline_header = {"events": "事件", "timestamp": "时间戳", "time": "时间", "participantID": "玩家序号", "teamId": "阵营", "summonerName": "召唤师名称", "champion": "选用英雄", "alias": "名称", "currentGold": "当前金币余额", "dominionScore": "占领得分", "jungleMinionsKilled": "击杀野怪数", "level": "英雄等级", "minionsKilled": "击杀小兵数", "position": "当前位置坐标", "teamScore": "队伍得分", "totalGold": "金币获取", "xp": "经验值"}
