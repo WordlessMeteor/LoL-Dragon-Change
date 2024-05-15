@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.9.1",
+    "version": "14.10.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -14970,11 +14970,11 @@
                             0.5
                         ],
                         [
-                            60,
-                            80,
-                            100,
-                            120,
-                            140
+                            200,
+                            200,
+                            200,
+                            200,
+                            200
                         ],
                         [
                             6,
@@ -15000,7 +15000,7 @@
                         "3",
                         "3",
                         "0.5",
-                        "60/80/100/120/140",
+                        "200",
                         "6",
                         "50"
                     ],
@@ -15265,76 +15265,78 @@
                 "difficulty": 6
             },
             "stats": {
-                "hp": 610,
-                "hpperlevel": 103,
+                "hp": 640,
+                "hpperlevel": 100,
                 "mp": 350,
                 "mpperlevel": 54,
                 "movespeed": 325,
-                "armor": 28,
-                "armorperlevel": 4.7,
+                "armor": 30,
+                "armorperlevel": 4.5,
                 "spellblock": 30,
                 "spellblockperlevel": 1.3,
                 "attackrange": 550,
                 "hpregen": 5.5,
                 "hpregenperlevel": 0.55,
                 "mpregen": 7.4,
-                "mpregenperlevel": 0.55,
+                "mpregenperlevel": 0.7,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 61,
+                "attackdamage": 55,
                 "attackdamageperlevel": 2.5,
                 "attackspeedperlevel": 2.3,
-                "attackspeed": 0.638
+                "attackspeed": 0.644
             },
             "spells": [
                 {
                     "id": "PhosphorusBomb",
                     "name": "磷光炸弹",
                     "description": "库奇向目标区域发射一枚闪光弹，对范围内的敌人造成魔法伤害。这个技能还会暂时让目标区域附近的非隐形的单位和英雄现形。",
-                    "tooltip": "库奇抛射一颗炸弹，造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>。该区域及命中的敌方英雄会被显形{{ e2 }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "库奇抛射一颗炸弹，造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>。该区域及命中的敌方英雄会被显形{{ revealduration }}秒。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
+                            "冷却时间",
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        9,
+                        8.5,
                         8,
-                        8,
-                        8,
-                        8,
-                        8
+                        7.5,
+                        7
                     ],
-                    "cooldownBurn": "8",
+                    "cooldownBurn": "9/8.5/8/7.5/7",
                     "cost": [
                         60,
+                        65,
                         70,
-                        80,
-                        90,
-                        100
+                        75,
+                        80
                     ],
-                    "costBurn": "60/70/80/90/100",
+                    "costBurn": "60/65/70/75/80",
                     "datavalues": {},
                     "effect": [
                         null,
                         [
-                            75,
-                            120,
-                            165,
-                            210,
-                            255
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            6,
-                            6,
-                            6,
-                            6,
-                            6
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -15395,8 +15397,8 @@
                     ],
                     "effectBurn": [
                         null,
-                        "75/120/165/210/255",
-                        "6",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -15432,15 +15434,17 @@
                     "id": "CarpetBomb",
                     "name": "瓦尔基里俯冲",
                     "description": "库奇飞行一小段距离，同时投下炸弹。炸弹会制造出一条毁灭与死亡的路径，对留在路径中的敌人造成伤害。",
-                    "tooltip": "库奇飞越并烧焦一条路径，使其灼烧{{ trailduration }}秒。火焰中的敌人们会每秒受到<magicDamage>{{ totaldamagepersecond }}魔法伤害</magicDamage>。<br /><br />如果库奇拥有<keywordMajor>弹药包</keywordMajor>，那么他会转而将其消耗掉以飞行一段更远的距离，刷新这个技能的冷却时间，<status>震开</status>命中的敌人们，并灼烧该路径{{ megatrailduration }}秒。被命中的敌人们和路径中的敌人们会被<status>减速</status>{{ spell.carpetbombmega:slowamount*100 }}%并且每秒受到<magicDamage>{{ spell.carpetbombmega:totaldamagepersecond }}魔法伤害</magicDamage>，持续{{ spell.carpetbombmega:directburnduration }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "库奇飞越并烧焦一条路径，使其灼烧{{ trailduration }}秒。火焰中的敌人们在此期间至多受到<magicDamage>{{ maximumdamage }}魔法伤害</magicDamage>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "每秒伤害",
-                            "冷却时间"
+                            "持续伤害",
+                            "冷却时间",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ basedamagepersecond }} -> {{ basedamagepersecondNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}"
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -15454,12 +15458,12 @@
                     "cooldownBurn": "20/18/16/14/12",
                     "cost": [
                         80,
-                        80,
-                        80,
-                        80,
-                        80
+                        85,
+                        90,
+                        95,
+                        100
                     ],
-                    "costBurn": "80",
+                    "costBurn": "80/85/90/95/100",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -15573,92 +15577,94 @@
                     "id": "GGun",
                     "name": "格林机枪",
                     "description": "库奇使用格林机枪扫射他面前锥形范围内的敌人，造成伤害并降低敌人护甲和魔法抗性。",
-                    "tooltip": "库奇朝他的前方发射加特林机枪，每秒造成<physicalDamage>{{ physicaldamagepersecond }}物理伤害</physicalDamage>和<magicDamage>{{ magicaldamagepersecond }}魔法伤害</magicDamage>并在{{ e2 }}秒内至多击碎<scaleArmor>{{ e4 }}护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>。<br /><br />每秒总伤害：{{ totaldamagepersecond }}{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "库奇朝他的前方发射加特林机枪，在{{ sprayduration }}秒里持续造成共<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>并至多击碎<scaleArmor>{{ shredmax*-1 }}护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "防御削减"
+                            "防御削减",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ effect4amount*-1.000000 }} -> {{ effect4amountnl*-1.000000 }}"
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ shredmax*-1.000000 }} -> {{ shredmaxnl*-1.000000 }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        16,
-                        16,
-                        16,
-                        16,
-                        16
+                        12,
+                        12,
+                        12,
+                        12,
+                        12
                     ],
-                    "cooldownBurn": "16",
+                    "cooldownBurn": "12",
                     "cost": [
                         50,
-                        50,
-                        50,
-                        50,
-                        50
+                        55,
+                        60,
+                        65,
+                        70
                     ],
-                    "costBurn": "50",
+                    "costBurn": "50/55/60/65/70",
                     "datavalues": {},
                     "effect": [
                         null,
                         [
-                            120,
-                            170,
-                            220,
-                            270,
-                            320
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            8,
-                            11,
-                            14,
-                            17,
-                            20
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            8,
-                            8,
-                            8,
-                            8,
-                            8
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.5,
-                            0.5,
-                            0.5,
-                            0.5,
-                            0.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.5,
-                            0.5,
-                            0.5,
-                            0.5,
-                            0.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -15677,14 +15683,14 @@
                     ],
                     "effectBurn": [
                         null,
-                        "120/170/220/270/320",
-                        "4",
-                        "4",
-                        "8/11/14/17/20",
-                        "8",
-                        "2",
-                        "0.5",
-                        "0.5",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0"
                     ],
@@ -15714,17 +15720,13 @@
                     "id": "MissileBarrage",
                     "name": "火箭轰击",
                     "description": "库奇朝着他的目标地点发射一枚导弹。导弹会在命中第一个敌人后爆炸，并对目标周围单位造成伤害。库奇每隔一段时间就会挂载一枚导弹，最多挂载7枚。每发射2枚导弹后，下一次就会发射超级导弹，造成额外伤害。",
-                    "tooltip": "库奇发射一颗导弹，导弹会在命中第一个敌人时爆炸，对周围的敌人们造成<magicDamage>{{ rsmallmissiledamage }}魔法伤害</magicDamage>。每第三颗导弹会转而造成<magicDamage>{{ rbigmissiledamage }}魔法伤害</magicDamage>。<br /><br />这个技能有7层充能。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "库奇发射一颗导弹，导弹会在命中第一个敌人时爆炸，对周围的敌人们造成<physicalDamage>{{ rsmallmissiledamage }}物理伤害</physicalDamage>。每第三颗导弹会转而造成<physicalDamage>{{ rbigmissiledamage }}物理伤害</physicalDamage>。<br /><br />这个技能至多有{{ maxammotooltip }}层充能。每次对英雄的普攻会使充能时间缩短<attention>{{ attackrefund }}</attention>秒。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "伤害",
-                            "攻击力收益",
-                            "充能时间"
+                            "伤害"
                         ],
                         "effect": [
-                            "{{ rbasedamage }} -> {{ rbasedamageNL }}",
-                            "{{ radratio*100.000000 }}% -> {{ radrationl*100.000000 }}%",
-                            "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}"
+                            "{{ basedamage }} -> {{ basedamageNL }}"
                         ]
                     },
                     "maxrank": 3,
@@ -15735,11 +15737,11 @@
                     ],
                     "cooldownBurn": "2",
                     "cost": [
-                        20,
-                        20,
-                        20
+                        35,
+                        35,
+                        35
                     ],
-                    "costBurn": "20",
+                    "costBurn": "35",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -15809,7 +15811,7 @@
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
-                    "maxammo": "7",
+                    "maxammo": "4",
                     "range": [
                         1225,
                         1225,
@@ -15830,7 +15832,7 @@
             ],
             "passive": {
                 "name": "海克斯科技军备",
-                "description": "库奇普通攻击的一部分伤害会转化为<magicDamage>魔法伤害</magicDamage>。<br><br>库奇可以周期性地从基地中获得【特别快递】，可为他提供移动速度和一次性的强化版【瓦尔基里俯冲】。",
+                "description": "库奇普通攻击的一部分伤害会转化为<trueDamage>真实伤害</trueDamage>。",
                 "image": {
                     "full": "Corki_RapidReload.png",
                     "sprite": "passive0.png",
@@ -45078,6 +45080,12 @@
                     "num": 46,
                     "name": "山海绘卷 克格莫",
                     "chromas": true
+                },
+                {
+                    "id": "96055",
+                    "num": 55,
+                    "name": "胜利巨口 克格莫",
+                    "chromas": true
                 }
             ],
             "lore": "从艾卡西亚废墟深处的腐败裂口中，克格莫喷着进食后的胀气走入了符文之地，它是一只好奇的生物，然而身上散发着腐烂的恶臭，血盆大口里淌着腐蚀性的粘液。这只特别的虚空生物需要用牙齿和口水去理解周围的事物。虽然克格莫并非本性邪恶，但它的天真无知同样很危险，因为它的无知往往预示着一场疯狂的暴食——并不是为了填饱肚子，而是为了满足它无尽的好奇。",
@@ -45752,7 +45760,7 @@
             },
             "stats": {
                 "hp": 625,
-                "hpperlevel": 115,
+                "hpperlevel": 120,
                 "mp": 320,
                 "mpperlevel": 60,
                 "movespeed": 330,
@@ -45762,7 +45770,7 @@
                 "spellblockperlevel": 2.1,
                 "attackrange": 175,
                 "hpregen": 9.5,
-                "hpregenperlevel": 0.85,
+                "hpregenperlevel": 1,
                 "mpregen": 7,
                 "mpregenperlevel": 1,
                 "crit": 0,
@@ -48526,6 +48534,12 @@
                     "id": "876019",
                     "num": 19,
                     "name": "山海绘卷 莉莉娅",
+                    "chromas": true
+                },
+                {
+                    "id": "876028",
+                    "num": 28,
+                    "name": "花仙子 莉莉娅",
                     "chromas": true
                 }
             ],
@@ -51339,6 +51353,12 @@
                     "id": "99042",
                     "num": 42,
                     "name": "至高天 拉克丝",
+                    "chromas": true
+                },
+                {
+                    "id": "99061",
+                    "num": 61,
+                    "name": "花仙子 拉克丝",
                     "chromas": true
                 }
             ],
@@ -84303,15 +84323,13 @@
                             "伤害",
                             "攻击速度",
                             "对野怪的伤害封顶值",
-                            "冷却时间",
-                            "@AbilityResourceName@消耗"
+                            "冷却时间"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ attackspeed*100.000000 }}% -> {{ attackspeednl*100.000000 }}%",
                             "{{ monsterdamagecap }} -> {{ monsterdamagecapNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ cost }} -> {{ costNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -84325,12 +84343,12 @@
                     "cooldownBurn": "13/11.5/10/8.5/7",
                     "cost": [
                         30,
-                        35,
-                        40,
-                        45,
-                        50
+                        30,
+                        30,
+                        30,
+                        30
                     ],
-                    "costBurn": "30/35/40/45/50",
+                    "costBurn": "30",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -86299,6 +86317,12 @@
                     "id": "16037",
                     "num": 37,
                     "name": "玉剑传说 星仙子",
+                    "chromas": true
+                },
+                {
+                    "id": "16044",
+                    "num": 44,
+                    "name": "花仙子 索拉卡",
                     "chromas": true
                 }
             ],
@@ -93174,6 +93198,12 @@
                     "id": "18051",
                     "num": 51,
                     "name": "灵魂莲华 崔丝塔娜",
+                    "chromas": true
+                },
+                {
+                    "id": "18061",
+                    "num": 61,
+                    "name": "花仙子 崔丝塔娜",
                     "chromas": true
                 }
             ],

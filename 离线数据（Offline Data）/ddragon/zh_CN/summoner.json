@@ -1,12 +1,12 @@
 {
     "type": "summoner",
-    "version": "14.9.1",
+    "version": "14.10.1",
     "data": {
         "SummonerBarrier": {
             "id": "SummonerBarrier",
             "name": "屏障",
-            "description": "为你的英雄套上护盾，吸收105-411（取决于英雄等级）伤害，持续2秒。",
-            "tooltip": "为你的英雄提供持续2秒的<shield>{{ tooltipabsorbeddamage }}</shield>护盾值。",
+            "description": "为你的英雄提供护盾值，吸收120-480（取决于英雄等级）伤害，持续2.5秒。",
+            "tooltip": "为你的英雄提供持续{{ shieldduration }}秒的<shield>{{ shieldstrength }}</shield>护盾值。",
             "maxrank": 1,
             "cooldown": [
                 180
@@ -20,10 +20,10 @@
             "effect": [
                 null,
                 [
-                    87
+                    0
                 ],
                 [
-                    18
+                    0
                 ],
                 [
                     0
@@ -52,8 +52,8 @@
             ],
             "effectBurn": [
                 null,
-                "87",
-                "18",
+                "0",
+                "0",
                 "0",
                 "0",
                 "0",
@@ -103,13 +103,13 @@
         "SummonerBoost": {
             "id": "SummonerBoost",
             "name": "净化",
-            "description": "移除身上的所有限制效果（压制效果和击飞效果除外）和召唤师技能的减益效果，并且若在接下来的3秒里再次被施加限制效果时，新效果的持续时间会减少65%。",
-            "tooltip": "移除你的英雄身上的所有限制效果（压制效果和击飞效果除外）和召唤师技能的减益效果，并且若在接下来的{{ e2 }}秒里再次被施加以上效果时，新效果的持续时间将减少65%。",
+            "description": "移除身上的所有限制效果（压制效果和击飞效果除外）和召唤师技能的减益效果，并提供持续3秒的75%韧性。",
+            "tooltip": "移除身上的所有限制效果（压制效果和击飞效果除外）和召唤师技能的减益效果，并在接下来的{{ tenacityduration }}秒提供{{ tenacityvalue*100 }}%韧性。",
             "maxrank": 1,
             "cooldown": [
-                210
+                240
             ],
-            "cooldownBurn": "210",
+            "cooldownBurn": "240",
             "cost": [
                 0
             ],
@@ -118,10 +118,10 @@
             "effect": [
                 null,
                 [
-                    0.65
+                    0
                 ],
                 [
-                    3
+                    0
                 ],
                 [
                     0
@@ -150,8 +150,8 @@
             ],
             "effectBurn": [
                 null,
-                "0.65",
-                "3",
+                "0",
+                "0",
                 "0",
                 "0",
                 "0",
@@ -368,7 +368,7 @@
             "id": "SummonerDot",
             "name": "引燃",
             "description": "引燃是对单体敌方目标施放的持续性伤害技能，在5秒的持续时间里造成70-410（取决于英雄等级）真实伤害，获得目标的视野，并减少目标所受的治疗和回复效果。",
-            "tooltip": "引燃目标敌人，在5秒的持续时间里造成共<span class=\"colorFEFCFF\">{{ tooltiptruedamagecalculation }}</span>真实伤害，获得目标视野，并在持续期间为目标施加{{ grievousamount*100 }}%重伤效果。<br /><br /><rules>(重伤效果会使目标所受的治疗和回复效果降低，如果有多个重伤效果则取最高值。这个视野不会使潜行的敌人显形。)</rules>",
+            "tooltip": "引燃目标敌人，在5秒的持续时间里造成共<trueDamage>{{ tooltiptruedamagecalculation }}真实伤害</trueDamage>，获得目标视野，并在持续期间为目标施加{{ grievousamount*100 }}%重伤效果。<br /><br /><rules>(重伤效果会使目标所受的治疗和回复效果降低，如果有多个重伤效果则取最高值。这个视野不会使潜行的敌人显形。)</rules>",
             "maxrank": 1,
             "cooldown": [
                 180
@@ -382,16 +382,16 @@
             "effect": [
                 null,
                 [
-                    5
+                    0
                 ],
                 [
-                    10
+                    0
                 ],
                 [
-                    4
+                    0
                 ],
                 [
-                    100
+                    0
                 ],
                 [
                     0
@@ -414,10 +414,10 @@
             ],
             "effectBurn": [
                 null,
-                "5",
-                "10",
-                "4",
-                "100",
+                "0",
+                "0",
+                "0",
+                "0",
                 "0",
                 "0",
                 "0",
@@ -463,13 +463,13 @@
         "SummonerExhaust": {
             "id": "SummonerExhaust",
             "name": "虚弱",
-            "description": "虚弱目标敌方英雄，降低其30%的移动速度，并使其造成的伤害减少35%，持续3秒。",
-            "tooltip": "虚弱目标英雄，降低目标{{ e5 }}%的移动速度，并使目标造成的伤害减少{{ damagereductiontooltip }}%，持续3秒。",
+            "description": "虚弱目标敌方英雄，降低其40%的移动速度，并使其造成的伤害减少35%，持续3秒。",
+            "tooltip": "虚弱目标英雄，降低目标{{ slow }}%的移动速度，并使目标造成的伤害减少{{ damagereduction }}%，持续3秒。",
             "maxrank": 1,
             "cooldown": [
-                210
+                240
             ],
-            "cooldownBurn": "210",
+            "cooldownBurn": "240",
             "cost": [
                 0
             ],
@@ -478,10 +478,10 @@
             "effect": [
                 null,
                 [
-                    3
+                    0
                 ],
                 [
-                    35
+                    0
                 ],
                 [
                     0
@@ -490,7 +490,7 @@
                     0
                 ],
                 [
-                    30
+                    0
                 ],
                 [
                     0
@@ -510,11 +510,11 @@
             ],
             "effectBurn": [
                 null,
-                "3",
-                "35",
                 "0",
                 "0",
-                "30",
+                "0",
+                "0",
+                "0",
                 "0",
                 "0",
                 "0",
@@ -656,13 +656,13 @@
         "SummonerHaste": {
             "id": "SummonerHaste",
             "name": "幽灵疾步",
-            "description": "你的英雄在移动时会无视单位的碰撞体积，并获得24 - 48% 移动速度（基于英雄等级），持续15秒。",
+            "description": "你的英雄在移动时会无视单位的碰撞体积，并获得24 - 48%移动速度（基于英雄等级），持续10秒。",
             "tooltip": "在接下来的{{ duration }}秒里，获得<speed>{{ movespeedmod }}移动速度</speed>。在此期间，你的英雄可以无视单位的碰撞体积。",
             "maxrank": 1,
             "cooldown": [
-                210
+                240
             ],
-            "cooldownBurn": "210",
+            "cooldownBurn": "240",
             "cost": [
                 0
             ],
@@ -757,7 +757,7 @@
             "id": "SummonerHeal",
             "name": "治疗术",
             "description": "为你和目标友军英雄回复80-318生命值，并为你和目标友军英雄提供持续1秒的30%移动速度。若目标近期已受到过其它治疗术的影响，则治疗术对目标产生的治疗效果减半。",
-            "tooltip": "为你和目标友军英雄回复<healing>{{ tooltiphealamount }}生命值</healing>，并为你和目标友军英雄提供持续1秒的<speed>{{ movespeed*100 }}%移动速度</speed>。<br /><br /><rules>如果这个技能无法找到目标，就会作用于范围内伤势最重的一位友军英雄。<br />若目标近期已受到过其它治疗术的影响，则治疗术对目标产生的治疗效果减半。</rules>",
+            "tooltip": "为你和目标友军英雄回复<healing>{{ totalheal }}生命值</healing>，并为你和目标友军英雄提供持续{{ movespeedduration }}秒的<speed>{{ movespeed*100 }}%移动速度</speed>。<br /><br /><rules>如果这个技能无法找到目标，就会作用于范围内伤势最重的一位友军英雄。<br />若目标近期已受到过其它治疗术的影响，则治疗术对目标产生的治疗效果减半。</rules>",
             "maxrank": 1,
             "cooldown": [
                 240
@@ -771,7 +771,10 @@
             "effect": [
                 null,
                 [
-                    0.3
+                    0
+                ],
+                [
+                    0
                 ],
                 [
                     0
@@ -780,13 +783,10 @@
                     0
                 ],
                 [
-                    0.5
+                    0
                 ],
                 [
-                    826
-                ],
-                [
-                    0.5
+                    0
                 ],
                 [
                     0
@@ -803,12 +803,12 @@
             ],
             "effectBurn": [
                 null,
-                "0.3",
                 "0",
                 "0",
-                "0.5",
-                "826",
-                "0.5",
+                "0",
+                "0",
+                "0",
+                "0",
                 "0",
                 "0",
                 "0",
@@ -838,9 +838,9 @@
             "costType": "无消耗",
             "maxammo": "-1",
             "range": [
-                850
+                875
             ],
-            "rangeBurn": "850",
+            "rangeBurn": "875",
             "image": {
                 "full": "SummonerHeal.png",
                 "sprite": "spell0.png",
