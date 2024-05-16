@@ -2433,7 +2433,10 @@ async def search_profile(connection):
                                             LoLGame_timeline = await (await connection.request("GET", "/lol-match-history/v1/game-timelines/" + matchID)).json()
                                     elif "could not convert GAMHS data to match-history format" in LoLGame_timeline["message"]:
                                         fetched_timeline = False
-                                        print("斗魂竞技场模式不支持查询时间轴！\nTimeline crawling isn't supported in CHERRY matches!")
+                                        if LoLGame_info["gameMode"] == "CHERRY":
+                                            print("斗魂竞技场模式不支持查询时间轴！\nTimeline crawling isn't supported in CHERRY matches!")
+                                        else:
+                                            print("时间轴加载失败。\nFailed to load timeline.")
                                     if count > 3:
                                         fetched_timeline = False
                                         print("对局%s时间轴获取失败！\nMatch %s timeline capture failure!" %(matchID, matchID))
