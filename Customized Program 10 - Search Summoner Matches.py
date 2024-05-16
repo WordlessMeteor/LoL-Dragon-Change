@@ -115,7 +115,7 @@ async def search_summoner_online(connection):
             global opened
             opened = False
             #由于召唤师可能使用过改名卡，因此需要依据玩家通用唯一识别码来查询某玩家是否进行过某场对局（Since a summoner may have used the Summoner Name Change, puuid is used to judge whether a summoner is in a match）
-            if name.replace(" ", "").count("-") == 4 and len(name.replace(" ", "")) > 22: #拳头规定的玩家名称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
+            if name.replace(" ", "").count("-") == 4 and len(name.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
                 search_by_puuid = True
                 info = await (await connection.request("GET", "/lol-summoner/v2/summoners/puuid/" + quote(name))).json()
             else:

@@ -1062,7 +1062,7 @@ async def search_recent_players(connection):
             continue
         else:
             if detectMode == False:
-                if summoner_name.count("-") == 4 and len(summoner_name.replace(" ", "")) > 22: #拳头规定的玩家名称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
+                if summoner_name.count("-") == 4 and len(summoner_name.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
                     search_by_puuid = True
                     info = await (await connection.request("GET", "/lol-summoner/v2/summoners/puuid/" + quote(summoner_name))).json()
                 else:
@@ -3182,7 +3182,7 @@ async def search_recent_players(connection):
                                     illegal_name_warning = bool(input())
                                     legal_summoners = {}
                                     for summoner in summoners:
-                                        if summoner.count("-") == 4 and len(summoner.replace(" ", "")) > 22: #拳头规定的玩家名称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
+                                        if summoner.count("-") == 4 and len(summoner.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
                                             check_by_puuid = True
                                             info_check = await (await connection.request("GET", "/lol-summoner/v2/summoners/puuid/" + quote(summoner))).json()
                                         else:
