@@ -171,8 +171,8 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 411.0,
-                            "mStartValue": 105.0
+                            "mEndValue": 440.0,
+                            "mStartValue": 110.0
                         }
                     ]
                 },
@@ -187,7 +187,11 @@
                     ]
                 }
             },
-            "dataValues": {},
+            "dataValues": {
+                "AllyRange": 835.0,
+                "MoveSpeed": 0.30000001192092896,
+                "ShieldDuration": 2.5
+            },
             "desc": "获得召唤师技能<spellName>防御计略</spellName>。<br><br><rules><spellName>防御计略</spellName>会对你和你的队友施放<spellName>屏障</spellName>和<spellName>治疗术</spellName>。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/defensivemaneuvers_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/defensivemaneuvers_small.png",
@@ -340,9 +344,9 @@
             "apiName": "TankItOrLeaveIt",
             "calculations": {},
             "dataValues": {
-                "CritChance": 0.20000000298023224,
-                "DamageReduction": 0.25,
-                "MaxChance": 0.6000000238418579
+                "CritChance": 0.25,
+                "DamageReduction": 0.20000000298023224,
+                "MaxChance": 0.5
             },
             "desc": "你可以使用你的暴击几率(最大@MaxChance*100@%几率)来进行<crit>会心防御</crit>，使你有一定几率来使所受伤害降低。获得@CritChance*100@%暴击几率。",
             "iconLarge": "assets/ux/cherry/augments/icons/tankitorleaveit_large.png",
@@ -555,7 +559,7 @@
             "apiName": "MagicMissile",
             "calculations": {},
             "dataValues": {
-                "Cooldown": 2.0,
+                "Cooldown": 6.0,
                 "MaxHealthDamagePerMissile": 0.0033400000538676977,
                 "MaxHealthDamageTooltip": 1.0,
                 "MaxRangeThreshold": 1000.0,
@@ -577,12 +581,12 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 400.0,
+                            "mEndValue": 200.0,
                             "mStartValue": 40.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.30000001192092896
+                            "mCoefficient": 0.20000000298023224
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
@@ -597,7 +601,7 @@
                 }
             },
             "dataValues": {
-                "Cooldown": 4.0,
+                "Cooldown": 6.0,
                 "ExplosionDelayTime": 0.75,
                 "ExplosionRadius": 100.0
             },
@@ -692,8 +696,8 @@
             "apiName": "Vulnerability",
             "calculations": {},
             "dataValues": {
-                "CritChance": 0.20000000298023224,
-                "CritDamage": 0.5
+                "CritChance": 0.25,
+                "CritDamage": 0.44999998807907104
             },
             "desc": "你的装备和持续伤害效果可以暴击。获得@CritChance*100@%暴击几率。",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -982,26 +986,28 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 2000.0,
-                            "mStartValue": 125.0
+                            "mEndValue": 200.0,
+                            "mStartValue": 140.0
                         },
                         {
-                            "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.800000011920929
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
                         },
                         {
-                            "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.350000023841858,
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
                             "mStat": 2,
                             "mStatFormula": 2
                         }
                     ],
-                    "{37070a8d}": 4,
-                    "{cbcac618}": 4,
-                    "{e6eebb2f}": 4
+                    "{37070a8d}": 2,
+                    "{cbcac618}": 2,
+                    "{e6eebb2f}": 2
                 }
             },
             "dataValues": {
+                "APRatio": 0.4000000059604645,
+                "BonusADRatio": 1.350000023841858,
                 "ExplosionDelayTime": 0.75,
                 "ExplosionRadius": 300.0
             },
@@ -1212,7 +1218,7 @@
             },
             "dataValues": {
                 "BurnDuration": 5.0,
-                "BurnPercentMax": 0.07000000029802322,
+                "BurnPercentMax": 0.05000000074505806,
                 "BurnPercentMin": 0.009999999776482582,
                 "Cooldown": 1.5,
                 "Radius": 650.0
@@ -1228,6 +1234,24 @@
         {
             "apiName": "FeeltheBurn",
             "calculations": {
+                "DamagePerSecond": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "TooltipTrueDamageCalculation",
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "{25837bd7}"
+                    }
+                },
+                "TooltipTrueDamageCalculation": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 410.0,
+                            "mStartValue": 70.0
+                        }
+                    ]
+                },
                 "{7c50d74e}": {
                     "__type": "GameCalculation",
                     "mFormulaParts": [
@@ -1241,8 +1265,12 @@
             },
             "dataValues": {
                 "DamageReductionTOOLTIPONLY": 0.3499999940395355,
+                "DotDuration": 5.0,
                 "ExhaustDuration": 3.0,
+                "GrievousAmount": 0.4000000059604645,
+                "InverseDuration": 0.20000000298023224,
                 "Range": 1000.0,
+                "SightRadius": 100.0,
                 "SlowAmount": 0.5
             },
             "desc": "获得召唤师技能<spellName>感受灼烧</spellName>。<br><br><rules><spellName>感受灼烧</spellName>会对所有附近的敌人们施放<spellName>引燃</spellName>和<spellName>虚弱</spellName>。</rules>",
@@ -1324,7 +1352,7 @@
                 "ImprisonDuration": 9.0,
                 "MissingHPHealUponRelease": 0.30000001192092896,
                 "ShieldHealthRatio": 0.3499999940395355,
-                "StatIncrease": 0.5
+                "StatIncrease": 0.4000000059604645
             },
             "desc": "你每个回合开始时都会被封印在竞技场中心，无法进行任何行动。在被封印的状态下，你拥有至多@DamageReductionMax*100@%伤害减免并持续获得体型、<healing>生命值</healing>、<physicalDamage>攻击力</physicalDamage>和<magicDamage>法术强度</magicDamage>(最大值为@StatIncrease*100@%)。在@ImprisonDuration@秒之后或在达到<healing>@BreakoutHealthThreshold*100@%生命值</healing>时，你会打破封印，<status>击退</status>敌人们并获得<shield>@ShieldHealthRatio*100@%最大生命值的护盾值</shield>。",
             "iconLarge": "assets/ux/cherry/augments/icons/raidboss_large.png",
@@ -1370,13 +1398,13 @@
                 "BuffDuration": 2.0,
                 "MSAmount": 300.0
             },
-            "desc": "在使用一个冲刺、跳跃、闪烁或传送类技能或离开<stealth>潜行</stealth>状态之后，获得持续@BuffDuration@秒的@MSAmount@移动速度。",
+            "desc": "在使用一个冲刺、跳跃、闪烁或传送类技能或离开<stealth>潜行</stealth>状态之后，获得持续@spell.Augment_ShadowRunner:BuffDuration@秒的@spell.Augment_ShadowRunner:MSAmount@移动速度。",
             "iconLarge": "assets/ux/cherry/augments/icons/shadowrunner_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/shadowrunner_small.png",
             "id": 73,
             "name": "暗影疾奔",
             "rarity": 0,
-            "tooltip": "在使用一个冲刺、跳跃、闪烁或传送类技能或离开<stealth>潜行</stealth>状态之后，获得持续@BuffDuration@秒的@MSAmount@移动速度。"
+            "tooltip": "在使用一个冲刺、跳跃、闪烁或传送类技能或离开<stealth>潜行</stealth>状态之后，获得持续@spell.Augment_ShadowRunner:BuffDuration@秒的@spell.Augment_ShadowRunner:MSAmount@移动速度。"
         },
         {
             "apiName": "InfernalConduit",
@@ -1430,7 +1458,7 @@
             "apiName": "ADAPt",
             "calculations": {},
             "dataValues": {
-                "APAmp": 0.10000000149011612,
+                "APAmp": 0.15000000596046448,
                 "ConversionRate": 1.666659951210022,
                 "InverseRate": 0.6000000238418579
             },
@@ -1551,8 +1579,8 @@
             "apiName": "SoulSiphon",
             "calculations": {},
             "dataValues": {
-                "CritChance": 0.20000000298023224,
-                "HealPercentage": 0.15000000596046448
+                "CritChance": 0.25,
+                "HealPercentage": 0.11999999731779099
             },
             "desc": "获得<crit>@CritChance*100@%暴击几率</crit>和作用于<crit>暴击</crit>的@HealPercentage*100@%生命偷取。",
             "iconLarge": "assets/ux/cherry/augments/icons/soulsiphon_large.png",
@@ -1581,7 +1609,7 @@
             "apiName": "ThreadtheNeedle",
             "calculations": {},
             "dataValues": {
-                "PercentPen": 0.25
+                "PercentPen": 0.20000000298023224
             },
             "desc": "获得@PercentPen*100@%<scaleAD>护甲穿透</scaleAD>和<scaleAP>法术穿透</scaleAP>。",
             "iconLarge": "assets/ux/cherry/augments/icons/threadtheneedle_large.png",
@@ -1639,13 +1667,13 @@
                 "SlowZoneWidth": 80.0,
                 "StartingBaseDamage": 25.0
             },
-            "desc": "获<keywordMajor>余震</keywordMajor>和<keywordMajor>冰川增幅</keywordMajor>基石符文。",
+            "desc": "获得<keywordMajor>余震</keywordMajor>和<keywordMajor>冰川增幅</keywordMajor>基石符文。",
             "iconLarge": "assets/ux/cherry/augments/icons/impassable_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/impassable_small.png",
             "id": 149,
             "name": "不动如山",
             "rarity": 1,
-            "tooltip": "获<keywordMajor>余震</keywordMajor>和<keywordMajor>冰川增幅</keywordMajor>基石符文。"
+            "tooltip": "获得<keywordMajor>余震</keywordMajor>和<keywordMajor>冰川增幅</keywordMajor>基石符文。"
         },
         {
             "apiName": "ExtendoArm",
@@ -1764,7 +1792,7 @@
                 "DamageAmp": 0.15000000596046448,
                 "Gold": 150.0
             },
-            "desc": "每一回合，标记一个对方英雄来对其造成@DamageAmp*100@%额外伤害并在其阵亡时获得额外的@Gold@金币。",
+            "desc": "每一回合，标记一个对方英雄来对其造成@spell.Augment_ContractKiller:DamageAmp*100@%额外伤害并在其阵亡时获得额外的@spell.Augment_ContractKiller:Gold@金币。",
             "iconLarge": "assets/ux/cherry/augments/icons/contractkiller_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/contractkiller_small.png",
             "id": 17,
@@ -1914,7 +1942,7 @@
             "calculations": {},
             "dataValues": {
                 "BleedDuration": 5.0,
-                "PercentMaxHPDamagePer5Seconds": 0.02500000037252903
+                "PercentMaxHPDamagePer5Seconds": 0.019999999552965164
             },
             "desc": "你的攻击会施加一个可无限叠加的<keywordMajor>灼烧</keywordMajor>，持续造成伤害。",
             "iconLarge": "assets/ux/cherry/augments/icons/firebrand_large.png",
@@ -1993,9 +2021,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.6000000238418579,
-                "MinionHealthIncrease": 0.6000000238418579,
-                "MinionSizeIncrease": 0.6000000238418579
+                "MinionDamageIncrease": 0.5,
+                "MinionHealthIncrease": 0.5,
+                "MinionSizeIncrease": 0.5
             },
             "desc": "你的召唤物获得@MinionSizeIncrease*100@%体型提升、生命值和伤害。",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2347,7 +2375,7 @@
             "apiName": "AcceleratingSorcery",
             "calculations": {},
             "dataValues": {
-                "HastePerCast": 9.0
+                "HastePerCast": 10.0
             },
             "desc": "使用技能时会为你提供可无限叠加的<scaleBonus>技能急速</scaleBonus>。",
             "iconLarge": "assets/ux/cherry/augments/icons/acceleratingsorcery_large.png",
@@ -2390,8 +2418,8 @@
             "dataValues": {
                 "AOESize": 550.0,
                 "CastRange": 5500.0,
-                "Cooldown": 30.0,
-                "DamagetoChampions": 0.20000000298023224,
+                "Cooldown": 20.0,
+                "DamagetoChampions": 0.30000001192092896,
                 "GroundDuration": 3.0,
                 "LaserDelay": 2.5,
                 "TickRate": 0.5
@@ -2426,13 +2454,13 @@
                 "Duration": 10.0,
                 "MovementSpeed": 1.0
             },
-            "desc": "获得<speed>@MovementSpeed*100@%移动速度</speed>，在受到伤害后失效@DisableCooldown@秒。",
+            "desc": "获得<speed>@spell.Augment_Homeguard:MovementSpeed*100@%移动速度</speed>，在受到伤害后失效@spell.Augment_Homeguard:DisableCooldown@秒。",
             "iconLarge": "assets/ux/cherry/augments/icons/homeguard_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/homeguard_small.png",
             "id": 105,
             "name": "家园卫士",
             "rarity": 0,
-            "tooltip": "获得<speed>@MovementSpeed*100@%移动速度</speed>，在受到伤害后失效@DisableCooldown@秒。"
+            "tooltip": "获得<speed>@spell.Augment_Homeguard:MovementSpeed*100@%移动速度</speed>，在受到伤害后失效@spell.Augment_Homeguard:DisableCooldown@秒。"
         },
         {
             "apiName": "HeavyHitter",
@@ -2472,7 +2500,7 @@
                         },
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 90.0,
+                            "mEndValue": 60.0,
                             "mStartValue": 5.0
                         }
                     ]
@@ -2728,13 +2756,13 @@
                 "ReducedCooldown": 0.5,
                 "SnipeDistance": 700.0
             },
-            "desc": "用一个非终极技能命中一个@SnipeDistance@码外的敌人时，将这个技能的冷却时间缩短@ReducedCooldown@秒。",
+            "desc": "用一个非终极技能命中一个@SnipeDistance@码外的敌人时，将这个技能的冷却时间缩短至@ReducedCooldown@秒。",
             "iconLarge": "assets/ux/cherry/augments/icons/skilledsniper_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/skilledsniper_small.png",
             "id": 113,
             "name": "老练狙神",
             "rarity": 1,
-            "tooltip": "用一个非终极技能命中一个@SnipeDistance@码外的敌人时，将这个技能的冷却时间缩短@ReducedCooldown@秒。"
+            "tooltip": "用一个非终极技能命中一个@SnipeDistance@码外的敌人时，将这个技能的冷却时间缩短至@ReducedCooldown@秒。"
         },
         {
             "apiName": "ParasiticRelationship",
@@ -3150,13 +3178,13 @@
                     "mFormulaParts": [
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.0005000000237487257
+                            "mCoefficient": 0.00044999999227002263
                         }
                     ]
                 }
             },
             "dataValues": {
-                "CritChance": 0.20000000298023224,
+                "CritChance": 0.25,
                 "CritDamage": 1.5
             },
             "desc": "你的技能可以造成暴击。获得20%暴击几率。",
