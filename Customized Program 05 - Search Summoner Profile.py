@@ -2545,25 +2545,33 @@ async def search_profile(connection):
                                                     LoLGame_event_data[key].append(events[timestamp][key])
                                                 elif i in {1, 9, 17, 29}:
                                                     subkey = LoLGame_event_header_keys[i - 1]
-                                                    if i == 1:
+                                                    if events[timestamp][subkey] == 0:
+                                                        LoLGame_event_data[key].append("")
+                                                    elif i == 1:
                                                         LoLGame_event_data[key].append(list(map(lambda x: LoLChampions[LoLGame_info["participants"][x - 1]["championId"]]["name"], events[timestamp][subkey])))
                                                     else:
                                                         LoLGame_event_data[key].append(LoLChampions[LoLGame_info["participants"][events[timestamp][subkey] - 1]["championId"]]["name"])
                                                 elif i in {2, 10, 18, 30}:
                                                     subkey = LoLGame_event_header_keys[i - 2]
-                                                    if i == 2:
+                                                    if events[timestamp][subkey] == 0:
+                                                        LoLGame_event_data[key].append("")
+                                                    elif i == 2:
                                                         LoLGame_event_data[key].append(list(map(lambda x: LoLChampions[LoLGame_info["participants"][x - 1]["championId"]]["alias"], events[timestamp][subkey])))
                                                     else:
                                                         LoLGame_event_data[key].append(LoLChampions[LoLGame_info["participants"][events[timestamp][subkey] - 1]["championId"]]["alias"])
                                                 elif i in {3, 11, 19, 31}:
                                                     subkey = LoLGame_event_header_keys[i - 3]
-                                                    if i == 3:
+                                                    if events[timestamp][subkey] == 0:
+                                                        LoLGame_event_data[key].append("")
+                                                    elif i == 3:
                                                         LoLGame_event_data[key].append(list(map(lambda x: LoLGame_info["participantIdentities"][x - 1]["player"]["summonerName"], events[timestamp][subkey])))
                                                     else:
                                                         LoLGame_event_data[key].append(LoLGame_info["participantIdentities"][events[timestamp][subkey] - 1]["player"]["summonerName"])
                                                 else:
                                                     subkey = LoLGame_event_header_keys[i - 4]
-                                                    if i == 4:
+                                                    if events[timestamp][subkey] == 0:
+                                                        LoLGame_event_data[key].append("")
+                                                    elif i == 4:
                                                         LoLGame_event_data[key].append(list(map(lambda x: "" if LoLGame_info["participantIdentities"][x - 1]["player"]["gameName"] == "" and LoLGame_info["participantIdentities"][x - 1]["player"]["tagLine"] == "" else LoLGame_info["participantIdentities"][x - 1]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][x - 1]["player"]["tagLine"], events[timestamp][subkey])))
                                                     else:
                                                         if LoLGame_info["participantIdentities"][events[timestamp][subkey] - 1]["player"]["gameName"] == "" and LoLGame_info["participantIdentities"][events[timestamp][subkey] - 1]["player"]["tagLine"] == "":
