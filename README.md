@@ -141,6 +141,7 @@ The following explanations only apply to the current branch. For other details (
 			- 在运行扫描模式之前，先删除工作簿（到回收站），这样防止原有文件较大而导致程序读取文件和导出工作表的时间过长。
 			- 【本地重查】目前只支持**英雄联盟**对局。
 		- 每次导出一名召唤师的战绩后，如果后续有自行整理的需求，请修改相应的对局记录工作表名，以防程序下次运行时会覆盖工作表导致数据丢失。例如在工作表名后添加“ - Manual”。
+		- 如果原工作簿较大，建议先备份原工作簿，再导出数据，以免导出过程因意外中断导致工作簿损坏。
 		- 该程序需要依据实际遇到的报错来更新异常修复部分的代码。欢迎各位开发者分享爬取过程中遇到的报错问题👏
 	- 自定义脚本6用于**在美测服一键开启云顶之弈1V0模式，以获取3000点券**。双击即可。
 		- 对于非北美洲用户，即使使用了加速器，也要<u>在游戏大厅的PLAY按钮高亮3秒之后，再双击本程序</u>。否则会导致召唤师状态异常（实际为在线状态，却显示为正在排队，并有“正在匹配”的计时器）。这时只能通过<u>重启客户端</u>来解决。
@@ -413,6 +414,7 @@ For details about customized programs that is beyond the scope of creating a cus
 			- Right before running the scan mode, please delete the xlsx workbook (into Recycle Bin), in case the original workbook is too big for this program to quickly read and export sheets into.
 			- [Local Recheck] is only supported for **LoL** matches for now.
 		- Every time the program exports a summoner's profile, if you need to sort out data based on the generated result, please modify the names of the sheets that you want to make changes, in case they would be overwritten and some data would be lost. For example, you may add " - Manual" after the names of the sheets to change.
+		- If the original workbook is big enough, it's highly recommended that the user make a backup of the original workbook before the export, in case an unexpected interruption could lead to a broken workbook.
 		- This program relies on any encountered errors to update the exception handling code. Welcome for any developer to share the http errors when crawling the data 👏
 	- Customized Program 06 is designed to **one-key start the TFT 1v0 mode on PBE to gain 3000 RP**. A simple double-click will work.
 		- For users not in North America (in terms of location), despite any accerelator used, please don't double-click this program until several seconds after the PLAY button highlights. Otherwise, the summoner status will come into an unexpected state (the client will show that the summoner is in queue and display the "Finding Match" timer, but actually it's online). A **restart** for client is the only way to solve this problem.

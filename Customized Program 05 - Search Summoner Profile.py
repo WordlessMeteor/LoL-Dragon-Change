@@ -219,6 +219,17 @@ def get_info_name(info: dict, mode = 1) -> str:
                 name = "0. New Player\\" + str(info["summonerId"])
     return name
 
+def format_runtime(seconds: int):
+    units = [(" d", 86400), (" h", 3600), (" m", 60), (" s", 1)]
+    result = []
+    for unit_name, unit_seconds in units:
+        if seconds >= unit_seconds:
+            unit_value = int(seconds // unit_seconds)
+            seconds %= unit_seconds
+            result.append(f"{unit_value}{unit_name}")
+    
+    return " ".join(result) if result else "0"
+
 async def search_profile(connection):
     platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     platformId = platform_config["LoginDataPacket"]["platformId"]
@@ -3271,6 +3282,17 @@ async def search_profile(connection):
                 
                 matchIDs = list(game_info_dfs.keys())
                 matchIDs.sort()
+                print("正在计算每场对局要保存的工作表数量……\nCalculating the number of sheets to be saved for each match ...\n")
+                sheetNumber = {}
+                for i in range(len(matchIDs)):
+                    if info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
+                        sheetNumber[matchIDs[i]] = 2
+                    elif not info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
+                        sheetNumber[matchIDs[i]] = 1
+                    elif info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
+                        sheetNumber[matchIDs[i]] = 0
+                    else:
+                        sheetNumber[matchIDs[i]] = 3
                 
                 recent_players_df = pandas.DataFrame() #起到占位作用，保证在使用自定义脚本11时生成的近期一起玩过的玩家数据一定是工作簿的第4和5张工作表（Act as a placeholder to ensure the recent played summoner data from Customized Program 11 are in the fourth and fifth sheets in the workbook)
                 if not LoLHistory_searched:
@@ -3306,21 +3328,34 @@ async def search_profile(connection):
                                     TFTHistory_df.to_excel(excel_writer = writer, sheet_name = "TFT Match History")
                                     print("召唤师云顶之弈对局记录导出完成！\nSummoner TFT match history exported!\n")
                                 #print(len(info_exist_error), len(timeline_exist_error), len(main_player_included), len(match_reserve_strategy))
+                                runTimes = [] #记录保存一场对局的所有数据所花费的时间（Records the time spent in saving all data of a match）
                                 for i in range(len(matchIDs)):
+                                    if i == 0:
+                                        end = time.time()
+                                    else: #估计剩余时间（Estimates the time to finish saving）
+                                        start = end
+                                        end = time.time()
+                                        unit = end - start
+                                        runTimes.append((sheetNumber[matchIDs[i - 1]], unit))
+                                        total_remaining = 0 if sum([j[0] for j in runTimes[:i]]) == 0 else sum([j[1] for j in runTimes[:i]]) / sum([j[0] for j in runTimes[:i]]) * sum([sheetNumber[matchIDs[j]] for j in range(i, len(matchIDs))]) #需要考虑除数为0的情况（The case where the divisor is 0 needs considering）
                                     if not main_player_included[matchIDs[i]]:
                                         if not match_reserve_strategy[matchIDs[i]]:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner and not exported!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner and not exported!)" %(i + 1, len(matchIDs)), end = "")
                                         else:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner but yet exported!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner but yet exported!)" %(i + 1, len(matchIDs)), end = "")
                                     else:
                                         if info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information capture failure!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information capture failure!)" %(i + 1, len(matchIDs)), end = "")
                                         elif not info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match timeline capture failure!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match timeline capture failure!)" %(i + 1, len(matchIDs)), end = "")
                                         elif info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information & timeline capture Failure!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information & timeline capture Failure!)" %(i + 1, len(matchIDs)), end = "")
                                         else:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)), end = "")
+                                    if i == 0 or sum([j[0] for j in runTimes[:i]]) == 0: #第二个条件是为了解决前面几场对局的对局信息和时间轴都获取失败的情况（The second condition is designed to deal with the case where the information and the timeline of the first several matches fail to be captured）
+                                        print()
+                                    else:
+                                        print("\t剩余时间（Time remaining）：%s" %(format_runtime(total_remaining)))
                                     if match_reserve_strategy[matchIDs[i]]:
                                         if not info_exist_error[matchIDs[i]]:
                                             game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
@@ -3369,21 +3404,34 @@ async def search_profile(connection):
                                     pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "TFT Match History")
                                     pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "TFT Match History - Manual")
                                     print("已创建云顶之弈对局记录的空白工作表！\nCreated an empty sheet for TFT match history!\n")
+                                runTimes = []
                                 for i in range(len(matchIDs)):
+                                    if i == 0:
+                                        end = time.time()
+                                    else:
+                                        start = end
+                                        end = time.time()
+                                        unit = end - start
+                                        runTimes.append((sheetNumber[matchIDs[i - 1]], unit))
+                                        total_remaining = 0 if sum([j[0] for j in runTimes[:i]]) == 0 else sum([j[1] for j in runTimes[:i]]) / sum([j[0] for j in runTimes[:i]]) * sum([sheetNumber[matchIDs[j]] for j in range(i, len(matchIDs))])
                                     if not main_player_included[matchIDs[i]]:
                                         if not match_reserve_strategy[matchIDs[i]]:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner and not exported!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner and not exported!)" %(i + 1, len(matchIDs)), end = "")
                                         else:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner but yet exported!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner but yet exported!)" %(i + 1, len(matchIDs)), end = "")
                                     else:
                                         if info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information capture failure!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information capture failure!)" %(i + 1, len(matchIDs)), end = "")
                                         elif not info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match timeline capture failure!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match timeline capture failure!)" %(i + 1, len(matchIDs)), end = "")
                                         elif info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information & timeline capture Failure!)" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information & timeline capture Failure!)" %(i + 1, len(matchIDs)), end = "")
                                         else:
-                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)))
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)), end = "")
+                                    if i == 0 or sum([j[0] for j in runTimes[:i]]) == 0:
+                                        print()
+                                    else:
+                                        print("\t剩余时间（Time remaining）：%s" %(format_runtime(total_remaining)))
                                     if match_reserve_strategy[matchIDs[i]]:
                                         if not info_exist_error[matchIDs[i]]:
                                             game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
