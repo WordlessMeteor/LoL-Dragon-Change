@@ -1021,6 +1021,7 @@ async def search_recent_players(connection):
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
     #控制只输出一遍的提示（Control the hint to be displayed only once）
     puuid_change_warning_printed = False
+    Vanguard_warning_printed = False
     print("请选择本脚本的使用模式：\nPlease select a mode for use:\n1\t生成模式（Generate Mode）\n2\t检测模式（Detect Mode）")
     detectMode = False
     mode = input()
@@ -2622,6 +2623,13 @@ async def search_recent_players(connection):
                                             print("您已找到对局！请接受对局，并在进入英雄选择阶段后按回车键开始检测。\nA match has been found! Please accept this match and press Enter to start detection after entering champ select stage.")
                                             continue
                                         elif gameflow_phase == "ChampSelect" or gameflow_phase == "InProgress" or gameflow_phase == "Reconnect":
+                                            if gameflow_phase == "ChampSelect":
+                                                if Vanguard_warning_printed:
+                                                    print("您已进入英雄选择阶段！请在进入游戏后再按回车键开始检测。\nChamp select stage has started! Please press Enter to start detection after entering the game.")
+                                                else:
+                                                    print("鉴于拳头反作弊系统对于房间内队友信息访问行为的打击，本脚本已停用英雄选择阶段对曾经遇到过的队友的检测。请在进入游戏后再按回车键开始检测。\nIn view of Riot Vanguard's fight against Lobby Reveal behaviors, this program has banned the detection of recently played summoners during champ select stage. Please press Enter to start detection after entering the game.")
+                                                    Vanguard_warning_printed = True
+                                                continue
                                             break
                                         elif gameflow_phase == "WaitingForStats" or gameflow_phase == "EndOfGame" or gameflow_phase == "PreEndOfGame":
                                             print("您已完成对局！请使用生成模式以查看最近一局比赛中遇到的玩家信息，或者开启下一局以查看下一局遇到的队友是否曾经遇到过。\nYou've finished the match! Please use [Generate Mode] to check the information of players encountered in the latest match, or start another game and use [Detect Mode] to check whether an ally has been met before.")
