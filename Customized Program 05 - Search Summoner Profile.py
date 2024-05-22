@@ -3285,7 +3285,9 @@ async def search_profile(connection):
                 print("正在计算每场对局要保存的工作表数量……\nCalculating the number of sheets to be saved for each match ...\n")
                 sheetNumber = {}
                 for i in range(len(matchIDs)):
-                    if info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
+                    if not match_reserve_strategy[matchIDs[i]]:
+                        sheetNumber[matchIDs[i]] = 0
+                    elif info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
                         sheetNumber[matchIDs[i]] = 2
                     elif not info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
                         sheetNumber[matchIDs[i]] = 1
@@ -3330,6 +3332,7 @@ async def search_profile(connection):
                                 #print(len(info_exist_error), len(timeline_exist_error), len(main_player_included), len(match_reserve_strategy))
                                 runTimes = [] #记录保存一场对局的所有数据所花费的时间（Records the time spent in saving all data of a match）
                                 total_used = 0
+                                match_reserved = 0
                                 for i in range(len(matchIDs)):
                                     start = time.time()
                                     if not main_player_included[matchIDs[i]]:
@@ -3347,6 +3350,7 @@ async def search_profile(connection):
                                         else:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)))
                                     if match_reserve_strategy[matchIDs[i]]:
+                                        match_reserved += 1
                                         if not info_exist_error[matchIDs[i]]:
                                             game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
                                             print("对局信息导出完成。\nMatch information exported.")
@@ -3358,12 +3362,13 @@ async def search_profile(connection):
                                     end = time.time()
                                     unit = end - start
                                     total_used += unit
-                                    runTimes.append((sheetNumber[matchIDs[i - 1]], unit))
-                                    total_remaining = 0 if sum([j[0] for j in runTimes[:i]]) == 0 else sum([j[1] for j in runTimes[:i]]) / sum([j[0] for j in runTimes[:i]]) * sum([sheetNumber[matchIDs[j]] for j in range(i, len(matchIDs))]) #需要考虑除数为0的情况（The case where the divisor is 0 needs considering）
-                                    print("保存本场对局所花费的时间（Time spent on saving this match）：", format_runtime(unit))
-                                    print("已花费的总时间（Total time used）                          ：", format_runtime(total_used))
-                                    print("剩余时间（Time remaining）                                 ：", format_runtime(total_remaining))
-                                    print("预计总时间（Expected total time）                          ：", format_runtime(total_used + total_remaining), end = "\n\n")
+                                    if match_reserve_strategy[matchIDs[i]]:
+                                        runTimes.append((sheetNumber[matchIDs[i]], unit))
+                                        total_remaining = 0 if sum([j[0] for j in runTimes[:match_reserved + 1]]) == 0 else sum([j[1] for j in runTimes[:match_reserved + 1]]) / sum([j[0] for j in runTimes[:match_reserved + 1]]) * sum([sheetNumber[matchIDs[j]] for j in range(i + 1, len(matchIDs))]) #需要考虑除数为0的情况（The case where the divisor is 0 needs considering）
+                                        print("保存本场对局所花费的时间（Time spent in saving this match）：", format_runtime(unit))
+                                        print("已花费的总时间（Total time used）                          ：", format_runtime(total_used))
+                                        print("剩余时间（Time remaining）                                 ：", format_runtime(total_remaining))
+                                        print("预计总时间（Expected total time）                          ：", format_runtime(total_used + total_remaining), end = "\n\n")
                         except PermissionError:
                             print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
                             input()
@@ -3404,6 +3409,7 @@ async def search_profile(connection):
                                     pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "TFT Match History - Manual")
                                     print("已创建云顶之弈对局记录的空白工作表！\nCreated an empty sheet for TFT match history!\n")
                                 runTimes = []
+                                match_reserved = 0
                                 for i in range(len(matchIDs)):
                                     start = time.time()
                                     if not main_player_included[matchIDs[i]]:
@@ -3421,6 +3427,7 @@ async def search_profile(connection):
                                         else:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)))
                                     if match_reserve_strategy[matchIDs[i]]:
+                                        match_reserved += 1
                                         if not info_exist_error[matchIDs[i]]:
                                             game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
                                             print("对局信息导出完成。\nMatch information exported.")
@@ -3432,12 +3439,13 @@ async def search_profile(connection):
                                     end = time.time()
                                     unit = end - start
                                     total_used += unit
-                                    runTimes.append((sheetNumber[matchIDs[i - 1]], unit))
-                                    total_remaining = 0 if sum([j[0] for j in runTimes[:i]]) == 0 else sum([j[1] for j in runTimes[:i]]) / sum([j[0] for j in runTimes[:i]]) * sum([sheetNumber[matchIDs[j]] for j in range(i, len(matchIDs))]) #需要考虑除数为0的情况（The case where the divisor is 0 needs considering）
-                                    print("保存本场对局所花费的时间（Time spent on saving this match）：", format_runtime(unit))
-                                    print("已花费的总时间（Total time used）                          ：", format_runtime(total_used))
-                                    print("剩余时间（Time remaining）                                 ：", format_runtime(total_remaining))
-                                    print("预计总时间（Expected total time）                          ：", format_runtime(total_used + total_remaining), end = "\n\n")
+                                    if match_reserve_strategy[matchIDs[i]]:
+                                        runTimes.append((sheetNumber[matchIDs[i]], unit))
+                                        total_remaining = 0 if sum([j[0] for j in runTimes[:match_reserved + 1]]) == 0 else sum([j[1] for j in runTimes[:match_reserved + 1]]) / sum([j[0] for j in runTimes[:match_reserved + 1]]) * sum([sheetNumber[matchIDs[j]] for j in range(i + 1, len(matchIDs))]) #需要考虑除数为0的情况（The case where the divisor is 0 needs considering）
+                                        print("保存本场对局所花费的时间（Time spent in saving this match）：", format_runtime(unit))
+                                        print("已花费的总时间（Total time used）                          ：", format_runtime(total_used))
+                                        print("剩余时间（Time remaining）                                 ：", format_runtime(total_remaining))
+                                        print("预计总时间（Expected total time）                          ：", format_runtime(total_used + total_remaining), end = "\n\n")
                             break
                         else:
                             print("对局信息和时间轴导出完成！\nMatch information and timeline exported!")
