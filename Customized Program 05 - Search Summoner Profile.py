@@ -1303,7 +1303,7 @@ async def search_profile(connection):
                 info_exist_error = {} #当获取对局记录反复出现异常时，为了保证第二次没有获取到的报错信息在导出时不会覆盖上一次使用该程序时导出的正确工作表，设置该列表。列表中的某个元素为True，代表对应的对局记录将能正常导出。由于对局信息往往比对局时间轴更易接受关注，这里只以LoLGame_info的完整性作为exist_error的追加依据（When the match history service encounters errors frequently, to make sure the error information won't overlay the normally captured match information in the last time using this program, this list is declared here. When some element in this list is True, the corresponding match information / timeline can be exported as usual. Because the LoLGame_info is basically more focused on than LoLGame_timeline, True/False is appended to exist_error only based on the integrity of LoLGame_info）
                 timeline_exist_error = {}
                 main_player_included = {} #当通过列表来查询对局记录时，有可能某场对局并不包含该召唤师（When searching the match history using a list, maybe the summoner isn't present in some match）
-                match_reserve_strategy = {} #当某场对局不包含该召唤师时，决定最后导出时是否需要保存该对局记录（Decides whether to reserve the matches when they don't include the searched summoner at present）
+                match_reserve_strategy = {} #当某场对局不包含该召唤师，或者对局数据异常时，决定最后导出时是否需要保存该对局记录（Decides whether to reserve the matches when they don't include the searched summoner at present or data in them are lost）
                 
                 print("是否查询英雄联盟对局记录？（输入任意键查询，否则不查询）\nSearch LoL matches? (Input anything to search or null to skip searching LoL matches)")
                 if input() != "":
@@ -2807,7 +2807,7 @@ async def search_profile(connection):
                         info_exist_error[matchID] = False #一旦正常获取到云顶之弈的对局记录，对局信息即视为正常获取（Once the TFT match history is captured successfully, the TFT games' information is then regarded to be captured successfully as well）
                         timeline_exist_error[matchID] = True #云顶之弈对局中没有时间轴信息，因此每个云顶之弈对局的时间轴标记为异常获取（There's no timeline information in each TFT match, so each TFT match's timeline is labeled as "error" captured）
                         main_player_included[matchID] = True #从云顶之弈获取的对局记录中抽取对局信息，则这些对局一定包含当前玩家（Since TFT game information is extracted from TFT match history, these matches must include the current player）
-                        match_reserve_strategy[matchID] = True
+                        match_reserve_strategy[matchID] = True if TFTGame_info["json"] else False
                         TFTGame_info_data = {} #云顶之弈没有独立的API以供查询对局信息。这里将每场对局的与玩家有关的数据视为对局信息（No API is available for TFT match information query. Here any information relevant to participants is regarded as TFT game information）
                         for j in range(9, len(TFTHistory_header)): #各项目初始化（Initialize every feature / column）
                             key = TFTHistory_header_keys[j]
