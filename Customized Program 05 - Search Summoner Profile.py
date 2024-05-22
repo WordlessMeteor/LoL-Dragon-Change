@@ -2778,7 +2778,7 @@ async def search_profile(connection):
                         TFTGame_info = TFTHistory[i]
                         matchID = int(TFTGame_info["metadata"]["match_id"].split("_")[1]) #由于后面将对局序号作为键实现混合排序，所以这里需要将字符串分割后提取到的对局序号转化为整数类型（Because the matchIDs are used as keys to perform a mixed sort, the matchID extracted here needs transforming into integer type）
                         currentPlatformId = TFTGame_info["metadata"]["match_id"].split("_")[0]
-                        if export_json:
+                        if export_json and TFTGame_info["json"]: #一些旧版本的云顶之弈对局数据在API中被删除了。这样的对局信息不应覆盖写到本地保存完好的json文件（Some old TFT matches are deleted from API. These matches shouldn't overwrite the complete local json files）
                             save = True
                             json8name = "Match Information (TFT) - " + currentPlatformId + "-" + str(matchID) + ".json"
                             while True:
