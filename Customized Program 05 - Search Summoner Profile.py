@@ -3409,6 +3409,7 @@ async def search_profile(connection):
                                     pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "TFT Match History - Manual")
                                     print("已创建云顶之弈对局记录的空白工作表！\nCreated an empty sheet for TFT match history!\n")
                                 runTimes = []
+                                total_used = 0
                                 match_reserved = 0
                                 for i in range(len(matchIDs)):
                                     start = time.time()
