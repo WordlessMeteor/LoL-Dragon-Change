@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.10.1",
+    "version": "14.11.1",
     "data": {
         "Pantheon": {
             "id": "Pantheon",
@@ -290,14 +290,14 @@
                     "id": "PantheonW",
                     "name": "斗盾跃击",
                     "description": "潘森跃向一个目标，对其造成伤害和晕眩。",
-                    "tooltip": "潘森跃向他的目标，<status>晕眩</status>{{ stunduration }}秒并造成<physicalDamage>{{ damagecalc }}物理伤害</physicalDamage>。<br /><br /><keywordMajor>矢志不退加成：</keywordMajor>潘森的下一次攻击进行{{ empowerednumhits }}次打击，造成共计<physicalDamage>{{ empowereddamagemultcalcmodified }}物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "潘森跃向他的目标，<status>晕眩</status>{{ stunduration }}秒并造成<physicalDamage>{{ maxhealthdamagecalc }}最大生命值物理伤害</physicalDamage>。<br /><br /><keywordMajor>矢志不退加成：</keywordMajor>潘森的下一次攻击会打击{{ empowerednumhits }}次，总共造成<physicalDamage>{{ empowereddamagemultcalcmodified }}物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "伤害",
+                            "最大生命值",
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ maxhealthdamage*100.000000 }}% -> {{ maxhealthdamagenl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -431,7 +431,7 @@
                     "id": "PantheonE",
                     "name": "神佑枪阵",
                     "description": "潘森架起他的圣盾，变得免疫来自前方的伤害，并快速地用他的长枪戳刺。",
-                    "tooltip": "潘森架起他的圣盾并与选定方向上的敌人交战{{ shieldduration }}秒，变得免疫来自所选方向的伤害(防御塔除外)并在持续期间造成<physicalDamage>{{ damagecalc }}物理伤害</physicalDamage>。在引导之后，潘森会用他的圣盾进行猛击，造成<physicalDamage>{{ shielddamagecalc }}物理伤害</physicalDamage>。<br /><br /><span class=\"colorEDDA74\">矢志不退加成：</span>当潘森猛击他的圣盾时，获得持续{{ speedduration }}秒的<speed>{{ speedamount*100 }}%移动速度</speed>。<br />{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "潘森架起他的圣盾并与选定方向上的敌人交战{{ shieldduration }}秒，变得免疫来自所选方向的伤害(防御塔除外)并在持续期间造成<physicalDamage>{{ damagecalc }}物理伤害</physicalDamage>。在引导之后，潘森会用他的圣盾进行猛击，造成<physicalDamage>{{ shielddamagecalc }}物理伤害</physicalDamage>。<br /><br /><span class=\"colorEDDA74\">矢志不退加成：</span>当潘森猛击他的圣盾时，获得持续{{ resistsduration }}秒的{{ resistscalc }}护甲与魔抗，以及持续{{ speedduration }}秒的<speed>{{ speedamount*100 }}%移动速度</speed>。<br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "冷却时间",
@@ -572,7 +572,7 @@
                     "id": "PantheonR",
                     "name": "大荒星陨",
                     "description": "潘森屏气凝神然后跃至空中， 随后如流星一般落到选定的位置上。",
-                    "tooltip": "<spellPassive>被动：</spellPassive>潘森获得{{ armorpenetration*100 }}%护甲穿透。<br /><br /><spellActive>主动：</spellActive>潘森聚集他的力量以跃至空中。他会从天上掷出他的长枪，在小范围内造成<physicalDamage>{{ spell.pantheonq:tapdamagecalc }}物理伤害</physicalDamage>和持续{{ spearslowduration }}秒的{{ spearslow*100 }}%<status>减速</status>。<br /><br />潘森随后会如陨石一般落向目标区域。对一条直线上的敌人最多造成<magicDamage>{{ damagecalc }}魔法伤害</magicDamage>(最多降低{{ edgedamagereduction*100 }}%伤害，极小值出现于区域的边缘)。<br /><br />这个技能会立刻使<span class=\"colorEDDA74\">矢志不退</span>准备就绪。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>被动：</spellPassive>潘森获得{{ armorpenetration*100 }}%护甲穿透。<br /><br /><spellActive>主动：</spellActive>潘森聚集他的力量以跃至空中。他会从天上掷出他的长枪，在小范围内造成<physicalDamage>{{ spell.pantheonq:holddamagecalc }}物理伤害</physicalDamage>和持续{{ spearslowduration }}秒的{{ spearslow*100 }}%<status>减速</status>。<br /><br />潘森随后会如陨石一般落向目标区域。对一条直线上的敌人最多造成<magicDamage>{{ damagecalc }}魔法伤害</magicDamage>(最多降低至{{ edgedamagereduction*100 }}%伤害，极小值出现于区域的边缘)。<br /><br />这个技能会立刻使<span class=\"colorEDDA74\">矢志不退</span>准备就绪。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
