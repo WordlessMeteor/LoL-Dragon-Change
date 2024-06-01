@@ -99,9 +99,7 @@ The following explanations only apply to the current branch. For other details (
 	- 为方便查看程序的返回信息，避免命令行一闪而过，建议先打开命令提示符（或终端），使用cd命令切换到程序集所在目录，再输入命令`python [文件名]`或`python -W ignore [文件名]`以使用某个程序。
 3. 所有程序必须在登录英雄联盟客户端后运行。
 4. 本程序集所有打开的py文件均可通过Ctrl + C提前结束进程。一次不行来十次！
-5. 对库文件进行的修改。注意，如果修改后无法解决问题，请**第一时间**撤销对库文件进行的修改！
-	- 12.23版本以后，对lcu_driver库中的utils.py文件，将`key, value = cmdline_arg[2:].split('=')`修改为`lst = cmdline_arg[2:].split('=')`、`key = lst[0]`和`value = lst[1]`共3个语句。
-6. 本程序集提供了一些自定义房间创建之外的功能，仅供娱乐。欢迎各位志同道合的小伙伴补充完善！
+5. 本程序集提供了一些自定义房间创建之外的功能，仅供娱乐。欢迎各位志同道合的小伙伴补充完善！
 	- **声明：请按照顺序为后来添加的脚本命名，格式为`Customized Program [数字] - [功能].py`。**
 	- 自定义脚本1**返回通过lcu_driver库获取到的连接信息**。
 	- 自定义脚本2参考了Mario开发的图形化界面的LeagueLobby中**根据Json创建房间**按钮的功能。使用时，需要先在文本编辑器中修改该文件中create_custom_lobby函数中的各参数的值，保存后再双击该文件以尝试创建房间。
@@ -122,7 +120,81 @@ The following explanations only apply to the current branch. For other details (
 		- 该脚本获取数据所依赖的数据资源主要来自<u>CommunityDragon数据库</u>，支持**离线获取**。如果选择离线获取，<u>请按照程序提示，在主目录下新建文件夹`离线数据（Offline Data）`，打开相应资源的网页，将相应的json文件下载到该文件夹下。</u>
 		- 从13.22版本开始，美测服采用**拳头ID**来替代召唤师名称。因此，如果通过召唤师名称无法查询一名召唤师的信息，**请尝试在玩家昵称后加上一个“#”，再加上昵称编号**。
 			- <b>提示：</b>在客户端中打开一个召唤师的生涯界面，**将鼠标悬停在玩家昵称上**，即可看到完整的带有昵称编号的拳头ID。单击即可复制。粘贴到生涯界面右上方的搜索栏即可搜索该玩家。
-		- 在选择导出全部数据的情况下，生成的Excel文件中包含五大部分：
+		- 该脚本支持以下保存模式：
+			<table>
+				<thead>
+					<tr>
+						<th style="text-align:center;">保存模式</th>
+						<th style="text-align:center;">定义</th>
+						<th style="text-align:center;">适用产品</th>
+						<th style="text-align:center;">实现步骤</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align:center;">完全保存</td>
+						<td>保存所有的对局信息和时间轴文本文档，并导出所有对局工作表</td>
+						<td style="text-align:center;">英雄联盟<br>云顶之弈</td>
+						<td>英雄联盟：<br>1. “是否查询英雄联盟对局记录”，<b>输入任意非空字符串</b>以选择是<br>2. <b>输入“3”</b>以批量查询全部对局<br>3. <b>输入任意非空字符串</b>以自行指定对局索引上下限<br>4. 在设置需要查询的对局索引上下界时<b>直接按回车</b><br>5. <b>直接按回车</b>以输出每场对局的文本文档<br>6. 在计算每场对局要保存的工作表数量后，<b>输入任意非空字符串</b>以导出所有对局工作表<br>云顶之弈：<br>1. “是否查询云顶之弈对局记录”，<b>输入任意非空字符串</b>以选择是<br>2. <b>直接按回车</b>以输出每场对局的文本文档<br>3. <b>输入任意非空字符串</b>以重新保存所有对局的文本文档<br>4. 在计算每场对局要保存的工作表数量后，<b>输入任意非空字符串</b>以导出所有对局工作表</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">完全加载</td>
+						<td>在不保存任何对局信息和时间轴文本文档的情况下，导出所有对局工作表</td>
+						<td style="text-align:center;">英雄联盟<br>云顶之弈</td>
+						<td>英雄联盟：<br>5. <b>输入任意非空字符串</b>以不输出每场对局的文本文档<br>其余步骤与【完全保存】相同<br>云顶之弈：<br>1. “是否查询云顶之弈对局记录”，<b>输入任意非空字符串</b>以选择是<br>2. <b>输入任意非空字符串</b>以不输出每场对局的文本文档<br>3. 在计算每场对局要保存的工作表数量后，输入<b>任意非空字符串</b>以导出所有对局工作表</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">批量保存</td>
+						<td>保存指定的上下界范围内的API中记录的对局信息和时间轴文本文档，并导出所有对局工作表</td>
+						<td style="text-align:center;">英雄联盟</td>
+						<td>英雄联盟：<br>1. “是否查询英雄联盟对局记录”，<b>输入任意非空字符串</b>以选择是<br>2. <b>输入“3”</b>以批量查询全部对局<br>3. <b>输入任意非空字符串</b>以自行指定对局索引上下限<br>4. 在设置需要查询的对局索引上下界时<b>输入空格分隔的两个自然数</b><br>5. <b>直接按回车</b>以输出每场对局的文本文档<br>6. 在计算每场对局要保存的工作表数量后，<b>输入任意非空字符串</b>以导出所有对局工作表</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">批量加载</td>
+						<td>在不保存指定的上下界范围内的API中记录的对局信息和时间轴文本文档的情况下，导出所有对局工作表</td>
+						<td style="text-align:center;">英雄联盟</td>
+						<td>英雄联盟：<br>5. <b>输入任意非空字符串</b>以不输出每场对局的文本文档<br>其余步骤与【批量保存】相同</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">增补保存</td>
+						<td>保存本地未保存文本文档的对局的信息和时间轴文本文档，并导出这些对局的工作表</td>
+						<td style="text-align:center;">英雄联盟<br>云顶之弈</td>
+						<td>英雄联盟：<br>1. “是否查询英雄联盟对局记录”，<b>输入任意非空字符串</b>以选择是<br>2. <b>输入“3”</b>以批量查询全部对局<br>3. <b>直接按回车</b>以只查询未保存过文本文档的对局<br>4. <b>直接按回车</b>以输出每场对局的文本文档<br>5. 在计算每场对局要保存的工作表数量后，<b>输入任意非空字符串</b>以导出所有对局工作表<br>云顶之弈：<br>3. <b>直接按回车</b>以只保存尚未保存过文本文档的对局<br>其余步骤与【完全保存】相同</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">增补加载</td>
+						<td>在不保存任何本地未保存文本文档的对局的信息和时间轴文本文档的情况下，导出这些对局的工作表</td>
+						<td style="text-align:center;">英雄联盟</td>
+						<td>4. <b>输入任意非空字符串</b>以输出每场对局的文本文档<br>其余步骤与【增补保存】相同</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">列表保存</td>
+						<td>按照一个对局序号列表保存对局信息和时间轴文本文档，并导出这些对局的工作表</td>
+						<td style="text-align:center;">英雄联盟</td>
+						<td>1. “是否查询英雄联盟对局记录”，<b>输入任意非空字符串</b>以选择是<br>2. <b>输入一个由中括号包围、由半角逗号分隔的正整数列表</b>作为对局序号列表<br>3. <b>直接按回车</b>以输出每场对局的文本文档<br>4. 在计算每场对局要保存的工作表数量后，<b>输入任意非空字符串</b>以导出所有对局工作表</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">列表加载</td>
+						<td>在不保存某个给定对局序号列表中的任何对局的信息和时间轴文本文档的情况下，导出这些对局的工作表</td>
+						<td style="text-align:center;">英雄联盟</td>
+						<td>3. <b>输入任意非空字符串</b>以不输出每场对局的文本文档<br>其余步骤与【列表保存】相同</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">扫描保存</td>
+						<td>扫描本地已保存的所有对局，重新查询这些对局的信息和时间轴，保存其文本文档并导出其工作表</td>
+						<td style="text-align:center;">英雄联盟</td>
+						<td>1. “是否查询英雄联盟对局记录”，<b>输入任意非空字符串</b>以选择是<br>2. <b>输入隐藏代码“scan”</b>以扫描本地文件，获取对局序号<br>3. <b>直接按回车</b>以开始对局记录重查，或者<b>输入任意非空字符串</b>以返回第2步<br>4. <b>直接按回车</b>以输出每场对局的文本文档<br>5. 在计算每场对局要保存的工作表数量后，<b>输入任意非空字符串</b>以导出所有对局工作表</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">扫描加载</td>
+						<td>扫描本地已保存的所有对局，重新查询这些对局的信息和时间轴，在不保存其文本文档情况下，导出其工作表</td>
+						<td style="text-align:center;">英雄联盟</td>
+						<td>4. <b>输入任意非空字符串</b>以不输出每场对局的文本文档<br>其余步骤与【扫描保存】相同</td>
+					</tr>
+				</tbody>
+			</table>
+			<b>注：</b>【扫描保存】和【扫描加载】统称【扫描模式】或【本地重查】。
+		- 在选择【完全保存】模式的情况下，生成的Excel文件中包含五大部分：
 			- 人物简介（单工作表）
 			- 排位信息（单工作表）
 			- 英雄成就（单工作表）
@@ -136,7 +208,7 @@ The following explanations only apply to the current branch. For other details (
 				- 对局信息
 				- 对局时间轴
 				- 对局事件
-		- 在运行扫描模式（【本地重查】）之前，请先运行【一键查询】，以避免遗漏最新的对局。（要查看一些名词的含义，请看相应的提交记录描述。）
+		- 在运行扫描模式（【本地重查】）之前，请先运行【一键查询】，以避免遗漏最新的对局。（要查看一些名词的含义，请看[相应的提交记录](https://github.com/WordlessMeteor/LoL-DIY-Programs-Archived/commit/dc1cfd187caa619a80f70001d89f7f9c5db1892a)描述。）
 			- 不建议使用该程序导出超过2500场正常对局（或5000场斗魂竞技场对局）的信息。
 			- 在运行扫描模式之前，先删除工作簿（到回收站），这样防止原有文件较大而导致程序读取文件和导出工作表的时间过长。
 			- 【本地重查】目前只支持**英雄联盟**对局。
@@ -267,7 +339,7 @@ The following explanations only apply to the current branch. For other details (
 					- 124及以后的键的后半部分可以作为`TFTHistory[i]["json"]["participants"][participantId]["units"][int(unit_iter[4:])]["items"]`的索引。
 		- 下面对整理战利品脚本中的`player_loot_df`的结构进行说明。
 			- 工作表`12 - player_loot_header`的主要数据区域未设置颜色，因为这些键都可作为`player_loot[i]`的索引。
-7. 一般情况下，本程序集生成的包含json数据的文本文档都是带缩进的。如果需要根据这些文件复现python运行环境中的字典变量，只需要向json库中的load函数传入一个由open函数创建的文件指针即可。如`fp = open("{文件名}.txt", "r", encoding = "utf-8")`和`d = json.load(fp)`。
+6. 一般情况下，本程序集生成的包含json数据的文本文档都是带缩进的。如果需要根据这些文件复现python运行环境中的字典变量，只需要向json库中的load函数传入一个由open函数创建的文件指针即可。如`fp = open("{文件名}.txt", "r", encoding = "utf-8")`和`d = json.load(fp)`。
 	- 若要在运行环境中将dumps函数生成的带缩进的json字符串转换成不带缩进的json字符串，只需要将dumps函数生成的字符串传入loads函数即可。如`formatted = json.dumps({字典变量}, indent = 8, ensure_ascii = False)`和`d = json.loads(formatted)`。
 # 后记
 作为初学者，我只学习到了Python的一些基本语法，还是在基于结构化程序设计的思想来实现每一个功能，而没有用到类和对象的概念，导致代码的整合程度不高，存在大量冗余的代码。例如查询召唤师战绩的脚本中，存在**大量复制**的现象。对于长字符串，我的处理方法是**一行写到底**，是基于<u>缩减代码行数</u>的考虑，可能不利于代码的浏览，还请见谅！另外，本程序集的注释尚不充足，还需要进一步完善。由于尚未学习图形化界面相关的知识（唯一学过的就是VB了😂），我只能设计这种通过命令行来实现功能的程序。（y1s1，现在并没有设计图形化界面的打算。）\
@@ -372,9 +444,7 @@ For details about customized programs that is beyond the scope of creating a cus
 	- To prevent the window from flashing quickly, it's suggested that users first open Command Prompt (or Terminal), switch to the directory of the program set using `cd` command and then open some program by `python [Filename]` or `python -W ignore [Filename]`. In this way, it's easy check the returned information.
 3. All programs must run after the user logs in the LoL client. 
 4. All opened .py files can be aborted by Ctrl + C while running. (Press for any times you want, until the program exits.)
-5. Modification note on the library. **Note:** If the modification doesn't solve the problem, please redo the modification **at first**!
-	- After Patch 12.23, in utils.py in lcu_driver library, substitute `key, value = cmdline_arg[2:].split('=')` with the three statements: `lst = cmdline_arg[2:].split('=')`, `key = lst[0]` and `value = lst[1]`.
-6. This program set provides some functions besides creating custom lobbies, just for entertainment. Anyone willing to make supplements and perfection is welcome!
+5. This program set provides some functions besides creating custom lobbies, just for entertainment. Anyone willing to make supplements and perfection is welcome!
 	- **Declaration: Please name the subsequent customized programs in order, following the format `Customized Program [Number] - [Function].py`.**
 	- Customized Program 01 **returns the connection information by lcu_driver library**.
 	- Customized Program 02 refers to the **根据Json创建房间** button in the GUI LeagueLobby software by Mario. When using, users need first modify the values of parameters in create_custom_lobby function and then double-click the file after saving the change.
@@ -395,7 +465,81 @@ For details about customized programs that is beyond the scope of creating a cus
 		- The data resources for capturing data in this program are mainly from <u>CommunityDragon database</u>, and it's allowed to obtain these data resources **offline**. If the user chooses to obtain the data resources offline, <u>please create a folder named as `离线数据（Offline Data）` in the main directory, open the url of the corresponding data resources and then download them to this new folder.</u>
 		- Since Patch 13.22, **Riot ID** has taken the place of summoner name. Therefore, if a summoner's information can't be visited by its summonerName, **please add a "#" and the summoner's tagLine after the gameName.**
 			- **Note:** Open a summoner's profile page in the League Client. Keep the mouse cursor stay on his/her gameName. You should see a window with the complete Riot ID with the postfixxed tagLine. Click to copy it. Paste it into the search bar on the top-right corner of the page to search this summoner.
-		- If all data are exported, the generated xlsx file contains 5 parts of sheets:
+		- This program supports the following saving modes:
+			<table>
+				<thead>
+					<tr>
+						<th style="text-align:center;">Saving mode</th>
+						<th style="text-align:center;">Definition</th>
+						<th style="text-align:center;">Applicable product(s)</th>
+						<th style="text-align:center;">Implementation steps</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align:center;">Complete saving</td>
+						<td>Save all matches' information and timeline json files and export all match sheets</td>
+						<td style="text-align:center;">lol<br>tft</td>
+						<td>LoL:<br>1. At "Search LoL matches?" stage, <b>Enter any non-empty string</b> to choose yes<br>2. <b>Submit "3"</b> to search all matches<br>3. <b>Input any non-empty string</b> to specify the match begIndex and endIndex by yourself<br>4. When setting the match begIndex and endIndex, <b>press Enter directly</b><br>5. <b>Press Enter directly</b> to output json files of each match<br>6. After the program finishes calculating the number of sheets to be saved for each match, <b>input any non-empty string</b> to export all match sheets<br>TFT:<br>1. At "Search TFT matches?" stage, <b>input any non-empty string</b> to choose yes<br>2. <b>Press Enter directly</b> to output json files of each match<br>3. <b>Input any non-empty string</b> to confirm saving all matches' json files<br>4. After the program finishes calculating the number of sheets to be saved for each match, <b>input any non-empty string</b> to export all match sheets</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">Complete loading</td>
+						<td>Export all match sheets while not saving the information and timeline json files of any match</td>
+						<td style="text-align:center;">lol<br>tft</td>
+						<td>LoL:<br>5. <b>Input any non-empty string</b> to refuse outputting json files of each match<br>The other steps are the same as those of [Complete saving]<br>TFT:<br>1. At "Search TFT matches?" stage, <b>input any non-empty string</b> to choose yes<br>2. <b>Input any non-empty string</b> to refuse outputting json files of each match<br>3. After the program finishes calculating the number of sheets to be saved for each match, <b>input any non-empty string</b> to export all match sheets</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">Bulk saving</td>
+						<td>Save the information and timeline json files of matches recorded in API within a specified range of matchID and export all match sheets</td>
+						<td style="text-align:center;">lol</td>
+						<td>LoL:<br>1. At "Search LoL matches?" stage, <b>Enter any non-empty string</b> to choose yes<br>2. <b>Submit "3"</b> to search all matches<br>3. <b>Input any non-empty string</b> to specify the match begIndex and endIndex by yourself<br>4. When setting the match begIndex and endIndex, <b>input two integers split by space</b><br>5. <b>Press Enter directly</b> to output json files of each match<br>6. After the program finishes calculating the number of sheets to be saved for each match, <b>input any non-empty string</b> to export all match sheets</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">Bulk loading</td>
+						<td>Export sheets of matches recorded in API within a specified range of matchID while not saving their information and timeline json files</td>
+						<td style="text-align:center;">lol</td>
+						<td>LoL:<br>5. <b>Input any non-empty string</b> to refuse outputting json files of each match<br>The other steps are the same as those of [Bulk saving]</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">Supplementary saving</td>
+						<td>Save the information and timeline json files of the matches which haven't been saved to local before and export these match sheets</td>
+						<td style="text-align:center;">lol<br>tft</td>
+						<td>LoL:<br>1. At "Search LoL matches?" stage, <b>input any non-empty string</b> to choose yes<br>2. <b>Submit "3"</b> to search all matches<br>3. <b>Press Enter directly</b> to only search for the matches whose json files haven't been saved to local before<br>4. <b>Press Enter directly</b> to output json files of each match<br>5. After the program finishes calculating the number of sheets to be saved for each match, <b>input any non-empty string</b> to export all match sheets<br>TFT:<br>3. <b>Press Enter directly</b> to only save the matches which haven't been saved to local before<br>The other steps are the same as those of [Complete Saving]</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">Supplementary loading</td>
+						<td>Export sheets of matches whose information and timeline json files haven't been saved to local before, while not saving their information and timeline json files</td>
+						<td style="text-align:center;">lol</td>
+						<td>4. <b>Input any non-empty string</b> to output json files of each match<br>The other steps are the same as those of [Supplementary saving]</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">List saving</td>
+						<td>Save the information and timeline json files of matches in a match list and export these match sheets</td>
+						<td style="text-align:center;">lol</td>
+						<td>1. At "Search LoL matches?" stage, <b>input any non-empty string</b> to choose yes<br>2. <b>Input an integer list wrapped by square brackets and split by comma</b> as the matchID list<br>3. <b>Press Enter directly</b> to output json files of each match<br>4. After the program finishes calculating the number of sheets to be saved for each match, <b>input any non-empty string</b> to export all match sheets</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">List loading</td>
+						<td>Export sheets of matches in a specified match list, while not saving the information and timeline json files of any match in this list</td>
+						<td style="text-align:center;">lol</td>
+						<td>3. <b>Input any non-empty string</b> to refuse outputting json files of each match<br>The other steps are the same those of [List saving]</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">Scanning saving</td>
+						<td>Scan all the locally saved matches, search for the information and timeline of these matches, save the json files and export them to Excel</td>
+						<td style="text-align:center;">lol</td>
+						<td>1. At "Search LoL matches?" stage, <b>input any non-empty string</b> to choose yes<br>2. <b>Input the secret code "scan"</b> to scan the local files and obtain the matchIDs<br>3. <b>Press Enter directly</b> to start local recheck or <b>input any non-empty string</b> to return to Step 2<br>4. <b>Press Enter directly</b> to output json files of each match<br>5. After the program finishes calculating the number of sheets to be saved for each match, <b>input any non-empty string</b> to export all match sheets</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">Scanning loading</td>
+						<td>Scan all the locally saved matches, search for the information and timeline of these matches and export them to Excel while not saving the json files</td>
+						<td style="text-align:center;">lol</td>
+						<td>4. <b>Input any non-empty string</b> to refuse outputting json files of each match<br>The other steps are the same as those of [Scanning saving]</td>
+					</tr>
+				</tbody>
+			</table>
+			<b>Note:</b> [Scanning saving] and [Scanning loading] are jointly termed [Scan Mode] or [Local Recheck].
+		- Under [Complete Saving] mode, the generated xlsx file contains 5 parts of sheets:
 			- Profile (Single sheet)
 			- Rank (Single sheet)
 			- Champion Mastery (Single sheet)
@@ -409,7 +553,7 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Game information
 				- Game timeline
 				- Game events
-		- Before running the scan mode ([Local Recheck]), please run [One-Key Query] first, in case latest matches are neglected. (For the definition of some terms, check the description of corresponding commit.)
+		- Before running the scan mode ([Local Recheck]), please run [One-Key Query] first, in case latest matches are neglected. (For the definition of some terms, check the description of [corresponding commit](https://github.com/WordlessMeteor/LoL-DIY-Programs-Archived/commit/dc1cfd187caa619a80f70001d89f7f9c5db1892a).)
 			- The user isn't advised to export the information and timelines of more than 2500 normal matches (or the information of 5000 Arena matches) using this program.
 			- Right before running the scan mode, please delete the xlsx workbook (into Recycle Bin), in case the original workbook is too big for this program to quickly read and export sheets into.
 			- [Local Recheck] is only supported for **LoL** matches for now.
@@ -539,8 +683,8 @@ For details about customized programs that is beyond the scope of creating a cus
 					- The second half of `Key` whose index is greater than 123 is the index of `TFTHistory[i]["json"]["participants"][participantId]["units"][int(unit_iter[4:])]["items"]`.
 		- `player_loot_df` in Customized Program 12:
 			- No color is used to divide the maun data area in the sheet `12 - player_loot_header`, because these keys are all indices of `player_loot[i]`.
-7. Normally, text files generated by this program set are organized with indents. If the original dictionary variable in python runtime environment is required to recur, then simply pass a file pointer created by `open` function to the `load` function in `json` library, such as `fp = open("{filename}.txt", "r", encoding = "utf-8")` and `d = json.load(fp)`.
+6. Normally, text files generated by this program set are organized with indents. If the original dictionary variable in python runtime environment is required to recur, then simply pass a file pointer created by `open` function to the `load` function in `json` library, such as `fp = open("{filename}.txt", "r", encoding = "utf-8")` and `d = json.load(fp)`.
 	- If the user wants to transform a json string with indents generated by `dumps` function into a json string without indents just in the runtime environment, he/she only needs to pass the string generated by `dumps` functin into `loads` function, such as `formatted = json.dumps({dictvariable}, indent = 8, ensure_ascii = False)` and `d = json.loads(formatted)`.
 # Afterword
-As a beginner in programming, I've just learned some basic usage of Python, and each function is implemented based on structured programming, without using the concepts of classes and objects, which may explain the code redundancy and low level of integration. For example, in Customized Program 05, a number of lines of codes are actually **copied** from some other part of the code. Moreover, for long strings, I choose to write them **in single lines**, considering decreasing the number of code lines, which is not friendly for a glance, and I apologize for this. In addition, I realized that more annotations are needed for the codes. Last but not least, since I haven't learned anything about GUI (the only one I've ever used is Visual Basic 😂), I'm only capable of designing programs that interact with CMD. (Actually and sadly, I haven't planned to design the graphics interface for now and in the near future.)\
+As a beginner in programming, I've just learned some basic usage of Python, and each function is implemented based on structured programming, without using the concepts of classes and objects, which may explain the code redundancy and low level of integration. For example, in Customized Program 05, a number of lines of codes are actually **copied** from some other part of the code. Moreover, for long strings, I choose to write them **in single lines**, considering decreasing the number of code lines, which is not friendly for a glance, and I apologize for this. In addition, I realized that more annotations are needed for the codes. Last but not least, since I haven't learned anything about GUI (the only one I've ever used is Visual Basic 😂), I'm only capable of designing programs that interact with CMD. (To be honest, I haven't planned to design the graphics interface for now and in the near future.)\
 To be honest, there're not any really innovative ideas besides ZhiHu Author XHXIAIEIN's perception and Riot's official API. The program set mainly crawls and sorts out data. If any interesting idea pops up in your mind, welcome to fork this repository, create your own branch and submit pull requests!

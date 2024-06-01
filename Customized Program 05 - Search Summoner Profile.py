@@ -1643,19 +1643,28 @@ async def search_profile(connection):
                             break
                         else:
                             if matchID == "3":
-                                print("请设置需要查询的对局索引下界和上界，以空格为分隔符（输入空字符以默认近200场对局）：\nPlease set the begIndex and endIndex of the matches to be searched, split by space (Enter an empty string to search for the recent 200 matches):") #在13.13版本以前，腾讯代理的服务器只支持近20场对局查询（Before Patch 13.13, Tencent servers only provide search of the latest 20 matches）
-                                while True:
-                                    gameIndex = input()
-                                    if gameIndex == "":
-                                        begIndex, endIndex = 0, 200
-                                    else:
-                                        try:
-                                            begIndex, endIndex = map(int, gameIndex.split())
-                                        except ValueError:
-                                            print("请以空格为分隔符输入对局索引的自然数类型的下界和上界！\nPlease enter two nonegative integers as the begIndex and endIndex of the matches split by space!")
-                                            continue
-                                    break
-                                LoLMatchIDs = list(map(str, gameID[begIndex:endIndex]))
+                                saved_LoLMatchIDs = [int(name.split(".")[0].split("-")[-1]) for name in os.listdir(folder) if name.startswith("Match Information (LoL) - ")]
+                                if saved_LoLMatchIDs:
+                                    latest_LoLMatchID = max(saved_LoLMatchIDs) #需要注意，对局序号最大的对局未必是最近进行的对局。而这种情况并不会引起数据的丢失。相反，最近进行的对局会被重新保存一次，从数据完整性的角度上讲无关紧要（Note that the match with the greatest matchID doesn't mean it's the latest match. Nevertheless, when this situation happens, there won't be any data loss. Conversely, the latest match will be saved again, which doesn't matter in terms of data integrity）
+                                    latest_LoLMatchID_index = gameID.index(latest_LoLMatchID) if latest_LoLMatchID in gameID else 500
+                                    print("检测到您以前曾经查询过该召唤师的英雄联盟对局记录。是否只查询该召唤师信息文件夹中不包含的英雄联盟对局？（输入空字符串以只查询未保存过文本文档的对局，否则自行指定对局索引上下限）\nThe program detected that you've searched for this summoner's LoL match history before. Do you want to only fetch the LoL matches not present in the current summoner folder? (Enter an empty string to search for only the matches whose json files haven't been saved, or any non-empty string to specify the begIndex and endIndex of the matches by yourself)\n即将使用的对局索引下界和上界（The match begIndex and endIndex to be used）：0 %d" %latest_LoLMatchID_index)
+                                    update_unsaved_only = input() == ""
+                                if saved_LoLMatchIDs and update_unsaved_only:
+                                    LoLMatchIDs = list(map(str, gameID[0:latest_LoLMatchID_index]))
+                                else:
+                                    print("请设置需要查询的对局索引下界和上界，以空格为分隔符（输入空字符以默认查询近200场对局）：\nPlease set the begIndex and endIndex of the matches to be searched, split by space (Enter an empty string to search for the recent 200 matches):") #在13.13版本以前，腾讯代理的服务器只支持近20场对局查询（Before Patch 13.13, Tencent servers only provide search of the latest 20 matches）
+                                    while True:
+                                        gameIndex = input()
+                                        if gameIndex == "":
+                                            begIndex, endIndex = 0, 200
+                                        else:
+                                            try:
+                                                begIndex, endIndex = map(int, gameIndex.split())
+                                            except ValueError:
+                                                print("请以空格为分隔符输入对局索引的自然数类型的下界和上界！\nPlease enter two nonegative integers as the begIndex and endIndex of the matches split by space!")
+                                                continue
+                                        break
+                                    LoLMatchIDs = list(map(str, gameID[begIndex:endIndex]))
                             elif matchID == "scan":
                                 filenames = os.listdir(folder)
                                 for filename in filenames:
@@ -2040,11 +2049,7 @@ async def search_profile(connection):
                                         main_player_included[int(matchID)] = False
                                         reserve = False #由于从文本文件中可以提取该召唤师的对局序号，所以需要保证保留下来的文本文件都包含该召唤师。因此，如果一场对局不包含该召唤师，就不应该把这场对局保存下来（Because a summoner's matchIDs can be extracted from the saved json files, it needs to be guaranteed that all saved json files belong to this summoner. Therefore, if a match doesn't include this summoner, then it shouldn't be saved into json files）
                                         print("警告：对局%s所在对局不包含该玩家！是否仍要保持该对局？（输入任意键以保留该对局，否则舍弃该对局）\nWarning: The match %s doesn't include the current player! Continue? (Input any nonempty string to reserve this match, or null to abandon it)" %(matchID, matchID))
-                                        cont = input()
-                                        if cont == "":
-                                            match_reserve_strategy[int(matchID)] = False
-                                        else:
-                                            match_reserve_strategy[int(matchID)] = True
+                                        match_reserve_strategy[int(matchID)] = input() != ""
                                     info_exist_error[int(matchID)] = False
                                     currentPlatformId = LoLGame_info["participantIdentities"][0]["player"]["currentPlatformId"]
                                     save = True #指示保存是否成功，成功则输出保存进度，不成功则提示生成失败（Indicates whether the saving process is successful. If so, output the saving process, otherwise give a hint of generation failure）
@@ -2747,6 +2752,14 @@ async def search_profile(connection):
                     print("是否输出每场对局的文本文档？（输入任意键不输出，否则默认输出）\nExport text files of each match? (Input anything to cancel, or null to export by default)")
                     export_json = input() == ""
                     TFTHistory = TFTHistory["games"]
+                    TFTHistory_gameIDs = list(map(lambda x: int(x["metadata"]["match_id"].split("_")[1]), TFTHistory))
+                    saved_TFTMatchIDs = [int(name.split(".")[0].split("-")[-1]) for name in os.listdir(folder) if name.startswith("Match Information (TFT) - ")]
+                    latest_TFTMatchID = max(saved_TFTMatchIDs)
+                    latest_TFTMatchID_index = TFTHistory_gameIDs.index(latest_TFTMatchID) if latest_TFTMatchID in TFTHistory_gameIDs else 500
+                    update_unsaved_only = False
+                    if export_json and saved_TFTMatchIDs:
+                        print("检测到您以前曾经查询过该召唤师的云顶之弈对局记录。是否只保存该召唤师信息文件夹中不包含的云顶之弈对局？（输入空字符串以只保存尚未保存过文本文档的对局，否则将全部重新保存一遍）\nThe program detected that you've searched for this summoner's TFT match history before. Do you want to only fetch the TFT matches not present in the current summoner folder? (Enter an empty string to only save the matches whose json files haven't been saved, or any non-empty string to save all the TFT matches' information)\n已保存的最大对局序号的对局在最新对局列表中的下标（The index of the saved match with the greatest matchID in the latest match list recorded in API）：0 %d" %latest_TFTMatchID_index)
+                        update_unsaved_only = input() == ""
                     TFTHistory_header = {"gameIndex": "游戏序号", "game_datetime": "创建日期", "game_id": "对局序号", "game_length": "持续时长", "game_version": "对局版本", "queue_id": "队列序号", "tft_game_type": "游戏类型", "tft_set_core_name": "数据版本名称", "tft_set_number": "赛季", "participantId": "玩家序号", "augment1": "强化符文1", "augment2": "强化符文2", "augment3": "强化符文3", "companion": "小小英雄", "companion_level": "小小英雄星级", "companion_rarity": "小小英雄稀有度", "gameName": "玩家昵称", "gold_left": "剩余金币", "last_round": "存活回合", "level": "等级", "placement": "名次", "players_eliminated": "淘汰玩家数", "puuid": "玩家通用唯一识别码", "summonerName": "召唤师名称", "summonerId": "召唤师序号", "tagLine": "昵称编号", "time_eliminated": "存活时长", "total_damage_to_players": "造成玩家伤害", "trait0 name": "羁绊1", "trait0 num_units": "羁绊1单位数", "trait0 style": "羁绊1羁绊框颜色", "trait0 tier_current": "羁绊1当前等级", "trait0 tier_total": "羁绊1最高等级", "trait1 name": "羁绊2", "trait1 num_units": "羁绊2单位数", "trait1 style": "羁绊2羁绊框颜色", "trait1 tier_current": "羁绊2当前等级", "trait1 tier_total": "羁绊2最高等级", "trait2 name": "羁绊3", "trait2 num_units": "羁绊3单位数", "trait2 style": "羁绊3羁绊框颜色", "trait2 tier_current": "羁绊3当前等级", "trait2 tier_total": "羁绊3最高等级", "trait3 name": "羁绊4", "trait3 num_units": "羁绊4单位数", "trait3 style": "羁绊4羁绊框颜色", "trait3 tier_current": "羁绊4当前等级", "trait3 tier_total": "羁绊4最高等级", "trait4 name": "羁绊5", "trait4 num_units": "羁绊5单位数", "trait4 style": "羁绊5羁绊框颜色", "trait4 tier_current": "羁绊5当前等级", "trait4 tier_total": "羁绊5最高等级", "trait5 name": "羁绊6", "trait5 num_units": "羁绊6单位数", "trait5 style": "羁绊6羁绊框颜色", "trait5 tier_current": "羁绊6当前等级", "trait5 tier_total": "羁绊6最高等级", "trait6 name": "羁绊7", "trait6 num_units": "羁绊7单位数", "trait6 style": "羁绊7羁绊框颜色", "trait6 tier_current": "羁绊7当前等级", "trait6 tier_total": "羁绊7最高等级", "trait7 name": "羁绊8", "trait7 num_units": "羁绊8单位数", "trait7 style": "羁绊8羁绊框颜色", "trait7 tier_current": "羁绊8当前等级", "trait7 tier_total": "羁绊8最高等级", "trait8 name": "羁绊9", "trait8 num_units": "羁绊9单位数", "trait8 style": "羁绊9羁绊框颜色", "trait8 tier_current": "羁绊9当前等级", "trait8 tier_total": "羁绊9最高等级", "trait9 name": "羁绊10", "trait9 num_units": "羁绊10单位数", "trait9 style": "羁绊10羁绊框颜色", "trait9 tier_current": "羁绊10当前等级", "trait9 tier_total": "羁绊10最高等级", "trait10 name": "羁绊11", "trait10 num_units": "羁绊11单位数", "trait10 style": "羁绊11羁绊框颜色", "trait10 tier_current": "羁绊11当前等级", "trait10 tier_total": "羁绊11最高等级", "trait11 name": "羁绊12", "trait11 num_units": "羁绊12单位数", "trait11 style": "羁绊12羁绊框颜色", "trait11 tier_current": "羁绊12当前等级", "trait11 tier_total": "羁绊12最高等级", "trait12 name": "羁绊13", "trait12 num_units": "羁绊13单位数", "trait12 style": "羁绊13羁绊框颜色", "trait12 tier_current": "羁绊13当前等级", "trait12 tier_total": "羁绊13最高等级", "unit0 character": "英雄1", "unit0 rarity": "英雄1：稀有度", "unit0 tier": "英雄1：星级", "unit1 character": "英雄2", "unit1 rarity": "英雄2：稀有度", "unit1 tier": "英雄2：星级", "unit2 character": "英雄3", "unit2 rarity": "英雄3：稀有度", "unit2 tier": "英雄3：星级", "unit3 character": "英雄4", "unit3 rarity": "英雄4：稀有度", "unit3 tier": "英雄4：星级", "unit4 character": "英雄5", "unit4 rarity": "英雄5：稀有度", "unit4 tier": "英雄5：星级", "unit5 character": "英雄6", "unit5 rarity": "英雄6：稀有度", "unit5 tier": "英雄6：星级", "unit6 character": "英雄7", "unit6 rarity": "英雄7：稀有度", "unit6 tier": "英雄7：星级", "unit7 character": "英雄8", "unit7 rarity": "英雄8：稀有度", "unit7 tier": "英雄8：星级", "unit8 character": "英雄9", "unit8 rarity": "英雄9：稀有度", "unit8 tier": "英雄9：星级", "unit9 character": "英雄10", "unit9 rarity": "英雄10：稀有度", "unit9 tier": "英雄10：星级", "unit10 character": "英雄11", "unit10 rarity": "英雄11：稀有度", "unit11 tier": "英雄11：星级", "unit0 item0": "英雄1：装备1", "unit0 item1": "英雄1：装备2", "unit0 item2": "英雄1：装备3", "unit1 item0": "英雄2：装备1", "unit1 item1": "英雄2：装备2", "unit1 item2": "英雄2：装备3", "unit2 item0": "英雄3：装备1", "unit2 item1": "英雄3：装备2", "unit2 item2": "英雄3：装备3", "unit3 item0": "英雄4：装备1", "unit3 item1": "英雄4：装备2", "unit3 item2": "英雄4：装备3", "unit4 item0": "英雄5：装备1", "unit4 item1": "英雄5：装备2", "unit4 item2": "英雄5：装备3", "unit5 item0": "英雄6：装备1", "unit5 item1": "英雄6：装备2", "unit5 item2": "英雄6：装备3", "unit6 item0": "英雄7：装备1", "unit6 item1": "英雄7：装备2", "unit6 item2": "英雄7：装备3", "unit7 item0": "英雄8：装备1", "unit7 item1": "英雄8：装备2", "unit7 item2": "英雄8：装备3", "unit8 item0": "英雄9：装备1", "unit8 item1": "英雄9：装备2", "unit8 item2": "英雄9：装备3", "unit9 item0": "英雄10：装备1", "unit9 item1": "英雄10：装备2", "unit9 item2": "英雄10：装备3", "unit10 item0": "英雄11：装备1", "unit10 item1": "英雄11：装备2", "unit10 item2": "英雄11：装备3"}
                     TFTHistory_data = {}
                     TFTHistory_header_keys = list(TFTHistory_header.keys())
@@ -2778,7 +2791,7 @@ async def search_profile(connection):
                         TFTGame_info = TFTHistory[i]
                         matchID = int(TFTGame_info["metadata"]["match_id"].split("_")[1]) #由于后面将对局序号作为键实现混合排序，所以这里需要将字符串分割后提取到的对局序号转化为整数类型（Because the matchIDs are used as keys to perform a mixed sort, the matchID extracted here needs transforming into integer type）
                         currentPlatformId = TFTGame_info["metadata"]["match_id"].split("_")[0]
-                        if export_json and TFTGame_info["json"]: #一些旧版本的云顶之弈对局数据在API中被删除了。这样的对局信息不应覆盖写到本地保存完好的json文件（Some old TFT matches are deleted from API. These matches shouldn't overwrite the complete local json files）
+                        if export_json and TFTGame_info["json"] and not (update_unsaved_only and matchID in saved_TFTMatchIDs): #一些旧版本的云顶之弈对局数据在API中被删除了。这样的对局信息不应覆盖写到本地保存完好的json文件（Some old TFT matches are deleted from API. These matches shouldn't overwrite the complete local json files）
                             save = True
                             json8name = "Match Information (TFT) - " + currentPlatformId + "-" + str(matchID) + ".json"
                             while True:
@@ -2794,19 +2807,22 @@ async def search_profile(connection):
                                 print("对局%s信息文本文档生成失败！请检查召唤师名称是否包含不常用字符！\nMatch %s information text generation failure! Please check if the summoner name includes any abnormal characters!" %(matchID, matchID))
                                 save = False
                             jsonfile8.close()
-                            currentTime = time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime())
-                            pkl8name = "Intermediate Object - Match Information (LoL) - %s-%d.pkl" %(currentPlatformId, matchID)
+                            pkl8name = "Intermediate Object - Match Information (TFT) - %s-%d.pkl" %(currentPlatformId, matchID)
                             #with open(os.path.join(folder, pkl8name), "wb") as IntObj8:
                                 #pickle.dump(TFTGame_info, IntObj8)
                         if save:
                             if export_json:
-                                print('保存进度（Saving process）：%d/%d\t对局序号（MatchID）： %d' %(i + 1, len(TFTHistory), matchID))
+                                print('保存进度（Saving process）：%d/%d\t对局序号（MatchID）： %d' %(i + 1, len(TFTHistory), matchID), end = "")
+                                if update_unsaved_only and matchID in saved_TFTMatchIDs:
+                                    print(" (Json file already exists!)")
+                                else:
+                                    print()
                             else:
                                 print('加载进度（Loading process）：%d/%d\t对局序号（MatchID）： %d' %(i + 1, len(TFTHistory), matchID))
                         
                         info_exist_error[matchID] = False #一旦正常获取到云顶之弈的对局记录，对局信息即视为正常获取（Once the TFT match history is captured successfully, the TFT games' information is then regarded to be captured successfully as well）
                         timeline_exist_error[matchID] = True #云顶之弈对局中没有时间轴信息，因此每个云顶之弈对局的时间轴标记为异常获取（There's no timeline information in each TFT match, so each TFT match's timeline is labeled as "error" captured）
-                        main_player_included[matchID] = True #从云顶之弈获取的对局记录中抽取对局信息，则这些对局一定包含当前玩家（Since TFT game information is extracted from TFT match history, these matches must include the current player）
+                        main_player_included[matchID] = True #从云顶之弈对局记录中抽取对局信息，则这些对局一定包含当前玩家（Since TFT game information is extracted from TFT match history, these matches must include the current player）
                         match_reserve_strategy[matchID] = True if TFTGame_info["json"] else False
                         TFTGame_info_data = {} #云顶之弈没有独立的API以供查询对局信息。这里将每场对局的与玩家有关的数据视为对局信息（No API is available for TFT match information query. Here any information relevant to participants is regarded as TFT game information）
                         for j in range(9, len(TFTHistory_header)): #各项目初始化（Initialize every feature / column）
@@ -3265,7 +3281,8 @@ async def search_profile(connection):
                             TFTGame_info_data_organized[key] = [TFTHistory_header[key]] + TFTGame_info_data[key]
                         TFTGame_info_df = pandas.DataFrame(data = TFTGame_info_data_organized)
                         TFTGame_info_df = TFTGame_info_df.stack().unstack(0)
-                        game_info_dfs[matchID] = TFTGame_info_df.copy(deep = True)
+                        if not (update_unsaved_only and matchID in saved_TFTMatchIDs):
+                            game_info_dfs[matchID] = TFTGame_info_df.copy(deep = True)
                         
                     TFTHistory_statistics_display_order = [0, 2, 1, 3, 5, 6, 4, 8, 13, 14, 15, 19, 18, 26, 17, 27, 21, 20, 10, 11, 12, 93, 94, 95, 126, 127, 128, 96, 97, 98, 129, 130, 131, 99, 100, 101, 132, 133, 134, 102, 103, 104, 135, 136, 137, 105, 106, 107, 138, 139, 140, 108, 109, 110, 141, 142, 143, 111, 112, 113, 144, 145, 146, 114, 115, 116, 147, 148, 149, 117, 118, 119, 150, 151, 152, 120, 121, 122, 153, 154, 155, 123, 124, 125, 156, 157, 158, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
                     TFTHistory_data_organized = {}
@@ -3341,7 +3358,9 @@ async def search_profile(connection):
                                         else:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner but yet exported!)" %(i + 1, len(matchIDs)))
                                     else:
-                                        if info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
+                                        if not match_reserve_strategy[matchIDs[i]]: #这种情况只会发生在云顶之弈中（This case only happens on a TFT match）
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match data deleted from API!)" %(i + 1, len(matchIDs)))
+                                        elif info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information capture failure!)" %(i + 1, len(matchIDs)))
                                         elif not info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match timeline capture failure!)" %(i + 1, len(matchIDs)))
@@ -3419,7 +3438,9 @@ async def search_profile(connection):
                                         else:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Excluding this summoner but yet exported!)" %(i + 1, len(matchIDs)))
                                     else:
-                                        if info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
+                                        if not match_reserve_strategy[matchIDs[i]]: #这种情况只会发生在云顶之弈中（This case only happens on a TFT match）
+                                            print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match data deleted from API!)" %(i + 1, len(matchIDs)))
+                                        elif info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information capture failure!)" %(i + 1, len(matchIDs)))
                                         elif not info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match timeline capture failure!)" %(i + 1, len(matchIDs)))
