@@ -2,6 +2,7 @@ from lcu_driver import Connector
 import os, copy, unicodedata, shutil, pandas, requests, time, json, re, pickle
 from urllib.parse import quote, unquote
 from wcwidth import wcswidth
+from collections import OrderedDict
 from openpyxl import load_workbook
 
 #=============================================================================
@@ -85,7 +86,7 @@ def format_json(origin = '''{"customGameLobby": {"configuration": {"gameMode": "
 def count_nonASCII(s: str): #统计一个字符串中占用命令行2个宽度单位的字符个数（Count the number of characters that take up 2 width unit in CMD）
     return sum([unicodedata.east_asian_width(character) in ("F", "W") for character in list(str(s))])
 
-def format_df(df: pandas.DataFrame): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
     df = df.reset_index(drop = True) #这一步至关重要，因为下面的操作前提是行号是默认的（This step is crucial, for the following operations are based on the dataframe with the default row index）
     maxLens = {}
     maxWidth = shutil.get_terminal_size()[0]
@@ -93,11 +94,18 @@ def format_df(df: pandas.DataFrame): #按照每列最长字符串的命令行宽
     for field in fields:
         maxLens[field] = max(max(map(lambda x: wcswidth(str(x)), df[field])), wcswidth(str(field))) + 2
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth: #因为输出的时候，相邻两列之间需要有两个空格分隔，所以在计算总宽度的时候必须算上这些空格的宽度（Because two spaces are used between each pair of columns, the width they take up must be taken into consideration）
-        print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
-        if input() == "":
-            #print(df)
+        if width_exceed_ask:
+            print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
+            if input() == "":
+                #print(df)
+                result = str(df)
+                return (result, maxLens)
+        elif direct_print:
+            print("单行数据字符串输出宽度超过当前终端窗口宽度！将直接打印该数据框！\nThe output width of each record string exceeds the current width of the terminal window! The program is going to directly print this dataframe!")
             result = str(df)
             return (result, maxLens)
+        else:
+            print("单行数据字符串输出宽度超过当前终端窗口宽度！将继续格式化输出！\nThe output width of each record string exceeds the current width of the terminal window! The program is going on formatted printing!")
     result = ""
     for i in range(df.shape[1]):
         field = fields[i]
@@ -230,6 +238,32 @@ def format_runtime(seconds: int):
     
     return " ".join(result) if result else "0"
 
+def write_roman(num): #此部分代码来自Stack Overflow（The following code come from https://stackoverflow.com/questions/28777219/basic-program-to-convert-integer-to-roman-numerals）
+    roman = OrderedDict()
+    roman[1000] = "M"
+    roman[900] = "CM"
+    roman[500] = "D"
+    roman[400] = "CD"
+    roman[100] = "C"
+    roman[90] = "XC"
+    roman[50] = "L"
+    roman[40] = "XL"
+    roman[10] = "X"
+    roman[9] = "IX"
+    roman[5] = "V"
+    roman[4] = "IV"
+    roman[1] = "I"
+
+    def roman_num(num):
+        for r in roman.keys():
+            x, y = divmod(num, r)
+            yield roman[r] * x
+            num -= (r * x)
+            if num <= 0:
+                break
+
+    return "".join([a for a in roman_num(num)])
+
 async def search_profile(connection):
     platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     platformId = platform_config["LoginDataPacket"]["platformId"]
@@ -271,16 +305,16 @@ async def search_profile(connection):
             Arena_url = "https://raw.communitydragon.org/%s/cdragon/arena/%s.json" %(URLPatch, language_code.lower())
             #下面声明离线数据资源的默认地址（The following code declare the default paths of offline data resources）
             patches_local_default = "离线数据（Offline Data）\\versions.json"
-            spell_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\summoner-spells.json" %URLPatch
-            LoLItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\items.json" %URLPatch
-            perk_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\perks.json" %URLPatch
-            perkstyle_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\perkstyles.json" %URLPatch
-            TFT_local_default = "离线数据（Offline Data）\\cdragon\\%s\\cdragon\\tft\\zh_cn.json" %URLPatch
-            TFTChampion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\tftchampions.json" %URLPatch
-            TFTItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\tftitems.json" %URLPatch
-            TFTCompanion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\companions.json" %URLPatch
-            TFTTrait_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\tfttraits.json" %URLPatch
-            Arena_local_default = "离线数据（Offline Data）\\cdragon\\%s\\cdragon\\arena\\zh_cn.json" %URLPatch
+            spell_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\summoner-spells.json" %(URLPatch, language_cdragon[language_code])
+            LoLItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\items.json" %(URLPatch, language_cdragon[language_code])
+            perk_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\perks.json" %(URLPatch, language_cdragon[language_code])
+            perkstyle_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\perkstyles.json" %(URLPatch, language_cdragon[language_code])
+            TFT_local_default = "离线数据（Offline Data）\\cdragon\\%s\\cdragon\\tft\\%s.json" %(URLPatch, language_code.lower())
+            TFTChampion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tftchampions.json" %(URLPatch, language_cdragon[language_code])
+            TFTItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tftitems.json" %(URLPatch, language_cdragon[language_code])
+            TFTCompanion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\companions.json" %(URLPatch, language_cdragon[language_code])
+            TFTTrait_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tfttraits.json" %(URLPatch, language_cdragon[language_code])
+            Arena_local_default = "离线数据（Offline Data）\\cdragon\\%s\\cdragon\\arena\\%s.json" %(URLPatch, language_code.lower())
             print("请选择数据资源获取模式：\nPlease select the data resource capture mode:\n1\t在线模式（Online）\n2\t离线模式（Offline）")
             prepareMode = input()
             switch_language = False
@@ -320,6 +354,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合DataDragon数据库中记录的版本数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the patch data archived in DataDragon database (%s)!" %(patches_url, patches_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     latest_patch = patches_initial[0]
                     patches_dict = {}
                     smallPatches = []
@@ -375,6 +412,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的召唤师技能数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the summoner spell data archived in CommunityDragon database (%s)!" %(spell_url, spell_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取英雄联盟装备信息（The following code get LoL item data）
                     try:
                         print("正在加载英雄联盟装备信息……\nLoading LoL item information from CommunityDragon...")
@@ -416,6 +456,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的英雄联盟装备数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the LoL item data archived in CommunityDragon database (%s)!" %(LoLItem_url, LoLItem_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取基石符文信息（The following code get perk data）
                     try:
                         print("正在加载基石符文信息……\nLoading perk information from CommunityDragon...")
@@ -457,6 +500,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的基石符文数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the perk data archived in CommunityDragon database (%s)!" %(perk_url, perk_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取符文系信息（The following code get perkstyle data）
                     try:
                         print("正在加载符文系信息……\nLoading perkstyle information from CommunityDragon...")
@@ -498,6 +544,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的符文系数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the perkstyle data archived in CommunityDragon database (%s)!" %(perkstyle_url, perkstyle_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈强化符文数据（The following code get TFT augment data）
                     try:
                         print("正在加载云顶之弈基础数据……\nLoading TFT basic data from CommunityDragon ...")
@@ -539,6 +588,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈基础数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT basic data archived in CommunityDragon database (%s)!" %(TFT_url, TFT_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈英雄数据（The following code get TFT champion data）
                     try:
                         print("正在加载云顶之弈棋子信息……\nLoading TFT champion information from CommunityDragon ...")
@@ -580,6 +632,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈棋子数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT champion data archived in CommunityDragon database (%s)!" %(TFTChampion_url, TFTChampion_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈装备数据（The following code get TFT item information）
                     try:
                         print("正在加载云顶之弈装备信息……\nLoading TFT item information from CommunityDragon ...")
@@ -621,6 +676,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈装备数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT item data archived in CommunityDragon database (%s)!" %(TFTItem_url, TFTItem_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈小小英雄数据（The following code get TFT companion data）
                     try:
                         print("正在加载云顶之弈小小英雄信息……\nLoading companion information from CommunityDragon ...")
@@ -662,6 +720,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈小小英雄数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT companion data archived in CommunityDragon database (%s)!" %(TFTCompanion_url, TFTCompanion_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈羁绊数据（The following code get TFT trait data）
                     try:
                         print("正在加载云顶之弈羁绊信息……\nLoading TFT trait information from CommunityDragon ...")
@@ -703,6 +764,9 @@ async def search_profile(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈羁绊数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT trait data archived in CommunityDragon database (%s)!" %(TFTTrait_url, TFTTrait_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取斗魂竞技场强化符文数据（The following code get Arena augment data）
                     try:
                         print("正在加载斗魂竞技场强化符文信息……\nLoading Arena augment information from CommunityDragon ...")
@@ -1053,7 +1117,10 @@ async def search_profile(connection):
             print("请输入非空字符串！\nPlease input a string instead of null!")
             continue
         else:
-            if summoner_name.count("-") == 4 and len(summoner_name.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
+            if summoner_name == "current-summoner":
+                search_by_puuid = False
+                info = current_info.copy()
+            elif summoner_name.count("-") == 4 and len(summoner_name.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
                 search_by_puuid = True
                 info = await (await connection.request("GET", "/lol-summoner/v2/summoners/puuid/" + quote(summoner_name))).json()
             else:
@@ -1138,15 +1205,13 @@ async def search_profile(connection):
                 if "errorCode" in ranked and ranked["httpStatus"] == 404: #很久以前，国服体验服的排位数据API未知。现在已经与正式服统一（Long ago, API of ranked stats on Chinese PBE was unknown. Now it accords with Live servers）
                     info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"]]}
                 elif not "highestPreviousSeasonAchievedDivision" in ranked and not "highestPreviousSeasonAchievedTier" in ranked: #在美测服14.2版本发现这两个键被删除了（These two keys are found to be deleted in PBE Patch 14.2）
-                    info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验", "当前赛季赛段点", "已获得的排位赛段奖励物品序号", "当前赛季最高赛段（召唤师峡谷）", "过往赛季结束赛段", "过往赛季结束赛段分级"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel", "currentSeasonSplitPoints", "earnedRegaliaRewardIds", "highestCurrentSeasonReachedTierSR", "highestPreviousSeasonEndTier", "highestPreviousSeasonEndDivision"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"], ranked["currentSeasonSplitPoints"], ranked["earnedRegaliaRewardIds"], tier[ranked["highestCurrentSeasonReachedTierSR"]], tier[ranked["highestPreviousSeasonEndTier"]], ranked["highestPreviousSeasonEndDivision"]]}
+                    info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验", "当前赛季段位点", "已获得段位奖励物品序号", "当前赛季最高段位（召唤师峡谷）", "过往赛季结束段位", "过往赛季结束段位分级"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel", "currentSeasonSplitPoints", "earnedRegaliaRewardIds", "highestCurrentSeasonReachedTierSR", "highestPreviousSeasonEndTier", "highestPreviousSeasonEndDivision"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"], ranked["currentSeasonSplitPoints"], ranked["earnedRegaliaRewardIds"], tier[ranked["highestCurrentSeasonReachedTierSR"]], tier[ranked["highestPreviousSeasonEndTier"]], ranked["highestPreviousSeasonEndDivision"]]}
                 else:
-                    info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验", "当前赛季赛段点", "已获得的排位赛段奖励物品序号", "当前赛季最高赛段（召唤师峡谷）", "过往赛季最高赛段", "过往赛季最高赛段分级", "过往赛季结束赛段", "过往赛季结束赛段分级"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel", "currentSeasonSplitPoints", "earnedRegaliaRewardIds", "highestCurrentSeasonReachedTierSR", "highestPreviousSeasonAchievedTier", "highestPreviousSeasonAchievedDivision", "highestPreviousSeasonEndTier", "highestPreviousSeasonEndDivision"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"], ranked["currentSeasonSplitPoints"], ranked["earnedRegaliaRewardIds"], tier[ranked["highestCurrentSeasonReachedTierSR"]], tier[ranked["highestPreviousSeasonAchievedTier"]], ranked["highestPreviousSeasonAchievedDivision"], tier[ranked["highestPreviousSeasonEndTier"]], ranked["highestPreviousSeasonEndDivision"]]}
+                    info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验", "当前赛季赛段点", "已获得的段位奖励物品序号", "当前赛季最高段位（召唤师峡谷）", "过往赛季最高段位", "过往赛季最高段位分级", "过往赛季结束段位", "过往赛季结束段位分级"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel", "currentSeasonSplitPoints", "earnedRegaliaRewardIds", "highestCurrentSeasonReachedTierSR", "highestPreviousSeasonAchievedTier", "highestPreviousSeasonAchievedDivision", "highestPreviousSeasonEndTier", "highestPreviousSeasonEndDivision"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"], ranked["currentSeasonSplitPoints"], ranked["earnedRegaliaRewardIds"], tier[ranked["highestCurrentSeasonReachedTierSR"]], tier[ranked["highestPreviousSeasonAchievedTier"]], ranked["highestPreviousSeasonAchievedDivision"], tier[ranked["highestPreviousSeasonEndTier"]], ranked["highestPreviousSeasonEndDivision"]]}
                 info_df = pandas.DataFrame(data = info_data)
                 
                 #print("召唤师英雄成就如下：\nSummoner champion mastery is as follows:")
-                mastery = await (await connection.request("GET", "/lol-collections/v1/inventories/" + str(info["summonerId"]) + "/champion-mastery")).json()
-                if "errorCode" in mastery: #美测服13.20版本需要使用玩家通用唯一识别码代替召唤师序号来查询英雄成就信息（summonerId is replaced by puuid to search for champion mastery information in Patch 13.20 on PBE. Extra information: A capture of the champion mastery at 2023年10月5日16:08:00 (UTC+8) gave the following information: {"errorCode": "RPC_ERROR", "httpStatus": 500, "implementationDetails": {}, "message": "Error requesting summoner champion masteries for 2772370761401792: {\"message\":\"{\\\"httpStatus\\\":500,\\\"errorCode\\\":\\\"UNHANDLED_SERVER_SIDE_ERROR\\\",\\\"message\\\":\\\"Invlaid puuid 2772370761401792\\\",\\\"implementationDetails\\\":\\\"filtered\\\"}\",\"failureCode_int\":500}"}）
-                    mastery = await (await connection.request("GET", "/lol-collections/v1/inventories/" + current_puuid + "/champion-mastery")).json()
+                mastery = await (await connection.request("GET", "/lol-champion-mastery/v1/" + current_puuid + "/champion-mastery")).json()
                 #print(mastery)
                 json2name = "Champion Mastery - " + displayName + ".json"
                 while True:
@@ -1167,33 +1232,62 @@ async def search_profile(connection):
                 pkl2name = "Intermediate Object - mastery (Champion Mastery) - %s (%s).pkl" %(displayName, currentTime)
                 #with open(os.path.join(folder, pkl2name), "wb") as IntObj2:
                     #pickle.dump(mastery, IntObj2)
-                mastery_header = {"champion": "英雄", "alias": "名称", "championLevel": "成就等级", "championPoints": "总成就点数", "championPointsSinceLastLevel": "当前等级成就点数", "championPointsUntilNextLevel": "升级所需成就点数", "chestGranted": "已赚取海克斯宝箱", "formattedChampionPoints": "总成就点数（千位分隔符）", "formattedMasteryGoal": "下一级成就点数（千位分隔符）", "highestGrade": "当前赛季最高评分", "lastPlayTime": "上次使用时间", "playerId": "玩家序号", "puuid": "玩家通用唯一识别码", "tokensEarned": "成就代币数量"}
+                mastery_header = {"champion": "英雄", "alias": "名称", "championLevel": "成就等级", "championPoints": "总成就点数", "championPointsSinceLastLevel": "当前等级成就点数", "championPointsUntilNextLevel": "升级所需成就点数", "championSeasonMilestone": "当前赛季英雄成就里程点", "chestGranted": "已赚取海克斯宝箱", "highestGrade": "当前赛季最高评分", "lastPlayTime": "上次使用时间", "markRequiredForNextLevel": "下一级成就所需英雄成就标记个数", "milestoneGrades": "已取得的对局评价", "puuid": "玩家通用唯一识别码", "tokensEarned": "成就代币数量", "nextSeasonMilestoneBonus": "已达到IV级里程碑", "nextSeasonMilestoneRequireGrade": "下个里程点所需对局评价", "nextSeasonMilestoneRewardMarks": "下个里程点奖励英雄成就标记个数", "nextSeasonMilestoneMaximumReward": "下个里程点最大奖励次数", "nextSeasonMilestoneRewardValue": "下个里程点奖励物品序号"}
                 mastery_header_keys = list(mastery_header.keys())
                 mastery_data = {}
                 for i in range(len(mastery_header)):
                     key = mastery_header_keys[i]
                     mastery_data[key] = []
-                    if i == 0:
-                        for j in range(len(mastery)):
-                            mastery_data[key].append(LoLChampions[mastery[j]["championId"]]["name"])
-                    elif i == 1:
-                        for j in range(len(mastery)):
-                            mastery_data[key].append(LoLChampions[mastery[j]["championId"]]["alias"])
-                    elif i == 10:
-                        for j in range(len(mastery)): #这里需要将时间戳转换为标准格式的时间（Here the timestamp is going to be converted into time in standard format）
-                            lastPlayTime = time.localtime(mastery[j][key] // 1000) #英雄联盟中的时间戳精确到微妙，也就是放大了1000倍（Timestamps in LCU api are accurate to milliseconds, namely multiplied by 1000）
-                            lastPlayTime_standard = time.strftime("%Y年%m月%d日%H:%M:%S", lastPlayTime)
-                            mastery_data[key].append(lastPlayTime_standard)
+                for i in range(len(mastery_header)):
+                    key = mastery_header_keys[i]
+                    if i <= 13:
+                        if i == 0:
+                            for j in range(len(mastery)):
+                                mastery_data[key].append(LoLChampions[mastery[j]["championId"]]["name"])
+                        elif i == 1:
+                            for j in range(len(mastery)):
+                                mastery_data[key].append(LoLChampions[mastery[j]["championId"]]["alias"])
+                        elif i == 7:
+                            for j in range(len(mastery)):
+                                mastery_data[key].append(mastery[j].get(key, False)) #外服的英雄成就接口中没有“chestGranted”这个键（Champion mastery API in Riot servers don't include the key "chestGranted"）
+                        elif i == 9:
+                            for j in range(len(mastery)): #这里需要将时间戳转换为标准格式的时间（Here the timestamp is going to be converted into time in standard format）
+                                lastPlayTime = time.localtime(mastery[j][key] // 1000) #英雄联盟中的时间戳精确到微妙，也就是放大了1000倍（Timestamps in LCU API are accurate to milliseconds, namely multiplied by 1000）
+                                lastPlayTime_standard = time.strftime("%Y年%m月%d日%H:%M:%S", lastPlayTime)
+                                mastery_data[key].append(lastPlayTime_standard)
+                        else:
+                            for j in range(len(mastery)):
+                                mastery_data[key].append(mastery[j][key])
+                    elif i >= 14 and i <= 16:
+                        if i == 14:
+                            for j in range(len(mastery)):
+                                mastery_data[key].append(mastery[j]["nextSeasonMilestone"]["bonus"])
+                        elif i == 15:
+                            for j in range(len(mastery)):
+                                #requireGradeCounts = mastery[j]["nextSeasonMilestone"]["requireGradeCounts"]
+                                mastery_data[key].append(mastery[j]["nextSeasonMilestone"]["requireGradeCounts"])
+                        elif i == 16:
+                            for j in range(len(mastery)):
+                                mastery_data[key].append(mastery[j]["nextSeasonMilestone"]["rewardMarks"])
                     else:
-                        for j in range(len(mastery)):
-                            mastery_data[key].append(mastery[j][key])
-                mastery_statistics_display_order = [0, 1, 2, 3, 4, 5, 6, 9, 10, 13]
+                        if i == 17:
+                            for j in range(len(mastery)):
+                                mastery_data[key].append(mastery[j]["nextSeasonMilestone"]["rewardConfig"]["maximumReward"])
+                        elif i == 18:
+                            for j in range(len(mastery)):
+                                mastery_data[key].append(mastery[j]["nextSeasonMilestone"]["rewardConfig"]["rewardValue"])
+                mastery_statistics_display_order = [0, 1, 2, 3, 4, 5, 10, 13, 7, 8, 6, 14, 11, 15, 16, 17, 18, 9]
                 mastery_data_organized = {}
                 for i in mastery_statistics_display_order:
                     key = mastery_header_keys[i]
                     mastery_data_organized[key] = [mastery_header[key]] + mastery_data[key]
                 mastery_df = pandas.DataFrame(data = mastery_data_organized)
-                mastery_df.loc[:, "chestGranted"].replace({True: "√", False: ""}, inplace = True)
+                for i in range(mastery_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
+                    for j in range(mastery_df.shape[1]):
+                        if str(mastery_df.iat[i, j]) == "True":
+                            mastery_df.iat[i, j] = "√"
+                        elif str(mastery_df.iat[i, j]) == "False":
+                            mastery_df.iat[i, j] = ""
 
                 if "errorCode" in ranked and ranked["httpStatus"] == 404: #从13.15版本开始，国服体验服的排位信息和对局记录可以正常查询（From Patch 13.15 on, rank data and match history can be searched on Chinese PBE server）
                     print("该服务器暂不支持排位数据和对局记录查询！\nThis server doesn't support ranked data and match history lookup!")
@@ -1236,7 +1330,7 @@ async def search_profile(connection):
                 pkl3name = "Intermediate Object - ranked (Rank) - %s (%s).pkl" %(displayName, currentTime)
                 #with open(os.path.join(folder, pkl3name), "wb") as IntObj3:
                     #pickle.dump(ranked, IntObj3)
-                ranked_header = {"division": "分级", "isProvisional": "定位中", "leaguePoints": "胜点", "losses": "负场", "miniSeriesProgress": "定位赛/晋级赛进展", "previousSeasonAchievedDivision": "过往赛季最高赛段分级", "previousSeasonAchievedTier": "过往赛季最高赛段", "previousSeasonEndDivision": "过往赛季结束赛段分级", "previousSeasonEndTier": "过往赛季结束赛段", "provisionalGameThreshold": "总定位场次", "provisionalGamesRemaining": "剩余定位场次", "queueType": "对局类型", "ratedRating": "段位点", "ratedTier": "段位", "tier": "段位", "warnings": "警告消息", "wins": "胜场"}
+                ranked_header = {"division": "分级", "isProvisional": "定位中", "leaguePoints": "胜点", "losses": "负场", "miniSeriesProgress": "定位赛/晋级赛进展", "previousSeasonAchievedDivision": "过往赛季最高段位分级", "previousSeasonAchievedTier": "过往赛季最高段位", "previousSeasonEndDivision": "过往赛季结束段位分级", "previousSeasonEndTier": "过往赛季结束段位", "provisionalGameThreshold": "总定位场次", "provisionalGamesRemaining": "剩余定位场次", "queueType": "对局类型", "ratedRating": "段位点", "ratedTier": "段位", "tier": "段位", "warnings": "警告消息", "wins": "胜场"}
                 queueType = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战 (BETA测试)", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
                 ranked_header_keys = list(ranked_header.keys())
                 ranked_data = {}
@@ -2095,7 +2189,7 @@ async def search_profile(connection):
                                             print('保存进度（Saving process）：%d/%d\t对局序号（MatchID）： %s' %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
                                         else:
                                             print('加载进度（Loading process）：%d/%d\t对局序号（MatchID）： %s' %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
-                                    LoLGame_info_header = {"participantId": "玩家序号", "accountId": "账户序号", "currentAccountId": "当前账户序号", "currentPlatformId": "当前大区", "gameName": "玩家昵称", "matchHistoryUri": "", "platformId": "原大区", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "champion": "选用英雄", "alias": "名称", "highestAchievedSeasonTier": "最高赛段", "spell1": "召唤师技能1", "spell2": "召唤师技能2", "teamId": "阵营", "assists": "助攻", "causedEarlySurrender": "发起提前投降", "champLevel": "英雄等级", "combatPlayerScore": "战斗得分", "damageDealtToObjectives": "对战略点的总伤害", "damageDealtToTurrets": "对防御塔的总伤害", "damageSelfMitigated": "自我缓和的伤害", "deaths": "死亡", "doubleKills": "双杀", "earlySurrenderAccomplice": "同意提前投降", "firstBloodAssist": "协助获得第一滴血", "firstBloodKill": "第一滴血", "firstInhibitorAssist": "协助摧毁第一座召唤水晶", "firstInhibitorKill": "摧毁第一座召唤水晶", "firstTowerAssist": "协助摧毁第一座塔", "firstTowerKill": "摧毁第一座塔", "gameEndedInEarlySurrender": "提前投降导致比赛结束", "gameEndedInSurrender": "投降导致比赛结束", "goldEarned": "金币获取", "goldSpent": "金币使用", "inhibitorKills": "摧毁召唤水晶", "item1": "装备1", "item2": "装备2", "item3": "装备3", "item4": "装备4", "item5": "装备5", "item6": "装备6", "ornament": "饰品", "killingSprees": "大杀特杀", "kills": "击杀", "largestCriticalStrike": "最大暴击伤害", "largestKillingSpree": "最高连杀", "largestMultiKill": "最高多杀", "longestTimeSpentLiving": "最长生存时间", "magicDamageDealt": "造成的魔法伤害", "magicDamageDealtToChampions": "对英雄的魔法伤害", "magicalDamageTaken": "承受的魔法伤害", "neutralMinionsKilled": "击杀野怪", "neutralMinionsKilledEnemyJungle": "击杀敌方野区野怪", "neutralMinionsKilledTeamJungle": "击杀我方野区野怪", "objectivePlayerScore": "战略点玩家得分", "pentaKills": "五杀", "perk0": "符文1", "perk0EndOfGameStatDescs": "符文1游戏结算数据", "perk0Var1": "符文1：参数1", "perk0Var2": "符文1：参数2", "perk0Var3": "符文1：参数3", "perk1": "符文2", "perk1EndOfGameStatDescs": "符文2游戏结算数据", "perk1Var1": "符文2：参数1", "perk1Var2": "符文2：参数2", "perk1Var3": "符文2：参数3", "perk2": "符文3", "perk2EndOfGameStatDescs": "符文3游戏结算数据", "perk2Var1": "符文3：参数1", "perk2Var2": "符文3：参数2", "perk2Var3": "符文3：参数3", "perk3": "符文4", "perk3EndOfGameStatDescs": "符文4游戏结算数据", "perk3Var1": "符文4：参数1", "perk3Var2": "符文4：参数2", "perk3Var3": "符文4：参数3", "perk4": "符文5", "perk4EndOfGameStatDescs": "符文5游戏结算数据", "perk4Var1": "符文5：参数1", "perk4Var2": "符文5：参数2", "perk4Var3": "符文5：参数3", "perk5": "符文6", "perk5EndOfGameStatDescs": "符文6游戏结算数据", "perk5Var1": "符文6：参数1", "perk5Var2": "符文6：参数2", "perk5Var3": "符文6：参数3", "perkPrimaryStyle": "主系", "perkSubStyle": "副系", "physicalDamageDealt": "造成的物理伤害", "physicalDamageDealtToChampions": "对英雄的物理伤害", "physicalDamageTaken": "承受的物理伤害", "playerAugment1": "强化符文1", "playerAugment1_rarity": "强化符文1等级", "playerAugment2": "强化符文2", "playerAugment2_rarity": "强化符文2等级", "playerAugment3": "强化符文3", "playerAugment3_rarity": "强化符文3等级", "playerAugment4": "强化符文4", "playerAugment4_rarity": "强化符文4等级", "playerScore0": "玩家得分1", "playerScore1": "玩家得分2", "playerScore2": "玩家得分3", "playerScore3": "玩家得分4", "playerScore4": "玩家得分5", "playerScore5": "玩家得分6", "playerScore6": "玩家得分7", "playerScore7": "玩家得分8", "playerScore8": "玩家得分9", "playerScore9": "玩家得分10", "playerSubteamId": "子阵营序号", "quadraKills": "四杀", "sightWardsBoughtInGame": "购买洞察之石", "subteamPlacement": "队伍排名", "teamEarlySurrendered": "队伍提前投降", "timeCCingOthers": "控制得分", "totalDamageDealt": "造成的伤害总和", "totalDamageDealtToChampions": "对英雄的伤害总和", "totalDamageTaken": "承受伤害", "totalHeal": "治疗伤害", "totalMinionsKilled": "击杀小兵", "totalPlayerScore": "玩家总得分", "totalScoreRank": "总得分排名", "totalTimeCrowdControlDealt": "控制时间", "totalUnitsHealed": "治疗单位数", "tripleKills": "三杀", "trueDamageDealt": "造成真实伤害", "trueDamageDealtToChampions": "对英雄的真实伤害", "trueDamageTaken": "承受的真实伤害", "turretKills": "摧毁防御塔", "unrealKills": "六杀及以上", "visionScore": "视野得分", "visionWardsBoughtInGame": "购买控制守卫", "wardsKilled": "摧毁守卫", "wardsPlaced": "放置守卫", "win/lose": "胜负", "bannedChampion": "禁用英雄", "bannedAlias": "名称"}
+                                    LoLGame_info_header = {"participantId": "玩家序号", "accountId": "账户序号", "currentAccountId": "当前账户序号", "currentPlatformId": "当前大区", "gameName": "玩家昵称", "matchHistoryUri": "", "platformId": "原大区", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "champion": "选用英雄", "alias": "名称", "highestAchievedSeasonTier": "最高段位", "spell1": "召唤师技能1", "spell2": "召唤师技能2", "teamId": "阵营", "assists": "助攻", "causedEarlySurrender": "发起提前投降", "champLevel": "英雄等级", "combatPlayerScore": "战斗得分", "damageDealtToObjectives": "对战略点的总伤害", "damageDealtToTurrets": "对防御塔的总伤害", "damageSelfMitigated": "自我缓和的伤害", "deaths": "死亡", "doubleKills": "双杀", "earlySurrenderAccomplice": "同意提前投降", "firstBloodAssist": "协助获得第一滴血", "firstBloodKill": "第一滴血", "firstInhibitorAssist": "协助摧毁第一座召唤水晶", "firstInhibitorKill": "摧毁第一座召唤水晶", "firstTowerAssist": "协助摧毁第一座塔", "firstTowerKill": "摧毁第一座塔", "gameEndedInEarlySurrender": "提前投降导致比赛结束", "gameEndedInSurrender": "投降导致比赛结束", "goldEarned": "金币获取", "goldSpent": "金币使用", "inhibitorKills": "摧毁召唤水晶", "item1": "装备1", "item2": "装备2", "item3": "装备3", "item4": "装备4", "item5": "装备5", "item6": "装备6", "ornament": "饰品", "killingSprees": "大杀特杀", "kills": "击杀", "largestCriticalStrike": "最大暴击伤害", "largestKillingSpree": "最高连杀", "largestMultiKill": "最高多杀", "longestTimeSpentLiving": "最长生存时间", "magicDamageDealt": "造成的魔法伤害", "magicDamageDealtToChampions": "对英雄的魔法伤害", "magicalDamageTaken": "承受的魔法伤害", "neutralMinionsKilled": "击杀野怪", "neutralMinionsKilledEnemyJungle": "击杀敌方野区野怪", "neutralMinionsKilledTeamJungle": "击杀我方野区野怪", "objectivePlayerScore": "战略点玩家得分", "pentaKills": "五杀", "perk0": "符文1", "perk0EndOfGameStatDescs": "符文1游戏结算数据", "perk0Var1": "符文1：参数1", "perk0Var2": "符文1：参数2", "perk0Var3": "符文1：参数3", "perk1": "符文2", "perk1EndOfGameStatDescs": "符文2游戏结算数据", "perk1Var1": "符文2：参数1", "perk1Var2": "符文2：参数2", "perk1Var3": "符文2：参数3", "perk2": "符文3", "perk2EndOfGameStatDescs": "符文3游戏结算数据", "perk2Var1": "符文3：参数1", "perk2Var2": "符文3：参数2", "perk2Var3": "符文3：参数3", "perk3": "符文4", "perk3EndOfGameStatDescs": "符文4游戏结算数据", "perk3Var1": "符文4：参数1", "perk3Var2": "符文4：参数2", "perk3Var3": "符文4：参数3", "perk4": "符文5", "perk4EndOfGameStatDescs": "符文5游戏结算数据", "perk4Var1": "符文5：参数1", "perk4Var2": "符文5：参数2", "perk4Var3": "符文5：参数3", "perk5": "符文6", "perk5EndOfGameStatDescs": "符文6游戏结算数据", "perk5Var1": "符文6：参数1", "perk5Var2": "符文6：参数2", "perk5Var3": "符文6：参数3", "perkPrimaryStyle": "主系", "perkSubStyle": "副系", "physicalDamageDealt": "造成的物理伤害", "physicalDamageDealtToChampions": "对英雄的物理伤害", "physicalDamageTaken": "承受的物理伤害", "playerAugment1": "强化符文1", "playerAugment1_rarity": "强化符文1等级", "playerAugment2": "强化符文2", "playerAugment2_rarity": "强化符文2等级", "playerAugment3": "强化符文3", "playerAugment3_rarity": "强化符文3等级", "playerAugment4": "强化符文4", "playerAugment4_rarity": "强化符文4等级", "playerScore0": "玩家得分1", "playerScore1": "玩家得分2", "playerScore2": "玩家得分3", "playerScore3": "玩家得分4", "playerScore4": "玩家得分5", "playerScore5": "玩家得分6", "playerScore6": "玩家得分7", "playerScore7": "玩家得分8", "playerScore8": "玩家得分9", "playerScore9": "玩家得分10", "playerSubteamId": "子阵营序号", "quadraKills": "四杀", "sightWardsBoughtInGame": "购买洞察之石", "subteamPlacement": "队伍排名", "teamEarlySurrendered": "队伍提前投降", "timeCCingOthers": "控制得分", "totalDamageDealt": "造成的伤害总和", "totalDamageDealtToChampions": "对英雄的伤害总和", "totalDamageTaken": "承受伤害", "totalHeal": "治疗伤害", "totalMinionsKilled": "击杀小兵", "totalPlayerScore": "玩家总得分", "totalScoreRank": "总得分排名", "totalTimeCrowdControlDealt": "控制时间", "totalUnitsHealed": "治疗单位数", "tripleKills": "三杀", "trueDamageDealt": "造成真实伤害", "trueDamageDealtToChampions": "对英雄的真实伤害", "trueDamageTaken": "承受的真实伤害", "turretKills": "摧毁防御塔", "unrealKills": "六杀及以上", "visionScore": "视野得分", "visionWardsBoughtInGame": "购买控制守卫", "wardsKilled": "摧毁守卫", "wardsPlaced": "放置守卫", "win/lose": "胜负", "bannedChampion": "禁用英雄", "bannedAlias": "名称"}
                                     LoLGame_info_data = {} ####这里将对局的数据放在一个字典中，键为统计量，值为由所有玩家的数据组成的列表（Here the whole match data are stored in a dictionary whose keys are statistics and values are lists composed of corresponding data of all players）
                                     LoLGame_info_header_keys = list(LoLGame_info_header.keys())
                                     #整理对局禁用信息（Sort out the team ban information）
@@ -2534,8 +2628,8 @@ async def search_profile(connection):
                                     LoLGame_event_header = {"assistingParticipantIds": "助攻者序号", "assistingChampion": "助攻者英雄", "assistingChampionAlias": "助攻者英雄名称", "assistingParticipantSummonerName": "助攻者召唤师名", "assistingParticipantGameName#TagLine": "助攻者游戏名", "buildingType": "被摧毁的建筑物类型", "itemId": "购买的装备序号", "item": "获得的装备", "killerId": "击杀者序号", "killerChampion": "击杀者英雄", "killerChampionAlias": "击杀者英雄名称", "killerParticipantSummonerName": "击杀者召唤师名", "killerParticipantGameName#TagLine": "击杀者游戏名", "laneType": "线路位置", "monsterSubType": "野区生物亚型", "monsterType": "野区生物类型", "participantId": "事件参与者序号", "champion": "参与者英雄", "championAlias": "参与者英雄名称", "participantSummonerName": "参与者召唤师名", "participantGameName#TagLine": "参与者游戏名", "position": "位置坐标", "skillSlot": "学习技能槽位", "teamId": "阵营", "timestamp": "时间戳", "time": "时间", "towerType": "防御塔类型", "type": "事件类型", "victimId": "被杀者序号", "victimChampion": "被杀者英雄", "victimChampionAlias": "被杀者英雄名称", "victimParticipantSummonerName": "被杀者召唤师名", "victimParticipantGameName#TagLine": "被杀者游戏名"}
                                     LoLGame_event_data = {}
                                     LoLGame_event_header_keys = list(LoLGame_event_header.keys())
-                                    eventTypes = {"CHAMPION_KILL": "击杀英雄", "ELITE_MONSTER_KILL": "击杀史诗级野怪", "BUILDING_KILL": "摧毁建筑物"}
-                                    #eventTypes = {"CHAMPION_KILL": "CHAMPION_SLAIN", "ELITE_MONSTER_KILL": "ELITE_MONSTER_KILL", "BUILDING_KILL": "BUILDING_DESTROY"}
+                                    eventTypes = {"CHAMPION_KILL": "英雄击杀", "ELITE_MONSTER_KILL": "史诗级野怪击杀", "BUILDING_KILL": "建筑物击杀"}
+                                    #eventTypes = {"CHAMPION_KILL": "Champion Kills", "ELITE_MONSTER_KILL": "Elite Monster Kills", "BUILDING_KILL": "Building Kills"}
                                     buildingTypes = {"": "", "TOWER_BUILDING": "防御塔", "INHIBITOR_BUILDING": "召唤水晶"}
                                     #buildingTypes = {"": "", "TOWER_BUILDING": "Turret", "INHIBITOR_BUILDING": "Inhibitor"}
                                     laneTypes = {"": "", "TOP_LANE": "上路", "MID_LANE": "中路", "BOT_LANE": "下路"}

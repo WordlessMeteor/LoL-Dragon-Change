@@ -20,6 +20,7 @@ The following explanations only apply to the current branch. For other details (
 	- 整合简化版提供以下功能：
 		- 游戏模式选择
 		- 电脑玩家自动随机生成
+		- 请注意，整合简化版只适用于国服。本程序集将在未来国服正式引入玩家角色定位后移除该脚本。
 	- 整合版提供以下功能：
 		- 队列房间循环创建
 		- 自定义房间游戏模式选择
@@ -282,9 +283,13 @@ The following explanations only apply to the current branch. For other details (
 			- 一些键被标记为白色。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`ornament`不曾出现在对局信息的json对象中，但是实际上来自`LoLGame_info["participants"][participantId]["stats"]`，对应的是索引`"item6"`。
 			- 要获取各个呈现顺序列表，只需要将表格以`OutputOrder`作升序排列，然后复制`Index`列的单元格内容即可。
 		- 下面对查战绩脚本中的`mastery_df`的结构进行说明。
-			- 工作表`05 - mastery_header`的主要数据区域设置了一种颜色。
-				- 白字只包含`champion`和`alias`，分别表示英雄的称号和名字。LCU API只提供了英雄序号。
+			- 工作表`05 - mastery_header`的主要数据区域设置了4种颜色。
 				- 蓝色代表`Key`可以直接作为`mastery[champion_iter]`的索引。
+					- 白字只包含`champion`和`alias`，分别表示英雄的称号和名字。LCU API只提供了英雄序号。
+				- 浅绿色代表`Key`来自`mastery[champion_iter]["nextSeasonMilestone"]`的索引。
+					- 注意到其中不包含任何可直接作为索引的键。
+				- 深紫色代表`Key`来自`mastery[champion_iter]["nextSeasonMilestone"]["rewardConfig"]`的索引。
+					- 注意到其中不包含任何可直接作为索引的键。
 		- 下面对查战绩脚本中的`ranked_df`的结构进行说明。
 			- 工作表`05 - ranked_header`的`Key`都可作为`ranked["queues"][Id]`的索引。
 			- 注意到`OutputOrder`列存在重复数据。造成这个现象的根本原因是云顶之弈狂暴模式的段位和其它排位模式的段位被记录在两个变量中，但是输出表格时期望输出在一列中，所以有一些原键的输出顺序相同。
@@ -365,6 +370,7 @@ For details about customized programs that is beyond the scope of creating a cus
 	- The simplified consolidated version has the following features:
 		- Game mode selection
 		- Random generation of bot players
+		- Please note that this version only applies to Tencent servers. This program will be removed after Tencent servers introduce botPosition some day.
 	- The consolidated version has the following features:
 		- Queue lobby over-creation
 		- Custom game mode selection
@@ -626,9 +632,13 @@ For details about customized programs that is beyond the scope of creating a cus
 			- Some keys are colored white. These keys don't belong to the indices of any variable in LCU API, but actually come from them. For example, `ornament` never occurs in the json object of the game information, but actually originates from `LoLGame_info["participants"][participantId]["stats]` and corresponds to the key `"item6"`.
 			- To obtain the statistics display order lists, all needed is to arrange the table acoording to the ascending order of `OutputOrder` and to copy the cells in `Index` column.
 		- `mastery_df` in Customized Program 05:
-			- 1 color is used to divide the main data area in the sheet `05 - mastery_header`.
+			- 3 colors are used to divide the main data area in the sheet `05 - mastery_header`.
 				- Data in the blue area mean `Key` is the direct index of the variable `mastery[champion_iter]`.
-				- Keys in white only include `champion` and `alias`, representing the titles and aliases of champions, respectively. Only championIds are provided in LCU API.
+					- Keys in white only include `champion` and `alias`, representing the titles and aliases of champions, respectively. Only championIds are provided in LCU API.
+				- Data in the light green area mean `Key` is the index of `mastery[champion_iter]["nextSeasonMilestone"]`.
+					- Note that no key in this area exists to be the direct index.
+				- Data in the deep purple area mean `Key` is the index of `mastery[champion_iter]["nextSeasonMilestone"]["rewardConfig"]`.
+					- Note that no key in this area exists to be the direct index.
 		- `ranked_df` in Customized Program 05:
 			- `Key` in the sheet `05 - ranked_header` can all be the index of `ranked["queues"][id]`.
 			- Note that redundancy exists in the `OutputOrder` column. The essential reason for this is that the tier of TFT turbo and that of other rank modes are recorded into 2 variables separately, while the two tiers are expected to be stored in a single column. Therefore, the `OutputOrder` of some keys are the same.

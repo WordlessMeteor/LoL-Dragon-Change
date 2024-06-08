@@ -8,7 +8,7 @@ from wcwidth import wcswidth
 def count_nonASCII(s: str): #统计一个字符串中占用命令行2个宽度单位的字符个数（Count the number of characters that take up 2 width unit in CMD）
     return sum([unicodedata.east_asian_width(character) in ("F", "W") for character in list(str(s))])
 
-def format_df(df: pd.DataFrame): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+def format_df(df: pd.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
     df = df.reset_index(drop = True) #这一步至关重要，因为下面的操作前提是行号是默认的（This step is crucial, for the following operations are based on the dataframe with the default row index）
     maxLens = {}
     maxWidth = shutil.get_terminal_size()[0]
@@ -16,11 +16,18 @@ def format_df(df: pd.DataFrame): #按照每列最长字符串的命令行宽度�
     for field in fields:
         maxLens[field] = max(max(map(lambda x: wcswidth(str(x)), df[field])), wcswidth(str(field))) + 2
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth: #因为输出的时候，相邻两列之间需要有两个空格分隔，所以在计算总宽度的时候必须算上这些空格的宽度（Because two spaces are used between each pair of columns, the width they take up must be taken into consideration）
-        print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
-        if input() == "":
-            #print(df)
+        if width_exceed_ask:
+            print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
+            if input() == "":
+                #print(df)
+                result = str(df)
+                return (result, maxLens)
+        elif direct_print:
+            print("单行数据字符串输出宽度超过当前终端窗口宽度！将直接打印该数据框！\nThe output width of each record string exceeds the current width of the terminal window! The program is going to directly print this dataframe!")
             result = str(df)
             return (result, maxLens)
+        else:
+            print("单行数据字符串输出宽度超过当前终端窗口宽度！将继续格式化输出！\nThe output width of each record string exceeds the current width of the terminal window! The program is going on formatted printing!")
     result = ""
     for i in range(df.shape[1]):
         field = fields[i]
@@ -83,6 +90,7 @@ currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
 os.makedirs("离线数据（Offline Data）/Update Logs", exist_ok = True)
 log = open(f"离线数据（Offline Data）/Update Logs/{currentTime}.log", "w", encoding = "utf-8")
 ddragon_hint = True
+line_re = re.compile('<tr><td class="link"><a href=".*" title=".*">.*</a></td><td class="size">.*</td><td class="date">.*</td></tr>')
 while True:
     print("请选择要更新的数据资源，输入空字符串以退出程序：\nPlease select the data resource to update, or submit an empty string to exit the program:\n1\tCommunityDragon\n2\tDataDragon")
     log.write("请选择要更新的数据资源，输入空字符串以退出程序：\nPlease select the data resource to update, or submit an empty string to exit the program:\n1\tCommunityDragon\n2\tDataDragon\n")
@@ -92,11 +100,11 @@ while True:
         log.close()
         break
     elif resource[0] == "1":
-        print("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）")
-        log.write("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n")
+        print("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）")
+        log.write("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）\n")
         mode = input()
         log.write(mode + "\n")
-        if mode == "" or mode[0] != "1":
+        if mode == "" or mode[0] == "2":
             mode = "2"
             print("请选择一种方式指定修改时间：\nPlease select a method of specifying the modification time:\n1\t自动获取（Automatically get）\n2\t手动输入（Manually input）")
             log.write("请选择一种方式指定修改时间：\nPlease select a method of specifying the modification time:\n1\t自动获取（Automatically get）\n2\t手动输入（Manually input）\n")
@@ -131,9 +139,74 @@ while True:
                 log.write("指定修改时间（Specified modification time）：%s\n" %(latest_mod_date))
             else:
                 time_get_method = "1"
+        elif mode[0] == "3":
+            mode = "3"
         else:
             mode = "1"
-        cdragon_folders = ["latest/cdragon/arena/", "latest/cdragon/tft/", "latest/plugins/rcp-be-lol-game-data/global/default/v1/champions/", "latest/plugins/rcp-be-lol-game-data/global/default/v1/map-assets/", "latest/plugins/rcp-be-lol-game-data/global/default/v1/", "latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champions/", "latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/map-assets/", "latest/plugins/rcp-be-lol-game-data/global/zh_cn/v1/", "pbe/cdragon/arena/", "pbe/cdragon/tft/", "pbe/plugins/rcp-be-lol-game-data/global/default/v1/champions/", "pbe/plugins/rcp-be-lol-game-data/global/default/v1/map-assets/", "pbe/plugins/rcp-be-lol-game-data/global/default/v1/", "pbe/plugins/rcp-be-lol-game-data/global/zh_cn/v1/champions/", "pbe/plugins/rcp-be-lol-game-data/global/zh_cn/v1/map-assets/", "pbe/plugins/rcp-be-lol-game-data/global/zh_cn/v1/"]
+        if mode == "3":
+            print("正在获取目前CommunityDragon数据库支持的语言\nTrying to get the currently supported locales in CommunityDragon database ...")
+            log.write("正在获取目前CommunityDragon数据库支持的语言\nTrying to get the currently supported locales in CommunityDragon database ...\n")
+            source, status = getUrl("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/", log)
+            if not status:
+                print('正式服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "latest" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.')
+                log.write('正式服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "latest" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.\n')
+                log.close()
+                time.sleep(3)
+                exit()
+            source = source.content.decode()
+            source_list = list(map(lambda x: x.strip(), source.split("\n")))
+            locales_latest = []
+            for line in source_list:
+                matchedLine = line_re.search(line)
+                if matchedLine:
+                    soup = BeautifulSoup(line, 'lxml')
+                    name = soup.find("a")["href"]
+                    locales_latest.append(name)
+            source, status = getUrl("https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/", log)
+            if not status:
+                print('测试服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.')
+                log.write('测试服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.\n')
+                log.close()
+                time.sleep(3)
+                exit()
+            source = source.content.decode()
+            source_list = list(map(lambda x: x.strip(), source.split("\n")))
+            locales_pbe = []
+            for line in source_list:
+                matchedLine = line_re.search(line)
+                if matchedLine:
+                    soup = BeautifulSoup(line, 'lxml')
+                    name = soup.find("a")["href"]
+                    locales_pbe.append(name)
+            cdragon_folders = ["latest/cdragon/arena/", "latest/cdragon/tft/"] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_latest] + ["pbe/cdragon/arena/", "pbe/cdragon/tft/"] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_pbe]
+        else:
+            print("正在读取在线索引……\nReading online indices ...")
+            log.write("正在读取在线索引……\nReading online indices ...\n")
+            source, status = getUrl("https://raw.communitydragon.org/latest/cdragon/files.exported.txt", log)
+            if not status:
+                print("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.")
+                log.write("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\n")
+                log.close()
+                time.sleep(3)
+                exit()
+            files_exported_latest = source.text.strip("\n").split("\n")
+            #files_exported_latest = requests.get("https://raw.communitydragon.org/latest/cdragon/files.exported.txt").text.strip("\n").split("\n")
+            text_files_exported_latest = [file for file in files_exported_latest if file.endswith((".json", ".txt", ".js", ".yaml"))]
+            text_folders_exported_latest = list(set(list(map(lambda x: "/".join(x.split("/")[:-1]) + "/" if "/" in x else "", text_files_exported_latest))))
+            text_folders_exported_latest.sort()
+            source, status = getUrl("https://raw.communitydragon.org/pbe/cdragon/files.exported.txt", log)
+            if not status:
+                print("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.")
+                log.write("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\n")
+                log.close()
+                time.sleep(3)
+                exit()
+            files_exported_pbe = source.text.strip("\n").split("\n")
+            #files_exported_pbe = requests.get("https://raw.communitydragon.org/pbe/cdragon/files.exported.txt").text.strip("\n").split("\n")
+            text_files_exported_pbe = [file for file in files_exported_pbe if file.endswith((".json", ".txt", ".js", ".yaml"))]
+            text_folders_exported_pbe = list(set(list(map(lambda x: "/".join(x.split("/")[:-1]) + "/" if "/" in x else "", text_files_exported_pbe))))
+            text_folders_exported_pbe.sort()
+            cdragon_folders = list(map(lambda x: "latest/" + x, text_folders_exported_latest)) + list(map(lambda x: "pbe/" + x, text_folders_exported_pbe))
         web_prefix = "https://raw.communitydragon.org/"
         local_prefix = "离线数据（Offline Data）/cdragon"
         updated_files = []
@@ -148,7 +221,6 @@ while True:
             log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
             print("[%d/%d]正在检查文件夹（Checking the folder）：%s" %(cnt1, len(cdragon_folders), url))
             log.write("[%d/%d]正在检查文件夹（Checking the folder）：%s\n" %(cnt1, len(cdragon_folders), url))
-            line_re = re.compile('<tr><td class="link"><a href=".*" title=".*">.*</a></td><td class="size">.*</td><td class="date">.*</td></tr>')
             table = {"file": [], "size": [], "web_date": [], "web_timestamp": [], "local_date": [], "local_timestamp": []}
             retry = 0
             source, status = getUrl(url, log)
@@ -171,6 +243,9 @@ while True:
                 elif time_get_method == "2":
                     print("指定修改时间（%s）后的页面文件列表如下：\nFile list after the specified modification time (%s) is as follows:\n网页链接（URL)： %s" %(latest_mod_date, latest_mod_date, url))
                     log.write("指定修改时间（%s）后的页面文件列表如下：\nFile list after the specified modification time (%s) is as follows:\n网页链接（URL)： %s\n" %(latest_mod_date, latest_mod_date, url))
+            elif mode == "3":
+                print("本程序集涉及的文件列表如下：\nFile list involved in this program set is as follows:\n网页链接（URL)： %s" %url)
+                log.write("本程序集涉及的文件列表如下：\nFile list involved in this program set is as follows:\n网页链接（URL)： %s\n" %url)
             for line in source_list:
                 matchedLine = line_re.search(line)
                 if matchedLine:
@@ -180,10 +255,10 @@ while True:
                     web_date = soup.find("td", class_ = "date").text
                     web_date_obj = datetime.strptime(web_date, "%Y-%b-%d %H:%M")
                     web_timestamp = web_date_obj.timestamp()
-                    local_timestamp = os.path.getmtime(os.path.join(local_prefix, folder, name)) if name in os.listdir(os.path.join(local_prefix, folder)) else 0
+                    local_timestamp = os.path.getmtime(os.path.join(local_prefix, folder, name)) if os.path.exists(os.path.join(local_prefix, folder)) and name in os.listdir(os.path.join(local_prefix, folder)) else 0
                     local_date = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(local_timestamp))
-                    if ".json" in name:
-                        if ("cdragon/arena" in folder or "cdragon/tft" in folder) and (name != "en_us.json" and name != "zh_cn.json") or mode == "2" and time_get_method == "1" and web_timestamp < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp < latest_mod_timestamp:
+                    if name.endswith((".json", ".txt", ".js", ".yaml")):
+                        if mode == "2" and time_get_method == "1" and web_timestamp < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp < latest_mod_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"]:
                             continue
                         table["file"].append(name)
                         table["size"].append(size)
@@ -196,9 +271,10 @@ while True:
                 print(table)
                 log.write(str(table) + "\n")
             else:
-                print(format_df(table)[0])
+                print(format_df(table, False, True)[0])
                 log.write(format_df(table)[0] + "\n")
             dir = os.path.join(local_prefix, folder).replace("\\", "/")
+            os.makedirs(dir, exist_ok = True)
             for i in range(len(table)):
                 cnt2 += 1
                 name = table["file"][i]
@@ -213,17 +289,26 @@ while True:
                     log.write("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes.\n" %(urljoin(url, name), urljoin(url, name)))
                     error_files.append(urljoin(url, name))
                     continue
-                src = src.json()
+                try:
+                    src = src.json() if name.endswith(".json") else src.text.replace("\r", "")
+                except json.decoder.JSONDecodeError as e:
+                    if "Unexpected UTF-8 BOM (decode using utf-8-sig)" in str(e): #解决方案来自Stack Overflow（The solution comes from https://stackoverflow.com/questions/71025396/asyncio-and-get-unexpected-utf-8-bom）
+                        print("文件编码格式错误！正在尝试改用utf-8-sig编码……\nFile decode error! Trying decoding by utf-8-sig ...")
+                        log.write("文件编码格式错误！正在尝试改用utf-8-sig编码……\nFile decode error! Trying decoding by utf-8-sig ...\n")
+                        src = json.loads(src.text.encode().decode("utf-8-sig"))
                 if not name in os.listdir(dir):
                     update = added = True
                 else:
                     with open(os.path.join(dir, name), "r", encoding = "utf-8") as fp:
-                        dst = json.load(fp)
+                        dst = json.load(fp) if name.endswith(".json") else fp.read()
                     if src != dst:
                         update = True
-                if mode == "1" and update or mode == "2": #当选择全局扫描时，只更新有变化的文档；当选择根据修改时间更新时，如果网页修改时间超前，那么无论文件内容是否发生变化，都重新保存一次，便于后续按照修改时间更新（When the user selects Global Scan, the program updates the changed files. When the user selects Updating according to modification time, if the web modification time of a file succeeds to the local midification time of that, then save the web content to local, no matter whether the web file is same as the local file in terms of content）
+                if mode == "1" and update or mode == "2" or mode == "3": #当选择全局扫描时，只更新有变化的文档；当选择根据修改时间更新时，如果网页修改时间超前，那么无论文件内容是否发生变化，都重新保存一次，便于后续按照修改时间更新（When the user selects Global Scan, the program updates the changed files. When the user selects Updating according to modification time, if the web modification time of a file succeeds to the local midification time of that, then save the web content to local, no matter whether the web file is same as the local file in terms of content）
                     with open(os.path.join(dir, name), "w", encoding = "utf-8") as fp:
-                        json.dump(src, fp, indent = 4, ensure_ascii = False)
+                        if name.endswith(".json"):
+                            json.dump(src, fp, indent = 4, ensure_ascii = False)
+                        else:
+                            fp.write(src)
                 if update:
                     if added:
                         print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
@@ -262,7 +347,7 @@ while True:
             print()
     elif resource[0] == "2":
         if ddragon_hint:
-            hint = '请按以下步骤操作：\nPlease follow these steps:\n1. 访问网址https://developer.riotgames.com/docs/lol#data-dragon\n   Visit the website: https://developer.riotgames.com/docs/lol#data-dragon\n2. 在Latest中找到正式服最新版本数据资源压缩包下载链接。例如：https://ddragon.leagueoflegends.com/cdn/dragontail-14.8.1.tgz\n   Find the link to download the compressed tarball of the latest data resource for live servers. For example: https://ddragon.leagueoflegends.com/cdn/dragontail-14.8.1.tgz\n3. 下载。这需要花费一些时间。\n   Download the file. It may take some time.\n4. 将下载好的tgz文件直接“解压至此”。\n   "Extract here" for the tgz file.\n5. 将解压出来的压缩包再次解压到选定文件夹下与压缩包同名的文件夹。示例：将“dragontail-14.8.1.tar”解压到“D:/360AI浏览器下载/dragontail-14.8.1”文件夹下。\nExtract to "Archive-Name" folder under the selected folder for the extracted tar file. For example, extract "dragontail-14.8.1.tar" into the folder "D:/Downloads/dragontail-14.8.1".\n接下来，请给出数据资源的位置。（按照上例应为“D:/360AI浏览器下载/dragontail-14.8.1/14.8.1/data”。）\nNext, please provide the directory that stores the data resources. (By the above example, the directory should be "D:/Downloads/dragontail-14.8.1/14.8.1/data".)'
+            hint = '请按以下步骤操作：\nPlease follow these steps:\n1. 访问网址https://developer.riotgames.com/docs/lol#data-dragon\n   Visit the website: https://developer.riotgames.com/docs/lol#data-dragon\n2. 在Latest中找到正式服最新版本数据资源压缩包下载链接。例如：https://ddragon.leagueoflegends.com/cdn/dragontail-14.11.1.tgz\n   Find the link to download the compressed tarball of the latest data resource for live servers. For example: https://ddragon.leagueoflegends.com/cdn/dragontail-14.11.1.tgz\n3. 下载。这需要花费一些时间。\n   Download the file. It may take some time.\n4. 将下载好的tgz文件直接“解压至此”。\n   "Extract here" for the tgz file.\n5. 将解压出来的压缩包再次解压到选定文件夹下与压缩包同名的文件夹。示例：将“dragontail-14.11.1.tar”解压到“D:/360AI浏览器下载/dragontail-14.11.1”文件夹下。\nExtract to "Archive-Name" folder under the selected folder for the extracted tar file. For example, extract "dragontail-14.11.1.tar" into the folder "D:/Downloads/dragontail-14.11.1".\n接下来，请给出数据资源的位置。（按照上例应为“D:/360AI浏览器下载/dragontail-14.11.1/14.11.1/data”。）\nNext, please provide the directory that stores the data resources. (By the above example, the directory should be "D:/Downloads/dragontail-14.11.1/14.11.1/data".)'
             print(hint)
             log.write(hint + "\n")
             ddragon_hint = False

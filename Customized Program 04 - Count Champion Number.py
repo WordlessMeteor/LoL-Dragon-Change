@@ -341,7 +341,7 @@ async def count_all_bots(connection):
     await create_custom_lobby(connection)
     alias_dict = {4: "Twisted Fate", 5: "Xin Zhao", 11: "Master Yi", 20: "Nunu & Willump", 21: "Miss Fortune", 31: "Cho'Gath", 36: "Dr. Mundo", 59: "Jarvan IV", 62: "Monkey King", 64: "Lee Sin", 96: "Kog'Maw", 136: "Aurelion Sol", 145: "Kai'Sa", 161: "Vel'Koz", 200: "Bel'Veth", 223: "Tahm Kench", 421: "Rek'Sai", 888: "Renata Glasc", 897: "K'Sante"}
     for champion in champions:
-        bot = { "championId": champion["id"], "botDifficulty": "HARD", "teamId": "200"}
+        bot = { "championId": champion["id"], "botDifficulty": "RSINTERMEDIATE", "teamId": "200", "position": "TOP"}
         await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)
         time.sleep(0.1) #由于服务器响应速度原因，从添加电脑到房间信息更新，需要0.1秒的缓冲时间（0.1s buffer time is needed between adding a bot and updating the lobby information due to the server response speed）
         lobby = await(await connection.request("GET", "/lol-lobby/v2/lobby")).json()
@@ -355,8 +355,9 @@ async def count_all_bots(connection):
             f.write(entry)
             if champion["id"] > 0: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
                 count += 1
-        for player in lobby["gameConfig"]["customTeam200"]:
-            await connection.request("DELETE", "/lol-lobby/v1/lobby/custom/bots/%s" %player["botId"])
+        #for player in lobby["gameConfig"]["customTeam200"]:
+            #await connection.request("DELETE", "/lol-lobby/v1/lobby/custom/bots/%s" %player["botId"])
+        await create_custom_lobby(connection)
     print("\n统计完毕，共%d名英雄。请输入任意键退出。\nCount finished! There're %d champions in total. Please press any key to exit." %(count, count))
     f.close()
     input()

@@ -198,16 +198,16 @@ async def fetch_store(connection):
     tftmapskins_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/tftmapskins.json" %(URLPatch, language_cdragon)
     wardSkins_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/ward-skins.json" %(URLPatch, language_cdragon)
     #下面声明离线数据资源的默认地址（The following code declare the default paths of offline data resources）
-    championSkins_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\skins.json" %URLPatch
-    companions_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\companions.json" %URLPatch
-    statstones_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\statstones.json" %URLPatch
-    summonerEmotes_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\summoner-emotes.json" %URLPatch
-    summonerIcons_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\summoner-icons.json" %URLPatch
-    tftdamageskins_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\tftdamageskins.json" %URLPatch
-    tftmapskins_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\tftmapskins.json" %URLPatch
-    wardSkins_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\ward-skins.json" %URLPatch
+    championSkins_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\skins.json" %(URLPatch, language_cdragon)
+    companions_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\companions.json" %(URLPatch, language_cdragon)
+    statstones_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\statstones.json" %(URLPatch, language_cdragon)
+    summonerEmotes_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\summoner-emotes.json" %(URLPatch, language_cdragon)
+    summonerIcons_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\summoner-icons.json" %(URLPatch, language_cdragon)
+    tftdamageskins_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tftdamageskins.json" %(URLPatch, language_cdragon)
+    tftmapskins_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tftmapskins.json" %(URLPatch, language_cdragon)
+    wardSkins_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\ward-skins.json" %(URLPatch, language_cdragon)
     #下面声明离线数据资源的格式（The following code declare the formats of offline data resources）
-    championSkins_format = 'isinstance(data, dict) and all(map(lambda x: isinstance(x, dict), data.values())) and all(i in data[j] for i in ["id", "isBase", "name", "splashPath", "uncenteredSplashPath", "tilePath", "loadScreenPath", "skinType", "rarity", "isLegacy", "splashVideoPath", "collectionSplashVideoPath", "featuresText", "emblems", "regionRarityId", "rarityGemPath", "skinLines", "skinAugments", "description"] for j in data) and all("chromaPath" in data[i] for i in data if not i in ["147000", "147001", "147015"])'
+    championSkins_format = 'isinstance(data, dict) and all(map(lambda x: isinstance(x, dict), data.values())) and all(i in data[j] for i in ["id", "isBase", "name", "splashPath", "uncenteredSplashPath", "tilePath", "loadScreenPath", "skinType", "rarity", "isLegacy", "splashVideoPath", "collectionSplashVideoPath", "featuresText", "emblems", "regionRarityId", "rarityGemPath", "skinLines", "description"] for j in data) and all("chromaPath" in data[i] for i in data if not i in ["103000", "103016", "103065", "103085", "147000", "147001", "147015"])'
     companions_format = 'isinstance(data, list) and all(isinstance(data[i], dict) for i in range(len(data))) and all(j in data[i] for i in range(len(data)) for j in ["contentId", "itemId", "name", "loadoutsIcon", "description", "level", "speciesName", "speciesId", "rarity", "rarityValue", "isDefault", "upgrades", "TFTOnly"])'
     statstones_format = 'isinstance(data, dict) and all(i in data for i in ["statstoneData", "packData", "packIdToStatStonesIds", "seriesIdToStatStoneIds", "packIdToSubPackIds", "collectionIdToStatStoneIds", "packIdToChampIds", "champIdToPackIds", "packItemIdToContainingPackItemId"]) and all(isinstance(data[i], dict) if i != "statstoneData" and i != "packData" else isinstance(data[i], list) for i in data) and all(i in j for i in ["name", "itemId", "inventoryType", "contentId", "statstones"] for j in data["statstoneData"]) and all(i in j for statstone in data["statstoneData"] for i in ["name", "contentId", "itemId", "isRetired", "trackingType", "isEpic", "description", "milestones", "boundChampion", "category", "iconUnowned", "iconUnlit", "iconLit", "iconFull"] for j in statstone["statstones"]) and all(map(lambda x: all(i in x for i in ["name", "description", "itemId", "contentId", "storeIconImage"]), data["packData"]))'
     summonerEmotes_format = 'isinstance(data, list) and all(map(lambda x: isinstance(x, dict), data)) and all(i in j for i in ["id", "name", "inventoryIcon", "description"] for j in data) and all(map(lambda x: isinstance(x["id"], int) and isinstance(x["name"], str) and isinstance(x["inventoryIcon"], str) and isinstance(x["description"], str), data))'
@@ -264,8 +264,8 @@ async def fetch_store(connection):
                 continue
             elif summonerIcons_initial_dict["exit"]:
                 return 0
-            #下面获取云顶之弈攻击特效数据（The following code get TFT damage skin data）
-            tftdamageskins_initial_dict = load_data_online("云顶之弈攻击特效", "TFT damage skin", tftdamageskins_url, tftdamageskins_local_default, tftdamageskins_format)
+            #下面获取云顶之弈进攻特效数据（The following code get TFT damage skin data）
+            tftdamageskins_initial_dict = load_data_online("云顶之弈进攻特效", "TFT damage skin", tftdamageskins_url, tftdamageskins_local_default, tftdamageskins_format)
             if tftdamageskins_initial_dict["captured"]:
                 tftdamageskins_initial = tftdamageskins_initial_dict["data"]
             elif tftdamageskins_initial_dict["switch_to_offline"]:
@@ -293,9 +293,9 @@ async def fetch_store(connection):
                 return 0
         else:
             switch_prepare_mode = False
-            print('请在浏览器中打开以下网页，待加载完成后按Ctrl + S保存网页json文件至同目录的“离线数据（Offline Data）”文件夹下，并根据括号内的提示放置和命名文件。\nPlease open the following URLs in a browser, then press Ctrl + S to save the online json files into the folder "离线数据（Offline Data）" under the same directory after the website finishes loading and organize and rename the downloaded files according to the hints in the circle brackets.\n皮肤（%s）： %s\n云顶之弈小小英雄（%s）： %s\n永恒星碑（%s）： %s\n表情（%s）： %s\n召唤师图标（%s）： %s\n云顶之弈攻击特效（%s）： %s\n云顶之弈棋盘皮肤（%s）： %s\n守卫（眼）皮肤（%s）： %s' %(championSkins_local_default[19:], championSkins_url, companions_local_default[19:], companions_url, statstones_local_default[19:], statstones_url, summonerEmotes_local_default[19:], summonerEmotes_url, summonerIcons_local_default[19:], summonerIcons_url, tftdamageskins_local_default[19:], tftdamageskins_url, tftmapskins_local_default[19:], tftmapskins_url, wardSkins_local_default[19:], wardSkins_url))
+            print('请在浏览器中打开以下网页，待加载完成后按Ctrl + S保存网页json文件至同目录的“离线数据（Offline Data）”文件夹下，并根据括号内的提示放置和命名文件。\nPlease open the following URLs in a browser, then press Ctrl + S to save the online json files into the folder "离线数据（Offline Data）" under the same directory after the website finishes loading and organize and rename the downloaded files according to the hints in the circle brackets.\n皮肤（%s）： %s\n云顶之弈小小英雄（%s）： %s\n永恒星碑（%s）： %s\n表情（%s）： %s\n召唤师图标（%s）： %s\n云顶之弈进攻特效（%s）： %s\n云顶之弈棋盘皮肤（%s）： %s\n守卫（眼）皮肤（%s）： %s' %(championSkins_local_default[19:], championSkins_url, companions_local_default[19:], companions_url, statstones_local_default[19:], statstones_url, summonerEmotes_local_default[19:], summonerEmotes_url, summonerIcons_local_default[19:], summonerIcons_url, tftdamageskins_local_default[19:], tftdamageskins_url, tftmapskins_local_default[19:], tftmapskins_url, wardSkins_local_default[19:], wardSkins_url))
             offline_files_loaded = {"skin": False, "companion": False, "statstone": False, "summonerEmote": False, "summonerIcon": False, "tftdamageskin": False, "tftmapskin": False, "wardSkin": False}
-            offline_files = {"skin": {"file": championSkins_local_default, "URL": championSkins_url, "content": "皮肤"}, "companion": {"file": companions_local_default, "URL": companions_url, "content": "云顶之弈小小英雄"}, "statstone": {"file": statstones_local_default, "URL": statstones_url, "content": "永恒星碑"}, "summonerEmote": {"file": summonerEmotes_local_default, "URL": summonerEmotes_url, "content": "表情"}, "summonerIcon": {"file": summonerIcons_local_default, "URL": summonerIcons_url, "content": "召唤师图标"}, "tftdamageskin": {"file": tftdamageskins_local_default, "URL": tftdamageskins_url, "content": "云顶之弈攻击特效"}, "tftmapskin": {"file": tftmapskins_local_default, "URL": tftmapskins_url, "content": "云顶之弈棋盘皮肤"}, "wardSkin": {"file": wardSkins_local_default, "URL": wardSkins_url, "content": "守卫（眼）皮肤"}}
+            offline_files = {"skin": {"file": championSkins_local_default, "URL": championSkins_url, "content": "皮肤"}, "companion": {"file": companions_local_default, "URL": companions_url, "content": "云顶之弈小小英雄"}, "statstone": {"file": statstones_local_default, "URL": statstones_url, "content": "永恒星碑"}, "summonerEmote": {"file": summonerEmotes_local_default, "URL": summonerEmotes_url, "content": "表情"}, "summonerIcon": {"file": summonerIcons_local_default, "URL": summonerIcons_url, "content": "召唤师图标"}, "tftdamageskin": {"file": tftdamageskins_local_default, "URL": tftdamageskins_url, "content": "云顶之弈进攻特效"}, "tftmapskin": {"file": tftmapskins_local_default, "URL": tftmapskins_url, "content": "云顶之弈棋盘皮肤"}, "wardSkin": {"file": wardSkins_local_default, "URL": wardSkins_url, "content": "守卫（眼）皮肤"}}
             print('请按任意键以加载离线数据。输入“1”以转为在线模式。输入“0”以退出程序。\nPlease input anything to load offline data. Input "1" to switch to online mode. Submit "0" to exit.')
             while any(not i for i in offline_files_loaded.values()):
                 offline_files_notfound = {"skin": False, "companion": False, "statstone": False, "summonerEmote": False, "summonerIcon": False, "tftdamageskin": False, "tftmapskin": False, "wardSkin": False}
@@ -303,7 +303,7 @@ async def fetch_store(connection):
                 prepareMode = input()
                 if prepareMode != "" and prepareMode[0] == "1":
                     switch_prepare_mode = True
-                    continue
+                    break
                 if prepareMode != "" and prepareMode[0] == "0":
                     return 0
                 #下面获取皮肤数据（The following code get champion skin data）
@@ -336,7 +336,7 @@ async def fetch_store(connection):
                     offline_files_loaded["summonerIcon"], offline_files_notfound["summonerIcon"], offline_files_formaterror["summonerIcon"] = summonerIcons_initial_dict["loaded"], summonerIcons_initial_dict["notfound"], summonerIcons_initial_dict["formaterror"]
                     if summonerIcons_initial_dict["loaded"]:
                         summonerIcons_initial = summonerIcons_initial_dict["data"]
-                #下面获取云顶之弈攻击特效数据（The following code get TFT damage skin data）
+                #下面获取云顶之弈进攻特效数据（The following code get TFT damage skin data）
                 if not offline_files_loaded["tftdamageskin"]:
                     tftdamageskins_initial_dict = load_data_offline(tftdamageskins_local_default, tftdamageskins_format)
                     offline_files_loaded["tftdamageskin"], offline_files_notfound["tftdamageskin"], offline_files_formaterror["tftdamageskin"] = tftdamageskins_initial_dict["loaded"], tftdamageskins_initial_dict["notfound"], tftdamageskins_initial_dict["formaterror"]

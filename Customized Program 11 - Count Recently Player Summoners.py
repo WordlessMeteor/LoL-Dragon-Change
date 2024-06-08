@@ -85,7 +85,7 @@ def format_json(origin = '''{"customGameLobby": {"configuration": {"gameMode": "
 def count_nonASCII(s: str): #统计一个字符串中占用命令行2个宽度单位的字符个数（Count the number of characters that take up 2 width unit in CMD）
     return sum([unicodedata.east_asian_width(character) in ("F", "W") for character in list(str(s))])
 
-def format_df(df: pandas.DataFrame): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
     df = df.reset_index(drop = True) #这一步至关重要，因为下面的操作前提是行号是默认的（This step is crucial, for the following operations are based on the dataframe with the default row index）
     maxLens = {}
     maxWidth = shutil.get_terminal_size()[0]
@@ -93,11 +93,18 @@ def format_df(df: pandas.DataFrame): #按照每列最长字符串的命令行宽
     for field in fields:
         maxLens[field] = max(max(map(lambda x: wcswidth(str(x)), df[field])), wcswidth(str(field))) + 2
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth:
-        print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
-        if input() == "":
-            #print(df)
+        if width_exceed_ask:
+            print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
+            if input() == "":
+                #print(df)
+                result = str(df)
+                return (result, maxLens)
+        elif direct_print:
+            print("单行数据字符串输出宽度超过当前终端窗口宽度！将直接打印该数据框！\nThe output width of each record string exceeds the current width of the terminal window! The program is going to directly print this dataframe!")
             result = str(df)
             return (result, maxLens)
+        else:
+            print("单行数据字符串输出宽度超过当前终端窗口宽度！将继续格式化输出！\nThe output width of each record string exceeds the current width of the terminal window! The program is going on formatted printing!")
     result = ""
     for i in range(df.shape[1]):
         field = fields[i]
@@ -245,16 +252,16 @@ async def search_recent_players(connection):
             Arena_url = "https://raw.communitydragon.org/%s/cdragon/arena/%s.json" %(URLPatch, language_code.lower())
             #下面声明离线数据资源的默认地址（The following code declare the default paths of offline data resources）
             patches_local_default = "离线数据（Offline Data）\\versions.json"
-            spell_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\summoner-spells.json" %URLPatch
-            LoLItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\items.json" %URLPatch
-            perk_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\perks.json" %URLPatch
-            perkstyle_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\perkstyles.json" %URLPatch
-            TFT_local_default = "离线数据（Offline Data）\\cdragon\\%s\\cdragon\\tft\\zh_cn.json" %URLPatch
-            TFTChampion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\tftchampions.json" %URLPatch
-            TFTItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\tftitems.json" %URLPatch
-            TFTCompanion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\companions.json" %URLPatch
-            TFTTrait_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\tfttraits.json" %URLPatch
-            Arena_local_default = "离线数据（Offline Data）\\cdragon\\%s\\cdragon\\arena\\zh_cn.json" %URLPatch
+            spell_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\summoner-spells.json" %(URLPatch, language_cdragon[language_code])
+            LoLItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\items.json" %(URLPatch, language_cdragon[language_code])
+            perk_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\perks.json" %(URLPatch, language_cdragon[language_code])
+            perkstyle_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\perkstyles.json" %(URLPatch, language_cdragon[language_code])
+            TFT_local_default = "离线数据（Offline Data）\\cdragon\\%s\\cdragon\\tft\\%s.json" %(URLPatch, language_code.lower())
+            TFTChampion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tftchampions.json" %(URLPatch, language_cdragon[language_code])
+            TFTItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tftitems.json" %(URLPatch, language_cdragon[language_code])
+            TFTCompanion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\companions.json" %(URLPatch, language_cdragon[language_code])
+            TFTTrait_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tfttraits.json" %(URLPatch, language_cdragon[language_code])
+            Arena_local_default = "离线数据（Offline Data）\\cdragon\\%s\\cdragon\\arena\\%s.json" %(URLPatch, language_code.lower())
             print("请选择数据资源获取模式：\nPlease select the data resource capture mode:\n1\t在线模式（Online）\n2\t离线模式（Offline）")
             prepareMode = input()
             switch_language = False
@@ -294,6 +301,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合DataDragon数据库中记录的版本数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the patch data archived in DataDragon database (%s)!" %(patches_url, patches_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     latest_patch = patches_initial[0]
                     patches_dict = {}
                     smallPatches = []
@@ -349,6 +359,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的召唤师技能数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the summoner spell data archived in CommunityDragon database (%s)!" %(spell_url, spell_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取英雄联盟装备信息（The following code get LoL item data）
                     try:
                         print("正在加载英雄联盟装备信息……\nLoading LoL item information from CommunityDragon...")
@@ -390,6 +403,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的英雄联盟装备数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the LoL item data archived in CommunityDragon database (%s)!" %(LoLItem_url, LoLItem_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取基石符文信息（The following code get perk data）
                     try:
                         print("正在加载基石符文信息……\nLoading perk information from CommunityDragon...")
@@ -431,6 +447,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的基石符文数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the perk data archived in CommunityDragon database (%s)!" %(perk_url, perk_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取符文系信息（The following code get perkstyle data）
                     try:
                         print("正在加载符文系信息……\nLoading perkstyle information from CommunityDragon...")
@@ -472,6 +491,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的符文系数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the perkstyle data archived in CommunityDragon database (%s)!" %(perkstyle_url, perkstyle_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈强化符文数据（The following code get TFT augment data）
                     try:
                         print("正在加载云顶之弈基础数据……\nLoading TFT basic data from CommunityDragon ...")
@@ -513,6 +535,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈基础数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT basic data archived in CommunityDragon database (%s)!" %(TFT_url, TFT_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈英雄数据（The following code get TFT champion data）
                     try:
                         print("正在加载云顶之弈棋子信息……\nLoading TFT champion information from CommunityDragon ...")
@@ -554,6 +579,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈棋子数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT champion data archived in CommunityDragon database (%s)!" %(TFTChampion_url, TFTChampion_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈装备数据（The following code get TFT item information）
                     try:
                         print("正在加载云顶之弈装备信息……\nLoading TFT item information from CommunityDragon ...")
@@ -595,6 +623,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈装备数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT item data archived in CommunityDragon database (%s)!" %(TFTItem_url, TFTItem_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈小小英雄数据（The following code get TFT companion data）
                     try:
                         print("正在加载云顶之弈小小英雄信息……\nLoading companion information from CommunityDragon ...")
@@ -636,6 +667,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈小小英雄数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT companion data archived in CommunityDragon database (%s)!" %(TFTCompanion_url, TFTCompanion_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取云顶之弈羁绊数据（The following code get TFT trait data）
                     try:
                         print("正在加载云顶之弈羁绊信息……\nLoading TFT trait information from CommunityDragon ...")
@@ -677,6 +711,9 @@ async def search_recent_players(connection):
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈羁绊数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT trait data archived in CommunityDragon database (%s)!" %(TFTTrait_url, TFTTrait_url))
                                 continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
                     #下面获取斗魂竞技场强化符文数据（The following code get Arena augment data）
                     try:
                         print("正在加载斗魂竞技场强化符文信息……\nLoading Arena augment information from CommunityDragon ...")
@@ -1063,7 +1100,10 @@ async def search_recent_players(connection):
             continue
         else:
             if detectMode == False:
-                if summoner_name.count("-") == 4 and len(summoner_name.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
+                if summoner_name == "current-summoner":
+                    search_by_puuid = False
+                    info = current_info.copy()
+                elif summoner_name.count("-") == 4 and len(summoner_name.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
                     search_by_puuid = True
                     info = await (await connection.request("GET", "/lol-summoner/v2/summoners/puuid/" + quote(summoner_name))).json()
                 else:
