@@ -1,0 +1,181 @@
+{
+    "Characters/DominationScout/Skins/Skin0": {
+        "championSkinName": "DominationScout",
+        "skinAnimationProperties": {
+            "animationGraphData": "Characters/DominationScout/Animations/Skin0",
+            "__type": "SkinAnimationProperties"
+        },
+        "skinMeshProperties": {
+            "skeleton": "ASSETS/Characters/DominationScout/Skins/Base/DominationPoroScout.skl",
+            "simpleSkin": "ASSETS/Characters/DominationScout/Skins/Base/DominationPoroScout.skn",
+            "texture": "ASSETS/Characters/DominationScout/Skins/Base/DominationPoroScout.dds",
+            "skinScale": 1.100000023841858,
+            "selfIllumination": 0.699999988079071,
+            "brushAlphaOverride": 0.6000000238418579,
+            "material": "Characters/DominationScout/Skins/Skin0/Materials/FresnelAlpha_Ghost_poro_inst",
+            "reflectionFresnelColor": [
+                0,
+                0,
+                0,
+                255
+            ],
+            "__type": "SkinMeshDataProperties"
+        },
+        "mResourceResolver": "Characters/DominationScout/Skins/Skin0/Resources",
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/DominationScout/Skins/Skin0/Resources": {
+        "resourceMap": {
+            "{25cd1309}": "Characters/DominationScout/Skins/Skin0/Particles/DominationScout_Base_Jump01"
+        },
+        "__type": "ResourceResolver"
+    },
+    "Characters/DominationScout/Skins/Skin0/Particles/DominationScout_Base_Jump01": {
+        "particleName": "DominationScout_Base_Jump01",
+        "particlePath": "Characters/DominationScout/Skins/Skin0/Particles/DominationScout_Base_Jump01",
+        "soundOnCreateDefault": "Play_sfx_env_map12_ha_ap_poro_base_jump",
+        "__type": "VfxSystemDefinitionData"
+    },
+    "Characters/DominationScout/Skins/Skin0/Materials/FresnelAlpha_Ghost_poro_inst": {
+        "name": "Characters/DominationScout/Skins/Skin0/Materials/FresnelAlpha_Ghost_poro_inst",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Shared/Materials/black.Skarner_Rework.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask_Texture",
+                "textureName": "ASSETS/Shared/Materials/Generic_Noise.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Fresnel_Color",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FresnelColor_Size",
+                "value": [
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FresnelColor_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Size",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Diffuse_Alpha_Override",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Noise_Scale",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Color",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Noise_ScrollSpeed",
+                "value": [
+                    0.05000000074505806,
+                    0.10000000149011612,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Override",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "INVERT_FRESNEL",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_ADDITIONAL_MASKING",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/FresnelAlpha_Scrolling",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
+    }
+}

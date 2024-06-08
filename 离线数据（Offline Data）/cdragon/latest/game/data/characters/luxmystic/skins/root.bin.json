@@ -1,0 +1,340 @@
+{
+    "Characters/LuxMystic/Skins/Root": {
+        "championSkinName": "Lux",
+        "metaDataTags": "faction:demacia,gender:female,race:human,element:light",
+        "skinAudioProperties": {
+            "tagEventList": [
+                "LuxSkin07Mystic"
+            ],
+            "bankUnits": [
+                {
+                    "name": "Lux_Base_VO",
+                    "bankPath": [
+                        "ASSETS/Sounds/Wwise2016/VO/en_US/Characters/Lux/Skins/Base/Lux_Base_VO_audio.bnk",
+                        "ASSETS/Sounds/Wwise2016/VO/en_US/Characters/Lux/Skins/Base/Lux_Base_VO_events.bnk",
+                        "ASSETS/Sounds/Wwise2016/VO/en_US/Characters/Lux/Skins/Base/Lux_Base_VO_audio.wpk"
+                    ],
+                    "events": [
+                        "Play_vo_Lux_Attack2DGeneral",
+                        "Play_vo_Lux_Death3D",
+                        "Play_vo_Lux_FirstEncounter3DDemacia",
+                        "Play_vo_Lux_FirstEncounter3DEzreal",
+                        "Play_vo_Lux_FirstEncounter3DGalio",
+                        "Play_vo_Lux_FirstEncounter3DGaren",
+                        "Play_vo_Lux_FirstEncounter3DJarvanIV",
+                        "Play_vo_Lux_FirstEncounter3DKatarina",
+                        "Play_vo_Lux_FirstEncounter3DLeona",
+                        "Play_vo_Lux_FirstEncounter3DLucian",
+                        "Play_vo_Lux_FirstEncounter3DNoxus",
+                        "Play_vo_Lux_FirstEncounter3DRyze",
+                        "Play_vo_Lux_FirstEncounter3DShadowIsles",
+                        "Play_vo_Lux_FirstEncounter3DSona",
+                        "Play_vo_Lux_FirstEncounter3DTaliyah",
+                        "Play_vo_Lux_FirstEncounter3DTwitch",
+                        "Play_vo_Lux_Joke3DGeneral",
+                        "Play_vo_Lux_JokeResponse3DGeneral",
+                        "Play_vo_Lux_Kill3DGeneral",
+                        "Play_vo_Lux_Laugh3DGeneral",
+                        "Play_vo_Lux_LuxBasicAttack2_cast3D",
+                        "Play_vo_Lux_LuxBasicAttack_cast3D",
+                        "Play_vo_Lux_LuxCritAttack_cast3D",
+                        "Play_vo_Lux_LuxLightBinding_cast3D",
+                        "Play_vo_Lux_LuxLightBindingMis_hit3D",
+                        "Play_vo_Lux_LuxLightStrikeKugel_cast3D",
+                        "Play_vo_Lux_LuxLightstrikeToggle_cast3D",
+                        "Play_vo_Lux_LuxPrismaticWave_cast3D",
+                        "Play_vo_Lux_LuxPrismaticWaveShield_OnBuffCast",
+                        "Play_vo_Lux_LuxR_cast3D",
+                        "Play_vo_Lux_Move2DFirst",
+                        "Play_vo_Lux_Move2DFirstAllyDemacia",
+                        "Play_vo_Lux_Move2DFirstAllyGalio",
+                        "Play_vo_Lux_Move2DFirstAllyGaren",
+                        "Play_vo_Lux_Move2DFirstAllyTaliyah",
+                        "Play_vo_Lux_Move2DStandard",
+                        "Play_vo_Lux_Respawn2DGeneral",
+                        "Play_vo_Lux_Taunt3DGeneral",
+                        "Play_vo_Lux_TauntResponse3DGeneral"
+                    ],
+                    "voiceOver": true,
+                    "__type": "BankUnit"
+                }
+            ],
+            "__type": "SkinAudioProperties"
+        },
+        "skinAnimationProperties": {
+            "animationGraphData": "Characters/Lux/Animations/Skin0",
+            "__type": "SkinAnimationProperties"
+        },
+        "armorMaterial": "Flesh",
+        "mContextualActionData": "Characters/LuxMystic/CAC/Lux_Skin07Mystic",
+        "iconCircle": "ASSETS/Characters/Lux/HUD/Lux_Circle_0.dds",
+        "iconSquare": "ASSETS/Characters/Lux/HUD/Lux_Square_0.dds",
+        "healthBarData": {
+            "unitHealthBarStyle": 10,
+            "__type": "CharacterHealthBarDataRecord"
+        },
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/LuxMystic/CAC/Lux_Skin07Mystic": {
+        "mCooldown": 15.0,
+        "mSituations": {
+            "AttackMinion2D": {
+                "mRules": [
+                    {
+                        "mRuleName": "AttackMinion2D",
+                        "mAudioAction": {
+                            "mSelfEventName": "AttackMinion2D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "MoveOrder2D": {
+                "mRules": [
+                    {
+                        "mRuleName": "MoveOrder2D",
+                        "mConditions": [
+                            {
+                                "mDistance": 400.0,
+                                "mCompareOp": 3,
+                                "__type": "ContextualConditionMoveDistance"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "MoveOrder2D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "TauntEndedNearby": {
+                "mRules": [
+                    {
+                        "mRuleName": "TauntEndedNearby3D",
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mSelfEventName": "TauntEndedNearby3D",
+                            "mAllyEventName": "TauntEndedNearby3D",
+                            "mEnemyEventName": "TauntEndedNearby3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "Taunt": {
+                "mRules": [
+                    {
+                        "mRuleName": "Taunt3D",
+                        "mAudioAction": {
+                            "mSelfEventName": "Taunt3D",
+                            "mAllyEventName": "Taunt3D",
+                            "mEnemyEventName": "Taunt3D",
+                            "mSpectatorEventName": "Taunt3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "AttackChampion2D": {
+                "mRules": [
+                    {
+                        "mRuleName": "AttackChampion2D",
+                        "mAudioAction": {
+                            "mSelfEventName": "AttackChampion2D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "KillChampion": {
+                "mRules": [
+                    {
+                        "mRuleName": "KillChampion3DKillingSpree",
+                        "mConditions": [
+                            {
+                                "mMultikillSize": 2,
+                                "__type": "ContextualConditionMultikillSize"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mSelfEventName": "KillChampion3DKillingSpree",
+                            "mAllyEventName": "KillChampion3DKillingSpree",
+                            "mEnemyEventName": "KillChampion3DKillingSpree",
+                            "mWaitForAnnouncerQueue": true,
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "KillChampion3D",
+                        "mAudioAction": {
+                            "mSelfEventName": "KillChampion3D",
+                            "mAllyEventName": "KillChampion3D",
+                            "mEnemyEventName": "KillChampion3D",
+                            "mWaitForAnnouncerQueue": true,
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "BuyItem": {
+                "mRules": [
+                    {
+                        "mRuleName": "BuyItem2D",
+                        "mAudioAction": {
+                            "mSelfEventName": "BuyItem2D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "KillTurret": {
+                "mRules": [
+                    {
+                        "mRuleName": "KillTurret3D",
+                        "mAudioAction": {
+                            "mSelfEventName": "KillTurret3D",
+                            "mAllyEventName": "KillTurret3D",
+                            "mEnemyEventName": "KillTurret3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "Laugh": {
+                "mRules": [
+                    {
+                        "mRuleName": "Laugh3D",
+                        "mAudioAction": {
+                            "mSelfEventName": "Laugh3D",
+                            "mAllyEventName": "Laugh3D",
+                            "mEnemyEventName": "Laugh3D",
+                            "mSpectatorEventName": "Laugh3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "Joke": {
+                "mRules": [
+                    {
+                        "mRuleName": "Joke3D",
+                        "mAudioAction": {
+                            "mSelfEventName": "Joke3D",
+                            "mAllyEventName": "Joke3D",
+                            "mEnemyEventName": "Joke3D",
+                            "mSpectatorEventName": "Joke3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "RecallLeadIn": {
+                "mCoolDownTime": 10.0,
+                "mRules": [
+                    {
+                        "mRuleName": "RecallLeadin2D",
+                        "mAudioAction": {
+                            "mSelfEventName": "RecallLeadin2D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "UseItem": {
+                "mRules": [
+                    {
+                        "mRuleName": "Use item - Ward",
+                        "mConditions": [
+                            {
+                                "mItemVOGroupHash": "Ward",
+                                "__type": "ContextualConditionItemVOGroup"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "UseItem2D2043",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{68fee3c4}": true,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "Respawn2D": {
+                "mRules": [
+                    {
+                        "mRuleName": "Respawn2D",
+                        "mAudioAction": {
+                            "mSelfEventName": "Respawn2D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "AttackNeutral2D": {
+                "mRules": [
+                    {
+                        "mRuleName": "AttackChampion2D",
+                        "mAudioAction": {
+                            "mSelfEventName": "AttackChampion2D",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            }
+        },
+        "mObjectPath": "Characters/LuxMystic/CAC/Lux_Skin07Mystic",
+        "__type": "ContextualActionData"
+    }
+}

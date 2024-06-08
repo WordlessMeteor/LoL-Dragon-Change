@@ -1,0 +1,225 @@
+{
+    "{9b89ab2a}": {
+        "championSkinName": "TFT10_AnimProp_Car",
+        "skinAnimationProperties": {
+            "animationGraphData": "{b92d0d5f}",
+            "__type": "SkinAnimationProperties"
+        },
+        "skinMeshProperties": {
+            "skeleton": "ASSETS/Characters/TFT10_AnimProp_Car/Skins/Base/TFT10_AnimProp_Car.skl",
+            "simpleSkin": "ASSETS/Characters/TFT10_AnimProp_Car/Skins/Base/TFT10_AnimProp_Car.skn",
+            "texture": "ASSETS/Characters/TFT10_AnimProp_Car/Skins/Base/TFT10_AnimProp_Car_TX_CM.dds",
+            "selfIllumination": 0.699999988079071,
+            "material": "Characters/TFT10_AnimProp_Car/Skins/Skin0/Materials/TFT_Materialize_inst",
+            "__type": "SkinMeshDataProperties"
+        },
+        "armorMaterial": "Metal",
+        "mResourceResolver": "{79e5c0b8}",
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/TFT10_AnimProp_Car/Skins/Skin0/Materials/TFT_Materialize_inst": {
+        "name": "Characters/TFT10_AnimProp_Car/Skins/Skin0/Materials/TFT_Materialize_inst",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Maps/KitPieces/TFT/Set10/Textures/KDA_Kitpieces_A.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Grid_Texture",
+                "textureName": "ASSETS/Shared/Particles/21.SKINS_Akali_Skin82.dds",
+                "addressU": 2,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Alpha_Texture",
+                "textureName": "ASSETS/Shared/Materials/TriangleBase.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Crystal_Texture",
+                "textureName": "ASSETS/Shared/Materials/TriangleBase.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Color_A",
+                "value": [
+                    0.5137255191802979,
+                    0.2705882489681244,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Mat_Control",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Noise_Tiling",
+                "value": [
+                    6.0,
+                    4.0,
+                    0.0,
+                    0.20000000298023224
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Grid_Contrast",
+                "value": [
+                    0.10000000149011612,
+                    0.20000000298023224,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Panning_Params",
+                "value": [
+                    2.0,
+                    2.0,
+                    0.0,
+                    0.5
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Crystal_Params",
+                "value": [
+                    6.0,
+                    4.0,
+                    0.0,
+                    0.20000000298023224
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Distance_Control",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Control",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Step",
+                "value": [
+                    0.30000001192092896,
+                    0.800000011920929,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Glitch_Strength",
+                "value": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "USE_ADDITIVE",
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/TFT_Materialize",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "Mat_Control",
+                    "driver": {
+                        "mBoolDriver": {
+                            "mKeyName": "visibility",
+                            "__type": "{d0116dc8}"
+                        },
+                        "mOnValue": 0.0,
+                        "mOffValue": 1.0,
+                        "mTurnOnTimeSec": 1.7000000476837158,
+                        "mTurnOffTimeSec": 1.7000000476837158,
+                        "__type": "LerpMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Distance_Control",
+                    "driver": {
+                        "minDistance": 425.0,
+                        "maxDistance": 500.0,
+                        "__type": "DistanceToPlayerMaterialFloatDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Alpha_Control",
+                    "driver": {
+                        "mBoolDriver": {
+                            "mBoolDriver": {
+                                "mKeyName": "visibility",
+                                "__type": "{d0116dc8}"
+                            },
+                            "mDelayOff": 1.5,
+                            "__type": "DelayedBoolMaterialDriver"
+                        },
+                        "mOnValue": 0.0,
+                        "mOffValue": 1.0,
+                        "mTurnOnTimeSec": 0.5,
+                        "mTurnOffTimeSec": 0.5,
+                        "__type": "LerpMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    }
+}

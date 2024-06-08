@@ -1,0 +1,343 @@
+{
+    "Characters/ZyraSeed/Skins/Skin47": {
+        "championSkinName": "ZyraSeedSkin47",
+        "skinParent": 46,
+        "skinAudioProperties": {
+            "tagEventList": [
+                "ZyraSeed"
+            ],
+            "__type": "SkinAudioProperties"
+        },
+        "skinAnimationProperties": {
+            "animationGraphData": "{b4b9219b}",
+            "__type": "SkinAnimationProperties"
+        },
+        "skinMeshProperties": {
+            "skeleton": "ASSETS/Characters/ZyraSeed/Skins/Skin46/ZyraSeed_Skin46.skl",
+            "simpleSkin": "ASSETS/Characters/ZyraSeed/Skins/Skin46/ZyraSeed_Skin46.skn",
+            "texture": "ASSETS/Characters/ZyraSeed/Skins/Skin47/ZyraSeed_Skin47_TX_CM.dds",
+            "skinScale": 1.2000000476837158,
+            "selfIllumination": 0.800000011920929,
+            "material": "Characters/ZyraSeed/Skins/Skin47/Materials/Dissolve_Diffuse_Bloom_inst",
+            "reflectionFresnelColor": [
+                0,
+                0,
+                0,
+                255
+            ],
+            "materialOverride": [
+                {
+                    "material": "Characters/ZyraSeed/Skins/Skin47/Materials/Head_Outline_inst",
+                    "submesh": "Outline",
+                    "__type": "SkinMeshDataProperties_MaterialOverride"
+                }
+            ],
+            "__type": "SkinMeshDataProperties"
+        },
+        "iconSquare": "ASSETS/Characters/ZyraSeed/HUD/ZyraW_Square.dds",
+        "mResourceResolver": "Characters/ZyraSeed/Skins/Skin47/Resources",
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/ZyraSeed/Skins/Skin47/Materials/Dissolve_Diffuse_Bloom_inst": {
+        "name": "Characters/ZyraSeed/Skins/Skin47/Materials/Dissolve_Diffuse_Bloom_inst",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/ZyraSeed/Skins/Skin47/ZyraSeed_Skin47_TX_CM.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask",
+                "textureName": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Dissolve_Texture",
+                "textureName": "ASSETS/Shared/Particles/3026_Items_Einstein_01_mult.TFT_Booms_Tristana_Base.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "DissolveWidth",
+                "value": [
+                    0.0010000000474974513,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DissolveBias",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "HAS_ALT_DIFF",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_POST_LIGHT",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/Dissolve_Diffuse_Bloom",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "DissolveBias",
+                    "driver": {
+                        "driver": {
+                            "mAnimationName": "Death",
+                            "__type": "AnimationFractionDynamicMaterialFloatDriver"
+                        },
+                        "graph": {
+                            "times": [
+                                0.0,
+                                0.2507007122039795
+                            ],
+                            "values": [
+                                1.0,
+                                0.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "FloatGraphMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    },
+    "Characters/ZyraSeed/Skins/Skin47/Materials/Head_Outline_inst": {
+        "name": "Characters/ZyraSeed/Skins/Skin47/Materials/Head_Outline_inst",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Shared/Materials/white.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Bloom_Texture",
+                "textureName": "ASSETS/Shared/Materials/black.Skarner_Rework.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Outline_Thickness",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Outline_Color",
+                "value": [
+                    0.1921568661928177,
+                    0.16078431904315948,
+                    0.4313725531101227,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Color",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "USE_GRADIENT_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "BLOOM_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_BLOOM_MAP",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_ALPHA_CHANNEL",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/HKG_Outline",
+                        "blendEnable": true,
+                        "PolygonDepthBiasEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "windingToCull": 0,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    },
+    "Characters/ZyraSeed/Skins/Skin47/Resources": {
+        "resourceMap": {
+            "{ac2b9f56}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Abyssalscepter_itm",
+            "{b9e42290}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_BrandConflagration_buf",
+            "Zyra_AA_cas": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_AA_cas",
+            "Zyra_AA_cas_02": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_AA_cas_02",
+            "Zyra_AA_cas_crit": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_AA_cas_crit",
+            "Zyra_AA_mis": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_AA_mis",
+            "Zyra_AA_tar": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_AA_tar",
+            "Zyra_AA_tar_crit": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_AA_tar_crit",
+            "Zyra_Dance_Sound": "Characters/Zyra/Skins/Skin0/Particles/Zyra_Base_Dance_Sound",
+            "Zyra_Death": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Base_Death",
+            "Zyra_Death_End": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Death_End",
+            "Zyra_Death_Sound": "Characters/Zyra/Skins/Skin0/Particles/Zyra_Base_Death_Sound",
+            "Zyra_E_Cas": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_E_cas",
+            "Zyra_E_cas_02": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_E_cas_02",
+            "Zyra_E_Plant_Tar": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_E_plant_tar",
+            "Zyra_E_Sequence_Impact": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_E_Sequence_Impact",
+            "Zyra_E_Sequence_Root": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_E_Sequence_Root",
+            "Zyra_E_Sequence_Unroot": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_E_Sequence_Unroot",
+            "Zyra_E_Spawn_Lasher_VO": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_E_Spawn_Lasher_VO",
+            "Zyra_E_tar": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_E_tar",
+            "Zyra_Joke_Sound": "Characters/Zyra/Skins/Skin0/Particles/Zyra_Base_Joke_Sound",
+            "Zyra_Laugh_Sound": "Characters/Zyra/Skins/Skin0/Particles/Zyra_Base_Laugh_Sound",
+            "Zyra_P_cas": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_cas",
+            "Zyra_P_Death": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_Death",
+            "Zyra_P_Enrage": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_Enrage",
+            "Zyra_P_Enrage_NoAudio": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_Enrage_NoAudio",
+            "Zyra_P_Indicator_Overhead": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_Indicator_Overhead",
+            "Zyra_P_Indicator_Overhead_2": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_Indicator_Overhead_2",
+            "Zyra_P_Plant_Birth": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_Plant_Birth",
+            "Zyra_P_SeedSpawn_Mis": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_SeedSpawn_Mis",
+            "Zyra_P_Spawn": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_Spawn",
+            "Zyra_Q_Cas": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_Q_Cas",
+            "Zyra_Q_cas_Hand": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Q_cas_hand",
+            "Zyra_Q_cas_Hand_02": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Q_cas_Hand_02",
+            "Zyra_Q_Expire": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Q_Expire",
+            "Zyra_Q_Plant_Mis": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Q_Plant_Mis",
+            "Zyra_Q_Plant_Tar": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Q_Plant_Tar",
+            "Zyra_Q_Tar": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Q_Tar",
+            "Zyra_Q_Team_ID_green": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Q_Team_ID_green",
+            "Zyra_Q_Team_ID_red": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Q_Team_ID_red",
+            "Zyra_R_cas": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_R_cas",
+            "Zyra_R_Cas_Center": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_R_Cas_Center",
+            "Zyra_R_cas_Hand": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_R_cas_Hand",
+            "Zyra_R_Cas_ID_Green": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_R_Cas_ID_Green",
+            "Zyra_R_Cas_ID_Red": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_R_Cas_ID_Red",
+            "Zyra_R_Outer": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_R_Outer",
+            "Zyra_R_Unit_Ground_Tar": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_R_Unit_Ground_Tar",
+            "Zyra_R_Unit_Impact": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_R_Unit_Impact",
+            "Zyra_R_Unit_Impact_Spike": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_R_Unit_Impact_Spike",
+            "Zyra_Taunt_Sound": "Characters/Zyra/Skins/Skin0/Particles/Zyra_Base_Taunt_Sound",
+            "Zyra_W_Cas": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_Cas",
+            "Zyra_W_Cas_02": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_Cas_02",
+            "Zyra_W_SeedSpawn_Mis": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_SeedSpawn_Mis",
+            "Zyra_W_SeedTrap_Trigger": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_SeedTrap_Trigger",
+            "Zyra_W_Seed_Death_Sound": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_Seed_Death_Sound",
+            "Zyra_W_Seed_ID_Green": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_Seed_ID_Green",
+            "Zyra_W_Seed_ID_Red": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_Seed_ID_Red",
+            "Zyra_W_Seed_Indicator": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_Seed_Indicator",
+            "Zyra_W_Seed_Indicator_NoSound": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_Seed_Indicator_NoSound",
+            "Zyra_W_Seed_Indicator_Zyra": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_W_Seed_Indicator_Zyra",
+            "Zyra_W_Texture": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_W_Texture",
+            "Zyra_Z_Dummy_Controller": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Dummy_Controller",
+            "Zyra_Z_Sequence_Impact": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Sequence_Impact",
+            "{7931d64f}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_E_Sequence_Impact_child",
+            "{82d775c7}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_R_Cas_ID_Green_Child",
+            "{f352b07e}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_Seed_glow",
+            "{90b1d4ce}": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_P_Death_child",
+            "{ddc025f8}": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_Death_End_child",
+            "{d0891bb7}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_01",
+            "{12bd4eb6}": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_Z_Recall_flower",
+            "{31544417}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_P_Seed_Death",
+            "{4d9353f8}": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_Z_Recall_flower_cas",
+            "{cbea4678}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_flower_end",
+            "{b65d0f7d}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_flower_end_child",
+            "{1923f740}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_water",
+            "{46ffdc45}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_water_Child",
+            "{cd0a08ed}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_logo01",
+            "{1c8053b4}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_logo01_child",
+            "{068d2de6}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_flower_glow",
+            "{6066b381}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_logo02_child",
+            "{cb0a05c7}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Z_Recall_logo03",
+            "{eea76a0d}": "Characters/Zyra/Skins/Skin47/Particles/Zyra_Skin47_E_Sequence_Impact_child02",
+            "{8ec5ac7b}": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Emote_joke_vfx",
+            "Zyra_Skin46_Idle_glow": "Characters/Zyra/Skins/Skin46/Particles/Zyra_Skin46_Idle_glow"
+        },
+        "__type": "ResourceResolver"
+    }
+}

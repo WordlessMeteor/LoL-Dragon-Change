@@ -1,0 +1,212 @@
+{
+    "Characters/TFT4_LunarRevel_Billboard/Skins/Skin1": {
+        "championSkinName": "TFT4_LunarRevel_Billboard",
+        "skinAnimationProperties": {
+            "animationGraphData": "Characters/TFT4_LunarRevel_Billboard/Animations/Skin0",
+            "__type": "SkinAnimationProperties"
+        },
+        "skinMeshProperties": {
+            "skeleton": "ASSETS/Characters/TFT4_LunarRevel_Billboard/Skins/Skin01/TFT4_LunarRevel_Billboard_Skin01.skl",
+            "simpleSkin": "ASSETS/Characters/TFT4_LunarRevel_Billboard/Skins/Skin01/TFT4_LunarRevel_Billboard_Skin01.skn",
+            "selfIllumination": 0.3330000042915344,
+            "material": "Characters/TFT4_LunarRevel_Billboard/Skins/Skin1/Materials/GlowSign_B_inst",
+            "__type": "SkinMeshDataProperties"
+        },
+        "armorMaterial": "Glass",
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/TFT4_LunarRevel_Billboard/Skins/Skin1/Materials/GlowSign_B_inst": {
+        "name": "Characters/TFT4_LunarRevel_Billboard/Skins/Skin1/Materials/GlowSign_B_inst",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/TFT4_LunarRevel_Billboard/Skins/Base/TFT4_LunarRevel_Billboard_TX_CM.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Emissive_Texture",
+                "textureName": "ASSETS/Characters/TFT4_LunarRevel_Billboard/Skins/Base/TFT4_LunarRevel_Billboard_Emissive.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Emissive_Color",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Emissive_Intensity",
+                "value": [
+                    0.699999988079071,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "value": [
+                    0.30000001192092896,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Time_Speed",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Offset",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Noise_Min",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Noise_Max",
+                "value": [
+                    1.5,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Time_Offset",
+                "value": [
+                    1.3700000047683716,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "USE_BLUE_CHANNEL_MASK",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_GREEN_CHANNEL_MASK",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_RED_CHANNEL_MASK",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FLICKER",
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/GlowSign",
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "Noise_Min",
+                    "driver": {
+                        "mBoolDriver": {
+                            "mOperator": 3,
+                            "mValueA": {
+                                "mValue": 0.5,
+                                "__type": "FloatLiteralMaterialDriver"
+                            },
+                            "mValueB": {
+                                "mKeyName": "FlickerValue",
+                                "__type": "{e856a498}"
+                            },
+                            "__type": "FloatComparisonMaterialDriver"
+                        },
+                        "mOnValue": -1.0,
+                        "mOffValue": 1.0,
+                        "mTurnOnTimeSec": 0.20000000298023224,
+                        "mTurnOffTimeSec": 2.0,
+                        "__type": "LerpMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Noise_Max",
+                    "driver": {
+                        "mBoolDriver": {
+                            "mOperator": 3,
+                            "mValueA": {
+                                "mValue": 0.5,
+                                "__type": "FloatLiteralMaterialDriver"
+                            },
+                            "mValueB": {
+                                "mKeyName": "FlickerValue",
+                                "__type": "{e856a498}"
+                            },
+                            "__type": "FloatComparisonMaterialDriver"
+                        },
+                        "mOnValue": 0.5,
+                        "mOffValue": 1.5,
+                        "mTurnOnTimeSec": 0.20000000298023224,
+                        "mTurnOffTimeSec": 2.0,
+                        "__type": "LerpMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    }
+}

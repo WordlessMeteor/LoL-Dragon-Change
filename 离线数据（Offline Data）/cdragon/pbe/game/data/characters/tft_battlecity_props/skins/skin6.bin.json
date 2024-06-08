@@ -1,0 +1,307 @@
+{
+    "{30d9f15e}": {
+        "championSkinName": "TFT_BattleCity_Prop2",
+        "skinAnimationProperties": {
+            "animationGraphData": "{fcafbad7}",
+            "__type": "SkinAnimationProperties"
+        },
+        "skinMeshProperties": {
+            "skeleton": "ASSETS/Characters/TFT_BattleCity_Props/Skins/Skin02/erosion.skl",
+            "simpleSkin": "ASSETS/Characters/TFT_BattleCity_Props/Skins/Skin02/erosion.skn",
+            "texture": "ASSETS/Characters/TFT_Template_AnimProp/Skins/Base/TFT_Template_AnimProp_TX_CM.dds",
+            "selfIllumination": 0.699999988079071,
+            "material": "Characters/TFT_BattleCity_Props/Skins/Skin6/Materials/Erosion_Stencil",
+            "castShadows": false,
+            "initialSubmeshShadowsToHide": "TFT_BattleCity_Board_B_MAT",
+            "__type": "SkinMeshDataProperties"
+        },
+        "armorMaterial": "Metal",
+        "mResourceResolver": "{b376ff26}",
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/TFT_BattleCity_Props/Skins/Skin6/Materials/Erosion_Stencil": {
+        "name": "Characters/TFT_BattleCity_Props/Skins/Skin6/Materials/Erosion_Stencil",
+        "samplerValues": [
+            {
+                "samplerName": "ColorTexture",
+                "textureName": "ASSETS/Maps/Particles/TFT/Pyke_Skin45_Z_SpaceBackground_01.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask_Texture",
+                "textureName": "ASSETS/Characters/TFT_BattleCity_Props/Skins/Skin02/mask_firebox.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "NoiseTexture",
+                "textureName": "ASSETS/Maps/Particles/TFT/Base_light_wall_mult.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "ColorTexTilling",
+                "value": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ColorTexSpeed",
+                "value": [
+                    0.05000000074505806,
+                    0.05000000074505806,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "EdgeSoftness",
+                "value": [
+                    0.15000000596046448,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Color",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.800000011920929
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "EdgeNoiseIntensity",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ErosionFactor",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "EdgePosition",
+                "value": [
+                    1.2000000476837158,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "NoiseTexTilling",
+                "value": [
+                    6.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "NoiseTexSpeed",
+                "value": [
+                    -0.004999999888241291,
+                    -0.003000000026077032,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/TFT_Erosion",
+                        "stencilEnable": true,
+                        "blendEnable": true,
+                        "stencilCompareFunc": 0,
+                        "stencilReferenceVal": 7,
+                        "stencilMask": 255,
+                        "stencilPassDepthPassOp": 2,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "writeMask": 32,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "ErosionFactor",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "{2f7adffe}"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 0.30000001192092896,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "{2e7ade6b}"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 0.5,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "{2d7adcd8}"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 0.8999999761581421,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "{96ad54aa}"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "driver": {
+                                        "mAnimationName": "{96ad54aa}",
+                                        "__type": "AnimationFractionDynamicMaterialFloatDriver"
+                                    },
+                                    "graph": {
+                                        "times": [
+                                            0.0,
+                                            1.0
+                                        ],
+                                        "values": [
+                                            0.0,
+                                            0.30000001192092896
+                                        ],
+                                        "__type": "VfxAnimatedFloatVariableData"
+                                    },
+                                    "__type": "FloatGraphMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "{95ad5317}"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "driver": {
+                                        "mAnimationName": "{95ad5317}",
+                                        "__type": "AnimationFractionDynamicMaterialFloatDriver"
+                                    },
+                                    "graph": {
+                                        "times": [
+                                            0.0,
+                                            1.0
+                                        ],
+                                        "values": [
+                                            0.30000001192092896,
+                                            0.5
+                                        ],
+                                        "__type": "VfxAnimatedFloatVariableData"
+                                    },
+                                    "__type": "FloatGraphMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "{94ad5184}"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "driver": {
+                                        "mAnimationName": "{94ad5184}",
+                                        "__type": "AnimationFractionDynamicMaterialFloatDriver"
+                                    },
+                                    "graph": {
+                                        "times": [
+                                            0.0,
+                                            1.0
+                                        ],
+                                        "values": [
+                                            0.5,
+                                            0.8999999761581421
+                                        ],
+                                        "__type": "VfxAnimatedFloatVariableData"
+                                    },
+                                    "__type": "FloatGraphMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    }
+}

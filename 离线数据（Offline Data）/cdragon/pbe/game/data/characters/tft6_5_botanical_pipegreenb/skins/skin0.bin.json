@@ -1,0 +1,191 @@
+{
+    "Characters/TFT6_5_Botanical_PipeGreenB/Skins/Skin0": {
+        "championSkinName": "TFT6_5_Botanical_PipeGreenB",
+        "skinAnimationProperties": {
+            "animationGraphData": "Characters/TFT6_5_Botanical_PipeGreenB/Animations/Skin0",
+            "__type": "SkinAnimationProperties"
+        },
+        "skinMeshProperties": {
+            "skeleton": "ASSETS/Characters/TFT6_5_Botanical_PipeGreenB/Skins/Base/TFT6_5_Botanical_PipeGreenB.skl",
+            "simpleSkin": "ASSETS/Characters/TFT6_5_Botanical_PipeGreenB/Skins/Base/TFT6_5_Botanical_PipeGreenB.skn",
+            "texture": "ASSETS/Characters/TFT6_5_Botanical_PipeGreenB/Skins/Base/TFT6_5_Botanical_PipeGreenB_TX_CM.dds",
+            "selfIllumination": 0.699999988079071,
+            "castShadows": false,
+            "materialOverride": [
+                {
+                    "material": "Characters/TFT6_5_Botanical_PipeGreenB/Skins/Skin0/Materials/Botanical_PipeGreenB_inst",
+                    "submesh": "Garden_Kitpieces_B_PipeB_MAT",
+                    "__type": "SkinMeshDataProperties_MaterialOverride"
+                }
+            ],
+            "__type": "SkinMeshDataProperties"
+        },
+        "armorMaterial": "Metal",
+        "mResourceResolver": "Characters/TFT6_5_Botanical_PipeGreenB/Skins/Skin0/Resources",
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/TFT6_5_Botanical_PipeGreenB/Skins/Skin0/Materials/Botanical_PipeGreenB_inst": {
+        "name": "Characters/TFT6_5_Botanical_PipeGreenB/Skins/Skin0/Materials/Botanical_PipeGreenB_inst",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Maps/KitPieces/TFT/Set6_5/Textures/Garden_Kitpieces_B_B.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Bubble_Texture",
+                "textureName": "ASSETS/Maps/KitPieces/TFT/Set6_5/Textures/Garden_Set6_5_Bubbles.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Bubble_Color",
+                "value": [
+                    0.11372549086809158,
+                    0.3490196168422699,
+                    0.21176470816135406,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bubble_Strength",
+                "value": [
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bubble_Map_Tiling",
+                "value": [
+                    1.0,
+                    3.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bubble_Speed",
+                "value": [
+                    4.050000190734863,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bubble_Tiling",
+                "value": [
+                    1.5,
+                    12.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Liquid_Color",
+                "value": [
+                    0.10980392247438431,
+                    0.2705882489681244,
+                    0.06666667014360428,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bubble_Sharpness",
+                "value": [
+                    0.0,
+                    0.30000001192092896,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Liquid_Sharpness",
+                "value": [
+                    0.10000000149011612,
+                    0.30000001192092896,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "ENABLE_SPECULAR",
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/CHAR_ChannelScroll_Diffuse",
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "Bubble_Strength",
+                    "driver": {
+                        "mBoolDriver": {
+                            "mOperator": 3,
+                            "mValueA": {
+                                "mValue": 0.5,
+                                "__type": "FloatLiteralMaterialDriver"
+                            },
+                            "mValueB": {
+                                "mKeyName": "EmissiveStrengthB",
+                                "__type": "{e856a498}"
+                            },
+                            "__type": "FloatComparisonMaterialDriver"
+                        },
+                        "mOnValue": 0.800000011920929,
+                        "mOffValue": 0.44999998807907104,
+                        "mTurnOnTimeSec": 0.5,
+                        "__type": "LerpMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Bubble_Speed",
+                    "driver": {
+                        "mKeyName": "BubbleSpeed",
+                        "__type": "{e856a498}"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    }
+}

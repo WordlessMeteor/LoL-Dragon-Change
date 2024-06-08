@@ -1,0 +1,287 @@
+{
+    "Characters/IvernMinion/Skins/Skin18": {
+        "championSkinName": "IvernMinionSkin18",
+        "skinParent": 11,
+        "skinAudioProperties": {
+            "tagEventList": [
+                "Ivern",
+                "IvernSkin11",
+                "IvernMinionSkin11"
+            ],
+            "{07624567}": false,
+            "__type": "SkinAudioProperties"
+        },
+        "skinAnimationProperties": {
+            "animationGraphData": "Characters/IvernMinion/Animations/Skin11",
+            "__type": "SkinAnimationProperties"
+        },
+        "skinMeshProperties": {
+            "skeleton": "ASSETS/Characters/IvernMinion/Skins/Skin11/IvernMinion_Skin11.skl",
+            "simpleSkin": "ASSETS/Characters/IvernMinion/Skins/Skin11/IvernMinion_Skin11.skn",
+            "texture": "ASSETS/Characters/IvernMinion/Skins/Skin18/IvernMinion_Skin18_TX_CM.dds",
+            "selfIllumination": 0.699999988079071,
+            "material": "Characters/IvernMinion/Skins/Skin18/Materials/Minion_Bloom_inst",
+            "reflectionFresnelColor": [
+                0,
+                0,
+                0,
+                255
+            ],
+            "materialOverride": [
+                {
+                    "texture": "ASSETS/Characters/IvernMinion/Skins/Skin18/IvernMinion_Skin18_IvernGolemTop_TX_CM.dds",
+                    "submesh": "IvernMinion_Top_Mat",
+                    "__type": "SkinMeshDataProperties_MaterialOverride"
+                }
+            ],
+            "__type": "SkinMeshDataProperties"
+        },
+        "armorMaterial": "Stone",
+        "idleParticlesEffects": [
+            {
+                "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
+            }
+        ],
+        "iconCircle": "ASSETS/Characters/IvernMinion/HUD/Daisy_Circle.dds",
+        "iconSquare": "ASSETS/Characters/IvernMinion/HUD/Daisy_Sq.dds",
+        "healthBarData": {
+            "unitHealthBarStyle": 4,
+            "__type": "CharacterHealthBarDataRecord"
+        },
+        "mResourceResolver": "Characters/IvernMinion/Skins/Skin18/Resources",
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/IvernMinion/Skins/Skin18/Materials/Minion_Bloom_inst": {
+        "name": "Characters/IvernMinion/Skins/Skin18/Materials/Minion_Bloom_inst",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/IvernMinion/Skins/Skin18/IvernMinion_Skin18_TX_CM.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask_Texture_red",
+                "textureName": "ASSETS/Characters/IvernMinion/Skins/Skin11/IvernMinion_Skin11_bloom_mask.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Bloom_Intensity",
+                "value": [
+                    3.25,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Color",
+                "value": [
+                    0.0,
+                    0.14901961386203766,
+                    0.7019608020782471,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Bias",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "USE_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/Diffuse_Bloom",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "Bloom_Intensity",
+                    "driver": {
+                        "mDriver": {
+                            "__type": "TimeMaterialDriver"
+                        },
+                        "mFrequency": 1.2000000476837158,
+                        "mScale": 4.0,
+                        "__type": "SineMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    },
+    "Characters/IvernMinion/Skins/Skin18/Resources": {
+        "resourceMap": {
+            "Ivern_BA_Mis": "{771c259a}",
+            "Ivern_BA_Ranged_avatarMesh": "{144610a1}",
+            "Ivern_BA_Ranged_Cas": "{c0a9f636}",
+            "Ivern_BA_Ranged_Tar": "{e8b7b064}",
+            "Ivern_BA_Tar": "{63b4aa66}",
+            "Ivern_death_impact": "{6d4c854e}",
+            "Ivern_death_leaves": "{a51defb0}",
+            "Ivern_E_Cas": "{d6e5a6e8}",
+            "Ivern_E_DamageShield": "{56ddd8c7}",
+            "Ivern_E_DamageShield_destroyed": "{6b2da523}",
+            "Ivern_E_damageShield_nova": "{1a6f2526}",
+            "Ivern_E_Indicator_Green": "{b3d3aca4}",
+            "Ivern_E_Indicator_Red": "{e4b130b4}",
+            "Ivern_E_Slow_hit_tar": "{7b9454d4}",
+            "Ivern_E_Whisp": "{de1c4174}",
+            "Ivern_Idle1_ground": "{eceb541a}",
+            "Ivern_Idle_ground": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_Idle_ground",
+            "Ivern_R_Cas_Glitter_Child": "{9af0153e}",
+            "Ivern_P_blueBuff": "{f25888f3}",
+            "Ivern_P_BuffTransfer_buf": "{5658f43a}",
+            "Ivern_P_BuffTransfer_buf_red": "{0bb2ba36}",
+            "Ivern_P_BuffTransfer_Mis": "{e2200468}",
+            "Ivern_P_BuffTransfer_Mis_Red2": "{03ab19ba}",
+            "Ivern_P_cas": "{0c216fb3}",
+            "Ivern_P_ChannelGround": "{c54c123a}",
+            "Ivern_P_ChannelGround_scuttler": "{c1653a1b}",
+            "Ivern_P_FinishedGround": "{8dc9a5bb}",
+            "Ivern_P_FinishedGround_scuttler": "{b43745c0}",
+            "Ivern_P_Finished_buff_scuttler": "{858af3e1}",
+            "Ivern_P_HarvestGround": "{c63184b8}",
+            "Ivern_P_HarvestGround_scuttler": "{7e4a0e0d}",
+            "Ivern_P_Order_redBuff": "{467b448f}",
+            "Ivern_P_Overlay": "{857b78c6}",
+            "Ivern_P_redBuff": "{c9d73e9c}",
+            "Ivern_P_ring_timer": "{0a2542ee}",
+            "Ivern_P_ring_timer_decor": "{adf4d9b0}",
+            "Ivern_P_ring_timer_scuttler": "{bf35b2c7}",
+            "Ivern_Q_cas": "{b7a4108c}",
+            "Ivern_Q_Mis": "{4596acd2}",
+            "Ivern_Q_Tar": "{1f84413e}",
+            "Ivern_Q_Tar_despawn": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_Q_Tar_despawn",
+            "Ivern_Q_Tar_roots": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_Q_Tar_roots",
+            "Ivern_R_BlueOverlay": "{ee59ed14}",
+            "Ivern_R_cas_highfive": "{176ff71a}",
+            "Ivern_R_Daisy_Overlay": "{9b9e8479}",
+            "Ivern_R_lasersight_beam": "{1eeed1d2}",
+            "Ivern_R_Overlay": "{8450e9a0}",
+            "Ivern_R_Overlay_Head": "{f241fd5b}",
+            "Ivern_R_Overlay_LHand": "{d34d848a}",
+            "Ivern_R_Overlay_RHand": "{81343cc8}",
+            "Ivern_R_Small_mis": "{37bc9603}",
+            "Ivern_R_stack_1": "{cc5b372c}",
+            "Ivern_R_stack_2": "{cf5b3be5}",
+            "Ivern_R_stack_3": "{ce5b3a52}",
+            "Ivern_R_timer": "{9e5f2121}",
+            "Ivern_R_trail": "{02752c5c}",
+            "Ivern_Smite_Champion_Debuff": "{7564c930}",
+            "Ivern_Taunt_flower": "{38ef0845}",
+            "Ivern_W_Brush": "{a6831bab}",
+            "Ivern_W_cas_tar": "{2efec7a2}",
+            "Ivern_W_Exclamation": "{cf0a017e}",
+            "Ivern_W_indicator_beam": "{b8344424}",
+            "Ivern_W_LH": "{854eda71}",
+            "Ivern_W_Mis": "{7e6187f8}",
+            "Ivern_W_Passive_Range_01": "{3570c922}",
+            "Ivern_W_RH": "{a94902ef}",
+            "Ivern_W_scanner": "{2f59ac0d}",
+            "Ivern_W_scanner_enemy": "{44df866a}",
+            "{42160fed}": "{396a5692}",
+            "{0c5fa65b}": "{e961aff5}",
+            "IvernMinion_BA": "{96993732}",
+            "IvernMinion_BA_1_FistSlam": "{9084ae08}",
+            "IvernMinion_idle1_aggro1_sound": "{1c45fecc}",
+            "IvernMinion_idle1_aggro2_sound": "{f3a3c559}",
+            "IvernMinion_idle1_aggro3_sound": "{6fe6368a}",
+            "IvernMinion_R_Spawn": "{08e85ca7}",
+            "IvernMinion_spawn_debris": "{0329c038}",
+            "IvernMinion_Spawn_GroundSlam": "{5d517565}",
+            "IvernMinion_spawn_highfive": "{21dbfe33}",
+            "IvernMinion_Z_Blue_Death_GroundPoof": "{9845b9d9}",
+            "IvernMinion_Z_Blue_Death_Sound": "{d1d485e9}",
+            "IvernMinion_Z_Blue_Spawn_ReadyFlash": "{e951ade2}",
+            "{bdeb2b5e}": "{1c45fecc}",
+            "{96271f5f}": "{f3a3c559}",
+            "{db04b54c}": "{6fe6368a}",
+            "{73890e2f}": "{afc46352}",
+            "{c24b3a7d}": "{b4a00798}",
+            "{4e10b7ab}": "{2a493980}",
+            "{6185acb8}": "{fd4ec455}",
+            "{cd62a7fa}": "{b72cb125}",
+            "{ae11bfe0}": "{8b11362d}",
+            "{05ca9a7c}": "{a6d88c95}",
+            "{d3c25536}": "{2ddd8af1}",
+            "{3eb35384}": "{b5ebb635}",
+            "{6337b81a}": "{4ef1bd2b}",
+            "{91b4fe46}": "{05e8e971}",
+            "{8315fa3c}": "{06ab2c5f}",
+            "{6b1aba0c}": "{8177a8cb}",
+            "{e9572e3e}": "{54c035c7}",
+            "{e875543e}": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_W_BotanyMeshChild",
+            "{b7d75ffc}": "{7baa8697}",
+            "{804b7706}": "{4d916032}",
+            "{5725b20a}": "{2e4aadf7}",
+            "{52b42e9d}": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_R_Small_mis_Tree_1",
+            "{4fb429e4}": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_R_Small_mis_Tree_2",
+            "{12c9c033}": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_Recall_Ground_Flower_1",
+            "{8c94b699}": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_Recall_Stone",
+            "{ce4cdaaf}": "{ce8e2488}",
+            "{13c9c1c6}": "{e64d90eb}",
+            "{1d151a7b}": "{77834f7c}",
+            "{8755e37f}": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_P_BotanyMeshChild",
+            "{31e419ed}": "{79a00ba2}",
+            "{f1eef30f}": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_Recall_Ground",
+            "{f41962c1}": "Characters/Ivern/Skins/Skin11/Particles/Ivern_Skin11_R_BotanyMeshChild",
+            "{906183b3}": "{77ea9f68}",
+            "{1fa61dd5}": "{48734ac8}",
+            "{a9bc34bc}": "{9ce38c1b}",
+            "{dc24e708}": "{a2bdc7b3}",
+            "{52367de7}": "{ae718e3e}",
+            "{ee7d291a}": "{5a85f5a1}"
+        },
+        "__type": "ResourceResolver"
+    }
+}
