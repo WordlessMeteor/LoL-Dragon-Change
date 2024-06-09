@@ -56,17 +56,18 @@ def format_df(df: pd.DataFrame, width_exceed_ask: bool = True, direct_print: boo
 
 def getUrl(url: str, log):
     retry = 0
-    while retry <= 5:
+    while True:
         try:
             source = requests.get(url)
             source.raise_for_status()
-        except requests.exceptions.HTTPError as http_err:
             retry += 1
+            if retry > 5:
+                break
+        except requests.exceptions.HTTPError as http_err:
             if http_err.response.status_code == 404:
                 print("文件不存在！正在尝试第%d次重新获取数据！\nFile not found! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
                 log.write("文件不存在！正在尝试第%d次重新获取数据！\nFile not found! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         except requests.exceptions.SSLError as ssl_error:
-            retry += 1
             if "[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol" in str(ssl_error):
                 print("违反协议导致读取中断！正在尝试第%d次重新获取数据！\nEOF occurred in violation of protocol! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
                 log.write("违反协议导致读取中断！正在尝试第%d次重新获取数据！\nEOF occurred in violation of protocol! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
@@ -74,11 +75,9 @@ def getUrl(url: str, log):
                 print("SSL证书验证失败！正在尝试第%d次重新获取数据！\nSSL certificate verify failed! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
                 log.write("SSL证书验证失败！正在尝试第%d次重新获取数据！\nSSL certificate verify failed! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         except requests.exceptions.ProxyError:
-            retry += 1
             print("无法连接到代理！正在尝试第%d次重新获取数据！\nCannot connect to proxy! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
             log.write("无法连接到代理！正在尝试第%d次重新获取数据！\nCannot connect to proxy! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         except requests.exceptions.ChunkedEncodingError:
-            retry += 1
             print("接收数据块长度不正确导致连接中断！正在尝试第%d次重新获取数据！\nConnection broken: InvalidChunkLength. Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
             log.write("接收数据块长度不正确导致连接中断！正在尝试第%d次重新获取数据！\nConnection broken: InvalidChunkLength. Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         else:
@@ -144,8 +143,8 @@ while True:
         else:
             mode = "1"
         if mode == "3":
-            print("正在获取目前CommunityDragon数据库支持的语言\nTrying to get the currently supported locales in CommunityDragon database ...")
-            log.write("正在获取目前CommunityDragon数据库支持的语言\nTrying to get the currently supported locales in CommunityDragon database ...\n")
+            print("正在获取目前CommunityDragon数据库支持的语言……\nTrying to get the currently supported locales in CommunityDragon database ...")
+            log.write("正在获取目前CommunityDragon数据库支持的语言……\nTrying to get the currently supported locales in CommunityDragon database ...\n")
             source, status = getUrl("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/", log)
             if not status:
                 print('正式服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "latest" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.')
@@ -258,7 +257,7 @@ while True:
                     local_timestamp = os.path.getmtime(os.path.join(local_prefix, folder, name)) if os.path.exists(os.path.join(local_prefix, folder)) and name in os.listdir(os.path.join(local_prefix, folder)) else 0
                     local_date = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(local_timestamp))
                     if name.endswith((".json", ".txt", ".js", ".yaml")):
-                        if mode == "2" and time_get_method == "1" and web_timestamp < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp < latest_mod_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"]:
+                        if mode == "2" and time_get_method == "1" and web_timestamp < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp < latest_mod_timestamp or mode == "3" and web_timestamp < local_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"]:
                             continue
                         table["file"].append(name)
                         table["size"].append(size)
