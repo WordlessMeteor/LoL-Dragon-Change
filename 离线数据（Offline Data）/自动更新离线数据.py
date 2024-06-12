@@ -58,16 +58,17 @@ def getUrl(url: str, log):
     retry = 0
     while True:
         try:
+            retry += 1
             source = requests.get(url)
             source.raise_for_status()
-            retry += 1
+        except requests.exceptions.HTTPError as http_err:
             if retry > 5:
                 break
-        except requests.exceptions.HTTPError as http_err:
             if http_err.response.status_code == 404:
-                print("文件不存在！正在尝试第%d次重新获取数据！\nFile not found! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
-                log.write("文件不存在！正在尝试第%d次重新获取数据！\nFile not found! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
+                return (source, 404)
         except requests.exceptions.SSLError as ssl_error:
+            if retry > 5:
+                break
             if "[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol" in str(ssl_error):
                 print("违反协议导致读取中断！正在尝试第%d次重新获取数据！\nEOF occurred in violation of protocol! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
                 log.write("违反协议导致读取中断！正在尝试第%d次重新获取数据！\nEOF occurred in violation of protocol! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
@@ -75,15 +76,19 @@ def getUrl(url: str, log):
                 print("SSL证书验证失败！正在尝试第%d次重新获取数据！\nSSL certificate verify failed! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
                 log.write("SSL证书验证失败！正在尝试第%d次重新获取数据！\nSSL certificate verify failed! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         except requests.exceptions.ProxyError:
+            if retry > 5:
+                break
             print("无法连接到代理！正在尝试第%d次重新获取数据！\nCannot connect to proxy! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
             log.write("无法连接到代理！正在尝试第%d次重新获取数据！\nCannot connect to proxy! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         except requests.exceptions.ChunkedEncodingError:
+            if retry > 5:
+                break
             print("接收数据块长度不正确导致连接中断！正在尝试第%d次重新获取数据！\nConnection broken: InvalidChunkLength. Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
             log.write("接收数据块长度不正确导致连接中断！正在尝试第%d次重新获取数据！\nConnection broken: InvalidChunkLength. Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         else:
-            return (source, True)
+            return (source, 0)
     if retry > 5:
-        return (None, False)
+        return (None, 1)
 
 currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
 os.makedirs("离线数据（Offline Data）/Update Logs", exist_ok = True)
@@ -94,7 +99,7 @@ while True:
     print("请选择要更新的数据资源，输入空字符串以退出程序：\nPlease select the data resource to update, or submit an empty string to exit the program:\n1\tCommunityDragon\n2\tDataDragon")
     log.write("请选择要更新的数据资源，输入空字符串以退出程序：\nPlease select the data resource to update, or submit an empty string to exit the program:\n1\tCommunityDragon\n2\tDataDragon\n")
     resource = input()
-    log.write(resource + "\n")
+    log.write(resource + "\n\n" if resource == "" else resource + "\n")
     if resource == "":
         log.close()
         break
@@ -102,20 +107,20 @@ while True:
         print("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）")
         log.write("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）\n")
         mode = input()
-        log.write(mode + "\n")
+        log.write(mode + "\n\n" if mode == "" else mode + "\n")
         if mode == "" or mode[0] == "2":
             mode = "2"
             print("请选择一种方式指定修改时间：\nPlease select a method of specifying the modification time:\n1\t自动获取（Automatically get）\n2\t手动输入（Manually input）")
             log.write("请选择一种方式指定修改时间：\nPlease select a method of specifying the modification time:\n1\t自动获取（Automatically get）\n2\t手动输入（Manually input）\n")
             time_get_method = input()
-            log.write(time_get_method + "\n")
+            log.write(time_get_method + "\n\n" if time_get_method == "" else time_get_method + "\n")
             if time_get_method != "" and time_get_method[0] == "2":
                 time_get_method == "2"
                 print('请以“年-月-日 时-分-秒”的格式输入修改时间。示例：2024-05-04 10-26-21。\nPlease input a modification time in the format "%Y-%m-%d %H-%M-%S". Example: 2024-05-04 10-26-21.')
                 log.write('请以“年-月-日 时-分-秒”的格式输入修改时间。示例：2024-05-04 10-26-21。\nPlease input a modification time in the format "%Y-%m-%d %H-%M-%S". Example: 2024-05-04 10-26-21.\n')
                 while True:
                     latest_mod_timestamp = input()
-                    log.write(latest_mod_timestamp + "\n")
+                    log.write(latest_mod_timestamp + "\n\n" if latest_mod_timestamp == "" else latest_mod_timestamp + "\n")
                     if latest_mod_timestamp == "":
                         continue
                     try: #允许输入整型或浮点型时间戳（A timestamp of integer or float type is allowed）
@@ -146,9 +151,13 @@ while True:
             print("正在获取目前CommunityDragon数据库支持的语言……\nTrying to get the currently supported locales in CommunityDragon database ...")
             log.write("正在获取目前CommunityDragon数据库支持的语言……\nTrying to get the currently supported locales in CommunityDragon database ...\n")
             source, status = getUrl("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/", log)
-            if not status:
-                print('正式服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "latest" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.')
-                log.write('正式服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "latest" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.\n')
+            if status != 0:
+                if status == 1:
+                    print('正式服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "latest" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.')
+                    log.write('正式服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "latest" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.\n')
+                elif status == 404:
+                    print('正式服语言信息获取失败！请检查以下链接的可用性。程序即将退出。\nLocales in the "latest" folder capture failure! Please check the URL availability. The program will exit now.\nhttps://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/')
+                    log.write('正式服语言信息获取失败！请检查以下链接的可用性。程序即将退出。\nLocales in the "latest" folder capture failure! Please check the URL availability. The program will exit now.\nhttps://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/\n')
                 log.close()
                 time.sleep(3)
                 exit()
@@ -162,9 +171,13 @@ while True:
                     name = soup.find("a")["href"]
                     locales_latest.append(name)
             source, status = getUrl("https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/", log)
-            if not status:
-                print('测试服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.')
-                log.write('测试服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.\n')
+            if status != 0:
+                if status == 1:
+                    print('测试服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.')
+                    log.write('测试服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.\n')
+                elif status == 404:
+                    print('正式服语言信息获取失败！请检查以下链接的可用性。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the URL availability. The program will exit now.\nhttps://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/')
+                    log.write('正式服语言信息获取失败！请检查以下链接的可用性。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the URL availability. The program will exit now.\nhttps://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/\n')
                 log.close()
                 time.sleep(3)
                 exit()
@@ -182,9 +195,13 @@ while True:
             print("正在读取在线索引……\nReading online indices ...")
             log.write("正在读取在线索引……\nReading online indices ...\n")
             source, status = getUrl("https://raw.communitydragon.org/latest/cdragon/files.exported.txt", log)
-            if not status:
-                print("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.")
-                log.write("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\n")
+            if status != 0:
+                if status == 1:
+                    print("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.")
+                    log.write("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\n")
+                elif status == 404:
+                    print("获取索引失败！请检查以下链接的可用性。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\nhttps://raw.communitydragon.org/latest/cdragon/files.exported.txt")
+                    log.write("获取索引失败！请检查以下链接的可用性。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\nhttps://raw.communitydragon.org/latest/cdragon/files.exported.txt\n")
                 log.close()
                 time.sleep(3)
                 exit()
@@ -194,9 +211,13 @@ while True:
             text_folders_exported_latest = list(set(list(map(lambda x: "/".join(x.split("/")[:-1]) + "/" if "/" in x else "", text_files_exported_latest))))
             text_folders_exported_latest.sort()
             source, status = getUrl("https://raw.communitydragon.org/pbe/cdragon/files.exported.txt", log)
-            if not status:
-                print("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.")
-                log.write("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\n")
+            if status != 0:
+                if status == 1:
+                    print("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.")
+                    log.write("获取索引失败！请检查系统网络状况和代理设置。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\n")
+                elif status == 404:
+                    print("获取索引失败！请检查以下链接的可用性。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\nhttps://raw.communitydragon.org/pbe/cdragon/files.exported.txt")
+                    log.write("获取索引失败！请检查以下链接的可用性。程序即将退出。\nIndex capture failure! Please check the system network condition and agent configuration. The program will exit now.\nhttps://raw.communitydragon.org/pbe/cdragon/files.exported.txt\n")
                 log.close()
                 time.sleep(3)
                 exit()
@@ -211,6 +232,12 @@ while True:
         updated_files = []
         added_files = []
         error_files = []
+        folders_to_delete = [] #统计本地存在而数据库不存在的文件夹（Summarize the folders that exist locally but don't exist in the database）
+        files_to_delete = [] #统计本地存在而数据库不存在的文件（Summarize the files that exist locally but don't exist in the database）
+        for root, dirs, files in os.walk(local_prefix):
+            if not root in folders_to_delete and files != []: #请仔细体会后半个条件的作用（Please try to udnerstand the role of the latter condition）
+                folders_to_delete.append(root.replace("\\", "/") + "/")
+            files_to_delete += list(map(lambda x: os.path.join(root, x).replace("\\", "/"), files))
         cnt1 = 0
         for folder in cdragon_folders:
             cnt1 += 1
@@ -221,13 +248,18 @@ while True:
             print("[%d/%d]正在检查文件夹（Checking the folder）：%s" %(cnt1, len(cdragon_folders), url))
             log.write("[%d/%d]正在检查文件夹（Checking the folder）：%s\n" %(cnt1, len(cdragon_folders), url))
             table = {"file": [], "size": [], "web_date": [], "web_timestamp": [], "local_date": [], "local_timestamp": []}
-            retry = 0
             source, status = getUrl(url, log)
-            if not status:
-                print("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes." %(url, url))
-                log.write("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes.\n" %(url, url))
-                error_files.append(url)
+            if status != 0:
+                if status == 1:
+                    print("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes." %(url, url))
+                    log.write("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes.\n" %(url, url))
+                    error_files.append(url)
+                elif status == 404:
+                    print("文件夹%s不存在！\nFolder %s not found!" %(url, url))
+                    log.write("文件夹%s不存在！\nFolder %s not found!\n" %(url, url))
                 continue
+            if os.path.join(local_prefix, folder).replace("\\", "/") in folders_to_delete:
+                folders_to_delete.remove(os.path.join(local_prefix, folder).replace("\\", "/"))
             source = source.content.decode()
             source_list = list(map(lambda x: x.strip(), source.split("\n")))
             print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
@@ -243,8 +275,8 @@ while True:
                     print("指定修改时间（%s）后的页面文件列表如下：\nFile list after the specified modification time (%s) is as follows:\n网页链接（URL)： %s" %(latest_mod_date, latest_mod_date, url))
                     log.write("指定修改时间（%s）后的页面文件列表如下：\nFile list after the specified modification time (%s) is as follows:\n网页链接（URL)： %s\n" %(latest_mod_date, latest_mod_date, url))
             elif mode == "3":
-                print("本程序集涉及的文件列表如下：\nFile list involved in this program set is as follows:\n网页链接（URL)： %s" %url)
-                log.write("本程序集涉及的文件列表如下：\nFile list involved in this program set is as follows:\n网页链接（URL)： %s\n" %url)
+                print("本程序集涉及的新文件列表如下：\nNew file list involved in this program set is as follows:\n网页链接（URL)： %s" %url)
+                log.write("本程序集涉及的新文件列表如下：\nNew file list involved in this program set is as follows:\n网页链接（URL)： %s\n" %url)
             for line in source_list:
                 matchedLine = line_re.search(line)
                 if matchedLine:
@@ -257,7 +289,7 @@ while True:
                     local_timestamp = os.path.getmtime(os.path.join(local_prefix, folder, name)) if os.path.exists(os.path.join(local_prefix, folder)) and name in os.listdir(os.path.join(local_prefix, folder)) else 0
                     local_date = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(local_timestamp))
                     if name.endswith((".json", ".txt", ".js", ".yaml")):
-                        if mode == "2" and time_get_method == "1" and web_timestamp < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp < latest_mod_timestamp or mode == "3" and web_timestamp < local_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"]:
+                        if mode == "2" and time_get_method == "1" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp + time.localtime().tm_gmtoff < latest_mod_timestamp or mode == "3" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"]:
                             continue
                         table["file"].append(name)
                         table["size"].append(size)
@@ -283,11 +315,17 @@ while True:
                 log.write("[%d/%d][%d/%d]正在校对文件（Checking file）： %s\n" %(cnt1, len(cdragon_folders), cnt2, len(table), urljoin(url, name)))
                 update = added = False
                 src, status = getUrl(urljoin(url, name), log)
-                if not status:
-                    print("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes." %(urljoin(url, name), urljoin(url, name)))
-                    log.write("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes.\n" %(urljoin(url, name), urljoin(url, name)))
-                    error_files.append(urljoin(url, name))
+                if status != 0:
+                    if status == 1:
+                        print("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes." %(urljoin(url, name), urljoin(url, name)))
+                        log.write("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes.\n" %(urljoin(url, name), urljoin(url, name)))
+                        error_files.append(urljoin(url, name))
+                    elif status == 404:
+                        print("文件%s不存在！\nFile %s not found!" %(urljoin(url, name), urljoin(url, name)))
+                        log.write("文件%s不存在！\nFile %s not found!\n" %(urljoin(url, name), urljoin(url, name)))
                     continue
+                if os.path.join(local_prefix, folder, name).replace("\\", "/") in files_to_delete:
+                    files_to_delete.remove(os.path.join(local_prefix, folder, name).replace("\\", "/"))
                 try:
                     src = src.json() if name.endswith(".json") else src.text.replace("\r", "")
                 except json.decoder.JSONDecodeError as e:
@@ -344,6 +382,28 @@ while True:
                 print(file)
                 log.write(file + "\n")
             print()
+        if mode == "1" and files_to_delete: #只有全局扫描才可以决定删除哪些文件（Only by Global Scan can the program decide which files to delete）
+            print("以下文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following files don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" + "\n".join(files_to_delete))
+            log.write("以下文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following files don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" + "\n".join(files_to_delete) + "\n")
+            delete = input() != ""
+            log.write(delete + "\n\n" if delete == "" else delete + "\n")
+            if delete:
+                for file in files_to_delete:
+                    try:
+                        os.remove(file)
+                    except FileNotFoundError:
+                        pass
+        if folders_to_delete:
+            print("以下文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following folders don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" + "\n".join(folders_to_delete))
+            log.write("以下文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following folders don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" + "\n".join(folders_to_delete) + "\n")
+            delete = input() != ""
+            log.write(delete + "\n\n" if delete == "" else delete + "\n")
+            if delete:
+                for folder in folders_to_delete:
+                    try:
+                        shutil.rmtree(folder)
+                    except FileNotFoundError: #部分文件夹可能在上一步中已被删除（Some folders may have been deleted in the last step）
+                        pass
     elif resource[0] == "2":
         if ddragon_hint:
             hint = '请按以下步骤操作：\nPlease follow these steps:\n1. 访问网址https://developer.riotgames.com/docs/lol#data-dragon\n   Visit the website: https://developer.riotgames.com/docs/lol#data-dragon\n2. 在Latest中找到正式服最新版本数据资源压缩包下载链接。例如：https://ddragon.leagueoflegends.com/cdn/dragontail-14.11.1.tgz\n   Find the link to download the compressed tarball of the latest data resource for live servers. For example: https://ddragon.leagueoflegends.com/cdn/dragontail-14.11.1.tgz\n3. 下载。这需要花费一些时间。\n   Download the file. It may take some time.\n4. 将下载好的tgz文件直接“解压至此”。\n   "Extract here" for the tgz file.\n5. 将解压出来的压缩包再次解压到选定文件夹下与压缩包同名的文件夹。示例：将“dragontail-14.11.1.tar”解压到“D:/360AI浏览器下载/dragontail-14.11.1”文件夹下。\nExtract to "Archive-Name" folder under the selected folder for the extracted tar file. For example, extract "dragontail-14.11.1.tar" into the folder "D:/Downloads/dragontail-14.11.1".\n接下来，请给出数据资源的位置。（按照上例应为“D:/360AI浏览器下载/dragontail-14.11.1/14.11.1/data”。）\nNext, please provide the directory that stores the data resources. (By the above example, the directory should be "D:/Downloads/dragontail-14.11.1/14.11.1/data".)'
@@ -356,7 +416,7 @@ while True:
         dst_folder = "离线数据（Offline Data）/ddragon"
         while True:
             src_folder = input()
-            log.write(src_folder + "\n")
+            log.write(src_folder + "\n\n" if src_folder == "" else src_folder + "\n")
             try:
                 if not ("en_US" in os.listdir(src_folder) and "zh_CN" in os.listdir(src_folder)):
                     print("您输入的地址有误！请重新输入！\nERROR input of data resource directory! Please try again!")
@@ -416,9 +476,13 @@ while True:
         log.write("[%d]正在校对文件（Checking file）： %s\n" %(cnt1, version_url))
         update = added = False
         src, status = getUrl(version_url, log)
-        if not status:
-            print("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes." %(version_url, version_url))
-            log.write("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes.\n" %(version_url, version_url))
+        if status != 0:
+            if status == 1:
+                print("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes." %(version_url, version_url))
+                log.write("文件%s比对失败！请等待程序结束后手动比对。\nFile %s check failed! Please check manually after the program execution finishes.\n" %(version_url, version_url))
+            elif status == 404:
+                print("文件%s不存在！请等待程序结束后手动比对。\nFile %s not found! Please check manually after the program execution finishes." %(version_url, version_url))
+                log.write("文件%s不存在！请等待程序结束后手动比对。\nFile %s not found! Please check manually after the program execution finishes.\n" %(version_url, version_url))
             error_files.append(version_url)
             continue
         src = src.json()

@@ -3462,6 +3462,7 @@ async def search_profile(connection):
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information & timeline capture Failure!)" %(i + 1, len(matchIDs)))
                                         else:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)))
+                                    print("对局序号（MatchID）： %d" %matchIDs[i])
                                     if match_reserve_strategy[matchIDs[i]]:
                                         match_reserved += 1
                                         if not info_exist_error[matchIDs[i]]:
@@ -3542,6 +3543,7 @@ async def search_profile(connection):
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d (Match information & timeline capture Failure!)" %(i + 1, len(matchIDs)))
                                         else:
                                             print("对局信息和时间轴导出进度（Match information and timeline export process）：%d/%d" %(i + 1, len(matchIDs)))
+                                    print("对局序号（MatchID）： %d" %matchIDs[i])
                                     if match_reserve_strategy[matchIDs[i]]:
                                         match_reserved += 1
                                         if not info_exist_error[matchIDs[i]]:

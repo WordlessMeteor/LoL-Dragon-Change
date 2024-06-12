@@ -343,11 +343,14 @@ async def add_bots_team1(connection):
                     continue
                 elif i in map(str, range(1, maxTeamSize + 1)):
                     i = int(i)
-                    team = random.sample(all_champions, i)
-                    print("程序为您分配到以下英雄：\nYou have been distributed the following bot champions:\n*****************************************************************************")
-                    for j in team:
-                        print("{0:<14}".format(champions_CN[j]) + "\t" + "{0:<14}".format(champions_EN[j]))
-                    print("*****************************************************************************")
+                    while True:
+                        team = random.sample(all_champions, i)
+                        print("程序为您分配到以下英雄：\nYou have been distributed the following bot champions:\n*****************************************************************************")
+                        for j in team:
+                            print("{0:<14}".format(champions_CN[j]) + "\t" + "{0:<14}".format(champions_EN[j]))
+                        print("*****************************************************************************\n是否重新随机英雄？（输入任意键以重新随机，否则进行下一步）\nDo you want to regenerate the champions? (Input anything to reroll, or null to enter the next step)")
+                        if input() == "":
+                            break
                     break
                 else:
                     print("电脑玩家数量不合法！请重新输入：\nIllegal bot players number! Please try again:")
@@ -476,11 +479,14 @@ async def add_bots_team2(connection):
                     continue
                 elif i in map(str, range(1, maxTeamSize + 1)):
                     i = int(i)
-                    team = random.sample(all_champions, i)
-                    print("程序为您分配到以下英雄：\nYou have been distributed the following bot champions:\n*****************************************************************************")
-                    for j in team:
-                        print("{0:<14}".format(champions_CN[j]) + "\t" + "{0:<14}".format(champions_EN[j]))
-                    print("*****************************************************************************")
+                    while True:
+                        team = random.sample(all_champions, i)
+                        print("程序为您分配到以下英雄：\nYou have been distributed the following bot champions:\n*****************************************************************************")
+                        for j in team:
+                            print("{0:<14}".format(champions_CN[j]) + "\t" + "{0:<14}".format(champions_EN[j]))
+                        print("*****************************************************************************\n是否重新随机英雄？（输入任意键以重新随机，否则进行下一步）\nDo you want to regenerate the champions? (Input anything to reroll, or null to enter the next step)")
+                        if input() == "":
+                            break
                     break
                 else:
                     print("电脑玩家数量不合法！请重新输入：\nIllegal bot players number! Please try again:")
