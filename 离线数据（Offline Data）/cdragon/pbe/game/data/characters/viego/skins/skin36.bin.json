@@ -243,8 +243,8 @@
             ],
             "rigPoseModifierData": [
                 {
-                    "mStartingJointName": "{e0bcfad0}",
-                    "mEndingJointName": "{c2ef6967}",
+                    "mStartingJointName": "R_Shoulder_Ground",
+                    "mEndingJointName": "R_Hand_Ground",
                     "mDefaultMaskName": "Default",
                     "mMaxBoneAngle": 115.0,
                     "mDampingValue": 8.0,
@@ -254,12 +254,12 @@
                 },
                 {
                     "name": "{492afeaf}",
-                    "Joint": "{3871dae1}",
+                    "Joint": "Isolde_SpringJoint",
                     "DefaultOn": false,
-                    "{028ff849}": 3.5,
+                    "SpringStiffness": 3.5,
                     "DoRotation": true,
                     "maxDistance": 11.0,
-                    "__type": "{cc9e24e1}"
+                    "__type": "SpringPhysicsRigPoseModifierData"
                 }
             ],
             "__type": "SkinMeshDataProperties"
@@ -267,17 +267,17 @@
         "armorMaterial": "Flesh",
         "idleParticlesEffects": [
             {
-                "effectKey": "{3432f5cd}",
+                "effectKey": "Viego_Idle_MistBoots",
                 "boneName": "L_Foot",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
-                "effectKey": "{3432f5cd}",
+                "effectKey": "Viego_Idle_MistBoots",
                 "boneName": "R_Foot",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
-                "effectKey": "{4f87c7f6}",
+                "effectKey": "Viego_Idle_Sword",
                 "boneName": "Sword_pommel",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             }
@@ -302,9 +302,9 @@
             }
         ],
         "mResourceResolver": "Characters/Viego/Skins/Skin36/Resources",
-        "{87b1d303}": [
+        "PersistentEffectConditions": [
             {
-                "{43c8c7b1}": {
+                "OwnerCondition": {
                     "mDrivers": [
                         {
                             "mAnimationNames": [
@@ -334,46 +334,46 @@
                     ],
                     "__type": "AllTrueMaterialDriver"
                 },
-                "{071f3c1d}": [
+                "PersistentVfxs": [
                     {
                         "boneName": "Isolde_Root",
                         "effectKey": "Viego_Skin30_Emote_Homeguard_Isolde_Fresnel",
-                        "__type": "{00fa43e4}"
+                        "__type": "PersistentVfxData"
                     }
                 ],
-                "{a826e328}": [
-                    "{054e7087}",
-                    "{d7532ecf}"
+                "SubmeshesToShow": [
+                    "Isolde_Body_MAT",
+                    "Isolde_Wings_MAT"
                 ],
-                "__type": "{67ac9672}"
+                "__type": "PersistentEffectConditionData"
             },
             {
-                "{43c8c7b1}": {
+                "OwnerCondition": {
                     "Spell": "{d7dc0979}",
                     "__type": "HasBuffDynamicMaterialBoolDriver"
                 },
-                "{071f3c1d}": [
+                "PersistentVfxs": [
                     {
                         "boneName": "Buffbone_Glb_Ground_Loc",
                         "effectKey": "Viego_Skin30_E_Wraith_Form_Smoke",
-                        "__type": "{00fa43e4}"
+                        "__type": "PersistentVfxData"
                     },
                     {
                         "boneName": "Sword_Pommel",
                         "effectKey": "Viego_Skin30_W_Wraith_Form_Sword",
-                        "__type": "{00fa43e4}"
+                        "__type": "PersistentVfxData"
                     }
                 ],
-                "{a826e328}": [
-                    "{30bdf47e}"
+                "SubmeshesToShow": [
+                    "Handle_E_MAT"
                 ],
-                "{fd949819}": [
-                    "{7ab19530}"
+                "SubmeshesToHide": [
+                    "Handle_Default_MAT"
                 ],
-                "__type": "{67ac9672}"
+                "__type": "PersistentEffectConditionData"
             },
             {
-                "{43c8c7b1}": {
+                "OwnerCondition": {
                     "mDrivers": [
                         {
                             "mCustomDuration": 1.7999999523162842,
@@ -418,14 +418,14 @@
                     ],
                     "__type": "AllTrueMaterialDriver"
                 },
-                "{071f3c1d}": [
+                "PersistentVfxs": [
                     {
                         "boneName": "Isolde_Root",
                         "effectKey": "Viego_Skin30_Q_Isolde_Glow",
-                        "__type": "{00fa43e4}"
+                        "__type": "PersistentVfxData"
                     }
                 ],
-                "__type": "{67ac9672}"
+                "__type": "PersistentEffectConditionData"
             }
         ],
         "__type": "SkinCharacterDataProperties"
@@ -447,12 +447,12 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{054e7087}",
-                            "{d7532ecf}"
+                            "Isolde_Body_MAT",
+                            "Isolde_Wings_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{054e7087}",
-                            "{d7532ecf}"
+                            "Isolde_Body_MAT",
+                            "Isolde_Wings_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -678,7 +678,7 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         0.0,
@@ -686,7 +686,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -838,7 +838,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -905,7 +905,7 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "blendMode": 4,
                 "birthColor": {
@@ -1077,7 +1077,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -1227,7 +1227,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "dynamics": {
                             "probabilityTables": [
@@ -1275,9 +1275,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -1511,7 +1511,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         550.0,
@@ -1691,7 +1691,7 @@
                     "__type": "ValueFloat"
                 },
                 "emitterName": "Ground_Light",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -1874,7 +1874,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         140.0,
                         550.0,
@@ -2054,7 +2054,7 @@
                     "__type": "ValueFloat"
                 },
                 "emitterName": "Ground_Light1",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         140.0,
                         0.0,
@@ -2062,7 +2062,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -2220,9 +2220,9 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{4c2b165b}",
+                            "Viego_Body_MAT",
                             "{f021c0b5}",
-                            "{f0835527}",
+                            "sword_MAT",
                             "{33041dc0}"
                         ],
                         "mLockMeshToAttachment": true,
@@ -2328,7 +2328,7 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{f0835527}"
+                            "sword_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -2830,13 +2830,13 @@
                     },
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 100.0,
                     "height": 100.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -43.0,
                         1.0,
@@ -3218,13 +3218,13 @@
                     },
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 100.0,
                     "height": 100.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -43.0,
                         1.0,
@@ -3529,11 +3529,11 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "radius": 25.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         1.0,
                         50.0,
@@ -3902,7 +3902,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         8.0,
@@ -4193,7 +4193,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "2",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -4205,10 +4205,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_Open_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -4373,7 +4373,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -4397,7 +4397,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -4414,7 +4414,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm1",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -4426,10 +4426,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Portal_Core.scb",
                         "mSubmeshesToDraw": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -4557,7 +4557,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm2",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -4569,10 +4569,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_Open_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -4736,7 +4736,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.699999988079071
@@ -4755,7 +4755,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -4772,7 +4772,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "1",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -4784,10 +4784,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_Open_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -4959,7 +4959,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -4983,7 +4983,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -5000,7 +5000,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "3",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -5012,10 +5012,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_Open_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -5180,7 +5180,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -5204,7 +5204,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -5221,7 +5221,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm5",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -5233,10 +5233,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_Open_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -5401,7 +5401,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -5425,7 +5425,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -5442,7 +5442,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm7",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -5454,10 +5454,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_Open_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -5628,7 +5628,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm8",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -5640,10 +5640,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_Open_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -5808,7 +5808,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.699999988079071
@@ -5827,7 +5827,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -5844,7 +5844,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm9",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -5856,10 +5856,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Portal_Core.scb",
                         "mSubmeshesToDraw": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -5943,7 +5943,7 @@
                 },
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_RecallPortal_Core_Alpha.dds",
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -5960,7 +5960,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm10",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -5972,10 +5972,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Portal_Core.scb",
                         "mSubmeshesToDraw": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -6066,7 +6066,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -6147,7 +6147,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm11",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -60.0,
                         260.0,
@@ -6159,10 +6159,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Eyeball_Mesh.scb",
                         "mSubmeshesToDraw": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -6252,7 +6252,7 @@
                 "lifetime": 8.0,
                 "isSingleParticle": 1,
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -6264,10 +6264,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -6406,7 +6406,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -6430,7 +6430,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -6447,7 +6447,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm1",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -6459,10 +6459,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -6561,7 +6561,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm3",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         200.0,
@@ -6573,10 +6573,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -6661,7 +6661,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -6685,7 +6685,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             }
@@ -6709,7 +6709,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         160.0,
@@ -6869,7 +6869,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         160.0,
@@ -7066,7 +7066,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -7082,7 +7082,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         160.0,
@@ -7278,7 +7278,7 @@
                     "constantValue": 0.20000000298023224,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -300.0,
@@ -7512,7 +7512,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -350.0,
@@ -7791,7 +7791,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -320.0,
@@ -8086,7 +8086,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -280.0,
@@ -8195,7 +8195,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -260.0,
@@ -8273,7 +8273,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -10.0,
@@ -8281,7 +8281,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -8393,7 +8393,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -8460,20 +8460,20 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{30bdf47e}"
+                            "Handle_E_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{30bdf47e}"
+                            "Handle_E_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
                     },
-                    "{5f2e5640}": true,
+                    "UseAvatarSpecificSubmeshMask": true,
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
                 "blendMode": 1,
@@ -8510,7 +8510,7 @@
                 "texture": "ASSETS/Characters/Viego/Skins/Skin36/Viego_Skin36_Sword_TX_CM.dds",
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Sword_Hand_Eye_Mask.dds",
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             }
@@ -8576,7 +8576,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         900.0,
@@ -8880,12 +8880,12 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "radius": 120.0,
                     "height": 50.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         20.0,
@@ -9215,7 +9215,7 @@
                         },
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -9229,7 +9229,7 @@
                     "__type": "ValueFloat"
                 },
                 "emitterName": "Ground_dark",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -9408,13 +9408,13 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 150.0,
                     "height": 700.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -700.0,
@@ -9634,7 +9634,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         900.0,
@@ -9815,7 +9815,7 @@
                 },
                 "isSingleParticle": 1,
                 "emitterName": "Ground_dark1",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -200.0,
@@ -9823,7 +9823,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -10010,7 +10010,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         550.0,
@@ -10200,7 +10200,7 @@
                 "lifetime": 11.0,
                 "isSingleParticle": 1,
                 "emitterName": "Ground_Light",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -300.0,
@@ -10208,7 +10208,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -10359,12 +10359,12 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{f0835527}",
-                            "{7ab19530}"
+                            "sword_MAT",
+                            "Handle_Default_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{f0835527}",
-                            "{7ab19530}"
+                            "sword_MAT",
+                            "Handle_Default_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -10453,10 +10453,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{30bdf47e}"
+                            "Handle_E_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{30bdf47e}"
+                            "Handle_E_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -10521,7 +10521,7 @@
                 "texture": "ASSETS/Characters/Viego/Skins/Skin36/Viego_Skin36_Sword_TX_CM.dds",
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Sword_Hand_Eye_Mask.dds",
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -10538,7 +10538,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Ground_Light1",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -35.0,
@@ -10546,7 +10546,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -10699,7 +10699,7 @@
                 "emitterName": "a.Missile_Glow3",
                 "importance": 2,
                 "Linger": {
-                    "{6b77a8ca}": {
+                    "SeparateLingerColor": {
                         "constantValue": [
                             0.7960784435272217,
                             0.7960784435272217,
@@ -10735,7 +10735,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         45.0,
@@ -10743,7 +10743,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -10919,7 +10919,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         45.0,
@@ -11035,7 +11035,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "dynamics": {
                             "probabilityTables": [
@@ -11083,9 +11083,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -11307,7 +11307,7 @@
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BasicGradient.dds",
                     "texAddressModeMult": 3,
-                    "{dd36a38c}": {
+                    "ParticleIntegratedUvRotateMult": {
                         "dynamics": {
                             "times": [
                                 0.0
@@ -11319,7 +11319,7 @@
                         },
                         "__type": "IntegratedValueFloat"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -11337,7 +11337,7 @@
                 "emitterName": "darkBG4",
                 "importance": 2,
                 "Linger": {
-                    "{6b77a8ca}": {
+                    "SeparateLingerColor": {
                         "constantValue": [
                             0.7960784435272217,
                             0.7960784435272217,
@@ -11373,7 +11373,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         45.0,
@@ -11381,7 +11381,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -11518,7 +11518,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         45.0,
@@ -11718,12 +11718,12 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 10.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         45.0,
@@ -11982,11 +11982,11 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         34.0,
@@ -12176,11 +12176,11 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "radius": 30.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         45.0,
@@ -12444,7 +12444,7 @@
                 "emitterName": "darkBG5",
                 "importance": 2,
                 "Linger": {
-                    "{6b77a8ca}": {
+                    "SeparateLingerColor": {
                         "constantValue": [
                             0.7960784435272217,
                             0.7960784435272217,
@@ -12480,7 +12480,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         45.0,
@@ -12488,7 +12488,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -12625,7 +12625,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         34.0,
@@ -12633,7 +12633,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -12753,7 +12753,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         40.0,
@@ -12906,7 +12906,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         800.0,
@@ -13096,7 +13096,7 @@
                 "lifetime": 11.0,
                 "isSingleParticle": 1,
                 "emitterName": "Ground_Light",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -13247,12 +13247,12 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{054e7087}",
-                            "{d7532ecf}"
+                            "Isolde_Body_MAT",
+                            "Isolde_Wings_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{054e7087}",
-                            "{d7532ecf}"
+                            "Isolde_Body_MAT",
+                            "Isolde_Wings_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -13334,12 +13334,12 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{4c2b165b}",
-                            "{fc36c3a8}"
+                            "Viego_Body_MAT",
+                            "Viego_Crown_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{4c2b165b}",
-                            "{fc36c3a8}"
+                            "Viego_Body_MAT",
+                            "Viego_Crown_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -13443,10 +13443,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{01b4ab44}"
+                            "Viego_Chest_Eye_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{01b4ab44}"
+                            "Viego_Chest_Eye_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -13588,7 +13588,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -13655,22 +13655,22 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{f0835527}",
-                            "{7ab19530}"
+                            "sword_MAT",
+                            "Handle_Default_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{f0835527}",
-                            "{7ab19530}"
+                            "sword_MAT",
+                            "Handle_Default_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
                     },
-                    "{5f2e5640}": true,
+                    "UseAvatarSpecificSubmeshMask": true,
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
                 "blendMode": 4,
@@ -13744,7 +13744,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -13811,7 +13811,7 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "blendMode": 4,
                 "color": {
@@ -13884,7 +13884,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -14019,7 +14019,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "dynamics": {
                             "probabilityTables": [
@@ -14067,9 +14067,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -14583,7 +14583,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -14763,7 +14763,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         20.0,
@@ -14771,7 +14771,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -14950,7 +14950,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -15117,12 +15117,12 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{054e7087}",
-                            "{d7532ecf}"
+                            "Isolde_Body_MAT",
+                            "Isolde_Wings_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{054e7087}",
-                            "{d7532ecf}"
+                            "Isolde_Body_MAT",
+                            "Isolde_Wings_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -15352,7 +15352,7 @@
                     "constantValue": 0.5,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -15655,7 +15655,7 @@
                     },
                     "__type": "VfxAlphaErosionDefinitionData"
                 },
-                "{676949a1}": 1,
+                "ParticlesShareRandomValue": 1,
                 "birthScale0": {
                     "constantValue": [
                         60.0,
@@ -15707,7 +15707,7 @@
                 },
                 "texture": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Flame_Trail.dds",
                 "textureMult": {
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -15738,7 +15738,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -15982,7 +15982,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -16358,7 +16358,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             -2.0,
                             1.0
@@ -16382,7 +16382,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -16423,7 +16423,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -10.0,
@@ -16692,7 +16692,7 @@
                 },
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Trail_Fire_erosion_02.dds",
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -16783,7 +16783,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.0,
                             1.0
@@ -16807,7 +16807,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -16968,7 +16968,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             -2.0,
                             1.0
@@ -16992,7 +16992,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -17054,7 +17054,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -17211,7 +17211,7 @@
                     "__type": "ValueColor"
                 },
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Lillia_Skin28.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Milio_Skin11.dds",
                     "reflectionFresnel": 0.0,
                     "reflectionFresnelColor": [
                         0.0,
@@ -17814,7 +17814,7 @@
                 "lifetime": 2.0,
                 "isSingleParticle": 1,
                 "emitterName": "Glow",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         8.0,
@@ -18197,7 +18197,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -40.0,
                         0.0,
@@ -18258,7 +18258,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -40.0,
                         0.0,
@@ -18327,7 +18327,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -18394,7 +18394,7 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "blendMode": 4,
                 "color": {
@@ -18467,7 +18467,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -18602,7 +18602,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "dynamics": {
                             "probabilityTables": [
@@ -18650,9 +18650,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -19257,7 +19257,7 @@
                 "lifetime": 2.0,
                 "isSingleParticle": 1,
                 "emitterName": "Glow",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         10.0,
@@ -19487,7 +19487,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         8.0,
@@ -19623,7 +19623,7 @@
                 "lifetime": 0.4000000059604645,
                 "emitterName": "Trail_Flame",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -19737,7 +19737,7 @@
                     0.0,
                     -30.0
                 ],
-                "{676949a1}": 1,
+                "ParticlesShareRandomValue": 1,
                 "birthScale0": {
                     "constantValue": [
                         25.0,
@@ -19808,7 +19808,7 @@
                     "__type": "ValueVector2"
                 },
                 "emitterName": "smoke trail",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         0.0,
@@ -19816,7 +19816,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -20021,10 +20021,10 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Flash_Bright",
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
                     "scaleEmitOffsetByBoundObjectSize": 0.004999999888241291,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "birthColor": {
                     "constantValue": [
@@ -20195,7 +20195,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Ring",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "dynamics": {
                             "probabilityTables": [
@@ -20243,9 +20243,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -20439,7 +20439,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Ring1",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "dynamics": {
                             "probabilityTables": [
@@ -20487,9 +20487,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -20689,10 +20689,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{054e7087}"
+                            "Isolde_Body_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{054e7087}"
+                            "Isolde_Body_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -20799,7 +20799,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Cylinder_Blue",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -20951,7 +20951,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -20968,7 +20968,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Cylinder_Blue1",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -21126,7 +21126,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -21144,7 +21144,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "decal_DarkRing",
                 "importance": 2,
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         0.0,
@@ -21152,7 +21152,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -21376,7 +21376,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             30.0,
@@ -21482,9 +21482,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -21737,7 +21737,7 @@
                         },
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -21771,7 +21771,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -21938,7 +21938,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -22055,7 +22055,7 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             50.0,
@@ -22139,9 +22139,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -22322,7 +22322,7 @@
                 "lifetime": 0.9100000262260437,
                 "isSingleParticle": 1,
                 "emitterName": "glow_DarkBG",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -22409,7 +22409,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         0.0,
@@ -22619,7 +22619,7 @@
                 "emitterLinger": 1.0,
                 "emitterName": "decal_Ground",
                 "importance": 2,
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         0.0,
@@ -22627,7 +22627,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -22954,13 +22954,13 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 100.0,
                     "height": 100.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -43.0,
                         1.0,
@@ -23328,13 +23328,13 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 100.0,
                     "height": 100.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -43.0,
                         1.0,
@@ -23640,11 +23640,11 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "radius": 25.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         1.0,
                         50.0,
@@ -23915,7 +23915,7 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         0.0,
@@ -23923,7 +23923,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -24076,7 +24076,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -280.0,
@@ -24226,7 +24226,7 @@
                     "constantValue": 0.20000000298023224,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -300.0,
@@ -24455,7 +24455,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -24558,7 +24558,7 @@
                     },
                     "__type": "VfxAlphaErosionDefinitionData"
                 },
-                "{676949a1}": 1,
+                "ParticlesShareRandomValue": 1,
                 "birthScale0": {
                     "constantValue": [
                         50.0,
@@ -24635,7 +24635,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -300.0,
@@ -24760,7 +24760,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -24863,7 +24863,7 @@
                     },
                     "__type": "VfxAlphaErosionDefinitionData"
                 },
-                "{676949a1}": 1,
+                "ParticlesShareRandomValue": 1,
                 "birthScale0": {
                     "constantValue": [
                         50.0,
@@ -24940,7 +24940,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -300.0,
@@ -25063,7 +25063,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -25075,10 +25075,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -25195,7 +25195,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm1",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -25207,10 +25207,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -25302,7 +25302,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm2",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -25314,10 +25314,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal_02.scb",
                         "mSubmeshesToDraw": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2d2d8cc7}"
+                            "VXFB"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -25400,7 +25400,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "1",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -25412,10 +25412,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -25580,7 +25580,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -25604,7 +25604,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -25621,7 +25621,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "2",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -25633,10 +25633,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -25801,7 +25801,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -25825,7 +25825,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -25842,7 +25842,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "3",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -25854,10 +25854,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -26029,7 +26029,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -26053,7 +26053,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -26070,7 +26070,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm4",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -26082,10 +26082,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -26250,7 +26250,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.5
@@ -26274,7 +26274,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -26291,7 +26291,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm5",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -26303,10 +26303,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -26470,7 +26470,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.699999988079071
@@ -26489,7 +26489,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -26506,7 +26506,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm6",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -26518,10 +26518,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -26686,7 +26686,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.10000000149011612,
                             0.699999988079071
@@ -26705,7 +26705,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -26722,7 +26722,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Bade_anm7",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -26734,10 +26734,10 @@
                     "mMesh": {
                         "mSimpleMeshName": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Recall_Portal.scb",
                         "mSubmeshesToDraw": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{2e2d8e5a}"
+                            "VXFA"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -26910,7 +26910,7 @@
                 "emitterLinger": 1.0,
                 "emitterName": "distort",
                 "importance": 0,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         30.0,
                         180.0,
@@ -27285,7 +27285,7 @@
                 "isSingleParticle": 1,
                 "emitterLinger": 1.0,
                 "emitterName": "Blink_Flare",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         100.0,
@@ -27706,12 +27706,12 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 10.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         60.0,
@@ -27937,7 +27937,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         80.0,
@@ -28019,7 +28019,7 @@
                 "isSingleParticle": 1,
                 "emitterLinger": 1.0,
                 "emitterName": "Flash1",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         150.0,
@@ -28266,12 +28266,12 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "radius": 50.0,
                     "height": 20.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -28555,7 +28555,7 @@
                 "isSingleParticle": 1,
                 "emitterLinger": 0.5,
                 "emitterName": "up_glow1",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -15.0,
@@ -28753,7 +28753,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -28771,7 +28771,7 @@
                 "isSingleParticle": 1,
                 "emitterLinger": 0.5,
                 "emitterName": "up_glow2",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -15.0,
@@ -28973,7 +28973,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -29169,7 +29169,7 @@
                 "isSingleParticle": 1,
                 "emitterLinger": 1.0,
                 "emitterName": "Flash2",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         150.0,
@@ -29374,7 +29374,7 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             200.0,
@@ -29458,9 +29458,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         100.0,
@@ -29726,11 +29726,11 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "radius": 185.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -30120,7 +30120,7 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             180.0,
@@ -30204,9 +30204,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         100.0,
@@ -30807,7 +30807,7 @@
                 "lifetime": 2.0,
                 "isSingleParticle": 1,
                 "emitterName": "Glow",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         10.0,
@@ -31140,7 +31140,7 @@
                 "lifetime": 3.0,
                 "isSingleParticle": 1,
                 "emitterName": "Temp_Mesh",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -31300,7 +31300,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Temp_Mesh1",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -31462,7 +31462,7 @@
                         "constantValue": 180.0,
                         "__type": "ValueFloat"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -31613,7 +31613,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             250.0,
@@ -31697,9 +31697,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         20.0,
@@ -32096,7 +32096,7 @@
                 },
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_egoBASkin05_R_Einstein_01_mult.dds",
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -32190,11 +32190,11 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "radius": 160.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -100.0,
@@ -32811,7 +32811,7 @@
                 "lifetime": 2.0,
                 "isSingleParticle": 1,
                 "emitterName": "Glow",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         10.0,
@@ -33084,12 +33084,12 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "height": 100.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -33363,12 +33363,12 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "height": 100.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -33628,7 +33628,7 @@
                 },
                 "emitterName": "Trail_Flame",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         80.0,
@@ -33731,7 +33731,7 @@
                     },
                     "__type": "VfxAlphaErosionDefinitionData"
                 },
-                "{676949a1}": 1,
+                "ParticlesShareRandomValue": 1,
                 "birthRotation0": {
                     "constantValue": [
                         90.0,
@@ -33859,12 +33859,12 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "height": 100.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -34103,7 +34103,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -34170,22 +34170,22 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{01b4ab44}",
-                            "{fc36c3a8}"
+                            "Viego_Chest_Eye_MAT",
+                            "Viego_Crown_MAT"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{01b4ab44}",
-                            "{fc36c3a8}"
+                            "Viego_Chest_Eye_MAT",
+                            "Viego_Crown_MAT"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
                     },
-                    "{5f2e5640}": true,
+                    "UseAvatarSpecificSubmeshMask": true,
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
                 "blendMode": 1,
@@ -34221,7 +34221,7 @@
                 },
                 "texture": "ASSETS/Characters/Viego/Skins/Skin36/Viego_Skin36_Body_TX_CM.dds",
                 "textureMult": {
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -34276,12 +34276,12 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "height": 100.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -34541,7 +34541,7 @@
                 },
                 "emitterName": "Trail_Flame",
                 "importance": 2,
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         80.0,
@@ -34644,7 +34644,7 @@
                     },
                     "__type": "VfxAlphaErosionDefinitionData"
                 },
-                "{676949a1}": 1,
+                "ParticlesShareRandomValue": 1,
                 "birthRotation0": {
                     "constantValue": [
                         90.0,
@@ -34986,7 +34986,7 @@
                 "lifetime": 1.0,
                 "emitterName": "Temp_Avatar",
                 "Linger": {
-                    "{6b77a8ca}": {
+                    "SeparateLingerColor": {
                         "constantValue": [
                             0.0,
                             0.0,
@@ -35152,7 +35152,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         550.0,
@@ -35495,7 +35495,7 @@
                                         0.30000001192092896,
                                         1.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -35507,7 +35507,7 @@
                                 1.0,
                                 1.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -35529,7 +35529,7 @@
                                         0.0,
                                         1.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -35541,7 +35541,7 @@
                                 0.20000000298023224,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -35563,7 +35563,7 @@
                                         0.30000001192092896,
                                         1.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -35575,7 +35575,7 @@
                                 0.09000000357627869,
                                 0.9800000190734863
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -35597,7 +35597,7 @@
                                         0.30000001192092896,
                                         1.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -35609,7 +35609,7 @@
                                 0.28999999165534973,
                                 0.4099999964237213
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -35946,6 +35946,11 @@
         ],
         "switches": [
             {
+                "name": "VFX_DIFFUSE_ADD_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "VFX_ON",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
@@ -36078,7 +36083,7 @@
                 {
                     "name": "DissolveEdgeColor",
                     "driver": {
-                        "{0e4fb927}": {
+                        "BoolDriver": {
                             "mAnimationNames": [
                                 "Respawn",
                                 "Recall_Winddown"
@@ -36097,9 +36102,9 @@
                             1.0,
                             1.0
                         ],
-                        "{9aae8e3b}": 1.75,
-                        "{1ea12a67}": 0.0,
-                        "__type": "{22d8a036}"
+                        "TurnOnTimeSec": 1.75,
+                        "TurnOffTimeSec": 0.0,
+                        "__type": "LerpVec4LogicDriver"
                     },
                     "__type": "DynamicMaterialParameterDef"
                 },
@@ -36217,7 +36222,7 @@
                                 0.0,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -36341,7 +36346,7 @@
                                         0.30000001192092896,
                                         1.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -36353,7 +36358,7 @@
                                 0.0,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -36477,7 +36482,7 @@
                                         0.0,
                                         0.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -36489,7 +36494,7 @@
                                 0.0,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -36623,7 +36628,7 @@
                                 0.0,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -36793,10 +36798,10 @@
                                 },
                                 "mValue": {
                                     "mBoolDriver": {
-                                        "{fc452e48}": [
-                                            "{054e7087}"
+                                        "Submeshes": [
+                                            "Isolde_Body_MAT"
                                         ],
-                                        "__type": "{f26c205e}"
+                                        "__type": "SubmeshVisibilityBoolDriver"
                                     },
                                     "mTurnOffTimeSec": 0.0,
                                     "__type": "LerpMaterialDriver"
@@ -36832,10 +36837,10 @@
                                 },
                                 "mValue": {
                                     "mBoolDriver": {
-                                        "{fc452e48}": [
-                                            "{054e7087}"
+                                        "Submeshes": [
+                                            "Isolde_Body_MAT"
                                         ],
-                                        "__type": "{f26c205e}"
+                                        "__type": "SubmeshVisibilityBoolDriver"
                                     },
                                     "mTurnOnTimeSec": 0.10000000149011612,
                                     "__type": "LerpMaterialDriver"
@@ -36851,10 +36856,10 @@
                                 },
                                 "mValue": {
                                     "mBoolDriver": {
-                                        "{fc452e48}": [
-                                            "{054e7087}"
+                                        "Submeshes": [
+                                            "Isolde_Body_MAT"
                                         ],
-                                        "__type": "{f26c205e}"
+                                        "__type": "SubmeshVisibilityBoolDriver"
                                     },
                                     "mTurnOnTimeSec": 0.10000000149011612,
                                     "__type": "LerpMaterialDriver"
@@ -36870,10 +36875,10 @@
                                 },
                                 "mValue": {
                                     "mBoolDriver": {
-                                        "{fc452e48}": [
-                                            "{054e7087}"
+                                        "Submeshes": [
+                                            "Isolde_Body_MAT"
                                         ],
-                                        "__type": "{f26c205e}"
+                                        "__type": "SubmeshVisibilityBoolDriver"
                                     },
                                     "mTurnOnTimeSec": 0.5,
                                     "__type": "LerpMaterialDriver"
@@ -37431,6 +37436,11 @@
         ],
         "switches": [
             {
+                "name": "VFX_DIFFUSE_ADD_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "VFX_ON",
                 "__type": "StaticMaterialSwitchDef"
             },
@@ -37530,7 +37540,7 @@
                                         0.15000000596046448,
                                         1.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -37542,7 +37552,7 @@
                                 0.0,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -37564,7 +37574,7 @@
                                         0.5,
                                         1.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -37576,7 +37586,7 @@
                                 0.0,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -37622,7 +37632,7 @@
                                         0.0,
                                         0.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -37634,7 +37644,7 @@
                                 0.0,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -37923,6 +37933,11 @@
         ],
         "switches": [
             {
+                "name": "VFX_DIFFUSE_ADD_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "VFX_ON",
                 "__type": "StaticMaterialSwitchDef"
             },
@@ -38024,7 +38039,7 @@
                                         0.15000000596046448,
                                         1.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -38036,7 +38051,7 @@
                                 0.0,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -38058,7 +38073,7 @@
                                         0.10000000149011612,
                                         1.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -38070,7 +38085,7 @@
                                 0.05000000074505806,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -38092,7 +38107,7 @@
                                         0.10000000149011612,
                                         0.0
                                     ],
-                                    "__type": "{f4c0192d}"
+                                    "__type": "Float4LiteralMaterialDriver"
                                 },
                                 "__type": "SwitchMaterialDriverElement"
                             }
@@ -38104,7 +38119,7 @@
                                 0.0,
                                 0.0
                             ],
-                            "__type": "{f4c0192d}"
+                            "__type": "Float4LiteralMaterialDriver"
                         },
                         "__type": "SwitchMaterialDriver"
                     },
@@ -38312,10 +38327,10 @@
                                 },
                                 "mValue": {
                                     "mBoolDriver": {
-                                        "{fc452e48}": [
-                                            "{054e7087}"
+                                        "Submeshes": [
+                                            "Isolde_Body_MAT"
                                         ],
-                                        "__type": "{f26c205e}"
+                                        "__type": "SubmeshVisibilityBoolDriver"
                                     },
                                     "mTurnOffTimeSec": 0.0,
                                     "__type": "LerpMaterialDriver"
@@ -38351,10 +38366,10 @@
                                 },
                                 "mValue": {
                                     "mBoolDriver": {
-                                        "{fc452e48}": [
-                                            "{054e7087}"
+                                        "Submeshes": [
+                                            "Isolde_Body_MAT"
                                         ],
-                                        "__type": "{f26c205e}"
+                                        "__type": "SubmeshVisibilityBoolDriver"
                                     },
                                     "mTurnOnTimeSec": 0.10000000149011612,
                                     "__type": "LerpMaterialDriver"
@@ -38370,10 +38385,10 @@
                                 },
                                 "mValue": {
                                     "mBoolDriver": {
-                                        "{fc452e48}": [
-                                            "{054e7087}"
+                                        "Submeshes": [
+                                            "Isolde_Body_MAT"
                                         ],
-                                        "__type": "{f26c205e}"
+                                        "__type": "SubmeshVisibilityBoolDriver"
                                     },
                                     "mTurnOnTimeSec": 0.10000000149011612,
                                     "__type": "LerpMaterialDriver"
@@ -38389,10 +38404,10 @@
                                 },
                                 "mValue": {
                                     "mBoolDriver": {
-                                        "{fc452e48}": [
-                                            "{054e7087}"
+                                        "Submeshes": [
+                                            "Isolde_Body_MAT"
                                         ],
-                                        "__type": "{f26c205e}"
+                                        "__type": "SubmeshVisibilityBoolDriver"
                                     },
                                     "mTurnOnTimeSec": 0.5,
                                     "__type": "LerpMaterialDriver"
@@ -39004,6 +39019,11 @@
         ],
         "switches": [
             {
+                "name": "VFX_DIFFUSE_ADD_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "VFX_ON",
                 "__type": "StaticMaterialSwitchDef"
             },
@@ -39161,78 +39181,78 @@
     },
     "Characters/Viego/Skins/Skin36/Resources": {
         "resourceMap": {
-            "{d7e90aec}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Indicator",
-            "{39d8c5c4}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Camouflage_Ring",
-            "{f42f9c34}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Missile_Part2",
-            "{71668346}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Tar",
-            "{d6481ad3}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_SpiritShader",
-            "{fcff187e}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Tell",
-            "{ca1dfb55}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Stealth_In",
-            "{e30e19a7}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_Passive_Soul",
-            "{f46b66f6}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Wither",
+            "Viego_P_Indicator": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Indicator",
+            "Viego_R_Camouflage_Ring": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Camouflage_Ring",
+            "Viego_W_Missile": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Missile_Part2",
+            "Viego_P_Tar": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Tar",
+            "Viego_P_SpiritShader": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_SpiritShader",
+            "Viego_R_Tell": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Tell",
+            "Viego_E_Stealth_In": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Stealth_In",
+            "Viego_Q_Passive_Soul": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_Passive_Soul",
+            "Viego_R_Wither": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Wither",
             "{8e7a8557}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Tar",
-            "{732f8a59}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Tar_Kill",
-            "{3432f5cd}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Idle_MistBoots",
-            "{c75c06c4}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Swipe_01",
-            "{ca5c0b7d}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Swipe_02",
-            "{c95c09ea}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Swipe_03",
-            "{3486f26c}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Windup",
-            "{1e0bea6d}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_CoreStab",
-            "{0f5b289d}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_CoreStab_Local",
+            "Viego_R_Tar_Kill": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Tar_Kill",
+            "Viego_Idle_MistBoots": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Idle_MistBoots",
+            "Viego_BA_Swipe_01": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Swipe_01",
+            "Viego_BA_Swipe_02": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Swipe_02",
+            "Viego_BA_Swipe_03": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Swipe_03",
+            "Viego_P_Windup": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Windup",
+            "Viego_Q_CoreStab": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_CoreStab",
+            "Viego_Q_CoreStab_Local": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_CoreStab_Local",
             "{9506da71}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Impact",
-            "{e2aadd15}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_ChargeUp",
-            "{ad5b73f5}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_Tar",
-            "{6b673167}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_Passive_Soul_Tar",
-            "{53fb8908}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Charge",
-            "{18cfdedb}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Tar",
-            "{0f5377bc}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Miss",
-            "{68f44f0c}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Stun",
-            "{d16aa126}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Trail_L",
-            "{a5727c5a}": "Characters/Viego/Skins/Skin36/Particles/Viego_Skin36_P_Crown",
-            "{34a83e34}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Timer",
-            "{b5270c91}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Tar_Secondary",
-            "{86840a32}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Cas",
-            "{4f87c7f6}": "Characters/Viego/Skins/Skin36/Particles/Viego_Skin36_Idle_Sword",
-            "{877c3abd}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Swipe",
-            "{04a64203}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Tar_01",
-            "{05a64396}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Tar_02",
-            "{6f0bedc6}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Crit_01",
-            "{7281b69a}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Crit_Tar_01",
-            "{7181b507}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Crit_Tar_02",
-            "{6e0bec33}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Crit_02",
-            "{06a64529}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Tar_03",
-            "{eb6aca14}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Trail_R",
-            "{c6fa5a54}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Cas",
-            "{868af82a}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Cas_Chest",
-            "{4073e481}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_DoubleAttack_01",
-            "{4a9a98fb}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Cast_Mist",
-            "{516ed92f}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_swordGlow",
+            "Viego_W_ChargeUp": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_ChargeUp",
+            "Viego_Q_Tar": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_Tar",
+            "Viego_Q_Passive_Soul_Tar": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_Passive_Soul_Tar",
+            "Viego_W_Charge": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Charge",
+            "Viego_W_Tar": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Tar",
+            "Viego_W_Miss": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Miss",
+            "Viego_W_Stun": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Stun",
+            "Viego_E_Wall_Trail_L": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Trail_L",
+            "Viego_P_Crown": "Characters/Viego/Skins/Skin36/Particles/Viego_Skin36_P_Crown",
+            "Viego_P_Timer": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Timer",
+            "Viego_R_Tar_Secondary": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Tar_Secondary",
+            "Viego_R_Cas": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Cas",
+            "Viego_Idle_Sword": "Characters/Viego/Skins/Skin36/Particles/Viego_Skin36_Idle_Sword",
+            "Viego_R_Swipe": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Swipe",
+            "Viego_BA_Tar_01": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Tar_01",
+            "Viego_BA_Tar_02": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Tar_02",
+            "Viego_BA_Crit_01": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Crit_01",
+            "Viego_BA_Crit_Tar_01": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Crit_Tar_01",
+            "Viego_BA_Crit_Tar_02": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Crit_Tar_02",
+            "Viego_BA_Crit_02": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Crit_02",
+            "Viego_BA_Tar_03": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_Tar_03",
+            "Viego_E_Wall_Trail_R": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Trail_R",
+            "Viego_P_Cas": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Cas",
+            "Viego_P_Cas_Chest": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Cas_Chest",
+            "Viego_BA_DoubleAttack_01": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_BA_DoubleAttack_01",
+            "Viego_E_Cast_Mist": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Cast_Mist",
+            "Viego_R_swordGlow": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_swordGlow",
             "{ff97d524}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Z_Blank",
-            "{d4db3fee}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_ChildParticle_spawnDeath",
-            "{30a1caf8}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Spirit_TimerOut",
-            "{fc7dff18}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_SpiritShader_Enemy",
-            "{ac03b375}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Mis",
-            "{b8ab8c3c}": "Characters/Viego/Skins/Skin36/Particles/Viego_Skin36_E_Mis_Child",
-            "{3931a6be}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Stealth_Out",
-            "{cacf243b}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Mis_End",
-            "{a89e86b3}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Cast_Wave",
-            "{aa264b58}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Mis_End_Wall",
-            "{a28f6d59}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Cast",
-            "{70de859d}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Mis_End_Wall_Child",
-            "{7575b5c8}": "Characters/Viego/Skins/Skin36/Particles/Viego_Skin36_Emote_Recall_Dissolve",
-            "{41c412eb}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Trail_End",
-            "{fdd6bef1}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_SpiritShader_inWorld",
-            "{ba3780b6}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_SpiritShader_inWorld_Enemy",
-            "{0df1e1de}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Audio_Only",
-            "{2bd74d9d}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Z_Blank",
-            "{7ac74dd9}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Tell_Enemy",
-            "{779ba6c5}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Cast_Mist_Half",
-            "{8691f0d9}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Missile",
-            "{2f86feba}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Missile_L",
-            "{1186cf80}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Missile_R",
-            "{6ade5e70}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Stealth_Child",
-            "{fb7e222c}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Trail_Child",
-            "{20a8e488}": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Passive_SpiritShader_inWorld_OFA_Ally",
+            "Viego_W_ChildParticle_spawnDeath": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_ChildParticle_spawnDeath",
+            "Viego_P_Spirit_TimerOut": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_Spirit_TimerOut",
+            "Viego_P_SpiritShader_Enemy": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_SpiritShader_Enemy",
+            "Viego_E_Mis": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Mis",
+            "Viego_E_Mis_Child": "Characters/Viego/Skins/Skin36/Particles/Viego_Skin36_E_Mis_Child",
+            "Viego_E_Stealth_Out": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Stealth_Out",
+            "Viego_E_Mis_End": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Mis_End",
+            "Viego_E_Cast_Wave": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Cast_Wave",
+            "Viego_E_Mis_End_Wall": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Mis_End_Wall",
+            "Viego_E_Cast": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Cast",
+            "Viego_E_Mis_End_Wall_Child": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Mis_End_Wall_Child",
+            "Viego_Emote_Recall_Dissolve": "Characters/Viego/Skins/Skin36/Particles/Viego_Skin36_Emote_Recall_Dissolve",
+            "Viego_E_Wall_Trail_End": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Trail_End",
+            "Viego_P_SpiritShader_inWorld": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_SpiritShader_inWorld",
+            "Viego_P_SpiritShader_inWorld_Enemy": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_P_SpiritShader_inWorld_Enemy",
+            "Viego_E_Wall_Audio_Only": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Audio_Only",
+            "Viego_Z_Blank": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Z_Blank",
+            "Viego_R_Tell_Enemy": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_R_Tell_Enemy",
+            "Viego_E_Cast_Mist_Half": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Cast_Mist_Half",
+            "Viego_E_Wall_Missile": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Missile",
+            "Viego_E_Wall_Missile_L": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Missile_L",
+            "Viego_E_Wall_Missile_R": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Missile_R",
+            "Viego_E_Stealth_Child": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Stealth_Child",
+            "Viego_E_Wall_Trail_Child": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Wall_Trail_Child",
+            "Viego_Passive_SpiritShader_inWorld_OFA_Ally": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Passive_SpiritShader_inWorld_OFA_Ally",
             "Viego_Skin30_E_Mis_Child_02": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_E_Mis_Child_02",
             "Viego_Skin30_Q_Isolde_Glow": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_Q_Isolde_Glow",
             "Viego_Skin30_W_Charge_child": "Characters/Viego/Skins/Skin30/Particles/Viego_Skin30_W_Charge_child",

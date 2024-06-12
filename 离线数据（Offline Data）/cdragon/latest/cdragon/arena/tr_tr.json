@@ -1,0 +1,3203 @@
+{
+    "augments": [
+        {
+            "apiName": "WarmupRoutine",
+            "calculations": {},
+            "dataValues": {
+                "DamagePerStack": 0.009999999776482582,
+                "MaxStacks": 24.0
+            },
+            "desc": "<spellName>Isınma Hareketleri</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Isınma Hareketleri</spellName>, yoğunlaşarak turun geri kalanı boyunca hasarını arttırmanı sağlar.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/warmuproutine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/warmuproutine_small.png",
+            "id": 93,
+            "name": "Isınma Hareketleri",
+            "rarity": 0,
+            "tooltip": "Yoğunlaşarak hasarını her saniye %2 arttırırsın. Bu oran en fazla %24 olabilir.<br><br>Bu Tur Verilen İlave Hasar: @f1@<br>Toplam İlave Hasar: @f2@"
+        },
+        {
+            "apiName": "Vanish",
+            "calculations": {},
+            "dataValues": {
+                "StealthDuration": 4.0
+            },
+            "desc": "<spellName>Kaybol</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Kaybol</spellName>, seni <stealth>görünmez</stealth> hale getirir.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/vanish_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vanish_small.png",
+            "id": 89,
+            "name": "Kaybol",
+            "rarity": 1,
+            "tooltip": "@StealthDuration@ saniyeliğine, bir saldırı yapana veya yetenek kullanana dek <stealth>görünmez</stealth> olursun.<br>Bu görünmezlik etkisi Sihirli Tarayıcı ziyneti tarafından açığa çıkarılamaz."
+        },
+        {
+            "apiName": "ChainLightning",
+            "calculations": {},
+            "dataValues": {
+                "DamageMod": 0.5,
+                "Range": 1000.0
+            },
+            "desc": "Bir rakibe hasar vermek, eğer yakınındaysa onun takım arkadaşına da <trueDamage>%@DamageMod*100@ Gerçek Hasar</trueDamage> verir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/chainlightning_small.png",
+            "id": 166,
+            "name": "Zincirleme Yıldırım",
+            "rarity": 2,
+            "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "Typhoon",
+            "calculations": {
+                "Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatio",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.30000001192092896
+            },
+            "desc": "Saldırıların ilaveten bir hedefe daha atış göndererek isabet etkilerini uygular. Bu atış, saldırına kıyasla daha az hasar verir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/typhoon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/typhoon_small.png",
+            "id": 87,
+            "name": "Tayfun",
+            "rarity": 0,
+            "tooltip": "Saldırıların fazladan bir hedefe %@ADRatio*100@ Hasar veren ve isabet etkilerini uygulayan bir atış gönderir."
+        },
+        {
+            "apiName": "SelfDestruct",
+            "calculations": {},
+            "dataValues": {
+                "BombDelay": 15.0,
+                "KnockupDuration": 0.75,
+                "MaxHealthDamage": 0.20000000298023224,
+                "Radius": 350.0
+            },
+            "desc": "Her tura kendine bir bomba bağlı olarak başlarsın. @BombDelay@ saniyenin ardından bomba patlayarak <trueDamage>azami canın %@MaxHealthDamage*100@ kadarına eşdeğer miktarda gerçek hasar</trueDamage> verir ve isabet alan birimleri @KnockupDuration@ saniyeliğine <status>havaya savurur</status>.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/selfdestruct_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/selfdestruct_small.png",
+            "id": 108,
+            "name": "İmha Mekanizması",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_SelfDestruct_Summary }}<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "ServeBeyondDeath",
+            "calculations": {
+                "{85d7d7f0}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "TicksBeforeDeath"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.25
+                    }
+                }
+            },
+            "dataValues": {
+                "DecayDuration": 3.0,
+                "Duration": 6.0,
+                "MaxStatMultiplier": 2.0,
+                "TagDuration": 6.0,
+                "TicksBeforeDeath": 10.0,
+                "TicksPerSecond": 4.0,
+                "TriumphPercent": 20.0
+            },
+            "desc": "Her tur ilk kez katledildiğinde @DecayDuration@ saniye içinde azalarak kaybolacak şekilde tüm canını yenilersin. Canın azalıyorken bir rakip şampiyonu alt edersen azalma durur ve <healing>%@TriumphPercent@ Cana</healing> sahip olursun.",
+            "iconLarge": "assets/ux/cherry/augments/icons/servebeyonddeath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/servebeyonddeath_small.png",
+            "id": 120,
+            "name": "Ölüm Sonrası Hizmet",
+            "rarity": 0,
+            "tooltip": "Her tur ilk kez katledildiğinde @DecayDuration@ saniye içinde azalarak kaybolacak şekilde tüm canını yenilersin. Canın azalıyorken bir rakip şampiyonu alt edersen azalma durur ve <healing>%@TriumphPercent@ Cana</healing> sahip olursun."
+        },
+        {
+            "apiName": "QuantumComputing",
+            "calculations": {},
+            "dataValues": {
+                "AutoCastCooldown": 10.0
+            },
+            "desc": "Her @AutoCastCooldown@ saniyede bir etrafındaki daire biçimindeki bir alana <keywordMajor>otomatik olarak</keywordMajor> saldırıp dairenin dış kenarındaki rakiplere ilave hasar verirsin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
+            "id": 66,
+            "name": "Kuantum Teknolojisi",
+            "rarity": 2,
+            "tooltip": "Her 15 saniyede bir etrafındaki daire biçimindeki bir alana <keywordMajor>otomatik olarak</keywordMajor> saldırıp dairenin dış kenarındaki rakiplere ilave hasar verirsin ve can yenilersin. <br><br>Verilen Toplam Hasar: @f1@<br>Yenilenen Toplam Can: @f2@"
+        },
+        {
+            "apiName": "DemonsDance",
+            "calculations": {},
+            "dataValues": {
+                "FFHealAPRatio": 0.20000000298023224,
+                "FFHealBase": 10.0,
+                "FFHealBonusADRatio": 0.30000001192092896,
+                "FFHealCritMod": 0,
+                "FFHealMax": 100.0,
+                "FFMSBuff": 0.20000000298023224,
+                "FFMSBuffMelee": 0.20000000298023224,
+                "FFMSDuration": 1.0,
+                "GRMaxHealthPerProc": 7.0,
+                "GRMeleeFlatHeal": 3.0,
+                "GRPercentHealthDamage": 3.5,
+                "GRPercentHealthHeal": 0.012000000104308128,
+                "GRRangedHealthPerProc": 4.0,
+                "GRRangedPenaltyMod": 0.4000000059604645,
+                "GRTriggerTime": 4.0,
+                "GRWindow": 5.0
+            },
+            "desc": "<spellName>Ayağı Çabuk</spellName> ve <spellName>Hortlağın Pençesi</spellName> anahtar rünlerini kazanırsın.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/demonsdance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/demonsdance_small.png",
+            "id": 23,
+            "name": "İblis Dansı",
+            "rarity": 1,
+            "tooltip": "<spellName>Ayağı Çabuk</spellName> ve <spellName>Hortlağın Pençesi</spellName> anahtar rünlerini kazanırsın.<br><br>Bu Tur Yapılan İyileştirme: @f1@<br>Yapılan Toplam İyileştirme: @f2@<br>Kazanılan Azami Can: @f3@"
+        },
+        {
+            "apiName": "DefensiveManeuvers",
+            "calculations": {
+                "BarrierAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 440.0,
+                            "mStartValue": 110.0
+                        }
+                    ]
+                },
+                "HealAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 318.0,
+                            "mStartValue": 80.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AllyRange": 835.0,
+                "MoveSpeed": 0.30000001192092896,
+                "ShieldDuration": 2.5
+            },
+            "desc": "<spellName>Savunma Manevraları</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Savunma Manevraları</spellName>, senin ve takım arkadaşının üstünde hem <spellName>Bariyer</spellName> hem de <spellName>Şifa</spellName> sihirdar büyülerini kullanır.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/defensivemaneuvers_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/defensivemaneuvers_small.png",
+            "id": 21,
+            "name": "Savunma Manevraları",
+            "rarity": 1,
+            "tooltip": "Kendin ve takım arkadaşının üstünde <abilityName>Bariyer</abilityName> ve <abilityName>Şifa</abilityName> sihirdar büyülerini kullanırsın. <shield>@BarrierAmount@ Kalkan</shield> kazandırır, <healing>@HealAmount@ Can</healing> yeniler ve 1 saniyeliğine <speed>%30 Hareket Hızı</speed> sağlar.<br><br>Yapılan Toplam İyileştirme: @f1@<br>Oluşturulan Toplam Kalkan: @f2@"
+        },
+        {
+            "apiName": "Chauffeur",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeed": 0.6499999761581421,
+                "Haste": 130.0
+            },
+            "desc": "Takım arkadaşına yapışırsın ve kendi başına hareket edemezsin. Takım arkadaşın senin ilave hareket hızını elde eder. Sen de <scaleLevel>yetenek hızı</scaleLevel> ve <attackSpeed>saldırı hızı</attackSpeed> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/chauffeur_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/chauffeur_small.png",
+            "id": 14,
+            "name": "Özel Şoför",
+            "rarity": 2,
+            "tooltip": "Takım arkadaşına yapışırsın. Takım arkadaşın senin ilave hareket hızını elde eder. Sen de <scaleLevel>@Haste@ Yetenek Hızı</scaleLevel> ve <attackSpeed>%@AttackSpeed*100@ Saldırı Hızı</attackSpeed> kazanırsın. <br><br>Atılma veya ışınlanma yeteneği kullanmak bu bağı 1,5 saniyeliğine kaldırır. Ardından takım arkadaşına yeniden yapışırsın."
+        },
+        {
+            "apiName": "Marksmage",
+            "calculations": {
+                "APDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "APRatio"
+                    }
+                }
+            },
+            "dataValues": {
+                "APRatio": 1.0
+            },
+            "desc": "Normal saldırıların <magicDamage>yetenek gücünün %@APRatio*100@ kadarına</magicDamage> eşdeğer miktarda ilave <physicalDamage>fiziksel hasar</physicalDamage> verir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/marksmage_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/marksmage_small.png",
+            "id": 129,
+            "name": "Efsunlu Saldırılar",
+            "rarity": 1,
+            "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "BladeWaltz",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 30.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05999999865889549
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "TotalHits": 8.0
+            },
+            "desc": "<spellName>Kılıç Valsi</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Kılıç Valsi</spellName>, hedef alınamaz haldeyken rakiplere atılıp @TotalHits@ defa hasar vermeni sağlar.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/bladewaltz_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bladewaltz_small.png",
+            "id": 6,
+            "name": "Kılıç Valsi",
+            "rarity": 2,
+            "tooltip": "<rules>Hedef alınamaz haldeyken rakiplere atılıp @TotalHits@ defa @Damage@ Hasar vermeni (isabet halinde %50 Hasar) sağlar.</rules><br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@<br>"
+        },
+        {
+            "apiName": "WillingSacrifice",
+            "calculations": {},
+            "dataValues": {
+                "AllyHealthThreshold": 0.30000001192092896,
+                "CurrentHealthToDrain": 0.25
+            },
+            "desc": "Takım arkadaşının <health>canı %@AllyHealthThreshold*100@ değerinin</health> altına düştüğünde kendi canının bir kısmını feda ederek ona <shield>kalkan</shield> sağlarsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/willingsacrifice_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/willingsacrifice_small.png",
+            "id": 94,
+            "name": "Fedakârlık",
+            "rarity": 1,
+            "tooltip": "Takım arkadaşının <health>canı %@AllyHealthThreshold*100@ değerinin</health> altına düştüğünde <health>mevcut canının %@CurrentHealthToDrain*100@ kadarını</health> feda ederek ona aynı miktarda <shield>kalkan</shield> sağlarsın.<br><br>Bu Tur Oluşturulan Kalkan: @f1@<br>Oluşturulan Toplam Kalkan: @f2@"
+        },
+        {
+            "apiName": "IceCold",
+            "calculations": {},
+            "dataValues": {
+                "ExtraSlowAmount": 100.0
+            },
+            "desc": "Uyguladığın <status>yavaşlatma</status> etkileri, hedefinin hareket hızını fazladan 100 azaltır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/icecold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/icecold_small.png",
+            "id": 44,
+            "name": "Buz Gibi",
+            "rarity": 0,
+            "tooltip": "Uyguladığın <status>yavaşlatma</status> etkileri, hedefinin hareket hızını fazladan 100 azaltır."
+        },
+        {
+            "apiName": "SpinToWin",
+            "calculations": {},
+            "dataValues": {
+                "SpinDamageAmp": 0.30000001192092896,
+                "SpinHaste": 30.0
+            },
+            "desc": "Dönme yeteneklerin @SpinHaste@ Yetenek Hızı kazanır ve fazladan %@SpinDamageAmp*100@ Hasar verir!",
+            "iconLarge": "assets/ux/cherry/augments/icons/spintowin_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spintowin_small.png",
+            "id": 214,
+            "name": "Dön Kazan",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_SpinToWin_Summary }}<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "BannerofCommand",
+            "calculations": {},
+            "dataValues": {
+                "BuffDuration": 10.0,
+                "EmpowermentValue": 0.15000000596046448
+            },
+            "desc": "<spellName>Komuta Sancağı</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Komuta Sancağı</spellName>, takım arkadaşını kısa süreliğine güçlendirir.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/bannerofcommand_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bannerofcommand_small.png",
+            "id": 5,
+            "name": "Komuta Sancağı",
+            "rarity": 1,
+            "tooltip": "Ortağın 10 saniyeliğine fazladan %@EmpowermentValue*100@ <scaleHealth>Can</scaleHealth>, <scaleAD>Saldırı Gücü</scaleAD>, <scaleAP>Yetenek Gücü</scaleAP> ve <attackSpeed>Saldırı Hızı</attackSpeed> kazanır."
+        },
+        {
+            "apiName": "TankItOrLeaveIt",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "DamageReduction": 0.20000000298023224,
+                "MaxChance": 0.5
+            },
+            "desc": "Kritik vuruş ihtimalini (en fazla %@MaxChance*100@) kullanarak <crit>kritik savunma</crit> yapabilirsin. Kritik savunma, aldığın hasarı azaltma ihtimaline sahiptir. Ayrıca %@CritChance*100@ Kritik Vuruş İhtimali kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tankitorleaveit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tankitorleaveit_small.png",
+            "id": 80,
+            "name": "Ya Tankla Ya Terk Et",
+            "rarity": 0,
+            "tooltip": "Kritik vuruş ihtimalini (en fazla %@MaxChance*100@) kullanarak <crit>kritik savunma</crit> yapabilirsin. Kritik savunma, aldığın hasarı %@DamageReduction*100@ azaltma ihtimaline sahiptir. Ayrıca %@CritChance*100@ Kritik Vuruş İhtimali kazanırsın.<br><br>Bu Tur Azaltılan Hasar: @f1@<br>Azaltılan Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "WitchfulThinking",
+            "calculations": {},
+            "dataValues": {
+                "AP": 70.0
+            },
+            "desc": "<scaleAP>@AP@ Yetenek Gücü</scaleAP> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/witchfulthinking_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/witchfulthinking_small.png",
+            "id": 97,
+            "name": "Abra Kadabra",
+            "rarity": 0,
+            "tooltip": "<scaleAP>@AP@ Yetenek Gücü</scaleAP> kazanırsın."
+        },
+        {
+            "apiName": "Quest_UrfsChampion",
+            "calculations": {},
+            "dataValues": {
+                "2ndPickTakendownsNeeded": 15.0,
+                "TakedownsNeeded": 10.0
+            },
+            "desc": "Koşul: @TakedownsNeeded@ kez rakipleri alt et. İkinci eklenti olarak seçildiyse bu sayı artarak @2ndPickTakendownsNeeded@ olur.<br><br>Ödül: Altın Spatula kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_urfschampion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
+            "id": 154,
+            "name": "Görev: Urf'ün Fedaisi",
+            "rarity": 1,
+            "tooltip": "Koşul: @TakedownsNeeded@ kez rakipleri alt et. İkinci eklenti olarak seçildiyse bu sayı artarak @2ndPickTakendownsNeeded@ olur.<br><br>Ödül: Altın Spatula kazanırsın."
+        },
+        {
+            "apiName": "Vengeance",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.2800000011920929,
+                "Omnivamp": 0.2800000011920929
+            },
+            "desc": "Takım arkadaşın katledildiğinde turun geri kalanı boyunca yüksek miktarda hasar ve mutlak sömürü kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/vengeance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vengeance_small.png",
+            "id": 90,
+            "name": "İntikam",
+            "rarity": 1,
+            "tooltip": "Takım arkadaşın katledildiğinde %@DamageAmp*100@ Hasar Artışı ve %@Omnivamp*100@ Mutlak Sömürü kazanırsın.<br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "Erosion",
+            "calculations": {},
+            "dataValues": {
+                "MaxStacks": 20.0,
+                "Shred": 0.014999999664723873,
+                "ShredDuration": 4.0
+            },
+            "desc": "Hasar verdiğin rakiplerinin <scaleArmor>zırhını</scaleArmor> ve <scaleMR>büyü direncini</scaleMR> @ShredDuration@ saniyeliğine eksiltirsin. ",
+            "iconLarge": "assets/ux/cherry/augments/icons/erosion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/erosion_small.png",
+            "id": 28,
+            "name": "Erozyon",
+            "rarity": 0,
+            "tooltip": "Hasar verdiğin rakiplerinin <scaleArmor>zırhını</scaleArmor> ve <scaleMR>büyü direncini</scaleMR> @ShredDuration@ saniyeliğine %@Shred*100@ eksiltirsin. <br><br>Bu etki en fazla @MaxStacks@ defa birikir."
+        },
+        {
+            "apiName": "MasterofDuality",
+            "calculations": {
+                "ADGained": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 9.0,
+                            "mStartValue": 3.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "APGained": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 18.0,
+                            "mStartValue": 6.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "Saldırıların birikecek şekilde <scaleAP>yetenek gücü</scaleAP>, yeteneklerin de birikecek şekilde <scaleAD>saldırı gücü</scaleAD> kazandırır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/masterofduality_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/masterofduality_small.png",
+            "id": 54,
+            "name": "Denge Uzmanı",
+            "rarity": 2,
+            "tooltip": "Saldırıların <scaleAP>@APGained@ Yetenek Gücü</scaleAP>, yeteneklerin <scaleAD>@ADGained@ Saldırı Gücü</scaleAD> kazandırır. Bu etki, tur sonuna kadar sınırsız kez birikebilir."
+        },
+        {
+            "apiName": "LightemUp",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 11.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.3499999940395355,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.1899999976158142
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "TOOLTIPONLYDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 320.0,
+                            "mStartValue": 44.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.7599999904632568
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "Her 4. saldırın fazladan <scaleMagic>büyü hasarı</scaleMagic> verir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightemup_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightemup_small.png",
+            "id": 51,
+            "name": "Ateeş!",
+            "rarity": 0,
+            "tooltip": "Her 4. saldırın fazladan <scaleMagic>@TOOLTIPONLYDamage@ Büyü Hasarı</scaleMagic> verir.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "SearingDawn",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "ProcCooldown": 0.75
+            },
+            "desc": "Yeteneklerin rakipleri işaretler. İşaretli birimler, takım arkadaşının bir sonraki saldırı veya yeteneğinden daha çok hasar alır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/searingdawn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/searingdawn_small.png",
+            "id": 72,
+            "name": "Kavuran Şafak",
+            "rarity": 1,
+            "tooltip": "Yeteneklerin rakipleri işaretler. İşaretli birimler, takım arkadaşının bir sonraki saldırısından veya yeteneğinden fazladan <magicDamage>@Damage@ Büyü Hasarı</magicDamage> alır.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "SlapAround",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForce": 20.0
+            },
+            "desc": "Bir rakibi <status>hareketsiz bıraktığında</status> o tur için sınırsız kez birikebilen @AdaptiveForce@ Değişken Kuvvet kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slaparound_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slaparound_small.png",
+            "id": 136,
+            "name": "Eylemsizlik Kanunu",
+            "rarity": 0,
+            "tooltip": "Bir rakibi <status>hareketsiz bıraktığında</status> o tur için sınırsız kez birikebilen @AdaptiveForce@ Değişken Kuvvet kazanırsın."
+        },
+        {
+            "apiName": "MagicMissile",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0,
+                "MaxHealthDamagePerMissile": 0.0033400000538676977,
+                "MaxHealthDamageTooltip": 1.0,
+                "MaxRangeThreshold": 1000.0,
+                "NumberOfMissiles": 3.0
+            },
+            "desc": "Bir yetenekle hasar vermek isabet alan her rakibe @NumberOfMissiles@ büyü atışı gönderir. Atışların her biri kat ettiği mesafeye bağlı olarak en fazla <trueDamage>hedefin azami canının %@MaxHealthDamageTooltip@ kadarına eşdeğer miktarda gerçek hasar</trueDamage> verir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/magicmissile_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/magicmissile_small.png",
+            "id": 133,
+            "name": "Büyü Atışı",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_MagicMissile_Summary }}<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "Spellwake",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.20000000298023224
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Cooldown": 6.0,
+                "ExplosionDelayTime": 0.75,
+                "ExplosionRadius": 100.0
+            },
+            "desc": "Rakiplere yetenek isabet ettirdiğin konumda <magicDamage>büyü hasarı</magicDamage> veren bir patlama oluşturursun.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spellwake_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spellwake_small.png",
+            "id": 135,
+            "name": "Artçı Büyü",
+            "rarity": 2,
+            "tooltip": "Rakiplere yetenek isabet ettirdiğin konumda <magicDamage>@Damage@ Büyü Hasarı</magicDamage> veren bir patlama oluşturursun.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "CenterOfTheUniverse",
+            "calculations": {
+                "StarDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 7.0,
+                            "mLevel1Value": 5.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.11999999731779099
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.25,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "MissileWidth": 50.0
+            },
+            "desc": "Temas ettiği rakiplere <magicDamage>büyü hasarı</magicDamage> veren yıldızlar, saldırı menzilinin sınırında yörüngeye girer.",
+            "iconLarge": "assets/ux/cherry/augments/icons/centeroftheuniverse_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/centeroftheuniverse_small.png",
+            "id": 193,
+            "name": "Kâinatın Merkezi",
+            "rarity": 2,
+            "tooltip": "Temas ettiği rakiplere <magicDamage>@StarDamage@ Büyü Hasarı</magicDamage> veren yıldızlar, saldırı menzilinin sınırında yörüngeye girer.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "PhenomenalEvil",
+            "calculations": {},
+            "dataValues": {
+                "APPerProc": 1.0,
+                "ProcCooldown": 0.75,
+                "SpellIDCD": 5.0,
+                "StartingAPIfSecondAugment": 40.0
+            },
+            "desc": "Yeteneklerin bir rakibe isabet ettiğinde kalıcı olarak <scaleAP>@APPerProc@ Yetenek Gücü</scaleAP> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/phenomenalevil_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/phenomenalevil_small.png",
+            "id": 65,
+            "name": "Acayip Kötülük",
+            "rarity": 1,
+            "tooltip": "Yeteneklerin bir rakibe isabet ettiğinde kalıcı olarak <scaleAP>@APPerProc@ Yetenek Gücü</scaleAP> kazanırsın.<br><br>Yetenek başına @SpellIDCD@ saniye bekleme süresi vardır.<br><br>Bu eklenti, ikinci seçimin olursa başlangıçta @StartingAPIfSecondAugment@ Yetenek Gücü kazandırır.<br><br>Kazanılan Yetenek Gücü: @f1@"
+        },
+        {
+            "apiName": "BigBrain",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ShieldBase"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AP": 1.0,
+                "ShieldBase": 3.0
+            },
+            "desc": "Her turun başında sahip olduğun <attention>%i:scaleAP% @AP@</attention> Yetenek Gücü başına <shield>@ShieldBase@ Kalkan</shield> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bigbrain_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bigbrain_small.png",
+            "id": 180,
+            "name": "Zekâ Küpü",
+            "rarity": 1,
+            "tooltip": "Her turun başında sahip olduğun <attention>%i:scaleAP% @AP@</attention> Yetenek Gücü başına <shield>@ShieldBase@ Kalkan</shield> kazanırsın."
+        },
+        {
+            "apiName": "Vulnerability",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritDamage": 0.44999998807907104
+            },
+            "desc": "Eşyaların ve zamanla hasar veren etkilerin kritik vuruş yapabilir. Ayrıca %@CritChance*100@ Kritik Vuruş İhtimali kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vulnerability_small.png",
+            "id": 92,
+            "name": "Zafiyet",
+            "rarity": 0,
+            "tooltip": "Eşyaların ve zamanla hasar veren etkilerin kritik vuruş yaparak %@CritDamage*100@ İlave Hasar verebilir. Ayrıca %@CritChance*100@ Kritik Vuruş İhtimali kazanırsın.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "CannonFodder",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Çatışmaya bir toptan fırlatılarak girersin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cannonfodder_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cannonfodder_small.png",
+            "id": 10,
+            "name": "Topun Ağzında",
+            "rarity": 1,
+            "tooltip": "Çatışmaya bir toptan fırlatılarak girersin."
+        },
+        {
+            "apiName": "MadScientist",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.30000001192092896,
+                "APAmp": 0.30000001192092896,
+                "Haste": 70.0,
+                "HealthAmp": 0.20000000298023224,
+                "MovespeedAmp": 0.30000001192092896,
+                "SizeAmp": 0.30000001192092896
+            },
+            "desc": "Tur başladığında büyüyerek <scaleAD>değişken kuvvet</scaleAD> ve <healing>can</healing> ya da küçülerek <scaleLevel>yetenek hızı</scaleLevel> ve <speed>hareket hızı</speed> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/madscientist_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/madscientist_small.png",
+            "id": 53,
+            "name": "Çılgın Bilim İnsanı",
+            "rarity": 2,
+            "tooltip": "Tur başladığında büyüyerek <scaleAD>%@ADAmp*100@ Değişken Kuvvet</scaleAD> ve <healing>%@HealthAmp*100@ Can</healing> ya da küçülerek <scaleLevel>@Haste@ Yetenek Hızı</scaleLevel> ve <speed>%@MovespeedAmp*100@ Hareket Hızı</speed> kazanırsın."
+        },
+        {
+            "apiName": "MountainSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Kısa süreliğine çatışma dışı kaldığında sana <shield>kalkan</shield> sağlayan Dağ Ruhu'nu kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mountainsoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mountainsoul_small.png",
+            "id": 57,
+            "name": "Dağ Ruhu",
+            "rarity": 0,
+            "tooltip": "Kısa süreliğine çatışma dışı kaldığında sana <shield>kalkan</shield> sağlayan Dağ Ruhu'nu kazanırsın.<br><br>Oluşturulan Toplam Kalkan: @f1@"
+        },
+        {
+            "apiName": "UltimateRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Ultinin bekleme süresi, tur başına onu bir kez kullandıktan sonra sıfırlanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 88,
+            "name": "Ulti Devrimi",
+            "rarity": 2,
+            "tooltip": "Ultinin bekleme süresi, tur başına onu bir kez kullandıktan sonra sıfırlanır."
+        },
+        {
+            "apiName": "Dematerialize",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForce": 15.0,
+                "SecondPickBonus": 30.0
+            },
+            "desc": "Alt etme başına @AdaptiveForce@ Değişken Kuvvet kazanırsın. Bu etki her tur şampiyon başına bir kere tetiklenebilir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dematerialize_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dematerialize_small.png",
+            "id": 171,
+            "name": "İliğini Kurut",
+            "rarity": 0,
+            "tooltip": "{{Cherry_Dematerialize_Summary}}<br><br>İkinci eklentin olarak seçilirse @SecondPickBonus@ Değişken Kuvvet ile başlar.<br><br>Kazanılan Değişken Kuvvet: @f1@"
+        },
+        {
+            "apiName": "FrostWraith",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.5,
+                "Radius": 450.0,
+                "RootDuration": 1.25
+            },
+            "desc": "Yakınındaki rakipleri her @Cooldown@ saniyede bir <keywordMajor>otomatik olarak</keywordMajor> @RootDuration@ saniyeliğine <status>sabitlersin</status>.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
+            "id": 39,
+            "name": "Buz Hortlağı",
+            "rarity": 0,
+            "tooltip": "Yakınındaki rakipleri her @Cooldown@ saniyede bir <keywordMajor>otomatik olarak</keywordMajor> @RootDuration@ saniyeliğine <status>sabitlersin</status>.<br><br>Bu Tur Sabitlenen Rakip: @f1@<br>Sabitlenen Toplam Rakip: @f2@"
+        },
+        {
+            "apiName": "SymphonyofWar",
+            "calculations": {
+                "ASMelee": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 3
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 6
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 9
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 12
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 15
+                                }
+                            ],
+                            "mLevel1Value": 0.12999999523162842
+                        }
+                    ]
+                },
+                "ASRanged": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 3
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 6
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 9
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 12
+                                }
+                            ],
+                            "mLevel1Value": 0.07999999821186066
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ASCap": 10.0,
+                "BuffDuration": 5.0,
+                "Duration": 6.0,
+                "HealingPercent": 0.10000000149011612,
+                "MaxAdaptivePerStack": 5.5,
+                "MaxStacks": 12.0,
+                "MinAdaptivePerStack": 3.0,
+                "PerCastIDLockout": 10.0,
+                "RangeBonus": 50.0,
+                "RangedHealingPercent": 0.07999999821186066,
+                "StackCap": 6.0,
+                "TimeUntilNextStackFromSameSpell": 5.0
+            },
+            "desc": "<spellName>Ölümcül Tempo</spellName> ve <spellName>Yenilmez</spellName> anahtar rünlerini kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/symphonyofwar_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/symphonyofwar_small.png",
+            "id": 79,
+            "name": "Savaş Senfonisi",
+            "rarity": 2,
+            "tooltip": "<spellName>Ölümcül Tempo</spellName> ve <spellName>Yenilmez</spellName> anahtar rünlerini kazanırsın."
+        },
+        {
+            "apiName": "TrueshotProdigy",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 750.0,
+                            "mStartValue": 250.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Cooldown": 5.0,
+                "SnipeDistance": 700.0
+            },
+            "desc": "Uzaktan hasar verdiğin şampiyonlara <keywordMajor>otomatik olarak</keywordMajor> bir <abilityName>İsabet Dalgası</abilityName> gönderirsin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
+            "id": 86,
+            "name": "İsabet Dehası",
+            "rarity": 2,
+            "tooltip": "Birine @SnipeDistance@ birim uzaktan hasar verdiğinde ona <keywordMajor>otomatik olarak</keywordMajor> sınırsız menzile sahip bir <abilityName>İsabet Dalgası</abilityName> göndererek @Damage@ Hasar verirsin (@Cooldown@ sn. bekleme süresi).<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "Eureka",
+            "calculations": {},
+            "dataValues": {
+                "APToHasteConversion": 0.25
+            },
+            "desc": "Yetenek hızın <scaleAP>yetenek gücünün %@APToHasteConversion*100@ kadarına eşdeğer miktarda</scaleAP> artar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/eureka_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/eureka_small.png",
+            "id": 30,
+            "name": "Evreka!",
+            "rarity": 2,
+            "tooltip": "Yetenek hızın <scaleAP>yetenek gücünün %@APToHasteConversion*100@ kadarına eşdeğer miktarda</scaleAP> artar."
+        },
+        {
+            "apiName": "OceanSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Rakiplere hasar verdikten sonra yüksek miktarda <healing>can</healing> ve <scaleMana>mana</scaleMana> yenilenmesi sağlayan Okyanus Ruhu'nu kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/oceansoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/oceansoul_small.png",
+            "id": 60,
+            "name": "Okyanus Ruhu",
+            "rarity": 0,
+            "tooltip": "Rakiplere hasar verdikten sonra yüksek miktarda <healing>can</healing> ve <scaleMana>mana</scaleMana> yenilenmesi sağlayan Okyanus Ruhu'nu kazanırsın.<br><br>Bu Tur Yapılan İyileştirme: @f1@<br>Yapılan Toplam İyileştirme: @f2@"
+        },
+        {
+            "apiName": "CircleofDeath",
+            "calculations": {},
+            "dataValues": {
+                "DamageRange": 1000.0,
+                "HealToDamageConversion": 0.699999988079071
+            },
+            "desc": "Yaptığın <health>iyileştirmenin</health> ve can yenilemenin bir kısmını en yakınındaki rakip şampiyona <scaleAP>büyü hasarı</scaleAP> olarak verirsin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/circleofdeath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/circleofdeath_small.png",
+            "id": 15,
+            "name": "Ölüm Döngüsü",
+            "rarity": 2,
+            "tooltip": "En yakınındaki rakip şampiyona, yaptığın <health>iyileştirmenin</health> ve can yenilemenin <magicDamage>%@HealToDamageConversion*100@ kadarına eşdeğer miktarda büyü hasarı</magicDamage> verirsin.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "Quest_WoogletsWitchcap",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Anında: Aşırı Büyük Sopa kazanırsın.<br><br>Koşul: Aşırı Büyük Sopa, Rabadon'un Şapkası ve Zhonya'nın Kumsaati'ne sahip ol.<br><br>Ödül: Wooglet'in Cadı Şapkası'nı kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
+            "id": 156,
+            "name": "Görev: Wooglet'in Cadı Şapkası",
+            "rarity": 2,
+            "tooltip": "Anında: Aşırı Büyük Sopa kazanırsın.<br><br>Koşul: Aşırı Büyük Sopa, Rabadon'un Şapkası ve Zhonya'nın Kumsaati'ne sahip ol.<br><br>Ödül: Wooglet'in Cadı Şapkası'nı kazanırsın."
+        },
+        {
+            "apiName": "Earthwake",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 2,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 2,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 140.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 2
+                }
+            },
+            "dataValues": {
+                "APRatio": 0.30000001192092896,
+                "BonusADRatio": 1.0,
+                "ExplosionDelayTime": 0.75,
+                "ExplosionRadius": 300.0
+            },
+            "desc": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerin arkalarında 1 saniye sonra patlayan bir iz bırakır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
+            "id": 27,
+            "name": "Toprağın Uyanışı",
+            "rarity": 2,
+            "tooltip": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerin arkalarında 1 saniye sonra patlayarak @Damage@ Fiziksel Hasar veren bir iz bırakır.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "ScopedWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 75.0,
+                "RangedRangeIncrease": 50.0
+            },
+            "desc": "Yakın dövüşçüysen @MeleeRangeIncrease@, menzilliysen @RangedRangeIncrease@ Saldırı Menzili kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopedweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopedweapons_small.png",
+            "id": 170,
+            "name": "Dürbünlü Silahlar",
+            "rarity": 0,
+            "tooltip": "Yakın dövüşçüysen @MeleeRangeIncrease@, menzilliysen @RangedRangeIncrease@ Saldırı Menzili kazanırsın."
+        },
+        {
+            "apiName": "BreadAndButter",
+            "calculations": {},
+            "dataValues": {
+                "QAbilityHaste": 200.0,
+                "QReducedAbilityHaste": 200.0
+            },
+            "desc": "Q yeteneğin @QAbilityHaste@ Yetenek Hızı kazanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandbutter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandbutter_small.png",
+            "id": 103,
+            "name": "Yağlı Ekmek",
+            "rarity": 1,
+            "tooltip": "Q yeteneğin @QAbilityHaste@ Yetenek Hızı kazanır."
+        },
+        {
+            "apiName": "TheBrutalizer",
+            "calculations": {},
+            "dataValues": {
+                "AD": 25.0,
+                "AbilityHaste": 10.0,
+                "Lethality": 10.0
+            },
+            "desc": "<scaleAD>@AD@ Saldırı Gücü</scaleAD>, <scaleLevel>@AbilityHaste@ Yetenek Hızı</scaleLevel> ve <scaleAD>@Lethality@ Zırh Deşme</scaleAD> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/thebrutalizer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/thebrutalizer_small.png",
+            "id": 82,
+            "name": "Hırpalayan",
+            "rarity": 1,
+            "tooltip": "<scaleAD>@AD@ Saldırı Gücü</scaleAD>, <scaleLevel>@AbilityHaste@ Yetenek Hızı</scaleLevel> ve <scaleAD>@Lethality@ Zırh Deşme</scaleAD> kazanırsın."
+        },
+        {
+            "apiName": "FullyAutomated",
+            "calculations": {},
+            "dataValues": {
+                "AutocastFlatCDR": 2.0
+            },
+            "desc": "<keywordMajor>Otomatik olarak</keywordMajor> tetiklenen etkilerinin bekleme süreleri @AutocastFlatCDR@ saniye azalır ve yetenek hızından faydalanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
+            "id": 213,
+            "name": "Tam Otomatik",
+            "rarity": 0,
+            "tooltip": "<keywordMajor>Otomatik olarak</keywordMajor> tetiklenen etkilerinin bekleme süreleri @AutocastFlatCDR@ saniye azalır ve yetenek hızından faydalanır."
+        },
+        {
+            "apiName": "SonicBoom",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 2,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 2,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 30.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 2
+                }
+            },
+            "dataValues": {
+                "ProcCooldown": 2.0,
+                "Radius": 450.0,
+                "SlowAmount": -0.30000001192092896
+            },
+            "desc": "Güçlendirdiğin, <healing>iyileştirdiğin</healing> veya <shield>kalkan sağladığın</shield> takım arkadaşının etrafındaki rakiplere hasar verirsin ve onları <status>yavaşlatırsın</status>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/sonicboom_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/sonicboom_small.png",
+            "id": 76,
+            "name": "Ses Patlaması",
+            "rarity": 0,
+            "tooltip": "Güçlendirdiğin, <healing>iyileştirdiğin</healing> veya <shield>kalkan sağladığın</shield> takım arkadaşının etrafındaki rakiplere <trueDamage>@Damage@ Gerçek Hasar</trueDamage> verirsin ve onları 2 saniyeliğine %@SlowAmount*-100@ <status>yavaşlatırsın</status>.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "TwiceThrice",
+            "calculations": {},
+            "dataValues": {
+                "ProcMultiplier": 1.5
+            },
+            "desc": "Her üçüncü saldırı isabet etkilerini iki defa uygular.",
+            "iconLarge": "assets/ux/cherry/augments/icons/twicethrice_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/twicethrice_small.png",
+            "id": 107,
+            "name": "Çifte Tesirli",
+            "rarity": 1,
+            "tooltip": "Her üçüncü saldırı isabet etkilerini iki defa uygular."
+        },
+        {
+            "apiName": "CelestialBody",
+            "calculations": {},
+            "dataValues": {
+                "DamageReduction": 0.10000000149011612,
+                "Health": 1250.0
+            },
+            "desc": "<health>@Health@ Can</health> kazanırsın ama verdiğin hasar %@DamageReduction*100@ azalır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/celestialbody_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/celestialbody_small.png",
+            "id": 13,
+            "name": "Semavi Beden",
+            "rarity": 1,
+            "tooltip": "<health>@Health@ Can</health> kazanırsın ama verdiğin hasar %@DamageReduction*100@ azalır."
+        },
+        {
+            "apiName": "BreadAndJam",
+            "calculations": {},
+            "dataValues": {
+                "WAbilityHaste": 200.0
+            },
+            "desc": "W yeteneğin @WAbilityHaste@ Yetenek Hızı kazanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandjam_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandjam_small.png",
+            "id": 150,
+            "name": "Reçelli Ekmek",
+            "rarity": 1,
+            "tooltip": "W yeteneğin @WAbilityHaste@ Yetenek Hızı kazanır."
+        },
+        {
+            "apiName": "WithHaste",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHasteToMSConversion": 1.5
+            },
+            "desc": "<scaleLevel>Yetenek hızının</scaleLevel> @AbilityHasteToMSConversion@ katı kadar <moveSpeed>hareket hızı</moveSpeed> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/withhaste_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/withhaste_small.png",
+            "id": 98,
+            "name": "Süratle",
+            "rarity": 1,
+            "tooltip": "<scaleLevel>Yetenek hızının</scaleLevel> @AbilityHasteToMSConversion@ katı kadar <moveSpeed>hareket hızı</moveSpeed> kazanırsın."
+        },
+        {
+            "apiName": "FallenAegis",
+            "calculations": {
+                "ShieldAmount": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 50.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "ShieldDuration": 12.0
+            },
+            "desc": "Çatışmaya @ShieldDuration@ saniyeliğine varlığını koruyan bir <abilityName>Kara Kalkan</abilityName>'la başlarsın.<br><br><rules><abilityName>Kara Kalkan</abilityName> büyü hasarını ve <status>hareketsiz bırakma</status> etkilerini engeller.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/fallenaegis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fallenaegis_small.png",
+            "id": 34,
+            "name": "Düşmüş Kalkan",
+            "rarity": 0,
+            "tooltip": "Çatışmaya @ShieldDuration@ saniyeliğine varlığını koruyan ve @ShieldAmount@ Büyü Hasarı engelleyen bir <abilityName>Kara Kalkan</abilityName>'la başlarsın.<br><br><rules><abilityName>Kara Kalkan</abilityName> büyü hasarını ve <status>hareketsiz bırakma</status> etkilerini engeller.</rules><br><br>Oluşturulan Toplam Kalkan: @f1@<br>Engellenen Toplam Hareketsiz Bırakma Yeteneği: @f2@"
+        },
+        {
+            "apiName": "HolyFire",
+            "calculations": {
+                "BurnDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.02500000037252903,
+                            "mStat": 11
+                        }
+                    ]
+                },
+                "BurnDamageTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "BurnDamage",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    }
+                }
+            },
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercentMax": 0.03999999910593033,
+                "BurnPercentMin": 0.009999999776482582,
+                "Cooldown": 1.5,
+                "Radius": 650.0
+            },
+            "desc": "<healing>İyileştirme</healing> veya <shield>kalkan</shield> sağladığında yakınındaki bir rakibe sınırsız kez birikebilen ve @BurnDuration@ saniye boyunca azami canın %@BurnPercentMin*100@ ila %@BurnPercentMax*100@ kadarına eşdeğer miktarda hasar veren bir <keywordMajor>yakma</keywordMajor> etkisi uygular.",
+            "iconLarge": "assets/ux/cherry/augments/icons/holyfire_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/holyfire_small.png",
+            "id": 198,
+            "name": "Kutlu Ateş",
+            "rarity": 1,
+            "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>Yakma hasarı, destek verilen şampiyonun azami canına oranla sağlanan iyileştirme veya kalkanın boyutuna bağlı olarak artar.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "FeeltheBurn",
+            "calculations": {
+                "DamagePerSecond": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "TooltipTrueDamageCalculation",
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "InverseDuration"
+                    }
+                },
+                "TooltipTrueDamageCalculation": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 410.0,
+                            "mStartValue": 70.0
+                        }
+                    ]
+                },
+                "{7c50d74e}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 600.0,
+                            "mStartValue": 100.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "DamageReductionTOOLTIPONLY": 0.3499999940395355,
+                "DotDuration": 5.0,
+                "ExhaustDuration": 3.0,
+                "GrievousAmount": 0.4000000059604645,
+                "InverseDuration": 0.20000000298023224,
+                "Range": 1000.0,
+                "SightRadius": 100.0,
+                "SlowAmount": 0.5
+            },
+            "desc": "<spellName>Sıcağı Hisset</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Sıcağı Hisset</spellName>, yakınındaki tüm rakip şampiyonların üstünde <spellName>Tutuştur</spellName> ve <spellName>Bitkinlik</spellName> sihirdar büyülerini kullanır.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/feeltheburn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/feeltheburn_small.png",
+            "id": 35,
+            "name": "Sıcağı Hisset",
+            "rarity": 2,
+            "tooltip": "<rules>Yakınındaki tüm rakip şampiyonların üstünde <spellName>Tutuştur</spellName> ve <spellName>Bitkinlik</spellName> sihirdar büyülerini kullanır.</rules>"
+        },
+        {
+            "apiName": "GuiltyPleasure",
+            "calculations": {
+                "TotalHeal": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 10.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealPercentage",
+                            "mStat": 11
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealPercentage": 0.014999999664723873
+            },
+            "desc": "Rakip şampiyonları <status>hareketsiz bırakmak</status> <healing>@TotalHeal@ Can yeniler</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/guiltypleasure_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/guiltypleasure_small.png",
+            "id": 42,
+            "name": "Enerji Emici",
+            "rarity": 0,
+            "tooltip": "Bir rakip şampiyonu <status>hareketsiz bırakmak</status> <healing>@TotalHeal@ Can yeniler</healing>.<br><br>Bu Tur Yenilenen Can: @f1@<br>Yenilenen Toplam Can: @f2@"
+        },
+        {
+            "apiName": "ScopierWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 200.0,
+                "RangedRangeIncrease": 100.0
+            },
+            "desc": "Yakın dövüşçüysen @MeleeRangeIncrease@, menzilliysen @RangedRangeIncrease@ Saldırı Menzili kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopierweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopierweapons_small.png",
+            "id": 71,
+            "name": "Daha Büyük Dürbünlü Silahlar",
+            "rarity": 1,
+            "tooltip": "Yakın dövüşçüysen @MeleeRangeIncrease@, menzilliysen @RangedRangeIncrease@ Saldırı Menzili kazanırsın."
+        },
+        {
+            "apiName": "BuffBuddies",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Kalıcı olarak Kırmızı ve Mavi Güçlendirme kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/buffbuddies_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/buffbuddies_small.png",
+            "id": 9,
+            "name": "Kırmızıyla Mavinin Uyumu",
+            "rarity": 0,
+            "tooltip": "Kalıcı olarak Kırmızı ve Mavi Güçlendirme kazanırsın."
+        },
+        {
+            "apiName": "RaidBoss",
+            "calculations": {},
+            "dataValues": {
+                "BreakoutHealthThreshold": 0.5,
+                "DamageReductionMax": 0.699999988079071,
+                "DamageReductionMin": 0.4000000059604645,
+                "DamageReductionRoundCap": 11.0,
+                "ImprisonDuration": 9.0,
+                "MissingHPHealUponRelease": 0.30000001192092896,
+                "ShieldHealthRatio": 0.3499999940395355,
+                "StatIncrease": 0.4000000059604645
+            },
+            "desc": "Her tura haritanın ortasına hapsedilmiş bir halde başlarsın. Bu haldeyken hareket edemezsin ancak en fazla %@DamageReductionMax*100@ Hasar Azaltma kazanabilirsin. Ayrıca boyutun, <healing>canın</healing>, <physicalDamage>saldırı gücün</physicalDamage> ve <magicDamage>yetenek gücün</magicDamage> en fazla %@StatIncrease*100@ olacak şekilde zamanla artar. @ImprisonDuration@ saniyenin ardından veya <healing>%@BreakoutHealthThreshold*100@</healing> Cana ulaştığında şiddetle dışarı çıkarsın, rakipleri <status>geri savurursun</status> ve <shield>azami canının %@ShieldHealthRatio*100@ kadarına eşdeğer miktarda kalkan</shield> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/raidboss_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/raidboss_small.png",
+            "id": 125,
+            "name": "Bölüm Sonu Canavarı",
+            "rarity": 2,
+            "tooltip": "Her tura haritanın ortasına hapsedilmiş bir halde başlarsın. Bu haldeyken hareket edemezsin ancak en fazla %@DamageReductionMax*100@ Hasar Azaltma kazanabilirsin. Ayrıca boyutun, <healing>canın</healing>, <physicalDamage>saldırı gücün</physicalDamage> ve <magicDamage>yetenek gücün</magicDamage> en fazla %@StatIncrease*100@ olacak şekilde zamanla artar. @ImprisonDuration@ saniyenin ardından veya <healing>%@BreakoutHealthThreshold*100@</healing> Cana ulaştığında şiddetle dışarı çıkarsın, rakipleri <status>geri savurursun</status> ve <shield>azami canının %@ShieldHealthRatio*100@ kadarına eşdeğer miktarda kalkan</shield> kazanırsın."
+        },
+        {
+            "apiName": "OutlawsGrit",
+            "calculations": {},
+            "dataValues": {
+                "MaxStacks": 5.0,
+                "ResistsPerStack": 12.0
+            },
+            "desc": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerini kullandıktan sonra <scaleArmor>@ResistsPerStack@ Zırh</scaleArmor> ve <scaleMR>Büyü Direnci</scaleMR> kazanırsın.<br><br>Bu etki en fazla @MaxStacks@ defa birikir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
+            "id": 63,
+            "name": "Kanun Kaçağı Cesareti",
+            "rarity": 1,
+            "tooltip": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerini kullandıktan sonra <scaleArmor>@ResistsPerStack@ Zırh</scaleArmor> ve <scaleMR>Büyü Direnci</scaleMR> kazanırsın.<br><br>Bu etki en fazla @MaxStacks@ defa birikir."
+        },
+        {
+            "apiName": "DontBlink",
+            "calculations": {},
+            "dataValues": {
+                "BonusDamagePerMSDifference": 0.0010000000474974513
+            },
+            "desc": "Rakiplerine kıyasla ne kadar hızlıysan o kadar fazla hasar verirsin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dontblink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dontblink_small.png",
+            "id": 26,
+            "name": "Gözünü Kırpma",
+            "rarity": 0,
+            "tooltip": "Hedefine kıyasla sahip olduğun her fazladan <moveSpeed>10 Hareket Hızı</moveSpeed> başına %@BonusDamagePerMSDifference*1000@ İlave Hasar kazanırsın.<br><br>Bu Tur Verilen İlave Hasar: @f1@<br>Toplam İlave Hasar: @f2@"
+        },
+        {
+            "apiName": "ShadowRunner",
+            "calculations": {},
+            "dataValues": {
+                "BuffDuration": 2.0,
+                "MSAmount": 300.0
+            },
+            "desc": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneği kullandıktan ya da <stealth>gizlenme</stealth> etkisinden çıktıktan sonra @spell.Augment_ShadowRunner:BuffDuration@ saniyeliğine @spell.Augment_ShadowRunner:MSAmount@ Hareket Hızı kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/shadowrunner_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/shadowrunner_small.png",
+            "id": 73,
+            "name": "Gölge Koşucu",
+            "rarity": 0,
+            "tooltip": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneği kullandıktan ya da <stealth>gizlenme</stealth> etkisinden çıktıktan sonra @spell.Augment_ShadowRunner:BuffDuration@ saniyeliğine @spell.Augment_ShadowRunner:MSAmount@ Hareket Hızı kazanırsın."
+        },
+        {
+            "apiName": "InfernalConduit",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 6.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05999999865889549
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.14000000059604645,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "FlatCooldownRefundPerTick": 0.07999999821186066,
+                "ProcCooldown": 1.0
+            },
+            "desc": "Yeteneklerin birikebilen ve zaman içinde <scaleAP>büyü hasarı</scaleAP> veren bir <keywordMajor>yakma</keywordMajor> etkisi uygular.<br><br>Uyguladığın <keywordMajor>yakma</keywordMajor> etkileri temel yeteneklerinin bekleme sürelerini azaltır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/infernalconduit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/infernalconduit_small.png",
+            "id": 45,
+            "name": "Alev Geçidi",
+            "rarity": 2,
+            "tooltip": "Yeteneklerin birikebilen ve @BleedDuration@ saniye boyunca <scaleAP>@BleedDamageTooltip@ Büyü Hasarı</scaleAP> veren bir <keywordMajor>yakma</keywordMajor> etkisi uygular. <keywordMajor>Yakma</keywordMajor> etkisi sınırsız kez birikebilir.<br><br>Rakiplere hasar veren tüm <keywordMajor>yakma</keywordMajor> etkilerin, temel yeteneklerinin bekleme sürelerini @FlatCooldownRefundPerTick@ saniye azaltır.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "<physicalDamage>İlave saldırı gücün</physicalDamage> <magicDamage>yetenek gücüne</magicDamage> dönüşür. <magicDamage>%@APAmp*100@ Yetenek Gücü</magicDamage> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Yetenek Gücüne Güç Kat",
+            "rarity": 0,
+            "tooltip": "<physicalDamage>İlave saldırı gücün</physicalDamage> <magicDamage>yetenek gücüne</magicDamage> dönüşür. <magicDamage>%@APAmp*100@ Yetenek Gücü</magicDamage> kazanırsın."
+        },
+        {
+            "apiName": "BacktoBasics",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.3499999940395355,
+                "Haste": 60.0,
+                "HealingAmp": 0.3499999940395355,
+                "ShieldingAmp": 0.3499999940395355
+            },
+            "desc": "<scaleLevel>Hasarın</scaleLevel>, <healing>iyileştirme gücün</healing> ve <shield>kalkan gücün</shield> artar. Ayrıca <scaleBonus>yetenek hızı</scaleBonus> kazanırsın ama <keywordMajor>ultini kullanamazsın</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/backtobasics_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/backtobasics_small.png",
+            "id": 4,
+            "name": "Temeli Sağlam",
+            "rarity": 2,
+            "tooltip": "Ultin mühürlenir. <scaleLevel>Hasarın</scaleLevel>, <healing>iyileştirme gücün</healing> ve <shield>kalkan gücün</shield> %@DamageAmp*100@ artar. Ayrıca <scaleBonus>@Haste@ Yetenek Hızı</scaleBonus> kazanırsın."
+        },
+        {
+            "apiName": "Clothesline",
+            "calculations": {
+                "BurnDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 75.0,
+                            "mStartValue": 5.0
+                        }
+                    ]
+                },
+                "BurnDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "BurnDamage",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 4.0
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4,
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "RectangleHalfWidth": 50.0
+            },
+            "desc": "Takım arkadaşınla aranda, içinde kalan rakiplere sürekli hasar veren bir bağ oluşur.",
+            "iconLarge": "assets/ux/cherry/augments/icons/clothesline_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/clothesline_small.png",
+            "id": 110,
+            "name": "Alevli Urgan",
+            "rarity": 0,
+            "tooltip": "Takım arkadaşınla aranda, rakiplere her saniye <magicDamage>@BurnDamageTooltip@ Büyü Hasarı</magicDamage> veren bir bağ oluşur.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "DontChase",
+            "calculations": {
+                "ApproximateTotalDamageTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "DamagePerSecond",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 4.25
+                    },
+                    "tooltipOnly": true
+                },
+                "DamagePerSecond": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 15.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatioPerSecond"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.20000000298023224,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "APRatioPerSecond": 0.10000000149011612,
+                "CloudDuration": 3.25,
+                "PoisonDuration": 2.0999999046325684,
+                "TicksPerSecond": 4.0,
+                "ToggleCooldown": 1.0
+            },
+            "desc": "Hayalet etkisi kazanır ve arkanda içindeki rakiplere <magicDamage>büyü hasarı</magicDamage> veren bir zehir bulutu bırakırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dontchase_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dontchase_small.png",
+            "id": 102,
+            "name": "Nafile Takip",
+            "rarity": 0,
+            "tooltip": "Hayalet etkisi kazanır ve arkanda içindeki rakiplere her saniye <magicDamage>@DamagePerSecond@ Büyü Hasarı</magicDamage> veren bir zehir bulutu bırakırsın.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "SoulSiphon",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "HealPercentage": 0.11999999731779099
+            },
+            "desc": "<crit>%@CritChance*100@ Kritik Vuruş İhtimali</crit> kazanırsın ve <crit>kritik vuruşların</crit> %@HealPercentage*100@ Can Çalma kazanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/soulsiphon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/soulsiphon_small.png",
+            "id": 77,
+            "name": "Ruh Sömürüsü",
+            "rarity": 1,
+            "tooltip": "<crit>%@CritChance*100@ Kritik Vuruş İhtimali</crit> kazanırsın ve <crit>kritik vuruşların</crit> %@HealPercentage*100@ Can Çalma kazanır.<br><br>Bu Tur Yapılan İyileştirme: @f1@<br>Yapılan Toplam İyileştirme: @f2@"
+        },
+        {
+            "apiName": "GambaAnvil",
+            "calculations": {},
+            "dataValues": {
+                "GoldBasisDiscount": 1250.0,
+                "GoldBonus": 1000.0,
+                "PrismaticCostReduction": 1000.0
+            },
+            "desc": "@GoldBonus@ Altın kazandırır. Prizmatik Örs'ün bedeli @PrismaticCostReduction@ Altın düşer ve şu andan itibaren alınan prizmatik eşyaların satış bedelleri 500 Altın azalır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
+            "id": 220,
+            "name": "Talih Örsü",
+            "rarity": 2,
+            "tooltip": "@GoldBonus@ Altın kazandırır. Prizmatik Örs'ün bedeli @PrismaticCostReduction@ Altın düşer ve şu andan itibaren alınan prizmatik eşyaların satış bedelleri 500 Altın azalır."
+        },
+        {
+            "apiName": "ThreadtheNeedle",
+            "calculations": {},
+            "dataValues": {
+                "PercentPen": 0.20000000298023224
+            },
+            "desc": "%@PercentPen*100@ <scaleAD>Zırh Delme</scaleAD> ve <scaleAP>Büyü Nüfuzu</scaleAP> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/threadtheneedle_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threadtheneedle_small.png",
+            "id": 84,
+            "name": "İğne Deliğinden",
+            "rarity": 1,
+            "tooltip": "%@PercentPen*100@ <scaleAD>Zırh Delme</scaleAD> ve <scaleAP>Büyü Nüfuzu</scaleAP> kazanırsın."
+        },
+        {
+            "apiName": "BreadAndCheese",
+            "calculations": {},
+            "dataValues": {
+                "EAbilityHaste": 200.0
+            },
+            "desc": "E yeteneğin @EAbilityHaste@ Yetenek Hızı kazanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandcheese_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandcheese_small.png",
+            "id": 151,
+            "name": "Peynirli Ekmek",
+            "rarity": 1,
+            "tooltip": "E yeteneğin @EAbilityHaste@ Yetenek Hızı kazanır."
+        },
+        {
+            "apiName": "Impassable",
+            "calculations": {},
+            "dataValues": {
+                "BeamPosIndent": 100.0,
+                "BonusResistsMax": 150.0,
+                "BonusResistsMin": 80.0,
+                "CCCarryOverRatio": 1.0,
+                "Cooldown": 15.0,
+                "DamageRadius": 350.0,
+                "DamageRatioAD": 0,
+                "DamageRatioAP": 0,
+                "DelayBeforeBurst": 2.5,
+                "DmgReduction": 0.15000000596046448,
+                "FlatResists": 35.0,
+                "FlatResistsMax": 35.0,
+                "HealthRatio": 8.0,
+                "MRRatio": 0,
+                "MaxBaseDamage": 120.0,
+                "PercentBonusResists": 0.800000011920929,
+                "RayCount": 3.0,
+                "ResistInc": 0,
+                "SizeInc": 0.25,
+                "SlowAmount": 0.15000000596046448,
+                "SlowDuration": 2.5,
+                "SlowZoneDuration": 3.0,
+                "SlowZoneLength": 700.0,
+                "SlowZoneSlowAPRatio": 0.05999999865889549,
+                "SlowZoneSlowBase": 0.20000000298023224,
+                "SlowZoneSlowHealShieldRatio": 0.09000000357627869,
+                "SlowZoneSlowbADRatio": 0.07000000029802322,
+                "SlowZoneWidth": 80.0,
+                "StartingBaseDamage": 25.0
+            },
+            "desc": "<keywordMajor>Artçı Şok</keywordMajor> ve <keywordMajor>Buzul Takviyesi</keywordMajor> anahtar rünlerini kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/impassable_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/impassable_small.png",
+            "id": 149,
+            "name": "Geçilmez",
+            "rarity": 1,
+            "tooltip": "<keywordMajor>Artçı Şok</keywordMajor> ve <keywordMajor>Buzul Takviyesi</keywordMajor> anahtar rünlerini kazanırsın."
+        },
+        {
+            "apiName": "ExtendoArm",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 12.0
+            },
+            "desc": "Her 12 saniyede bir yakınındaki bir rakibe <keywordMajor>otomatik olarak</keywordMajor> Blitzcrank Q'su gönderirsin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/extendoarm_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/extendoarm_small.png",
+            "id": 33,
+            "name": "Roket Eller Havaya",
+            "rarity": 1,
+            "tooltip": "Her 12 saniyede bir yakınındaki bir rakibe <keywordMajor>otomatik olarak</keywordMajor> Blitzcrank Q'su gönderirsin.<br><br>İsabet Etme Sayısı: @f1@"
+        },
+        {
+            "apiName": "SlowCooker",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.017500000074505806,
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "Range": 500.0
+            },
+            "desc": "Her saniye yakınındaki rakip şampiyonlara birikebilen ve <health>azami canına</health> bağlı olarak hasar veren bir <keywordMajor>yakma</keywordMajor> etkisi uygularsın. <keywordMajor>Yakma</keywordMajor> etkisi sınırsız kez birikebilir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowcooker_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowcooker_small.png",
+            "id": 75,
+            "name": "Yavaş Pişmiş",
+            "rarity": 2,
+            "tooltip": "Her saniye @Range@ birim yakınındaki şampiyonlara birikebilen ve <health>@BleedDuration@ saniye boyunca her saniye @BleedDamageTooltip@ <scaleAP>Büyü Hasarı</scaleAP></health> veren bir <keywordMajor>yakma</keywordMajor> etkisi uygularsın. <keywordMajor>Yakma</keywordMajor> etkisi sınırsız kez birikebilir.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "DieAnotherDay",
+            "calculations": {},
+            "dataValues": {
+                "HealFlatTooltip": 250.0
+            },
+            "desc": "<spellName>Bugün De Ölmedik</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Bugün De Ölmedik</spellName>, 4 saniye boyunca içinde hiçbir birimin katledilemediği bir alan oluşturur.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/dieanotherday_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dieanotherday_small.png",
+            "id": 24,
+            "name": "Bugün De Ölmedik",
+            "rarity": 1,
+            "tooltip": "Üstünde durduğun zemini 4 saniyeliğine kutsayarak içindeki birimlerin canının %10'un altına düşmesini engelleyen bir alan oluşturursun. Sürenin sonunda alanda bulunan birimler <healing>@HealFlatTooltip@ Can</healing> iyileşir. "
+        },
+        {
+            "apiName": "SpiritLink",
+            "calculations": {},
+            "dataValues": {
+                "DamageRedirectPercentage": 0.15000000596046448,
+                "HealCopyPercentage": 0.5
+            },
+            "desc": "Takım arkadaşına verilen hasarın %@DamageRedirectPercentage*100@ kadarı ve takım arkadaşının elde ettiği <healing>iyileştirmenin</healing> %@HealCopyPercentage*100@ kadarı sana yönlendirilir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spiritlink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spiritlink_small.png",
+            "id": 78,
+            "name": "Ruh Bağı",
+            "rarity": 2,
+            "tooltip": "Takım arkadaşına verilen hasarın %@DamageRedirectPercentage*100@ kadarı ve takım arkadaşının elde ettiği <healing>iyileştirmenin</healing> %@HealCopyPercentage*100@ kadarı sana yönlendirilir.<br><br>Yönlendirilen Toplam Hasar: @f1@<br>Yapılan Toplam İyileştirme: @f2@<br>"
+        },
+        {
+            "apiName": "Quest_AngelofRetribution",
+            "calculations": {
+                "BaseDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 50.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AttackSpeed": 1.0,
+                "HealPowerToDamageConversion": 3.0,
+                "RequirementAmount": 2500.0
+            },
+            "desc": "Koşul: Takım arkadaşların için @RequirementAmount@ Can yenile veya hasar engelle.<br><br>Ödül: <attackspeed>%@AttackSpeed*100@ Saldırı Hızı</attackspeed> kazanırsın. Ayrıca saldırıların <healing>iyileştirme ve kalkan gücünün %@HealPowerToDamageConversion*100@ kadarına eşdeğer miktarda</healing> ilave <magicdamage>büyü hasarı</magicdamage> verir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_angelofretribution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_angelofretribution_small.png",
+            "id": 192,
+            "name": "Görev: İntikam Meleği",
+            "rarity": 1,
+            "tooltip": "{{Cherry_QuestAngelofRetribution_Summary}}<br><br>Yenilenen veya Engellenen Hasar: @f1@<br>Verilen Hasar: @f2@"
+        },
+        {
+            "apiName": "ContractKiller",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.15000000596046448,
+                "Gold": 150.0
+            },
+            "desc": "Her tur bir rakibi işaretleyerek onun %@spell.Augment_ContractKiller:DamageAmp*100@ daha fazla hasar almasını ve katledildiğinde fazladan @spell.Augment_ContractKiller:Gold@ Altın kazandırmasını sağlarsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/contractkiller_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/contractkiller_small.png",
+            "id": 17,
+            "name": "Kiralık Katil",
+            "rarity": 0,
+            "tooltip": "Her tur bir rakip şampiyonu işaretlersin. İşaretlediğin şampiyon %@DamageAmp*100@ daha fazla hasar alır ve katledildiğinde hem sana hem de takım arkadaşına @Gold@ Altın kazandırır.<br><br>Bu Tur Verilen İlave Hasar: @f1@<br>Toplam İlave Hasar: @f2@<br>Takım Arkadaşı Başına Kazanılan Toplam Altın: @f3@"
+        },
+        {
+            "apiName": "Goredrink",
+            "calculations": {},
+            "dataValues": {
+                "Omnivamp": 0.20000000298023224
+            },
+            "desc": "%@Omnivamp*100@ Mutlak Sömürü kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/goredrink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/goredrink_small.png",
+            "id": 138,
+            "name": "Kana Kana",
+            "rarity": 0,
+            "tooltip": "%@Omnivamp*100@ Mutlak Sömürü kazanırsın."
+        },
+        {
+            "apiName": "FirstAidKit",
+            "calculations": {},
+            "dataValues": {
+                "HealShieldAmp": 0.20000000298023224
+            },
+            "desc": "<healing>%@HealShieldAmp*100@ İyileştirme ve Kalkan Gücü</healing> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firstaidkit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firstaidkit_small.png",
+            "id": 37,
+            "name": "İlk Yardım Seti",
+            "rarity": 0,
+            "tooltip": "<healing>%@HealShieldAmp*100@ İyileştirme ve Kalkan Gücü</healing> kazanırsın."
+        },
+        {
+            "apiName": "OkBoomerang",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.2199999988079071,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "Yakınındaki bir rakibe her 7 saniyede bir <keywordMajor>otomatik olarak</keywordMajor> bumerang gönderirsin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
+            "id": 61,
+            "name": "Dönerse Senindir",
+            "rarity": 1,
+            "tooltip": "Yakınındaki bir rakibe her 7 saniyede bir <keywordMajor>otomatik olarak</keywordMajor> bir bumerang göndererek isabet halinde @Damage@ Değişken Hasar verirsin.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "JuiceBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Sen ve takım arkadaşın her tur fazladan bedelsiz bir Nektar kazanırsınız.",
+            "iconLarge": "assets/ux/cherry/augments/icons/juicebox_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/juicebox_small.png",
+            "id": 49,
+            "name": "Nektar",
+            "rarity": 0,
+            "tooltip": "Sen ve takım arkadaşın her tur fazladan bedelsiz bir Nektar kazanırsınız."
+        },
+        {
+            "apiName": "ScopiestWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 250.0,
+                "RangedRangeIncrease": 150.0
+            },
+            "desc": "Yakın dövüşçüysen @MeleeRangeIncrease@, menzilliysen @RangedRangeIncrease@ Saldırı Menzili kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopiestweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopiestweapons_small.png",
+            "id": 115,
+            "name": "En Büyük Dürbünlü Silahlar",
+            "rarity": 2,
+            "tooltip": "Yakın dövüşçüysen @MeleeRangeIncrease@, menzilliysen @RangedRangeIncrease@ Saldırı Menzili kazanırsın."
+        },
+        {
+            "apiName": "StackosaurusRex",
+            "calculations": {},
+            "dataValues": {
+                "StackModifier": 0.75
+            },
+            "desc": "Yetenekler için kazandığın kalıcı <keywordMajor>yükler</keywordMajor> %@StackModifier*100@ artar!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stackosaurusrex_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stackosaurusrex_small.png",
+            "id": 204,
+            "name": "Zahmetsiz Yük",
+            "rarity": 0,
+            "tooltip": "Yetenekler için kazandığın kalıcı <keywordMajor>yükler</keywordMajor> %@StackModifier*100@ artar!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "<magicDamage>Yetenek gücün</magicDamage> <physicalDamage>ilave saldırı gücüne</physicalDamage> dönüşür. <physicalDamage>%@ADAmp*100@ Saldırı Gücü</physicalDamage> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Saldırı Gücüne Güç Kat",
+            "rarity": 0,
+            "tooltip": "<magicDamage>Yetenek gücün</magicDamage> <physicalDamage>ilave saldırı gücüne</physicalDamage> dönüşür. <physicalDamage>%@ADAmp*100@ Saldırı Gücü</physicalDamage> kazanırsın."
+        },
+        {
+            "apiName": "FeyMagic",
+            "calculations": {},
+            "dataValues": {
+                "PolyCooldown": 15.0,
+                "PolyDuration": 2.0,
+                "WEnemySlow": 60.0
+            },
+            "desc": "Ultinle hasar vermek rakipleri @PolyDuration@ saniyeliğine zararsız yaratıklara <status>dönüştürür</status> (@PolyCooldown@ saniye bekleme süresi).",
+            "iconLarge": "assets/ux/cherry/augments/icons/feymagic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/feymagic_small.png",
+            "id": 194,
+            "name": "Peri Büyüsü",
+            "rarity": 2,
+            "tooltip": "Ultinle hasar vermek rakipleri @PolyDuration@ saniyeliğine zararsız yaratıklara <status>dönüştürür</status> (@PolyCooldown@ saniye bekleme süresi)."
+        },
+        {
+            "apiName": "Firebrand",
+            "calculations": {},
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.019999999552965164
+            },
+            "desc": "Saldırıların zamanla hasar veren ve sınırsız kez birikebilen bir <keywordMajor>yakma</keywordMajor> etkisi uygular.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firebrand_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firebrand_small.png",
+            "id": 36,
+            "name": "Yakıcı Damga",
+            "rarity": 1,
+            "tooltip": "Saldırıların @BleedDuration@ saniye boyunca <scaleAP>azami canının %@PercentMaxHPDamagePer5Seconds*20@ kadarına eşdeğer miktarda büyü hasarı</scaleAP> veren bir <keywordMajor>yakma</keywordMajor> etkisi uygular. <keywordMajor>Yakma</keywordMajor> etkisi sınırsız kez birikebilir.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "Flashy",
+            "calculations": {},
+            "dataValues": {
+                "FlashCooldown": 2.0
+            },
+            "desc": "Sıçra'nın 3 yükü ve @FlashCooldown@ saniyelik bekleme süresi olur.",
+            "iconLarge": "assets/ux/cherry/augments/icons/flashy_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
+            "id": 116,
+            "name": "Çekirge Gibi",
+            "rarity": 0,
+            "tooltip": "Sıçra'nın 3 yükü ve @FlashCooldown@ saniyelik bekleme süresi olur."
+        },
+        {
+            "apiName": "NestingDoll",
+            "calculations": {},
+            "dataValues": {
+                "ReviveArmTime": 2.0,
+                "ReviveDuration": 1.5,
+                "ReviveMod": 0.4000000059604645,
+                "SecondReviveMod": 0.25,
+                "SecondSizeMod": -0.4000000059604645,
+                "SelfReviveTimerModMax": 0.5,
+                "SelfReviveTimerModMin": 0.4000000059604645,
+                "SizeMod": -0.20000000298023224
+            },
+            "desc": "@ReviveArmTime@ saniyenin ardından otomatik olarak kendini kendini diriltmeye başlarsın. Ayrıca ilaveten bir kez daha diriltilebilirsin. Her dirildiğinde daha küçük bir boyutla ve azami canının %@ReviveMod*100@ kadarıyla geri dönersin.<br><br>Dirildiğinde etrafındaki rakipleri <status>geri savurursun</status>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/nestingdoll_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/nestingdoll_small.png",
+            "id": 177,
+            "name": "Matruşka",
+            "rarity": 2,
+            "tooltip": "@ReviveArmTime@ saniyenin ardından otomatik olarak kendini kendini diriltmeye başlarsın. Ayrıca ilaveten bir kez daha diriltilebilirsin. Her dirildiğinde daha küçük bir boyutla ve azami canının %@ReviveMod*100@ kadarıyla geri dönersin.<br><br>Dirildiğinde etrafındaki rakipleri <status>geri savurursun</status>."
+        },
+        {
+            "apiName": "TapDancer",
+            "calculations": {},
+            "dataValues": {
+                "MSPerHit": 10.0,
+                "MSToASConversion": 0.0010000000474974513
+            },
+            "desc": "Normal saldırıların sana sınırsız kez birikecek şekilde <moveSpeed>@MSPerHit@ Hareket Hızı</moveSpeed> kazandırır. Ayrıca hareket hızının %@MSToASConversion*10000@ kadarına eşdeğer miktarda saldırı hızı kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tapdancer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tapdancer_small.png",
+            "id": 81,
+            "name": "Step Dansı",
+            "rarity": 2,
+            "tooltip": "Normal saldırıların sana sınırsız kez birikecek şekilde <moveSpeed>@MSPerHit@ Hareket Hızı</moveSpeed> kazandırır. Ayrıca hareket hızının %@MSToASConversion*10000@ kadarına eşdeğer miktarda saldırı hızı kazanırsın."
+        },
+        {
+            "apiName": "Tormentor",
+            "calculations": {},
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033
+            },
+            "desc": "<status>Hareketsiz bıraktığın</status> rakip şampiyonlara sınırsız kez birikebilen ve zamanla hasar veren bir <keywordMajor>yakma</keywordMajor> etkisi uygularsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tormentor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tormentor_small.png",
+            "id": 85,
+            "name": "İşkenceci",
+            "rarity": 0,
+            "tooltip": "<status>Hareketsiz bıraktığın</status> rakip şampiyonlara sınırsız kez birikebilen ve @BleedDuration@ saniye boyunca <scaleAP>azami canlarının %@PercentMaxHPDamagePer5Seconds*20@ kadarına eşdeğer miktarda büyü hasarı</scaleAP> veren bir <keywordMajor>yakma</keywordMajor> etkisi uygularsın. <keywordMajor>Yakma</keywordMajor> etkisi sınırsız kez birikebilir.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "Minionmancer",
+            "calculations": {},
+            "dataValues": {
+                "MinionDamageIncrease": 0.44999998807907104,
+                "MinionHealthIncrease": 0.44999998807907104,
+                "MinionSizeIncrease": 0.44999998807907104
+            },
+            "desc": "Çağırdığın birimlerin boyutu, canı ve hasarı %@MinionSizeIncrease*100@ artar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/minionmancer_small.png",
+            "id": 104,
+            "name": "Seçkin Kuvvetler",
+            "rarity": 1,
+            "tooltip": "Çağırdığın birimlerin boyutu, canı ve hasarı %@MinionSizeIncrease*100@ artar."
+        },
+        {
+            "apiName": "EtherealWeapon",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Yeteneklerin isabet etkilerini uygular (hedef başına 1 saniye bekleme süresi).",
+            "iconLarge": "assets/ux/cherry/augments/icons/etherealweapon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/etherealweapon_small.png",
+            "id": 29,
+            "name": "Olağandışı Silah",
+            "rarity": 1,
+            "tooltip": "Yeteneklerin isabet etkilerini uygular (hedef başına 1 saniye bekleme süresi).<br><br>Bu Tur Tetiklenme Sayısı: @f1@<br>Toplam Tetiklenme Sayısı: @f2@"
+        },
+        {
+            "apiName": "OmniSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "3 rasgele ejder ruhu kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
+            "id": 62,
+            "name": "Ruhların Hâkimi",
+            "rarity": 2,
+            "tooltip": "3 rasgele ejder ruhu kazanırsın."
+        },
+        {
+            "apiName": "DawnbringersResolve",
+            "calculations": {
+                "HealCalc": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealAmount",
+                            "mStat": 11
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.08299999684095383
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Duration": 3.0,
+                "HealAmount": 0.30000001192092896,
+                "HealthThreshold": 0.5
+            },
+            "desc": "Canın %@HealthThreshold*100@ değerinin altına düştüğünde 3 saniye boyunca azami canının %@HealAmount*100@ kadarını yenilersin.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 20,
+            "name": "Şafakgetiren'in Azmi",
+            "rarity": 1,
+            "tooltip": "Canın %@HealthThreshold*100@ değerinin altına düştüğünde 3 saniye boyunca azami canının %@HealAmount*100@ kadarını yenilersin.<br><br>Bu Tur Yapılan İyileştirme: @f1@<br>Yapılan Toplam İyileştirme: @f2@"
+        },
+        {
+            "apiName": "HoldVeryStill",
+            "calculations": {
+                "BonusAS": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 5
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 10
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 15
+                                }
+                            ],
+                            "mLevel1Value": 0.20000000298023224
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ASDuration": 5.0,
+                "BonusDamage": 0.10000000149011612,
+                "BonusMS": 0.20000000298023224,
+                "HoldStillDuration": 1.5
+            },
+            "desc": "<spellName>Kaçak Dövüş</spellName> pasifini kazanırsın.<br><br><rules>@HoldStillDuration@ saniye hareketsiz kalırsan hareket edene dek <keywordStealth>görünmez</keywordStealth> olursun. Bu <keywordStealth>görünmezlik</keywordStealth> etkisinden çıktığında <attackSpeed>@BonusAS@ Saldırı Hızı</attackSpeed> kazanırsın.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/holdverystill_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/holdverystill_small.png",
+            "id": 207,
+            "name": "Kıpırdama",
+            "rarity": 0,
+            "tooltip": "<spellName>Kaçak Dövüş</spellName> pasifini kazanırsın.<br><br><rules>@HoldStillDuration@ saniye hareketsiz kalırsan hareket edene dek <keywordStealth>görünmez</keywordStealth> olursun. Bu <keywordStealth>görünmezlik</keywordStealth> etkisinden çıktığında <attackSpeed>@BonusAS@ Saldırı Hızı</attackSpeed> kazanırsın.</rules>"
+        },
+        {
+            "apiName": "FromBeginningToEnd",
+            "calculations": {
+                "ChampRange": {
+                    "StaticTooltipCalculationDisplay": 5,
+                    "__type": "GameCalculationConditional",
+                    "mConditionalCalculationRequirements": {
+                        "__type": "IsRangedCastRequirement"
+                    },
+                    "mConditionalGameCalculation": "{06387172}",
+                    "mDefaultGameCalculation": "{792cf56b}",
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mSimpleTooltipCalculationDisplay": 5
+                },
+                "Cooldown": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "ByCharLevelInterpolationCalculationPart",
+                                "mEndValue": 15.0,
+                                "mStartValue": 25.0
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ModesCooldownReduction"
+                            }
+                        }
+                    ]
+                },
+                "{06387172}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 2.0
+                        }
+                    ]
+                },
+                "{792cf56b}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 1.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.3499999940395355,
+                "APRatio": 0.25,
+                "BaseDamageHigh": 100.0,
+                "BaseDamageLow": 50.0,
+                "CooldownResetValue": 1.5,
+                "DHCooldown": 45.0,
+                "DamageAmp": 0.15000000596046448,
+                "DamagePerSoulEssence": 10.0,
+                "Duration": 3.0,
+                "GoldPercentBonus": 1.2000000476837158,
+                "GoldPercentBonusRanged": 0.8999999761581421,
+                "GoldProcBonus": 6.0,
+                "GraceWindow": 0.25,
+                "HarvestThreshold": 0.5,
+                "MissileNoiseNumberLimiter": 3.0,
+                "MissileNoiseRangeLimiter": 1500.0,
+                "ModesCooldownReduction": 1.0,
+                "OOCTimer": 10.0
+            },
+            "desc": "<spellName>İlk Vuruş</spellName> ve <spellName>Kara Hasat</spellName> anahtar rünlerini kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frombeginningtoend_small.png",
+            "id": 38,
+            "name": "Baştan Sona",
+            "rarity": 1,
+            "tooltip": "<spellName>İlk Vuruş</spellName> ve <spellName>Kara Hasat</spellName> anahtar rünlerini kazanırsın.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@<br>Kazanılan Toplam Altın: @f3@"
+        },
+        {
+            "apiName": "CantTouchThis",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "InvulnDuration": 2.0
+            },
+            "desc": "Ultini kullandığında kısa süreliğine <status>hasar görmez</status> hale gelirsin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
+            "id": 11,
+            "name": "Dokunulmaz",
+            "rarity": 2,
+            "tooltip": "Ultini kullandığında @InvulnDuration@ saniyeliğine <status>hasar görmez</status> hale gelirsin (@Cooldown@ sn. bekleme süresi)."
+        },
+        {
+            "apiName": "SnowballFight",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 15.0
+            },
+            "desc": "Kaç sihirdar büyüsünün yerini Tuttur alır.<br><br><rules>Tuttur'la isabet ettiği ilk rakibi işaretleyen ve ona hasar veren bir kartopu atarsın. <recast>Yeniden kullanarak</recast> işaretli rakibe atılabilirsin.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/snowballfight_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/snowballfight_small.png",
+            "id": 176,
+            "name": "Kartopu Savaşı!",
+            "rarity": 0,
+            "tooltip": "Kaç sihirdar büyüsünün yerini Tuttur alır.<br><br><rules>Tuttur'la isabet ettiği ilk rakibi işaretleyen ve ona hasar veren bir kartopu atarsın. <recast>Yeniden kullanarak</recast> işaretli rakibe atılabilirsin.</rules>"
+        },
+        {
+            "apiName": "ItsCritical",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.4000000059604645
+            },
+            "desc": "<crit>%@CritChance*100@ Kritik Vuruş İhtimali</crit> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/itscritical_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/itscritical_small.png",
+            "id": 47,
+            "name": "Çok Kritik",
+            "rarity": 1,
+            "tooltip": "<crit>%@CritChance*100@ Kritik Vuruş İhtimali</crit> kazanırsın."
+        },
+        {
+            "apiName": "BloodBrother",
+            "calculations": {
+                "BleedDamagePerStack": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 45.0,
+                            "mStartValue": 15.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "NoxianMightBonusAD": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mBonusPerLevelAtAndAfter": 15.0,
+                                    "mLevel": 11
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mBonusPerLevelAtAndAfter": 30.0,
+                                    "mLevel": 14
+                                }
+                            ],
+                            "mInitialBonusPerLevel": 5.0,
+                            "mLevel1Value": 30.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "MaxStacks": 5.0,
+                "SecondsPerTick": 1.2599999904632568
+            },
+            "desc": "Darius'un pasifi <spellName>Kanama</spellName>'yı kazanırsın.<br><br><rules>Saldırılar ve hasar veren yetenekler, hedefe <keywordMajor>Kanama</keywordMajor> etkisi uygulayarak onun @BleedDuration@ saniye boyunca <physicalDamage>@BleedDamagePerStack@ Fiziksel Hasar</physicalDamage> almasına sebep olur. Bu etki en fazla @MaxStacks@ defa birikir.<br><br>Draven @MaxStacks@ <keywordMajor>Kanama</keywordMajor> yüküne ulaştığında <scaleAD>@NoxianMightBonusAD@ Saldırı Gücü</scaleAD> kazanır.</rules><br><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/bloodbrother_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bloodbrother_small.png",
+            "id": 200,
+            "name": "Kan Kardeşi",
+            "rarity": 1,
+            "tooltip": "Darius'un pasifi <spellName>Kanama</spellName>'yı kazanırsın.<br><br><rules>Saldırılar ve hasar veren yetenekler, hedefe <keywordMajor>Kanama</keywordMajor> etkisi uygulayarak onun @BleedDuration@ saniye boyunca <physicalDamage>@BleedDamagePerStack@ Fiziksel Hasar</physicalDamage> almasına sebep olur. Bu etki en fazla @MaxStacks@ defa birikir.<br><br>Draven @MaxStacks@ <keywordMajor>Kanama</keywordMajor> yüküne ulaştığında <scaleAD>@NoxianMightBonusAD@ Saldırı Gücü</scaleAD> kazanır.</rules><br><br>"
+        },
+        {
+            "apiName": "UltimateUnstoppable",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "UnstoppableDuration": 3.0
+            },
+            "desc": "Ultini kullandıktan sonra @UnstoppableDuration@ saniyeliğine kitle kontrolü etkilerine karşı bağışıklık kazanırsın (@Cooldown@ sn. bekleme süresi).",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimateunstoppable_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimateunstoppable_small.png",
+            "id": 112,
+            "name": "Durdurulamaz Ulti",
+            "rarity": 0,
+            "tooltip": "Ultini kullandıktan sonra @UnstoppableDuration@ saniyeliğine kitle kontrolü etkilerine karşı bağışıklık kazanırsın (@Cooldown@ sn. bekleme süresi)."
+        },
+        {
+            "apiName": "Recursion",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHaste": 60.0
+            },
+            "desc": "<scaleLevel>@AbilityHaste@ Yetenek Hızı</scaleLevel> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/recursion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/recursion_small.png",
+            "id": 68,
+            "name": "Yineleme",
+            "rarity": 1,
+            "tooltip": "<scaleLevel>@AbilityHaste@ Yetenek Hızı</scaleLevel> kazanırsın."
+        },
+        {
+            "apiName": "Deft",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeed": 0.6000000238418579
+            },
+            "desc": "%@AttackSpeed*100@ Saldırı Hızı kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/deft_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/deft_small.png",
+            "id": 22,
+            "name": "Eli Çabuk",
+            "rarity": 0,
+            "tooltip": "%@AttackSpeed*100@ Saldırı Hızı kazanırsın."
+        },
+        {
+            "apiName": "Goliath",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.15000000596046448,
+                "APAmp": 0.15000000596046448,
+                "HealthAmp": 0.3499999940395355,
+                "SizeAmp": 0.5
+            },
+            "desc": "Boyutunu büyüterek <scaleHealth>%@HealthAmp*100@ Can</scaleHealth> ve <scaleAP>%@ADAmp*100@ Değişken Kuvvet</scaleAP> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/goliath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/goliath_small.png",
+            "id": 41,
+            "name": "Izbandut",
+            "rarity": 2,
+            "tooltip": "Boyutunu büyüterek <scaleHealth>%@HealthAmp*100@ Can</scaleHealth> ve <scaleAP>%@ADAmp*100@ Değişken Kuvvet</scaleAP> kazanırsın."
+        },
+        {
+            "apiName": "AcceleratingSorcery",
+            "calculations": {},
+            "dataValues": {
+                "HastePerCast": 10.0
+            },
+            "desc": "Yetenek kullanmak sınırsız kez birikecek şekilde <scaleBonus>yetenek hızı</scaleBonus> kazandırır. Bu ilave her tur sıfırlanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/acceleratingsorcery_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/acceleratingsorcery_small.png",
+            "id": 1,
+            "name": "İvmeli Büyü",
+            "rarity": 2,
+            "tooltip": "Yetenek kullanmak sınırsız kez birikecek şekilde <scaleBonus>@HastePerCast@ Yetenek Hızı</scaleBonus> kazandırır. Bu ilave her tur sıfırlanır."
+        },
+        {
+            "apiName": "OrbitalLaser",
+            "calculations": {
+                "DamagePerTick": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 120.0,
+                            "mStartValue": 45.0
+                        }
+                    ]
+                },
+                "TotalDamageOverTimeTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "DamagePerTick",
+                    "mMultiplier": {
+                        "__type": "ProductOfSubPartsCalculationPart",
+                        "mPart1": {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "GroundDuration"
+                        },
+                        "mPart2": {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 4.0
+                        }
+                    },
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "AOESize": 550.0,
+                "CastRange": 5500.0,
+                "Cooldown": 20.0,
+                "DamagetoChampions": 0.30000001192092896,
+                "GroundDuration": 3.0,
+                "LaserDelay": 2.5,
+                "TickRate": 0.5
+            },
+            "desc": "Kaç sihirdar büyüsünün yerini <spellName>Yörünge Lazeri</spellName> alır.<br><br><rules>Bir gecikmenin ardından bir yörünge lazeri çağırarak isabet alan rakiplere <trueDamage>azami canlarının %@DamagetoChampions*100@ kadarına eşdeğer miktarda gerçek hasar</trueDamage> ve @GroundDuration@ saniye içinde <magicDamage>@TotalDamageOverTimeTooltip@ Büyü Hasarı</magicDamage> verirsin.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/orbitallaser_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/orbitallaser_small.png",
+            "id": 208,
+            "name": "Yörünge Lazeri",
+            "rarity": 2,
+            "tooltip": "{{Cherry_OrbitalLaser_Summary}}<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "MysticPunch",
+            "calculations": {},
+            "dataValues": {
+                "CooldownRefund": 1.25
+            },
+            "desc": "Saldırıların bekleme sürelerini @CooldownRefund@ saniye azaltır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
+            "id": 58,
+            "name": "Mistik Yumruk",
+            "rarity": 2,
+            "tooltip": "Saldırıların bekleme sürelerini @CooldownRefund@ saniye azaltır."
+        },
+        {
+            "apiName": "Homeguard",
+            "calculations": {},
+            "dataValues": {
+                "DisableCooldown": 3.0,
+                "Duration": 10.0,
+                "MovementSpeed": 1.0
+            },
+            "desc": "<speed>%@spell.Augment_Homeguard:MovementSpeed*100@ Hareket Hızı</speed> kazanırsın. Bu ilave hasar aldıktan sonraki @spell.Augment_Homeguard:DisableCooldown@ saniye boyunca devre dışı kalır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/homeguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/homeguard_small.png",
+            "id": 105,
+            "name": "Sığınak",
+            "rarity": 0,
+            "tooltip": "<speed>%@spell.Augment_Homeguard:MovementSpeed*100@ Hareket Hızı</speed> kazanırsın. Bu ilave hasar aldıktan sonraki @spell.Augment_Homeguard:DisableCooldown@ saniye boyunca devre dışı kalır."
+        },
+        {
+            "apiName": "HeavyHitter",
+            "calculations": {
+                "HealthPercentDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthPercent",
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthPercent": 0.03500000014901161
+            },
+            "desc": "Normal saldırıların <healing>azami canının</healing> %@HealthPercent*100@ kadarına eşdeğer miktarda ilave <physicalDamage>fiziksel hasar</physicalDamage> verir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/heavyhitter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/heavyhitter_small.png",
+            "id": 181,
+            "name": "Eli Ağır",
+            "rarity": 0,
+            "tooltip": "Normal saldırıların <healing>azami canının</healing> %@HealthPercent*100@ kadarına eşdeğer miktarda ilave <physicalDamage>fiziksel hasar</physicalDamage> verir."
+        },
+        {
+            "apiName": "RabbleRousing",
+            "calculations": {
+                "HealAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "MaxHealthPercentageHeal",
+                            "mStat": 11
+                        },
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 5.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "MaxHealthPercentageHeal": 0.009999999776482582
+            },
+            "desc": "Bir yetenek kullandığında <healing>@HealAmount@ Can</healing> yenilersin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/rabblerousing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/rabblerousing_small.png",
+            "id": 67,
+            "name": "Yaman Kavga",
+            "rarity": 1,
+            "tooltip": "Bir yetenek kullandığında <healing>@HealAmount@ Can</healing> yenilersin.<br><br>Bu Tur Yenilenen Can: @f1@<br>Yenilenen Toplam Can: @f2@"
+        },
+        {
+            "apiName": "GiantSlayer",
+            "calculations": {},
+            "dataValues": {
+                "LargeBonusDamage": 0.25,
+                "MedBonusDamage": 0.15000000596046448,
+                "MovespeedMod": 0.30000001192092896,
+                "SizeMod": 0.25,
+                "SmallBonusDamage": 0.10000000149011612,
+                "XLargeBonusDamage": 0.30000001192092896
+            },
+            "desc": "Boyutun küçülür, <speed>hareket hızı</speed> kazanırsın ve şampiyonlara aranızdaki boyut farkına bağlı olarak artacak şekilde ilave hasar verirsin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/giantslayer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/giantslayer_small.png",
+            "id": 195,
+            "name": "Dev Katili",
+            "rarity": 2,
+            "tooltip": "Boyutun küçülür, <speed>%@MovespeedMod*100@ Hareket Hızı</speed> kazanırsın ve şampiyonlara aranızdaki boyut farkına bağlı olarak %@SmallBonusDamage*100@ ila %@XLargeBonusDamage*100@ İlave Hasar verirsin.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "FrozenFoundations",
+            "calculations": {},
+            "dataValues": {
+                "ChampPushDistance": 120.0,
+                "NonChampPushDistance": 250.0,
+                "WallDuration": 5.0,
+                "WallWidth": 400.0
+            },
+            "desc": "<spellName>Donmuş Temeller</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Donmuş Temeller</spellName>, hedeflenen konumda bir buz duvarı oluşturur.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/frozenfoundations_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frozenfoundations_small.png",
+            "id": 40,
+            "name": "Donmuş Temeller",
+            "rarity": 0,
+            "tooltip": "<rules>Hedeflenen konumda bir buz duvarı oluşturursun.</rules>"
+        },
+        {
+            "apiName": "CriticalHealing",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritHeal": 0.4000000059604645
+            },
+            "desc": "İyileştirme ve kalkanların kritik vuruş yapabilir. %@CritChance*100@ Kritik Vuruş İhtimali kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/criticalhealing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/criticalhealing_small.png",
+            "id": 118,
+            "name": "Kritik İyileştirme",
+            "rarity": 1,
+            "tooltip": "İyileştirme ve kalkanların kritik vuruş yaparak %@CritHeal*100@ artabilir. %@CritChance*100@ Kritik Vuruş İhtimali kazanırsın. <br><br>İlave İyileştirme: @f1@<br>İlave Kalkan: @f2@"
+        },
+        {
+            "apiName": "ApexInventor",
+            "calculations": {},
+            "dataValues": {
+                "ItemHaste": 300.0,
+                "TooltipCDR": 75.0
+            },
+            "desc": "<scaleBonus>@ItemHaste@ Eşya Hızı</scaleBonus> (eşya bekleme süresinde %@TooltipCDR@ azalmaya eşdeğer) kazanırsın.<br><br><rules>Eşya hızı tüm eşya yeteneklerinin bekleme sürelerini azaltır.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
+            "id": 2,
+            "name": "Dâhi Mucit",
+            "rarity": 1,
+            "tooltip": "<scaleBonus>@ItemHaste@ Eşya Hızı</scaleBonus> (eşya bekleme süresinde %@TooltipCDR@ azalmaya eşdeğer) kazanırsın.<br><br><rules>Eşya hızı tüm eşya yeteneklerinin bekleme sürelerini azaltır.</rules>"
+        },
+        {
+            "apiName": "MirrorImage",
+            "calculations": {},
+            "dataValues": {
+                "AugmentCooldown": 60.0,
+                "CloneDuration": 8.0,
+                "HealthThreshold": 0.30000001192092896,
+                "StealthDuration": 1.25
+            },
+            "desc": "%@HealthThreshold*100@ Canın altına düştüğünde kısa süreliğine <keywordStealth>görünmez</keywordStealth> olur ve bir kopyanı oluşturursun.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
+            "id": 172,
+            "name": "Ayna Görüntüsü",
+            "rarity": 0,
+            "tooltip": "%@HealthThreshold*100@ Canın altına düştüğünde kısa süreliğine <keywordStealth>görünmez</keywordStealth> olur ve bir kopyanı oluşturursun."
+        },
+        {
+            "apiName": "AllForYou",
+            "calculations": {},
+            "dataValues": {
+                "HealShieldAmp": 0.30000001192092896
+            },
+            "desc": "Takım arkadaşının üstünde kullandığın iyileştirme ve kalkan etkileri %@HealShieldAmp*100@ güçlenir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/allforyou_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/allforyou_small.png",
+            "id": 141,
+            "name": "Hepsi Senin İçin",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_AllForYou_Summary }}<br><br>İlave İyileştirme: @f1@<br>İlave Kalkan: @f2@"
+        },
+        {
+            "apiName": "KeystoneConjurer",
+            "calculations": {},
+            "dataValues": {
+                "ADRatio": 0.3499999940395355,
+                "APRatio": 0.20000000298023224,
+                "AoEPercentRefund": 0.10000000149011612,
+                "DamageADRatio": 0.15000000596046448,
+                "DamageAPRatio": 0.10000000149011612,
+                "DamageBase": 10.0,
+                "DamageMax": 40.0,
+                "DotPercentRefund": 0.05000000074505806,
+                "PercentRefund": 0.20000000298023224,
+                "RechargeTime": 20.0,
+                "RechargeTimeMin": 8.0,
+                "ShieldBase": 30.0,
+                "ShieldMax": 75.0,
+                "ShieldRatio": 0.22499999403953552,
+                "ShieldRatioAD": 0.3499999940395355
+            },
+            "desc": "<spellName>Aery'yi Çağır</spellName> ve <spellName>Sihirli Yıldız</spellName> anahtar rünlerini kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/keystoneconjurer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/keystoneconjurer_small.png",
+            "id": 50,
+            "name": "Anahtar Rün Sihirbazı",
+            "rarity": 1,
+            "tooltip": "<spellName>Aery'yi Çağır</spellName> ve <spellName>Sihirli Yıldız</spellName> anahtar rünlerini kazanırsın.<br><br>Verilen Toplam Hasar: @f1@<br>Oluşturulan Toplam Kalkan: @f2@"
+        },
+        {
+            "apiName": "LaserEyes",
+            "calculations": {
+                "LaserDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 5.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatio",
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "LaserEyesTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 240.0,
+                            "mStartValue": 20.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatioTooltip"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatioTooltip",
+                            "mStat": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4,
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.14000000059604645,
+                "ADRatioTooltip": 0.5600000023841858,
+                "APRatio": 0.09000000357627869,
+                "APRatioTooltip": 0.36000001430511475,
+                "LaserLength": 700.0,
+                "RectHalfWidth": 60.0
+            },
+            "desc": "Dönük olduğun tarafta sürekli <magicDamage>büyü hasarı</magicDamage> veren bir lazer olur.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lasereyes_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lasereyes_small.png",
+            "id": 174,
+            "name": "Lazer Gözler",
+            "rarity": 2,
+            "tooltip": "Dönük olduğun tarafta her saniye <magicDamage>@LaserEyesTooltip@ Büyü Hasarı</magicDamage> veren bir lazer var.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "Dashing",
+            "calculations": {},
+            "dataValues": {
+                "Haste": 250.0
+            },
+            "desc": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerin <scaleLevel>@Haste@ Yetenek Hızı</scaleLevel> kazanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dashing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dashing_small.png",
+            "id": 19,
+            "name": "Atılgan",
+            "rarity": 2,
+            "tooltip": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerin <scaleLevel>@Haste@ Yetenek Hızı</scaleLevel> kazanır."
+        },
+        {
+            "apiName": "LightningStrikes",
+            "calculations": {},
+            "dataValues": {
+                "ASToADConversion": 25.0
+            },
+            "desc": "<attackSpeed>Saldırı hızına</attackSpeed> bağlı olarak artacak şekilde <scaleAD>saldırı gücü</scaleAD> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
+            "id": 52,
+            "name": "Yıldırım Darbeleri",
+            "rarity": 1,
+            "tooltip": "Her <attackSpeed>0,1 Saldırı Hızı</attackSpeed> başına <scaleAD>@ASToADConversion*.1@ Saldırı Gücü</scaleAD> kazanırsın."
+        },
+        {
+            "apiName": "Repulsor",
+            "calculations": {},
+            "dataValues": {
+                "HealthThreshold1": 0.6000000238418579,
+                "HealthThreshold2": 0.30000001192092896,
+                "KnockbackDistance": 750.0,
+                "KnockbackRange": 500.0
+            },
+            "desc": "Canın %@HealthThreshold1*100@ veya %@HealthThreshold2*100@ değerinin altına düştüğünde yakınındaki rakipleri <status>geri savurursun</status>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/repulsor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/repulsor_small.png",
+            "id": 69,
+            "name": "İtici",
+            "rarity": 0,
+            "tooltip": "Canın %@HealthThreshold1*100@ veya %@HealthThreshold2*100@ değerinin altına düştüğünde yakınındaki rakipleri <status>geri savurursun</status>."
+        },
+        {
+            "apiName": "SkilledSniper",
+            "calculations": {},
+            "dataValues": {
+                "PeriodicReductionAmount": 3.0,
+                "ReducedCooldown": 0.5,
+                "SnipeDistance": 700.0
+            },
+            "desc": "@SnipeDistance@ menzilden ufak bir mesafeden bir rakibe temel yetenek isabet ettirmek onun bekleme süresini azaltarak @ReducedCooldown@ saniyeye düşürür. Zamanla hasar veren yeteneklerin bekleme süresiyse @PeriodicReductionAmount@ saniyeye düşer.",
+            "iconLarge": "assets/ux/cherry/augments/icons/skilledsniper_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/skilledsniper_small.png",
+            "id": 113,
+            "name": "Yetenekli Keskin Nişancı",
+            "rarity": 1,
+            "tooltip": "@SnipeDistance@ menzilden ufak bir mesafeden bir rakibe temel yetenek isabet ettirmek onun bekleme süresini azaltarak @ReducedCooldown@ saniyeye düşürür. Zamanla hasar veren yeteneklerin bekleme süresiyse @PeriodicReductionAmount@ saniyeye düşer."
+        },
+        {
+            "apiName": "ParasiticRelationship",
+            "calculations": {},
+            "dataValues": {
+                "HealPercent": 0.15000000596046448
+            },
+            "desc": "Takım arkadaşın tarafından verilen hasarın %@HealPercent*100@ kadarına eşdeğer miktarda can yenilersin.",
+            "iconLarge": "assets/ux/cherry/augments/icons/parasiticrelationship_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/parasiticrelationship_small.png",
+            "id": 175,
+            "name": "Parazitli İlişki",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_ParasiticRelationship_Summary }}<br><br>Bu Tur Yenilenen Can: @f1@<br>Yenilenen Toplam Can: @f2@"
+        },
+        {
+            "apiName": "Restart",
+            "calculations": {},
+            "dataValues": {
+                "CoolDown": 10.0
+            },
+            "desc": "Temel yeteneklerinin bekleme süreleri <keywordMajor>otomatik olarak</keywordMajor> her @CoolDown@ saniyede bir sıfırlanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/restart_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/restart_small.png",
+            "id": 165,
+            "name": "Sil Baştan",
+            "rarity": 1,
+            "tooltip": "Temel yeteneklerinin bekleme süreleri <keywordMajor>otomatik olarak</keywordMajor> her @CoolDown@ saniyede bir sıfırlanır."
+        },
+        {
+            "apiName": "DrawYourSword",
+            "calculations": {},
+            "dataValues": {
+                "BonusAD": 0.3499999940395355,
+                "BonusAS": 0.25,
+                "BonusHP": 0.3499999940395355,
+                "BonusLifesteal": 0.25,
+                "BonusMS": 0.25,
+                "ExtraStackAttackRangeCeiling": 650.0,
+                "ExtraStackAttackRangeFloor": 500.0,
+                "MaxStatMod": 0.30000001192092896,
+                "MeleeAttackRange": 200.0
+            },
+            "desc": "Yakın dövüşçü olursun. <physicalDamage>%@BonusAD*100@ Saldırı Gücü</physicalDamage>, <healing>%@BonusHP*100@ Can</healing>, <attackSpeed>%@BonusAS*100@ Saldırı Hızı</attackSpeed>, <lifesteal>%@BonusLifesteal*100@ Can Çalma</lifesteal> ve <speed>%@BonusMS*100@ Hareket Hızı</speed> kazanırsın. Bu nitelikler kaybettiğin saldırı menziline bağlı olarak artar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/drawyoursword_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/drawyoursword_small.png",
+            "id": 134,
+            "name": "Çek Kılıcını!",
+            "rarity": 2,
+            "tooltip": "Yakın dövüşçü olursun. <physicalDamage>%@BonusAD*100@ Saldırı Gücü</physicalDamage>, <healing>%@BonusHP*100@ Can</healing>, <attackSpeed>%@BonusAS*100@ Saldırı Hızı</attackSpeed>, <lifesteal>%@BonusLifesteal*100@ Can Çalma</lifesteal> ve <speed>%@BonusMS*100@ Hareket Hızı</speed> kazanırsın. Bu nitelikler kaybettiğin saldırı menziline bağlı olarak artar."
+        },
+        {
+            "apiName": "RestlessRestoration",
+            "calculations": {
+                "HealCalcPer1000Units": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthRatioPer1000Units",
+                            "mStat": 11
+                        },
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 120.0,
+                            "mStartValue": 20.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealthRatioPer1000Units": 0.019999999552965164
+            },
+            "desc": "Hareket ettikçe <healing>can</healing> yenilersin. Bu miktar kat ettiğin mesafeye bağlı olarak artar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/restlessrestoration_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/restlessrestoration_small.png",
+            "id": 70,
+            "name": "Sağlam Sağlık",
+            "rarity": 1,
+            "tooltip": "Kat ettiğin her 1000 birim başına @HealCalcPer1000Units@ Can yenilersin.<br><br>Bu Tur Yapılan İyileştirme: @f1@<br>Yapılan Toplam İyileştirme: @f2@"
+        },
+        {
+            "apiName": "DiveBomber",
+            "calculations": {},
+            "dataValues": {
+                "ExplosionRadius": 500.0,
+                "PercentMaxHPDamage": 0.20000000298023224
+            },
+            "desc": "Her tur takımında ilk katledilen şampiyon patlayarak yüksek miktarda hasar verir.",
+            "iconLarge": "assets/ux/cherry/augments/icons/divebomber_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/divebomber_small.png",
+            "id": 25,
+            "name": "Kamikaze",
+            "rarity": 1,
+            "tooltip": "Her tur takımında ilk katledilen şampiyon patlayarak yakınındaki rakiplere <trueDamage>azami canlarının %@PercentMaxHPDamage*100@ kadarına eşdeğer miktarda gerçek hasar</trueDamage> verir.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "BluntForce",
+            "calculations": {},
+            "dataValues": {
+                "ADIncrease": 0.15000000596046448
+            },
+            "desc": "<scaleAD>%@ADIncrease*100@ Saldırı Gücü</scaleAD> sağlar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
+            "id": 7,
+            "name": "Kaba Kuvvet",
+            "rarity": 0,
+            "tooltip": "<scaleAD>%@ADIncrease*100@ Saldırı Gücü</scaleAD> sağlar."
+        },
+        {
+            "apiName": "Oathsworn",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Kaç sihirdar büyüsünün yerini <spellName>Ecelin Çağrısı</spellName> alır.<br><br><rules><spellName>Ecelin Çağrısı</spellName>, takım arkadaşını içine çekip en fazla 4 saniye boyunca hedef alınamaz hale getirmeni sağlar. Takım arkadaşın hareket ederek kendini dışarı fırlatabilir ve fırladığı zaman isabet ettiği ilk şampiyonla yakınındaki tüm rakipleri <status>geri savurur</status>.</rules><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
+            "id": 109,
+            "name": "Yeminli",
+            "rarity": 1,
+            "tooltip": "Kaç sihirdar büyüsünün yerini <spellName>Ecelin Çağrısı</spellName> alır.<br><br><rules><spellName>Ecelin Çağrısı</spellName>, takım arkadaşını içine çekip en fazla 4 saniye boyunca hedef alınamaz hale getirmeni sağlar. Takım arkadaşın hareket ederek kendini dışarı fırlatabilir ve fırladığı zaman isabet ettiği ilk şampiyonla yakınındaki tüm rakipleri <status>geri savurur</status>.</rules><br>"
+        },
+        {
+            "apiName": "Flashbang",
+            "calculations": {
+                "ExplosiveDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.6000000238418579
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.699999988079071,
+                            "mStat": 2
+                        },
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 10.0,
+                            "mLevel1Value": 70.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "SlowAmount": 0.3499999940395355,
+                "SlowDuration": 1.25
+            },
+            "desc": "Sıçra kullandığında etrafına <MagicalDamage>büyü hasarı</MagicalDamage> veren ve isabet alan rakipleri <status>yavaşlatan</status> bir patlama meydana gelir. Ayrıca Sıçra'nın bekleme süresi her tur sıfırlanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/flashbang_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/flashbang_small.png",
+            "id": 187,
+            "name": "Sıçrayan Bomba",
+            "rarity": 0,
+            "tooltip": "Sıçra kullandığında etrafına <MagicalDamage>@ExplosiveDamage@ Büyü Hasarı</MagicalDamage> veren ve rakipleri @SlowDuration@ saniyeliğine %@SlowAmount*100@ <status>yavaşlatan</status> bir patlama meydana gelir. Ayrıca Sıçra'nın bekleme süresi her tur sıfırlanır.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "SummonersRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Sihirdar büyülerini rasgele değiştir. Her @Cooldown@ saniyede bir çatışmada sihirdar büyünü kullandığında rasgele bir büyü onun yerini alır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonersroulette_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonersroulette_small.png",
+            "id": 123,
+            "name": "Sihirdar Ruleti",
+            "rarity": 2,
+            "tooltip": "Sihirdar büyülerini rasgele değiştir. Her @Cooldown@ saniyede bir çatışmada sihirdar büyünü kullandığında rasgele bir büyü onun yerini alır."
+        },
+        {
+            "apiName": "ShrinkRay",
+            "calculations": {},
+            "dataValues": {
+                "DamageReduction": 0.15000000596046448
+            },
+            "desc": "Saldırıların rakibinin hasarını 3 saniyeliğine %@DamageReduction*100@ azaltır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/shrinkray_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/shrinkray_small.png",
+            "id": 74,
+            "name": "Küçültme Işını",
+            "rarity": 1,
+            "tooltip": "Saldırıların rakibinin hasarını 3 saniyeliğine %@DamageReduction*100@ azaltır.<br><br>Bu Tur Azaltılan Hasar: @f1@<br>Azaltılan Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "Castle",
+            "calculations": {},
+            "dataValues": {
+                "MSBuffAmount": 0.5,
+                "MSBuffDuration": 4.0
+            },
+            "desc": "<spellName>Rok</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Rok</spellName>, takım arkadaşınla yer değiştirmeni sağlar.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/castle_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/castle_small.png",
+            "id": 12,
+            "name": "Rok",
+            "rarity": 0,
+            "tooltip": "<spellName>Rok</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules>Takım arkadaşınla yer değiştirmeni sağlar. Ardından @MSBuffDuration@ saniyeliğine %@MSBuffAmount*100@ Hareket Hızı kazanırsın.</rules>"
+        },
+        {
+            "apiName": "Quest_SteelYourHeart",
+            "calculations": {},
+            "dataValues": {
+                "StackMultiplication": 6.0,
+                "StackThreshold": 325.0,
+                "StacktoRegenConversion": 0.10000000149011612
+            },
+            "desc": "Koşul: En az @StackThreshold@ yükü olan bir Çelikyürek'in olsun.<br><br>Ödül: Çelikyürek yüklerin @StackMultiplication@ katına çıkar. <healing>Can yenilenmesi</healing> Çelikyürek yüklerinin %@StacktoRegenConversion*100@ kadarına eşdeğer miktarda artar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_steelyourheart_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_steelyourheart_small.png",
+            "id": 152,
+            "name": "Görev: Paslanmaz Yürek",
+            "rarity": 1,
+            "tooltip": "Koşul: En az @StackThreshold@ yükü olan bir Çelikyürek'in olsun.<br><br>Ödül: Çelikyürek yüklerin @StackMultiplication@ katına çıkar. <healing>Can yenilenmesi</healing> Çelikyürek yüklerinin %@StacktoRegenConversion*100@ kadarına eşdeğer miktarda artar."
+        },
+        {
+            "apiName": "Executioner",
+            "calculations": {},
+            "dataValues": {
+                "BonusDamage": 0.15000000596046448,
+                "HealthThreshold": 0.5
+            },
+            "desc": "Canı %@HealthThreshold*100@ değerinin altındaki rakiplere %@BonusDamage*100@ daha fazla hasar verirsin. Alt etme halinde temel yeteneklerinin bekleme süresi sıfırlanır.",
+            "iconLarge": "assets/ux/cherry/augments/icons/executioner_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/executioner_small.png",
+            "id": 32,
+            "name": "Cellat",
+            "rarity": 0,
+            "tooltip": "Canı %@HealthThreshold*100@ değerinin altındaki rakiplere %@BonusDamage*100@ daha fazla hasar verirsin. Alt etme halinde temel yeteneklerinin bekleme süresi sıfırlanır.<br><br>Bu Tur Verilen İlave Hasar: @f1@<br>Toplam İlave Hasar: @f2@"
+        },
+        {
+            "apiName": "CourageoftheColossus",
+            "calculations": {
+                "TotalShield": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 100.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthScalar",
+                            "mStat": 11
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806
+            },
+            "desc": "Bir rakip şampiyonu <status>hareketsiz bıraktıktan</status> sonra <shield>@TotalShield@ Kalkan</shield> kazanırsın.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/courageofthecolossus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
+            "id": 18,
+            "name": "Heyulanın Cesareti",
+            "rarity": 2,
+            "tooltip": "Bir rakip şampiyonu <status>hareketsiz bıraktıktan</status> sonra <shield>@TotalShield@ Kalkan</shield> kazanırsın.<br><br>Bu Tur Oluşturulan Kalkan: @f1@<br>Oluşturulan Toplam Kalkan: @f2@"
+        },
+        {
+            "apiName": "InfernalSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Yeteneklerin veya saldırılarından isabet alan rakiplere ilave hasar vermeni sağlayan Alev Ruhu'nu kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/infernalsoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/infernalsoul_small.png",
+            "id": 46,
+            "name": "Alev Ruhu",
+            "rarity": 0,
+            "tooltip": "Yeteneklerin veya saldırılarından isabet alan rakiplere ilave hasar vermeni sağlayan Alev Ruhu'nu kazanırsın.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "ComboMaster",
+            "calculations": {
+                "Cooldown": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 10.0,
+                            "mStartValue": 20.0
+                        }
+                    ]
+                },
+                "{4120d321}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 60.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.550000011920929,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HasteBase": 0.30000001192092896,
+                "HasteBaseMelee": 0.4000000059604645,
+                "HasteDuration": 3.0,
+                "HasteMax": 0.800000011920929,
+                "HasteMaxMelee": 0.800000011920929,
+                "MaxBonusSeconds": 4.0,
+                "NumberToProc": 3.0,
+                "SlowResist": 0.75,
+                "WindowDuration": 4.0
+            },
+            "desc": "<spellName>Elektrik Ver</spellName> ve <spellName>Sürat Coşkusu</spellName> anahtar rünlerini kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/combomaster_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/combomaster_small.png",
+            "id": 16,
+            "name": "Kombo Erbabı",
+            "rarity": 1,
+            "tooltip": "<spellName>Elektrik Ver</spellName> ve <spellName>Sürat Coşkusu</spellName> anahtar rünlerini kazanırsın.<br><br>Elektrik Ver'in Bu Tur Verdiği Hasar: @f1@<br>Toplam Elektrik Ver Hasarı: @f2@"
+        },
+        {
+            "apiName": "MindtoMatter",
+            "calculations": {},
+            "dataValues": {
+                "ManaToHealthConversion": 0.5
+            },
+            "desc": "<healing>Azami canın</healing> <scaleMana>mananın</scaleMana> yarısı kadar artar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
+            "id": 56,
+            "name": "Zihinden Bedene",
+            "rarity": 0,
+            "tooltip": "<healing>Azami canın</healing> <scaleMana>mananın</scaleMana> yarısı kadar artar."
+        },
+        {
+            "apiName": "ItsKillingTime",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "DamageStorePercentage": 0.4000000059604645,
+                "MarkDuration": 5.0,
+                "VFXHighDamageThreshold": 500.0
+            },
+            "desc": "Ultini kullandıktan sonra tüm rakip şampiyonları katletmek üzere işaretlersin. Bu işaret onlara verilen hasarın %@DamageStorePercentage*100@ kadarını biriktirir ve @MarkDuration@ saniye sonra biriktirilen hasarı verecek şekilde patlar (@Cooldown@ sn. bekleme süresi).",
+            "iconLarge": "assets/ux/cherry/augments/icons/itskillingtime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/itskillingtime_small.png",
+            "id": 211,
+            "name": "Katliam Vakti",
+            "rarity": 1,
+            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+        },
+        {
+            "apiName": "WisdomofAges",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Hemen 1 seviye atlarsın ve her iki turda bir fazladan 1 seviye atlamaya devam edersin. Seviye sınırın kalkar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
+            "id": 96,
+            "name": "Asırlık Bilgi",
+            "rarity": 2,
+            "tooltip": "Hemen 1 seviye atlarsın ve her iki turda bir fazladan 1 seviye atlamaya devam edersin. Seviye sınırın kalkar."
+        },
+        {
+            "apiName": "NowYouSeeMe",
+            "calculations": {},
+            "dataValues": {
+                "MSBuffAmount": 0.5,
+                "MSBuffDuration": 2.0
+            },
+            "desc": "<spellName>Hokkabaz</spellName> sihirdar büyüsünü kazanırsın.<br><br><rules><spellName>Hokkabaz</spellName>, son kullandığın hareket yeteneğinin başlangıç noktasına ışınlanmanı sağlar.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/nowyouseeme_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/nowyouseeme_small.png",
+            "id": 43,
+            "name": "Hokkabaz",
+            "rarity": 0,
+            "tooltip": "<passive>Pasif:</passive> Bir hareket yeteneği kullandığında ardında bir işaret bırakırsın.<br><br><active>Aktif:</active> Bıraktığın son işarete geri dönersin. Ardından @MSBuffDuration@ saniyeliğine %@MSBuffAmount*100@ Hareket Hızı kazanırsın."
+        },
+        {
+            "apiName": "Perseverance",
+            "calculations": {},
+            "dataValues": {
+                "AmpedHPThreshold": 0.25,
+                "AmpedRegen": 16.0,
+                "BaseRegen": 8.0
+            },
+            "desc": "Yüksek miktarda <healing>can yenilenmesi</healing> kazanırsın. Bu miktar, canın azaldıkça daha da artar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/perseverance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/perseverance_small.png",
+            "id": 64,
+            "name": "Metanet",
+            "rarity": 1,
+            "tooltip": "<healing>%@BaseRegen*100@ Taban Can Yenilenmesi</healing> kazanırsın. Bu miktar canın %25'in altına düştüğünde artarak <healing>%@AmpedRegen*100@ Taban Can Yenilenmesi</healing> olur.<br><br>Bu Tur Yapılan İyileştirme: @f1@<br>Yapılan Toplam İyileştirme: @f2@"
+        },
+        {
+            "apiName": "JeweledGauntlet",
+            "calculations": {
+                "APToCritConversion": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.00044999999227002263
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritDamage": 1.399999976158142
+            },
+            "desc": "Yeteneklerin kritik vuruş yapabilir. %@CritChance*100@ Kritik Vuruş İhtimali kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/jeweledgauntlet_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/jeweledgauntlet_small.png",
+            "id": 48,
+            "name": "Mücevherli Eldiven",
+            "rarity": 2,
+            "tooltip": "Yeteneklerin kritik vuruş yaparak toplamda %@CritDamage*100@ Hasar verebilir. %@CritChance*100@ Kritik Vuruş İhtimali kazanırsın. Yetenek gücüne bağlı olarak artacak şekilde fazladan @APToCritConversion@ Kritik Vuruş İhtimali kazanırsın.<br><br>Bu Tur Verilen İlave Hasar: @f1@<br>Verilen Toplam İlave Hasar: @f2@"
+        }
+    ]
+}

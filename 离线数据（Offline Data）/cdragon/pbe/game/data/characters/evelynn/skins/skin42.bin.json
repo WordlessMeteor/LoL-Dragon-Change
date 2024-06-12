@@ -43,6 +43,7 @@
                         "Play_vo_Evelynn_EvelynnQ2_cast3D",
                         "Play_vo_Evelynn_EvelynnQ_cast3D",
                         "Play_vo_Evelynn_EvelynnR_cast3D",
+                        "Play_vo_Evelynn_EvelynnStealth_activate",
                         "Play_vo_Evelynn_EvelynnW_OnEnemy_start",
                         "Play_vo_Evelynn_EvelynnW_OnSelf_start",
                         "Play_vo_Evelynn_FirstEncounter3DAmumu",
@@ -69,7 +70,6 @@
                         "Play_vo_Evelynn_Move2DStandard",
                         "Play_vo_Evelynn_Recall3DGeneral",
                         "Play_vo_Evelynn_Respawn2DGeneral",
-                        "Play_vo_Evelynn_Spell3DPCast",
                         "Play_vo_Evelynn_Taunt3DGeneral",
                         "Play_vo_Evelynn_TauntResponse3DGeneral"
                     ],
@@ -187,20 +187,20 @@
             ],
             "rigPoseModifierData": [
                 {
-                    "mStartingJointName": "{ca9833b9}",
-                    "mEndingJointName": "{c7220ddb}",
+                    "mStartingJointName": "L_TailA2_Grnd",
+                    "mEndingJointName": "L_TailB5_Grnd",
                     "mMaxBoneAngle": 30.0,
-                    "{a4e3d433}": true,
+                    "OnlyActivateInTurns": true,
                     "ActivationDistance": 100.0,
                     "BlendDistance": 450.0,
                     "ActivationAngle": 8.0,
                     "__type": "ConformToPathRigPoseModifierData"
                 },
                 {
-                    "mStartingJointName": "{d3d4746b}",
-                    "mEndingJointName": "{59a83b0d}",
+                    "mStartingJointName": "R_TailA2_Grnd",
+                    "mEndingJointName": "R_TailB5_Grnd",
                     "mMaxBoneAngle": 30.0,
-                    "{a4e3d433}": true,
+                    "OnlyActivateInTurns": true,
                     "ActivationDistance": 100.0,
                     "BlendDistance": 450.0,
                     "ActivationAngle": 8.0,
@@ -225,38 +225,38 @@
             }
         ],
         "mResourceResolver": "Characters/Evelynn/Skins/Skin42/Resources",
-        "{87b1d303}": [
+        "PersistentEffectConditions": [
             {
-                "{43c8c7b1}": {
+                "OwnerCondition": {
                     "mScriptName": "EvelynnStealthRing",
                     "__type": "HasBuffDynamicMaterialBoolDriver"
                 },
-                "{a826e328}": [
-                    "{277ecafe}"
+                "SubmeshesToShow": [
+                    "Shadow_Body"
                 ],
-                "{fd949819}": [
+                "SubmeshesToHide": [
                     "BODY"
                 ],
-                "__type": "{67ac9672}"
+                "__type": "PersistentEffectConditionData"
             },
             {
-                "{43c8c7b1}": {
+                "OwnerCondition": {
                     "Spell": "{c043c6bb}",
                     "__type": "HasBuffDynamicMaterialBoolDriver"
                 },
-                "{071f3c1d}": [
+                "PersistentVfxs": [
                     {
                         "boneName": "L_TailClaw_SKN",
                         "effectKey": "{ac714de5}",
-                        "__type": "{00fa43e4}"
+                        "__type": "PersistentVfxData"
                     },
                     {
                         "boneName": "R_TailClaw_SKN",
                         "effectKey": "{ac714de5}",
-                        "__type": "{00fa43e4}"
+                        "__type": "PersistentVfxData"
                     }
                 ],
-                "__type": "{67ac9672}"
+                "__type": "PersistentEffectConditionData"
             }
         ],
         "__type": "SkinCharacterDataProperties"
@@ -586,6 +586,11 @@
             }
         ],
         "switches": [
+            {
+                "name": "VFX_DIFFUSE_ADD_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
             {
                 "name": "VFX_ON",
                 "__type": "StaticMaterialSwitchDef"
@@ -1056,6 +1061,11 @@
         ],
         "switches": [
             {
+                "name": "VFX_DIFFUSE_ADD_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "VFX_ON",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
@@ -1451,6 +1461,11 @@
         ],
         "switches": [
             {
+                "name": "VFX_DIFFUSE_ADD_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "VFX_ON",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
@@ -1700,7 +1715,7 @@
             "Evelynn_Q_Beam": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Q_Beam",
             "Evelynn_Q_Beam_Return": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Q_Beam_Return",
             "Evelynn_Q_Hatespike_Cas": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Q_Hatespike_Cas",
-            "{5efe1798}": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Q_Buf",
+            "Evelynn_Q_Buf": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Q_Buf",
             "Evelynn_Q_HateSpike_Mis": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Q_HateSpike_Mis",
             "Evelynn_R_Activate": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_R_Activate",
             "Evelynn_Sound_Environment_Processing_Start": "Characters/Evelynn/Skins/Skin0/Particles/Evelynn_Base_Sound_Environment_Processing_Start",
@@ -1709,7 +1724,7 @@
             "Evelynn_W_Fizz_Mark": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_W_Fizz_Mark",
             "Evelynn_W_Fizz_Mark_Decay": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_W_Fizz_Mark_Decay",
             "Evelynn_W_Mark_Cook": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_W_Mark_Cook",
-            "{5685f487}": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_BasicAttack_01",
+            "Evelynn_BasicAttack": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_BasicAttack_01",
             "{e9e038ef}": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_BasicAttack_02",
             "Evelynn_E_cas": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_E_cas",
             "Evelynn_E_Tar": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_E_Tar",
@@ -1728,7 +1743,7 @@
             "Evelynn_R_Trail": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_R_Trail",
             "Evelynn_R_Landing": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_R_Landing",
             "Evelynn_Base_Q_Shred": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Q_Shred",
-            "{7f9e1bc6}": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_W_Cas_Mis",
+            "Evelynn_W_Cas": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_W_Cas_Mis",
             "Evelynn_Q_Cas": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Q_Cas",
             "Evelynn_W_Mark_Cook_Ground": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_W_Mark_Cook_Ground",
             "Evelynn_Q_Mis_Linger": "Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Q_Mis_Linger",
@@ -1799,10 +1814,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{277ecafe}"
+                            "Shadow_Body"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{277ecafe}"
+                            "Shadow_Body"
                         ],
                         "__type": "VfxMeshDefinitionData"
                     },
@@ -1883,17 +1898,17 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Behind_Dark",
-                "{f50b1a41}": {
+                "Filtering": {
                     "keywordsExcluded": [
                         "Aatroxskin01"
                     ],
-                    "__type": "{f4e37e07}"
+                    "__type": "VfxEmitterFiltering"
                 },
                 "bindWeight": {
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         300.0,
@@ -2245,7 +2260,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -10.0,
@@ -2461,7 +2476,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -10.0,
@@ -2709,11 +2724,11 @@
                 },
                 "lifetime": 0.5,
                 "emitterName": "FrontAura",
-                "{f50b1a41}": {
+                "Filtering": {
                     "keywordsExcluded": [
                         "NasusSkin05"
                     ],
-                    "__type": "{f4e37e07}"
+                    "__type": "VfxEmitterFiltering"
                 },
                 "birthVelocity": {
                     "constantValue": [
@@ -2767,12 +2782,12 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 35.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         200.0,
@@ -2991,7 +3006,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         250.0,
@@ -2999,7 +3014,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -3199,7 +3214,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             -2.0,
                             1.0
@@ -3223,7 +3238,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -3265,7 +3280,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         250.0,
@@ -3273,7 +3288,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -3462,7 +3477,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -3524,7 +3539,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         350.0,
@@ -3642,7 +3657,7 @@
                 "emitterName": " a.Spirit3",
                 "importance": 2,
                 "Linger": {
-                    "{6b77a8ca}": {
+                    "SeparateLingerColor": {
                         "constantValue": [
                             0.7960784435272217,
                             0.7960784435272217,
@@ -3755,7 +3770,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         200.0,
@@ -3763,7 +3778,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -3904,7 +3919,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -3924,7 +3939,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         200.0,
@@ -3932,7 +3947,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -4073,7 +4088,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -4093,7 +4108,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         200.0,
@@ -4101,7 +4116,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -4242,7 +4257,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -4262,7 +4277,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         200.0,
@@ -4270,7 +4285,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -4404,7 +4419,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -4509,7 +4524,7 @@
                     "__type": "VfxAlphaErosionDefinitionData"
                 },
                 "isUniformScale": 1,
-                "{2bf854fb}": 1,
+                "TextureFlipV": 1,
                 "birthRotation0": {
                     "dynamics": {
                         "probabilityTables": [
@@ -4626,7 +4641,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -4648,14 +4663,14 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{277ecafe}",
-                            "{ad085f9e}",
-                            "{b7086f5c}"
+                            "Shadow_Body",
+                            "Lashers_R",
+                            "Lashers_L"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{277ecafe}",
-                            "{ad085f9e}",
-                            "{b7086f5c}"
+                            "Shadow_Body",
+                            "Lashers_R",
+                            "Lashers_L"
                         ],
                         "__type": "VfxMeshDefinitionData"
                     },
@@ -4742,7 +4757,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -4881,7 +4896,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             0.20000000298023224,
                             0.20000000298023224
@@ -4900,7 +4915,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -5033,7 +5048,7 @@
                 "lifetime": 5.199999809265137,
                 "emitterName": "FlashFrame",
                 "importance": 2,
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         10.0,
@@ -5041,7 +5056,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -5208,7 +5223,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         10.0,
@@ -5216,7 +5231,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -5381,7 +5396,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         10.0,
@@ -5622,7 +5637,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -5831,7 +5846,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         20.0,
@@ -5839,7 +5854,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -6044,7 +6059,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -6235,7 +6250,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         80.0,
@@ -6603,7 +6618,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -6711,7 +6726,7 @@
                 "texture": "ASSETS/Characters/Evelynn/Skins/Skin42/Evelynn_Skin42_Recall_TX_CM.dds",
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/Evelynn/Skins/Skin42/Particles/Evelynn_Skin42_Texture_Machine.dds",
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -6820,7 +6835,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -6929,7 +6944,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             }
@@ -6961,10 +6976,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{b7086f5c}"
+                            "Lashers_L"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{b7086f5c}"
+                            "Lashers_L"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -7091,10 +7106,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{ad085f9e}"
+                            "Lashers_R"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{ad085f9e}"
+                            "Lashers_R"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"

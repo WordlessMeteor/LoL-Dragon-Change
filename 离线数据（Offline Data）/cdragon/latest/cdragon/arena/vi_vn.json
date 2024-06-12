@@ -1,0 +1,3203 @@
+{
+    "augments": [
+        {
+            "apiName": "WarmupRoutine",
+            "calculations": {},
+            "dataValues": {
+                "DamagePerStack": 0.009999999776482582,
+                "MaxStacks": 24.0
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Giãn Gân Cốt</spellName><br><br><rules><spellName>Giãn Gân Cốt</spellName> cho phép bạn vận sức để tăng sát thương của mình trong phần còn lại của vòng đấu.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/warmuproutine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/warmuproutine_small.png",
+            "id": 93,
+            "name": "Giãn Gân Cốt",
+            "rarity": 0,
+            "tooltip": "Vận sức để tăng 2% sát thương mỗi giây, tối đa 24%.<br><br>Sát Thương Cộng Thêm Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Cộng Thêm: @f2@"
+        },
+        {
+            "apiName": "Vanish",
+            "calculations": {},
+            "dataValues": {
+                "StealthDuration": 4.0
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Tan Biến</spellName><br><br><rules><spellName>Tan Biến</spellName> cho phép bạn trở nên <stealth>Vô Hình</stealth>.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/vanish_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vanish_small.png",
+            "id": 89,
+            "name": "Tan Biến",
+            "rarity": 1,
+            "tooltip": "Trở nên <stealth>Vô Hình</stealth> trong @StealthDuration@ giây hoặc cho tới khi bạn Tấn Công hoặc sử dụng Kỹ Năng.<br>Hiệu ứng tàng hình này không thể bị lộ diện bởi phụ kiện Máy Quét Công Nghệ."
+        },
+        {
+            "apiName": "ChainLightning",
+            "calculations": {},
+            "dataValues": {
+                "DamageMod": 0.5,
+                "Range": 1000.0
+            },
+            "desc": "Gây sát thương lên một kẻ địch cũng khiến đồng minh của kẻ đó nhận <trueDamage>@DamageMod*100@% sát thương chuẩn</trueDamage> nếu chúng gần bên.",
+            "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/chainlightning_small.png",
+            "id": 166,
+            "name": "Điện Lan",
+            "rarity": 2,
+            "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "Typhoon",
+            "calculations": {
+                "Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatio",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.30000001192092896
+            },
+            "desc": "Các Đòn Đánh của bạn bắn một tia đạn vào thêm một mục tiêu, gây ra lượng sát thương ít hơn và kích hoạt hiệu ứng khi đánh trúng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/typhoon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/typhoon_small.png",
+            "id": 87,
+            "name": "Bão Tố",
+            "rarity": 0,
+            "tooltip": "Các Đòn Đánh của bạn bắn một tia đạn vào thêm một mục tiêu, gây @ADRatio*100@% sát thương và kích hoạt hiệu ứng trên đòn đánh."
+        },
+        {
+            "apiName": "SelfDestruct",
+            "calculations": {},
+            "dataValues": {
+                "BombDelay": 15.0,
+                "KnockupDuration": 0.75,
+                "MaxHealthDamage": 0.20000000298023224,
+                "Radius": 350.0
+            },
+            "desc": "Bắt đầu mỗi vòng đấu với một quả bom gắn bên mình. Sau @BombDelay@ giây, nó phát nổ gây <trueDamage>sát thương chuẩn bằng @MaxHealthDamage*100@% Máu tối đa</trueDamage> và <status>Hất Tung</status> trong @KnockupDuration@ giây.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/selfdestruct_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/selfdestruct_small.png",
+            "id": 108,
+            "name": "Tự Hủy",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_SelfDestruct_Summary }}<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "ServeBeyondDeath",
+            "calculations": {
+                "{85d7d7f0}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "TicksBeforeDeath"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.25
+                    }
+                }
+            },
+            "dataValues": {
+                "DecayDuration": 3.0,
+                "Duration": 6.0,
+                "MaxStatMultiplier": 2.0,
+                "TagDuration": 6.0,
+                "TicksBeforeDeath": 10.0,
+                "TicksPerSecond": 4.0,
+                "TriumphPercent": 20.0
+            },
+            "desc": "Lần đầu tiên hy sinh mỗi vòng đấu, bạn trở lại với đầy Máu nhưng Máu giảm dần trong @DecayDuration@ giây. Tham gia hạ gục tướng địch khi Máu đang giảm sẽ dừng nó lại, đồng thời đặt Máu của bạn thành <healing>@TriumphPercent@% Máu tối đa</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/servebeyonddeath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/servebeyonddeath_small.png",
+            "id": 120,
+            "name": "Trở Về Từ Cõi Chết",
+            "rarity": 0,
+            "tooltip": "Lần đầu tiên hy sinh mỗi vòng đấu, bạn trở lại với đầy Máu nhưng Máu giảm dần trong @DecayDuration@ giây. Tham gia hạ gục tướng địch khi Máu đang giảm sẽ dừng nó lại, đồng thời đặt Máu của bạn thành <healing>@TriumphPercent@% Máu tối đa</healing>."
+        },
+        {
+            "apiName": "QuantumComputing",
+            "calculations": {},
+            "dataValues": {
+                "AutoCastCooldown": 10.0
+            },
+            "desc": "<keywordMajor>Tự Động</keywordMajor> chém theo vòng tròn quanh bản thân, gây thêm sát thương ở phần rìa sau mỗi @AutoCastCooldown@ giây.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
+            "id": 66,
+            "name": "Điện Toán Lượng Tử",
+            "rarity": 2,
+            "tooltip": "<keywordMajor>Tự Động</keywordMajor> chém theo vòng tròn quanh bản thân, gây thêm sát thương và hồi máu ở phần rìa sau mỗi 15 giây. <br><br>Tổng Sát Thương Gây Ra: @f1@<br>Tổng Máu Đã Hồi: @f2@"
+        },
+        {
+            "apiName": "DemonsDance",
+            "calculations": {},
+            "dataValues": {
+                "FFHealAPRatio": 0.20000000298023224,
+                "FFHealBase": 10.0,
+                "FFHealBonusADRatio": 0.30000001192092896,
+                "FFHealCritMod": 0,
+                "FFHealMax": 100.0,
+                "FFMSBuff": 0.20000000298023224,
+                "FFMSBuffMelee": 0.20000000298023224,
+                "FFMSDuration": 1.0,
+                "GRMaxHealthPerProc": 7.0,
+                "GRMeleeFlatHeal": 3.0,
+                "GRPercentHealthDamage": 3.5,
+                "GRPercentHealthHeal": 0.012000000104308128,
+                "GRRangedHealthPerProc": 4.0,
+                "GRRangedPenaltyMod": 0.4000000059604645,
+                "GRTriggerTime": 4.0,
+                "GRWindow": 5.0
+            },
+            "desc": "Nhận Ngọc Siêu Cấp <spellName>Bước Chân Thần Tốc</spellName> và <spellName>Quyền Năng Bất Diệt</spellName>.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/demonsdance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/demonsdance_small.png",
+            "id": 23,
+            "name": "Vũ Điệu Ma Quỷ",
+            "rarity": 1,
+            "tooltip": "Nhận Ngọc Siêu Cấp <spellName>Bước Chân Thần Tốc</spellName> và <spellName>Quyền Năng Bất Diệt</spellName>.<br><br>Máu Đã Hồi Trong Vòng Này: @f1@<br>Tổng Máu Đã Hồi: @f2@<br>Máu Tối Đa Đã Nhận: @f3@"
+        },
+        {
+            "apiName": "DefensiveManeuvers",
+            "calculations": {
+                "BarrierAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 440.0,
+                            "mStartValue": 110.0
+                        }
+                    ]
+                },
+                "HealAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 318.0,
+                            "mStartValue": 80.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AllyRange": 835.0,
+                "MoveSpeed": 0.30000001192092896,
+                "ShieldDuration": 2.5
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Thủ Hộ</spellName><br><br><rules><spellName>Thủ Hộ</spellName> Sử dụng Phép Bổ Trợ <spellName>Lá Chắn</spellName> và <spellName>Hồi Máu</spellName> lên bạn và đồng đội.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/defensivemaneuvers_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/defensivemaneuvers_small.png",
+            "id": 21,
+            "name": "Thủ Hộ",
+            "rarity": 1,
+            "tooltip": "Sử dụng Phép Bổ Trợ <abilityName>Lá Chắn</abilityName> và <abilityName>Hồi Máu</abilityName> lên bạn và đồng đội. Nhận <shield>@BarrierAmount@ Lá Chắn</shield>, hồi lại <healing>@HealAmount@ Máu</healing>, đồng thời cho <speed>30% Tốc Độ Di Chuyển</speed> trong 1 giây.<br><br>Tổng Máu Đã Hồi: @f1@<br>Tổng Lá Chắn Đã Tạo: @f2@"
+        },
+        {
+            "apiName": "Chauffeur",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeed": 0.6499999761581421,
+                "Haste": 130.0
+            },
+            "desc": "Bạn sẽ bám vào đồng đội và không thể tự di chuyển. Tốc độ di chuyển cộng thêm cũng sẽ được chuyển cho đồng minh đó và bạn nhận thêm <scaleLevel>Điểm Hồi Kỹ Năng</scaleLevel> và <attackSpeed>Tốc Độ Đánh</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/chauffeur_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/chauffeur_small.png",
+            "id": 14,
+            "name": "Quá Giang",
+            "rarity": 2,
+            "tooltip": "Bạn sẽ bám vào đồng đội. Tốc độ di chuyển cộng thêm cũng sẽ được chuyển cho đồng minh đó và bạn nhận thêm <scaleLevel>@Haste@ Điểm Hồi Kỹ Năng</scaleLevel> và <attackSpeed>@AttackSpeed*100@% Tốc Độ Đánh</attackSpeed>. <br><br>Sử dụng kỹ năng Lướt Tới hoặc Di Chuyển để ngưng liên kết trong 1,5 giây trước khi trở lại với đồng minh của bạn."
+        },
+        {
+            "apiName": "Marksmage",
+            "calculations": {
+                "APDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "APRatio"
+                    }
+                }
+            },
+            "dataValues": {
+                "APRatio": 1.0
+            },
+            "desc": "Đòn đánh sẽ gây thêm <physicalDamage>sát thương vật lý</physicalDamage> bằng <magicDamage>@APRatio*100@% Sức Mạnh Phép Thuật</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/marksmage_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/marksmage_small.png",
+            "id": 129,
+            "name": "Xạ Thủ Ma Pháp",
+            "rarity": 1,
+            "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "BladeWaltz",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 30.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05999999865889549
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "TotalHits": 8.0
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Điệu Van Tử Thần</spellName>.<br><br><rules><spellName>Điệu Van Tử Thần</spellName> giúp bạn trở nên không thể bị chỉ định khi lướt vào và gây sát thương lên kẻ địch @TotalHits@ lần.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/bladewaltz_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bladewaltz_small.png",
+            "id": 6,
+            "name": "Điệu Van Tử Thần",
+            "rarity": 2,
+            "tooltip": "<rules>Phép bổ trợ này sẽ giúp bạn trở nên không thể bị chỉ định khi lướt vào và gây @Damage@ sát thương lên kẻ địch @TotalHits@ lần (gây 50% sát thương trên đòn đánh).</rules><br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@<br>"
+        },
+        {
+            "apiName": "WillingSacrifice",
+            "calculations": {},
+            "dataValues": {
+                "AllyHealthThreshold": 0.30000001192092896,
+                "CurrentHealthToDrain": 0.25
+            },
+            "desc": "Khi đồng minh còn dưới <health>@AllyHealthThreshold*100@% Máu</health>, đánh đổi một phần máu của bạn để tạo <shield>Lá Chắn</shield> cho đồng minh.",
+            "iconLarge": "assets/ux/cherry/augments/icons/willingsacrifice_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/willingsacrifice_small.png",
+            "id": 94,
+            "name": "Sẵn Lòng Hy Sinh",
+            "rarity": 1,
+            "tooltip": "Khi đồng minh còn dưới <health>@AllyHealthThreshold*100@% Máu</health>, đánh đổi <health>@CurrentHealthToDrain*100@% Máu hiện tại của bạn</health> để tạo một lượng <shield>Lá Chắn</shield> tương đương cho đồng minh.<br><br>Lá Chắn Tạo Ra Trong Vòng Này: @f1@<br>Tổng Lá Chắn Tạo Ra: @f2@"
+        },
+        {
+            "apiName": "IceCold",
+            "calculations": {},
+            "dataValues": {
+                "ExtraSlowAmount": 100.0
+            },
+            "desc": "Các hiệu ứng <status>Làm Chậm</status> giảm thêm 100 Tốc Độ Di Chuyển.",
+            "iconLarge": "assets/ux/cherry/augments/icons/icecold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/icecold_small.png",
+            "id": 44,
+            "name": "Băng Lạnh",
+            "rarity": 0,
+            "tooltip": "Các hiệu ứng <status>Làm Chậm</status> giảm thêm 100 Tốc Độ Di Chuyển."
+        },
+        {
+            "apiName": "SpinToWin",
+            "calculations": {},
+            "dataValues": {
+                "SpinDamageAmp": 0.30000001192092896,
+                "SpinHaste": 30.0
+            },
+            "desc": "Các Kỹ Năng xoay được tăng @SpinHaste@ Điểm Hồi Kỹ Năng và gây thêm @SpinDamageAmp*100@% sát thương!",
+            "iconLarge": "assets/ux/cherry/augments/icons/spintowin_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spintowin_small.png",
+            "id": 214,
+            "name": "Xoay Là Thắng",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_SpinToWin_Summary }}<br><br>Sát thương vòng này: @f1@<br>Sát thương trận đấu này: @f2@"
+        },
+        {
+            "apiName": "BannerofCommand",
+            "calculations": {},
+            "dataValues": {
+                "BuffDuration": 10.0,
+                "EmpowermentValue": 0.15000000596046448
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Cờ Lệnh Hiệu Triệu</spellName>.<br><br><rules><spellName>Cờ Lệnh Hiệu Triệu</spellName> giúp cường hóa đồng minh trong thoáng chốc</rules>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bannerofcommand_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bannerofcommand_small.png",
+            "id": 5,
+            "name": "Cờ Lệnh Hiệu Triệu",
+            "rarity": 1,
+            "tooltip": "Đồng minh của bạn được tăng @EmpowermentValue*100@% <scaleHealth>Máu</scaleHealth>, <scaleAD>Sức Mạnh Công Kích</scaleAD>, <scaleAP>Sức Mạnh Phép Thuật</scaleAP>, và <attackSpeed>Tốc Độ Đánh</attackSpeed> trong 10 giây."
+        },
+        {
+            "apiName": "TankItOrLeaveIt",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "DamageReduction": 0.20000000298023224,
+                "MaxChance": 0.5
+            },
+            "desc": "Bạn có thể <crit>Thủ Đòn Chí Mạng</crit> bằng Tỉ Lệ Chí Mạng của mình (tối đa @MaxChance*100@%), giúp bạn có cơ hội giảm sát thương. Nhận @CritChance*100@% Tỉ Lệ Chí Mạng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tankitorleaveit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tankitorleaveit_small.png",
+            "id": 80,
+            "name": "Chiến Hoặc Chuồn",
+            "rarity": 0,
+            "tooltip": "Bạn có thể <crit>Thủ Đòn Chí Mạng</crit> bằng Tỉ Lệ Chí Mạng của mình (tối đa @MaxChance*100@%), giúp bạn có cơ hội giảm @DamageReduction*100@% sát thương gánh chịu. Nhận @CritChance*100@% Tỉ Lệ Chí Mạng.<br><br>Sát Thương Đã Giảm Trong Vòng Này: @f1@<br>Tổng Sát Thương Đã Giảm: @f2@"
+        },
+        {
+            "apiName": "WitchfulThinking",
+            "calculations": {},
+            "dataValues": {
+                "AP": 70.0
+            },
+            "desc": "Nhận <scaleAP>@AP@ Sức Mạnh Phép Thuật</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/witchfulthinking_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/witchfulthinking_small.png",
+            "id": 97,
+            "name": "Tư Duy Ma Thuật",
+            "rarity": 0,
+            "tooltip": "Nhận <scaleAP>@AP@ Sức Mạnh Phép Thuật</scaleAP>."
+        },
+        {
+            "apiName": "Quest_UrfsChampion",
+            "calculations": {},
+            "dataValues": {
+                "2ndPickTakendownsNeeded": 15.0,
+                "TakedownsNeeded": 10.0
+            },
+            "desc": "Yêu Cầu: Kiếm được @TakedownsNeeded@ mạng hạ gục, nếu được chọn làm nâng cấp thứ hai của bạn, tăng thành @2ndPickTakendownsNeeded@ mạng hạ gục.<br><br>Phần Thưởng: Xẻng Vàng",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_urfschampion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
+            "id": 154,
+            "name": "Nhiệm Vụ: Nhà Vô Địch URF",
+            "rarity": 1,
+            "tooltip": "Yêu Cầu: Kiếm được @TakedownsNeeded@ mạng hạ gục, nếu được chọn làm nâng cấp thứ hai của bạn, tăng thành @2ndPickTakendownsNeeded@ mạng hạ gục.<br><br>Phần Thưởng: Xẻng Vàng"
+        },
+        {
+            "apiName": "Vengeance",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.2800000011920929,
+                "Omnivamp": 0.2800000011920929
+            },
+            "desc": "Sau khi đồng đội bị hạ gục, tăng thêm một lượng lớn sát thương và Hút Máu Toàn Phần cho đến hết vòng đấu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/vengeance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vengeance_small.png",
+            "id": 90,
+            "name": "Phục Hận",
+            "rarity": 1,
+            "tooltip": "Tăng thêm @DamageAmp*100@% sát thương và @Omnivamp*100@% Hút Máu Toàn Phần sau khi đồng đội bị hạ gục.<br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "Erosion",
+            "calculations": {},
+            "dataValues": {
+                "MaxStacks": 20.0,
+                "Shred": 0.014999999664723873,
+                "ShredDuration": 4.0
+            },
+            "desc": "Gây sát thương lên kẻ địch sẽ cho 1 cộng dồn giảm <scaleArmor>Giáp</scaleArmor> và <scaleMR>Kháng Phép</scaleMR> trong @ShredDuration@ giây. ",
+            "iconLarge": "assets/ux/cherry/augments/icons/erosion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/erosion_small.png",
+            "id": 28,
+            "name": "Xói Mòn",
+            "rarity": 0,
+            "tooltip": "Gây sát thương lên kẻ địch sẽ giảm @Shred*100@% <scaleArmor>Giáp</scaleArmor> và <scaleMR>Kháng Phép</scaleMR> trong @ShredDuration@ giây. <br><br>Cộng dồn tối đa @MaxStacks@ lần."
+        },
+        {
+            "apiName": "MasterofDuality",
+            "calculations": {
+                "ADGained": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 9.0,
+                            "mStartValue": 3.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "APGained": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 18.0,
+                            "mStartValue": 6.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "Đòn đánh của bạn cho cộng dồn <scaleAP>Sức Mạnh Phép Thuật</scaleAP> và Kỹ Năng cho <scaleAD>Sức Mạnh Công Kích</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/masterofduality_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/masterofduality_small.png",
+            "id": 54,
+            "name": "Chúa Tể Tay Đôi",
+            "rarity": 2,
+            "tooltip": "Đòn đánh của bạn cho <scaleAP>@APGained@ Sức Mạnh Phép Thuật</scaleAP> và Kỹ Năng cho <scaleAD>@ADGained@ Sức Mạnh Công Kích</scaleAD>, cộng dồn vô hạn cho tới cuối vòng đấu."
+        },
+        {
+            "apiName": "LightemUp",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 11.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.3499999940395355,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.1899999976158142
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "TOOLTIPONLYDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 320.0,
+                            "mStartValue": 44.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.7599999904632568
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "Mỗi đòn đánh thứ 4 sẽ gây thêm <scaleMagic>sát thương phép</scaleMagic>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightemup_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightemup_small.png",
+            "id": 51,
+            "name": "Nếm Mùi Đau Thương!",
+            "rarity": 0,
+            "tooltip": "Mỗi đòn đánh thứ 4 sẽ gây thêm <scaleMagic>@TOOLTIPONLYDamage@ sát thương phép</scaleMagic>.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "SearingDawn",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "ProcCooldown": 0.75
+            },
+            "desc": "Kỹ Năng của bạn đánh dấu kẻ địch, khiến chúng chịu thêm sát thương từ hiệu ứng tiếp theo của đồng đội.",
+            "iconLarge": "assets/ux/cherry/augments/icons/searingdawn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/searingdawn_small.png",
+            "id": 72,
+            "name": "Ban Mai Bỏng Cháy",
+            "rarity": 1,
+            "tooltip": "Kỹ Năng của bạn đánh dấu kẻ địch, khiến chúng chịu thêm <magicDamage>@Damage@ sát thương phép</magicDamage> từ Đòn Đánh hoặc Kỹ Năng kế tiếp của đồng đội.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "SlapAround",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForce": 20.0
+            },
+            "desc": "Mỗi khi bạn <status>Làm Bất Động</status> một kẻ địch, nhận được @AdaptiveForce@ Sức Mạnh Thích Ứng cho đến hết vòng đấu, cộng dồn vô hạn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slaparound_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slaparound_small.png",
+            "id": 136,
+            "name": "Quăng Quật",
+            "rarity": 0,
+            "tooltip": "Mỗi khi bạn <status>Làm Bất Động</status> một kẻ địch, nhận được @AdaptiveForce@ Sức Mạnh Thích Ứng cho đến hết vòng đấu, cộng dồn vô hạn."
+        },
+        {
+            "apiName": "MagicMissile",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0,
+                "MaxHealthDamagePerMissile": 0.0033400000538676977,
+                "MaxHealthDamageTooltip": 1.0,
+                "MaxRangeThreshold": 1000.0,
+                "NumberOfMissiles": 3.0
+            },
+            "desc": "Gây sát thương bằng Kỹ Năng sẽ bắn ra @NumberOfMissiles@ tên lửa ma pháp vào mỗi kẻ địch trúng chiêu, gây tối đa <trueDamage>@MaxHealthDamageTooltip@% máu tối đa thành sát thương chuẩn</trueDamage> dựa trên khoảng cách đã bay được.",
+            "iconLarge": "assets/ux/cherry/augments/icons/magicmissile_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/magicmissile_small.png",
+            "id": 133,
+            "name": "Tên Lửa Ma Pháp",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_MagicMissile_Summary }}<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "Spellwake",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.20000000298023224
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Cooldown": 6.0,
+                "ExplosionDelayTime": 0.75,
+                "ExplosionRadius": 100.0
+            },
+            "desc": "Đánh trúng kẻ địch bằng Kỹ Năng sẽ tạo ra một vụ nổ tại vị trí mục tiêu, gây <magicDamage>sát thương phép</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spellwake_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spellwake_small.png",
+            "id": 135,
+            "name": "Trúng Phép Tỉnh Người",
+            "rarity": 2,
+            "tooltip": "Đánh trúng kẻ địch bằng Kỹ Năng kích hoạt sẽ tạo ra một vụ nổ tại vị trí mục tiêu, gây <magicDamage>@Damage@ sát thương phép</magicDamage>.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "CenterOfTheUniverse",
+            "calculations": {
+                "StarDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 7.0,
+                            "mLevel1Value": 5.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.11999999731779099
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.25,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "MissileWidth": 50.0
+            },
+            "desc": "Tinh vân xoay xung quanh bạn trong phạm vi Tầm Đánh, gây <magicDamage>sát thương phép</magicDamage> lên những kẻ địch chúng chạm phải.",
+            "iconLarge": "assets/ux/cherry/augments/icons/centeroftheuniverse_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/centeroftheuniverse_small.png",
+            "id": 193,
+            "name": "Trung Tâm Vũ Trụ",
+            "rarity": 2,
+            "tooltip": "Tinh vân xoay xung quanh bạn trong phạm vi Tầm Đánh, gây <magicDamage>@StarDamage@ sát thương phép</magicDamage> lên những kẻ địch chúng chạm phải.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "PhenomenalEvil",
+            "calculations": {},
+            "dataValues": {
+                "APPerProc": 1.0,
+                "ProcCooldown": 0.75,
+                "SpellIDCD": 5.0,
+                "StartingAPIfSecondAugment": 40.0
+            },
+            "desc": "Nhận vĩnh viễn <scaleAP>@APPerProc@ Sức Mạnh Phép Thuật</scaleAP> khi đánh trúng kẻ địch bằng Kỹ Năng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/phenomenalevil_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/phenomenalevil_small.png",
+            "id": 65,
+            "name": "Quỷ Quyệt Vô Thường",
+            "rarity": 1,
+            "tooltip": "Nhận vĩnh viễn <scaleAP>@APPerProc@ Sức Mạnh Phép Thuật</scaleAP> khi đánh trúng kẻ địch bằng Kỹ Năng.<br><br>@SpellIDCD@ giây hồi chiêu mỗi kỹ năng.<br><br>Nếu đây là nâng cấp thứ hai của bạn, bắt đầu với @StartingAPIfSecondAugment@ SMPT.<br><br>SMPT Nhận Được: @f1@"
+        },
+        {
+            "apiName": "BigBrain",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ShieldBase"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AP": 1.0,
+                "ShieldBase": 3.0
+            },
+            "desc": "Khi bắt đầu mỗi vòng đấu, nhận<shield> @ShieldBase@ Lá Chắn </shield>với mỗi <attention>%i:scaleAP% @AP@</attention> Sức Mạnh Phép Thuật.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bigbrain_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bigbrain_small.png",
+            "id": 180,
+            "name": "Siêu Trí Tuệ",
+            "rarity": 1,
+            "tooltip": "Khi bắt đầu mỗi vòng đấu, nhận<shield> @ShieldBase@ Lá Chắn </shield>với mỗi <attention>%i:scaleAP% @AP@</attention> Sức Mạnh Phép Thuật."
+        },
+        {
+            "apiName": "Vulnerability",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritDamage": 0.44999998807907104
+            },
+            "desc": "Trang Bị và hiệu ứng sát thương theo thời gian của bạn có thể Chí Mạng. Nhận @CritChance*100@% Tỉ Lệ Chí Mạng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vulnerability_small.png",
+            "id": 92,
+            "name": "Yếu Điểm",
+            "rarity": 0,
+            "tooltip": "Trang Bị và hiệu ứng sát thương theo thời gian của bạn có thể Chí Mạng và gây thêm @CritDamage*100@% sát thương. Nhận @CritChance*100@% Tỉ Lệ Chí Mạng.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "CannonFodder",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Chui vào khẩu pháo và bắn thẳng bạn vào giao tranh.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cannonfodder_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cannonfodder_small.png",
+            "id": 10,
+            "name": "Pháo Thần Công",
+            "rarity": 1,
+            "tooltip": "Chui vào khẩu pháo và bắn thẳng bạn vào giao tranh."
+        },
+        {
+            "apiName": "MadScientist",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.30000001192092896,
+                "APAmp": 0.30000001192092896,
+                "Haste": 70.0,
+                "HealthAmp": 0.20000000298023224,
+                "MovespeedAmp": 0.30000001192092896,
+                "SizeAmp": 0.30000001192092896
+            },
+            "desc": "Khi bắt đầu vòng đấu, bạn hóa lớn (<scaleAD>Sức Mạnh Thích Ứng</scaleAD> và <healing>Máu</healing>) hoặc hóa nhỏ (<scaleLevel>Điểm Hồi Kỹ Năng</scaleLevel> và <speed>Tốc Độ Di Chuyển</speed>).",
+            "iconLarge": "assets/ux/cherry/augments/icons/madscientist_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/madscientist_small.png",
+            "id": 53,
+            "name": "Bác Học Điên",
+            "rarity": 2,
+            "tooltip": "Khi bắt đầu vòng đấu, bạn hóa lớn (nhận <scaleAD>@ADAmp*100@% Sức Mạnh Thích Ứng</scaleAD> và <healing>@HealthAmp*100@% Máu</healing>) hoặc hóa nhỏ (nhận <scaleLevel>@Haste@ Điểm Hồi Kỹ Năng</scaleLevel> và <speed>@MovespeedAmp*100@% Tốc Độ Di Chuyển</speed>)."
+        },
+        {
+            "apiName": "MountainSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Bạn nhận Linh Hồn Rồng Đất, nhận <shield>Lá Chắn</shield> sau khi rời khỏi giao tranh trong thoáng chốc.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mountainsoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mountainsoul_small.png",
+            "id": 57,
+            "name": "Linh Hồn Rồng Đất",
+            "rarity": 0,
+            "tooltip": "Bạn nhận Linh Hồn Rồng Đất, nhận <shield>Lá Chắn</shield> sau khi rời khỏi giao tranh trong thoáng chốc.<br><br>Tổng Lá Chắn Đã Nhận: @f1@"
+        },
+        {
+            "apiName": "UltimateRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Một lần mỗi vòng, hồi lại Chiêu Cuối của bạn sau khi thi triển.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 88,
+            "name": "Tái Tạo Tuyệt Chiêu",
+            "rarity": 2,
+            "tooltip": "Một lần mỗi vòng, hồi lại Chiêu Cuối của bạn sau khi thi triển."
+        },
+        {
+            "apiName": "Dematerialize",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForce": 15.0,
+                "SecondPickBonus": 30.0
+            },
+            "desc": "Nhận @AdaptiveForce@ Sức Mạnh Thích Ứng khi tham gia hạ gục, một lần mỗi tướng mỗi vòng đấu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dematerialize_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dematerialize_small.png",
+            "id": 171,
+            "name": "Phân Rã Năng Lượng",
+            "rarity": 0,
+            "tooltip": "{{Cherry_Dematerialize_Summary}}<br><br>Nếu được chọn làm nâng cấp thứ hai của bạn, bắt đầu với @SecondPickBonus@ Sức Mạnh Thích Ứng.<br><br>Sức Mạnh Thích Ứng đã nhận được: @f1@"
+        },
+        {
+            "apiName": "FrostWraith",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.5,
+                "Radius": 450.0,
+                "RootDuration": 1.25
+            },
+            "desc": "Mỗi @Cooldown@ giây, <keywordMajor>Tự Động</keywordMajor> <status>Trói</status> kẻ địch xung quanh trong @RootDuration@ giây.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
+            "id": 39,
+            "name": "Ma Băng",
+            "rarity": 0,
+            "tooltip": "Mỗi @Cooldown@ giây, <keywordMajor>Tự Động</keywordMajor> <status>Trói</status> kẻ địch xung quanh trong @RootDuration@ giây.<br><br>Kẻ Địch Đã Trói Trong Vòng Này: @f1@<br>Tổng Kẻ Địch Đã Trói: @f2@"
+        },
+        {
+            "apiName": "SymphonyofWar",
+            "calculations": {
+                "ASMelee": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 3
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 6
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 9
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 12
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 15
+                                }
+                            ],
+                            "mLevel1Value": 0.12999999523162842
+                        }
+                    ]
+                },
+                "ASRanged": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 3
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 6
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 9
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 12
+                                }
+                            ],
+                            "mLevel1Value": 0.07999999821186066
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ASCap": 10.0,
+                "BuffDuration": 5.0,
+                "Duration": 6.0,
+                "HealingPercent": 0.10000000149011612,
+                "MaxAdaptivePerStack": 5.5,
+                "MaxStacks": 12.0,
+                "MinAdaptivePerStack": 3.0,
+                "PerCastIDLockout": 10.0,
+                "RangeBonus": 50.0,
+                "RangedHealingPercent": 0.07999999821186066,
+                "StackCap": 6.0,
+                "TimeUntilNextStackFromSameSpell": 5.0
+            },
+            "desc": "Nhận Ngọc Siêu Cấp <spellName>Nhịp Độ Chết Người</spellName> và <spellName>Chinh Phục</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/symphonyofwar_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/symphonyofwar_small.png",
+            "id": 79,
+            "name": "Chiến Hùng Ca",
+            "rarity": 2,
+            "tooltip": "Nhận Ngọc Siêu Cấp <spellName>Nhịp Độ Chết Người</spellName> và <spellName>Chinh Phục</spellName>."
+        },
+        {
+            "apiName": "TrueshotProdigy",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 750.0,
+                            "mStartValue": 250.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Cooldown": 5.0,
+                "SnipeDistance": 700.0
+            },
+            "desc": "Khi bạn gây sát thương lên tướng từ xa, <keywordMajor>Tự Động</keywordMajor> bắn <abilityName>Cung Ánh Sáng</abilityName> về phía chúng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
+            "id": 86,
+            "name": "Xạ Thủ Thiên Bẩm",
+            "rarity": 2,
+            "tooltip": "Khi bạn gây sát thương lên mục tiêu cách @SnipeDistance@ đơn vị, <keywordMajor>Tự Động</keywordMajor> bắn <abilityName>Cung Ánh Sáng</abilityName> về phía chúng, gây @Damage@ sát thương xuyên qua toàn sân đấu. Hồi chiêu: @Cooldown@ giây.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "Eureka",
+            "calculations": {},
+            "dataValues": {
+                "APToHasteConversion": 0.25
+            },
+            "desc": "Nhận Điểm Hồi Kỹ Năng tương đương <scaleAP>@APToHasteConversion*100@% Sức Mạnh Phép Thuật</scaleAP>",
+            "iconLarge": "assets/ux/cherry/augments/icons/eureka_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/eureka_small.png",
+            "id": 30,
+            "name": "Eureka",
+            "rarity": 2,
+            "tooltip": "Nhận Điểm Hồi Kỹ Năng tương đương <scaleAP>@APToHasteConversion*100@% Sức Mạnh Phép Thuật</scaleAP>"
+        },
+        {
+            "apiName": "OceanSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Nhận Linh Hồn Rồng Nước, cho lượng hồi phục <healing>Máu</healing> và <scaleMana>Năng Lượng</scaleMana> lớn sau khi gây sát thương lên kẻ địch.",
+            "iconLarge": "assets/ux/cherry/augments/icons/oceansoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/oceansoul_small.png",
+            "id": 60,
+            "name": "Linh Hồn Rồng Nước",
+            "rarity": 0,
+            "tooltip": "Nhận Linh Hồn Rồng Nước, cho lượng hồi phục <healing>Máu</healing> và <scaleMana>Năng Lượng</scaleMana> lớn sau khi gây sát thương lên kẻ địch.<br><br>Lượng Hồi Phục Trong Vòng Này: @f1@<br>Tổng Lượng Hồi Phục: @f2@"
+        },
+        {
+            "apiName": "CircleofDeath",
+            "calculations": {},
+            "dataValues": {
+                "DamageRange": 1000.0,
+                "HealToDamageConversion": 0.699999988079071
+            },
+            "desc": "Một phần lượng <health>Hồi Máu</health> và Hồi Phục từ bạn sẽ trở thành <scaleAP>Sát Thương Phép</scaleAP> lên tướng địch gần nhất.",
+            "iconLarge": "assets/ux/cherry/augments/icons/circleofdeath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/circleofdeath_small.png",
+            "id": 15,
+            "name": "Vòng Tròn Tử Thần",
+            "rarity": 2,
+            "tooltip": "<magicDamage>@HealToDamageConversion*100@% lượng</magicDamage> <health>Hồi Máu</health> và Hồi Phục từ bạn sẽ trở thành sát thương phép lên tướng địch gần nhất.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "Quest_WoogletsWitchcap",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Lập tức: Nhận Gậy Quá Khổ.<br><br>Yêu cầu: Sở hữu Gậy Quá Khổ, Mũ Phù Thủy Rabadon và Đồng Hồ Cát Zhonya.<br><br>Phần thưởng: Nhận được Mũ Phù Thủy Wooglet.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
+            "id": 156,
+            "name": "Nhiệm Vụ: Mũ Phù Thủy Wooglet",
+            "rarity": 2,
+            "tooltip": "Lập tức: Nhận Gậy Quá Khổ.<br><br>Yêu cầu: Sở hữu Gậy Quá Khổ, Mũ Phù Thủy Rabadon và Đồng Hồ Cát Zhonya.<br><br>Phần thưởng: Nhận được Mũ Phù Thủy Wooglet."
+        },
+        {
+            "apiName": "Earthwake",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 2,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 2,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 140.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 2
+                }
+            },
+            "dataValues": {
+                "APRatio": 0.30000001192092896,
+                "BonusADRatio": 1.0,
+                "ExplosionDelayTime": 0.75,
+                "ExplosionRadius": 300.0
+            },
+            "desc": "Kỹ Năng lướt, nhảy hoặc dịch chuyển của bạn sẽ để lại một vệt phía sau, vệt này sẽ phát nổ sau 1 giây.",
+            "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
+            "id": 27,
+            "name": "Chấn Động",
+            "rarity": 2,
+            "tooltip": "Kỹ Năng lướt, nhảy hoặc dịch chuyển của bạn sẽ để lại một vệt phía sau, vệt này sẽ phát nổ sau 1 giây, gây @Damage@ sát thương vật lý.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "ScopedWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 75.0,
+                "RangedRangeIncrease": 50.0
+            },
+            "desc": "Nhận @MeleeRangeIncrease@ Tầm Đánh, giảm xuống còn @RangedRangeIncrease@ nếu bạn là Tướng Đánh Xa.",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopedweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopedweapons_small.png",
+            "id": 170,
+            "name": "Lắp Kính Nhắm",
+            "rarity": 0,
+            "tooltip": "Nhận @MeleeRangeIncrease@ Tầm Đánh, giảm xuống còn @RangedRangeIncrease@ nếu bạn là Tướng Đánh Xa."
+        },
+        {
+            "apiName": "BreadAndButter",
+            "calculations": {},
+            "dataValues": {
+                "QAbilityHaste": 200.0,
+                "QReducedAbilityHaste": 200.0
+            },
+            "desc": "Q của bạn được tăng @QAbilityHaste@ Điểm Hồi Kỹ Năng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandbutter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandbutter_small.png",
+            "id": 103,
+            "name": "Bánh Mỳ & Bơ",
+            "rarity": 1,
+            "tooltip": "Q của bạn được tăng @QAbilityHaste@ Điểm Hồi Kỹ Năng."
+        },
+        {
+            "apiName": "TheBrutalizer",
+            "calculations": {},
+            "dataValues": {
+                "AD": 25.0,
+                "AbilityHaste": 10.0,
+                "Lethality": 10.0
+            },
+            "desc": "Nhận <scaleAD>@AD@ Sức Mạnh Công Kích</scaleAD>, <scaleLevel>@AbilityHaste@ Điểm Hồi Kỹ Năng</scaleLevel> và <scaleAD>@Lethality@ Sát Lực</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/thebrutalizer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/thebrutalizer_small.png",
+            "id": 82,
+            "name": "Tàn Bạo",
+            "rarity": 1,
+            "tooltip": "Nhận <scaleAD>@AD@ Sức Mạnh Công Kích</scaleAD>, <scaleLevel>@AbilityHaste@ Điểm Hồi Kỹ Năng</scaleLevel> và <scaleAD>@Lethality@ Sát Lực</scaleAD>."
+        },
+        {
+            "apiName": "FullyAutomated",
+            "calculations": {},
+            "dataValues": {
+                "AutocastFlatCDR": 2.0
+            },
+            "desc": "Các kỹ năng <keywordMajor>Tự Kích Hoạt</keywordMajor> được giảm hồi chiêu đi @AutocastFlatCDR@ giây và hưởng lợi từ Điểm Hồi Kỹ Năng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
+            "id": 213,
+            "name": "Tự Động Hoàn Toàn",
+            "rarity": 0,
+            "tooltip": "Các kỹ năng <keywordMajor>Tự Kích Hoạt</keywordMajor> được giảm hồi chiêu đi @AutocastFlatCDR@ giây và hưởng lợi từ Điểm Hồi Kỹ Năng."
+        },
+        {
+            "apiName": "SonicBoom",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 2,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 2,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 30.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 2
+                }
+            },
+            "dataValues": {
+                "ProcCooldown": 2.0,
+                "Radius": 450.0,
+                "SlowAmount": -0.30000001192092896
+            },
+            "desc": "Cường Hóa, <healing>Hồi Máu</healing> hoặc <shield>Tạo Lá Chắn</shield> cho đồng minh sẽ gây sát thương và <status>Làm Chậm</status> những kẻ địch xung quanh họ.",
+            "iconLarge": "assets/ux/cherry/augments/icons/sonicboom_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/sonicboom_small.png",
+            "id": 76,
+            "name": "Vụ Nổ Siêu Thanh",
+            "rarity": 0,
+            "tooltip": "Cường Hóa, <healing>Hồi Máu</healing> hoặc <shield>Tạo Lá Chắn</shield> cho đồng minh sẽ gây <trueDamage>@Damage@ sát thương chuẩn</trueDamage> và <status>Làm Chậm</status> những kẻ địch xung quanh đồng minh đi @SlowAmount*-100@% trong 2 giây.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "TwiceThrice",
+            "calculations": {},
+            "dataValues": {
+                "ProcMultiplier": 1.5
+            },
+            "desc": "Mỗi Đòn Đánh thứ ba, Hiệu Ứng Trên Đòn Đánh của bạn sẽ được kích hoạt lần hai.",
+            "iconLarge": "assets/ux/cherry/augments/icons/twicethrice_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/twicethrice_small.png",
+            "id": 107,
+            "name": "Nhân Hai Nhân Ba",
+            "rarity": 1,
+            "tooltip": "Mỗi Đòn Đánh thứ ba, Hiệu Ứng Trên Đòn Đánh của bạn sẽ được kích hoạt lần hai."
+        },
+        {
+            "apiName": "CelestialBody",
+            "calculations": {},
+            "dataValues": {
+                "DamageReduction": 0.10000000149011612,
+                "Health": 1250.0
+            },
+            "desc": "Nhận <health>@Health@ Máu</health>, nhưng giảm @DamageReduction*100@% sát thương gây ra.",
+            "iconLarge": "assets/ux/cherry/augments/icons/celestialbody_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/celestialbody_small.png",
+            "id": 13,
+            "name": "Cơ Thể Thượng Nhân",
+            "rarity": 1,
+            "tooltip": "Nhận <health>@Health@ Máu</health>, nhưng giảm @DamageReduction*100@% sát thương gây ra."
+        },
+        {
+            "apiName": "BreadAndJam",
+            "calculations": {},
+            "dataValues": {
+                "WAbilityHaste": 200.0
+            },
+            "desc": "W của bạn được tăng @WAbilityHaste@ Điểm Hồi Kỹ Năng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandjam_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandjam_small.png",
+            "id": 150,
+            "name": "Bánh Mỳ & Mứt",
+            "rarity": 1,
+            "tooltip": "W của bạn được tăng @WAbilityHaste@ Điểm Hồi Kỹ Năng."
+        },
+        {
+            "apiName": "WithHaste",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHasteToMSConversion": 1.5
+            },
+            "desc": "Nhận <moveSpeed>Tốc Độ Di Chuyển</moveSpeed> tương đương @AbilityHasteToMSConversion@ lần <scaleLevel>Điểm Hồi Kỹ Năng</scaleLevel> của bạn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/withhaste_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/withhaste_small.png",
+            "id": 98,
+            "name": "Bứt Tốc",
+            "rarity": 1,
+            "tooltip": "Nhận <moveSpeed>Tốc Độ Di Chuyển</moveSpeed> tương đương @AbilityHasteToMSConversion@ lần <scaleLevel>Điểm Hồi Kỹ Năng</scaleLevel> của bạn."
+        },
+        {
+            "apiName": "FallenAegis",
+            "calculations": {
+                "ShieldAmount": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 50.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "ShieldDuration": 12.0
+            },
+            "desc": "Khởi đầu giao tranh với <abilityName>Khiên Đen</abilityName> trong @ShieldDuration@ giây.<br><br><rules><abilityName>Khiên Đen</abilityName> chặn Sát Thương Phép và các hiệu ứng <status>Bất Động</status>.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/fallenaegis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fallenaegis_small.png",
+            "id": 34,
+            "name": "Bảo Hộ Sa Ngã",
+            "rarity": 0,
+            "tooltip": "Khởi đầu giao tranh với <abilityName>Khiên Đen</abilityName>, giúp chặn @ShieldAmount@ sát thương phép trong @ShieldDuration@ giây.<br><br><rules><abilityName>Khiên Đen</abilityName> chặn Sát Thương Phép và các hiệu ứng <status>Bất Động</status>.</rules><br><br>Tổng Khiên Đã Tạo: @f1@<br>Tổng Kỹ Năng Khống Chế Đã Chặn: @f2@"
+        },
+        {
+            "apiName": "HolyFire",
+            "calculations": {
+                "BurnDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.02500000037252903,
+                            "mStat": 11
+                        }
+                    ]
+                },
+                "BurnDamageTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "BurnDamage",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    }
+                }
+            },
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercentMax": 0.03999999910593033,
+                "BurnPercentMin": 0.009999999776482582,
+                "Cooldown": 1.5,
+                "Radius": 650.0
+            },
+            "desc": "Hiệu ứng <healing>Hồi Máu</healing> và <shield>Tạo Lá Chắn</shield> của bạn sẽ gây cộng dồn <keywordMajor>Thiêu Đốt</keywordMajor> lên một kẻ địch ở gần, gây sát thương tương đương @BurnPercentMin*100@% - @BurnPercentMax*100@% Máu Tối Đa trong @BurnDuration@ giây.",
+            "iconLarge": "assets/ux/cherry/augments/icons/holyfire_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/holyfire_small.png",
+            "id": 198,
+            "name": "Hỏa Thiêng",
+            "rarity": 1,
+            "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>Sát thương thiêu đốt tăng dần theo tỉ lệ giữa giá trị Hồi Máu hoặc Lá Chắn so với lượng máu tối đa của tướng được hỗ trợ.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "FeeltheBurn",
+            "calculations": {
+                "DamagePerSecond": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "TooltipTrueDamageCalculation",
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "InverseDuration"
+                    }
+                },
+                "TooltipTrueDamageCalculation": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 410.0,
+                            "mStartValue": 70.0
+                        }
+                    ]
+                },
+                "{7c50d74e}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 600.0,
+                            "mStartValue": 100.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "DamageReductionTOOLTIPONLY": 0.3499999940395355,
+                "DotDuration": 5.0,
+                "ExhaustDuration": 3.0,
+                "GrievousAmount": 0.4000000059604645,
+                "InverseDuration": 0.20000000298023224,
+                "Range": 1000.0,
+                "SightRadius": 100.0,
+                "SlowAmount": 0.5
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Đốt Tí Lửa</spellName>.<br><br><rules><spellName>Đốt Tí Lửa</spellName> sẽ <spellName>Thiêu Đốt</spellName> và làm <spellName>Kiệt Sức</spellName> mọi kẻ địch xung quanh.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/feeltheburn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/feeltheburn_small.png",
+            "id": 35,
+            "name": "Đốt Tí Lửa",
+            "rarity": 2,
+            "tooltip": "<rules>Thi triển <spellName>Thiêu Đốt</spellName> và làm <spellName>Kiệt Sức</spellName> mọi tướng địch ở gần.</rules>"
+        },
+        {
+            "apiName": "GuiltyPleasure",
+            "calculations": {
+                "TotalHeal": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 10.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealPercentage",
+                            "mStat": 11
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealPercentage": 0.014999999664723873
+            },
+            "desc": "<status>Làm Bất Động</status> tướng địch sẽ <healing>hồi lại @TotalHeal@ Máu</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/guiltypleasure_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/guiltypleasure_small.png",
+            "id": 42,
+            "name": "Khoái Lạc Tội Lỗi",
+            "rarity": 0,
+            "tooltip": "<status>Làm Bất Động</status> tướng địch sẽ <healing>hồi lại @TotalHeal@% Máu</healing>.<br><br>Máu Đã Hồi Trong Vòng Này: @f1@<br>Tổng Máu Đã Hồi: @f2@"
+        },
+        {
+            "apiName": "ScopierWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 200.0,
+                "RangedRangeIncrease": 100.0
+            },
+            "desc": "Nhận @MeleeRangeIncrease@ Tầm Đánh, giảm xuống còn @RangedRangeIncrease@ nếu bạn là Tướng Đánh Xa.",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopierweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopierweapons_small.png",
+            "id": 71,
+            "name": "Lắp Kính Nhắm",
+            "rarity": 1,
+            "tooltip": "Nhận @MeleeRangeIncrease@ Tầm Đánh, giảm xuống còn @RangedRangeIncrease@ nếu bạn là Tướng Đánh Xa."
+        },
+        {
+            "apiName": "BuffBuddies",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Bạn nhận Bùa Xanh và Bùa Đỏ vĩnh viễn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/buffbuddies_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/buffbuddies_small.png",
+            "id": 9,
+            "name": "Bùa Lợi Thiện Lành",
+            "rarity": 0,
+            "tooltip": "Bạn nhận Bùa Xanh và Bùa Đỏ vĩnh viễn."
+        },
+        {
+            "apiName": "RaidBoss",
+            "calculations": {},
+            "dataValues": {
+                "BreakoutHealthThreshold": 0.5,
+                "DamageReductionMax": 0.699999988079071,
+                "DamageReductionMin": 0.4000000059604645,
+                "DamageReductionRoundCap": 11.0,
+                "ImprisonDuration": 9.0,
+                "MissingHPHealUponRelease": 0.30000001192092896,
+                "ShieldHealthRatio": 0.3499999940395355,
+                "StatIncrease": 0.4000000059604645
+            },
+            "desc": "Bắt đầu mỗi vòng đấu, bạn bị cầm tù tại trung tâm võ đài, không thể thao tác. Khi đang bị cầm tù, bạn nhận được lên đến @DamageReductionMax*100@% kháng sát thương và tăng kích cỡ, đồng thời nhận thêm <healing>Máu</healing>, <physicalDamage>Sức Mạnh Công Kích</physicalDamage> và <magicDamage>Sức Mạnh Phép Thuật</magicDamage> theo thời gian (tối đa @StatIncrease*100@%). Sau @ImprisonDuration@ giây hoặc sau khi đạt tới <healing>@BreakoutHealthThreshold*100@% Máu</healing>, phá ngục và <status>Đẩy Lùi</status> kẻ địch, đồng thời nhận được <shield>Lá Chắn bằng @ShieldHealthRatio*100@% Máu tối đa</shield>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/raidboss_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/raidboss_small.png",
+            "id": 125,
+            "name": "Trùm Bản Đồ",
+            "rarity": 2,
+            "tooltip": "Bắt đầu mỗi vòng đấu, bạn bị cầm tù tại trung tâm võ đài, không thể thao tác. Khi đang bị cầm tù, bạn nhận được lên đến @DamageReductionMax*100@% kháng sát thương và tăng kích cỡ, đồng thời nhận thêm <healing>Máu</healing>, <physicalDamage>Sức Mạnh Công Kích</physicalDamage> và <magicDamage>Sức Mạnh Phép Thuật</magicDamage> theo thời gian (tối đa @StatIncrease*100@%). Sau @ImprisonDuration@ giây hoặc sau khi đạt tới <healing>@BreakoutHealthThreshold*100@% Máu</healing>, phá ngục và <status>Đẩy Lùi</status> kẻ địch, đồng thời nhận được <shield>Lá Chắn bằng @ShieldHealthRatio*100@% Máu tối đa</shield>."
+        },
+        {
+            "apiName": "OutlawsGrit",
+            "calculations": {},
+            "dataValues": {
+                "MaxStacks": 5.0,
+                "ResistsPerStack": 12.0
+            },
+            "desc": "Sau khi sử dụng Kỹ Năng lướt, nhảy hoặc dịch chuyển, bạn sẽ nhận được <scaleArmor>@ResistsPerStack@ Giáp</scaleArmor> và <scaleMR>Kháng Phép</scaleMR>.<br><br>Hiệu ứng này cộng dồn @MaxStacks@ lần.",
+            "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
+            "id": 63,
+            "name": "Gan Góc Vô Pháp",
+            "rarity": 1,
+            "tooltip": "Sau khi sử dụng Kỹ Năng lướt, nhảy hoặc dịch chuyển, bạn sẽ nhận được <scaleArmor>@ResistsPerStack@ Giáp</scaleArmor> và <scaleMR>Kháng Phép</scaleMR>.<br><br>Hiệu ứng này cộng dồn @MaxStacks@ lần."
+        },
+        {
+            "apiName": "DontBlink",
+            "calculations": {},
+            "dataValues": {
+                "BonusDamagePerMSDifference": 0.0010000000474974513
+            },
+            "desc": "Gây thêm sát thương lên kẻ địch khi bạn có tốc độ di chuyển lớn hơn chúng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dontblink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dontblink_small.png",
+            "id": 26,
+            "name": "Đừng Chớp Mắt",
+            "rarity": 0,
+            "tooltip": "Nhận thêm @BonusDamagePerMSDifference*1000@% sát thương mỗi <moveSpeed>10 Tốc Độ Di Chuyển</moveSpeed> bạn hơn mục tiêu.<br><br>Sát Thương Cộng Thêm Trong Vòng Này: @f1@<br>Tổng Sát Thương: @f2@"
+        },
+        {
+            "apiName": "ShadowRunner",
+            "calculations": {},
+            "dataValues": {
+                "BuffDuration": 2.0,
+                "MSAmount": 300.0
+            },
+            "desc": "Sau khi sử dụng 1 Kỹ Năng lướt, nhảy hoặc dịch chuyển hay thoát khỏi trạng thái <stealth>Tàng Hình</stealth>, nhận @spell.Augment_ShadowRunner:MSAmount@ Tốc Độ Di Chuyển trong @spell.Augment_ShadowRunner:BuffDuration@ giây.",
+            "iconLarge": "assets/ux/cherry/augments/icons/shadowrunner_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/shadowrunner_small.png",
+            "id": 73,
+            "name": "Bóng Đen Tốc Độ",
+            "rarity": 0,
+            "tooltip": "Sau khi sử dụng 1 Kỹ Năng lướt, nhảy hoặc dịch chuyển hay thoát khỏi trạng thái <stealth>Tàng Hình</stealth>, nhận @spell.Augment_ShadowRunner:MSAmount@ Tốc Độ Di Chuyển trong @spell.Augment_ShadowRunner:BuffDuration@ giây."
+        },
+        {
+            "apiName": "InfernalConduit",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 6.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05999999865889549
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.14000000059604645,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "FlatCooldownRefundPerTick": 0.07999999821186066,
+                "ProcCooldown": 1.0
+            },
+            "desc": "Kỹ năng đặt 1 cộng dồn <keywordMajor>Thiêu Đốt</keywordMajor>, gây <scaleAP>Sát Thương Phép</scaleAP> theo thời gian.<br><br>Các hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> sẽ giảm hồi chiêu của Kỹ Năng cơ bản.",
+            "iconLarge": "assets/ux/cherry/augments/icons/infernalconduit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/infernalconduit_small.png",
+            "id": 45,
+            "name": "Hỏa Ngục Dẫn Truyền",
+            "rarity": 2,
+            "tooltip": "Kỹ năng đặt 1 cộng dồn <keywordMajor>Thiêu Đốt</keywordMajor>, gây <scaleAP>@BleedDamageTooltip@ Sát Thương Phép</scaleAP> mỗi giây trong @BleedDuration@ giây. Hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> cộng dồn vô hạn.<br><br>Mọi hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> sẽ giảm hồi chiêu của Kỹ Năng Cơ Bản còn lại đi @FlatCooldownRefundPerTick@ giây khi gây sát thương lên kẻ địch.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Chuyển hóa <physicalDamage>Sức Mạnh Công Kích Cộng Thêm</physicalDamage> thành <magicDamage>Sức Mạnh Phép Thuật</magicDamage>. Nhận <magicDamage>@APAmp*100@% Sức Mạnh Phép Thuật</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "THÍCH ỨNG",
+            "rarity": 0,
+            "tooltip": "Chuyển hóa <physicalDamage>Sức Mạnh Công Kích Cộng Thêm</physicalDamage> thành <magicDamage>Sức Mạnh Phép Thuật</magicDamage>. Nhận <magicDamage>@APAmp*100@% Sức Mạnh Phép Thuật</magicDamage>."
+        },
+        {
+            "apiName": "BacktoBasics",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.3499999940395355,
+                "Haste": 60.0,
+                "HealingAmp": 0.3499999940395355,
+                "ShieldingAmp": 0.3499999940395355
+            },
+            "desc": "Tăng sát thương gây ra, <scaleLevel>Sát Thương</scaleLevel>, <healing>Hồi Máu</healing>, <shield>Tạo Lá Chắn</shield>, và <scaleBonus>Điểm Hồi Kỹ Năng</scaleBonus>, bù lại <keywordMajor>không thể dùng Chiêu Cuối</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/backtobasics_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/backtobasics_small.png",
+            "id": 4,
+            "name": "Đơn Giản Hóa",
+            "rarity": 2,
+            "tooltip": "Không thể dùng Chiêu Cuối. Tăng @DamageAmp*100@% <scaleLevel>Sát Thương</scaleLevel>, <healing>Hồi Máu</healing>, <shield>Tạo Lá Chắn</shield>, và <scaleBonus>@Haste@ Điểm Hồi Kỹ Năng</scaleBonus>."
+        },
+        {
+            "apiName": "Clothesline",
+            "calculations": {
+                "BurnDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 75.0,
+                            "mStartValue": 5.0
+                        }
+                    ]
+                },
+                "BurnDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "BurnDamage",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 4.0
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4,
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "RectangleHalfWidth": 50.0
+            },
+            "desc": "Tạo sợi dây kết nối giữa bạn và chiến hữu với khả năng gây sát thương liên tục lên kẻ địch ở giữa.",
+            "iconLarge": "assets/ux/cherry/augments/icons/clothesline_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/clothesline_small.png",
+            "id": 110,
+            "name": "Kết Nối Ngoại Trang",
+            "rarity": 0,
+            "tooltip": "Tạo sợi dây kết nối giữa bạn và chiến hữu với khả năng gây <magicDamage>@BurnDamageTooltip@ sát thương phép</magicDamage> mỗi giây.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "DontChase",
+            "calculations": {
+                "ApproximateTotalDamageTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "DamagePerSecond",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 4.25
+                    },
+                    "tooltipOnly": true
+                },
+                "DamagePerSecond": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 15.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatioPerSecond"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.20000000298023224,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "APRatioPerSecond": 0.10000000149011612,
+                "CloudDuration": 3.25,
+                "PoisonDuration": 2.0999999046325684,
+                "TicksPerSecond": 4.0,
+                "ToggleCooldown": 1.0
+            },
+            "desc": "Bạn có thể đi xuyên vật thể và để lại một vệt độc tố phía sau, gây <magicDamage>sát thương phép</magicDamage> lên những kẻ địch dẫm phải.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dontchase_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dontchase_small.png",
+            "id": 102,
+            "name": "Đừng Đuổi Theo Ta",
+            "rarity": 0,
+            "tooltip": "Bạn có thể đi xuyên vật thể và để lại một vệt độc tố phía sau, gây <magicDamage>@DamagePerSecond@ sát thương phép</magicDamage> mỗi giây lên những kẻ địch dẫm phải.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "SoulSiphon",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "HealPercentage": 0.11999999731779099
+            },
+            "desc": "Nhận <crit>@CritChance*100@% Tỉ Lệ Chí Mạng</crit> và @HealPercentage*100@% Hút Máu từ <crit>Đòn Chí Mạng</crit>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/soulsiphon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/soulsiphon_small.png",
+            "id": 77,
+            "name": "Hút Hồn",
+            "rarity": 1,
+            "tooltip": "Nhận <crit>@CritChance*100@% Tỉ Lệ Chí Mạng</crit> và @HealPercentage*100@% Hút Máu từ <crit>Đòn Chí Mạng</crit>.<br><br>Máu Đã Hồi Trong Vòng Này: @f1@<br>Tổng Máu Đã Hồi: @f2@"
+        },
+        {
+            "apiName": "GambaAnvil",
+            "calculations": {},
+            "dataValues": {
+                "GoldBasisDiscount": 1250.0,
+                "GoldBonus": 1000.0,
+                "PrismaticCostReduction": 1000.0
+            },
+            "desc": "Nhận @GoldBonus@ vàng. Giá của Gói Trang Bị Tối Thượng được giảm @PrismaticCostReduction@ vàng và Các Trang Bị Tối Thượng nhận được từ lúc này sẽ có giá bán lại giảm 500 vàng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
+            "id": 220,
+            "name": "Gói Trang Bị Đánh Cược",
+            "rarity": 2,
+            "tooltip": "Nhận @GoldBonus@ vàng. Giá của Gói Trang Bị Tối Thượng được giảm @PrismaticCostReduction@ vàng và Các Trang Bị Tối Thượng nhận được từ lúc này sẽ có giá bán lại giảm 500 vàng."
+        },
+        {
+            "apiName": "ThreadtheNeedle",
+            "calculations": {},
+            "dataValues": {
+                "PercentPen": 0.20000000298023224
+            },
+            "desc": "Nhận thêm @PercentPen*100@% <scaleAD>Xuyên Giáp</scaleAD> và <scaleAP>Xuyên Kháng Phép</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/threadtheneedle_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threadtheneedle_small.png",
+            "id": 84,
+            "name": "Xe Chỉ Luồn Kim",
+            "rarity": 1,
+            "tooltip": "Nhận thêm @PercentPen*100@% <scaleAD>Xuyên Giáp</scaleAD> và <scaleAP>Xuyên Kháng Phép</scaleAP>."
+        },
+        {
+            "apiName": "BreadAndCheese",
+            "calculations": {},
+            "dataValues": {
+                "EAbilityHaste": 200.0
+            },
+            "desc": "E của bạn được tăng @EAbilityHaste@ Điểm Hồi Kỹ Năng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandcheese_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandcheese_small.png",
+            "id": 151,
+            "name": "Bánh Mỳ & Phô-mai",
+            "rarity": 1,
+            "tooltip": "E của bạn được tăng @EAbilityHaste@ Điểm Hồi Kỹ Năng."
+        },
+        {
+            "apiName": "Impassable",
+            "calculations": {},
+            "dataValues": {
+                "BeamPosIndent": 100.0,
+                "BonusResistsMax": 150.0,
+                "BonusResistsMin": 80.0,
+                "CCCarryOverRatio": 1.0,
+                "Cooldown": 15.0,
+                "DamageRadius": 350.0,
+                "DamageRatioAD": 0,
+                "DamageRatioAP": 0,
+                "DelayBeforeBurst": 2.5,
+                "DmgReduction": 0.15000000596046448,
+                "FlatResists": 35.0,
+                "FlatResistsMax": 35.0,
+                "HealthRatio": 8.0,
+                "MRRatio": 0,
+                "MaxBaseDamage": 120.0,
+                "PercentBonusResists": 0.800000011920929,
+                "RayCount": 3.0,
+                "ResistInc": 0,
+                "SizeInc": 0.25,
+                "SlowAmount": 0.15000000596046448,
+                "SlowDuration": 2.5,
+                "SlowZoneDuration": 3.0,
+                "SlowZoneLength": 700.0,
+                "SlowZoneSlowAPRatio": 0.05999999865889549,
+                "SlowZoneSlowBase": 0.20000000298023224,
+                "SlowZoneSlowHealShieldRatio": 0.09000000357627869,
+                "SlowZoneSlowbADRatio": 0.07000000029802322,
+                "SlowZoneWidth": 80.0,
+                "StartingBaseDamage": 25.0
+            },
+            "desc": "Nhận Ngọc Siêu Cấp <keywordMajor>Dư Chấn</keywordMajor> và <keywordMajor>Nâng Cấp Băng Giá</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/impassable_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/impassable_small.png",
+            "id": 149,
+            "name": "Không Thể Vượt Qua",
+            "rarity": 1,
+            "tooltip": "Nhận Ngọc Siêu Cấp <keywordMajor>Dư Chấn</keywordMajor> và <keywordMajor>Nâng Cấp Băng Giá</keywordMajor>."
+        },
+        {
+            "apiName": "ExtendoArm",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 12.0
+            },
+            "desc": "Mỗi 12 giây, <keywordMajor>Tự động</keywordMajor> phóng ra kỹ năng kéo của Blitzcrank vào 1 tướng địch gần đó.",
+            "iconLarge": "assets/ux/cherry/augments/icons/extendoarm_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/extendoarm_small.png",
+            "id": 33,
+            "name": "Cánh Tay Siêu Dài",
+            "rarity": 1,
+            "tooltip": "Mỗi 12 giây, <keywordMajor>Tự động</keywordMajor> phóng ra kỹ năng kéo của Blitzcrank vào 1 tướng địch gần đó.<br><br>Kéo Đã Phóng: @f1@"
+        },
+        {
+            "apiName": "SlowCooker",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.017500000074505806,
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "Range": 500.0
+            },
+            "desc": "Mỗi giây, tạo hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> cộng dồn lên các tướng địch ở gần, tăng dần theo <health>Máu Tối Đa</health> của bạn. Hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> cộng dồn vô hạn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowcooker_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowcooker_small.png",
+            "id": 75,
+            "name": "Hầm Nhừ",
+            "rarity": 2,
+            "tooltip": "Mỗi giây, tạo hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor>, gây <health>@BleedDamageTooltip@ <scaleAP>Sát Thương Phép</scaleAP> mỗi giây trong @BleedDuration@ giây</health> lên các tướng địch trong phạm vi @Range@. Hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> cộng dồn vô hạn.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "DieAnotherDay",
+            "calculations": {},
+            "dataValues": {
+                "HealFlatTooltip": 250.0
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Chưa Phải Hồi Kết</spellName><br><br><rules><spellName>Chưa Phải Hồi Kết</spellName> tạo một khu vực giúp các đơn vị ở bên trong trở nên bất tử trong vòng 4 giây.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/dieanotherday_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dieanotherday_small.png",
+            "id": 24,
+            "name": "Chưa Phải Hồi Kết",
+            "rarity": 1,
+            "tooltip": "Phù phép mặt đất trong vòng 4 giây, giúp mọi đơn vị bên trong khu vực không thể tụt xuống dưới 10% Máu tối đa. Khi kết thúc, các đơn vị trong khu vực được hồi <healing>@HealFlatTooltip@ Máu</healing>. "
+        },
+        {
+            "apiName": "SpiritLink",
+            "calculations": {},
+            "dataValues": {
+                "DamageRedirectPercentage": 0.15000000596046448,
+                "HealCopyPercentage": 0.5
+            },
+            "desc": "Nhận thay cho đồng minh @DamageRedirectPercentage*100@% sát thương họ phải gánh chịu, và hưởng @HealCopyPercentage*100@% lượng <healing>hồi máu</healing> họ nhận được.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spiritlink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spiritlink_small.png",
+            "id": 78,
+            "name": "Liên Kết Tâm Linh",
+            "rarity": 2,
+            "tooltip": "Nhận thay cho đồng minh @DamageRedirectPercentage*100@% sát thương họ phải gánh chịu, và hưởng @HealCopyPercentage*100@% lượng <healing>hồi máu</healing> họ nhận được.<br><br>Tổng Sát Thương Chịu Thay: @f1@<br>Tổng Máu Đã Hồi: @f2@<br>"
+        },
+        {
+            "apiName": "Quest_AngelofRetribution",
+            "calculations": {
+                "BaseDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 50.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AttackSpeed": 1.0,
+                "HealPowerToDamageConversion": 3.0,
+                "RequirementAmount": 2500.0
+            },
+            "desc": "Yêu cầu: Hồi phục hoặc chặn @RequirementAmount@ sát thương cho đồng đội.<br><br>Phần thưởng: Nhận <attackspeed>@AttackSpeed*100@% Tốc Độ Đánh</attackspeed>, và Đòn Đánh của bạn gây thêm <magicdamage>sát thương phép</magicdamage> bằng <healing>@HealPowerToDamageConversion*100@% Sức Mạnh Hồi Máu/Lá Chắn</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_angelofretribution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_angelofretribution_small.png",
+            "id": 192,
+            "name": "Nhiệm Vụ: Thiên Thần Báo Oán",
+            "rarity": 1,
+            "tooltip": "{{Cherry_QuestAngelofRetribution_Summary}}<br><br>Hồi Máu hoặc Sát Thương Đã Chặn: @f1@<br>Sát Thương Đã Gây Ra: @f2@"
+        },
+        {
+            "apiName": "ContractKiller",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.15000000596046448,
+                "Gold": 150.0
+            },
+            "desc": "Mỗi vòng, đánh dấu 1 đối thủ để gây thêm @spell.Augment_ContractKiller:DamageAmp*100@% sát thương và nhận thêm @spell.Augment_ContractKiller:Gold@ vàng khi kẻ địch đó bị hạ gục.",
+            "iconLarge": "assets/ux/cherry/augments/icons/contractkiller_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/contractkiller_small.png",
+            "id": 17,
+            "name": "Sát Thủ Đánh Thuê",
+            "rarity": 0,
+            "tooltip": "Mỗi vòng, đánh dấu 1 tướng địch. Tướng địch bị đánh dấu sẽ chịu thêm @DamageAmp*100@% sát thương, đồng thời cho bạn và đồng đội @Gold@ vàng khi bị hạ gục.<br><br>Sát Thương Cộng Thêm Trong Vòng Này: @f1@<br>Tổng Sát Thương Cộng Thêm: @f2@<br>Tổng Vàng Mỗi Đồng Đội Nhận Được: @f3@"
+        },
+        {
+            "apiName": "Goredrink",
+            "calculations": {},
+            "dataValues": {
+                "Omnivamp": 0.20000000298023224
+            },
+            "desc": "Nhận @Omnivamp*100@% Hút Máu Toàn Phần.",
+            "iconLarge": "assets/ux/cherry/augments/icons/goredrink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/goredrink_small.png",
+            "id": 138,
+            "name": "Chùy Hấp Huyết",
+            "rarity": 0,
+            "tooltip": "Nhận @Omnivamp*100@% Hút Máu Toàn Phần."
+        },
+        {
+            "apiName": "FirstAidKit",
+            "calculations": {},
+            "dataValues": {
+                "HealShieldAmp": 0.20000000298023224
+            },
+            "desc": "Tăng <healing>@HealShieldAmp*100@% Sức Mạnh Lá Chắn và Hồi Máu</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firstaidkit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firstaidkit_small.png",
+            "id": 37,
+            "name": "Túi Cứu Thương",
+            "rarity": 0,
+            "tooltip": "Tăng <healing>@HealShieldAmp*100@% Sức Mạnh Lá Chắn và Hồi Máu</healing>."
+        },
+        {
+            "apiName": "OkBoomerang",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.2199999988079071,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "<keywordMajor>Tự Động</keywordMajor> phóng ra 1 boomerang vào 1 tướng địch gần bên sau mỗi 7 giây.",
+            "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
+            "id": 61,
+            "name": "Boomerang OK",
+            "rarity": 1,
+            "tooltip": "<keywordMajor>Tự Động</keywordMajor> phóng ra 1 boomerang vào 1 tướng địch gần bên sau mỗi 7 giây, gây @Damage@ sát thương thích ứng lên những kẻ địch trúng chiêu.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "JuiceBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Mỗi vòng, bạn và đồng đội sẽ nhận được thêm 1 Nước Ép miễn phí.",
+            "iconLarge": "assets/ux/cherry/augments/icons/juicebox_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/juicebox_small.png",
+            "id": 49,
+            "name": "Hộp Nước Ép",
+            "rarity": 0,
+            "tooltip": "Mỗi vòng, bạn và đồng đội sẽ nhận được thêm 1 Nước Ép miễn phí."
+        },
+        {
+            "apiName": "ScopiestWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 250.0,
+                "RangedRangeIncrease": 150.0
+            },
+            "desc": "Nhận @MeleeRangeIncrease@ Tầm Đánh, giảm xuống còn @RangedRangeIncrease@ nếu bạn là Tướng Đánh Xa.",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopiestweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopiestweapons_small.png",
+            "id": 115,
+            "name": "Lắp Kính Nhắm Cỡ Đại",
+            "rarity": 2,
+            "tooltip": "Nhận @MeleeRangeIncrease@ Tầm Đánh, giảm xuống còn @RangedRangeIncrease@ nếu bạn là Tướng Đánh Xa."
+        },
+        {
+            "apiName": "StackosaurusRex",
+            "calculations": {},
+            "dataValues": {
+                "StackModifier": 0.75
+            },
+            "desc": "Khi bạn nhận <keywordMajor>Cộng Dồn</keywordMajor> vĩnh viễn cho một Kỹ Năng, nhận thêm @StackModifier*100@% cộng dồn nữa!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stackosaurusrex_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stackosaurusrex_small.png",
+            "id": 204,
+            "name": "Khủng Long Cộng Dồn",
+            "rarity": 0,
+            "tooltip": "Khi bạn nhận <keywordMajor>Cộng Dồn</keywordMajor> vĩnh viễn cho một Kỹ Năng, nhận thêm @StackModifier*100@% cộng dồn nữa!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Chuyển hóa <magicDamage>Sức Mạnh Phép Thuật</magicDamage> thành <physicalDamage>Sức Mạnh Công Kích Cộng Thêm</physicalDamage>. Nhận <physicalDamage>@ADAmp*100@% Sức Mạnh Công Kích</physicalDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Chuyển Hoá SMPT-SMCK",
+            "rarity": 0,
+            "tooltip": "Chuyển hóa <magicDamage>Sức Mạnh Phép Thuật</magicDamage> thành <physicalDamage>Sức Mạnh Công Kích Cộng Thêm</physicalDamage>. Nhận <physicalDamage>@ADAmp*100@% Sức Mạnh Công Kích</physicalDamage>."
+        },
+        {
+            "apiName": "FeyMagic",
+            "calculations": {},
+            "dataValues": {
+                "PolyCooldown": 15.0,
+                "PolyDuration": 2.0,
+                "WEnemySlow": 60.0
+            },
+            "desc": "Gây sát thương bằng Chiêu Cuối sẽ <status>Biến Hóa</status> kẻ địch trong @PolyDuration@ giây (@PolyCooldown@ giây hồi chiêu).",
+            "iconLarge": "assets/ux/cherry/augments/icons/feymagic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/feymagic_small.png",
+            "id": 194,
+            "name": "Ma Pháp Mê Hoặc",
+            "rarity": 2,
+            "tooltip": "Gây sát thương bằng Chiêu Cuối sẽ <status>Biến Hóa</status> kẻ địch trong @PolyDuration@ giây (@PolyCooldown@ giây hồi chiêu)."
+        },
+        {
+            "apiName": "Firebrand",
+            "calculations": {},
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.019999999552965164
+            },
+            "desc": "Đòn Đánh đặt cộng dồn <keywordMajor>Thiêu Đốt</keywordMajor> (không có giới hạn tối đa), gây sát thương theo thời gian.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firebrand_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firebrand_small.png",
+            "id": 36,
+            "name": "Hỏa Tinh",
+            "rarity": 1,
+            "tooltip": "Đòn Đánh <keywordMajor>Thiêu Đốt</keywordMajor> kẻ địch, gây Sát Thương Phép tương đương <scaleAP>@PercentMaxHPDamagePer5Seconds*20@% Máu tối đa</scaleAP> mỗi giây trong vòng @BleedDuration@ giây. Hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> cộng dồn vô hạn.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "Flashy",
+            "calculations": {},
+            "dataValues": {
+                "FlashCooldown": 2.0
+            },
+            "desc": "Tốc Biến của bạn có 3 tích trữ và @FlashCooldown@ giây hồi chiêu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/flashy_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
+            "id": 116,
+            "name": "Tốc Biến Liên Hoàn",
+            "rarity": 0,
+            "tooltip": "Tốc Biến của bạn có 3 tích trữ và @FlashCooldown@ giây hồi chiêu."
+        },
+        {
+            "apiName": "NestingDoll",
+            "calculations": {},
+            "dataValues": {
+                "ReviveArmTime": 2.0,
+                "ReviveDuration": 1.5,
+                "ReviveMod": 0.4000000059604645,
+                "SecondReviveMod": 0.25,
+                "SecondSizeMod": -0.4000000059604645,
+                "SelfReviveTimerModMax": 0.5,
+                "SelfReviveTimerModMin": 0.4000000059604645,
+                "SizeMod": -0.20000000298023224
+            },
+            "desc": "Bạn sẽ tự động Hồi Sinh bản thân sau @ReviveArmTime@ giây và bạn có thể được Hồi Sinh thêm 1 lần nữa. Mỗi lần Hồi Sinh, bạn sẽ trở lại với kích cỡ nhỏ hơn và @ReviveMod*100@% Máu tối đa.<br><br>Khi hồi sinh, <status>Đẩy Lùi</status> kẻ địch xung quanh bạn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/nestingdoll_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/nestingdoll_small.png",
+            "id": 177,
+            "name": "Búp Bê Xây Tổ",
+            "rarity": 2,
+            "tooltip": "Bạn sẽ tự động Hồi Sinh bản thân sau @ReviveArmTime@ giây và bạn có thể được Hồi Sinh thêm 1 lần nữa. Mỗi lần Hồi Sinh, bạn sẽ trở lại với kích cỡ nhỏ hơn và @ReviveMod*100@% Máu tối đa.<br><br>Khi hồi sinh, <status>Đẩy Lùi</status> kẻ địch xung quanh bạn."
+        },
+        {
+            "apiName": "TapDancer",
+            "calculations": {},
+            "dataValues": {
+                "MSPerHit": 10.0,
+                "MSToASConversion": 0.0010000000474974513
+            },
+            "desc": "Các Đòn Đánh của bạn trao cho bạn <moveSpeed>@MSPerHit@ Tốc Độ Di Chuyển</moveSpeed>, cộng dồn vô hạn. Nhận Tốc Độ Đánh tương đương @MSToASConversion*10000@% Tốc Độ Di Chuyển.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tapdancer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tapdancer_small.png",
+            "id": 81,
+            "name": "Vũ Công Thiết Hài",
+            "rarity": 2,
+            "tooltip": "Các Đòn Đánh của bạn trao cho bạn <moveSpeed>@MSPerHit@ Tốc Độ Di Chuyển</moveSpeed>, cộng dồn vô hạn. Nhận Tốc Độ Đánh tương đương @MSToASConversion*10000@% Tốc Độ Di Chuyển."
+        },
+        {
+            "apiName": "Tormentor",
+            "calculations": {},
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033
+            },
+            "desc": "Làm <status>Bất Động</status> tướng địch sẽ tạo hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> gây sát thương theo thời gian, cộng dồn vô hạn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tormentor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tormentor_small.png",
+            "id": 85,
+            "name": "Đọa Đày",
+            "rarity": 0,
+            "tooltip": "Làm <status>Bất Động</status> tướng địch sẽ tạo hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor>, gây Sát Thương Phép tương đương <scaleAP>@PercentMaxHPDamagePer5Seconds*20@% Máu tối đa</scaleAP> mỗi giây trong @BleedDuration@ giây. Hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> cộng dồn vô hạn.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "Minionmancer",
+            "calculations": {},
+            "dataValues": {
+                "MinionDamageIncrease": 0.44999998807907104,
+                "MinionHealthIncrease": 0.44999998807907104,
+                "MinionSizeIncrease": 0.44999998807907104
+            },
+            "desc": "Các triệu hồi của bạn được tăng @MinionSizeIncrease*100@% kích cỡ, máu và sát thương.",
+            "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/minionmancer_small.png",
+            "id": 104,
+            "name": "Bậc Thầy Gọi Đệ",
+            "rarity": 1,
+            "tooltip": "Các triệu hồi của bạn được tăng @MinionSizeIncrease*100@% kích cỡ, máu và sát thương."
+        },
+        {
+            "apiName": "EtherealWeapon",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Kỹ năng áp dụng hiệu ứng đòn đánh. 1 giây hồi chiêu trên mỗi mục tiêu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/etherealweapon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/etherealweapon_small.png",
+            "id": 29,
+            "name": "Vũ Khí Siêu Nhiên",
+            "rarity": 1,
+            "tooltip": "Kỹ năng áp dụng hiệu ứng đòn đánh. 1 giây hồi chiêu trên mỗi mục tiêu.<br><br>Số Lần Kích Hoạt Trong Vòng Này: @f1@<br>Tổng Số Lần Kích Hoạt: @f2@"
+        },
+        {
+            "apiName": "OmniSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Nhận 3 Linh Hồn Rồng ngẫu nhiên.",
+            "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
+            "id": 62,
+            "name": "Linh Hồn Toàn Năng",
+            "rarity": 2,
+            "tooltip": "Nhận 3 Linh Hồn Rồng ngẫu nhiên."
+        },
+        {
+            "apiName": "DawnbringersResolve",
+            "calculations": {
+                "HealCalc": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealAmount",
+                            "mStat": 11
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.08299999684095383
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Duration": 3.0,
+                "HealAmount": 0.30000001192092896,
+                "HealthThreshold": 0.5
+            },
+            "desc": "Sau khi Máu tụt xuống dưới @HealthThreshold*100@%, hồi lại @HealAmount*100@% Máu tối đa trong 3 giây.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 20,
+            "name": "Ý Chí Thần Sứ",
+            "rarity": 1,
+            "tooltip": "Sau khi Máu tụt xuống dưới @HealthThreshold*100@%, hồi lại @HealAmount*100@% Máu tối đa trong 3 giây.<br><br>Máu Đã Hồi Trong Vòng Này: @f1@<br>Tổng Máu Đã Hồi: @f2@"
+        },
+        {
+            "apiName": "HoldVeryStill",
+            "calculations": {
+                "BonusAS": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 5
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 10
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 15
+                                }
+                            ],
+                            "mLevel1Value": 0.20000000298023224
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ASDuration": 5.0,
+                "BonusDamage": 0.10000000149011612,
+                "BonusMS": 0.20000000298023224,
+                "HoldStillDuration": 1.5
+            },
+            "desc": "Nhận <spellName>Chiến Tranh Du Kích</spellName><br><br><rules>Sau khi không di chuyển trong @HoldStillDuration@ giây, trở nên <keywordStealth>Vô Hình</keywordStealth> cho đến khi bạn di chuyển. Khi bạn thoát khỏi trạng thái <keywordStealth>Vô Hình</keywordStealth>, nhận <attackSpeed>@BonusAS@ Tốc Độ Đánh</attackSpeed>.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/holdverystill_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/holdverystill_small.png",
+            "id": 207,
+            "name": "Không Động Đậy",
+            "rarity": 0,
+            "tooltip": "Nhận <spellName>Chiến Tranh Du Kích</spellName><br><br><rules>Sau khi không di chuyển trong @HoldStillDuration@ giây, trở nên <keywordStealth>Vô Hình</keywordStealth> cho đến khi bạn di chuyển. Khi bạn thoát khỏi trạng thái <keywordStealth>Vô Hình</keywordStealth>, nhận <attackSpeed>@BonusAS@ Tốc Độ Đánh</attackSpeed>.</rules>"
+        },
+        {
+            "apiName": "FromBeginningToEnd",
+            "calculations": {
+                "ChampRange": {
+                    "StaticTooltipCalculationDisplay": 5,
+                    "__type": "GameCalculationConditional",
+                    "mConditionalCalculationRequirements": {
+                        "__type": "IsRangedCastRequirement"
+                    },
+                    "mConditionalGameCalculation": "{06387172}",
+                    "mDefaultGameCalculation": "{792cf56b}",
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mSimpleTooltipCalculationDisplay": 5
+                },
+                "Cooldown": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "ByCharLevelInterpolationCalculationPart",
+                                "mEndValue": 15.0,
+                                "mStartValue": 25.0
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ModesCooldownReduction"
+                            }
+                        }
+                    ]
+                },
+                "{06387172}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 2.0
+                        }
+                    ]
+                },
+                "{792cf56b}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 1.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.3499999940395355,
+                "APRatio": 0.25,
+                "BaseDamageHigh": 100.0,
+                "BaseDamageLow": 50.0,
+                "CooldownResetValue": 1.5,
+                "DHCooldown": 45.0,
+                "DamageAmp": 0.15000000596046448,
+                "DamagePerSoulEssence": 10.0,
+                "Duration": 3.0,
+                "GoldPercentBonus": 1.2000000476837158,
+                "GoldPercentBonusRanged": 0.8999999761581421,
+                "GoldProcBonus": 6.0,
+                "GraceWindow": 0.25,
+                "HarvestThreshold": 0.5,
+                "MissileNoiseNumberLimiter": 3.0,
+                "MissileNoiseRangeLimiter": 1500.0,
+                "ModesCooldownReduction": 1.0,
+                "OOCTimer": 10.0
+            },
+            "desc": "Nhận Ngọc Siêu Cấp <spellName>Đòn Phủ Đầu</spellName> và <spellName>Thu Thập Hắc Ám</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frombeginningtoend_small.png",
+            "id": 38,
+            "name": "Từ Đầu Chí Cuối",
+            "rarity": 1,
+            "tooltip": "Nhận Ngọc Siêu Cấp <spellName>Đòn Phủ Đầu</spellName> và <spellName>Thu Thập Hắc Ám</spellName>.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@<br>Tổng Vàng Nhận Được: @f3@"
+        },
+        {
+            "apiName": "CantTouchThis",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "InvulnDuration": 2.0
+            },
+            "desc": "Sử dụng Chiêu Cuối cũng sẽ khiến bạn trở nên <status>Miễn Nhiễm Sát Thương</status> trong một khoảng thời gian ngắn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
+            "id": 11,
+            "name": "Sao Mà Chạm Được",
+            "rarity": 2,
+            "tooltip": "Sử dụng Chiêu Cuối cũng sẽ khiến bạn trở nên <status>Miễn Nhiễm Sát Thương</status> trong @InvulnDuration@ giây. @Cooldown@ giây hồi chiêu."
+        },
+        {
+            "apiName": "SnowballFight",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 15.0
+            },
+            "desc": "Thay thế phép bổ trợ Vọt Lẹ bằng Đánh Dấu.<br><br><rules>Ném một quả cầu tuyết gây sát thương và đánh dấu kẻ địch đầu tiên trúng chiêu. <recast>Tái kích hoạt</recast> để lướt tới mục tiêu bị đánh dấu.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/snowballfight_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/snowballfight_small.png",
+            "id": 176,
+            "name": "Trận Chiến Cầu Tuyết!",
+            "rarity": 0,
+            "tooltip": "Thay thế phép bổ trợ Vọt Lẹ bằng Đánh Dấu.<br><br><rules>Ném một quả cầu tuyết gây sát thương và đánh dấu kẻ địch đầu tiên trúng chiêu. <recast>Tái kích hoạt</recast> để lướt tới mục tiêu bị đánh dấu.</rules>"
+        },
+        {
+            "apiName": "ItsCritical",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.4000000059604645
+            },
+            "desc": "Nhận <crit>@CritChance*100@% Tỉ Lệ Chí Mạng</crit>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/itscritical_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/itscritical_small.png",
+            "id": 47,
+            "name": "Chí Mạng Đấy",
+            "rarity": 1,
+            "tooltip": "Nhận <crit>@CritChance*100@% Tỉ Lệ Chí Mạng</crit>."
+        },
+        {
+            "apiName": "BloodBrother",
+            "calculations": {
+                "BleedDamagePerStack": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 45.0,
+                            "mStartValue": 15.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "NoxianMightBonusAD": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mBonusPerLevelAtAndAfter": 15.0,
+                                    "mLevel": 11
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mBonusPerLevelAtAndAfter": 30.0,
+                                    "mLevel": 14
+                                }
+                            ],
+                            "mInitialBonusPerLevel": 5.0,
+                            "mLevel1Value": 30.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "MaxStacks": 5.0,
+                "SecondsPerTick": 1.2599999904632568
+            },
+            "desc": "Nhận Nội Tại <spellName>Xuất Huyết</spellName> của Darius.<br><br><rules>Đòn đánh và các Kỹ Năng gây sát thương sẽ khiến mục tiêu bị <keywordMajor>Xuất Huyết</keywordMajor>, gây <physicalDamage>@BleedDamagePerStack@ sát thương vật lý</physicalDamage> trong @BleedDuration@ giây, tối đa @MaxStacks@ cộng dồn.<br><br>Draven được tăng <scaleAD>@NoxianMightBonusAD@ Sức Mạnh Công Kích</scaleAD> khi đạt @MaxStacks@ cộng dồn <keywordMajor>Xuất Huyết</keywordMajor>.</rules><br><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/bloodbrother_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bloodbrother_small.png",
+            "id": 200,
+            "name": "Anh Em Xương Máu",
+            "rarity": 1,
+            "tooltip": "Nhận Nội Tại <spellName>Xuất Huyết</spellName> của Darius.<br><br><rules>Đòn đánh và các Kỹ Năng gây sát thương sẽ khiến mục tiêu bị <keywordMajor>Xuất Huyết</keywordMajor>, gây <physicalDamage>@BleedDamagePerStack@ sát thương vật lý</physicalDamage> trong @BleedDuration@ giây, tối đa @MaxStacks@ cộng dồn.<br><br>Draven được tăng <scaleAD>@NoxianMightBonusAD@ Sức Mạnh Công Kích</scaleAD> khi đạt @MaxStacks@ cộng dồn <keywordMajor>Xuất Huyết</keywordMajor>.</rules><br><br>"
+        },
+        {
+            "apiName": "UltimateUnstoppable",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "UnstoppableDuration": 3.0
+            },
+            "desc": "Sau khi dùng Chiêu Cuối, bạn được miễn nhiễm khống chế trong @UnstoppableDuration@ giây. (@Cooldown@ giây hồi chiêu).",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimateunstoppable_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimateunstoppable_small.png",
+            "id": 112,
+            "name": "Chiêu Cuối Không Thể Cản Phá",
+            "rarity": 0,
+            "tooltip": "Sau khi dùng Chiêu Cuối, bạn được miễn nhiễm khống chế trong @UnstoppableDuration@ giây. (@Cooldown@ giây hồi chiêu)."
+        },
+        {
+            "apiName": "Recursion",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHaste": 60.0
+            },
+            "desc": "Nhận <scaleLevel>@AbilityHaste@ Điểm Hồi Kỹ Năng</scaleLevel>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/recursion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/recursion_small.png",
+            "id": 68,
+            "name": "Đệ Quy",
+            "rarity": 1,
+            "tooltip": "Nhận <scaleLevel>@AbilityHaste@ Điểm Hồi Kỹ Năng</scaleLevel>."
+        },
+        {
+            "apiName": "Deft",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeed": 0.6000000238418579
+            },
+            "desc": "Nhận @AttackSpeed*100@% Tốc Độ Đánh",
+            "iconLarge": "assets/ux/cherry/augments/icons/deft_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/deft_small.png",
+            "id": 22,
+            "name": "Khéo Léo",
+            "rarity": 0,
+            "tooltip": "Nhận @AttackSpeed*100@% Tốc Độ Đánh"
+        },
+        {
+            "apiName": "Goliath",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.15000000596046448,
+                "APAmp": 0.15000000596046448,
+                "HealthAmp": 0.3499999940395355,
+                "SizeAmp": 0.5
+            },
+            "desc": "Hóa lớn, nhận @HealthAmp*100@% <scaleHealth>Máu</scaleHealth> và @ADAmp*100@% <scaleAP>Sức Mạnh Thích Ứng</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/goliath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/goliath_small.png",
+            "id": 41,
+            "name": "Khổng Lồ Hóa",
+            "rarity": 2,
+            "tooltip": "Hóa lớn, nhận @HealthAmp*100@% <scaleHealth>Máu</scaleHealth> và @ADAmp*100@% <scaleAP>Sức Mạnh Thích Ứng</scaleAP>."
+        },
+        {
+            "apiName": "AcceleratingSorcery",
+            "calculations": {},
+            "dataValues": {
+                "HastePerCast": 10.0
+            },
+            "desc": "Sử dụng kỹ năng sẽ cho cộng dồn vô hạn <scaleBonus>Điểm Hồi Kỹ Năng</scaleBonus>, hiệu ứng này được đặt lại sau mỗi vòng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/acceleratingsorcery_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/acceleratingsorcery_small.png",
+            "id": 1,
+            "name": "Pháp Thuật Gia Tăng",
+            "rarity": 2,
+            "tooltip": "Sử dụng một kỹ năng sẽ cho <scaleBonus>@HastePerCast@ Điểm Hồi Kỹ Năng</scaleBonus>, cộng dồn vô hạn, đặt lại sau mỗi vòng."
+        },
+        {
+            "apiName": "OrbitalLaser",
+            "calculations": {
+                "DamagePerTick": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 120.0,
+                            "mStartValue": 45.0
+                        }
+                    ]
+                },
+                "TotalDamageOverTimeTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "DamagePerTick",
+                    "mMultiplier": {
+                        "__type": "ProductOfSubPartsCalculationPart",
+                        "mPart1": {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "GroundDuration"
+                        },
+                        "mPart2": {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 4.0
+                        }
+                    },
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "AOESize": 550.0,
+                "CastRange": 5500.0,
+                "Cooldown": 20.0,
+                "DamagetoChampions": 0.30000001192092896,
+                "GroundDuration": 3.0,
+                "LaserDelay": 2.5,
+                "TickRate": 0.5
+            },
+            "desc": "Thay thế phép bổ trợ Vọt Lẹ bằng <spellName>Laser Không Kích</spellName>.<br><br><rules>Sau một khoảng trễ, gọi xuống một laser không kích, gây <trueDamage>sát thương chuẩn bằng @DamagetoChampions*100@% Máu tối đa</trueDamage> cộng thêm <magicDamage>@TotalDamageOverTimeTooltip@ sát thương phép</magicDamage> trong @GroundDuration@ giây.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/orbitallaser_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/orbitallaser_small.png",
+            "id": 208,
+            "name": "Laser Không Kích",
+            "rarity": 2,
+            "tooltip": "{{Cherry_OrbitalLaser_Summary}}<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "MysticPunch",
+            "calculations": {},
+            "dataValues": {
+                "CooldownRefund": 1.25
+            },
+            "desc": "Đòn đánh của bạn giảm hồi chiêu đi @CooldownRefund@ giây.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
+            "id": 58,
+            "name": "Cú Đấm Thần Bí",
+            "rarity": 2,
+            "tooltip": "Đòn đánh của bạn giảm hồi chiêu đi @CooldownRefund@ giây."
+        },
+        {
+            "apiName": "Homeguard",
+            "calculations": {},
+            "dataValues": {
+                "DisableCooldown": 3.0,
+                "Duration": 10.0,
+                "MovementSpeed": 1.0
+            },
+            "desc": "Nhận <speed>@spell.Augment_Homeguard:MovementSpeed*100@% Tốc Độ Di Chuyển</speed>, bị vô hiệu hóa trong @spell.Augment_Homeguard:DisableCooldown@ giây sau khi nhận sát thương.",
+            "iconLarge": "assets/ux/cherry/augments/icons/homeguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/homeguard_small.png",
+            "id": 105,
+            "name": "Vệ Quân",
+            "rarity": 0,
+            "tooltip": "Nhận <speed>@spell.Augment_Homeguard:MovementSpeed*100@% Tốc Độ Di Chuyển</speed>, bị vô hiệu hóa trong @spell.Augment_Homeguard:DisableCooldown@ giây sau khi nhận sát thương."
+        },
+        {
+            "apiName": "HeavyHitter",
+            "calculations": {
+                "HealthPercentDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthPercent",
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthPercent": 0.03500000014901161
+            },
+            "desc": "Đòn đánh sẽ gây thêm <physicalDamage>sát thương vật lý</physicalDamage> bằng @HealthPercent*100@% <healing>Máu tối đa</healing> của bản thân.",
+            "iconLarge": "assets/ux/cherry/augments/icons/heavyhitter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/heavyhitter_small.png",
+            "id": 181,
+            "name": "Đánh Nhừ Tử",
+            "rarity": 0,
+            "tooltip": "Đòn đánh sẽ gây thêm <physicalDamage>sát thương vật lý</physicalDamage> bằng @HealthPercent*100@% <healing>Máu tối đa</healing> của bản thân."
+        },
+        {
+            "apiName": "RabbleRousing",
+            "calculations": {
+                "HealAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "MaxHealthPercentageHeal",
+                            "mStat": 11
+                        },
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 5.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "MaxHealthPercentageHeal": 0.009999999776482582
+            },
+            "desc": "Sử dụng 1 Kỹ Năng hồi cho bạn <healing>@HealAmount@ Máu</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/rabblerousing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/rabblerousing_small.png",
+            "id": 67,
+            "name": "Đả Kích",
+            "rarity": 1,
+            "tooltip": "Sử dụng 1 Kỹ Năng hồi cho bạn <healing>@HealAmount@% Máu</healing>.<br><br>Máu Đã Hồi Trong Vòng Này: @f1@<br>Tổng Máu Đã Hồi: @f2@"
+        },
+        {
+            "apiName": "GiantSlayer",
+            "calculations": {},
+            "dataValues": {
+                "LargeBonusDamage": 0.25,
+                "MedBonusDamage": 0.15000000596046448,
+                "MovespeedMod": 0.30000001192092896,
+                "SizeMod": 0.25,
+                "SmallBonusDamage": 0.10000000149011612,
+                "XLargeBonusDamage": 0.30000001192092896
+            },
+            "desc": "Hóa tí hon, nhận thêm <speed>Tốc Độ Di Chuyển</speed> và gây thêm sát thương lên tướng dựa trên sự chênh lệch về kích thước giữa bạn và mục tiêu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/giantslayer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/giantslayer_small.png",
+            "id": 195,
+            "name": "Diệt Khổng Lồ",
+            "rarity": 2,
+            "tooltip": "Hóa tí hon, nhận <speed>@MovespeedMod*100@% Tốc Độ Di Chuyển</speed>, và gây thêm @SmallBonusDamage*100@% - @XLargeBonusDamage*100@% sát thương dựa trên sự chênh lệch về kích thước giữa bạn và mục tiêu.<br><br>Sát Thương Trong Vòng Này: @f1@<br>Tổng Sát Thương: @f2@"
+        },
+        {
+            "apiName": "FrozenFoundations",
+            "calculations": {},
+            "dataValues": {
+                "ChampPushDistance": 120.0,
+                "NonChampPushDistance": 250.0,
+                "WallDuration": 5.0,
+                "WallWidth": 400.0
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Nền Băng</spellName><br><br><rules><spellName>Nền Băng</spellName> triệu hồi 1 bức tường băng tại một vị trí.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/frozenfoundations_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frozenfoundations_small.png",
+            "id": 40,
+            "name": "Nền Băng",
+            "rarity": 0,
+            "tooltip": "<rules>Triệu hồi 1 bức tường băng tại vị trí chỉ định.</rules>"
+        },
+        {
+            "apiName": "CriticalHealing",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritHeal": 0.4000000059604645
+            },
+            "desc": "Hồi Máu và Lá Chắn của bạn có thể Chí Mạng. Nhận @CritChance*100@% Tỉ Lệ Chí Mạng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/criticalhealing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/criticalhealing_small.png",
+            "id": 118,
+            "name": "Hồi Máu Chí Mạng",
+            "rarity": 1,
+            "tooltip": "Hồi Máu và Lá Chắn của bạn có thể Chí Mạng tăng thêm @CritHeal*100@%. Nhận @CritChance*100@% Tỉ Lệ Chí Mạng. <br><br>Hồi Máu Cộng Thêm: @f1@<br>Lá Chắn Cộng Thêm: @f2@"
+        },
+        {
+            "apiName": "ApexInventor",
+            "calculations": {},
+            "dataValues": {
+                "ItemHaste": 300.0,
+                "TooltipCDR": 75.0
+            },
+            "desc": "Nhận <scaleBonus>@ItemHaste@ Điểm Hồi Trang Bị</scaleBonus> (tương đương với @TooltipCDR@% GHC Trang Bị).<br><br><rules>Điểm Hồi Trang Bị giúp giảm hồi chiêu tất cả Kỹ Năng của Trang Bị.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
+            "id": 2,
+            "name": "Nhà Phát Minh Đỉnh Chóp",
+            "rarity": 1,
+            "tooltip": "Nhận <scaleBonus>@ItemHaste@ Điểm Hồi Trang Bị</scaleBonus> (tương đương với @TooltipCDR@% GHC Trang Bị).<br><br><rules>Điểm Hồi Trang Bị giúp giảm hồi chiêu tất cả Kỹ Năng của Trang Bị.</rules>"
+        },
+        {
+            "apiName": "MirrorImage",
+            "calculations": {},
+            "dataValues": {
+                "AugmentCooldown": 60.0,
+                "CloneDuration": 8.0,
+                "HealthThreshold": 0.30000001192092896,
+                "StealthDuration": 1.25
+            },
+            "desc": "Khi xuống dưới @HealthThreshold*100@% Máu, <keywordStealth>Tàng Hình</keywordStealth> trong thoáng chốc và tạo một bản sao của bản thân.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
+            "id": 172,
+            "name": "Phân Ảnh",
+            "rarity": 0,
+            "tooltip": "Khi xuống dưới @HealthThreshold*100@% Máu, <keywordStealth>Tàng Hình</keywordStealth> trong thoáng chốc và tạo một bản sao của bản thân."
+        },
+        {
+            "apiName": "AllForYou",
+            "calculations": {},
+            "dataValues": {
+                "HealShieldAmp": 0.30000001192092896
+            },
+            "desc": "Khả năng Hồi Máu/Tạo Lá Chắn của bạn sẽ mạnh hơn @HealShieldAmp*100@% khi sử dụng lên đồng đội.",
+            "iconLarge": "assets/ux/cherry/augments/icons/allforyou_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/allforyou_small.png",
+            "id": 141,
+            "name": "Dành Hết Cho Bạn",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_AllForYou_Summary }}<br><br>Hồi Máu Cộng Thêm: @f1@<br>Lá Chắn Cộng Thêm: @f2@"
+        },
+        {
+            "apiName": "KeystoneConjurer",
+            "calculations": {},
+            "dataValues": {
+                "ADRatio": 0.3499999940395355,
+                "APRatio": 0.20000000298023224,
+                "AoEPercentRefund": 0.10000000149011612,
+                "DamageADRatio": 0.15000000596046448,
+                "DamageAPRatio": 0.10000000149011612,
+                "DamageBase": 10.0,
+                "DamageMax": 40.0,
+                "DotPercentRefund": 0.05000000074505806,
+                "PercentRefund": 0.20000000298023224,
+                "RechargeTime": 20.0,
+                "RechargeTimeMin": 8.0,
+                "ShieldBase": 30.0,
+                "ShieldMax": 75.0,
+                "ShieldRatio": 0.22499999403953552,
+                "ShieldRatioAD": 0.3499999940395355
+            },
+            "desc": "Nhận Ngọc Siêu Cấp <spellName>Triệu Hồi Aery</spellName> và <spellName>Thiên Thạch Bí Ẩn</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/keystoneconjurer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/keystoneconjurer_small.png",
+            "id": 50,
+            "name": "Thầy Pháp Ngọc Bội",
+            "rarity": 1,
+            "tooltip": "Nhận Ngọc Siêu Cấp <spellName>Triệu Hồi Aery</spellName> và <spellName>Thiên Thạch Bí Ẩn</spellName>.<br><br>Tổng Sát Thương Gây Ra: @f1@<br>Tổng Lá chắn Đã Tạo: @f2@"
+        },
+        {
+            "apiName": "LaserEyes",
+            "calculations": {
+                "LaserDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 5.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatio",
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "LaserEyesTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 240.0,
+                            "mStartValue": 20.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatioTooltip"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatioTooltip",
+                            "mStat": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4,
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.14000000059604645,
+                "ADRatioTooltip": 0.5600000023841858,
+                "APRatio": 0.09000000357627869,
+                "APRatioTooltip": 0.36000001430511475,
+                "LaserLength": 700.0,
+                "RectHalfWidth": 60.0
+            },
+            "desc": "Chiếu một tia laser về phía bạn đang hướng về, liên tục gây <magicDamage>sát thương phép</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lasereyes_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lasereyes_small.png",
+            "id": 174,
+            "name": "Mắt Laser",
+            "rarity": 2,
+            "tooltip": "Chiếu một tia laser về phía bạn đang hướng về, gây <magicDamage>@LaserEyesTooltip@ sát thương phép</magicDamage> mỗi giây.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "Dashing",
+            "calculations": {},
+            "dataValues": {
+                "Haste": 250.0
+            },
+            "desc": "Kỹ Năng lướt, nhảy hoặc dịch chuyển của bạn sẽ nhận thêm <scaleLevel>@Haste@ Điểm Hồi Kỹ Năng</scaleLevel>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dashing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dashing_small.png",
+            "id": 19,
+            "name": "Thân Thủ Lả Lướt",
+            "rarity": 2,
+            "tooltip": "Kỹ Năng lướt, nhảy hoặc dịch chuyển của bạn sẽ nhận thêm <scaleLevel>@Haste@ Điểm Hồi Kỹ Năng</scaleLevel>."
+        },
+        {
+            "apiName": "LightningStrikes",
+            "calculations": {},
+            "dataValues": {
+                "ASToADConversion": 25.0
+            },
+            "desc": "Nhận <scaleAD>Sức Mạnh Công Kích</scaleAD> tăng theo <attackSpeed>Tốc Độ Đánh</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
+            "id": 52,
+            "name": "Đòn Đánh Sấm Sét",
+            "rarity": 1,
+            "tooltip": "Nhận <scaleAD>@ASToADConversion*.1@ Sức mạnh Công kích</scaleAD> mỗi <attackSpeed>0,1 Tốc độ Đánh</attackSpeed>."
+        },
+        {
+            "apiName": "Repulsor",
+            "calculations": {},
+            "dataValues": {
+                "HealthThreshold1": 0.6000000238418579,
+                "HealthThreshold2": 0.30000001192092896,
+                "KnockbackDistance": 750.0,
+                "KnockbackRange": 500.0
+            },
+            "desc": "Khi còn dưới @HealthThreshold1*100@ hoặc @HealthThreshold2*100@% Máu, kẻ địch xung quanh sẽ bị <status>Đẩy Lùi</status>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/repulsor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/repulsor_small.png",
+            "id": 69,
+            "name": "Cự Tuyệt",
+            "rarity": 0,
+            "tooltip": "Khi còn dưới @HealthThreshold1*100@ hoặc @HealthThreshold2*100@% Máu, kẻ địch xung quanh sẽ bị <status>Đẩy Lùi</status>."
+        },
+        {
+            "apiName": "SkilledSniper",
+            "calculations": {},
+            "dataValues": {
+                "PeriodicReductionAmount": 3.0,
+                "ReducedCooldown": 0.5,
+                "SnipeDistance": 700.0
+            },
+            "desc": "Đánh trúng kẻ địch bằng một kỹ năng cơ bản ở khoảng cách lớn hơn @SnipeDistance@ sẽ giảm Hồi Chiêu của kỹ năng đó đi @ReducedCooldown@ giây, còn các kỹ năng gây sát thương gây sát thương theo thời gian sẽ được đặt về @PeriodicReductionAmount@ giây.",
+            "iconLarge": "assets/ux/cherry/augments/icons/skilledsniper_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/skilledsniper_small.png",
+            "id": 113,
+            "name": "Xạ Thủ Kỳ Cựu",
+            "rarity": 1,
+            "tooltip": "Đánh trúng kẻ địch bằng một kỹ năng cơ bản ở khoảng cách lớn hơn @SnipeDistance@ sẽ giảm Hồi Chiêu của kỹ năng đó đi @ReducedCooldown@ giây, còn các kỹ năng gây sát thương gây sát thương theo thời gian sẽ được đặt về @PeriodicReductionAmount@ giây."
+        },
+        {
+            "apiName": "ParasiticRelationship",
+            "calculations": {},
+            "dataValues": {
+                "HealPercent": 0.15000000596046448
+            },
+            "desc": "Hồi máu bằng @HealPercent*100@% sát thương gây ra bởi đồng đội của bạn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/parasiticrelationship_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/parasiticrelationship_small.png",
+            "id": 175,
+            "name": "Quan Hệ Ký Sinh",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_ParasiticRelationship_Summary }}<br><br>Hồi máu vòng này: @f1@<br>Tổng lượng hồi máu: @f2@"
+        },
+        {
+            "apiName": "Restart",
+            "calculations": {},
+            "dataValues": {
+                "CoolDown": 10.0
+            },
+            "desc": "Các kỹ năng không phải Chiêu Cuối sẽ <keywordMajor>Tự Động</keywordMajor> được làm mới sau mỗi @CoolDown@ giây.",
+            "iconLarge": "assets/ux/cherry/augments/icons/restart_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/restart_small.png",
+            "id": 165,
+            "name": "Tái Khởi Động",
+            "rarity": 1,
+            "tooltip": "Các kỹ năng không phải Chiêu Cuối sẽ <keywordMajor>Tự Động</keywordMajor> được làm mới sau mỗi @CoolDown@ giây."
+        },
+        {
+            "apiName": "DrawYourSword",
+            "calculations": {},
+            "dataValues": {
+                "BonusAD": 0.3499999940395355,
+                "BonusAS": 0.25,
+                "BonusHP": 0.3499999940395355,
+                "BonusLifesteal": 0.25,
+                "BonusMS": 0.25,
+                "ExtraStackAttackRangeCeiling": 650.0,
+                "ExtraStackAttackRangeFloor": 500.0,
+                "MaxStatMod": 0.30000001192092896,
+                "MeleeAttackRange": 200.0
+            },
+            "desc": "Bạn trở thành tướng cận chiến. Nhận <physicalDamage>@BonusAD*100@% Sức Mạnh Công Kích</physicalDamage>, <healing>@BonusHP*100@% Máu</healing>, <attackSpeed>@BonusAS*100@% Tốc Độ Đánh</attackSpeed>, <lifesteal>@BonusLifesteal*100@% Hút Máu</lifesteal> và <speed>@BonusMS*100@% Tốc Độ Di Chuyển</speed> (chỉ số cộng thêm sẽ tăng theo Tầm Đánh bị mất).",
+            "iconLarge": "assets/ux/cherry/augments/icons/drawyoursword_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/drawyoursword_small.png",
+            "id": 134,
+            "name": "Rút Kiếm Ra",
+            "rarity": 2,
+            "tooltip": "Bạn trở thành tướng cận chiến. Nhận <physicalDamage>@BonusAD*100@% Sức Mạnh Công Kích</physicalDamage>, <healing>@BonusHP*100@% Máu</healing>, <attackSpeed>@BonusAS*100@% Tốc Độ Đánh</attackSpeed>, <lifesteal>@BonusLifesteal*100@% Hút Máu</lifesteal> và <speed>@BonusMS*100@% Tốc Độ Di Chuyển</speed> (chỉ số cộng thêm sẽ tăng theo Tầm Đánh bị mất)."
+        },
+        {
+            "apiName": "RestlessRestoration",
+            "calculations": {
+                "HealCalcPer1000Units": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthRatioPer1000Units",
+                            "mStat": 11
+                        },
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 120.0,
+                            "mStartValue": 20.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealthRatioPer1000Units": 0.019999999552965164
+            },
+            "desc": "Liên tục <healing>hồi máu</healing> khi di chuyển, tăng theo khoảng cách đã di chuyển.",
+            "iconLarge": "assets/ux/cherry/augments/icons/restlessrestoration_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/restlessrestoration_small.png",
+            "id": 70,
+            "name": "Hồi Phục Không Ngừng",
+            "rarity": 1,
+            "tooltip": "Hồi lại @HealCalcPer1000Units@ Máu với mỗi 1.000 khoảng cách đã di chuyển.<br><br>Máu Đã Hồi Trong Vòng Này: @f1@<br>Tổng Máu Đã Hồi: @f2@"
+        },
+        {
+            "apiName": "DiveBomber",
+            "calculations": {},
+            "dataValues": {
+                "ExplosionRadius": 500.0,
+                "PercentMaxHPDamage": 0.20000000298023224
+            },
+            "desc": "Bạn hoặc đồng đội sẽ phát nổ khi bị hạ gục lần đầu mỗi vòng đấu, gây lượng sát thương lớn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/divebomber_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/divebomber_small.png",
+            "id": 25,
+            "name": "Cảm Tử Quân",
+            "rarity": 1,
+            "tooltip": "Bạn hoặc đồng đội sẽ phát nổ khi bị hạ gục lần đầu mỗi vòng đấu, gây <trueDamage>sát thương chuẩn tương đương @PercentMaxHPDamage*100@% máu tối đa của mục tiêu</trueDamage> lên kẻ địch xung quanh.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra Khi Hy Sinh: @f2@"
+        },
+        {
+            "apiName": "BluntForce",
+            "calculations": {},
+            "dataValues": {
+                "ADIncrease": 0.15000000596046448
+            },
+            "desc": "Nhận <scaleAD>@ADIncrease*100@% Sức Mạnh Công Kích</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
+            "id": 7,
+            "name": "Vũ Lực",
+            "rarity": 0,
+            "tooltip": "Nhận <scaleAD>@ADIncrease*100@% Sức Mạnh Công Kích</scaleAD>."
+        },
+        {
+            "apiName": "Oathsworn",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Thay thế phép bổ trợ Vọt Lẹ bằng <spellName>Định Mệnh Vẫy Gọi</spellName> <br><br><rules><spellName>Định Mệnh Vẫy Gọi</spellName> sẽ kéo đồng đội bắt cặp vào người bạn trong tối đa 4 giây, khiến họ trở nên Không Thể Chỉ Định. Đồng đội có thể nhấp để phóng bản thân ra xa, dừng lại khi trúng tướng địch đầu tiên và <status>Đẩy Lùi</status> tất cả kẻ địch gần bên.</rules><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
+            "id": 109,
+            "name": "Thệ Ước",
+            "rarity": 1,
+            "tooltip": "Thay thế phép bổ trợ Vọt Lẹ bằng <spellName>Định Mệnh Vẫy Gọi</spellName> <br><br><rules><spellName>Định Mệnh Vẫy Gọi</spellName> sẽ kéo đồng đội bắt cặp vào người bạn trong tối đa 4 giây, khiến họ trở nên Không Thể Chỉ Định. Đồng đội có thể nhấp để phóng bản thân ra xa, dừng lại khi trúng tướng địch đầu tiên và <status>Đẩy Lùi</status> tất cả kẻ địch gần bên.</rules><br>"
+        },
+        {
+            "apiName": "Flashbang",
+            "calculations": {
+                "ExplosiveDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.6000000238418579
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.699999988079071,
+                            "mStat": 2
+                        },
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 10.0,
+                            "mLevel1Value": 70.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "SlowAmount": 0.3499999940395355,
+                "SlowDuration": 1.25
+            },
+            "desc": "Sử dụng Tốc Biến sẽ kích hoạt một vụ nổ ra xung quanh, gây <MagicalDamage>sát thương phép</MagicalDamage> và <status>Làm Chậm</status> kẻ địch trúng chiêu. Ngoài ra, Tốc Biến sẽ hồi lại sau mỗi vòng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/flashbang_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/flashbang_small.png",
+            "id": 187,
+            "name": "Lựu Đạn Mù",
+            "rarity": 0,
+            "tooltip": "Sử dụng Tốc Biến sẽ kích hoạt một vụ nổ ra xung quanh, gây <MagicalDamage>@ExplosiveDamage@ sát thương phép</MagicalDamage> và <status>Làm Chậm</status> @SlowAmount*100@% trong @SlowDuration@ giây. Ngoài ra, Tốc Biến sẽ hồi lại sau mỗi vòng.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "SummonersRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Thay thế Phép Bổ Trợ của bạn bằng các phép bổ trợ ngẫu nhiên. Khi bạn sử dụng Phép Bổ Trợ trong giao tranh, thay thế nó bằng một phép bổ trợ ngẫu nhiên khác với @Cooldown@ giây hồi chiêu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonersroulette_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonersroulette_small.png",
+            "id": 123,
+            "name": "Vòng Quay Anh Hùng",
+            "rarity": 2,
+            "tooltip": "Thay thế Phép Bổ Trợ của bạn bằng các phép bổ trợ ngẫu nhiên. Khi bạn sử dụng Phép Bổ Trợ trong giao tranh, thay thế nó bằng một phép bổ trợ ngẫu nhiên khác với @Cooldown@ giây hồi chiêu."
+        },
+        {
+            "apiName": "ShrinkRay",
+            "calculations": {},
+            "dataValues": {
+                "DamageReduction": 0.15000000596046448
+            },
+            "desc": "Đòn Đánh của bạn làm giảm @DamageReduction*100@% sát thương của kẻ địch trong 3 giây.",
+            "iconLarge": "assets/ux/cherry/augments/icons/shrinkray_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/shrinkray_small.png",
+            "id": 74,
+            "name": "Tia Thu Nhỏ",
+            "rarity": 1,
+            "tooltip": "Đòn Đánh của bạn làm giảm @DamageReduction*100@% sát thương của kẻ địch trong 3 giây.<br><br>Sát Thương Đã Giảm Trong Vòng Này: @f1@<br>Tổng Sát Thương Đã Giảm: @f2@"
+        },
+        {
+            "apiName": "Castle",
+            "calculations": {},
+            "dataValues": {
+                "MSBuffAmount": 0.5,
+                "MSBuffDuration": 4.0
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Thế Chỗ</spellName><br><br><rules><spellName>Thế Chỗ</spellName> cho phép bạn đổi vị trí với đồng đội.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/castle_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/castle_small.png",
+            "id": 12,
+            "name": "Thế Chỗ",
+            "rarity": 0,
+            "tooltip": "Nhận Phép Bổ Trợ <spellName>Thế Chỗ</spellName><br><br><rules>Cho phép bạn đổi vị trí với đồng đội. Sau đó nhận thêm @MSBuffAmount*100@% Tốc Độ Di Chuyển trong @MSBuffDuration@ giây.</rules>"
+        },
+        {
+            "apiName": "Quest_SteelYourHeart",
+            "calculations": {},
+            "dataValues": {
+                "StackMultiplication": 6.0,
+                "StackThreshold": 325.0,
+                "StacktoRegenConversion": 0.10000000149011612
+            },
+            "desc": "Yêu cầu: Sở hữu Trái Tim Khổng Thần với @StackThreshold@+ cộng dồn.<br><br>Phần thưởng: Số cộng dồn Trái Tim Khổng Thần được gấp lên @StackMultiplication@ lần. Tăng <healing>Hồi Phục Máu</healing> bằng @StacktoRegenConversion*100@% số cộng dồn Trái Tim Khổng Thần của bạn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_steelyourheart_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_steelyourheart_small.png",
+            "id": 152,
+            "name": "Nhiệm Vụ: Trái Tim Sắt Đá",
+            "rarity": 1,
+            "tooltip": "Yêu cầu: Sở hữu Trái Tim Khổng Thần với @StackThreshold@+ cộng dồn.<br><br>Phần thưởng: Số cộng dồn Trái Tim Khổng Thần được gấp lên @StackMultiplication@ lần. Tăng <healing>Hồi Phục Máu</healing> bằng @StacktoRegenConversion*100@% số cộng dồn Trái Tim Khổng Thần của bạn."
+        },
+        {
+            "apiName": "Executioner",
+            "calculations": {},
+            "dataValues": {
+                "BonusDamage": 0.15000000596046448,
+                "HealthThreshold": 0.5
+            },
+            "desc": "Gây thêm @BonusDamage*100@% sát thương lên kẻ địch còn ít hơn @HealthThreshold*100@% máu. Đặt lại hồi chiêu các kỹ năng cơ bản khi tham gia hạ gục.",
+            "iconLarge": "assets/ux/cherry/augments/icons/executioner_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/executioner_small.png",
+            "id": 32,
+            "name": "Đao Phủ",
+            "rarity": 0,
+            "tooltip": "Gây thêm @BonusDamage*100@% sát thương lên kẻ địch còn ít hơn @HealthThreshold*100@% máu. Đặt lại hồi chiêu các kỹ năng cơ bản khi tham gia hạ gục.<br><br>Sát Thương Cộng Thêm Trong Vòng Này: @f1@<br>Tổng Sát Thương Cộng Thêm: @f2@"
+        },
+        {
+            "apiName": "CourageoftheColossus",
+            "calculations": {
+                "TotalShield": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 100.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthScalar",
+                            "mStat": 11
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806
+            },
+            "desc": "Nhận <shield>@TotalShield@Lá Chắn</shield> sau khi <status>Làm Bất Động</status> một tướng địch.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/courageofthecolossus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
+            "id": 18,
+            "name": "Khổng Nhân Can Đảm",
+            "rarity": 2,
+            "tooltip": "Nhận <shield>@TotalShield@ Lá Chắn</shield> sau khi <status>Làm Bất Động</status> 1 tướng địch.<br><br>Lá Chắn Tạo Trong Vòng Này: @f1@<br>Tổng Lá Chắn Đã Tạo: @f2@"
+        },
+        {
+            "apiName": "InfernalSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Bạn nhận Linh Hồn Hỏa Ngục, gây thêm sát thương khi đánh trúng kẻ địch bằng Kỹ Năng hoặc Đòn Đánh.",
+            "iconLarge": "assets/ux/cherry/augments/icons/infernalsoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/infernalsoul_small.png",
+            "id": 46,
+            "name": "Linh Hồn Hỏa Ngục",
+            "rarity": 0,
+            "tooltip": "Bạn nhận Linh Hồn Hỏa Ngục, gây thêm sát thương khi đánh trúng kẻ địch bằng Kỹ Năng hoặc Đòn Đánh.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
+        },
+        {
+            "apiName": "ComboMaster",
+            "calculations": {
+                "Cooldown": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 10.0,
+                            "mStartValue": 20.0
+                        }
+                    ]
+                },
+                "{4120d321}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 60.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.550000011920929,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HasteBase": 0.30000001192092896,
+                "HasteBaseMelee": 0.4000000059604645,
+                "HasteDuration": 3.0,
+                "HasteMax": 0.800000011920929,
+                "HasteMaxMelee": 0.800000011920929,
+                "MaxBonusSeconds": 4.0,
+                "NumberToProc": 3.0,
+                "SlowResist": 0.75,
+                "WindowDuration": 4.0
+            },
+            "desc": "Nhận Ngọc Siêu Cấp <spellName>Sốc Điện</spellName> và <spellName>Tăng Tốc Pha</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/combomaster_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/combomaster_small.png",
+            "id": 16,
+            "name": "Bậc Thầy Combo",
+            "rarity": 1,
+            "tooltip": "Nhận Ngọc Siêu Cấp <spellName>Sốc Điện</spellName> và <spellName>Tăng Tốc Pha</spellName>.<br><br>Sát Thương Sốc Điện Trong Vòng Này: @f1@<br>Tổng Sát Thương Sốc Điện: @f2@"
+        },
+        {
+            "apiName": "MindtoMatter",
+            "calculations": {},
+            "dataValues": {
+                "ManaToHealthConversion": 0.5
+            },
+            "desc": "Tăng <healing>Máu tối đa</healing> bằng một nửa <scaleMana>Năng Lượng</scaleMana> của bạn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
+            "id": 56,
+            "name": "Ý Thức Thắng Vật Chất",
+            "rarity": 0,
+            "tooltip": "Tăng <healing>Máu tối đa</healing> bằng một nửa <scaleMana>Năng Lượng</scaleMana> của bạn."
+        },
+        {
+            "apiName": "ItsKillingTime",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "DamageStorePercentage": 0.4000000059604645,
+                "MarkDuration": 5.0,
+                "VFXHighDamageThreshold": 500.0
+            },
+            "desc": "Sau khi thi triển Chiêu Cuối, đánh dấu án tử lên tất cả tướng địch. Dấu ấn sẽ tích trữ @DamageStorePercentage*100@% lượng sát thương gây ra lên chúng, phát nổ sau @MarkDuration@ giây và gây ra lượng sát thương đã tích trữ. (@Cooldown@ giây hồi chiêu).",
+            "iconLarge": "assets/ux/cherry/augments/icons/itskillingtime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/itskillingtime_small.png",
+            "id": 211,
+            "name": "Đến Giờ Đồ Sát",
+            "rarity": 1,
+            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>Sát Thương Gây Ra Trong Vòng Này:@f1@<br>Tổng Sát Thương Gây Ra:@f2@"
+        },
+        {
+            "apiName": "WisdomofAges",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Tăng ngay 1 cấp và tăng thêm 1 cấp sau mỗi 2 vòng đấu. Bạn không còn bị giới hạn cấp độ.",
+            "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
+            "id": 96,
+            "name": "Gừng Càng Già Càng Cay",
+            "rarity": 2,
+            "tooltip": "Tăng ngay 1 cấp và tăng thêm 1 cấp sau mỗi 2 vòng đấu. Bạn không còn bị giới hạn cấp độ."
+        },
+        {
+            "apiName": "NowYouSeeMe",
+            "calculations": {},
+            "dataValues": {
+                "MSBuffAmount": 0.5,
+                "MSBuffDuration": 2.0
+            },
+            "desc": "Nhận Phép Bổ Trợ <spellName>Ú Òa</spellName><br><br><rules><spellName>Ú Òa</spellName> sẽ dịch chuyển bạn trở lại điểm xuất phát của Kỹ Năng Di Chuyển gần nhất bạn đã dùng.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/nowyouseeme_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/nowyouseeme_small.png",
+            "id": 43,
+            "name": "Ú Òa",
+            "rarity": 0,
+            "tooltip": "<passive>Nội Tại:</passive> Mỗi khi sử dụng Kỹ Năng Di Chuyển sẽ để lại dấu ấn.<br><br><active>Kích hoạt:</active> Trở lại dấu ấn cuối cùng bạn để lại. Sau đó nhận thêm @MSBuffAmount*100@% Tốc Độ Di Chuyển trong @MSBuffDuration@ giây."
+        },
+        {
+            "apiName": "Perseverance",
+            "calculations": {},
+            "dataValues": {
+                "AmpedHPThreshold": 0.25,
+                "AmpedRegen": 16.0,
+                "BaseRegen": 8.0
+            },
+            "desc": "Nhận lượng lớn <healing>Hồi Máu</healing>, máu càng thấp hồi càng nhiều.",
+            "iconLarge": "assets/ux/cherry/augments/icons/perseverance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/perseverance_small.png",
+            "id": 64,
+            "name": "Bền Bỉ",
+            "rarity": 1,
+            "tooltip": "Nhận <healing>@BaseRegen*100@% Hồi Máu cơ bản</healing>, tăng lên tới <healing>@AmpedRegen*100@% Hồi Máu cơ bản</healing> khi còn dưới 25% Máu.<br><br>Máu Đã Hồi Trong Vòng Này: @f1@<br>Tổng Máu Đã Hồi: @f2@"
+        },
+        {
+            "apiName": "JeweledGauntlet",
+            "calculations": {
+                "APToCritConversion": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.00044999999227002263
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritDamage": 1.399999976158142
+            },
+            "desc": "Kỹ năng của bạn có thể chí mạng. Nhận @CritChance*100@% Tỉ Lệ Chí Mạng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/jeweledgauntlet_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/jeweledgauntlet_small.png",
+            "id": 48,
+            "name": "Găng Bảo Thạch",
+            "rarity": 2,
+            "tooltip": "Kỹ năng của bạn có thể chí mạng gây tổng cộng @CritDamage*100@% sát thương. Nhận @CritChance*100@% Tỉ Lệ Chí Mạng. Nhận thêm @APToCritConversion@ Tỉ Lệ Chí Mạng, tăng theo SMPT của bạn.<br><br>Sát Thương Cộng Thêm Trong Vòng Này: @f1@<br>Tổng Sát Thương Cộng Thêm: @f2@"
+        }
+    ]
+}

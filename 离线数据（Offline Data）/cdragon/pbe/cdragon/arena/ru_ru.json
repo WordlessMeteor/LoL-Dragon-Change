@@ -1,0 +1,3203 @@
+{
+    "augments": [
+        {
+            "apiName": "WarmupRoutine",
+            "calculations": {},
+            "dataValues": {
+                "DamagePerStack": 0.009999999776482582,
+                "MaxStacks": 24.0
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Разминка</spellName>.<br><br><rules><spellName>Разминка</spellName> постепенно увеличивает ваш урон. Прибавка действует до конца раунда.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/warmuproutine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/warmuproutine_small.png",
+            "id": 93,
+            "name": "Разминка",
+            "rarity": 0,
+            "tooltip": "Вы увеличиваете урон на 2% в секунду (максимум: 24%).<br><br>Дополнительный урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный дополнительный урон: @f2@"
+        },
+        {
+            "apiName": "Vanish",
+            "calculations": {},
+            "dataValues": {
+                "StealthDuration": 4.0
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Исчезновение</spellName>.<br><br><rules><spellName>Исчезновение</spellName> дает вам <stealth>невидимость</stealth>.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/vanish_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vanish_small.png",
+            "id": 89,
+            "name": "Исчезновение",
+            "rarity": 1,
+            "tooltip": "Вы получаете <stealth>невидимость</stealth> на @StealthDuration@ сек. или до применения автоатаки либо умения.<br>Чемпионов, на которых действует эта невидимость, нельзя раскрыть Волшебным чистильщиком."
+        },
+        {
+            "apiName": "ChainLightning",
+            "calculations": {},
+            "dataValues": {
+                "DamageMod": 0.5,
+                "Range": 1000.0
+            },
+            "desc": "Когда вы наносите урон врагу, его союзник также получает <trueDamage>@DamageMod*100@% чистого урона</trueDamage>, если находится неподалеку.",
+            "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/chainlightning_small.png",
+            "id": 166,
+            "name": "Цепная молния",
+            "rarity": 2,
+            "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "Typhoon",
+            "calculations": {
+                "Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatio",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.30000001192092896
+            },
+            "desc": "Во время автоатак вы выпускаете дополнительный снаряд, который наносит меньше урона и накладывает эффекты при попадании.",
+            "iconLarge": "assets/ux/cherry/augments/icons/typhoon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/typhoon_small.png",
+            "id": 87,
+            "name": "Тайфун",
+            "rarity": 0,
+            "tooltip": "Во время автоатак вы выпускаете дополнительный снаряд, который наносит @ADRatio*100@% урона и накладывает эффекты при попадании."
+        },
+        {
+            "apiName": "SelfDestruct",
+            "calculations": {},
+            "dataValues": {
+                "BombDelay": 15.0,
+                "KnockupDuration": 0.75,
+                "MaxHealthDamage": 0.20000000298023224,
+                "Radius": 350.0
+            },
+            "desc": "В начале каждого раунда к вам прикрепляется бомба. Спустя @BombDelay@ сек. она взрывается, нанося <trueDamage>чистый урон в размере @MaxHealthDamage*100@% от максимального запаса здоровья</trueDamage> и <status>подбрасывая</status> врагов на @KnockupDuration@ сек.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/selfdestruct_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/selfdestruct_small.png",
+            "id": 108,
+            "name": "Самоуничтожение",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_SelfDestruct_Summary }}<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "ServeBeyondDeath",
+            "calculations": {
+                "{85d7d7f0}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "TicksBeforeDeath"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.25
+                    }
+                }
+            },
+            "dataValues": {
+                "DecayDuration": 3.0,
+                "Duration": 6.0,
+                "MaxStatMultiplier": 2.0,
+                "TagDuration": 6.0,
+                "TicksBeforeDeath": 10.0,
+                "TicksPerSecond": 4.0,
+                "TriumphPercent": 20.0
+            },
+            "desc": "Когда вы погибаете первый раз за раунд, то возрождаетесь с 100% здоровья, но теряете его в течение @DecayDuration@ сек. При участии в убийстве вражеского чемпиона ваш запас здоровья становится равен <healing>@TriumphPercent@% от максимального</healing>, и вы перестаете его терять.",
+            "iconLarge": "assets/ux/cherry/augments/icons/servebeyonddeath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/servebeyonddeath_small.png",
+            "id": 120,
+            "name": "Служитель смерти",
+            "rarity": 0,
+            "tooltip": "Когда вы погибаете первый раз за раунд, то возрождаетесь с 100% здоровья, но теряете его в течение @DecayDuration@ сек. При участии в убийстве вражеского чемпиона ваш запас здоровья становится равен <healing>@TriumphPercent@% от максимального</healing>, и вы перестаете его терять."
+        },
+        {
+            "apiName": "QuantumComputing",
+            "calculations": {},
+            "dataValues": {
+                "AutoCastCooldown": 10.0
+            },
+            "desc": "<keywordMajor>Автоматически</keywordMajor>: каждые @AutoCastCooldown@ сек. вы совершаете круговой удар, который наносит дополнительный урон врагам во внешней части области поражения.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
+            "id": 66,
+            "name": "Квантовые вычисления",
+            "rarity": 2,
+            "tooltip": "<keywordMajor>Автоматически</keywordMajor>: каждые 15 сек. вы совершаете круговой удар, который наносит дополнительный урон врагам во внешней части области поражения и восстанавливает вам здоровье.<br><br>Общий нанесенный урон: @f1@<br>Общая эффективность лечения: @f2@"
+        },
+        {
+            "apiName": "DemonsDance",
+            "calculations": {},
+            "dataValues": {
+                "FFHealAPRatio": 0.20000000298023224,
+                "FFHealBase": 10.0,
+                "FFHealBonusADRatio": 0.30000001192092896,
+                "FFHealCritMod": 0,
+                "FFHealMax": 100.0,
+                "FFMSBuff": 0.20000000298023224,
+                "FFMSBuffMelee": 0.20000000298023224,
+                "FFMSDuration": 1.0,
+                "GRMaxHealthPerProc": 7.0,
+                "GRMeleeFlatHeal": 3.0,
+                "GRPercentHealthDamage": 3.5,
+                "GRPercentHealthHeal": 0.012000000104308128,
+                "GRRangedHealthPerProc": 4.0,
+                "GRRangedPenaltyMod": 0.4000000059604645,
+                "GRTriggerTime": 4.0,
+                "GRWindow": 5.0
+            },
+            "desc": "Вы получаете ключевые руны <spellName>Искусное лавирование</spellName> и <spellName>Хватка нежити</spellName>.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/demonsdance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/demonsdance_small.png",
+            "id": 23,
+            "name": "Танец демона",
+            "rarity": 1,
+            "tooltip": "Вы получаете ключевые руны <spellName>Искусное лавирование</spellName> и <spellName>Хватка нежити</spellName>.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@<br>Прибавка к максимальному запасу здоровья: @f3@"
+        },
+        {
+            "apiName": "DefensiveManeuvers",
+            "calculations": {
+                "BarrierAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 440.0,
+                            "mStartValue": 110.0
+                        }
+                    ]
+                },
+                "HealAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 318.0,
+                            "mStartValue": 80.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AllyRange": 835.0,
+                "MoveSpeed": 0.30000001192092896,
+                "ShieldDuration": 2.5
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Защитные маневры</spellName>.<br><br><rules><spellName>Защитные маневры</spellName> активируют заклинания призывателя <spellName>Барьер</spellName> и <spellName>Исцеление</spellName>, которые действуют на вас и союзника.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/defensivemaneuvers_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/defensivemaneuvers_small.png",
+            "id": 21,
+            "name": "Защитные маневры",
+            "rarity": 1,
+            "tooltip": "Вы применяете заклинания призывателя <abilityName>Барьер</abilityName> и <abilityName>Исцеление</abilityName> к себе и своему союзнику. Заклинания дают <shield>щит прочностью @BarrierAmount@</shield>, восстанавливают <healing>@HealAmount@ здоровья</healing> и увеличивают <speed>скорость передвижения на 30%</speed> на 1 сек.<br><br>Общая эффективность лечения: @f1@<br>Общее количество щитов: @f2@"
+        },
+        {
+            "apiName": "Chauffeur",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeed": 0.6499999761581421,
+                "Haste": 130.0
+            },
+            "desc": "Вы привязываетесь к союзнику и не можете передвигаться самостоятельно. Ваша дополнительная скорость передвижения также передается союзнику, а вы получаете прибавки к <scaleLevel>ускорению умений</scaleLevel> и <attackSpeed>скорости атаки</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/chauffeur_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/chauffeur_small.png",
+            "id": 14,
+            "name": "Шофер",
+            "rarity": 2,
+            "tooltip": "Вы привязываетесь к союзнику. Ваша дополнительная скорость передвижения также передается союзнику, а вы получаете <scaleLevel>@Haste@ ускорения умений</scaleLevel> и <attackSpeed>@AttackSpeed*100@% скорости атаки</attackSpeed>.<br><br>После применения рывка или телепортации связь пропадает на 1.5 сек., а затем восстанавливается."
+        },
+        {
+            "apiName": "Marksmage",
+            "calculations": {
+                "APDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "APRatio"
+                    }
+                }
+            },
+            "dataValues": {
+                "APRatio": 1.0
+            },
+            "desc": "Ваши автоатаки дополнительно наносят <physicalDamage>физический урон</physicalDamage>, равный <magicDamage>@APRatio*100@% от силы умений</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/marksmage_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/marksmage_small.png",
+            "id": 129,
+            "name": "Маг-стрелок",
+            "rarity": 1,
+            "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "BladeWaltz",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 30.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05999999865889549
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "TotalHits": 8.0
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Вальс клинков</spellName>.<br><br><rules>Применив <spellName>Вальс клинков</spellName>, вы получаете недосягаемость и совершаете несколько рывков (@TotalHits@) вокруг врагов, нанося урон.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/bladewaltz_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bladewaltz_small.png",
+            "id": 6,
+            "name": "Вальс клинков",
+            "rarity": 2,
+            "tooltip": "<rules>Вы получаете недосягаемость и совершаете несколько рывков вокруг врагов, нанося @Damage@ урона @TotalHits@ раз(а) (эффекты при попадании наносят 50% урона).</rules><br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@<br>"
+        },
+        {
+            "apiName": "WillingSacrifice",
+            "calculations": {},
+            "dataValues": {
+                "AllyHealthThreshold": 0.30000001192092896,
+                "CurrentHealthToDrain": 0.25
+            },
+            "desc": "Когда у вашего союзника остается менее <health>@AllyHealthThreshold*100@% здоровья</health>, вы тратите часть своего здоровья и даете ему <shield>щит</shield>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/willingsacrifice_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/willingsacrifice_small.png",
+            "id": 94,
+            "name": "Самопожертвование",
+            "rarity": 1,
+            "tooltip": "Когда у вашего союзника остается менее <health>@AllyHealthThreshold*100@% здоровья</health>, вы тратите <health>@CurrentHealthToDrain*100@% от своего текущего запаса здоровья</health> и даете ему <shield>щит</shield> такой же прочности.<br><br>Щиты, полученные в этом раунде: @f1@<br>Общее количество щитов: @f2@"
+        },
+        {
+            "apiName": "IceCold",
+            "calculations": {},
+            "dataValues": {
+                "ExtraSlowAmount": 100.0
+            },
+            "desc": "Ваши эффекты <status>замедления</status> дополнительно уменьшают скорость передвижения на 100.",
+            "iconLarge": "assets/ux/cherry/augments/icons/icecold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/icecold_small.png",
+            "id": 44,
+            "name": "Дикий холод",
+            "rarity": 0,
+            "tooltip": "Ваши эффекты <status>замедления</status> дополнительно уменьшают скорость передвижения на 100."
+        },
+        {
+            "apiName": "SpinToWin",
+            "calculations": {},
+            "dataValues": {
+                "SpinDamageAmp": 0.30000001192092896,
+                "SpinHaste": 30.0
+            },
+            "desc": "Ускорение умений, при применении которых вы крутитесь, увеличивается на @SpinHaste@, и они наносят на @SpinDamageAmp*100@% больше урона!",
+            "iconLarge": "assets/ux/cherry/augments/icons/spintowin_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spintowin_small.png",
+            "id": 214,
+            "name": "Опасный поворот",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_SpinToWin_Summary }}<br><br>Урон, нанесенный в этом раунде: @f1@<br>Урон, нанесенный в этой игре: @f2@"
+        },
+        {
+            "apiName": "BannerofCommand",
+            "calculations": {},
+            "dataValues": {
+                "BuffDuration": 10.0,
+                "EmpowermentValue": 0.15000000596046448
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Знамя власти</spellName>.<br><br><rules><spellName>Знамя власти</spellName> ненадолго усиливает вашего союзника</rules>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bannerofcommand_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bannerofcommand_small.png",
+            "id": 5,
+            "name": "Знамя власти",
+            "rarity": 1,
+            "tooltip": "Ваш партнер получает @EmpowermentValue*100@% <scaleHealth>здоровья</scaleHealth>, <scaleAD>силы атаки</scaleAD>, <scaleAP>силы умений</scaleAP> и <attackSpeed>скорости атаки</attackSpeed> на 10 сек."
+        },
+        {
+            "apiName": "TankItOrLeaveIt",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "DamageReduction": 0.20000000298023224,
+                "MaxChance": 0.5
+            },
+            "desc": "У вас появляется <crit>критическая защита</crit>, на которую распространяется шанс критического удара (но не более @MaxChance*100@%). При ее срабатывании вы получаете меньше урона. Ваш шанс критического удара увеличивается на @CritChance*100@%.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tankitorleaveit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tankitorleaveit_small.png",
+            "id": 80,
+            "name": "Непробиваемость",
+            "rarity": 0,
+            "tooltip": "У вас появляется <crit>критическая защита</crit>, на которую распространяется шанс критического удара (но не более @MaxChance*100@%). При ее срабатывании вы получаете на @DamageReduction*100@% меньше урона. Ваш шанс критического удара увеличивается на @CritChance*100@%.<br><br>Урон, уменьшенный в этом раунде: @f1@<br>Общий уменьшенный урон: @f2@"
+        },
+        {
+            "apiName": "WitchfulThinking",
+            "calculations": {},
+            "dataValues": {
+                "AP": 70.0
+            },
+            "desc": "Вы получаете <scaleAP>@AP@ силы умений</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/witchfulthinking_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/witchfulthinking_small.png",
+            "id": 97,
+            "name": "Ведьмовские штучки",
+            "rarity": 0,
+            "tooltip": "Вы получаете <scaleAP>@AP@ силы умений</scaleAP>."
+        },
+        {
+            "apiName": "Quest_UrfsChampion",
+            "calculations": {},
+            "dataValues": {
+                "2ndPickTakendownsNeeded": 15.0,
+                "TakedownsNeeded": 10.0
+            },
+            "desc": "Требование: принять участие в @TakedownsNeeded@ убийствах. Если аугментация выбрана второй, это значение увеличивается до @2ndPickTakendownsNeeded@.<br><br>Награда: Золотая лопатка.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_urfschampion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
+            "id": 154,
+            "name": "Задание: защитник Урфа",
+            "rarity": 1,
+            "tooltip": "Требование: принять участие в @TakedownsNeeded@ убийствах. Если аугментация выбрана второй, это значение увеличивается до @2ndPickTakendownsNeeded@.<br><br>Награда: Золотая лопатка."
+        },
+        {
+            "apiName": "Vengeance",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.2800000011920929,
+                "Omnivamp": 0.2800000011920929
+            },
+            "desc": "После смерти союзника у вас значительно увеличиваются урон и всестороннее вытягивание жизни. Эффект действует до конца раунда.",
+            "iconLarge": "assets/ux/cherry/augments/icons/vengeance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vengeance_small.png",
+            "id": 90,
+            "name": "Возмездие",
+            "rarity": 1,
+            "tooltip": "После смерти союзника вы начинаете наносить на @DamageAmp*100@% больше урона и получаете @Omnivamp*100@% всестороннего вытягивания жизни.<br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "Erosion",
+            "calculations": {},
+            "dataValues": {
+                "MaxStacks": 20.0,
+                "Shred": 0.014999999664723873,
+                "ShredDuration": 4.0
+            },
+            "desc": "При нанесении урона врагам вы уменьшаете их <scaleArmor>броню</scaleArmor> и <scaleMR>сопротивление магии</scaleMR> на @ShredDuration@ сек. ",
+            "iconLarge": "assets/ux/cherry/augments/icons/erosion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/erosion_small.png",
+            "id": 28,
+            "name": "Эрозия",
+            "rarity": 0,
+            "tooltip": "При нанесении урона врагам вы уменьшаете их <scaleArmor>броню</scaleArmor> и <scaleMR>сопротивление магии</scaleMR> на @Shred*100@% на @ShredDuration@ сек. <br><br>Суммируется до @MaxStacks@ раз."
+        },
+        {
+            "apiName": "MasterofDuality",
+            "calculations": {
+                "ADGained": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 9.0,
+                            "mStartValue": 3.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "APGained": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 18.0,
+                            "mStartValue": 6.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "Ваши автоатаки дают суммирующуюся прибавку к <scaleAP>силе умений</scaleAP>, а умения – суммирующуюся прибавку к <scaleAD>силе атаки</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/masterofduality_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/masterofduality_small.png",
+            "id": 54,
+            "name": "Мастер двойственности",
+            "rarity": 2,
+            "tooltip": "Ваши автоатаки дают <scaleAP>@APGained@ силы умений</scaleAP>, а умения – <scaleAD>@ADGained@ силы атаки</scaleAD>. Прибавки суммируются бесконечно до конца раунда."
+        },
+        {
+            "apiName": "LightemUp",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 11.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.3499999940395355,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.1899999976158142
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "TOOLTIPONLYDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 320.0,
+                            "mStartValue": 44.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.7599999904632568
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "Каждая ваша 4-я автоатака наносит дополнительный <scaleMagic>магический урон</scaleMagic>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightemup_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightemup_small.png",
+            "id": 51,
+            "name": "Пора зажигать",
+            "rarity": 0,
+            "tooltip": "Каждая ваша 4-я автоатака дополнительно наносит <scaleMagic>@TOOLTIPONLYDamage@ магического урона</scaleMagic>.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "SearingDawn",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "ProcCooldown": 0.75
+            },
+            "desc": "Ваши умения помечают врагов, заставляя их получать дополнительный урон от следующего эффекта вашего союзника.",
+            "iconLarge": "assets/ux/cherry/augments/icons/searingdawn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/searingdawn_small.png",
+            "id": 72,
+            "name": "Обжигающий рассвет",
+            "rarity": 1,
+            "tooltip": "Ваши умения помечают врагов. Следующие автоатака или умение вашего союзника против помеченной цели дополнительно наносят ей <magicDamage>@Damage@ магического урона</magicDamage>.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "SlapAround",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForce": 20.0
+            },
+            "desc": "Каждый раз, когда вы <status>обездвиживаете</status> врага, вы получаете @AdaptiveForce@ адаптивной силы до конца раунда (суммируется бесконечно).",
+            "iconLarge": "assets/ux/cherry/augments/icons/slaparound_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slaparound_small.png",
+            "id": 136,
+            "name": "Большая взбучка",
+            "rarity": 0,
+            "tooltip": "Каждый раз, когда вы <status>обездвиживаете</status> врага, вы получаете @AdaptiveForce@ адаптивной силы до конца раунда (суммируется бесконечно)."
+        },
+        {
+            "apiName": "MagicMissile",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0,
+                "MaxHealthDamagePerMissile": 0.0033400000538676977,
+                "MaxHealthDamageTooltip": 1.0,
+                "MaxRangeThreshold": 1000.0,
+                "NumberOfMissiles": 3.0
+            },
+            "desc": "Нанося урон умением, вы выпускаете в каждого пораженного врага волшебные стрелы (@NumberOfMissiles@). Каждая из них наносит чистый урон вплоть до <trueDamage>@MaxHealthDamageTooltip@% от максимального запаса здоровья</trueDamage> в зависимости от преодоленного расстояния.",
+            "iconLarge": "assets/ux/cherry/augments/icons/magicmissile_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/magicmissile_small.png",
+            "id": 133,
+            "name": "Волшебные стрелы",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_MagicMissile_Summary }}<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "Spellwake",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.20000000298023224
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Cooldown": 6.0,
+                "ExplosionDelayTime": 0.75,
+                "ExplosionRadius": 100.0
+            },
+            "desc": "Когда вы поражаете врага умением, происходит взрыв, наносящий <magicDamage>магический урон</magicDamage> всем противникам между вами и точкой, в которой была поражена первоначальная цель.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spellwake_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spellwake_small.png",
+            "id": 135,
+            "name": "Выброс магии",
+            "rarity": 2,
+            "tooltip": "Когда вы поражаете врага умением, происходит взрыв, наносящий <magicDamage>@Damage@ магического урона</magicDamage> всем противникам между вами и точкой, в которой была поражена первоначальная цель. <br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "CenterOfTheUniverse",
+            "calculations": {
+                "StarDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 7.0,
+                            "mLevel1Value": 5.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.11999999731779099
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.25,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "MissileWidth": 50.0
+            },
+            "desc": "Вокруг вас на расстоянии дальности атаки вращаются звезды, нанося <magicDamage>магический урон</magicDamage> задетым врагам.",
+            "iconLarge": "assets/ux/cherry/augments/icons/centeroftheuniverse_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/centeroftheuniverse_small.png",
+            "id": 193,
+            "name": "Центр Вселенной",
+            "rarity": 2,
+            "tooltip": "Вокруг вас на расстоянии дальности атаки вращаются звезды, нанося <magicDamage>@StarDamage@ магического урона</magicDamage> задетым врагам.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "PhenomenalEvil",
+            "calculations": {},
+            "dataValues": {
+                "APPerProc": 1.0,
+                "ProcCooldown": 0.75,
+                "SpellIDCD": 5.0,
+                "StartingAPIfSecondAugment": 40.0
+            },
+            "desc": "Вы навсегда получаете <scaleAP>@APPerProc@ силы умений</scaleAP>, когда поражаете врагов умениями (перезарядка – @SpellIDCD@ сек. для каждого умения).<br><br>Выбрав эту аугментацию второй, вы сразу получаете @StartingAPIfSecondAugment@ силы умений.",
+            "iconLarge": "assets/ux/cherry/augments/icons/phenomenalevil_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/phenomenalevil_small.png",
+            "id": 65,
+            "name": "Невероятное зло",
+            "rarity": 1,
+            "tooltip": "Вы навсегда получаете <scaleAP>@APPerProc@ силы умений</scaleAP>, когда поражаете врагов умениями.<br><br>Перезарядка: @SpellIDCD@ сек. для каждого умения.<br><br>Если это ваша вторая аугментация, вы сразу получаете @StartingAPIfSecondAugment@ силы умений.<br><br>Полученная сила умений: @f1@"
+        },
+        {
+            "apiName": "BigBrain",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ShieldBase"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AP": 1.0,
+                "ShieldBase": 3.0
+            },
+            "desc": "В начале каждого раунда вы получаете щит, прочность которого увеличивается на <shield>@ShieldBase@</shield> за каждые <attention>%i:scaleAP% @AP@</attention> силы умений.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bigbrain_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bigbrain_small.png",
+            "id": 180,
+            "name": "Большой мозг",
+            "rarity": 1,
+            "tooltip": "В начале каждого раунда вы получаете щит, прочность которого увеличивается на <shield>@ShieldBase@</shield> за каждые <attention>%i:scaleAP% @AP@</attention> силы умений."
+        },
+        {
+            "apiName": "Vulnerability",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritDamage": 0.44999998807907104
+            },
+            "desc": "Ваши эффекты с периодическим уроном и эффекты предметов могут быть критическими. Ваш шанс критического удара увеличивается на @CritChance*100@%.",
+            "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vulnerability_small.png",
+            "id": 92,
+            "name": "Уязвимость",
+            "rarity": 0,
+            "tooltip": "Ваши эффекты с периодическим уроном и эффекты предметов могут быть критическими, нанося @CritDamage*100@% дополнительного урона. Ваш шанс критического удара увеличивается на @CritChance*100@%.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "CannonFodder",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "В начале раунда вами выстреливают из пушки, и вы влетаете в самую гущу сражения.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cannonfodder_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cannonfodder_small.png",
+            "id": 10,
+            "name": "Пушечное мясо",
+            "rarity": 1,
+            "tooltip": "В начале раунда вами выстреливают из пушки, и вы влетаете в самую гущу сражения."
+        },
+        {
+            "apiName": "MadScientist",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.30000001192092896,
+                "APAmp": 0.30000001192092896,
+                "Haste": 70.0,
+                "HealthAmp": 0.20000000298023224,
+                "MovespeedAmp": 0.30000001192092896,
+                "SizeAmp": 0.30000001192092896
+            },
+            "desc": "В начале раунда вы увеличиваетесь (<scaleAD>адаптивная сила</scaleAD> и <healing>здоровье</healing>) или уменьшаетесь (<scaleLevel>ускорение умений</scaleLevel> и <speed>скорость передвижения</speed>) в размере.",
+            "iconLarge": "assets/ux/cherry/augments/icons/madscientist_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/madscientist_small.png",
+            "id": 53,
+            "name": "Безумный ученый",
+            "rarity": 2,
+            "tooltip": "В начале раунда вы увеличиваетесь, получая <scaleAD>@ADAmp*100@% адаптивной силы</scaleAD> и <healing>@HealthAmp*100@% здоровья</healing>, или уменьшаетесь, получая <scaleLevel>@Haste@ ускорения умений</scaleLevel> и <speed>@MovespeedAmp*100@% скорости передвижения</speed>."
+        },
+        {
+            "apiName": "MountainSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Вы получаете горную душу. После недолгого пребывания вне боя на вас накладывается <shield>щит</shield>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mountainsoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mountainsoul_small.png",
+            "id": 57,
+            "name": "Горная душа",
+            "rarity": 0,
+            "tooltip": "Вы получаете горную душу. После недолгого пребывания вне боя на вас накладывается <shield>щит</shield>.<br><br>Общее количество щитов: @f1@"
+        },
+        {
+            "apiName": "UltimateRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Один раз за раунд после применения абсолютного умения вы сбрасываете его перезарядку.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 88,
+            "name": "Абсолютный сброс",
+            "rarity": 2,
+            "tooltip": "Один раз за раунд после применения абсолютного умения вы сбрасываете его перезарядку."
+        },
+        {
+            "apiName": "Dematerialize",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForce": 15.0,
+                "SecondPickBonus": 30.0
+            },
+            "desc": "При участии в убийстве вы получаете @AdaptiveForce@ адаптивной силы (не более одного раза за каждого чемпиона в каждом раунде).<br><br>Выбрав эту аугментацию второй, вы сразу получаете @SecondPickBonus@ адаптивной силы.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dematerialize_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dematerialize_small.png",
+            "id": 171,
+            "name": "Дезинтеграция",
+            "rarity": 0,
+            "tooltip": "{{Cherry_Dematerialize_Summary}}<br><br>Получено адаптивной силы: @f1@"
+        },
+        {
+            "apiName": "FrostWraith",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.5,
+                "Radius": 450.0,
+                "RootDuration": 1.25
+            },
+            "desc": "<keywordMajor>Автоматически</keywordMajor>: раз в @Cooldown@ сек. вы <status>обездвиживаете</status> врагов поблизости на @RootDuration@ сек.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
+            "id": 39,
+            "name": "Морозный призрак",
+            "rarity": 0,
+            "tooltip": "<keywordMajor>Автоматически</keywordMajor>: раз в @Cooldown@ сек. вы <status>обездвиживаете</status> врагов поблизости на @RootDuration@ сек.<br><br>Количество обездвиживаний за этот раунд: @f1@<br>Общее количество обездвиживаний: @f2@"
+        },
+        {
+            "apiName": "SymphonyofWar",
+            "calculations": {
+                "ASMelee": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 3
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 6
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 9
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 12
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 15
+                                }
+                            ],
+                            "mLevel1Value": 0.12999999523162842
+                        }
+                    ]
+                },
+                "ASRanged": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 3
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 6
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 9
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 12
+                                }
+                            ],
+                            "mLevel1Value": 0.07999999821186066
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ASCap": 10.0,
+                "BuffDuration": 5.0,
+                "Duration": 6.0,
+                "HealingPercent": 0.10000000149011612,
+                "MaxAdaptivePerStack": 5.5,
+                "MaxStacks": 12.0,
+                "MinAdaptivePerStack": 3.0,
+                "PerCastIDLockout": 10.0,
+                "RangeBonus": 50.0,
+                "RangedHealingPercent": 0.07999999821186066,
+                "StackCap": 6.0,
+                "TimeUntilNextStackFromSameSpell": 5.0
+            },
+            "desc": "Вы получаете ключевые руны <spellName>Смертельный темп</spellName> и <spellName>Завоеватель</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/symphonyofwar_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/symphonyofwar_small.png",
+            "id": 79,
+            "name": "Симфония войны",
+            "rarity": 2,
+            "tooltip": "Вы получаете ключевые руны <spellName>Смертельный темп</spellName> и <spellName>Завоеватель</spellName>."
+        },
+        {
+            "apiName": "TrueshotProdigy",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 750.0,
+                            "mStartValue": 250.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Cooldown": 5.0,
+                "SnipeDistance": 700.0
+            },
+            "desc": "Нанося урон чемпиону издалека, вы <keywordMajor>автоматически</keywordMajor> выпускаете в него <abilityName>Прицельный залп</abilityName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
+            "id": 86,
+            "name": "Меткий стрелок",
+            "rarity": 2,
+            "tooltip": "Нанося урон чемпиону на расстоянии более @SnipeDistance@ ед., вы <keywordMajor>автоматически</keywordMajor> выпускаете в него <abilityName>Прицельный залп</abilityName>, который наносит @Damage@ урона. Перезарядка: @Cooldown@ сек.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "Eureka",
+            "calculations": {},
+            "dataValues": {
+                "APToHasteConversion": 0.25
+            },
+            "desc": "Вы получаете ускорение умений в размере <scaleAP>@APToHasteConversion*100@% от силы умений</scaleAP>",
+            "iconLarge": "assets/ux/cherry/augments/icons/eureka_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/eureka_small.png",
+            "id": 30,
+            "name": "Эврика!",
+            "rarity": 2,
+            "tooltip": "Вы получаете ускорение умений в размере <scaleAP>@APToHasteConversion*100@% от силы умений</scaleAP>"
+        },
+        {
+            "apiName": "OceanSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Вы получаете морскую душу. После нанесения урона врагам у вас начинают быстро восстанавливаться <healing>здоровье</healing> и <scaleMana>мана</scaleMana>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/oceansoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/oceansoul_small.png",
+            "id": 60,
+            "name": "Морская душа",
+            "rarity": 0,
+            "tooltip": "Вы получаете морскую душу. После нанесения урона врагам у вас начинают быстро восстанавливаться <healing>здоровье</healing> и <scaleMana>мана</scaleMana>.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@"
+        },
+        {
+            "apiName": "CircleofDeath",
+            "calculations": {},
+            "dataValues": {
+                "DamageRange": 1000.0,
+                "HealToDamageConversion": 0.699999988079071
+            },
+            "desc": "При <health>лечении</health> и регенерации вы наносите ближайшему вражескому чемпиону <scaleAP>магический урон</scaleAP> в размере части от восстановленного здоровья.",
+            "iconLarge": "assets/ux/cherry/augments/icons/circleofdeath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/circleofdeath_small.png",
+            "id": 15,
+            "name": "Цикл смерти",
+            "rarity": 2,
+            "tooltip": "При <health>лечении</health> и регенерации вы наносите ближайшему вражескому чемпиону <magicDamage>магический урон в размере @HealToDamageConversion*100@% от восстановленного здоровья</magicDamage>.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "Quest_WoogletsWitchcap",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Вы получаете Слишком Большой Жезл.<br><br>Требование: иметь в инвентаре Слишком Большой Жезл, Смертельную шляпу Рабадона и Песочные часы Жони.<br><br>Награда: Шляпа ведьмы.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
+            "id": 156,
+            "name": "Задание: Шляпа ведьмы",
+            "rarity": 2,
+            "tooltip": "Вы получаете Слишком Большой Жезл.<br><br>Требование: иметь в инвентаре Слишком Большой Жезл, Смертельную шляпу Рабадона и Песочные часы Жони.<br><br>Награда: Шляпа ведьмы."
+        },
+        {
+            "apiName": "Earthwake",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 2,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 2,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 140.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 2
+                }
+            },
+            "dataValues": {
+                "APRatio": 0.30000001192092896,
+                "BonusADRatio": 1.0,
+                "ExplosionDelayTime": 0.75,
+                "ExplosionRadius": 300.0
+            },
+            "desc": "Применяя умения с рывками, прыжками и телепортацией, вы оставляете за собой след, который взрывается через 1 сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
+            "id": 27,
+            "name": "Борозда",
+            "rarity": 2,
+            "tooltip": "Применяя умения с рывками, прыжками и телепортацией, вы оставляете за собой след, который взрывается через 1 сек., нанося @Damage@ физического урона.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "ScopedWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 75.0,
+                "RangedRangeIncrease": 50.0
+            },
+            "desc": "Ваша дальность атаки увеличивается на @MeleeRangeIncrease@ ед. (на @RangedRangeIncrease@ ед. для чемпионов дальнего боя).",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopedweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopedweapons_small.png",
+            "id": 170,
+            "name": "Снайперский прицел",
+            "rarity": 0,
+            "tooltip": "Ваша дальность атаки увеличивается на @MeleeRangeIncrease@ ед. (на @RangedRangeIncrease@ ед. для чемпионов дальнего боя)."
+        },
+        {
+            "apiName": "BreadAndButter",
+            "calculations": {},
+            "dataValues": {
+                "QAbilityHaste": 200.0,
+                "QReducedAbilityHaste": 200.0
+            },
+            "desc": "Ускорение умений для вашего [Q] увеличивается на @QAbilityHaste@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandbutter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandbutter_small.png",
+            "id": 103,
+            "name": "Хлеб с маслом",
+            "rarity": 1,
+            "tooltip": "Ускорение умений для вашего [Q] увеличивается на @QAbilityHaste@."
+        },
+        {
+            "apiName": "TheBrutalizer",
+            "calculations": {},
+            "dataValues": {
+                "AD": 25.0,
+                "AbilityHaste": 10.0,
+                "Lethality": 10.0
+            },
+            "desc": "Вы получаете <scaleAD>@AD@ силы атаки</scaleAD>, <scaleLevel>@AbilityHaste@ ускорения умений</scaleLevel> и <scaleAD>@Lethality@ смертоносности</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/thebrutalizer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/thebrutalizer_small.png",
+            "id": 82,
+            "name": "Изувер",
+            "rarity": 1,
+            "tooltip": "Вы получаете <scaleAD>@AD@ силы атаки</scaleAD>, <scaleLevel>@AbilityHaste@ ускорения умений</scaleLevel> и <scaleAD>@Lethality@ смертоносности</scaleAD>."
+        },
+        {
+            "apiName": "FullyAutomated",
+            "calculations": {},
+            "dataValues": {
+                "AutocastFlatCDR": 2.0
+            },
+            "desc": "На ваши <keywordMajor>автоматически применяемые</keywordMajor> эффекты действует ускорение умений, и их перезарядка дополнительно сокращается на @AutocastFlatCDR@ сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
+            "id": 213,
+            "name": "Полная автоматизация",
+            "rarity": 0,
+            "tooltip": "На ваши <keywordMajor>автоматически применяемые</keywordMajor> эффекты действует ускорение умений, и их перезарядка дополнительно сокращается на @AutocastFlatCDR@ сек."
+        },
+        {
+            "apiName": "SonicBoom",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 2,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 2,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 30.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 2
+                }
+            },
+            "dataValues": {
+                "ProcCooldown": 2.0,
+                "Radius": 450.0,
+                "SlowAmount": -0.30000001192092896
+            },
+            "desc": "Когда вы усиливаете или <healing>лечите</healing> союзника либо накладываете на него <shield>щит</shield>, он наносит окружающим врагам урон и <status>замедляет</status> их.",
+            "iconLarge": "assets/ux/cherry/augments/icons/sonicboom_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/sonicboom_small.png",
+            "id": 76,
+            "name": "Звуковой удар",
+            "rarity": 0,
+            "tooltip": "Когда вы усиливаете или <healing>лечите</healing> союзника либо накладываете на него <shield>щит</shield>, он наносит окружающим врагам <trueDamage>@Damage@ чистого урона</trueDamage> и <status>замедляет</status> их на @SlowAmount*-100@% на 2 сек.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "TwiceThrice",
+            "calculations": {},
+            "dataValues": {
+                "ProcMultiplier": 1.5
+            },
+            "desc": "Каждую третью автоатаку эффекты при попадании срабатывают дважды.",
+            "iconLarge": "assets/ux/cherry/augments/icons/twicethrice_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/twicethrice_small.png",
+            "id": 107,
+            "name": "Двойная порция",
+            "rarity": 1,
+            "tooltip": "Каждую третью автоатаку эффекты при попадании срабатывают дважды."
+        },
+        {
+            "apiName": "CelestialBody",
+            "calculations": {},
+            "dataValues": {
+                "DamageReduction": 0.10000000149011612,
+                "Health": 1250.0
+            },
+            "desc": "Вы получаете <health>@Health@ здоровья</health>, но наносите на @DamageReduction*100@% меньше урона.",
+            "iconLarge": "assets/ux/cherry/augments/icons/celestialbody_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/celestialbody_small.png",
+            "id": 13,
+            "name": "Небесное тело",
+            "rarity": 1,
+            "tooltip": "Вы получаете <health>@Health@ здоровья</health>, но наносите на @DamageReduction*100@% меньше урона."
+        },
+        {
+            "apiName": "BreadAndJam",
+            "calculations": {},
+            "dataValues": {
+                "WAbilityHaste": 200.0
+            },
+            "desc": "Ускорение умений для вашего [W] увеличивается на @WAbilityHaste@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandjam_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandjam_small.png",
+            "id": 150,
+            "name": "Хлеб с вареньем",
+            "rarity": 1,
+            "tooltip": "Ускорение умений для вашего [W] увеличивается на @WAbilityHaste@."
+        },
+        {
+            "apiName": "WithHaste",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHasteToMSConversion": 1.5
+            },
+            "desc": "Вы получаете прибавку к <moveSpeed>скорости передвижения</moveSpeed> в размере <scaleLevel>ускорения умений</scaleLevel>, умноженного на @AbilityHasteToMSConversion@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/withhaste_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/withhaste_small.png",
+            "id": 98,
+            "name": "Максимальное ускорение",
+            "rarity": 1,
+            "tooltip": "Вы получаете прибавку к <moveSpeed>скорости передвижения</moveSpeed> в размере <scaleLevel>ускорения умений</scaleLevel>, умноженного на @AbilityHasteToMSConversion@."
+        },
+        {
+            "apiName": "FallenAegis",
+            "calculations": {
+                "ShieldAmount": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 50.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "ShieldDuration": 12.0
+            },
+            "desc": "Вы начинаете бой с <abilityName>Черным щитом</abilityName>, который действует @ShieldDuration@ сек.<br><br><rules><abilityName>Черный щит</abilityName> блокирует магический урон и эффекты <status>обездвиживания</status>.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/fallenaegis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fallenaegis_small.png",
+            "id": 34,
+            "name": "Эгида Падшей",
+            "rarity": 0,
+            "tooltip": "Вы начинаете бой с <abilityName>Черным щитом</abilityName>, который блокирует до @ShieldAmount@ магического урона в течение @ShieldDuration@ сек.<br><br><rules><abilityName>Черный щит</abilityName> блокирует магический урон и эффекты <status>обездвиживания</status>.</rules><br><br>Общее количество щитов: @f1@<br>Общее количество заблокированных эффектов обездвиживания: @f2@"
+        },
+        {
+            "apiName": "HolyFire",
+            "calculations": {
+                "BurnDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.02500000037252903,
+                            "mStat": 11
+                        }
+                    ]
+                },
+                "BurnDamageTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "BurnDamage",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    }
+                }
+            },
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercentMax": 0.03999999910593033,
+                "BurnPercentMin": 0.009999999776482582,
+                "Cooldown": 1.5,
+                "Radius": 650.0
+            },
+            "desc": "Применяя эффекты <healing>лечения</healing> и <shield>щиты</shield>, вы <keywordMajor>поджигаете</keywordMajor> врага поблизости (эффект суммируется бесконечно). Горящий враг получает урон в размере @BurnPercentMin*100@–@BurnPercentMax*100@% от максимального запаса здоровья в течение @BurnDuration@ сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/holyfire_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/holyfire_small.png",
+            "id": 198,
+            "name": "Святой огонь",
+            "rarity": 1,
+            "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>Количество огненного урона зависит от эффективности лечения и щитов относительно максимального запаса здоровья чемпиона, на которого они направлены.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "FeeltheBurn",
+            "calculations": {
+                "DamagePerSecond": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "TooltipTrueDamageCalculation",
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "InverseDuration"
+                    }
+                },
+                "TooltipTrueDamageCalculation": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 410.0,
+                            "mStartValue": 70.0
+                        }
+                    ]
+                },
+                "{7c50d74e}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 600.0,
+                            "mStartValue": 100.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "DamageReductionTOOLTIPONLY": 0.3499999940395355,
+                "DotDuration": 5.0,
+                "ExhaustDuration": 3.0,
+                "GrievousAmount": 0.4000000059604645,
+                "InverseDuration": 0.20000000298023224,
+                "Range": 1000.0,
+                "SightRadius": 100.0,
+                "SlowAmount": 0.5
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Жжение</spellName>.<br><br><rules><spellName>Жжение</spellName> активирует заклинания призывателя <spellName>Воспламенение</spellName> и <spellName>Изнурение</spellName>, которые поражают всех вражеских чемпионов поблизости.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/feeltheburn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/feeltheburn_small.png",
+            "id": 35,
+            "name": "Время размяться",
+            "rarity": 2,
+            "tooltip": "<rules>Вы активируете заклинания призывателя <spellName>Воспламенение</spellName> и <spellName>Изнурение</spellName>, которые поражают всех вражеских чемпионов поблизости.</rules>"
+        },
+        {
+            "apiName": "GuiltyPleasure",
+            "calculations": {
+                "TotalHeal": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 10.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealPercentage",
+                            "mStat": 11
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealPercentage": 0.014999999664723873
+            },
+            "desc": "При <status>обездвиживании</status> вражеских чемпионов вы восстанавливаете себе <healing>@TotalHeal@ здоровья</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/guiltypleasure_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/guiltypleasure_small.png",
+            "id": 42,
+            "name": "Злоупотребление беспомощностью",
+            "rarity": 0,
+            "tooltip": "При <status>обездвиживании</status> вражеских чемпионов вы восстанавливаете себе <healing>@TotalHeal@ здоровья</healing>.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@"
+        },
+        {
+            "apiName": "ScopierWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 200.0,
+                "RangedRangeIncrease": 100.0
+            },
+            "desc": "Ваша дальность атаки увеличивается на @MeleeRangeIncrease@ ед. (на @RangedRangeIncrease@ ед. для чемпионов дальнего боя).",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopierweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopierweapons_small.png",
+            "id": 71,
+            "name": "Точный оптический прицел",
+            "rarity": 1,
+            "tooltip": "Ваша дальность атаки увеличивается на @MeleeRangeIncrease@ ед. (на @RangedRangeIncrease@ ед. для чемпионов дальнего боя)."
+        },
+        {
+            "apiName": "BuffBuddies",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Вы навсегда получаете красное и синее усиления.",
+            "iconLarge": "assets/ux/cherry/augments/icons/buffbuddies_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/buffbuddies_small.png",
+            "id": 9,
+            "name": "Двойное усиление",
+            "rarity": 0,
+            "tooltip": "Вы навсегда получаете красное и синее усиления."
+        },
+        {
+            "apiName": "RaidBoss",
+            "calculations": {},
+            "dataValues": {
+                "BreakoutHealthThreshold": 0.5,
+                "DamageReductionMax": 0.699999988079071,
+                "DamageReductionMin": 0.4000000059604645,
+                "DamageReductionRoundCap": 11.0,
+                "ImprisonDuration": 9.0,
+                "MissingHPHealUponRelease": 0.30000001192092896,
+                "ShieldHealthRatio": 0.3499999940395355,
+                "StatIncrease": 0.4000000059604645
+            },
+            "desc": "Вы начинаете каждый раунд в центре арены, теряя способность совершать действия. При этом вы получаете до @DamageReductionMax*100@% меньше урона и увеличиваетесь в размерах, а ваши <healing>запас здоровья</healing>, <physicalDamage>сила атаки</physicalDamage> и <magicDamage>сила умений</magicDamage> постепенно увеличиваются на величину вплоть до @StatIncrease*100@%. Через @ImprisonDuration@ сек. или при падении вашего уровня здоровья до <healing>@BreakoutHealthThreshold*100@%</healing> вы вырываетесь на свободу, <status>отбрасывая врагов</status> и получая щит прочностью <shield>@ShieldHealthRatio*100@% от макс. запаса здоровья</shield>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/raidboss_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/raidboss_small.png",
+            "id": 125,
+            "name": "Рейд-босс",
+            "rarity": 2,
+            "tooltip": "Вы начинаете каждый раунд в центре арены, теряя способность совершать действия. При этом вы получаете до @DamageReductionMax*100@% меньше урона и увеличиваетесь в размерах, а ваши <healing>запас здоровья</healing>, <physicalDamage>сила атаки</physicalDamage> и <magicDamage>сила умений</magicDamage> постепенно увеличиваются на величину вплоть до @StatIncrease*100@%. Через @ImprisonDuration@ сек. или при падении вашего уровня здоровья до <healing>@BreakoutHealthThreshold*100@%</healing> вы вырываетесь на свободу, <status>отбрасывая врагов</status> и получая щит прочностью <shield>@ShieldHealthRatio*100@% от макс. запаса здоровья</shield>."
+        },
+        {
+            "apiName": "OutlawsGrit",
+            "calculations": {},
+            "dataValues": {
+                "MaxStacks": 5.0,
+                "ResistsPerStack": 12.0
+            },
+            "desc": "После применения умений с рывками, прыжками и телепортацией вы получаете <scaleArmor>@ResistsPerStack@ брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>.<br><br>Прибавки суммируются до @MaxStacks@ раз.",
+            "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
+            "id": 63,
+            "name": "Стойкость бандита",
+            "rarity": 1,
+            "tooltip": "После применения умений с рывками, прыжками и телепортацией вы получаете <scaleArmor>@ResistsPerStack@ брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>.<br><br>Прибавки суммируются до @MaxStacks@ раз."
+        },
+        {
+            "apiName": "DontBlink",
+            "calculations": {},
+            "dataValues": {
+                "BonusDamagePerMSDifference": 0.0010000000474974513
+            },
+            "desc": "Чем быстрее вы двигаетесь по сравнению с врагом, тем больше урона ему наносите.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dontblink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dontblink_small.png",
+            "id": 26,
+            "name": "Не моргай",
+            "rarity": 0,
+            "tooltip": "Чем быстрее вы двигаетесь по сравнению с врагом, тем больше урона ему наносите: @BonusDamagePerMSDifference*1000@% дополнительного урона за каждые <moveSpeed>10</moveSpeed> разницы в скорости передвижения.<br><br>Дополнительный урон, нанесенный в этом раунде: @f1@<br>Общий дополнительный урон: @f2@"
+        },
+        {
+            "apiName": "ShadowRunner",
+            "calculations": {},
+            "dataValues": {
+                "BuffDuration": 2.0,
+                "MSAmount": 300.0
+            },
+            "desc": "После применения умений с рывками, прыжками и телепортацией или выхода из <stealth>скрытности</stealth> вы получаете @spell.Augment_ShadowRunner:MSAmount@ скорости передвижения на @spell.Augment_ShadowRunner:BuffDuration@ сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/shadowrunner_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/shadowrunner_small.png",
+            "id": 73,
+            "name": "Бег в тени",
+            "rarity": 0,
+            "tooltip": "После применения умений с рывками, прыжками и телепортацией или выхода из <stealth>скрытности</stealth> вы получаете @spell.Augment_ShadowRunner:MSAmount@ скорости передвижения на @spell.Augment_ShadowRunner:BuffDuration@ сек."
+        },
+        {
+            "apiName": "InfernalConduit",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 6.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05999999865889549
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.14000000059604645,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "FlatCooldownRefundPerTick": 0.07999999821186066,
+                "ProcCooldown": 1.0
+            },
+            "desc": "Ваши умения <keywordMajor>поджигают</keywordMajor> цель, нанося периодический <scaleAP>магический урон</scaleAP> (эффект суммируется).<br><br>Ваши эффекты <keywordMajor>горения</keywordMajor> сокращают перезарядку базовых умений.",
+            "iconLarge": "assets/ux/cherry/augments/icons/infernalconduit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/infernalconduit_small.png",
+            "id": 45,
+            "name": "Огнепровод",
+            "rarity": 2,
+            "tooltip": "Ваши умения <keywordMajor>поджигают</keywordMajor> цель, нанося <scaleAP>@BleedDamageTooltip@ магического урона</scaleAP> в секунду в течение @BleedDuration@ сек. <keywordMajor>Горение</keywordMajor> суммируется бесконечно.<br><br>Все ваши эффекты <keywordMajor>горения</keywordMajor> сокращают оставшуюся перезарядку базовых умений на @FlatCooldownRefundPerTick@ сек. при нанесении урона врагам.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Превращает <physicalDamage>дополнительную силу атаки</physicalDamage> в <magicDamage>силу умений</magicDamage>. Дает <magicDamage>@APAmp*100@% силы умений</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Адаптация",
+            "rarity": 0,
+            "tooltip": "Превращает <physicalDamage>дополнительную силу атаки</physicalDamage> в <magicDamage>силу умений</magicDamage>. Дает <magicDamage>@APAmp*100@% силы умений</magicDamage>."
+        },
+        {
+            "apiName": "BacktoBasics",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.3499999940395355,
+                "Haste": 60.0,
+                "HealingAmp": 0.3499999940395355,
+                "ShieldingAmp": 0.3499999940395355
+            },
+            "desc": "У вас увеличиваются <scaleLevel>урон</scaleLevel>, <healing>эффективность лечения</healing>, <shield>прочность щитов</shield> и <scaleBonus>ускорение умений</scaleBonus>, но <keywordMajor>вы не можете использовать абсолютное умение</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/backtobasics_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/backtobasics_small.png",
+            "id": 4,
+            "name": "Возвращение к основам",
+            "rarity": 2,
+            "tooltip": "Ваше абсолютное умение заблокировано. При этом у вас увеличиваются <scaleLevel>урон</scaleLevel>, <healing>эффективность лечения</healing> и <shield>прочность щитов</shield> на @DamageAmp*100@%, и вы получаете <scaleBonus>@Haste@ ускорения умений</scaleBonus>."
+        },
+        {
+            "apiName": "Clothesline",
+            "calculations": {
+                "BurnDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 75.0,
+                            "mStartValue": 5.0
+                        }
+                    ]
+                },
+                "BurnDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "BurnDamage",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 4.0
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4,
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "RectangleHalfWidth": 50.0
+            },
+            "desc": "Между вами и союзником образуется связь, которая постоянно наносит урон задетым врагам.",
+            "iconLarge": "assets/ux/cherry/augments/icons/clothesline_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/clothesline_small.png",
+            "id": 110,
+            "name": "Неразрывная связь",
+            "rarity": 0,
+            "tooltip": "Между вами и союзником образуется связь, которая наносит врагам <magicDamage>@BurnDamageTooltip@ магического урона</magicDamage> в секунду.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "DontChase",
+            "calculations": {
+                "ApproximateTotalDamageTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "DamagePerSecond",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 4.25
+                    },
+                    "tooltipOnly": true
+                },
+                "DamagePerSecond": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 15.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatioPerSecond"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.20000000298023224,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "APRatioPerSecond": 0.10000000149011612,
+                "CloudDuration": 3.25,
+                "PoisonDuration": 2.0999999046325684,
+                "TicksPerSecond": 4.0,
+                "ToggleCooldown": 1.0
+            },
+            "desc": "Ваш чемпион становится призрачным и оставляет позади себя ядовитый след, который наносит <magicDamage>магический урон</magicDamage> всем попавшим в него врагам.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dontchase_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dontchase_small.png",
+            "id": 102,
+            "name": "Опасный забег",
+            "rarity": 0,
+            "tooltip": "Ваш чемпион становится призрачным и оставляет позади себя ядовитый след, который ежесекундно наносит <magicDamage>@DamagePerSecond@ магического урона</magicDamage> всем попавшим в него врагам.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "SoulSiphon",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "HealPercentage": 0.11999999731779099
+            },
+            "desc": "Вы получаете <crit>@CritChance*100@% шанса критического удара</crit>, и на ваши <crit>критические удары</crit> действует @HealPercentage*100@% вампиризма.",
+            "iconLarge": "assets/ux/cherry/augments/icons/soulsiphon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/soulsiphon_small.png",
+            "id": 77,
+            "name": "Вытягивание души",
+            "rarity": 1,
+            "tooltip": "Вы получаете <crit>@CritChance*100@% шанса критического удара</crit>, и на ваши <crit>критические удары</crit> действует @HealPercentage*100@% вампиризма.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@"
+        },
+        {
+            "apiName": "GambaAnvil",
+            "calculations": {},
+            "dataValues": {
+                "GoldBasisDiscount": 1250.0,
+                "GoldBonus": 1000.0,
+                "PrismaticCostReduction": 1000.0
+            },
+            "desc": "Вы получаете @GoldBonus@ золота. Призматические наковальни стоят на @PrismaticCostReduction@ золота меньше. Призматические предметы, получаемые с этого момента, при перепродаже стоят на 500 золота меньше.",
+            "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
+            "id": 220,
+            "name": "Наковальня виолы да гамба",
+            "rarity": 2,
+            "tooltip": "Вы получаете @GoldBonus@ золота. Призматические наковальни стоят на @PrismaticCostReduction@ золота меньше. Призматические предметы, получаемые с этого момента, при перепродаже стоят на 500 золота меньше."
+        },
+        {
+            "apiName": "ThreadtheNeedle",
+            "calculations": {},
+            "dataValues": {
+                "PercentPen": 0.20000000298023224
+            },
+            "desc": "Вы получаете @PercentPen*100@% <scaleAD>пробивания брони</scaleAD> и <scaleAP>магического пробивания</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/threadtheneedle_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threadtheneedle_small.png",
+            "id": 84,
+            "name": "Прошивание",
+            "rarity": 1,
+            "tooltip": "Вы получаете @PercentPen*100@% <scaleAD>пробивания брони</scaleAD> и <scaleAP>магического пробивания</scaleAP>."
+        },
+        {
+            "apiName": "BreadAndCheese",
+            "calculations": {},
+            "dataValues": {
+                "EAbilityHaste": 200.0
+            },
+            "desc": "Ускорение умений для вашего [E] увеличивается на @EAbilityHaste@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandcheese_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandcheese_small.png",
+            "id": 151,
+            "name": "Хлеб с сыром",
+            "rarity": 1,
+            "tooltip": "Ускорение умений для вашего [E] увеличивается на @EAbilityHaste@."
+        },
+        {
+            "apiName": "Impassable",
+            "calculations": {},
+            "dataValues": {
+                "BeamPosIndent": 100.0,
+                "BonusResistsMax": 150.0,
+                "BonusResistsMin": 80.0,
+                "CCCarryOverRatio": 1.0,
+                "Cooldown": 15.0,
+                "DamageRadius": 350.0,
+                "DamageRatioAD": 0,
+                "DamageRatioAP": 0,
+                "DelayBeforeBurst": 2.5,
+                "DmgReduction": 0.15000000596046448,
+                "FlatResists": 35.0,
+                "FlatResistsMax": 35.0,
+                "HealthRatio": 8.0,
+                "MRRatio": 0,
+                "MaxBaseDamage": 120.0,
+                "PercentBonusResists": 0.800000011920929,
+                "RayCount": 3.0,
+                "ResistInc": 0,
+                "SizeInc": 0.25,
+                "SlowAmount": 0.15000000596046448,
+                "SlowDuration": 2.5,
+                "SlowZoneDuration": 3.0,
+                "SlowZoneLength": 700.0,
+                "SlowZoneSlowAPRatio": 0.05999999865889549,
+                "SlowZoneSlowBase": 0.20000000298023224,
+                "SlowZoneSlowHealShieldRatio": 0.09000000357627869,
+                "SlowZoneSlowbADRatio": 0.07000000029802322,
+                "SlowZoneWidth": 80.0,
+                "StartingBaseDamage": 25.0
+            },
+            "desc": "Вы получаете ключевые руны <keywordMajor>Дрожь земли</keywordMajor> и <keywordMajor>Ледяной нарост</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/impassable_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/impassable_small.png",
+            "id": 149,
+            "name": "Сама невозмутимость",
+            "rarity": 1,
+            "tooltip": "Вы получаете ключевые руны <keywordMajor>Дрожь земли</keywordMajor> и <keywordMajor>Ледяной нарост</keywordMajor>."
+        },
+        {
+            "apiName": "ExtendoArm",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 12.0
+            },
+            "desc": "<keywordMajor>Автоматически</keywordMajor>: каждые 12 сек. вы применяете к ближайшему вражескому чемпиону захват Блицкранка.",
+            "iconLarge": "assets/ux/cherry/augments/icons/extendoarm_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/extendoarm_small.png",
+            "id": 33,
+            "name": "Длинная рука",
+            "rarity": 1,
+            "tooltip": "<keywordMajor>Автоматически</keywordMajor>: каждые 12 сек. вы применяете к ближайшему вражескому чемпиону захват Блицкранка.<br><br>Попадания захватом: @f1@"
+        },
+        {
+            "apiName": "SlowCooker",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.017500000074505806,
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "Range": 500.0
+            },
+            "desc": "Каждую секунду вы <keywordMajor>поджигаете</keywordMajor> вражеских чемпионов поблизости, нанося урон, который зависит от вашего <health>максимального запаса здоровья</health>. <keywordMajor>Горение</keywordMajor> суммируется бесконечно.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowcooker_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowcooker_small.png",
+            "id": 75,
+            "name": "Медленный огонь",
+            "rarity": 2,
+            "tooltip": "Каждую секунду вы <keywordMajor>поджигаете</keywordMajor> вражеских чемпионов в пределах @Range@ ед., нанося им <health>@BleedDamageTooltip@ <scaleAP>магического урона</scaleAP> в секунду в течение @BleedDuration@ сек.</health> <keywordMajor>Горение</keywordMajor> суммируется бесконечно.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "DieAnotherDay",
+            "calculations": {},
+            "dataValues": {
+                "HealFlatTooltip": 250.0
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Отложенная смерть</spellName>.<br><br><rules><spellName>Отложенная смерть</spellName> на 4 сек. создает область, в которой не может умереть ни один боец.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/dieanotherday_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dieanotherday_small.png",
+            "id": 24,
+            "name": "Отложенная смерть",
+            "rarity": 1,
+            "tooltip": "Вы благословляете землю под собой на 4 сек. Уровень здоровья любого бойца в этой области не может опуститься ниже 10%. По окончании действия эффекта все бойцы внутри восстанавливают себе <healing>@HealFlatTooltip@ здоровья</healing>. "
+        },
+        {
+            "apiName": "SpiritLink",
+            "calculations": {},
+            "dataValues": {
+                "DamageRedirectPercentage": 0.15000000596046448,
+                "HealCopyPercentage": 0.5
+            },
+            "desc": "@DamageRedirectPercentage*100@% от урона, получаемого вашим союзником, перенаправляется на вас. Кроме того, @HealCopyPercentage*100@% от получаемого им <healing>лечения</healing> получаете и вы.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spiritlink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spiritlink_small.png",
+            "id": 78,
+            "name": "Духовная связь",
+            "rarity": 2,
+            "tooltip": "@DamageRedirectPercentage*100@% от урона, получаемого вашим союзником, перенаправляется на вас. Кроме того, @HealCopyPercentage*100@% от получаемого им <healing>лечения</healing> получаете и вы.<br><br>Общий перенаправленный урон: @f1@<br>Общая эффективность лечения: @f2@<br>"
+        },
+        {
+            "apiName": "Quest_AngelofRetribution",
+            "calculations": {
+                "BaseDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 50.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AttackSpeed": 1.0,
+                "HealPowerToDamageConversion": 3.0,
+                "RequirementAmount": 2500.0
+            },
+            "desc": "Требование: восстановить союзнику @RequirementAmount@ здоровья или заблокировать для него такое же количество урона.<br><br>Награда: вы получаете <attackspeed>@AttackSpeed*100@% скорости атаки</attackspeed>, и ваши автоатаки наносят дополнительный <magicdamage>магический урон</magicdamage> в размере <healing>@HealPowerToDamageConversion*100@% от эффективности лечения и щитов</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_angelofretribution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_angelofretribution_small.png",
+            "id": 192,
+            "name": "Задание: Ангел возмездия",
+            "rarity": 1,
+            "tooltip": "{{Cherry_QuestAngelofRetribution_Summary}}<br><br>Исцеленный или заблокированный урон: @f1@<br>Нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "ContractKiller",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.15000000596046448,
+                "Gold": 150.0
+            },
+            "desc": "В каждом раунде вы помечаете врага. Он получает на @spell.Augment_ContractKiller:DamageAmp*100@% больше урона, а за его убийство дается @spell.Augment_ContractKiller:Gold@ дополнительного золота.",
+            "iconLarge": "assets/ux/cherry/augments/icons/contractkiller_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/contractkiller_small.png",
+            "id": 17,
+            "name": "Наемный убийца",
+            "rarity": 0,
+            "tooltip": "В каждом раунде вы помечаете вражеского чемпиона. Он получает на @DamageAmp*100@% больше урона, а за его убийство вы и ваш союзник получаете @Gold@ дополнительного золота.<br><br>Дополнительный урон, нанесенный в этом раунде: @f1@<br>Общий дополнительный урон: @f2@<br>Общее количество полученного золота у каждого союзника: @f3@"
+        },
+        {
+            "apiName": "Goredrink",
+            "calculations": {},
+            "dataValues": {
+                "Omnivamp": 0.20000000298023224
+            },
+            "desc": "Вы получаете @Omnivamp*100@% всестороннего вытягивания жизни.",
+            "iconLarge": "assets/ux/cherry/augments/icons/goredrink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/goredrink_small.png",
+            "id": 138,
+            "name": "Потрошение",
+            "rarity": 0,
+            "tooltip": "Вы получаете @Omnivamp*100@% всестороннего вытягивания жизни."
+        },
+        {
+            "apiName": "FirstAidKit",
+            "calculations": {},
+            "dataValues": {
+                "HealShieldAmp": 0.20000000298023224
+            },
+            "desc": "Ваша <healing>эффективность лечения и щитов</healing> увеличивается на <healing>@HealShieldAmp*100@%</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firstaidkit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firstaidkit_small.png",
+            "id": 37,
+            "name": "Аптечка",
+            "rarity": 0,
+            "tooltip": "Ваша <healing>эффективность лечения и щитов</healing> увеличивается на <healing>@HealShieldAmp*100@%</healing>."
+        },
+        {
+            "apiName": "OkBoomerang",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.2199999988079071,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "<keywordMajor>Автоматически:</keywordMajor> каждые 7 сек. вы запускаете в ближайшего врага бумеранг.",
+            "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
+            "id": 61,
+            "name": "Окей, бумеранг",
+            "rarity": 1,
+            "tooltip": "<keywordMajor>Автоматически:</keywordMajor> каждые 7 сек. вы запускаете в ближайшего врага бумеранг, нанося @Damage@ адаптивного урона всем пораженным бойцам.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "JuiceBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "В каждом раунде вы и ваш союзник получаете дополнительный напиток бесплатно.",
+            "iconLarge": "assets/ux/cherry/augments/icons/juicebox_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/juicebox_small.png",
+            "id": 49,
+            "name": "Напиток",
+            "rarity": 0,
+            "tooltip": "В каждом раунде вы и ваш союзник получаете дополнительный напиток бесплатно."
+        },
+        {
+            "apiName": "ScopiestWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 250.0,
+                "RangedRangeIncrease": 150.0
+            },
+            "desc": "Ваша дальность атаки увеличивается на @MeleeRangeIncrease@ ед. (на @RangedRangeIncrease@ ед. для чемпионов дальнего боя).",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopiestweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopiestweapons_small.png",
+            "id": 115,
+            "name": "Точнейший оптический прицел",
+            "rarity": 2,
+            "tooltip": "Ваша дальность атаки увеличивается на @MeleeRangeIncrease@ ед. (на @RangedRangeIncrease@ ед. для чемпионов дальнего боя)."
+        },
+        {
+            "apiName": "StackosaurusRex",
+            "calculations": {},
+            "dataValues": {
+                "StackModifier": 0.75
+            },
+            "desc": "Количество постоянных <keywordMajor>зарядов</keywordMajor>, которые вы получаете при применении умений, увеличивается на @StackModifier*100@%!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stackosaurusrex_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stackosaurusrex_small.png",
+            "id": 204,
+            "name": "Заряжен и опасен",
+            "rarity": 0,
+            "tooltip": "Количество постоянных <keywordMajor>зарядов</keywordMajor>, которые вы получаете при применении умений, увеличивается на @StackModifier*100@%!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Превращает <magicDamage>силу умений</magicDamage> в <physicalDamage>дополнительную силу атаки</physicalDamage>. Дает <physicalDamage>@ADAmp*100@% силы атаки</physicalDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Трансмутация",
+            "rarity": 0,
+            "tooltip": "Превращает <magicDamage>силу умений</magicDamage> в <physicalDamage>дополнительную силу атаки</physicalDamage>. Дает <physicalDamage>@ADAmp*100@% силы атаки</physicalDamage>."
+        },
+        {
+            "apiName": "FeyMagic",
+            "calculations": {},
+            "dataValues": {
+                "PolyCooldown": 15.0,
+                "PolyDuration": 2.0,
+                "WEnemySlow": 60.0
+            },
+            "desc": "Нанося урон врагам абсолютным умением, вы также <status>превращаете</status> их на @PolyDuration@ сек. (Перезарядка: @PolyCooldown@ сек.)",
+            "iconLarge": "assets/ux/cherry/augments/icons/feymagic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/feymagic_small.png",
+            "id": 194,
+            "name": "Магия фей",
+            "rarity": 2,
+            "tooltip": "Нанося урон врагам абсолютным умением, вы также <status>превращаете</status> их на @PolyDuration@ сек. (Перезарядка: @PolyCooldown@ сек.)"
+        },
+        {
+            "apiName": "Firebrand",
+            "calculations": {},
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.019999999552965164
+            },
+            "desc": "Ваши автоатаки <keywordMajor>поджигают</keywordMajor> цель, нанося периодический урон. Эффект суммируется бесконечно.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firebrand_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firebrand_small.png",
+            "id": 36,
+            "name": "Тавро",
+            "rarity": 1,
+            "tooltip": "Ваши автоатаки <keywordMajor>поджигают</keywordMajor> цель, нанося <scaleAP>магический урон в размере @PercentMaxHPDamagePer5Seconds*20@% от максимального запаса здоровья</scaleAP> в секунду в течение @BleedDuration@ сек. <keywordMajor>Горение</keywordMajor> суммируется бесконечно.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "Flashy",
+            "calculations": {},
+            "dataValues": {
+                "FlashCooldown": 2.0
+            },
+            "desc": "У вашего Скачка 3 заряда, и его презарядка составляет @FlashCooldown@ сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/flashy_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
+            "id": 116,
+            "name": "Скакун",
+            "rarity": 0,
+            "tooltip": "У вашего Скачка 3 заряда, и его презарядка составляет @FlashCooldown@ сек."
+        },
+        {
+            "apiName": "NestingDoll",
+            "calculations": {},
+            "dataValues": {
+                "ReviveArmTime": 2.0,
+                "ReviveDuration": 1.5,
+                "ReviveMod": 0.4000000059604645,
+                "SecondReviveMod": 0.25,
+                "SecondSizeMod": -0.4000000059604645,
+                "SelfReviveTimerModMax": 0.5,
+                "SelfReviveTimerModMin": 0.4000000059604645,
+                "SizeMod": -0.20000000298023224
+            },
+            "desc": "Вы автоматически начинаете возрождаться через @ReviveArmTime@ сек. и получаете возможность возродиться еще раз. Каждый раз, когда вы возрождаетесь, ваш размер уменьшается. При этом ваш запас здоровья составляет @ReviveMod*100@% от максимального.<br><br>После возрождения вы <status>отбрасываете</status> врагов вокруг.",
+            "iconLarge": "assets/ux/cherry/augments/icons/nestingdoll_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/nestingdoll_small.png",
+            "id": 177,
+            "name": "Матрешка",
+            "rarity": 2,
+            "tooltip": "Вы автоматически начинаете возрождаться через @ReviveArmTime@ сек. и получаете возможность возродиться еще раз. Каждый раз, когда вы возрождаетесь, ваш размер уменьшается. При этом ваш запас здоровья составляет @ReviveMod*100@% от максимального.<br><br>После возрождения вы <status>отбрасываете</status> врагов вокруг."
+        },
+        {
+            "apiName": "TapDancer",
+            "calculations": {},
+            "dataValues": {
+                "MSPerHit": 10.0,
+                "MSToASConversion": 0.0010000000474974513
+            },
+            "desc": "Автоатаки дают вам <moveSpeed>@MSPerHit@ скорости передвижения</moveSpeed> (суммируется бесконечно). Вы получаете скорость атаки в размере @MSToASConversion*10000@% от скорости передвижения.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tapdancer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tapdancer_small.png",
+            "id": 81,
+            "name": "Чечетка",
+            "rarity": 2,
+            "tooltip": "Автоатаки дают вам <moveSpeed>@MSPerHit@ скорости передвижения</moveSpeed> (суммируется бесконечно). Вы получаете скорость атаки в размере @MSToASConversion*10000@% от скорости передвижения."
+        },
+        {
+            "apiName": "Tormentor",
+            "calculations": {},
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033
+            },
+            "desc": "При <status>обездвиживании</status> вражеских чемпионов вы <keywordMajor>поджигаете</keywordMajor> их, нанося периодический урон. Горение суммируется бесконечно.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tormentor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tormentor_small.png",
+            "id": 85,
+            "name": "Мучитель",
+            "rarity": 0,
+            "tooltip": "При <status>обездвиживании</status> вражеских чемпионов вы <keywordMajor>поджигаете</keywordMajor> их, нанося <scaleAP>магический урон в размере @PercentMaxHPDamagePer5Seconds*20@% от максимального запаса здоровья</scaleAP> в секунду в течение @BleedDuration@ сек. <keywordMajor>Горение</keywordMajor> суммируется бесконечно.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "Minionmancer",
+            "calculations": {},
+            "dataValues": {
+                "MinionDamageIncrease": 0.44999998807907104,
+                "MinionHealthIncrease": 0.44999998807907104,
+                "MinionSizeIncrease": 0.44999998807907104
+            },
+            "desc": "Ваши призванные бойцы увеличиваются в размере на @MinionSizeIncrease*100@% и получают такой же бонус к здоровью и урону.",
+            "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/minionmancer_small.png",
+            "id": 104,
+            "name": "Повелитель миньонов",
+            "rarity": 1,
+            "tooltip": "Ваши призванные бойцы увеличиваются в размере на @MinionSizeIncrease*100@% и получают такой же бонус к здоровью и урону."
+        },
+        {
+            "apiName": "EtherealWeapon",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Ваши умения накладывают эффекты при попадании. Перезарядка: 1 сек. для каждой цели.",
+            "iconLarge": "assets/ux/cherry/augments/icons/etherealweapon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/etherealweapon_small.png",
+            "id": 29,
+            "name": "Эфемерное оружие",
+            "rarity": 1,
+            "tooltip": "Ваши умения накладывают эффекты при попадании. Перезарядка: 1 сек. для каждой цели.<br><br>Количество срабатываний за этот раунд: @f1@<br>Общее количество срабатываний: @f2@"
+        },
+        {
+            "apiName": "OmniSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Вы получаете 3 случайные души драконов.",
+            "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
+            "id": 62,
+            "name": "Собиратель душ",
+            "rarity": 2,
+            "tooltip": "Вы получаете 3 случайные души драконов."
+        },
+        {
+            "apiName": "DawnbringersResolve",
+            "calculations": {
+                "HealCalc": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealAmount",
+                            "mStat": 11
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.08299999684095383
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Duration": 3.0,
+                "HealAmount": 0.30000001192092896,
+                "HealthThreshold": 0.5
+            },
+            "desc": "Когда у вас остается @HealthThreshold*100@% здоровья, вы восстанавливаете себе @HealAmount*100@% от максимального запаса здоровья в течение 3 сек.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 20,
+            "name": "Решимость Предвестника зари",
+            "rarity": 1,
+            "tooltip": "Когда у вас остается @HealthThreshold*100@% здоровья, вы восстанавливаете себе @HealAmount*100@% от максимального запаса здоровья в течение 3 сек.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@"
+        },
+        {
+            "apiName": "HoldVeryStill",
+            "calculations": {
+                "BonusAS": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 5
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 10
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 15
+                                }
+                            ],
+                            "mLevel1Value": 0.20000000298023224
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ASDuration": 5.0,
+                "BonusDamage": 0.10000000149011612,
+                "BonusMS": 0.20000000298023224,
+                "HoldStillDuration": 1.5
+            },
+            "desc": "Вы получаете <spellName>Партизанскую войну</spellName>.<br><br><rules>Не двигаясь в течение @HoldStillDuration@ сек., вы становитесь <keywordStealth>невидимым</keywordStealth> до тех пор, пока не начнете передвигаться. После выхода из <keywordStealth>невидимости</keywordStealth> вы получаете <attackSpeed>@BonusAS@ скорости атаки</attackSpeed>.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/holdverystill_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/holdverystill_small.png",
+            "id": 207,
+            "name": "Стой смирно",
+            "rarity": 0,
+            "tooltip": "Вы получаете <spellName>Партизанскую войну</spellName>.<br><br><rules>Не двигаясь в течение @HoldStillDuration@ сек., вы становитесь <keywordStealth>невидимым</keywordStealth> до тех пор, пока не начнете передвигаться. После выхода из <keywordStealth>невидимости</keywordStealth> вы получаете <attackSpeed>@BonusAS@ скорости атаки</attackSpeed>.</rules>"
+        },
+        {
+            "apiName": "FromBeginningToEnd",
+            "calculations": {
+                "ChampRange": {
+                    "StaticTooltipCalculationDisplay": 5,
+                    "__type": "GameCalculationConditional",
+                    "mConditionalCalculationRequirements": {
+                        "__type": "IsRangedCastRequirement"
+                    },
+                    "mConditionalGameCalculation": "{06387172}",
+                    "mDefaultGameCalculation": "{792cf56b}",
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mSimpleTooltipCalculationDisplay": 5
+                },
+                "Cooldown": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "ByCharLevelInterpolationCalculationPart",
+                                "mEndValue": 15.0,
+                                "mStartValue": 25.0
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ModesCooldownReduction"
+                            }
+                        }
+                    ]
+                },
+                "{06387172}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 2.0
+                        }
+                    ]
+                },
+                "{792cf56b}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 1.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.3499999940395355,
+                "APRatio": 0.25,
+                "BaseDamageHigh": 100.0,
+                "BaseDamageLow": 50.0,
+                "CooldownResetValue": 1.5,
+                "DHCooldown": 45.0,
+                "DamageAmp": 0.15000000596046448,
+                "DamagePerSoulEssence": 10.0,
+                "Duration": 3.0,
+                "GoldPercentBonus": 1.2000000476837158,
+                "GoldPercentBonusRanged": 0.8999999761581421,
+                "GoldProcBonus": 6.0,
+                "GraceWindow": 0.25,
+                "HarvestThreshold": 0.5,
+                "MissileNoiseNumberLimiter": 3.0,
+                "MissileNoiseRangeLimiter": 1500.0,
+                "ModesCooldownReduction": 1.0,
+                "OOCTimer": 10.0
+            },
+            "desc": "Вы получаете ключевые руны <spellName>Удар на опережение</spellName> и <spellName>Темная жатва</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frombeginningtoend_small.png",
+            "id": 38,
+            "name": "От начала до конца",
+            "rarity": 1,
+            "tooltip": "Вы получаете ключевые руны <spellName>Удар на опережение</spellName> и <spellName>Темная жатва</spellName>.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@<br>Общее количество полученного золота: @f3@"
+        },
+        {
+            "apiName": "CantTouchThis",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "InvulnDuration": 2.0
+            },
+            "desc": "При применении абсолютного умения вы ненадолго получаете <status>неуязвимость</status>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
+            "id": 11,
+            "name": "Не достанешь",
+            "rarity": 2,
+            "tooltip": "При применении абсолютного умения вы на @InvulnDuration@ сек. получаете <status>неуязвимость</status>. Перезарядка: @Cooldown@ сек."
+        },
+        {
+            "apiName": "SnowballFight",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 15.0
+            },
+            "desc": "Ваше заклинание призывателя Бегство заменяется на Метку.<br><br><rules>Применив Метку, вы бросаете снежок, который помечает врага и наносит урон. При <recast>повторном применении</recast> вы совершаете рывок к помеченном врагу.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/snowballfight_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/snowballfight_small.png",
+            "id": 176,
+            "name": "Битва снежками!",
+            "rarity": 0,
+            "tooltip": "Ваше заклинание призывателя Бегство заменяется на Метку.<br><br><rules>Применив Метку, вы бросаете снежок, который помечает врага и наносит урон. При <recast>повторном применении</recast> вы совершаете рывок к помеченном врагу.</rules>"
+        },
+        {
+            "apiName": "ItsCritical",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.4000000059604645
+            },
+            "desc": "Вы получаете <crit>@CritChance*100@% шанса критического удара</crit>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/itscritical_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/itscritical_small.png",
+            "id": 47,
+            "name": "Критическая ситуация",
+            "rarity": 1,
+            "tooltip": "Вы получаете <crit>@CritChance*100@% шанса критического удара</crit>."
+        },
+        {
+            "apiName": "BloodBrother",
+            "calculations": {
+                "BleedDamagePerStack": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 45.0,
+                            "mStartValue": 15.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "NoxianMightBonusAD": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mBonusPerLevelAtAndAfter": 15.0,
+                                    "mLevel": 11
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mBonusPerLevelAtAndAfter": 30.0,
+                                    "mLevel": 14
+                                }
+                            ],
+                            "mInitialBonusPerLevel": 5.0,
+                            "mLevel1Value": 30.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "MaxStacks": 5.0,
+                "SecondsPerTick": 1.2599999904632568
+            },
+            "desc": "Дает пассивное умение Дариуса <spellName>Кровотечение</spellName>.<br><br><rules>Автоатаки и наносящие урон умения Дрейвена накладывают на цель <keywordMajor>Кровотечение</keywordMajor>, которое наносит <physicalDamage>@BleedDamagePerStack@ физического урона</physicalDamage> в течение @BleedDuration@ сек. (максимум зарядов – @MaxStacks@).<br><br>Когда враг набирает максимальное количество (@MaxStacks@) зарядов <keywordMajor>Кровотечения</keywordMajor>, Дрейвен получает <scaleAD>@NoxianMightBonusAD@ силы атаки</scaleAD>.</rules><br><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/bloodbrother_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bloodbrother_small.png",
+            "id": 200,
+            "name": "Кровный брат",
+            "rarity": 1,
+            "tooltip": "Дает пассивное умение Дариуса <spellName>Кровотечение</spellName>.<br><br><rules>Автоатаки и наносящие урон умения Дрейвена накладывают на цель <keywordMajor>Кровотечение</keywordMajor>, которое наносит <physicalDamage>@BleedDamagePerStack@ физического урона</physicalDamage> в течение @BleedDuration@ сек. (максимум зарядов – @MaxStacks@).<br><br>Когда враг набирает максимальное количество (@MaxStacks@) зарядов <keywordMajor>Кровотечения</keywordMajor>, Дрейвен получает <scaleAD>@NoxianMightBonusAD@ силы атаки</scaleAD>.</rules><br><br>"
+        },
+        {
+            "apiName": "UltimateUnstoppable",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "UnstoppableDuration": 3.0
+            },
+            "desc": "После применения своего абсолютного умения вы на @UnstoppableDuration@ сек. получаете невосприимчивость к эффектам контроля. Перезарядка: @Cooldown@ сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimateunstoppable_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimateunstoppable_small.png",
+            "id": 112,
+            "name": "Абсолютная неудержимость",
+            "rarity": 0,
+            "tooltip": "После применения своего абсолютного умения вы на @UnstoppableDuration@ сек. получаете невосприимчивость к эффектам контроля. Перезарядка: @Cooldown@ сек."
+        },
+        {
+            "apiName": "Recursion",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHaste": 60.0
+            },
+            "desc": "Вы получаете <scaleLevel>@AbilityHaste@ ускорения умений</scaleLevel>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/recursion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/recursion_small.png",
+            "id": 68,
+            "name": "Рекурсия",
+            "rarity": 1,
+            "tooltip": "Вы получаете <scaleLevel>@AbilityHaste@ ускорения умений</scaleLevel>."
+        },
+        {
+            "apiName": "Deft",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeed": 0.6000000238418579
+            },
+            "desc": "Вы получаете @AttackSpeed*100@% скорости атаки.",
+            "iconLarge": "assets/ux/cherry/augments/icons/deft_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/deft_small.png",
+            "id": 22,
+            "name": "Проворство",
+            "rarity": 0,
+            "tooltip": "Вы получаете @AttackSpeed*100@% скорости атаки."
+        },
+        {
+            "apiName": "Goliath",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.15000000596046448,
+                "APAmp": 0.15000000596046448,
+                "HealthAmp": 0.3499999940395355,
+                "SizeAmp": 0.5
+            },
+            "desc": "Вы увеличиваетесь в размере и получаете @HealthAmp*100@% <scaleHealth>здоровья</scaleHealth> и @ADAmp*100@% <scaleAP>адаптивной силы</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/goliath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/goliath_small.png",
+            "id": 41,
+            "name": "Голиаф",
+            "rarity": 2,
+            "tooltip": "Вы увеличиваетесь в размере и получаете @HealthAmp*100@% <scaleHealth>здоровья</scaleHealth> и @ADAmp*100@% <scaleAP>адаптивной силы</scaleAP>."
+        },
+        {
+            "apiName": "AcceleratingSorcery",
+            "calculations": {},
+            "dataValues": {
+                "HastePerCast": 10.0
+            },
+            "desc": "При применении умений вы получаете прибавки к <scaleBonus>ускорению умений</scaleBonus> (сбрасываются каждый раунд).",
+            "iconLarge": "assets/ux/cherry/augments/icons/acceleratingsorcery_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/acceleratingsorcery_small.png",
+            "id": 1,
+            "name": "Ускоренное колдовство",
+            "rarity": 2,
+            "tooltip": "При применении умения вы получаете <scaleBonus>@HastePerCast@ ускорения умений</scaleBonus> (сбрасываются каждый раунд)."
+        },
+        {
+            "apiName": "OrbitalLaser",
+            "calculations": {
+                "DamagePerTick": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 120.0,
+                            "mStartValue": 45.0
+                        }
+                    ]
+                },
+                "TotalDamageOverTimeTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "DamagePerTick",
+                    "mMultiplier": {
+                        "__type": "ProductOfSubPartsCalculationPart",
+                        "mPart1": {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "GroundDuration"
+                        },
+                        "mPart2": {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 4.0
+                        }
+                    },
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "AOESize": 550.0,
+                "CastRange": 5500.0,
+                "Cooldown": 20.0,
+                "DamagetoChampions": 0.30000001192092896,
+                "GroundDuration": 3.0,
+                "LaserDelay": 2.5,
+                "TickRate": 0.5
+            },
+            "desc": "Ваше заклинание призывателя Бегство заменяется на <spellName>Орбитальный лазер</spellName>.<br><br><rules>После задержки указанную точку поражает луч орбитального лазера, который наносит <trueDamage>чистый урон в размере @DamagetoChampions*100@% от максимального запаса здоровья</trueDamage> плюс <magicDamage>@TotalDamageOverTimeTooltip@ магического урона</magicDamage> в течение @GroundDuration@ сек.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/orbitallaser_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/orbitallaser_small.png",
+            "id": 208,
+            "name": "Орбитальный лазер",
+            "rarity": 2,
+            "tooltip": "{{Cherry_OrbitalLaser_Summary}}<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "MysticPunch",
+            "calculations": {},
+            "dataValues": {
+                "CooldownRefund": 1.25
+            },
+            "desc": "Ваши автоатаки сокращают перезарядку умений на @CooldownRefund@ сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
+            "id": 58,
+            "name": "Мистический удар",
+            "rarity": 2,
+            "tooltip": "Ваши автоатаки сокращают перезарядку умений на @CooldownRefund@ сек."
+        },
+        {
+            "apiName": "Homeguard",
+            "calculations": {},
+            "dataValues": {
+                "DisableCooldown": 3.0,
+                "Duration": 10.0,
+                "MovementSpeed": 1.0
+            },
+            "desc": "Вы получаете <speed>@spell.Augment_Homeguard:MovementSpeed*100@% скорости передвижения</speed>. Эффект перестает действовать на @spell.Augment_Homeguard:DisableCooldown@ сек. после получения урона.",
+            "iconLarge": "assets/ux/cherry/augments/icons/homeguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/homeguard_small.png",
+            "id": 105,
+            "name": "Ополчение",
+            "rarity": 0,
+            "tooltip": "Вы получаете <speed>@spell.Augment_Homeguard:MovementSpeed*100@% скорости передвижения</speed>. Эффект перестает действовать на @spell.Augment_Homeguard:DisableCooldown@ сек. после получения урона."
+        },
+        {
+            "apiName": "HeavyHitter",
+            "calculations": {
+                "HealthPercentDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthPercent",
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthPercent": 0.03500000014901161
+            },
+            "desc": "Ваши автоатаки дополнительно наносят <physicalDamage>физический урон</physicalDamage> в размере @HealthPercent*100@% от вашего <healing>максимального запаса здоровья</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/heavyhitter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/heavyhitter_small.png",
+            "id": 181,
+            "name": "Тяжеловес",
+            "rarity": 0,
+            "tooltip": "Ваши автоатаки дополнительно наносят <physicalDamage>физический урон</physicalDamage> в размере @HealthPercent*100@% от вашего <healing>максимального запаса здоровья</healing>."
+        },
+        {
+            "apiName": "RabbleRousing",
+            "calculations": {
+                "HealAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "MaxHealthPercentageHeal",
+                            "mStat": 11
+                        },
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 5.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "MaxHealthPercentageHeal": 0.009999999776482582
+            },
+            "desc": "При применении умений вы восстанавливаете себе <healing>@HealAmount@ здоровья</healing>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/rabblerousing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/rabblerousing_small.png",
+            "id": 67,
+            "name": "Возмутитель спокойствия",
+            "rarity": 1,
+            "tooltip": "При применении умений вы восстанавливаете себе <healing>@HealAmount@ здоровья</healing>.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@"
+        },
+        {
+            "apiName": "GiantSlayer",
+            "calculations": {},
+            "dataValues": {
+                "LargeBonusDamage": 0.25,
+                "MedBonusDamage": 0.15000000596046448,
+                "MovespeedMod": 0.30000001192092896,
+                "SizeMod": 0.25,
+                "SmallBonusDamage": 0.10000000149011612,
+                "XLargeBonusDamage": 0.30000001192092896
+            },
+            "desc": "Вы уменьшаетесь в размерах, получаете прибавку к <speed>скорости передвижения</speed> и наносите дополнительный урон чемпионам в зависимости от того, насколько они крупнее вас.",
+            "iconLarge": "assets/ux/cherry/augments/icons/giantslayer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/giantslayer_small.png",
+            "id": 195,
+            "name": "Убийца великанов",
+            "rarity": 2,
+            "tooltip": "Вы уменьшаетесь в размерах, получаете <speed>@MovespeedMod*100@% скорости передвижения</speed> и наносите @SmallBonusDamage*100@-@XLargeBonusDamage*100@% дополнительного урона чемпионам в зависимости от того, насколько они крупнее вас.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Урон, нанесенный в этой игре: @f2@"
+        },
+        {
+            "apiName": "FrozenFoundations",
+            "calculations": {},
+            "dataValues": {
+                "ChampPushDistance": 120.0,
+                "NonChampPushDistance": 250.0,
+                "WallDuration": 5.0,
+                "WallWidth": 400.0
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Морозный оплот</spellName>.<br><br><rules><spellName>Морозный оплот</spellName> создает ледяную стену в выбранном месте.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/frozenfoundations_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frozenfoundations_small.png",
+            "id": 40,
+            "name": "Морозный оплот",
+            "rarity": 0,
+            "tooltip": "<rules>Вы создаете ледяную стену в выбранном месте.</rules>"
+        },
+        {
+            "apiName": "CriticalHealing",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritHeal": 0.4000000059604645
+            },
+            "desc": "Ваши эффекты исцеления и щиты могут быть критическими. Вы получаете @CritChance*100@% шанса критического удара.",
+            "iconLarge": "assets/ux/cherry/augments/icons/criticalhealing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/criticalhealing_small.png",
+            "id": 118,
+            "name": "Критическое лечение",
+            "rarity": 1,
+            "tooltip": "Ваши эффекты исцеления и щиты могут быть критическими, отчего их эффективность дополнительно увеличивается на @CritHeal*100@%. Вы получаете @CritChance*100@% шанса критического удара. <br><br>Дополнительное лечение: @f1@<br>Дополнительные щиты: @f2@"
+        },
+        {
+            "apiName": "ApexInventor",
+            "calculations": {},
+            "dataValues": {
+                "ItemHaste": 300.0,
+                "TooltipCDR": 75.0
+            },
+            "desc": "Дает <scaleBonus>@ItemHaste@ ускорения предметов</scaleBonus> (@TooltipCDR@% сокращения перезарядки предметов).<br><br><rules>Ускорение предметов сокращает перезарядку всех активных эффектов предметов.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
+            "id": 2,
+            "name": "Блестящий изобретатель",
+            "rarity": 1,
+            "tooltip": "Дает <scaleBonus>@ItemHaste@ ускорения предметов</scaleBonus> (@TooltipCDR@% сокращения перезарядки предметов).<br><br><rules>Ускорение предметов сокращает перезарядку всех активных эффектов предметов.</rules>"
+        },
+        {
+            "apiName": "MirrorImage",
+            "calculations": {},
+            "dataValues": {
+                "AugmentCooldown": 60.0,
+                "CloneDuration": 8.0,
+                "HealthThreshold": 0.30000001192092896,
+                "StealthDuration": 1.25
+            },
+            "desc": "Когда у вас остается @HealthThreshold*100@% здоровья, вы ненадолго получаете <keywordStealth>невидимость</keywordStealth> и создаете своего клона.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
+            "id": 172,
+            "name": "Отражение",
+            "rarity": 0,
+            "tooltip": "Когда у вас остается @HealthThreshold*100@% здоровья, вы ненадолго получаете <keywordStealth>невидимость</keywordStealth> и создаете своего клона."
+        },
+        {
+            "apiName": "AllForYou",
+            "calculations": {},
+            "dataValues": {
+                "HealShieldAmp": 0.30000001192092896
+            },
+            "desc": "Мощность ваших исцеляющих эффектов и щитов увеличена на @HealShieldAmp*100@% при применении к вашему партнеру.",
+            "iconLarge": "assets/ux/cherry/augments/icons/allforyou_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/allforyou_small.png",
+            "id": 141,
+            "name": "Все для тебя",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_AllForYou_Summary }}<br><br>Дополнительное лечение: @f1@<br>Дополнительная прочность щитов: @f2@"
+        },
+        {
+            "apiName": "KeystoneConjurer",
+            "calculations": {},
+            "dataValues": {
+                "ADRatio": 0.3499999940395355,
+                "APRatio": 0.20000000298023224,
+                "AoEPercentRefund": 0.10000000149011612,
+                "DamageADRatio": 0.15000000596046448,
+                "DamageAPRatio": 0.10000000149011612,
+                "DamageBase": 10.0,
+                "DamageMax": 40.0,
+                "DotPercentRefund": 0.05000000074505806,
+                "PercentRefund": 0.20000000298023224,
+                "RechargeTime": 20.0,
+                "RechargeTimeMin": 8.0,
+                "ShieldBase": 30.0,
+                "ShieldMax": 75.0,
+                "ShieldRatio": 0.22499999403953552,
+                "ShieldRatioAD": 0.3499999940395355
+            },
+            "desc": "Вы получаете ключевые руны <spellName>Призыв Пушинки</spellName> и <spellName>Магическая комета</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/keystoneconjurer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/keystoneconjurer_small.png",
+            "id": 50,
+            "name": "Рунный призыватель",
+            "rarity": 1,
+            "tooltip": "Вы получаете ключевые руны <spellName>Призыв Пушинки</spellName> и <spellName>Магическая комета</spellName>.<br><br>Общий нанесенный урон: @f1@<br>Общая прочность щитов: @f2@"
+        },
+        {
+            "apiName": "LaserEyes",
+            "calculations": {
+                "LaserDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 5.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatio",
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "LaserEyesTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 240.0,
+                            "mStartValue": 20.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatioTooltip"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatioTooltip",
+                            "mStat": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4,
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.14000000059604645,
+                "ADRatioTooltip": 0.5600000023841858,
+                "APRatio": 0.09000000357627869,
+                "APRatioTooltip": 0.36000001430511475,
+                "LaserLength": 700.0,
+                "RectHalfWidth": 60.0
+            },
+            "desc": "Ваш чемпион стреляет перед собой лазерным лучом, который наносит периодический <magicDamage>магический урон</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lasereyes_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lasereyes_small.png",
+            "id": 174,
+            "name": "Лазеры из глаз",
+            "rarity": 2,
+            "tooltip": "Ваш чемпион стреляет перед собой лазерным лучом, который наносит <magicDamage>@LaserEyesTooltip@ магического урона</magicDamage> в секунду.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "Dashing",
+            "calculations": {},
+            "dataValues": {
+                "Haste": 250.0
+            },
+            "desc": "На ваши умения с рывками, прыжками и телепортацией действует <scaleLevel>@Haste@ ускорения умений</scaleLevel>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dashing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dashing_small.png",
+            "id": 19,
+            "name": "Стремительность",
+            "rarity": 2,
+            "tooltip": "На ваши умения с рывками, прыжками и телепортацией действует <scaleLevel>@Haste@ ускорения умений</scaleLevel>."
+        },
+        {
+            "apiName": "LightningStrikes",
+            "calculations": {},
+            "dataValues": {
+                "ASToADConversion": 25.0
+            },
+            "desc": "Вы получаете прибавку к <scaleAD>силе атаки</scaleAD>, которая зависит от вашей <attackSpeed>скорости атаки</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
+            "id": 52,
+            "name": "Удары молнии",
+            "rarity": 1,
+            "tooltip": "Вы получаете <scaleAD>@ASToADConversion*.1@ силы атаки</scaleAD> за каждые <attackSpeed>0.1 скорости атаки</attackSpeed>."
+        },
+        {
+            "apiName": "Repulsor",
+            "calculations": {},
+            "dataValues": {
+                "HealthThreshold1": 0.6000000238418579,
+                "HealthThreshold2": 0.30000001192092896,
+                "KnockbackDistance": 750.0,
+                "KnockbackRange": 500.0
+            },
+            "desc": "Когда у вас остается менее @HealthThreshold1*100@ или @HealthThreshold2*100@% здоровья, вы <status>отбрасываете</status> врагов поблизости.",
+            "iconLarge": "assets/ux/cherry/augments/icons/repulsor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/repulsor_small.png",
+            "id": 69,
+            "name": "Репульсор",
+            "rarity": 0,
+            "tooltip": "Когда у вас остается менее @HealthThreshold1*100@ или @HealthThreshold2*100@% здоровья, вы <status>отбрасываете</status> врагов поблизости."
+        },
+        {
+            "apiName": "SkilledSniper",
+            "calculations": {},
+            "dataValues": {
+                "PeriodicReductionAmount": 3.0,
+                "ReducedCooldown": 0.5,
+                "SnipeDistance": 700.0
+            },
+            "desc": "Когда вы поражаете врага неабсолютным умением на расстоянии более @SnipeDistance@ ед., его перезарядка сокращается до @ReducedCooldown@ сек. Если умение наносит периодический урон, вместо этого его перезарядка сокращается до @PeriodicReductionAmount@ сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/skilledsniper_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/skilledsniper_small.png",
+            "id": 113,
+            "name": "Опытный снайпер",
+            "rarity": 1,
+            "tooltip": "Когда вы поражаете врага неабсолютным умением на расстоянии более @SnipeDistance@ ед., его перезарядка сокращается до @ReducedCooldown@ сек. Если умение наносит периодический урон, вместо этого его перезарядка сокращается до @PeriodicReductionAmount@ сек."
+        },
+        {
+            "apiName": "ParasiticRelationship",
+            "calculations": {},
+            "dataValues": {
+                "HealPercent": 0.15000000596046448
+            },
+            "desc": "Вы лечитесь на @HealPercent*100@% от урона, нанесенного союзником.",
+            "iconLarge": "assets/ux/cherry/augments/icons/parasiticrelationship_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/parasiticrelationship_small.png",
+            "id": 175,
+            "name": "Паразитические отношения",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_ParasiticRelationship_Summary }}<br><br>Лечение в этом раунде: @f1@<br>Общее лечение: @f2@"
+        },
+        {
+            "apiName": "Restart",
+            "calculations": {},
+            "dataValues": {
+                "CoolDown": 10.0
+            },
+            "desc": "<keywordMajor>Автоматически</keywordMajor>: раз в @CoolDown@ сек. у ваших неабсолютных умений сбрасывается перезарядка.",
+            "iconLarge": "assets/ux/cherry/augments/icons/restart_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/restart_small.png",
+            "id": 165,
+            "name": "Перезапуск",
+            "rarity": 1,
+            "tooltip": "<keywordMajor>Автоматически</keywordMajor>: раз в @CoolDown@ сек. у ваших неабсолютных умений сбрасывается перезарядка."
+        },
+        {
+            "apiName": "DrawYourSword",
+            "calculations": {},
+            "dataValues": {
+                "BonusAD": 0.3499999940395355,
+                "BonusAS": 0.25,
+                "BonusHP": 0.3499999940395355,
+                "BonusLifesteal": 0.25,
+                "BonusMS": 0.25,
+                "ExtraStackAttackRangeCeiling": 650.0,
+                "ExtraStackAttackRangeFloor": 500.0,
+                "MaxStatMod": 0.30000001192092896,
+                "MeleeAttackRange": 200.0
+            },
+            "desc": "Ваш чемпион теперь сражается в ближнем бою. Вы получаете <physicalDamage>@BonusAD*100@% силы атаки</physicalDamage>, <healing>@BonusHP*100@% здоровья</healing>, <attackSpeed>@BonusAS*100@% скорости атаки</attackSpeed>, <lifesteal>@BonusLifesteal*100@% вампиризма</lifesteal> и <speed>@BonusMS*100@% скорости передвижения</speed> (чем выше была дальность атаки, тем больше прибавки).",
+            "iconLarge": "assets/ux/cherry/augments/icons/drawyoursword_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/drawyoursword_small.png",
+            "id": 134,
+            "name": "Меч к бою",
+            "rarity": 2,
+            "tooltip": "Ваш чемпион теперь сражается в ближнем бою. Вы получаете <physicalDamage>@BonusAD*100@% силы атаки</physicalDamage>, <healing>@BonusHP*100@% здоровья</healing>, <attackSpeed>@BonusAS*100@% скорости атаки</attackSpeed>, <lifesteal>@BonusLifesteal*100@% вампиризма</lifesteal> и <speed>@BonusMS*100@% скорости передвижения</speed> (чем выше была дальность атаки, тем больше прибавки)."
+        },
+        {
+            "apiName": "RestlessRestoration",
+            "calculations": {
+                "HealCalcPer1000Units": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthRatioPer1000Units",
+                            "mStat": 11
+                        },
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 120.0,
+                            "mStartValue": 20.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealthRatioPer1000Units": 0.019999999552965164
+            },
+            "desc": "Вы постоянно <healing>лечитесь</healing> во время перемещения. Эффективность зависит от пройденного расстояния.",
+            "iconLarge": "assets/ux/cherry/augments/icons/restlessrestoration_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/restlessrestoration_small.png",
+            "id": 70,
+            "name": "Активная регенерация",
+            "rarity": 1,
+            "tooltip": "Вы восстанавливаете себе @HealCalcPer1000Units@ здоровья за каждые 1000 ед. пройденного расстояния.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@"
+        },
+        {
+            "apiName": "DiveBomber",
+            "calculations": {},
+            "dataValues": {
+                "ExplosionRadius": 500.0,
+                "PercentMaxHPDamage": 0.20000000298023224
+            },
+            "desc": "В каждом раунде первый погибший боец из вашей команды взрывается, нанося врагам большой урон.",
+            "iconLarge": "assets/ux/cherry/augments/icons/divebomber_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/divebomber_small.png",
+            "id": 25,
+            "name": "Прощальный подарок",
+            "rarity": 1,
+            "tooltip": "В каждом раунде первый погибший боец из вашей команды взрывается, нанося врагам поблизости <trueDamage>чистый урон в размере @PercentMaxHPDamage*100@% от их максимального запаса здоровья</trueDamage>.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "BluntForce",
+            "calculations": {},
+            "dataValues": {
+                "ADIncrease": 0.15000000596046448
+            },
+            "desc": "Дает <scaleAD>@ADIncrease*100@% силы атаки</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
+            "id": 7,
+            "name": "Грубая сила",
+            "rarity": 0,
+            "tooltip": "Дает <scaleAD>@ADIncrease*100@% силы атаки</scaleAD>."
+        },
+        {
+            "apiName": "Oathsworn",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Ваше заклинание призывателя Бегство заменяется на <spellName>Зов судьбы</spellName>. <br><br><rules><spellName>Зов судьбы</spellName> затягивает вашего союзника в вас, делая его недосягаемым на срок до 4 сек. Он может применить команду передвижения, чтобы броситься в выбранное место. При столкновении с чемпионом он останавливается и <status>отбрасывает</status> всех окружающих врагов.</rules><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
+            "id": 109,
+            "name": "Клятва верности",
+            "rarity": 1,
+            "tooltip": "Ваше заклинание призывателя Бегство заменяется на <spellName>Зов судьбы</spellName>. <br><br><rules><spellName>Зов судьбы</spellName> затягивает вашего союзника в вас, делая его недосягаемым на срок до 4 сек. Он может применить команду передвижения, чтобы броситься в выбранное место. При столкновении с чемпионом он останавливается и <status>отбрасывает</status> всех окружающих врагов.</rules><br>"
+        },
+        {
+            "apiName": "Flashbang",
+            "calculations": {
+                "ExplosiveDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.6000000238418579
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.699999988079071,
+                            "mStat": 2
+                        },
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 10.0,
+                            "mLevel1Value": 70.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "SlowAmount": 0.3499999940395355,
+                "SlowDuration": 1.25
+            },
+            "desc": "Когда вы применяете Скачок, вокруг вас происходит взрыв, который наносит врагам <MagicalDamage>магический урон</MagicalDamage> и <status>замедляет</status> их. Перезарядка Скачка сбрасывается в начале каждого раунда.",
+            "iconLarge": "assets/ux/cherry/augments/icons/flashbang_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/flashbang_small.png",
+            "id": 187,
+            "name": "Светошумовая граната",
+            "rarity": 0,
+            "tooltip": "Когда вы применяете Скачок, вокруг вас происходит взрыв, который наносит врагам <MagicalDamage>@ExplosiveDamage@ магического урона</MagicalDamage> и <status>замедляет</status> их на @SlowAmount*100@% на @SlowDuration@ сек. Перезарядка Скачка сбрасывается в начале каждого раунда.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "SummonersRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Ваши заклинания призывателя заменяются на другие, выбранные случайно. При использовании заклинания в бою оно также заменяется на случайное, и его время перезарядки составляет @Cooldown@ сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonersroulette_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonersroulette_small.png",
+            "id": 123,
+            "name": "Рулетка призывателей",
+            "rarity": 2,
+            "tooltip": "Ваши заклинания призывателя заменяются на другие, выбранные случайно. При использовании заклинания в бою оно также заменяется на случайное, и его время перезарядки составляет @Cooldown@ сек."
+        },
+        {
+            "apiName": "ShrinkRay",
+            "calculations": {},
+            "dataValues": {
+                "DamageReduction": 0.15000000596046448
+            },
+            "desc": "Ваши автоатаки уменьшают урон врагов на @DamageReduction*100@% на 3 сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/shrinkray_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/shrinkray_small.png",
+            "id": 74,
+            "name": "Уменьшающий луч",
+            "rarity": 1,
+            "tooltip": "Ваши автоатаки уменьшают урон врагов на @DamageReduction*100@% на 3 сек.<br><br>Урон, уменьшенный в этом раунде: @f1@<br>Общий уменьшенный урон: @f2@"
+        },
+        {
+            "apiName": "Castle",
+            "calculations": {},
+            "dataValues": {
+                "MSBuffAmount": 0.5,
+                "MSBuffDuration": 4.0
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Рокировка</spellName>.<br><br><rules><spellName>Рокировка</spellName> позволяет вам поменяться местами с союзником.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/castle_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/castle_small.png",
+            "id": 12,
+            "name": "Рокировка",
+            "rarity": 0,
+            "tooltip": "Вы получаете заклинание призывателя <spellName>Рокировка</spellName>.<br><br><rules>Позволяет вам поменяться местами с союзником. После этого вы получаете @MSBuffAmount*100@% скорости передвижения на @MSBuffDuration@ сек.</rules>"
+        },
+        {
+            "apiName": "Quest_SteelYourHeart",
+            "calculations": {},
+            "dataValues": {
+                "StackMultiplication": 6.0,
+                "StackThreshold": 325.0,
+                "StacktoRegenConversion": 0.10000000149011612
+            },
+            "desc": "Требование: накопить @StackThreshold@+ зарядов Сердца стали.<br><br>Награда: количество зарядов Сердца стали увеличивается в @StackMultiplication@ раз(а). Ваше <healing>восстановление здоровья</healing> увеличивается на величину, равную @StacktoRegenConversion*100@% от количества зарядов Сердца стали.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_steelyourheart_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_steelyourheart_small.png",
+            "id": 152,
+            "name": "Задание: стойкое сердце",
+            "rarity": 1,
+            "tooltip": "Требование: накопить @StackThreshold@+ зарядов Сердца стали.<br><br>Награда: количество зарядов Сердца стали увеличивается в @StackMultiplication@ раз(а). Ваше <healing>восстановление здоровья</healing> увеличивается на величину, равную @StacktoRegenConversion*100@% от количества зарядов Сердца стали."
+        },
+        {
+            "apiName": "Executioner",
+            "calculations": {},
+            "dataValues": {
+                "BonusDamage": 0.15000000596046448,
+                "HealthThreshold": 0.5
+            },
+            "desc": "Вы наносите на @BonusDamage*100@% больше урона чемпионам, чей уровень здоровья ниже @HealthThreshold*100@%. Участия в убийствах сбрасывают перезарядку базовых умений.",
+            "iconLarge": "assets/ux/cherry/augments/icons/executioner_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/executioner_small.png",
+            "id": 32,
+            "name": "Палач",
+            "rarity": 0,
+            "tooltip": "Вы наносите на @BonusDamage*100@% больше урона чемпионам, чей уровень здоровья ниже @HealthThreshold*100@%. Участия в убийствах сбрасывают перезарядку базовых умений.<br><br>Дополнительный урон, нанесенный в этом раунде: @f1@<br>Общий дополнительный урон: @f2@"
+        },
+        {
+            "apiName": "CourageoftheColossus",
+            "calculations": {
+                "TotalShield": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 100.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthScalar",
+                            "mStat": 11
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806
+            },
+            "desc": "После <status>обездвиживания</status> вражеского чемпиона вы получаете <shield>щит прочностью @TotalShield@</shield>.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/courageofthecolossus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
+            "id": 18,
+            "name": "Мужество колосса",
+            "rarity": 2,
+            "tooltip": "После <status>обездвиживания</status> вражеского чемпиона вы получаете <shield>щит прочностью @TotalShield@</shield>.<br><br>Щиты, полученные в этом раунде: @f1@<br>Общее количество щитов: @f2@"
+        },
+        {
+            "apiName": "InfernalSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Вы получаете огненную душу. Поражая врагов умениями или автоатаками, вы наносите им дополнительный урон.",
+            "iconLarge": "assets/ux/cherry/augments/icons/infernalsoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/infernalsoul_small.png",
+            "id": 46,
+            "name": "Огненная душа",
+            "rarity": 0,
+            "tooltip": "Вы получаете огненную душу. Поражая врагов умениями или автоатаками, вы наносите им дополнительный урон.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "ComboMaster",
+            "calculations": {
+                "Cooldown": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 10.0,
+                            "mStartValue": 20.0
+                        }
+                    ]
+                },
+                "{4120d321}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 60.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.550000011920929,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HasteBase": 0.30000001192092896,
+                "HasteBaseMelee": 0.4000000059604645,
+                "HasteDuration": 3.0,
+                "HasteMax": 0.800000011920929,
+                "HasteMaxMelee": 0.800000011920929,
+                "MaxBonusSeconds": 4.0,
+                "NumberToProc": 3.0,
+                "SlowResist": 0.75,
+                "WindowDuration": 4.0
+            },
+            "desc": "Вы получаете ключевые руны <spellName>Казнь электричеством</spellName> и <spellName>Фазовый рывок</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/combomaster_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/combomaster_small.png",
+            "id": 16,
+            "name": "Мастер комбо",
+            "rarity": 1,
+            "tooltip": "Вы получаете ключевые руны <spellName>Казнь электричеством</spellName> и <spellName>Фазовый рывок</spellName>.<br><br>Урон от Казни электричеством, нанесенный в этом раунде: @f1@<br>Общий урон от Казни электричеством: @f2@"
+        },
+        {
+            "apiName": "MindtoMatter",
+            "calculations": {},
+            "dataValues": {
+                "ManaToHealthConversion": 0.5
+            },
+            "desc": "Ваш <healing>максимальный запас здоровья</healing> увеличивается на половину от <scaleMana>запаса маны</scaleMana>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
+            "id": 56,
+            "name": "Материализация энергии",
+            "rarity": 0,
+            "tooltip": "Ваш <healing>максимальный запас здоровья</healing> увеличивается на половину от <scaleMana>запаса маны</scaleMana>."
+        },
+        {
+            "apiName": "ItsKillingTime",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "DamageStorePercentage": 0.4000000059604645,
+                "MarkDuration": 5.0,
+                "VFXHighDamageThreshold": 500.0
+            },
+            "desc": "Применяя абсолютное умение, вы накладываете на всех вражеских чемпионов метку смерти. Метка сохраняет @DamageStorePercentage*100@% от всего получаемого ими урона и взрывается спустя @MarkDuration@ сек., нанося им этот урон. Перезарядка: @Cooldown@ сек.",
+            "iconLarge": "assets/ux/cherry/augments/icons/itskillingtime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/itskillingtime_small.png",
+            "id": 211,
+            "name": "Время убивать",
+            "rarity": 1,
+            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+        },
+        {
+            "apiName": "WisdomofAges",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Вы получаете 1 уровень сразу и еще по 1 дополнительному уровню каждый раунд. Кроме того, с вас снимается ограничение на максимальный уровень.",
+            "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
+            "id": 96,
+            "name": "Мудрость веков",
+            "rarity": 2,
+            "tooltip": "Вы получаете 1 уровень сразу и еще по 1 дополнительному уровню каждый раунд. Кроме того, с вас снимается ограничение на максимальный уровень."
+        },
+        {
+            "apiName": "NowYouSeeMe",
+            "calculations": {},
+            "dataValues": {
+                "MSBuffAmount": 0.5,
+                "MSBuffDuration": 2.0
+            },
+            "desc": "Вы получаете заклинание призывателя <spellName>Фокус</spellName>.<br><br><rules><spellName>Фокус</spellName> телепортирует вас на начальную позицию, с которой вы активировали последнее умение перемещения.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/nowyouseeme_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/nowyouseeme_small.png",
+            "id": 43,
+            "name": "Фокус",
+            "rarity": 0,
+            "tooltip": "<passive>Пассивно:</passive> применяя умение перемещения, вы оставляете за собой метку.<br><br><active>Активно:</active> вы перемещаетесь к последней оставленной метке. Затем вы получаете @MSBuffAmount*100@% скорости передвижения на @MSBuffDuration@ сек."
+        },
+        {
+            "apiName": "Perseverance",
+            "calculations": {},
+            "dataValues": {
+                "AmpedHPThreshold": 0.25,
+                "AmpedRegen": 16.0,
+                "BaseRegen": 8.0
+            },
+            "desc": "Вы получаете дополнительное <healing>восстановление здоровья</healing>. Прибавка увеличивается, когда у вас остается мало здоровья.",
+            "iconLarge": "assets/ux/cherry/augments/icons/perseverance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/perseverance_small.png",
+            "id": 64,
+            "name": "Упорство",
+            "rarity": 1,
+            "tooltip": "Вы получаете <healing>@BaseRegen*100@% базового восстановления здоровья</healing>. Прибавка увеличивается до <healing>@AmpedRegen*100@%</healing>, когда у вас менее 25% здоровья.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@"
+        },
+        {
+            "apiName": "JeweledGauntlet",
+            "calculations": {
+                "APToCritConversion": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.00044999999227002263
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritDamage": 1.399999976158142
+            },
+            "desc": "Ваши умения могут наносить критический урон. Вы получаете @CritChance*100@% шанса критического удара.",
+            "iconLarge": "assets/ux/cherry/augments/icons/jeweledgauntlet_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/jeweledgauntlet_small.png",
+            "id": 48,
+            "name": "Драгоценная перчатка",
+            "rarity": 2,
+            "tooltip": "Ваши умения могут наносить критический урон (@CritDamage*100@% урона всего). Вы получаете @CritChance*100@% шанса критического удара плюс еще @APToCritConversion@. Последнее значение зависит от силы умений.<br><br>Дополнительный урон, нанесенный в этом раунде: @f1@<br>Общий дополнительный урон: @f2@"
+        }
+    ]
+}

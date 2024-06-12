@@ -204,8 +204,8 @@
             "apiName": "Chauffeur",
             "calculations": {},
             "dataValues": {
-                "AttackSpeed": 0.5,
-                "Haste": 100.0
+                "AttackSpeed": 0.6499999761581421,
+                "Haste": 130.0
             },
             "desc": "你附身于你的友军，并且无法自行移动。你的额外移动速度还会提供给你的友军，并且你获得<scaleLevel>技能急速</scaleLevel>和<attackSpeed>攻击速度</attackSpeed>。",
             "iconLarge": "assets/ux/cherry/augments/icons/chauffeur_large.png",
@@ -374,15 +374,16 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
+                "2ndPickTakendownsNeeded": 15.0,
                 "TakedownsNeeded": 10.0
             },
-            "desc": "需求：参与击杀@TakedownsNeeded@次。<br><br>奖励：【金铲铲】",
+            "desc": "需求：参与@TakedownsNeeded@次击杀，如果是作为你的第二个强化符文，这个次数提升至@2ndPickTakendownsNeeded@次。<br><br>奖励：金铲铲",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_urfschampion_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
             "id": 154,
             "name": "任务：海牛阿福的勇士",
             "rarity": 1,
-            "tooltip": "需求：参与击杀@TakedownsNeeded@次。<br><br>奖励：【金铲铲】"
+            "tooltip": "需求：参与@TakedownsNeeded@次击杀，如果是作为你的第二个强化符文，这个次数提升至@2ndPickTakendownsNeeded@次。<br><br>奖励：金铲铲"
         },
         {
             "apiName": "Vengeance",
@@ -657,6 +658,7 @@
             "dataValues": {
                 "APPerProc": 1.0,
                 "ProcCooldown": 0.75,
+                "SpellIDCD": 5.0,
                 "StartingAPIfSecondAugment": 40.0
             },
             "desc": "在你用技能命中敌人时永久提供<scaleAP>@APPerProc@法术强度</scaleAP>。",
@@ -665,7 +667,7 @@
             "id": 65,
             "name": "超凡邪恶",
             "rarity": 1,
-            "tooltip": "在你用技能命中敌人时永久提供<scaleAP>@APPerProc@法术强度</scaleAP>。<br><br>1秒冷却时间。<br><br>如果是作为你的第二个强化符文，则自带@StartingAPIfSecondAugment@法术强度。<br><br>已获得的法术强度：@f1@"
+            "tooltip": "在你用技能命中敌人时永久提供<scaleAP>@APPerProc@法术强度</scaleAP>。<br><br>每个技能@SpellIDCD@秒冷却时间。<br><br>如果是作为你的第二个强化符文，则自带@StartingAPIfSecondAugment@法术强度。<br><br>已获得的法术强度：@f1@"
         },
         {
             "apiName": "BigBrain",
@@ -705,7 +707,7 @@
             "id": 92,
             "name": "易损",
             "rarity": 0,
-            "tooltip": "你的装备和持续伤害效果可以暴击来造成@CritDamage*100@%额外伤害。获得20%暴击几率。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+            "tooltip": "你的装备和持续伤害效果可以暴击来造成@CritDamage*100@%额外伤害。获得@CritChance*100@%暴击几率。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
             "apiName": "CannonFodder",
@@ -781,9 +783,9 @@
             "apiName": "FrostWraith",
             "calculations": {},
             "dataValues": {
-                "Cooldown": 7.0,
+                "Cooldown": 6.5,
                 "Radius": 450.0,
-                "RootDuration": 1.0
+                "RootDuration": 1.25
             },
             "desc": "每@Cooldown@秒，<keywordMajor>自动</keywordMajor><status>禁锢</status>附近的敌人们@RootDuration@秒。<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
@@ -1006,8 +1008,8 @@
                 }
             },
             "dataValues": {
-                "APRatio": 0.4000000059604645,
-                "BonusADRatio": 1.350000023841858,
+                "APRatio": 0.30000001192092896,
+                "BonusADRatio": 1.0,
                 "ExplosionDelayTime": 0.75,
                 "ExplosionRadius": 300.0
             },
@@ -1561,7 +1563,7 @@
                 }
             },
             "dataValues": {
-                "APRatioPerSecond": 0.11999999731779099,
+                "APRatioPerSecond": 0.10000000149011612,
                 "CloudDuration": 3.25,
                 "PoisonDuration": 2.0999999046325684,
                 "TicksPerSecond": 4.0,
@@ -1595,15 +1597,16 @@
             "calculations": {},
             "dataValues": {
                 "GoldBasisDiscount": 1250.0,
-                "GoldBonus": 1000.0
+                "GoldBonus": 1000.0,
+                "PrismaticCostReduction": 1000.0
             },
-            "desc": "获得@GoldBonus@金币。棱彩锻造器花费减少1000金币，并且从现在起获得的棱彩装备的转售减少500金币。",
+            "desc": "获得@GoldBonus@金币。棱彩锻造器花费减少@PrismaticCostReduction@金币，并且从现在起获得的棱彩装备的转售减少500金币。",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
             "id": 220,
             "name": "财运锻造器",
             "rarity": 2,
-            "tooltip": "获得@GoldBonus@金币。棱彩锻造器花费减少1000金币，并且从现在起获得的棱彩装备的转售减少500金币。"
+            "tooltip": "获得@GoldBonus@金币。棱彩锻造器花费减少@PrismaticCostReduction@金币，并且从现在起获得的棱彩装备的转售减少500金币。"
         },
         {
             "apiName": "ThreadtheNeedle",
@@ -2753,16 +2756,17 @@
             "apiName": "SkilledSniper",
             "calculations": {},
             "dataValues": {
+                "PeriodicReductionAmount": 3.0,
                 "ReducedCooldown": 0.5,
                 "SnipeDistance": 700.0
             },
-            "desc": "用一个非终极技能命中一个@SnipeDistance@码外的敌人时，将这个技能的冷却时间缩短至@ReducedCooldown@秒。",
+            "desc": "用一个非终极技能命中一个@SnipeDistance@码外的敌人时，将这个技能的冷却时间缩短至@ReducedCooldown@秒，周期型技能会被重置至@PeriodicReductionAmount@秒。",
             "iconLarge": "assets/ux/cherry/augments/icons/skilledsniper_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/skilledsniper_small.png",
             "id": 113,
             "name": "老练狙神",
             "rarity": 1,
-            "tooltip": "用一个非终极技能命中一个@SnipeDistance@码外的敌人时，将这个技能的冷却时间缩短至@ReducedCooldown@秒。"
+            "tooltip": "用一个非终极技能命中一个@SnipeDistance@码外的敌人时，将这个技能的冷却时间缩短至@ReducedCooldown@秒，周期型技能会被重置至@PeriodicReductionAmount@秒。"
         },
         {
             "apiName": "ParasiticRelationship",
@@ -2956,7 +2960,7 @@
             "calculations": {},
             "dataValues": {
                 "MSBuffAmount": 0.5,
-                "MSBuffDuration": 2.0
+                "MSBuffDuration": 4.0
             },
             "desc": "获得召唤师技能<spellName>王车易位</spellName>。<br><br><rules><spellName>王车易位</spellName>会使你与你的友军交换位置。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/castle_large.png",
@@ -3185,7 +3189,7 @@
             },
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 1.5
+                "CritDamage": 1.399999976158142
             },
             "desc": "你的技能可以造成暴击。获得@CritChance*100@%暴击几率。",
             "iconLarge": "assets/ux/cherry/augments/icons/jeweledgauntlet_large.png",
@@ -3193,7 +3197,7 @@
             "id": 48,
             "name": "珠光护手",
             "rarity": 2,
-            "tooltip": "你的技能可以造成暴击，造成140%总伤害。获得@CritChance*100@%暴击几率。获得随法术强度增长的额外@APToCritConversion@暴击几率。<br><br>这个回合的额外伤害：@f1@<br>额外伤害总和：@f2@"
+            "tooltip": "你的技能可以造成暴击，造成@CritDamage*100@%总伤害。获得@CritChance*100@%暴击几率。获得随法术强度增长的额外@APToCritConversion@暴击几率。<br><br>这个回合的额外伤害：@f1@<br>额外伤害总和：@f2@"
         }
     ]
 }

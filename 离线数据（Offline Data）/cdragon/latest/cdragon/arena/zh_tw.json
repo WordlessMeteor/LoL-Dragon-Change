@@ -1,0 +1,3203 @@
+{
+    "augments": [
+        {
+            "apiName": "WarmupRoutine",
+            "calculations": {},
+            "dataValues": {
+                "DamagePerStack": 0.009999999776482582,
+                "MaxStacks": 24.0
+            },
+            "desc": "獲得召喚師技能「<spellName>例行熱身</spellName>」。<br><br><rules>施放「<spellName>例行熱身</spellName>」後會開始發動技能，根據詠唱的時間增加本回合造成的傷害。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/warmuproutine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/warmuproutine_small.png",
+            "id": 93,
+            "name": "例行熱身",
+            "rarity": 0,
+            "tooltip": "發動技能，每詠唱1秒就能增加造成的傷害2%，上限為24%。<br><br>本回合造成的額外傷害：@f1@<br>總額外傷害：@f2@"
+        },
+        {
+            "apiName": "Vanish",
+            "calculations": {},
+            "dataValues": {
+                "StealthDuration": 4.0
+            },
+            "desc": "獲得召喚師技能<spellName>消失</spellName>。<br><br><rules>施展<spellName>消失</spellName>後能使英雄<stealth>隱形</stealth>。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/vanish_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vanish_small.png",
+            "id": 89,
+            "name": "消失",
+            "rarity": 1,
+            "tooltip": "進入<stealth>隱形</stealth>狀態@StealthDuration@秒，直到進行普攻或施放技能。<br>此狀態不會被奧術清除者飾品揭露。"
+        },
+        {
+            "apiName": "ChainLightning",
+            "calculations": {},
+            "dataValues": {
+                "DamageMod": 0.5,
+                "Range": 1000.0
+            },
+            "desc": "若敵軍的搭檔在附近，對敵軍造成傷害也會對其造成<trueDamage>@DamageMod*100@%真實傷害</trueDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/chainlightning_small.png",
+            "id": 166,
+            "name": "連鎖閃電",
+            "rarity": 2,
+            "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "Typhoon",
+            "calculations": {
+                "Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatio",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.30000001192092896
+            },
+            "desc": "普攻會朝額外一名目標射出箭矢，造成較低傷害，並附加命中效果。",
+            "iconLarge": "assets/ux/cherry/augments/icons/typhoon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/typhoon_small.png",
+            "id": 87,
+            "name": "颱風",
+            "rarity": 0,
+            "tooltip": "普攻會朝額外一個目標射出箭矢，造成@ADRatio*100@%傷害，並附加命中效果。"
+        },
+        {
+            "apiName": "SelfDestruct",
+            "calculations": {},
+            "dataValues": {
+                "BombDelay": 15.0,
+                "KnockupDuration": 0.75,
+                "MaxHealthDamage": 0.20000000298023224,
+                "Radius": 350.0
+            },
+            "desc": "每回合開始你身上都會附有一顆炸彈。@BombDelay@秒後，炸彈會爆炸，造成等同於<trueDamage>@MaxHealthDamage*100@%最大生命的真實傷害</trueDamage>，並<status>擊飛</status>@KnockupDuration@秒。<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/selfdestruct_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/selfdestruct_small.png",
+            "id": 108,
+            "name": "自我毀滅",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_SelfDestruct_Summary }}<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "ServeBeyondDeath",
+            "calculations": {
+                "{85d7d7f0}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "TicksBeforeDeath"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.25
+                    }
+                }
+            },
+            "dataValues": {
+                "DecayDuration": 3.0,
+                "Duration": 6.0,
+                "MaxStatMultiplier": 2.0,
+                "TagDuration": 6.0,
+                "TicksBeforeDeath": 10.0,
+                "TicksPerSecond": 4.0,
+                "TriumphPercent": 20.0
+            },
+            "desc": "每回合第一次死亡時，改為回滿生命並在@DecayDuration@秒內衰減至零。生命衰減時擊殺敵方英雄可停止衰減，並將生命設為<healing>@TriumphPercent@%最大生命</healing>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/servebeyonddeath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/servebeyonddeath_small.png",
+            "id": 120,
+            "name": "不得好死",
+            "rarity": 0,
+            "tooltip": "每回合第一次死亡時，改為回滿生命並在@DecayDuration@秒內衰減至零。生命衰減時擊殺敵方英雄可停止衰減，並將生命設為<healing>@TriumphPercent@%最大生命</healing>。"
+        },
+        {
+            "apiName": "QuantumComputing",
+            "calculations": {},
+            "dataValues": {
+                "AutoCastCooldown": 10.0
+            },
+            "desc": "每@AutoCastCooldown@秒<keywordMajor>自動</keywordMajor>旋轉斬擊，對位於外圈的敵軍造成額外傷害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
+            "id": 66,
+            "name": "量子計算",
+            "rarity": 2,
+            "tooltip": "每15秒<keywordMajor>自動</keywordMajor>旋轉斬擊，對位於外圈的敵軍造成額外傷害，並回復生命。<br><br>總輸出傷害：@f1@<br>總治療量：@f2@"
+        },
+        {
+            "apiName": "DemonsDance",
+            "calculations": {},
+            "dataValues": {
+                "FFHealAPRatio": 0.20000000298023224,
+                "FFHealBase": 10.0,
+                "FFHealBonusADRatio": 0.30000001192092896,
+                "FFHealCritMod": 0,
+                "FFHealMax": 100.0,
+                "FFMSBuff": 0.20000000298023224,
+                "FFMSBuffMelee": 0.20000000298023224,
+                "FFMSDuration": 1.0,
+                "GRMaxHealthPerProc": 7.0,
+                "GRMeleeFlatHeal": 3.0,
+                "GRPercentHealthDamage": 3.5,
+                "GRPercentHealthHeal": 0.012000000104308128,
+                "GRRangedHealthPerProc": 4.0,
+                "GRRangedPenaltyMod": 0.4000000059604645,
+                "GRTriggerTime": 4.0,
+                "GRWindow": 5.0
+            },
+            "desc": "獲得<spellName>瞬疾步法</spellName>及<spellName>不死之握</spellName>關鍵符文。<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/demonsdance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/demonsdance_small.png",
+            "id": 23,
+            "name": "不死魔舞",
+            "rarity": 1,
+            "tooltip": "獲得<spellName>瞬疾步法</spellName>及<spellName>不死之握</spellName>關鍵符文。<br><br>本回合治療量：@f1@<br>總治療量：@f2@<br>最大生命增加量：@f3@"
+        },
+        {
+            "apiName": "DefensiveManeuvers",
+            "calculations": {
+                "BarrierAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 440.0,
+                            "mStartValue": 110.0
+                        }
+                    ]
+                },
+                "HealAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 318.0,
+                            "mStartValue": 80.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AllyRange": 835.0,
+                "MoveSpeed": 0.30000001192092896,
+                "ShieldDuration": 2.5
+            },
+            "desc": "獲得<spellName>防禦行動</spellName>召喚師技能。<br><br><rules>施放<spellName>防禦行動</spellName>後，對自身和隊友施放召喚師技能<spellName>光盾</spellName>及<spellName>治療</spellName>。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/defensivemaneuvers_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/defensivemaneuvers_small.png",
+            "id": 21,
+            "name": "防禦行動",
+            "rarity": 1,
+            "tooltip": "對自身和隊友施放召喚師技能<abilityName>光盾</abilityName>及<abilityName>治療</abilityName>。獲得<shield>可吸收@BarrierAmount@傷害的護盾</shield>、回復<healing>@HealAmount@生命</healing>，以及增加<speed>30%跑速</speed>，持續1秒。<br><br>總治療量：@f1@<br>總護盾量：@f2@"
+        },
+        {
+            "apiName": "Chauffeur",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeed": 0.6499999761581421,
+                "Haste": 130.0
+            },
+            "desc": "附著在友軍身上，無法自行移動。友軍也會獲得你的額外跑速，你則會增加<scaleLevel>技能加速</scaleLevel>及<attackSpeed>攻速</attackSpeed>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/chauffeur_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/chauffeur_small.png",
+            "id": 14,
+            "name": "私人司機",
+            "rarity": 2,
+            "tooltip": "附著在友軍身上，友軍也會獲得你的額外跑速，你則會增加<scaleLevel>@Haste@技能加速</scaleLevel>及<attackSpeed>@AttackSpeed*100@%攻速</attackSpeed>。<br><br>使用衝刺或瞬移技能可解除附著1.5秒，之後再黏回友軍身上。"
+        },
+        {
+            "apiName": "Marksmage",
+            "calculations": {
+                "APDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "APRatio"
+                    }
+                }
+            },
+            "dataValues": {
+                "APRatio": 1.0
+            },
+            "desc": "你的普攻造成等同於<magicDamage>@APRatio*100@%魔法攻擊</magicDamage>的額外<physicalDamage>物理傷害</physicalDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/marksmage_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/marksmage_small.png",
+            "id": 129,
+            "name": "射手法師",
+            "rarity": 1,
+            "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "BladeWaltz",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 30.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05999999865889549
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "TotalHits": 8.0
+            },
+            "desc": "獲得<spellName>劍舞之心</spellName>召喚師技能。<br><br><rules>施放<spellName>劍舞之心</spellName>後，衝刺時進入無法指定狀態，並對敵軍造成@TotalHits@次傷害。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/bladewaltz_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bladewaltz_small.png",
+            "id": 6,
+            "name": "劍舞之心",
+            "rarity": 2,
+            "tooltip": "<rules>衝刺時進入無法指定狀態，並對敵軍造成@Damage@傷害@TotalHits@次(50%命中傷害)。</rules><br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@<br>"
+        },
+        {
+            "apiName": "WillingSacrifice",
+            "calculations": {},
+            "dataValues": {
+                "AllyHealthThreshold": 0.30000001192092896,
+                "CurrentHealthToDrain": 0.25
+            },
+            "desc": "當隊友的生命降至<health>@AllyHealthThreshold*100@%</health>時，犧牲你的部分生命值賦予隊友<shield>護盾</shield>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/willingsacrifice_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/willingsacrifice_small.png",
+            "id": 94,
+            "name": "犧牲奉獻",
+            "rarity": 1,
+            "tooltip": "當隊友的生命降至<health>@AllyHealthThreshold*100@%</health>時，犧牲你<health>@CurrentHealthToDrain*100@%現有生命值</health>賦予隊友<shield>護盾</shield>。<br><br>本回合護盾量：@f1@<br>總護盾量：@f2@"
+        },
+        {
+            "apiName": "IceCold",
+            "calculations": {},
+            "dataValues": {
+                "ExtraSlowAmount": 100.0
+            },
+            "desc": "造成的<status>緩速</status>效果額外降低100跑速。",
+            "iconLarge": "assets/ux/cherry/augments/icons/icecold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/icecold_small.png",
+            "id": 44,
+            "name": "雪地踱步",
+            "rarity": 0,
+            "tooltip": "造成的<status>緩速</status>效果額外降低100跑速。"
+        },
+        {
+            "apiName": "SpinToWin",
+            "calculations": {},
+            "dataValues": {
+                "SpinDamageAmp": 0.30000001192092896,
+                "SpinHaste": 30.0
+            },
+            "desc": "旋轉技能增加@SpinHaste@技能加速，並額外造成@SpinDamageAmp*100@%傷害！",
+            "iconLarge": "assets/ux/cherry/augments/icons/spintowin_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spintowin_small.png",
+            "id": 214,
+            "name": "一轉就贏",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_SpinToWin_Summary }}<br><br>本回合造成傷害：@f1@<br>本對戰造成傷害：@f2@"
+        },
+        {
+            "apiName": "BannerofCommand",
+            "calculations": {},
+            "dataValues": {
+                "BuffDuration": 10.0,
+                "EmpowermentValue": 0.15000000596046448
+            },
+            "desc": "獲得<spellName>指揮旗幟</spellName>召喚師技能。<br><br><rules>施放<spellName>指揮旗幟</spellName>後，隊友會暫時強化</rules>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/bannerofcommand_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bannerofcommand_small.png",
+            "id": 5,
+            "name": "指揮旗幟",
+            "rarity": 1,
+            "tooltip": "拍檔增加@EmpowermentValue*100@%<scaleHealth>生命</scaleHealth>、<scaleAD>物理攻擊</scaleAD>、<scaleAP>魔法攻擊</scaleAP>，以及<attackSpeed>攻速</attackSpeed>，持續10秒。"
+        },
+        {
+            "apiName": "TankItOrLeaveIt",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "DamageReduction": 0.20000000298023224,
+                "MaxChance": 0.5
+            },
+            "desc": "你可以根據自身暴擊率進行<crit>完美防禦</crit>（上限為@MaxChance*100@%機率），觸發時減少承受的傷害。增加@CritChance*100@%暴擊率。",
+            "iconLarge": "assets/ux/cherry/augments/icons/tankitorleaveit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tankitorleaveit_small.png",
+            "id": 80,
+            "name": "毫髮無傷",
+            "rarity": 0,
+            "tooltip": "你可以根據自身暴擊率進行<crit>完美防禦</crit>（上限為@MaxChance*100@%機率），觸發時減少承受的傷害@DamageReduction*100@%。增加@CritChance*100@%暴擊率。<br><br>本回合降低的傷害：@f1@<br>總降低傷害量：@f2@"
+        },
+        {
+            "apiName": "WitchfulThinking",
+            "calculations": {},
+            "dataValues": {
+                "AP": 70.0
+            },
+            "desc": "增加<scaleAP>@AP@魔法攻擊</scaleAP>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/witchfulthinking_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/witchfulthinking_small.png",
+            "id": 97,
+            "name": "女巫思維",
+            "rarity": 0,
+            "tooltip": "增加<scaleAP>@AP@魔法攻擊</scaleAP>。"
+        },
+        {
+            "apiName": "Quest_UrfsChampion",
+            "calculations": {},
+            "dataValues": {
+                "2ndPickTakendownsNeeded": 15.0,
+                "TakedownsNeeded": 10.0
+            },
+            "desc": "條件：取得@TakedownsNeeded@次擊殺與助攻，若此為第二件增幅裝置，則條件增加至@2ndPickTakendownsNeeded@次。<br><br>獎勵：黃金鍋鏟",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_urfschampion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
+            "id": 154,
+            "name": "任務：阿福英雄",
+            "rarity": 1,
+            "tooltip": "條件：取得@TakedownsNeeded@次擊殺與助攻，若此為第二件增幅裝置，則條件增加至@2ndPickTakendownsNeeded@次。<br><br>獎勵：黃金鍋鏟"
+        },
+        {
+            "apiName": "Vengeance",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.2800000011920929,
+                "Omnivamp": 0.2800000011920929
+            },
+            "desc": "隊友陣亡後，大幅增加傷害並獲得全能吸血，直到回合結束。",
+            "iconLarge": "assets/ux/cherry/augments/icons/vengeance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vengeance_small.png",
+            "id": 90,
+            "name": "報仇雪恨",
+            "rarity": 1,
+            "tooltip": "隊友陣亡後，增加@DamageAmp*100@%傷害並獲得@Omnivamp*100@%全能吸血。<br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "Erosion",
+            "calculations": {},
+            "dataValues": {
+                "MaxStacks": 20.0,
+                "Shred": 0.014999999664723873,
+                "ShredDuration": 4.0
+            },
+            "desc": "對敵軍造成傷害可累加一層<scaleArmor>物理</scaleArmor>與<scaleMR>魔法防禦</scaleMR>削弱，持續@ShredDuration@秒。 ",
+            "iconLarge": "assets/ux/cherry/augments/icons/erosion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/erosion_small.png",
+            "id": 28,
+            "name": "侵蝕裝甲",
+            "rarity": 0,
+            "tooltip": "對敵軍造成傷害可削弱@Shred*100@%<scaleArmor>物理</scaleArmor>與<scaleMR>魔法防禦</scaleMR>，持續@ShredDuration@秒。<br><br>最多可累加@MaxStacks@次。"
+        },
+        {
+            "apiName": "MasterofDuality",
+            "calculations": {
+                "ADGained": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 9.0,
+                            "mStartValue": 3.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "APGained": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 18.0,
+                            "mStartValue": 6.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "普攻可累加<scaleAP>魔法攻擊</scaleAP>，技能則可增加<scaleAD>物理攻擊</scaleAD>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/masterofduality_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/masterofduality_small.png",
+            "id": 54,
+            "name": "雙修大師",
+            "rarity": 2,
+            "tooltip": "普攻可增加<scaleAP>@APGained@魔法攻擊</scaleAP>，技能則可增加<scaleAD>@ADGained@物理攻擊</scaleAD>，可無限累加，直到回合結束為止。"
+        },
+        {
+            "apiName": "LightemUp",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 11.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.3499999940395355,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.1899999976158142
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "TOOLTIPONLYDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 320.0,
+                            "mStartValue": 44.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.7599999904632568
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "每四下普攻可額外造成<scaleMagic>魔法傷害</scaleMagic>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightemup_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightemup_small.png",
+            "id": 51,
+            "name": "來點顏色",
+            "rarity": 0,
+            "tooltip": "每四下普攻可額外造成<scaleMagic>@TOOLTIPONLYDamage@魔法傷害</scaleMagic>。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "SearingDawn",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "ProcCooldown": 0.75
+            },
+            "desc": "技能會標記敵軍，隊友的下一次效果會對其額外造成傷害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/searingdawn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/searingdawn_small.png",
+            "id": 72,
+            "name": "灼熱黎明",
+            "rarity": 1,
+            "tooltip": "技能會標記敵軍，隊友的下一次普攻或技能會對其額外造成<magicDamage>@Damage@魔法傷害</magicDamage>。<br><br>本回合造成傷害：@f1@<br>總傷害量：@f2@"
+        },
+        {
+            "apiName": "SlapAround",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForce": 20.0
+            },
+            "desc": "每次對一名敵軍造成<status>硬控場</status>效果，則該回合獲得@AdaptiveForce@適性之力，可無限累加。",
+            "iconLarge": "assets/ux/cherry/augments/icons/slaparound_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slaparound_small.png",
+            "id": 136,
+            "name": "痛打一頓",
+            "rarity": 0,
+            "tooltip": "每次對一名敵軍造成<status>硬控場</status>效果，則該回合獲得@AdaptiveForce@適性之力，可無限累加。"
+        },
+        {
+            "apiName": "MagicMissile",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0,
+                "MaxHealthDamagePerMissile": 0.0033400000538676977,
+                "MaxHealthDamageTooltip": 1.0,
+                "MaxRangeThreshold": 1000.0,
+                "NumberOfMissiles": 3.0
+            },
+            "desc": "使用技能造成傷害會對每位命中的敵軍發射@NumberOfMissiles@枚魔法飛彈，每發會根據飛行距離造成最高<trueDamage>@MaxHealthDamageTooltip@%最大生命的真實傷害</trueDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/magicmissile_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/magicmissile_small.png",
+            "id": 133,
+            "name": "魔法導彈",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_MagicMissile_Summary }}<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "Spellwake",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.20000000298023224
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Cooldown": 6.0,
+                "ExplosionDelayTime": 0.75,
+                "ExplosionRadius": 100.0
+            },
+            "desc": "使用技能命中敵軍會從你的位置發射一道衝擊波到命中敵軍的位置，造成<magicDamage>魔法傷害</magicDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/spellwake_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spellwake_small.png",
+            "id": 135,
+            "name": "法術餘波",
+            "rarity": 2,
+            "tooltip": "使用技能命中敵軍會從你到命中敵軍的位置發射一道衝擊波，造成<magicDamage>@Damage@魔法傷害</magicDamage>。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "CenterOfTheUniverse",
+            "calculations": {
+                "StarDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 7.0,
+                            "mLevel1Value": 5.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.11999999731779099
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.25,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "MissileWidth": 50.0
+            },
+            "desc": "星星繞著攻擊範圍邊緣轉，對碰到的敵軍造成<magicDamage>魔法傷害</magicDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/centeroftheuniverse_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/centeroftheuniverse_small.png",
+            "id": 193,
+            "name": "宇宙奇點",
+            "rarity": 2,
+            "tooltip": "星星繞著攻擊範圍邊緣轉，對碰到的敵軍造成<magicDamage>@StarDamage@魔法傷害</magicDamage>。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "PhenomenalEvil",
+            "calculations": {},
+            "dataValues": {
+                "APPerProc": 1.0,
+                "ProcCooldown": 0.75,
+                "SpellIDCD": 5.0,
+                "StartingAPIfSecondAugment": 40.0
+            },
+            "desc": "使用技能命中敵軍後，可永久增加<scaleAP>@APPerProc@魔法攻擊</scaleAP>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/phenomenalevil_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/phenomenalevil_small.png",
+            "id": 65,
+            "name": "極度邪惡",
+            "rarity": 1,
+            "tooltip": "使用技能命中敵軍後，可永久增加<scaleAP>@APPerProc@魔法攻擊</scaleAP>。<br><br>每個技能冷卻時間為@SpellIDCD@秒。<br><br>若此為你獲得的第二件增幅裝置，則對戰開始時擁有@StartingAPIfSecondAugment@魔法攻擊。<br><br>魔攻增加量：@f1@"
+        },
+        {
+            "apiName": "BigBrain",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ShieldBase"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AP": 1.0,
+                "ShieldBase": 3.0
+            },
+            "desc": "回合開始時，每有<attention>%i:scaleAP% @AP@</attention>魔法攻擊便獲得<shield>@ShieldBase@護盾</shield>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/bigbrain_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bigbrain_small.png",
+            "id": 180,
+            "name": "超強大腦",
+            "rarity": 1,
+            "tooltip": "回合開始時，每有<attention>%i:scaleAP% @AP@</attention>魔法攻擊便獲得<shield>@ShieldBase@護盾</shield>。"
+        },
+        {
+            "apiName": "Vulnerability",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritDamage": 0.44999998807907104
+            },
+            "desc": "道具與持續傷害效果可以暴擊。增加@CritChance*100@%暴擊率。",
+            "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/vulnerability_small.png",
+            "id": 92,
+            "name": "見縫插針",
+            "rarity": 0,
+            "tooltip": "道具與持續傷害效果可以暴擊，造成@CritDamage*100@%額外傷害。增加@CritChance*100@%暴擊率。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "CannonFodder",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "自身會從大炮發射飛入戰場。",
+            "iconLarge": "assets/ux/cherry/augments/icons/cannonfodder_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cannonfodder_small.png",
+            "id": 10,
+            "name": "炮灰",
+            "rarity": 1,
+            "tooltip": "自身會從大炮發射飛入戰場。"
+        },
+        {
+            "apiName": "MadScientist",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.30000001192092896,
+                "APAmp": 0.30000001192092896,
+                "Haste": 70.0,
+                "HealthAmp": 0.20000000298023224,
+                "MovespeedAmp": 0.30000001192092896,
+                "SizeAmp": 0.30000001192092896
+            },
+            "desc": "回合開始時，體積變大(增加<scaleAD>適性之力</scaleAD>及<healing>生命</healing>)或變小(增加<scaleLevel>技能加速</scaleLevel>及<speed>跑速</speed>)。",
+            "iconLarge": "assets/ux/cherry/augments/icons/madscientist_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/madscientist_small.png",
+            "id": 53,
+            "name": "瘋狂科學家",
+            "rarity": 2,
+            "tooltip": "回合開始時，體積變大(增加<scaleAD>@ADAmp*100@%適性之力</scaleAD>及<healing>@HealthAmp*100@%生命</healing>)或變小(增加<scaleLevel>@Haste@技能加速</scaleLevel>及<speed>@MovespeedAmp*100@%跑速</speed>)。"
+        },
+        {
+            "apiName": "MountainSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "獲得高山之魂，脫離戰鬥一段時間後可獲得<shield>護盾</shield>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/mountainsoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mountainsoul_small.png",
+            "id": 57,
+            "name": "高山之魂",
+            "rarity": 0,
+            "tooltip": "獲得高山之魂，脫離戰鬥一段時間後可獲得<shield>護盾</shield>。<br><br>總護盾量：@f1@"
+        },
+        {
+            "apiName": "UltimateRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "每回合可以在施放大絕後重置其冷卻時間一次。",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 88,
+            "name": "終極革新",
+            "rarity": 2,
+            "tooltip": "每回合可以在施放大絕後重置其冷卻時間一次。"
+        },
+        {
+            "apiName": "Dematerialize",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForce": 15.0,
+                "SecondPickBonus": 30.0
+            },
+            "desc": "每回合每位英雄僅限一次，參與擊殺時獲得@AdaptiveForce@適性之力。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dematerialize_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dematerialize_small.png",
+            "id": 171,
+            "name": "去質",
+            "rarity": 0,
+            "tooltip": "{{Cherry_Dematerialize_Summary}}<br><br>若這是你拿的第二件增幅裝置，開始時有@SecondPickBonus@適性之力。<br><br>適性之力增加量：@f1@"
+        },
+        {
+            "apiName": "FrostWraith",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.5,
+                "Radius": 450.0,
+                "RootDuration": 1.25
+            },
+            "desc": "每@Cooldown@秒<keywordMajor>自動</keywordMajor><status>定身</status>鄰近敵軍，持續@RootDuration@秒。<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
+            "id": 39,
+            "name": "寒霜幽魂",
+            "rarity": 0,
+            "tooltip": "每@Cooldown@秒<keywordMajor>自動</keywordMajor><status>定身</status>鄰近敵軍，持續@RootDuration@秒。<br><br>本回合定身敵軍數：@f1@<br>定身敵軍總數：@f2@"
+        },
+        {
+            "apiName": "SymphonyofWar",
+            "calculations": {
+                "ASMelee": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 3
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 6
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 9
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 12
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 15
+                                }
+                            ],
+                            "mLevel1Value": 0.12999999523162842
+                        }
+                    ]
+                },
+                "ASRanged": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 3
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 6
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 9
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.009999999776482582,
+                                    "mLevel": 12
+                                }
+                            ],
+                            "mLevel1Value": 0.07999999821186066
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ASCap": 10.0,
+                "BuffDuration": 5.0,
+                "Duration": 6.0,
+                "HealingPercent": 0.10000000149011612,
+                "MaxAdaptivePerStack": 5.5,
+                "MaxStacks": 12.0,
+                "MinAdaptivePerStack": 3.0,
+                "PerCastIDLockout": 10.0,
+                "RangeBonus": 50.0,
+                "RangedHealingPercent": 0.07999999821186066,
+                "StackCap": 6.0,
+                "TimeUntilNextStackFromSameSpell": 5.0
+            },
+            "desc": "獲得<spellName>致命節奏</spellName>與<spellName>征服者</spellName>關鍵符文。",
+            "iconLarge": "assets/ux/cherry/augments/icons/symphonyofwar_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/symphonyofwar_small.png",
+            "id": 79,
+            "name": "戰爭交響曲",
+            "rarity": 2,
+            "tooltip": "獲得<spellName>致命節奏</spellName>與<spellName>征服者</spellName>關鍵符文。"
+        },
+        {
+            "apiName": "TrueshotProdigy",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 750.0,
+                            "mStartValue": 250.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.399999976158142,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Cooldown": 5.0,
+                "SnipeDistance": 700.0
+            },
+            "desc": "在一定距離以上對敵方英雄造成傷害後，向目標<keywordMajor>自動施放</keywordMajor>一道<abilityName>精準彈幕</abilityName>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
+            "id": 86,
+            "name": "彈幕神童",
+            "rarity": 2,
+            "tooltip": "當在@SnipeDistance@距離以上對目標造成傷害後，會再向目標<keywordMajor>自動施放</keywordMajor>一道<abilityName>精準彈幕</abilityName>，造成@Damage@傷害，彈幕距離無限。冷卻時間：@Cooldown@秒。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "Eureka",
+            "calculations": {},
+            "dataValues": {
+                "APToHasteConversion": 0.25
+            },
+            "desc": "增加相當於<scaleAP>@APToHasteConversion*100@%魔法攻擊</scaleAP>的技能加速。",
+            "iconLarge": "assets/ux/cherry/augments/icons/eureka_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/eureka_small.png",
+            "id": 30,
+            "name": "靈光一閃",
+            "rarity": 2,
+            "tooltip": "增加相當於<scaleAP>@APToHasteConversion*100@%魔法攻擊</scaleAP>的技能加速。"
+        },
+        {
+            "apiName": "OceanSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "獲得海洋之魂，對敵軍造成傷害後可增加大量<healing>生命</healing>及<scaleMana>魔力</scaleMana>回復。",
+            "iconLarge": "assets/ux/cherry/augments/icons/oceansoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/oceansoul_small.png",
+            "id": 60,
+            "name": "海洋之魂",
+            "rarity": 0,
+            "tooltip": "獲得海洋之魂，對敵軍造成傷害後可增加大量<healing>生命</healing>及<scaleMana>魔力</scaleMana>回復。<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
+        },
+        {
+            "apiName": "CircleofDeath",
+            "calculations": {},
+            "dataValues": {
+                "DamageRange": 1000.0,
+                "HealToDamageConversion": 0.699999988079071
+            },
+            "desc": "進行<health>治療</health>和回復後，對最靠近的敵方英雄造成等同於部分治療量的<scaleAP>魔法傷害</scaleAP>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/circleofdeath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/circleofdeath_small.png",
+            "id": 15,
+            "name": "死亡循環",
+            "rarity": 2,
+            "tooltip": "進行<health>治療</health>和回復後，對最靠近的敵方英雄造成等同於<magicDamage>@HealToDamageConversion*100@%治療量的魔法傷害</magicDamage>。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "Quest_WoogletsWitchcap",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "立即獲得巨型魔棒。<br><br>條件：擁有巨型魔棒、死亡之帽與中婭沙漏。<br><br>獎勵：獲得烏莉特的法帽。",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
+            "id": 156,
+            "name": "任務：烏莉特的法帽",
+            "rarity": 2,
+            "tooltip": "立即獲得巨型魔棒。<br><br>條件：擁有巨型魔棒、死亡之帽與中婭沙漏。<br><br>獎勵：獲得烏莉特的法帽。"
+        },
+        {
+            "apiName": "Earthwake",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 2,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 2,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 140.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 2
+                }
+            },
+            "dataValues": {
+                "APRatio": 0.30000001192092896,
+                "BonusADRatio": 1.0,
+                "ExplosionDelayTime": 0.75,
+                "ExplosionRadius": 300.0
+            },
+            "desc": "施放衝刺、跳躍、閃現或傳送技能後會留下軌跡，軌跡會在1秒後引爆。",
+            "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
+            "id": 27,
+            "name": "大地覺醒",
+            "rarity": 2,
+            "tooltip": "施放衝刺、跳躍、閃現或傳送技能後會留下軌跡，軌跡會在1秒後引爆，造成@Damage@物理傷害。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "ScopedWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 75.0,
+                "RangedRangeIncrease": 50.0
+            },
+            "desc": "增加@MeleeRangeIncrease@攻擊距離，遠攻英雄則減至只增加@RangedRangeIncrease@攻擊距離。",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopedweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopedweapons_small.png",
+            "id": 170,
+            "name": "狙擊武器",
+            "rarity": 0,
+            "tooltip": "增加@MeleeRangeIncrease@攻擊距離，遠攻英雄則減至只增加@RangedRangeIncrease@攻擊距離。"
+        },
+        {
+            "apiName": "BreadAndButter",
+            "calculations": {},
+            "dataValues": {
+                "QAbilityHaste": 200.0,
+                "QReducedAbilityHaste": 200.0
+            },
+            "desc": "你的Q獲得@QAbilityHaste@技能加速。",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandbutter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandbutter_small.png",
+            "id": 103,
+            "name": "土司和奶油",
+            "rarity": 1,
+            "tooltip": "你的Q獲得@QAbilityHaste@技能加速。"
+        },
+        {
+            "apiName": "TheBrutalizer",
+            "calculations": {},
+            "dataValues": {
+                "AD": 25.0,
+                "AbilityHaste": 10.0,
+                "Lethality": 10.0
+            },
+            "desc": "增加<scaleAD>@AD@物理攻擊</scaleAD>、<scaleLevel>@AbilityHaste@技能加速</scaleLevel>、以及<scaleAD>@Lethality@物理致命</scaleAD>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/thebrutalizer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/thebrutalizer_small.png",
+            "id": 82,
+            "name": "兇殘之柄",
+            "rarity": 1,
+            "tooltip": "增加<scaleAD>@AD@物理攻擊</scaleAD>、<scaleLevel>@AbilityHaste@技能加速</scaleLevel>、以及<scaleAD>@Lethality@物理致命</scaleAD>。"
+        },
+        {
+            "apiName": "FullyAutomated",
+            "calculations": {},
+            "dataValues": {
+                "AutocastFlatCDR": 2.0
+            },
+            "desc": "你的<keywordMajor>自動施放</keywordMajor>冷卻時間縮短@AutocastFlatCDR@秒，且可適用技能加速。",
+            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
+            "id": 213,
+            "name": "全自動",
+            "rarity": 0,
+            "tooltip": "你的<keywordMajor>自動施放</keywordMajor>冷卻時間縮短@AutocastFlatCDR@秒，且可適用技能加速。"
+        },
+        {
+            "apiName": "SonicBoom",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 2,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 2,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 30.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 2
+                }
+            },
+            "dataValues": {
+                "ProcCooldown": 2.0,
+                "Radius": 450.0,
+                "SlowAmount": -0.30000001192092896
+            },
+            "desc": "強化、<healing>治療</healing>、或<shield>賦予友軍護盾</shield>時，會對友軍周圍的敵人造成傷害與<status>緩速</status>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/sonicboom_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/sonicboom_small.png",
+            "id": 76,
+            "name": "餘音震盪",
+            "rarity": 0,
+            "tooltip": "強化、<healing>治療</healing>、或<shield>賦予友軍護盾</shield>時，會對友軍周圍的敵軍造成<trueDamage>@Damage@真實傷害</trueDamage>，並<status>緩速</status>@SlowAmount*-100@%，持續2秒。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "TwiceThrice",
+            "calculations": {},
+            "dataValues": {
+                "ProcMultiplier": 1.5
+            },
+            "desc": "每第三次普攻會觸發兩次命中效果。",
+            "iconLarge": "assets/ux/cherry/augments/icons/twicethrice_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/twicethrice_small.png",
+            "id": 107,
+            "name": "二次三次",
+            "rarity": 1,
+            "tooltip": "每第三次普攻會觸發兩次命中效果。"
+        },
+        {
+            "apiName": "CelestialBody",
+            "calculations": {},
+            "dataValues": {
+                "DamageReduction": 0.10000000149011612,
+                "Health": 1250.0
+            },
+            "desc": "增加<health>@Health@生命</health>，但造成的傷害降低@DamageReduction*100@%。",
+            "iconLarge": "assets/ux/cherry/augments/icons/celestialbody_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/celestialbody_small.png",
+            "id": 13,
+            "name": "天界之身",
+            "rarity": 1,
+            "tooltip": "增加<health>@Health@生命</health>，但造成的傷害降低@DamageReduction*100@%。"
+        },
+        {
+            "apiName": "BreadAndJam",
+            "calculations": {},
+            "dataValues": {
+                "WAbilityHaste": 200.0
+            },
+            "desc": "你的W獲得@WAbilityHaste@技能加速。",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandjam_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandjam_small.png",
+            "id": 150,
+            "name": "土司和果醬",
+            "rarity": 1,
+            "tooltip": "你的W獲得@WAbilityHaste@技能加速。"
+        },
+        {
+            "apiName": "WithHaste",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHasteToMSConversion": 1.5
+            },
+            "desc": "增加<moveSpeed>跑速</moveSpeed>，數值等同於@AbilityHasteToMSConversion@倍的<scaleLevel>技能加速</scaleLevel>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/withhaste_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/withhaste_small.png",
+            "id": 98,
+            "name": "腳程加速",
+            "rarity": 1,
+            "tooltip": "增加<moveSpeed>跑速</moveSpeed>，數值等同於@AbilityHasteToMSConversion@倍的<scaleLevel>技能加速</scaleLevel>。"
+        },
+        {
+            "apiName": "FallenAegis",
+            "calculations": {
+                "ShieldAmount": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 50.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "ShieldDuration": 12.0
+            },
+            "desc": "戰鬥開始時，獲得「<abilityName>黑暗之盾</abilityName>」，持續@ShieldDuration@秒。<br><br><rules>「<abilityName>黑暗之盾</abilityName>」可擋下魔法傷害及<status>硬控場</status>效果。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/fallenaegis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fallenaegis_small.png",
+            "id": 34,
+            "name": "墮落神盾",
+            "rarity": 0,
+            "tooltip": "戰鬥開始時，獲得「<abilityName>黑暗之盾</abilityName>」，持續@ShieldDuration@秒。<br><br><rules>「<abilityName>黑暗之盾</abilityName>」可擋下@ShieldAmount@魔法傷害及<status>硬控場</status>效果。</rules><br><br>總護盾量：@f1@<br>擋下硬控場技能的次數：@f2@"
+        },
+        {
+            "apiName": "HolyFire",
+            "calculations": {
+                "BurnDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.02500000037252903,
+                            "mStat": 11
+                        }
+                    ]
+                },
+                "BurnDamageTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "BurnDamage",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    }
+                }
+            },
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercentMax": 0.03999999910593033,
+                "BurnPercentMin": 0.009999999776482582,
+                "Cooldown": 1.5,
+                "Radius": 650.0
+            },
+            "desc": "<healing>治療</healing>和賦予<shield>護盾</shield>時，可對鄰近敵軍附加可無限累加的<keywordMajor>燃燒</keywordMajor>效果，在@BurnDuration@秒內造成@BurnPercentMin*100@%至@BurnPercentMax*100@%最大生命的持續傷害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/holyfire_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/holyfire_small.png",
+            "id": 198,
+            "name": "神聖之火",
+            "rarity": 1,
+            "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>燃燒傷害取決於目標友軍的最大生命與所受治療或護盾量的比例。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "FeeltheBurn",
+            "calculations": {
+                "DamagePerSecond": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "TooltipTrueDamageCalculation",
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "InverseDuration"
+                    }
+                },
+                "TooltipTrueDamageCalculation": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 410.0,
+                            "mStartValue": 70.0
+                        }
+                    ]
+                },
+                "{7c50d74e}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 600.0,
+                            "mStartValue": 100.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "DamageReductionTOOLTIPONLY": 0.3499999940395355,
+                "DotDuration": 5.0,
+                "ExhaustDuration": 3.0,
+                "GrievousAmount": 0.4000000059604645,
+                "InverseDuration": 0.20000000298023224,
+                "Range": 1000.0,
+                "SightRadius": 100.0,
+                "SlowAmount": 0.5
+            },
+            "desc": "獲得<spellName>感受灼燒</spellName>召喚師技能。<br><br><rules>施放<spellName>感受灼燒</spellName>後，對所有鄰近敵方英雄施放<spellName>點燃</spellName>及<spellName>虛弱</spellName>。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/feeltheburn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/feeltheburn_small.png",
+            "id": 35,
+            "name": "感受灼燒",
+            "rarity": 2,
+            "tooltip": "<rules>對附近所有敵方英雄施放<spellName>點燃</spellName>及<spellName>虛弱</spellName>。</rules>"
+        },
+        {
+            "apiName": "GuiltyPleasure",
+            "calculations": {
+                "TotalHeal": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 10.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealPercentage",
+                            "mStat": 11
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealPercentage": 0.014999999664723873
+            },
+            "desc": "對敵方英雄造成<status>硬控場</status>後，<healing>回復@TotalHeal@生命</healing>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/guiltypleasure_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/guiltypleasure_small.png",
+            "id": 42,
+            "name": "惡趣味",
+            "rarity": 0,
+            "tooltip": "對敵方英雄造成<status>硬控場</status>效果後，<healing>回復@TotalHeal@生命</healing>。<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
+        },
+        {
+            "apiName": "ScopierWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 200.0,
+                "RangedRangeIncrease": 100.0
+            },
+            "desc": "增加@MeleeRangeIncrease@攻擊距離，遠攻英雄則減至增加@RangedRangeIncrease@攻擊距離。",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopierweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopierweapons_small.png",
+            "id": 71,
+            "name": "超狙武器",
+            "rarity": 1,
+            "tooltip": "增加@MeleeRangeIncrease@攻擊距離，遠攻英雄則減至增加@RangedRangeIncrease@攻擊距離。"
+        },
+        {
+            "apiName": "BuffBuddies",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "永久獲得樹精長老和遠古魔像增益效果。",
+            "iconLarge": "assets/ux/cherry/augments/icons/buffbuddies_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/buffbuddies_small.png",
+            "id": 9,
+            "name": "增益麻吉",
+            "rarity": 0,
+            "tooltip": "永久獲得樹精長老和遠古魔像增益效果。"
+        },
+        {
+            "apiName": "RaidBoss",
+            "calculations": {},
+            "dataValues": {
+                "BreakoutHealthThreshold": 0.5,
+                "DamageReductionMax": 0.699999988079071,
+                "DamageReductionMin": 0.4000000059604645,
+                "DamageReductionRoundCap": 11.0,
+                "ImprisonDuration": 9.0,
+                "MissingHPHealUponRelease": 0.30000001192092896,
+                "ShieldHealthRatio": 0.3499999940395355,
+                "StatIncrease": 0.4000000059604645
+            },
+            "desc": "每回合開始時，你會被困在競技場中間，無法行動。期間，你會獲得最多@DamageReductionMax*100@%傷害減免，並隨時間體型變大、增加<healing>生命</healing>、<physicalDamage>物理攻擊</physicalDamage>，以及<magicDamage>魔法攻擊</magicDamage>(最大@StatIncrease*100@%)。@ImprisonDuration@秒後或達到<healing>@BreakoutHealthThreshold*100@%生命</healing>時，你會爆炸，<status>擊退</status>敵軍並獲得等同於<shield>@ShieldHealthRatio*100@%最大生命的護盾</shield>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/raidboss_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/raidboss_small.png",
+            "id": 125,
+            "name": "突襲頭目",
+            "rarity": 2,
+            "tooltip": "每回合開始時，你會被困在競技場中間，無法行動。期間，你會獲得最多@DamageReductionMax*100@%傷害減免，並隨時間體型變大、增加<healing>生命</healing>、<physicalDamage>物理攻擊</physicalDamage>，以及<magicDamage>魔法攻擊</magicDamage>(最大@StatIncrease*100@%)。@ImprisonDuration@秒後或達到<healing>@BreakoutHealthThreshold*100@%生命</healing>時，你會爆炸，<status>擊退</status>敵軍並獲得等同於<shield>@ShieldHealthRatio*100@%最大生命的護盾</shield>。"
+        },
+        {
+            "apiName": "OutlawsGrit",
+            "calculations": {},
+            "dataValues": {
+                "MaxStacks": 5.0,
+                "ResistsPerStack": 12.0
+            },
+            "desc": "使用衝刺、跳躍、閃現或傳送技能後，增加<scaleArmor>@ResistsPerStack@物理防禦</scaleArmor>和<scaleMR>魔法防禦</scaleMR>。<br><br>此效果最多可疊加@MaxStacks@次。",
+            "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
+            "id": 63,
+            "name": "俠盜恆毅",
+            "rarity": 1,
+            "tooltip": "使用衝刺、跳躍、閃現或傳送技能後，增加<scaleArmor>@ResistsPerStack@物理防禦</scaleArmor>和<scaleMR>魔法防禦</scaleMR>。<br><br>此效果最多可疊加@MaxStacks@次。"
+        },
+        {
+            "apiName": "DontBlink",
+            "calculations": {},
+            "dataValues": {
+                "BonusDamagePerMSDifference": 0.0010000000474974513
+            },
+            "desc": "高出敵軍的跑速越多，造成的傷害越多。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dontblink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dontblink_small.png",
+            "id": 26,
+            "name": "別眨眼",
+            "rarity": 0,
+            "tooltip": "每高出目標<moveSpeed>10跑速</moveSpeed>，傷害就會增加@BonusDamagePerMSDifference*1000@%。<br><br>本回合額外傷害：@f1@<br>總額外傷害：@f2@"
+        },
+        {
+            "apiName": "ShadowRunner",
+            "calculations": {},
+            "dataValues": {
+                "BuffDuration": 2.0,
+                "MSAmount": 300.0
+            },
+            "desc": "使用衝刺、跳躍、閃現或傳送技能或脫離<stealth>潛行</stealth>後，增加@spell.Augment_ShadowRunner:MSAmount@跑速，持續@spell.Augment_ShadowRunner:BuffDuration@秒。",
+            "iconLarge": "assets/ux/cherry/augments/icons/shadowrunner_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/shadowrunner_small.png",
+            "id": 73,
+            "name": "飛影跑法",
+            "rarity": 0,
+            "tooltip": "使用衝刺、跳躍、閃現或傳送技能或脫離<stealth>潛行</stealth>後，增加@spell.Augment_ShadowRunner:MSAmount@跑速，持續@spell.Augment_ShadowRunner:BuffDuration@秒。"
+        },
+        {
+            "apiName": "InfernalConduit",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 6.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05999999865889549
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.14000000059604645,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "FlatCooldownRefundPerTick": 0.07999999821186066,
+                "ProcCooldown": 1.0
+            },
+            "desc": "技能附加一層<keywordMajor>燃燒</keywordMajor>，期間造成<scaleAP>魔法傷害</scaleAP>。<br><br>自身造成的<keywordMajor>燃燒</keywordMajor>效果可使基本技能冷卻時間降低。",
+            "iconLarge": "assets/ux/cherry/augments/icons/infernalconduit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/infernalconduit_small.png",
+            "id": 45,
+            "name": "煉獄使者",
+            "rarity": 2,
+            "tooltip": "技能附加一層<keywordMajor>燃燒</keywordMajor>，在@BleedDuration@秒內每秒造成<scaleAP>@BleedDamageTooltip@魔法傷害</scaleAP>。<keywordMajor>燃燒</keywordMajor>可以無限累加。<br><br>自身造成的所有<keywordMajor>燃燒</keywordMajor>效果對敵軍造成傷害時，可使基本技能剩餘冷卻時間降低@FlatCooldownRefundPerTick@秒。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "將<physicalDamage>額外物理攻擊</physicalDamage>轉換為<magicDamage>魔法攻擊</magicDamage>。增加<magicDamage>@APAmp*100@%魔法攻擊</magicDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "靈活轉換",
+            "rarity": 0,
+            "tooltip": "將<physicalDamage>額外物理攻擊</physicalDamage>轉換為<magicDamage>魔法攻擊</magicDamage>。增加<magicDamage>@APAmp*100@%魔法攻擊</magicDamage>。"
+        },
+        {
+            "apiName": "BacktoBasics",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.3499999940395355,
+                "Haste": 60.0,
+                "HealingAmp": 0.3499999940395355,
+                "ShieldingAmp": 0.3499999940395355
+            },
+            "desc": "增加<scaleLevel>傷害</scaleLevel>、<healing>治療</healing>、<scaleBonus>技能加速</scaleBonus>，並獲得<shield>護盾</shield>，但<keywordMajor>無法使用大絕</keywordMajor>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/backtobasics_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/backtobasics_small.png",
+            "id": 4,
+            "name": "基本功夫",
+            "rarity": 2,
+            "tooltip": "無法使用大絕。增加@DamageAmp*100@%<scaleLevel>傷害</scaleLevel>、<healing>治療</healing>、<scaleBonus>@Haste@技能加速</scaleBonus>，並獲得<shield>護盾</shield>。"
+        },
+        {
+            "apiName": "Clothesline",
+            "calculations": {
+                "BurnDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 75.0,
+                            "mStartValue": 5.0
+                        }
+                    ]
+                },
+                "BurnDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "BurnDamage",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 4.0
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4,
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "RectangleHalfWidth": 50.0
+            },
+            "desc": "自身和搭檔之間有著一條會持續對敵軍造成傷害的繫繩。",
+            "iconLarge": "assets/ux/cherry/augments/icons/clothesline_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/clothesline_small.png",
+            "id": 110,
+            "name": "曬衣繩",
+            "rarity": 0,
+            "tooltip": "自身和搭檔之間有著一條會每秒造成<magicDamage>@BurnDamageTooltip@魔法傷害</magicDamage>的繫繩。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "DontChase",
+            "calculations": {
+                "ApproximateTotalDamageTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "DamagePerSecond",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 4.25
+                    },
+                    "tooltipOnly": true
+                },
+                "DamagePerSecond": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 150.0,
+                            "mStartValue": 15.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatioPerSecond"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.20000000298023224,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "APRatioPerSecond": 0.10000000149011612,
+                "CloudDuration": 3.25,
+                "PoisonDuration": 2.0999999046325684,
+                "TicksPerSecond": 4.0,
+                "ToggleCooldown": 1.0
+            },
+            "desc": "你進入鬼步狀態，在身後留下劇毒蹤跡，對經過上面的敵軍造成<magicDamage>魔法傷害</magicDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dontchase_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dontchase_small.png",
+            "id": 102,
+            "name": "你追不到我",
+            "rarity": 0,
+            "tooltip": "你進入鬼步狀態，在身後留下劇毒蹤跡，對經過上面的敵軍每秒造成<magicDamage>@DamagePerSecond@魔法傷害</magicDamage>。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "SoulSiphon",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "HealPercentage": 0.11999999731779099
+            },
+            "desc": "增加<crit>@CritChance*100@%暴擊率</crit>，<crit>暴擊</crit>時會附帶@HealPercentage*100@%普攻吸血。",
+            "iconLarge": "assets/ux/cherry/augments/icons/soulsiphon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/soulsiphon_small.png",
+            "id": 77,
+            "name": "靈魂虹吸",
+            "rarity": 1,
+            "tooltip": "增加<crit>@CritChance*100@%暴擊率</crit>，<crit>暴擊</crit>時會附帶@HealPercentage*100@%普攻吸血。<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
+        },
+        {
+            "apiName": "GambaAnvil",
+            "calculations": {},
+            "dataValues": {
+                "GoldBasisDiscount": 1250.0,
+                "GoldBonus": 1000.0,
+                "PrismaticCostReduction": 1000.0
+            },
+            "desc": "獲得@GoldBonus@金錢。稜鏡鐵砧價格降低@PrismaticCostReduction@，且往後獲得的稜鏡道具售價降低500。",
+            "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
+            "id": 220,
+            "name": "甘巴鐵砧",
+            "rarity": 2,
+            "tooltip": "獲得@GoldBonus@金錢。稜鏡鐵砧價格降低@PrismaticCostReduction@，且往後獲得的稜鏡道具售價降低500。"
+        },
+        {
+            "apiName": "ThreadtheNeedle",
+            "calculations": {},
+            "dataValues": {
+                "PercentPen": 0.20000000298023224
+            },
+            "desc": "獲得@PercentPen*100@%<scaleAD>物理穿透</scaleAD>與<scaleAP>魔法穿透</scaleAP>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/threadtheneedle_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threadtheneedle_small.png",
+            "id": 84,
+            "name": "穿針引線",
+            "rarity": 1,
+            "tooltip": "獲得@PercentPen*100@%<scaleAD>物理穿透</scaleAD>與<scaleAP>魔法穿透</scaleAP>。"
+        },
+        {
+            "apiName": "BreadAndCheese",
+            "calculations": {},
+            "dataValues": {
+                "EAbilityHaste": 200.0
+            },
+            "desc": "你的E獲得@EAbilityHaste@技能加速。",
+            "iconLarge": "assets/ux/cherry/augments/icons/breadandcheese_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/breadandcheese_small.png",
+            "id": 151,
+            "name": "土司和起司",
+            "rarity": 1,
+            "tooltip": "你的E獲得@EAbilityHaste@技能加速。"
+        },
+        {
+            "apiName": "Impassable",
+            "calculations": {},
+            "dataValues": {
+                "BeamPosIndent": 100.0,
+                "BonusResistsMax": 150.0,
+                "BonusResistsMin": 80.0,
+                "CCCarryOverRatio": 1.0,
+                "Cooldown": 15.0,
+                "DamageRadius": 350.0,
+                "DamageRatioAD": 0,
+                "DamageRatioAP": 0,
+                "DelayBeforeBurst": 2.5,
+                "DmgReduction": 0.15000000596046448,
+                "FlatResists": 35.0,
+                "FlatResistsMax": 35.0,
+                "HealthRatio": 8.0,
+                "MRRatio": 0,
+                "MaxBaseDamage": 120.0,
+                "PercentBonusResists": 0.800000011920929,
+                "RayCount": 3.0,
+                "ResistInc": 0,
+                "SizeInc": 0.25,
+                "SlowAmount": 0.15000000596046448,
+                "SlowDuration": 2.5,
+                "SlowZoneDuration": 3.0,
+                "SlowZoneLength": 700.0,
+                "SlowZoneSlowAPRatio": 0.05999999865889549,
+                "SlowZoneSlowBase": 0.20000000298023224,
+                "SlowZoneSlowHealShieldRatio": 0.09000000357627869,
+                "SlowZoneSlowbADRatio": 0.07000000029802322,
+                "SlowZoneWidth": 80.0,
+                "StartingBaseDamage": 25.0
+            },
+            "desc": "獲得<keywordMajor>裂地衝擊</keywordMajor>與<keywordMajor>冰川增幅</keywordMajor>關鍵符文。",
+            "iconLarge": "assets/ux/cherry/augments/icons/impassable_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/impassable_small.png",
+            "id": 149,
+            "name": "不可通行",
+            "rarity": 1,
+            "tooltip": "獲得<keywordMajor>裂地衝擊</keywordMajor>與<keywordMajor>冰川增幅</keywordMajor>關鍵符文。"
+        },
+        {
+            "apiName": "ExtendoArm",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 12.0
+            },
+            "desc": "每12秒<keywordMajor>自動</keywordMajor>對鄰近敵方英雄發射布里茨鉤子。",
+            "iconLarge": "assets/ux/cherry/augments/icons/extendoarm_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/extendoarm_small.png",
+            "id": 33,
+            "name": "伸縮手臂",
+            "rarity": 1,
+            "tooltip": "每12秒<keywordMajor>自動</keywordMajor>對鄰近敵方英雄發射布里茨鉤子。<br><br>鉤子命中次數：@f1@"
+        },
+        {
+            "apiName": "SlowCooker",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.017500000074505806,
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "Range": 500.0
+            },
+            "desc": "每秒對鄰近敵方英雄附加一層<keywordMajor>燃燒</keywordMajor>，傷害隨你的<health>最大生命</health>成長。<keywordMajor>燃燒</keywordMajor>可以無限累加。",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowcooker_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowcooker_small.png",
+            "id": 75,
+            "name": "細煮慢燉",
+            "rarity": 2,
+            "tooltip": "每秒對@Range@範圍內的敵方英雄附加一層<keywordMajor>燃燒</keywordMajor>，每秒造成<health>@BleedDamageTooltip@<scaleAP>魔法傷害</scaleAP>，持續@BleedDuration@秒</health>。<keywordMajor>燃燒</keywordMajor>可以無限累加。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "DieAnotherDay",
+            "calculations": {},
+            "dataValues": {
+                "HealFlatTooltip": 250.0
+            },
+            "desc": "獲得<spellName>擇日而亡</spellName>召喚師技能。<br><br><rules>施放<spellName>擇日而亡</spellName>後，會創造一個結界，範圍內的單位無法陣亡，持續4秒。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/dieanotherday_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dieanotherday_small.png",
+            "id": 24,
+            "name": "擇日而亡",
+            "rarity": 1,
+            "tooltip": "祝福腳下的大地，範圍內所有單位生命無法降到其最大生命10%以下，持續4秒。效果結束後，範圍內的單位回復<healing>@HealFlatTooltip@生命</healing>。 "
+        },
+        {
+            "apiName": "SpiritLink",
+            "calculations": {},
+            "dataValues": {
+                "DamageRedirectPercentage": 0.15000000596046448,
+                "HealCopyPercentage": 0.5
+            },
+            "desc": "友軍承受的@DamageRedirectPercentage*100@%傷害將會轉移至你身上，同時你也能獲得@HealCopyPercentage*100@%<healing>友軍受到的治療</healing>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/spiritlink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spiritlink_small.png",
+            "id": 78,
+            "name": "靈魂連結",
+            "rarity": 2,
+            "tooltip": "友軍承受的@DamageRedirectPercentage*100@%傷害將會轉移至你身上，同時你也能獲得@HealCopyPercentage*100@%<healing>友軍受到的治療</healing>。<br><br>總轉移傷害：@f1@<br>總治療量：@f2@<br>"
+        },
+        {
+            "apiName": "Quest_AngelofRetribution",
+            "calculations": {
+                "BaseDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 50.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AttackSpeed": 1.0,
+                "HealPowerToDamageConversion": 3.0,
+                "RequirementAmount": 2500.0
+            },
+            "desc": "條件：回復或阻擋友軍@RequirementAmount@傷害。<br><br>獎勵：增加<attackspeed>@AttackSpeed*100@%攻速</attackspeed>，且普攻額外造成等同於<healing>@HealPowerToDamageConversion*100@%治療/護盾強度</healing>的<magicdamage>魔法傷害</magicdamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_angelofretribution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_angelofretribution_small.png",
+            "id": 192,
+            "name": "任務：復仇天使",
+            "rarity": 1,
+            "tooltip": "{{Cherry_QuestAngelofRetribution_Summary}}<br><br>回復與阻擋的傷害：@f1@<br>造成傷害：@f2@"
+        },
+        {
+            "apiName": "ContractKiller",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmp": 0.15000000596046448,
+                "Gold": 150.0
+            },
+            "desc": "每回合標記1名敵方英雄，使其受到的傷害增加@spell.Augment_ContractKiller:DamageAmp*100@%，並在陣亡時額外掉落@spell.Augment_ContractKiller:Gold@金錢。",
+            "iconLarge": "assets/ux/cherry/augments/icons/contractkiller_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/contractkiller_small.png",
+            "id": 17,
+            "name": "契約殺手",
+            "rarity": 0,
+            "tooltip": "每回合標記一名敵方英雄，使其受到的傷害增加@DamageAmp*100@%。擊殺該英雄時你和隊友可獲得@Gold@金幣。<br><br>本回合額外傷害：@f1@<br>總額外傷害：@f2@<br>每個隊友獲得的總金幣數：@f3@"
+        },
+        {
+            "apiName": "Goredrink",
+            "calculations": {},
+            "dataValues": {
+                "Omnivamp": 0.20000000298023224
+            },
+            "desc": "獲得@Omnivamp*100@%全能吸血效果",
+            "iconLarge": "assets/ux/cherry/augments/icons/goredrink_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/goredrink_small.png",
+            "id": 138,
+            "name": "飲血",
+            "rarity": 0,
+            "tooltip": "獲得@Omnivamp*100@%全能吸血效果"
+        },
+        {
+            "apiName": "FirstAidKit",
+            "calculations": {},
+            "dataValues": {
+                "HealShieldAmp": 0.20000000298023224
+            },
+            "desc": "增加<healing>@HealShieldAmp*100@%治療與護盾強度</healing>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/firstaidkit_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firstaidkit_small.png",
+            "id": 37,
+            "name": "急救箱",
+            "rarity": 0,
+            "tooltip": "增加<healing>@HealShieldAmp*100@%治療與護盾強度</healing>。"
+        },
+        {
+            "apiName": "OkBoomerang",
+            "calculations": {
+                "Damage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.2199999988079071,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {},
+            "desc": "每7秒<keywordMajor>自動施放</keywordMajor>，對鄰近敵軍發射回力鏢。",
+            "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
+            "id": 61,
+            "name": "棒棒回力鏢",
+            "rarity": 1,
+            "tooltip": "每7秒<keywordMajor>自動施放</keywordMajor>，對鄰近敵軍發射回力鏢，對命中敵軍造成@Damage@適性傷害。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "JuiceBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "自身和隊友每回合額外免費獲得1瓶果汁。",
+            "iconLarge": "assets/ux/cherry/augments/icons/juicebox_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/juicebox_small.png",
+            "id": 49,
+            "name": "果汁盒",
+            "rarity": 0,
+            "tooltip": "自身和隊友每回合額外免費獲得1瓶果汁。"
+        },
+        {
+            "apiName": "ScopiestWeapons",
+            "calculations": {},
+            "dataValues": {
+                "MeleeRangeIncrease": 250.0,
+                "RangedRangeIncrease": 150.0
+            },
+            "desc": "增加@MeleeRangeIncrease@攻擊距離，遠攻英雄則減至@RangedRangeIncrease@。",
+            "iconLarge": "assets/ux/cherry/augments/icons/scopiestweapons_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/scopiestweapons_small.png",
+            "id": 115,
+            "name": "頂狙武器",
+            "rarity": 2,
+            "tooltip": "增加@MeleeRangeIncrease@攻擊距離，遠攻英雄則減至@RangedRangeIncrease@。"
+        },
+        {
+            "apiName": "StackosaurusRex",
+            "calculations": {},
+            "dataValues": {
+                "StackModifier": 0.75
+            },
+            "desc": "永久獲得技能的<keywordMajor>堆層</keywordMajor>時，額外獲得@StackModifier*100@%！",
+            "iconLarge": "assets/ux/cherry/augments/icons/stackosaurusrex_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stackosaurusrex_small.png",
+            "id": 204,
+            "name": "堆層暴龍",
+            "rarity": 0,
+            "tooltip": "永久獲得技能的<keywordMajor>堆層</keywordMajor>時，額外獲得@StackModifier*100@%！"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "將<magicDamage>魔法攻擊</magicDamage>轉換為<physicalDamage>額外物理攻擊</physicalDamage>。增加<physicalDamage>@ADAmp*100@%物理攻擊</physicalDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "轉換惡作劇",
+            "rarity": 0,
+            "tooltip": "將<magicDamage>魔法攻擊</magicDamage>轉換為<physicalDamage>額外物理攻擊</physicalDamage>。增加<physicalDamage>@ADAmp*100@%物理攻擊</physicalDamage>。"
+        },
+        {
+            "apiName": "FeyMagic",
+            "calculations": {},
+            "dataValues": {
+                "PolyCooldown": 15.0,
+                "PolyDuration": 2.0,
+                "WEnemySlow": 60.0
+            },
+            "desc": "使用大絕造成傷害會<status>變形</status>敵軍@PolyDuration@秒(冷卻時間：@PolyCooldown@秒)。",
+            "iconLarge": "assets/ux/cherry/augments/icons/feymagic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/feymagic_small.png",
+            "id": 194,
+            "name": "妖精魔法",
+            "rarity": 2,
+            "tooltip": "使用大絕造成傷害會<status>變形</status>敵軍@PolyDuration@秒(冷卻時間：@PolyCooldown@秒)。"
+        },
+        {
+            "apiName": "Firebrand",
+            "calculations": {},
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.019999999552965164
+            },
+            "desc": "普攻造成<keywordMajor>燃燒</keywordMajor>效果，並持續造成傷害，可無限累加。",
+            "iconLarge": "assets/ux/cherry/augments/icons/firebrand_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firebrand_small.png",
+            "id": 36,
+            "name": "煽風點火",
+            "rarity": 1,
+            "tooltip": "普攻可<keywordMajor>燃燒</keywordMajor>敵軍，在@BleedDuration@秒內每秒造成<scaleAP>@PercentMaxHPDamagePer5Seconds*20@%最大生命的魔法傷害</scaleAP>。<keywordMajor>燃燒</keywordMajor>可以無限累加。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "Flashy",
+            "calculations": {},
+            "dataValues": {
+                "FlashCooldown": 2.0
+            },
+            "desc": "你的閃現有3發，冷卻時間為@FlashCooldown@秒。",
+            "iconLarge": "assets/ux/cherry/augments/icons/flashy_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
+            "id": 116,
+            "name": "閃光俠",
+            "rarity": 0,
+            "tooltip": "你的閃現有3發，冷卻時間為@FlashCooldown@秒。"
+        },
+        {
+            "apiName": "NestingDoll",
+            "calculations": {},
+            "dataValues": {
+                "ReviveArmTime": 2.0,
+                "ReviveDuration": 1.5,
+                "ReviveMod": 0.4000000059604645,
+                "SecondReviveMod": 0.25,
+                "SecondSizeMod": -0.4000000059604645,
+                "SelfReviveTimerModMax": 0.5,
+                "SelfReviveTimerModMin": 0.4000000059604645,
+                "SizeMod": -0.20000000298023224
+            },
+            "desc": "@ReviveArmTime@秒後自己會開始自動復活，而且可以額外復活一次。每次復活體型都會變小，且擁有@ReviveMod*100@%最大生命。<br><br>復活時，<status>擊退</status>周遭敵軍。",
+            "iconLarge": "assets/ux/cherry/augments/icons/nestingdoll_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/nestingdoll_small.png",
+            "id": 177,
+            "name": "套娃",
+            "rarity": 2,
+            "tooltip": "@ReviveArmTime@秒後自己會開始自動復活，而且可以額外復活一次。每次復活體型都會變小，且擁有@ReviveMod*100@%最大生命。<br><br>復活時，<status>擊退</status>周遭敵軍。"
+        },
+        {
+            "apiName": "TapDancer",
+            "calculations": {},
+            "dataValues": {
+                "MSPerHit": 10.0,
+                "MSToASConversion": 0.0010000000474974513
+            },
+            "desc": "普攻可增加<moveSpeed>@MSPerHit@跑速</moveSpeed>，可無限累加。增加相當於@MSToASConversion*10000@%跑速的攻速。",
+            "iconLarge": "assets/ux/cherry/augments/icons/tapdancer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tapdancer_small.png",
+            "id": 81,
+            "name": "輕舞飛揚",
+            "rarity": 2,
+            "tooltip": "普攻可增加<moveSpeed>@MSPerHit@跑速</moveSpeed>，可無限累加。增加相當於@MSToASConversion*10000@%跑速的攻速。"
+        },
+        {
+            "apiName": "Tormentor",
+            "calculations": {},
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033
+            },
+            "desc": "對敵方英雄造成<status>硬控場</status>時附加<keywordMajor>燃燒</keywordMajor>，持續造成傷害，可無限累加。",
+            "iconLarge": "assets/ux/cherry/augments/icons/tormentor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tormentor_small.png",
+            "id": 85,
+            "name": "烈焰折磨",
+            "rarity": 0,
+            "tooltip": "對敵方英雄造成<status>硬控場</status>時附加<keywordMajor>燃燒</keywordMajor>，每秒造成<scaleAP>@PercentMaxHPDamagePer5Seconds*20@%最大生命的魔法傷害</scaleAP>，持續@BleedDuration@秒。<keywordMajor>燃燒</keywordMajor>可以無限累加。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "Minionmancer",
+            "calculations": {},
+            "dataValues": {
+                "MinionDamageIncrease": 0.44999998807907104,
+                "MinionHealthIncrease": 0.44999998807907104,
+                "MinionSizeIncrease": 0.44999998807907104
+            },
+            "desc": "你的召喚物增加@MinionSizeIncrease*100@%體型、生命與傷害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/minionmancer_small.png",
+            "id": 104,
+            "name": "士兵術師",
+            "rarity": 1,
+            "tooltip": "你的召喚物增加@MinionSizeIncrease*100@%體型、生命與傷害。"
+        },
+        {
+            "apiName": "EtherealWeapon",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "技能可附加命中效果。對每個目標有1秒冷卻時間。",
+            "iconLarge": "assets/ux/cherry/augments/icons/etherealweapon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/etherealweapon_small.png",
+            "id": 29,
+            "name": "幻影武器",
+            "rarity": 1,
+            "tooltip": "技能可附加命中效果。對每個目標有1秒冷卻時間。<br><br>本回合觸發次數：@f1@<br>總觸發次數：@f2@"
+        },
+        {
+            "apiName": "OmniSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "獲得3個隨機龍魂。",
+            "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
+            "id": 62,
+            "name": "全能之魂",
+            "rarity": 2,
+            "tooltip": "獲得3個隨機龍魂。"
+        },
+        {
+            "apiName": "DawnbringersResolve",
+            "calculations": {
+                "HealCalc": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealAmount",
+                            "mStat": 11
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.08299999684095383
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "Duration": 3.0,
+                "HealAmount": 0.30000001192092896,
+                "HealthThreshold": 0.5
+            },
+            "desc": "生命降到@HealthThreshold*100@%以下後，在3秒內回復@HealAmount*100@%最大生命。<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 20,
+            "name": "黎明使者之決意",
+            "rarity": 1,
+            "tooltip": "生命降到@HealthThreshold*100@%以下後，在3秒內回復@HealAmount*100@%最大生命。<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
+        },
+        {
+            "apiName": "HoldVeryStill",
+            "calculations": {
+                "BonusAS": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 5
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 10
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mAdditionalBonusAtThisLevel": 0.20000000298023224,
+                                    "mLevel": 15
+                                }
+                            ],
+                            "mLevel1Value": 0.20000000298023224
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ASDuration": 5.0,
+                "BonusDamage": 0.10000000149011612,
+                "BonusMS": 0.20000000298023224,
+                "HoldStillDuration": 1.5
+            },
+            "desc": "獲得「<spellName>約德爾游擊隊</spellName>」<br><br><rules>停止移動@HoldStillDuration@秒後，進入<keywordStealth>潛隱</keywordStealth>狀態，直到下次移動為止。脫離<keywordStealth>潛隱</keywordStealth>狀態時，增加<attackSpeed>@BonusAS@攻速</attackSpeed>。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/holdverystill_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/holdverystill_small.png",
+            "id": 207,
+            "name": "一動也不動",
+            "rarity": 0,
+            "tooltip": "獲得「<spellName>約德爾游擊隊</spellName>」<br><br><rules>停止移動@HoldStillDuration@秒後，進入<keywordStealth>潛隱</keywordStealth>狀態，直到下次移動為止。脫離<keywordStealth>潛隱</keywordStealth>狀態時，增加<attackSpeed>@BonusAS@攻速</attackSpeed>。</rules>"
+        },
+        {
+            "apiName": "FromBeginningToEnd",
+            "calculations": {
+                "ChampRange": {
+                    "StaticTooltipCalculationDisplay": 5,
+                    "__type": "GameCalculationConditional",
+                    "mConditionalCalculationRequirements": {
+                        "__type": "IsRangedCastRequirement"
+                    },
+                    "mConditionalGameCalculation": "{06387172}",
+                    "mDefaultGameCalculation": "{792cf56b}",
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mSimpleTooltipCalculationDisplay": 5
+                },
+                "Cooldown": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "ByCharLevelInterpolationCalculationPart",
+                                "mEndValue": 15.0,
+                                "mStartValue": 25.0
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ModesCooldownReduction"
+                            }
+                        }
+                    ]
+                },
+                "{06387172}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 2.0
+                        }
+                    ]
+                },
+                "{792cf56b}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 1.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.3499999940395355,
+                "APRatio": 0.25,
+                "BaseDamageHigh": 100.0,
+                "BaseDamageLow": 50.0,
+                "CooldownResetValue": 1.5,
+                "DHCooldown": 45.0,
+                "DamageAmp": 0.15000000596046448,
+                "DamagePerSoulEssence": 10.0,
+                "Duration": 3.0,
+                "GoldPercentBonus": 1.2000000476837158,
+                "GoldPercentBonusRanged": 0.8999999761581421,
+                "GoldProcBonus": 6.0,
+                "GraceWindow": 0.25,
+                "HarvestThreshold": 0.5,
+                "MissileNoiseNumberLimiter": 3.0,
+                "MissileNoiseRangeLimiter": 1500.0,
+                "ModesCooldownReduction": 1.0,
+                "OOCTimer": 10.0
+            },
+            "desc": "獲得<spellName>先發制人</spellName>及<spellName>靈魂收割</spellName>關鍵符文。",
+            "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frombeginningtoend_small.png",
+            "id": 38,
+            "name": "自始至終",
+            "rarity": 1,
+            "tooltip": "獲得<spellName>先發制人</spellName>及<spellName>靈魂收割</spellName>關鍵符文。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@<br>獲得的總金幣數：@f3@"
+        },
+        {
+            "apiName": "CantTouchThis",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "InvulnDuration": 2.0
+            },
+            "desc": "施放大絕時，進入<status>無敵</status>狀態，持續一小段時間。",
+            "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
+            "id": 11,
+            "name": "別想碰我",
+            "rarity": 2,
+            "tooltip": "施放大絕時，進入<status>無敵</status>狀態，持續@InvulnDuration@秒，@Cooldown@秒冷卻時間。"
+        },
+        {
+            "apiName": "SnowballFight",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 15.0
+            },
+            "desc": "將召喚師逃亡換為標記。<br><br><rules>投出一顆雪球，標記第一位命中的敵軍並造成傷害，<recast>重施</recast>技能可衝向被標記的敵軍。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/snowballfight_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/snowballfight_small.png",
+            "id": 176,
+            "name": "雪球大戰！",
+            "rarity": 0,
+            "tooltip": "將召喚師逃亡換為標記。<br><br><rules>投出一顆雪球，標記第一位命中的敵軍並造成傷害，<recast>重施</recast>技能可衝向被標記的敵軍。</rules>"
+        },
+        {
+            "apiName": "ItsCritical",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.4000000059604645
+            },
+            "desc": "增加<crit>@CritChance*100@%暴擊率</crit>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/itscritical_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/itscritical_small.png",
+            "id": 47,
+            "name": "痛恨一擊",
+            "rarity": 1,
+            "tooltip": "增加<crit>@CritChance*100@%暴擊率</crit>。"
+        },
+        {
+            "apiName": "BloodBrother",
+            "calculations": {
+                "BleedDamagePerStack": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 45.0,
+                            "mStartValue": 15.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "NoxianMightBonusAD": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mBreakpoints": [
+                                {
+                                    "__type": "Breakpoint",
+                                    "mBonusPerLevelAtAndAfter": 15.0,
+                                    "mLevel": 11
+                                },
+                                {
+                                    "__type": "Breakpoint",
+                                    "mBonusPerLevelAtAndAfter": 30.0,
+                                    "mLevel": 14
+                                }
+                            ],
+                            "mInitialBonusPerLevel": 5.0,
+                            "mLevel1Value": 30.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "MaxStacks": 5.0,
+                "SecondsPerTick": 1.2599999904632568
+            },
+            "desc": "獲得達瑞斯的被動「<spellName>絞喉</spellName>」。<br><br><rules>普攻與傷害性技能會對目標造成<keywordMajor>絞喉</keywordMajor>，在@BleedDuration@秒內造成<physicalDamage>@BleedDamagePerStack@物理傷害</physicalDamage>，累加最多@MaxStacks@層。<br><br><keywordMajor>絞喉</keywordMajor>達到@MaxStacks@層時，達瑞文增加<scaleAD>@NoxianMightBonusAD@物理攻擊</scaleAD>。</rules><br><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/bloodbrother_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bloodbrother_small.png",
+            "id": 200,
+            "name": "結拜兄弟",
+            "rarity": 1,
+            "tooltip": "獲得達瑞斯的被動「<spellName>絞喉</spellName>」。<br><br><rules>普攻與傷害性技能會對目標造成<keywordMajor>絞喉</keywordMajor>，在@BleedDuration@秒內造成<physicalDamage>@BleedDamagePerStack@物理傷害</physicalDamage>，累加最多@MaxStacks@層。<br><br><keywordMajor>絞喉</keywordMajor>達到@MaxStacks@層時，達瑞文增加<scaleAD>@NoxianMightBonusAD@物理攻擊</scaleAD>。</rules><br><br>"
+        },
+        {
+            "apiName": "UltimateUnstoppable",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "UnstoppableDuration": 3.0
+            },
+            "desc": "使用大絕後會免疫控場效果@UnstoppableDuration@秒(冷卻時間：@Cooldown@秒)。",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimateunstoppable_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimateunstoppable_small.png",
+            "id": 112,
+            "name": "無敵大絕",
+            "rarity": 0,
+            "tooltip": "使用大絕後會免疫控場效果@UnstoppableDuration@秒(冷卻時間：@Cooldown@秒)。"
+        },
+        {
+            "apiName": "Recursion",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHaste": 60.0
+            },
+            "desc": "增加<scaleLevel>@AbilityHaste@技能加速</scaleLevel>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/recursion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/recursion_small.png",
+            "id": 68,
+            "name": "循環利用",
+            "rarity": 1,
+            "tooltip": "增加<scaleLevel>@AbilityHaste@技能加速</scaleLevel>。"
+        },
+        {
+            "apiName": "Deft",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeed": 0.6000000238418579
+            },
+            "desc": "增加@AttackSpeed*100@%攻速。",
+            "iconLarge": "assets/ux/cherry/augments/icons/deft_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/deft_small.png",
+            "id": 22,
+            "name": "手腳麻利",
+            "rarity": 0,
+            "tooltip": "增加@AttackSpeed*100@%攻速。"
+        },
+        {
+            "apiName": "Goliath",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.15000000596046448,
+                "APAmp": 0.15000000596046448,
+                "HealthAmp": 0.3499999940395355,
+                "SizeAmp": 0.5
+            },
+            "desc": "體積變大，增加@HealthAmp*100@%<scaleHealth>生命</scaleHealth>及@ADAmp*100@%<scaleAP>適性之力</scaleAP>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/goliath_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/goliath_small.png",
+            "id": 41,
+            "name": "巨人",
+            "rarity": 2,
+            "tooltip": "體積變大，增加@HealthAmp*100@%<scaleHealth>生命</scaleHealth>及@ADAmp*100@%<scaleAP>適性之力</scaleAP>。"
+        },
+        {
+            "apiName": "AcceleratingSorcery",
+            "calculations": {},
+            "dataValues": {
+                "HastePerCast": 10.0
+            },
+            "desc": "使用技能可增加<scaleBonus>技能加速</scaleBonus>，可無限累加。每回合重置。",
+            "iconLarge": "assets/ux/cherry/augments/icons/acceleratingsorcery_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/acceleratingsorcery_small.png",
+            "id": 1,
+            "name": "加速巫術",
+            "rarity": 2,
+            "tooltip": "使用技能可增加<scaleBonus>@HastePerCast@技能加速</scaleBonus>，可無限累加。每回合重置。"
+        },
+        {
+            "apiName": "OrbitalLaser",
+            "calculations": {
+                "DamagePerTick": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 120.0,
+                            "mStartValue": 45.0
+                        }
+                    ]
+                },
+                "TotalDamageOverTimeTooltip": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "DamagePerTick",
+                    "mMultiplier": {
+                        "__type": "ProductOfSubPartsCalculationPart",
+                        "mPart1": {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "GroundDuration"
+                        },
+                        "mPart2": {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 4.0
+                        }
+                    },
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "AOESize": 550.0,
+                "CastRange": 5500.0,
+                "Cooldown": 20.0,
+                "DamagetoChampions": 0.30000001192092896,
+                "GroundDuration": 3.0,
+                "LaserDelay": 2.5,
+                "TickRate": 0.5
+            },
+            "desc": "將召喚師逃亡換為<spellName>衛星雷射炮</spellName>。<br><br><rules>在短暫延遲後，發射衛星雷射炮，造成<trueDamage>@DamagetoChampions*100@%最大生命的真實傷害</trueDamage>，且在@GroundDuration@秒內造成<magicDamage>@TotalDamageOverTimeTooltip@魔法傷害</magicDamage>。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/orbitallaser_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/orbitallaser_small.png",
+            "id": 208,
+            "name": "衛星雷射炮",
+            "rarity": 2,
+            "tooltip": "{{Cherry_OrbitalLaser_Summary}}<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "MysticPunch",
+            "calculations": {},
+            "dataValues": {
+                "CooldownRefund": 1.25
+            },
+            "desc": "普攻縮短冷卻時間@CooldownRefund@秒。",
+            "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
+            "id": 58,
+            "name": "祕術拳擊",
+            "rarity": 2,
+            "tooltip": "普攻縮短冷卻時間@CooldownRefund@秒。"
+        },
+        {
+            "apiName": "Homeguard",
+            "calculations": {},
+            "dataValues": {
+                "DisableCooldown": 3.0,
+                "Duration": 10.0,
+                "MovementSpeed": 1.0
+            },
+            "desc": "獲得<speed>@spell.Augment_Homeguard:MovementSpeed*100@%跑速</speed>，承受傷害後@spell.Augment_Homeguard:DisableCooldown@秒內會失效。",
+            "iconLarge": "assets/ux/cherry/augments/icons/homeguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/homeguard_small.png",
+            "id": 105,
+            "name": "守護家園",
+            "rarity": 0,
+            "tooltip": "獲得<speed>@spell.Augment_Homeguard:MovementSpeed*100@%跑速</speed>，承受傷害後@spell.Augment_Homeguard:DisableCooldown@秒內會失效。"
+        },
+        {
+            "apiName": "HeavyHitter",
+            "calculations": {
+                "HealthPercentDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthPercent",
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthPercent": 0.03500000014901161
+            },
+            "desc": "你的普攻額外造成等同於自身<healing>最大生命</healing>@HealthPercent*100@%的<physicalDamage>物理傷害</physicalDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/heavyhitter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/heavyhitter_small.png",
+            "id": 181,
+            "name": "重型打手",
+            "rarity": 0,
+            "tooltip": "你的普攻額外造成等同於自身<healing>最大生命</healing>@HealthPercent*100@%的<physicalDamage>物理傷害</physicalDamage>。"
+        },
+        {
+            "apiName": "RabbleRousing",
+            "calculations": {
+                "HealAmount": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "MaxHealthPercentageHeal",
+                            "mStat": 11
+                        },
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 5.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "MaxHealthPercentageHeal": 0.009999999776482582
+            },
+            "desc": "使用技能後，回復<healing>@HealAmount@生命</healing>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/rabblerousing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/rabblerousing_small.png",
+            "id": 67,
+            "name": "煽動群眾",
+            "rarity": 1,
+            "tooltip": "使用技能後，回復<healing>@HealAmount@生命</healing>。<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
+        },
+        {
+            "apiName": "GiantSlayer",
+            "calculations": {},
+            "dataValues": {
+                "LargeBonusDamage": 0.25,
+                "MedBonusDamage": 0.15000000596046448,
+                "MovespeedMod": 0.30000001192092896,
+                "SizeMod": 0.25,
+                "SmallBonusDamage": 0.10000000149011612,
+                "XLargeBonusDamage": 0.30000001192092896
+            },
+            "desc": "體型變小，增加<speed>跑速</speed>，並根據目標英雄與你的體型差距造成額外傷害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/giantslayer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/giantslayer_small.png",
+            "id": 195,
+            "name": "巨人殺手",
+            "rarity": 2,
+            "tooltip": "體型變小，增加<speed>@MovespeedMod*100@%跑速</speed>，並根據目標英雄與自身體型差距造成@SmallBonusDamage*100@%至@XLargeBonusDamage*100@%額外傷害。<br><br>本回合造成傷害：@f1@<br>本對戰造成傷害：@f2@"
+        },
+        {
+            "apiName": "FrozenFoundations",
+            "calculations": {},
+            "dataValues": {
+                "ChampPushDistance": 120.0,
+                "NonChampPushDistance": 250.0,
+                "WallDuration": 5.0,
+                "WallWidth": 400.0
+            },
+            "desc": "獲得<spellName>冰封地基</spellName>召喚師技能。<br><br><rules>施放<spellName>冰封地基</spellName>後，可在任意位置召喚冰牆。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/frozenfoundations_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/frozenfoundations_small.png",
+            "id": 40,
+            "name": "冰封地基",
+            "rarity": 0,
+            "tooltip": "<rules>在目標位置召喚冰牆。</rules>"
+        },
+        {
+            "apiName": "CriticalHealing",
+            "calculations": {},
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritHeal": 0.4000000059604645
+            },
+            "desc": "你的治療與護盾可以暴擊。獲得@CritChance*100@%暴擊率。",
+            "iconLarge": "assets/ux/cherry/augments/icons/criticalhealing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/criticalhealing_small.png",
+            "id": 118,
+            "name": "暴擊治療",
+            "rarity": 1,
+            "tooltip": "你的治療與護盾可以暴擊，提升治療或護盾量額外@CritHeal*100@%。獲得@CritChance*100@%暴擊率。<br><br>額外治療量：@f1@<br>額外護盾量：@f2@"
+        },
+        {
+            "apiName": "ApexInventor",
+            "calculations": {},
+            "dataValues": {
+                "ItemHaste": 300.0,
+                "TooltipCDR": 75.0
+            },
+            "desc": "增加<scaleBonus>@ItemHaste@道具加速</scaleBonus>(等同於@TooltipCDR@%道具冷卻時間減免)。<br><br><rules>道具加速降低所有道具技能的冷卻時間。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
+            "id": 2,
+            "name": "頂尖發明家",
+            "rarity": 1,
+            "tooltip": "增加<scaleBonus>@ItemHaste@道具加速</scaleBonus>(等同於@TooltipCDR@%道具冷卻時間減免)。<br><br><rules>道具加速降低所有道具技能的冷卻時間。</rules>"
+        },
+        {
+            "apiName": "MirrorImage",
+            "calculations": {},
+            "dataValues": {
+                "AugmentCooldown": 60.0,
+                "CloneDuration": 8.0,
+                "HealthThreshold": 0.30000001192092896,
+                "StealthDuration": 1.25
+            },
+            "desc": "生命降至@HealthThreshold*100@%以下時，短暫進入<keywordStealth>隱形</keywordStealth>狀態並創造一個自己的複製體。",
+            "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
+            "id": 172,
+            "name": "鏡像",
+            "rarity": 0,
+            "tooltip": "生命降至@HealthThreshold*100@%以下時，短暫進入<keywordStealth>隱形</keywordStealth>狀態並創造一個自己的複製體。"
+        },
+        {
+            "apiName": "AllForYou",
+            "calculations": {},
+            "dataValues": {
+                "HealShieldAmp": 0.30000001192092896
+            },
+            "desc": "對搭檔施放時，你的治療與護盾量提升@HealShieldAmp*100@%。",
+            "iconLarge": "assets/ux/cherry/augments/icons/allforyou_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/allforyou_small.png",
+            "id": 141,
+            "name": "全部都給你",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_AllForYou_Summary }}<br><br>額外治療量：@f1@<br>額外護盾量：@f2@"
+        },
+        {
+            "apiName": "KeystoneConjurer",
+            "calculations": {},
+            "dataValues": {
+                "ADRatio": 0.3499999940395355,
+                "APRatio": 0.20000000298023224,
+                "AoEPercentRefund": 0.10000000149011612,
+                "DamageADRatio": 0.15000000596046448,
+                "DamageAPRatio": 0.10000000149011612,
+                "DamageBase": 10.0,
+                "DamageMax": 40.0,
+                "DotPercentRefund": 0.05000000074505806,
+                "PercentRefund": 0.20000000298023224,
+                "RechargeTime": 20.0,
+                "RechargeTimeMin": 8.0,
+                "ShieldBase": 30.0,
+                "ShieldMax": 75.0,
+                "ShieldRatio": 0.22499999403953552,
+                "ShieldRatioAD": 0.3499999940395355
+            },
+            "desc": "獲得<spellName>召喚：艾莉</spellName>及<spellName>奧術彗星</spellName>關鍵符文。",
+            "iconLarge": "assets/ux/cherry/augments/icons/keystoneconjurer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/keystoneconjurer_small.png",
+            "id": 50,
+            "name": "符文術士",
+            "rarity": 1,
+            "tooltip": "獲得<spellName>召喚：艾莉</spellName>及<spellName>奧術彗星</spellName>關鍵符文。<br><br>總輸出傷害：@f1@<br>總護盾量：@f2@"
+        },
+        {
+            "apiName": "LaserEyes",
+            "calculations": {
+                "LaserDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 60.0,
+                            "mStartValue": 5.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatio",
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "LaserEyesTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 240.0,
+                            "mStartValue": 20.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatioTooltip"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRatioTooltip",
+                            "mStat": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4,
+                    "tooltipOnly": true
+                }
+            },
+            "dataValues": {
+                "ADRatio": 0.14000000059604645,
+                "ADRatioTooltip": 0.5600000023841858,
+                "APRatio": 0.09000000357627869,
+                "APRatioTooltip": 0.36000001430511475,
+                "LaserLength": 700.0,
+                "RectHalfWidth": 60.0
+            },
+            "desc": "你會對面對的方向發射雷射，持續造成<magicDamage>魔法傷害</magicDamage>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/lasereyes_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lasereyes_small.png",
+            "id": 174,
+            "name": "雷射眼",
+            "rarity": 2,
+            "tooltip": "你會對面對的方向發射雷射，每秒造成<magicDamage>@LaserEyesTooltip@魔法傷害</magicDamage>。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "Dashing",
+            "calculations": {},
+            "dataValues": {
+                "Haste": 250.0
+            },
+            "desc": "施放衝刺、跳躍、閃現或傳送技能會獲得<scaleLevel>@Haste@技能加速</scaleLevel>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dashing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dashing_small.png",
+            "id": 19,
+            "name": "衝鋒",
+            "rarity": 2,
+            "tooltip": "施放衝刺、跳躍、閃現或傳送技能會獲得<scaleLevel>@Haste@技能加速</scaleLevel>。"
+        },
+        {
+            "apiName": "LightningStrikes",
+            "calculations": {},
+            "dataValues": {
+                "ASToADConversion": 25.0
+            },
+            "desc": "<scaleAD>物理攻擊</scaleAD>會隨<attackSpeed>攻速</attackSpeed>增加。",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
+            "id": 52,
+            "name": "電光石火",
+            "rarity": 1,
+            "tooltip": "每有<attackSpeed>0.1攻速</attackSpeed>便會增加<scaleAD>@ASToADConversion*.1@物理攻擊</scaleAD>。"
+        },
+        {
+            "apiName": "Repulsor",
+            "calculations": {},
+            "dataValues": {
+                "HealthThreshold1": 0.6000000238418579,
+                "HealthThreshold2": 0.30000001192092896,
+                "KnockbackDistance": 750.0,
+                "KnockbackRange": 500.0
+            },
+            "desc": "生命低於@HealthThreshold1*100@或@HealthThreshold2*100@%時，可<status>擊退</status>鄰近敵軍。",
+            "iconLarge": "assets/ux/cherry/augments/icons/repulsor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/repulsor_small.png",
+            "id": 69,
+            "name": "反重力裝置",
+            "rarity": 0,
+            "tooltip": "生命低於@HealthThreshold1*100@或@HealthThreshold2*100@%時，可<status>擊退</status>鄰近敵軍。"
+        },
+        {
+            "apiName": "SkilledSniper",
+            "calculations": {},
+            "dataValues": {
+                "PeriodicReductionAmount": 3.0,
+                "ReducedCooldown": 0.5,
+                "SnipeDistance": 700.0
+            },
+            "desc": "在@SnipeDistance@距離單位以外以非大絕技能命中敵軍時，可將該技能冷卻時間縮短為@ReducedCooldown@秒，持續性技能則重置為@PeriodicReductionAmount@秒。",
+            "iconLarge": "assets/ux/cherry/augments/icons/skilledsniper_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/skilledsniper_small.png",
+            "id": 113,
+            "name": "老練狙擊手",
+            "rarity": 1,
+            "tooltip": "在@SnipeDistance@距離單位以外以非大絕技能命中敵軍時，可將該技能冷卻時間縮短為@ReducedCooldown@秒，持續性技能則重置為@PeriodicReductionAmount@秒。"
+        },
+        {
+            "apiName": "ParasiticRelationship",
+            "calculations": {},
+            "dataValues": {
+                "HealPercent": 0.15000000596046448
+            },
+            "desc": "自身回復拍檔造成傷害@HealPercent*100@%的生命。",
+            "iconLarge": "assets/ux/cherry/augments/icons/parasiticrelationship_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/parasiticrelationship_small.png",
+            "id": 175,
+            "name": "寄生關係",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_ParasiticRelationship_Summary }}<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
+        },
+        {
+            "apiName": "Restart",
+            "calculations": {},
+            "dataValues": {
+                "CoolDown": 10.0
+            },
+            "desc": "非大絕技能每@CoolDown@秒會<keywordMajor>自動</keywordMajor>重置一次。",
+            "iconLarge": "assets/ux/cherry/augments/icons/restart_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/restart_small.png",
+            "id": 165,
+            "name": "重啟",
+            "rarity": 1,
+            "tooltip": "非大絕技能每@CoolDown@秒會<keywordMajor>自動</keywordMajor>重置一次。"
+        },
+        {
+            "apiName": "DrawYourSword",
+            "calculations": {},
+            "dataValues": {
+                "BonusAD": 0.3499999940395355,
+                "BonusAS": 0.25,
+                "BonusHP": 0.3499999940395355,
+                "BonusLifesteal": 0.25,
+                "BonusMS": 0.25,
+                "ExtraStackAttackRangeCeiling": 650.0,
+                "ExtraStackAttackRangeFloor": 500.0,
+                "MaxStatMod": 0.30000001192092896,
+                "MeleeAttackRange": 200.0
+            },
+            "desc": "你成為近戰英雄。增加<physicalDamage>@BonusAD*100@物理攻擊</physicalDamage>、<healing>@BonusHP*100@%生命</healing>、<attackSpeed>@BonusAS*100@%攻速</attackSpeed>、<lifesteal>@BonusLifesteal*100@%普攻吸血</lifesteal>與<speed>@BonusMS*100@%跑速</speed>(失去越多攻擊距離，增加越多)。",
+            "iconLarge": "assets/ux/cherry/augments/icons/drawyoursword_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/drawyoursword_small.png",
+            "id": 134,
+            "name": "拔劍吧",
+            "rarity": 2,
+            "tooltip": "你成為近戰英雄。增加<physicalDamage>@BonusAD*100@物理攻擊</physicalDamage>、<healing>@BonusHP*100@%生命</healing>、<attackSpeed>@BonusAS*100@%攻速</attackSpeed>、<lifesteal>@BonusLifesteal*100@%普攻吸血</lifesteal>與<speed>@BonusMS*100@%跑速</speed>(失去越多攻擊距離，增加越多)。"
+        },
+        {
+            "apiName": "RestlessRestoration",
+            "calculations": {
+                "HealCalcPer1000Units": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthRatioPer1000Units",
+                            "mStat": 11
+                        },
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 120.0,
+                            "mStartValue": 20.0
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealthRatioPer1000Units": 0.019999999552965164
+            },
+            "desc": "移動時持續<healing>回復生命</healing>，移動距離越長，回復越多。",
+            "iconLarge": "assets/ux/cherry/augments/icons/restlessrestoration_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/restlessrestoration_small.png",
+            "id": 70,
+            "name": "回復不休",
+            "rarity": 1,
+            "tooltip": "每移動1000距離，便會回復@HealCalcPer1000Units@生命。<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
+        },
+        {
+            "apiName": "DiveBomber",
+            "calculations": {},
+            "dataValues": {
+                "ExplosionRadius": 500.0,
+                "PercentMaxHPDamage": 0.20000000298023224
+            },
+            "desc": "我方每回合第一個陣亡的單位會爆炸並造成大量傷害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/divebomber_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/divebomber_small.png",
+            "id": 25,
+            "name": "自爆炸彈客",
+            "rarity": 1,
+            "tooltip": "我方每回合第一個陣亡的單位會爆炸，並對鄰近敵軍造成目標最大生命<trueDamage>@PercentMaxHPDamage*100@%的真實傷害</trueDamage>。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "BluntForce",
+            "calculations": {},
+            "dataValues": {
+                "ADIncrease": 0.15000000596046448
+            },
+            "desc": "增加<scaleAD>@ADIncrease*100@%物理攻擊</scaleAD>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
+            "id": 7,
+            "name": "蠻力重擊",
+            "rarity": 0,
+            "tooltip": "增加<scaleAD>@ADIncrease*100@%物理攻擊</scaleAD>。"
+        },
+        {
+            "apiName": "Oathsworn",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "將召喚師逃亡換為<spellName>命運呼喚</spellName><br><br><rules><spellName>命運呼喚</spellName>會將你的搭檔拖到你身上4秒，並使其進入無法被指定的狀態。搭檔可以移動來將自己投射出去，<status>擊退</status>命中的第一名英雄及所有鄰近敵軍。</rules><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
+            "id": 109,
+            "name": "血誓同盟",
+            "rarity": 1,
+            "tooltip": "將召喚師逃亡換為<spellName>命運呼喚</spellName><br><br><rules><spellName>命運呼喚</spellName>會將你的搭檔拖到你身上4秒，並使其進入無法被指定的狀態。搭檔可以移動來將自己投射出去，<status>擊退</status>命中的第一名英雄及所有鄰近敵軍。</rules><br>"
+        },
+        {
+            "apiName": "Flashbang",
+            "calculations": {
+                "ExplosiveDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.6000000238418579
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.699999988079071,
+                            "mStat": 2
+                        },
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 10.0,
+                            "mLevel1Value": 70.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "SlowAmount": 0.3499999940395355,
+                "SlowDuration": 1.25
+            },
+            "desc": "閃現時在周圍發生爆炸，對命中的敵軍造成<MagicalDamage>魔法傷害</MagicalDamage>和<status>緩速</status>效果。另外，閃現每回合會重置。",
+            "iconLarge": "assets/ux/cherry/augments/icons/flashbang_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/flashbang_small.png",
+            "id": 187,
+            "name": "閃光彈",
+            "rarity": 0,
+            "tooltip": "閃現時在周圍發生爆炸，造成<MagicalDamage>@ExplosiveDamage@魔法傷害</MagicalDamage>，並在@SlowDuration@秒內<status>緩速</status>目標@SlowAmount*100@%。另外，閃現每回合會重置。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "SummonersRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "隨機替換你的召喚師技能。在戰鬥中使用召喚師技能時，將其隨機替換成另一個，冷卻時間為@Cooldown@秒。",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonersroulette_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonersroulette_small.png",
+            "id": 123,
+            "name": "召喚師輪盤",
+            "rarity": 2,
+            "tooltip": "隨機替換你的召喚師技能。在戰鬥中使用召喚師技能時，將其隨機替換成另一個，冷卻時間為@Cooldown@秒。"
+        },
+        {
+            "apiName": "ShrinkRay",
+            "calculations": {},
+            "dataValues": {
+                "DamageReduction": 0.15000000596046448
+            },
+            "desc": "你的普攻可以降低敵軍造成的傷害@DamageReduction*100@%，持續3秒。",
+            "iconLarge": "assets/ux/cherry/augments/icons/shrinkray_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/shrinkray_small.png",
+            "id": 74,
+            "name": "縮小光線",
+            "rarity": 1,
+            "tooltip": "你的普攻可以降低敵軍造成的傷害@DamageReduction*100@%，持續3秒。<br><br>本回合降低的傷害：@f1@<br>總降低傷害量：@f2@"
+        },
+        {
+            "apiName": "Castle",
+            "calculations": {},
+            "dataValues": {
+                "MSBuffAmount": 0.5,
+                "MSBuffDuration": 4.0
+            },
+            "desc": "獲得<spellName>換斗移星</spellName>召喚師技能。<br><br><rules>施放<spellName>換斗移星</spellName>後，可與隊友調換位置。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/castle_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/castle_small.png",
+            "id": 12,
+            "name": "換斗移星",
+            "rarity": 0,
+            "tooltip": "獲得<spellName>換斗移星</spellName>召喚師技能。<br><br><rules>施放換斗移星後，可與隊友調換位置，然後增加@MSBuffAmount*100@%跑速，持續@MSBuffDuration@秒。</rules>"
+        },
+        {
+            "apiName": "Quest_SteelYourHeart",
+            "calculations": {},
+            "dataValues": {
+                "StackMultiplication": 6.0,
+                "StackThreshold": 325.0,
+                "StacktoRegenConversion": 0.10000000149011612
+            },
+            "desc": "條件：擁有@StackThreshold@層以上的雄心之鋼。<br><br>獎勵：將雄心之鋼堆層乘以@StackMultiplication@。增加相當於@StacktoRegenConversion*100@%雄心之鋼堆層的<healing>生命回復</healing>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_steelyourheart_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_steelyourheart_small.png",
+            "id": 152,
+            "name": "任務：心鋼起來",
+            "rarity": 1,
+            "tooltip": "條件：擁有@StackThreshold@層以上的雄心之鋼。<br><br>獎勵：將雄心之鋼堆層乘以@StackMultiplication@。增加相當於@StacktoRegenConversion*100@%雄心之鋼堆層的<healing>生命回復</healing>。"
+        },
+        {
+            "apiName": "Executioner",
+            "calculations": {},
+            "dataValues": {
+                "BonusDamage": 0.15000000596046448,
+                "HealthThreshold": 0.5
+            },
+            "desc": "對生命低於@HealthThreshold*100@%的敵軍額外造成@BonusDamage*100@%傷害。擊殺或助攻時，重置基本技能。",
+            "iconLarge": "assets/ux/cherry/augments/icons/executioner_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/executioner_small.png",
+            "id": 32,
+            "name": "處刑者",
+            "rarity": 0,
+            "tooltip": "對生命低於@HealthThreshold*100@%的敵軍額外造成@BonusDamage*100@%傷害。擊殺或助攻時，重置基本技能。<br><br>本回合額外傷害：@f1@<br>總額外傷害：@f2@"
+        },
+        {
+            "apiName": "CourageoftheColossus",
+            "calculations": {
+                "TotalShield": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 100.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthScalar",
+                            "mStat": 11
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806
+            },
+            "desc": "對敵方英雄造成<status>硬控場</status>後，獲得<shield>@TotalShield@護盾</shield>。<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/courageofthecolossus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
+            "id": 18,
+            "name": "巨像勇氣",
+            "rarity": 2,
+            "tooltip": "對敵方英雄造成<status>硬控場</status>後，獲得<shield>@TotalShield@護盾</shield>。<br><br>本回合護盾量：@f1@<br>總護盾量：@f2@"
+        },
+        {
+            "apiName": "InfernalSoul",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "獲得煉獄惡靈，使用技能或普攻命中敵軍時，可額外造成傷害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/infernalsoul_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/infernalsoul_small.png",
+            "id": 46,
+            "name": "煉獄惡靈",
+            "rarity": 0,
+            "tooltip": "獲得煉獄惡靈，使用技能或普攻命中敵軍時，可額外造成傷害。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "ComboMaster",
+            "calculations": {
+                "Cooldown": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 10.0,
+                            "mStartValue": 20.0
+                        }
+                    ]
+                },
+                "{4120d321}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 60.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.550000011920929,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HasteBase": 0.30000001192092896,
+                "HasteBaseMelee": 0.4000000059604645,
+                "HasteDuration": 3.0,
+                "HasteMax": 0.800000011920929,
+                "HasteMaxMelee": 0.800000011920929,
+                "MaxBonusSeconds": 4.0,
+                "NumberToProc": 3.0,
+                "SlowResist": 0.75,
+                "WindowDuration": 4.0
+            },
+            "desc": "獲得<spellName>死亡電刑</spellName>及<spellName>相位衝擊</spellName>關鍵符文。",
+            "iconLarge": "assets/ux/cherry/augments/icons/combomaster_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/combomaster_small.png",
+            "id": 16,
+            "name": "連招大師",
+            "rarity": 1,
+            "tooltip": "獲得<spellName>死亡電刑</spellName>及<spellName>相位衝擊</spellName>關鍵符文。<br><br>本回合死亡電刑傷害@f1@<br>死亡電刑總傷害：@f2@"
+        },
+        {
+            "apiName": "MindtoMatter",
+            "calculations": {},
+            "dataValues": {
+                "ManaToHealthConversion": 0.5
+            },
+            "desc": "增加<healing>最大生命</healing>，增加量為<scaleMana>魔力</scaleMana>的一半。",
+            "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
+            "id": 56,
+            "name": "因心成體",
+            "rarity": 0,
+            "tooltip": "增加<healing>最大生命</healing>，增加量為<scaleMana>魔力</scaleMana>的一半。"
+        },
+        {
+            "apiName": "ItsKillingTime",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 8.0,
+                "DamageStorePercentage": 0.4000000059604645,
+                "MarkDuration": 5.0,
+                "VFXHighDamageThreshold": 500.0
+            },
+            "desc": "施放大絕後，對所有敵方英雄附加死亡標記。此標記會儲存@DamageStorePercentage*100@%對其造成的傷害，然後在@MarkDuration@秒後爆炸，造成該傷害(冷卻時間為@Cooldown@秒)。",
+            "iconLarge": "assets/ux/cherry/augments/icons/itskillingtime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/itskillingtime_small.png",
+            "id": 211,
+            "name": "殺戮時間",
+            "rarity": 1,
+            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+        },
+        {
+            "apiName": "WisdomofAges",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "立刻升級，且每隔一回合獲得1次額外升級。移除等級的上限。",
+            "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
+            "id": 96,
+            "name": "亙古智慧",
+            "rarity": 2,
+            "tooltip": "立刻升級，且每隔一回合獲得1次額外升級。移除等級的上限。"
+        },
+        {
+            "apiName": "NowYouSeeMe",
+            "calculations": {},
+            "dataValues": {
+                "MSBuffAmount": 0.5,
+                "MSBuffDuration": 2.0
+            },
+            "desc": "獲得<spellName>遁術高手</spellName>召喚師技能。<br><br><rules>施放<spellName>遁術高手</spellName>後，可瞬移到上一次使用位移技能時的起始位置。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/nowyouseeme_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/nowyouseeme_small.png",
+            "id": 43,
+            "name": "遁術高手",
+            "rarity": 0,
+            "tooltip": "<passive>被動：</passive>使用位移技能時留下印記。<br><br><active>主動：</active>返回最後一個印記的位置。然後增加@MSBuffAmount*100@%跑速，持續@MSBuffDuration@秒。"
+        },
+        {
+            "apiName": "Perseverance",
+            "calculations": {},
+            "dataValues": {
+                "AmpedHPThreshold": 0.25,
+                "AmpedRegen": 16.0,
+                "BaseRegen": 8.0
+            },
+            "desc": "增加大量<healing>生命回復</healing>，生命低於一定值時增加更多。",
+            "iconLarge": "assets/ux/cherry/augments/icons/perseverance_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/perseverance_small.png",
+            "id": 64,
+            "name": "剛毅",
+            "rarity": 1,
+            "tooltip": "增加<healing>@BaseRegen*100@基礎生命回復</healing>，生命低於25%時增至<healing>@AmpedRegen*100@%基礎生命回復</healing>。<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
+        },
+        {
+            "apiName": "JeweledGauntlet",
+            "calculations": {
+                "APToCritConversion": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.00044999999227002263
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "CritChance": 0.25,
+                "CritDamage": 1.399999976158142
+            },
+            "desc": "技能可以暴擊。增加@CritChance*100@%暴擊率。",
+            "iconLarge": "assets/ux/cherry/augments/icons/jeweledgauntlet_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/jeweledgauntlet_small.png",
+            "id": 48,
+            "name": "寶石手套",
+            "rarity": 2,
+            "tooltip": "技能可以暴擊，造成@CritDamage*100@%總傷害。增加@CritChance*100@%暴擊率。額外增加@APToCritConversion@暴擊率，隨魔攻成長。<br><br>本回合額外傷害：@f1@<br>總額外傷害：@f2@"
+        }
+    ]
+}
