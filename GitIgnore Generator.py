@@ -1,0 +1,25 @@
+import os
+
+LF = [] #存储大小超过100 MB的文件位置（Stores paths of large files over 100 MiB）
+LNF = [] #存储文件名超过213个字符长度的文件位置（Stores paths of files with file name longer than 213 characters）
+for root, dirs, files in os.walk("离线数据（Offline Data）"):
+    for file in files:
+        size = os.path.getsize(os.path.join(root, file))
+        if size > 104857600: #100 * 1024 * 1024
+            LF.append(os.path.join(root, file).replace("\\", "/"))
+        if len(file) > 213:
+            LNF.append(os.path.join(root, file).replace("\\", "/"))
+
+with open(".gitignore", "w", encoding = "utf-8") as fp:
+    if LF:
+        print("#文件大小超过100 MB（File size exceeds 100 MiB）")
+        fp.write("#文件大小超过100 MB（File size exceeds 100 MiB）\n")
+        for file in LF:
+            print(file)
+            fp.write(file + "\n")
+    if LNF:
+        print("#文件名过长（File name exceeds 213 characters）")
+        fp.write("#文件名过长（File name exceeds 213 characters）\n")
+        for file in LNF:
+            print(file)
+            fp.write(file + "\n")
