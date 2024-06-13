@@ -104,8 +104,8 @@ while True:
         log.close()
         break
     elif resource[0] == "1":
-        print("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）")
-        log.write("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）\n")
+        print("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）\n4\t更新指定文件夹（Updating Specified Folders）")
+        log.write("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）\n4\t更新指定文件夹（Updating Specified Folders）\n")
         mode = input()
         log.write(mode + "\n\n" if mode == "" else mode + "\n")
         if mode == "" or mode[0] == "2":
@@ -145,6 +145,8 @@ while True:
                 time_get_method = "1"
         elif mode[0] == "3":
             mode = "3"
+        elif mode[0] == "4":
+            mode = "4"
         else:
             mode = "1"
         if mode == "3":
@@ -191,6 +193,41 @@ while True:
                     name = soup.find("a")["href"]
                     locales_pbe.append(name)
             cdragon_folders = ["latest/cdragon/arena/", "latest/cdragon/tft/"] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_latest] + ["pbe/cdragon/arena/", "pbe/cdragon/tft/"] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_pbe]
+        elif mode == "4":
+            print("请选择输入方式：\nPlease choose an input method:\n1\t逐行输入（Line by line）\n2\t来自文件（From file）")
+            log.write("请选择输入方式：\nPlease choose an input method:\n1\t逐行输入（Line by line）\n2\t来自文件（From file）\n")
+            input_method = input()
+            log.write(input_method + "\n\n" if input_method == "" else input_method + "\n")
+            if input_method == "" or input_method[0] == "2":
+                print('请输入一个存放CommunityDragon数据库文件夹地址的文本文档的位置：\nPlease input the path of a text file that contains URLs of folders in CommunityDragon database:')
+                log.write('请输入一个存放CommunityDragon数据库文件夹地址的文本文档的位置：\nPlease input the path of a text file that contains URLs of folders in CommunityDragon database:\n')
+                while True:
+                    txtfile = input()
+                    log.write(txtfile + "\n\n" if txtfile == "" else txtfile + "\n")
+                    if txtfile == "":
+                        continue
+                    elif os.path.exists(txtfile):
+                        break
+                    else:
+                        print("您输入的地址有误！请重新输入。\nERROR input of the text file path! Please try again.")
+                        log.write("您输入的地址有误！请重新输入。\nERROR input of the text file path! Please try again.\n")
+                with open(txtfile, "r", encoding = "utf-8") as fp:
+                    cdragon_folders = list(set(map(lambda x: x.strip("\n").lstrip("https://raw.communitydragon.org/"), txtfile.readlines())))
+                if "" in cdragon_folders:
+                    cdragon_folders.remove("")
+                cdragon_folders.sort()
+            else:
+                cdragon_folders = []
+                print("请逐个输入要更新的CommunityDragon文件夹的地址，输入-1以退出循环：\nPlease input the URLs of CommunityDragon folders to update one by one. Enter -1 to exit the loop:")
+                while True:
+                    cdragon_folder = input()
+                    log.write(cdragon_folder + "\n\n" if cdragon_folder == "" else cdragon_folder + "\n")
+                    if cdragon_folder == "":
+                        continue
+                    elif cdragon_folder == "-1":
+                        break
+                    else:
+                        cdragon_folders.append(cdragon_folder.replace("https://raw.communitydragon.org/", "").replace("离线数据（Offline Data）/cdragon/", "")) #请思考，这里如果换成`cdragon_folder.lstrip("https://raw.communitydragon.org/")`，会有什么效果？（Please figure out what will happen if the code is replaced by `cdragon_folder.lstrip("https://raw.communitydragon.org/")`）
         else:
             print("正在读取在线索引……\nReading online indices ...")
             log.write("正在读取在线索引……\nReading online indices ...\n")
@@ -226,7 +263,7 @@ while True:
             text_files_exported_pbe = [file for file in files_exported_pbe if file.endswith((".json", ".txt", ".js", ".yaml"))]
             text_folders_exported_pbe = list(set(list(map(lambda x: "/".join(x.split("/")[:-1]) + "/" if "/" in x else "", text_files_exported_pbe))))
             text_folders_exported_pbe.sort()
-            cdragon_folders = list(map(lambda x: "latest/" + x, text_folders_exported_latest)) + list(map(lambda x: "pbe/" + x, text_folders_exported_pbe))
+            cdragon_folders =  ["latest/cdragon/arena/", "latest/cdragon/tft/"] + list(map(lambda x: "latest/" + x, text_folders_exported_latest)) + ["pbe/cdragon/arena/", "pbe/cdragon/tft/"] + list(map(lambda x: "pbe/" + x, text_folders_exported_pbe)) #索引文件中不包含cdragon文件夹内的文件，因此这里需要单独添加到文件夹列表中（The index file doesn't contain files in cdragon folder, so they should be added to the folder list specially）
         web_prefix = "https://raw.communitydragon.org/"
         local_prefix = "离线数据（Offline Data）/cdragon"
         updated_files = []
@@ -254,6 +291,8 @@ while True:
                     print("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes." %(url, url))
                     log.write("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes.\n" %(url, url))
                     error_files.append(url)
+                    if os.path.join(local_prefix, folder).replace("\\", "/") in folders_to_delete:
+                        folders_to_delete.remove(os.path.join(local_prefix, folder).replace("\\", "/"))
                 elif status == 404:
                     print("文件夹%s不存在！\nFolder %s not found!" %(url, url))
                     log.write("文件夹%s不存在！\nFolder %s not found!\n" %(url, url))
@@ -277,6 +316,9 @@ while True:
             elif mode == "3":
                 print("本程序集涉及的新文件列表如下：\nNew file list involved in this program set is as follows:\n网页链接（URL)： %s" %url)
                 log.write("本程序集涉及的新文件列表如下：\nNew file list involved in this program set is as follows:\n网页链接（URL)： %s\n" %url)
+            elif mode == "4":
+                print("指定文件夹涉及的新文件列表如下：\nNew file list in specified folders is as follows:\n网页链接（URL)： %s" %url)
+                log.write("指定文件夹涉及的新文件列表如下：\nNew file list involved in specified folders is as follows:\n网页链接（URL)： %s\n" %url)
             for line in source_list:
                 matchedLine = line_re.search(line)
                 if matchedLine:
@@ -289,7 +331,7 @@ while True:
                     local_timestamp = os.path.getmtime(os.path.join(local_prefix, folder, name)) if os.path.exists(os.path.join(local_prefix, folder)) and name in os.listdir(os.path.join(local_prefix, folder)) else 0
                     local_date = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(local_timestamp))
                     if name.endswith((".json", ".txt", ".js", ".yaml")):
-                        if mode == "2" and time_get_method == "1" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp + time.localtime().tm_gmtoff < latest_mod_timestamp or mode == "3" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"]:
+                        if mode == "2" and time_get_method == "1" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp + time.localtime().tm_gmtoff < latest_mod_timestamp or mode == "3" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"] or mode == "4" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp:
                             continue
                         table["file"].append(name)
                         table["size"].append(size)
@@ -340,7 +382,7 @@ while True:
                         dst = json.load(fp) if name.endswith(".json") else fp.read()
                     if src != dst:
                         update = True
-                if mode == "1" and update or mode == "2" or mode == "3": #当选择全局扫描时，只更新有变化的文档；当选择根据修改时间更新时，如果网页修改时间超前，那么无论文件内容是否发生变化，都重新保存一次，便于后续按照修改时间更新（When the user selects Global Scan, the program updates the changed files. When the user selects Updating according to modification time, if the web modification time of a file succeeds to the local midification time of that, then save the web content to local, no matter whether the web file is same as the local file in terms of content）
+                if mode == "1" and update or mode != "1": #当选择全局扫描时，只更新有变化的文档；当选择根据修改时间更新时，如果网页修改时间超前，那么无论文件内容是否发生变化，都重新保存一次，便于后续按照修改时间更新（When the user selects Global Scan, the program updates the changed files. When the user selects Updating according to modification time, if the web modification time of a file succeeds to the local midification time of that, then save the web content to local, no matter whether the web file is same as the local file in terms of content）
                     with open(os.path.join(dir, name), "w", encoding = "utf-8") as fp:
                         if name.endswith(".json"):
                             json.dump(src, fp, indent = 4, ensure_ascii = False)
@@ -376,29 +418,29 @@ while True:
             print()
             log.write("\n")
         if error_files:
-            print("以下文件比对失败。请重新比对！\nThe following files fail to be checked. Please check manually!")
-            log.write("以下文件比对失败。请重新比对！\nThe following files fail to be checked. Please check manually!\n")
+            print("以下%d个文件比对失败。请重新比对！\nThe following %d file(s) fail to be checked. Please check manually!" %(len(error_files), len(error_files)))
+            log.write("以下%d个文件比对失败。请重新比对！\nThe following %d file(s) fail to be checked. Please check manually!\n" %(len(error_files), len(error_files)))
             for file in error_files:
                 print(file)
                 log.write(file + "\n")
             print()
         if mode == "1" and files_to_delete: #只有全局扫描才可以决定删除哪些文件（Only by Global Scan can the program decide which files to delete）
-            print("以下文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following files don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" + "\n".join(files_to_delete))
-            log.write("以下文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following files don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" + "\n".join(files_to_delete) + "\n")
-            delete = input() != ""
+            print("以下%d个文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following %d file(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" %(len(files_to_delete), len(files_to_delete)) + "\n".join(files_to_delete))
+            log.write("以下%d个文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following %d file(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" %(len(files_to_delete), len(files_to_delete)) + "\n".join(files_to_delete) + "\n")
+            delete = input()
             log.write(delete + "\n\n" if delete == "" else delete + "\n")
-            if delete:
+            if delete != "":
                 for file in files_to_delete:
                     try:
                         os.remove(file)
                     except FileNotFoundError:
                         pass
-        if folders_to_delete:
-            print("以下文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following folders don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" + "\n".join(folders_to_delete))
-            log.write("以下文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following folders don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" + "\n".join(folders_to_delete) + "\n")
-            delete = input() != ""
+        if (mode == "1" or mode == "2") and folders_to_delete:
+            print("以下%d个文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following %d folder(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" %(len(folders_to_delete), len(folders_to_delete)) + "\n".join(folders_to_delete))
+            log.write("以下%d个文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following %d folder(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" %(len(folders_to_delete), len(folders_to_delete)) + "\n".join(folders_to_delete) + "\n")
+            delete = input()
             log.write(delete + "\n\n" if delete == "" else delete + "\n")
-            if delete:
+            if delete != "":
                 for folder in folders_to_delete:
                     try:
                         shutil.rmtree(folder)
