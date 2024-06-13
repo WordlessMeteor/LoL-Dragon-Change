@@ -345,7 +345,7 @@ while True:
                 log.write(str(table) + "\n")
             else:
                 print(format_df(table, False, True)[0])
-                log.write(format_df(table)[0] + "\n")
+                log.write(format_df(table, False, True)[0] + "\n")
             dir = os.path.join(local_prefix, folder).replace("\\", "/")
             os.makedirs(dir, exist_ok = True)
             for i in range(len(table)):
