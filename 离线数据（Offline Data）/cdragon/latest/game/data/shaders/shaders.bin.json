@@ -8178,7 +8178,7 @@
                 "name": "Parameter1",
                 "logicalParameters": [
                     {
-                        "name": "PlanePos",
+                        "name": "PlaneOffset",
                         "fields": 7,
                         "__type": "ShaderLogicalParameter"
                     }
@@ -8187,6 +8187,17 @@
             },
             {
                 "name": "Parameter2",
+                "logicalParameters": [
+                    {
+                        "name": "PlanePos",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter3",
                 "data": [
                     0.0,
                     -1.0,
@@ -8203,7 +8214,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter3",
+                "name": "Parameter4",
                 "data": [
                     0.0,
                     0.0,
@@ -8220,7 +8231,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter4",
+                "name": "Parameter5",
                 "data": [
                     0.0,
                     100.0,
@@ -29417,6 +29428,179 @@
         },
         "featureMask": 37,
         "objectPath": "Shaders/SkinnedMesh/Ora",
+        "__type": "CustomShaderDef"
+    },
+    "Shaders/SkinnedMesh/Matcap_Iridescent_Holographic": {
+        "ShadingModel": "{baebc346}",
+        "parameters": [
+            {
+                "name": "Parameter0",
+                "data": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "TintColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "data": [
+                    1.0,
+                    2.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "MatCap_Strength",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "SpecularPower",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Flowspeed",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "NoiseStrength",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "data": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "SpecularTintColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter3",
+                "data": [
+                    1.0,
+                    0.5,
+                    1.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "IridescentControl",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Speed",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter4",
+                "data": [
+                    1.0,
+                    2.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Holo_Strength",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Holo_Size",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "staticSwitches": [
+            {
+                "name": "MATCAP_MASK_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "MATCAP_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "IRIDESCENCE_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "HOLOGRAPHIC_ON",
+                "__type": "ShaderStaticSwitch"
+            }
+        ],
+        "textures": [
+            {
+                "name": "OutlineMask_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/Atlast_Test.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "MatCap_Tex",
+                "defaultTexturePath": "ASSETS/Shared/Materials/MatCap_ToonPlastic.tex",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "Diffuse_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/rock_texture.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "iridescentTex",
+                "defaultTexturePath": "ASSETS/Shared/Materials/Default_Gradient.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "Flowmap",
+                "defaultTexturePath": "ASSETS/Shared/Materials/flowmap.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "Noise_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
+                "__type": "ShaderTexture"
+            }
+        ],
+        "featureDefines": {
+            "FEATURE_BLOOM": "1",
+            "FEATURE_WORLD_NORMAL": "1",
+            "FEATURE_WORLD_POSITION": "1"
+        },
+        "featureMask": 1,
+        "objectPath": "Shaders/SkinnedMesh/Matcap_Iridescent_Holographic",
         "__type": "CustomShaderDef"
     },
     "Shaders/SkinnedMesh/HKG_MatCap_Diff_Mask_Alpha": {

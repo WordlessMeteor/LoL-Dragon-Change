@@ -1032,74 +1032,6 @@
                 "__type": "TftDamageSkinDescriptor"
             }
         ],
-        "DamageSkinCutscene": {
-            "duration": 5.0,
-            "Entries": [
-                {
-                    "TriggerTime": 0.699999988079071,
-                    "duration": 3.0,
-                    "{c547d3c0}": true,
-                    "SourceObject": "PlayerSource",
-                    "Source": {
-                        "{1ec4c9b5}": "PlayerSource",
-                        "__type": "{69cdddcc}"
-                    },
-                    "TargetObject": "PlayerTarget",
-                    "Target": {
-                        "{1ec4c9b5}": "PlayerTarget",
-                        "{cbbb27a5}": true,
-                        "__type": "{69cdddcc}"
-                    },
-                    "{a0d7eb85}": "DamagePercentToConsume",
-                    "{a32d933a}": true,
-                    "acceleration": 8000.0,
-                    "MinSpeed": 300.0,
-                    "MaxSpeed": 8000.0,
-                    "InitialSpeed": 500.0,
-                    "__type": "TftCutsceneAcceleratingMissileClip"
-                }
-            ],
-            "initializer": {
-                "{220cba44}": "PlayerSource1",
-                "{61e7d1d5}": "PlayerSource",
-                "{00bd8f19}": "PlayerTarget",
-                "{317471c2}": "DamagePercentToConsume",
-                "__type": "{5cfe6ce7}"
-            },
-            "__type": "TftCutscene"
-        },
-        "{e3bee29c}": {
-            "duration": 3.0,
-            "Entries": [
-                {
-                    "duration": 3.0,
-                    "effectKey": "TFT_PlayerDamageMis1",
-                    "{c547d3c0}": true,
-                    "SourceObject": "PlayerSource",
-                    "Source": {
-                        "{1ec4c9b5}": "PlayerSource",
-                        "__type": "{69cdddcc}"
-                    },
-                    "TargetObject": "PlayerTarget",
-                    "Target": {
-                        "{1ec4c9b5}": "PlayerTarget",
-                        "{cbbb27a5}": true,
-                        "__type": "{69cdddcc}"
-                    },
-                    "{a0d7eb85}": "DamagePercentToConsume",
-                    "missileSpeed": 5000.0,
-                    "__type": "{38749c0a}"
-                }
-            ],
-            "initializer": {
-                "{220cba44}": "PlayerSource1",
-                "{61e7d1d5}": "PlayerSource",
-                "{00bd8f19}": "PlayerTarget",
-                "{317471c2}": "DamagePercentToConsume",
-                "__type": "{5cfe6ce7}"
-            },
-            "__type": "TftCutscene"
-        },
         "VfxResourceResolver": "{eb6bd996}",
         "StandaloneLoadoutsIcon": "ASSETS/Loadouts/TFTDamageSkins/Boom_RedPackets_Small.tex",
         "StandaloneLoadoutsLargeIcon": "ASSETS/Loadouts/TFTDamageSkins/Boom_RedPackets.tex",
@@ -1379,7 +1311,7 @@
                     {
                         "TriggerTime": 1.399999976158142,
                         "duration": 3.0,
-                        "BlackboardVfxSource": "Source",
+                        "BlackboardVfxSource": "SourcePlayer",
                         "effectKey": "TFT_PlayerDamageTar",
                         "position": {
                             "BlackboardPosition": "TargetPosition",
@@ -1391,7 +1323,7 @@
                     {
                         "TriggerTime": 1.899999976158142,
                         "duration": 3.0,
-                        "BlackboardVfxSource": "Source",
+                        "BlackboardVfxSource": "SourcePlayer",
                         "effectKey": "TFT_PlayerDamageTar2",
                         "position": {
                             "BlackboardPosition": "TargetPosition",
@@ -1471,6 +1403,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -1486,12 +1419,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -1514,6 +1447,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -1612,6 +1546,11 @@
             "ASSETS/Sounds/Wwise2016/SFX/Shared/MODE_TFT_DmgSkin15_SFX_audio.bnk",
             "ASSETS/Sounds/Wwise2016/SFX/Shared/MODE_TFT_DmgSkin15_SFX_events.bnk"
         ],
+        "RotationalShopItemData": {
+            "LcuBackgroundTexturePath": "ASSETS/Loadouts/TFTDamageSkins/boom_mushroom_madness_1.tex",
+            "MobileBackgroundTexturePath": "ASSETS/Loadouts/TFTDamageSkins/boom_mushroom_madness_1.tex",
+            "__type": "TftRotationalShopItemData"
+        },
         "CeremonyDurationInSeconds": 1.0,
         "__type": "TFTDamageSkin"
     },
@@ -1745,7 +1684,7 @@
                         "effectKey": "TFT_PlayerDamageMis_Avatar",
                         "HitEffectKey": "TFT_PlayerDamageTar",
                         "{c547d3c0}": true,
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
@@ -1756,7 +1695,7 @@
                             ],
                             "__type": "{2bde0c9c}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -1802,6 +1741,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -1877,6 +1817,7 @@
                     ],
                     "initializer": {
                         "{220cba44}": "SourcePlayer",
+                        "{19b74650}": "TargetPlayer",
                         "{61e7d1d5}": "Source",
                         "{00bd8f19}": "Target",
                         "{317471c2}": "DamagePercentToConsume",
@@ -1893,12 +1834,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -1921,6 +1862,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -2387,222 +2329,6 @@
                 "__type": "TftDamageSkinDescriptor"
             }
         ],
-        "DamageSkinCutscene": {
-            "duration": 5.0,
-            "Entries": [
-                {
-                    "duration": 5.0,
-                    "BlackboardVfxSource": "PlayerSource",
-                    "effectKey": "TFT_PlayerDamageCas",
-                    "position": {
-                        "{1ec4c9b5}": "Source",
-                        "__type": "{69cdddcc}"
-                    },
-                    "__type": "TftCutscenePosProviderVfxClip"
-                },
-                {
-                    "duration": 5.0,
-                    "BlackboardVfxSource": "PlayerSource",
-                    "effectKey": "TFT_Dmg_Skin115_Cas2_3Star",
-                    "BlackboardTargetObject": "Source",
-                    "TargetBone": "Root",
-                    "{1d6290fe}": "Target",
-                    "__type": "TftCutsceneObjVfxClip"
-                },
-                {
-                    "TriggerTime": 2.0,
-                    "effectKey": "TFT_PlayerDamageMis_Avatar",
-                    "HitEffectKey": "TFT_PlayerDamageTar",
-                    "SourceObject": "Source",
-                    "Source": {
-                        "{1ec4c9b5}": "Source",
-                        "bone": "Root",
-                        "{cbbb27a5}": true,
-                        "__type": "{69cdddcc}"
-                    },
-                    "TargetObject": "Target",
-                    "Target": {
-                        "{1ec4c9b5}": "Target",
-                        "bone": "Root",
-                        "{cbbb27a5}": true,
-                        "__type": "{69cdddcc}"
-                    },
-                    "MissileRadius": 1.0,
-                    "DamagePercent": 1.0,
-                    "{a0d7eb85}": "DamagePercentToConsume",
-                    "{a32d933a}": true,
-                    "missileSpeed": 1500.0,
-                    "MaxAddedSpeed": 4500.0,
-                    "__type": "{54019489}"
-                },
-                {
-                    "TriggerTime": 2.0999999046325684,
-                    "effectKey": "TFT_Dmg_Skin115_Mis2_3Star",
-                    "HitEffectKey": "TFT_Dmg_Skin115_Tar2_3Star",
-                    "{c547d3c0}": true,
-                    "SourceObject": "Source",
-                    "Source": {
-                        "{1ec4c9b5}": "Source",
-                        "bone": "Root",
-                        "HasOffset": true,
-                        "OffsetVector": [
-                            250.0,
-                            0.0,
-                            0.0
-                        ],
-                        "__type": "{69cdddcc}"
-                    },
-                    "TargetObject": "Target",
-                    "Target": {
-                        "{1ec4c9b5}": "Target",
-                        "bone": "Root",
-                        "{cbbb27a5}": true,
-                        "__type": "{69cdddcc}"
-                    },
-                    "MissileRadius": 10.0,
-                    "{a0d7eb85}": "DamagePercentToConsume",
-                    "missileSpeed": 2500.0,
-                    "__type": "{38749c0a}"
-                },
-                {
-                    "TriggerTime": 2.200000047683716,
-                    "effectKey": "TFT_Dmg_Skin115_Mis2_3Star",
-                    "HitEffectKey": "TFT_Dmg_Skin115_Tar2_3Star",
-                    "{c547d3c0}": true,
-                    "SourceObject": "Source",
-                    "Source": {
-                        "{1ec4c9b5}": "Source",
-                        "bone": "Root",
-                        "HasOffset": true,
-                        "OffsetVector": [
-                            -100.0,
-                            0.0,
-                            -250.0
-                        ],
-                        "__type": "{69cdddcc}"
-                    },
-                    "TargetObject": "Target",
-                    "Target": {
-                        "{1ec4c9b5}": "Target",
-                        "bone": "Root",
-                        "{cbbb27a5}": true,
-                        "__type": "{69cdddcc}"
-                    },
-                    "MissileRadius": 10.0,
-                    "{a0d7eb85}": "DamagePercentToConsume",
-                    "missileSpeed": 2500.0,
-                    "__type": "{38749c0a}"
-                },
-                {
-                    "TriggerTime": 2.0,
-                    "effectKey": "TFT_Dmg_Skin115_Mis2_3Star",
-                    "HitEffectKey": "TFT_Dmg_Skin115_Tar2_3Star",
-                    "{c547d3c0}": true,
-                    "SourceObject": "Source",
-                    "Source": {
-                        "{1ec4c9b5}": "Source",
-                        "bone": "Root",
-                        "HasOffset": true,
-                        "OffsetVector": [
-                            -200.0,
-                            0.0,
-                            150.0
-                        ],
-                        "__type": "{69cdddcc}"
-                    },
-                    "TargetObject": "Target",
-                    "Target": {
-                        "{1ec4c9b5}": "Target",
-                        "bone": "Root",
-                        "{cbbb27a5}": true,
-                        "__type": "{69cdddcc}"
-                    },
-                    "MissileRadius": 10.0,
-                    "{a0d7eb85}": "DamagePercentToConsume",
-                    "missileSpeed": 2500.0,
-                    "__type": "{38749c0a}"
-                }
-            ],
-            "initializer": {
-                "{220cba44}": "PlayerSource",
-                "{61e7d1d5}": "Source",
-                "{00bd8f19}": "Target",
-                "{317471c2}": "DamagePercentToConsume",
-                "__type": "{5cfe6ce7}"
-            },
-            "__type": "TftCutscene"
-        },
-        "{e3bee29c}": {
-            "Entries": [
-                {
-                    "effectKey": "TFT_PlayerDamageMis_Avatar",
-                    "SourceObject": "Target",
-                    "Source": {
-                        "{1ec4c9b5}": "Target",
-                        "bone": "Root",
-                        "{cbbb27a5}": true,
-                        "__type": "{69cdddcc}"
-                    },
-                    "TargetObject": "Source",
-                    "Target": {
-                        "{1ec4c9b5}": "Source",
-                        "bone": "Root",
-                        "{cbbb27a5}": true,
-                        "__type": "{69cdddcc}"
-                    },
-                    "MissileRadius": 1.0,
-                    "{a0d7eb85}": "DamagePercentToConsume",
-                    "missileSpeed": 500.0,
-                    "MaxAddedSpeed": 3500.0,
-                    "ReverseScale": true,
-                    "__type": "{54019489}"
-                },
-                {
-                    "duration": 5.0,
-                    "BlackboardGameObjectName": "Target",
-                    "Animation": "Idle1",
-                    "PostStartModifiers": [
-                        {
-                            "Animation": "Damage_Hurt",
-                            "__type": "TftAnimClipOverrideModifier"
-                        }
-                    ],
-                    "__type": "TftCutsceneAnimClip"
-                },
-                {
-                    "__type": "{00000000}"
-                },
-                {
-                    "effectKey": "TFT_PlayerDamageMis_Avatar",
-                    "SourceObject": "Source",
-                    "Source": {
-                        "BlackboardPosition": "TargetPosition",
-                        "BlackboardOrientation": "TargetOrientation",
-                        "__type": "{8e30b80e}"
-                    },
-                    "TargetObject": "Source",
-                    "Target": {
-                        "BlackboardPosition": "SourcePosition",
-                        "BlackboardOrientation": "SourceOrientation",
-                        "__type": "{8e30b80e}"
-                    },
-                    "MissileRadius": 1.0,
-                    "{a0d7eb85}": "DamagePercentToConsume",
-                    "missileSpeed": 500.0,
-                    "MaxAddedSpeed": 3500.0,
-                    "ReverseScale": true,
-                    "__type": "{54019489}"
-                }
-            ],
-            "initializer": {
-                "{220cba44}": "PlayerSource",
-                "{61e7d1d5}": "Source",
-                "{00bd8f19}": "Target",
-                "{317471c2}": "DamagePercentToConsume",
-                "__type": "{5cfe6ce7}"
-            },
-            "__type": "TftCutscene"
-        },
         "ceremony": {
             "MainCutscene": {
                 "duration": 5.0,
@@ -2634,13 +2360,13 @@
                         "TriggerTime": 2.0,
                         "effectKey": "TFT_PlayerDamageMis_Avatar",
                         "HitEffectKey": "TFT_PlayerDamageTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "PlayerSource",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
                             "__type": "{8e30b80e}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "PlayerTarget",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -2659,7 +2385,7 @@
                         "effectKey": "TFT_Dmg_Skin115_Mis2_3Star",
                         "HitEffectKey": "TFT_Dmg_Skin115_Tar2_3Star",
                         "{c547d3c0}": true,
-                        "SourceObject": "Source",
+                        "SourceObject": "PlayerSource",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
@@ -2670,7 +2396,7 @@
                             ],
                             "__type": "{2bde0c9c}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "PlayerTarget",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -2686,7 +2412,7 @@
                         "effectKey": "TFT_Dmg_Skin115_Mis2_3Star",
                         "HitEffectKey": "TFT_Dmg_Skin115_Tar2_3Star",
                         "{c547d3c0}": true,
-                        "SourceObject": "Source",
+                        "SourceObject": "PlayerSource",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
@@ -2697,7 +2423,7 @@
                             ],
                             "__type": "{2bde0c9c}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "PlayerTarget",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -2713,7 +2439,7 @@
                         "effectKey": "TFT_Dmg_Skin115_Mis2_3Star",
                         "HitEffectKey": "TFT_Dmg_Skin115_Tar2_3Star",
                         "{c547d3c0}": true,
-                        "SourceObject": "Source",
+                        "SourceObject": "PlayerSource",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
@@ -2724,7 +2450,7 @@
                             ],
                             "__type": "{2bde0c9c}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "PlayerTarget",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -2754,6 +2480,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "PlayerSource",
+                    "{19b74650}": "PlayerTarget",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -2797,13 +2524,13 @@
                         },
                         {
                             "effectKey": "TFT_PlayerDamageMis_Avatar",
-                            "SourceObject": "Source",
+                            "SourceObject": "PlayerSource",
                             "Source": {
                                 "BlackboardPosition": "TargetPosition",
                                 "BlackboardOrientation": "TargetOrientation",
                                 "__type": "{8e30b80e}"
                             },
-                            "TargetObject": "Source",
+                            "TargetObject": "PlayerTarget",
                             "Target": {
                                 "BlackboardPosition": "SourcePosition",
                                 "BlackboardOrientation": "SourceOrientation",
@@ -2819,6 +2546,7 @@
                     ],
                     "initializer": {
                         "{220cba44}": "PlayerSource",
+                        "{19b74650}": "PlayerTarget",
                         "{61e7d1d5}": "Source",
                         "{00bd8f19}": "Target",
                         "{317471c2}": "DamagePercentToConsume",
@@ -2834,12 +2562,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -2862,6 +2590,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -2913,13 +2642,13 @@
                         "HitEffectKey": "TFT_PlayerDamageTar",
                         "{789f4661}": true,
                         "{15909afd}": 0.5,
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
                             "__type": "{8e30b80e}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -2958,6 +2687,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -2994,6 +2724,7 @@
                     ],
                     "initializer": {
                         "{220cba44}": "SourcePlayer",
+                        "{19b74650}": "TargetPlayer",
                         "{61e7d1d5}": "Source",
                         "{00bd8f19}": "Target",
                         "{317471c2}": "DamagePercentToConsume",
@@ -3010,12 +2741,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -3038,6 +2769,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -3797,6 +3529,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -3812,12 +3545,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -3839,6 +3572,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -3968,13 +3702,13 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMis1",
                         "HitEffectKey": "TFT_PlayerDamageTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
                             "__type": "{8e30b80e}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -4005,6 +3739,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -4035,6 +3770,7 @@
                     ],
                     "initializer": {
                         "{220cba44}": "SourcePlayer",
+                        "{19b74650}": "TargetPlayer",
                         "{61e7d1d5}": "Source",
                         "{00bd8f19}": "Target",
                         "{317471c2}": "DamagePercentToConsume",
@@ -4051,12 +3787,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -4079,6 +3815,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -4236,13 +3973,13 @@
                         "effectKey": "TFT_PlayerDamageMis_Avatar",
                         "HitEffectKey": "TFT_PlayerDamageTar",
                         "{c547d3c0}": true,
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
                             "__type": "{8e30b80e}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -4274,6 +4011,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -4306,6 +4044,7 @@
                     ],
                     "initializer": {
                         "{220cba44}": "SourcePlayer",
+                        "{19b74650}": "TargetPlayer",
                         "{61e7d1d5}": "Source",
                         "{00bd8f19}": "Target",
                         "{317471c2}": "DamagePercentToConsume",
@@ -4322,12 +4061,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -4350,6 +4089,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -5795,13 +5535,13 @@
                         "HitEffectKey": "TFT_PlayerDamageTar",
                         "{789f4661}": true,
                         "{15909afd}": 0.5,
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
                             "__type": "{8e30b80e}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -5841,6 +5581,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -5877,6 +5618,7 @@
                     ],
                     "initializer": {
                         "{220cba44}": "SourcePlayer",
+                        "{19b74650}": "TargetPlayer",
                         "{61e7d1d5}": "Source",
                         "{00bd8f19}": "Target",
                         "{317471c2}": "DamagePercentToConsume",
@@ -5893,12 +5635,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -5921,6 +5663,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -6048,6 +5791,225 @@
             "ASSETS/Sounds/Wwise2016/SFX/Shared/MODE_TFT_DmgSkin75_SFX_events.bnk"
         ],
         "CeremonyDurationInSeconds": 1.5,
+        "__type": "TFTDamageSkin"
+    },
+    "{b7a67f58}": {
+        "mNameTraKey": "tft_damageskin_tristana_pengucosplay",
+        "catalogEntry": {
+            "contentId": "36d2420b-ec74-44f4-8329-544e8209ca65",
+            "itemID": 129003,
+            "offerId": "0afd7cd9-9ddb-4bb5-9a27-b7b53d44e26c",
+            "__type": "CatalogEntry"
+        },
+        "mName": "Tristana_PenguCosplay_Tier3",
+        "rarity": 1,
+        "DamageBuffName": "TFT_PlayerDamage_Main",
+        "level": 1,
+        "SkinID": 129,
+        "ceremony": {
+            "MainCutscene": {
+                "duration": 3.0,
+                "Entries": [
+                    {
+                        "duration": 2.0,
+                        "BlackboardVfxSource": "SourcePlayer",
+                        "effectKey": "TFT_PlayerDamageCas",
+                        "position": {
+                            "BlackboardPosition": "SourcePosition",
+                            "BlackboardOrientation": "SourceOrientation",
+                            "{9e3d0a40}": "TargetPosition",
+                            "__type": "{8e30b80e}"
+                        },
+                        "__type": "TftCutscenePosProviderVfxClip"
+                    },
+                    {
+                        "TriggerTime": 1.7000000476837158,
+                        "duration": 3.0,
+                        "effectKey": "TFT_PlayerDamageMis_Avatar",
+                        "HitEffectKey": "TFT_PlayerDamageTar",
+                        "{c547d3c0}": true,
+                        "SourceObject": "SourcePlayer",
+                        "Source": {
+                            "BlackboardPosition": "SourcePosition",
+                            "BlackboardOrientation": "SourceOrientation",
+                            "OffsetVector": [
+                                0.0,
+                                300.0,
+                                0.0
+                            ],
+                            "__type": "{2bde0c9c}"
+                        },
+                        "TargetObject": "TargetPlayer",
+                        "Target": {
+                            "BlackboardPosition": "TargetPosition",
+                            "BlackboardOrientation": "TargetOrientation",
+                            "__type": "{8e30b80e}"
+                        },
+                        "DamagePercent": 1.0,
+                        "{a0d7eb85}": "DamagePercentToConsume",
+                        "{1f0b4b9f}": "PostHit",
+                        "heightSolver": {
+                            "InitialTargetHeightOffset": 1900.0,
+                            "__type": "TftCurveTheDifferenceHeightSolver"
+                        },
+                        "acceleration": 9000.0,
+                        "MinSpeed": 3000.0,
+                        "MaxSpeed": 9000.0,
+                        "__type": "TftCutsceneAcceleratingMissileClip"
+                    },
+                    {
+                        "duration": 1.600000023841858,
+                        "StartAudioEvent": "Play_sfx_tft_dmg_skin129_tier3_cast",
+                        "{78afa616}": "Source",
+                        "{bdee689d}": true,
+                        "__type": "TftCutsceneObjSfxClip"
+                    },
+                    {
+                        "TriggerTime": 1.5800000429153442,
+                        "StartAudioEvent": "Play_sfx_tft_dmg_skin129_tier3_travel",
+                        "StopAudioEvent": "Stop_sfx_tft_dmg_skin129_tier3_travel",
+                        "{78afa616}": "Source",
+                        "{bdee689d}": true,
+                        "{3cff8270}": true,
+                        "__type": "TftCutsceneObjSfxClip"
+                    },
+                    {
+                        "priority": 3,
+                        "duration": 5.0,
+                        "{40d522bc}": "Source",
+                        "BlackboardPosition": "SourcePosition",
+                        "BlackboardOrientation": "SourceOrientation",
+                        "__type": "{0f37151c}"
+                    },
+                    {
+                        "priority": 3,
+                        "duration": 5.0,
+                        "{40d522bc}": "Target",
+                        "BlackboardPosition": "TargetPosition",
+                        "BlackboardOrientation": "TargetOrientation",
+                        "__type": "{0f37151c}"
+                    },
+                    {
+                        "TriggerTime": 1.899999976158142,
+                        "duration": 3.0,
+                        "BlackboardVfxSource": "Source",
+                        "effectKey": "TFT_PlayerDamageTar2",
+                        "position": {
+                            "BlackboardPosition": "TargetPosition",
+                            "BlackboardOrientation": "TargetOrientation",
+                            "__type": "{8e30b80e}"
+                        },
+                        "__type": "TftCutscenePosProviderVfxClip"
+                    }
+                ],
+                "initializer": {
+                    "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
+                    "{61e7d1d5}": "Source",
+                    "{00bd8f19}": "Target",
+                    "{317471c2}": "DamagePercentToConsume",
+                    "__type": "{5cfe6ce7}"
+                },
+                "__type": "TftCutscene"
+            },
+            "{918227c9}": {
+                "PostHit": {
+                    "duration": 5.0,
+                    "Entries": [
+                        {
+                            "duration": 2.0999999046325684,
+                            "StartAudioEvent": "Play_sfx_tft_dmg_skin129_tier3_hit",
+                            "{78afa616}": "Target",
+                            "__type": "TftCutsceneObjSfxClip"
+                        },
+                        {
+                            "__type": "{00000000}"
+                        },
+                        {
+                            "duration": 5.0,
+                            "BlackboardGameObjectName": "Target",
+                            "Animation": "Idle1",
+                            "PostStartModifiers": [
+                                {
+                                    "Animation": "Damage_Hurt",
+                                    "__type": "TftAnimClipOverrideModifier"
+                                }
+                            ],
+                            "__type": "TftCutsceneAnimClip"
+                        }
+                    ],
+                    "initializer": {
+                        "{220cba44}": "SourcePlayer",
+                        "{19b74650}": "TargetPlayer",
+                        "{61e7d1d5}": "Source",
+                        "{00bd8f19}": "Target",
+                        "{317471c2}": "DamagePercentToConsume",
+                        "__type": "{5cfe6ce7}"
+                    },
+                    "__type": "TftCutscene"
+                }
+            },
+            "UnitCutscene": {
+                "duration": 5.0,
+                "Entries": [
+                    {
+                        "priority": 2,
+                        "duration": 5.0,
+                        "effectKey": "TFT_PlayerDamageMinionMis",
+                        "HitEffectKey": "TFT_PlayerDamageMinionTar",
+                        "SourceObject": "SourcePlayer",
+                        "Source": {
+                            "{1ec4c9b5}": "Source",
+                            "__type": "{69cdddcc}"
+                        },
+                        "TargetObject": "TargetPlayer",
+                        "Target": {
+                            "BlackboardPosition": "TargetPosition",
+                            "BlackboardOrientation": "TargetOrientation",
+                            "__type": "{8e30b80e}"
+                        },
+                        "MissileRadius": 1.0,
+                        "DamagePercent": 1.0,
+                        "{a0d7eb85}": "DamagePercentToConsume",
+                        "missileSpeed": 1800.0,
+                        "__type": "{38749c0a}"
+                    },
+                    {
+                        "priority": 3,
+                        "duration": 5.0,
+                        "{40d522bc}": "Target",
+                        "BlackboardPosition": "TargetPosition",
+                        "BlackboardOrientation": "TargetOrientation",
+                        "__type": "{0f37151c}"
+                    }
+                ],
+                "initializer": {
+                    "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
+                    "{61e7d1d5}": "Source",
+                    "{00bd8f19}": "Target",
+                    "{317471c2}": "DamagePercentToConsume",
+                    "__type": "{5cfe6ce7}"
+                },
+                "__type": "TftCutscene"
+            },
+            "__type": "TftDamageSkinCeremony"
+        },
+        "VfxResourceResolver": "{3ead9934}",
+        "StandaloneLoadoutsIcon": "ASSETS/Loadouts/TFTDamageSkins/Boom_Chibi_Tristana_PenguCosplay_Small.tex",
+        "StandaloneLoadoutsLargeIcon": "ASSETS/Loadouts/TFTDamageSkins/Boom_Chibi_Tristana_PenguCosplay.tex",
+        "AudioBankPaths": [
+            "ASSETS/Sounds/Wwise2016/SFX/Shared/MODE_TFT_DmgSkin129_SFX_audio.bnk",
+            "ASSETS/Sounds/Wwise2016/SFX/Shared/MODE_TFT_DmgSkin129_SFX_events.bnk"
+        ],
+        "TrovesHighlightVfx": "{a8fa4ad1}",
+        "{8e2a4357}": "{23561c73}",
+        "RotationalShopItemData": {
+            "LcuBackgroundTexturePath": "ASSETS/UX/TFT/RotationalShop/Content/PenguCosplayBusterBoom/Rotational_Shop_Mythic_Boom_PenguCosplayBuster_PC.tex",
+            "MobileBackgroundTexturePath": "ASSETS/UX/TFT/RotationalShop/Content/PenguCosplayBusterBoom/Rotational_Shop_Mythic_Boom_PenguCosplayBuster_Mobile.tex",
+            "__type": "TftRotationalShopItemData"
+        },
+        "CeremonyDurationInSeconds": 6.0,
         "__type": "TFTDamageSkin"
     },
     "{b86006c2}": {
@@ -7227,6 +7189,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -7241,12 +7204,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -7269,6 +7232,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -7692,13 +7656,13 @@
                         "effectKey": "TFT_PlayerDamageMis_Avatar",
                         "HitEffectKey": "TFT_PlayerDamageTar",
                         "{c547d3c0}": true,
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
                             "__type": "{8e30b80e}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -7744,6 +7708,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -7770,6 +7735,7 @@
                     ],
                     "initializer": {
                         "{220cba44}": "SourcePlayer",
+                        "{19b74650}": "TargetPlayer",
                         "{61e7d1d5}": "Source",
                         "{00bd8f19}": "Target",
                         "{317471c2}": "DamagePercentToConsume",
@@ -7786,12 +7752,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -7814,6 +7780,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -8446,13 +8413,13 @@
                         "effectKey": "TFT_PlayerDamageMis1",
                         "HitEffectKey": "TFT_PlayerDamageTar",
                         "{5e6afcf4}": "MainMissile",
-                        "SourceObject": "Source",
+                        "SourceObject": "PlayerSource",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
                             "__type": "{8e30b80e}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "PlayerTarget",
                         "Target": {
                             "{1ec4c9b5}": "Target",
                             "{cbbb27a5}": true,
@@ -8481,6 +8448,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "PlayerSource",
+                    "{19b74650}": "PlayerTarget",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -8516,6 +8484,7 @@
                     ],
                     "initializer": {
                         "{220cba44}": "PlayerSource",
+                        "{19b74650}": "PlayerTarget",
                         "{61e7d1d5}": "Source",
                         "{00bd8f19}": "Target",
                         "{317471c2}": "DamagePercentToConsume",
@@ -8532,12 +8501,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "PlayerSource",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "PlayerTarget",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -8559,6 +8528,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "PlayerSource",
+                    "{19b74650}": "PlayerTarget",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -8777,14 +8747,14 @@
                         "effectKey": "TFT_PlayerDamageMis_Avatar",
                         "HitEffectKey": "TFT_PlayerDamageTar",
                         "{c547d3c0}": true,
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "BlackboardPosition": "SourcePosition",
                             "BlackboardOrientation": "SourceOrientation",
                             "{9e3d0a40}": "TargetPosition",
                             "__type": "{8e30b80e}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -8831,6 +8801,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -8861,6 +8832,7 @@
                     ],
                     "initializer": {
                         "{220cba44}": "SourcePlayer",
+                        "{19b74650}": "TargetPlayer",
                         "{61e7d1d5}": "Source",
                         "{00bd8f19}": "Target",
                         "{317471c2}": "DamagePercentToConsume",
@@ -8877,12 +8849,12 @@
                         "duration": 5.0,
                         "effectKey": "TFT_PlayerDamageMinionMis",
                         "HitEffectKey": "TFT_PlayerDamageMinionTar",
-                        "SourceObject": "Source",
+                        "SourceObject": "SourcePlayer",
                         "Source": {
                             "{1ec4c9b5}": "Source",
                             "__type": "{69cdddcc}"
                         },
-                        "TargetObject": "Target",
+                        "TargetObject": "TargetPlayer",
                         "Target": {
                             "BlackboardPosition": "TargetPosition",
                             "BlackboardOrientation": "TargetOrientation",
@@ -8905,6 +8877,7 @@
                 ],
                 "initializer": {
                     "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
                     "{61e7d1d5}": "Source",
                     "{00bd8f19}": "Target",
                     "{317471c2}": "DamagePercentToConsume",
@@ -9253,6 +9226,199 @@
             "ASSETS/Sounds/Wwise2016/SFX/Shared/MODE_TFT_DmgSkin73_SFX_events.bnk"
         ],
         "CeremonyDurationInSeconds": 1.0,
+        "__type": "TFTDamageSkin"
+    },
+    "{f693749c}": {
+        "mNameTraKey": "tft_damageskin_tristanabustershot",
+        "catalogEntry": {
+            "contentId": "3885b5a0-f6fa-499a-8338-a2be4c9ac608",
+            "itemID": 127003,
+            "offerId": "e8524642-c363-4e24-9ad3-239d75b53996",
+            "__type": "CatalogEntry"
+        },
+        "mName": "TristanaBusterShot_Tier3",
+        "rarity": 1,
+        "DamageBuffName": "TFT_PlayerDamage_Main",
+        "level": 1,
+        "SkinID": 127,
+        "ceremony": {
+            "MainCutscene": {
+                "duration": 3.0,
+                "Entries": [
+                    {
+                        "duration": 2.0,
+                        "BlackboardVfxSource": "SourcePlayer",
+                        "effectKey": "TFT_PlayerDamageCas",
+                        "position": {
+                            "BlackboardPosition": "SourcePosition",
+                            "BlackboardOrientation": "SourceOrientation",
+                            "{9e3d0a40}": "TargetPosition",
+                            "__type": "{8e30b80e}"
+                        },
+                        "__type": "TftCutscenePosProviderVfxClip"
+                    },
+                    {
+                        "TriggerTime": 1.7300000190734863,
+                        "duration": 3.0,
+                        "effectKey": "TFT_PlayerDamageMis_Avatar",
+                        "HitEffectKey": "TFT_PlayerDamageTar",
+                        "{c547d3c0}": true,
+                        "SourceObject": "SourcePlayer",
+                        "Source": {
+                            "BlackboardPosition": "SourcePosition",
+                            "BlackboardOrientation": "SourceOrientation",
+                            "OffsetVector": [
+                                0.0,
+                                400.0,
+                                0.0
+                            ],
+                            "__type": "{2bde0c9c}"
+                        },
+                        "TargetObject": "TargetPlayer",
+                        "Target": {
+                            "BlackboardPosition": "TargetPosition",
+                            "BlackboardOrientation": "TargetOrientation",
+                            "__type": "{8e30b80e}"
+                        },
+                        "DamagePercent": 1.0,
+                        "{a0d7eb85}": "DamagePercentToConsume",
+                        "{1f0b4b9f}": "PostHit",
+                        "acceleration": 500.0,
+                        "MinSpeed": 7000.0,
+                        "MaxSpeed": 50000.0,
+                        "__type": "TftCutsceneAcceleratingMissileClip"
+                    },
+                    {
+                        "duration": 3.0,
+                        "StartAudioEvent": "Play_sfx_tft_dmg_skin127_cast",
+                        "StopAudioEvent": "Stop_sfx_tft_dmg_skin127_cast",
+                        "{78afa616}": "SourcePlayer",
+                        "{bdee689d}": true,
+                        "__type": "TftCutsceneObjSfxClip"
+                    },
+                    {
+                        "priority": 3,
+                        "duration": 5.0,
+                        "{40d522bc}": "Source",
+                        "BlackboardPosition": "SourcePosition",
+                        "BlackboardOrientation": "SourceOrientation",
+                        "__type": "{0f37151c}"
+                    },
+                    {
+                        "priority": 3,
+                        "duration": 5.0,
+                        "{40d522bc}": "Target",
+                        "BlackboardPosition": "TargetPosition",
+                        "BlackboardOrientation": "TargetOrientation",
+                        "__type": "{0f37151c}"
+                    }
+                ],
+                "initializer": {
+                    "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
+                    "{61e7d1d5}": "Source",
+                    "{00bd8f19}": "Target",
+                    "{317471c2}": "DamagePercentToConsume",
+                    "__type": "{5cfe6ce7}"
+                },
+                "__type": "TftCutscene"
+            },
+            "{918227c9}": {
+                "PostHit": {
+                    "duration": 5.0,
+                    "Entries": [
+                        {
+                            "duration": 3.0,
+                            "BlackboardGameObjectName": "Target",
+                            "Animation": "Idle1",
+                            "PostStartModifiers": [
+                                {
+                                    "Animation": "Damage_Hurt",
+                                    "__type": "TftAnimClipOverrideModifier"
+                                }
+                            ],
+                            "__type": "TftCutsceneAnimClip"
+                        },
+                        {
+                            "__type": "{00000000}"
+                        },
+                        {
+                            "duration": 3.0,
+                            "StartAudioEvent": "Play_sfx_tft_dmg_skin127_hit",
+                            "{78afa616}": "Target",
+                            "{bdee689d}": true,
+                            "__type": "TftCutsceneObjSfxClip"
+                        }
+                    ],
+                    "initializer": {
+                        "{220cba44}": "SourcePlayer",
+                        "{19b74650}": "TargetPlayer",
+                        "{61e7d1d5}": "Source",
+                        "{00bd8f19}": "Target",
+                        "{317471c2}": "DamagePercentToConsume",
+                        "__type": "{5cfe6ce7}"
+                    },
+                    "__type": "TftCutscene"
+                }
+            },
+            "UnitCutscene": {
+                "duration": 5.0,
+                "Entries": [
+                    {
+                        "duration": 5.0,
+                        "effectKey": "TFT_PlayerDamageMinionMis",
+                        "HitEffectKey": "TFT_PlayerDamageMinionTar",
+                        "SourceObject": "SourcePlayer",
+                        "Source": {
+                            "{1ec4c9b5}": "Source",
+                            "__type": "{69cdddcc}"
+                        },
+                        "TargetObject": "TargetPlayer",
+                        "Target": {
+                            "BlackboardPosition": "TargetPosition",
+                            "BlackboardOrientation": "TargetOrientation",
+                            "__type": "{8e30b80e}"
+                        },
+                        "MissileRadius": 1.0,
+                        "DamagePercent": 1.0,
+                        "{a0d7eb85}": "DamagePercentToConsume",
+                        "missileSpeed": 1500.0,
+                        "__type": "{38749c0a}"
+                    },
+                    {
+                        "priority": 3,
+                        "duration": 5.0,
+                        "{40d522bc}": "Target",
+                        "BlackboardPosition": "TargetPosition",
+                        "BlackboardOrientation": "TargetOrientation",
+                        "__type": "{0f37151c}"
+                    }
+                ],
+                "initializer": {
+                    "{220cba44}": "SourcePlayer",
+                    "{19b74650}": "TargetPlayer",
+                    "{61e7d1d5}": "Source",
+                    "{00bd8f19}": "Target",
+                    "{317471c2}": "DamagePercentToConsume",
+                    "__type": "{5cfe6ce7}"
+                },
+                "__type": "TftCutscene"
+            },
+            "__type": "TftDamageSkinCeremony"
+        },
+        "VfxResourceResolver": "{10d10830}",
+        "StandaloneLoadoutsIcon": "ASSETS/Loadouts/TFTDamageSkins/Boom_Chibi_Tristana_small.tex",
+        "StandaloneLoadoutsLargeIcon": "ASSETS/Loadouts/TFTDamageSkins/Boom_Chibi_Tristana.tex",
+        "AudioBankPaths": [
+            "ASSETS/Sounds/Wwise2016/SFX/Shared/MODE_TFT_DmgSkin127_SFX_audio.bnk",
+            "ASSETS/Sounds/Wwise2016/SFX/Shared/MODE_TFT_DmgSkin127_SFX_events.bnk"
+        ],
+        "RotationalShopItemData": {
+            "LcuBackgroundTexturePath": "ASSETS/Loadouts/TFTDamageSkins/Boom_Chibi_Tristana.tex",
+            "MobileBackgroundTexturePath": "ASSETS/Loadouts/TFTDamageSkins/Boom_Chibi_Tristana.tex",
+            "__type": "TftRotationalShopItemData"
+        },
+        "CeremonyDurationInSeconds": 5.300000190734863,
         "__type": "TFTDamageSkin"
     },
     "{f69dedc8}": {
