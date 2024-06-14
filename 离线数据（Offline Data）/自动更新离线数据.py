@@ -106,6 +106,7 @@ while True:
     resource = input()
     log.write(resource + "\n\n" if resource == "" else resource + "\n")
     if resource == "":
+        log.write("[The program has exited!]\n")
         log.close()
         break
     elif resource[0] == "1":
@@ -217,7 +218,7 @@ while True:
                         print("您输入的地址有误！请重新输入。\nERROR input of the text file path! Please try again.")
                         log.write("您输入的地址有误！请重新输入。\nERROR input of the text file path! Please try again.\n")
                 with open(txtfile, "r", encoding = "utf-8") as fp:
-                    cdragon_folders = list(set(map(lambda x: x.strip("\n").lstrip("https://raw.communitydragon.org/"), txtfile.readlines())))
+                    cdragon_folders = list(set(map(lambda x: (x if x.endswith("/") else x[:-len(os.path.basename(x))]).strip("\n").replace("https://raw.communitydragon.org/", "").replace("离线数据（Offline Data）/cdragon/", ""), fp.readlines())))
                 if "" in cdragon_folders:
                     cdragon_folders.remove("")
                 cdragon_folders.sort()
@@ -232,6 +233,7 @@ while True:
                     elif cdragon_folder == "-1":
                         break
                     else:
+                        cdragon_folder = cdragon_folder if cdragon_folder.endswith("/") else cdragon_folder[:-len(os.path.basename(cdragon_folder))]
                         cdragon_folders.append(cdragon_folder.replace("https://raw.communitydragon.org/", "").replace("离线数据（Offline Data）/cdragon/", "")) #请思考，这里如果换成`cdragon_folder.lstrip("https://raw.communitydragon.org/")`，会有什么效果？（Please figure out what will happen if the code is replaced by `cdragon_folder.lstrip("https://raw.communitydragon.org/")`）
         else:
             print("正在读取在线索引……\nReading online indices ...")
@@ -273,6 +275,7 @@ while True:
         local_prefix = "离线数据（Offline Data）/cdragon"
         updated_files = []
         added_files = []
+        error_folders = []
         error_files = []
         folders_to_delete = [] #统计本地存在而数据库不存在的文件夹（Summarize the folders that exist locally but don't exist in the database）
         files_to_delete = [] #统计本地存在而数据库不存在的文件（Summarize the files that exist locally but don't exist in the database）
@@ -295,7 +298,7 @@ while True:
                 if status == 1:
                     print("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes." %(url, url))
                     log.write("文件夹%s信息获取失败！请等待程序结束后手动比对。\nFolder %s information check failed! Please check manually after the program execution finishes.\n" %(url, url))
-                    error_files.append(url)
+                    error_folders.append(url)
                     if os.path.join(local_prefix, folder).replace("\\", "/") in folders_to_delete:
                         folders_to_delete.remove(os.path.join(local_prefix, folder).replace("\\", "/"))
                 elif status == 404:
@@ -422,6 +425,14 @@ while True:
                 log.write(file + "\n")
             print()
             log.write("\n")
+        if error_folders:
+            print("以下%d个文件夹比对失败。请重新比对！\nThe following %d folder(s) fail to be checked. Please check manually!" %(len(error_folders), len(error_folders)))
+            log.write("以下%d个文件夹比对失败。请重新比对！\nThe following %d folder(s) fail to be checked. Please check manually!\n" %(len(error_folders), len(error_folders)))
+            for folder in error_folders:
+                print(folder)
+                log.write(folder + "\n")
+            print()
+            log.write("\n")
         if error_files:
             print("以下%d个文件比对失败。请重新比对！\nThe following %d file(s) fail to be checked. Please check manually!" %(len(error_files), len(error_files)))
             log.write("以下%d个文件比对失败。请重新比对！\nThe following %d file(s) fail to be checked. Please check manually!\n" %(len(error_files), len(error_files)))
@@ -429,6 +440,7 @@ while True:
                 print(file)
                 log.write(file + "\n")
             print()
+            log.write("\n")
         if mode == "1" and files_to_delete: #只有全局扫描才可以决定删除哪些文件（Only by Global Scan can the program decide which files to delete）
             print("以下%d个文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following %d file(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" %(len(files_to_delete), len(files_to_delete)) + "\n".join(files_to_delete))
             log.write("以下%d个文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following %d file(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" %(len(files_to_delete), len(files_to_delete)) + "\n".join(files_to_delete) + "\n")
@@ -440,6 +452,8 @@ while True:
                         os.remove(file)
                     except FileNotFoundError:
                         pass
+            print()
+            log.write("\n")
         if (mode == "1" or mode == "2") and folders_to_delete:
             print("以下%d个文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following %d folder(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" %(len(folders_to_delete), len(folders_to_delete)) + "\n".join(folders_to_delete))
             log.write("以下%d个文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following %d folder(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" %(len(folders_to_delete), len(folders_to_delete)) + "\n".join(folders_to_delete) + "\n")
@@ -451,9 +465,11 @@ while True:
                         shutil.rmtree(folder)
                     except FileNotFoundError: #部分文件夹可能在上一步中已被删除（Some folders may have been deleted in the last step）
                         pass
+            print()
+            log.write("\n")
     elif resource[0] == "2":
         if ddragon_hint:
-            hint = '请按以下步骤操作：\nPlease follow these steps:\n1. 访问网址https://developer.riotgames.com/docs/lol#data-dragon\n   Visit the website: https://developer.riotgames.com/docs/lol#data-dragon\n2. 在Latest中找到正式服最新版本数据资源压缩包下载链接。例如：https://ddragon.leagueoflegends.com/cdn/dragontail-14.11.1.tgz\n   Find the link to download the compressed tarball of the latest data resource for live servers. For example: https://ddragon.leagueoflegends.com/cdn/dragontail-14.11.1.tgz\n3. 下载。这需要花费一些时间。\n   Download the file. It may take some time.\n4. 将下载好的tgz文件直接“解压至此”。\n   "Extract here" for the tgz file.\n5. 将解压出来的压缩包再次解压到选定文件夹下与压缩包同名的文件夹。示例：将“dragontail-14.11.1.tar”解压到“D:/360AI浏览器下载/dragontail-14.11.1”文件夹下。\nExtract to "Archive-Name" folder under the selected folder for the extracted tar file. For example, extract "dragontail-14.11.1.tar" into the folder "D:/Downloads/dragontail-14.11.1".\n接下来，请给出数据资源的位置。（按照上例应为“D:/360AI浏览器下载/dragontail-14.11.1/14.11.1/data”。）\nNext, please provide the directory that stores the data resources. (By the above example, the directory should be "D:/Downloads/dragontail-14.11.1/14.11.1/data".)'
+            hint = '请按以下步骤操作：\nPlease follow these steps:\n1. 访问网址https://developer.riotgames.com/docs/lol#data-dragon\n   Visit the website: https://developer.riotgames.com/docs/lol#data-dragon\n2. 在Latest中找到正式服最新版本数据资源压缩包下载链接。例如：https://ddragon.leagueoflegends.com/cdn/dragontail-14.12.1.tgz\n   Find the link to download the compressed tarball of the latest data resource for live servers. For example: https://ddragon.leagueoflegends.com/cdn/dragontail-14.12.1.tgz\n3. 下载。这需要花费一些时间。\n   Download the file. It may take some time.\n4. 将下载好的tgz文件直接“解压至此”。\n   "Extract here" for the tgz file.\n5. 将解压出来的压缩包再次解压到选定文件夹下与压缩包同名的文件夹。示例：将“dragontail-14.12.1.tar”解压到“D:/360AI浏览器下载/dragontail-14.12.1”文件夹下。\nExtract to "Archive-Name" folder under the selected folder for the extracted tar file. For example, extract "dragontail-14.12.1.tar" into the folder "D:/Downloads/dragontail-14.12.1".\n接下来，请给出数据资源的位置。（按照上例应为“D:/360AI浏览器下载/dragontail-14.12.1/14.12.1/data”。）\nNext, please provide the directory that stores the data resources. (By the above example, the directory should be "D:/Downloads/dragontail-14.12.1/14.12.1/data".)'
             print(hint)
             log.write(hint + "\n")
             ddragon_hint = False
