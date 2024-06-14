@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.11.1",
+    "version": "14.12.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -120,12 +120,12 @@
                 "mpperlevel": 0,
                 "movespeed": 345,
                 "armor": 38,
-                "armorperlevel": 4.45,
+                "armorperlevel": 4.8,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 175,
                 "hpregen": 3,
-                "hpregenperlevel": 1,
+                "hpregenperlevel": 0.5,
                 "mpregen": 0,
                 "mpregenperlevel": 0,
                 "crit": 0,
@@ -426,17 +426,13 @@
                     "id": "AatroxE",
                     "name": "暗影冲决",
                     "description": "被动效果：亚托克斯会在对敌方英雄造成伤害时治疗自身。主动效果：他会朝一个方向突进。",
-                    "tooltip": "<spellPassive>被动：</spellPassive>亚托克斯获得治疗效果，相当于他对英雄造成的<lifeSteal>{{ espellvamp }}%</lifeSteal>伤害，在<keywordMajor>大灭</keywordMajor>期间提升至<lifeSteal>{{ espellvampempowered }}%</lifeSteal>。<br /><br /><spellActive>主动：</spellActive>亚托克斯突进。他可以在其它技能的前摇阶段使用这个技能。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>被动：</spellPassive>亚托克斯获得治疗效果，相当于他对英雄造成的<lifeSteal>{{ totalevamp }}</lifeSteal>伤害。<br /><br /><spellActive>主动：</spellActive>亚托克斯突进。他可以在其它技能的前摇阶段使用这个技能。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
-                            "治疗效果百分比",
-                            "【大灭】期间的治疗百分比"
+                            "冷却时间"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ espellvamp }}% -> {{ espellvampNL }}%",
-                            "{{ espellvampempowered }}% -> {{ espellvampempoweredNL }}%"
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -822,6 +818,18 @@
                     "num": 76,
                     "name": "净雪之月 阿狸",
                     "chromas": true
+                },
+                {
+                    "id": "103085",
+                    "num": 85,
+                    "name": "殿堂传奇 阿狸",
+                    "chromas": false
+                },
+                {
+                    "id": "103086",
+                    "num": 86,
+                    "name": "联盟不朽 阿狸",
+                    "chromas": false
                 }
             ],
             "lore": "天生就与精神领域的魔法相通的阿狸，顾名思义，是一名狐狸模样的瓦斯塔亚。她可以操纵猎物的情感，吞噬他们的精魄——他们生前的记忆与领悟化作碎片在她心中浮现。她曾是一名强大又任性的掠食者，但现在却一心在世间寻觅着先祖留下的残迹，同时努力地创造一份真正属于自己，而非取自他人的记忆。",
@@ -2394,7 +2402,7 @@
                     "id": "AkshanW",
                     "name": "赴险夺人",
                     "description": "被动效果：敌方英雄在击杀了阿克尚的友方英雄时，会被标记为恶人。如果阿克尚击杀了一名恶人，那么他会复活被该恶人击杀的友方英雄，获得额外金币，并清除所有恶人标记。<br><br>主动施放时，阿克尚会进入伪装状态并在朝着恶人移动时获得移动速度和法力回复。在离开草丛或墙体附近后，阿克尚会失去伪装状态。",
-                    "tooltip": "{{ Spell_AkshanW_Tooltip_{{ gamemodeinteger }} }}{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>被动</spellPassive>：敌方英雄在击杀了阿克尚的友方英雄时，会被标记为<keywordMajor>恶人</keywordMajor>，持续{{ vengeanceduration }}秒。当阿克尚参与击杀了一名<keywordMajor>恶人</keywordMajor>且他在其死前{{ recentlydamagedwindow }}秒内对其造成过伤害时，他会获得{{ goldreward }}金币，复活被击杀的友方英雄，并移除所有其它的<keywordMajor>恶人</keywordMajor>标记。<br /><br /><spellActive>主动</spellActive>：阿克尚进入<keywordStealth>伪装状态</keywordStealth>，持续{{ wallgraceperiod }}秒，在墙体附近或草丛中时可无限持续。在以这种方式获取的<keywordStealth>伪装状态</keywordStealth>下，阿克尚在朝着<keywordMajor>恶人</keywordMajor>移动时还会获得<speed>{{ msvalue }}移动速度</speed>和<scaleMana>{{ missingmanaregen*100 }}%已损失法力值回复</scaleMana>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "冷却时间",
@@ -9810,7 +9818,7 @@
                 "difficulty": 4
             },
             "stats": {
-                "hp": 650,
+                "hp": 600,
                 "hpperlevel": 109,
                 "mp": 267,
                 "mpperlevel": 40,
@@ -15286,9 +15294,9 @@
                 "mpregenperlevel": 0.7,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 55,
+                "attackdamage": 52,
                 "attackdamageperlevel": 2.5,
-                "attackspeedperlevel": 2.3,
+                "attackspeedperlevel": 2.8,
                 "attackspeed": 0.644
             },
             "spells": [
@@ -15311,13 +15319,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        9,
-                        8.5,
                         8,
                         7.5,
-                        7
+                        7,
+                        6.5,
+                        6
                     ],
-                    "cooldownBurn": "9/8.5/8/7.5/7",
+                    "cooldownBurn": "8/7.5/7/6.5/6",
                     "cost": [
                         60,
                         65,
@@ -15606,12 +15614,12 @@
                     "cooldownBurn": "12",
                     "cost": [
                         50,
-                        55,
                         60,
-                        65,
-                        70
+                        70,
+                        80,
+                        90
                     ],
-                    "costBurn": "50/55/60/65/70",
+                    "costBurn": "50/60/70/80/90",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -19765,7 +19773,7 @@
                             "{{ e5 }} -> {{ e5NL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ e3 }} -> {{ e3NL }}",
-                            "{{ effect6amount*100.000000 }}% -> {{ effect6amountnl*100.000000 }}%"
+                            "{{ e6 }}% -> {{ e6NL }}%"
                         ]
                     },
                     "maxrank": 5,
@@ -20953,7 +20961,7 @@
                 "crit": 0,
                 "critperlevel": 0,
                 "attackdamage": 62,
-                "attackdamageperlevel": 2.5,
+                "attackdamageperlevel": 2.75,
                 "attackspeedperlevel": 2.5,
                 "attackspeed": 0.625
             },
@@ -46448,6 +46456,12 @@
                     "num": 45,
                     "name": "魅惑女巫 乐芙兰",
                     "chromas": true
+                },
+                {
+                    "id": "7055",
+                    "num": 55,
+                    "name": "殿堂传奇 乐芙兰",
+                    "chromas": true
                 }
             ],
             "lore": "即使是在秘密团体黑色玫瑰的成员内部，乐芙兰也同样保持神秘，而乐芙兰这个名字也只是众多化名之一。这个皮肤惨白的女人自从诺克萨斯建国初期就开始操纵大小人物，推动事态发展。这位女法师能用魔法制造自己的镜像，她可以出现在任何地点、任何人面前,甚至同时现身于许多地方。乐芙兰永远都在暗处密谋策划，而她真正的动机和她变换不定的身份一样令人难以捉摸。",
@@ -54402,13 +54416,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        9,
-                        9,
-                        9,
-                        9,
-                        9
+                        10,
+                        10,
+                        10,
+                        10,
+                        10
                     ],
-                    "cooldownBurn": "9",
+                    "cooldownBurn": "10",
                     "cost": [
                         40,
                         40,
@@ -58341,7 +58355,7 @@
                     "id": "NaafiriQ",
                     "name": "暗裔犬牙",
                     "description": "纳亚菲利猛投出两根犬牙，每根都会施加流血效果，或在目标已经流血时施加额外伤害。<br><br>狗群伙伴们会跃向并攻击被这个技能命中的英雄。",
-                    "tooltip": "纳亚菲利猛投出多个侵染了暗裔能量的犬牙，造成<physicalDamage>{{ spell.naafiriq:totaldamagefirstcast }}物理伤害</physicalDamage>并施加一个流血效果，流血会在{{ spell.naafiriq:bleedduration }}秒里持续造成共<physicalDamage>{{ spell.naafiriq:totalbleeddamage }}物理伤害</physicalDamage>。<br /><br />纳亚菲利可以<recast>再次施放</recast>这个技能。如果被命中的敌人已经被施加了来自这个技能的流血，那么它会转而造成剩余的流血伤害外加<physicalDamage>{{ spell.naafiriq:totalmindamagesecondcast }} </physicalDamage>到<physicalDamage>{{ spell.naafiriq:totalmaxdamagesecondcast }}物理伤害</physicalDamage>，基于该敌人的已损失生命值。如果该目标是一个英雄，那么纳亚菲利会回复<healing>{{ spell.naafiriq:totalhealsecondcast }}生命值</healing>。<br /><br /><keywordMajor>狗群伙伴</keywordMajor>们将跃向被命中的第一个英雄并攻击该英雄{{ spell.naafirip:packmatetauntduration }}秒。<br /><br />{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "纳亚菲利猛投出多个侵染了暗裔能量的犬牙，造成<physicalDamage>{{ spell.naafiriq:totaldamagefirstcast }}物理伤害</physicalDamage>并施加一个流血效果，流血会在{{ spell.naafiriq:bleedduration }}秒里持续造成共<physicalDamage>{{ spell.naafiriq:totalbleeddamage }}物理伤害</physicalDamage>。<br /><br />纳亚菲利可以<recast>再次施放</recast>这个技能。如果被命中的敌人已经被施加了来自这个技能的流血，那么它会转而造成剩余的流血伤害外加<physicalDamage>{{ spell.naafiriq:totalmindamagesecondcast }} </physicalDamage>到<physicalDamage>{{ spell.naafiriq:totalmaxdamagesecondcast }}物理伤害</physicalDamage>，基于该敌人的已损失生命值。如果该目标是一个英雄或大型野怪，那么纳亚菲利会回复<healing>{{ spell.naafiriq:totalhealsecondcast }}生命值</healing>。<br /><br /><keywordMajor>狗群伙伴</keywordMajor>们将跃向被命中的第一个英雄并攻击该英雄{{ spell.naafirip:packmatetauntduration }}秒。<br /><br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "初始伤害",
@@ -58362,13 +58376,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        11,
-                        10,
                         9,
+                        8.5,
                         8,
+                        7.5,
                         7
                     ],
-                    "cooldownBurn": "11/10/9/8/7",
+                    "cooldownBurn": "9/8.5/8/7.5/7",
                     "cost": [
                         55,
                         60,
@@ -62470,11 +62484,11 @@
                 "mpperlevel": 35,
                 "movespeed": 340,
                 "armor": 27,
-                "armorperlevel": 4.2,
+                "armorperlevel": 4.5,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 225,
-                "hpregen": 4,
+                "hpregen": 6,
                 "hpregenperlevel": 0.9,
                 "mpregen": 8.2,
                 "mpregenperlevel": 0.7,
@@ -66621,7 +66635,7 @@
                     "id": "PantheonQ",
                     "name": "贯星长枪",
                     "description": "潘森朝着选定方向刺出或投掷他的长枪。",
-                    "tooltip": "<span class=\"colorFF8C00\">秒放：</span>潘森刺出他的长枪，对命中的敌人们造成<physicalDamage>{{ tapdamagecalc }}物理伤害</physicalDamage>。返还此技能{{ tapcooldownrefund*100 }}%的冷却时间。<br /><br /><span class=\"colorFF8C00\">蓄力：</span>潘森挥出他的长枪，对命中的首个敌人造成<physicalDamage>{{ holddamagecalc }}物理伤害</physicalDamage>并对后续目标造成的伤害减少{{ damagefalloff*100 }}%。<br /><br />此技能会暴击低于{{ crithealththreshold*100 }}%生命值的敌人，造成<physicalDamage>{{ executedamagecalcmodified }}物理伤害</physicalDamage>作为替代。<br /><br /><span class=\"colorEDDA74\">矢志不退加成：</span>造成额外的<physicalDamage>{{ empowereddamagecalc }}物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<span class=\"colorFF8C00\">秒放：</span>潘森刺出他的长枪，对命中的敌人们造成<physicalDamage>{{ tapdamagecalc }}物理伤害</physicalDamage>。返还此技能{{ tapcooldownrefund*100 }}%的冷却时间。<br /><br /><span class=\"colorFF8C00\">蓄力：</span>潘森挥出他的长枪，对命中的首个敌人造成<physicalDamage>{{ holddamagecalc }}物理伤害</physicalDamage>并对后续目标造成的伤害减少{{ damagefalloff*100 }}%。<br /><br />此技能会在对抗低于{{ crithealththreshold*100 }}%生命值的敌人时获得强化，造成<physicalDamage>{{ executedamagecalcmodified }}物理伤害</physicalDamage>作为替代。<br /><br /><span class=\"colorEDDA74\">矢志不退加成：</span>造成额外的<physicalDamage>{{ empowereddamagecalc }}物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "基础伤害",
@@ -66905,7 +66919,7 @@
                     "id": "PantheonE",
                     "name": "神佑枪阵",
                     "description": "潘森架起他的圣盾，变得免疫来自前方的伤害，并快速地用他的长枪戳刺。",
-                    "tooltip": "潘森架起他的圣盾并与选定方向上的敌人交战{{ shieldduration }}秒，变得免疫来自所选方向的伤害(防御塔除外)并在持续期间造成<physicalDamage>{{ damagecalc }}物理伤害</physicalDamage>。在引导之后，潘森会用他的圣盾进行猛击，造成<physicalDamage>{{ shielddamagecalc }}物理伤害</physicalDamage>。<br /><br /><span class=\"colorEDDA74\">矢志不退加成：</span>当潘森猛击他的圣盾时，获得持续{{ resistsduration }}秒的{{ resistscalc }}护甲与魔抗，以及持续{{ speedduration }}秒的<speed>{{ speedamount*100 }}%移动速度</speed>。<br />{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "潘森架起他的圣盾并与选定方向上的敌人交战{{ shieldduration }}秒，变得免疫来自所选方向的伤害(防御塔除外)并在持续期间造成<physicalDamage>{{ damagecalc }}物理伤害</physicalDamage>。在引导之后，潘森会用他的圣盾进行猛击，造成<physicalDamage>{{ shielddamagecalc }}物理伤害</physicalDamage>。<br /><br /><span class=\"colorEDDA74\">矢志不退加成：</span>当潘森猛击他的圣盾时，获得持续{{ resistsduration }}秒的<scaleArmor>{{ resistscalc }}护甲</scaleArmor>和<scaleMR>{{ resistscalc }}魔法抗性</scaleMR>，以及持续{{ speedduration }}秒的<speed>{{ speedamount*100 }}%移动速度</speed>。<br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "冷却时间",
@@ -76054,7 +76068,7 @@
                     "id": "13010",
                     "num": 10,
                     "name": "SKT T1 瑞兹",
-                    "chromas": false
+                    "chromas": true
                 },
                 {
                     "id": "13011",
@@ -84301,8 +84315,8 @@
                 "difficulty": 5
             },
             "stats": {
-                "hp": 650,
-                "hpperlevel": 102,
+                "hp": 610,
+                "hpperlevel": 105,
                 "mp": 320,
                 "mpperlevel": 40,
                 "movespeed": 335,
@@ -88349,7 +88363,7 @@
                     "id": "134005",
                     "num": 5,
                     "name": "SKT T1 辛德拉",
-                    "chromas": false
+                    "chromas": true
                 },
                 {
                     "id": "134006",
@@ -95348,7 +95362,7 @@
                 "crit": 0,
                 "critperlevel": 0,
                 "attackdamage": 52,
-                "attackdamageperlevel": 3.3,
+                "attackdamageperlevel": 2.5,
                 "attackspeedperlevel": 2.5,
                 "attackspeed": 0.625
             },
@@ -95531,13 +95545,13 @@
                     ],
                     "cooldownBurn": "6",
                     "cost": [
-                        30,
-                        40,
                         50,
+                        55,
                         60,
+                        65,
                         70
                     ],
-                    "costBurn": "30/40/50/60/70",
+                    "costBurn": "50/55/60/65/70",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -95577,10 +95591,10 @@
                             45
                         ],
                         [
-                            50,
-                            75,
-                            100,
-                            125,
+                            70,
+                            90,
+                            110,
+                            130,
                             150
                         ],
                         [
@@ -95619,7 +95633,7 @@
                         "1/1.25/1.5/1.75/2",
                         "30/45/60/75/90",
                         "15/22.5/30/37.5/45",
-                        "50/75/100/125/150",
+                        "70/90/110/130/150",
                         "0",
                         "0",
                         "0",
@@ -103807,11 +103821,11 @@
                             300
                         ],
                         [
-                            20,
-                            20,
-                            20,
-                            20,
-                            20
+                            15,
+                            15,
+                            15,
+                            15,
+                            15
                         ],
                         [
                             40,
@@ -103821,18 +103835,18 @@
                             40
                         ],
                         [
-                            10,
-                            10,
-                            10,
-                            10,
-                            10
-                        ],
-                        [
                             15,
                             15,
                             15,
                             15,
                             15
+                        ],
+                        [
+                            30,
+                            30,
+                            30,
+                            30,
+                            30
                         ],
                         [
                             0,
@@ -103873,10 +103887,10 @@
                     "effectBurn": [
                         null,
                         "80/135/190/245/300",
-                        "20",
-                        "40",
-                        "10",
                         "15",
+                        "40",
+                        "15",
+                        "30",
                         "0",
                         "0",
                         "0",
@@ -106311,6 +106325,12 @@
                     "num": 21,
                     "name": "宇航员 泽拉斯",
                     "chromas": true
+                },
+                {
+                    "id": "101030",
+                    "num": 30,
+                    "name": "水晶巫灵 泽拉斯",
+                    "chromas": true
                 }
             ],
             "lore": "泽拉斯是古代恕瑞玛的巫师，飞升以后的他变成了一种奥术能量体，在魔法石棺的碎片之中涌动。数千年来，他被囚禁在沙漠之下，但最近恕瑞玛的崛起却将他从远古的牢笼中解放出来。对权力的疯狂渴求驱使着他，想要夺回他认为属于自己的东西，并取代世界上这些自命不凡的文明，让自己成为唯一受膜拜的偶像，统一整个世界。",
@@ -108419,7 +108439,7 @@
                 "mp": 500,
                 "mpperlevel": 0,
                 "movespeed": 345,
-                "armor": 30,
+                "armor": 33,
                 "armorperlevel": 4.6,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -108889,34 +108909,34 @@
                     "effect": [
                         null,
                         [
-                            10,
-                            20,
-                            30
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            450,
-                            450,
-                            450
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1300,
-                            1300,
-                            1300
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            8,
-                            8,
-                            8
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            120,
-                            120,
-                            120
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            260,
-                            260,
-                            260
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -108941,12 +108961,12 @@
                     ],
                     "effectBurn": [
                         null,
-                        "10/20/30",
-                        "450",
-                        "1300",
-                        "8",
-                        "120",
-                        "260",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -110080,13 +110100,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        12,
-                        11.5,
-                        11,
-                        10.5,
+                        10,
+                        10,
+                        10,
+                        10,
                         10
                     ],
-                    "cooldownBurn": "12/11.5/11/10.5/10",
+                    "cooldownBurn": "10",
                     "cost": [
                         80,
                         90,
@@ -111030,7 +111050,7 @@
                     "id": "238002",
                     "num": 2,
                     "name": "SKT T1 劫",
-                    "chromas": false
+                    "chromas": true
                 },
                 {
                     "id": "238003",
@@ -112615,8 +112635,8 @@
                 {
                     "id": "ZiggsW",
                     "name": "定点爆破",
-                    "description": "吉格斯扔出一个炸药包，会在4秒后爆炸，或者在再次施放该技能后爆炸。爆炸会对敌人造成魔法伤害，并将他们击退。吉格斯也会被击退，但不会受到伤害。吉格斯可以用这个技能来爆破敌方摇摇欲坠的防御塔。",
-                    "tooltip": "吉格斯扔出一个炸药包，会在{{ e2 }}秒后或者在<recast>再次施放</recast>该技能后爆炸。爆炸会对敌人造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，并将他们<status>击退</status>。吉格斯也会被震开，但不会受到伤害。<br /><br />【定点爆破】会自动摧毁生命值低于{{ f1*100 }}%的防御塔。{{ spellmodifierdescriptionappend }}",
+                    "description": "吉格斯扔出一个炸药包，会在一段延迟后爆炸，或者在再次施放该技能后爆炸。爆炸会对敌人造成魔法伤害，并将他们击退。吉格斯也会被击退，但不会受到伤害。<br><br>吉格斯可以用这个技能来爆破敌方摇摇欲坠的防御塔。",
+                    "tooltip": "吉格斯扔出一个炸药包，会在{{ bombduration }}秒后或者在<recast>再次施放</recast>该技能后爆炸。爆炸会对敌人造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，并将他们<status>击</status><status>退</status>。吉格斯也会被震开，但不会受到伤害。<br /><br />【定点爆破】会自动摧毁生命值低于{{ turretdestroypercent*100 }}%的防御塔。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -112657,81 +112677,81 @@
                             210
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.25,
-                            0.275,
-                            0.3,
-                            0.325,
-                            0.35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            600,
-                            600,
-                            600,
-                            600,
-                            600
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            50,
-                            50,
-                            50,
-                            50,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            500,
-                            500,
-                            500,
-                            500,
-                            500
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            325,
-                            325,
-                            325,
-                            325,
-                            325
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            775,
-                            775,
-                            775,
-                            775,
-                            775
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            400,
-                            400,
-                            400,
-                            400,
-                            400
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            6,
-                            6,
-                            6,
-                            6,
-                            6
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
                         "70/105/140/175/210",
-                        "4",
-                        "0.25/0.275/0.3/0.325/0.35",
-                        "600",
-                        "50",
-                        "500",
-                        "325",
-                        "775",
-                        "400",
-                        "6"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",

@@ -1,12 +1,12 @@
 {
     "type": "summoner",
-    "version": "14.11.1",
+    "version": "14.12.1",
     "data": {
         "SummonerBarrier": {
             "id": "SummonerBarrier",
             "name": "屏障",
-            "description": "为你的英雄提供护盾值，吸收120-480（取决于英雄等级）伤害，持续2.5秒。",
-            "tooltip": "为你的英雄提供持续{{ shieldduration }}秒的<shield>{{ shieldstrength }}</shield>护盾值。",
+            "description": "获得120-480护盾值，持续2.5秒。",
+            "tooltip": "获得<shield>{{ shieldstrength }}护盾值</shield>，持续{{ shieldduration }}秒。",
             "maxrank": 1,
             "cooldown": [
                 180
@@ -104,7 +104,7 @@
             "id": "SummonerBoost",
             "name": "净化",
             "description": "移除身上的所有限制效果（压制效果和击飞效果除外）和召唤师技能的减益效果，并提供持续3秒的75%韧性。",
-            "tooltip": "移除身上的所有限制效果（压制效果和击飞效果除外）和召唤师技能的减益效果，并在接下来的{{ tenacityduration }}秒提供{{ tenacityvalue*100 }}%韧性。",
+            "tooltip": "移除你身上的所有控制效果(<keyword>压制</keyword>和<keyword>浮空</keyword>除外)和召唤师技能减益效果，并提供持续{{ tenacityduration }}秒的{{ tenacityvalue*100 }}%韧性。",
             "maxrank": 1,
             "cooldown": [
                 240
@@ -367,8 +367,8 @@
         "SummonerDot": {
             "id": "SummonerDot",
             "name": "引燃",
-            "description": "引燃是对单体敌方目标施放的持续性伤害技能，在5秒的持续时间里造成70-410（取决于英雄等级）真实伤害，获得目标的视野，并减少目标所受的治疗和回复效果。",
-            "tooltip": "引燃目标敌人，在5秒的持续时间里造成共<trueDamage>{{ tooltiptruedamagecalculation }}真实伤害</trueDamage>，获得目标视野，并在持续期间为目标施加{{ grievousamount*100 }}%重伤效果。<br /><br /><rules>(重伤效果会使目标所受的治疗和回复效果降低，如果有多个重伤效果则取最高值。这个视野不会使潜行的敌人显形。)</rules>",
+            "description": "在5秒的持续时间里对目标敌方英雄造成共70-410真实伤害并在持续期间降低目标受到的治疗效果。",
+            "tooltip": "在5秒的持续时间里对目标敌方英雄造成共<trueDamage>{{ tooltiptruedamagecalculation }}真实伤害</trueDamage>并在持续期间施加<keyword>{{ grievousamount*100 }}%重伤</keyword>效果。<br /><br /><keyword>重伤</keyword>：降低治疗效果和生命回复的效能。",
             "maxrank": 1,
             "cooldown": [
                 180
@@ -463,8 +463,8 @@
         "SummonerExhaust": {
             "id": "SummonerExhaust",
             "name": "虚弱",
-            "description": "虚弱目标敌方英雄，降低其40%的移动速度，并使其造成的伤害减少35%，持续3秒。",
-            "tooltip": "虚弱目标英雄，降低目标{{ slow }}%的移动速度，并使目标造成的伤害减少{{ damagereduction }}%，持续3秒。",
+            "description": "使目标英雄减速40%并将其造成的伤害削减35%，持续3秒。",
+            "tooltip": "使目标敌方英雄<keyword>减速</keyword>{{ slow }}%并将其造成的伤害削减{{ damagereduction }}%，持续{{ debuffduration }}秒。",
             "maxrank": 1,
             "cooldown": [
                 240
@@ -557,8 +557,8 @@
         "SummonerFlash": {
             "id": "SummonerFlash",
             "name": "闪现",
-            "description": "使英雄朝着你的指针所停的区域瞬间传送一小段距离。",
-            "tooltip": "使英雄朝着你的指针所停的区域瞬间传送一小段距离。",
+            "description": "使你朝着你的指针位置瞬间传送一小段距离。",
+            "tooltip": "使你朝着你的指针位置瞬间传送一小段距离。",
             "maxrank": 1,
             "cooldown": [
                 300
@@ -656,8 +656,8 @@
         "SummonerHaste": {
             "id": "SummonerHaste",
             "name": "幽灵疾步",
-            "description": "你的英雄在移动时会无视单位的碰撞体积，并获得24 - 48%移动速度（基于英雄等级），持续10秒。",
-            "tooltip": "在接下来的{{ duration }}秒里，获得<speed>{{ movespeedmod }}移动速度</speed>。在此期间，你的英雄可以无视单位的碰撞体积。",
+            "description": "获得24 - 48%移动速度并无视单位的碰撞体积，持续10秒。",
+            "tooltip": "获得<speed>{{ movespeedmod }}移动速度</speed>并进入<keyword>幽灵状态</keyword>，持续{{ duration }}秒。<br /><br /><keyword>幽灵</keyword>：无视其它单位的碰撞体积。",
             "maxrank": 1,
             "cooldown": [
                 240
@@ -757,7 +757,7 @@
             "id": "SummonerHeal",
             "name": "治疗术",
             "description": "为你和目标友军英雄回复80-318生命值，并为你和目标友军英雄提供持续1秒的30%移动速度。若目标近期已受到过其它治疗术的影响，则治疗术对目标产生的治疗效果减半。",
-            "tooltip": "为你和目标友军英雄回复<healing>{{ totalheal }}生命值</healing>，并为你和目标友军英雄提供持续{{ movespeedduration }}秒的<speed>{{ movespeed*100 }}%移动速度</speed>。<br /><br /><rules>如果这个技能无法找到目标，就会作用于范围内伤势最重的一位友军英雄。<br />若目标近期已受到过其它治疗术的影响，则治疗术对目标产生的治疗效果减半。</rules>",
+            "tooltip": "为你和目标友军英雄回复<healing>{{ totalheal }}生命值</healing>并提供持续{{ movespeedduration }}秒的<speed>{{ movespeed*100 }}%移动速度</speed>。<br /><br /><rules>如果在无目标状态下施放，就会作用于范围内伤势最重的一位友军英雄。<br />若目标近期已受到过其它【治疗术】的影响，则这次的治疗量减半。</rules>",
             "maxrank": 1,
             "cooldown": [
                 240
@@ -1108,8 +1108,8 @@
         "SummonerSmite": {
             "id": "SummonerSmite",
             "name": "惩戒",
-            "description": "对目标野怪造成600~1200真实伤害。",
-            "tooltip": "对目标野怪或线上小兵造成<trueDamage>{{ smitebasedamage }}真实伤害</trueDamage>。<br /><br />对英雄宠物造成<trueDamage>{{ firstpvpdamage }}真实伤害</trueDamage>。<br /><br /><rules>无法对小型野怪施放。</rules>",
+            "description": "对目标大型野怪造成600~1200真实伤害。",
+            "tooltip": "对目标大型野怪或线上小兵造成<trueDamage>{{ smitebasedamage }}真实伤害</trueDamage>。<br /><br />对英雄宠物造成<trueDamage>{{ firstpvpdamage }}真实伤害</trueDamage>。",
             "maxrank": 1,
             "cooldown": [
                 15
@@ -1368,8 +1368,8 @@
         "SummonerTeleport": {
             "id": "SummonerTeleport",
             "name": "传送",
-            "description": "在引导4秒后，将英雄传送到友方建筑物旁边。会在10分钟时升级为【解封的传送】，【解封的传送】可将你的英雄传送至友方建筑物、友方小兵或友方守卫旁边。",
-            "tooltip": "在引导{{ channelduration }}秒后，你的英雄将传送到友方建筑物旁边。<br /><br />会在10分钟时升级为【解封的传送】。【解封的传送】拥有{{ upgradedcooldown }}秒冷却时间，可以用在友方的建筑物、小兵或守卫上，并提供持续{{ msduration }}秒的{{ msamount*100 }}%移动速度加成。",
+            "description": "在引导4秒后，传送到友方建筑物旁边。会在10分钟时升级为【解封的传送】，【解封的传送】允许你选择友方建筑物、友方小兵或友方守卫作为目标。",
+            "tooltip": "在引导{{ channelduration }}秒后，传送到目标友方建筑物旁边。<br /><br />会在10分钟时升级为【解封的传送】。【解封的传送】拥有{{ upgradedcooldown }}秒冷却时间，可以用在友方的建筑物、小兵或守卫上，并提供持续{{ msduration }}秒的{{ msamount*100 }}%移动速度。",
             "maxrank": 1,
             "cooldown": [
                 360

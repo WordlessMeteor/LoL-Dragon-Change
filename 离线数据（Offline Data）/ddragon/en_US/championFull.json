@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.11.1",
+    "version": "14.12.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -120,12 +120,12 @@
                 "mpperlevel": 0,
                 "movespeed": 345,
                 "armor": 38,
-                "armorperlevel": 4.45,
+                "armorperlevel": 4.8,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 175,
                 "hpregen": 3,
-                "hpregenperlevel": 1,
+                "hpregenperlevel": 0.5,
                 "mpregen": 0,
                 "mpregenperlevel": 0,
                 "crit": 0,
@@ -426,17 +426,13 @@
                     "id": "AatroxE",
                     "name": "Umbral Dash",
                     "description": "Passively, Aatrox heals when damaging enemy champions. On activation, he dashes in a direction.",
-                    "tooltip": "<spellPassive>Passive:</spellPassive> Aatrox heals for <lifeSteal>{{ espellvamp }}%</lifeSteal> of the damage he deals to Champions, increased to <lifeSteal>{{ espellvampempowered }}%</lifeSteal> during <keywordMajor>World Ender</keywordMajor>.<br /><br /><spellActive>Active:</spellActive> Aatrox dashes. He can use this Ability while winding up his other Abilities.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>Passive:</spellPassive> Aatrox heals for <lifeSteal>{{ totalevamp }}</lifeSteal> of the damage he deals to Champions.<br /><br /><spellActive>Active:</spellActive> Aatrox dashes. He can use this Ability while winding up his other Abilities.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
-                            "Healing %",
-                            "Healing % during World Ender"
+                            "Cooldown"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ espellvamp }}% -> {{ espellvampNL }}%",
-                            "{{ espellvampempowered }}% -> {{ espellvampempoweredNL }}%"
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -822,6 +818,18 @@
                     "num": 76,
                     "name": "Snow Moon Ahri",
                     "chromas": true
+                },
+                {
+                    "id": "103085",
+                    "num": 85,
+                    "name": "Risen Legend Ahri",
+                    "chromas": false
+                },
+                {
+                    "id": "103086",
+                    "num": 86,
+                    "name": "Immortalized Legend Ahri",
+                    "chromas": false
                 }
             ],
             "lore": "Innately connected to the magic of the spirit realm, Ahri is a fox-like vastaya who can manipulate her prey's emotions and consume their essence—receiving flashes of their memory and insight from each soul she consumes. Once a powerful yet wayward predator, Ahri is now traveling the world in search of remnants of her ancestors while also trying to replace her stolen memories with ones of her own making.",
@@ -2394,7 +2402,7 @@
                     "id": "AkshanW",
                     "name": "Going Rogue",
                     "description": "Akshan passively marks enemy champions as Scoundrels when they kill his ally champions. If Akshan kills a Scoundrel, he resurrects the allies they killed, gains bonus gold, and clears all marks.<br><br>When activated, Akshan enters camouflage and gains Move Speed and Mana Regen while moving towards Scoundrels. Akshan loses the camouflage quickly while he is not in brush or near terrain.",
-                    "tooltip": "{{ Spell_AkshanW_Tooltip_{{ gamemodeinteger }} }}{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>Passive</spellPassive>: Enemy champions that kill Akshan's allies become <keywordMajor>Scoundrels</keywordMajor> for {{ vengeanceduration }} seconds. Takedowns on a <keywordMajor>Scoundrel</keywordMajor> within {{ recentlydamagedwindow }} seconds of being damaged by Akshan grant him {{ goldreward }} Gold, resurrects the slain allies, and removes all other <keywordMajor>Scoundrels</keywordMajor>.<br /><br /><spellActive>Active</spellActive>: Akshan becomes <keywordStealth>Camouflaged</keywordStealth> for {{ wallgraceperiod }} seconds or indefinitely while he is near a wall or in brush. While <keywordStealth>Camouflaged</keywordStealth> in this way, Akshan also gains <speed>{{ msvalue }} Move Speed</speed> and <scaleMana>{{ missingmanaregen*100 }}% missing Mana regen</scaleMana> while moving towards <keywordMajor>Scoundrels</keywordMajor>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -9810,7 +9818,7 @@
                 "difficulty": 4
             },
             "stats": {
-                "hp": 650,
+                "hp": 600,
                 "hpperlevel": 109,
                 "mp": 267,
                 "mpperlevel": 40,
@@ -15286,9 +15294,9 @@
                 "mpregenperlevel": 0.7,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 55,
+                "attackdamage": 52,
                 "attackdamageperlevel": 2.5,
-                "attackspeedperlevel": 2.3,
+                "attackspeedperlevel": 2.8,
                 "attackspeed": 0.644
             },
             "spells": [
@@ -15311,13 +15319,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        9,
-                        8.5,
                         8,
                         7.5,
-                        7
+                        7,
+                        6.5,
+                        6
                     ],
-                    "cooldownBurn": "9/8.5/8/7.5/7",
+                    "cooldownBurn": "8/7.5/7/6.5/6",
                     "cost": [
                         60,
                         65,
@@ -15606,12 +15614,12 @@
                     "cooldownBurn": "12",
                     "cost": [
                         50,
-                        55,
                         60,
-                        65,
-                        70
+                        70,
+                        80,
+                        90
                     ],
-                    "costBurn": "50/55/60/65/70",
+                    "costBurn": "50/60/70/80/90",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -19765,7 +19773,7 @@
                             "{{ e5 }} -> {{ e5NL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ e3 }} -> {{ e3NL }}",
-                            "{{ effect6amount*100.000000 }}% -> {{ effect6amountnl*100.000000 }}%"
+                            "{{ e6 }}% -> {{ e6NL }}%"
                         ]
                     },
                     "maxrank": 5,
@@ -20953,7 +20961,7 @@
                 "crit": 0,
                 "critperlevel": 0,
                 "attackdamage": 62,
-                "attackdamageperlevel": 2.5,
+                "attackdamageperlevel": 2.75,
                 "attackspeedperlevel": 2.5,
                 "attackspeed": 0.625
             },
@@ -46449,6 +46457,12 @@
                     "num": 45,
                     "name": "Bewitching LeBlanc",
                     "chromas": true
+                },
+                {
+                    "id": "7055",
+                    "num": 55,
+                    "name": "Risen Legend LeBlanc",
+                    "chromas": true
                 }
             ],
             "lore": "Mysterious even to other members of the Black Rose cabal, LeBlanc is but one of many names for a pale woman who has manipulated people and events since the earliest days of Noxus. Using her magic to mirror herself, the sorceress can appear to anyone, anywhere, and even be in many places at once. Always plotting just out of sight, LeBlanc's true motives are as inscrutable as her shifting identity.",
@@ -51100,7 +51114,7 @@
                     "id": "LuluR",
                     "name": "Wild Growth",
                     "description": "Lulu enlarges an ally, knocking nearby enemies into the air and granting the ally a large amount of bonus health. For the next few seconds, that ally gains an aura that slows nearby enemies.",
-                    "tooltip": "Lulu enlarges an ally, <status>Knocking Up</status> surrounding enemies for {{ knockbackduration }} seconds. The enlarged ally gains <healing>{{ totalbonushealth }} max Health</healing> and <status>Slows</status> surrounding enemies by {{ slowpercent }}% for {{ buffduration }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Lulu enlarges an ally, <status>Knocking Up</status> surrounding enemies for {{ knockbackduration }} second. The enlarged ally gains <healing>{{ totalbonushealth }} max Health</healing> and <status>Slows</status> surrounding enemies by {{ slowpercent }}% for {{ buffduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Bonus Health",
@@ -54403,13 +54417,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        9,
-                        9,
-                        9,
-                        9,
-                        9
+                        10,
+                        10,
+                        10,
+                        10,
+                        10
                     ],
-                    "cooldownBurn": "9",
+                    "cooldownBurn": "10",
                     "cost": [
                         40,
                         40,
@@ -58342,7 +58356,7 @@
                     "id": "NaafiriQ",
                     "name": "Darkin Daggers",
                     "description": "Naafiri hurls up to two daggers, each inflicting bleed, or each inflicting bonus damage if the target is already bleeding.<br><br>Packmates leap to attack champions hit by this skill.<br>",
-                    "tooltip": "Naafiri hurls Darkin-tainted blades, dealing <physicalDamage>{{ spell.naafiriq:totaldamagefirstcast }} physical damage</physicalDamage> and inflicting a bleed, dealing <physicalDamage>{{ spell.naafiriq:totalbleeddamage }} physical damage</physicalDamage> over {{ spell.naafiriq:bleedduration }} seconds.<br /><br />Naafiri can <recast>Recast</recast> this Ability. If enemies hit are already bleeding from this Ability, it instead deals the remaining bleed damage plus between <physicalDamage>{{ spell.naafiriq:totalmindamagesecondcast }}</physicalDamage> and <physicalDamage>{{ spell.naafiriq:totalmaxdamagesecondcast }} physical damage</physicalDamage>, based on their missing Health. If that target was a champion, Naafiri restores <healing>{{ spell.naafiriq:totalhealsecondcast }} Health</healing>.<br /><br /><keywordMajor>Packmates</keywordMajor> will leap at the first champion hit and attack them for {{ spell.naafirip:packmatetauntduration }} seconds. <br /><br />{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Naafiri hurls Darkin-tainted blades, dealing <physicalDamage>{{ spell.naafiriq:totaldamagefirstcast }} physical damage</physicalDamage> and inflicting a bleed, dealing <physicalDamage>{{ spell.naafiriq:totalbleeddamage }} physical damage</physicalDamage> over {{ spell.naafiriq:bleedduration }} seconds.<br /><br />Naafiri can <recast>Recast</recast> this Ability. If enemies hit are already bleeding from this Ability, it instead deals the remaining bleed damage plus between <physicalDamage>{{ spell.naafiriq:totalmindamagesecondcast }}</physicalDamage> and <physicalDamage>{{ spell.naafiriq:totalmaxdamagesecondcast }} physical damage</physicalDamage>, based on their missing Health. If that target was a champion or large monster, Naafiri restores <healing>{{ spell.naafiriq:totalhealsecondcast }} Health</healing>.<br /><br /><keywordMajor>Packmates</keywordMajor> will leap at the first champion hit and attack them for {{ spell.naafirip:packmatetauntduration }} seconds. <br /><br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Initial Damage",
@@ -58363,13 +58377,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        11,
-                        10,
                         9,
+                        8.5,
                         8,
+                        7.5,
                         7
                     ],
-                    "cooldownBurn": "11/10/9/8/7",
+                    "cooldownBurn": "9/8.5/8/7.5/7",
                     "cost": [
                         55,
                         60,
@@ -62471,11 +62485,11 @@
                 "mpperlevel": 35,
                 "movespeed": 340,
                 "armor": 27,
-                "armorperlevel": 4.2,
+                "armorperlevel": 4.5,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 225,
-                "hpregen": 4,
+                "hpregen": 6,
                 "hpregenperlevel": 0.9,
                 "mpregen": 8.2,
                 "mpregenperlevel": 0.7,
@@ -66622,7 +66636,7 @@
                     "id": "PantheonQ",
                     "name": "Comet Spear",
                     "description": "Pantheon either thrusts his spear or throws his spear in the chosen direction.",
-                    "tooltip": "<span class=\"colorFF8C00\">Tap:</span> Pantheon thrusts his spear, dealing <physicalDamage>{{ tapdamagecalc }} physical damage</physicalDamage> to enemies hit. Refunds {{ tapcooldownrefund*100 }}% of this Ability's Cooldown.<br /><br /><span class=\"colorFF8C00\">Hold:</span> Pantheon hurls his spear, dealing <physicalDamage>{{ holddamagecalc }} physical damage</physicalDamage> to the first enemy hit and {{ damagefalloff*100 }}% less to further targets. <br /><br />This Ability critically strikes enemies below {{ crithealththreshold*100 }}% health for <physicalDamage>{{ executedamagecalcmodified }} physical damage</physicalDamage> instead.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Deals an additional <physicalDamage>{{ empowereddamagecalc }} physical damage</physicalDamage>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<span class=\"colorFF8C00\">Tap:</span> Pantheon thrusts his spear, dealing <physicalDamage>{{ tapdamagecalc }} physical damage</physicalDamage> to enemies hit. Refunds {{ tapcooldownrefund*100 }}% of this Ability's Cooldown.<br /><br /><span class=\"colorFF8C00\">Hold:</span> Pantheon hurls his spear, dealing <physicalDamage>{{ holddamagecalc }} physical damage</physicalDamage> to the first enemy hit and {{ damagefalloff*100 }}% less to further targets. <br /><br />This Ability is enhanced against enemies below {{ crithealththreshold*100 }}% health to deal <physicalDamage>{{ executedamagecalcmodified }} physical damage</physicalDamage> instead.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> Deals an additional <physicalDamage>{{ empowereddamagecalc }} physical damage</physicalDamage>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Base Damage",
@@ -66906,7 +66920,7 @@
                     "id": "PantheonE",
                     "name": "Aegis Assault",
                     "description": "Pantheon sets his shield, becoming invulnerable to damage from the front and striking repeatedly with his spear.",
-                    "tooltip": "Pantheon braces his shield and engages enemies in a chosen direction for {{ shieldduration }} seconds, becoming immune to non-tower damage from that direction and dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> over the duration. After channeling Pantheon slams with his shield, dealing <physicalDamage>{{ shielddamagecalc }} physical damage</physicalDamage>.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> When Pantheon slams his shield he gains {{ resistscalc }} Armor and Magic Resist for {{ resistsduration }} seconds, and <speed>{{ speedamount*100 }}% Move Speed</speed> for {{ speedduration }} seconds. <br />{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Pantheon braces his shield and engages enemies in a chosen direction for {{ shieldduration }} seconds, becoming immune to non-tower damage from that direction and dealing <physicalDamage>{{ damagecalc }} physical damage</physicalDamage> over the duration. After channeling Pantheon slams with his shield, dealing <physicalDamage>{{ shielddamagecalc }} physical damage</physicalDamage>.<br /><br /><span class=\"colorEDDA74\">Mortal Will Bonus:</span> When Pantheon slams his shield he gains <scaleArmor>{{ resistscalc }} Armor</scaleArmor> and <scaleMR>{{ resistscalc }} Magic Resist</scaleMR> for {{ resistsduration }} seconds, and <speed>{{ speedamount*100 }}% Move Speed</speed> for {{ speedduration }} seconds. <br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -76055,7 +76069,7 @@
                     "id": "13010",
                     "num": 10,
                     "name": "SKT T1 Ryze",
-                    "chromas": false
+                    "chromas": true
                 },
                 {
                     "id": "13011",
@@ -84302,8 +84316,8 @@
                 "difficulty": 5
             },
             "stats": {
-                "hp": 650,
-                "hpperlevel": 102,
+                "hp": 610,
+                "hpperlevel": 105,
                 "mp": 320,
                 "mpperlevel": 40,
                 "movespeed": 335,
@@ -88350,7 +88364,7 @@
                     "id": "134005",
                     "num": 5,
                     "name": "SKT T1 Syndra",
-                    "chromas": false
+                    "chromas": true
                 },
                 {
                     "id": "134006",
@@ -95349,7 +95363,7 @@
                 "crit": 0,
                 "critperlevel": 0,
                 "attackdamage": 52,
-                "attackdamageperlevel": 3.3,
+                "attackdamageperlevel": 2.5,
                 "attackspeedperlevel": 2.5,
                 "attackspeed": 0.625
             },
@@ -95532,13 +95546,13 @@
                     ],
                     "cooldownBurn": "6",
                     "cost": [
-                        30,
-                        40,
                         50,
+                        55,
                         60,
+                        65,
                         70
                     ],
-                    "costBurn": "30/40/50/60/70",
+                    "costBurn": "50/55/60/65/70",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -95578,10 +95592,10 @@
                             45
                         ],
                         [
-                            50,
-                            75,
-                            100,
-                            125,
+                            70,
+                            90,
+                            110,
+                            130,
                             150
                         ],
                         [
@@ -95620,7 +95634,7 @@
                         "1/1.25/1.5/1.75/2",
                         "30/45/60/75/90",
                         "15/22.5/30/37.5/45",
-                        "50/75/100/125/150",
+                        "70/90/110/130/150",
                         "0",
                         "0",
                         "0",
@@ -103808,11 +103822,11 @@
                             300
                         ],
                         [
-                            20,
-                            20,
-                            20,
-                            20,
-                            20
+                            15,
+                            15,
+                            15,
+                            15,
+                            15
                         ],
                         [
                             40,
@@ -103822,18 +103836,18 @@
                             40
                         ],
                         [
-                            10,
-                            10,
-                            10,
-                            10,
-                            10
-                        ],
-                        [
                             15,
                             15,
                             15,
                             15,
                             15
+                        ],
+                        [
+                            30,
+                            30,
+                            30,
+                            30,
+                            30
                         ],
                         [
                             0,
@@ -103874,10 +103888,10 @@
                     "effectBurn": [
                         null,
                         "80/135/190/245/300",
-                        "20",
-                        "40",
-                        "10",
                         "15",
+                        "40",
+                        "15",
+                        "30",
                         "0",
                         "0",
                         "0",
@@ -106312,6 +106326,12 @@
                     "num": 21,
                     "name": "Astronaut Xerath",
                     "chromas": true
+                },
+                {
+                    "id": "101030",
+                    "num": 30,
+                    "name": "Crystalis Indomitus Xerath",
+                    "chromas": true
                 }
             ],
             "lore": "Xerath is an Ascended Magus of ancient Shurima, a being of arcane energy writhing in the broken shards of a magical sarcophagus. For millennia, he was trapped beneath the desert sands, but the rise of Shurima freed him from his ancient prison. Driven insane with power, he now seeks to take what he believes is rightfully his and replace the upstart civilizations of the world with one fashioned in his image.",
@@ -108420,7 +108440,7 @@
                 "mp": 500,
                 "mpperlevel": 0,
                 "movespeed": 345,
-                "armor": 30,
+                "armor": 33,
                 "armorperlevel": 4.6,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -108890,34 +108910,34 @@
                     "effect": [
                         null,
                         [
-                            10,
-                            20,
-                            30
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            450,
-                            450,
-                            450
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1300,
-                            1300,
-                            1300
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            8,
-                            8,
-                            8
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            120,
-                            120,
-                            120
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            260,
-                            260,
-                            260
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -108942,12 +108962,12 @@
                     ],
                     "effectBurn": [
                         null,
-                        "10/20/30",
-                        "450",
-                        "1300",
-                        "8",
-                        "120",
-                        "260",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -110081,13 +110101,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        12,
-                        11.5,
-                        11,
-                        10.5,
+                        10,
+                        10,
+                        10,
+                        10,
                         10
                     ],
-                    "cooldownBurn": "12/11.5/11/10.5/10",
+                    "cooldownBurn": "10",
                     "cost": [
                         80,
                         90,
@@ -111031,7 +111051,7 @@
                     "id": "238002",
                     "num": 2,
                     "name": "SKT T1 Zed",
-                    "chromas": false
+                    "chromas": true
                 },
                 {
                     "id": "238003",
@@ -112615,8 +112635,8 @@
                 {
                     "id": "ZiggsW",
                     "name": "Satchel Charge",
-                    "description": "Ziggs flings an explosive charge that detonates after 4 seconds, or when this ability is activated again. The explosion deals magic damage to enemies, knocking them away. Ziggs is also knocked away, but takes no damage. Ziggs can use the Satchel to hexplode vulnerable enemy turrets.",
-                    "tooltip": "Ziggs flings an explosive charge that detonates after {{ e2 }} seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br /><br />Satchel Charge will automatically destroy towers below {{ f1*100 }}% of their Health.{{ spellmodifierdescriptionappend }}",
+                    "description": "Ziggs flings an explosive charge that detonates after a delay, or when this ability is activated again. The explosion deals magic damage to enemies, knocking them away. Ziggs is also knocked away, but takes no damage. <br><br>Ziggs can use the Satchel to hexplode vulnerable enemy turrets.",
+                    "tooltip": "Ziggs flings an explosive charge that detonates after {{ bombduration }} seconds, or when this ability is <recast>Recast</recast>. It deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to enemies and <status>Knocks</status> them <status>Back</status>. Ziggs is also knocked away, but takes no damage.<br /><br />Satchel Charge will automatically destroy towers below {{ turretdestroypercent*100 }}% of their Health.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -112657,81 +112677,81 @@
                             210
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.25,
-                            0.275,
-                            0.3,
-                            0.325,
-                            0.35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            600,
-                            600,
-                            600,
-                            600,
-                            600
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            50,
-                            50,
-                            50,
-                            50,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            500,
-                            500,
-                            500,
-                            500,
-                            500
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            325,
-                            325,
-                            325,
-                            325,
-                            325
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            775,
-                            775,
-                            775,
-                            775,
-                            775
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            400,
-                            400,
-                            400,
-                            400,
-                            400
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            6,
-                            6,
-                            6,
-                            6,
-                            6
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
                         "70/105/140/175/210",
-                        "4",
-                        "0.25/0.275/0.3/0.325/0.35",
-                        "600",
-                        "50",
-                        "500",
-                        "325",
-                        "775",
-                        "400",
-                        "6"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
