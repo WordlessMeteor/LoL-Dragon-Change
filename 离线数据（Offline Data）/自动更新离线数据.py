@@ -20,7 +20,7 @@ def format_df(df: pd.DataFrame, log, width_exceed_ask: bool = True, direct_print
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
             log.write("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)\n")
             cont = input()
-            log.write(cont + "\n\n" if cont == "" else cont + "\n")
+            log.write(cont + "\n")
             if cont == "":
                 #print(df)
                 result = str(df)
@@ -104,7 +104,7 @@ while True:
     print("请选择要更新的数据资源，输入空字符串以退出程序：\nPlease select the data resource to update, or submit an empty string to exit the program:\n1\tCommunityDragon\n2\tDataDragon")
     log.write("请选择要更新的数据资源，输入空字符串以退出程序：\nPlease select the data resource to update, or submit an empty string to exit the program:\n1\tCommunityDragon\n2\tDataDragon\n")
     resource = input()
-    log.write(resource + "\n\n" if resource == "" else resource + "\n")
+    log.write(resource + "\n")
     if resource == "":
         log.write("[The program has exited!]\n")
         log.close()
@@ -113,20 +113,20 @@ while True:
         print("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）\n4\t更新指定文件夹（Updating Specified Folders）")
         log.write("请选择更新模式：\nPlease select the update mode:\n1\t全局扫描（Global Scanning）\n2\t按修改时间更新（Updating According to Modification Time）\n3\t按程序需求更新（Updating According to Program Demands）\n4\t更新指定文件夹（Updating Specified Folders）\n")
         mode = input()
-        log.write(mode + "\n\n" if mode == "" else mode + "\n")
+        log.write(mode + "\n")
         if mode == "" or mode[0] == "2":
             mode = "2"
             print("请选择一种方式指定修改时间：\nPlease select a method of specifying the modification time:\n1\t自动获取（Automatically get）\n2\t手动输入（Manually input）")
             log.write("请选择一种方式指定修改时间：\nPlease select a method of specifying the modification time:\n1\t自动获取（Automatically get）\n2\t手动输入（Manually input）\n")
             time_get_method = input()
-            log.write(time_get_method + "\n\n" if time_get_method == "" else time_get_method + "\n")
+            log.write(time_get_method + "\n")
             if time_get_method != "" and time_get_method[0] == "2":
                 time_get_method == "2"
                 print('请以“年-月-日 时-分-秒”的格式输入修改时间。示例：2024-05-04 10-26-21。\nPlease input a modification time in the format "%Y-%m-%d %H-%M-%S". Example: 2024-05-04 10-26-21.')
                 log.write('请以“年-月-日 时-分-秒”的格式输入修改时间。示例：2024-05-04 10-26-21。\nPlease input a modification time in the format "%Y-%m-%d %H-%M-%S". Example: 2024-05-04 10-26-21.\n')
                 while True:
                     latest_mod_timestamp = input()
-                    log.write(latest_mod_timestamp + "\n\n" if latest_mod_timestamp == "" else latest_mod_timestamp + "\n")
+                    log.write(latest_mod_timestamp + "\n")
                     if latest_mod_timestamp == "":
                         continue
                     try: #允许输入整型或浮点型时间戳（A timestamp of integer or float type is allowed）
@@ -203,13 +203,13 @@ while True:
             print("请选择输入方式：\nPlease choose an input method:\n1\t逐行输入（Line by line）\n2\t来自文件（From file）")
             log.write("请选择输入方式：\nPlease choose an input method:\n1\t逐行输入（Line by line）\n2\t来自文件（From file）\n")
             input_method = input()
-            log.write(input_method + "\n\n" if input_method == "" else input_method + "\n")
+            log.write(input_method + "\n")
             if input_method == "" or input_method[0] == "2":
                 print('请输入一个存放CommunityDragon数据库文件夹地址的文本文档的位置：\nPlease input the path of a text file that contains URLs of folders in CommunityDragon database:')
                 log.write('请输入一个存放CommunityDragon数据库文件夹地址的文本文档的位置：\nPlease input the path of a text file that contains URLs of folders in CommunityDragon database:\n')
                 while True:
                     txtfile = input()
-                    log.write(txtfile + "\n\n" if txtfile == "" else txtfile + "\n")
+                    log.write(txtfile + "\n")
                     if txtfile == "":
                         continue
                     elif os.path.exists(txtfile):
@@ -227,7 +227,7 @@ while True:
                 print("请逐个输入要更新的CommunityDragon文件夹的地址，输入-1以退出循环：\nPlease input the URLs of CommunityDragon folders to update one by one. Enter -1 to exit the loop:")
                 while True:
                     cdragon_folder = input()
-                    log.write(cdragon_folder + "\n\n" if cdragon_folder == "" else cdragon_folder + "\n")
+                    log.write(cdragon_folder + "\n")
                     if cdragon_folder == "":
                         continue
                     elif cdragon_folder == "-1":
@@ -445,7 +445,7 @@ while True:
             print("以下%d个文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following %d file(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" %(len(files_to_delete), len(files_to_delete)) + "\n".join(files_to_delete))
             log.write("以下%d个文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following %d file(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" %(len(files_to_delete), len(files_to_delete)) + "\n".join(files_to_delete) + "\n")
             delete = input()
-            log.write(delete + "\n\n" if delete == "" else delete + "\n")
+            log.write(delete + "\n")
             if delete != "":
                 for file in files_to_delete:
                     try:
@@ -458,7 +458,7 @@ while True:
             print("以下%d个文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following %d folder(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" %(len(folders_to_delete), len(folders_to_delete)) + "\n".join(folders_to_delete))
             log.write("以下%d个文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following %d folder(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" %(len(folders_to_delete), len(folders_to_delete)) + "\n".join(folders_to_delete) + "\n")
             delete = input()
-            log.write(delete + "\n\n" if delete == "" else delete + "\n")
+            log.write(delete + "\n")
             if delete != "":
                 for folder in folders_to_delete:
                     try:
@@ -479,7 +479,7 @@ while True:
         dst_folder = "离线数据（Offline Data）/ddragon"
         while True:
             src_folder = input()
-            log.write(src_folder + "\n\n" if src_folder == "" else src_folder + "\n")
+            log.write(src_folder + "\n")
             try:
                 if not ("en_US" in os.listdir(src_folder) and "zh_CN" in os.listdir(src_folder)):
                     print("您输入的地址有误！请重新输入！\nERROR input of data resource directory! Please try again!")
