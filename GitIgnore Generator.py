@@ -11,6 +11,8 @@ for root, dirs, files in os.walk("离线数据（Offline Data）"):
             LNF.append(os.path.join(root, file).replace("\\", "/"))
 
 with open(".gitignore", "w", encoding = "utf-8") as fp:
+    print("#日志文件（Log files）\n离线数据（Offline Data）/Update Logs/*")
+    fp.write("#日志文件（Log files）\n离线数据（Offline Data）/Update Logs/*\n")
     if LF:
         print("#文件大小超过100 MB（File size exceeds 100 MiB）")
         fp.write("#文件大小超过100 MB（File size exceeds 100 MiB）\n")
