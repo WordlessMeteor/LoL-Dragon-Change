@@ -1153,6 +1153,7 @@ async def search_profile(connection):
                     gamemodes_iter["name"] = gamemode_iter["name"]
                     gamemodes_iter["gameMode"] = gamemode_iter["gameMode"]
                     gamemodes_iter["category"] = gamemode_iter["category"]
+                    gamemodes_iter["description"] = gamemode_iter["description"]
                     gamemodes[gamemode_id] = gamemodes_iter
                 maps = {8: {"zh_CN": "水晶之痕", "en_US": "Crystal Scar"}, 10: {"zh_CN": "扭曲丛林", "en_US": "Twisted Treeline"}, 11: {"zh_CN": "召唤师峡谷", "en_US": "Summoner's Rift"}, 12: {"zh_CN": "嚎哭深渊", "en_US": "Howling Abyss"}, 16: {"zh_CN": "宇宙遗迹", "en_US": "Cosmic Ruins"}, 18: {"zh_CN": "瓦罗兰城市公园", "en_US": "Valoran City Park"}, 20: {"zh_CN": "失控地点", "en_US": "Crash Site"}, 21: {"zh_CN": "百合与莲花的神庙", "en_US": "Temple of Lily and Lotus"}, 22: {"zh_CN": "聚点危机", "en_US": "Convergence"}, 30: {"zh_CN": "怒火角斗场", "en_US": "Rings of Wrath"}}
                 summonerId = current_info["summonerId"]
@@ -2204,14 +2205,19 @@ async def search_profile(connection):
                                         bans_tmp = bans[:]
                                         bans = []
                                         emptyBan = {"championId": -1, "pickTurn": 0} #定义一个初始化禁用字典，用于后续数据框填充空值（Define an initialized banning dictionary so that empty values are appended to the dataframe at certain times subsequently）
-                                        playerSubteamIds = {}
+                                        playerSubteam = {} #存储不同子阵营的玩家，键是子阵营序号，值是该子阵营中的玩家的API序号列表（Stores different subteams' players. Keys are playerSubteamIds, and values are index lists from API for players in the subteams）
                                         for i in range(len(LoLGame_info["participants"])):
                                             bans.append(emptyBan.copy())
                                             playerSubteamId = LoLGame_info["participants"][i]["stats"]["playerSubteamId"]
-                                            if not playerSubteamId in playerSubteamIds:
-                                                playerSubteamIds[playerSubteamId] = []
-                                            playerSubteamIds[playerSubteamId].append(i)
-                                        participantBanIds = [playerSubteamIds[i][0] for i in sorted(playerSubteamIds.keys())] #这里默认采用某个子阵营在API中记录的第一名玩家作为禁用英雄的玩家。这可能与实际禁用英雄的玩家有出入（Here the first player of a subteam recorded in API is considered as the player that banned some champion. This player may not be the real player that banned it）
+                                            if not playerSubteamId in playerSubteam:
+                                                playerSubteam[playerSubteamId] = []
+                                            playerSubteam[playerSubteamId].append(i)
+                                        if patch_compare("14.12", LoLGame_info["gameVersion"]):
+                                            participantBanIds = []
+                                            for i in sorted(playerSubteam.keys()):
+                                                participantBanIds += [playerSubteam[i][0], playerSubteam[i][1]] #这里默认采用某个子阵营在API中记录的第一名玩家作为该子阵营的先选者。这可能与实际选用顺序有出入（Here the first player of a subteam recorded in API is considered as the player that picks a champion first. This player may not be the real first player.）
+                                        else:
+                                            participantBanIds = [playerSubteam[i][0] for i in sorted(playerSubteam.keys())] #这里默认采用某个子阵营在API中记录的第一名玩家作为禁用英雄的玩家。这可能与实际禁用英雄的玩家有出入（Here the first player of a subteam recorded in API is considered as the player that banned some champion. This player may not be the real player that banned it）
                                         for i in range(len(participantBanIds)):
                                             bans[participantBanIds[i]] = bans_tmp[i]
                                     team_color = {100: "蓝方", 200: "红方"}
@@ -2965,20 +2971,10 @@ async def search_profile(connection):
                                         TFTHistory_data[key].append(TFTGameVersion)
                                         TFTGamePatch = ".".join(TFTGameVersion.split(".")[:2]) #由于需要通过这部分代码事先获取所有对局的版本，因此无论如何，这部分代码都要放在与从CommunityDragon重新获取云顶之弈数据相关的代码前面（Since game patches are captured here, by all means should this part of code be in front of the code relevant to regetting TFT data from CommunityDragon）
                                         TFTGamePatches.append(TFTGamePatch)
+                                    elif j == 6:
+                                        TFTHistory_data[key].append(gamemodes[TFTHistoryJson["queue_id"]]["description"])
                                     else:
-                                        if not key in TFTHistoryJson.keys() or TFTHistoryJson[key] == "standard": #在云顶之弈第4赛季及以前，TFTHistoryJson中无tft_game_type键（Before (and including) TFT set 4, the key `tft_game_type` is absent from `TFTHistoryJson`）
-                                            if "normal" in TFTHistory[i]["metadata"]["tags"]:
-                                                TFTHistory_data[key].append("匹配模式")
-                                            elif "ranked" in TFTHistory[i]["metadata"]["tags"]:
-                                                TFTHistory_data[key].append("排位")
-                                        elif TFTHistoryJson[key] == "turbo":
-                                            TFTHistory_data[key].append("狂暴模式")
-                                        elif TFTHistoryJson[key] == "pairs":
-                                            TFTHistory_data[key].append("双人作战")
-                                        elif TFTHistoryJson[key] == "tutorial":
-                                            TFTHistory_data[key].append("新手教程")
-                                        else:
-                                            TFTHistory_data[key].append(TFTHistoryJson[key])
+                                        TFTHistory_data[key].append(TFTHistoryJson[key])
                                 elif j >= 9 and j <= 27: #对于一些容易产生争议和报错的情况，引入to_append变量以简化代码。下同（Variable `to_append` is introduced to simplify the code in case of some controversy that produces errors easily. So does the following）
                                     #TFTMainPlayer = TFTHistory[i]["json"]["participants"][TFT_main_player_indices[i]]
                                     for k in range(len(TFTHistory[i]["json"]["participants"])):

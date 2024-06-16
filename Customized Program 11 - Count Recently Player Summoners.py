@@ -988,6 +988,7 @@ async def search_recent_players(connection):
         gamemodes_iter["name"] = gamemode_iter["name"]
         gamemodes_iter["gameMode"] = gamemode_iter["gameMode"]
         gamemodes_iter["category"] = gamemode_iter["category"]
+        gamemodes_iter["description"] = gamemode_iter["description"]
         gamemodes[gamemode_id] = gamemodes_iter
     ##准备英雄数据，用于将英雄序号映射到英雄名称（Prepare champion data to map championIds to champions' names）
     summonerId = current_info["summonerId"]
@@ -1945,20 +1946,10 @@ async def search_recent_players(connection):
                                                     elif j == 4:
                                                         TFTHistory_data[key].append(TFTGameVersion)
                                                         TFTGamePatches.append(TFTGamePatch)
+                                                    elif j == 6:
+                                                        TFTHistory_data[key].append(gamemodes[TFTHistoryJson["queue_id"]]["description"])
                                                     else:
-                                                        if not key in TFTHistoryJson.keys() or TFTHistoryJson[key] == "standard": #在云顶之弈第4赛季及以前，TFTHistoryJson中无tft_game_type键（Before (and including) TFT set 4, the key `tft_game_type` is absent from `TFTHistoryJson`）
-                                                            if "normal" in TFTHistory[i]["metadata"]["tags"]:
-                                                                TFTHistory_data[key].append("匹配模式")
-                                                            elif "ranked" in TFTHistory[i]["metadata"]["tags"]:
-                                                                TFTHistory_data[key].append("排位")
-                                                        elif TFTHistoryJson[key] == "turbo":
-                                                            TFTHistory_data[key].append("狂暴模式")
-                                                        elif TFTHistoryJson[key] == "pairs":
-                                                            TFTHistory_data[key].append("双人作战")
-                                                        elif TFTHistoryJson[key] == "tutorial":
-                                                            TFTHistory_data[key].append("新手教程")
-                                                        else:
-                                                            TFTHistory_data[key].append(TFTHistoryJson[key])
+                                                        TFTHistory_data[key].append(TFTHistoryJson[key])
                                         elif j >= 9 and j <= 27: #对于一些容易产生争议和报错的情况，引入to_append变量以简化代码。下同（Variable `to_append` is introduced to simplify the code in case of some controversy that produces errors easily. So does the following）
                                             #TFTMainPlayer = TFTHistory[i]["json"]["participants"][TFT_main_player_indices[i]]
                                             for k in range(len(TFTHistory[i]["metadata"]["participants"])): #注意这里遍历对象和查战绩脚本的区别。实际上相当于判断玩家是不是人类玩家（Pay attention to the difference between this piece of code and the corresponding code in Customized Program 5. Actually this line of code judges whether a player is human player）
