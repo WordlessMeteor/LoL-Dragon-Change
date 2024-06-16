@@ -98,6 +98,8 @@ def getUrl(url: str, log):
 currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
 os.makedirs("离线数据（Offline Data）/Update Logs", exist_ok = True)
 log = open(f"离线数据（Offline Data）/Update Logs/{currentTime}.log", "w", encoding = "utf-8")
+#控制只输出一遍的提示（Control the hint to be displayed only once）
+task_continue_hint = True
 ddragon_hint = True
 line_re = re.compile('<tr><td class="link"><a href=".*" title=".*">.*</a></td><td class="size">.*</td><td class="date">.*</td></tr>')
 while True:
@@ -271,6 +273,29 @@ while True:
             text_folders_exported_pbe = list(set(list(map(lambda x: "/".join(x.split("/")[:-1]) + "/" if "/" in x else "", text_files_exported_pbe))))
             text_folders_exported_pbe.sort()
             cdragon_folders =  ["latest/cdragon/arena/", "latest/cdragon/tft/"] + list(map(lambda x: "latest/" + x, text_folders_exported_latest)) + ["pbe/cdragon/arena/", "pbe/cdragon/tft/"] + list(map(lambda x: "pbe/" + x, text_folders_exported_pbe)) #索引文件中不包含cdragon文件夹内的文件，因此这里需要单独添加到文件夹列表中（The index file doesn't contain files in cdragon folder, so they should be added to the folder list specially）
+            complete_scan = True
+            if task_continue_hint:
+                print("如果您之前有文件夹未检查，那么请在这里输入本次检查的文件夹的索引下界和上界。输入空字符串以检查所有文件夹。\nIf there're some folders unchecked before, please enter the lower and upper limit of the index of the folders to be checked this time. Submit an empty string to check all folders.\n提示：如果想要包含最后一个文件夹，请将上界指定为大于当前文件夹列表长度的任意一个正整数。\nHint: If you expect the program not to neglect the last folder, please specify the upper limit as any integer greater than the length of the current folder list.\n文件夹总个数（Total number of folders）：%d" %len(cdragon_folders))
+                log.write("如果您之前有文件夹未检查，那么请在这里输入本次检查的文件夹的索引下界和上界。输入空字符串以检查所有文件夹。\nIf there're some folders unchecked before, please enter the lower and upper limit of the index of the folders to be checked this time. Submit an empty string to check all folders.\n提示：如果想要包含最后一个文件夹，请将上界指定为大于当前文件夹列表长度的任意一个正整数。\nHint: If you expect the program not to neglect the last folder, please specify the upper limit as any integer greater than the length of the current folder list.\n文件夹总个数（Total number of folders）：%d\n" %len(cdragon_folders))
+                task_continue_hint = False
+            else:
+                print("如果您之前有文件夹未检查，那么请在这里输入本次检查的文件夹的索引下界和上界。输入空字符串以检查所有文件夹。\nIf there're some folders unchecked before, please enter the lower and upper limit of the index of the folders to be checked this time. Submit an empty string to check all folders.\n文件夹总个数（Total number of folders）：%d" %len(cdragon_folders))
+                log.write("如果您之前有文件夹未检查，那么请在这里输入本次检查的文件夹的索引下界和上界。输入空字符串以检查所有文件夹。\nIf there're some folders unchecked before, please enter the lower and upper limit of the index of the folders to be checked this time. Submit an empty string to check all folders.\n文件夹总个数（Total number of folders）：%d\n" %len(cdragon_folders))
+            while True:
+                contCheck = input()
+                log.write(contCheck + "\n")
+                if contCheck == "":
+                    break
+                else:
+                    try:
+                        begin, end = map(int, contCheck.split())
+                    except ValueError:
+                        print("请以空格为分隔符输入文件夹列表的整数类型的下界和上界！\nPlease enter two integers as the begIndex and endIndex of the folder list split by space!")
+                        log.write("请以空格为分隔符输入文件夹列表的整数类型的下界和上界！\nPlease enter two integers as the begIndex and endIndex of the folder list split by space!\n")
+                    else:
+                        cdragon_folders = cdragon_folders[begin:end]
+                        complete_scan = False
+                        break
         web_prefix = "https://raw.communitydragon.org/"
         local_prefix = "离线数据（Offline Data）/cdragon"
         updated_files = []
@@ -441,7 +466,7 @@ while True:
                 log.write(file + "\n")
             print()
             log.write("\n")
-        if mode == "1" and files_to_delete: #只有全局扫描才可以决定删除哪些文件（Only by Global Scan can the program decide which files to delete）
+        if mode == "1" and complete_scan and files_to_delete: #只有全局扫描才可以决定删除哪些文件（Only by Global Scan can the program decide which files to delete）
             print("以下%d个文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following %d file(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" %(len(files_to_delete), len(files_to_delete)) + "\n".join(files_to_delete))
             log.write("以下%d个文件不存在于数据库中。是否永久删除这些文件？（输入任意非空字符串删除，否则不删除）\nThe following %d file(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the files)\n" %(len(files_to_delete), len(files_to_delete)) + "\n".join(files_to_delete) + "\n")
             delete = input()
@@ -454,7 +479,7 @@ while True:
                         pass
             print()
             log.write("\n")
-        if (mode == "1" or mode == "2") and folders_to_delete:
+        if (mode == "1" or mode == "2") and complete_scan and folders_to_delete:
             print("以下%d个文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following %d folder(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" %(len(folders_to_delete), len(folders_to_delete)) + "\n".join(folders_to_delete))
             log.write("以下%d个文件夹不存在于数据库中。是否永久删除这些文件夹？（输入任意非空字符串删除，否则不删除）\nThe following %d folder(s) don't exist in the database. Do you want to delete them? (Submit any non-empty string to delete, or null to refuse deleting the folders)\n" %(len(folders_to_delete), len(folders_to_delete)) + "\n".join(folders_to_delete) + "\n")
             delete = input()
