@@ -90,6 +90,11 @@ def getUrl(url: str, log):
                 break
             print("接收数据块长度不正确导致连接中断！正在尝试第%d次重新获取数据！\nConnection broken: InvalidChunkLength. Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
             log.write("接收数据块长度不正确导致连接中断！正在尝试第%d次重新获取数据！\nConnection broken: InvalidChunkLength. Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
+        except requests.exceptions.ConnectionError:
+            if retry > 5:
+                break
+            print("由于远程服务器端无响应，连接已关闭！正在尝试第%d次重新获取数据！\nRemote end closed connection without response. Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
+            log.write("由于远程服务器端无响应，连接已关闭！正在尝试第%d次重新获取数据！\nRemote end closed connection without response. Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         else:
             return (source, 0)
     if retry > 5:
@@ -238,8 +243,8 @@ while True:
                         cdragon_folder = cdragon_folder if cdragon_folder.endswith("/") else cdragon_folder[:-len(os.path.basename(cdragon_folder))]
                         cdragon_folders.append(cdragon_folder.replace("https://raw.communitydragon.org/", "").replace("离线数据（Offline Data）/cdragon/", "")) #请思考，这里如果换成`cdragon_folder.lstrip("https://raw.communitydragon.org/")`，会有什么效果？（Please figure out what will happen if the code is replaced by `cdragon_folder.lstrip("https://raw.communitydragon.org/")`）
         else:
-            print("正在读取在线索引……\nReading online indices ...")
-            log.write("正在读取在线索引……\nReading online indices ...\n")
+            print("正在读取正式服在线索引……\nReading the online index file of live data resources...")
+            log.write("正在读取正式服在线索引……\nReading the online index file of live data resources...\n")
             source, status = getUrl("https://raw.communitydragon.org/latest/cdragon/files.exported.txt", log)
             if status != 0:
                 if status == 1:
@@ -256,6 +261,8 @@ while True:
             text_files_exported_latest = [file for file in files_exported_latest if file.endswith((".json", ".txt", ".js", ".yaml"))]
             text_folders_exported_latest = list(set(list(map(lambda x: "/".join(x.split("/")[:-1]) + "/" if "/" in x else "", text_files_exported_latest))))
             text_folders_exported_latest.sort()
+            print("正在读取美测服在线索引……\nReading the online index file of pbe data resources...")
+            log.write("正在读取美测服在线索引……\nReading the online index file of pbe data resources...\n")
             source, status = getUrl("https://raw.communitydragon.org/pbe/cdragon/files.exported.txt", log)
             if status != 0:
                 if status == 1:
