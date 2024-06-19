@@ -115,7 +115,7 @@ async def create_custom_lobby(connection):
 async def add_bots_team1(connection):
     lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
     maxTeamSize = lobby_information["gameConfig"]["maxTeamSize"]
-    botDifficulty = ["RSINTRO", "RSBEGINNER", "RSINTERMEDIATE"]
+    botDifficulty = ["EASY", "MEDIUM", "RSINTRO", "RSBEGINNER", "RSINTERMEDIATE"]
     botPosition = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
     print("队伍1：请选择自选电脑玩家或者随机生成电脑玩家：\nTeam 1: Please select the option to generate bot players:\n0\t跳过该队伍（Skip this team）\n1\t随机生成（Randomly）\n2\t自选（By picking）")
     while True:
@@ -241,7 +241,7 @@ async def add_bots_team1(connection):
 async def add_bots_team2(connection):
     lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
     maxTeamSize = lobby_information["gameConfig"]["maxTeamSize"]
-    botDifficulty = ["RSINTRO", "RSBEGINNER", "RSINTERMEDIATE"]
+    botDifficulty = ["EASY", "MEDIUM", "RSINTRO", "RSBEGINNER", "RSINTERMEDIATE"]
     botPosition = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
     print("队伍2：请选择自选电脑玩家或者随机生成电脑玩家：\nTeam 2: Please select the option to generate bot players:\n0\t跳过该队伍（Skip this team）\n1\t随机生成（Randomly）\n2\t自选（By picking）")
     while True:
