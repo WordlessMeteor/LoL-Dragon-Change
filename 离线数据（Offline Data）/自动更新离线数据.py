@@ -163,6 +163,8 @@ while True:
         else:
             mode = "1"
         if mode == "3":
+            print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+            log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
             print("正在获取目前CommunityDragon数据库支持的语言……\nTrying to get the currently supported locales in CommunityDragon database ...")
             log.write("正在获取目前CommunityDragon数据库支持的语言……\nTrying to get the currently supported locales in CommunityDragon database ...\n")
             source, status = getUrl("https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/", log)
@@ -243,6 +245,8 @@ while True:
                         cdragon_folder = cdragon_folder if cdragon_folder.endswith("/") else cdragon_folder[:-len(os.path.basename(cdragon_folder))]
                         cdragon_folders.append(cdragon_folder.replace("https://raw.communitydragon.org/", "").replace("离线数据（Offline Data）/cdragon/", "")) #请思考，这里如果换成`cdragon_folder.lstrip("https://raw.communitydragon.org/")`，会有什么效果？（Please figure out what will happen if the code is replaced by `cdragon_folder.lstrip("https://raw.communitydragon.org/")`）
         else:
+            print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+            log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
             print("正在读取正式服在线索引……\nReading the online index file of live data resources...")
             log.write("正在读取正式服在线索引……\nReading the online index file of live data resources...\n")
             source, status = getUrl("https://raw.communitydragon.org/latest/cdragon/files.exported.txt", log)
@@ -261,6 +265,8 @@ while True:
             text_files_exported_latest = [file for file in files_exported_latest if file.endswith((".json", ".txt", ".js", ".yaml"))]
             text_folders_exported_latest = list(set(list(map(lambda x: "/".join(x.split("/")[:-1]) + "/" if "/" in x else "", text_files_exported_latest))))
             text_folders_exported_latest.sort()
+            print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+            log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
             print("正在读取美测服在线索引……\nReading the online index file of pbe data resources...")
             log.write("正在读取美测服在线索引……\nReading the online index file of pbe data resources...\n")
             source, status = getUrl("https://raw.communitydragon.org/pbe/cdragon/files.exported.txt", log)
