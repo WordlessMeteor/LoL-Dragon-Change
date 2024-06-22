@@ -1482,7 +1482,7 @@ async def search_recent_players(connection):
                                 break
                             LoLMatchIDs = list(map(str, gameID[begIndex:endIndex]))
                         elif matchID == "scan":
-                            LoLMatchIDs = []
+                            LoLMatchIDs = list(map(str, gameID))
                             filenames = os.listdir(folder)
                             for filename in filenames:
                                 if filename.startswith("Match Information (LoL) - "):

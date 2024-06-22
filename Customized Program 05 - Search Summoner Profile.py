@@ -1762,6 +1762,7 @@ async def search_profile(connection):
                                     LoLMatchIDs = list(map(str, gameID[begIndex:endIndex]))
                             elif matchID == "scan":
                                 filenames = os.listdir(folder)
+                                LoLMatchIDs += list(map(str, gameID))
                                 for filename in filenames:
                                     if filename.startswith("Match Information (LoL) - "):
                                         LoLMatchIDs.append(filename.split("-")[-1].split(".")[0])
