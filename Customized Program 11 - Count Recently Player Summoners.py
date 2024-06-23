@@ -2602,8 +2602,8 @@ async def search_recent_players(connection):
                             print("近期一起玩过的玩家数据已加载完成！\nRecently played summoner data loaded successfully!")
                             update = False
                             while True:
-                                recent_LoLPlayer_fields = ["summonerName", "gameName", "tagLine", "summonerId", "puuid", "gameCreationDate", "gameMode", "gameModeName", "mapId", "ally?", "champion", "alias", "champLevel", "spell1", "spell2", "KDA", "item1", "item2", "item3", "item4", "item5", "item6", "ornament", "win/lose"]
-                                recent_TFTPlayer_fields = ["summonerName", "gameName", "tagLine", "summonerId", "puuid", "game_datetime", "tft_game_type", "companion", "companion_level", "companion_rarity", "level", "last_round", "time_eliminated", "gold_left", "total_damage_to_players", "players_eliminated", "placement", "augment1", "augment2", "augment3", "unit0 character", "unit0 rarity", "unit0 tier", "unit0 item0", "unit0 item1", "unit0 item2", "unit1 character", "unit1 rarity", "unit1 tier", "unit1 item0", "unit1 item1", "unit1 item2", "unit2 character", "unit2 rarity", "unit2 tier", "unit2 item0", "unit2 item1", "unit2 item2", "unit3 character", "unit3 rarity", "unit3 tier", "unit3 item0", "unit3 item1", "unit3 item2", "unit4 character", "unit4 rarity", "unit4 tier", "unit4 item0", "unit4 item1", "unit4 item2", "unit5 character", "unit5 rarity", "unit5 tier", "unit5 item0", "unit5 item1", "unit5 item2", "unit6 character", "unit6 rarity", "unit6 tier", "unit6 item0", "unit6 item1", "unit6 item2", "unit7 character", "unit7 rarity", "unit7 tier", "unit7 item0", "unit7 item1", "unit7 item2", "unit8 character", "unit8 rarity", "unit8 tier", "unit8 item0", "unit8 item1", "unit8 item2", "unit9 character", "unit9 rarity", "unit9 tier", "unit9 item0", "unit9 item1", "unit9 item2", "unit10 character", "unit10 rarity", "unit11 tier", "unit10 item0", "unit10 item1", "unit10 item2", "trait0 name", "trait0 num_units", "trait0 style", "trait0 tier_current", "trait0 tier_total", "trait1 name", "trait1 num_units", "trait1 style", "trait1 tier_current", "trait1 tier_total", "trait2 name", "trait2 num_units", "trait2 style", "trait2 tier_current", "trait2 tier_total", "trait3 name", "trait3 num_units", "trait3 style", "trait3 tier_current", "trait3 tier_total", "trait4 name", "trait4 num_units", "trait4 style", "trait4 tier_current", "trait4 tier_total", "trait5 name", "trait5 num_units", "trait5 style", "trait5 tier_current", "trait5 tier_total", "trait6 name", "trait6 num_units", "trait6 style", "trait6 tier_current", "trait6 tier_total", "trait7 name", "trait7 num_units", "trait7 style", "trait7 tier_current", "trait7 tier_total", "trait8 name", "trait8 num_units", "trait8 style", "trait8 tier_current", "trait8 tier_total", "trait9 name", "trait9 num_units", "trait9 style", "trait9 tier_current", "trait9 tier_total", "trait10 name", "trait10 num_units", "trait10 style", "trait10 tier_current", "trait10 tier_total", "trait11 name", "trait11 num_units", "trait11 style", "trait11 tier_current", "trait11 tier_total", "trait12 name", "trait12 num_units", "trait12 style", "trait12 tier_current", "trait12 tier_total"]
+                                recent_LoLPlayer_fields = ["summonerName", "gameName", "tagLine", "gameCreationDate", "gameModeName", "champion", "KDA"]
+                                recent_TFTPlayer_fields = ["summonerName", "gameName", "tagLine", "game_datetime", "tft_game_type", "last_round"]
                                 recent_LoLPlayer_dict_to_print = {}
                                 recent_TFTPlayer_dict_to_print = {}
                                 for key in recent_LoLPlayer_fields:
@@ -2679,7 +2679,7 @@ async def search_recent_players(connection):
                                         else:
                                             for ally in champ_select_session["myTeam"]:
                                                 if ally["puuid"] != current_puuid:
-                                                    if ally["nameVisibilityType"] == "VISIBLE":
+                                                    if ally["nameVisibilityType"] == "VISIBLE" or ally["nameVisibilityType"] == "":
                                                         ally_info_recapture = 0
                                                         if ally["puuid"] in infos:
                                                             ally_info = infos[ally["puuid"]]
@@ -2734,7 +2734,7 @@ async def search_recent_players(connection):
                                                                     break
                                             if champ_select_session["theirTeam"]: #在人机对战、云顶之弈和斗魂竞技场中，无敌方玩家（There're no enemy players in bot games, TFT and Arena）
                                                 for enemy in champ_select_session["theirTeam"]:
-                                                    if enemy["nameVisibilityType"] == "VISIBLE":
+                                                    if enemy["nameVisibilityType"] == "VISIBLE" or enemy["nameVisibilityType"] == "":
                                                         enemy_info_recapture = 0
                                                         if enemy["puuid"] in infos:
                                                             enemy_info = infos[enemy["puuid"]]
@@ -2799,7 +2799,7 @@ async def search_recent_players(connection):
                                                         print('''一名队友曾经出现在您的历史对局中。请查看主目录下的“%s”文件。\nThere's an ally present in your past matches. Please check the workbook "%s" in the main directory.''' %(excel_name, excel_name))
                                                     else:
                                                         print('''%d名队友曾经出现在您的历史对局中。请查看主目录下的“%s”文件。\nThere're %d allies present in your past matches. Please check the workbook "%s" in the main directory.''' %(ally_count, excel_name, ally_count, excel_name))
-                                            if any(map(lambda x: x["nameVisibilityType"] == "VISIBLE", champ_select_session["theirTeam"])):
+                                            if any(map(lambda x: x["nameVisibilityType"] == "VISIBLE" or x["nameVisibilityType"] == "", champ_select_session["theirTeam"])):
                                                 if enemy_count > 0:
                                                     print()
                                                     print(LoLEnemy_df_to_print)
@@ -2814,7 +2814,7 @@ async def search_recent_players(connection):
                                                 print("以上玩家中，%s是您的好友。\nAmong the above players, %s is your friend." %(recent_friends[0], recent_friends[0]))
                                             elif len(recent_friends) > 1:
                                                 print("以上玩家中，%s是您的好友。\nAmong the above players, %s are your friends." %("、".join(recent_friends), ", ".join(recent_friends)))
-                                            if not (all(map(lambda x: x["nameVisibilityType"] == "VISIBLE", champ_select_session["theirTeam"])) or all(map(lambda x: x["nameVisibilityType"] == "HIDDEN", champ_select_session["theirTeam"]))):
+                                            if not (all(map(lambda x: x["nameVisibilityType"] == "VISIBLE", champ_select_session["theirTeam"])) or all(map(lambda x: x["nameVisibilityType"] == "HIDDEN", champ_select_session["theirTeam"])) or all(map(lambda x: x["nameVisibilityType"] == "", champ_select_session["theirTeam"])) or all(map(lambda x: x["nameVisibilityType"] == "", champ_select_session["theirTeam"]))):
                                                 print("检测到敌方信息可见性异常！请检查之前输出的英雄选择阶段信息。\nDetected enemies' visibility abnormal! Please check the champ select session information printed before.")
                                     elif gameflow_phase == "InProgress" or gameflow_phase == "Reconnect":
                                         gameflow_session = await (await connection.request("GET", "/lol-gameflow/v1/session")).json()
