@@ -42,18 +42,28 @@ The following explanations only apply to the current branch. For other details (
 	- 本程序设置了默认的检测上下限。如有需要，请自行修改上下限。
 4. 本程序集中的`get_lobby_information.py`提供**反复**获取房间信息的功能。
 5. 本程序集提供了离线数据资源，用于降低资源获取时间。
-	- 离线数据资源包含*CommunityDragon*数据库的<u>pbe</u>文件夹下的<u>cdragon</u>文件夹和<u>plugins/rcp-be-lol-game-data</u>文件夹下的所有**中文和英文json文件**和*DataDragon*数据库的*dragontail存档压缩包*的<u>data</u>文件夹下的所有**中文和英文文件**。
-		- CommunityDragon数据库的数据资源将跟随<u>美测服的每一次调整</u>而更新，更新周期以**天**计；DataDragon数据库的数据资源将跟随<u>正式服的每一次停机更新</u>而更新，更新周期以**朔望**计。
+	- 离线数据资源包含*CommunityDragon*数据库的<u>latest</u>和<u>pbe</u>文件夹下的所有**文本文档**和*DataDragon*数据库的*dragontail存档压缩包*的<u>data</u>文件夹下的所有**中文和英文文件**。
+		- CommunityDragon数据库的数据资源将跟随<u>美测服的每一次调整</u>而更新，更新周期以**天**计；DataDragon数据库的数据资源将跟随<u>正式服的每一次停机更新</u>而更新，更新周期以**半个月**计。
 	- 离线数据文件夹下的`自动更新离线数据`脚本可简化离线数据资源更新过程。
 		- 该脚本仅供开发者用于更新离线数据资源，感兴趣的用户可自行下载体验。
 		- 该脚本可用于更新CommunityDragon和DataDragon数据库的数据资源。
-			- 在更新CommunityDragon数据库的资源时，用户可以选择【全局扫描】或者【按修改时间更新】。
+			- 在更新CommunityDragon数据库的资源时，程序提供了4种模式。
 				- 【全局扫描】可将在线数据资源与本地数据资源进行**全面对比**，实现数据资源的同步。
 					- 在一台设备上**第一次运行此脚本时，建议首先执行全局扫描**，即使用户已经从该存储库下载了数据资源。
 				- 【按修改时间更新】用于反映本地数据资源和在线数据资源的**变化**。
 					- 如果本地数据资源文件的**修改时间晚于**在线数据资源文件，而本地数据资源文件的**内容实际上早于**在线数据资源文件，那么这些数据资源文件**不会更新**。
+					- 该模式在<u>存储库</u>中被设置为默认模式。输入空字符串即采用默认模式。
+				- 【按程序需求更新】用于**快速**更新为程序所需要的数据资源。
+					- 该模式在<u>发行版</u>中被设置为默认模式。输入空字符串即采用默认模式。
+				- 【更新指定文件夹】允许用户传入一个**自定义文件夹列表**，程序将只更新用户指定的文件夹中的数据资源。
+					- 该模式主要用于重新比对前三个模式由于网络原因**比对失败**的文件夹。
 			- 在更新DataDragon数据库的资源时，用户需要**按照程序提示**，先下载DataDragon数据库的最新压缩包，然后解压，并提供解压的目录。
 			- 对于联网更新的资源，**使用适当的代理**可能加速数据资源的获取。
+	- 由于每次更新可能涉及的数据资源较多，GitHub无法加载变化内容。以下推荐两种查看变化内容的方式：
+		1. 访问[英雄联盟版本更新存储库](https://github.com/WordlessMeteor/LoL-Patch-Change)以*在线*查看**主要**更新内容。
+		2. 将[本仓库](https://github.com/WordlessMeteor/LoL-DIY-Programs)克隆到本地，并查看标题为“<u>离线数据资源更新</u>”的提交，以*离线*查看**完整**更新内容。
+			- 克隆该存储库需要占用大约<u>20 GB</u>的本地空间。请保证您的磁盘有足够的空间。
+			- 对于包含较多数据资源的更新的提交，本地加载仍然需要几分钟时间，请耐心等待。
 6. 本程序集起源于主目录下的`create_custom_lobby.py`。
 # 注意事项
 1. 本程序集全部为Python程序，需要从[Python官网中](www.python.org)下载最新版本的Python。（不是最新版本也可，但不要太古早～）
@@ -393,18 +403,28 @@ For details about customized programs that is beyond the scope of creating a cus
 	- In both programs, ranges for check have been set to some values by default. For users' own requirements, please modify the ranges.
 4. In this program set, `get_lobby_information.py` allows repeatedly getting lobby information.
 5. This program set provides offline data resources to save the time of preparing data.
-	- The data resources include all **Chinese and English json files** under both <u>cdragon</u> and <u>plugins/rcp-be-lol-game-data</u> folders under <u>pbe</u> folder of *CommunityDragon* database and all **Chinese and English files** under <u>data</u> folder of the *dragontail archived file* of *DataDragon* database.
+	- The data resources include all **text files** under <u>latest and pbe</u> folders of *CommunityDragon* database and all **Chinese and English files** under <u>data</u> folder of the *dragontail archived file* of *DataDragon* database.
 		- The update of data resources in CommunityDragon database will follow <u>each adjustment of PBE</u> **daily**, and the update of data resources in DataDragon database will follow <u>each patch mainteinance of live servers </u> **about every fortnight**.
 	- `自动更新离线数据.py` under the `离线数据（Offline Data）` folder simplifies the updating process of data resources.
 		- This program is designed only for the developer to update offline data, but anyone interested is welcome to download and experience it.
 		- This program can be used to update data resources from both CommunityDragon and DataDragon databases.
-			- While updating CommunityDragon data resources, users can select between [Global Scanning] and [Updating According to Modification Time].
+			- While updating CommunityDragon data resources, The program provides 4 updating modes.
 				- [Global Scanning] performs an **entire comparison** between the local and online data resources to achieve the syncronization.
 					- It's highly recommended that **the user perform [Global Scanning] at first when the user is running this program for the first time**, even if he/she has downloaded the data resources from this repository.
 				- [Updating According to Modification Time] is meant to reflect the **changes** between online and local data resources.
 					- In a case where the **modification times** of some local data resources are **later** than those of the corresponding online data resources, whereas the **actual content** of these local data resources is **earlier** than that of their corresponding online data resources, running this mode *won't update* these local data resources.
+					- This mode is set as the default mode in the <u>repository</u>. Submit an empty string to adopt the default mode.
+				- [Updating According to Program Demands] is meant to **quickly** update the data resources only necessary for customized programs.
+					- This mode is set as the default mode in the <u>releases</u>. Submit an empty string to adopt the default mode.
+				- [Updating Specified Folders] allows users to pass **a custom folder list** into the program. The program will only check the data resource files under these folders.
+					- This mode is mainly meant to make up for the folders that **fail to be checked** because of network condition by the previous three modes.
 			- While updating DataDragon data resources, users need to **follow the hint of the program**: first download the latest compressed tarball of DataDragon database, then decompress it, and finally provide the decompression directory.
 			- For resources updated online, **an appropriate proxy** may accelerate the data capture process.
+		- Because a number of data resources might be involved in a commit, GitHub can't load the diff. Here two methods of checking the diff are recommended:
+			1. Visit [LoL-Patch-Change repository](https://github.com/WordlessMeteor/LoL-Patch-Change) to look over the **main** update content *online*.
+			2. Clone [this repository](https://github.com/WordlessMeteor/LoL-DIY-Programs) to local and check the commit with header "<u>Offline Data Resource Update</u>" to look through the **complete** update content *offline*.
+				- Cloning this repository takes up approximately <u>20 GiB</u> local space. Please ensure your disk has sufficient space for it.
+				- For those commits that involve a number of data resources, it still takes several minutes to load the diff locally. Please wait in patience.
 6. The program set is adapted from `create_custom_lobby.py` in the home directory.
 # Notes on Instructions
 1. The whole program set is made of Python programs. Users are highly suggested to download the latest version of Python from [Python official website](www.python.org). (A version that isn't latest is also OK, but please make sure it's not too early, either [xD])
