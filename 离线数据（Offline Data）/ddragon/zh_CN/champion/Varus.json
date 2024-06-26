@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.12.1",
+    "version": "14.13.1",
     "data": {
         "Varus": {
             "id": "Varus",
@@ -143,9 +143,9 @@
                 "mpregenperlevel": 0.8,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 60,
+                "attackdamage": 57,
                 "attackdamageperlevel": 3.4,
-                "attackspeedperlevel": 4,
+                "attackspeedperlevel": 3.5,
                 "attackspeed": 0.658
             },
             "spells": [
@@ -153,7 +153,7 @@
                     "id": "VarusQ",
                     "name": "穿刺之箭",
                     "description": "韦鲁斯开始蓄力，随后进行一次远距离的强力射击，蓄力时间越长，伤害越高。",
-                    "tooltip": "<charge>开始蓄力：</charge>韦鲁斯为一次强力射击深深挽弓，自我<status>减速</status>{{ e7 }}%。在{{ e5 }}秒后，如果未将箭射出去，则韦鲁斯会取消这个技能并返还其{{ e4 }}%法力消耗。<br /><br /><release>释放：</release>韦鲁斯将箭射出，造成<physicalDamage>{{ totaldamagemintooltip }}物理伤害</physicalDamage>，每命中一个敌人就会降低{{ e3 }}%(最低降至{{ e9 }}%)。伤害和<keywordMajor>枯萎</keywordMajor>的引爆效果会基于蓄力时间至多提升{{ maxchargeamp*100 }}%(最大值为<physicalDamage>{{ totaldamagemax }}</physicalDamage>) 。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<attention>开始蓄力</attention>：韦鲁斯为一次强力射击深深挽弓，自我<status>减速</status>{{ e7 }}%。在{{ e5 }}秒后，如果未将箭射出去，则韦鲁斯会取消这个技能并返还其{{ e4 }}%法力消耗。<br /><br /><attention>释放：</attention>韦鲁斯将箭射出，造成<physicalDamage>{{ totaldamagemintooltip }}物理伤害</physicalDamage>，每命中一个敌人就会降低{{ e3 }}%(最低降至{{ e9 }}%)。伤害和<keywordMajor>枯萎</keywordMajor>的引爆效果会基于蓄力时间至多提升至{{ maxchargeamp*100 }}%(最大值为<physicalDamage>{{ totaldamagemax }}</physicalDamage>) 。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "最大伤害",
@@ -302,11 +302,13 @@
                     "leveltip": {
                         "label": [
                             "攻击附加的伤害",
-                            "来自枯萎效果的伤害"
+                            "最大生命值伤害",
+                            "已损失的生命值伤害"
                         ],
                         "effect": [
                             "{{ varuswonhitdamage }} -> {{ varuswonhitdamageNL }}",
-                            "{{ basepercenthpperstack*100.000000 }}% -> {{ basepercenthpperstacknl*100.000000 }}%"
+                            "{{ basepercenthpperstack*100.000000 }}% -> {{ basepercenthpperstacknl*100.000000 }}%",
+                            "{{ wqhealthdamage*100.000000 }}% -> {{ wqhealthdamagenl*100.000000 }}%"
                         ]
                     },
                     "maxrank": 5,
@@ -439,7 +441,7 @@
                     "id": "VarusE",
                     "name": "恶灵箭雨",
                     "description": "韦鲁斯射出一阵箭雨，造成物理伤害并污染地面。被污染的地面将会减慢敌人的移动速度，并降低他们的自我治疗效果和回复效果。",
-                    "tooltip": "韦鲁斯射出一阵箭雨，造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>，并污染地面{{ e3 }}秒，<status>减速</status>敌人{{ e2 }}%并施加{{ grievousamount*100 }}%重伤。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "韦鲁斯射出一阵箭雨，造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>，并污染地面{{ e3 }}秒，<status>减速</status>敌人{{ e2 }}%并施加<keywordMajor>{{ grievousamount*100 }}%重伤</keywordMajor>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -696,7 +698,7 @@
             ],
             "passive": {
                 "name": "复仇之欲",
-                "description": "每完成一次击杀或助攻，韦鲁斯就会暂时获得攻击速度加成。如果这个敌人是一位英雄，则这个加成幅度会更大。",
+                "description": "每完成一次击杀或助攻，韦鲁斯就会暂时获得攻击速度、攻击力和法术强度。如果敌人是个英雄，则这个加成的幅度会更大。",
                 "image": {
                     "full": "VarusPassive.png",
                     "sprite": "passive4.png",

@@ -2,6 +2,7 @@
     "Characters/TFTEvent5YR_TrainerDragon/Spells/TFTEvent5YR_TrainerDragonQFireball": {
         "mScriptName": "TFTEvent5YR_TrainerDragonQFireball",
         "mSpell": {
+            "flags": 4,
             "mAffectsTypeFlags": 6154,
             "mAnimationName": "",
             "delayTotalTimePercent": -0.5,
@@ -111,27 +112,6 @@
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "StunDuration",
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "ShieldAmount",
-                    "mValues": [
-                        50.0,
-                        150.0,
-                        250.0,
-                        350.0,
-                        450.0,
-                        350.0,
-                        350.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "ShieldDuration",
-                    "__type": "SpellDataValue"
-                },
-                {
                     "mName": "FireballSize",
                     "mValues": [
                         1.0,
@@ -156,23 +136,6 @@
                         1.0
                     ],
                     "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "ShouldStun",
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "GrievousWoundsPercent",
-                    "mValues": [
-                        0.0,
-                        50.0,
-                        50.0,
-                        50.0,
-                        50.0,
-                        50.0,
-                        50.0
-                    ],
-                    "__type": "SpellDataValue"
                 }
             ],
             "mSpellCalculations": {
@@ -184,19 +147,6 @@
                         {
                             "mSubpart": {
                                 "mDataValue": "Damage",
-                                "__type": "NamedDataValueCalculationPart"
-                            },
-                            "mRatio": 0.009999999776482582,
-                            "__type": "SubPartScaledProportionalToStat"
-                        }
-                    ],
-                    "__type": "GameCalculation"
-                },
-                "ModifiedShieldAmount": {
-                    "mFormulaParts": [
-                        {
-                            "mSubpart": {
-                                "mDataValue": "ShieldAmount",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 0.009999999776482582,
@@ -223,9 +173,8 @@
             "mDoNotNeedToFaceTarget": true,
             "mUpdateRotationWhenCasting": true,
             "missileSpeed": 20.0,
-            "selectionPriority": 1,
             "mTargetingTypeData": {
-                "__type": "Direction"
+                "__type": "Self"
             },
             "mSpellCooldownOrSealedQueueThreshold": 0.5,
             "mClientData": {
@@ -253,70 +202,6 @@
                     "__type": "TooltipInstanceSpell"
                 },
                 "__type": "SpellDataResourceClient"
-            },
-            "__type": "SpellDataResource"
-        },
-        "__type": "SpellObject"
-    },
-    "{360ccd75}": {
-        "mScriptName": "TFTEvent5YR_TrainerDragonQBeamMissile",
-        "mSpell": {
-            "mAffectsTypeFlags": 6154,
-            "delayCastOffsetPercent": -0.5,
-            "delayTotalTimePercent": -0.5,
-            "mCastRangeGrowthMax": [
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0
-            ],
-            "mCantCancelWhileWindingUp": true,
-            "mProjectTargetToCastRange": true,
-            "castRange": [
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0
-            ],
-            "luaOnMissileUpdateDistanceInterval": 51.0,
-            "mMissileSpec": {
-                "mMissileWidth": 150.0,
-                "movementComponent": {
-                    "mUseHeightOffsetAtEnd": true,
-                    "mTracksTarget": false,
-                    "mTargetHeightAugment": 50.0,
-                    "mStartBoneName": "root",
-                    "mSpeed": 4500.0,
-                    "__type": "FixedSpeedMovement"
-                },
-                "heightSolver": {
-                    "__type": "BlendedLinearHeightSolver"
-                },
-                "verticalFacing": {
-                    "__type": "VerticalFacingFaceTarget"
-                },
-                "behaviors": [
-                    {
-                        "__type": "CastOnHit"
-                    },
-                    {
-                        "__type": "DestroyOnMovementComplete"
-                    }
-                ],
-                "__type": "MissileSpecification"
-            },
-            "mCastType": 3,
-            "castFrame": 7.5,
-            "missileSpeed": 4500.0,
-            "mLineWidth": 120.0,
-            "mTargetingTypeData": {
-                "__type": "Location"
             },
             "__type": "SpellDataResource"
         },
@@ -7865,7 +7750,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Shared/Particles/bigglow02.SRT_DURIAN_2024.dds",
+                "texture": "ASSETS/Shared/Particles/bigglow02.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -12950,7 +12835,6 @@
             "parameters": [
                 {
                     "name": "Rim_A_High",
-                    "enabled": false,
                     "driver": {
                         "mElements": [
                             {
@@ -13175,40 +13059,14 @@
                     "name": "Dissolve_Bias",
                     "enabled": false,
                     "driver": {
-                        "mElements": [
-                            {
-                                "mCondition": {
-                                    "mAnimationNames": [
-                                        "Death"
-                                    ],
-                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "__type": "FloatLiteralMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            },
-                            {
-                                "mCondition": {
-                                    "mScriptName": "TFT_Unitbuff_UpgradeCeremony_Dissolve",
-                                    "__type": "HasBuffDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "__type": "FloatLiteralMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            }
-                        ],
-                        "mDefaultValue": {
-                            "mValue": 1.0,
-                            "__type": "FloatLiteralMaterialDriver"
+                        "mBoolDriver": {
+                            "__type": "IsDeadDynamicMaterialBoolDriver"
                         },
-                        "mBlendTime": 1.5,
-                        "mOverrideBlendTimes": [
-                            1.5,
-                            2.5
-                        ],
-                        "__type": "BlendingSwitchMaterialDriver"
+                        "mOnValue": 0.0,
+                        "mOffValue": 1.0,
+                        "mTurnOnTimeSec": 1.5,
+                        "mTurnOffTimeSec": 2.5,
+                        "__type": "LerpMaterialDriver"
                     },
                     "__type": "DynamicMaterialParameterDef"
                 },

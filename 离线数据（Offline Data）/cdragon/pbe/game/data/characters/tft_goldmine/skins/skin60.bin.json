@@ -25,21 +25,21 @@
                 0,
                 255
             ],
-            "initialSubmeshToHide": " lotusB",
+            "initialSubmeshToHide": "LotusB",
             "materialOverride": [
                 {
-                    "material": "Characters/TFT_GoldMine/Skins/Skin60/Materials/ScrollingUVs_Simple_TextureBlend_night",
-                    "submesh": "lotusB",
+                    "material": "{2d9e1892}",
+                    "submesh": "LotusB",
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 },
                 {
-                    "material": "Characters/TFT_GoldMine/Skins/Skin60/Materials/ScrollingUVs_Simple_TextureBlend_night",
-                    "submesh": "lotusA",
+                    "material": "{2d9e1892}",
+                    "submesh": "LotusA",
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 },
                 {
                     "material": "Characters/TFT_GoldMine/Skins/Skin60/Materials/Diffuse_Tint_day",
-                    "submesh": "lotus",
+                    "submesh": "Lotus",
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 }
             ],
@@ -5447,17 +5447,132 @@
         "flags": 199,
         "__type": "VfxSystemDefinitionData"
     },
-    "{3fb62abb}": {
-        "resourceMap": {
-            "TFT_GoldMine_Skin60_Idle": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Idle",
-            "TFT_GoldMine_Skin60_Spawn": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Spawn",
-            "TFT_GoldMine_Skin60_Idle2": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Idle2",
-            "TFT_GoldMine_Skin60_Click": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Click",
-            "TFT_GoldMine_Skin60_Death": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Death",
-            "TFT_GoldMine_Skin60_Spawn2": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Spawn2",
-            "TFT_GoldMine_Skin60_Idleoff": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Idleoff"
+    "{2d9e1892}": {
+        "name": "Characters/TFT_GoldMine/Skins/Skin60/Materials/MaskedBlend_Bloom_Night",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/TFT_GoldMine/Skins/Skin60/TFT_ImmortalJourney_GoldenMine_B_Lotus.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask_Texture",
+                "textureName": "ASSETS/Shared/Materials/white.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Gradient_Texture",
+                "textureName": "ASSETS/Shared/Materials/white.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Color1",
+                "value": [
+                    0.10666055977344513,
+                    0.15645074844360352,
+                    0.5333333611488342,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ColorBlend_Intensity",
+                "value": [
+                    0.4050000011920929,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FresnelSize",
+                "value": [
+                    2.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AlphaBlend_Bias",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Scrolling_Scale",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Scrolling_Speed",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "USE_FRESNEL_GRADIENT",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
         },
-        "__type": "ResourceResolver"
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/MaskedBlend_Bloom",
+                        "stencilEnable": true,
+                        "blendEnable": true,
+                        "stencilCompareFunc": 7,
+                        "stencilMask": 255,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
     },
     "Characters/TFT_GoldMine/Skins/Skin60/Materials/Skin60_Ink": {
         "name": "Characters/TFT_GoldMine/Skins/Skin60/Materials/Skin60_Ink",
@@ -5480,7 +5595,7 @@
             },
             {
                 "samplerName": "Ink_Texture",
-                "textureName": "ASSETS/Shared/Materials/black.Skarner_Rework.dds",
+                "textureName": "ASSETS/Shared/Materials/black.dds",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             }
@@ -5670,308 +5785,16 @@
         ],
         "__type": "StaticMaterialDef"
     },
-    "Characters/TFT_GoldMine/Skins/Skin60/Materials/ScrollingUVs_Simple_TextureBlend_night": {
-        "name": "Characters/TFT_GoldMine/Skins/Skin60/Materials/ScrollingUVs_Simple_TextureBlend_night",
-        "samplerValues": [
-            {
-                "samplerName": "Diffuse_Texture",
-                "textureName": "ASSETS/Shared/Materials/black.Skarner_Rework.dds",
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Main_Texture",
-                "textureName": "ASSETS/Characters/TFT_GoldMine/Skins/Skin60/TFT_ImmortalJourney_GoldenMine_B_Lotus.dds",
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "OutlineMask_Texture",
-                "textureName": "ASSETS/Shared/Materials/black.Skarner_Rework.dds",
-                "addressU": 2,
-                "addressV": 2,
-                "addressW": 2,
-                "__type": "StaticMaterialShaderSamplerDef"
-            }
-        ],
-        "paramValues": [
-            {
-                "name": "OutlineMask_Texture_B_UV",
-                "value": [
-                    1.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollSpeedBase",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollSpeedBlend",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "TintColor",
-                "value": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Base_Tile",
-                "value": [
-                    1.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Blend_Tile",
-                "value": [
-                    1.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "BaseMat_Tint",
-                "value": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "BlendMat_Tint",
-                "value": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "MaskStrength",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "BloomValue",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "OutlineColor",
-                "value": [
-                    0.0,
-                    0.0,
-                    0.0,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "MainTex_TintColor",
-                "value": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "OutlineControl",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "OutlineMask_Strength",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "WaveController",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "WaveStrength",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AlphaClipValue",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AlphaClipNoiseStrength",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Bloom_TintColor",
-                "value": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "NoiseUV",
-                "value": [
-                    5.0,
-                    5.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollSpeedMainTex",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "MainTex_Tile",
-                "value": [
-                    1.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Alpha_Control",
-                "__type": "StaticMaterialShaderParamDef"
-            }
-        ],
-        "switches": [
-            {
-                "name": "USE_OUTLINEMASK_B_ALPHA",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "BLENDCOLOR_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "ADDITIVEALPHA_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "MASK_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "MAINTEX_ON",
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "OUTLINE_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "OUTLINE_MASK_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "ALPHABLEND_MAIN",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "USE_MAINTEXCOLOR",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "DEFORM_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "TWO_D_DEFORM_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "USE_MAINTEXALPHA",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "ALPHACLIP_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "BLOOM_TINTCOLOR_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "SCROLL_MAIN_TEX",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            }
-        ],
-        "shaderMacros": {
-            "NUM_BLEND_WEIGHTS": "4"
+    "{3fb62abb}": {
+        "resourceMap": {
+            "TFT_GoldMine_Skin60_Idle": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Idle",
+            "TFT_GoldMine_Skin60_Spawn": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Spawn",
+            "TFT_GoldMine_Skin60_Idle2": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Idle2",
+            "TFT_GoldMine_Skin60_Click": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Click",
+            "TFT_GoldMine_Skin60_Death": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Death",
+            "TFT_GoldMine_Skin60_Spawn2": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Spawn2",
+            "TFT_GoldMine_Skin60_Idleoff": "Characters/TFT_GoldMine/Skins/Skin60/Particles/TFT_GoldMine_Skin60_Idleoff"
         },
-        "techniques": [
-            {
-                "name": "normal",
-                "passes": [
-                    {
-                        "shader": "Shaders/SkinnedMesh/AlphaBlend_Additive_Scroll_Packed",
-                        "blendEnable": true,
-                        "srcColorBlendFactor": 6,
-                        "srcAlphaBlendFactor": 6,
-                        "dstColorBlendFactor": 7,
-                        "dstAlphaBlendFactor": 7,
-                        "__type": "StaticMaterialPassDef"
-                    }
-                ],
-                "__type": "StaticMaterialTechniqueDef"
-            }
-        ],
-        "childTechniques": [
-            {
-                "name": "transition",
-                "parentName": "normal",
-                "shaderMacros": {
-                    "TRANSITION": "1"
-                },
-                "__type": "StaticMaterialChildTechniqueDef"
-            }
-        ],
-        "__type": "StaticMaterialDef"
+        "__type": "ResourceResolver"
     }
 }

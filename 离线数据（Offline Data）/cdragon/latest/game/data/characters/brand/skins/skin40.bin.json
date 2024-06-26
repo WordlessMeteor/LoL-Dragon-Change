@@ -393,7 +393,7 @@
                     "__type": "ValueVector3"
                 },
                 "texture": "ASSETS/Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_common_glow_soft_01.dds",
-                "{bc022424}": {
+                "LegacySimple": {
                     "birthScale": {
                         "constantValue": 50.0,
                         "__type": "ValueFloat"
@@ -428,7 +428,7 @@
                         1.0,
                         1.0
                     ],
-                    "__type": "{7f70a2b2}"
+                    "__type": "VfxEmitterLegacySimple"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -521,11 +521,11 @@
                     "constantValue": 0.5,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
-                    "__type": "{3dbe415d}"
+                    "__type": "VfxShapeSphere"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -10.0,
@@ -926,7 +926,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         20.0,
@@ -960,7 +960,7 @@
                     2.0,
                     2.0
                 ],
-                "{bc022424}": {
+                "LegacySimple": {
                     "birthScale": {
                         "constantValue": 50.0,
                         "__type": "ValueFloat"
@@ -995,7 +995,7 @@
                         1.0,
                         1.0
                     ],
-                    "__type": "{7f70a2b2}"
+                    "__type": "VfxEmitterLegacySimple"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -1032,7 +1032,7 @@
                 },
                 "emitterName": "BlackHole",
                 "importance": 0,
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -130.0,
@@ -1040,7 +1040,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -2194,7 +2194,7 @@
                     "__type": "ValueVector3"
                 },
                 "texture": "ASSETS/Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_common_glow_soft_01.dds",
-                "{bc022424}": {
+                "LegacySimple": {
                     "birthScale": {
                         "constantValue": 50.0,
                         "__type": "ValueFloat"
@@ -2229,7 +2229,7 @@
                         1.0,
                         1.0
                     ],
-                    "__type": "{7f70a2b2}"
+                    "__type": "VfxEmitterLegacySimple"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -2374,16 +2374,16 @@
                     },
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "Size": [
                         4.0,
                         5.0,
                         4.0
                     ],
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         2.0,
@@ -2776,16 +2776,16 @@
                     },
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "Size": [
                         4.0,
                         5.0,
                         4.0
                     ],
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -1.655975341796875,
@@ -3119,7 +3119,7 @@
                     {
                         "shader": "Shaders/SkinnedMesh/HKG_Outline",
                         "blendEnable": true,
-                        "{aab4104c}": true,
+                        "PolygonDepthBiasEnable": true,
                         "srcColorBlendFactor": 6,
                         "srcAlphaBlendFactor": 6,
                         "dstColorBlendFactor": 7,
@@ -3219,7 +3219,7 @@
                     {
                         "shader": "Shaders/SkinnedMesh/HKG_Outline",
                         "blendEnable": true,
-                        "{aab4104c}": true,
+                        "PolygonDepthBiasEnable": true,
                         "srcColorBlendFactor": 6,
                         "srcAlphaBlendFactor": 6,
                         "dstColorBlendFactor": 7,
@@ -3527,6 +3527,11 @@
         ],
         "switches": [
             {
+                "name": "VFX_DIFFUSE_ADD_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "VFX_ON",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
@@ -3630,6 +3635,14 @@
                 "addressV": 1,
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask_Texture",
+                "textureName": "ASSETS/Shared/Materials/white.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
@@ -3662,6 +3675,11 @@
             },
             {
                 "name": "BLEND_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "MASK_MATCAP",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
             }
@@ -3700,102 +3718,102 @@
     },
     "Characters/Brand/Skins/Skin40/Resources": {
         "resourceMap": {
-            "{ca397de0}": "{c6ce1cfd}",
-            "Brand_BasicAttack_cas": "{f9a37567}",
-            "Brand_BasicAttack_mis": "{10885045}",
-            "Brand_BasicAttack_tar": "{3380ef19}",
-            "Brand_CritAttack_mis": "{f8327eb5}",
-            "Brand_CritAttack_tar": "{bbba52a9}",
-            "Brand_Dance": "{004d5bd0}",
-            "Brand_DanceStart": "{1d1ebd64}",
-            "Brand_Death": "{2667a139}",
-            "Brand_DeathFlame": "{4c192e8c}",
-            "Brand_E_Conflagration_buf": "{f4528f08}",
-            "Brand_E_Conflagration_cas": "{6ca182cc}",
-            "Brand_E_Conflagration_mis": "{fa95b212}",
-            "Brand_E_Conflagration_tar": "{d6fdaf7e}",
-            "Brand_E_Overlay_tar": "{648ff367}",
-            "Brand_I_Avatar_01": "{8bd50bee}",
+            "{ca397de0}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_AnnieBasicAttack3_mis",
+            "Brand_BasicAttack_cas": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_BasicAttack_cas",
+            "Brand_BasicAttack_mis": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_BasicAttack_mis",
+            "Brand_BasicAttack_tar": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_BasicAttack_tar",
+            "Brand_CritAttack_mis": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_CritAttack_mis",
+            "Brand_CritAttack_tar": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_CritAttack_tar",
+            "Brand_Dance": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Dance",
+            "Brand_DanceStart": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Base_DanceStart",
+            "Brand_Death": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Base_Death",
+            "Brand_DeathFlame": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Base_DeathFlame",
+            "Brand_E_Conflagration_buf": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_E_Conflagration_buf",
+            "Brand_E_Conflagration_cas": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_E_Conflagration_cas",
+            "Brand_E_Conflagration_mis": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_E_Conflagration_mis",
+            "Brand_E_Conflagration_tar": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_E_Conflagration_tar",
+            "Brand_E_Overlay_tar": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_E_Overlay_tar",
+            "Brand_I_Avatar_01": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_I_Avatar_01",
             "Brand_I_Fire_Hair": "Characters/Brand/Skins/Skin40/Particles/Brand_Skin40_I_Fire_Hair",
             "Brand_I_Fire_Hand": "Characters/Brand/Skins/Skin40/Particles/Brand_Skin40_I_Fire_Hand",
-            "Brand_I_Fire_Hand_extension": "{d8ba4ced}",
-            "Brand_I_Headdress": "{648fa156}",
-            "Brand_Joke": "{ba39ff32}",
-            "Brand_JokeStart": "{dc3881aa}",
-            "Brand_PHguardian_tar": "{cb997266}",
-            "Brand_PHScorchGround": "{965274ee}",
-            "Brand_P_Apoc_Detonate_big": "{6058c541}",
-            "Brand_P_Detonate_Audio": "{b5da3e4d}",
-            "Brand_P_Detonate_Audio2": "{c59061ed}",
-            "Brand_P_Detonate_Audio3": "{c490605a}",
-            "Brand_P_Detonate_Audio4": "{bf90587b}",
-            "Brand_P_FireMark": "{8d07d871}",
-            "Brand_P_FireMark2": "{46597179}",
-            "Brand_P_FireMark3": "{45596fe6}",
-            "Brand_P_hotfoot": "{6b6e2c4f}",
-            "Brand_P_redring": "{4669b0ad}",
-            "Brand_P_redring_doombots": "{97326769}",
-            "Brand_P_Revolving_Audio": "{8309518d}",
-            "Brand_P_Revolving_Audio2": "{06abafad}",
-            "Brand_P_Revolving_Audio_2Chars": "{c7936601}",
-            "Brand_P_Revolving_Audio_3Chars": "{d68f625c}",
-            "Brand_P_Revolving_Audio_4Chars": "{598289bb}",
-            "Brand_P_Stack1_Audio": "{0e52de0a}",
-            "Brand_P_Stack1_Audio_2Chars": "{1343b864}",
-            "Brand_P_Stack1_Audio_3Chars": "{03379549}",
-            "Brand_P_Stack1_Audio_4Chars": "{65da2b7e}",
-            "Brand_P_Stack2_Audio": "{3729e6f3}",
-            "Brand_P_Stack2_Audio_2Chars": "{5d3468ff}",
-            "Brand_P_Stack2_Audio_3Chars": "{347c33da}",
-            "Brand_P_Stack2_Audio_4Chars": "{741b160d}",
-            "Brand_P_Stack3_Audio": "{de36f5a8}",
-            "Brand_P_Stack3_Audio_2Chars": "{b01ae68a}",
-            "Brand_P_Stack3_Audio_3Chars": "{e1ec566f}",
-            "Brand_P_Stack3_Audio_4Chars": "{01302e18}",
-            "Brand_P_Stack3_Audio_SpecialCaseFileNameBugFix": "{95668a1c}",
-            "Brand_P_StackInitialize_Audio": "{a598e18b}",
-            "Brand_P_StackInitialize_Audio_2Chars": "{25039027}",
-            "Brand_P_StackInitialize_Audio_3Chars": "{747a8fc2}",
-            "Brand_P_StackInitialize_Audio_4Chars": "{634ee9f5}",
-            "Brand_P_Timer": "{6edea67d}",
-            "Brand_P_Timer_Audio": "{f20dfe20}",
-            "Brand_Q_Blaze_mis": "{61204257}",
-            "Brand_Q_Blaze_tar": "{84b844eb}",
-            "Brand_R_Wildfire_buf": "{dc7c4dd4}",
-            "Brand_R_Wildfire_cas": "{5d077858}",
-            "Brand_R_Wildfire_mis": "{73ec5336}",
-            "Brand_R_Wildfire_tar": "{1dfa72c2}",
-            "Brand_Taunt": "{2fe87097}",
-            "Brand_W_POF_cas": "{e67235c6}",
-            "Brand_W_POF_charge": "{f60b9a29}",
-            "Brand_W_POF_tar": "{aa18c014}",
-            "Brand_W_POF_tar_green": "{a2ac3f30}",
-            "Brand_W_POF_tar_red": "{53782cb0}",
-            "{2b5c9cfd}": "{a71af2a1}",
-            "{0f11aab4}": "{d85e2046}",
-            "{45030c67}": "{cc5e41a2}",
-            "DoomBots_Brand_W_POF_charge": "{3aa46e91}",
-            "DoomBots_Brand_W_POF_tar": "{7584441c}",
-            "{a78c31d5}": "{6ffe75da}",
-            "{1c106e97}": "{95062525}",
-            "{4d8e875b}": "{96673c8d}",
-            "{741c5c6e}": "{f77def80}",
-            "{afa6ac01}": "{30327da3}",
-            "{fafc38a3}": "{11d498f1}",
-            "{c636fda8}": "{d700d9d6}",
-            "{fbfc3a36}": "{0ed49438}",
-            "{fcfc3bc9}": "{0fd495cb}",
-            "{fdfc3d5c}": "{14d49daa}",
+            "Brand_I_Fire_Hand_extension": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_I_Fire_Hand_extension",
+            "Brand_I_Headdress": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_I_Headdress",
+            "Brand_Joke": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Base_Joke",
+            "Brand_JokeStart": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Base_JokeStart",
+            "Brand_PHguardian_tar": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_PHguardian_tar",
+            "Brand_PHScorchGround": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Base_PHScorchGround",
+            "Brand_P_Apoc_Detonate_big": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Apoc_Detonate_big",
+            "Brand_P_Detonate_Audio": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Detonate_Audio",
+            "Brand_P_Detonate_Audio2": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Detonate_Audio2",
+            "Brand_P_Detonate_Audio3": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Detonate_Audio3",
+            "Brand_P_Detonate_Audio4": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Detonate_Audio4",
+            "Brand_P_FireMark": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_FireMark",
+            "Brand_P_FireMark2": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_FireMark2",
+            "Brand_P_FireMark3": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_FireMark3",
+            "Brand_P_hotfoot": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_hotfoot",
+            "Brand_P_redring": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_redring",
+            "Brand_P_redring_doombots": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_redring_doombots",
+            "Brand_P_Revolving_Audio": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Revolving_Audio",
+            "Brand_P_Revolving_Audio2": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Revolving_Audio2",
+            "Brand_P_Revolving_Audio_2Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Revolving_Audio_2Chars",
+            "Brand_P_Revolving_Audio_3Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Revolving_Audio_3Chars",
+            "Brand_P_Revolving_Audio_4Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Revolving_Audio_4Chars",
+            "Brand_P_Stack1_Audio": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack1_Audio",
+            "Brand_P_Stack1_Audio_2Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack1_Audio_2Chars",
+            "Brand_P_Stack1_Audio_3Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack1_Audio_3Chars",
+            "Brand_P_Stack1_Audio_4Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack1_Audio_4Chars",
+            "Brand_P_Stack2_Audio": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack2_Audio",
+            "Brand_P_Stack2_Audio_2Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack2_Audio_2Chars",
+            "Brand_P_Stack2_Audio_3Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack2_Audio_3Chars",
+            "Brand_P_Stack2_Audio_4Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack2_Audio_4Chars",
+            "Brand_P_Stack3_Audio": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack3_Audio",
+            "Brand_P_Stack3_Audio_2Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack3_Audio_2Chars",
+            "Brand_P_Stack3_Audio_3Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack3_Audio_3Chars",
+            "Brand_P_Stack3_Audio_4Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack3_Audio_4Chars",
+            "Brand_P_Stack3_Audio_SpecialCaseFileNameBugFix": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Stack3_Audio_SpecialCaseFileNameBugFix",
+            "Brand_P_StackInitialize_Audio": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_StackInitialize_Audio",
+            "Brand_P_StackInitialize_Audio_2Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_StackInitialize_Audio_2Chars",
+            "Brand_P_StackInitialize_Audio_3Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_StackInitialize_Audio_3Chars",
+            "Brand_P_StackInitialize_Audio_4Chars": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_StackInitialize_Audio_4Chars",
+            "Brand_P_Timer": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Timer",
+            "Brand_P_Timer_Audio": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Timer_Audio",
+            "Brand_Q_Blaze_mis": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Q_Blaze_mis",
+            "Brand_Q_Blaze_tar": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Q_Blaze_tar",
+            "Brand_R_Wildfire_buf": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_R_Wildfire_buf",
+            "Brand_R_Wildfire_cas": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_R_Wildfire_cas",
+            "Brand_R_Wildfire_mis": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_R_Wildfire_mis",
+            "Brand_R_Wildfire_tar": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_R_Wildfire_tar",
+            "Brand_Taunt": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Base_Taunt",
+            "Brand_W_POF_cas": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_W_POF_cas",
+            "Brand_W_POF_charge": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_W_POF_charge",
+            "Brand_W_POF_tar": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_W_POF_tar",
+            "Brand_W_POF_tar_green": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_W_POF_tar_green",
+            "Brand_W_POF_tar_red": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_W_POF_tar_red",
+            "{2b5c9cfd}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_death_sound",
+            "{0f11aab4}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_joke_sound",
+            "{45030c67}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_DarkBinding_tar",
+            "DoomBots_Brand_W_POF_charge": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Base_W_POF_charge",
+            "DoomBots_Brand_W_POF_tar": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Base_W_POF_tar",
+            "{a78c31d5}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_shadowbolt_tar",
+            "Brand_E_Range_Ring": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_E_Range_Ring",
+            "Brand_E_Range_Ring_ext": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_E_Range_Ring_ext",
+            "Brand_P_redring_Ignition_Child": "Characters/Brand/Skins/Skin0/Particles/Brand_Base_P_redring_Ignition_Child",
+            "{afa6ac01}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_R_Wildfire_mis_child",
+            "{fafc38a3}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Graffiti_01",
+            "{c636fda8}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Ghost_01",
+            "{fbfc3a36}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Graffiti_02",
+            "{fcfc3bc9}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Graffiti_03",
+            "{fdfc3d5c}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Graffiti_04",
             "{0d771de9}": "Characters/Brand/Skins/Skin40/Particles/Brand_Skin40_P_Idle_Shoulder",
-            "{b00a0914}": "{323d9f66}",
-            "{c9370261}": "{d600d843}",
-            "{c83700ce}": "{d500d6b0}",
-            "{fa4bf67b}": "{8075d335}",
-            "{b5f38561}": "{92bcf7fb}",
-            "{c736ff3b}": "{d800db69}",
-            "{13cad17c}": "{7b556962}",
-            "{8b40aece}": "{5ce0872c}",
-            "{8a40ad3b}": "{5fe08be5}"
+            "{b00a0914}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Hand_01",
+            "{c9370261}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Ghost_02",
+            "{c83700ce}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Ghost_03",
+            "{fa4bf67b}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Hand_Fire",
+            "{b5f38561}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Hand_Fire_End",
+            "{c736ff3b}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_Recall_Ghost_00",
+            "{13cad17c}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Joke_Child",
+            "{8b40aece}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Joke_Child_01",
+            "{8a40ad3b}": "Characters/Brand/Skins/Skin33/Particles/Brand_Skin33_P_Joke_Child_02"
         },
         "__type": "ResourceResolver"
     }

@@ -35,15 +35,13 @@
                         "Play_vo_Lillia_FirstEncounter3DYone",
                         "Play_vo_Lillia_FirstEncounter3DZoe",
                         "Play_vo_Lillia_Joke3DGeneral",
-                        "Play_vo_Lillia_Kill3DChampion",
+                        "Play_vo_Lillia_Kill3DGeneral",
                         "Play_vo_Lillia_Kill3DHuman",
                         "Play_vo_Lillia_Laugh3DGeneral",
                         "Play_vo_Lillia_LilliaBasicAttack1_cast3D",
                         "Play_vo_Lillia_LilliaBasicAttack2_cast3D",
                         "Play_vo_Lillia_LilliaBasicAttack3_cast3D",
                         "Play_vo_Lillia_LilliaE_cast3D",
-                        "Play_vo_Lillia_LilliaPranceStack_cast3D",
-                        "Play_vo_Lillia_LilliaPranceStack_OnBuffDeactivate",
                         "Play_vo_Lillia_LilliaQ_cast3D",
                         "Play_vo_Lillia_LilliaQPassiveSneeze_cast3D",
                         "Play_vo_Lillia_LilliaR_cast3D",
@@ -53,6 +51,8 @@
                         "Play_vo_Lillia_Move2DStandard",
                         "Play_vo_Lillia_Recall3DGeneral",
                         "Play_vo_Lillia_Respawn2DGeneral",
+                        "Play_vo_Lillia_Spell3DPEnd",
+                        "Play_vo_Lillia_Spell3DPMax",
                         "Play_vo_Lillia_Taunt3DGeneral"
                     ],
                     "voiceOver": true,
@@ -139,7 +139,7 @@
                 255
             ],
             "initialSubmeshToHide": "Smear Bird Recall_Scroll Recall_Reel Recall_Bird",
-            "{3606145c}": "Bird Recall_Scroll Recall_Reel Recall_Bird",
+            "EmitterSubmeshAvatarToHide": "Bird Recall_Scroll Recall_Reel Recall_Bird",
             "materialOverride": [
                 {
                     "material": "Characters/Lillia/Skins/Skin20/Materials/Ink_Weapon",
@@ -189,8 +189,8 @@
             ],
             "rigPoseModifierData": [
                 {
-                    "mStartingJointName": "{c1a33de7}",
-                    "mEndingJointName": "{bf3778ee}",
+                    "mStartingJointName": "Lower_Spine3_Ground",
+                    "mEndingJointName": "Pelvis_Ground",
                     "mDefaultMaskName": "{7136e1bc}",
                     "mMaxBoneAngle": 50.0,
                     "mDampingValue": 7.0,
@@ -203,12 +203,12 @@
         "armorMaterial": "Flesh",
         "idleParticlesEffects": [
             {
-                "effectKey": "{92681ea7}",
+                "effectKey": "Lillia_I_Staff_Glow",
                 "boneName": "Weapon_String5",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
-                "effectKey": "{62d87e61}",
+                "effectKey": "Lillia_I_Ground_Plants",
                 "boneName": "C_Buffbone_Glb_Ground_Loc",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
@@ -372,7 +372,7 @@
         "samplerValues": [
             {
                 "samplerName": "FlowMap",
-                "textureName": "ASSETS/Shared/Materials/black.Skarner_Rework.dds",
+                "textureName": "ASSETS/Shared/Materials/black.dds",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
@@ -382,7 +382,7 @@
             },
             {
                 "samplerName": "Mask",
-                "textureName": "ASSETS/Shared/Materials/black.Skarner_Rework.dds",
+                "textureName": "ASSETS/Shared/Materials/black.dds",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -582,7 +582,7 @@
             },
             {
                 "samplerName": "Mask",
-                "textureName": "ASSETS/Shared/Materials/black.Skarner_Rework.dds",
+                "textureName": "ASSETS/Shared/Materials/black.dds",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -772,7 +772,7 @@
                 "isSingleParticle": 1,
                 "emitterName": "Basic3",
                 "disabled": true,
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -839,12 +839,12 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{0f0d7f48}"
+                            "Head_Bud01"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -897,7 +897,7 @@
                 },
                 "isSingleParticle": 1,
                 "emitterName": "Basic4",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -964,12 +964,12 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{0f0d7f48}"
+                            "Head_Bud01"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -1027,7 +1027,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             }
@@ -1058,7 +1058,7 @@
                 },
                 "emitterName": "Short_",
                 "importance": 2,
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "dynamics": {
                             "probabilityTables": [
@@ -1106,9 +1106,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -1558,17 +1558,17 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 15.0,
                     "height": 5.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleEmitOffsetByBoundObjectSize": 0.004999999888241291,
                     "scaleEmitOffsetByBoundObjectHeight": 0.004999999888241291,
                     "scaleEmitOffsetByBoundObjectRadius": 0.004999999888241291,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "blendMode": 1,
                 "birthColor": {
@@ -1812,7 +1812,7 @@
                 "particleLinger": 1.0,
                 "lifetime": 2.0,
                 "emitterName": "Temp_Trail",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -1967,7 +1967,7 @@
                 "particleLinger": 0.4000000059604645,
                 "lifetime": 1.5,
                 "emitterName": "Temp_Trail1",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -2100,7 +2100,7 @@
                 "particleLinger": 0.4000000059604645,
                 "lifetime": 1.5,
                 "emitterName": "Temp_Trail2",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -2709,7 +2709,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -50.0,
@@ -2717,7 +2717,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -2870,7 +2870,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         -20.0,
                         0.0,
@@ -2878,7 +2878,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -2972,7 +2972,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         -20.0,
                         0.0,
@@ -2980,7 +2980,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -3190,7 +3190,7 @@
                     },
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         -40.0,
                         0.0,
@@ -3198,7 +3198,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -3225,9 +3225,9 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "blendMode": 1,
                 "birthColor": {
@@ -3526,16 +3526,16 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "Size": [
                         10.0,
                         0.0,
                         10.0
                     ],
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -20.0,
                         0.0,
@@ -3752,16 +3752,16 @@
                     },
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "Size": [
                         3.0,
                         3.0,
                         3.0
                     ],
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -25.0,
                         0.0,
@@ -4029,7 +4029,7 @@
                 },
                 "isSingleParticle": 1,
                 "emitterName": "Basic1",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -4096,7 +4096,7 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "primitive": {
                     "mMesh": {
@@ -4136,7 +4136,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -4167,7 +4167,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -21.562044143676758,
                         0.0,
@@ -4471,12 +4471,12 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "radius": 250.0,
                     "height": 80.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -4623,7 +4623,7 @@
                 },
                 "isSingleParticle": 1,
                 "emitterName": "Basic7",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -4723,11 +4723,11 @@
                 "lifetime": 5.0,
                 "isSingleParticle": 1,
                 "emitterName": "glow1",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -40.0,
@@ -4905,7 +4905,7 @@
                         },
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "dynamics": {
                             "times": [
                                 0.0
@@ -4920,7 +4920,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -5094,10 +5094,10 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "radius": 240.0,
                     "height": 40.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
                 "blendMode": 1,
                 "birthColor": {
@@ -5350,11 +5350,11 @@
                 "lifetime": 5.0,
                 "isSingleParticle": 1,
                 "emitterName": "glow2",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -40.0,
@@ -5576,7 +5576,7 @@
                         },
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "dynamics": {
                             "times": [
                                 0.0
@@ -5598,7 +5598,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -5692,7 +5692,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             100.0,
@@ -5784,9 +5784,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         50.0,
@@ -6089,11 +6089,11 @@
                 "lifetime": 5.0,
                 "isSingleParticle": 1,
                 "emitterName": "glow7",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -36.70899963378906,
                         20.0,
@@ -6230,7 +6230,7 @@
                     "textureMult": "ASSETS/Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Door_Mask_90_01.dds",
                     "texAddressModeMult": 2,
                     "uvScrollAlphaMult": 0,
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "dynamics": {
                             "times": [
                                 0.0
@@ -6245,7 +6245,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -6310,7 +6310,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         1300.0,
@@ -6613,7 +6613,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             80.0,
@@ -6697,7 +6697,7 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "blendMode": 4,
                 "birthColor": {
@@ -6884,7 +6884,7 @@
                 ],
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_huaheng_07_1.dds",
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "constantValue": [
                             1.0,
                             1.0
@@ -6903,7 +6903,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -7065,7 +7065,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             150.0,
@@ -7149,9 +7149,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         200.0,
@@ -7359,7 +7359,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "M5",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         50.0,
                         40.5032844543457,
@@ -7494,7 +7494,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "M6",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         114.75115203857422,
                         32.80616760253906,
@@ -7611,7 +7611,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "M7",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         -115.052001953125,
                         50.0,
@@ -7729,7 +7729,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "M8",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         109.66041564941406,
                         50.0,
@@ -7847,11 +7847,11 @@
                 "lifetime": 5.0,
                 "isSingleParticle": 1,
                 "emitterName": "glow8",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         30.0,
@@ -7983,7 +7983,7 @@
                     "textureMult": "ASSETS/Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Door_Mask_90_01.dds",
                     "texAddressModeMult": 2,
                     "uvScrollAlphaMult": 0,
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "dynamics": {
                             "times": [
                                 0.0
@@ -7998,7 +7998,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -8015,7 +8015,7 @@
                 "lifetime": 10.0,
                 "isSingleParticle": 1,
                 "emitterName": "Basic9",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -8082,7 +8082,7 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "primitive": {
                     "mMesh": {
@@ -8179,7 +8179,7 @@
                 "lifetime": 10.0,
                 "isSingleParticle": 1,
                 "emitterName": "Basic10",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitRotationAngles": [
                         {
                             "constantValue": 1.0,
@@ -8246,7 +8246,7 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "primitive": {
                     "mMesh": {
@@ -8356,7 +8356,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -8386,10 +8386,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{e71cebd4}"
+                            "Recall_Scroll"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{e71cebd4}"
+                            "Recall_Scroll"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -8470,7 +8470,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -8500,10 +8500,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{e71cebd4}"
+                            "Recall_Scroll"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{e71cebd4}"
+                            "Recall_Scroll"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -8653,13 +8653,13 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 80.0,
                     "height": 50.0,
-                    "__type": "{12ab94a6}"
+                    "__type": "VfxShapeCylinder"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -30.0,
@@ -9164,10 +9164,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{c2f0317a}"
+                            "Recall_Bird"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{c2f0317a}"
+                            "Recall_Bird"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -9499,10 +9499,10 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "radius": 50.0,
-                    "__type": "{3dbe415d}"
+                    "__type": "VfxShapeSphere"
                 },
                 "blendMode": 4,
                 "birthColor": {
@@ -9691,7 +9691,7 @@
                 },
                 "lifetime": 7.0,
                 "emitterName": "Smoke_big",
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -10225,7 +10225,7 @@
                 ],
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Emote_Dash_Mult.dds",
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             },
@@ -10394,7 +10394,7 @@
                         -0.20000000298023224,
                         0.0
                     ],
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             }
@@ -10406,75 +10406,75 @@
     },
     "Characters/Lillia/Skins/Skin20/Resources": {
         "resourceMap": {
-            "{298c08dd}": "{85d250db}",
-            "{ea90effb}": "{ec4b1165}",
-            "{3282fb6f}": "{8fb79b3d}",
-            "{33ee5326}": "{076444e4}",
-            "{09ce8074}": "{7bd9246e}",
-            "{7074b5c6}": "{29cc0140}",
-            "{ca7c56f4}": "{cb4e0d82}",
-            "{3231e0f3}": "{736ee6ad}",
-            "{4108d69b}": "{bd36de85}",
-            "{f02edfe5}": "{db0e68af}",
-            "{1f2c90c2}": "{30fe38f0}",
-            "{2389ee58}": "{f93b0c2e}",
-            "{2789f4a4}": "{fd3b127a}",
-            "{2589f17e}": "{f73b0908}",
-            "{dd231412}": "{80a67cdc}",
-            "{9347639f}": "{f16fcf31}",
-            "{c9c4ecaa}": "{ff57fc24}",
-            "{9a4d34d3}": "{121c9375}",
-            "{cc272c49}": "{fcc76fa7}",
-            "{d88a169b}": "{57c8fab9}",
-            "{e257aaa5}": "{6377c02b}",
-            "{ea0497bd}": "{8d9147d3}",
-            "{e1e8e904}": "{113847fe}",
-            "{e893aef2}": "{a90fbffc}",
-            "{528a973f}": "{f046777d}",
-            "{980f36c9}": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_R_Tar_Swirl",
-            "{1146ea67}": "{a24f7a05}",
-            "{a9f8b7ac}": "{70e69ece}",
-            "{2719b7fe}": "{2b161798}",
-            "{d8a3b784}": "{4ee7a516}",
-            "{92681ea7}": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_I_Staff_Glow",
-            "{62d87e61}": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_I_Ground_Plants",
-            "{8dedfb84}": "{2dace09a}",
-            "{77ed9a89}": "{0f92a2f7}",
-            "{cf9ac945}": "{d6f5aa63}",
-            "{be971468}": "{1b86a86e}",
-            "{d2989046}": "{f95680a8}",
-            "{6d2db99e}": "{1ce83a9c}",
-            "{120bc8eb}": "{73a30565}",
-            "{2b244b8f}": "{23946f91}",
-            "{40695c0d}": "{7f28ccf7}",
-            "{5912deed}": "{1737f6fb}",
-            "{cd9a3558}": "{e0064426}",
-            "{d624fef6}": "{83c914bc}",
-            "{cf961e17}": "{9d3d9441}",
-            "{d6b753fc}": "{cf7ddea6}",
-            "{cf68c132}": "{5b37b470}",
-            "{e579685f}": "{1b0d22c9}",
-            "{cf936a9d}": "{b81f5d2b}",
-            "{40694d82}": "{aadf08b0}",
-            "{3bb05fe3}": "{38b04411}",
-            "{5f8c1dad}": "{dfd65324}",
-            "{9dde4ba2}": "{dfd65324}",
-            "{a3ec41a6}": "{ee26a368}",
-            "{38f22b88}": "{83c10dd6}",
-            "{dc5042fe}": "{a5279c14}",
-            "{58ab2cd7}": "{c9be6a61}",
-            "{2cbc5fa9}": "{2a3e181b}",
-            "{6911e402}": "{31a07978}",
-            "{90fdd363}": "{e35fc479}",
-            "{3c73c54c}": "{731008de}",
-            "{f103677e}": "{daf14690}",
-            "{15a043eb}": "{f0a23155}",
-            "{c1e073eb}": "{c11b4c19}",
-            "{e7862fba}": "{63bc0758}",
-            "{fe7a2a47}": "{a6079849}",
+            "Lillia_R_Sleep_Break_Tar": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Sleep_Break_Tar",
+            "Lillia_R_Sleep_Buff": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Sleep_Buff",
+            "Lillia_R_Sleep_Timer": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Sleep_Timer",
+            "Lillia_R_Sleep_Timer_Child": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Sleep_Timer_Child",
+            "Lillia_R_Indicator_Enemy": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Indicator_Enemy",
+            "Lillia_R_Indicator_Ally": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Indicator_Ally",
+            "Lillia_E_slow": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_slow",
+            "Lillia_Q_Heal": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Q_Heal",
+            "Lillia_P_Buff_Dust_Child": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_P_Buff_Dust_Child",
+            "Lillia_P_Shroom_Child": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_P_Shroom_Child",
+            "Lillia_Q_Ring_Child": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Q_Ring_Child",
+            "Lillia_P_Stack_1": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_P_Stack_1",
+            "Lillia_P_Stack_5": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_P_Stack_5",
+            "Lillia_P_Stack_3": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_P_Stack_3",
+            "Lillia_W_AOE_Explosion": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_AOE_Explosion",
+            "Lillia_W_AOE_indicator_Ally": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_AOE_indicator_Ally",
+            "Lillia_W_Center": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_Center",
+            "Lillia_W_AOE_indicator_Enemy": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_AOE_indicator_Enemy",
+            "Lillia_BA_Swipe": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_BA_Swipe",
+            "Lillia_P_poison_debuff": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_P_poison_debuff",
+            "Lillia_Q_Indicator_Inner": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Q_Indicator_Inner",
+            "Lillia_R_mis": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_mis",
+            "Lillia_E_Mis": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Mis",
+            "Lillia_E_Mis_Ground": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Mis_Ground",
+            "Lillia_E_Mis_Ground_Seed_Child": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Mis_Ground_Seed_Child",
+            "Lillia_R_Tar_Swirl": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_R_Tar_Swirl",
+            "Lillia_E_Slow_Trail": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Slow_Trail",
+            "Lillia_BA_Tar": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_BA_Tar",
+            "Lillia_E_ground_direction_indicator": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_ground_direction_indicator",
+            "Lillia_Q_Tar": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Q_Tar",
+            "Lillia_I_Staff_Glow": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_I_Staff_Glow",
+            "Lillia_I_Ground_Plants": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_I_Ground_Plants",
+            "Lillia_W_Weapon_Glow_Short": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_Weapon_Glow_Short",
+            "Lillia_W_Weapon_Glow": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_Weapon_Glow",
+            "Lillia_W_trail": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_trail",
+            "Lillia_W_trail_Short": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_trail_Short",
+            "Lillia_R_Danger_SelfOnly": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Danger_SelfOnly",
+            "Lillia_W_tar": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_tar",
+            "Lillia_Q_Plants": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Q_Plants",
+            "Lillia_Q_Weapon_Glow": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Q_Weapon_Glow",
+            "Lillia_E_Mis_Ground_Close": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Mis_Ground_Close",
+            "Lillia_E_Cas_Trail": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Cas_Trail",
+            "Lillia_E_End_Indicator": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_End_Indicator",
+            "Lillia_E_Hit_Champ": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Hit_Champ",
+            "Lillia_E_Ground_Bounce": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_E_Ground_Bounce",
+            "Lillia_Butterfly_Glow": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Butterfly_Glow",
+            "Lillia_R_Weapon_Glow": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Weapon_Glow",
+            "Lillia_R_Cas": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Cas",
+            "Lillia_P_Flower_Glow": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_P_Flower_Glow",
+            "Lillia_P_Stack5_Deactivate": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_P_Stack5_Deactivate",
+            "Lillia_Q_Ring": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Q_Ring",
+            "Lillia_Q__Sparks_Child": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Q_Sparks_Child",
+            "Lillia_Q_Sparks_Child": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Q_Sparks_Child",
+            "Lillia_P_poison_debuff_minion": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_P_poison_debuff_minion",
+            "Lillia_Recall_Dream": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Recall_Dream",
+            "Lillia_Recall_Puff": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Recall_Puff",
+            "Lillia_Z_SleepBubble": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Z_SleepBubble",
+            "{2cbc5fa9}": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Z_Bubble_Child",
+            "Lillia_R_Overhead_Sleep_Buff": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Overhead_Sleep_Buff",
+            "Lillia_R_Overhead_Indicator_Ally": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_R_Overhead_Indicator_Ally",
+            "Lillia_J_Sneeze": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_J_Sneeze",
+            "Lillia_J_Sleep_Dust": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_J_Sleep_Dust",
+            "Lillia_Respawn_Puff": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Respawn_Puff",
+            "Lillia_Recall_GroundSmoke": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Recall_GroundSmoke",
+            "Lillia_Recall_Flower": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Recall_Flower",
+            "{fe7a2a47}": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_W_AOE_Explosion_child",
             "{f75c4f30}": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_Recall_Bird02",
             "{fb1711d5}": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_Recall_Ground01",
-            "{1e6f7086}": "{35c7f268}",
+            "{1e6f7086}": "Characters/Lillia/Skins/Skin19/Particles/Lillia_Skin19_Recall_Scroll_Cloud",
             "{bac7b1c3}": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_Recall_Scroll01",
             "{b96792b5}": "Characters/Lillia/Skins/Skin20/Particles/Lillia_Skin20_I_Head_Hud"
         },

@@ -175,11 +175,11 @@
             "KogMaw_W_buff_mouth": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_W_buff_mouth",
             "KogMaw_W_mis": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_W_mis",
             "{5dca1f33}": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_W_EyeGlow",
-            "{e281d305}": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_W_tar",
-            "{ec7aa7da}": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_R_tar",
-            "{a152444f}": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_R_tar_mis_child",
-            "{f28be03d}": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_R_cas_mis_child",
-            "{f58f57de}": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_W_Activate_Child",
+            "KogMaw_W_tar": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_W_tar",
+            "KogMaw_R_tar": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_R_tar",
+            "KogMaw_R_tar_mis_child": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_R_tar_mis_child",
+            "KogMaw_R_cas_mis_child": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_R_cas_mis_child",
+            "KogMaw_W_Activate_Child": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_W_Activate_Child",
             "{299b15f2}": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_Recall_Light",
             "{7b86b8e9}": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_Recall_Light_Dis",
             "{c2b52d63}": "Characters/KogMaw/Skins/Skin55/Particles/KogMaw_Skin55_Recall_Light_Dis_S",
@@ -208,6 +208,14 @@
             {
                 "samplerName": "MatCap_Tex",
                 "textureName": "ASSETS/Shared/Materials/Kindred_Skin12_Props_MatCap.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask_Texture",
+                "textureName": "ASSETS/Shared/Materials/white.dds",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,
@@ -243,6 +251,11 @@
             },
             {
                 "name": "BLEND_ALPHA",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "MASK_MATCAP",
+                "on": false,
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
@@ -316,7 +329,7 @@
                 "childParticleSetDefinition": {
                     "childrenIdentifiers": [
                         {
-                            "effectKey": "{f58f57de}",
+                            "effectKey": "KogMaw_W_Activate_Child",
                             "__type": "VfxChildIdentifier"
                         }
                     ],
@@ -439,14 +452,14 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "Size": [
                         50.0,
                         50.0,
                         50.0
                     ],
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
                 "blendMode": 1,
                 "birthColor": {
@@ -615,7 +628,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             50.0,
@@ -699,9 +712,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -30.0,
@@ -962,7 +975,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             50.0,
@@ -1046,9 +1059,9 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         -30.0,
@@ -1402,7 +1415,7 @@
                     },
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -50.0,
@@ -1810,14 +1823,14 @@
                     "constantValue": 0.10000000149011612,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "Size": [
                         20.0,
                         20.0,
                         50.0
                     ],
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
                 "blendMode": 1,
                 "birthColor": {
@@ -1884,7 +1897,7 @@
                     },
                     "erosionFeatherOut": 0.20000000298023224,
                     "erosionSliceWidth": 1.0,
-                    "erosionMapName": "ASSETS/Shared/Particles/Alpha_Mult.SRT_DURIAN_2024.dds",
+                    "erosionMapName": "ASSETS/Shared/Particles/Alpha_Mult.dds",
                     "__type": "VfxAlphaErosionDefinitionData"
                 },
                 "miscRenderFlags": 1,
@@ -2236,7 +2249,7 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             1.0,
@@ -2343,7 +2356,7 @@
                             1.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "blendMode": 4,
                 "birthColor": {
@@ -2491,7 +2504,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         10.0,
@@ -2593,7 +2606,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         10.0,
@@ -2744,7 +2757,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         0.0,
@@ -3087,7 +3100,7 @@
                     },
                     "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             1.0,
@@ -3194,7 +3207,7 @@
                             1.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "blendMode": 4,
                 "birthColor": {
@@ -3497,7 +3510,7 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{39199710}"
+                            "Antenna"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -3583,14 +3596,14 @@
                 "particleLinger": 2.0,
                 "lifetime": 8.0,
                 "emitterName": "Splatter_Floor",
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "flags": 1,
                     "Size": [
                         80.0,
                         0.0,
                         80.0
                     ],
-                    "__type": "{ba945ee1}"
+                    "__type": "VfxShapeBox"
                 },
                 "primitive": {
                     "__type": "VfxPrimitiveArbitraryQuad"
@@ -3808,7 +3821,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         100.0,
@@ -4011,7 +4024,7 @@
                     "mMesh": {
                         "mSubmeshesToDraw": [
                             "Water",
-                            "{c944ea21}"
+                            "Teeth"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -4046,7 +4059,7 @@
                         ],
                         "__type": "ValueVector2"
                     },
-                    "{22c3cf3e}": {
+                    "ParticleIntegratedUvScrollMult": {
                         "dynamics": {
                             "times": [
                                 0.0
@@ -4061,7 +4074,7 @@
                         },
                         "__type": "IntegratedValueVector2"
                     },
-                    "__type": "{b097c1bd}"
+                    "__type": "VfxTextureMultDefinitionData"
                 },
                 "__type": "VfxEmitterDefinitionData"
             }

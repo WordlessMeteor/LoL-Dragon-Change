@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.12.1",
+    "version": "14.13.1",
     "data": {
         "Kalista": {
             "id": "Kalista",
@@ -94,7 +94,7 @@
                 "mpregenperlevel": 0.4,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 61,
+                "attackdamage": 59,
                 "attackdamageperlevel": 3.25,
                 "attackspeedperlevel": 4.5,
                 "attackspeed": 0.694
@@ -245,15 +245,17 @@
                     "id": "KalistaW",
                     "name": "Sentinel",
                     "description": "Gain bonus damage when Kalista and her Oathsworn strike the same target. <br><br>Activate to send a soul to scout out the path, revealing the area in front of it.",
-                    "tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>{{ e2 }}% max Health magic damage</magicDamage>. This effect has a {{ e7 }} second Cooldown per target.<br /><br /><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges ({{ e4 }} second refresh).{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>{{ maxhealthdamage*100 }}% max Health magic damage</magicDamage>. This effect has a {{ pertargetcooldown }} second Cooldown per target and a cap of {{ maximummonsterdamage }} to non-champions.<br /><br /><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges ({{ ammorechargetooltip }} second refresh).{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Damage",
-                            "Ammo Recharge"
+                            "Maximum Health Damage",
+                            "Ammo Recharge",
+                            "Monster Damage Cap"
                         ],
                         "effect": [
-                            "{{ e2 }}% -> {{ e2NL }}%",
-                            "{{ e4 }} -> {{ e4NL }}"
+                            "{{ maxhealthdamage*100.000000 }}% -> {{ maxhealthdamagenl*100.000000 }}%",
+                            "{{ ammorechargetooltip }} -> {{ ammorechargetooltipNL }}",
+                            "{{ maximummonsterdamage }} -> {{ maximummonsterdamageNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -548,11 +550,11 @@
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        150,
-                        120,
-                        90
+                        160,
+                        140,
+                        120
                     ],
-                    "cooldownBurn": "150/120/90",
+                    "cooldownBurn": "160/140/120",
                     "cost": [
                         100,
                         100,

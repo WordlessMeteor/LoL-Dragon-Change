@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.12.1",
+    "version": "14.13.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -2402,7 +2402,7 @@
                     "id": "AkshanW",
                     "name": "Going Rogue",
                     "description": "Akshan passively marks enemy champions as Scoundrels when they kill his ally champions. If Akshan kills a Scoundrel, he resurrects the allies they killed, gains bonus gold, and clears all marks.<br><br>When activated, Akshan enters camouflage and gains Move Speed and Mana Regen while moving towards Scoundrels. Akshan loses the camouflage quickly while he is not in brush or near terrain.",
-                    "tooltip": "<spellPassive>Passive</spellPassive>: Enemy champions that kill Akshan's allies become <keywordMajor>Scoundrels</keywordMajor> for {{ vengeanceduration }} seconds. Takedowns on a <keywordMajor>Scoundrel</keywordMajor> within {{ recentlydamagedwindow }} seconds of being damaged by Akshan grant him {{ goldreward }} Gold, resurrects the slain allies, and removes all other <keywordMajor>Scoundrels</keywordMajor>.<br /><br /><spellActive>Active</spellActive>: Akshan becomes <keywordStealth>Camouflaged</keywordStealth> for {{ wallgraceperiod }} seconds or indefinitely while he is near a wall or in brush. While <keywordStealth>Camouflaged</keywordStealth> in this way, Akshan also gains <speed>{{ msvalue }} Move Speed</speed> and <scaleMana>{{ missingmanaregen*100 }}% missing Mana regen</scaleMana> while moving towards <keywordMajor>Scoundrels</keywordMajor>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "{{ Spell_AkshanW_Tooltip_{{ gamemodeinteger }} }}{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -23014,6 +23014,12 @@
                     "num": 26,
                     "name": "Astronaut Fizz",
                     "chromas": true
+                },
+                {
+                    "id": "105035",
+                    "num": 35,
+                    "name": "Rain Shepherd Fizz",
+                    "chromas": true
                 }
             ],
             "lore": "Fizz is an amphibious yordle, who dwells among the reefs surrounding Bilgewater. He often retrieves and returns the tithes cast into the sea by superstitious captains, but even the saltiest of sailors know better than to cross him—for many are the tales of those who have underestimated this slippery character. Often mistaken for some manner of capricious ocean spirit, he seems able to command the beasts of the deep, and delights in confounding his allies and enemies alike.",
@@ -24758,7 +24764,7 @@
                         "effect": [
                             "{{ e3 }} -> {{ e3NL }}",
                             "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e4 }}% -> {{ e4NL }}%",
+                            "{{ barrelslow }}% -> {{ barrelslowNL }}%",
                             "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}"
                         ]
                     },
@@ -24804,11 +24810,11 @@
                             195
                         ],
                         [
-                            30,
-                            37.5,
-                            45,
-                            52.5,
-                            60
+                            40,
+                            50,
+                            60,
+                            70,
+                            80
                         ],
                         [
                             25,
@@ -24858,7 +24864,7 @@
                         "3/3/4/4/5",
                         "2",
                         "75/105/135/165/195",
-                        "30/37.5/45/52.5/60",
+                        "40/50/60/70/80",
                         "25",
                         "2",
                         "10",
@@ -27616,11 +27622,11 @@
                             0.5
                         ],
                         [
-                            2,
-                            5,
-                            8,
-                            11,
-                            14
+                            4,
+                            7,
+                            10,
+                            13,
+                            16
                         ],
                         [
                             750,
@@ -27664,7 +27670,7 @@
                         "4",
                         "20/25/30/35/40",
                         "0.5",
-                        "2/5/8/11/14",
+                        "4/7/10/13/16",
                         "750",
                         "375",
                         "275",
@@ -37544,7 +37550,7 @@
                 "mpregenperlevel": 0.4,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 61,
+                "attackdamage": 59,
                 "attackdamageperlevel": 3.25,
                 "attackspeedperlevel": 4.5,
                 "attackspeed": 0.694
@@ -37695,15 +37701,17 @@
                     "id": "KalistaW",
                     "name": "Sentinel",
                     "description": "Gain bonus damage when Kalista and her Oathsworn strike the same target. <br><br>Activate to send a soul to scout out the path, revealing the area in front of it.",
-                    "tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>{{ e2 }}% max Health magic damage</magicDamage>. This effect has a {{ e7 }} second Cooldown per target.<br /><br /><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges ({{ e4 }} second refresh).{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>Passive:</spellPassive> When Kalista and her <keywordMajor>Oathsworn</keywordMajor> both Attack the same target, she deals <magicDamage>{{ maxhealthdamage*100 }}% max Health magic damage</magicDamage>. This effect has a {{ pertargetcooldown }} second Cooldown per target and a cap of {{ maximummonsterdamage }} to non-champions.<br /><br /><spellPassive>Active: </spellPassive>Kalista sends a ghost to patrol an area for three laps. Champions spotted are revealed for 4 seconds. This ability has 2 charges ({{ ammorechargetooltip }} second refresh).{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Damage",
-                            "Ammo Recharge"
+                            "Maximum Health Damage",
+                            "Ammo Recharge",
+                            "Monster Damage Cap"
                         ],
                         "effect": [
-                            "{{ e2 }}% -> {{ e2NL }}%",
-                            "{{ e4 }} -> {{ e4NL }}"
+                            "{{ maxhealthdamage*100.000000 }}% -> {{ maxhealthdamagenl*100.000000 }}%",
+                            "{{ ammorechargetooltip }} -> {{ ammorechargetooltipNL }}",
+                            "{{ maximummonsterdamage }} -> {{ maximummonsterdamageNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -37998,11 +38006,11 @@
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        150,
-                        120,
-                        90
+                        160,
+                        140,
+                        120
                     ],
-                    "cooldownBurn": "150/120/90",
+                    "cooldownBurn": "160/140/120",
                     "cost": [
                         100,
                         100,
@@ -42420,7 +42428,7 @@
                 "difficulty": 4
             },
             "stats": {
-                "hp": 611,
+                "hp": 580,
                 "hpperlevel": 98,
                 "mp": 200,
                 "mpperlevel": 0,
@@ -47223,7 +47231,7 @@
             },
             "stats": {
                 "hp": 645,
-                "hpperlevel": 105,
+                "hpperlevel": 108,
                 "mp": 200,
                 "mpperlevel": 0,
                 "movespeed": 345,
@@ -49440,13 +49448,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        12,
-                        11,
                         10,
+                        9.5,
                         9,
+                        8.5,
                         8
                     ],
-                    "cooldownBurn": "12/11/10/9/8",
+                    "cooldownBurn": "10/9.5/9/8.5/8",
                     "cost": [
                         40,
                         40,
@@ -54837,6 +54845,12 @@
                     "num": 1,
                     "name": "Faerie Court Milio",
                     "chromas": true
+                },
+                {
+                    "id": "902011",
+                    "num": 11,
+                    "name": "Rain Shepherd Milio",
+                    "chromas": true
                 }
             ],
             "lore": "Milio is a warmhearted boy from Ixtal who has, despite his young age, mastered the fire axiom and discovered something new: soothing fire. With this newfound power, Milio plans to help his family escape their exile by joining the Yun Tal—just like his grandmother once did. Having traveled through the Ixtal jungles to the capital of Ixaocan, Milio now prepares to face the Vidalion and join the Yun Tal, unaware of the trials—and dangers—that await him.",
@@ -55630,7 +55644,7 @@
                 "mpregenperlevel": 0.8,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 52,
+                "attackdamage": 55,
                 "attackdamageperlevel": 2.4,
                 "attackspeedperlevel": 3,
                 "attackspeed": 0.656
@@ -65272,7 +65286,7 @@
                 "mpregenperlevel": 0.8,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 40,
+                "attackdamage": 44,
                 "attackdamageperlevel": 2.6,
                 "attackspeedperlevel": 3.5,
                 "attackspeed": 0.658
@@ -67333,7 +67347,7 @@
                     "id": "PoppyQ",
                     "name": "Hammer Shock",
                     "description": "Poppy swings her hammer, dealing damage and creating a zone that will slow enemies and explode after a delay.",
-                    "tooltip": "Poppy smashes the ground, dealing <physicalDamage>{{ basedamage }}</physicalDamage> plus <physicalDamage>{{ e5 }}% max Health physical damage</physicalDamage> and making the ground unstable. <br /><br />The unstable area <status>Slows</status> enemies by {{ e3 }}% and erupts after {{ e4 }} second, dealing <physicalDamage>{{ basedamage }}</physicalDamage> plus <physicalDamage>{{ e5 }}% max Health physical damage</physicalDamage> again.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Poppy smashes the ground, dealing <physicalDamage>{{ basedamage }}</physicalDamage> plus <physicalDamage>{{ healthdamagepercent }}% max Health physical damage</physicalDamage> and making the ground unstable. <br /><br />The unstable area <status>Slows</status> enemies by {{ e3 }}% and erupts after {{ e4 }} second, dealing <physicalDamage>{{ basedamage }}</physicalDamage> plus <physicalDamage>{{ healthdamagepercent }}% max Health physical damage</physicalDamage> again.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -84367,13 +84381,13 @@
                     ],
                     "cooldownBurn": "13/11.5/10/8.5/7",
                     "cost": [
-                        30,
-                        30,
-                        30,
-                        30,
-                        30
+                        50,
+                        50,
+                        50,
+                        50,
+                        50
                     ],
-                    "costBurn": "30",
+                    "costBurn": "50",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -95666,7 +95680,7 @@
                     "id": "CardmasterStack",
                     "name": "Stacked Deck",
                     "description": "Every 4 attacks, Twisted Fate deals bonus damage. In addition, his Attack Speed is increased.",
-                    "tooltip": "<spellPassive>Passive:</spellPassive> Twisted fate gains <attackSpeed>{{ attackspeedbonus }}% Attack Speed</attackSpeed> and every 4th Attack deals an additional <magicDamage>{{ bonusdamage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>Passive:</spellPassive> Twisted Fate gains <attackSpeed>{{ attackspeedbonus }}% Attack Speed</attackSpeed> and every 4th Attack deals an additional <magicDamage>{{ bonusdamage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Bonus Damage",
@@ -98178,9 +98192,9 @@
                 "mpregenperlevel": 0.8,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 60,
+                "attackdamage": 57,
                 "attackdamageperlevel": 3.4,
-                "attackspeedperlevel": 4,
+                "attackspeedperlevel": 3.5,
                 "attackspeed": 0.658
             },
             "spells": [
@@ -98188,7 +98202,7 @@
                     "id": "VarusQ",
                     "name": "Piercing Arrow",
                     "description": "Varus readies and then fires a powerful shot that gains extra range and damage the longer he spends preparing to fire.",
-                    "tooltip": "<charge>Begin Charging:</charge> Varus draws back his next shot, <status>Slowing</status> himself by {{ e7 }}%. After {{ e5 }} seconds, if not fired, Varus will cancel the Ability and refund {{ e4 }}% of its Mana cost.<br /><br /><release>Release:</release> Varus releases the arrow, dealing <physicalDamage>{{ totaldamagemintooltip }} physical damage</physicalDamage>, reduced by {{ e3 }}% per enemy hit (minimum {{ e9 }}%). Damage and <keywordMajor>Blight</keywordMajor> detonation effects are increased by up to {{ maxchargeamp*100 }}% based on charge time (maximum <physicalDamage>{{ totaldamagemax }}</physicalDamage>) .{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<attention>Begin Charging:</attention> Varus draws back his next shot, <status>Slowing</status> himself by {{ e7 }}%. After {{ e5 }} seconds, if not fired, Varus will cancel the Ability and refund {{ e4 }}% of its Mana cost.<br /><br /><attention>Release:</attention> Varus releases the arrow, dealing <physicalDamage>{{ totaldamagemintooltip }} physical damage</physicalDamage>, reduced by {{ e3 }}% per enemy hit (minimum {{ e9 }}%). Damage and <keywordMajor>Blight</keywordMajor> detonation effects are increased by up to {{ maxchargeamp*100 }}% based on charge time (maximum <physicalDamage>{{ totaldamagemax }}</physicalDamage>) .{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Maximum Damage",
@@ -98337,11 +98351,13 @@
                     "leveltip": {
                         "label": [
                             "Damage on Attack",
-                            "Damage from Blight"
+                            "Maximum Health Damage",
+                            "Missing Health Damage"
                         ],
                         "effect": [
                             "{{ varuswonhitdamage }} -> {{ varuswonhitdamageNL }}",
-                            "{{ basepercenthpperstack*100.000000 }}% -> {{ basepercenthpperstacknl*100.000000 }}%"
+                            "{{ basepercenthpperstack*100.000000 }}% -> {{ basepercenthpperstacknl*100.000000 }}%",
+                            "{{ wqhealthdamage*100.000000 }}% -> {{ wqhealthdamagenl*100.000000 }}%"
                         ]
                     },
                     "maxrank": 5,
@@ -98474,7 +98490,7 @@
                     "id": "VarusE",
                     "name": "Hail of Arrows",
                     "description": "Varus fires a hail of arrows that deal physical damage and desecrate the ground. Desecrated ground slows enemies' Move Speed and reduces their self healing and regeneration.",
-                    "tooltip": "Varus fires a hail of arrows that deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and desecrates the ground for {{ e3 }} seconds, <status>Slowing</status> enemies by {{ e2 }}% and applying {{ grievousamount*100 }}% Grievous Wounds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Varus fires a hail of arrows that deals <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> and desecrates the ground for {{ e3 }} seconds, <status>Slowing</status> enemies by {{ e2 }}% and applying <keywordMajor>{{ grievousamount*100 }}% Grievous Wounds</keywordMajor>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -98731,7 +98747,7 @@
             ],
             "passive": {
                 "name": "Living Vengeance",
-                "description": "On kill or assist, Varus temporarily gains Attack Speed. This bonus is larger if the enemy is a champion.",
+                "description": "On kill or assist, Varus temporarily gains Attack Damage and Ability Power. This bonus is larger if the enemy is a champion.",
                 "image": {
                     "full": "VarusPassive.png",
                     "sprite": "passive4.png",
@@ -106009,13 +106025,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        13,
                         12,
                         11,
                         10,
-                        9
+                        9,
+                        8
                     ],
-                    "cooldownBurn": "13/12/11/10/9",
+                    "cooldownBurn": "12/11/10/9/8",
                     "cost": [
                         30,
                         30,
@@ -110086,14 +110102,12 @@
                     "leveltip": {
                         "label": [
                             "Shield Amount",
-                            "Cooldown",
                             "Mana Cost",
                             "Mana Restore",
                             "Attack Speed"
                         ],
                         "effect": [
                             "{{ baseshielding }} -> {{ baseshieldingNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}",
                             "{{ manarestore }} -> {{ manarestoreNL }}",
                             "{{ attackspeedamount }} -> {{ attackspeedamountNL }}"
@@ -110611,7 +110625,7 @@
                     "leveltip": {
                         "label": [
                             "Flat Damage",
-                            "% Max Health"
+                            "Maximum Health Damage"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
@@ -110891,16 +110905,14 @@
                     "id": "ZacR",
                     "name": "Let's Bounce!",
                     "description": "Zac bounces four times, knocking up enemies hit and slowing them.",
-                    "tooltip": "<spellPassive>Passive:</spellPassive> <spellName>Cell Division</spellName> healing is increased to <healing>{{ passivehealingtotaltooltip }} Health</healing> per <keywordMajor>Goo</keywordMajor> chunk.<br /><br /><spellActive>Active:</spellActive> Zac bounces {{ bounces }} times. The first bounce to hit each enemy <status>Knocks</status> them back and deals <magicDamage>{{ damageperbounce }} magic damage</magicDamage>. Subsequent bounces deal <magicDamage>{{ damagepersubsequentbounce }} magic damage</magicDamage> and <status>Slow</status> by {{ slowamount*100 }}% for {{ slowduration }} second.<br /><br />Zac gains up to <speed>{{ endingms*100 }}% Move Speed</speed> over time and can cast <spellName>Unstable Matter</spellName> while bouncing.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellActive>Active:</spellActive> Zac bounces {{ bounces }} times. The first bounce to hit each enemy <status>Knocks</status> them back and deals <magicDamage>{{ damageperbounce }} magic damage</magicDamage>. Subsequent bounces deal <magicDamage>{{ damagepersubsequentbounce }} magic damage</magicDamage> and <status>Slow</status> by {{ slowamount*100 }}% for {{ slowduration }} second.<br /><br />Zac gains up to <speed>{{ endingms*100 }}% Move Speed</speed> over time and can cast <spellName>Unstable Matter</spellName> while bouncing.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Base Bounce Damage",
-                            "Additional Chunk Healing",
                             "Cooldown"
                         ],
                         "effect": [
                             "{{ basedamagebounce }} -> {{ basedamagebounceNL }}",
-                            "{{ additionalchunkhealing }}% -> {{ additionalchunkhealingNL }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },

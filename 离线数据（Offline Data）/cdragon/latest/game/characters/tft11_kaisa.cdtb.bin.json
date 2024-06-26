@@ -12897,7 +12897,6 @@
             "parameters": [
                 {
                     "name": "Rim_A_High",
-                    "enabled": false,
                     "driver": {
                         "mElements": [
                             {
@@ -13122,40 +13121,14 @@
                     "name": "Dissolve_Bias",
                     "enabled": false,
                     "driver": {
-                        "mElements": [
-                            {
-                                "mCondition": {
-                                    "mAnimationNames": [
-                                        "Death"
-                                    ],
-                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "__type": "FloatLiteralMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            },
-                            {
-                                "mCondition": {
-                                    "mScriptName": "TFT_Unitbuff_UpgradeCeremony_Dissolve",
-                                    "__type": "HasBuffDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "__type": "FloatLiteralMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            }
-                        ],
-                        "mDefaultValue": {
-                            "mValue": 1.0,
-                            "__type": "FloatLiteralMaterialDriver"
+                        "mBoolDriver": {
+                            "__type": "IsDeadDynamicMaterialBoolDriver"
                         },
-                        "mBlendTime": 1.5,
-                        "mOverrideBlendTimes": [
-                            1.5,
-                            2.5
-                        ],
-                        "__type": "BlendingSwitchMaterialDriver"
+                        "mOnValue": 0.0,
+                        "mOffValue": 1.0,
+                        "mTurnOnTimeSec": 1.5,
+                        "mTurnOffTimeSec": 2.5,
+                        "__type": "LerpMaterialDriver"
                     },
                     "__type": "DynamicMaterialParameterDef"
                 },
@@ -15322,8 +15295,8 @@
         "critDamageMultiplier": 1.399999976158142,
         "baseMoveSpeed": 500.0,
         "attackRange": 890.0,
-        "attackSpeed": 0.800000011920929,
-        "attackSpeedRatio": 0.800000011920929,
+        "attackSpeed": 0.8500000238418579,
+        "attackSpeedRatio": 0.8500000238418579,
         "basicAttack": {
             "mAttackProbability": 0.5,
             "mAttackName": "TFT11_KaisaBasicAttack",

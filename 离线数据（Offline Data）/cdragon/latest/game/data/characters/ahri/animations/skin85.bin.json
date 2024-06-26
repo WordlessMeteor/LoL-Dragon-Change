@@ -186,6 +186,7 @@
                 "mEventDataMap": {
                     "{58966a3a}": {
                         "mStartFrame": 5.0,
+                        "mEndFrame": 8.0,
                         "mEffectKey": "Ahri_Q_Cas",
                         "mParticleEventDataPairList": [
                             {
@@ -197,7 +198,7 @@
                         "__type": "ParticleEventData"
                     },
                     "{96ea6e96}": {
-                        "mEndFrame": 7.0,
+                        "mEndFrame": 8.0,
                         "mEffectKey": "Ahri_Q_Orb_Cast",
                         "mParticleEventDataPairList": [
                             {
@@ -771,6 +772,7 @@
             "Spell2_ToRun": {
                 "mFlags": 5,
                 "mTrackDataName": "Default",
+                "mSyncGroupDataName": "{51e974df}",
                 "mEventDataMap": {
                     "{170efc87}": {
                         "mStartFrame": 25.0,
@@ -790,6 +792,7 @@
             },
             "Spell2_ToIdle": {
                 "mTrackDataName": "Default",
+                "mSyncGroupDataName": "{51e974df}",
                 "mAnimationResourceData": {
                     "mAnimationFilePath": "ASSETS/Characters/Ahri/Skins/Skin85/Animations/Spell2_toIdle_Form1.SKINS_Ahri_HoL.anm",
                     "__type": "AnimationResourceData"
@@ -861,7 +864,7 @@
                     "__type": "LogicDriverBoolParametricUpdater"
                 },
                 "mTrueConditionClipName": "Run_Spell4",
-                "mFalseConditionClipName": "{c380648a}",
+                "mFalseConditionClipName": "{5f28bc0e}",
                 "__type": "ConditionBoolClipData"
             },
             "{871388dc}": {
@@ -1208,7 +1211,7 @@
                         "__type": "SubmeshVisibilityEventData"
                     },
                     "{76f0dc39}": {
-                        "mEndFrame": 50.0,
+                        "mEndFrame": 42.0,
                         "mEffectKey": "{9dc8a8ea}",
                         "mParticleEventDataPairList": [
                             {
@@ -1227,7 +1230,7 @@
                         "__type": "ParticleEventData"
                     },
                     "{a8e5da9a}": {
-                        "mEndFrame": 50.0,
+                        "mEndFrame": 42.0,
                         "mEffectKey": "{4fb8f1ed}",
                         "mParticleEventDataPairList": [
                             {
@@ -1337,6 +1340,8 @@
                 "Updater": {
                     "__type": "MoveSpeedParametricUpdater"
                 },
+                "mChangeAnimationMidPlay": true,
+                "SyncFrameOnChangeAnim": true,
                 "DontStompTransitionClip": true,
                 "__type": "ConditionFloatClipData"
             },
@@ -1475,7 +1480,7 @@
             "Stunned": {
                 "mTrackDataName": "Default",
                 "mAnimationResourceData": {
-                    "mAnimationFilePath": "ASSETS/Characters/Ahri/Skins/Base/Animations/Stunned.anm",
+                    "mAnimationFilePath": "ASSETS/Characters/Ahri/Skins/Skin85/Animations/Stunned.SKINS_Ahri_HoL.anm",
                     "__type": "AnimationResourceData"
                 },
                 "__type": "AtomicClipData"
@@ -1483,7 +1488,7 @@
             "KnockUp": {
                 "mTrackDataName": "Default",
                 "mAnimationResourceData": {
-                    "mAnimationFilePath": "ASSETS/Characters/Ahri/Skins/Base/Animations/Knockup.anm",
+                    "mAnimationFilePath": "ASSETS/Characters/Ahri/Skins/Skin85/Animations/Knockup.SKINS_Ahri_HoL.anm",
                     "__type": "AnimationResourceData"
                 },
                 "__type": "AtomicClipData"
@@ -2273,6 +2278,45 @@
                     "__type": "AnimationResourceData"
                 },
                 "__type": "AtomicClipData"
+            },
+            "{d97c861b}": {
+                "mFlags": 2,
+                "mConditionFloatPairDataList": [
+                    {
+                        "mClipName": "{f517c676}",
+                        "mHoldAnimationToHigher": 450.0,
+                        "__type": "ConditionFloatPairData"
+                    },
+                    {
+                        "mClipName": "Run_Haste",
+                        "mValue": 451.0,
+                        "mHoldAnimationToHigher": 1000.0,
+                        "__type": "ConditionFloatPairData"
+                    }
+                ],
+                "Updater": {
+                    "__type": "MoveSpeedParametricUpdater"
+                },
+                "mChildAnimDelaySwitchTime": 1.0,
+                "__type": "ConditionFloatClipData"
+            },
+            "{5f28bc0e}": {
+                "Updater": {
+                    "driver": {
+                        "mBoolDriver": {
+                            "Spell": "{28a70038}",
+                            "__type": "HasBuffDynamicMaterialBoolDriver"
+                        },
+                        "mDelayOff": 1.0,
+                        "__type": "DelayedBoolMaterialDriver"
+                    },
+                    "__type": "LogicDriverBoolParametricUpdater"
+                },
+                "mChangeAnimationMidPlay": true,
+                "DontStompTransitionClip": true,
+                "mTrueConditionClipName": "{d97c861b}",
+                "mFalseConditionClipName": "{c380648a}",
+                "__type": "ConditionBoolClipData"
             }
         },
         "mMaskDataMap": {
@@ -3767,6 +3811,9 @@
                 "__type": "SyncGroupData"
             },
             "Spell3": {
+                "__type": "SyncGroupData"
+            },
+            "{51e974df}": {
                 "__type": "SyncGroupData"
             }
         },
@@ -11074,6 +11121,18 @@
             "6857006548747377537": {
                 "mTime": 0.10000000149011612,
                 "__type": "TimeBlendData"
+            },
+            "6028927017134781874": {
+                "mClipName": "Spell2_ToRun",
+                "__type": "TransitionClipBlendData"
+            },
+            "6028927013738951322": {
+                "mClipName": "Spell2_ToRun",
+                "__type": "TransitionClipBlendData"
+            },
+            "10832289108477934368": {
+                "mClipName": "Crit_ToIdle",
+                "__type": "TransitionClipBlendData"
             }
         },
         "__type": "AnimationGraphData"
