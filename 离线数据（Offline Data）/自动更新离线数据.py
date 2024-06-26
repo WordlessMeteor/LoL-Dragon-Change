@@ -193,8 +193,8 @@ while True:
                     print('测试服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.')
                     log.write('测试服语言信息获取失败！请检查系统网络状况和代理设置。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the system network condition and agent configuration. The program will exit now.\n')
                 elif status == 404:
-                    print('正式服语言信息获取失败！请检查以下链接的可用性。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the URL availability. The program will exit now.\nhttps://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/')
-                    log.write('正式服语言信息获取失败！请检查以下链接的可用性。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the URL availability. The program will exit now.\nhttps://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/\n')
+                    print('测试服语言信息获取失败！请检查以下链接的可用性。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the URL availability. The program will exit now.\nhttps://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/')
+                    log.write('测试服语言信息获取失败！请检查以下链接的可用性。程序即将退出。\nLocales in the "pbe" folder capture failure! Please check the URL availability. The program will exit now.\nhttps://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/\n')
                 log.close()
                 time.sleep(3)
                 exit()
@@ -207,7 +207,7 @@ while True:
                     soup = BeautifulSoup(line, 'lxml')
                     name = soup.find("a")["href"]
                     locales_pbe.append(name)
-            cdragon_folders = ["latest/cdragon/arena/", "latest/cdragon/tft/"] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_latest] + ["pbe/cdragon/arena/", "pbe/cdragon/tft/"] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_pbe]
+            cdragon_folders = ["latest/cdragon/tft/"] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_latest] + ["pbe/cdragon/tft/"] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_pbe]
         elif mode == "4":
             print("请选择输入方式：\nPlease choose an input method:\n1\t逐行输入（Line by line）\n2\t来自文件（From file）")
             log.write("请选择输入方式：\nPlease choose an input method:\n1\t逐行输入（Line by line）\n2\t来自文件（From file）\n")
@@ -377,7 +377,7 @@ while True:
                     local_timestamp = os.path.getmtime(os.path.join(local_prefix, folder, name)) if os.path.exists(os.path.join(local_prefix, folder)) and name in os.listdir(os.path.join(local_prefix, folder)) else 0
                     local_date = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(local_timestamp))
                     if name.endswith((".json", ".txt", ".js", ".yaml")):
-                        if mode == "2" and time_get_method == "1" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp + time.localtime().tm_gmtoff < latest_mod_timestamp or mode == "3" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"] or mode == "4" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp:
+                        if mode == "2" and time_get_method == "1" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp + time.localtime().tm_gmtoff < latest_mod_timestamp or mode == "3" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["champion-summary.json", "cherry-augments.json", "companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"] or mode == "4" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp:
                             continue
                         table["file"].append(name)
                         table["size"].append(size)
@@ -507,7 +507,7 @@ while True:
             log.write("\n")
     elif resource[0] == "2":
         if ddragon_hint:
-            hint = '请按以下步骤操作：\nPlease follow these steps:\n1. 访问网址https://developer.riotgames.com/docs/lol#data-dragon\n   Visit the website: https://developer.riotgames.com/docs/lol#data-dragon\n2. 在Latest中找到正式服最新版本数据资源压缩包下载链接。例如：https://ddragon.leagueoflegends.com/cdn/dragontail-14.12.1.tgz\n   Find the link to download the compressed tarball of the latest data resource for live servers. For example: https://ddragon.leagueoflegends.com/cdn/dragontail-14.12.1.tgz\n3. 下载。这需要花费一些时间。\n   Download the file. It may take some time.\n4. 将下载好的tgz文件直接“解压至此”。\n   "Extract here" for the tgz file.\n5. 将解压出来的压缩包再次解压到选定文件夹下与压缩包同名的文件夹。示例：将“dragontail-14.12.1.tar”解压到“D:/360AI浏览器下载/dragontail-14.12.1”文件夹下。\nExtract to "Archive-Name" folder under the selected folder for the extracted tar file. For example, extract "dragontail-14.12.1.tar" into the folder "D:/Downloads/dragontail-14.12.1".\n接下来，请给出数据资源的位置。（按照上例应为“D:/360AI浏览器下载/dragontail-14.12.1/14.12.1/data”。）\nNext, please provide the directory that stores the data resources. (By the above example, the directory should be "D:/Downloads/dragontail-14.12.1/14.12.1/data".)'
+            hint = '请按以下步骤操作：\nPlease follow these steps:\n1. 访问网址https://developer.riotgames.com/docs/lol#data-dragon\n   Visit the website: https://developer.riotgames.com/docs/lol#data-dragon\n2. 在Latest中找到正式服最新版本数据资源压缩包下载链接。例如：https://ddragon.leagueoflegends.com/cdn/dragontail-14.13.1.tgz\n   Find the link to download the compressed tarball of the latest data resource for live servers. For example: https://ddragon.leagueoflegends.com/cdn/dragontail-14.13.1.tgz\n3. 下载。这需要花费一些时间。\n   Download the file. It may take some time.\n4. 将下载好的tgz文件直接“解压至此”。\n   "Extract here" for the tgz file.\n5. 将解压出来的压缩包再次解压到选定文件夹下与压缩包同名的文件夹。示例：将“dragontail-14.13.1.tar”解压到“D:/360AI浏览器下载/dragontail-14.13.1”文件夹下。\nExtract to "Archive-Name" folder under the selected folder for the extracted tar file. For example, extract "dragontail-14.13.1.tar" into the folder "D:/Downloads/dragontail-14.13.1".\n接下来，请给出数据资源的位置。（按照上例应为“D:/360AI浏览器下载/dragontail-14.13.1/14.13.1/data”。）\nNext, please provide the directory that stores the data resources. (By the above example, the directory should be "D:/Downloads/dragontail-14.13.1/14.13.1/data".)'
             print(hint)
             log.write(hint + "\n")
             ddragon_hint = False

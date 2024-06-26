@@ -294,6 +294,7 @@ async def search_profile(connection):
             URLPatch = "pbe" if platformId == "PBE1" or platformId == "PBE" else "latest"
             patches_url = "https://ddragon.leagueoflegends.com/api/versions.json"
             spell_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/summoner-spells.json" %(URLPatch, language_cdragon[language_code]) #CommunityDragon数据库只存储第7赛季及以后的数据（CommunityDragon database only stores data including and after Season 7）
+            LoLChampion_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/champion-summary.json" %(URLPatch, language_cdragon[language_code])
             LoLItem_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/items.json" %(URLPatch, language_cdragon[language_code])
             perk_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/perks.json" %(URLPatch, language_cdragon[language_code])
             perkstyle_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/perkstyles.json" %(URLPatch, language_cdragon[language_code])
@@ -302,10 +303,11 @@ async def search_profile(connection):
             TFTItem_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/tftitems.json" %(URLPatch, language_cdragon[language_code])
             TFTCompanion_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/companions.json" %(URLPatch, language_cdragon[language_code])
             TFTTrait_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/tfttraits.json" %(URLPatch, language_cdragon[language_code])
-            Arena_url = "https://raw.communitydragon.org/%s/cdragon/arena/%s.json" %(URLPatch, language_code.lower())
+            CherryAugment_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/cherry-augments.json" %(URLPatch, language_cdragon[language_code])
             #下面声明离线数据资源的默认地址（The following code declare the default paths of offline data resources）
             patches_local_default = "离线数据（Offline Data）\\versions.json"
             spell_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\summoner-spells.json" %(URLPatch, language_cdragon[language_code])
+            LoLChampion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\champion-summary.json" %(URLPatch, language_cdragon[language_code])
             LoLItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\items.json" %(URLPatch, language_cdragon[language_code])
             perk_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\perks.json" %(URLPatch, language_cdragon[language_code])
             perkstyle_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\perkstyles.json" %(URLPatch, language_cdragon[language_code])
@@ -314,7 +316,7 @@ async def search_profile(connection):
             TFTItem_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tftitems.json" %(URLPatch, language_cdragon[language_code])
             TFTCompanion_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\companions.json" %(URLPatch, language_cdragon[language_code])
             TFTTrait_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\tfttraits.json" %(URLPatch, language_cdragon[language_code])
-            Arena_local_default = "离线数据（Offline Data）\\cdragon\\%s\\cdragon\\arena\\%s.json" %(URLPatch, language_code.lower())
+            CherryAugment_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\cherry-augments.json" %(URLPatch, language_code.lower())
             print("请选择数据资源获取模式：\nPlease select the data resource capture mode:\n1\t在线模式（Online）\n2\t离线模式（Offline）")
             prepareMode = input()
             switch_language = False
@@ -411,6 +413,50 @@ async def search_profile(connection):
                                 continue
                             except json.decoder.JSONDecodeError:
                                 print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的召唤师技能数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the summoner spell data archived in CommunityDragon database (%s)!" %(spell_url, spell_url))
+                                continue
+                    if switch_prepare_mode:
+                        prepareMode = ""
+                        continue
+                    #下面获取英雄信息（The following code get LoL champion data）
+                    try:
+                        print("正在加载英雄信息……\nLoading LoL champion information from CommunityDragon...")
+                        LoLChampion_initial = requests.get(LoLChampion_url) #LoLItem存储英雄信息。（Variable `LoLChampion_initial` stores information of LoL champions）
+                        if LoLChampion_initial.ok:
+                            LoLChampion_initial = LoLChampion_initial.json()
+                        else:
+                            print(LoLChampion_initial)
+                            print("当前语言不可用！请切换语言或检查源代码中的链接。\nCurrent language isn't available! Please change another language or check the requests link in the source code.")
+                            switch_language = True
+                            break
+                    except requests.exceptions.RequestException:
+                        print('英雄信息获取超时！正在尝试离线加载数据……\nLoL champion information capture timeout! Trying loading offline data ...\n请输入英雄Json数据文件路径。输入空字符以使用默认相对引用路径“%s”。输入“2”以转为离线模式。输入“0”以退出程序。\nPlease enter the LoL champion Json data file path. Enter an empty string to use the default relative path: "%s". Submit "2" to switch to offline mode. Submit "0" to exit.' %(LoLChampion_local_default, LoLChampion_local_default))
+                        while True:
+                            LoLChampion_local = input()
+                            if LoLChampion_local == "":
+                                LoLChampion_local = LoLChampion_local_default
+                            elif LoLChampion_local[0] == "0":
+                                print("英雄信息获取失败！请检查系统网络状况和代理设置。\nLoL champion information capture failure! Please check the system network condition and agent configuration.")
+                                time.sleep(5)
+                                return 1
+                            else:
+                                switch_prepare_mode = True
+                                break
+                            try:
+                                with open(LoLChampion_local, "r", encoding = "utf-8") as fp:
+                                    LoLChampion_initial = json.load(fp)
+                                if isinstance(LoLChampion_initial, list) and all(isinstance(LoLChampion_initial[i], dict) for i in range(len(LoLChampion_initial))) and all(j in LoLChampion_initial[i] for i in range(len(LoLChampion_initial)) for j in ["id", "name", "alias", "squarePortraitPath", "roles"]) and all(isinstance(LoLChampion_initial[i]["id"], int) for i in range(len(LoLChampion_initial))) and all(isinstance(LoLChampion_initial[i]["name"], str) for i in range(len(LoLChampion_initial))) and all(isinstance(LoLChampion_initial[i]["alias"], str) for i in range(len(LoLChampion_initial))) and all(isinstance(LoLChampion_initial[i]["squarePortraitPath"], str) for i in range(len(LoLChampion_initial))) and all(isinstance(LoLChampion_initial[i]["roles"], list) for i in range(len(LoLChampion_initial))):
+                                    break
+                                else:
+                                    print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的英雄数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the LoL champion data archived in CommunityDragon database (%s)!" %(LoLChampion_url, LoLChampion_url))
+                                    continue
+                            except FileNotFoundError:
+                                print('未找到文件“%s”！请输入正确的英雄Json数据文件路径！\nFile "%s" NOT found! Please input a correct LoL champion Json data file path!' %(LoLChampion_local, LoLChampion_local))
+                                continue
+                            except OSError:
+                                print("数据文件名不合法！请输入含有英雄信息的本地文件的路径！\nIllegal data filename! Please input the path of a local file with LoL champion information.")
+                                continue
+                            except json.decoder.JSONDecodeError:
+                                print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的英雄数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the LoL champion data archived in CommunityDragon database (%s)!" %(LoLChampion_url, LoLChampion_url))
                                 continue
                     if switch_prepare_mode:
                         prepareMode = ""
@@ -770,22 +816,22 @@ async def search_profile(connection):
                     #下面获取斗魂竞技场强化符文数据（The following code get Arena augment data）
                     try:
                         print("正在加载斗魂竞技场强化符文信息……\nLoading Arena augment information from CommunityDragon ...")
-                        Arena_initial = requests.get(Arena_url) #Arena存储斗魂竞技场的强化符文信息（Variable `Arena_initial` stores information of Arena augments）
-                        if Arena_initial.ok:
-                            Arena_initial = Arena_initial.json()
+                        CherryAugment_initial = requests.get(CherryAugment_url) #Arena存储斗魂竞技场的强化符文信息（Variable `CherryAugment_initial` stores information of Arena augments）
+                        if CherryAugment_initial.ok:
+                            CherryAugment_initial = CherryAugment_initial.json()
                             break
                         else:
-                            print(Arena_initial)
+                            print(CherryAugment_initial)
                             print("当前语言不可用！请切换语言或检查源代码中的链接。\nCurrent language isn't available! Please change another language or check the requests link in the source code.")
                             switch_language = True
                             break
                     except requests.exceptions.RequestException:
-                        print('斗魂竞技场强化符文信息获取超时！正在尝试离线加载数据……\nArena augment information capture timeout! Trying loading offline data ...\n请输入斗魂竞技场强化符文Json数据文件路径。输入空字符以使用默认相对引用路径“%s”。输入“2”以转为离线模式。输入“0”以退出程序。\nPlease enter the Arena augment Json data file path. Enter an empty string to use the default relative path: "%s". Submit "2" to switch to offline mode. Submit "0" to exit.' %(Arena_local_default, Arena_local_default))
+                        print('斗魂竞技场强化符文信息获取超时！正在尝试离线加载数据……\nArena augment information capture timeout! Trying loading offline data ...\n请输入斗魂竞技场强化符文Json数据文件路径。输入空字符以使用默认相对引用路径“%s”。输入“2”以转为离线模式。输入“0”以退出程序。\nPlease enter the Arena augment Json data file path. Enter an empty string to use the default relative path: "%s". Submit "2" to switch to offline mode. Submit "0" to exit.' %(CherryAugment_local_default, CherryAugment_local_default))
                         while True:
-                            Arena_local = input()
-                            if Arena_local == "":
-                                Arena_local = Arena_local_default
-                            elif Arena_local[0] == "0":
+                            CherryAugment_local = input()
+                            if CherryAugment_local == "":
+                                CherryAugment_local = CherryAugment_local_default
+                            elif CherryAugment_local[0] == "0":
                                 print("斗魂竞技场强化符文信息获取失败！请检查系统网络状况和代理设置。\nArena augment information capture failure! Please check the system network condition and agent configuration.")
                                 time.sleep(5)
                                 return 1
@@ -793,21 +839,21 @@ async def search_profile(connection):
                                 switch_prepare_mode = True
                                 break
                             try:
-                                with open(Arena_local, "r", encoding = "utf-8") as fp:
-                                    Arena_initial = json.load(fp)
-                                if isinstance(Arena_initial, dict) and all(i in Arena_initial for i in ["augments"]) and isinstance(Arena_initial["augments"], list) and all(isinstance(Arena_initial["augments"][i], dict) for i in range(len(Arena_initial))) and all(j in Arena_initial["augments"][i] for i in range(len(Arena_initial["augments"])) for j in ["apiName", "calculations", "dataValues", "desc", "iconLarge", "iconSmall", "id", "name", "rarity", "tooltip"]):
+                                with open(CherryAugment_local, "r", encoding = "utf-8") as fp:
+                                    CherryAugment_initial = json.load(fp)
+                                if isinstance(CherryAugment_initial, list) and all(isinstance(CherryAugment_initial[i], dict) for i in range(len(CherryAugment_initial))) and all(j in CherryAugment_initial[i] for i in range(len(CherryAugment_initial)) for j in ["id", "nameTRA", "augmentSmallIconPath", "rarity"]) and all(isinstance(CherryAugment_initial[i]["id"], int) for i in range(len(CherryAugment_initial))) and all(isinstance(CherryAugment_initial[i]["nameTRA"], str) for i in range(len(CherryAugment_initial))) and all(isinstance(CherryAugment_initial[i]["augmentSmallIconPath"], str) for i in range(len(CherryAugment_initial))) and all(isinstance(CherryAugment_initial[i]["rarity"], str) for i in range(len(CherryAugment_initial))):
                                     break
                                 else:
-                                    print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的斗魂竞技场强化符文数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the Arena augment data archived in CommunityDragon database (%s)!" %(Arena_url, Arena_url))
+                                    print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的斗魂竞技场强化符文数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the Arena augment data archived in CommunityDragon database (%s)!" %(CherryAugment_url, CherryAugment_url))
                                     continue
                             except FileNotFoundError:
-                                print('未找到文件“%s”！请输入正确的斗魂竞技场强化符文Json数据文件路径！\nFile "%s" NOT found! Please input a correct Arena augment Json data file path!' %(Arena_local, Arena_local))
+                                print('未找到文件“%s”！请输入正确的斗魂竞技场强化符文Json数据文件路径！\nFile "%s" NOT found! Please input a correct Arena augment Json data file path!' %(CherryAugment_local, CherryAugment_local))
                                 continue
                             except OSError:
                                 print("数据文件名不合法！请输入含有斗魂竞技场强化符文信息的本地文件的路径！\nIllegal data filename! Please input the path of a local file with Arena augment information.")
                                 continue
                             except json.decoder.JSONDecodeError:
-                                print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的斗魂竞技场强化符文数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the Arena augment data archived in CommunityDragon database (%s)!" %(Arena_url, Arena_url))
+                                print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的斗魂竞技场强化符文数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the Arena augment data archived in CommunityDragon database (%s)!" %(CherryAugment_url, CherryAugment_url))
                                 continue
                     if switch_prepare_mode:
                         prepareMode = ""
@@ -815,13 +861,13 @@ async def search_profile(connection):
                     break
                 else:
                     switch_prepare_mode = False
-                    print('请在浏览器中打开以下网页，待加载完成后按Ctrl + S保存网页json文件至同目录的“离线数据（Offline Data）”文件夹下，并根据括号内的提示放置和命名文件。\nPlease open the following URLs in a browser, then press Ctrl + S to save the online json files into the folder "离线数据（Offline Data）" under the same directory after the website finishes loading and organize and rename the downloaded files according to the hints in the circle brackets.\n版本信息（%s）： %s\n召唤师技能（%s）： %s\n英雄联盟装备（%s）： %s\n基石符文（%s）： %s\n符文系（%s）： %s\n云顶之弈基础信息（%s）： %s\n云顶之弈棋子（%s）： %s\n云顶之弈装备（%s）： %s\n云顶之弈小小英雄（%s）： %s\n云顶之弈羁绊（%s）： %s\n斗魂竞技场强化符文（%s）： %s' %(patches_local_default[19:], patches_url, spell_local_default[19:], spell_url, LoLItem_local_default[19:], LoLItem_url, perk_local_default[19:], perk_url, perkstyle_local_default[19:], perkstyle_url, TFT_local_default[19:], TFT_url, TFTChampion_local_default[19:], TFTChampion_url, TFTItem_local_default[19:], TFTItem_url, TFTCompanion_local_default[19:], TFTCompanion_url, TFTTrait_local_default[19:], TFTTrait_url, Arena_local_default[19:], Arena_url))
-                    offline_files_loaded = {"patch": False, "spell": False, "LoLItem": False, "perk": False, "perkstyle": False, "TFT": False, "TFTChampion": False, "TFTItem": False, "TFTCompanion": False, "TFTTrait": False, "Arena": False}
-                    offline_files = {"patch": {"file": patches_local_default, "URL": patches_url, "content": "版本信息"}, "spell": {"file": spell_local_default, "URL": spell_url, "content": "召唤师技能"}, "LoLItem": {"file": LoLItem_local_default, "URL": LoLItem_url, "content": "英雄联盟装备"}, "perk": {"file": perk_local_default, "URL": perk_url, "content": "基石符文"}, "perkstyle": {"file": perkstyle_local_default, "URL": perkstyle_url, "content": "符文系"}, "TFT": {"file": TFT_local_default, "URL": TFT_url, "content": "云顶之弈基础信息"}, "TFTChampion": {"file": TFTChampion_local_default, "URL": TFTChampion_url, "content": "云顶之弈英雄"}, "TFTItem": {"file": TFTItem_local_default, "URL": TFTItem_url, "content": "云顶之弈装备"}, "TFTCompanion": {"file": TFTCompanion_local_default, "URL": TFTCompanion_url, "content": "云顶之弈小小英雄"}, "TFTTrait": {"file": TFTTrait_local_default, "URL": TFTTrait_url, "content": "云顶之弈羁绊"}, "Arena": {"file": Arena_local_default, "URL": Arena_url, "content": "斗魂竞技场强化符文"}}
+                    print('请在浏览器中打开以下网页，待加载完成后按Ctrl + S保存网页json文件至同目录的“离线数据（Offline Data）”文件夹下，并根据括号内的提示放置和命名文件。\nPlease open the following URLs in a browser, then press Ctrl + S to save the online json files into the folder "离线数据（Offline Data）" under the same directory after the website finishes loading and organize and rename the downloaded files according to the hints in the circle brackets.\n版本信息（%s）： %s\n召唤师技能（%s）： %s\n英雄（%s）： %s\n英雄联盟装备（%s）： %s\n基石符文（%s）： %s\n符文系（%s）： %s\n云顶之弈基础信息（%s）： %s\n云顶之弈棋子（%s）： %s\n云顶之弈装备（%s）： %s\n云顶之弈小小英雄（%s）： %s\n云顶之弈羁绊（%s）： %s\n斗魂竞技场强化符文（%s）： %s' %(patches_local_default[19:], patches_url, spell_local_default[19:], spell_url, LoLChampion_local_default[19:], LoLChampion_url, LoLItem_local_default[19:], LoLItem_url, perk_local_default[19:], perk_url, perkstyle_local_default[19:], perkstyle_url, TFT_local_default[19:], TFT_url, TFTChampion_local_default[19:], TFTChampion_url, TFTItem_local_default[19:], TFTItem_url, TFTCompanion_local_default[19:], TFTCompanion_url, TFTTrait_local_default[19:], TFTTrait_url, CherryAugment_local_default[19:], CherryAugment_url))
+                    offline_files_loaded = {"patch": False, "spell": False, "LoLChampion": False, "LoLItem": False, "perk": False, "perkstyle": False, "TFT": False, "TFTChampion": False, "TFTItem": False, "TFTCompanion": False, "TFTTrait": False, "CherryAugment": False}
+                    offline_files = {"patch": {"file": patches_local_default, "URL": patches_url, "content": "版本信息"}, "spell": {"file": spell_local_default, "URL": spell_url, "content": "召唤师技能"}, "LoLChampion": {"file": LoLChampion_local_default, "URL": LoLChampion_url, "content": "英雄"}, "LoLItem": {"file": LoLItem_local_default, "URL": LoLItem_url, "content": "英雄联盟装备"}, "perk": {"file": perk_local_default, "URL": perk_url, "content": "基石符文"}, "perkstyle": {"file": perkstyle_local_default, "URL": perkstyle_url, "content": "符文系"}, "TFT": {"file": TFT_local_default, "URL": TFT_url, "content": "云顶之弈基础信息"}, "TFTChampion": {"file": TFTChampion_local_default, "URL": TFTChampion_url, "content": "云顶之弈英雄"}, "TFTItem": {"file": TFTItem_local_default, "URL": TFTItem_url, "content": "云顶之弈装备"}, "TFTCompanion": {"file": TFTCompanion_local_default, "URL": TFTCompanion_url, "content": "云顶之弈小小英雄"}, "TFTTrait": {"file": TFTTrait_local_default, "URL": TFTTrait_url, "content": "云顶之弈羁绊"}, "CherryAugment": {"file": CherryAugment_local_default, "URL": CherryAugment_url, "content": "斗魂竞技场强化符文"}}
                     print('请按任意键以加载离线数据。输入“1”以转为在线模式。输入“0”以退出程序。\nPlease input anything to load offline data. Input "1" to switch to online mode. Submit "0" to exit.')
                     while any(not i for i in offline_files_loaded.values()):
-                        offline_files_notfound = {"patch": False, "spell": False, "LoLItem": False, "perk": False, "perkstyle": False, "TFT": False, "TFTChampion": False, "TFTItem": False, "TFTCompanion": False, "TFTTrait": False, "Arena": False}
-                        offline_files_formaterror = {"patch": False, "spell": False, "LoLItem": False, "perk": False, "perkstyle": False, "TFT": False, "TFTChampion": False, "TFTItem": False, "TFTCompanion": False, "TFTTrait": False, "Arena": False}
+                        offline_files_notfound = {"patch": False, "spell": False, "LoLChampion": False, "LoLItem": False, "perk": False, "perkstyle": False, "TFT": False, "TFTChampion": False, "TFTItem": False, "TFTCompanion": False, "TFTTrait": False, "CherryAugment": False}
+                        offline_files_formaterror = {"patch": False, "spell": False, "LoLChampion": False, "LoLItem": False, "perk": False, "perkstyle": False, "TFT": False, "TFTChampion": False, "TFTItem": False, "TFTCompanion": False, "TFTTrait": False, "CherryAugment": False}
                         prepareMode = input()
                         if prepareMode != "" and prepareMode[0] == "1":
                             switch_prepare_mode = True
@@ -870,6 +916,20 @@ async def search_profile(connection):
                             else:
                                 if not offline_files_formaterror["spell"]:
                                     offline_files_loaded["spell"] = True
+                        #下面获取英雄信息（The following code get LoL champion data）
+                        if not offline_files_loaded["LoLChampion"]:
+                            try:
+                                with open(LoLChampion_local_default, "r", encoding = "utf-8") as fp:
+                                    LoLChampion_initial = json.load(fp)
+                                if not(isinstance(LoLChampion_initial, list) and all(isinstance(LoLChampion_initial[i], dict) for i in range(len(LoLChampion_initial))) and all(j in LoLChampion_initial[i] for i in range(len(LoLChampion_initial)) for j in ["id", "name", "alias", "squarePortraitPath", "roles"]) and all(isinstance(LoLChampion_initial[i]["id"], int) for i in range(len(LoLChampion_initial))) and all(isinstance(LoLChampion_initial[i]["name"], str) for i in range(len(LoLChampion_initial))) and all(isinstance(LoLChampion_initial[i]["alias"], str) for i in range(len(LoLChampion_initial))) and all(isinstance(LoLChampion_initial[i]["squarePortraitPath"], str) for i in range(len(LoLChampion_initial))) and all(isinstance(LoLChampion_initial[i]["roles"], list) for i in range(len(LoLChampion_initial)))):
+                                    offline_files_formaterror["LoLChampion"] = True
+                            except FileNotFoundError:
+                                offline_files_notfound["LoLChampion"] = True
+                            except json.decoder.JSONDecodeError:
+                                offline_files_formaterror["LoLChampion"] = True
+                            else:
+                                if not offline_files_formaterror["LoLChampion"]:
+                                    offline_files_loaded["LoLChampion"] = True
                         #下面获取英雄联盟装备信息（The following code get LoL item data）
                         if not offline_files_loaded["LoLItem"]:
                             try:
@@ -983,19 +1043,19 @@ async def search_profile(connection):
                                 if not offline_files_formaterror["TFTTrait"]:
                                     offline_files_loaded["TFTTrait"] = True
                         #下面获取斗魂竞技场强化符文数据（The following code get Arena augment data）
-                        if not offline_files_loaded["Arena"]:
+                        if not offline_files_loaded["CherryAugment"]:
                             try:
-                                with open(Arena_local_default, "r", encoding = "utf-8") as fp:
-                                    Arena_initial = json.load(fp)
-                                if not(isinstance(Arena_initial, dict) and all(i in Arena_initial for i in ["augments"]) and isinstance(Arena_initial["augments"], list) and all(isinstance(Arena_initial["augments"][i], dict) for i in range(len(Arena_initial))) and all(j in Arena_initial["augments"][i] for i in range(len(Arena_initial["augments"])) for j in ["apiName", "calculations", "dataValues", "desc", "iconLarge", "iconSmall", "id", "name", "rarity", "tooltip"])):
-                                    offline_files_formaterror["Arena"] = True
+                                with open(CherryAugment_local_default, "r", encoding = "utf-8") as fp:
+                                    CherryAugment_initial = json.load(fp)
+                                if not(isinstance(CherryAugment_initial, list) and all(isinstance(CherryAugment_initial[i], dict) for i in range(len(CherryAugment_initial))) and all(j in CherryAugment_initial[i] for i in range(len(CherryAugment_initial)) for j in ["id", "nameTRA", "augmentSmallIconPath", "rarity"]) and all(isinstance(CherryAugment_initial[i]["id"], int) for i in range(len(CherryAugment_initial))) and all(isinstance(CherryAugment_initial[i]["nameTRA"], str) for i in range(len(CherryAugment_initial))) and all(isinstance(CherryAugment_initial[i]["augmentSmallIconPath"], str) for i in range(len(CherryAugment_initial))) and all(isinstance(CherryAugment_initial[i]["rarity"], str) for i in range(len(CherryAugment_initial)))):
+                                    offline_files_formaterror["CherryAugment"] = True
                             except FileNotFoundError:
-                                offline_files_notfound["Arena"] = True
+                                offline_files_notfound["CherryAugment"] = True
                             except json.decoder.JSONDecodeError:
-                                offline_files_formaterror["Arena"] = True
+                                offline_files_formaterror["CherryAugment"] = True
                             else:
-                                if not offline_files_formaterror["Arena"]:
-                                    offline_files_loaded["Arena"] = True
+                                if not offline_files_formaterror["CherryAugment"]:
+                                    offline_files_loaded["CherryAugment"] = True
                         #下面总结离线数据加载情况（The following code conclude the result of loading offline data）
                         unloaded_offline_files = []
                         notfound_offline_files = []
@@ -1034,6 +1094,10 @@ async def search_profile(connection):
     for spell_iter in spell_initial:
         spell_id = spell_iter.pop("id")
         spells_initial[spell_id] = spell_iter
+    LoLChampions_initial = {} #LoLChampions为嵌套字典，键为英雄序号，值为英雄信息字典。一个键值对的示例如右：（Variable `LoLItems` is a nested dictionary, whose keys are itemIds and values are item information dictionaries. An example of the key-value pairs is shown as follows: ）{1: {"name": "黑暗之女", "alias": "Annie", "squarePortraitPath": "/lol-game-data/assets/v1/champion-icons/1.png", "roles": ["mage", "support"]}}
+    for LoLChampion_iter in LoLChampion_initial:
+        LoLChampion_id = LoLChampion_iter.pop("id")
+        LoLChampions_initial[LoLChampion_id] = LoLChampion_iter
     LoLItems_initial = {} #LoLItems为嵌套字典，键为装备序号，值为装备信息字典。一个键值对的示例如右：（Variable `LoLItems` is a nested dictionary, whose keys are itemIds and values are item information dictionaries. An example of the key-value pairs is shown as follows: ）{1001: {"name": "鞋子", "description": "<mainText><stats><attention>25</attention>移动速度</stats></mainText><br>", "active": False, "inStore": True, "from": [], "to": [3111, 3006, 3005, 3009, 3020, 3047, 3117, 3158], "categories": ["Boots"], "maxStacks": 1, "requiredChampion": "", "requiredAlly": "", "requiredBuffCurrencyName": "", "requiredBuffCurrencyCost": 0, "specialRecipe": 0, "isEnchantment": False, "price": 300, "priceTotal": 300, "iconPath": "/lol-game-data/assets/ASSETS/Items/Icons2D/1001_Class_T1_BootsofSpeed.png"}}
     for LoLItem_iter in LoLItem_initial:
         LoLItem_id = LoLItem_iter.pop("id")
@@ -1071,13 +1135,13 @@ async def search_profile(connection):
             conditional_trait_sets[style_idx] = conditional_trait_set
         trait_iter["conditional_trait_sets"] = conditional_trait_sets
         TFTTraits_initial[trait_id] = trait_iter
-    ArenaAugments_initial = {} #ArenaAugments为嵌套字典，键为斗魂竞技场强化符文在LCU API上的表达形式，值为斗魂竞技场强化符文信息字典。一个键值对的实例如右：（Variable `ArenaAugments` is a nested dictionary, whose keys are LCU API representation of Arena augments and values are Arena augment information dictionaries. An example of the key-value pairs is shown as follows: ）{89: {"apiName": "WarmupRoutine", "calculations": {}, "dataValues": {"DamagePerStack": 0.009999999776482582, "MaxStacks": 24.0}, "desc": "获得召唤师技能<spellName>热身动作</spellName>。<br><br><rules><spellName>热身动作</spellName>可使你通过进行引导来提升你的伤害，持续至回合结束。</rules>", "iconLarge": "assets/ux/cherry/augments/icons/warmuproutine_large.2v2_mode_fighters.png", "iconSmall": "assets/ux/cherry/augments/icons/warmuproutine_small.2v2_mode_fighters.png", "name": "热身动作", "rarity": 0, "tooltip": "进行引导，每秒使你的伤害提升2%，至多至24%。<br><br>这个回合的额外伤害：@f1@<br>额外伤害的总和：@f2@"}}
-    for ArenaAugment in Arena_initial["augments"]:
-        ArenaAugment_id = ArenaAugment.pop("id")
-        ArenaAugments_initial[ArenaAugment_id] = ArenaAugment
+    CherryAugments_initial = {} #CherryAugments为嵌套字典，键为斗魂竞技场强化符文在LCU API上的表达形式，值为斗魂竞技场强化符文信息字典。一个键值对的实例如右：（Variable `CherryAugments` is a nested dictionary, whose keys are LCU API representation of Arena augments and values are Arena augment information dictionaries. An example of the key-value pairs is shown as follows: ）{205: {"nameTRA": "物理转魔法", "augmentSmallIconPath": "/lol-game-data/assets/ASSETS/UX/Cherry/Augments/Icons/ADAPt_small.png", "rarity": "kSilver"}}
+    for CherryAugment in CherryAugment_initial:
+        CherryAugment_id = CherryAugment.pop("id")
+        CherryAugments_initial[CherryAugment_id] = CherryAugment
     #下面创建一个嵌套字典，用来判断所有版本的各种数据是否曾经获取过（The following code creates a nested dictionary to judge whether all kinds of data of a patch is once recaptured）
     TemplateBoolList = [False for i in range(len(bigPatches))] #为什么想到起个template作为后面字典的构成，是为了致敬后续出现的模板羁绊（The reason why I choose a name containing "template" to compose the following dictionary is in honor of the following "TemplateTrait"）
-    recaptured_header = ["bigPatch", "spell", "LoLItem", "perk", "perkstyle", "TFTAugment", "TFTChampion", "TFTItem", "TFTCompanion", "TFTTrait", "ArenaAugment"]
+    recaptured_header = ["bigPatch", "spell", "LoLItem", "perk", "perkstyle", "TFTAugment", "TFTChampion", "TFTItem", "TFTCompanion", "TFTTrait", "CherryAugment"]
     recaptured = {}
     for bigPatch in bigPatches:
         recaptured[bigPatch] = {}
@@ -1099,6 +1163,7 @@ async def search_profile(connection):
         print("\n正在初始化所有数据资源……\nInitializing all data resources ...\n")
         patches = copy.deepcopy(patches_initial)
         spells = copy.deepcopy(spells_initial)
+        LoLChampions = copy.deepcopy(LoLChampions_initial)
         LoLItems = copy.deepcopy(LoLItems_initial)
         perks = copy.deepcopy(perks_initial)
         perkstyles = copy.deepcopy(perkstyles_initial)
@@ -1107,7 +1172,7 @@ async def search_profile(connection):
         TFTItems = copy.deepcopy(TFTItems_initial)
         TFTCompanions = copy.deepcopy(TFTCompanions_initial)
         TFTTraits = copy.deepcopy(TFTTraits_initial)
-        ArenaAugments = copy.deepcopy(ArenaAugments_initial)
+        CherryAugments = copy.deepcopy(CherryAugments_initial)
         infos = {} #存储程序运行过程中遇到的玩家信息，防止后续程序反复获取已经获取过的玩家信息（Store the summoner information fetched  during the program execution, in case the program would keep capturing the summoner information already fetched before）
         print('请输入要查询的召唤师名称，退出请输入“0”：\nPlease input the summoner name to be searched. Submit "0" to exit.')
         summoner_name = input()
@@ -1156,12 +1221,6 @@ async def search_profile(connection):
                     gamemodes_iter["description"] = gamemode_iter["description"]
                     gamemodes[gamemode_id] = gamemodes_iter
                 maps = {8: {"zh_CN": "水晶之痕", "en_US": "Crystal Scar"}, 10: {"zh_CN": "扭曲丛林", "en_US": "Twisted Treeline"}, 11: {"zh_CN": "召唤师峡谷", "en_US": "Summoner's Rift"}, 12: {"zh_CN": "嚎哭深渊", "en_US": "Howling Abyss"}, 16: {"zh_CN": "宇宙遗迹", "en_US": "Cosmic Ruins"}, 18: {"zh_CN": "瓦罗兰城市公园", "en_US": "Valoran City Park"}, 20: {"zh_CN": "失控地点", "en_US": "Crash Site"}, 21: {"zh_CN": "百合与莲花的神庙", "en_US": "Temple of Lily and Lotus"}, 22: {"zh_CN": "聚点危机", "en_US": "Convergence"}, 30: {"zh_CN": "怒火角斗场", "en_US": "Rings of Wrath"}, 33: {"zh_CN": "STRAWBERRY", "en_US": "STRAWBERRY"}}
-                summonerId = current_info["summonerId"]
-                LoLChampion = await (await connection.request("GET", "/lol-champions/v1/inventories/" + str(summonerId) + "/champions")).json()
-                LoLChampions = {}
-                for LoLChampion_iter in LoLChampion:
-                    LoLChampion_id = LoLChampion_iter.pop("id")
-                    LoLChampions[LoLChampion_id] = LoLChampion_iter
                 
                 #print("召唤师信息如下：\nSummoner information is as follows:")
                 ranked = await (await connection.request("GET", "/lol-ranked/v1/ranked-stats/" + info["puuid"])).json()
@@ -2225,8 +2284,8 @@ async def search_profile(connection):
                                     #team_color = {100: "Blue", 200: "Red"}
                                     subteam_color = {0: "", 1: "魄罗", 2: "小兵", 3: "迅捷蟹", 4: "石甲虫", 5: "锋喙鸟", 6: "哨卫", 7: "狼", 8: "魔沼蛙"} #仅用于斗魂竞技场（Only for Arena mode）
                                     #subteam_color = {0: "", 1: "Poro", 2: "Minion", 3: "Scuttle", 4: "Krug", 5: "Raptor", 6: "Sentinel", 7: "Wolf", 8: "Gromp"}
-                                    augment_rarity = {0: "白银", 1: "黄金", 2: "棱彩", 4: "黄金", 8: "棱彩"}
-                                    #augment_rarity = {0: "Silver", 1: "Gold", 2: "Prismatic", 4: "Gold", 8: "Prismatic"}
+                                    augment_rarity = {0: "白银", 1: "黄金", 2: "棱彩", 4: "黄金", 8: "棱彩", "kBronze": "青铜", "kSilver": "白银", "kGold": "黄金", "kPrismatic": "棱彩"}
+                                    #augment_rarity = {0: "Silver", 1: "Gold", 2: "Prismatic", 4: "Gold", 8: "Prismatic", "KBronze": "Bronze", "KSilver": "Silver", "kGold": "Gold", "kPrismatic": "Prismatic"}
                                     win = {True: "胜利", False: "失败"}
                                     #win = {True: "V", False: "D"}
                                     player_count = len(LoLGame_info["participantIdentities"])
@@ -2239,7 +2298,7 @@ async def search_profile(connection):
                                                 LoLGame_info_data[key].append(LoLGame_info["participantIdentities"][j][key])
                                             elif i >= 1 and i <= 11:
                                                 LoLGame_info_data[key].append(LoLGame_info["participantIdentities"][j]["player"][key])
-                                            elif i == 12:
+                                            elif i == 12: #需要指出，没有为英雄数据的整理设置异常处理机制。因为英雄往往不会被删除，只会被更新（Note that no exceptional handling mechanism is prepared for champion data sorting, cause the fact is a champion won't be deleted, although it might be updated）
                                                 try:
                                                     LoLGame_info_data[key].append(LoLChampions[LoLGame_info["participants"][j]["championId"]]["name"])
                                                 except KeyError:
@@ -2449,45 +2508,45 @@ async def search_profile(connection):
                                                 if playerAugmentId == 0:
                                                     LoLGame_info_data[key].append("")
                                                 else:
-                                                    ArenaAugment_captured = True
+                                                    CherryAugment_captured = True
                                                     try:
-                                                        augment_to_append = ArenaAugments[playerAugmentId]
+                                                        augment_to_append = CherryAugments[playerAugmentId]
                                                     except KeyError:
                                                         ArenaPatch_adopted = ".".join(LoLGame_info["gameVersion"].split(".")[:2])
-                                                        Arena_recapture = 1
-                                                        print("第%d/%d场对局（对局序号：%s）强化符文信息（%s）获取失败！正在第%d次尝试改用%s版本的斗魂竞技场强化符文信息……\nArena augment information (%s) of Match %d / %d (matchID: %s) capture failed! Changing to Arena augments of Patch %s ... Times tried: %d." %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, playerAugmentId, Arena_recapture, ArenaPatch_adopted, playerAugmentId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, ArenaPatch_adopted, Arena_recapture))
+                                                        CherryAugment_recapture = 1
+                                                        print("第%d/%d场对局（对局序号：%s）强化符文信息（%s）获取失败！正在第%d次尝试改用%s版本的斗魂竞技场强化符文信息……\nArena augment information (%s) of Match %d / %d (matchID: %s) capture failed! Changing to Arena augments of Patch %s ... Times tried: %d." %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, playerAugmentId, CherryAugment_recapture, ArenaPatch_adopted, playerAugmentId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, ArenaPatch_adopted, CherryAugment_recapture))
                                                         while True:
                                                             try:
-                                                                Arena = requests.get("https://raw.communitydragon.org/%s/cdragon/arena/%s.json" %(ArenaPatch_adopted, language_cdragon[language_code])).json()
+                                                                CherryAugment = requests.get("https://raw.communitydragon.org/%s/cdragon/arena/%s.json" %(ArenaPatch_adopted, language_cdragon[language_code])).json()
                                                             except requests.exceptions.JSONDecodeError:
                                                                 ArenaPatch_deserted = ArenaPatch_adopted
                                                                 ArenaPatch_adopted = FindPostPatch(ArenaPatch_adopted, bigPatches)
-                                                                Arena_recapture = 1
-                                                                print("%s版本文件不存在！正在第%s次尝试转至%s版本……\n%s patch file doesn't exist! Changing to Arena augments of Patch %s ... Times tried: %d." %(ArenaPatch_deserted, Arena_recapture, ArenaPatch_adopted, ArenaPatch_deserted, ArenaPatch_adopted, Arena_recapture))
+                                                                CherryAugment_recapture = 1
+                                                                print("%s版本文件不存在！正在第%s次尝试转至%s版本……\n%s patch file doesn't exist! Changing to Arena augments of Patch %s ... Times tried: %d." %(ArenaPatch_deserted, CherryAugment_recapture, ArenaPatch_adopted, ArenaPatch_deserted, ArenaPatch_adopted, CherryAugment_recapture))
                                                             except requests.exceptions.RequestException:
-                                                                if Arena_recapture < 3:
-                                                                    Arena_recapture += 1
-                                                                    print("网络环境异常！正在第%d次尝试改用%s版本的斗魂竞技场强化符文信息……\nYour network environment is abnormal! Changing to Arena augments of Patch %s ... Times tried: %d." %(Arena_recapture, ArenaPatch_adopted, ArenaPatch_adopted, Arena_recapture))
+                                                                if CherryAugment_recapture < 3:
+                                                                    CherryAugment_recapture += 1
+                                                                    print("网络环境异常！正在第%d次尝试改用%s版本的斗魂竞技场强化符文信息……\nYour network environment is abnormal! Changing to Arena augments of Patch %s ... Times tried: %d." %(CherryAugment_recapture, ArenaPatch_adopted, ArenaPatch_adopted, CherryAugment_recapture))
                                                                 else:
                                                                     print("网络环境异常！第%d/%d场对局（对局序号：%s）的强化符文信息（%s）将采用原始数据！\nNetwork error! The original data will be used for the Arena augments (%s) of Match %d / %d (matchID: %s)!" %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, playerAugmentId, playerAugmentId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
-                                                                    ArenaAugment_captured = False
+                                                                    CherryAugment_captured = False
                                                                     break
                                                             else:
                                                                 print("已改用%s版本的斗魂竞技场强化符文信息。\nArena augment information changed to Patch %s." %(ArenaPatch_adopted, ArenaPatch_adopted))
-                                                                ArenaAugments = {}
-                                                                for ArenaAugment in Arena["augments"]:
-                                                                    ArenaAugment_id = ArenaAugment.pop("id")
-                                                                    ArenaAugments[ArenaAugment_id] = ArenaAugment
+                                                                CherryAugments = {}
+                                                                for CherryAugment in CherryAugment:
+                                                                    CherryAugment_id = CherryAugment.pop("id")
+                                                                    CherryAugments[CherryAugment_id] = CherryAugment
                                                                 try:
-                                                                    augment_to_append = ArenaAugments[playerAugmentId]
+                                                                    augment_to_append = CherryAugments[playerAugmentId]
                                                                 except KeyError:
                                                                     print("【%d. %s】第%d/%d场对局（对局序号：%s）强化符文信息（%s）获取失败！将采用原始数据！\n[%d. %s] Arena augment information (%s) of Match %d / %d (matchID: %s) capture failed! The original data will be used for this match!" %(i, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, playerAugmentId, i, key, playerAugmentId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
-                                                                    ArenaAugment_captured = False
+                                                                    CherryAugment_captured = False
                                                                     break
                                                                 else:
                                                                     break
-                                                    if ArenaAugment_captured:
-                                                        to_append = augment_to_append["name"] if (i - 95) % 2 == 0 else augment_rarity[augment_to_append["rarity"]]
+                                                    if CherryAugment_captured:
+                                                        to_append = augment_to_append["nameTRA"] if (i - 95) % 2 == 0 else augment_rarity[augment_to_append["rarity"]]
                                                     else:
                                                         to_append = playerAugmentId if (i - 95) % 2 == 0 else ""
                                                     LoLGame_info_data[key].append(to_append)
