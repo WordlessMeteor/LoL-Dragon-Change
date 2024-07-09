@@ -17655,6 +17655,11 @@
         ],
         "staticSwitches": [
             {
+                "name": "TRANSITION_OUT",
+                "onByDefault": true,
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "ALPHACLIP",
                 "__type": "ShaderStaticSwitch"
             },
@@ -29781,12 +29786,7 @@
                 "logicalParameters": [
                     {
                         "name": "_LayerUVFactor01",
-                        "fields": 7,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
-                        "name": "_LayerBlendMode02",
-                        "fields": 8,
+                        "fields": 15,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
@@ -29814,12 +29814,7 @@
                 "logicalParameters": [
                     {
                         "name": "_LayerUVFactor02",
-                        "fields": 7,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
-                        "name": "_LayerBlendMode03",
-                        "fields": 8,
+                        "fields": 15,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
@@ -29846,12 +29841,22 @@
                 "name": "Parameter4",
                 "logicalParameters": [
                     {
-                        "name": "_LayerUVFactor03",
-                        "fields": 7,
+                        "name": "_LayerMultiFactor02",
+                        "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "_LayerBlendMode01",
+                        "name": "_LayerBlendMode02",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "_LayerMultiFactor03",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "_LayerBlendMode03",
                         "fields": 8,
                         "__type": "ShaderLogicalParameter"
                     }
@@ -29860,6 +29865,17 @@
             },
             {
                 "name": "Parameter5",
+                "logicalParameters": [
+                    {
+                        "name": "_LayerUVFactor03",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter6",
                 "data": [
                     0.501960813999176,
                     0.501960813999176,
@@ -29876,7 +29892,29 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter6",
+                "name": "Parameter7",
+                "data": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "_LayerBlendMode01",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "_BloomThreshold",
+                        "fields": 14,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter8",
                 "logicalParameters": [
                     {
                         "name": "_BloomColor",
@@ -29887,7 +29925,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter7",
+                "name": "Parameter9",
                 "logicalParameters": [
                     {
                         "name": "_BloomWeight",
@@ -29898,47 +29936,25 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter8",
-                "data": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    0.0
-                ],
+                "name": "Parameter10",
                 "logicalParameters": [
-                    {
-                        "name": "_BloomThreshold",
-                        "fields": 7,
-                        "__type": "ShaderLogicalParameter"
-                    },
                     {
                         "name": "_BloomIntensity",
-                        "fields": 8,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Parameter9",
-                "logicalParameters": [
-                    {
-                        "name": "_LayerUVType01",
                         "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "_NoiseUVType01",
+                        "name": "_LayerUVType01",
                         "fields": 2,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "_NoiseUVType02",
+                        "name": "MatcapType",
                         "fields": 4,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "_NoiseUVType03",
+                        "name": "_NoiseUVType01",
                         "fields": 8,
                         "__type": "ShaderLogicalParameter"
                     }
@@ -29946,7 +29962,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter10",
+                "name": "Parameter11",
                 "logicalParameters": [
                     {
                         "name": "BoneInfo",
@@ -29957,7 +29973,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter11",
+                "name": "Parameter12",
                 "logicalParameters": [
                     {
                         "name": "_LayerUVInfo01",
@@ -29968,7 +29984,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter12",
+                "name": "Parameter13",
                 "logicalParameters": [
                     {
                         "name": "_NoiseUVInfo01",
@@ -29979,7 +29995,33 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter13",
+                "name": "Parameter14",
+                "logicalParameters": [
+                    {
+                        "name": "_NoiseUVType02",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "_NoiseUVType03",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "_LayerUVType02",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "_LayerUVType03",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter15",
                 "logicalParameters": [
                     {
                         "name": "_NoiseUVInfo02",
@@ -29990,7 +30032,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter14",
+                "name": "Parameter16",
                 "logicalParameters": [
                     {
                         "name": "_NoiseUVInfo03",
@@ -30001,23 +30043,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter15",
-                "logicalParameters": [
-                    {
-                        "name": "_LayerUVType02",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
-                        "name": "_LayerUVType03",
-                        "fields": 2,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Parameter16",
+                "name": "Parameter17",
                 "logicalParameters": [
                     {
                         "name": "_LayerUVInfo02",
@@ -30028,7 +30054,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter17",
+                "name": "Parameter18",
                 "logicalParameters": [
                     {
                         "name": "_LayerUVInfo03",

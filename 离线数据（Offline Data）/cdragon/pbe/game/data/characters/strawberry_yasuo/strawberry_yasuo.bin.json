@@ -127,13 +127,13 @@
                 {
                     "mName": "WindGain",
                     "mValues": [
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0
+                        2.0,
+                        2.0,
+                        2.0,
+                        2.0,
+                        2.0,
+                        2.0,
+                        2.0
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -4317,12 +4317,12 @@
                 }
             ],
             "mSpellCalculations": {
-                "{3d1a55c5}": {
+                "DashThruDamage": {
                     "mFormulaParts": [
                         {
                             "mSubparts": [
                                 {
-                                    "mDataValue": "{6a16e5dc}",
+                                    "mDataValue": "BaseDashThruDamage",
                                     "__type": "NamedDataValueCalculationPart"
                                 },
                                 {
@@ -4554,13 +4554,13 @@
                 {
                     "mName": "ShieldDuration",
                     "mValues": [
-                        2.0,
-                        2.0,
-                        2.0,
-                        2.0,
-                        2.0,
-                        2.0,
-                        2.0
+                        1.75,
+                        1.75,
+                        1.75,
+                        1.75,
+                        1.75,
+                        1.75,
+                        1.75
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -4589,30 +4589,33 @@
                         100.0
                     ],
                     "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "DashSpeed",
+                    "mValues": [
+                        1000.0,
+                        1000.0,
+                        1000.0,
+                        1000.0,
+                        1000.0,
+                        1000.0,
+                        1000.0
+                    ],
+                    "__type": "SpellDataValue"
                 }
             ],
             "mSpellCalculations": {
-                "BonusDamagePerStack": {
-                    "mMultiplier": {
-                        "mStartValue": 0.15000000596046448,
-                        "mEndValue": 0.25,
-                        "__type": "ByCharLevelInterpolationCalculationPart"
-                    },
-                    "mModifiedGameCalculation": "TotalDamage",
-                    "__type": "GameCalculationModified"
-                },
-                "{fc2a9ee9}": {
+                "TotalShieldValue": {
                     "mFormulaParts": [
                         {
                             "mSubparts": [
                                 {
-                                    "mLevel1Value": 200.0,
-                                    "mInitialBonusPerLevel": 10.0,
+                                    "mLevel1Value": 150.0,
                                     "__type": "ByCharLevelBreakpointsCalculationPart"
                                 },
                                 {
                                     "mStat": 11,
-                                    "mCoefficient": 0.20000000298023224,
+                                    "mCoefficient": 0.10000000149011612,
                                     "__type": "StatByCoefficientCalculationPart"
                                 }
                             ],
@@ -4621,12 +4624,12 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{3d1a55c5}": {
+                "DashThruDamage": {
                     "mFormulaParts": [
                         {
                             "mSubparts": [
                                 {
-                                    "mDataValue": "{6a16e5dc}",
+                                    "mDataValue": "BaseDashThruDamage",
                                     "__type": "NamedDataValueCalculationPart"
                                 },
                                 {
@@ -4655,6 +4658,20 @@
                                 }
                             ],
                             "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "{56ce6c88}": {
+                    "mFormulaParts": [
+                        {
+                            "mDataValue": "DashSpeed",
+                            "__type": "NamedDataValueCalculationPart"
+                        },
+                        {
+                            "mStat": 6,
+                            "mCoefficient": 1.0,
+                            "__type": "StatByCoefficientCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
