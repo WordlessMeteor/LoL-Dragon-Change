@@ -2118,6 +2118,9 @@ async def search_profile(connection):
                                     for i in list(LoLHistory_header.keys()):
                                         LoLHistory_data[i] = [LoLHistory_header[i]] + eval(i) #因为这里要用到eval，所以前面的变量名必须和LoLHistory_header中的键保持一致（Since eval() is used here, those lists variable name must correspond to variable LoLHistory_header's keys）
                                     LoLHistory_df = pandas.DataFrame(data = LoLHistory_data)
+                                    print("是否一同保存每场对局的信息？（输入任意键保存，否则将只导出对局记录）\nSave each match? (Input anything to save each match, or null to only save the scanned match history)")
+                                    if input() == "":
+                                        break
                             else:
                                 try:
                                     matchID = eval(matchID)
@@ -2136,7 +2139,7 @@ async def search_profile(connection):
                                     continue
                             spells = copy.deepcopy(spells_initial)
                             LoLItems = copy.deepcopy(LoLItems_initial) #接下来查询具体的对局信息和时间轴，使用的可能并不是历史记录中记载的对局序号形成的列表。考虑实际使用需求，这里对于装备的合适版本信息采取的思路是默认从最新版本开始获取，如果有装备不存在于最新版本的装备信息，则获取游戏信息中存储的版本对应的装备信息。该思路仍然有问题，详见后续关于美测服的装备获取的注释（The next step is to capture the information and timeline for each specific match, which may not originate from the matchIDs recorded in the match history. Considering the practical use, here the stream of thought for an appropriate version for items is to get items' information from the latest patch, and if some item doesn't exist in the items information of the latest patch, then get the items of the version corresponding to the game according to gameVersion recorded in the match information. There's a flaw of this idea. Please refer to the annotation regarding PBE data crawling for further solution）
-                            print("是否输出每场对局的文本文档？（输入任意键不输出，否则默认输出）\nExport text files of each match? (Input anything to cancel, or null to export by default)")
+                            print("是否输出每场对局的文本文档？（输入任意键不输出，否则默认输出）\nExport text files of each match? (Input anything to refuse exporting, or null to export by default)")
                             export_json = input() == ""
                             for matchID in LoLMatchIDs:
                                 LoLGame_info = await (await connection.request("GET", "/lol-match-history/v1/games/" + matchID)).json()
