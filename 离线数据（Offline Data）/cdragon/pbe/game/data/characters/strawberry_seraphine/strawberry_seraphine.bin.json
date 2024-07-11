@@ -765,19 +765,6 @@
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "RBaseDamageFlat",
-                    "mValues": [
-                        110.0,
-                        110.0,
-                        110.0,
-                        110.0,
-                        110.0,
-                        110.0,
-                        110.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
                     "mName": "R1APRatio",
                     "mValues": [
                         0.4000000059604645,
@@ -899,10 +886,6 @@
                 "R1TotalDamage": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "RBaseDamageFlat",
-                            "__type": "NamedDataValueCalculationPart"
-                        },
-                        {
                             "mDataValue": "R1APRatio",
                             "__type": "StatByNamedDataValueCalculationPart"
                         }
@@ -912,12 +895,8 @@
                 "RBaseDamage": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "RBaseDamageFlat",
-                            "__type": "NamedDataValueCalculationPart"
-                        },
-                        {
-                            "mLevel1Value": 5.0,
-                            "mInitialBonusPerLevel": 15.0,
+                            "mLevel1Value": 200.0,
+                            "mInitialBonusPerLevel": 20.0,
                             "__type": "ByCharLevelBreakpointsCalculationPart"
                         }
                     ],
@@ -996,28 +975,6 @@
                     "mLocKeys": {
                         "keyName": "Spell_Strawberry_SeraphineR_Name",
                         "keyTooltip": "Spell_Strawberry_SeraphineR_Tooltip"
-                    },
-                    "mLists": {
-                        "LevelUp": {
-                            "levelCount": 3,
-                            "elements": [
-                                {
-                                    "type": "RBaseDamage",
-                                    "nameOverride": "Spell_ListType_InitialDamage",
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "RChannelDuration",
-                                    "nameOverride": "Spell_ListType_CharmDuration",
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "Cooldown",
-                                    "__type": "TooltipInstanceListElement"
-                                }
-                            ],
-                            "__type": "TooltipInstanceList"
-                        }
                     },
                     "__type": "TooltipInstanceSpell"
                 },
@@ -1649,9 +1606,13 @@
                 "TotalShieldStrength": {
                     "mFormulaParts": [
                         {
-                            "mLevel1Value": 350.0,
-                            "mInitialBonusPerLevel": 5.0,
-                            "__type": "ByCharLevelBreakpointsCalculationPart"
+                            "mNumber": 150.0,
+                            "__type": "NumberCalculationPart"
+                        },
+                        {
+                            "mStat": 11,
+                            "mCoefficient": 0.25,
+                            "__type": "StatByCoefficientCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
