@@ -217,19 +217,6 @@
             ],
             "mDataValues": [
                 {
-                    "mName": "BaseDamage",
-                    "mValues": [
-                        95.0,
-                        180.0,
-                        265.0,
-                        350.0,
-                        435.0,
-                        520.0,
-                        605.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
                     "mName": "ExitBaseDamage",
                     "mValues": [
                         0.0,
@@ -245,13 +232,13 @@
                 {
                     "mName": "AreaDuration",
                     "mValues": [
-                        9.0,
-                        9.0,
-                        9.0,
-                        9.0,
-                        9.0,
-                        9.0,
-                        9.0
+                        8.0,
+                        8.0,
+                        8.0,
+                        8.0,
+                        8.0,
+                        8.0,
+                        8.0
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -332,37 +319,20 @@
                         25.0
                     ],
                     "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "KnockawayDmg",
-                    "mValues": [
-                        55.0,
-                        55.0,
-                        55.0,
-                        55.0,
-                        55.0,
-                        55.0,
-                        55.0
-                    ],
-                    "__type": "SpellDataValue"
                 }
             ],
             "mSpellCalculations": {
                 "DamageCalc": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "BaseDamage",
-                            "__type": "NamedDataValueCalculationPart"
-                        },
-                        {
-                            "mLevel1Value": 10.0,
-                            "mInitialBonusPerLevel": 10.0,
+                            "mLevel1Value": 150.0,
+                            "mInitialBonusPerLevel": 15.0,
                             "__type": "ByCharLevelBreakpointsCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
                 },
-                "{9e75c8b5}": {
+                "DurationTotal": {
                     "mMultiplier": {
                         "UseNewStats": true,
                         "statType": 9,
@@ -371,22 +341,18 @@
                     },
                     "mFormulaParts": [
                         {
-                            "mDataValue": "{5c9a1f6c}",
+                            "mDataValue": "AreaDuration",
                             "__type": "NamedDataValueCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
                 },
-                "{177ebb21}": {
+                "KnockTotalDmg": {
                     "mFormulaParts": [
                         {
-                            "mStartValue": 15.0,
-                            "mEndValue": 455.0,
-                            "__type": "ByCharLevelInterpolationCalculationPart"
-                        },
-                        {
-                            "mDataValue": "{971e0023}",
-                            "__type": "NamedDataValueCalculationPart"
+                            "mLevel1Value": 100.0,
+                            "mInitialBonusPerLevel": 10.0,
+                            "__type": "ByCharLevelBreakpointsCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
@@ -456,29 +422,6 @@
                     "mLocKeys": {
                         "keyName": "Spell_Strawberry_AuroraR_Name",
                         "keyTooltip": "Spell_Strawberry_AuroraR_Tooltip"
-                    },
-                    "mLists": {
-                        "LevelUp": {
-                            "levelCount": 3,
-                            "elements": [
-                                {
-                                    "type": "Cooldown",
-                                    "nameOverride": "Spell_ListType_Cooldown",
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "BaseDamage",
-                                    "nameOverride": "Spell_ListType_Damage",
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "AreaDuration",
-                                    "nameOverride": "Spell_ListType_Duration",
-                                    "__type": "TooltipInstanceListElement"
-                                }
-                            ],
-                            "__type": "TooltipInstanceList"
-                        }
                     },
                     "__type": "TooltipInstanceSpell"
                 },
@@ -785,13 +728,13 @@
                 {
                     "mName": "BaseDamage",
                     "mValues": [
-                        10.0,
-                        15.0,
                         20.0,
-                        25.0,
+                        20.0,
                         30.0,
-                        35.0,
-                        40.0
+                        40.0,
+                        50.0,
+                        60.0,
+                        60.0
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -824,13 +767,13 @@
                 {
                     "mName": "MarkDuration",
                     "mValues": [
-                        8.0,
-                        8.0,
-                        8.0,
-                        8.0,
-                        8.0,
-                        8.0,
-                        8.0
+                        10.0,
+                        10.0,
+                        10.0,
+                        10.0,
+                        10.0,
+                        10.0,
+                        10.0
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -916,7 +859,7 @@
                 "{27b5f82c}": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "{251dbe2f}",
+                            "mDataValue": "BaseMissileCount",
                             "__type": "NamedDataValueCalculationPart"
                         },
                         {
@@ -1366,7 +1309,7 @@
                 "{27b5f82c}": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "{251dbe2f}",
+                            "mDataValue": "BaseMissileCount",
                             "__type": "NamedDataValueCalculationPart"
                         },
                         {
@@ -1382,7 +1325,7 @@
                     "mFormulaParts": [
                         {
                             "mPart1": {
-                                "mDataValue": "{212b301c}",
+                                "mDataValue": "EvolveAoEDetonationRangeFlat",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mPart2": {
@@ -1688,7 +1631,7 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{4a31ef0f}": {
+                "Q2DamageMax": {
                     "mMultiplier": {
                         "mNumber": 2.0,
                         "__type": "NumberCalculationPart"
@@ -1723,7 +1666,7 @@
                 "{27b5f82c}": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "{251dbe2f}",
+                            "mDataValue": "BaseMissileCount",
                             "__type": "NamedDataValueCalculationPart"
                         },
                         {
@@ -1739,7 +1682,7 @@
                     "mFormulaParts": [
                         {
                             "mPart1": {
-                                "mDataValue": "{212b301c}",
+                                "mDataValue": "EvolveAoEDetonationRangeFlat",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mPart2": {
@@ -2095,7 +2038,7 @@
                 "{27b5f82c}": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "{251dbe2f}",
+                            "mDataValue": "BaseMissileCount",
                             "__type": "NamedDataValueCalculationPart"
                         },
                         {
@@ -2111,7 +2054,7 @@
                     "mFormulaParts": [
                         {
                             "mPart1": {
-                                "mDataValue": "{212b301c}",
+                                "mDataValue": "EvolveAoEDetonationRangeFlat",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mPart2": {
@@ -2407,13 +2350,13 @@
                 {
                     "mName": "LevelsNeededForSpirit",
                     "mValues": [
-                        8.0,
-                        8.0,
-                        8.0,
-                        8.0,
-                        8.0,
-                        8.0,
-                        8.0
+                        7.0,
+                        7.0,
+                        7.0,
+                        7.0,
+                        7.0,
+                        7.0,
+                        7.0
                     ],
                     "__type": "SpellDataValue"
                 }
@@ -2422,7 +2365,7 @@
                 "ProcDamage": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "{f940f791}",
+                            "mDataValue": "BaseHPDamage",
                             "__type": "NamedDataValueCalculationPart"
                         },
                         {
@@ -2437,7 +2380,7 @@
                     "mFormulaParts": [
                         {
                             "mBuffName": "{f25ec61b}",
-                            "mDataValue": "{9400e4de}",
+                            "mDataValue": "MoveSpeedPerStack",
                             "__type": "BuffCounterByNamedDataValueCalculationPart"
                         }
                     ],
@@ -2459,7 +2402,7 @@
                     "mFormulaParts": [
                         {
                             "mPart1": {
-                                "mDataValue": "{7644e4f8}",
+                                "mDataValue": "FlatSpiritAoERadius",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mPart2": {
@@ -2483,7 +2426,7 @@
                                 "__type": "StatByCoefficientCalculationPart"
                             },
                             "mPart2": {
-                                "mDataValue": "{026234a8}",
+                                "mDataValue": "MissileLifetime",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "__type": "ProductOfSubPartsCalculationPart"
@@ -2494,8 +2437,8 @@
                 "{4119bcc9}": {
                     "mFormulaParts": [
                         {
-                            "mLevel1Value": 5.0,
-                            "mInitialBonusPerLevel": 1.0,
+                            "mLevel1Value": 20.0,
+                            "mInitialBonusPerLevel": 2.0,
                             "__type": "ByCharLevelBreakpointsCalculationPart"
                         }
                     ],
@@ -2532,6 +2475,9 @@
                 0,
                 0
             ],
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
             "mClientData": {
                 "mTooltipData": {
                     "mObjectName": "Strawberry_AuroraPassive",
@@ -2609,13 +2555,13 @@
                 {
                     "mName": "JumpDistance",
                     "mValues": [
-                        150.0,
-                        150.0,
-                        150.0,
-                        150.0,
-                        150.0,
-                        150.0,
-                        150.0
+                        250.0,
+                        250.0,
+                        250.0,
+                        250.0,
+                        250.0,
+                        250.0,
+                        250.0
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -2657,26 +2603,13 @@
                         1.25
                     ],
                     "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "PassthroughDamage",
-                    "mValues": [
-                        75.0,
-                        75.0,
-                        75.0,
-                        75.0,
-                        75.0,
-                        75.0,
-                        75.0
-                    ],
-                    "__type": "SpellDataValue"
                 }
             ],
             "mSpellCalculations": {
                 "{139ff8fd}": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "{326bc788}",
+                            "mDataValue": "DebuffCircleApplyRadiusFlat",
                             "__type": "NamedDataValueCalculationPart"
                         },
                         {
@@ -2688,27 +2621,24 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{607e3955}": {
+                "TotalDuration": {
                     "mFormulaParts": [
                         {
                             "UseNewStats": true,
                             "statType": 9,
-                            "mDataValue": "{b4b3e090}",
+                            "mDataValue": "InvisDuration",
                             "__type": "StatByNamedDataValueCalculationPart"
                         }
                     ],
+                    "mPrecision": 1,
                     "__type": "GameCalculation"
                 },
-                "{76981ae3}": {
+                "PassthroughDmg": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "PassThroughDamage",
-                            "__type": "NamedDataValueCalculationPart"
-                        },
-                        {
-                            "mStartValue": 5.0,
-                            "mEndValue": 105.0,
-                            "__type": "ByCharLevelInterpolationCalculationPart"
+                            "mLevel1Value": 80.0,
+                            "mInitialBonusPerLevel": 10.0,
+                            "__type": "ByCharLevelBreakpointsCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
@@ -2721,13 +2651,13 @@
             ],
             "mCastTime": 0.25,
             "cooldownTime": [
-                13.0,
-                13.0,
-                13.0,
-                13.0,
-                13.0,
-                13.0,
-                13.0
+                15.0,
+                15.0,
+                15.0,
+                15.0,
+                15.0,
+                15.0,
+                15.0
             ],
             "delayCastOffsetPercent": -0.5,
             "delayTotalTimePercent": -0.5,
@@ -2769,24 +2699,6 @@
             "missileSpeed": 1800.0,
             "bHaveHitBone": true,
             "mHitBoneName": "spine",
-            "mFloatVarsDecimals": [
-                0,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2
-            ],
             "selectionPriority": 1,
             "mTargetingTypeData": {
                 "__type": "Location"
@@ -9485,7 +9397,6 @@
             "description": "game_character_description_Strawberry_Aurora",
             "defenseRank": 4,
             "ChasingAttackRangePercent": 0.800000011920929,
-            "botEnabledMM": true,
             "attackRank": 3,
             "__type": "CharacterToolData"
         },
