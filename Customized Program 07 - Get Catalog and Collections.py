@@ -524,7 +524,7 @@ async def fetch_store(connection):
             elif i == 8:
                 if item[key] != "":
                     catalog_data[key].append(item[key])
-                elif item["inventoryType"] in hashtable_dicts:
+                elif item["inventoryType"] in hashtable_dicts and item["itemId"] in hashtable_dicts[item["inventoryType"]]:
                     catalog_data[key].append(hashtable_dicts[item["inventoryType"]][item["itemId"]]["name"])
                 else:
                     catalog_data[key].append("")
