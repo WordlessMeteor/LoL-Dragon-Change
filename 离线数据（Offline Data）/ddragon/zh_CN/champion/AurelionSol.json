@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.13.1",
+    "version": "14.14.1",
     "data": {
         "AurelionSol": {
             "id": "AurelionSol",
@@ -86,7 +86,7 @@
                 "mpregenperlevel": 0.75,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 55,
+                "attackdamage": 58,
                 "attackdamageperlevel": 3.2,
                 "attackspeedperlevel": 1.5,
                 "attackspeed": 0.625
@@ -245,11 +245,13 @@
                     "leveltip": {
                         "label": [
                             "百分比额外魔法伤害",
+                            "基础飞行距离",
                             "@AbilityResourceName@消耗",
                             "冷却时间"
                         ],
                         "effect": [
                             "{{ truedamagebonus*100.000000 }}% -> {{ truedamagebonusnl*100.000000 }}%",
+                            "{{ castrange }} -> {{ castrangeNL }}",
                             "{{ cost }} -> {{ costNL }}",
                             "{{ cd }} -> {{ cdNL }}"
                         ]
@@ -362,13 +364,13 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        1200,
-                        1200,
-                        1200,
-                        1200,
-                        1200
+                        1500,
+                        1600,
+                        1700,
+                        1800,
+                        1900
                     ],
-                    "rangeBurn": "1200",
+                    "rangeBurn": "1500/1600/1700/1800/1900",
                     "image": {
                         "full": "AurelionSolW.png",
                         "sprite": "spell1.png",
@@ -387,12 +389,10 @@
                     "tooltip": "奥瑞利安·索尔召唤一个黑洞，对敌人们每秒造成<magicDamage>{{ damagepersecond }}魔法伤害</magicDamage>并缓慢地将他们<status>拉拽</status>向黑洞的中心，持续{{ duration }}秒。黑洞中心的敌人一旦低于<scaleHealth>{{ currentexecutionthreshold }}%最大生命值</scaleHealth>就会立刻阵亡。<br /><br />每有一名敌人在黑洞中阵亡，以及一名敌方英雄在黑洞中每被困住一秒，黑洞就会吸收<span class=\"color3458eb\">星尘</span>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "每秒伤害",
-                            "@AbilityResourceName@消耗"
+                            "每秒伤害"
                         ],
                         "effect": [
-                            "{{ basedamagepersecond }} -> {{ basedamagepersecondNL }}",
-                            "{{ cost }} -> {{ costNL }}"
+                            "{{ basedamagepersecond }} -> {{ basedamagepersecondNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -406,12 +406,12 @@
                     "cooldownBurn": "12",
                     "cost": [
                         80,
-                        85,
-                        90,
-                        95,
-                        100
+                        80,
+                        80,
+                        80,
+                        80
                     ],
-                    "costBurn": "80/85/90/95/100",
+                    "costBurn": "80",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -537,7 +537,7 @@
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ basedamage*1.250000 }} -> {{ basedamagenl*1.250000 }}",
-                            "{{ basedamage }} -> {{ basedamageNL }}"
+                            "{{ basedamage*0.900000 }} -> {{ basedamagenl*0.900000 }}"
                         ]
                     },
                     "maxrank": 3,

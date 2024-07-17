@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.13.1",
+    "version": "14.14.1",
     "data": {
         "AurelionSol": {
             "id": "AurelionSol",
@@ -86,7 +86,7 @@
                 "mpregenperlevel": 0.75,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 55,
+                "attackdamage": 58,
                 "attackdamageperlevel": 3.2,
                 "attackspeedperlevel": 1.5,
                 "attackspeed": 0.625
@@ -245,11 +245,13 @@
                     "leveltip": {
                         "label": [
                             "Percent Bonus Magic Damage",
+                            "Base Flight Range",
                             "@AbilityResourceName@ Cost",
                             "Cooldown"
                         ],
                         "effect": [
                             "{{ truedamagebonus*100.000000 }}% -> {{ truedamagebonusnl*100.000000 }}%",
+                            "{{ castrange }} -> {{ castrangeNL }}",
                             "{{ cost }} -> {{ costNL }}",
                             "{{ cd }} -> {{ cdNL }}"
                         ]
@@ -362,13 +364,13 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        1200,
-                        1200,
-                        1200,
-                        1200,
-                        1200
+                        1500,
+                        1600,
+                        1700,
+                        1800,
+                        1900
                     ],
-                    "rangeBurn": "1200",
+                    "rangeBurn": "1500/1600/1700/1800/1900",
                     "image": {
                         "full": "AurelionSolW.png",
                         "sprite": "spell1.png",
@@ -387,12 +389,10 @@
                     "tooltip": "Aurelion Sol summons a black hole, dealing <magicDamage>{{ damagepersecond }} magic damage</magicDamage> per second and <status>Dragging</status> enemies towards the center for {{ duration }} seconds. Enemies in the center below <scaleHealth>{{ currentexecutionthreshold }}% max Health</scaleHealth> die instantly.<br /><br />The black hole absorbs <span class=\"color3458eb\">Stardust</span> when enemies die within it and each second an enemy champion is inside.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Damage Per Second",
-                            "@AbilityResourceName@ Cost"
+                            "Damage Per Second"
                         ],
                         "effect": [
-                            "{{ basedamagepersecond }} -> {{ basedamagepersecondNL }}",
-                            "{{ cost }} -> {{ costNL }}"
+                            "{{ basedamagepersecond }} -> {{ basedamagepersecondNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -406,12 +406,12 @@
                     "cooldownBurn": "12",
                     "cost": [
                         80,
-                        85,
-                        90,
-                        95,
-                        100
+                        80,
+                        80,
+                        80,
+                        80
                     ],
-                    "costBurn": "80/85/90/95/100",
+                    "costBurn": "80",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -537,7 +537,7 @@
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ basedamage*1.250000 }} -> {{ basedamagenl*1.250000 }}",
-                            "{{ basedamage }} -> {{ basedamageNL }}"
+                            "{{ basedamage*0.900000 }} -> {{ basedamagenl*0.900000 }}"
                         ]
                     },
                     "maxrank": 3,
