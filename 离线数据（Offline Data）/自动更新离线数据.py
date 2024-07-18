@@ -244,6 +244,8 @@ while True:
                     else:
                         cdragon_folder = cdragon_folder if cdragon_folder.endswith("/") else cdragon_folder[:-len(os.path.basename(cdragon_folder))]
                         cdragon_folders.append(cdragon_folder.replace("https://raw.communitydragon.org/", "").replace("离线数据（Offline Data）/cdragon/", "")) #请思考，这里如果换成`cdragon_folder.lstrip("https://raw.communitydragon.org/")`，会有什么效果？（Please figure out what will happen if the code is replaced by `cdragon_folder.lstrip("https://raw.communitydragon.org/")`）
+                cdragon_folders = list(set(cdragon_folders))
+                cdragon_folders.sort()
         else:
             print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
             log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
@@ -506,6 +508,14 @@ while True:
             print()
             log.write("\n")
     elif resource[0] == "2":
+        print("请选择更新模式：\nPlease select the update mode:\n1\t全局比对（Global Compare）\n2\t按程序需求更新（Updating According to Program Demands）")
+        log.write("请选择更新模式：\nPlease select the update mode:\n1\t全局比对（Global Compare）\n2\t按程序需求更新（Updating According to Program Demands）\n")
+        mode = input()
+        log.write(mode + "\n")
+        if mode == "" or mode[0] == "1":
+            mode = "1"
+        else:
+            mode = "2"
         if ddragon_hint:
             hint = '请按以下步骤操作：\nPlease follow these steps:\n1. 访问网址https://developer.riotgames.com/docs/lol#data-dragon\n   Visit the website: https://developer.riotgames.com/docs/lol#data-dragon\n2. 在Latest中找到正式服最新版本数据资源压缩包下载链接。例如：https://ddragon.leagueoflegends.com/cdn/dragontail-14.14.1.tgz\n   Find the link to download the compressed tarball of the latest data resource for live servers. For example: https://ddragon.leagueoflegends.com/cdn/dragontail-14.14.1.tgz\n3. 下载。这需要花费一些时间。\n   Download the file. It may take some time.\n4. 将下载好的tgz文件直接“解压至此”。\n   "Extract here" for the tgz file.\n5. 将解压出来的压缩包再次解压到选定文件夹下与压缩包同名的文件夹。示例：将“dragontail-14.14.1.tar”解压到“D:/360AI浏览器下载/dragontail-14.14.1”文件夹下。\nExtract to "Archive-Name" folder under the selected folder for the extracted tar file. For example, extract "dragontail-14.14.1.tar" into the folder "D:/Downloads/dragontail-14.14.1".\n接下来，请给出数据资源的位置。（按照上例应为“D:/360AI浏览器下载/dragontail-14.14.1/14.14.1/data”。）\nNext, please provide the directory that stores the data resources. (By the above example, the directory should be "D:/Downloads/dragontail-14.14.1/14.14.1/data".)'
             print(hint)
@@ -534,7 +544,7 @@ while True:
         for root, dirs, files in os.walk(src_folder):
             for file in files:
                 update = added = False
-                if file.endswith(".json"):
+                if mode == "1" and file.endswith(".json") or mode == "2" and file == "champion.json":
                     src_path = os.path.join(root, file).replace("\\", "/")
                     relative_path = os.path.relpath(root, src_folder).replace("\\", "/")
                     dst_path = os.path.join(dst_folder, relative_path, file).replace("\\", "/")

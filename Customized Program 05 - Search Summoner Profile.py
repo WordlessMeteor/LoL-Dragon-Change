@@ -1220,7 +1220,7 @@ async def search_profile(connection):
                     gamemodes_iter["category"] = gamemode_iter["category"]
                     gamemodes_iter["description"] = gamemode_iter["description"]
                     gamemodes[gamemode_id] = gamemodes_iter
-                maps = {8: {"zh_CN": "水晶之痕", "en_US": "Crystal Scar"}, 10: {"zh_CN": "扭曲丛林", "en_US": "Twisted Treeline"}, 11: {"zh_CN": "召唤师峡谷", "en_US": "Summoner's Rift"}, 12: {"zh_CN": "嚎哭深渊", "en_US": "Howling Abyss"}, 16: {"zh_CN": "宇宙遗迹", "en_US": "Cosmic Ruins"}, 18: {"zh_CN": "瓦罗兰城市公园", "en_US": "Valoran City Park"}, 20: {"zh_CN": "失控地点", "en_US": "Crash Site"}, 21: {"zh_CN": "百合与莲花的神庙", "en_US": "Temple of Lily and Lotus"}, 22: {"zh_CN": "聚点危机", "en_US": "Convergence"}, 30: {"zh_CN": "怒火角斗场", "en_US": "Rings of Wrath"}, 33: {"zh_CN": "STRAWBERRY", "en_US": "STRAWBERRY"}}
+                maps = {8: {"zh_CN": "水晶之痕", "en_US": "Crystal Scar"}, 10: {"zh_CN": "扭曲丛林", "en_US": "Twisted Treeline"}, 11: {"zh_CN": "召唤师峡谷", "en_US": "Summoner's Rift"}, 12: {"zh_CN": "嚎哭深渊", "en_US": "Howling Abyss"}, 16: {"zh_CN": "宇宙遗迹", "en_US": "Cosmic Ruins"}, 18: {"zh_CN": "瓦罗兰城市公园", "en_US": "Valoran City Park"}, 20: {"zh_CN": "失控地点", "en_US": "Crash Site"}, 21: {"zh_CN": "百合与莲花的神庙", "en_US": "Temple of Lily and Lotus"}, 22: {"zh_CN": "聚点危机", "en_US": "Convergence"}, 30: {"zh_CN": "怒火角斗场", "en_US": "Rings of Wrath"}, 33: {"zh_CN": "最终都市", "en_US": "Final City"}}
                 
                 #print("召唤师信息如下：\nSummoner information is as follows:")
                 ranked = await (await connection.request("GET", "/lol-ranked/v1/ranked-stats/" + info["puuid"])).json()
