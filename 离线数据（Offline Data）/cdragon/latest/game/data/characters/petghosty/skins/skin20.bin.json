@@ -61,5 +61,190 @@
         },
         "mResourceResolver": "Characters/PetGhosty/Skins/Skin20/Resources",
         "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/PetGhosty/Skins/Skin20/Resources": {
+        "resourceMap": {
+            "{271a37fb}": "Characters/PetGhosty/Themes/Set3RankedRewards/Root/Particles/NPC_Pet_Ghostie_Base_Emote_Celebrate_Confetti",
+            "{c7931491}": "Characters/PetGhosty/Themes/Set3RankedRewards/Root/Particles/NPC_Pet_Ghostie_Base_Emote_Recall_Dust",
+            "{53bde612}": "Characters/PetGhosty/Themes/Set3RankedRewards/Root/Particles/NPC_Pet_Ghostie_Base_Emote_RunVariant1",
+            "{a3553994}": "Characters/PetGhosty/Themes/Set3RankedRewards/Root/Particles/NPC_Pet_Ghostie_Base_Emote_Taunt_Dust"
+        },
+        "__type": "ResourceResolver"
+    },
+    "Characters/PetGhosty/Themes/Set3RankedRewards/Root/Materials/Galaxies_Shader": {
+        "name": "Characters/PetGhosty/Themes/Set3RankedRewards/Root/Materials/Galaxies_Shader",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/PetGhosty/Themes/Set3RankedRewards/PetGhosty_Set3RankedRewardsGalaxies_TX_CM.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "SS_Texture",
+                "textureName": "ASSETS/Characters/PetDSSquid/Pet_DSSquid_Skin016_Stars_TX_CM.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask1",
+                "textureName": "ASSETS/Characters/PetGhosty/Themes/Set3RankedRewards/PetGhosty_Set3RankedRewards_Mask_TX_CM.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask2",
+                "textureName": "ASSETS/Characters/PetGhosty/Themes/Set3RankedRewards/PetGhosty_Set3RankedRewards_Mask2_TX_CM.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "SS_Scale",
+                "value": [
+                    4.477999687194824,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SS_rate",
+                "value": [
+                    -0.009999999776482582,
+                    0.07999999821186066,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Color",
+                "value": [
+                    0.48627451062202454,
+                    0.8039215803146362,
+                    1.0,
+                    0.729411780834198
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Blue_Scale",
+                "value": [
+                    10.0,
+                    10.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Blue_Rate",
+                "value": [
+                    0.35499998927116394,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BloomIntensity",
+                "value": [
+                    0.7250000238418579,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Size",
+                "value": [
+                    0.40097498893737793,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dodge_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/Darkstar",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "textures": [
+                {
+                    "name": "Diffuse_Texture",
+                    "options": [
+                        {
+                            "driver": {
+                                "mAnimationNames": [
+                                    "Taunt_loop"
+                                ],
+                                "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                            },
+                            "textureName": "ASSETS/Characters/PetDSSquid/Pet_DSSquid_Taunt_TX_CM.dds",
+                            "__type": "DynamicMaterialTextureSwapOption"
+                        }
+                    ],
+                    "__type": "DynamicMaterialTextureSwapDef"
+                },
+                {
+                    "name": "SS_Texture",
+                    "options": [
+                        {
+                            "driver": {
+                                "mAnimationNames": [
+                                    "Taunt_loop"
+                                ],
+                                "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                            },
+                            "textureName": "ASSETS/Characters/PetDSSquid/Pet_DSSquid_Taunt_TX_CM.dds",
+                            "__type": "DynamicMaterialTextureSwapOption"
+                        }
+                    ],
+                    "__type": "DynamicMaterialTextureSwapDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
     }
 }

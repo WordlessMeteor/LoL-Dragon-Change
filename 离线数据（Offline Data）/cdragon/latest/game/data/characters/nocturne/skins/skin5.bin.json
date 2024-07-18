@@ -94,13 +94,12 @@
                         "Play_vo_NocturneSkin05_Move2DFirst",
                         "Play_vo_NocturneSkin05_Move2DStandard",
                         "Play_vo_NocturneSkin05_NocturneDuskbringer_cast3D",
-                        "Play_vo_NocturneSkin05_NocturneParanoia_cast2D",
                         "Play_vo_NocturneSkin05_NocturneParanoiaTargetChaosVO_OnBuffActivate",
                         "Play_vo_NocturneSkin05_NocturneParanoiaTargetOrderVO_OnBuffActivate",
-                        "Play_vo_NocturneSkin05_NocturneShroudofDarknessBuff_OnBuffActivate",
                         "Play_vo_NocturneSkin05_NocturneUnspeakableHorror_cast3D",
                         "Play_vo_NocturneSkin05_Recall3DGeneral",
                         "Play_vo_NocturneSkin05_Respawn2DGeneral",
+                        "Play_vo_NocturneSkin05_Spell3DWProc",
                         "Play_vo_NocturneSkin05_Taunt3DGeneral"
                     ],
                     "voiceOver": true,
@@ -41275,6 +41274,12 @@
                 "mRules": [
                     {
                         "mRuleName": "Respawn",
+                        "mConditions": [
+                            {
+                                "mPercentChanceToPlay": 75,
+                                "__type": "ContextualConditionChanceToPlay"
+                            }
+                        ],
                         "mAudioAction": {
                             "mSelfEventName": "Respawn2DGeneral",
                             "__type": "ContextualActionPlayVO"
@@ -41308,10 +41313,19 @@
                 "__type": "ContextualSituation"
             },
             "RecallLeadIn": {
-                "mCoolDownTime": 10.0,
                 "mRules": [
                     {
                         "mRuleName": "Recall",
+                        "mConditions": [
+                            {
+                                "mPercentChanceToPlay": 75,
+                                "__type": "ContextualConditionChanceToPlay"
+                            },
+                            {
+                                "mRuleCooldown": 10.0,
+                                "__type": "ContextualConditionRuleCooldown"
+                            }
+                        ],
                         "mAudioAction": {
                             "mSelfEventName": "Recall3DGeneral",
                             "__type": "ContextualActionPlayVO"
@@ -41369,7 +41383,10 @@
                             "mSpectatorEventName": "Taunt3DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -41386,7 +41403,10 @@
                             "mSpectatorEventName": "Joke3DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -41583,7 +41603,36 @@
                             "mSpectatorEventName": "Laugh3DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "SpellBuffCast": {
+                "mRules": [
+                    {
+                        "mRuleName": "W Block Spell",
+                        "mConditions": [
+                            {
+                                "SpellBuff": "{0a460f01}",
+                                "__type": "ContextualConditionSpellBuffName"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "Spell3DWProc",
+                            "mAllyEventName": "Spell3DWProc",
+                            "mEnemyEventName": "Spell3DWProc",
+                            "mSpectatorEventName": "Spell3DWProc",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],

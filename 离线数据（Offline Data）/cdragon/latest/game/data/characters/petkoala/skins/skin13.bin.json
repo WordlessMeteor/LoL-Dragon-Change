@@ -107,5 +107,303 @@
         },
         "mResourceResolver": "Characters/PetKoala/Skins/Skin13/Resources",
         "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/PetKoala/Skins/Skin13/Materials/HKG_MatCap_Diff_Mask_Alpha_KoalaMat_Expression": {
+        "name": "Characters/PetKoala/Skins/Skin13/Materials/HKG_MatCap_Diff_Mask_Alpha_KoalaMat_Expression",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/PetKoala/Themes/Base/PetKoala_Base_Classic_Expression_TX_CM.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "MatCap_Tex",
+                "textureName": "ASSETS/Characters/PetKoala/Themes/Base/Matcap1.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask",
+                "textureName": "ASSETS/Characters/PetKoala/Themes/Base/Space_mask.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "EvolvingPassiveTex",
+                "textureName": "ASSETS/Shared/Materials/lava_mask.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "BlendMod",
+                "value": [
+                    0.0,
+                    2.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "RGBA_Mask_Values",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TintColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Intensity",
+                "value": [
+                    2.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Size",
+                "value": [
+                    2.262500047683716,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "BLEND_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_TEX_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "EXCLUDE_R_FROM_FRESNEL",
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/HKG_MatCap_Diff_Mask_Alpha",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "RGBA_Mask_Values",
+                    "enabled": false,
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mValueA": {
+                                        "mScriptName": "EzrealPassiveStacks",
+                                        "__type": "BuffCounterDynamicMaterialFloatDriver"
+                                    },
+                                    "mValueB": {
+                                        "mValue": 1.0,
+                                        "__type": "FloatLiteralMaterialDriver"
+                                    },
+                                    "__type": "FloatComparisonMaterialDriver"
+                                },
+                                "mValue": {
+                                    "value": [
+                                        0.0,
+                                        1.0,
+                                        0.0,
+                                        0.0
+                                    ],
+                                    "__type": "Float4LiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mValueA": {
+                                        "mScriptName": "EzrealPassiveStacks",
+                                        "__type": "BuffCounterDynamicMaterialFloatDriver"
+                                    },
+                                    "mValueB": {
+                                        "mValue": 2.0,
+                                        "__type": "FloatLiteralMaterialDriver"
+                                    },
+                                    "__type": "FloatComparisonMaterialDriver"
+                                },
+                                "mValue": {
+                                    "value": [
+                                        0.0,
+                                        0.0,
+                                        1.0,
+                                        0.0
+                                    ],
+                                    "__type": "Float4LiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mValueA": {
+                                        "mScriptName": "EzrealPassiveStacks",
+                                        "__type": "BuffCounterDynamicMaterialFloatDriver"
+                                    },
+                                    "mValueB": {
+                                        "mValue": 3.0,
+                                        "__type": "FloatLiteralMaterialDriver"
+                                    },
+                                    "__type": "FloatComparisonMaterialDriver"
+                                },
+                                "mValue": {
+                                    "value": [
+                                        0.0,
+                                        0.0,
+                                        0.0,
+                                        1.0
+                                    ],
+                                    "__type": "Float4LiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mValueA": {
+                                        "mScriptName": "EzrealPassiveStacks",
+                                        "__type": "BuffCounterDynamicMaterialFloatDriver"
+                                    },
+                                    "mValueB": {
+                                        "mValue": 4.0,
+                                        "__type": "FloatLiteralMaterialDriver"
+                                    },
+                                    "__type": "FloatComparisonMaterialDriver"
+                                },
+                                "mValue": {
+                                    "__type": "Float4LiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mValueA": {
+                                        "mScriptName": "EzrealPassiveStacks",
+                                        "__type": "BuffCounterDynamicMaterialFloatDriver"
+                                    },
+                                    "mValueB": {
+                                        "mValue": 5.0,
+                                        "__type": "FloatLiteralMaterialDriver"
+                                    },
+                                    "__type": "FloatComparisonMaterialDriver"
+                                },
+                                "mValue": {
+                                    "value": [
+                                        1.0,
+                                        1.0,
+                                        1.0,
+                                        1.0
+                                    ],
+                                    "__type": "Float4LiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "value": [
+                                0.0,
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            "__type": "Float4LiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    },
+    "Characters/PetKoala/Skins/Skin13/Resources": {
+        "resourceMap": {
+            "PetKoala_Base_Emote_Joke": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Joke",
+            "PetKoala_Base_Emote_Joke_Sand": "Characters/PetKoala/Themes/Base/Root/Particles/PetKoala_Base_Emote_Joke_Sand",
+            "PetKoala_Base_Emote_Joke_Ears": "Characters/PetKoala/Themes/Base/Root/Particles/PetKoala_Base_Emote_Joke_Ears",
+            "PetKoala_Base_Emote_Dance": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Dance01",
+            "PetKoala_Base_Emote_Dance_in": "Characters/PetKoala/Themes/Base/Root/Particles/PetKoala_Base_Emote_Dance_in",
+            "PetKoala_Base_Emote_Taunt_Ear": "Characters/PetKoala/Themes/Base/Root/Particles/PetKoala_Base_Emote_Taunt_Ear",
+            "PetKoala_Base_Emote_Dance_Rhythm": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Dance_Rhythm",
+            "{3b736f75}": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Dance",
+            "PetKoala_Base_Emote_Dance_Rhythm01": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Dance_Rhythm01",
+            "PetKoala_Base_Emote_Taunt": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Taunt",
+            "PetKoala_Base_Emote_Taunt_Smoke": "Characters/PetKoala/Themes/Base/Root/Particles/PetKoala_Base_Emote_Taunt_Smoke",
+            "PetKoala_Base_Emote_Taunt_Smoke01": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Taunt_Smoke01",
+            "PetKoala_Base_Emote_Laugh": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Laugh",
+            "PetKoala_Base_Emote_Laugh_Clap": "Characters/PetKoala/Themes/Base/Root/Particles/PetKoala_Base_Emote_Laugh_Clap",
+            "PetKoala_Base_Emote_Laugh_Smoke": "Characters/PetKoala/Themes/Base/Root/Particles/PetKoala_Base_Emote_Laugh_Smoke",
+            "PetKoala_Base_Emote_Laugh_Smoke01": "Characters/PetKoala/Themes/Base/Root/Particles/PetKoala_Base_Emote_Laugh_Smoke01",
+            "PetKoala_Base_Emote_Laugh_hit": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Laugh_hit",
+            "PetKoala_Base_Emote_Laugh_hit01": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Laugh_hit01",
+            "{8420fe49}": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Laugh_hit02",
+            "PetKoala_Base_Emote_Laugh_Smoke02": "Characters/PetKoala/Themes/Base/Root/Particles/PetKoala_Base_Emote_Laugh_Smoke02",
+            "{4ad26850}": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Laugh_hit02_Child",
+            "PetKoala_Skin3_Emote_Dance_Child": "Characters/PetKoala/Skins/Skin3/Particles/PetKoala_Skin3_Emote_Dance_Child",
+            "{b65e958e}": "Characters/PetKoala/Skins/Skin15/Particles/PetKoala_Skin15_Emote_Dance_Child"
+        },
+        "__type": "ResourceResolver"
     }
 }
