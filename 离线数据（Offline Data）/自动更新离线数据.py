@@ -544,7 +544,7 @@ while True:
         for root, dirs, files in os.walk(src_folder):
             for file in files:
                 update = added = False
-                if mode == "1" and file.endswith(".json") or mode == "2" and file == "champion.json":
+                if mode == "1" and file.endswith(".json") or mode == "2":
                     src_path = os.path.join(root, file).replace("\\", "/")
                     relative_path = os.path.relpath(root, src_folder).replace("\\", "/")
                     dst_path = os.path.join(dst_folder, relative_path, file).replace("\\", "/")
