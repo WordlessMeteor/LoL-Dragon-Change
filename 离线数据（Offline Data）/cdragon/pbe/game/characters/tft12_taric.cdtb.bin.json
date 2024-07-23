@@ -1,5 +1,5 @@
 {
-    "{08f823d6}": {
+    "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_MIssileRedirect": {
         "complexEmitterDefinitionData": [
             {
                 "rate": {
@@ -378,7 +378,7 @@
         "overrideScaleCap": -1.0,
         "__type": "VfxSystemDefinitionData"
     },
-    "{6fb220d5}": {
+    "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_Tar": {
         "complexEmitterDefinitionData": [
             {
                 "rate": {
@@ -1960,7 +1960,7 @@
         "flags": 132,
         "__type": "VfxSystemDefinitionData"
     },
-    "{88631b94}": {
+    "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_RedirectZone": {
         "complexEmitterDefinitionData": [
             {
                 "timeBeforeFirstEmission": 0.15000000596046448,
@@ -6805,7 +6805,7 @@
         "flags": 212,
         "__type": "VfxSystemDefinitionData"
     },
-    "{a3a6d7d9}": {
+    "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_Explosion": {
         "complexEmitterDefinitionData": [
             {
                 "timeBeforeFirstEmission": 0.05000000074505806,
@@ -10556,7 +10556,7 @@
         "soundOnCreateDefault": "Play_sfx_tft12_TaricSpell_explo",
         "__type": "VfxSystemDefinitionData"
     },
-    "{cc56b6bd}": {
+    "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_DamageReductionShield": {
         "complexEmitterDefinitionData": [
             {
                 "rate": {
@@ -14474,7 +14474,7 @@
         "flags": 198,
         "__type": "VfxSystemDefinitionData"
     },
-    "{7c549c94}": {
+    "Characters/TFT12_Taric/Skins/Skin0/Materials/TierUpgrade": {
         "name": "Characters/TFT12_Taric/Skins/Skin0/Materials/TierUpgrade",
         "samplerValues": [
             {
@@ -15013,7 +15013,7 @@
         },
         "__type": "StaticMaterialDef"
     },
-    "{a7e52b00}": {
+    "Characters/TFT12_Taric/Skins/Skin0/Materials/FrozenStatus": {
         "name": "Characters/TFT12_Taric/Skins/Skin0/Materials/FrozenStatus",
         "samplerValues": [
             {
@@ -15242,7 +15242,7 @@
                 "name": "normal",
                 "passes": [
                     {
-                        "shader": "{f3062c30}",
+                        "shader": "Shaders/SkinnedMesh/TFT_Freeze",
                         "blendEnable": true,
                         "srcColorBlendFactor": 6,
                         "srcAlphaBlendFactor": 6,
@@ -15339,18 +15339,18 @@
     },
     "{cea3daec}": {
         "resourceMap": {
-            "{00755912}": "{88631b94}",
-            "{ccaa8867}": "{cc56b6bd}",
-            "{caf173bb}": "{6fb220d5}",
-            "{96e21f23}": "{a3a6d7d9}",
-            "{39d34f2c}": "{08f823d6}"
+            "{00755912}": "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_RedirectZone",
+            "{ccaa8867}": "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_DamageReductionShield",
+            "{caf173bb}": "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_Tar",
+            "{96e21f23}": "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_Explosion",
+            "{39d34f2c}": "Characters/TFT12_Taric/Skins/Skin0/Particles/TFT12_Taric_Base_R_MIssileRedirect"
         },
         "__type": "ResourceResolver"
     },
-    "{88dcea1e}": {
+    "Characters/TFT12_Taric/Skins/Meta": {
         "__type": "SkinCharacterMetaDataProperties"
     },
-    "{48fbcb15}": {
+    "Characters/TFT12_Taric/Spells/TFT12_TaricSpell": {
         "mScriptName": "TFT12_TaricSpell",
         "mSpell": {
             "mAffectsTypeFlags": 11333,
@@ -15420,6 +15420,19 @@
                         2.0
                     ],
                     "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BaseDamage",
+                    "mValues": [
+                        0.0,
+                        50.0,
+                        75.0,
+                        600.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
                 }
             ],
             "mSpellCalculations": {
@@ -15427,13 +15440,22 @@
                     "mSimpleTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
-                            "mSubpart": {
-                                "mDataValue": "MRScalar",
-                                "__type": "NamedDataValueCalculationPart"
-                            },
-                            "mRatio": 1.0,
-                            "mStat": 5,
-                            "__type": "SubPartScaledProportionalToStat"
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "MRScalar",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 1.0,
+                                    "mStat": 5,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mDataValue": "BaseDamage",
+                                    "__type": "NamedDataValueCalculationPart"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
@@ -15534,7 +15556,7 @@
         },
         "__type": "SpellObject"
     },
-    "{520c08b1}": {
+    "Characters/TFT12_Taric/Spells/TFT12_TaricBasicAttack2": {
         "mScriptName": "TFT12_TaricBasicAttack2",
         "mSpell": {
             "flags": 128,
@@ -15596,7 +15618,7 @@
         },
         "__type": "SpellObject"
     },
-    "{bfed9199}": {
+    "Characters/TFT12_Taric/Spells/TFT12_TaricCritAttack": {
         "mScriptName": "TFT12_TaricCritAttack",
         "mSpell": {
             "mAffectsTypeFlags": 7375,
@@ -15656,7 +15678,7 @@
         },
         "__type": "SpellObject"
     },
-    "{d0744719}": {
+    "Characters/TFT12_Taric/Spells/TFT12_TaricBasicAttack": {
         "mScriptName": "TFT12_TaricBasicAttack",
         "mSpell": {
             "flags": 128,
@@ -15722,7 +15744,7 @@
         },
         "__type": "SpellObject"
     },
-    "{ed404f18}": {
+    "Characters/TFT12_Taric/CharacterRecords/Root": {
         "mCharacterName": "TFT12_Taric",
         "baseHP": 1100.0,
         "baseStaticHPRegen": 0.0,
