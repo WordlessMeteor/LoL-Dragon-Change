@@ -78,43 +78,45 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
             patches_url = "https://ddragon.leagueoflegends.com/api/versions.json"
             #下面声明离线数据资源的默认地址（The following code declare the default paths of offline data resources）
             patches_local_default = "离线数据（Offline Data）\\versions.json"
-            champion_local_default = "离线数据（Offline Data）\\ddragon\\zh_CN\\champion.json"
+            cdragon_champion_local_default = "离线数据（Offline Data）\\cdragon\\pbe\\plugins\\rcp-be-lol-game-data\\global\\zh_cn\\v1\\champion-summary.json"
+            ddragon_champion_local_default = "离线数据（Offline Data）\\ddragon\\zh_CN\\champion.json"
             break
         else:
             print("语言选项输入错误！请重新输入：\nERROR input of language option! Please try again:")
-    try:
-        patches = requests.get(patches_url)
-    except requests.exceptions.RequestException:
-        print('版本信息获取超时！正在尝试离线加载数据……\nPatch information capture timeout! Trying loading offline data ...\n请输入版本Json数据文件路径。输入空字符以使用默认相对引用路径“%s”。输入“0”以退出程序。\nPlease enter the patch Json data file path. Enter an empty string to use the default relative path: "%s". Submit "0" to exit.' %(patches_local_default, patches_local_default))
-        while True:
-            patches_local = input()
-            if patches_local == "":
-                patches_local = patches_local_default
-            elif patches_local[0] == "0":
-                print("版本信息获取失败！请检查系统网络状况和代理设置。\nPatch information capture failure! Please check the system network condition and agent configuration.")
-                time.sleep(5)
-                exit()
-            try:
-                with open(patches_local, "r", encoding = "utf-8") as fp:
-                    patches = json.load(fp)
-                if isinstance(patches, list) and patches[-1] == "lolpatch_3.7":
-                    break
-                else:
+    if source[0] == "2":
+        try:
+            patches = requests.get(patches_url)
+        except requests.exceptions.RequestException:
+            print('版本信息获取超时！正在尝试离线加载数据……\nPatch information capture timeout! Trying loading offline data ...\n请输入版本Json数据文件路径。输入空字符以使用默认相对引用路径“%s”。输入“0”以退出程序。\nPlease enter the patch Json data file path. Enter an empty string to use the default relative path: "%s". Submit "0" to exit.' %(patches_local_default, patches_local_default))
+            while True:
+                patches_local = input()
+                if patches_local == "":
+                    patches_local = patches_local_default
+                elif patches_local[0] == "0":
+                    print("版本信息获取失败！请检查系统网络状况和代理设置。\nPatch information capture failure! Please check the system network condition and agent configuration.")
+                    time.sleep(5)
+                    exit()
+                try:
+                    with open(patches_local, "r", encoding = "utf-8") as fp:
+                        patches = json.load(fp)
+                    if isinstance(patches, list) and patches[-1] == "lolpatch_3.7":
+                        break
+                    else:
+                        print("数据格式错误！请选择一个符合DataDragon数据库中记录的版本数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the patch data archived in DataDragon database (%s)!" %(patches_url, patches_url))
+                        continue
+                except FileNotFoundError:
+                    print("未找到文件%s！请输入正确的版本Json数据文件路径！\nFile %s NOT found! Please input a correct patch Json data file path!" %(patches_local, patches_local))
+                    continue
+                except OSError:
+                    print("数据文件名不合法！请输入含有版本信息的本地文件的路径！\nIllegal data filename! Please input the path of a local file with patch information.")
+                    continue
+                except json.decoder.JSONDecodeError:
                     print("数据格式错误！请选择一个符合DataDragon数据库中记录的版本数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the patch data archived in DataDragon database (%s)!" %(patches_url, patches_url))
                     continue
-            except FileNotFoundError:
-                print("未找到文件%s！请输入正确的版本Json数据文件路径！\nFile %s NOT found! Please input a correct patch Json data file path!" %(patches_local, patches_local))
-                continue
-            except OSError:
-                print("数据文件名不合法！请输入含有版本信息的本地文件的路径！\nIllegal data filename! Please input the path of a local file with patch information.")
-                continue
-            except json.decoder.JSONDecodeError:
-                print("数据格式错误！请选择一个符合DataDragon数据库中记录的版本数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the patch data archived in DataDragon database (%s)!" %(patches_url, patches_url))
-                continue
-    else:
-        patches = patches.json()
-        latest_patch = patches[0]
-    if source[0] == "2":
+        else:
+            patches = patches.json()
+            latest_patch = patches[0]
+        champion_local_default = ddragon_champion_local_default
         print("请输入您想要获取的版本。输入空字符串以获取最新版本英雄信息。\nPlease input the patch you want to search from. Submit an empty string to get the latest champion data. Examples: \n" + ", ".join(patches[:-98]))
         while True:
             patch_in_url = input()
@@ -129,8 +131,8 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
         print("请输入您想要获取的版本。输入空字符串以获取最新版本英雄信息。\nPlease input the patch you want to search from. Submit an empty string to get the latest champion data. Examples: ")
         cdragon_homepage = requests.get("https://raw.communitydragon.org/") #对应于DataDragon数据库的版本，下面从CommunityDragons数据库主页的源代码获取可用版本（Corresponding to getting patches DataDragon database, the following code crawl the available patches in CommunityDragon database through its homepage）
         if cdragon_homepage.ok:
-            source = cdragon_homepage.content.decode()
-            source_list = list(map(lambda x: x.strip(), source.split("\n")))
+            sourceCode = cdragon_homepage.content.decode()
+            source_list = list(map(lambda x: x.strip(), sourceCode.split("\n")))
             line_re = re.compile('<tr><td class="link"><a href="[0-9]*\.[0-9]*/" title="[0-9]*\.[0-9]*">[0-9]*\.[0-9]*/</a></td><td class="size">-</td><td class="date">[0-9]*-[a-zA-Z]*-[0-9]* [0-9]*:[0-9]*</td></tr>')
             patch_re = re.compile('[0-9]*\.[0-9]*')
             patches_cdragon = []
@@ -156,10 +158,11 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
             print("CommunityDragon数据库主页源代码获取失败！请检查系统网络状况和代理设置。CommunityDragon database homepage source code capture failure! Please check the system network condition and agent configuration.")
             time.sleep(5)
             exit()
+        champion_local_default = cdragon_champion_local_default
     try:
         champion = requests.get(champion_url).json()
     except requests.exceptions.RequestException:
-        print('英雄数据获取超时！正在尝试离线加载数据……\nChampion data capture timeout! Trying loading offline data ...\n请输入英雄Json数据文件路径。输入空字符以使用默认相对引用路径“%s”。输入“0”以退出程序。\nPlease enter the champion Json data file path. Enter an empty string to use the default relative path: "%s". Submit "0" to exit.' %(patches_local_default, patches_local_default))
+        print('英雄数据获取超时！正在尝试离线加载数据……\nChampion data capture timeout! Trying loading offline data ...\n请输入英雄Json数据文件路径。输入空字符以使用默认相对引用路径“%s”。输入“0”以退出程序。\nPlease enter the champion Json data file path. Enter an empty string to use the default relative path: "%s". Submit "0" to exit.' %(champion_local_default, champion_local_default))
         while True:
             champion_local = input()
             if champion_local == "":
@@ -193,11 +196,11 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
             champions[champion_key] = champion_iter
         count = 0
         f = open("Champion List.txt", "w")
-        header = "championId\tname\ttitle\n"
+        header = "championId\tname\ttitle\talias\n"
         print(header, end = "")
         f.write(header)
         for i in sorted(champions.keys()):
-            entry = "%s\t%s\t%s\n" %(i, champions[i]["name"], champions[i]["title"])
+            entry = "%s\t%s\t%s\t%s\n" %(i, champions[i]["name"], champions[i]["title"], champions[i]["id"])
             print(entry, end = "")
             f.write(entry)
             if int(i) > 0: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
@@ -309,17 +312,17 @@ async def create_custom_lobby(connection):
 async def count_all_champions(connection):
     count = 0
     f = open("Champion List.txt", "w")
-    header = "championId\tname\talias\n"
+    header = "championId\tname\ttitle\talias\n"
     print(header, end = "")
     f.write(header)
     champions = await (await connection.request("GET", "/lol-champions/v1/inventories/%s/champions" %summoner["summonerId"])).json()
-    alias_dict = {4: "Twisted Fate", 5: "Xin Zhao", 11: "Master Yi", 20: "Nunu & Willump", 21: "Miss Fortune", 31: "Cho'Gath", 36: "Dr. Mundo", 59: "Jarvan IV", 62: "Monkey King", 64: "Lee Sin", 96: "Kog'Maw", 136: "Aurelion Sol", 145: "Kai'Sa", 161: "Vel'Koz", 200: "Bel'Veth", 223: "Tahm Kench", 421: "Rek'Sai", 888: "Renata Glasc", 897: "K'Sante"}
+    # alias_dict = {4: "Twisted Fate", 5: "Xin Zhao", 11: "Master Yi", 20: "Nunu & Willump", 21: "Miss Fortune", 31: "Cho'Gath", 36: "Dr. Mundo", 59: "Jarvan IV", 62: "Monkey King", 64: "Lee Sin", 96: "Kog'Maw", 136: "Aurelion Sol", 145: "Kai'Sa", 161: "Vel'Koz", 200: "Bel'Veth", 223: "Tahm Kench", 421: "Rek'Sai", 888: "Renata Glasc", 897: "K'Sante"}
     for champion in champions:
-        if champion["id"] in alias_dict.keys():
-            alias = alias_dict[champion["id"]]
-        else:
-            alias = champion["alias"]
-        entry = "%s\t%s\t%s\n" %(champion["id"], champion["name"], alias)
+        # if champion["id"] in alias_dict.keys():
+        #     alias = alias_dict[champion["id"]]
+        # else:
+        #     alias = champion["alias"]
+        entry = "%s\t%s\t%s\t%s\n" %(champion["id"], champion["name"], champion["title"], champion["alias"])
         print(entry, end = "")
         f.write(entry)
         if champion["id"] > 0: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
@@ -334,23 +337,23 @@ async def count_all_champions(connection):
 async def count_all_bots(connection):
     count = 0
     f = open("Champion List.txt", "w")
-    header = "championId\tname\talias\n"
+    header = "championId\tname\ttitle\talias\n"
     print(header, end = "")
     f.write(header)
     champions = await (await connection.request("GET", "/lol-champions/v1/inventories/%s/champions" %summoner["summonerId"])).json()
     await create_custom_lobby(connection)
-    alias_dict = {4: "Twisted Fate", 5: "Xin Zhao", 11: "Master Yi", 20: "Nunu & Willump", 21: "Miss Fortune", 31: "Cho'Gath", 36: "Dr. Mundo", 59: "Jarvan IV", 62: "Monkey King", 64: "Lee Sin", 96: "Kog'Maw", 136: "Aurelion Sol", 145: "Kai'Sa", 161: "Vel'Koz", 200: "Bel'Veth", 223: "Tahm Kench", 421: "Rek'Sai", 888: "Renata Glasc", 897: "K'Sante"}
+    # alias_dict = {4: "Twisted Fate", 5: "Xin Zhao", 11: "Master Yi", 20: "Nunu & Willump", 21: "Miss Fortune", 31: "Cho'Gath", 36: "Dr. Mundo", 59: "Jarvan IV", 62: "Monkey King", 64: "Lee Sin", 96: "Kog'Maw", 136: "Aurelion Sol", 145: "Kai'Sa", 161: "Vel'Koz", 200: "Bel'Veth", 223: "Tahm Kench", 421: "Rek'Sai", 888: "Renata Glasc", 897: "K'Sante"}
     for champion in champions:
         bot = { "championId": champion["id"], "botDifficulty": "RSINTERMEDIATE", "teamId": "200", "position": "TOP"}
         await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)
         time.sleep(0.1) #由于服务器响应速度原因，从添加电脑到房间信息更新，需要0.1秒的缓冲时间（0.1s buffer time is needed between adding a bot and updating the lobby information due to the server response speed）
         lobby = await(await connection.request("GET", "/lol-lobby/v2/lobby")).json()
         if len(lobby["gameConfig"]["customTeam200"]) == 1 and lobby["gameConfig"]["customTeam200"][0]["botChampionId"] == champion["id"]:
-            if champion["id"] in alias_dict.keys():
-                alias = alias_dict[champion["id"]]
-            else:
-                alias = champion["alias"]
-            entry = "%s\t%s\t%s\n" %(champion["id"], champion["name"], alias)
+            # if champion["id"] in alias_dict.keys():
+            #     alias = alias_dict[champion["id"]]
+            # else:
+            #     alias = champion["alias"]
+            entry = "%s\t%s\t%s\t%s\n" %(champion["id"], champion["name"], champion["title"], champion["alias"])
             print(entry, end = "")
             f.write(entry)
             if champion["id"] > 0: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
@@ -378,20 +381,20 @@ async def count_available_bots(connection):
         input()
         return 0
     f = open("Champion List.txt", "w")
-    header = "championId\tname\talias\n"
+    header = "championId\tname\ttitle\talias\n"
     print(header, end = "")
     f.write(header)
     champions = await (await connection.request("GET", "/lol-champions/v1/inventories/%s/champions" %summoner["summonerId"])).json()
-    alias_dict = {4: "Twisted Fate", 5: "Xin Zhao", 11: "Master Yi", 20: "Nunu & Willump", 21: "Miss Fortune", 31: "Cho'Gath", 36: "Dr. Mundo", 59: "Jarvan IV", 62: "Monkey King", 64: "Lee Sin", 96: "Kog'Maw", 136: "Aurelion Sol", 145: "Kai'Sa", 161: "Vel'Koz", 200: "Bel'Veth", 223: "Tahm Kench", 421: "Rek'Sai", 888: "Renata Glasc", 897: "K'Sante"}
+    # alias_dict = {4: "Twisted Fate", 5: "Xin Zhao", 11: "Master Yi", 20: "Nunu & Willump", 21: "Miss Fortune", 31: "Cho'Gath", 36: "Dr. Mundo", 59: "Jarvan IV", 62: "Monkey King", 64: "Lee Sin", 96: "Kog'Maw", 136: "Aurelion Sol", 145: "Kai'Sa", 161: "Vel'Koz", 200: "Bel'Veth", 223: "Tahm Kench", 421: "Rek'Sai", 888: "Renata Glasc", 897: "K'Sante"}
     available_bots = await (await connection.request("GET", "/lol-lobby/v2/lobby/custom/available-bots")).json()
     available_botIds = [bot["id"] for bot in available_bots]
     for champion in champions:
         if champion["id"] in available_botIds:
-            if champion["id"] in alias_dict.keys():
-                alias = alias_dict[champion["id"]]
-            else:
-                alias = champion["alias"]
-            entry = "%s\t%s\t%s\n" %(champion["id"], champion["name"], alias)
+            # if champion["id"] in alias_dict.keys():
+            #     alias = alias_dict[champion["id"]]
+            # else:
+            #     alias = champion["alias"]
+            entry = "%s\t%s\t%s\t%s\n" %(champion["id"], champion["name"], champion["title"], champion["alias"])
             print(entry, end = "")
             f.write(entry)
             if champion["id"] > 0: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
