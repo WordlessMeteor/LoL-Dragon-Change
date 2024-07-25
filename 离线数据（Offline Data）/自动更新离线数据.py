@@ -95,6 +95,11 @@ def getUrl(url: str, log):
                 break
             print("由于远程服务器端无响应，连接已关闭！正在尝试第%d次重新获取数据！\nRemote end closed connection without response. Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
             log.write("由于远程服务器端无响应，连接已关闭！正在尝试第%d次重新获取数据！\nRemote end closed connection without response. Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
+        except requests.exceptions.ReadTimeout:
+            if retry > 5:
+                break
+            print("读取超时！正在尝试第%d次重新获取数据！\nRead time out! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
+            log.write("读取超时！正在尝试第%d次重新获取数据！\nRead time out! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         else:
             return (source, 0)
     if retry > 5:
