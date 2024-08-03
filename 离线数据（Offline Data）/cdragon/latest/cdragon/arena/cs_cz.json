@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Poškození způsobené v tomto kole: @f1@<br>Celkové způsobené poškození: @f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "Každých pár sekund <keywordMajor>automaticky sešleš</keywordMajor> směrem ke svému spojenci strážné světlo, které tobě a spojencům, jimiž projde, poskytne <shield>štít</shield>. Při návratu světlo svůj efekt opakuje.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "Strážce světla",
+            "rarity": 1,
+            "tooltip": "Vždy po uplynutí @Cooldown@&nbsp;sek. <keywordMajor>automaticky sešleš</keywordMajor> směrem ke svému spojenci strážné světlo, které tobě a spojencům, jimiž projde, poskytne <shield>štít o síle @TotalShield@ bodů</shield>. Po dosažení cíle se začne vracet, během návratu svůj efekt opakuje."
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "Dobrovolná oběť",
             "rarity": 1,
             "tooltip": "Když tvému spojenci poklesne <health>zdraví pod @AllyHealthThreshold*100@&nbsp;%</health>, obětuješ <health>@CurrentHealthToDrain*100@&nbsp;% vlastního aktuálního zdraví</health> a poskytneš mu <shield>štít</shield> o téže síle.<br><br>Štíty vytvořené v tomto kole: @f1@<br>Štíty vytvořené celkem: @f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Za každé vyvolávačovo kouzlo se ti jednou za kolo obnoví jeho přebíjecí doba.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "Revoluce vyvolávačů",
+            "rarity": 1,
+            "tooltip": "Za každé vyvolávačovo kouzlo se ti jednou za kolo obnoví jeho přebíjecí doba."
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "Eroze",
             "rarity": 0,
             "tooltip": "Když způsobíš nepříteli poškození, připravíš ho na @ShredDuration@&nbsp;sek. o @Shred*100@&nbsp;% <scaleArmor>brnění</scaleArmor> a <scaleMR>odolnosti vůči magii</scaleMR>. <br><br>Tento efekt se může až @MaxStacks@x nasčítat."
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "Získáš @AmountOfStatAnvils@x kovadlinu atributů!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "Atributy!",
+            "rarity": 0,
+            "tooltip": "Získáš @AmountOfStatAnvils@x kovadlinu atributů!"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "Potrava pro děla",
             "rarity": 1,
             "tooltip": "Do boje se zapojíš tím, že se necháš vystřelit z děla."
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Nahradí Útěk ultimátkou náhodného šampiona. Po seslání této schopnosti se vymění za ultimátku jiného náhodného šampiona.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "Ultimátní ruleta",
+            "rarity": 2,
+            "tooltip": "Nahradí Útěk ultimátkou náhodného šampiona. Po seslání této schopnosti se vymění za ultimátku jiného náhodného šampiona."
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "Brutalizér",
             "rarity": 1,
             "tooltip": "Získáš <scaleAD>@AD@ k útočnému poškození</scaleAD>, <scaleLevel>@AbilityHaste@ ke zrychlení schopností</scaleLevel> a <scaleAD>@Lethality@ k vražednosti</scaleAD>."
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "Přebíjecí doby tvého <keywordMajor>automatické sesílání</keywordMajor> se zkracují o @AutocastFlatCDR@&nbsp;sek. a těží z tvého zrychlení schopností.",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "Plně automatické",
-            "rarity": 0,
-            "tooltip": "Přebíjecí doby tvého <keywordMajor>automatické sesílání</keywordMajor> se zkracují o @AutocastFlatCDR@&nbsp;sek. a těží z tvého zrychlení schopností."
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "Tvoje ultimátní schopnost je zapečetěná. Získáš @DamageAmp*100@&nbsp;% k <scaleLevel>poškození</scaleLevel>, <healing>léčení</healing> a <shield>síle štítů</shield> a <scaleBonus>@Haste@ ke zrychlení schopností</scaleBonus>."
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "Za každou provedenou likvidaci získáš @KillStackCredit@ stupeň, tento efekt se může v daném kole aktivovat za každého šampiona jen jednou. Po nasčítání @RequiredKillCount@ stupňů se vyklube spektrální kovadlina. Toto lze provést i vícekrát, po prvním vyklubání je však zapotřebí @RequiredKillCountSubsequent@ stupňů.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "Spektrální vejce",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>Aktuální počet stupňů: @f1@<br>Celkem stupňů: @f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "Získáš @GoldBonus@ zlaťáků. Spektrální kovadliny stojí o @PrismaticCostReduction@ zlaťáků méně a spektrální předměty, které od této chvíle získáš, mají při odprodeji o 500 zlaťáků nižší hodnotu.",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "Kovadlina gamba",
             "rarity": 2,
             "tooltip": "Získáš @GoldBonus@ zlaťáků. Spektrální kovadliny stojí o @PrismaticCostReduction@ zlaťáků méně a spektrální předměty, které od této chvíle získáš, mají při odprodeji o 500 zlaťáků nižší hodnotu."
@@ -1746,6 +1824,22 @@
             "name": "Dnes neumírej",
             "rarity": 1,
             "tooltip": "Na 4&nbsp;sekundy požehnáš okolní zem, takže žádná jednotka nemůže klesnout pod 10&nbsp;% svého maximálního zdraví. Po skončení působení efektu si jednotky v oblasti vyléčí <healing>@HealFlatTooltip@ zdraví</healing>. "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "Tvoje útoky a zásahové efekty způsobují o @AttackReduction*100@&nbsp;% nižší poškození. Získáš <attackSpeed>@AttackSpeed*100@&nbsp;% k rychlosti útoků</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "Dvojice zbraní",
+            "rarity": 2,
+            "tooltip": "Tvoje útoky a zásahové efekty způsobují o @AttackReduction*100@&nbsp;% nižší poškození. Získáš <attackSpeed>@AttackSpeed*100@&nbsp;% k rychlosti útoků</attackSpeed>."
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "Získáš @MeleeRangeIncrease@ k dosahu útoků, u šampionů bojujících na dálku se tento bonus snižuje na @RangedRangeIncrease@."
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "Každých pár sekund <keywordMajor>automaticky sešleš</keywordMajor> výbuch slizu, který vytryskne z tvého těla a způsobí okolním nepřátelům <magicDamage>magické poškození</magicDamage>. Při zasažení šampiona vytvoříš kapku, která tě vyléčí, když přes ni přejdeš.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "Slizová sprcha",
+            "rarity": 0,
+            "tooltip": "Vždy po uplynutí @Cooldown@&nbsp;sek. <keywordMajor>automaticky sešleš</keywordMajor> výbuch slizu, který vytryskne z tvého těla a způsobí okolním nepřátelům <magicDamage>magické poškození ve výši @BaseDamage@ bodů plus @PercentDamage@ maximálního zdraví</magicDamage>. Při zasažení šampiona vytvoříš poblíž kapku. Když přes ni přejdeš, obnovíš si <healing>@BlobHeal@ zdraví</healing>, nepřátelé ji tím zničí."
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "Stepař",
             "rarity": 2,
             "tooltip": "Tvoje útoky ti poskytují <moveSpeed>@MSPerHit@ k rychlosti pohybu</moveSpeed>, tento efekt se neomezeně nasčítává. Získáš bonus k rychlosti útoků ve výši @MSToASConversion*10000@&nbsp;% své rychlosti pohybu."
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "Při útoku vypálíš @AdditionalBolts@ dalších projektilů, z nichž každý způsobí <physicalDamage>fyzické poškození</physicalDamage>, jehož výše se odvíjí od uražené vzdálenosti. Každý směr má vlastní přebíjecí dobu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "Natažený kohoutek",
+            "rarity": 2,
+            "tooltip": "Při útoku vypálíš @AdditionalBolts@ dalších projektilů, z nichž každý způsobí <physicalDamage>@DamagePerBolt@ bodů fyzického poškození</physicalDamage>, v závislosti na uražené vzdálenosti se tato hodnota zvyšuje až na @MaxDamageAmp*100@&nbsp;%. Každý hlavní směr má přebíjecí dobu @Cooldown@&nbsp;sek.<br><br>Každý dodatečný projektil může způsobit kritický zásah a aplikuje zásahové efekty s @OnHitRatio*100@% účinností."
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "Získáš <scaleLevel>@AbilityHaste@ ke zrychlení schopností</scaleLevel>."
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "Získáš @AmountOfStatAnvils@x kovadlinu atributů!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "Atributy, atributy, atributy!",
+            "rarity": 2,
+            "tooltip": "Získáš @AmountOfStatAnvils@x kovadlinu atributů!"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "Goliáš",
             "rarity": 2,
             "tooltip": "Zvětšíš se, získáš @HealthAmp*100@&nbsp;% <scaleHealth>zdraví</scaleHealth> a @ADAmp*100@&nbsp;% <scaleAP>adaptivní síly</scaleAP>."
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "Přeběhnutím nebo přemístěním aplikuješ na nedalekého nepřítele efekt <keywordMajor>hoření</keywordMajor>, který způsobuje poškození rozložené v čase a může se neomezeně nasčítávat.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "Průkopník",
+            "rarity": 0,
+            "tooltip": "Když přeběhneš nebo se přemístíš, <keywordMajor>zapálíš</keywordMajor> nedalekého nepřítele a způsobíš mu tak <magicDamage>magické poškození ve výši @BurnPercent*100@&nbsp;% maximálního zdraví</magicDamage> rozložené do @BurnDuration@&nbsp;sek.<br><br>Poškození způsobené v tomto kole: @f1@<br>Poškození způsobené v tomto zápase: @f2@"
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "Pádné pěsti",
             "rarity": 0,
-            "tooltip": "Tvoje útoky způsobí dodatečné <physicalDamage>fyzické poškození</physicalDamage> ve výši @HealthPercent*100@&nbsp;% tvého <healing>maximálního zdraví</healing>."
+            "tooltip": "Tvoje útoky způsobí dodatečných <physicalDamage>@HealthPercentDamage@ bodů fyzického poškození</physicalDamage>, které odpovídá @HealthPercent*100@&nbsp;% tvého <healing>maximálního zdraví</healing>."
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "Ve směru, kterým se díváš, vypálíš laser, který způsobuje <magicDamage>@LaserEyesTooltip@ bodů magického poškození</magicDamage> za sekundu.<br><br>Poškození způsobené v tomto kole: @f1@<br>Celkové způsobené poškození: @f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "Získáš @AmountOfStatAnvils@x kovadlinu atributů!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "Atributy, atributy!",
+            "rarity": 1,
+            "tooltip": "Získáš @AmountOfStatAnvils@x kovadlinu atributů!"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "Mrštný sprint",
             "rarity": 2,
             "tooltip": "Tvoje schopnosti se sprintem, skokem, přesunem nebo teleportací získají <scaleLevel>@Haste@ ke zrychlení schopností</scaleLevel>."
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "Okamžitě prodáš všechny své neúkolové předměty za @SellValueTooltip@&nbsp;% jejich ceny pro přímý nákup. Ideální v kombinaci se slevovými kovadlinami.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "Ohnivý výprodej",
+            "rarity": 0,
+            "tooltip": "Okamžitě prodáš všechny své neúkolové předměty za @SellValueTooltip@&nbsp;% jejich ceny pro přímý nákup. Ideální v kombinaci se slevovými kovadlinami."
         },
         {
             "apiName": "LightningStrikes",
@@ -3037,6 +3287,24 @@
             "name": "Kolosova odvaha",
             "rarity": 2,
             "tooltip": "Po <status>znehybnění</status> nepřátelského šampiona získáš <shield>štít o síle @TotalShield@ bodů</shield>.<br><br>Štíty vytvořené v tomto kole: @f1@<br>Štíty vytvořené celkem: @f2@"
+        },
+        {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "Sdílíš efekty Květin síly s nejbližším spojencem, tebou obdržené výhody jsou o @AmpAmountTooltip@&nbsp;% vyšší.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "Dřina nese ovoce",
+            "rarity": 1,
+            "tooltip": "Sdílíš efekty Květin síly s nejbližším spojencem, tebou obdržené výhody jsou o @AmpAmountTooltip@&nbsp;% vyšší."
         },
         {
             "apiName": "InfernalSoul",

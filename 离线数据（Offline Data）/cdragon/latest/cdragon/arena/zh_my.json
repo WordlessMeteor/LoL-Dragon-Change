@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>本回合造成伤害：@f1@<br>合计造成伤害：@f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "每过几秒，向你的友军<keywordMajor>自动施放</keywordMajor>一道守护圣光，为自身和圣光穿过的友军<shield>提供护盾</shield>。圣光随后折返，重复该效果。",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "圣光护卫",
+            "rarity": 1,
+            "tooltip": "每过@Cooldown@秒，向你的友军<keywordMajor>自动施放</keywordMajor>一道守护圣光，为自身和圣光穿过的友军提供<shield>@TotalShield@护盾</shield>。圣光随后折返，重复返回时的效果。"
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "自愿牺牲",
             "rarity": 1,
             "tooltip": "友军生命值降至<health>@AllyHealthThreshold*100@%</health>以下时，将自身<health>@CurrentHealthToDrain*100@%当前生命值</health>转化成该友军的<shield>护盾</shield>。<br><br>本回合生成护盾：@f1@<br>合计生成护盾：@f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "每个召唤师技能的冷却时间可每回合刷新一次。",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "召唤师变革",
+            "rarity": 1,
+            "tooltip": "每个召唤师技能的冷却时间可每回合刷新一次。"
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "腐蚀",
             "rarity": 0,
             "tooltip": "对敌人造成伤害会削弱其@Shred*100@%<scaleArmor>物理防御</scaleArmor>和<scaleMR>魔法防御</scaleMR>，持续@ShredDuration@秒。<br><br>此效果最多可叠加@MaxStacks@次。"
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "获得@AmountOfStatAnvils@个属性铁砧！",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "属性！",
+            "rarity": 0,
+            "tooltip": "获得@AmountOfStatAnvils@个属性铁砧！"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "炮灰",
             "rarity": 1,
             "tooltip": "进入战斗时，从加农重炮发射出去。"
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "将“逃跑”替换为随机一名英雄的终极技能。施放此技能后，则会替换为另一个随机英雄的终极技能。",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "终极轮盘",
+            "rarity": 2,
+            "tooltip": "将“逃跑”替换为随机一名英雄的终极技能。施放此技能后，则会替换为另一个随机英雄的终极技能。"
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "残暴之力",
             "rarity": 1,
             "tooltip": "获得<scaleAD>@AD@物理攻击</scaleAD>、<scaleLevel>@AbilityHaste@技能加速</scaleLevel>和<scaleAD>@Lethality@物理致命</scaleAD>。"
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "<keywordMajor>自动施放</keywordMajor>技能的冷却时间减少@AutocastFlatCDR@秒，并受益于技能加速的影响。",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "全自动",
-            "rarity": 0,
-            "tooltip": "<keywordMajor>自动施放</keywordMajor>技能的冷却时间减少@AutocastFlatCDR@秒，并受益于技能加速的影响。"
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "你的终极技能已被封锁。获得@DamageAmp*100@%<scaleLevel>伤害</scaleLevel>、<healing>治疗</healing>、<shield>护盾</shield>和<scaleBonus>@Haste@技能加速</scaleBonus>"
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "每次参与击杀都会获得@KillStackCredit@层叠加，每回合每名英雄一次。累积@RequiredKillCount@层后，彩蛋会孵化出一个棱镜铁砧。可多次完成，但在第一次孵化后需要@RequiredKillCountSubsequent@层叠加。",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "棱镜彩蛋",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>当前层数：@f1@<br>总计层数：@f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "获得@GoldBonus@金钱。棱彩铁砧的费用减少@PrismaticCostReduction@金钱，现在获得的棱彩道具转售价格减少500金钱。",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "冈巴铁砧",
             "rarity": 2,
             "tooltip": "获得@GoldBonus@金钱。棱彩铁砧的费用减少@PrismaticCostReduction@金钱，现在获得的棱彩道具转售价格减少500金钱。"
@@ -1746,6 +1824,22 @@
             "name": "择日而亡",
             "rarity": 1,
             "tooltip": "为脚下的土地进行赐福，持续4秒，范围内单位的最大生命值不会降至10%以下。赐福结束后，范围内的单位都会治愈<healing>@HealFlatTooltip@生命值</healing>。 "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "你的普攻和命中效果造成的伤害降低@AttackReduction*100@%。获得<attackSpeed>@AttackSpeed*100@%攻击速度</attackSpeed>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "双持武器",
+            "rarity": 2,
+            "tooltip": "你的普攻和命中效果造成的伤害降低@AttackReduction*100@%。获得<attackSpeed>@AttackSpeed*100@%攻击速度</attackSpeed>。"
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "获得@MeleeRangeIncrease@攻击距离（远程角色减少至@RangedRangeIncrease@）。"
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "每过几秒，从体内<keywordMajor>自动施放</keywordMajor>爆裂黏液，对附近敌人造成<magicDamage>魔法伤害</magicDamage>。如果黏液击中英雄，会分泌出一个软泥，在你走过时为你提供治疗。",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "黏液时间",
+            "rarity": 0,
+            "tooltip": "每过@Cooldown@秒，从你的体内<keywordMajor>自动施放</keywordMajor>爆裂黏液，对附近敌人造成<magicDamage>@BaseDamage@外加@PercentDamage@最大生命值的魔法伤害</magicDamage>。如果你击中英雄，则会在附近分泌出一个软泥。走过软泥时，软泥会回复<healing>@BlobHeal@生命值</healing>，而敌人则会摧毁软泥。"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "踢踏舞者",
             "rarity": 2,
             "tooltip": "普攻可获得<moveSpeed>@MSPerHit@移动速度</moveSpeed>，效果可无限叠加。提供等同于自身@MSToASConversion*10000@%移动速度的攻击速度。"
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "普攻时，发射@AdditionalBolts@道额外飞弹，基于飞弹飞行的距离，每道飞弹造成<physicalDamage>物理伤害</physicalDamage>。每个方向有冷却时间。",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "连发射击",
+            "rarity": 2,
+            "tooltip": "普攻时，发射@AdditionalBolts@道额外飞弹，每道飞弹造成<physicalDamage>@DamagePerBolt@物理伤害</physicalDamage>，伤害随飞行距离而增加，最多可造成@MaxDamageAmp*100@%伤害。每个基本方向有@Cooldown@秒的冷却时间。<br><br>每道飞弹可触发暴击并会施加@OnHitRatio*100@%命中效果。"
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "获得<scaleLevel>@AbilityHaste@技能加速</scaleLevel>。"
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "获得@AmountOfStatAnvils@个属性铁砧！",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "属性叠加再叠加！",
+            "rarity": 2,
+            "tooltip": "获得@AmountOfStatAnvils@个属性铁砧！"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "巨人",
             "rarity": 2,
             "tooltip": "体型变大，获得@HealthAmp*100@%<scaleHealth>生命值</scaleHealth>和@ADAmp*100@%<scaleAP>适性之力</scaleAP>。"
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "冲刺或闪现会对附近敌人施加持续造成伤害的<keywordMajor>燃烧</keywordMajor>效果，效果可无限叠加。",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "先行者",
+            "rarity": 0,
+            "tooltip": "当你冲刺或闪现时，<keywordMajor>燃烧</keywordMajor>附近敌人，在@BurnDuration@秒内造成<magicDamage>@BurnPercent*100@%最大生命值的魔法伤害</magicDamage>。<br><br>本回合造成伤害：@f1@<br>本场对战造成伤害：@f2@"
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "重装打手",
             "rarity": 0,
-            "tooltip": "你的普攻可造成相当于自身@HealthPercent*100@%<healing>最大生命值</healing>的额外<physicalDamage>物理伤害</physicalDamage>。"
+            "tooltip": "你的普攻可造成相当于自身@HealthPercent*100@%<healing>最大生命值</healing>的额外<physicalDamage>@HealthPercentDamage@物理伤害</physicalDamage>。"
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "你的正前方射出一道激光，每秒造成<magicDamage>@LaserEyesTooltip@魔法伤害</magicDamage>。<br><br>本回合已造成伤害：@f1@<br>总计已造成伤害：@f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "获得@AmountOfStatAnvils@个属性铁砧！",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "属性叠加！",
+            "rarity": 1,
+            "tooltip": "获得@AmountOfStatAnvils@个属性铁砧！"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "冲锋",
             "rarity": 2,
             "tooltip": "你的冲刺、跳跃、闪现和传送技能获得<scaleLevel>@Haste@技能加速</scaleLevel>。"
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "立即出售你的所有非任务道具，获得其直接买入价的@SellValueTooltip@%金钱。非常适合处理那些打折的铁砧。",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "火热促销",
+            "rarity": 0,
+            "tooltip": "立即出售你的所有非任务道具，获得其直接买入价的@SellValueTooltip@%金钱。非常适合处理那些打折的铁砧。"
         },
         {
             "apiName": "LightningStrikes",
@@ -3037,6 +3287,24 @@
             "name": "巨像之勇",
             "rarity": 2,
             "tooltip": "<status>定身</status>一名敌方英雄后，获得一道<shield>@TotalShield@护盾</shield>。<br><br>本回合生成护盾@f1@<br>合计生成护盾：@f2@"
+        },
+        {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "将力量之花的效果分享给附近的友军，并使你的收益提升@AmpAmountTooltip@%。",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "劳动果实",
+            "rarity": 1,
+            "tooltip": "将力量之花的效果分享给附近的友军，并使你的收益提升@AmpAmountTooltip@%。"
         },
         {
             "apiName": "InfernalSoul",

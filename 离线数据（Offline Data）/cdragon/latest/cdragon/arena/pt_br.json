@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Dano causado nesta rodada: @f1@<br>Total de dano causado: @f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "De poucos em poucos segundos, <keywordMajor>conjura automaticamente</keywordMajor> uma proteção de luz na direção do seu aliado, concedendo <shield>Escudo</shield> a si e aos aliados no caminho. Em seguida, a luz retorna, repetindo o efeito.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "Proteção de Luz",
+            "rarity": 1,
+            "tooltip": "A cada @Cooldown@s, <keywordMajor>conjura automaticamente</keywordMajor> uma proteção de luz na direção do seu aliado, concedendo <shield>@TotalShield@ de Escudo</shield> a si mesmo e aos aliados no caminho. Em seguida, a luz retorna, repetindo o efeito."
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "Sacrifício Voluntário",
             "rarity": 1,
             "tooltip": "Quando seu aliado ficar com menos de <health>@AllyHealthThreshold*100@% de Vida</health>, troca <health>@CurrentHealthToDrain*100@% da sua Vida atual</health> por um <shield>Escudo</shield> para ele.<br><br>Escudos gerados nesta rodada: @f1@<br>Total de Escudos gerados: @f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Para cada Feitiço de Invocador, redefine o Tempo de Recarga uma vez por rodada.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "Revolução do Invocador",
+            "rarity": 1,
+            "tooltip": "Para cada Feitiço de Invocador, redefine o Tempo de Recarga uma vez por rodada."
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "Erosão",
             "rarity": 0,
             "tooltip": "Causar dano a inimigos fragmenta @Shred*100@% de <scaleArmor>Armadura</scaleArmor> e <scaleMR>Resistência Mágica</scaleMR> por @ShredDuration@s. <br><br>Acumula até @MaxStacks@ vezes."
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "Recebe @AmountOfStatAnvils@ Bigornas de Atributos!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "Atributos!",
+            "rarity": 0,
+            "tooltip": "Recebe @AmountOfStatAnvils@ Bigornas de Atributos!"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "Munição de Canhão",
             "rarity": 1,
             "tooltip": "Você entra no combate sendo lançado de um canhão."
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Substitui Fugir pela ultimate de um Campeão aleatório. Após conjurar a habilidade, ela é substituída pela ultimate de outro Campeão aleatório.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "Roleta de Ultimates",
+            "rarity": 2,
+            "tooltip": "Substitui Fugir pela ultimate de um Campeão aleatório. Após conjurar a habilidade, ela é substituída pela ultimate de outro Campeão aleatório."
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "Brutalizador",
             "rarity": 1,
             "tooltip": "Recebe <scaleAD>@AD@ de Dano de Ataque</scaleAD>, <scaleLevel>@AbilityHaste@ de Aceleração de Habilidade</scaleLevel> e <scaleAD>@Lethality@ de Letalidade</scaleAD>."
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "O Tempo de Recarga das suas <keywordMajor>conjurações automáticas</keywordMajor> é reduzido em @AutocastFlatCDR@s e se beneficia da sua Aceleração de Habilidade.",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "Totalmente Automatizado",
-            "rarity": 0,
-            "tooltip": "O Tempo de Recarga das suas <keywordMajor>conjurações automáticas</keywordMajor> é reduzido em @AutocastFlatCDR@s e se beneficia da sua Aceleração de Habilidade."
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "Sua ultimate está selada. Recebe @DamageAmp*100@% de <scaleLevel>dano</scaleLevel>, <healing>cura</healing> e <shield>Escudo</shield>, e <scaleBonus>@Haste@ de Aceleração de Habilidade</scaleBonus>."
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "Receberá @KillStackCredit@ acúmulo, por Campeão e por rodada, sempre que conseguir uma eliminação. Com @RequiredKillCount@ acúmulos, eclode e se torna uma Bigorna Prismática. Isso pode ser feito várias vezes, mas precisa de @RequiredKillCountSubsequent@ acúmulos depois da primeira eclosão.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "Ovo Prismático",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>Acúmulos atuais: @f1@<br>Acúmulos totais: @f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "Recebe @GoldBonus@ de ouro. Bigornas Prismáticas custam @PrismaticCostReduction@ a menos de ouro, e itens Prismáticos adquiridos a partir de agora são revendidos por 500 a menos de ouro.",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "Bigorna Gamba",
             "rarity": 2,
             "tooltip": "Recebe @GoldBonus@ de ouro. Bigornas Prismáticas custam @PrismaticCostReduction@ a menos de ouro, e itens Prismáticos adquiridos a partir de agora são revendidos por 500 a menos de ouro."
@@ -1746,6 +1824,22 @@
             "name": "Hoje Não",
             "rarity": 1,
             "tooltip": "Abençoa o solo sob você por 4s, evitando que qualquer unidade dentro da área fique com menos de 10% da Vida máxima. No final da duração, unidades na área são curadas em <healing>@HealFlatTooltip@ de Vida</healing>. "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "Seus Ataques e efeitos ao contato causam @AttackReduction*100@% menos dano. Recebe <attackSpeed>@AttackSpeed*100@% de Velocidade de Ataque</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "Ataque Duplo",
+            "rarity": 2,
+            "tooltip": "Seus Ataques e efeitos ao contato causam @AttackReduction*100@% menos dano. Recebe <attackSpeed>@AttackSpeed*100@% de Velocidade de Ataque</attackSpeed>."
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "Recebe @MeleeRangeIncrease@ de Alcance de Ataque, reduzido para @RangedRangeIncrease@ caso você seja um atacante à distância."
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "De poucos em poucos, <keywordMajor>conjura automaticamente</keywordMajor> uma explosão de gosma do seu corpo, causando <magicDamage>Dano Mágico</magicDamage> a inimigos próximos. Se atingir um Campeão, expelirá uma gosma que cura ao passar por cima dela.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "Hora da Geleca",
+            "rarity": 0,
+            "tooltip": "A cada @Cooldown@s, <keywordMajor>conjura automaticamente</keywordMajor> uma explosão de gosma do seu corpo, causando <magicDamage>@BaseDamage@ mais @PercentDamage@ da Vida máxima como Dano Mágico</magicDamage> a inimigos próximos. Se atingir um Campeão, expelirá uma gosma nos arredores. Passar sobre a gosma restaurará <healing>@BlobHeal@ de Vida</healing>, e inimigos que pisarem nela a destruirão."
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "Sapateado",
             "rarity": 2,
             "tooltip": "Seus Ataques concedem <moveSpeed>@MSPerHit@ de Velocidade de Movimento</moveSpeed>, acumulando infinitamente. Recebe Velocidade de Ataque equivalente a @MSToASConversion*10000@% da sua Velocidade de Movimento."
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "Ao Atacar, dispara @AdditionalBolts@ raios adicionais que causam <physicalDamage>Dano Físico</physicalDamage> com base na distância percorrida. Tem Tempo de Recarga por direção.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "Mãos Velozes",
+            "rarity": 2,
+            "tooltip": "Ao Atacar, dispara @AdditionalBolts@ raios adicionais que causam <physicalDamage>@DamagePerBolt@ de Dano Físico</physicalDamage> cada, aumentado em até @MaxDamageAmp*100@% de acordo com a distância percorrida. Cada direção cardinal tem @Cooldown@s de Tempo de Recarga.<br><br>Cada raio pode causar Acerto Crítico e aplica efeitos ao contato com @OnHitRatio*100@% de eficácia."
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "Recebe <scaleLevel>@AbilityHaste@ de Aceleração de Habilidade</scaleLevel>."
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "Recebe @AmountOfStatAnvils@ Bigornas de Atributos!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "Atributos em Dose Tripla!",
+            "rarity": 2,
+            "tooltip": "Recebe @AmountOfStatAnvils@ Bigornas de Atributos!"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "Golias",
             "rarity": 2,
             "tooltip": "Fica grande, recebendo @HealthAmp*100@% <scaleHealth>de Vida</scaleHealth> e @ADAmp*100@% <scaleAP>de Força Adaptativa</scaleAP>."
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "Usar um avanço ou teleporte aplica uma <keywordMajor>Queimadura</keywordMajor> a um inimigo próximo que causa dano ao longo do tempo, acumulando infinitamente.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "Desbravador",
+            "rarity": 0,
+            "tooltip": "Ao avançar ou se teleportar, <keywordMajor>Queima</keywordMajor> um inimigo próximo em <magicDamage>@BurnPercent*100@% da Vida máxima como Dano Mágico</magicDamage> ao longo de @BurnDuration@s.<br><br>Dano causado na rodada: @f1@<br>Dano causado na partida: @f2@"
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "Porradeiro",
             "rarity": 0,
-            "tooltip": "Seus Ataques causam <physicalDamage>Dano Físico</physicalDamage> adicional equivalente a @HealthPercent*100@% da sua <healing>Vida máxima.</healing>"
+            "tooltip": "Seus Ataques causam <physicalDamage>@HealthPercentDamage@ de Dano Físico</physicalDamage> adicional equivalente a @HealthPercent*100@% da sua <healing>Vida máxima.</healing>"
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "Dispara um laser na direção que está olhando que causa <magicDamage>@LaserEyesTooltip@ de Dano Mágico</magicDamage> por segundo. <br><br>Dano causado nesta rodada: @f1@<br>Total de dano causado: @f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "Recebe @AmountOfStatAnvils@ Bigornas de Atributos!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "Atributos em Dose Dupla!",
+            "rarity": 1,
+            "tooltip": "Recebe @AmountOfStatAnvils@ Bigornas de Atributos!"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "Veloz",
             "rarity": 2,
             "tooltip": "Suas Habilidades de avanço, salto e teleporte recebem <scaleLevel>@Haste@ de Aceleração de Habilidade</scaleLevel>."
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "Vende instantaneamente todos os seus itens que não sejam de missão por @SellValueTooltip@% do preço de compra direta. Ótimo para bigornas com desconto.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "Saldão da Bala",
+            "rarity": 0,
+            "tooltip": "Vende instantaneamente todos os seus itens que não sejam de missão por @SellValueTooltip@% do preço de compra direta. Ótimo para bigornas com desconto."
         },
         {
             "apiName": "LightningStrikes",
@@ -3037,6 +3287,24 @@
             "name": "Coragem do Colosso",
             "rarity": 2,
             "tooltip": "Recebe <shield>@TotalShield@ de Escudo</shield> depois de <status>Imobilizar</status> um Campeão inimigo.<br><br>Escudos gerados nesta rodada: @f1@<br>Total de Escudos gerados: @f2@"
+        },
+        {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "Compartilha os efeitos das Flores do Poder com um aliado próximo e aumenta os benefícios recebidos por você em @AmpAmountTooltip@%.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "Frutos do Trabalho",
+            "rarity": 1,
+            "tooltip": "Compartilha os efeitos das Flores do Poder com um aliado próximo e aumenta os benefícios recebidos por você em @AmpAmountTooltip@%."
         },
         {
             "apiName": "InfernalSoul",

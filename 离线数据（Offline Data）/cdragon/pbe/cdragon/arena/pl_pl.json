@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{22c13cca}"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{027a9892}",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "<keywordMajor>Automatycznie</keywordMajor> tniesz wrogów w kręgu wokół siebie co @AutoCastCooldown@ sek., zadając dodatkowe obrażenia jednostkom na dalszym krańcu kręgu.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "<keywordMajor>Automatycznie</keywordMajor> tniesz wrogów w kręgu wokół siebie, zadając <physicalDamage>obrażenia fizyczne</physicalDamage>. Wrogowie znajdujący się na zewnętrznej połowie obszaru trafienia zostają <status>spowolnieni</status> i otrzymują dodatkowe <physicalDamage>obrażenia fizyczne zależne od ich maksymalnego zdrowia</physicalDamage>. Leczysz się o <healing>@OuterConeHealingRatio@% dodatkowych obrażeń zadanych bohaterom</healing>. Czas odnowienia: @AutoCastCooldown@ sek.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Kwantowe Obliczenia",
             "rarity": 2,
-            "tooltip": "<keywordMajor>Automatycznie</keywordMajor> tniesz wrogów w kręgu wokół siebie co 15 sek., zapewniając dodatkowe obrażenia oraz leczenie, jeśli trafione jednostki znajdują się na dalszym krańcu kręgu. <br><br>Całkowite zadane obrażenia: @f1@ pkt.<br>Całkowite leczenie: @f2@ pkt."
+            "tooltip": "<keywordMajor>Automatycznie</keywordMajor> tniesz wrogów w kręgu wokół siebie, zadając <physicalDamage>@BaseDamageTotal@ pkt. obrażeń fizycznych</physicalDamage>. Na wrogów znajdujących się na zewnętrznej połowie obszaru trafienia zostaje nałożone <status>spowolnienie</status> o @SlowPercentage@%, zanikające w ciągu @SlowDuration@ sek., i otrzymują oni dodatkowe <physicalDamage>obrażenia fizyczne równe @OuterEdgeTooltip@% ich maksymalnego zdrowia</physicalDamage>. Leczysz się o <healing>@OuterConeHealingRatio@% dodatkowych obrażeń zadanych bohaterom</healing>. Czas odnowienia: @AutoCastCooldown@ sek.<br><br>Całkowite zadane obrażenia: @f1@ pkt.<br>Całkowite leczenie: @f2@ pkt."
         },
         {
             "apiName": "DemonsDance",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "Twoje ataki skracają twoje czasy odnowienia o @CooldownRefund@ sek.",
+            "desc": "{{ Item_Keyword_OnHit }} skracają twoje czasy odnowienia o @CooldownRefund@ sek.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Mistyczny Cios",
             "rarity": 2,
-            "tooltip": "Twoje ataki skracają twoje czasy odnowienia o @CooldownRefund@ sek."
+            "tooltip": "{{ Item_Keyword_OnHit }} skracają twoje czasy odnowienia o @CooldownRefund@ sek."
         },
         {
             "apiName": "Homeguard",

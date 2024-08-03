@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{22c13cca}"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{027a9892}",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "<keywordMajor>Automatikusan</keywordMajor> lecsap egy körben a hős körül, amivel a külső részen lévő áldozatoknak bónusz sebzést okoz minden @AutoCastCooldown@. másodpercben.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "<keywordMajor>Automatikusan</keywordMajor> lecsap egy körben a hős körül, amivel <physicalDamage>fizikai sebzést</physicalDamage> okoz. A vágás távolabbi felén lévő ellenfeleket <status>lelassítja</status>, valamint a <physicalDamage>maximális életerejük alapján fizikai sebzést</physicalDamage> okoz nekik. A hősöknek okozott bónusz sebzés <healing>@OuterConeHealingRatio@%-át életerőként</healing> tölti vissza. @AutoCastCooldown@ másodperc töltési idő.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Kvantumszámítás",
             "rarity": 2,
-            "tooltip": "<keywordMajor>Automatikusan</keywordMajor> lecsap egy körben a hős körül, amivel a külső részen lévő áldozatoknak bónusz sebzést okoz és gyógyít minden 15. másodpercben. <br><br>Okozott sebzés összesen: @f1@<br>Teljes gyógyítás: @f2@"
+            "tooltip": "<keywordMajor>Automatikusan</keywordMajor> lecsap egy körben a hős körül, amivel <physicalDamage>@BaseDamageTotal@ fizikai sebzést</physicalDamage> okoz. A vágás távolabbi felén lévő ellenfeleket @SlowPercentage@%-kal <status>lelassítja</status>, ami @SlowDuration@ másodperc alatt elenyészik, valamint a maximális életerejük alapján <physicalDamage>@OuterEdgeTooltip@ fizikai sebzést</physicalDamage> okoz nekik. A hősöknek okozott bónusz sebzés <healing>@OuterConeHealingRatio@%-át életerőként</healing> tölti vissza. @AutoCastCooldown@ másodperc töltési idő.<br><br>Okozott sebzés összesen: @f1@<br>Teljes gyógyítás: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "A támadásaid @CooldownRefund@ másodperccel csökkentik a töltési időt.",
+            "desc": "A töltési idők @CooldownRefund@ másodperccel csökkennek {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Misztikus ütés",
             "rarity": 2,
-            "tooltip": "A támadásaid @CooldownRefund@ másodperccel csökkentik a töltési időt."
+            "tooltip": "A töltési idők @CooldownRefund@ másodperccel csökkennek {{ Item_Keyword_OnHit }}."
         },
         {
             "apiName": "Homeguard",

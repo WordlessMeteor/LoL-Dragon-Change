@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{22c13cca}"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{027a9892}",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "每@AutoCastCooldown@秒<keywordMajor>自动</keywordMajor>在你周围进行环状斩击，外侧边缘造成额外伤害。",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "<keywordMajor>自动</keywordMajor>在你周围进行环状斩击，造成<physicalDamage>物理伤害</physicalDamage>。被外沿命中的敌人会被<status>减速</status>并会受到额外的<physicalDamage>最大生命值的物理伤害</physicalDamage>。回复对敌方英雄们的<healing>@OuterConeHealingRatio@%实际额外伤害值的生命值</healing>。@AutoCastCooldown@秒冷却时间。",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "量子计算",
             "rarity": 2,
-            "tooltip": "每15秒<keywordMajor>自动</keywordMajor>在你周围进行环状斩击，外侧边缘造成额外伤害并治疗你自身。<br><br>已造成伤害的总和：@f1@<br>已造成的治疗效果总和：@f2@"
+            "tooltip": "<keywordMajor>自动</keywordMajor>在你周围进行环状斩击，造成<physicalDamage>@BaseDamageTotal@物理伤害</physicalDamage>。被外沿命中的敌人会被施加在@SlowDuration@秒里持续衰减的@SlowPercentage@%<status>减速</status>，并会受到额外的<physicalDamage>@OuterEdgeTooltip@最大生命值的物理伤害</physicalDamage>。回复对敌方英雄们的<healing>@OuterConeHealingRatio@%实际额外伤害值的生命值</healing>。@AutoCastCooldown@秒冷却时间。<br><br>已造成的伤害总和：@f1@<br>已造成的治疗效果总和：@f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "你的攻击会使你的各个冷却时间缩短@CooldownRefund@秒。",
+            "desc": "{{ Item_Keyword_OnHit }}会使你的各个冷却时间缩短@CooldownRefund@秒。",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "秘术冲拳",
             "rarity": 2,
-            "tooltip": "你的攻击会使你的各个冷却时间缩短@CooldownRefund@秒。"
+            "tooltip": "{{ Item_Keyword_OnHit }}会使你的各个冷却时间缩短@CooldownRefund@秒。"
         },
         {
             "apiName": "Homeguard",

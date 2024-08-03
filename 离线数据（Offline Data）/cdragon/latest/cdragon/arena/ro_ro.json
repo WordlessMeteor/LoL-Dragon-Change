@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "La fiecare câteva secunde, <keywordMajor>lansezi automat</keywordMajor> o lumină protectoare spre aliatul tău. Tu și aliații tăi prin care trece lumina primiți un <shield>scut</shield>. Apoi lumina se întoarce, repetând efectul.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "Temnicerul luminii",
+            "rarity": 1,
+            "tooltip": "La fiecare @Cooldown@ secunde, <keywordMajor>lansezi automat</keywordMajor> o lumină protectoare spre aliatul tău. Tu și aliații tăi prin care trece lumina primiți un <shield>scut de @TotalShield@</shield>. Apoi lumina revine, repetând efectul și la întoarcere."
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "Sacrificiu voit",
             "rarity": 1,
             "tooltip": "Când viața aliatului tău scade sub <health>@AllyHealthThreshold*100@%</health>, dai <health>@CurrentHealthToDrain*100@% din viața ta actuală</health> în schimbul unui <shield>scut</shield> cu valoare egală pentru aliatul tău.<br><br>Scuturi generate în această rundă: @f1@<br>Scuturi generate în total: @f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Fiecare vrajă de invocator își reîmprospătează timpul de reactivare o dată per rundă.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "Revoluția verii",
+            "rarity": 1,
+            "tooltip": "Fiecare vrajă de invocator își reîmprospătează timpul de reactivare o dată per rundă."
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "Eroziune",
             "rarity": 0,
             "tooltip": "Când le provoci daune inamicilor, le reduci cu @Shred*100@% <scaleArmor>armura</scaleArmor> și <scaleMR>rezistența la magie</scaleMR> timp de @ShredDuration@ sec. <br><br>Se cumulează de maximum @MaxStacks@ ori."
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "Primești @AmountOfStatAnvils@ ''Nicovale ale atributelor''!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "Atribute!",
+            "rarity": 0,
+            "tooltip": "Primești @AmountOfStatAnvils@ ''Nicovale ale atributelor''!"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "Carne de tun",
             "rarity": 1,
             "tooltip": "Intri în luptă lansându-te dintr-un tun."
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Înlocuiești terifierea cu suprema unui campion aleatoriu. După ce folosești abilitatea, o înlocuiești cu suprema altui campion aleatoriu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "Ruletă supremă",
+            "rarity": 2,
+            "tooltip": "Înlocuiești terifierea cu suprema unui campion aleatoriu. După ce folosești abilitatea, o înlocuiești cu suprema altui campion aleatoriu."
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "Sălbaticul",
             "rarity": 1,
             "tooltip": "Primești <scaleAD>@AD@ daune din atac</scaleAD>, <scaleLevel>@AbilityHaste@ rapiditatea abilităților</scaleLevel> și <scaleAD>@Lethality@ letalitate</scaleAD>."
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "Timpii tăi de reactivare pentru <keywordMajor>''Folosiri automate''</keywordMajor> se reduc cu @AutocastFlatCDR@ sec. și beneficiază de pe urma rapidității abilităților.",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "Automatizare completă",
-            "rarity": 0,
-            "tooltip": "Timpii tăi de reactivare pentru <keywordMajor>''Folosiri automate''</keywordMajor> se reduc cu @AutocastFlatCDR@ sec. și beneficiază de pe urma rapidității abilităților."
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "Abilitatea supremă este blocată. Primești @DamageAmp*100@% <scaleLevel>daune</scaleLevel>, <healing>vindecare</healing>, <shield>scuturi</shield> și <scaleBonus>@Haste@ rapiditatea abilităților</scaleBonus>."
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "Primești @KillStackCredit@ cumul per campion per rundă la fiecare doborâre. La @RequiredKillCount@ cumuluri, din ou iese o ''Nicovală prismatică''. Poți îndeplini cerințele de mai multe ori, dar necesită @RequiredKillCountSubsequent@ cumuluri după prima recompensă.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "Ou prismatic",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>Cumuluri actuale: @f1@<br>Cumuluri totale: @f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "Primești @GoldBonus@ aur. Nicovalele prismatice costă cu @PrismaticCostReduction@ aur mai puțin, iar valoarea de vânzare a obiectelor prismatice achiziționate de acum încolo scade cu 500 aur.",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "Nicovala pariorului",
             "rarity": 2,
             "tooltip": "Primești @GoldBonus@ aur. Nicovalele prismatice costă cu @PrismaticCostReduction@ aur mai puțin, iar valoarea de vânzare a obiectelor prismatice achiziționate de acum încolo scade cu 500 aur."
@@ -1746,6 +1824,22 @@
             "name": "Mori altă dată",
             "rarity": 1,
             "tooltip": "Binecuvântează pământul de sub tine timp de 4 sec., împiedicând orice unitate din zonă să scadă sub 10% din viața maximă. La final, unitățile din interiorul zonei își refac <healing>@HealFlatTooltip@ viață</healing>. "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "Atacurile și efectele la impact provoacă cu @AttackReduction*100@% mai puține daune. Primești <attackSpeed>@AttackSpeed*100@% viteză de atac</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "Lupt cu două arme",
+            "rarity": 2,
+            "tooltip": "Atacurile și efectele la impact provoacă cu @AttackReduction*100@% mai puține daune. Primești <attackSpeed>@AttackSpeed*100@% viteză de atac</attackSpeed>."
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "Primești @MeleeRangeIncrease@ rază de atac, valoare redusă la @RangedRangeIncrease@ pentru campionii care atacă la distanță."
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "La fiecare câteva secunde, <keywordMajor>lansezi automat</keywordMajor> mâzgă din corpul tău, provocându-le inamicilor din apropiere <magicDamage>daune magice</magicDamage>. Dacă lovești un campion, creezi un strop care te vindecă atunci când calci pe el.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "Mâzgăleală",
+            "rarity": 0,
+            "tooltip": "La fiecare @Cooldown@ secunde, <keywordMajor>lansezi automat</keywordMajor> mâzgă din corpul tău, provocându-le inamicilor din apropiere <magicDamage>daune magice în valoare de @BaseDamage@ plus @PercentDamage@ din viața maximă</magicDamage>. Dacă lovești un campion, creezi un strop în apropiere. Dacă treci peste strop, îți refaci <healing>@BlobHeal@ viață</healing>, dar inamicii distrug stropul când calcă pe el."
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "Dansator de step",
             "rarity": 2,
             "tooltip": "Atacurile tale îți oferă <moveSpeed>@MSPerHit@ viteză de mișcare</moveSpeed>, care se cumulează la infinit. Primești viteză de atac egală cu @MSToASConversion*10000@% din viteza de mișcare."
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "Când ataci, lansezi @AdditionalBolts@ fulgere suplimentare care provoacă fiecare <physicalDamage>daune fizice</physicalDamage>, în funcție de distanța parcursă. Are un timp de reactivare per direcție.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "Ciocan evantai",
+            "rarity": 2,
+            "tooltip": "Când ataci, lansezi @AdditionalBolts@ fulgere suplimentare care provoacă fiecare <physicalDamage>@DamagePerBolt@ daune fizice</physicalDamage>, valoare ce crește până la @MaxDamageAmp*100@% în funcție de distanța parcursă. Fiecare direcție cardinală are un timp de reactivare de @Cooldown@ secundă.<br><br>Fiecare fulger poate lovi critic și aplică efecte la impact la eficiență de @OnHitRatio*100@%."
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "Primești <scaleLevel>@AbilityHaste@ rapiditatea abilităților</scaleLevel>."
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "Primești @AmountOfStatAnvils@ ''Nicovale ale atributelor''!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "Atribute peste atribute peste atribute!",
+            "rarity": 2,
+            "tooltip": "Primești @AmountOfStatAnvils@ ''Nicovale ale atributelor''!"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "Goliat",
             "rarity": 2,
             "tooltip": "Devii mai mare, primind @HealthAmp*100@% <scaleHealth>viață</scaleHealth> și @ADAmp*100@% <scaleAP>forță adaptivă</scaleAP>."
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "Când te năpustești sau te deplasezi instantaneu, îi aplici unui inamic din apropiere o <keywordMajor>ardere</keywordMajor> care îi provoacă daune în timp și se cumulează la infinit.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "Deschizător de drumuri",
+            "rarity": 0,
+            "tooltip": "Când te năpustești sau te deplasezi instantaneu, <keywordMajor>arzi</keywordMajor> un inamic din apropiere, provocându-i <magicDamage>daune magice în valoare de @BurnPercent*100@% din viața maximă</magicDamage> de-a lungul a @BurnDuration@ secunde.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în acest meci: @f2@"
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "Barosan",
             "rarity": 0,
-            "tooltip": "Atacurile tale provoacă <physicalDamage>daune fizice</physicalDamage> suplimentare în valoare de @HealthPercent*100@% din <healing>viața ta maximă.</healing>"
+            "tooltip": "Atacurile tale provoacă <physicalDamage>@HealthPercentDamage@ daune fizice</physicalDamage> suplimentare în valoare de @HealthPercent*100@% din <healing>viața ta maximă.</healing>"
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "Creezi un laser în direcția în care privești, provocând <magicDamage>@LaserEyesTooltip@ daune magice</magicDamage> pe secundă.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "Primești @AmountOfStatAnvils@ ''Nicovale ale atributelor''!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "Atribute peste atribute!",
+            "rarity": 1,
+            "tooltip": "Primești @AmountOfStatAnvils@ ''Nicovale ale atributelor''!"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "Năpustire",
             "rarity": 2,
             "tooltip": "Năpustirile, săriturile, deplasările instantanee și teleportările primesc <scaleLevel>@Haste@ rapiditatea abilităților</scaleLevel>."
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "Vinzi instantaneu toate obiectele care nu sunt pentru misiuni la @SellValueTooltip@% din prețul lor de bază. O ofertă grozavă pentru toate nicovalele luate la reducere.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "Vânzare-fulger",
+            "rarity": 0,
+            "tooltip": "Vinzi instantaneu toate obiectele care nu sunt pentru misiuni la @SellValueTooltip@% din prețul lor de bază. O ofertă grozavă pentru toate nicovalele luate la reducere."
         },
         {
             "apiName": "LightningStrikes",
@@ -3039,6 +3289,24 @@
             "tooltip": "Primești un <shield>scut în valoare de@TotalShield@</shield> după <status>imobilizarea</status> unui campion inamic.<br><br>Scuturi generate în această rundă: @f1@<br>Scuturi generate în total: @f2@"
         },
         {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "Împărtășește efectele ''Florilor puterii'' cu cel mai apropiat aliat din apropiere. Tu primești beneficii cu @AmpAmountTooltip@% mai mari.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "Roadele muncii tale",
+            "rarity": 1,
+            "tooltip": "Împărtășește efectele ''Florilor puterii'' cu cel mai apropiat aliat din apropiere. Tu primești beneficii cu @AmpAmountTooltip@% mai mari."
+        },
+        {
             "apiName": "InfernalSoul",
             "calculations": {},
             "dataValues": {},
@@ -3132,7 +3400,7 @@
             "id": 211,
             "name": "Anotimpul morții",
             "rarity": 1,
-            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>Daune provocate în această rundă:@f1@<br>Daune provocate în total: @f2@"
+            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
             "apiName": "WisdomofAges",

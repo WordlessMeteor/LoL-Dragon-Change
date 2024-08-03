@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "Every few seconds, <keywordMajor>Autocast</keywordMajor> a warding light towards your ally, <shield>Shielding</shield> yourself and allies it passes through. It then returns, repeating the effect.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "Light Warden",
+            "rarity": 1,
+            "tooltip": "Every @Cooldown@ seconds, <keywordMajor>Autocast</keywordMajor> a warding light towards your ally, granting <shield>@TotalShield@ Shield</shield> to yourself and allies it passes through. It then returns, repeating the effect on its return."
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "Willing Sacrifice",
             "rarity": 1,
             "tooltip": "When your ally drops below <health>@AllyHealthThreshold*100@% Health</health>, trade <health>@CurrentHealthToDrain*100@% of your current Health</health> for that much <shield>Shield</shield> on your ally.<br><br>Shields Generated This Round: @f1@<br>Shields Generated Total: @f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "For each Summoner Spell refresh its cooldown once per round.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "Summoner Revolution",
+            "rarity": 1,
+            "tooltip": "For each Summoner Spell refresh its cooldown once per round."
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "Erosion",
             "rarity": 0,
             "tooltip": "Damaging enemies shreds @Shred*100@% <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for @ShredDuration@s. <br><br>Stacks up to @MaxStacks@ times."
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "Gain @AmountOfStatAnvils@ Stat Anvils!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "Stats!",
+            "rarity": 0,
+            "tooltip": "Gain @AmountOfStatAnvils@ Stat Anvils!"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "Cannon Fodder",
             "rarity": 1,
             "tooltip": "You enter combat launching from a cannon."
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Replace Flee with the a random champion's ultimate. After casting this ability replace it with another random champion's ultimate.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "Ultimate Roulette",
+            "rarity": 2,
+            "tooltip": "Replace Flee with the a random champion's ultimate. After casting this ability replace it with another random champion's ultimate."
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "The Brutalizer",
             "rarity": 1,
             "tooltip": "Gain <scaleAD>@AD@ Attack Damage</scaleAD>, <scaleLevel>@AbilityHaste@ Ability Haste</scaleLevel>, and <scaleAD>@Lethality@ Lethality</scaleAD>."
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "Your <keywordMajor>Autocast</keywordMajor> Cooldowns are reduced by @AutocastFlatCDR@ seconds and benefit from your Ability Haste.",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "Fully Automated",
-            "rarity": 0,
-            "tooltip": "Your <keywordMajor>Autocast</keywordMajor> Cooldowns are reduced by @AutocastFlatCDR@ seconds and benefit from your Ability Haste."
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "Your Ultimate Ability is sealed. Gain @DamageAmp*100@% <scaleLevel>Damage</scaleLevel>, <healing>Healing</healing>, <shield>Shielding</shield>, and <scaleBonus>@Haste@ Ability Haste</scaleBonus>"
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "Gain @KillStackCredit@ stack, per champion per round, whenever you get a takedown. At @RequiredKillCount@ stacks, this hatches into a Prismatic Anvil. This can be completed multiple times, but requires @RequiredKillCountSubsequent@ stacks after the first hatch.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "Prismatic Egg",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>Current Stacks: @f1@<br>Total Stacks: @f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "Gain @GoldBonus@ gold. Prismatic Anvils cost @PrismaticCostReduction@ gold less, and Prismatic Items acquired from now on resell for 500 gold less.",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "Gamba Anvil",
             "rarity": 2,
             "tooltip": "Gain @GoldBonus@ gold. Prismatic Anvils cost @PrismaticCostReduction@ gold less, and Prismatic Items acquired from now on resell for 500 gold less."
@@ -1746,6 +1824,22 @@
             "name": "Die Another Day",
             "rarity": 1,
             "tooltip": "Bless the ground under you for 4s, preventing any unit inside from falling below 10% of their max Health. At the end, units inside are healed for <healing>@HealFlatTooltip@ Health</healing>. "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "Your Attacks and On-Hits deal @AttackReduction*100@% less damage. Gain <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "Dual Wield",
+            "rarity": 2,
+            "tooltip": "Your Attacks and On-Hits deal @AttackReduction*100@% less damage. Gain <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>."
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "Gain @MeleeRangeIncrease@ Attack Range, reduced to @RangedRangeIncrease@ if you are Ranged."
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "Every few seconds <keywordMajor>Autocast</keywordMajor> a burst slime from your body, dealing <magicDamage>magic damage</magicDamage> to nearby enemies. If you hit a champion, secrete a blob that heals you when walked over.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "Slime Time",
+            "rarity": 0,
+            "tooltip": "Every @Cooldown@ seconds <keywordMajor>Autocast</keywordMajor> a burst slime from your body, dealing <magicDamage>@BaseDamage@ plus @PercentDamage@ max Health magic damage</magicDamage> to nearby enemies. If you hit a champion, secrete a blob nearby. Walking over the blob restores <healing>@BlobHeal@ Health</healing>, while enemies destroy the blob."
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "Tap Dancer",
             "rarity": 2,
             "tooltip": "Your Attacks grant you <moveSpeed>@MSPerHit@ Move Speed</moveSpeed>, stacking infinitely. Gain AS equal to @MSToASConversion*10000@% of your MS."
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "When you Attack, fire @AdditionalBolts@ additional bolts that each deal <physicalDamage>physical damage</physicalDamage> based on distance travelled. Has a per direction Cooldown.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "Fan the Hammer",
+            "rarity": 2,
+            "tooltip": "When you Attack, fire @AdditionalBolts@ additional bolts that each deal <physicalDamage>@DamagePerBolt@ physical damage</physicalDamage>, increased up to @MaxDamageAmp*100@% with distance travelled. Each cardinal direction has a @Cooldown@ second Cooldown.<br><br>Each bolt can Critically Strike and applies On-Hits at @OnHitRatio*100@% effectiveness."
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "Gain <scaleLevel>@AbilityHaste@ Ability Haste</scaleLevel>."
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "Gain @AmountOfStatAnvils@ Stat Anvils!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "Stats on Stats on Stats!",
+            "rarity": 2,
+            "tooltip": "Gain @AmountOfStatAnvils@ Stat Anvils!"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "Goliath",
             "rarity": 2,
             "tooltip": "Become large, gaining @HealthAmp*100@% <scaleHealth>Health</scaleHealth> and @ADAmp*100@% <scaleAP>Adaptive Force</scaleAP>."
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "Dashing or Blinking applies a <keywordMajor>Burn</keywordMajor> to a nearby enemy that deals damage over time, stacking infinitely.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "Trailblazer",
+            "rarity": 0,
+            "tooltip": "When you Dash or Blink, <keywordMajor>Burn</keywordMajor> a nearby enemy for <magicDamage>@BurnPercent*100@% max Health magic damage</magicDamage> over @BurnDuration@ seconds.<br><br>Damage dealt this round: @f1@<br>Damage dealt this game: @f2@"
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "Heavy Hitter",
             "rarity": 0,
-            "tooltip": "Your Attacks deal additional <physicalDamage>physical damage</physicalDamage> equal to @HealthPercent*100@% of your <healing>max Health.</healing>"
+            "tooltip": "Your Attacks deal additional <physicalDamage>@HealthPercentDamage@ physical damage</physicalDamage> equal to @HealthPercent*100@% of your <healing>max Health.</healing>"
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "There is a laser in the direction you are facing that deals <magicDamage>@LaserEyesTooltip@ magic damage</magicDamage> per second.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "Gain @AmountOfStatAnvils@ Stat Anvils!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "Stats on Stats!",
+            "rarity": 1,
+            "tooltip": "Gain @AmountOfStatAnvils@ Stat Anvils!"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "Dashing",
             "rarity": 2,
             "tooltip": "Your dash, leap, blink, or teleport Abilities gain <scaleLevel>@Haste@ Ability Haste</scaleLevel>."
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "Instantly sell all your non-quest items for @SellValueTooltip@% of their direct buy price. Great for all those discounted anvils.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "Fire Sale",
+            "rarity": 0,
+            "tooltip": "Instantly sell all your non-quest items for @SellValueTooltip@% of their direct buy price. Great for all those discounted anvils."
         },
         {
             "apiName": "LightningStrikes",
@@ -3039,6 +3289,24 @@
             "tooltip": "Gain a <shield>@TotalShield@ Shield</shield> after <status>Immobilizing</status> an enemy champion.<br><br>Shields Generated This Round: @f1@<br>Shields Generated Total: @f2@"
         },
         {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "Share the effects of Power Flowers with your nearby ally, and increase the benefits you gain by @AmpAmountTooltip@%.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "Fruits of Your Labor",
+            "rarity": 1,
+            "tooltip": "Share the effects of Power Flowers with your nearby ally, and increase the benefits you gain by @AmpAmountTooltip@%."
+        },
+        {
             "apiName": "InfernalSoul",
             "calculations": {},
             "dataValues": {},
@@ -3132,7 +3400,7 @@
             "id": 211,
             "name": "It's Killing Time",
             "rarity": 1,
-            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>Damage Dealt This Round:@f1@<br>Damage Dealt Total:@f2@"
+            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "WisdomofAges",

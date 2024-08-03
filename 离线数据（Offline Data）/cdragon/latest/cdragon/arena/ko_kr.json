@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "아군이 있는 방향으로 몇 초마다 공격을 막는 빛을 <keywordMajor>자동 사용</keywordMajor>하여 빛을 통과하는 아군과 자신에게 <shield>보호막</shield>을 부여합니다. 이후 빛이 돌아오며 같은 효과를 반복합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "빛의 파수꾼",
+            "rarity": 1,
+            "tooltip": "아군이 있는 방향으로 @Cooldown@초마다 공격을 막는 빛을 <keywordMajor>자동 사용</keywordMajor>하여 빛을 통과하는 아군과 자신에게 <shield>@TotalShield@의 피해를 흡수하는 보호막</shield>을 부여합니다. 이후 빛이 돌아오며 같은 효과를 반복합니다."
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "희생의 의지",
             "rarity": 1,
             "tooltip": "아군의 <health>체력이 @AllyHealthThreshold*100@%</health> 이하로 떨어지면 <health>현재 체력의 @CurrentHealthToDrain*100@%</health>를 <shield>보호막</shield>으로 바꿔 아군에게 부여합니다.<br><br>이번 라운드에 생성한 보호막: @f1@<br>생성한 총 보호막: @f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "라운드마다 한 번 각 소환사 주문의 재사용 대기시간이 초기화됩니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "소환사 혁명",
+            "rarity": 1,
+            "tooltip": "라운드마다 한 번 각 소환사 주문의 재사용 대기시간이 초기화됩니다."
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "부식",
             "rarity": 0,
             "tooltip": "적에게 피해를 입히면 @ShredDuration@초 동안 <scaleArmor>방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 @Shred*100@% 감소시킵니다. <br><br>최대 @MaxStacks@번까지 중첩됩니다."
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "능력치 모루 @AmountOfStatAnvils@개를 획득합니다!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "능력치!",
+            "rarity": 0,
+            "tooltip": "능력치 모루 @AmountOfStatAnvils@개를 획득합니다!"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "포탄",
             "rarity": 1,
             "tooltip": "대포에서 발사되어 전투를 시작합니다."
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "도주를 무작위 챔피언의 궁극기로 교체합니다. 이 스킬을 사용한 후 또 다른 무작위 챔피언의 궁극기로 교체합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "궁극의 룰렛",
+            "rarity": 2,
+            "tooltip": "도주를 무작위 챔피언의 궁극기로 교체합니다. 이 스킬을 사용한 후 또 다른 무작위 챔피언의 궁극기로 교체합니다."
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "야수화",
             "rarity": 1,
             "tooltip": "<scaleAD>공격력이 @AD@</scaleAD>, <scaleLevel>스킬 가속이 @AbilityHaste@</scaleLevel>, <scaleAD>물리 관통력이 @Lethality@</scaleAD> 증가합니다."
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "<keywordMajor>자동 사용</keywordMajor> 재사용 대기시간이 @AutocastFlatCDR@초 감소하고 스킬 가속의 영향을 받습니다.",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "완전 자동화",
-            "rarity": 0,
-            "tooltip": "<keywordMajor>자동 사용</keywordMajor> 재사용 대기시간이 @AutocastFlatCDR@초 감소하고 스킬 가속의 영향을 받습니다."
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "궁극기가 봉인됩니다. <scaleLevel>피해량</scaleLevel>이 @DamageAmp*100@% 증가합니다. <healing>체력 회복량</healing>, <shield>보호막</shield>이 증가하고 <scaleBonus>@Haste@의 스킬 가속</scaleBonus>을 얻습니다."
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "각 라운드에서 챔피언당 한 번씩 처치에 관여할 때마다 중첩을 @KillStackCredit@회 얻습니다. @RequiredKillCount@회 중첩 시 프리즘 모루로 부화합니다. 여러 번 완성할 수 있지만 첫 부화 후에는 중첩이 @RequiredKillCountSubsequent@회 필요합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "프리즘 알",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>현재 중첩: @f1@<br>총 중첩 수: @f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "@GoldBonus@골드를 획득합니다. 프리즘 모루 비용이 @PrismaticCostReduction@골드 감소하고 이후에 획득하는 프리즘 아이템을 되팔 때 받는 비용이 500골드 감소합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "감바 모루",
             "rarity": 2,
             "tooltip": "@GoldBonus@골드를 획득합니다. 프리즘 모루 비용이 @PrismaticCostReduction@골드 감소하고 이후에 획득하는 프리즘 아이템을 되팔 때 받는 비용이 500골드 감소합니다."
@@ -1746,6 +1824,22 @@
             "name": "불사의 날",
             "rarity": 1,
             "tooltip": "4초 동안 지면을 축복해 영역 내의 모든 유닛의 체력이 최대 체력의 10% 아래로 떨어지는 것을 방지합니다. 주문이 끝나면 영역 내의 유닛들은 <healing>@HealFlatTooltip@의 체력</healing>을 회복합니다. "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "기본 공격과 적중 시 피해량이 @AttackReduction*100@% 감소합니다. <attackSpeed>공격 속도가 @AttackSpeed*100@%</attackSpeed> 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "양손잡이",
+            "rarity": 2,
+            "tooltip": "기본 공격과 적중 시 피해량이 @AttackReduction*100@% 감소합니다. <attackSpeed>공격 속도가 @AttackSpeed*100@%</attackSpeed> 증가합니다."
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "공격 사거리가 @MeleeRangeIncrease@ 증가합니다. (원거리 챔피언은 @RangedRangeIncrease@만 증가)"
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "몇 초마다 <keywordMajor>자동 사용</keywordMajor>으로 몸에서 점액을 터뜨려 주변 적에게 <magicDamage>마법 피해</magicDamage>를 입힙니다. 챔피언에게 적중 시, 밟으면 체력이 회복되는 방울을 분비합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "점액 천지",
+            "rarity": 0,
+            "tooltip": "@Cooldown@초마다 <keywordMajor>자동 사용</keywordMajor>으로 몸에서 점액을 터뜨려 주변 적에게 <magicDamage>@BaseDamage@+최대 체력의 @PercentDamage@에 해당하는 마법 피해</magicDamage>를 입힙니다. 챔피언에게 적중 시 주변에 방울을 분비합니다. 방울을 밟으면 <healing>체력을 @BlobHeal@</healing> 회복하고 적은 방울을 파괴합니다."
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "탭 댄서",
             "rarity": 2,
             "tooltip": "기본 공격 시 무한히 중첩되는 <moveSpeed>@MSPerHit@의 이동 속도</moveSpeed>를 얻습니다. 이동 속도의 @MSToASConversion*10000@%에 해당하는 공격 속도를 얻습니다."
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "기본 공격 시 추가 탄환을 @AdditionalBolts@개 발사해 탄환의 이동 거리에 비례한 <physicalDamage>물리 피해</physicalDamage>를 입힙니다. 방향마다 재사용 대기시간이 따로 적용됩니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "탄환 세례",
+            "rarity": 2,
+            "tooltip": "기본 공격 시 추가 탄환을 @AdditionalBolts@개 발사해 탄환당 <physicalDamage>@DamagePerBolt@의 물리 피해</physicalDamage>를 입힙니다. 피해량은 탄환이 이동한 거리에 비례해 @MaxDamageAmp*100@%까지 증가합니다. 재사용 대기시간은 방향마다 @Cooldown@초씩 따로 적용됩니다.<br><br>각 탄환은 치명타를 입힐 수 있고 적중 시 효과가 @OnHitRatio*100@%로 적용됩니다."
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "<scaleLevel>@AbilityHaste@의 스킬 가속</scaleLevel>을 얻습니다."
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "능력치 모루 @AmountOfStatAnvils@개를 획득합니다!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "능력치 더하기 능력치 더하기 능력치!",
+            "rarity": 2,
+            "tooltip": "능력치 모루 @AmountOfStatAnvils@개를 획득합니다!"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "거인",
             "rarity": 2,
             "tooltip": "크기가 커져 <scaleHealth>체력</scaleHealth>이 @HealthAmp*100@% 증가하고 <scaleAP>적응형 능력치</scaleAP>가 @ADAmp*100@% 증가합니다."
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "돌진이나 순간이동 시 주변 적에게 무한히 중첩되는 <keywordMajor>화상</keywordMajor> 효과를 적용해 지속적으로 피해를 입힙니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "개척자",
+            "rarity": 0,
+            "tooltip": "돌진이나 순간이동 시 @BurnDuration@초에 걸쳐 주변 적을 <keywordMajor>불태워</keywordMajor> <magicDamage>최대 체력의 @BurnPercent*100@%에 해당하는 마법 피해</magicDamage>를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>이 게임에서 입힌 피해량: @f2@"
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "강타자",
             "rarity": 0,
-            "tooltip": "기본 공격 시 <healing>최대 체력</healing>의 @HealthPercent*100@%에 해당하는 추가 <physicalDamage>물리 피해</physicalDamage>를 입힙니다."
+            "tooltip": "기본 공격 시 <healing>최대 체력</healing>의 @HealthPercent*100@%에 해당하는 <physicalDamage>@HealthPercentDamage@의 물리 피해</physicalDamage>를 추가로 입힙니다."
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "내가 바라보는 방향으로 광선을 발사해 매초 <magicDamage>@LaserEyesTooltip@의 마법 피해</magicDamage>를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "능력치 모루 @AmountOfStatAnvils@개를 획득합니다!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "능력치 더하기 능력치!",
+            "rarity": 1,
+            "tooltip": "능력치 모루 @AmountOfStatAnvils@개를 획득합니다!"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "돌진",
             "rarity": 2,
             "tooltip": "돌진, 도약, 점멸, 순간이동 스킬의 <scaleLevel>스킬 가속이 @Haste@</scaleLevel>만큼 증가합니다."
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "보유한 모든 퀘스트 아이템이 아닌 아이템을 구매한 가격의 @SellValueTooltip@%로 즉시 판매합니다. 할인된 모루에 적격입니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "폭탄 세일",
+            "rarity": 0,
+            "tooltip": "보유한 모든 퀘스트 아이템이 아닌 아이템을 구매한 가격의 @SellValueTooltip@%로 즉시 판매합니다. 할인된 모루에 적격입니다."
         },
         {
             "apiName": "LightningStrikes",
@@ -3037,6 +3287,24 @@
             "name": "거석상의 용기",
             "rarity": 2,
             "tooltip": "적 챔피언을 <status>이동 불가</status> 상태로 만든 후 <shield>@TotalShield@의 피해를 흡수하는 보호막</shield>을 얻습니다.<br><br>이번 라운드에 생성한 보호막: @f1@<br>생성한 총 보호막: @f2@"
+        },
+        {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "근처 아군과 힘의 꽃 효과를 공유하고, 누리는 효과를 @AmpAmountTooltip@% 높입니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "노력의 결실",
+            "rarity": 1,
+            "tooltip": "근처 아군과 힘의 꽃 효과를 공유하고, 누리는 효과를 @AmpAmountTooltip@% 높입니다."
         },
         {
             "apiName": "InfernalSoul",

@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>الضرر الملحق بهذه الجولة: @f1@<br>إجمالي الضرر الملحق: @f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "كل بضع ثوانٍ، <keywordMajor>تلقي تلقائيًا</keywordMajor> ضوء حراسة باتجاه حليفك، مما <shield>يدرعك</shield> أنت والحلفاء الذين يمرون عبره. ثم يعود الضوء، ويكرر التأثير.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "مأمور النور",
+            "rarity": 1,
+            "tooltip": "كل @Cooldown@ث، <keywordMajor>تلقي تلقائيًا</keywordMajor> ضوء حراسة باتجاه حليفك، مما يمنح <shield>درعًا بقدر @TotalShield@</shield> لك وللحلفاء الذين يمرون عبره. ثم يعود الضوء، ويكرر التأثير عند عودته."
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "التضحية الإرادية",
             "rarity": 1,
             "tooltip": "عندما تنخفض <health>صحة</health> حليفك عن @AllyHealthThreshold*100@%، قايض <health>@CurrentHealthToDrain*100@% من صحتك الحالية</health> مقابل هذا القدر من <shield>الدروع</shield> على حليفك.<br><br>الدروع المتجددة في هذه الجولة: @f1@<br>إجمالي الدروع المتجددة: @f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "يمكنك تجديد فترة تبريد كل تعويذة مستدعي مرة في الجولة.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "ثورة المستدعي",
+            "rarity": 1,
+            "tooltip": "يمكنك تجديد فترة تبريد كل تعويذة مستدعي مرة في الجولة."
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "التآكل",
             "rarity": 0,
             "tooltip": "يمزق إلحاق الضرر بالأعداء @Shred*100@% <scaleArmor>دروع</scaleArmor> و<scaleMR>مقاومة سحر</scaleMR> لمدة @ShredDuration@ث. <br><br>تتكدس لحدٍ أقصاه @MaxStacks@ من المرات."
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "تكسب @AmountOfStatAnvils@ من سنادين الإحصاءات!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "إحصاءات!",
+            "rarity": 0,
+            "tooltip": "تكسب @AmountOfStatAnvils@ من سنادين الإحصاءات!"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "وقود المدفع",
             "rarity": 1,
             "tooltip": "ستدخل قتالاً وأنت تطلق النيران من مدفع."
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "تستبدل قدرة الهرب بقدرة بطل خارقة عشوائية. بعد إلقاء هذه القدرة، تستبدلها بقدرة خارقة عشوائية لبطل آخر.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "عجلة الحظ الخارقة",
+            "rarity": 2,
+            "tooltip": "تستبدل قدرة الهرب بقدرة بطل خارقة عشوائية. بعد إلقاء هذه القدرة، تستبدلها بقدرة خارقة عشوائية لبطل آخر."
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "الباطش",
             "rarity": 1,
             "tooltip": "اكسب <scaleAD>@AD@ ضرر هجوم</scaleAD> <scaleLevel>و@AbilityHaste@ تسارع القدرة</scaleLevel> و<scaleAD>@Lethality@ قوة الفتك</scaleAD>."
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "تم تقليص فترات تبريد <keywordMajor>الإلقاء التلقائي</keywordMajor> لديك لمدة @AutocastFlatCDR@ث وهي تستفيد من تسارع القدرة لديك.",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "تلقائي بالكامل",
-            "rarity": 0,
-            "tooltip": "تم تقليص فترات تبريد <keywordMajor>الإلقاء التلقائي</keywordMajor> لديك لمدة @AutocastFlatCDR@ث وهي تستفيد من تسارع القدرة لديك."
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "تم تعطيل قدرتك الخارقة. اكسب @DamageAmp*100@% <scaleLevel>ضرر</scaleLevel> و<healing>علاج</healing> و<shield>تدريع</shield> و<scaleBonus>@Haste@ تسارع قدرة</scaleBonus>"
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "تكسب @KillStackCredit@ من التكدسات لكل بطل في الجولة الواحدة كلما حققت إطاحة. عند بلوغ @RequiredKillCount@ من التكدسات، تفقس هذه البيضة عن سندان موشوري. يمكن إكمال هذه العملية عدة مرات، ولكنها تتطلب @RequiredKillCountSubsequent@ من التكدسات بعد فقس البيضة الأولى.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "بيضة موشورية",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>التكدسات الحالية: @f1@<br>التكدسات الإجمالية: @f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "تكسب @GoldBonus@ ذهب. السندان الموشوري أقل تكلفةً بـ @PrismaticCostReduction@ ذهب، وستباع جميع العناصر الموشورية التي يتم الحصول عليها من الآن فصاعدًا بسعر أقل بـ 500 ذهب.",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "سندان جامبا",
             "rarity": 2,
             "tooltip": "تكسب @GoldBonus@ ذهب. السندان الموشوري أقل تكلفةً بـ @PrismaticCostReduction@ ذهب، وستباع جميع العناصر الموشورية التي يتم الحصول عليها من الآن فصاعدًا بسعر أقل بـ 500 ذهب."
@@ -1746,6 +1824,22 @@
             "name": "سأموت في يومٍ آخر",
             "rarity": 1,
             "tooltip": "بارك الأرض تحتك لمدة 4 ثوانٍ، مما يمنع أي وحدة بالداخل من انخفاض صحتها القصوى عن 10%. وفي النهاية، يتم علاج الوحدات بالداخل مقابل <healing>@HealFlatTooltip@ صحة</healing>. "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "تلحق هجماتك وتأثيرات الإصابة @AttackReduction*100@% ضرر أقل. تكسب <attackSpeed>@AttackSpeed*100@% سرعة هجوم</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "ثنائي القبضة",
+            "rarity": 2,
+            "tooltip": "تلحق هجماتك وتأثيرات الإصابة @AttackReduction*100@% ضرر أقل. تكسب <attackSpeed>@AttackSpeed*100@% سرعة هجوم</attackSpeed>."
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "اكسب @MeleeRangeIncrease@ من مدى الهجوم، يُقلّصُ إلى @RangedRangeIncrease@ إذا كنت بعيد المدى."
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "كل بضع ثوانٍ، <keywordMajor>تلقي تلقائيًا</keywordMajor> دفقة من مادة لزجة من جسدك، ملحقًا <magicDamage>ضرر سحر</magicDamage> بالأعداء في الجوار. إذا أصبت بطلًا، تفرز فقاعة تعالجك عندما تمر فوقها.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "وقت اللزوجة",
+            "rarity": 0,
+            "tooltip": "كل @Cooldown@ث من فترة التبريد، <keywordMajor>تلقي تلقائيًا</keywordMajor> دفقة من مادة لزجة من جسدك، ملحقًا <magicDamage>@BaseDamage@ و @PercentDamage@ من الصحة القصوى على شكل ضرر سحر</magicDamage> بالأعداء في الجوار. إذا أصبت بطلًا، تفرز فقاعة في الجوار. يستعيد المشي فوق الفقاعة <healing>@BlobHeal@ صحة</healing>، بينما يدمرها الأعداء."
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -1990,7 +2143,7 @@
             "iconLarge": "assets/ux/cherry/augments/icons/nestingdoll_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/nestingdoll_small.png",
             "id": 177,
-            "name": "دمية التعشيش",
+            "name": "الانكماش",
             "rarity": 2,
             "tooltip": "تبدأ عملية إنعاشك تلقائياً بعد @ReviveArmTime@ث وبالإمكان إنعاشك مرة أخرى. مع كل عملية إنعاش، ستعود أصغر حجماً مع @ReviveMod*100@% من الصحة القصوى.<br><br>عند إنعاشك، <status>أطح إلى الخلف</status> بالأعداء من حولك."
         },
@@ -2008,6 +2161,41 @@
             "name": "راقص النقرة",
             "rarity": 2,
             "tooltip": "تمنحك هجماتك <moveSpeed>@MSPerHit@ سرعة حركة</moveSpeed> تتكدس دون حد أقصى. اكسب سرعة هجوم تعادل @MSToASConversion*10000@% من سرعة الحركة."
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "عندما تهاجم، تطلق @AdditionalBolts@ من الصواعق الإضافية تلحق كل منها <physicalDamage>ضرر مادي</physicalDamage> حسب المسافة المقطوعة. يمتلك فترة تبريد لكل اتجاه.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "ضربات في كل اتجاه",
+            "rarity": 2,
+            "tooltip": "عندما تهاجم، تطلق @AdditionalBolts@ صواعق إضافيةً تلحق كل منها <physicalDamage>@DamagePerBolt@ ضرر مادي</physicalDamage>، يزداد بما يصل إلى @MaxDamageAmp*100@% مع المسافة المقطوعة. يمتلك كل اتجاه من الاتجاهات الأربعة =فترة تبريد تدوم @Cooldown@ث.<br><br>يمكن لكل صاعقة أن تلحق ضربة حرجة وتطبق تأثيرات الإصابة بنسبة @OnHitRatio*100@% من الفعالية."
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "اكسب <scaleLevel>@AbilityHaste@ تسارع قدرة</scaleLevel>."
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "تكسب @AmountOfStatAnvils@ من سنادين الإحصاءات!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "فيضٌ من الإحصاءات!",
+            "rarity": 2,
+            "tooltip": "تكسب @AmountOfStatAnvils@ من سنادين الإحصاءات!"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "جالوت",
             "rarity": 2,
             "tooltip": "تحول إلى عملاق، واكسب @HealthAmp*100@% <scaleHealth>صحة</scaleHealth> و@ADAmp*100@% <scaleAP>قوة متكيفة</scaleAP>."
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "يطبق الاندفاع أو تنفيذ ومضة تأثير <keywordMajor>حرق</keywordMajor> على الأعداء في الجوار مما يلحق الضرر بمرور الوقت، ويتكدس دون حد أقصى.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "الطليعي",
+            "rarity": 0,
+            "tooltip": "عندما تندفع أو تنفذ ومضة، <keywordMajor>تحرق</keywordMajor> الأعداء في الجوار بنسبة <magicDamage>@BurnPercent*100@% من الصحة القصوى على شكل ضرر سحر</magicDamage> خلال @BurnDuration@ث.<br><br>الضرر الملحق في هذه الجولة: @f1@<br>الضرر الملحق في هذه المباراة: @f2@"
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "الباطشون",
             "rarity": 0,
-            "tooltip": "تلحق هجماتك <physicalDamage>ضرر مادي</physicalDamage> إضافي يعادل @HealthPercent*100@% من <healing>صحتك القصوى</healing>."
+            "tooltip": "تلحق هجماتك <physicalDamage>@HealthPercentDamage@ ضرر مادي</physicalDamage> إضافي يعادل @HealthPercent*100@% من <healing>صحتك القصوى</healing>."
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "ثمة ليزر في الاتجاه الذي تواجهه يلحق <magicDamage>@LaserEyesTooltip@ ضرر سحر</magicDamage> في الثانية.<br><br>الضرر الملحق بهذه الجولة: @f1@<br>إجمالي الضرر الملحق: @f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "تكسب @AmountOfStatAnvils@ من سنادين الإحصاءات!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "الكثير من الإحصاءات!",
+            "rarity": 1,
+            "tooltip": "تكسب @AmountOfStatAnvils@ من سنادين الإحصاءات!"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "الاندفاع",
             "rarity": 2,
             "tooltip": "تكسب قدرات الاندفاع أو الوثبة أو الومضة أو الانتقال السريع لديك <scaleLevel>@Haste@ تسارع قدرة</scaleLevel>."
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "تبيع جميع العناصر غير المرتبطة بالمهام على الفور مقابل @SellValueTooltip@% من سعر شرائها المباشر. عرض مثالي للسنادين ذات السعر المخفض.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "البيع السريع",
+            "rarity": 0,
+            "tooltip": "تبيع جميع العناصر غير المرتبطة بالمهام على الفور مقابل @SellValueTooltip@% من سعر شرائها المباشر. عرض مثالي للسنادين ذات السعر المخفض."
         },
         {
             "apiName": "LightningStrikes",
@@ -3039,6 +3289,24 @@
             "tooltip": "اكسب <shield>@TotalShield@ درعًا</shield> بعد <status>شل حركة</status> بطل معادٍ.<br><br>الدروع المتجددة في هذه الجولة: @f1@<br>إجمالي الدروع المتجددة: @f2@"
         },
         {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "تشارك تأثيرات أزهار القوة مع حليفك القريب، وتزيد الفوائد التي تكسبها بنسبة @AmpAmountTooltip@%.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "ثمار جهدك",
+            "rarity": 1,
+            "tooltip": "تشارك تأثيرات أزهار القوة مع حليفك القريب، وتزيد الفوائد التي تكسبها بنسبة @AmpAmountTooltip@%."
+        },
+        {
             "apiName": "InfernalSoul",
             "calculations": {},
             "dataValues": {},
@@ -3132,7 +3400,7 @@
             "id": 211,
             "name": "إنه مضيعة للوقت",
             "rarity": 1,
-            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>الضرر الملحق بهذه الجولة:@f1@<br>إجمالي الضرر الملحق:@f2@"
+            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>الضرر الملحق في هذه الجولة: @f1@<br>إجمالي الضرر الملحق: @f2@"
         },
         {
             "apiName": "WisdomofAges",

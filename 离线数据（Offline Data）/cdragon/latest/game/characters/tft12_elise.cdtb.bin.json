@@ -1,0 +1,4525 @@
+{
+    "Characters/TFT12_Elise/Spells/TFT12_EliseSpell": {
+        "mScriptName": "TFT12_EliseSpell",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 11333,
+            "mAffectsStatusFlags": 32,
+            "mDataValues": [
+                {
+                    "mName": "Heal",
+                    "mValues": [
+                        140.0,
+                        160.0,
+                        190.0,
+                        230.0,
+                        280.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "StunDuration",
+                    "mValues": [
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BaseDamage",
+                    "mValues": [
+                        60.0,
+                        80.0,
+                        100.0,
+                        120.0,
+                        140.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "PercentHPDamage",
+                    "mValues": [
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HEROBonusSpellDamage",
+                    "mValues": [
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HEROBleedDuration",
+                    "mValues": [
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HEROManaReduction",
+                    "mValues": [
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedHeal": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "Heal",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedDamage": {
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "BaseDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mStat": 11,
+                                    "mDataValue": "PercentHPDamage",
+                                    "__type": "StatByNamedDataValueCalculationPart"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedHERODamage": {
+                    "mMultiplier": {
+                        "mDataValue": "HEROBonusSpellDamage",
+                        "__type": "NamedDataValueCalculationPart"
+                    },
+                    "mModifiedGameCalculation": "ModifiedDamage",
+                    "__type": "GameCalculationModified"
+                }
+            },
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+            ],
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT12_EliseSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT12_EliseSpell_Name",
+                        "keyTooltip": "Spell_TFT12_EliseSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "elements": [
+                                {
+                                    "type": "BaseDamage",
+                                    "nameOverride": "Spell_TFT12_EliseSpell_TotalDamage",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Heal",
+                                    "nameOverride": "Spell_TFT12_EliseSpell_Healing",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT12_Elise/Spells/TFT12_EliseBasicAttack2": {
+        "mScriptName": "TFT12_EliseBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 7375,
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.14567901194095612,
+            "bHaveHitEffect": true,
+            "castRange": [
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "L_Buffbone_CSTM_Hand_Loc",
+                    "mSpeed": 1600.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 9.0,
+            "missileSpeed": 1600.0,
+            "mMissileEffectKey": "{cc97e7cf}",
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{6c3557d9}": {
+        "mScriptName": "TFT12_EliseSpell_TransformedHero",
+        "mSpell": {
+            "mAffectsTypeFlags": 6154,
+            "mAffectsStatusFlags": 32,
+            "mAnimationName": "Spell",
+            "delayCastOffsetPercent": -0.3399999737739563,
+            "delayTotalTimePercent": -0.75,
+            "castRange": [
+                4000.0,
+                4000.0,
+                4000.0,
+                4000.0,
+                4000.0,
+                4000.0,
+                4000.0
+            ],
+            "castFrame": 10.0,
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT12_Elise/Spells/TFT12_EliseBasicAttack": {
+        "mScriptName": "TFT12_EliseBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 7375,
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.14567901194095612,
+            "bHaveHitEffect": true,
+            "castRange": [
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "R_Buffbone_CSTM_Hand_Loc",
+                    "mSpeed": 1600.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 9.0,
+            "missileSpeed": 1600.0,
+            "mMissileEffectKey": "{cc97e7cf}",
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{83e5e145}": {
+        "mScriptName": "TFT12_EliseSpell_Transformed",
+        "mSpell": {
+            "mAffectsTypeFlags": 6154,
+            "mAffectsStatusFlags": 32,
+            "mAnimationName": "Spell",
+            "delayCastOffsetPercent": -0.3399999737739563,
+            "delayTotalTimePercent": -0.75,
+            "castRange": [
+                4000.0,
+                4000.0,
+                4000.0,
+                4000.0,
+                4000.0,
+                4000.0,
+                4000.0
+            ],
+            "castFrame": 10.0,
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT12_Elise/Spells/TFT12_EliseCritAttack": {
+        "mScriptName": "TFT12_EliseCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 7375,
+            "mAnimationName": "Crit",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.14567901194095612,
+            "bHaveHitEffect": true,
+            "castRange": [
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "L_Buffbone_CSTM_Hand_Loc",
+                    "mSpeed": 1600.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 9.0,
+            "missileSpeed": 1600.0,
+            "mMissileEffectKey": "{cc97e7cf}",
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{9e00bc93}": {
+        "mScriptName": "TFT12_EliseSpellHero",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 11333,
+            "mAffectsStatusFlags": 32,
+            "mDataValues": [
+                {
+                    "mName": "Heal",
+                    "mValues": [
+                        140.0,
+                        160.0,
+                        190.0,
+                        230.0,
+                        280.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "StunDuration",
+                    "mValues": [
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BaseDamage",
+                    "mValues": [
+                        60.0,
+                        80.0,
+                        100.0,
+                        120.0,
+                        140.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "PercentHPDamage",
+                    "mValues": [
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HEROBonusSpellDamage",
+                    "mValues": [
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842,
+                        1.2999999523162842
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HEROBleedDuration",
+                    "mValues": [
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HEROManaReduction",
+                    "mValues": [
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedHeal": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "Heal",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedDamage": {
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "BaseDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mStat": 11,
+                                    "mDataValue": "PercentHPDamage",
+                                    "__type": "StatByNamedDataValueCalculationPart"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedHERODamage": {
+                    "mMultiplier": {
+                        "mDataValue": "HEROBonusSpellDamage",
+                        "__type": "NamedDataValueCalculationPart"
+                    },
+                    "mModifiedGameCalculation": "ModifiedDamage",
+                    "__type": "GameCalculationModified"
+                }
+            },
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "{abe507b9}": "ClientStates/Gameplay/UX/TFT/UiMaterials/Set12/HexCore/SpiderQueen_II",
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+            ],
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT12_EliseSpellHero",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "TFT12_EliseSpellHero_name",
+                        "keyTooltip": "TFT12_EliseSpellHero_dsc"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "elements": [
+                                {
+                                    "type": "BaseDamage",
+                                    "nameOverride": "Spell_TFT12_EliseSpell_TotalDamage",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Heal",
+                                    "nameOverride": "Spell_TFT12_EliseSpell_Healing",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{1cfcd93f}": {
+        "resourceMap": {
+            "{1fbbc016}": "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_R_cas",
+            "{866b5cb3}": "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_R_Heal",
+            "{cc97e7cf}": "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_BA_mis",
+            "{47c97a44}": "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_R_Tar"
+        },
+        "__type": "ResourceResolver"
+    },
+    "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_R_cas": {
+        "complexEmitterDefinitionData": [
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLingerType": 1,
+                "particleLinger": 0.5,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Alpha_GroundGlow_Purple",
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "blendMode": 1,
+                "birthColor": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        0.609994649887085
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.05000000074505806,
+                            0.10000000149011612,
+                            0.75,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.9259174466133118,
+                                0.3686274588108063,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                0.7058823704719543,
+                                0.250980406999588,
+                                0.6705882549285889,
+                                1.0
+                            ],
+                            [
+                                0.13000686466693878,
+                                0.020004577934741974,
+                                0.17000076174736023,
+                                0.800000011920929
+                            ],
+                            [
+                                0.0800030529499054,
+                                0.02999923750758171,
+                                0.17000076174736023,
+                                0.800000011920929
+                            ],
+                            [
+                                0.027450980618596077,
+                                0.01568627543747425,
+                                0.062745101749897,
+                                0.12156862765550613
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 1,
+                "alphaRef": 0,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.550000011920929,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                0.0,
+                                1.25
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherOut": 0.30000001192092896,
+                    "erosionMapName": "ASSETS/Shared/Particles/TFT/TFT6_Trait_YordleLord_Hecarim_Base_SmokeErode.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "miscRenderFlags": 1,
+                "isUniformScale": 1,
+                "isGroundLayer": 1,
+                "useNavmeshMask": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0
+                                ],
+                                "keyValues": [
+                                    90.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    1.0,
+                                    360.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        200.0,
+                        150.0,
+                        50.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.013000000268220901,
+                            0.20000000298023224,
+                            0.5,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                1.100000023841858,
+                                1.100000023841858,
+                                1.100000023841858
+                            ],
+                            [
+                                1.0,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                0.6499999761581421,
+                                1.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Shared/Particles/TFT/Thresh_Base_Q_BackDrop.dds",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 5.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.0,
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.5,
+                                    1.5
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            1.0
+                        ],
+                        "__type": "VfxAnimatedFloatVariableData"
+                    },
+                    "__type": "ValueFloat"
+                },
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterLinger": 1.0,
+                "emitterName": "Alpha_GroundSmoke_Purple",
+                "importance": 2,
+                "birthVelocity": {
+                    "constantValue": [
+                        150.0,
+                        50.0,
+                        150.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -1.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -1.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                150.0,
+                                50.0,
+                                150.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "birthDrag": {
+                    "constantValue": [
+                        2.0,
+                        2.0,
+                        2.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "worldAcceleration": {
+                    "constantValue": [
+                        0.0,
+                        100.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                100.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "IntegratedValueVector3"
+                },
+                "SpawnShape": {
+                    "flags": 1,
+                    "radius": 121.0,
+                    "height": 1.0,
+                    "__type": "VfxShapeCylinder"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        10.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "blendMode": 1,
+                "color": {
+                    "constantValue": [
+                        0.22000457346439362,
+                        0.13000686466693878,
+                        0.28000304102897644,
+                        0.2399939000606537
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.20000000298023224,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.22000457346439362,
+                                0.13000686466693878,
+                                0.28000304102897644,
+                                0.0
+                            ],
+                            [
+                                0.22000457346439362,
+                                0.13000686466693878,
+                                0.28000304102897644,
+                                0.2399939000606537
+                            ],
+                            [
+                                0.22000457346439362,
+                                0.13000686466693878,
+                                0.28000304102897644,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": -220,
+                "softParticleParams": {
+                    "deltaIn": 35.0,
+                    "__type": "VfxSoftParticleDefinitionData"
+                },
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.30000001192092896,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                0.0,
+                                0.699999988079071
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionMapName": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_Assets_1_162.TFT_Set12.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "miscRenderFlags": 1,
+                "isUniformScale": 1,
+                "isRandomStartFrame": 1,
+                "isGroundLayer": 1,
+                "useNavmeshMask": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    360.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    360.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        88.0,
+                        1.0,
+                        1.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_Assets_1_105.TFT_Set12.tex",
+                "numFrames": 4,
+                "texDiv": [
+                    2.0,
+                    2.0
+                ],
+                "__type": "VfxEmitterDefinitionData"
+            }
+        ],
+        "particleName": "TFT12_Elise_Base_R_cas",
+        "particlePath": "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_R_cas",
+        "__type": "VfxSystemDefinitionData"
+    },
+    "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_R_Heal": {
+        "complexEmitterDefinitionData": [
+            {
+                "rate": {
+                    "constantValue": 10.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.30000001192092896,
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    1.0,
+                                    3.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            0.30000001192092896
+                        ],
+                        "__type": "VfxAnimatedFloatVariableData"
+                    },
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 10.300000190734863,
+                "lifetime": 0.25,
+                "emitterName": "Add_Spark_Green",
+                "birthOrbitalVelocity": {
+                    "constantValue": [
+                        0.0,
+                        3.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -1.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                3.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "birthVelocity": {
+                    "constantValue": [
+                        0.0,
+                        500.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -1.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.10000000149011612,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -1.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                500.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "birthDrag": {
+                    "constantValue": [
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "SpawnShape": {
+                    "emitOffset": {
+                        "constantValue": [
+                            70.0,
+                            35.0,
+                            70.0
+                        ],
+                        "dynamics": {
+                            "probabilityTables": [
+                                {
+                                    "keyTimes": [
+                                        0.0,
+                                        0.5,
+                                        0.5099999904632568,
+                                        1.0
+                                    ],
+                                    "keyValues": [
+                                        -1.0,
+                                        -0.5,
+                                        0.5,
+                                        1.0
+                                    ],
+                                    "__type": "VfxProbabilityTableData"
+                                },
+                                {
+                                    "__type": "VfxProbabilityTableData"
+                                },
+                                {
+                                    "keyTimes": [
+                                        0.0,
+                                        0.5,
+                                        0.5099999904632568,
+                                        1.0
+                                    ],
+                                    "keyValues": [
+                                        -1.0,
+                                        -0.5,
+                                        0.5,
+                                        1.0
+                                    ],
+                                    "__type": "VfxProbabilityTableData"
+                                }
+                            ],
+                            "times": [
+                                0.0
+                            ],
+                            "values": [
+                                [
+                                    70.0,
+                                    35.0,
+                                    70.0
+                                ]
+                            ],
+                            "__type": "VfxAnimatedVector3fVariableData"
+                        },
+                        "__type": "ValueVector3"
+                    },
+                    "__type": "VfxShapeLegacy"
+                },
+                "birthColor": {
+                    "constantValue": [
+                        0.5607843399047852,
+                        1.0,
+                        0.5372549295425415,
+                        1.0
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.5,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "colorLookUpTypeY": 3,
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        25.0,
+                        25.0,
+                        25.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.10000000149011612,
+                            0.30000001192092896,
+                            0.6000000238418579,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.10000000149011612,
+                                0.10000000149011612,
+                                0.10000000149011612
+                            ],
+                            [
+                                0.30000001192092896,
+                                0.30000001192092896,
+                                0.30000001192092896
+                            ],
+                            [
+                                1.0,
+                                5.0,
+                                1.0
+                            ],
+                            [
+                                0.30000001192092896,
+                                0.30000001192092896,
+                                0.30000001192092896
+                            ],
+                            [
+                                0.10000000149011612,
+                                0.10000000149011612,
+                                0.10000000149011612
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_HealSparkle.TFT_Set12.tex",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 2.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.75,
+                    "__type": "ValueFloat"
+                },
+                "lifetime": 0.10000000149011612,
+                "isSingleParticle": 1,
+                "emitterLinger": 0.30000001192092896,
+                "emitterName": "Add_HealMesh_Green",
+                "birthOrbitalVelocity": {
+                    "constantValue": [
+                        0.0,
+                        0.15000000596046448,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    0.5,
+                                    0.5009999871253967,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -1.0,
+                                    -0.5,
+                                    0.5,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                0.15000000596046448,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "SpawnShape": {
+                    "emitOffset": [
+                        0.0,
+                        10.0,
+                        0.0
+                    ],
+                    "__type": "{ee39916f}"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        30.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "primitive": {
+                    "mMesh": {
+                        "mSimpleMeshName": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_R_HealMesh.TFT_Set12.scb",
+                        "__type": "VfxMeshDefinitionData"
+                    },
+                    "__type": "VfxPrimitiveMesh"
+                },
+                "blendMode": 4,
+                "color": {
+                    "constantValue": [
+                        0.5,
+                        0.949999988079071,
+                        1.0,
+                        7.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.5,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.5,
+                                0.949999988079071,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                0.5,
+                                0.949999988079071,
+                                1.0,
+                                7.0
+                            ],
+                            [
+                                0.5,
+                                0.949999988079071,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 100,
+                "softParticleParams": {
+                    "beginIn": 50.0,
+                    "deltaIn": 10.0,
+                    "__type": "VfxSoftParticleDefinitionData"
+                },
+                "reflectionDefinition": {
+                    "fresnel": -0.5,
+                    "fresnelColor": [
+                        0.20000000298023224,
+                        0.05000000074505806,
+                        0.15000000596046448,
+                        1.0
+                    ],
+                    "__type": "VfxReflectionDefinitionData"
+                },
+                "disableBackfaceCull": true,
+                "isRandomStartFrame": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        0.0,
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -30.0,
+                                    -160.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "birthRotationalVelocity0": {
+                    "constantValue": [
+                        0.0,
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    2.0,
+                                    -2.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        2.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    1.0,
+                                    1.399999976158142
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    0.5,
+                                    0.5099999904632568,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -1.0,
+                                    -0.5,
+                                    0.5,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                2.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.5,
+                                1.0,
+                                1.5
+                            ],
+                            [
+                                4.0,
+                                2.0,
+                                4.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_R_SpeedBuffTrail.TFT_Set12.tex",
+                "uvMode": 2,
+                "birthUvScrollRate": {
+                    "constantValue": [
+                        -0.15000000596046448,
+                        0.05000000074505806
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.15000000596046448,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -0.20000000298023224,
+                                    0.20000000298023224
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                -0.15000000596046448,
+                                0.05000000074505806
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "birthUVOffset": {
+                    "constantValue": [
+                        1.0,
+                        1.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.5,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "textureMult": {
+                    "textureMult": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_R_Wave_Mult.TFT_Set12.tex",
+                    "birthUvScrollRateMult": {
+                        "constantValue": [
+                            -0.25,
+                            0.05000000074505806
+                        ],
+                        "__type": "ValueVector2"
+                    },
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            }
+        ],
+        "particleName": "TFT12_Elise_Base_R_Heal",
+        "particlePath": "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_R_Heal",
+        "__type": "VfxSystemDefinitionData"
+    },
+    "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_BA_mis": {
+        "complexEmitterDefinitionData": [
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.4000000059604645,
+                    "__type": "ValueFloat"
+                },
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Add_Head_Orange",
+                "importance": 2,
+                "birthDrag": {
+                    "constantValue": [
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -25.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        0.9700007438659668,
+                        0.6399939060211182,
+                        0.0,
+                        0.800000011920929
+                    ],
+                    "__type": "ValueColor"
+                },
+                "pass": 12,
+                "particleIsLocalOrientation": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        0.0,
+                        0.0,
+                        -90.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "birthScale0": {
+                    "constantValue": [
+                        50.0,
+                        20.0,
+                        1.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Shared/Particles/TFT/TFT_Ray.dds",
+                "uvScale": {
+                    "constantValue": [
+                        1.0,
+                        -1.0
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "textureMult": {
+                    "textureMult": "ASSETS/Shared/Particles/TFT/common_color-rampdown32.dds",
+                    "texAddressModeMult": 2,
+                    "UvRotationMult": {
+                        "constantValue": -90.0,
+                        "__type": "ValueFloat"
+                    },
+                    "birthUVOffsetMult": {
+                        "constantValue": [
+                            0.30000001192092896,
+                            0.0
+                        ],
+                        "__type": "ValueVector2"
+                    },
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.4000000059604645,
+                    "__type": "ValueFloat"
+                },
+                "lifetime": 2.0,
+                "isSingleParticle": 1,
+                "emitterName": "Alpha_Misile_Purple",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "SpawnShape": {
+                    "emitOffset": [
+                        0.0,
+                        -20.0,
+                        0.0
+                    ],
+                    "__type": "{ee39916f}"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -29.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "blendMode": 1,
+                "birthColor": {
+                    "constantValue": [
+                        0.39056992530822754,
+                        0.06147859990596771,
+                        0.5493858456611633,
+                        1.0
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.10000000149011612
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 1,
+                "miscRenderFlags": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        180.0,
+                        0.0,
+                        90.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "birthScale0": {
+                    "constantValue": [
+                        80.0,
+                        20.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_BA_MisGlow.TFT_Set12.tex",
+                "textureMult": {
+                    "textureMult": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_SmokeA.TFT_Set12.tex",
+                    "birthUvScrollRateMult": {
+                        "constantValue": [
+                            0.0,
+                            3.0
+                        ],
+                        "__type": "ValueVector2"
+                    },
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.4000000059604645,
+                    "__type": "ValueFloat"
+                },
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Add_Glow_Orange",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "SpawnShape": {
+                    "emitOffset": [
+                        0.0,
+                        30.0,
+                        0.0
+                    ],
+                    "__type": "{ee39916f}"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -25.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        0.43999388813972473
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "constantValue": [
+                        0.9644007086753845,
+                        0.5396658182144165,
+                        0.13752956688404083,
+                        1.0
+                    ],
+                    "__type": "ValueColor"
+                },
+                "pass": 13,
+                "miscRenderFlags": 1,
+                "particleIsLocalOrientation": 1,
+                "isUniformScale": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        0.0,
+                        90.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "birthScale0": {
+                    "constantValue": [
+                        22.0,
+                        95.0,
+                        140.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "constantValue": [
+                        1.399999976158142,
+                        1.399999976158142,
+                        1.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Shared/Particles/TFT/Thresh_Base_Q_BackDrop.dds",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.4000000059604645,
+                    "__type": "ValueFloat"
+                },
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Alpha_Glow_BG_Purle",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -30.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "blendMode": 1,
+                "birthColor": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        0.3799954354763031
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "constantValue": [
+                        0.32434576749801636,
+                        0.0955367386341095,
+                        0.48336002230644226,
+                        1.0
+                    ],
+                    "__type": "ValueColor"
+                },
+                "miscRenderFlags": 1,
+                "particleIsLocalOrientation": 1,
+                "birthScale0": {
+                    "constantValue": [
+                        22.0,
+                        48.0,
+                        140.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "constantValue": [
+                        1.399999976158142,
+                        1.399999976158142,
+                        1.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Shared/Particles/TFT/Thresh_Base_Q_BackDrop.dds",
+                "__type": "VfxEmitterDefinitionData"
+            }
+        ],
+        "particleName": "TFT12_Elise_Base_BA_mis",
+        "particlePath": "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_BA_mis",
+        "soundPersistentDefault": "Play_sfx_tft12_EliseBasicAttack_missilelaunch",
+        "__type": "VfxSystemDefinitionData"
+    },
+    "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_R_Tar": {
+        "complexEmitterDefinitionData": [
+            {
+                "timeBeforeFirstEmission": 0.009999999776482582,
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLingerType": 1,
+                "particleLinger": 0.5,
+                "lifetime": 2.0,
+                "isSingleParticle": 1,
+                "emitterName": "Mesh_Cylinder_Purple1",
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -30.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "primitive": {
+                    "mMesh": {
+                        "mSimpleMeshName": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_EliseSpider_Base_Cage.TFT_Set12.scb",
+                        "__type": "VfxMeshDefinitionData"
+                    },
+                    "__type": "VfxPrimitiveMesh"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        0.22000457346439362,
+                        0.1600061058998108,
+                        0.3199969530105591,
+                        0.7000076174736023
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.5,
+                            0.800000011920929
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                0.09803921729326248,
+                                0.06666667014360428,
+                                0.15294118225574493,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 6,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.800000011920929,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                0.0,
+                                1.25
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "UseLingerErosionDriveCurve": true,
+                    "LingerErosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                2.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherOut": 0.5,
+                    "erosionMapName": "ASSETS/Shared/Particles/TFT/Smoke_Erode.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "miscRenderFlags": 1,
+                "isGroundLayer": 1,
+                "useNavmeshMask": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        0.0,
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    360.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "birthScale0": {
+                    "constantValue": [
+                        4.5,
+                        3.0,
+                        4.5
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.100000023841858,
+                                1.0,
+                                1.100000023841858
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Shared/Particles/TFT/white_RGB.dds",
+                "birthUvScrollRate": {
+                    "constantValue": [
+                        0.0,
+                        0.5
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "birthUVOffset": {
+                    "constantValue": [
+                        0.25,
+                        0.0
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "textureMult": {
+                    "textureMult": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_Smoke_01.TFT_Set12.tex",
+                    "uvScaleMult": {
+                        "constantValue": [
+                            2.0,
+                            1.0
+                        ],
+                        "__type": "ValueVector2"
+                    },
+                    "birthUvScrollRateMult": {
+                        "constantValue": [
+                            0.4000000059604645,
+                            -1.0
+                        ],
+                        "__type": "ValueVector2"
+                    },
+                    "ParticleIntegratedUvScrollMult": {
+                        "constantValue": [
+                            0.05000000074505806,
+                            -0.5
+                        ],
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.5,
+                                1.0
+                            ],
+                            "values": [
+                                [
+                                    0.05000000074505806,
+                                    -0.0
+                                ],
+                                [
+                                    0.05000000074505806,
+                                    -0.5
+                                ],
+                                [
+                                    0.05000000074505806,
+                                    -1.0
+                                ]
+                            ],
+                            "__type": "VfxAnimatedVector2fVariableData"
+                        },
+                        "__type": "IntegratedValueVector2"
+                    },
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLingerType": 1,
+                "particleLinger": 0.5,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Alpha_Decal_Purple",
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -25.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "blendMode": 1,
+                "birthColor": {
+                    "constantValue": [
+                        0.1600061058998108,
+                        0.1600061058998108,
+                        0.1600061058998108,
+                        0.6000000238418579
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.02500000037252903,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                0.45490196347236633,
+                                0.6745098233222961,
+                                0.0
+                            ],
+                            [
+                                0.5882353186607361,
+                                0.1725490242242813,
+                                0.8470588326454163,
+                                1.0
+                            ],
+                            [
+                                0.12156862765550613,
+                                0.125490203499794,
+                                0.27450981736183167,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "alphaRef": 0,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.10000000149011612,
+                                0.4000000059604645,
+                                1.0
+                            ],
+                            "values": [
+                                1.0,
+                                0.20000000298023224,
+                                0.20000000298023224,
+                                1.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherOut": 0.30000001192092896,
+                    "erosionMapName": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_Assets_1_162.TFT_Set12.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            1.0,
+                            1.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "miscRenderFlags": 1,
+                "isUniformScale": 1,
+                "isGroundLayer": 1,
+                "useNavmeshMask": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        90.0,
+                        90.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        100.0,
+                        1.0,
+                        1.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_EliseSpider_Base_R_Mask7.TFT_Set12.tex",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 4.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.699999988079071,
+                    "__type": "ValueFloat"
+                },
+                "particleLingerType": 1,
+                "particleLinger": 0.5,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Alpha_Decal_Orange",
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -25.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "blendMode": 1,
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.15000000596046448,
+                            0.25,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.9773098230361938,
+                                0.7508201599121094,
+                                0.44873732328414917,
+                                0.0
+                            ],
+                            [
+                                0.9803921580314636,
+                                0.6196078658103943,
+                                0.2980392277240753,
+                                1.0
+                            ],
+                            [
+                                0.9990997314453125,
+                                0.5357595086097717,
+                                0.12129396200180054,
+                                1.0
+                            ],
+                            [
+                                0.5636224746704102,
+                                0.2880140244960785,
+                                0.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 4,
+                "alphaRef": 0,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.10000000149011612,
+                                0.4000000059604645,
+                                1.0
+                            ],
+                            "values": [
+                                1.0,
+                                0.20000000298023224,
+                                0.20000000298023224,
+                                1.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherOut": 0.30000001192092896,
+                    "erosionMapName": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_Elise_Base_Assets_1_162.TFT_Set12.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            1.0,
+                            1.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "miscRenderFlags": 1,
+                "isUniformScale": 1,
+                "isGroundLayer": 1,
+                "useNavmeshMask": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        90.0,
+                        90.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        100.0,
+                        1.0,
+                        1.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.013000000268220901,
+                            0.02500000037252903,
+                            0.5,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                1.25,
+                                1.100000023841858,
+                                1.100000023841858
+                            ],
+                            [
+                                1.0,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_EliseSpider_Base_R_Mask7.TFT_Set12.tex",
+                "textureMult": {
+                    "textureMult": "ASSETS/Shared/Particles/TFT/TFT_KSante_Hit2ball32_02.dds",
+                    "texAddressModeMult": 2,
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "timeBeforeFirstEmission": 0.009999999776482582,
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.800000011920929,
+                    "__type": "ValueFloat"
+                },
+                "particleLingerType": 1,
+                "particleLinger": 0.5,
+                "lifetime": 2.0,
+                "isSingleParticle": 1,
+                "emitterName": "Mesh_Cylinder_Purple",
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -25.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "primitive": {
+                    "mMesh": {
+                        "mSimpleMeshName": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_EliseSpider_Base_Cage.TFT_Set12.scb",
+                        "__type": "VfxMeshDefinitionData"
+                    },
+                    "__type": "VfxPrimitiveMesh"
+                },
+                "blendMode": 1,
+                "birthColor": {
+                    "constantValue": [
+                        0.4899977147579193,
+                        0.3799954354763031,
+                        0.7600061297416687,
+                        0.7000076174736023
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.6000000238418579,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                0.41750210523605347,
+                                0.41750210523605347,
+                                0.41750210523605347,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 5,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.8500000238418579,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                0.0,
+                                1.5
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "UseLingerErosionDriveCurve": true,
+                    "LingerErosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                2.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherOut": 0.5,
+                    "erosionMapName": "ASSETS/Shared/Particles/TFT/Smoke_Erode.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "miscRenderFlags": 1,
+                "isGroundLayer": 1,
+                "useNavmeshMask": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        0.0,
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    360.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "birthScale0": {
+                    "constantValue": [
+                        4.199999809265137,
+                        7.0,
+                        4.199999809265137
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.800000011920929,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                0.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Shared/Particles/TFT/white_RGB.dds",
+                "birthUvScrollRate": {
+                    "constantValue": [
+                        0.0,
+                        0.5
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "birthUVOffset": {
+                    "constantValue": [
+                        0.25,
+                        0.0
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "textureMult": {
+                    "textureMult": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_EliseSpider_Base_SmokeB.TFT_Set12.tex",
+                    "uvScaleMult": {
+                        "constantValue": [
+                            2.0,
+                            1.0
+                        ],
+                        "__type": "ValueVector2"
+                    },
+                    "birthUvScrollRateMult": {
+                        "constantValue": [
+                            0.4000000059604645,
+                            -1.0
+                        ],
+                        "__type": "ValueVector2"
+                    },
+                    "ParticleIntegratedUvScrollMult": {
+                        "constantValue": [
+                            0.05000000074505806,
+                            -0.5
+                        ],
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.5,
+                                1.0
+                            ],
+                            "values": [
+                                [
+                                    0.05000000074505806,
+                                    -0.0
+                                ],
+                                [
+                                    0.05000000074505806,
+                                    -0.5
+                                ],
+                                [
+                                    0.05000000074505806,
+                                    -1.0
+                                ]
+                            ],
+                            "__type": "VfxAnimatedVector2fVariableData"
+                        },
+                        "__type": "IntegratedValueVector2"
+                    },
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.5,
+                    "__type": "ValueFloat"
+                },
+                "particleLingerType": 1,
+                "particleLinger": 0.5,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Alpha_GlowBG_Purple",
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -50.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "blendMode": 1,
+                "color": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        0.4000000059604645
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.05000000074505806,
+                            0.10000000149011612,
+                            0.75,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.9946135878562927,
+                                0.6866865158081055,
+                                0.15365834534168243,
+                                0.0
+                            ],
+                            [
+                                0.5199969410896301,
+                                0.36000609397888184,
+                                0.0,
+                                0.22800031304359436
+                            ],
+                            [
+                                0.13000686466693878,
+                                0.020004577934741974,
+                                0.17000076174736023,
+                                0.3199999928474426
+                            ],
+                            [
+                                0.0800030529499054,
+                                0.02999923750758171,
+                                0.17000076174736023,
+                                0.1599999964237213
+                            ],
+                            [
+                                0.027450980618596077,
+                                0.01568627543747425,
+                                0.062745101749897,
+                                0.048627451062202454
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": -10,
+                "alphaRef": 0,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.75,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                0.0,
+                                1.25
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherOut": 0.30000001192092896,
+                    "erosionMapName": "ASSETS/Shared/Particles/TFT/TFT6_Trait_YordleLord_Hecarim_Base_SmokeErode.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "miscRenderFlags": 1,
+                "isUniformScale": 1,
+                "isGroundLayer": 1,
+                "useNavmeshMask": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0
+                                ],
+                                "keyValues": [
+                                    90.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    1.0,
+                                    360.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        150.0,
+                        150.0,
+                        50.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.013000000268220901,
+                            0.20000000298023224,
+                            0.5,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                1.100000023841858,
+                                1.100000023841858,
+                                1.100000023841858
+                            ],
+                            [
+                                1.0,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                0.6499999761581421,
+                                1.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Shared/Particles/TFT/Thresh_Base_Q_BackDrop.dds",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "timeBeforeFirstEmission": 0.009999999776482582,
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 1.0,
+                "lifetime": 2.0,
+                "isSingleParticle": 1,
+                "emitterName": "Mesh_Whirling_Purple",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        20.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "primitive": {
+                    "mMesh": {
+                        "mSimpleMeshName": "ASSETS/Characters/TFT12_Elise/Skins/Base/Particles/TFT12_EliseSpider_Base_R_StormMesh01.TFT_Set12.scb",
+                        "__type": "VfxMeshDefinitionData"
+                    },
+                    "__type": "VfxPrimitiveMesh"
+                },
+                "blendMode": 1,
+                "birthColor": {
+                    "constantValue": [
+                        0.16470588743686676,
+                        0.11764705926179886,
+                        0.24705882370471954,
+                        1.0
+                    ],
+                    "__type": "ValueColor"
+                },
+                "pass": 10,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "constantValue": 1.2000000476837158,
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                0.30000001192092896,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                0.0,
+                                1.440000057220459
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherOut": 0.5,
+                    "erosionMapName": "ASSETS/Shared/Particles/TFT/TFT6_Trait_YordleLord_Hecarim_Base_SmokeErode.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "disableBackfaceCull": true,
+                "isRotationEnabled": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        180.0,
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    360.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                180.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "birthScale0": {
+                    "constantValue": [
+                        0.800000011920929,
+                        5.0,
+                        0.800000011920929
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Shared/Particles/TFT/TFT10_Katarina_Base_Wisp_Trail3.dds",
+                "birthUVOffset": {
+                    "constantValue": [
+                        0.30000001192092896,
+                        -0.10000000149011612
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "particleUVScrollRate": {
+                    "constantValue": [
+                        2.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                2.0,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "IntegratedValueVector2"
+                },
+                "uvScale": {
+                    "constantValue": [
+                        1.0,
+                        3.0
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "birthUvRotateRate": {
+                    "constantValue": 30.0,
+                    "__type": "ValueFloat"
+                },
+                "textureMult": {
+                    "textureMult": "ASSETS/Shared/Particles/TFT/TFT12_Syndra_Base_Particles_1_216.dds",
+                    "uvScaleMult": {
+                        "constantValue": [
+                            1.0,
+                            0.6000000238418579
+                        ],
+                        "__type": "ValueVector2"
+                    },
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.25,
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 1.0,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Add_Flash_Purple",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
+                    "scaleEmitOffsetByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "particleColorTexture": "ASSETS/Shared/Particles/TFT/VS_Color_Rampdown.dds",
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        0.4000000059604645
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "constantValue": [
+                        0.9499961733818054,
+                        0.9499961733818054,
+                        0.9499961733818054,
+                        1.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.9346739053726196,
+                                0.23469044268131256,
+                                0.6054404377937317,
+                                1.0
+                            ],
+                            [
+                                0.6269960403442383,
+                                0.36099421977996826,
+                                0.9499961733818054,
+                                0.5300068855285645
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 991,
+                "meshRenderFlags": 0,
+                "softParticleParams": {
+                    "deltaIn": 40.0,
+                    "__type": "VfxSoftParticleDefinitionData"
+                },
+                "miscRenderFlags": 1,
+                "isUniformScale": 1,
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        110.0,
+                        230.0,
+                        230.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.2999999523162842,
+                                0.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Shared/Particles/TFT/Thresh_Base_Q_BackDrop.dds",
+                "__type": "VfxEmitterDefinitionData"
+            }
+        ],
+        "particleName": "TFT12_Elise_Base_R_Tar",
+        "particlePath": "Characters/TFT12_Elise/Skins/Skin0/Particles/TFT12_Elise_Base_R_Tar",
+        "__type": "VfxSystemDefinitionData"
+    },
+    "Characters/TFT12_Elise/Skins/Skin0/Materials/FrozenStatus": {
+        "name": "Characters/TFT12_Elise/Skins/Skin0/Materials/FrozenStatus",
+        "samplerValues": [
+            {
+                "samplerName": "Patterns_Texture",
+                "textureName": "ASSETS/Characters/TFT12_WinterStatue/Skins/Base/TFT12_WinterStatue_Generic_Noise.TFT_Set12.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/TFT12_Elise/Skins/Base/TFT12_Elise_Base_TX_CM.TFT_Set12.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "AlphaControl",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ShineTimeParam",
+                "value": [
+                    12.0,
+                    10.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DirectionSwitcher",
+                "value": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DissolveBias",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "NoiseParams",
+                "value": [
+                    1.0,
+                    0.5,
+                    0.0,
+                    -0.05000000074505806
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "NoiseIntensity",
+                "value": [
+                    0.75,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "VertexController",
+                "value": [
+                    50.0,
+                    0.6000000238418579,
+                    3.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ShineThickness",
+                "value": [
+                    0.20000000298023224,
+                    0.30000001192092896,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ChannelSwitcher",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightDirection",
+                "value": [
+                    0.15000000596046448,
+                    0.8999999761581421,
+                    0.15000000596046448,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SpecularColor",
+                "value": [
+                    0.800000011920929,
+                    1.0,
+                    0.9900053143501282,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SpecularIntensity",
+                "value": [
+                    0.20000000298023224,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SpecularTightness",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SSSScale",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SSSTightness",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SSSColor",
+                "value": [
+                    0.13543908298015594,
+                    0.42423132061958313,
+                    0.8047150373458862,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BaseSSSColor",
+                "value": [
+                    0.3499999940395355,
+                    0.3700000047683716,
+                    0.8199999928474426,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SSSColor2",
+                "value": [
+                    0.07999999821186066,
+                    0.18000000715255737,
+                    0.23000000417232513,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ErosionParams",
+                "value": [
+                    1.5,
+                    0.10000000149011612,
+                    0.10000000149011612,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ShineIntensity",
+                "value": [
+                    0.625,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "ENABLE_SHINE",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_SHAKE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/TFT_Freeze",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "SSSColor",
+                    "driver": {
+                        "mBoolDriver": {
+                            "__type": "{c8d666b4}"
+                        },
+                        "mColorOn": [
+                            0.3450980484485626,
+                            0.07058823853731155,
+                            0.4274509847164154,
+                            1.0
+                        ],
+                        "mColorOff": [
+                            0.13725490868091583,
+                            0.42352941632270813,
+                            0.8039215803146362,
+                            1.0
+                        ],
+                        "__type": "ColorChooserMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "SSSColor2",
+                    "driver": {
+                        "mBoolDriver": {
+                            "__type": "{c8d666b4}"
+                        },
+                        "mColorOn": [
+                            0.16862745583057404,
+                            0.10588235408067703,
+                            0.18039216101169586,
+                            1.0
+                        ],
+                        "mColorOff": [
+                            0.0784313753247261,
+                            0.16078431904315948,
+                            0.23137255012989044,
+                            1.0
+                        ],
+                        "__type": "ColorChooserMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "SpecularColor",
+                    "driver": {
+                        "mBoolDriver": {
+                            "__type": "{c8d666b4}"
+                        },
+                        "mColorOn": [
+                            0.8980392217636108,
+                            0.800000011920929,
+                            1.0,
+                            1.0
+                        ],
+                        "mColorOff": [
+                            0.800000011920929,
+                            1.0,
+                            0.9882352948188782,
+                            1.0
+                        ],
+                        "__type": "ColorChooserMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    },
+    "Characters/TFT12_Elise/Skins/Skin0/Materials/TierUpgrade": {
+        "name": "Characters/TFT12_Elise/Skins/Skin0/Materials/TierUpgrade",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/TFT12_Elise/Skins/Base/TFT12_Elise_Base_TX_CM.TFT_Set12.tex",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Light_Mask",
+                "textureName": "ASSETS/Characters/TFT12_Elise/Skins/Base/TFT12_Elise_Base_mask_TX_CM.TFT_Set12.tex",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Color_Rim",
+                "value": [
+                    0.8313725590705872,
+                    0.7333333492279053,
+                    0.4941176474094391,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Light_FX_Opacity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Rim_Intensity_A",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Colorize_Power",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Colorize_Opacity",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dissolve_Bias",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Rim_Lighting_Offset",
+                "value": [
+                    -0.41999998688697815,
+                    -0.41999998688697815,
+                    -0.41999998688697815,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Light_Shadow_SmoothSteps",
+                "value": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Rim_Power",
+                "value": [
+                    1.5,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Light_Intensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Light_Shadow_Power",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dissolve_SmoothStep",
+                "value": [
+                    0.0,
+                    0.6000000238418579,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dissolve_Power",
+                "value": [
+                    6.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Rim_Power_A",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Light_Shadow_Offset",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Light_SmoothSteps",
+                "value": [
+                    0.0,
+                    0.6000000238418579,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Rim_A_Low",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Rim_A_High",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Diffuse_Tiling",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "DEBUG_VIEW_RIM_A",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ADD_FX_LIGHTING",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ADD_BEAUTY_LIGHTING",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "TINT_DIFFUSE",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DEBUG_VIEW_DISSOLVE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DEBUG_VIEW_BEAUTY_LIGHT",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ADD_BEAUTY_SHADOW",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_DISSOLVE_MASK",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/TFT_ChampTiers",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "Rim_A_High",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star3",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mDriver": {
+                                        "__type": "TimeMaterialDriver"
+                                    },
+                                    "mFrequency": 1.5,
+                                    "mScale": 0.3499999940395355,
+                                    "mBias": 1.100000023841858,
+                                    "__type": "SineMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star2",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 0.800000011920929,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Rim_Intensity_A",
+                    "enabled": false,
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star3",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 0.6000000238418579,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star2",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 0.5,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "mBlendTime": 1.5,
+                        "__type": "BlendingSwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Color_Rim",
+                    "enabled": false,
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star3",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mColor": [
+                                        1.0,
+                                        0.6352941393852234,
+                                        0.0470588244497776,
+                                        1.0
+                                    ],
+                                    "__type": "SpecificColorMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star2",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mColor": [
+                                        0.7372549176216125,
+                                        0.8980392217636108,
+                                        1.0,
+                                        1.0
+                                    ],
+                                    "__type": "SpecificColorMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mColor": [
+                                0.8313725590705872,
+                                0.7333333492279053,
+                                0.4941176474094391,
+                                1.0
+                            ],
+                            "__type": "SpecificColorMaterialDriver"
+                        },
+                        "mBlendTime": 1.25,
+                        "__type": "BlendingSwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Colorize_Power",
+                    "enabled": false,
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star3",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 1.0,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star2",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 1.0,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Colorize_Opacity",
+                    "enabled": false,
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star3",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 0.5,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star2",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 0.5,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "BlendingSwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Rim_A_Low",
+                    "enabled": false,
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star3",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": -0.15000000596046448,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Dissolve_Bias",
+                    "enabled": false,
+                    "driver": {
+                        "mBoolDriver": {
+                            "__type": "IsDeadDynamicMaterialBoolDriver"
+                        },
+                        "mOnValue": 0.0,
+                        "mOffValue": 1.0,
+                        "mTurnOnTimeSec": 1.5,
+                        "mTurnOffTimeSec": 2.5,
+                        "__type": "LerpMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Light_FX_Opacity",
+                    "enabled": false,
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star3_Ceremony",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 6.0,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star2_Ceremony",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 4.0,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "mScriptName": "TFT_UnitBuff_Star1",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "mBlendTime": 2.0,
+                        "__type": "BlendingSwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    },
+    "Characters/TFT12_Elise/Skins/Meta": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "Characters/TFT12_Elise/CharacterRecords/Root": {
+        "mCharacterName": "TFT12_Elise",
+        "baseHP": 650.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 210.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 90.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 50.0,
+        "baseArmor": 40.0,
+        "baseSpellBlock": 40.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.6000000238418579,
+        "attackSpeedRatio": 0.6000000238418579,
+        "basicAttack": {
+            "mAttackName": "TFT12_EliseBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT12_EliseBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT12_EliseCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT12_EliseSpell",
+            "BaseSpell",
+            "BaseSpell",
+            "BaseSpell"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "useRiotRelationships": true,
+        "flags": 9446656,
+        "tier": 1,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{48f54c5a}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{5381075b}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{2ccf900f}",
+        "mMoveInterval": -0.10000000149011612,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mInitialMana": 30.0,
+        "mShopData": "{f789c98c}",
+        "MobileHealthBarHeightOverride": 170.0,
+        "__type": "TFTCharacterRecord"
+    }
+}

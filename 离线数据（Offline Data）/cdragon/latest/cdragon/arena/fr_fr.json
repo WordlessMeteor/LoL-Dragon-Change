@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Dégâts infligés lors de cette manche : @f1@<br>Total des dégâts infligés : @f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "Périodiquement, vous projetez <keywordMajor>automatiquement</keywordMajor> une vague de lumière protectrice vers votre allié, ce qui octroie un <shield>bouclier</shield> aux alliés qu'elle traverse et à vous-même. La vague de lumière revient alors vers vous, ce qui répète ses effets.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "Bouclier de lumière",
+            "rarity": 1,
+            "tooltip": "Toutes les @Cooldown@ sec, vous projetez <keywordMajor>automatiquement</keywordMajor> une vague de lumière protectrice vers votre allié, ce qui octroie un <shield>bouclier de @TotalShield@ PV</shield> aux alliés qu'elle traverse et à vous-même. La vague de lumière revient alors vers vous, ce qui répète ses effets."
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "Sacrifice",
             "rarity": 1,
             "tooltip": "Quand votre allié tombe sous <health>@AllyHealthThreshold*100@% de ses PV</health>, vous donnez <health>@CurrentHealthToDrain*100@% de vos PV actuels</health> pour lui octroyer un <shield>bouclier</shield> d'une valeur équivalente.<br><br>Boucliers générés lors de cette manche : @f1@<br>Total des boucliers générés : @f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Réinitialise le délai de récupération de chaque sort d'invocateur une fois par manche.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "Révolution d'invocateur",
+            "rarity": 1,
+            "tooltip": "Réinitialise le délai de récupération de chaque sort d'invocateur une fois par manche."
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "Érosion",
             "rarity": 0,
             "tooltip": "Blesser des ennemis réduit leur <scaleArmor>armure</scaleArmor> et leur <scaleMR>résistance magique</scaleMR> de @Shred*100@% pendant @ShredDuration@ sec. <br><br>Cumulable @MaxStacks@ fois."
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "Vous gagnez @AmountOfStatAnvils@ Enclumes à stats !",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "Stats !",
+            "rarity": 0,
+            "tooltip": "Vous gagnez @AmountOfStatAnvils@ Enclumes à stats !"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "Chair à canon",
             "rarity": 1,
             "tooltip": "Vous rejoignez le combat en étant projeté par un canon."
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Vous remplacez Fuite par l'ultime d'un champion aléatoire. Une fois que vous avez lancé cette compétence, elle est remplacée par l'ultime d'un autre champion aléatoire.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "Roulette ultime",
+            "rarity": 2,
+            "tooltip": "Vous remplacez Fuite par l'ultime d'un champion aléatoire. Une fois que vous avez lancé cette compétence, elle est remplacée par l'ultime d'un autre champion aléatoire."
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "Brutalité",
             "rarity": 1,
             "tooltip": "Vous gagnez <scaleAD>+@AD@ pts de dégâts d'attaque</scaleAD>, <scaleLevel>+@AbilityHaste@ accélération de compétence</scaleLevel> et <scaleAD>+@Lethality@ létalité</scaleAD>."
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "Les délais de récupération de vos <keywordMajor>optimisations automatiques</keywordMajor> sont réduits de @AutocastFlatCDR@ sec et bénéficient de votre accélération de compétence.",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "Automatisme",
-            "rarity": 0,
-            "tooltip": "Les délais de récupération de vos <keywordMajor>optimisations automatiques</keywordMajor> sont réduits de @AutocastFlatCDR@ sec et bénéficient de votre accélération de compétence."
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "Votre compétence ultime a été scellée. Vos <scaleLevel>dégâts</scaleLevel>, vos <healing>soins</healing> et vos <shield>boucliers</shield> sont renforcés de @DamageAmp*100@% et vous gagnez <scaleBonus>+@Haste@ accélération de compétence</scaleBonus>."
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "Vous gagnez @KillStackCredit@ effet (par champion par manche) chaque fois que vous réussissez une élimination. À @RequiredKillCount@ effets cumulés, une Enclume prismatique éclot de l'œuf. Ceci peut avoir lieu plusieurs fois, mais nécessite @RequiredKillCountSubsequent@ effets après la première éclosion.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "Œuf prismatique",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>Effets actuels : @f1@.<br>Total des effets cumulés : @f2@."
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "Vous gagnez @GoldBonus@ PO. Les enclumes prismatiques coûtent @PrismaticCostReduction@ PO de moins et les objets prismatiques acquis à partir de maintenant sont revendus pour 500 PO de moins.",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "Enclume opulente",
             "rarity": 2,
             "tooltip": "Vous gagnez @GoldBonus@ PO. Les enclumes prismatiques coûtent @PrismaticCostReduction@ PO de moins et les objets prismatiques acquis à partir de maintenant sont revendus pour 500 PO de moins."
@@ -1746,6 +1824,22 @@
             "name": "Refuge",
             "rarity": 1,
             "tooltip": "Vous bénissez la terre à vos pieds pendant 4 sec. Aucune unité se trouvant dans la zone ne peut tomber en dessous de 10% de ses PV max. À la fin de l'effet, les unités se trouvant dans la zone récupèrent <healing>@HealFlatTooltip@ PV</healing>. "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "Vos attaques et vos effets à l'impact infligent @AttackReduction*100@% de dégâts en moins. Vous gagnez <attackSpeed>+@AttackSpeed*100@% de vitesse d'attaque</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "Ambidextrie",
+            "rarity": 2,
+            "tooltip": "Vos attaques et vos effets à l'impact infligent @AttackReduction*100@% de dégâts en moins. Vous gagnez <attackSpeed>+@AttackSpeed*100@% de vitesse d'attaque</attackSpeed>."
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "Votre portée d'attaque est augmentée de @MeleeRangeIncrease@ (@RangedRangeIncrease@ pour les champions à distance)."
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "Périodiquement, vous projetez <keywordMajor>automatiquement</keywordMajor> de la bave, infligeant des <magicDamage>dégâts magiques</magicDamage> aux ennemis proches. Si vous touchez un champion, vous invoquez un blob qui vous rend des PV quand vous marchez dessus.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "Bavure",
+            "rarity": 0,
+            "tooltip": "Toutes les @Cooldown@ sec, vous projetez <keywordMajor>automatiquement</keywordMajor> de la bave, infligeant des <magicDamage>dégâts magiques équivalents à @BaseDamage@ + @PercentDamage@% des PV max</magicDamage> aux ennemis proches. Si vous touchez un champion, vous invoquez un blob à proximité. Marcher sur le blob rend <healing>@BlobHeal@ PV</healing>, mais les ennemis qui marchent dessus le détruisent."
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "Danse effrénée",
             "rarity": 2,
             "tooltip": "Vos attaques vous octroient <moveSpeed>+@MSPerHit@ vitesse de déplacement</moveSpeed> (cumulable à l'infini). Vous gagnez de la vitesse d'attaque équivalente à @MSToASConversion*10000@% de votre vitesse de déplacement."
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "Quand vous attaquez, vous tirez @AdditionalBolts@ projectiles bonus qui infligent chacun <physicalDamage> pts de dégâts physiques</physicalDamage> en fonction de la distance parcourue. A un délai de récupération par direction.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "Projectiles cardinaux",
+            "rarity": 2,
+            "tooltip": "Quand vous attaquez, vous tirez @AdditionalBolts@ projectiles bonus qui infligent chacun <physicalDamage>@DamagePerBolt@ pts de dégâts physiques</physicalDamage> (ces dégâts sont augmentés de jusqu'à @MaxDamageAmp*100@% selon la distance parcourue). Chaque direction cardinale a un délai de récupération de @Cooldown@ sec.<br><br>Chaque projectile peut infliger des coups critiques et appliquer des effets à l'impact à @OnHitRatio*100@% d'efficacité."
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "Vous gagnez <scaleLevel>+@AbilityHaste@ accélération de compétence</scaleLevel>."
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "Vous gagnez @AmountOfStatAnvils@ Enclumes à stats !",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "Stats, stats, stats !",
+            "rarity": 2,
+            "tooltip": "Vous gagnez @AmountOfStatAnvils@ Enclumes à stats !"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "Goliath",
             "rarity": 2,
             "tooltip": "Vous grandissez et gagnez +@HealthAmp*100@% de <scaleHealth>PV</scaleHealth> et +@ADAmp*100@% de <scaleAP>force adaptative</scaleAP>."
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "Utiliser une ruée ou un saut instantané applique une <keywordMajor>brûlure</keywordMajor> à un ennemi proche, lui infligeant des dégâts sur la durée (cumulable à l'infini).",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "Sillon brûlant",
+            "rarity": 0,
+            "tooltip": "Quand vous utilisez une ruée ou un saut instantané, vous appliquez une <keywordMajor>brûlure</keywordMajor> à un ennemi proche, lui infligeant des <magicDamage>dégâts magiques équivalents à @BurnPercent*100@% des PV max</magicDamage> pendant @BurnDuration@ sec.<br><br>Dégâts infligés lors de cette manche : @f1@.<br>Total des dégâts infligés : @f2@."
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "Gros bras",
             "rarity": 0,
-            "tooltip": "Vos attaques infligent des <physicalDamage>dégâts physiques</physicalDamage> bonus équivalents à @HealthPercent*100@% de vos <healing>PV max</healing>."
+            "tooltip": "Vos attaques infligent des <physicalDamage>@HealthPercentDamage@dégâts physiques</physicalDamage> bonus équivalents à @HealthPercent*100@% de vos <healing>PV max</healing>."
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "Dans la direction à laquelle vous faites face, un laser inflige <magicDamage>@LaserEyesTooltip@ pts de dégâts magiques</magicDamage> par sec.<br><br>Dégâts infligés lors de cette manche : @f1@<br>Total des dégâts infligés : @f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "Vous gagnez @AmountOfStatAnvils@ Enclumes à stats !",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "Stats, stats !",
+            "rarity": 1,
+            "tooltip": "Vous gagnez @AmountOfStatAnvils@ Enclumes à stats !"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "Ruée des braves",
             "rarity": 2,
             "tooltip": "Vos compétences de ruée, de bond, de saut instantané ou de téléportation gagnent <scaleLevel>+@Haste@ accélération de compétence</scaleLevel>."
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "Vous vendez instantanément vos objets non liés aux quêtes pour @SellValueTooltip@% de leur prix d'achat direct. Idéal pour toutes les Enclumes à prix réduit.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "Vente instantanée",
+            "rarity": 0,
+            "tooltip": "Vous vendez instantanément vos objets non liés aux quêtes pour @SellValueTooltip@% de leur prix d'achat direct. Idéal pour toutes les Enclumes à prix réduit."
         },
         {
             "apiName": "LightningStrikes",
@@ -3037,6 +3287,24 @@
             "name": "Courage du colosse",
             "rarity": 2,
             "tooltip": "Après avoir <status>immobilisé</status> un champion ennemi, vous gagnez un <shield>bouclier de @TotalShield@ PV</shield>.<br><br>Boucliers générés lors de cette manche : @f1@<br>Total des boucliers générés : @f2@"
+        },
+        {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "Vous partagez les effets des Fleurs de puissance avec votre allié proche, et les effets que vous gagnez augmentent de @AmpAmountTooltip@%.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "Fruit du labeur",
+            "rarity": 1,
+            "tooltip": "Vous partagez les effets des Fleurs de puissance avec votre allié proche, et les effets que vous gagnez augmentent de @AmpAmountTooltip@%."
         },
         {
             "apiName": "InfernalSoul",

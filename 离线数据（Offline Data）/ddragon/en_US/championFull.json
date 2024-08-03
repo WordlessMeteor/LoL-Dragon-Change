@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.14.1",
+    "version": "14.15.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -89,6 +89,12 @@
                     "num": 31,
                     "name": "Prestige DRX Aatrox",
                     "chromas": false
+                },
+                {
+                    "id": "266033",
+                    "num": 33,
+                    "name": "Primordian Aatrox",
+                    "chromas": true
                 }
             ],
             "lore": "Once honored defenders of Shurima against the Void, Aatrox and his brethren would eventually become an even greater threat to Runeterra, and were defeated only by cunning mortal sorcery. But after centuries of imprisonment, Aatrox was the first to find freedom once more, corrupting and transforming those foolish enough to try and wield the magical weapon that contained his essence. Now, with stolen flesh, he walks Runeterra in a brutal approximation of his previous form, seeking an apocalyptic and long overdue vengeance.",
@@ -1766,22 +1772,24 @@
                     "leveltip": {
                         "label": [
                             "Move Speed",
-                            "Duration"
+                            "Duration",
+                            "Cooldown"
                         ],
                         "effect": [
                             "{{ movementspeed }}% -> {{ movementspeedNL }}%",
-                            "{{ baseduration }} -> {{ basedurationNL }}"
+                            "{{ baseduration }} -> {{ basedurationNL }}",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
                         20,
-                        20,
-                        20,
-                        20,
-                        20
+                        19,
+                        18,
+                        17,
+                        16
                     ],
-                    "cooldownBurn": "20",
+                    "cooldownBurn": "20/19/18/17/16",
                     "cost": [
                         0,
                         0,
@@ -1935,18 +1943,18 @@
                     "effect": [
                         null,
                         [
-                            50,
-                            75,
-                            100,
-                            125,
-                            150
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            400,
-                            400,
-                            400,
-                            400,
-                            400
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -2007,8 +2015,8 @@
                     ],
                     "effectBurn": [
                         null,
-                        "50/75/100/125/150",
-                        "400",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -2044,26 +2052,28 @@
                     "id": "AkaliR",
                     "name": "Perfect Execution",
                     "description": "Akali leaps in a direction, damaging enemies she strikes. Re-cast: Akali dashes in a direction, executing all enemies she strikes.",
-                    "tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>{{ cast1damage }} magic damage</magicDamage> to all enemies in her path. <br /><br />Akali can <recast>Recast</recast> after {{ cooldownbetweencasts }} seconds to execute a piercing thrust, dashing and dealing <magicDamage>{{ cast2damagemin }}</magicDamage> to <magicDamage>{{ cast2damagemax }} magic damage</magicDamage> based on missing health.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Akali vaults over an enemy champion, dealing <magicDamage>{{ cast1damage }} magic damage</magicDamage> to all enemies in her path. <br /><br />Akali can <recast>Recast</recast> after {{ cooldownbetweencasts }} seconds to execute a piercing thrust, dashing and dealing <magicDamage>{{ cast2damagemin }}</magicDamage> to <magicDamage>{{ cast2damagemax }} magic damage</magicDamage> based on missing Health.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
-                            "Base Damage",
-                            "Max Damage"
+                            "Initial Damage",
+                            "Minimum Damage",
+                            "Maximum Damage"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ r2basedamage }} -> {{ r2basedamageNL }}",
                             "{{ r2basedamage*3.000000 }} -> {{ r2basedamagenl*3.000000 }}"
                         ]
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        100,
-                        80,
+                        120,
+                        90,
                         60
                     ],
-                    "cooldownBurn": "100/80/60",
+                    "cooldownBurn": "120/90/60",
                     "cost": [
                         0,
                         0,
@@ -2074,14 +2084,14 @@
                     "effect": [
                         null,
                         [
-                            60,
-                            120,
-                            180
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0
                         ],
                         [
                             1,
@@ -2119,15 +2129,15 @@
                             0
                         ],
                         [
-                            120,
-                            100,
-                            80
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
-                        "60/120/180",
-                        "3",
+                        "0",
+                        "0",
                         "1",
                         "0",
                         "0",
@@ -2135,7 +2145,7 @@
                         "0",
                         "0",
                         "0",
-                        "120/100/80"
+                        "0"
                     ],
                     "vars": [],
                     "costType": "No Cost",
@@ -7181,13 +7191,13 @@
                     ],
                     "cooldownBurn": "3",
                     "cost": [
-                        30,
                         35,
                         40,
                         45,
-                        50
+                        50,
+                        55
                     ],
-                    "costBurn": "30/35/40/45/50",
+                    "costBurn": "35/40/45/50/55",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -7305,13 +7315,11 @@
                     "leveltip": {
                         "label": [
                             "Percent Bonus Magic Damage",
-                            "Base Flight Range",
                             "@AbilityResourceName@ Cost",
                             "Cooldown"
                         ],
                         "effect": [
                             "{{ truedamagebonus*100.000000 }}% -> {{ truedamagebonusnl*100.000000 }}%",
-                            "{{ castrange }} -> {{ castrangeNL }}",
                             "{{ cost }} -> {{ costNL }}",
                             "{{ cd }} -> {{ cdNL }}"
                         ]
@@ -7425,12 +7433,12 @@
                     "maxammo": "-1",
                     "range": [
                         1500,
-                        1600,
-                        1700,
-                        1800,
-                        1900
+                        1500,
+                        1500,
+                        1500,
+                        1500
                     ],
-                    "rangeBurn": "1500/1600/1700/1800/1900",
+                    "rangeBurn": "1500",
                     "image": {
                         "full": "AurelionSolW.png",
                         "sprite": "spell1.png",
@@ -7465,13 +7473,13 @@
                     ],
                     "cooldownBurn": "12",
                     "cost": [
-                        80,
-                        80,
-                        80,
-                        80,
-                        80
+                        90,
+                        90,
+                        90,
+                        90,
+                        90
                     ],
-                    "costBurn": "80",
+                    "costBurn": "90",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -7927,7 +7935,7 @@
                     "id": "AuroraW",
                     "name": "Across the Veil",
                     "description": "Aurora leaps in a direction of her choosing, entering the spirit realm upon landing and becoming invisible for a short duration of time.",
-                    "tooltip": "Hop in a direction. Upon landing, enter the spirit realm, becoming <keywordStealth>Invisible</keywordStealth> for {{ invisduration }} seconds and entering <keywordMajor>Realm Hopper</keywordMajor>.<br /><br />Scoring a takedown on an enemy champion will reset this ability's cooldown.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Hop in a direction. Upon landing, enter the spirit realm, becoming <keywordStealth>Invisible</keywordStealth> for {{ invisduration }} seconds and entering <keywordMajor>Realm Hopper</keywordMajor>.<br /><br />Scoring a takedown on an enemy champion resets this Ability's Cooldown.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -7940,13 +7948,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        22,
+                        21,
                         20,
                         19,
-                        18,
-                        17,
-                        16
+                        18
                     ],
-                    "cooldownBurn": "20/19/18/17/16",
+                    "cooldownBurn": "22/21/20/19/18",
                     "cost": [
                         80,
                         80,
@@ -8068,7 +8076,7 @@
                     "id": "AuroraE",
                     "name": "The Weirding",
                     "description": "Aurora converges the realms, sending out a blast of spirit magic that damages and slows enemies before Aurora hops backward to safety.",
-                    "tooltip": "Converge the realms, sending out a blast of spirit magic dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> to enemies in the area and Slowing them by {{ slowpercent*-100 }}% decaying over {{ slowduration }} second.<br /><br />Aurora will hop backwards a short distance after casting.<br />{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Converge the realms, sending out a blast of spirit magic dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> to enemies in the area and <status>Slowing</status> them by {{ slowpercent*-100 }}% decaying over {{ slowduration }} second.<br /><br />Aurora hops backwards a short distance after casting.<br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -8209,7 +8217,7 @@
                     "id": "AuroraR",
                     "name": "Between Worlds",
                     "description": "Aurora leaps in a direction of her choosing, releasing a shockwave that damages and slows any enemies it hits. Afterward, she creates an area that traps enemies within it and allows Aurora to teleport from one side of the area to the other.",
-                    "tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> and Slows enemies hit by {{ slowpercent*-100 }}% for 2 seconds.<br /><br />The area of convergence stays active for {{ areaduration }} seconds, empowering Aurora's <keywordMajor>Spirit Mode</keywordMajor> and allowing her to jump from one edge of the area to another.<br /><br />Enemies attempting to enter or leave the area are Slowed by {{ exitslowpercent*-100 }}% for {{ stunduration }} seconds after being pushed back toward the center.<br /><br />Aurora can <recast>Recast</recast> this ability to end the effect early.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> and <status>Slows</status> enemies hit by {{ slowpercent*-100 }}% for 2 seconds.<br /><br />The area of convergence stays active for {{ areaduration }} seconds, empowering Aurora's <keywordMajor>Realm Hopper</keywordMajor> and allowing her to jump from one edge of the area to another.<br /><br />Enemies attempting to enter or leave the area are <status>Slowed</status> by {{ exitslowpercent*-100 }}% for {{ stunduration }} seconds after being pushed back toward the center.<br /><br />Aurora can <recast>Recast</recast> this Ability to end the effect early.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -12424,6 +12432,12 @@
                     "num": 1,
                     "name": "Street Demons Briar",
                     "chromas": true
+                },
+                {
+                    "id": "233010",
+                    "num": 10,
+                    "name": "Primordian Briar",
+                    "chromas": true
                 }
             ],
             "lore": "A failed experiment by the Black Rose, Briar's uncontrollable bloodlust required a special pillory to focus her frenzied mind. After years of confinement, this living weapon broke free from her restraints and unleashed herself into the world. Now she's controlled by no one—following only her hunger for knowledge and blood—and relishes the opportunities to let loose, even if reining back the frenzy isn't easy.",
@@ -14529,8 +14543,8 @@
             "stats": {
                 "hp": 630,
                 "hpperlevel": 104,
-                "mp": 350,
-                "mpperlevel": 60,
+                "mp": 400,
+                "mpperlevel": 40,
                 "movespeed": 328,
                 "armor": 18,
                 "armorperlevel": 4.7,
@@ -14577,12 +14591,12 @@
                     "cooldownBurn": "3.5",
                     "cost": [
                         50,
+                        55,
                         60,
-                        70,
-                        80,
-                        90
+                        65,
+                        70
                     ],
-                    "costBurn": "50/60/70/80/90",
+                    "costBurn": "50/55/60/65/70",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -14722,12 +14736,12 @@
                     "cooldownBurn": "24/22/20/18/16",
                     "cost": [
                         70,
+                        75,
                         80,
-                        90,
-                        100,
-                        110
+                        85,
+                        90
                     ],
-                    "costBurn": "70/80/90/100/110",
+                    "costBurn": "70/75/80/85/90",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -14845,13 +14859,11 @@
                     "leveltip": {
                         "label": [
                             "Bonus Poison Damage",
-                            "Healing from Ability Power",
-                            "@AbilityResourceName@ Cost"
+                            "Healing from Ability Power"
                         ],
                         "effect": [
                             "{{ e1 }} -> {{ e1NL }}",
-                            "{{ healratio*100.000000 }}% -> {{ healrationl*100.000000 }}%",
-                            "{{ cost }} -> {{ costNL }}"
+                            "{{ healratio*100.000000 }}% -> {{ healrationl*100.000000 }}%"
                         ]
                     },
                     "maxrank": 5,
@@ -14864,13 +14876,13 @@
                     ],
                     "cooldownBurn": "0.75",
                     "cost": [
-                        50,
-                        48,
-                        46,
-                        44,
-                        42
+                        40,
+                        40,
+                        40,
+                        40,
+                        40
                     ],
-                    "costBurn": "50/48/46/44/42",
+                    "costBurn": "40",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -17472,7 +17484,7 @@
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "@AbilityResourceName@ Cost",
                             "Cooldown"
                         ],
@@ -25954,7 +25966,7 @@
                     "tooltip": "<spellPassive>Passive:</spellPassive> Killing units permanently grants <scaleArmor>{{ resistgainonkill }} Armor</scaleArmor> and <scaleMR>{{ resistgainonkill }} Magic Resist</scaleMR>, up to a max of {{ resistmax }}. At max stacks, Garen gains <scaleArmor>{{ percentarmor }} Armor</scaleArmor> and <scaleMR>{{ percentmr }} Magic Resist</scaleMR>.<br /><br /><spellActive>Active:</spellActive> Garen steels his courage for {{ drduration }} seconds, reducing incoming damage by {{ drpercent*100 }}%. He also gains <shield>{{ totalshield }} Shield</shield> and {{ upfronttenacity*100 }}% Tenacity for {{ upfrontduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "Cooldown"
                         ],
                         "effect": [
@@ -30709,7 +30721,7 @@
                         "label": [
                             "<spellName>Fleeting Current</spellName> | Move Speed",
                             "<spellName>Fleeting Current</spellName> | Duration",
-                            "<spellName>Pool of Reflection</spellName> | Shield Amount",
+                            "<spellName>Pool of Reflection</spellName> | Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "<spellName>Stirring Lights</spellName> | Additional Damage",
                             "<spellName>Stirring Lights</spellName> | Total Mana Restore",
                             "Cooldown",
@@ -31180,6 +31192,12 @@
                     "id": "420018",
                     "num": 18,
                     "name": "Snow Moon Illaoi",
+                    "chromas": true
+                },
+                {
+                    "id": "420027",
+                    "num": 27,
+                    "name": "Battle Bear Illaoi",
                     "chromas": true
                 }
             ],
@@ -31919,7 +31937,7 @@
                 "difficulty": 5
             },
             "stats": {
-                "hp": 590,
+                "hp": 630,
                 "hpperlevel": 115,
                 "mp": 350,
                 "mpperlevel": 50,
@@ -31929,7 +31947,7 @@
                 "spellblock": 30,
                 "spellblockperlevel": 2.05,
                 "attackrange": 200,
-                "hpregen": 8.5,
+                "hpregen": 6,
                 "hpregenperlevel": 0.85,
                 "mpregen": 8,
                 "mpregenperlevel": 0.8,
@@ -48550,6 +48568,18 @@
                     "num": 50,
                     "name": "Crystalis Motus Leona",
                     "chromas": true
+                },
+                {
+                    "id": "89052",
+                    "num": 52,
+                    "name": "Battle Lion Leona",
+                    "chromas": true
+                },
+                {
+                    "id": "89053",
+                    "num": 53,
+                    "name": "Prestige Battle Lion Leona",
+                    "chromas": false
                 }
             ],
             "lore": "Imbued with the fire of the sun, Leona is a holy warrior of the Solari who defends Mount Targon with her Zenith Blade and the Shield of Daybreak. Her skin shimmers with starfire while her eyes burn with the power of the celestial Aspect within her. Armored in gold and bearing a terrible burden of ancient knowledge, Leona brings enlightenment to some, death to others.",
@@ -48779,10 +48809,10 @@
                         null,
                         [
                             55,
-                            90,
-                            125,
-                            160,
-                            195
+                            85,
+                            115,
+                            145,
+                            175
                         ],
                         [
                             20,
@@ -48850,7 +48880,7 @@
                     ],
                     "effectBurn": [
                         null,
-                        "55/90/125/160/195",
+                        "55/85/115/145/175",
                         "20/27.5/35/42.5/50",
                         "3",
                         "20/27.5/35/42.5/50",
@@ -52214,7 +52244,7 @@
                     "tooltip": "Lux throws her wand, granting <shield>{{ totalshieldtt }} Shield</shield> for {{ e3 }} seconds to allies it passes through. Then it returns, granting the same <shield>Shield</shield> on its return.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "Cooldown",
                             "@AbilityResourceName@ Cost"
                         ],
@@ -59449,7 +59479,7 @@
                             "Packmates Gained",
                             "Move Speed",
                             "Move Speed after Damage",
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "Hounds' Pursuit Range Increase",
                             "Cooldown"
                         ],
@@ -72815,7 +72845,7 @@
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "Flip Damage"
                         ],
                         "effect": [
@@ -76236,7 +76266,7 @@
                     "tooltip": "Rumble tosses up a barrier, gaining <shield>{{ totalshield }} Shield</shield> for {{ shieldduration.1 }} seconds and <speed>{{ movespeed*100 }}% Move Speed</speed> for {{ movespeedduration }} second.<br /><br /><keywordMajor>Danger Zone:</keywordMajor> The barrier grants <shield>{{ empoweredshield }} Shield</shield> and <speed>{{ empoweredms }} Move Speed</speed> instead.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "Move Speed"
                         ],
                         "effect": [
@@ -79237,7 +79267,7 @@
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "Cooldown"
                         ],
                         "effect": [
@@ -79626,7 +79656,7 @@
                     "tooltip": "Seraphine spurs her nearby allied champions in song, granting them <speed>{{ hastevalueallies }} Move Speed</speed>, herself <speed>{{ wmsbonustotal }} decaying Move Speed</speed> and both <shield>{{ shieldvalueseraphine }} Shield</shield> for {{ shieldduration }} seconds.<br /><br />If Seraphine is already <shield>Shielded</shield>, she calls out to her allies to join her, restoring <healing>{{ wmissinghpheal }}% missing Health</healing> to them per nearby ally champion after a {{ whealsplitdelay }} second delay.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "Percent Healed",
                             "Cooldown",
                             "@AbilityResourceName@ Cost"
@@ -83752,13 +83782,13 @@
                             "Shield Amount",
                             "Damage",
                             "Max Health Shield Ratio",
-                            "@AbilityResourceName@ Cost",
+                            "Mana Cost",
                             "Cooldown"
                         ],
                         "effect": [
                             "{{ e1 }} -> {{ e1NL }}",
                             "{{ e2 }} -> {{ e2NL }}",
-                            "{{ e3 }}% -> {{ e3NL }}%",
+                            "{{ shieldpercenthealthtooltip*100.000000 }}% -> {{ shieldpercenthealthtooltipnl*100.000000 }}%",
                             "{{ cost }} -> {{ costNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
@@ -84975,7 +85005,7 @@
             },
             "stats": {
                 "hp": 610,
-                "hpperlevel": 105,
+                "hpperlevel": 110,
                 "mp": 320,
                 "mpperlevel": 40,
                 "movespeed": 335,
@@ -85025,13 +85055,13 @@
                     ],
                     "cooldownBurn": "13/11.5/10/8.5/7",
                     "cost": [
-                        50,
-                        50,
-                        50,
-                        50,
-                        50
+                        45,
+                        45,
+                        45,
+                        45,
+                        45
                     ],
-                    "costBurn": "50",
+                    "costBurn": "45",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -88396,7 +88426,7 @@
                 "mp": 400,
                 "mpperlevel": 70,
                 "movespeed": 340,
-                "armor": 27,
+                "armor": 29,
                 "armorperlevel": 5.2,
                 "spellblock": 32,
                 "spellblockperlevel": 2.55,
@@ -88420,27 +88450,27 @@
                     "tooltip": "Sylas lashes his chains out, dealing <magicDamage>{{ damage }} magic damage</magicDamage> and <status>Slowing</status> by {{ slowamountcalc }} for {{ slowduration }} seconds. The place where the chains intersect explodes, dealing a further <magicDamage>{{ explosiondamage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
                             "Damage",
+                            "Explosion Damage",
                             "Slow",
-                            "Explosion Damage"
+                            "Cooldown"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}",
                             "{{ slowamount*100.000000 }}% -> {{ slowamountnl*100.000000 }}%",
-                            "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        11,
                         10,
                         9,
                         8,
-                        7
+                        7,
+                        6
                     ],
-                    "cooldownBurn": "11/10/9/8/7",
+                    "cooldownBurn": "10/9/8/7/6",
                     "cost": [
                         55,
                         55,
@@ -90215,7 +90245,7 @@
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "Cooldown"
                         ],
                         "effect": [
@@ -91134,15 +91164,15 @@
                     "id": "TalonQ",
                     "name": "Noxian Diplomacy",
                     "description": "Talon stabs the target unit. If they are within melee range, this attack deals critical damage. If they are outside melee range, Talon will leap at his target before stabbing them. Talon refunds some health and cooldown if this ability kills the target.",
-                    "tooltip": "Talon leaps to a target and deals <physicalDamage>{{ leapdamage }} physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>{{ criticaldamage }} physical damage</physicalDamage>.<br /><br />If this Ability kills the target, Talon restores <healing>{{ totalhealing }} Health</healing> and refunds {{ e5 }}% of its Cooldown.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Talon leaps to a target and deals <physicalDamage>{{ leapdamage }} physical damage</physicalDamage>. If used in melee range, this Ability instead critically strikes for <physicalDamage>{{ criticaldamage }} physical damage</physicalDamage>.<br /><br />If this Ability kills the target, Talon restores <healing>{{ totalhealing }} Health</healing> and refunds {{ cooldownrefund*100 }}% of its Cooldown.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e6 }} -> {{ e6NL }}"
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -91166,60 +91196,60 @@
                     "effect": [
                         null,
                         [
-                            65,
-                            85,
-                            105,
-                            125,
-                            145
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            50,
-                            50,
-                            50,
-                            50,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            17,
-                            17,
-                            17,
-                            17,
-                            17
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            50,
-                            50,
-                            50,
-                            50,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            8,
-                            7.5,
-                            7,
-                            6.5,
-                            6
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.8,
-                            0.8,
-                            0.8,
-                            0.8,
-                            0.8
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -91238,14 +91268,14 @@
                     ],
                     "effectBurn": [
                         null,
-                        "65/85/105/125/145",
-                        "50",
-                        "17",
-                        "3",
-                        "50",
-                        "8/7.5/7/6.5/6",
-                        "0.8",
-                        "1.5",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0"
                     ],
@@ -97557,7 +97587,7 @@
                     "tooltip": "<spellPassive>Mantle Stance:</spellPassive> Udyr gains <shield>{{ totalshield }} Shield</shield> for {{ shieldduration }} seconds. Additionally, Udyr's next two Attacks gain {{ lifesteal*100 }}% Life Steal and restore <healing>{{ lifeonhit }} Health</healing>.<br /><br /><keywordMajor>Awaken:</keywordMajor> Gain <shield>{{ recastshield }} Shield</shield>, restore <healing>{{ recastheal }} Health</healing> over {{ shieldduration }} seconds, and Udyr's next two Attacks instead have {{ lifesteal*200 }}% Life Steal and restore <healing>{{ lifeonhitawakened }} Health</healing>.<br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "% Health Shield",
                             "Life Steal"
                         ],
@@ -97867,7 +97897,7 @@
                     "tooltip": "<spellActive>Storm Stance:</spellActive> Udyr surrounds himself in a glacial storm for {{ buffduration }} seconds, dealing <magicDamage>{{ stormdamage }} magic damage</magicDamage> per second to nearby enemies and <status>Slowing</status> them by {{ slowpotency*100 }}%. Additionally, Udyr's next two Attacks in this stance deal <magicDamage>{{ pulsedamage }} magic damage</magicDamage> to enemies in the storm.<br /><br /><keywordMajor>Awaken:</keywordMajor> Unleash the storm, causing it to follow Udyr's last Attacked enemy, deal an additional <magicDamage>{{ percenthpblast }} max Health magic damage</magicDamage> over the duration, and <status>Slow</status> by an additional {{ empoweredslow }}.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Magic Damage",
+                            "Magic Damage: <magicDamage>@MagicDamage@ (%i:scaleAP%)</magicDamage>",
                             "Slow"
                         ],
                         "effect": [
@@ -98836,7 +98866,7 @@
                 "mpregenperlevel": 0.8,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 57,
+                "attackdamage": 59,
                 "attackdamageperlevel": 3.4,
                 "attackspeedperlevel": 3.5,
                 "attackspeed": 0.658
@@ -101734,7 +101764,7 @@
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Shield Amount",
+                            "Shield: <TFTBonus>@ModifiedShieldAmount@&nbsp;(%i:scaleAP%)</TFTBonus>",
                             "Cooldown"
                         ],
                         "effect": [
@@ -108406,6 +108436,12 @@
                     "num": 68,
                     "name": "Foreseen Yasuo",
                     "chromas": true
+                },
+                {
+                    "id": "157077",
+                    "num": 77,
+                    "name": "Battle Wolf Yasuo",
+                    "chromas": true
                 }
             ],
             "lore": "An Ionian of deep resolve, Yasuo is an agile swordsman who wields the air itself against his enemies. As a proud young man, he was falsely accused of murdering his master—unable to prove his innocence, he was forced to slay his own brother in self defense. Even after his master's true killer was revealed, Yasuo still could not forgive himself for all he had done, and now wanders his homeland with only the wind to guide his blade.",
@@ -108438,7 +108474,7 @@
                 "mp": 100,
                 "mpperlevel": 0,
                 "movespeed": 345,
-                "armor": 30,
+                "armor": 32,
                 "armorperlevel": 4.6,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -108739,7 +108775,7 @@
                     "id": "YasuoE",
                     "name": "Sweeping Blade",
                     "description": "Dashes through target enemy, dealing magic damage. Each cast increases subsequent dash's damage, up to a max amount.<br><br>Cannot be re-cast on the same enemy for a few seconds.<br><br><font color='#99FF99'>If Steel Tempest is cast while dashing, it will strike as a circle.</font>",
-                    "tooltip": "Yasuo dashes through a target, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. Each use of this Ability grants <magicDamage>{{ bonusdamageperstack }}</magicDamage>(%i:scaleLevel%) bonus damage to subsequent uses for {{ stackduration }} seconds, stacking up to {{ maxstacks }} times.<br /><br />This Ability has a {{ e2 }} second per-target Cooldown.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Yasuo dashes through a target, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage>. Each use of this Ability grants <magicDamage>{{ bonusdamageperstack }}</magicDamage> bonus damage to subsequent uses for {{ stackduration }} seconds, stacking up to {{ maxstacks }} times.<br /><br />This Ability has a {{ e2 }} second per-target Cooldown.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -109127,7 +109163,7 @@
                     "id": "YoneQ",
                     "name": "Mortal Steel",
                     "description": "Thrusts forward, damaging all enemies in a line.<br><br>On hit, grants a stack of Gathering Storm for a few seconds. At 2 stacks, Mortal Steel dashes Yone forward with a gust of wind knocking enemies <status>Airborne</status>.<br><br>Mortal Steel is treated as a basic attack and scales with all the same things.",
-                    "tooltip": "Yone thrusts forward, dealing <physicalDamage>{{ qdamage }} physical damage</physicalDamage>.<br /><br />On hit, grants a stack for {{ buffduration }} seconds. At 2 stacks, this skill causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for {{ q3knockupduration }} seconds and deals <physicalDamage>{{ qdamage }} physical damage</physicalDamage>. {{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Yone thrusts forward, dealing <physicalDamage>{{ qdamage }} physical damage</physicalDamage>.<br /><br />On hit, grants a stack for {{ buffduration }} seconds. At 2 stacks, this ability causes Yone to dash forward with a wave of wind that <status>Knocks Up</status> for {{ q3knockupduration }} seconds and deals <physicalDamage>{{ qdamage }} physical damage</physicalDamage>. {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Base Damage"
@@ -109406,8 +109442,8 @@
                 {
                     "id": "YoneE",
                     "name": "Soul Unbound",
-                    "description": "Yone's spirit leaves his body behind, gaining Move Speed. When this skill ends, Yone's spirit is forced back to his body and he repeats a portion of the damage he dealt as a spirit.",
-                    "tooltip": "Yone enters a spirit form for {{ returntimer }} seconds, leaving his body behind for the duration and gaining <speed>{{ startingms*100 }}% ramping Move Speed</speed>. <br /><br />When the spirit form ends, Yone snaps back to his body and repeats {{ deathmarkpercent*100 }}% of all damage he dealt to champions during this time. You may <recast>Recast</recast> this skill during spirit form.<br /><br /><recast>Recast: </recast>End spirit form early.{{ spellmodifierdescriptionappend }}",
+                    "description": "Yone's spirit leaves his body behind, gaining Move Speed. When this ability ends, Yone's spirit is forced back to his body and he repeats a portion of the damage he dealt as a spirit.",
+                    "tooltip": "Yone enters a spirit form for {{ returntimer }} seconds, leaving his body behind for the duration and gaining <speed>{{ startingms*100 }}% ramping Move Speed</speed>. <br /><br />When the spirit form ends, Yone snaps back to his body and repeats {{ deathmarkpercent*100 }}% of all damage he dealt to champions during this time. You may <recast>Recast</recast> this ability during spirit form.<br /><br /><recast>Recast: </recast>End spirit form early.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Repeated Damage",
@@ -109562,10 +109598,10 @@
                     "maxrank": 3,
                     "cooldown": [
                         120,
-                        90,
-                        60
+                        100,
+                        80
                     ],
-                    "cooldownBurn": "120/90/60",
+                    "cooldownBurn": "120/100/80",
                     "cost": [
                         0,
                         0,
@@ -112125,13 +112161,13 @@
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Cooldown",
-                            "Slow"
+                            "Slow",
+                            "Cooldown"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ movespeedmod*-100.000000 }}% -> {{ movespeedmodnl*-100.000000 }}%"
+                            "{{ movespeedmod*-100.000000 }}% -> {{ movespeedmodnl*-100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -112278,10 +112314,10 @@
                     "maxrank": 3,
                     "cooldown": [
                         120,
-                        100,
-                        80
+                        110,
+                        100
                     ],
-                    "cooldownBurn": "120/100/80",
+                    "cooldownBurn": "120/110/100",
                     "cost": [
                         0,
                         0,

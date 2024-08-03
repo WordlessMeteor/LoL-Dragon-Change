@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Daño infligido esta ronda: @f1@<br>Daño total infligido: @f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "Cada pocos segundos, <keywordMajor>lanzas automáticamente</keywordMajor> una luz guardiana hacia tu aliado, que otorga un <shield>escudo</shield> a ti y a los aliados a los que atraviesa. Después, vuelve hacia ti y repite el mismo efecto.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "Guardián de luz",
+            "rarity": 1,
+            "tooltip": "Cada @Cooldown@ s, <keywordMajor>lanzas automáticamente</keywordMajor> una luz guardiana hacia tu aliado, que otorga un escudo de <shield>@TotalShield@</shield> a ti y a los aliados a los que atraviesa. Tras esto, vuelve hacia ti, repitiendo el mismo efecto."
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "Sacrificio",
             "rarity": 1,
             "tooltip": "Cuando tu aliado tiene menos del <health>@AllyHealthThreshold*100@% de vida</health>, intercambias un <health>@CurrentHealthToDrain*100@% de tu vida actual</health> por un <shield>escudo</shield> de esa misma cantidad para tu aliado.<br><br>Escudos generados esta ronda: @f1@<br>Escudos generadores en total: @f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Por cada hechizo de invocador, se restaura su enfriamiento una vez por ronda.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "Invocadores revolucionarios",
+            "rarity": 1,
+            "tooltip": "Por cada hechizo de invocador, se restaura su enfriamiento una vez por ronda."
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "Erosión",
             "rarity": 0,
             "tooltip": "Al infligir daño a los enemigos, reduces un @Shred*100@% su <scaleArmor>armadura</scaleArmor> y <scaleMR>resistencia mágica</scaleMR> durante @ShredDuration@ s. <br><br>Se acumula hasta @MaxStacks@ veces."
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "Obtienes @AmountOfStatAnvils@ Yunques de estadísticas.",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "¡Estadísticas!",
+            "rarity": 0,
+            "tooltip": "Obtienes @AmountOfStatAnvils@ Yunques de estadísticas."
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "Carne de cañón",
             "rarity": 1,
             "tooltip": "Se te lanza desde un cañón para entrar en combate."
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Sustituye Huida por la habilidad definitiva de un campeón aleatorio. Tras lanzar esta habilidad, se reemplazará por la habilidad definitiva de otro campeón aleatorio.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "Ruleta definitiva",
+            "rarity": 2,
+            "tooltip": "Sustituye Huida por la habilidad definitiva de un campeón aleatorio. Tras lanzar esta habilidad, se reemplazará por la habilidad definitiva de otro campeón aleatorio."
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "Embrutecedor",
             "rarity": 1,
             "tooltip": "Obtienes <scaleAD>@AD@ de daño de ataque</scaleAD>, <scaleLevel>@AbilityHaste@ de velocidad de habilidades</scaleLevel> y <scaleAD>@Lethality@ de letalidad</scaleAD>."
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "El enfriamiento de los <keywordMajor>lanzamientos automáticos</keywordMajor> se reduce en @AutocastFlatCDR@ s y se benefician de la velocidad de habilidades.",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "Automatización absoluta",
-            "rarity": 0,
-            "tooltip": "El enfriamiento de los <keywordMajor>lanzamientos automáticos</keywordMajor> se reduce en @AutocastFlatCDR@ s y se benefician de la velocidad de habilidades."
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "Tu habilidad definitiva queda sellada. Obtienes un @DamageAmp*100@% de <scaleLevel>daño</scaleLevel>, <healing>curación</healing>, <shield>escudo</shield> y <scaleBonus>@Haste@ de velocidad de habilidades</scaleBonus>."
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "Obtienes @KillStackCredit@ acumulación por campeón y ronda cada vez que consigues un asesinato o asistencia. Con @RequiredKillCount@ acumulaciones, se convierte en un Yunque prismático. Esto se puede completar varias veces, pero necesitarás @RequiredKillCountSubsequent@ acumulaciones tras la primera.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "Huevo prismático",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>Acumulaciones actuales: @f1@<br>Acumulaciones totales: @f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "Obtienes @GoldBonus@ de oro. Los Yunques prismáticos cuestan @PrismaticCostReduction@ de oro menos, y los objetos prismáticos ahora se venden por 500 de oro menos.",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "Yunque de apuestas",
             "rarity": 2,
             "tooltip": "Obtienes @GoldBonus@ de oro. Los Yunques prismáticos cuestan @PrismaticCostReduction@ de oro menos, y los objetos prismáticos ahora se venden por 500 de oro menos."
@@ -1746,6 +1824,22 @@
             "name": "Muere otro día",
             "rarity": 1,
             "tooltip": "Bendice el suelo a tus pies durante 4 s, lo que impide que las unidades en su interior tengan menos del 10% de su vida máxima. Al final, cura <healing>@HealFlatTooltip@ de vida</healing> a las unidades en su interior. "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "Tus ataques y efectos de impacto infligen un @AttackReduction*100@% menos de daño. Otorga un <attackSpeed>@AttackSpeed*100@% de velocidad de ataque</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "A dos manos",
+            "rarity": 2,
+            "tooltip": "Tus ataques y efectos de impacto infligen un @AttackReduction*100@% menos de daño. Otorga un <attackSpeed>@AttackSpeed*100@% de velocidad de ataque</attackSpeed>."
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "Obtienes @MeleeRangeIncrease@ de alcance de ataque, que se reduce a @RangedRangeIncrease@ si atacas a distancia."
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "Cada pocos segundos, <keywordMajor>lanzas automáticamente</keywordMajor> un chorro de limo que inflige <magicDamage>daño mágico</magicDamage> a los enemigos cercanos. Si golpeas a un campeón, secretas un limo cerca que te cura al pasar por encima.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "¡Hora del limo!",
+            "rarity": 0,
+            "tooltip": "Cada @Cooldown@ s, <keywordMajor>lanzas automáticamente</keywordMajor> un chorro de limo que inflige <magicDamage>@BaseDamage@ más @PercentDamage@ de daño mágico en función de la vida máxima</magicDamage> a los enemigos cercanos. Si golpeas a un campeón, secretas un limo cerca. Pasar por encima del limo restaura <healing>@BlobHeal@ de vida</healing>. Los enemigos, sin embargo, lo destruyen."
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "Taconeo",
             "rarity": 2,
             "tooltip": "Tus ataques te otorgan <moveSpeed>@MSPerHit@ de velocidad de movimiento</moveSpeed>, que se acumula de forma infinita. Obtienes velocidad de ataque equivalente al @MSToASConversion*10000@% de tu velocidad de movimiento."
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "Al atacar, disparas @AdditionalBolts@ proyectiles adicionales que infligen <physicalDamage>daño físico</physicalDamage> en función de la distancia recorrida. Tiene un enfriamiento por dirección.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "Martillazo de dispersión",
+            "rarity": 2,
+            "tooltip": "Al atacar, disparas @AdditionalBolts@ proyectiles adicionales que infligen <physicalDamage>@DamagePerBolt@ de daño físico</physicalDamage> cada uno, que aumenta hasta un @MaxDamageAmp*100@% en función de la distancia recorrida. Cada dirección cardinal tiene un enfriamiento de @Cooldown@ s.<br><br>Cada proyectil puede asestar impactos críticos y aplica efectos de impacto con un @OnHitRatio*100@% de efectividad."
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "Obtienes <scaleLevel>@AbilityHaste@ de velocidad de habilidades</scaleLevel>."
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "Obtienes @AmountOfStatAnvils@ Yunques de estadísticas.",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "¡Estadísticas a cascoporro!",
+            "rarity": 2,
+            "tooltip": "Obtienes @AmountOfStatAnvils@ Yunques de estadísticas."
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "Goliat",
             "rarity": 2,
             "tooltip": "Aumentas de tamaño y obtienes un @HealthAmp*100@% de <scaleHealth>vida</scaleHealth> y un @ADAmp*100@% de <scaleAP>fuerza adaptable</scaleAP>."
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "Deslizarse o teleportarse aplica una <keywordMajor>quemadura</keywordMajor> a un enemigo cercano que inflige daño prolongado y se acumula de forma infinita.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "Marcasendas",
+            "rarity": 0,
+            "tooltip": "Cuando te deslizas o teleportas, aplicas una <keywordMajor>quemadura</keywordMajor> a un enemigo cercano, la cual inflige un <magicDamage>@BurnPercent*100@% de daño mágico en función de la vida máxima</magicDamage> durante @BurnDuration@ s.<br><br>Daño infligido esta ronda: @f1@<br>Daño infligido esta partida: @f2@"
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "Peso pesado",
             "rarity": 0,
-            "tooltip": "Tus ataques infligen <physicalDamage>daño físico</physicalDamage> adicional equivalente al @HealthPercent*100@% de tu <healing>vida máxima</healing>."
+            "tooltip": "Tus ataques infligen <physicalDamage>@HealthPercentDamage@ de daño físico</physicalDamage> adicional equivalente al @HealthPercent*100@% de tu <healing>vida máxima</healing>."
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "Activa un láser en la dirección a la que miras que inflige <magicDamage>@LaserEyesTooltip@ de daño mágico</magicDamage> por segundo.<br><br>Daño infligido esta ronda: @f1@<br>Daño infligido en total: @f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "Obtienes @AmountOfStatAnvils@ Yunques de estadísticas.",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "¡Estadísticas a mansalva!",
+            "rarity": 1,
+            "tooltip": "Obtienes @AmountOfStatAnvils@ Yunques de estadísticas."
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "Deslizamiento",
             "rarity": 2,
             "tooltip": "Tus habilidades de deslizamiento, salto, teleportación o destello obtienen <scaleLevel>@Haste@ de velocidad de habilidades</scaleLevel>."
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "Vende todos los objetos que no sean de misión por un @SellValueTooltip@% de su precio original. Te vendrá genial para todos los yunques en oferta.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "Oferta armamentística",
+            "rarity": 0,
+            "tooltip": "Vende todos los objetos que no sean de misión por un @SellValueTooltip@% de su precio original. Te vendrá genial para todos los yunques en oferta."
         },
         {
             "apiName": "LightningStrikes",
@@ -3037,6 +3287,24 @@
             "name": "Coraje del coloso",
             "rarity": 2,
             "tooltip": "Obtienes un <shield>escudo de @TotalShield@</shield> tras <status>inmovilizar</status> a un campeón enemigo.<br><br>Escudos generados esta ronda: @f1@<br>Escudos generados en total: @f2@"
+        },
+        {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "Comparte los efectos de las flores de poder con tu aliado cercano y aumenta los beneficios que obtienes un @AmpAmountTooltip@%.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "Los frutos de tu trabajo",
+            "rarity": 1,
+            "tooltip": "Comparte los efectos de las flores de poder con tu aliado cercano y aumenta los beneficios que obtienes un @AmpAmountTooltip@%."
         },
         {
             "apiName": "InfernalSoul",

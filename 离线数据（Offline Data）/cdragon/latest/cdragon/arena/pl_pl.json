@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "Co kilka sekund <keywordMajor>automatycznie</keywordMajor> wysyłasz w kierunku sojusznika ochronne światło, nakładając <shield>tarczę</shield> na siebie i sojuszników, przez których światło przeniknie. Światło następnie powraca, ponownie nakładając swój efekt.",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "Świetlisty Wartownik",
+            "rarity": 1,
+            "tooltip": "Co @Cooldown@ sek. <keywordMajor>automatycznie</keywordMajor> wysyłasz w kierunku sojusznika ochronne światło, nakładając <shield>tarczę o wytrzymałości @TotalShield@ pkt.</shield> na siebie i sojuszników, przez których światło przeniknie. Światło następnie powraca, ponownie nakładając swój efekt."
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "Świadome Poświęcenie",
             "rarity": 1,
             "tooltip": "Gdy zdrowie twojego sojusznika spadnie poniżej <health>@AllyHealthThreshold*100@%</health>, zamieniasz <health>@CurrentHealthToDrain*100@% swojego aktualnego zdrowia</health> na <shield>tarczę</shield> o takiej samej wartości dla niego.<br><br>Wytrzymałość tarcz wygenerowanych w tej rundzie: @f1@ pkt.<br>Całkowita wytrzymałość tarcz: @f2@ pkt."
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Za każdy czar przywoływacza odśwież jego czas odnowienia raz na rundę.",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "Rewolucja Przywoływaczy",
+            "rarity": 1,
+            "tooltip": "Za każdy czar przywoływacza odśwież jego czas odnowienia raz na rundę."
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "Erozja",
             "rarity": 0,
             "tooltip": "Zadawanie obrażeń wrogom osłabia ich <scaleArmor>pancerz</scaleArmor> i <scaleMR>odporność na magię</scaleMR> o @Shred*100@% na @ShredDuration@ sek. <br><br>Kumuluje się do @MaxStacks@ razy."
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "Zdobywasz następującą liczbę Kowadeł Statystyk: @AmountOfStatAnvils@!",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "Statystyki!",
+            "rarity": 0,
+            "tooltip": "Zdobywasz następującą liczbę Kowadeł Statystyk: @AmountOfStatAnvils@!"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "Mięso Armatnie",
             "rarity": 1,
             "tooltip": "Wystrzeliwujesz się z działa do walki."
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "Zamienia Ucieczkę na superumiejętność losowego bohatera. Po użyciu superumiejętność zostaje zastąpiona kolejną superumiejętnością losowego bohatera.",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "Ruletka nad Ruletki",
+            "rarity": 2,
+            "tooltip": "Zamienia Ucieczkę na superumiejętność losowego bohatera. Po użyciu superumiejętność zostaje zastąpiona kolejną superumiejętnością losowego bohatera."
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "Tłuczek",
             "rarity": 1,
             "tooltip": "Zyskujesz <scaleAD>@AD@ pkt. obrażeń od ataku</scaleAD>, <scaleLevel>@AbilityHaste@ jedn. przyspieszenia umiejętności</scaleLevel> i <scaleAD>@Lethality@ pkt. destrukcji</scaleAD>."
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "Czas odnowienia twoich <keywordMajor>automatycznie używanych</keywordMajor> umiejętności zostaje skrócony o @AutocastFlatCDR@ sek. i skaluje się z przyspieszeniem umiejętności.",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "Pełna Automatyzacja",
-            "rarity": 0,
-            "tooltip": "Czas odnowienia twoich <keywordMajor>automatycznie używanych</keywordMajor> umiejętności zostaje skrócony o @AutocastFlatCDR@ sek. i skaluje się z przyspieszeniem umiejętności."
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "Twoja superumiejętność jest zablokowana. Zyskujesz @DamageAmp*100@% <scaleLevel>obrażeń</scaleLevel>, <healing>leczenia</healing>, <shield>siły tarcz</shield> i <scaleBonus>@Haste@ jedn. przyspieszenia umiejętności</scaleBonus>."
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "Otrzymaj @KillStackCredit@ ładunek za bohatera podczas każdej rundy, gdy weźmiesz udział w zabójstwie. Przy @RequiredKillCount@ ładunkach z jaja wykluwa się Pryzmatyczne Kowadło. Możesz to zrobić wielokrotnie, jednak po pierwszym wykluciu jajo wymaga @RequiredKillCountSubsequent@ ładunków.",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "Pryzmatyczne Jajo",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>Bieżące ładunki: @f1@<br>Całkowita liczba ładunków: @f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "Zdobywasz @GoldBonus@ szt. złota. Pryzmatyczne Kowadła kosztują o @PrismaticCostReduction@ szt. złota mniej, a zyskiwane odtąd pryzmatyczne przedmioty można sprzedać ponownie za 500 szt. złota mniej.",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "Kowadło Hazardu",
             "rarity": 2,
             "tooltip": "Zdobywasz @GoldBonus@ szt. złota. Pryzmatyczne Kowadła kosztują o @PrismaticCostReduction@ szt. złota mniej, a zyskiwane odtąd pryzmatyczne przedmioty można sprzedać ponownie za 500 szt. złota mniej."
@@ -1746,6 +1824,22 @@
             "name": "Śmierci Mówimy Nie",
             "rarity": 1,
             "tooltip": "Błogosławisz ziemię pod sobą na 4 sek. i sprawiasz, że zdrowie wszystkich jednostek znajdujących się na tym obszarze nie może spaść poniżej 10% ich maksymalnego zdrowia. Na koniec wszystkie te jednostki zostaną uleczone o <healing>@HealFlatTooltip@ pkt. zdrowia</healing>. "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "Twoje ataki i efekty przy trafieniu zadają o @AttackReduction*100@% mniej obrażeń. Zyskujesz <attackSpeed>@AttackSpeed*100@% prędkości ataku</attackSpeed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "Obie Ręce Zajęte",
+            "rarity": 2,
+            "tooltip": "Twoje ataki i efekty przy trafieniu zadają o @AttackReduction*100@% mniej obrażeń. Zyskujesz <attackSpeed>@AttackSpeed*100@% prędkości ataku</attackSpeed>."
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "Zyskujesz @MeleeRangeIncrease@ jedn. zasięgu ataku lub @RangedRangeIncrease@ jedn. jeśli walczysz z dystansu."
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "Co kilka sekund z twojego ciała <keywordMajor>automatycznie</keywordMajor> wybucha śluz, zadając pobliskim wrogom <magicDamage>obrażenia magiczne</magicDamage>. Jeśli trafisz bohatera, wydzielasz w pobliżu kapkę, która leczy cię, gdy po niej przejdziesz.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "Godzina Śluzu",
+            "rarity": 0,
+            "tooltip": "Co @Cooldown@ sek. z twojego ciała <keywordMajor>automatycznie</keywordMajor> wybucha śluz, zadając pobliskim wrogom <magicDamage>obrażenia magiczne równe @BaseDamage@ pkt. plus @PercentDamage@ maksymalnego zdrowia</magicDamage>. Jeśli trafisz bohatera, wydzielasz w pobliżu kapkę. Przejście po kapce regeneruje <healing>@BlobHeal@ zdrowia</healing>. Przejście wroga niszczy kapkę."
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "Szalone Tańcowanie",
             "rarity": 2,
             "tooltip": "Twoje ataki zapewniają ci <moveSpeed>@MSPerHit@ jedn. prędkości ruchu</moveSpeed>. Efekt kumuluje się w nieskończoność. Zyskujesz prędkość ataku równą @MSToASConversion*10000@% twojej prędkości ruchu."
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "Gdy atakujesz, wystrzeliwujesz następującą liczbę dodatkowych pocisków: @AdditionalBolts@, z których każdy zadaje <physicalDamage>obrażenia fizyczne</physicalDamage> zależne od dystansu przebytego przez pocisk. Ma czas odnowienia na każdy kierunek.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "Podsycający Młot",
+            "rarity": 2,
+            "tooltip": "Gdy atakujesz, wystrzeliwujesz następującą liczbę dodatkowych pocisków: @AdditionalBolts@, z których każdy zadaje <physicalDamage>@DamagePerBolt@ pkt. obrażeń fizycznych</physicalDamage>. Obrażenia wzrastają do @MaxDamageAmp*100@% w miarę dystansu przebytego przez pocisk. Każdy z kierunków głównych ma @Cooldown@ sek. odnowienia.<br><br>Każdy pocisk może trafić krytycznie i nakłada efekty przy trafieniu skuteczne w @OnHitRatio*100@%."
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "Zyskujesz <scaleLevel>@AbilityHaste@ jedn. przyspieszenia umiejętności</scaleLevel>."
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "Zdobywasz następującą liczbę Kowadeł Statystyk: @AmountOfStatAnvils@!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "Statystyczne Statystyki Statystyk!",
+            "rarity": 2,
+            "tooltip": "Zdobywasz następującą liczbę Kowadeł Statystyk: @AmountOfStatAnvils@!"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "Goliat",
             "rarity": 2,
             "tooltip": "Zwiększasz swój rozmiar i zyskujesz @HealthAmp*100@% <scaleHealth>zdrowia</scaleHealth> i @ADAmp*100@% <scaleAP>siły adaptacyjnej</scaleAP>."
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "Użycie doskoku lub mignięcia nakłada na pobliskiego wroga <keywordMajor>podpalenie</keywordMajor>, które zadaje obrażenia w czasie. Efekt kumuluje się w nieskończoność.",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "Przecieracz Szlaków",
+            "rarity": 0,
+            "tooltip": "Gdy użyjesz doskoku lub mignięcia, nakładasz na pobliskiego wroga <keywordMajor>podpalenie</keywordMajor>, które zadaje <magicDamage>obrażenia magiczne równe @BurnPercent*100@% maksymalnego zdrowia</magicDamage> w ciągu @BurnDuration@ sek.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Obrażenia zadane w tej grze: @f2@ pkt."
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "Mocne Ciosy",
             "rarity": 0,
-            "tooltip": "Twoje ataki zadają dodatkowe <physicalDamage>obrażenia fizyczne</physicalDamage> równe @HealthPercent*100@% twojego <healing>maksymalnego zdrowia</healing>."
+            "tooltip": "Twoje ataki zadają dodatkowe <physicalDamage>@HealthPercentDamage@ pkt. obrażeń fizycznych</physicalDamage> równe @HealthPercent*100@% twojego <healing>maksymalnego zdrowia</healing>."
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "W kierunku, w którym patrzysz, strzela laser, który zadaje <magicDamage>@LaserEyesTooltip@ pkt. obrażeń magicznych</magicDamage> na sekundę.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "Zdobywasz następującą liczbę Kowadeł Statystyk: @AmountOfStatAnvils@!",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "Statystyki Statystyk!",
+            "rarity": 1,
+            "tooltip": "Zdobywasz następującą liczbę Kowadeł Statystyk: @AmountOfStatAnvils@!"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "Skoczność",
             "rarity": 2,
             "tooltip": "Twoje umiejętności doskoku, skoku, mignięcia i teleportacji zyskują <scaleLevel>@Haste@ jedn. przyspieszenia umiejętności</scaleLevel>."
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "Natychmiastowo sprzedajesz wszystkie swoje przedmioty niebędące przedmiotami zadania za @SellValueTooltip@% ich bezpośredniej wartości przy zakupie. Świetnie się sprawdza przy wszystkich tych przecenionych kowadłach.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "Gorąca Wyprzedaż",
+            "rarity": 0,
+            "tooltip": "Natychmiastowo sprzedajesz wszystkie swoje przedmioty niebędące przedmiotami zadania za @SellValueTooltip@% ich bezpośredniej wartości przy zakupie. Świetnie się sprawdza przy wszystkich tych przecenionych kowadłach."
         },
         {
             "apiName": "LightningStrikes",
@@ -3037,6 +3287,24 @@
             "name": "Odwaga Kolosa",
             "rarity": 2,
             "tooltip": "Zyskujesz <shield>tarczę o wytrzymałości @TotalShield@ pkt.</shield> po <status>unieruchomieniu</status> wrogiego bohatera.<br><br>Wytrzymałość tarcz wygenerowanych w tej rundzie: @f1@ pkt.<br>Całkowita wytrzymałość wygenerowanych tarcz: @f2@ pkt."
+        },
+        {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "Dzielisz się efektami Kwiatów Mocy z pobliskim sojusznikiem, jednocześnie zwiększając własne premie o @AmpAmountTooltip@%.",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "Owoce Pracy",
+            "rarity": 1,
+            "tooltip": "Dzielisz się efektami Kwiatów Mocy z pobliskim sojusznikiem, jednocześnie zwiększając własne premie o @AmpAmountTooltip@%."
         },
         {
             "apiName": "InfernalSoul",

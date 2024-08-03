@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{22c13cca}"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{027a9892}",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "每@AutoCastCooldown@秒<keywordMajor>自動</keywordMajor>旋轉斬擊，對位於外圈的敵軍造成額外傷害。",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "<keywordMajor>自動</keywordMajor>旋轉斬擊，造成<physicalDamage>物理傷害</physicalDamage>。命中目標若位於技能範圍後半部，將被<status>緩速</status>並承受額外<physicalDamage>最大生命物理傷害</physicalDamage>。回復<healing>對英雄造成額外傷害@OuterConeHealingRatio@%的生命</healing>。(冷卻時間：@AutoCastCooldown@秒)。",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "量子計算",
             "rarity": 2,
-            "tooltip": "每15秒<keywordMajor>自動</keywordMajor>旋轉斬擊，對位於外圈的敵軍造成額外傷害，並回復生命。<br><br>總輸出傷害：@f1@<br>總治療量：@f2@"
+            "tooltip": "<keywordMajor>自動</keywordMajor>旋轉斬擊，造成<physicalDamage>@BaseDamageTotal@物理傷害</physicalDamage>。命中目標若位於技能範圍後半部，將被<status>緩速</status>@SlowPercentage@%，在@SlowDuration@秒內遞減至失效，並造成額外<physicalDamage>@OuterEdgeTooltip@最大生命物理傷害</physicalDamage>。回復<healing>對英雄造成額外傷害@OuterConeHealingRatio@%的生命</healing>。(冷卻時間：@AutoCastCooldown@秒)。<br><br>總傷害量：@f1@<br>總治療量：@f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "普攻縮短冷卻時間@CooldownRefund@秒。",
+            "desc": "{{ Item_Keyword_OnHit }}縮短冷卻時間@CooldownRefund@秒。",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "祕術拳擊",
             "rarity": 2,
-            "tooltip": "普攻縮短冷卻時間@CooldownRefund@秒。"
+            "tooltip": "{{ Item_Keyword_OnHit }}縮短冷卻時間@CooldownRefund@秒。"
         },
         {
             "apiName": "Homeguard",

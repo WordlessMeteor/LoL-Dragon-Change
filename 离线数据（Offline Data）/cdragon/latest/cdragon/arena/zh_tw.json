@@ -244,6 +244,42 @@
             "tooltip": "{{Cherry_Marksmage_Summary}}<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
         },
         {
+            "apiName": "LightWarden",
+            "calculations": {
+                "TotalShield": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 100.0,
+                            "mStartValue": 40.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.10000000149011612,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 8.0,
+                "ShieldDuration": 2.5
+            },
+            "desc": "每隔數秒，<keywordMajor>自動朝友軍施放</keywordMajor>一道守護之光，賦予自身與穿過的友軍<shield>護盾</shield>。然後守護之光會折返，重複發動效果。",
+            "iconLarge": "assets/ux/cherry/augments/icons/lightwarden_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/lightwarden_small.png",
+            "id": 231,
+            "name": "光之守衛",
+            "rarity": 1,
+            "tooltip": "每@Cooldown@秒，<keywordMajor>自動朝友軍施放</keywordMajor>一道守護之光，賦予自身與穿過的友軍<shield>@TotalShield@護盾</shield>。然後守護之光會折返，重複發動效果。"
+        },
+        {
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
@@ -295,6 +331,18 @@
             "name": "犧牲奉獻",
             "rarity": 1,
             "tooltip": "當隊友的生命降至<health>@AllyHealthThreshold*100@%</health>時，犧牲你<health>@CurrentHealthToDrain*100@%現有生命值</health>賦予隊友<shield>護盾</shield>。<br><br>本回合護盾量：@f1@<br>總護盾量：@f2@"
+        },
+        {
+            "apiName": "SummonerRevolution",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "每個召喚師技能每回合會重置冷卻時間1次。",
+            "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
+            "id": 223,
+            "name": "召喚革新",
+            "rarity": 1,
+            "tooltip": "每個召喚師技能每回合會重置冷卻時間1次。"
         },
         {
             "apiName": "IceCold",
@@ -415,6 +463,20 @@
             "name": "侵蝕裝甲",
             "rarity": 0,
             "tooltip": "對敵軍造成傷害可削弱@Shred*100@%<scaleArmor>物理</scaleArmor>與<scaleMR>魔法防禦</scaleMR>，持續@ShredDuration@秒。<br><br>最多可累加@MaxStacks@次。"
+        },
+        {
+            "apiName": "Stats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 2.0
+            },
+            "desc": "獲得@AmountOfStatAnvils@個能力值鐵砧！",
+            "iconLarge": "assets/ux/cherry/augments/icons/stats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/stats_small.png",
+            "id": 226,
+            "name": "能力值！",
+            "rarity": 0,
+            "tooltip": "獲得@AmountOfStatAnvils@個能力值鐵砧！"
         },
         {
             "apiName": "MasterofDuality",
@@ -723,6 +785,20 @@
             "name": "炮灰",
             "rarity": 1,
             "tooltip": "自身會從大炮發射飛入戰場。"
+        },
+        {
+            "apiName": "UltimateRoulette",
+            "calculations": {},
+            "dataValues": {
+                "Cooldown": 6.0
+            },
+            "desc": "將逃亡隨機替換為一名英雄的大絕。施放該技能後，將其隨機替換為另一名英雄的大絕。",
+            "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
+            "id": 233,
+            "name": "大絕轉盤",
+            "rarity": 2,
+            "tooltip": "將逃亡隨機替換為一名英雄的大絕。施放該技能後，將其隨機替換為另一名英雄的大絕。"
         },
         {
             "apiName": "MadScientist",
@@ -1070,20 +1146,6 @@
             "name": "兇殘之柄",
             "rarity": 1,
             "tooltip": "增加<scaleAD>@AD@物理攻擊</scaleAD>、<scaleLevel>@AbilityHaste@技能加速</scaleLevel>、以及<scaleAD>@Lethality@物理致命</scaleAD>。"
-        },
-        {
-            "apiName": "FullyAutomated",
-            "calculations": {},
-            "dataValues": {
-                "AutocastFlatCDR": 2.0
-            },
-            "desc": "你的<keywordMajor>自動施放</keywordMajor>冷卻時間縮短@AutocastFlatCDR@秒，且可適用技能加速。",
-            "iconLarge": "assets/ux/cherry/augments/icons/fullyautomated_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/fullyautomated_small.png",
-            "id": 213,
-            "name": "全自動",
-            "rarity": 0,
-            "tooltip": "你的<keywordMajor>自動施放</keywordMajor>冷卻時間縮短@AutocastFlatCDR@秒，且可適用技能加速。"
         },
         {
             "apiName": "SonicBoom",
@@ -1494,6 +1556,22 @@
             "tooltip": "無法使用大絕。增加@DamageAmp*100@%<scaleLevel>傷害</scaleLevel>、<healing>治療</healing>、<scaleBonus>@Haste@技能加速</scaleBonus>，並獲得<shield>護盾</shield>。"
         },
         {
+            "apiName": "PrismaticEgg",
+            "calculations": {},
+            "dataValues": {
+                "KillStackCredit": 1.0,
+                "RequiredKillCount": 5.0,
+                "RequiredKillCountSubsequent": 7.0
+            },
+            "desc": "每位英雄每回合1次，每次參與擊殺會獲得@KillStackCredit@層。達@RequiredKillCount@層時，孵化成1個稜鏡鐵砧。可以完成多次，但第一次孵化後需要@RequiredKillCountSubsequent@層。",
+            "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
+            "id": 224,
+            "name": "稜鏡蛋",
+            "rarity": 2,
+            "tooltip": "{{Cherry_PrismaticEgg_Summary}}<br><br>目前層數：@f1@<br>總層數：@f2@"
+        },
+        {
             "apiName": "Clothesline",
             "calculations": {
                 "BurnDamage": {
@@ -1607,7 +1685,7 @@
             "desc": "獲得@GoldBonus@金錢。稜鏡鐵砧價格降低@PrismaticCostReduction@，且往後獲得的稜鏡道具售價降低500。",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
-            "id": 220,
+            "id": 234,
             "name": "甘巴鐵砧",
             "rarity": 2,
             "tooltip": "獲得@GoldBonus@金錢。稜鏡鐵砧價格降低@PrismaticCostReduction@，且往後獲得的稜鏡道具售價降低500。"
@@ -1746,6 +1824,22 @@
             "name": "擇日而亡",
             "rarity": 1,
             "tooltip": "祝福腳下的大地，範圍內所有單位生命無法降到其最大生命10%以下，持續4秒。效果結束後，範圍內的單位回復<healing>@HealFlatTooltip@生命</healing>。 "
+        },
+        {
+            "apiName": "DualWield",
+            "calculations": {},
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 2.5,
+                "OnHitMod": 0.5
+            },
+            "desc": "你的普攻和命中傷害降低@AttackReduction*100@%。增加<attackSpeed>@AttackSpeed*100@%攻速</attackSpeed>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
+            "id": 225,
+            "name": "雙刀流",
+            "rarity": 2,
+            "tooltip": "你的普攻和命中傷害降低@AttackReduction*100@%。增加<attackSpeed>@AttackSpeed*100@%攻速</attackSpeed>。"
         },
         {
             "apiName": "SpiritLink",
@@ -1899,6 +1993,65 @@
             "tooltip": "增加@MeleeRangeIncrease@攻擊距離，遠攻英雄則減至@RangedRangeIncrease@。"
         },
         {
+            "apiName": "SlimeTime",
+            "calculations": {
+                "BaseDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 80.0,
+                            "mStartValue": 40.0
+                        }
+                    ]
+                },
+                "BlobHeal": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.05999999865889549,
+                            "mStartValue": 0.029999999329447746
+                        }
+                    ]
+                },
+                "PercentDamage": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 0.07000000029802322,
+                            "mStartValue": 0.029999999329447746
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.0001500000071246177,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "Cooldown": 7.0,
+                "Radius": 450.0
+            },
+            "desc": "每隔數秒，<keywordMajor>自動施放</keywordMajor>爆炸史萊姆，對鄰近敵軍造成<magicDamage>魔法傷害</magicDamage>。若你命中英雄，則在附近生成1坨黏液，踏過黏液可回復生命。",
+            "iconLarge": "assets/ux/cherry/augments/icons/slimetime_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slimetime_small.png",
+            "id": 232,
+            "name": "史萊姆時間",
+            "rarity": 0,
+            "tooltip": "每@Cooldown@秒<keywordMajor>自動施放</keywordMajor>爆炸史萊姆，對鄰近敵軍造成<magicDamage>@BaseDamage@加上@PercentDamage@最大生命的魔法傷害</magicDamage>。若命中英雄，則在附近生成1坨黏液。走過黏液會回復<healing>@BlobHeal@生命</healing>，敵軍走過則會破壞黏液。"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2008,6 +2161,41 @@
             "name": "輕舞飛揚",
             "rarity": 2,
             "tooltip": "普攻可增加<moveSpeed>@MSPerHit@跑速</moveSpeed>，可無限累加。增加相當於@MSToASConversion*10000@%跑速的攻速。"
+        },
+        {
+            "apiName": "FanTheHammer",
+            "calculations": {
+                "DamagePerBolt": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelBreakpointsCalculationPart",
+                            "mInitialBonusPerLevel": 2.5,
+                            "mLevel1Value": 10.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.15000000596046448,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "AdditionalBolts": 5.0,
+                "Cooldown": 3.0,
+                "MaxDamageAmp": 0.5,
+                "MaxDamageAmpDistance": 750.0,
+                "OnHitRatio": 0.20000000298023224
+            },
+            "desc": "攻擊時，額外發射@AdditionalBolts@道閃電，每道造成<physicalDamage>物理傷害</physicalDamage>，傷害量隨飛行距離提升。不同方向具有個別冷卻時間。",
+            "iconLarge": "assets/ux/cherry/augments/icons/fanthehammer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fanthehammer_small.png",
+            "id": 220,
+            "name": "旋風鎚",
+            "rarity": 2,
+            "tooltip": "攻擊時，額外發射@AdditionalBolts@道閃電，每道造成<physicalDamage>@DamagePerBolt@物理傷害</physicalDamage>，隨著飛行距離提升最多@MaxDamageAmp*100@%。每個方向有@Cooldown@秒鐘的冷卻時間。<br><br>每道閃電可以暴擊，且造成@OnHitRatio*100@%的命中效果。"
         },
         {
             "apiName": "Tormentor",
@@ -2348,6 +2536,20 @@
             "tooltip": "增加<scaleLevel>@AbilityHaste@技能加速</scaleLevel>。"
         },
         {
+            "apiName": "StatsOnStatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 4.0
+            },
+            "desc": "獲得@AmountOfStatAnvils@個能力值鐵砧！",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstatsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstatsonstats_small.png",
+            "id": 228,
+            "name": "能力值堆堆堆起來！",
+            "rarity": 2,
+            "tooltip": "獲得@AmountOfStatAnvils@個能力值鐵砧！"
+        },
+        {
             "apiName": "Deft",
             "calculations": {},
             "dataValues": {
@@ -2377,6 +2579,23 @@
             "name": "巨人",
             "rarity": 2,
             "tooltip": "體積變大，增加@HealthAmp*100@%<scaleHealth>生命</scaleHealth>及@ADAmp*100@%<scaleAP>適性之力</scaleAP>。"
+        },
+        {
+            "apiName": "Trailblazer",
+            "calculations": {},
+            "dataValues": {
+                "BurnDuration": 5.0,
+                "BurnPercent": 0.03999999910593033,
+                "Radius": 650.0,
+                "SpellIDCD": 1.5
+            },
+            "desc": "衝刺或瞬移會對1名鄰近敵軍附加<keywordMajor>燃燒</keywordMajor>，持續造成傷害，可無限累加。",
+            "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
+            "id": 221,
+            "name": "開拓者",
+            "rarity": 0,
+            "tooltip": "衝刺或瞬移時，<keywordMajor>燃燒</keywordMajor>1名鄰近敵軍<magicDamage>@BurnPercent*100@%最大生命的魔法傷害</magicDamage>，持續@BurnDuration@秒。<br><br>本回合造成傷害：@f1@<br>本對戰造成傷害：@f2@"
         },
         {
             "apiName": "AcceleratingSorcery",
@@ -2492,7 +2711,7 @@
             "id": 181,
             "name": "重型打手",
             "rarity": 0,
-            "tooltip": "你的普攻額外造成等同於自身<healing>最大生命</healing>@HealthPercent*100@%的<physicalDamage>物理傷害</physicalDamage>。"
+            "tooltip": "你的普攻額外造成等同於自身<healing>最大生命</healing>@HealthPercent*100@%的<physicalDamage>@HealthPercentDamage@物理傷害</physicalDamage>。"
         },
         {
             "apiName": "RabbleRousing",
@@ -2712,6 +2931,20 @@
             "tooltip": "你會對面對的方向發射雷射，每秒造成<magicDamage>@LaserEyesTooltip@魔法傷害</magicDamage>。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
         },
         {
+            "apiName": "StatsOnStats",
+            "calculations": {},
+            "dataValues": {
+                "AmountOfStatAnvils": 3.0
+            },
+            "desc": "獲得@AmountOfStatAnvils@個能力值鐵砧！",
+            "iconLarge": "assets/ux/cherry/augments/icons/statsonstats_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/statsonstats_small.png",
+            "id": 227,
+            "name": "能力值堆起來！",
+            "rarity": 1,
+            "tooltip": "獲得@AmountOfStatAnvils@個能力值鐵砧！"
+        },
+        {
             "apiName": "Dashing",
             "calculations": {},
             "dataValues": {
@@ -2724,6 +2957,23 @@
             "name": "衝鋒",
             "rarity": 2,
             "tooltip": "施放衝刺、跳躍、閃現或傳送技能會獲得<scaleLevel>@Haste@技能加速</scaleLevel>。"
+        },
+        {
+            "apiName": "FireSale",
+            "calculations": {},
+            "dataValues": {
+                "BootsStarterSellValue": 500.0,
+                "LegendarySellValue": 2500.0,
+                "PrismaticSellValue": 5000.0,
+                "SellValueTooltip": 100.0
+            },
+            "desc": "立即以@SellValueTooltip@%直購價賣掉所有非任務道具。最適合拿來賣打過折的鐵砧。",
+            "iconLarge": "assets/ux/cherry/augments/icons/firesale_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firesale_small.png",
+            "id": 229,
+            "name": "火速賣裝",
+            "rarity": 0,
+            "tooltip": "立即以@SellValueTooltip@%直購價賣掉所有非任務道具。最適合拿來賣打過折的鐵砧。"
         },
         {
             "apiName": "LightningStrikes",
@@ -3037,6 +3287,24 @@
             "name": "巨像勇氣",
             "rarity": 2,
             "tooltip": "對敵方英雄造成<status>硬控場</status>後，獲得<shield>@TotalShield@護盾</shield>。<br><br>本回合護盾量：@f1@<br>總護盾量：@f2@"
+        },
+        {
+            "apiName": "FruitsOfYourLabor",
+            "calculations": {},
+            "dataValues": {
+                "AllyMaxRange": 700.0,
+                "AmpAmount": 0.25,
+                "AmpAmountTooltip": 25.0,
+                "Duration": 2.0,
+                "MSBoost": 0.4000000059604645
+            },
+            "desc": "與鄰近友軍分享力量之花的效果，且提升你獲得的效果@AmpAmountTooltip@%。",
+            "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
+            "id": 222,
+            "name": "勞動之果",
+            "rarity": 1,
+            "tooltip": "與鄰近友軍分享力量之花的效果，且提升你獲得的效果@AmpAmountTooltip@%。"
         },
         {
             "apiName": "InfernalSoul",

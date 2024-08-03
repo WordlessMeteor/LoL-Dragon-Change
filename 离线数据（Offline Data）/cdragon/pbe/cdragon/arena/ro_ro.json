@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{22c13cca}"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{027a9892}",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Lovești <keywordMajor>automat</keywordMajor> într-o zonă în formă de cerc din jurul tău, provocând daune bonus pe marginea exterioară, la fiecare @AutoCastCooldown@ secunde.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "Lovești <keywordMajor>automat</keywordMajor> într-o zonă în formă de cerc în jurul tău, provocând <physicalDamage>daune fizice</physicalDamage>. Inamicii loviți de zona exterioară a abilității sunt <status>încetiniți</status> și suferă <physicalDamage>daune fizice suplimentare în funcție de viața maximă</physicalDamage>. Reface viață egală cu <healing>@OuterConeHealingRatio@% din daunele bonus provocate campionilor</healing>. Timp de reactivare: @AutoCastCooldown@ sec.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Calcul cuantic",
             "rarity": 2,
-            "tooltip": "Lovești <keywordMajor>automat</keywordMajor> într-o zonă în formă de cerc din jurul tău, provocând daune bonus și vindecând aliații de pe marginea exterioară, la fiecare 15 secunde. <br><br>Daune provocate în total: @f1@<br>Vindecare efectuată în total: @f2@"
+            "tooltip": "Lovești <keywordMajor>automat</keywordMajor> într-o zonă în formă de cerc în jurul tău, provocând <physicalDamage>@BaseDamageTotal@ daune fizice</physicalDamage>. Inamicii loviți de zona exterioară a abilității sunt <status>încetiniți</status> cu @SlowPercentage@%, valoare ce scade de-a lungul a @SlowDuration@ secunde. Apoi, aceștia suferă <physicalDamage>daune fizice suplimentare în valoare de @OuterEdgeTooltip@ din viața maximă</physicalDamage>. Reface viață egală cu <healing>@OuterConeHealingRatio@% din daunele bonus provocate campionilor</healing>. Timp de reactivare: @AutoCastCooldown@ sec.<br><br>Daune provocate în total: @f1@<br>Vindecare efectuată în total: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "Atacurile tale reduc timpii de reactivare cu @CooldownRefund@ secunde.",
+            "desc": "Efectele {{ Item_Keyword_OnHit }} îți reduc timpii de reactivare cu @CooldownRefund@ secunde.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Lovitură mistică",
             "rarity": 2,
-            "tooltip": "Atacurile tale reduc timpii de reactivare cu @CooldownRefund@ secunde."
+            "tooltip": "Efectele {{ Item_Keyword_OnHit }} îți reduc timpii de reactivare cu @CooldownRefund@ secunde."
         },
         {
             "apiName": "Homeguard",

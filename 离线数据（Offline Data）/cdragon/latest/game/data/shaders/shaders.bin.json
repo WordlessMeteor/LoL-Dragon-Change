@@ -2234,6 +2234,46 @@
         "objectPath": "Shaders/StaticMesh/SRX_Blend_Ocean",
         "__type": "CustomShaderDef"
     },
+    "Shaders/PostProcess/TFT_RadialBlur": {
+        "parameters": [
+            {
+                "name": "Parameter0",
+                "data": [
+                    0.6000000238418579,
+                    10.0,
+                    0.5,
+                    0.5
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Length",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Steps_HighQ",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "BlurCenter",
+                        "fields": 12,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "textures": [
+            {
+                "name": "Mask",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
+                "__type": "ShaderTexture"
+            }
+        ],
+        "objectPath": "Shaders/PostProcess/TFT_RadialBlur",
+        "__type": "CustomShaderDef"
+    },
     "Shaders/SkinnedMesh/FresnelColor_PanningNoise": {
         "ShadingModel": "{baebc346}",
         "parameters": [
@@ -3700,6 +3740,152 @@
         },
         "featureMask": 36,
         "objectPath": "Shaders/SkinnedMesh/Outline_MatCap_RMA_VertexDeform",
+        "__type": "CustomShaderDef"
+    },
+    "Shaders/StaticMesh/ENV_FloatingObjects_VertexColors": {
+        "parameters": [
+            {
+                "name": "Parameter0",
+                "data": [
+                    0.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "PitchFactor",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Translate_Axis",
+                        "fields": 14,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "data": [
+                    0.0,
+                    100.0,
+                    0.5,
+                    0.3700000047683716
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Translate_Range",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Bobbing_Rate",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Secondary_Rotation_Rate",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "data": [
+                    0.5,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RotationalAxis_Primary",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter3",
+                "data": [
+                    -0.019999999552965164,
+                    0.019999999552965164,
+                    -0.05000000074505806,
+                    0.05000000074505806
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RotationAngle_Primary",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "RotationAngle_Secondary",
+                        "fields": 12,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter4",
+                "data": [
+                    0.20000000298023224,
+                    1.0,
+                    -0.30000001192092896,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RotationalAxis_Secondary",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "staticSwitches": [
+            {
+                "name": "ENABLE_MESH_PIVOT",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "ENABLE_BILLBOARD",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "USE_RANDOM_SECONDARY_MOTION",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "USE_VERTEX_COLORS",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "ENABLE_TRANSITION",
+                "__type": "ShaderStaticSwitch"
+            }
+        ],
+        "textures": [
+            {
+                "name": "Diffuse_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/HeimerSnowTile.dds",
+                "__type": "ShaderTexture"
+            }
+        ],
+        "featureDefines": {
+            "FEATURE_DISPLACEMENT": "1",
+            "FEATURE_MASKED": "1",
+            "FEATURE_VERTEX_COLOR_VS": "1"
+        },
+        "featureMask": 44,
+        "objectPath": "Shaders/StaticMesh/ENV_FloatingObjects_VertexColors",
         "__type": "CustomShaderDef"
     },
     "Shaders/SkinnedMesh/PanBloom": {
@@ -18714,6 +18900,67 @@
         "objectPath": "Shaders/SkinnedMesh/ScrollingUVs_Wipe",
         "__type": "CustomShaderDef"
     },
+    "Shaders/UI/TFT/UI_TextureGlow": {
+        "parameters": [
+            {
+                "name": "Parameter0",
+                "data": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "GlowColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "data": [
+                    0.10000000149011612,
+                    0.10000000149011612,
+                    0.10000000149011612,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "ScrollSpeed",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "GlowMultiplier",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "staticSwitches": [
+            {
+                "name": "DESATURATE",
+                "__type": "ShaderStaticSwitch"
+            }
+        ],
+        "textures": [
+            {
+                "name": "GlowNoise",
+                "defaultTexturePath": "ASSETS/Shared/Materials/Base_Caustic_Noise.dds",
+                "__type": "ShaderTexture"
+            }
+        ],
+        "featureDefines": {
+            "FEATURE_UI_ORIGINAL_TEXCOORDS": "1"
+        },
+        "objectPath": "Shaders/UI/TFT/UI_TextureGlow",
+        "__type": "CustomShaderDef"
+    },
     "Shaders/SkinnedMesh/TFT_Jelly_ChampTiers": {
         "ShadingModel": "{baebc346}",
         "parameters": [
@@ -22852,6 +23099,153 @@
         "objectPath": "Shaders/SkinnedMesh/ScrollingCustomAlpha",
         "__type": "CustomShaderDef"
     },
+    "Shaders/UI/TFT/UI_OffsetShine": {
+        "parameters": [
+            {
+                "name": "Parameter0",
+                "data": [
+                    0.05000000074505806,
+                    0.05000000074505806,
+                    7.0,
+                    5.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "DiffuseXYOffset",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "ShineFrequencySpeed",
+                        "fields": 12,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "data": [
+                    1.0,
+                    1.0,
+                    0.20000000298023224,
+                    0.25
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "ShineDirection",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "ShineStrength",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "SaturationValue",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "data": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "ShineColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter3",
+                "data": [
+                    0.3144426643848419,
+                    0.252567321062088,
+                    0.3534294664859772,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Tint",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter4",
+                "data": [
+                    0.0,
+                    0.5,
+                    0.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RGBAGlowMinMax",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter5",
+                "data": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "GlowPulseFrequency",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "staticSwitches": [
+            {
+                "name": "ENABLE_WOBBLE",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "ENABLE_SHINE",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "ENABLE_GLOWPULSE",
+                "__type": "ShaderStaticSwitch"
+            }
+        ],
+        "textures": [
+            {
+                "name": "MaskTexture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
+                "__type": "ShaderTexture"
+            }
+        ],
+        "featureDefines": {
+            "FEATURE_UI_ORIGINAL_TEXCOORDS": "1"
+        },
+        "objectPath": "Shaders/UI/TFT/UI_OffsetShine",
+        "__type": "CustomShaderDef"
+    },
     "Shaders/SkinnedMesh/2Blend_2Add_Pan": {
         "ShadingModel": "{baebc346}",
         "parameters": [
@@ -25575,6 +25969,104 @@
             }
         ],
         "objectPath": "Shaders/PostProcess/Distortion_Inverted_Vignette",
+        "__type": "CustomShaderDef"
+    },
+    "Shaders/UI/TFT/UI_ZapBackground": {
+        "parameters": [
+            {
+                "name": "Parameter0",
+                "data": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RayColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "data": [
+                    0.0,
+                    0.0,
+                    -0.009999999776482582,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RayAdditionalUVControl",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "RayScrollSpeed",
+                        "fields": 12,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "data": [
+                    1.0,
+                    0.10000000149011612,
+                    0.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RayMultiplier",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "BGNoiseScrollSpeed",
+                        "fields": 6,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "BGNoiseMultiplier",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter3",
+                "logicalParameters": [
+                    {
+                        "name": "BGNoiseColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "textures": [
+            {
+                "name": "RayTexture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "BGNoiseTexture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
+                "__type": "ShaderTexture"
+            }
+        ],
+        "featureDefines": {
+            "FEATURE_UI_ORIGINAL_TEXCOORDS": "1"
+        },
+        "objectPath": "Shaders/UI/TFT/UI_ZapBackground",
         "__type": "CustomShaderDef"
     },
     "Shaders/SkinnedMesh/AtlasWalk_Simple": {
@@ -29841,22 +30333,22 @@
                 "name": "Parameter4",
                 "logicalParameters": [
                     {
-                        "name": "_LayerMultiFactor02",
+                        "name": "_LayerBlendMode02",
                         "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "_LayerBlendMode02",
+                        "name": "_LayerMultiFactor02",
                         "fields": 2,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "_LayerMultiFactor03",
+                        "name": "_LayerBlendMode03",
                         "fields": 4,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "_LayerBlendMode03",
+                        "name": "_LayerMultiFactor03",
                         "fields": 8,
                         "__type": "ShaderLogicalParameter"
                     }
@@ -36824,6 +37316,298 @@
         "objectPath": "Shaders/SkinnedMesh/Leona_Texture_Transition",
         "__type": "CustomShaderDef"
     },
+    "Shaders/SkinnedMesh/TFT_Freeze": {
+        "ShadingModel": "{baebc346}",
+        "parameters": [
+            {
+                "name": "Parameter0",
+                "data": [
+                    50.0,
+                    0.6000000238418579,
+                    3.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "VertexController",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "DissolveBias",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "data": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "AlphaControl",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "ChannelSwitcher",
+                        "fields": 14,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "data": [
+                    1.5,
+                    0.10000000149011612,
+                    0.10000000149011612,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "ErosionParams",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter3",
+                "data": [
+                    1.5,
+                    0.5,
+                    0.0,
+                    -0.05000000074505806
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "NoiseParams",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter4",
+                "data": [
+                    1.5,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "NoiseIntensity",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "SSSTightness",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "SSSScale",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "SpecularTightness",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter5",
+                "data": [
+                    0.3490196168422699,
+                    0.364705890417099,
+                    0.8196078538894653,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "BaseSSSColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter6",
+                "data": [
+                    0.08235294371843338,
+                    0.1764705926179886,
+                    0.22745098173618317,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "SSSColor2",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter7",
+                "data": [
+                    0.0,
+                    0.2823529541492462,
+                    0.4274509847164154,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "SSSColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter8",
+                "data": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "SpecularColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter9",
+                "data": [
+                    0.20000000298023224,
+                    0.20000000298023224,
+                    0.30000001192092896,
+                    0.17499999701976776
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "SpecularIntensity",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "ShineThickness",
+                        "fields": 6,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "ShineIntensity",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter10",
+                "data": [
+                    10.0,
+                    5.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "ShineTimeParam",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter11",
+                "data": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "DirectionSwitcher",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter12",
+                "data": [
+                    -0.41999998688697815,
+                    -0.41999998688697815,
+                    -0.41999998688697815,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "LightDirection",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "staticSwitches": [
+            {
+                "name": "ENABLE_SHAKE",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "ENABLE_SHINE",
+                "onByDefault": true,
+                "__type": "ShaderStaticSwitch"
+            }
+        ],
+        "textures": [
+            {
+                "name": "Diffuse_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "Patterns_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/BC_TestTexture.dds",
+                "__type": "ShaderTexture"
+            }
+        ],
+        "featureDefines": {
+            "FEATURE_DISPLACEMENT": "1",
+            "FEATURE_WORLD_NORMAL": "1",
+            "FEATURE_WORLD_POSITION": "1"
+        },
+        "featureMask": 4,
+        "objectPath": "Shaders/SkinnedMesh/TFT_Freeze",
+        "__type": "CustomShaderDef"
+    },
     "Shaders/SkinnedMesh/Viego/MistBody_DragonScale": {
         "ShadingModel": "{baebc346}",
         "parameters": [
@@ -38215,6 +38999,61 @@
         },
         "featureMask": 17,
         "objectPath": "Shaders/SkinnedMesh/TFT_CharacterDissolve",
+        "__type": "CustomShaderDef"
+    },
+    "Shaders/StaticMesh/TFT_Env_Flat_Billboard": {
+        "parameters": [
+            {
+                "name": "Parameter0",
+                "logicalParameters": [
+                    {
+                        "name": "PitchFactor",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "data": [
+                    0.501960813999176,
+                    0.501960813999176,
+                    0.501960813999176,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "TintColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "staticSwitches": [
+            {
+                "name": "ENABLE_MESH_PIVOT",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "ENABLE_BILLBOARD",
+                "__type": "ShaderStaticSwitch"
+            }
+        ],
+        "textures": [
+            {
+                "name": "DiffuseTexture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/rock_texture.dds",
+                "__type": "ShaderTexture"
+            }
+        ],
+        "featureDefines": {
+            "FEATURE_DISPLACEMENT": "1"
+        },
+        "featureMask": 4,
+        "objectPath": "Shaders/StaticMesh/TFT_Env_Flat_Billboard",
         "__type": "CustomShaderDef"
     },
     "Shaders/UI/UI_BaseShader": {
