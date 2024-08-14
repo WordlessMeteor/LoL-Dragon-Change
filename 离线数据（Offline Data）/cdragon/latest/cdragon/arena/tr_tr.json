@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRequiredTooltipOnly"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusHPRequiredTooltipOnly",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Her @AutoCastCooldown@ saniyede bir etrafındaki daire biçimindeki bir alana <keywordMajor>otomatik olarak</keywordMajor> saldırıp dairenin dış kenarındaki rakiplere ilave hasar verirsin.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "Etrafındaki daire biçimindeki alana <keywordMajor>otomatik olarak</keywordMajor> saldırıp <physicalDamage>fiziksel hasar</physicalDamage> verirsin. Dairenin dış yarısından isabet alan rakipler <status>yavaşlar</status> ve <physicalDamage>azami canlarına bağlı olarak fazladan fiziksel hasar</physicalDamage> alır. <healing>Şampiyonlara verilen ilave hasarın %@OuterConeHealingRatio@ kadarına eşdeğer miktarda can</healing> yenilersin. @AutoCastCooldown@ saniye bekleme süresi vardır.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Kuantum Teknolojisi",
             "rarity": 2,
-            "tooltip": "Her 15 saniyede bir etrafındaki daire biçimindeki bir alana <keywordMajor>otomatik olarak</keywordMajor> saldırıp dairenin dış kenarındaki rakiplere ilave hasar verirsin ve can yenilersin. <br><br>Verilen Toplam Hasar: @f1@<br>Yenilenen Toplam Can: @f2@"
+            "tooltip": "Etrafındaki daire biçimindeki alana <keywordMajor>otomatik olarak</keywordMajor> saldırıp <physicalDamage>@BaseDamageTotal@ Fiziksel Hasar</physicalDamage> verirsin. Dairenin dış yarısından isabet alan rakipler @SlowDuration@ saniye içinde azalarak kaybolacak şekilde %@SlowPercentage@ <status>yavaşlar</status> ve <physicalDamage>azami canlarının @OuterEdgeTooltip@ kadarına eşdeğer miktarda fazladan fiziksel hasar</physicalDamage> alır. <healing>Şampiyonlara verilen ilave hasarın %@OuterConeHealingRatio@ kadarına eşdeğer miktarda can</healing> yenilersin. @AutoCastCooldown@ saniye bekleme süresi vardır.<br><br>Verilen Toplam Hasar: @f1@<br>Yapılan Toplam İyileştirme: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -422,7 +486,7 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 15.0,
+                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
             "desc": "Koşul: @TakedownsNeeded@ kez rakipleri alt et. İkinci eklenti olarak seçildiyse bu sayı artarak @2ndPickTakendownsNeeded@ olur.<br><br>Ödül: Altın Spatula kazanırsın.",
@@ -1830,8 +1894,8 @@
             "calculations": {},
             "dataValues": {
                 "AttackReduction": 0.5,
-                "AttackSpeed": 2.5,
-                "OnHitMod": 0.5
+                "AttackSpeed": 1.0,
+                "OnHitMod": 0.6000000238418579
             },
             "desc": "Saldırıların ve isabet etkilerin %@AttackReduction*100@ daha az hasar verir. <attackSpeed>%@AttackSpeed*100@ Saldırı Hızı</attackSpeed> kazanırsın.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
@@ -2195,7 +2259,7 @@
             "id": 220,
             "name": "Seri Atış",
             "rarity": 2,
-            "tooltip": "Saldırdığında her biri <physicalDamage>@DamagePerBolt@ Fiziksel Hasar</physicalDamage> veren @AdditionalBolts@ ilave atış gönderirsin. Bu hasar kat ettiği mesafeye bağlı olarak artarak en fazla %@MaxDamageAmp*100@ olabilir. Her ana yönün bekleme süresi @Cooldown@ saniyedir.<br><br>Her atış kritik vuruş gerçekleştirebilir ve isabet etkilerini %@OnHitRatio*100@ verimlilikle uygular."
+            "tooltip": "Saldırdığında her biri <physicalDamage>@DamagePerBolt@ Fiziksel Hasar</physicalDamage> veren @AdditionalBolts@ ilave atış gönderirsin. Bu hasar kat ettiği mesafeye bağlı olarak artarak en fazla %@MaxDamageAmp*100@ olabilir. Her ana yönün bekleme süresi @Cooldown@ saniyedir.<br><br>Her atış kritik vuruş gerçekleştirebilir ve isabet etkilerini %@OnHitRatio*100@ verimlilikle uygular.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
         },
         {
             "apiName": "Tormentor",
@@ -2216,9 +2280,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.44999998807907104,
-                "MinionHealthIncrease": 0.44999998807907104,
-                "MinionSizeIncrease": 0.44999998807907104
+                "MinionDamageIncrease": 0.4000000059604645,
+                "MinionHealthIncrease": 0.4000000059604645,
+                "MinionSizeIncrease": 0.4000000059604645
             },
             "desc": "Çağırdığın birimlerin boyutu, canı ve hasarı %@MinionSizeIncrease*100@ artar.",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "Saldırıların bekleme sürelerini @CooldownRefund@ saniye azaltır.",
+            "desc": "Hedefe {{ Item_Keyword_OnHit }} bekleme sürelerini @CooldownRefund@ saniye azaltır.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Mistik Yumruk",
             "rarity": 2,
-            "tooltip": "Saldırıların bekleme sürelerini @CooldownRefund@ saniye azaltır."
+            "tooltip": "Hedefe {{ Item_Keyword_OnHit }} bekleme sürelerini @CooldownRefund@ saniye azaltır."
         },
         {
             "apiName": "Homeguard",
@@ -2964,7 +3028,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 5000.0,
+                "PrismaticSellValue": 4000.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "Görev eşyası olmayan tüm eşyaların alım fiyatlarının %@SellValueTooltip@ kadarına satılır. İndirimli örsler için idealdir.",

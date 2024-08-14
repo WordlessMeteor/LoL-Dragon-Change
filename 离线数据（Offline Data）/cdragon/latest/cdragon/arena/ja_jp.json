@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRequiredTooltipOnly"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusHPRequiredTooltipOnly",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "@AutoCastCooldown@秒ごとに、<keywordMajor>自動</keywordMajor>で周囲を斬りつける。効果範囲の外周では追加ダメージを与える。",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "<keywordMajor>自動</keywordMajor>で周囲を斬りつけ、<physicalDamage>物理ダメージ</physicalDamage>を与える。攻撃範囲の外側半分にいた敵には<status>スロウ効果</status>を付与し、<physicalDamage>最大体力に応じた物理ダメージ</physicalDamage>を与える。<healing>チャンピオンに与えた追加ダメージの@OuterConeHealingRatio@%の体力</healing>を回復する。クールダウン@AutoCastCooldown@秒。",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "量子演算",
             "rarity": 2,
-            "tooltip": "15秒ごとに、<keywordMajor>自動</keywordMajor>で周囲を斬りつける。効果範囲の外周では追加ダメージを与えて、体力を回復する。<br><br>与えたダメージ量の合計: @f1@<br>体力回復量の合計: @f2@"
+            "tooltip": "<keywordMajor>自動</keywordMajor>で周囲を斬りつけ、<physicalDamage>@BaseDamageTotal@の物理ダメージ</physicalDamage>を与える。攻撃範囲の外側半分にいた敵には@SlowDuration@秒間、@SlowPercentage@%の<status>スロウ効果</status>を付与する。この効果は徐々に減衰する。追加で<physicalDamage>@OuterEdgeTooltip@の最大体力に応じた物理ダメージ</physicalDamage>を与える。<healing>チャンピオンに与えた追加ダメージの@OuterConeHealingRatio@%の体力</healing>を回復する。クールダウン@AutoCastCooldown@秒。<br><br>与えたダメージの合計: @f1@<br>回復した体力の合計: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -422,7 +486,7 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 15.0,
+                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
             "desc": "必須条件: キルまたはアシストを@TakedownsNeeded@獲得する。2つ目のオーグメントとして獲得した場合は、キルまたはアシストを@2ndPickTakendownsNeeded@獲得する。<br><br>報酬: 金のへら",
@@ -1830,8 +1894,8 @@
             "calculations": {},
             "dataValues": {
                 "AttackReduction": 0.5,
-                "AttackSpeed": 2.5,
-                "OnHitMod": 0.5
+                "AttackSpeed": 1.0,
+                "OnHitMod": 0.6000000238418579
             },
             "desc": "通常攻撃と通常攻撃時効果のダメージが@AttackReduction*100@%減少する。<attackSpeed>攻撃速度が@AttackSpeed*100@%</attackSpeed>増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
@@ -2195,7 +2259,7 @@
             "id": 220,
             "name": "ぐるぐるハンマー",
             "rarity": 2,
-            "tooltip": "通常攻撃時、それぞれ<physicalDamage>@DamagePerBolt@の物理ダメージ</physicalDamage>を与える矢を@AdditionalBolts@発追加で発射する。このダメージは、移動距離に応じて最大@MaxDamageAmp*100@%増加する。各方向のクールダウンは@Cooldown@秒。<br><br>各矢はクリティカルを与えることができ、@OnHitRatio*100@%の効率で通常攻撃時効果を適用する。"
+            "tooltip": "通常攻撃時、それぞれ<physicalDamage>@DamagePerBolt@の物理ダメージ</physicalDamage>を与える矢を@AdditionalBolts@発追加で発射する。このダメージは、移動距離に応じて最大@MaxDamageAmp*100@%増加する。各方向のクールダウンは@Cooldown@秒。<br><br>矢は1本ごとにクリティカル判定を持ち、@OnHitRatio*100@%の効率で通常攻撃時効果を適用する。<br><br>このラウンドで与えたダメージ量: @f1@<br>与えたダメージ量の合計: @f2@"
         },
         {
             "apiName": "Tormentor",
@@ -2216,9 +2280,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.44999998807907104,
-                "MinionHealthIncrease": 0.44999998807907104,
-                "MinionSizeIncrease": 0.44999998807907104
+                "MinionDamageIncrease": 0.4000000059604645,
+                "MinionHealthIncrease": 0.4000000059604645,
+                "MinionSizeIncrease": 0.4000000059604645
             },
             "desc": "自身が召喚したユニットのサイズ、体力、ダメージが@MinionSizeIncrease*100@%増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "通常攻撃がクールダウンを@CooldownRefund@秒短縮する。",
+            "desc": "{{ Item_Keyword_OnHit }}がクールダウンを@CooldownRefund@秒短縮する。",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "神秘の鉄拳",
             "rarity": 2,
-            "tooltip": "通常攻撃がクールダウンを@CooldownRefund@秒短縮する。"
+            "tooltip": "{{ Item_Keyword_OnHit }}がクールダウンを@CooldownRefund@秒短縮する。"
         },
         {
             "apiName": "Homeguard",
@@ -2964,7 +3028,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 5000.0,
+                "PrismaticSellValue": 4000.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "即座にクエスト以外の全アイテムを直接購入価格の@SellValueTooltip@%で販売する。値引きされた金床に最適。",

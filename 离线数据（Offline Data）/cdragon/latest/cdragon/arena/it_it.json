@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRequiredTooltipOnly"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusHPRequiredTooltipOnly",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Sferra un colpo <keywordMajor>automaticamente</keywordMajor> in un cerchio intorno a te, infliggendo danni bonus sul bordo esterno ogni @AutoCastCooldown@ secondi.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "Sferra un colpo <keywordMajor>automaticamente</keywordMajor> in un cerchio intorno a te, infliggendo <physicalDamage>danni fisici</physicalDamage>. I nemici colpiti dalla metà esterna vengono <status>rallentati</status> e subiscono <physicalDamage>danni fisici aggiuntivi in base alla salute massima</physicalDamage>. Recupera un <healing>@OuterConeHealingRatio@% dei danni bonus inflitti ai campioni come salute</healing>. @AutoCastCooldown@ secondo/i di ricarica.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Calcolo quantistico",
             "rarity": 2,
-            "tooltip": "Sferra un colpo <keywordMajor>automaticamente</keywordMajor> in un cerchio intorno a te, infliggendo danni e guarigione bonus sul bordo esterno ogni 15 secondi. <br><br>Totale danni inflitti: @f1@<br>Totale guarigione effettuata: @f2@"
+            "tooltip": "Sferra un colpo <keywordMajor>automaticamente</keywordMajor> in un cerchio intorno a te, infliggendo <physicalDamage>@BaseDamageTotal@ danni fisici</physicalDamage>. I nemici colpiti dalla metà esterna vengono <status>rallentati</status> di un @SlowPercentage@%, che decade nell'arco di @SlowDuration@ secondi, e subiscono <physicalDamage>danni fisici aggiuntivi pari a un @OuterEdgeTooltip@% della salute massima</physicalDamage>. Recupera un <healing>@OuterConeHealingRatio@% dei danni bonus inflitti ai campioni come salute</healing>. @AutoCastCooldown@ secondo/i di ricarica.<br><br>Totale danni inflitti: @f1@<br>Totale guarigione effettuata: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -422,7 +486,7 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 15.0,
+                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
             "desc": "Requisito: metti a segno @TakedownsNeeded@ eliminazioni, se ottenuto come secondo Impianto, aumentano a @2ndPickTakendownsNeeded@.<br><br>Ricompensa: Spatola d'oro",
@@ -1830,14 +1894,14 @@
             "calculations": {},
             "dataValues": {
                 "AttackReduction": 0.5,
-                "AttackSpeed": 2.5,
-                "OnHitMod": 0.5
+                "AttackSpeed": 1.0,
+                "OnHitMod": 0.6000000238418579
             },
             "desc": "I tuoi attacchi ed effetti sul colpo infliggono un @AttackReduction*100@% di danni in meno. Ottieni <attackSpeed>@AttackSpeed*100@% velocità d'attacco</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
-            "name": "Dual Wield",
+            "name": "A due mani",
             "rarity": 2,
             "tooltip": "I tuoi attacchi ed effetti sul colpo infliggono un @AttackReduction*100@% di danni in meno. Ottieni <attackSpeed>@AttackSpeed*100@% velocità d'attacco</attackSpeed>."
         },
@@ -2195,7 +2259,7 @@
             "id": 220,
             "name": "Fuoco a ripetizione",
             "rarity": 2,
-            "tooltip": "Quando attacchi, spari @AdditionalBolts@ dardi aggiuntivi, ciascuno dei quali infligge <physicalDamage>@DamagePerBolt@ danni fisici</physicalDamage>, che aumentano fino a un @MaxDamageAmp*100@% con la distanza percorsa. Ogni punto cardinale ha una ricarica di @Cooldown@ secondo.<br><br>Ogni dardo può mettere a segno colpi critici e applicare effetti sul colpo con un'efficacia di un @OnHitRatio*100@%."
+            "tooltip": "Quando attacchi, spari @AdditionalBolts@ dardo/i aggiuntivi, ciascuno dei quali infligge <physicalDamage>@DamagePerBolt@ danni fisici</physicalDamage>, che aumentano fino a un @MaxDamageAmp*100@% con la distanza percorsa. Ogni punto cardinale ha una ricarica di @Cooldown@ secondo/i.<br><br>Ogni dardo può mettere a segno colpi critici e applicare effetti sul colpo con un'efficacia di un @OnHitRatio*100@%.<br><br>Danni inflitti in questo turno: @f1@<br>Totale danni inflitti: @f2@"
         },
         {
             "apiName": "Tormentor",
@@ -2216,9 +2280,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.44999998807907104,
-                "MinionHealthIncrease": 0.44999998807907104,
-                "MinionSizeIncrease": 0.44999998807907104
+                "MinionDamageIncrease": 0.4000000059604645,
+                "MinionHealthIncrease": 0.4000000059604645,
+                "MinionSizeIncrease": 0.4000000059604645
             },
             "desc": "Le tue evocazioni ottengono un aumento di dimensioni, salute e danni di un @MinionSizeIncrease*100@%.",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "I tuoi attacchi riducono le tue ricariche di @CooldownRefund@ secondi.",
+            "desc": "{{ Item_Keyword_OnHit }} riducono le tue ricariche di @CooldownRefund@ secondi.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Pugno mistico",
             "rarity": 2,
-            "tooltip": "I tuoi attacchi riducono le tue ricariche di @CooldownRefund@ secondi."
+            "tooltip": "{{ Item_Keyword_OnHit }} riducono le tue ricariche di @CooldownRefund@ secondi."
         },
         {
             "apiName": "Homeguard",
@@ -2964,7 +3028,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 5000.0,
+                "PrismaticSellValue": 4000.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "Vendi immediatamente tutti i tuoi oggetti non legati alla missione per un @SellValueTooltip@% del loro prezzo di acquisto diretto. Una meraviglia, con tutte quelle incudini scontate.",

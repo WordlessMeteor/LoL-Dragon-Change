@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRequiredTooltipOnly"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusHPRequiredTooltipOnly",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "ฟันออกเป็นวงรอบตัวโดย<keywordMajor>อัตโนมัติ</keywordMajor> สร้างโบนัสความเสียหายที่ขอบนอกทุก @AutoCastCooldown@&nbsp;วินาที",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "ฟันออกเป็นวงรอบตัวโดย<keywordMajor>อัตโนมัติ</keywordMajor> สร้าง<physicalDamage>ความเสียหายกายภาพ</physicalDamage>แก่ศัตรู โดยศัตรูที่อยู่ในเขตรอบนอกจะถูก<status>สโลว์</status> และได้รับ<physicalDamage>ความเสียหายกายภาพเพิ่มเติม จากพลังชีวิตสูงสุด</physicalDamage> และฟื้นฟูพลังชีวิต <healing>@OuterConeHealingRatio@% จากโบนัสความเสียหายที่ทำได้แก่แชมเปี้ยน</healing> คูลดาวน์ @AutoCastCooldown@ วินาที",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Quantum Computing",
             "rarity": 2,
-            "tooltip": "ฟันออกเป็นวงรอบตัวโดย<keywordMajor>อัตโนมัติ</keywordMajor> สร้างโบนัสความเสียหายและฟื้นฟูพลังชีวิตที่ขอบนอกทุก 15 วินาที <br><br>ความเสียหายทั้งหมดที่ทำได้: @f1@ หน่วย<br>ฮีลทั้งหมดที่ทำได้: @f2@ หน่วย"
+            "tooltip": "ฟันออกเป็นวงรอบตัวโดย<keywordMajor>อัตโนมัติ</keywordMajor> สร้าง<physicalDamage>ความเสียหายกายภาพ @BaseDamageTotal@ หน่วย</physicalDamage> โดยศัตรูที่อยู่ในเขตรอบนอกจะถูก<status>สโลว์</status> @SlowPercentage@% ที่จะค่อย ๆ ลดลงในระยะเวลา @SlowDuration@ วินาที และได้รับ<physicalDamage>ความเสียหายกายภาพเพิ่มเติม @OuterEdgeTooltip@ จากพลังชีวิตสูงสุด</physicalDamage> และฟื้นฟูพลังชีวิต <healing>@OuterConeHealingRatio@% จากโบนัสความเสียหายที่ทำได้แก่แชมเปี้ยน</healing> คูลดาวน์ @AutoCastCooldown@ วินาที<br><br>ความเสียหายทั้งหมดที่ทำได้: @f1@ หน่วย<br>ฮีลทั้งหมดที่ทำได้: @f2@ หน่วย"
         },
         {
             "apiName": "DemonsDance",
@@ -422,7 +486,7 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 15.0,
+                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
             "desc": "เงื่อนไข: สังหาร @TakedownsNeeded@ ตัว <br>หากคุณหยิบ Augment นี้เป็นชิ้นที่สอง จำนวนการสังหารจะเพิ่มเป็น @2ndPickTakendownsNeeded@&nbsp;ตัว<br><br>รางวัล: Golden Spatula",
@@ -1830,8 +1894,8 @@
             "calculations": {},
             "dataValues": {
                 "AttackReduction": 0.5,
-                "AttackSpeed": 2.5,
-                "OnHitMod": 0.5
+                "AttackSpeed": 1.0,
+                "OnHitMod": 0.6000000238418579
             },
             "desc": "การโจมตีปกติและ On-Hit ของคุณสร้างความเสียหายน้อยลง @AttackReduction*100@% และได้รับ<attackSpeed>ความเร็วโจมตี @AttackSpeed*100@%</attackSpeed>",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
@@ -2195,7 +2259,7 @@
             "id": 220,
             "name": "Fan the Hammer",
             "rarity": 2,
-            "tooltip": "ยิงกระสุนเพิ่มเติม @AdditionalBolts@ ลูกเมื่อโจมตี โดยแต่ละลูกสร้าง<physicalDamage>ความเสียหายกายภาพ @DamagePerBolt@ หน่วย</physicalDamage> เพิ่มขึ้นสูงสุด @MaxDamageAmp*100@% ขึ้นอยู่กับระยะทาง โดยแต่ละทิศจะมีคูลดาวน์ @Cooldown@ วินาที<br><br>กระสุนแต่ละลูกสามารถติดคริติคอลได้และส่งผล On-Hit ที่มีประสิทธิภาพ @OnHitRatio*100@%"
+            "tooltip": "ยิงกระสุนเพิ่มเติม @AdditionalBolts@ ลูกเมื่อโจมตี โดยแต่ละลูกสร้าง<physicalDamage>ความเสียหายกายภาพ @DamagePerBolt@ หน่วย</physicalDamage> เพิ่มขึ้นสูงสุด @MaxDamageAmp*100@% ขึ้นอยู่กับระยะทาง โดยแต่ละทิศจะมีคูลดาวน์ @Cooldown@ วินาที<br><br>กระสุนแต่ละลูกสามารถติดคริติคอลได้และส่งผล On-Hit ที่มีประสิทธิภาพ @OnHitRatio*100@%<br><br>ความเสียหายที่ทำได้ในรอบนี้: @f1@ หน่วย<br>ความเสียหายที่ทำได้ทั้งหมด: @f2@ หน่วย"
         },
         {
             "apiName": "Tormentor",
@@ -2216,9 +2280,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.44999998807907104,
-                "MinionHealthIncrease": 0.44999998807907104,
-                "MinionSizeIncrease": 0.44999998807907104
+                "MinionDamageIncrease": 0.4000000059604645,
+                "MinionHealthIncrease": 0.4000000059604645,
+                "MinionSizeIncrease": 0.4000000059604645
             },
             "desc": "ยูนิตที่คุณอัญเชิญจะมีขนาดตัว พลังชีวิต และความเสียหายเพิ่มขึ้น @MinionSizeIncrease*100@%",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "การโจมตีจะลดคูลดาวน์สกิลของคุณลง @CooldownRefund@ วินาที",
+            "desc": "การโจมตี {{ Item_Keyword_OnHit }} จะลดคูลดาวน์สกิลของคุณลง @CooldownRefund@ วินาที",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Mystic Punch",
             "rarity": 2,
-            "tooltip": "การโจมตีจะลดคูลดาวน์สกิลของคุณลง @CooldownRefund@ วินาที"
+            "tooltip": "การโจมตี {{ Item_Keyword_OnHit }} จะลดคูลดาวน์สกิลของคุณลง @CooldownRefund@ วินาที"
         },
         {
             "apiName": "Homeguard",
@@ -2964,7 +3028,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 5000.0,
+                "PrismaticSellValue": 4000.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "ขายไอเทมทั้งหมดที่ไม่ใช่ไอเทมภารกิจของคุณในทันทีเพื่อรับ @SellValueTooltip@% ของราคาที่คุณซื้อมาโดยตรง ใช้ได้ดีสุด ๆ สำหรับ Anvil ลดราคาทั้งหลาย",

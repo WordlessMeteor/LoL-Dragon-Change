@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRequiredTooltipOnly"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusHPRequiredTooltipOnly",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "@AutoCastCooldown@초마다 <keywordMajor>자동으로</keywordMajor> 주변의 원형 범위를 베고 가장자리에 있는 적에게 추가 피해를 입힙니다.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "<keywordMajor>자동으로</keywordMajor> 주변의 원형 범위를 베고 <physicalDamage>물리 피해</physicalDamage>를 입힙니다. 바깥쪽 절반에서 맞은 적은 <status>느려지며</status> <physicalDamage>최대 체력에 비례한 물리 피해</physicalDamage>를 추가로 입습니다. 이때 <healing>챔피언에게 입힌 추가 피해량의 @OuterConeHealingRatio@%만큼 체력</healing>을 회복합니다. 재사용 대기시간은 @AutoCastCooldown@초입니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "양자 연산",
             "rarity": 2,
-            "tooltip": "15초마다 <keywordMajor>자동으로</keywordMajor> 주변의 원형 범위를 베고 가장자리에 추가 피해를 입히며 체력을 회복합니다. <br><br>입힌 총 피해량: @f1@<br>총 체력 회복량: @f2@"
+            "tooltip": "<keywordMajor>자동으로</keywordMajor> 주변의 원형 범위를 베고 <physicalDamage>@BaseDamageTotal@의 물리 피해</physicalDamage>를 입힙니다. 바깥쪽 절반에서 맞은 적은 이동 속도가 @SlowPercentage@% <status>느려졌다가</status> @SlowDuration@초에 걸쳐 원래대로 돌아오며, 추가로 <physicalDamage>최대 체력에 비례해 @OuterEdgeTooltip@의 물리 피해</physicalDamage>를 입습니다. 이때 <healing>챔피언에게 입힌 추가 피해량의 @OuterConeHealingRatio@%만큼 체력</healing>을 회복합니다. 재사용 대기시간은 @AutoCastCooldown@초입니다.<br><br>입힌 총 피해량: @f1@<br>총 체력 회복량: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -422,7 +486,7 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 15.0,
+                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
             "desc": "조건: 처치에 @TakedownsNeeded@회 관여해야 합니다. 두 번째 증강일 경우 조건이 @2ndPickTakendownsNeeded@회로 증가합니다.<br><br>보상: 황금 뒤집개",
@@ -1830,8 +1894,8 @@
             "calculations": {},
             "dataValues": {
                 "AttackReduction": 0.5,
-                "AttackSpeed": 2.5,
-                "OnHitMod": 0.5
+                "AttackSpeed": 1.0,
+                "OnHitMod": 0.6000000238418579
             },
             "desc": "기본 공격과 적중 시 피해량이 @AttackReduction*100@% 감소합니다. <attackSpeed>공격 속도가 @AttackSpeed*100@%</attackSpeed> 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
@@ -2195,7 +2259,7 @@
             "id": 220,
             "name": "탄환 세례",
             "rarity": 2,
-            "tooltip": "기본 공격 시 추가 탄환을 @AdditionalBolts@개 발사해 탄환당 <physicalDamage>@DamagePerBolt@의 물리 피해</physicalDamage>를 입힙니다. 피해량은 탄환이 이동한 거리에 비례해 @MaxDamageAmp*100@%까지 증가합니다. 재사용 대기시간은 방향마다 @Cooldown@초씩 따로 적용됩니다.<br><br>각 탄환은 치명타를 입힐 수 있고 적중 시 효과가 @OnHitRatio*100@%로 적용됩니다."
+            "tooltip": "기본 공격 시 추가 탄환을 @AdditionalBolts@개 발사해 탄환당 <physicalDamage>@DamagePerBolt@의 물리 피해</physicalDamage>를 입힙니다. 피해량은 탄환이 이동한 거리에 비례해 @MaxDamageAmp*100@%까지 증가합니다. 재사용 대기시간은 방향마다 @Cooldown@초씩 따로 적용됩니다.<br><br>각 탄환은 치명타를 입힐 수 있고 적중 시 효과가 @OnHitRatio*100@%로 적용됩니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
             "apiName": "Tormentor",
@@ -2216,9 +2280,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.44999998807907104,
-                "MinionHealthIncrease": 0.44999998807907104,
-                "MinionSizeIncrease": 0.44999998807907104
+                "MinionDamageIncrease": 0.4000000059604645,
+                "MinionHealthIncrease": 0.4000000059604645,
+                "MinionSizeIncrease": 0.4000000059604645
             },
             "desc": "소환물의 크기, 체력, 피해량이 @MinionSizeIncrease*100@% 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "기본 공격 시 재사용 대기시간이 @CooldownRefund@초 감소합니다.",
+            "desc": "{{ Item_Keyword_OnHit }} 재사용 대기시간이 @CooldownRefund@초 감소합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "신비한 주먹",
             "rarity": 2,
-            "tooltip": "기본 공격 시 재사용 대기시간이 @CooldownRefund@초 감소합니다."
+            "tooltip": "{{ Item_Keyword_OnHit }} 재사용 대기시간이 @CooldownRefund@초 감소합니다."
         },
         {
             "apiName": "Homeguard",
@@ -2964,7 +3028,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 5000.0,
+                "PrismaticSellValue": 4000.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "보유한 모든 퀘스트 아이템이 아닌 아이템을 구매한 가격의 @SellValueTooltip@%로 즉시 판매합니다. 할인된 모루에 적격입니다.",

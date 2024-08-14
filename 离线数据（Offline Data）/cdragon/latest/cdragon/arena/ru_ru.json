@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRequiredTooltipOnly"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusHPRequiredTooltipOnly",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "<keywordMajor>Автоматически</keywordMajor>: каждые @AutoCastCooldown@ сек. вы совершаете круговой удар, который наносит дополнительный урон врагам во внешней части области поражения.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "<keywordMajor>Автоматически:</keywordMajor> вы совершаете круговой удар, нанося <physicalDamage>физический урон</physicalDamage>. Враги во внешней части области поражения <status>замедляются</status> и получают дополнительный <physicalDamage>физический урон в зависимости от максимального запаса здоровья</physicalDamage>. Также вы восстанавливаете <healing>здоровье в размере @OuterConeHealingRatio@% от дополнительного урона, нанесенного чемпионам</healing>. Перезарядка: @AutoCastCooldown@ сек.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Квантовые вычисления",
             "rarity": 2,
-            "tooltip": "<keywordMajor>Автоматически</keywordMajor>: каждые 15 сек. вы совершаете круговой удар, который наносит дополнительный урон врагам во внешней части области поражения и восстанавливает вам здоровье.<br><br>Общий нанесенный урон: @f1@<br>Общая эффективность лечения: @f2@"
+            "tooltip": "<keywordMajor>Автоматически:</keywordMajor> вы совершаете круговой удар, нанося <physicalDamage>@BaseDamageTotal@ физического урона</physicalDamage>. Враги во внешней части области поражения <status>замедляются</status> на @SlowPercentage@% (эффект ослабевает в течение @SlowDuration@ сек.) и получают дополнительный <physicalDamage>физический урон в размере @OuterEdgeTooltip@ от максимального запаса здоровья</physicalDamage>. Также вы восстанавливаете <healing>здоровье в размере @OuterConeHealingRatio@% от дополнительного урона, нанесенного чемпионам</healing>. Перезарядка: @AutoCastCooldown@ сек.<br><br>Общий нанесенный урон: @f1@<br>Общее лечение: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -422,7 +486,7 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 15.0,
+                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
             "desc": "Требование: принять участие в @TakedownsNeeded@ убийствах. Если аугментация выбрана второй, это значение увеличивается до @2ndPickTakendownsNeeded@.<br><br>Награда: Золотая лопатка.",
@@ -1830,8 +1894,8 @@
             "calculations": {},
             "dataValues": {
                 "AttackReduction": 0.5,
-                "AttackSpeed": 2.5,
-                "OnHitMod": 0.5
+                "AttackSpeed": 1.0,
+                "OnHitMod": 0.6000000238418579
             },
             "desc": "Ваши автоатаки и эффекты при попадании наносят на @AttackReduction*100@% меньше урона. Вы получаете <attackSpeed>@AttackSpeed*100@% скорости атаки</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
@@ -2195,7 +2259,7 @@
             "id": 220,
             "name": "Шквальный огонь",
             "rarity": 2,
-            "tooltip": "Применяя автоатаки, вы выпускаете дополнительные заряды (@AdditionalBolts@). Каждый из них наносит <physicalDamage>@DamagePerBolt@ физического урона</physicalDamage>, который увеличивается вплоть до @MaxDamageAmp*100@% в зависимости от преодоленного расстояния. Перезарядка для каждого из основных направлений – @Cooldown@ сек.<br><br>Каждый заряд может наносить критический урон и накладывает эффекты при попадании, но их сила составляет @OnHitRatio*100@%."
+            "tooltip": "Применяя автоатаки, вы выпускаете дополнительные заряды (@AdditionalBolts@). Каждый из них наносит <physicalDamage>@DamagePerBolt@ физического урона</physicalDamage>, который увеличивается вплоть до @MaxDamageAmp*100@% в зависимости от преодоленного расстояния. Перезарядка для каждого из основных направлений – @Cooldown@ сек.<br><br>Каждый заряд может наносить критический урон и накладывает эффекты при попадании, но их сила составляет @OnHitRatio*100@%.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
         },
         {
             "apiName": "Tormentor",
@@ -2216,9 +2280,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.44999998807907104,
-                "MinionHealthIncrease": 0.44999998807907104,
-                "MinionSizeIncrease": 0.44999998807907104
+                "MinionDamageIncrease": 0.4000000059604645,
+                "MinionHealthIncrease": 0.4000000059604645,
+                "MinionSizeIncrease": 0.4000000059604645
             },
             "desc": "Ваши призванные бойцы увеличиваются в размере на @MinionSizeIncrease*100@% и получают такой же бонус к здоровью и урону.",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "Ваши автоатаки сокращают перезарядку умений на @CooldownRefund@ сек.",
+            "desc": "Ваши эффекты {{ Item_Keyword_OnHit }} сокращают перезарядку умений на @CooldownRefund@ сек.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Мистический удар",
             "rarity": 2,
-            "tooltip": "Ваши автоатаки сокращают перезарядку умений на @CooldownRefund@ сек."
+            "tooltip": "Ваши эффекты {{ Item_Keyword_OnHit }} сокращают перезарядку умений на @CooldownRefund@ сек."
         },
         {
             "apiName": "Homeguard",
@@ -2964,7 +3028,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 5000.0,
+                "PrismaticSellValue": 4000.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "Вы сразу продаете все не относящиеся к заданиям предметы по цене, равной @SellValueTooltip@% от их обычной стоимости в магазине. Не зря вы набрали столько наковален по скидке!",

@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRequiredTooltipOnly"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusHPRequiredTooltipOnly",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Asesta un tajo en un círculo a tu alrededor <keywordMajor>automáticamente</keywordMajor> que inflige daño adicional en la zona exterior cada @AutoCastCooldown@ s.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "Asesta un tajo en un círculo a tu alrededor <keywordMajor>automáticamente</keywordMajor> que inflige <physicalDamage>daño físico</physicalDamage>. Los enemigos golpeados por la mitad exterior quedan <status>ralentizados</status> y reciben <physicalDamage>daño físico adicional según su vida máxima</physicalDamage>. Recupera un <healing>@OuterConeHealingRatio@% del daño adicional infligido a campeones como vida</healing>. @AutoCastCooldown@ s de enfriamiento.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Informática cuántica",
             "rarity": 2,
-            "tooltip": "Asesta un tajo en un círculo a tu alrededor <keywordMajor>automáticamente</keywordMajor> que inflige daño adicional en la zona exterior cada 15 s. <br><br>Daño infligido total: @f1@<br>Curación realizada total: @f2@"
+            "tooltip": "Asesta un tajo en un círculo a tu alrededor <keywordMajor>automáticamente</keywordMajor> que inflige <physicalDamage>@BaseDamageTotal@ de daño físico</physicalDamage>. Los enemigos golpeados por la mitad exterior quedan <status>ralentizados</status> un @SlowPercentage@%, que disminuye a lo largo de @SlowDuration@ s, y reciben un <physicalDamage>@OuterEdgeTooltip@ de daño físico adicional según su vida máxima</physicalDamage>. Recupera un <healing>@OuterConeHealingRatio@% del daño adicional infligido a campeones como vida</healing>. @AutoCastCooldown@ s de enfriamiento.<br><br>Daño infligido en total: @f1@<br>Curación realizada en total: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -422,7 +486,7 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 15.0,
+                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
             "desc": "Requisitos: Consigue @TakedownsNeeded@ asesinatos o asistencias. Si este es tu segundo aumento, esto mejora hasta @2ndPickTakendownsNeeded@.<br><br>Recompensa: Espátula dorada",
@@ -1830,8 +1894,8 @@
             "calculations": {},
             "dataValues": {
                 "AttackReduction": 0.5,
-                "AttackSpeed": 2.5,
-                "OnHitMod": 0.5
+                "AttackSpeed": 1.0,
+                "OnHitMod": 0.6000000238418579
             },
             "desc": "Tus ataques y efectos de impacto infligen un @AttackReduction*100@% menos de daño. Otorga un <attackSpeed>@AttackSpeed*100@% de velocidad de ataque</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
@@ -2049,7 +2113,7 @@
             "id": 232,
             "name": "¡Hora del limo!",
             "rarity": 0,
-            "tooltip": "Cada @Cooldown@ s, <keywordMajor>lanzas automáticamente</keywordMajor> un chorro de limo que inflige <magicDamage>@BaseDamage@ más @PercentDamage@ de daño mágico en función de la vida máxima</magicDamage> a los enemigos cercanos. Si golpeas a un campeón, secretas un limo cerca. Pasar por encima del limo restaura <healing>@BlobHeal@ de vida</healing>. Los enemigos, sin embargo, lo destruyen."
+            "tooltip": "Cada @Cooldown@ s, <keywordMajor>lanzas automáticamente</keywordMajor> un chorro de limo que inflige <magicDamage>@BaseDamage@ más un @PercentDamage@ de daño mágico en función de la vida máxima</magicDamage> a los enemigos cercanos. Si golpeas a un campeón, secretas un limo cerca. Pasar por encima del limo restaura un <healing>@BlobHeal@ de vida</healing>. Los enemigos, sin embargo, lo destruyen."
         },
         {
             "apiName": "StackosaurusRex",
@@ -2195,7 +2259,7 @@
             "id": 220,
             "name": "Martillazo de dispersión",
             "rarity": 2,
-            "tooltip": "Al atacar, disparas @AdditionalBolts@ proyectiles adicionales que infligen <physicalDamage>@DamagePerBolt@ de daño físico</physicalDamage> cada uno, que aumenta hasta un @MaxDamageAmp*100@% en función de la distancia recorrida. Cada dirección cardinal tiene un enfriamiento de @Cooldown@ s.<br><br>Cada proyectil puede asestar impactos críticos y aplica efectos de impacto con un @OnHitRatio*100@% de efectividad."
+            "tooltip": "Al atacar, disparas @AdditionalBolts@ proyectiles adicionales que infligen <physicalDamage>@DamagePerBolt@ de daño físico</physicalDamage> cada uno, que aumenta hasta un @MaxDamageAmp*100@% en función de la distancia recorrida. Cada dirección cardinal tiene un enfriamiento de @Cooldown@ s.<br><br>Cada proyectil puede asestar impactos críticos y aplica efectos de impacto con un @OnHitRatio*100@% de efectividad.<br><br>Daño infligido esta ronda: @f1@<br>Daño total infligido: @f2@"
         },
         {
             "apiName": "Tormentor",
@@ -2216,9 +2280,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.44999998807907104,
-                "MinionHealthIncrease": 0.44999998807907104,
-                "MinionSizeIncrease": 0.44999998807907104
+                "MinionDamageIncrease": 0.4000000059604645,
+                "MinionHealthIncrease": 0.4000000059604645,
+                "MinionSizeIncrease": 0.4000000059604645
             },
             "desc": "Tus súbditos obtienen un @MinionSizeIncrease*100@% de tamaño, vida y daño adicionales.",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "Tus ataques reducen los enfriamientos en @CooldownRefund@ s.",
+            "desc": "Los ataques {{ Item_Keyword_OnHit }} reducen tus enfriamientos en @CooldownRefund@ s.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Guantazo místico",
             "rarity": 2,
-            "tooltip": "Tus ataques reducen los enfriamientos en @CooldownRefund@ s."
+            "tooltip": "Los ataques {{ Item_Keyword_OnHit }} reducen tus enfriamientos en @CooldownRefund@ s."
         },
         {
             "apiName": "Homeguard",
@@ -2964,7 +3028,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 5000.0,
+                "PrismaticSellValue": 4000.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "Vende todos los objetos que no sean de misión por un @SellValueTooltip@% de su precio original. Te vendrá genial para todos los yunques en oferta.",

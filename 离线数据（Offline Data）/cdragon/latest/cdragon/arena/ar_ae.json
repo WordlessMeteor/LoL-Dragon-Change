@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRequiredTooltipOnly"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusHPRequiredTooltipOnly",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "قم <keywordMajor>تلقائيًا</keywordMajor> بتحريك دائرة من حولك، مما يلحق ضرر إضافي على الحافة الخارجية كل @AutoCastCooldown@ث.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "تضرب <keywordMajor>تلقائيًا</keywordMajor> على شكل دائرة من حولك، فتلحق <physicalDamage>ضرر مادي</physicalDamage>. يخضع الأعداء المصابون بالنصف الخارجي لتأثير <status>الإبطاء</status> ويتعرضون إلى مقدار من <physicalDamage>الصحة القصوى على شكل ضرر مادي</physicalDamage> إضافي. تستعيد <healing>@OuterConeHealingRatio@% من الضرر الإضافي المُلحق بالأبطال على شكل صحة</healing>. @AutoCastCooldown@ث فترة تبريد.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "الحوسبة الكمية",
             "rarity": 2,
-            "tooltip": "قم <keywordMajor>تلقائيًا</keywordMajor> بتحريك دائرة من حولك، مما يلحق ضرر إضافي ويعالج على الحافة الخارجية كل 15 ث. <br><br>إجمالي الضرر المُلحق: @f1@<br>إجمالي العلاج المحقق: @f2@"
+            "tooltip": "تضرب <keywordMajor>تلقائيًا</keywordMajor> على شكل دائرة من حولك، فتلحق <physicalDamage>@BaseDamageTotal@ ضرر مادي</physicalDamage>. يخضع الأعداء المصابون بالنصف الخارجي لتأثير <status>الإبطاء</status> بنسبة @SlowPercentage@%، ويتلاشى على مدار @SlowDuration@ث، ويتعرضون إلى ما يعادل <physicalDamage>@OuterEdgeTooltip@ من الصحة القصوى على شكل ضرر مادي</physicalDamage> إضافي. تستعيد <healing>@OuterConeHealingRatio@% من الضرر الإضافي المُلحق بالأبطال على شكل صحة</healing>. @AutoCastCooldown@ث فترة تبريد.<br><br>إجمالي الضرر المُلحق: @f1@<br>إجمالي العلاج المحقق: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -422,7 +486,7 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 15.0,
+                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
             "desc": "الشرط: أحرز @TakedownsNeeded@ من الإطاحات، يزداد هذا العدد إلى @2ndPickTakendownsNeeded@ إذا كان هذا التحسين الثاني لديك.<br><br>الجائزة: ملعقة مسطحة ذهبية",
@@ -1830,8 +1894,8 @@
             "calculations": {},
             "dataValues": {
                 "AttackReduction": 0.5,
-                "AttackSpeed": 2.5,
-                "OnHitMod": 0.5
+                "AttackSpeed": 1.0,
+                "OnHitMod": 0.6000000238418579
             },
             "desc": "تلحق هجماتك وتأثيرات الإصابة @AttackReduction*100@% ضرر أقل. تكسب <attackSpeed>@AttackSpeed*100@% سرعة هجوم</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
@@ -2049,7 +2113,7 @@
             "id": 232,
             "name": "وقت اللزوجة",
             "rarity": 0,
-            "tooltip": "كل @Cooldown@ث من فترة التبريد، <keywordMajor>تلقي تلقائيًا</keywordMajor> دفقة من مادة لزجة من جسدك، ملحقًا <magicDamage>@BaseDamage@ و @PercentDamage@ من الصحة القصوى على شكل ضرر سحر</magicDamage> بالأعداء في الجوار. إذا أصبت بطلًا، تفرز فقاعة في الجوار. يستعيد المشي فوق الفقاعة <healing>@BlobHeal@ صحة</healing>، بينما يدمرها الأعداء."
+            "tooltip": "كل @Cooldown@ث من فترة التبريد، <keywordMajor>تلقي تلقائيًا</keywordMajor> دفقة من مادة لزجة من جسدك، ملحقًا <magicDamage>@BaseDamage@ و @PercentDamage@ من الصحة القصوى على شكل ضرر سحر</magicDamage> بالأعداء في الجوار. إذا أصبت بطلًا، تفرز فقاعة في الجوار. يستعيد المشي فوق الفقاعة <healing>@BlobHeal@ صحة</healing>، بينما يدمر الأعداء الفقاعة."
         },
         {
             "apiName": "StackosaurusRex",
@@ -2158,7 +2222,7 @@
             "iconLarge": "assets/ux/cherry/augments/icons/tapdancer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/tapdancer_small.png",
             "id": 81,
-            "name": "راقص النقرة",
+            "name": "راقص إيقاعي",
             "rarity": 2,
             "tooltip": "تمنحك هجماتك <moveSpeed>@MSPerHit@ سرعة حركة</moveSpeed> تتكدس دون حد أقصى. اكسب سرعة هجوم تعادل @MSToASConversion*10000@% من سرعة الحركة."
         },
@@ -2195,7 +2259,7 @@
             "id": 220,
             "name": "ضربات في كل اتجاه",
             "rarity": 2,
-            "tooltip": "عندما تهاجم، تطلق @AdditionalBolts@ صواعق إضافيةً تلحق كل منها <physicalDamage>@DamagePerBolt@ ضرر مادي</physicalDamage>، يزداد بما يصل إلى @MaxDamageAmp*100@% مع المسافة المقطوعة. يمتلك كل اتجاه من الاتجاهات الأربعة =فترة تبريد تدوم @Cooldown@ث.<br><br>يمكن لكل صاعقة أن تلحق ضربة حرجة وتطبق تأثيرات الإصابة بنسبة @OnHitRatio*100@% من الفعالية."
+            "tooltip": "عندما تهاجم، تطلق @AdditionalBolts@ من الصواعق الإضافية تلحق كل منها <physicalDamage>@DamagePerBolt@ ضرر مادي</physicalDamage>، يزداد بما يصل إلى @MaxDamageAmp*100@% مع المسافة المقطوعة. يمتلك كل اتجاه من الاتجاهات الأربعة فترة تبريد تدوم @Cooldown@ث.<br><br>يمكن لكل صاعقة أن تلحق ضربة حرجة وتطبق تأثيرات الإصابة بنسبة @OnHitRatio*100@% من الفعالية.<br><br>الضرر الملحق في هذه الجولة: @f1@<br>إجمالي الضرر الملحق: @f2@"
         },
         {
             "apiName": "Tormentor",
@@ -2216,9 +2280,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.44999998807907104,
-                "MinionHealthIncrease": 0.44999998807907104,
-                "MinionSizeIncrease": 0.44999998807907104
+                "MinionDamageIncrease": 0.4000000059604645,
+                "MinionHealthIncrease": 0.4000000059604645,
+                "MinionSizeIncrease": 0.4000000059604645
             },
             "desc": "يكسب المستدعون نسبة @MinionSizeIncrease*100@% زيادة في الحجم والصحة والضرر.",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2593,7 +2657,7 @@
             "iconLarge": "assets/ux/cherry/augments/icons/trailblazer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trailblazer_small.png",
             "id": 221,
-            "name": "الطليعي",
+            "name": "فاتح الطريق",
             "rarity": 0,
             "tooltip": "عندما تندفع أو تنفذ ومضة، <keywordMajor>تحرق</keywordMajor> الأعداء في الجوار بنسبة <magicDamage>@BurnPercent*100@% من الصحة القصوى على شكل ضرر سحر</magicDamage> خلال @BurnDuration@ث.<br><br>الضرر الملحق في هذه الجولة: @f1@<br>الضرر الملحق في هذه المباراة: @f2@"
         },
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "تقلص هجماتك فترات التبريد لديك لمدة @CooldownRefund@ث.",
+            "desc": "{{ Item_Keyword_OnHit }} تقلص فترات التبريد لديك بمقدار @CooldownRefund@ث.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "لكمة الغموض",
             "rarity": 2,
-            "tooltip": "تقلص هجماتك فترات التبريد لديك لمدة @CooldownRefund@ث."
+            "tooltip": "{{ Item_Keyword_OnHit }} تقلص فترات التبريد لديك بمقدار @CooldownRefund@ث."
         },
         {
             "apiName": "Homeguard",
@@ -2964,7 +3028,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 5000.0,
+                "PrismaticSellValue": 4000.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "تبيع جميع العناصر غير المرتبطة بالمهام على الفور مقابل @SellValueTooltip@% من سعر شرائها المباشر. عرض مثالي للسنادين ذات السعر المخفض.",

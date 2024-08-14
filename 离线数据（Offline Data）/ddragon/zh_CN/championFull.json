@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.15.1",
+    "version": "14.16.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -7773,7 +7773,7 @@
                 "mp": 475,
                 "mpperlevel": 30,
                 "movespeed": 335,
-                "armor": 27,
+                "armor": 23,
                 "armorperlevel": 4.5,
                 "spellblock": 30,
                 "spellblockperlevel": 1.3,
@@ -8434,12 +8434,12 @@
                 "mp": 320,
                 "mpperlevel": 40,
                 "movespeed": 335,
-                "armor": 22,
+                "armor": 25,
                 "armorperlevel": 5,
                 "spellblock": 30,
                 "spellblockperlevel": 1.3,
                 "attackrange": 525,
-                "hpregen": 3.5,
+                "hpregen": 5,
                 "hpregenperlevel": 0.75,
                 "mpregen": 8,
                 "mpregenperlevel": 0.8,
@@ -9068,6 +9068,12 @@
                     "id": "432026",
                     "num": 26,
                     "name": "山海绘卷 巴德",
+                    "chromas": true
+                },
+                {
+                    "id": "432035",
+                    "num": 35,
+                    "name": "T1 巴德",
                     "chromas": true
                 }
             ],
@@ -14855,14 +14861,14 @@
                     "id": "CassiopeiaE",
                     "name": "双生毒牙",
                     "description": "卡西奥佩娅释放一次攻击，可对中毒的目标造成额外伤害并且基于实际伤害值为她提供治疗效果。如果目标死于这次攻击，卡西奥佩娅会回复法力值。",
-                    "tooltip": "卡西奥佩娅发射致命的毒牙，造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>。如果敌人已经<keywordMajor>中毒</keywordMajor>，那么还会受到额外的<magicDamage>{{ bouspoisoneddamage }}魔法伤害</magicDamage>并且卡西奥佩娅回复<healing>{{ healcalc }}生命值</healing>。<br /><br />如果这个技能击杀了目标，那么卡西奥佩娅回复<scaleMana>{{ cost }}法力值</scaleMana>。<br /><br />{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "卡西奥佩娅发射致命的毒牙，造成<magicDamage>{{ basicdamage }}魔法伤害</magicDamage>。如果敌人已经<keywordMajor>中毒</keywordMajor>，那么还会受到额外的<magicDamage>{{ bonuspoisoneddamage }}魔法伤害</magicDamage>并且卡西奥佩娅回复<healing>{{ healcalc }}生命值</healing>，对抗小兵和小型野怪降低至<healing>{{ healcalcminion }}生命值</healing>。<br /><br />如果这个技能击杀了目标，那么卡西奥佩娅回复<scaleMana>{{ cost }}法力值</scaleMana>。<br /><br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "额外毒性伤害",
                             "来自法术强度的治疗效果"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ bonusdamage }} -> {{ bonusdamageNL }}",
                             "{{ healratio*100.000000 }}% -> {{ healrationl*100.000000 }}%"
                         ]
                     },
@@ -14887,11 +14893,11 @@
                     "effect": [
                         null,
                         [
-                            20,
-                            40,
-                            60,
-                            80,
-                            100
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -14901,11 +14907,11 @@
                             0
                         ],
                         [
-                            0.1,
-                            0.1,
-                            0.1,
-                            0.1,
-                            0.1
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -14959,9 +14965,9 @@
                     ],
                     "effectBurn": [
                         null,
-                        "20/40/60/80/100",
                         "0",
-                        "0.1",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -15959,21 +15965,21 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        9,
+                        8.5,
                         8,
                         7.5,
-                        7,
-                        6.5,
-                        6
+                        7
                     ],
-                    "cooldownBurn": "8/7.5/7/6.5/6",
+                    "cooldownBurn": "9/8.5/8/7.5/7",
                     "cost": [
-                        60,
-                        65,
-                        70,
-                        75,
+                        80,
+                        80,
+                        80,
+                        80,
                         80
                     ],
-                    "costBurn": "60/65/70/75/80",
+                    "costBurn": "80",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -17484,7 +17490,7 @@
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "@AbilityResourceName@消耗",
                             "冷却时间"
                         ],
@@ -25966,7 +25972,7 @@
                     "tooltip": "<spellPassive>被动：</spellPassive>击杀一个单位会永久提供<scaleArmor>{{ resistgainonkill }}护甲</scaleArmor>和<scaleMR>{{ resistgainonkill }}魔法抗性</scaleMR>，最多可达{{ resistmax }}。满层时，盖伦获得<scaleArmor>{{ percentarmor }}护甲</scaleArmor>和<scaleMR>{{ percentmr }}魔法抗性</scaleMR>。<br /><br /><spellActive>主动：</spellActive>盖伦加固他的勇气{{ drduration }}秒，使即将到来的伤害减少{{ drpercent*100 }}%。他还会获得<shield>{{ totalshield }}护盾值</shield>和{{ upfronttenacity*100 }}%韧性，持续{{ upfrontduration }}秒。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "冷却时间"
                         ],
                         "effect": [
@@ -30720,7 +30726,7 @@
                         "label": [
                             "<spellName>飞染</spellName> | 移动速度",
                             "<spellName>飞染</spellName> | 持续时间",
-                            "<spellName>渲浓</spellName> | 护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "<spellName>渲浓</spellName> | 护盾值",
                             "<spellName>宿墨</spellName> | 额外伤害",
                             "<spellName>宿墨</spellName> | 法力回复总和",
                             "冷却时间",
@@ -35402,6 +35408,18 @@
                     "num": 25,
                     "name": "巅峰之星 杰斯",
                     "chromas": true
+                },
+                {
+                    "id": "126034",
+                    "num": 34,
+                    "name": "T1 杰斯",
+                    "chromas": true
+                },
+                {
+                    "id": "126036",
+                    "num": 36,
+                    "name": "至臻 T1 杰斯",
+                    "chromas": false
                 }
             ],
             "lore": "杰斯是一位天才发明家，他为了守护皮尔特沃夫和这座城市对于进步的追求贡献了毕生的心血。杰斯依靠手中的海克斯科技变形锤，还有自己的力量、勇气和出众的智慧守护着他的故乡。虽然整座城市都将他视为英雄，但他却并没有处理好这样的声名。即便如此，杰斯的心之所向依旧纯良，即使是那些嫉妒他天赋的人，也会真心实意地感谢他给进步之城带来的保护。",
@@ -36791,6 +36809,12 @@
                     "num": 51,
                     "name": "咖啡甜心 金克丝",
                     "chromas": true
+                },
+                {
+                    "id": "222062",
+                    "num": 62,
+                    "name": "T1 金克丝",
+                    "chromas": false
                 }
             ],
             "lore": "神经狂躁、冲动任性、劣迹斑斑……金克丝出身自祖安，生来就爱不计后果地大搞破坏。她就是一座人形自走军火库，所经之处必定会留下夺目的火光和震耳的爆炸。金克丝最讨厌无聊，所以不管她去到哪里，混乱和骚动就会如期而至，这就是她留下的“到此一游”。",
@@ -47849,6 +47873,12 @@
                     "num": 52,
                     "name": "圣天龙 李青",
                     "chromas": false
+                },
+                {
+                    "id": "64068",
+                    "num": 68,
+                    "name": "T1 李青",
+                    "chromas": false
                 }
             ],
             "lore": "李青是艾欧尼亚古老武术的大师，讲原则、重信义的他能将神龙之灵的精粹运用自如，助他面对任何挑战。虽然这位武僧多年前便已双目失明，但他依然献出自己的全部力量，用生命捍卫家园，抵御任何试图打破艾欧尼亚神圣均衡之人。所有因他安静冥想的举止而掉以轻心的敌人，都将尝到他燃烧的拳头和炽烈的回旋踢。",
@@ -50688,11 +50718,11 @@
                     "effect": [
                         null,
                         [
-                            95,
-                            125,
-                            155,
-                            185,
-                            215
+                            85,
+                            115,
+                            145,
+                            175,
+                            205
                         ],
                         [
                             60,
@@ -50760,7 +50790,7 @@
                     ],
                     "effectBurn": [
                         null,
-                        "95/125/155/185/215",
+                        "85/115/145/175/205",
                         "60/75/90/105/120",
                         "1000",
                         "0.41",
@@ -52243,7 +52273,7 @@
                     "tooltip": "拉克丝扔出她的魔杖，为它途经的友军提供持续{{ e3 }}秒的<shield>{{ totalshieldtt }}护盾</shield>。随后它会折返，为它途经的友军提供等额的<shield>护盾</shield>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "冷却时间",
                             "@AbilityResourceName@消耗"
                         ],
@@ -59478,7 +59508,7 @@
                             "已获得的狗群伙伴数量",
                             "移动速度",
                             "造成伤害后获得移动速度",
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "猎狗血性距离提升",
                             "冷却时间"
                         ],
@@ -65910,6 +65940,12 @@
                     "num": 29,
                     "name": "星之守护者 奥莉安娜",
                     "chromas": true
+                },
+                {
+                    "id": "61038",
+                    "num": 38,
+                    "name": "T1 奥莉安娜",
+                    "chromas": true
                 }
             ],
             "lore": "对一切充满好奇的奥莉安娜也曾拥有过血肉之躯，现在却成了一具全身上下都由发条和齿轮构成的科技奇观。祖安下层地区的一次事故，间接导致奥莉安娜身染重病。她日渐衰竭的身体必须被一个接着一个地替换为精密的人造器官，直至全身上下再也没有一丝人类肉体的痕迹。她给自己制作了一枚奇妙的铜球，它既是伙伴，也是保镖。值得庆幸的是，这个女孩如今可以自由地探索壮观的皮尔特沃夫，以及更遥远的地方了。",
@@ -69337,7 +69373,7 @@
                 "mp": 375,
                 "mpperlevel": 60,
                 "movespeed": 335,
-                "armor": 28,
+                "armor": 31,
                 "armorperlevel": 4.7,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -72844,7 +72880,7 @@
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "挑翻伤害"
                         ],
                         "effect": [
@@ -76265,7 +76301,7 @@
                     "tooltip": "兰博开启一道屏障，获得持续{{ shieldduration.1 }}秒的<shield>{{ totalshield }}护盾值</shield>和持续{{ movespeedduration }}秒的<speed>{{ movespeed*100 }}%移动速度</speed>。<br /><br /><keywordMajor>危险温度：</keywordMajor>屏障转而提供<shield>{{ empoweredshield }}护盾值</shield>和<speed>{{ empoweredms }}移动速度</speed>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "移动速度"
                         ],
                         "effect": [
@@ -78825,7 +78861,7 @@
                 "critperlevel": 0,
                 "attackdamage": 50,
                 "attackdamageperlevel": 0,
-                "attackspeedperlevel": 4,
+                "attackspeedperlevel": 2,
                 "attackspeed": 0.625
             },
             "spells": [
@@ -79266,7 +79302,7 @@
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "冷却时间"
                         ],
                         "effect": [
@@ -79655,7 +79691,7 @@
                     "tooltip": "萨勒芬妮用歌曲激励她附近的友方英雄，为他们提供<speed>{{ hastevalueallies }}移动速度</speed>，为她自身提供<speed>不断衰减的{{ wmsbonustotal }}%移动速度</speed>，并为自身和友方都提供<shield>{{ shieldvalueseraphine }}护盾值</shield>，持续{{ shieldduration }}秒。<br /><br />如果萨勒芬妮身上已有<shield>护盾</shield>，那么她会号召友军加入她，在{{ whealsplitdelay }}秒延迟后，附近的每有一位友方英雄，就会为他们回复<healing>{{ wmissinghpheal }}%已损失生命值</healing>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "已治疗的百分比",
                             "冷却时间",
                             "@AbilityResourceName@消耗"
@@ -85003,7 +85039,7 @@
                 "difficulty": 5
             },
             "stats": {
-                "hp": 610,
+                "hp": 630,
                 "hpperlevel": 110,
                 "mp": 320,
                 "mpperlevel": 40,
@@ -85019,7 +85055,7 @@
                 "mpregenperlevel": 0.75,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 60,
+                "attackdamage": 63,
                 "attackdamageperlevel": 3,
                 "attackspeedperlevel": 2,
                 "attackspeed": 0.625
@@ -88420,7 +88456,7 @@
                 "difficulty": 5
             },
             "stats": {
-                "hp": 575,
+                "hp": 600,
                 "hpperlevel": 129,
                 "mp": 400,
                 "mpperlevel": 70,
@@ -90244,7 +90280,7 @@
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "冷却时间"
                         ],
                         "effect": [
@@ -97586,7 +97622,7 @@
                     "tooltip": "<spellPassive>甲胄姿态：</spellPassive>乌迪尔获得持续{{ shieldduration }}秒的<shield>{{ totalshield }}护盾值</shield>。此外，乌迪尔的下两次攻击具有{{ lifesteal*100 }}%生命偷取并回复<healing>{{ lifeonhit }}生命值</healing>。<br /><br /><keywordMajor>觉醒：</keywordMajor>获得<shield>{{ recastshield }}护盾值</shield>，在{{ shieldduration }}秒里持续回复<healing>{{ recastheal }}生命值</healing>，并且乌迪尔的下两次攻击转而具有{{ lifesteal*200 }}%生命偷取并回复<healing>{{ lifeonhitawakened }}生命值</healing>。<br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "%生命值护盾",
                             "生命偷取"
                         ],
@@ -101763,7 +101799,7 @@
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "护盾值：<TFTBonus>@ModifiedShieldAmount@ (%i:scaleAP%)</TFTBonus>",
+                            "护盾值",
                             "冷却时间"
                         ],
                         "effect": [
@@ -102966,7 +103002,7 @@
                     "id": "ViegoQ",
                     "name": "破败王剑",
                     "description": "佛耶戈的鬼魅之刃会在被动地在命中时造成额外的百分比当前生命值伤害<OnHit>攻击特效</OnHit>，并对近期被他用一个技能袭击过的敌人进行两次打击，同时窃取生命值。<br><br>佛耶戈可以激活这个技能来向前刺出他的双手巨剑，穿刺他前方的所有敌人们。",
-                    "tooltip": "<spellPassive>被动：</spellPassive>佛耶戈的攻击造成额外的<physicalDamage>{{ totalpercenthealthonhit }}当前生命值的物理伤害</physicalDamage>。如果敌人近期被他用一个技能伤害过，那么他对该敌人的第一次攻击会进行两次打击，造成<physicalDamage>{{ secondattackdamage }}物理伤害</physicalDamage>并回复<healing>{{ healmodvschamps*100% }}%实际伤害值的生命值</healing>。这些被动加成会在<keywordMajor>占据</keywordMajor>期间保留。<br /><br /><spellActive>主动：</spellActive>佛耶戈向前戳刺，造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>被动：</spellPassive>佛耶戈的攻击造成额外的<physicalDamage>{{ totalpercenthealthonhit }}当前生命值的物理伤害</physicalDamage>。如果敌人近期被他用一个技能伤害过，那么他对该敌人的第一次攻击会进行两次打击，造成<physicalDamage>{{ secondattackdamage }}物理伤害</physicalDamage>并回复<healing>{{ healmodvschamps*100 }}%实际伤害值的生命值</healing>。这些被动加成会在<keywordMajor>占据</keywordMajor>期间保留。<br /><br /><spellActive>主动：</spellActive>佛耶戈向前戳刺，造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",

@@ -122,17 +122,81 @@
         },
         {
             "apiName": "QuantumComputing",
-            "calculations": {},
-            "dataValues": {
-                "AutoCastCooldown": 10.0
+            "calculations": {
+                "BaseDamageTotal": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 350.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.8500000238418579,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                },
+                "OuterEdgeTooltip": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "OuterConeMaxHPDamage"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADRequiredTooltipOnly",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRequiredTooltipOnly"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusHPRequiredTooltipOnly",
+                            "mStat": 11,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Realiza un corte circular a tu alrededor <keywordMajor>de forma automática</keywordMajor>, el cual inflige daño adicional en el borde exterior cada @AutoCastCooldown@ seg.",
+            "dataValues": {
+                "ADRequiredFor1PercentDamage": 35.0,
+                "ADRequiredTooltipOnly": 0.0002500000118743628,
+                "APRequiredFor1PercentDamage": 60.0,
+                "APRequiredTooltipOnly": 0.00015999999595806003,
+                "AutoCastCooldown": 10.0,
+                "BADRatio": 0.6000000238418579,
+                "BaseDamage": 40.0,
+                "BlastLength": 650.0,
+                "BonusHPRequiredFor1PercentDamag": 600.0,
+                "BonusHPRequiredTooltipOnly": 9.999999747378752e-06,
+                "ChargeDuration": 0.75,
+                "ConeAngle": 45.0,
+                "MonsterDamageReduction": 50.0,
+                "MonsterHealingCap": 0.10000000149011612,
+                "OuterConeHealingRatio": 80.0,
+                "OuterConeMaxHPDamage": 0.10000000149011612,
+                "SlowDuration": 2.0,
+                "SlowPercentage": 80.0
+            },
+            "desc": "Realiza un corte circular a tu alrededor <keywordMajor>de forma automática</keywordMajor>, lo que inflige <physicalDamage>daño físico</physicalDamage>. Los enemigos alcanzados por la mitad exterior son <status>ralentizados</status> y reciben <physicalDamage>vida máxima como daño físico</physicalDamage> adicional. Restaura un <healing>@OuterConeHealingRatio@% del daño adicional infligido a campeones como Vida</healing>. @AutoCastCooldown@ seg de enfriamiento.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Computación Cuántica",
             "rarity": 2,
-            "tooltip": "Realiza un corte circular a tu alrededor <keywordMajor>de forma automática</keywordMajor>, el cual inflige daño adicional y cura en el borde exterior cada 15 seg. <br><br>Daño total infligido: @f1@<br>Curación total realizada: @f2@"
+            "tooltip": "Realiza un corte circular a tu alrededor <keywordMajor>de forma automática</keywordMajor>, lo que inflige <physicalDamage>@BaseDamageTotal@ de daño físico</physicalDamage>. Los enemigos alcanzados por la mitad exterior son <status>ralentizados</status> en un @SlowPercentage@%, que decae durante @SlowDuration@ seg, y reciben <physicalDamage>@OuterEdgeTooltip@ de vida máxima como daño físico</physicalDamage> adicional. Restaura un <healing>@OuterConeHealingRatio@% del daño infligido adicional a campeones como Vida</healing>. @AutoCastCooldown@ seg de enfriamiento.<br><br>Daño total infligido: @f1@<br>Curación total realizada: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -422,7 +486,7 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 15.0,
+                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
             "desc": "Requisito: Consigue @TakedownsNeeded@ derribos, si eliges esto como tu segundo aumento se incrementa a @2ndPickTakendownsNeeded@.<br><br>Recompensa: Espátula Dorada",
@@ -1830,8 +1894,8 @@
             "calculations": {},
             "dataValues": {
                 "AttackReduction": 0.5,
-                "AttackSpeed": 2.5,
-                "OnHitMod": 0.5
+                "AttackSpeed": 1.0,
+                "OnHitMod": 0.6000000238418579
             },
             "desc": "Tus ataques y golpes al impacto infligen un @AttackReduction*100@% menos de daño. Obtienes un <attackSpeed>@AttackSpeed*100@% de Velocidad de Ataque</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
@@ -2195,7 +2259,7 @@
             "id": 220,
             "name": "Pistolero",
             "rarity": 2,
-            "tooltip": "Cuando atacas, disparas @AdditionalBolts@ proyectiles adicionales; cada uno inflige <physicalDamage>@DamagePerBolt@ de daño físico</physicalDamage>. Este daño aumenta hasta un @MaxDamageAmp*100@% según la distancia recorrida. Cada dirección cardinal tiene @Cooldown@ seg de enfriamiento.<br><br>Cada proyectil puede infligir golpes críticos y aplicar efectos al impacto a un @OnHitRatio*100@% de eficacia."
+            "tooltip": "Cuando atacas, disparas @AdditionalBolts@ proyectiles adicionales; cada uno inflige <physicalDamage>@DamagePerBolt@ de daño físico</physicalDamage>. Este daño aumenta hasta un @MaxDamageAmp*100@% según la distancia recorrida. Cada dirección cardinal tiene @Cooldown@ seg de enfriamiento.<br><br>Cada proyectil puede asestar golpes críticos y aplicar efectos al impacto con un @OnHitRatio*100@% de eficacia.<br><br>Daño infligido esta ronda: @f1@<br>Daño infligido en total: @f2@"
         },
         {
             "apiName": "Tormentor",
@@ -2216,9 +2280,9 @@
             "apiName": "Minionmancer",
             "calculations": {},
             "dataValues": {
-                "MinionDamageIncrease": 0.44999998807907104,
-                "MinionHealthIncrease": 0.44999998807907104,
-                "MinionSizeIncrease": 0.44999998807907104
+                "MinionDamageIncrease": 0.4000000059604645,
+                "MinionHealthIncrease": 0.4000000059604645,
+                "MinionSizeIncrease": 0.4000000059604645
             },
             "desc": "Tus invocaciones aumentan un @MinionSizeIncrease*100@% su Vida, tamaño y daño.",
             "iconLarge": "assets/ux/cherry/augments/icons/minionmancer_large.png",
@@ -2664,13 +2728,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "Tus ataques reducen tus enfriamientos en @CooldownRefund@ seg.",
+            "desc": "{{ Item_Keyword_OnHit }} reduce tus enfriamientos en @CooldownRefund@ seg.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Golpe Místico",
             "rarity": 2,
-            "tooltip": "Tus ataques reducen tus enfriamientos en @CooldownRefund@ seg."
+            "tooltip": "{{ Item_Keyword_OnHit }} reduce tus enfriamientos en @CooldownRefund@ seg."
         },
         {
             "apiName": "Homeguard",
@@ -2964,7 +3028,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 5000.0,
+                "PrismaticSellValue": 4000.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "Vendes al instante todos los objetos que no sean de misión por un @SellValueTooltip@% de su precio de compra directo. Excelente para los yunques con descuento.",
