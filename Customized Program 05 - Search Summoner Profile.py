@@ -1220,11 +1220,14 @@ async def search_profile(connection):
                     gamemodes_iter["category"] = gamemode_iter["category"]
                     gamemodes_iter["description"] = gamemode_iter["description"]
                     gamemodes[gamemode_id] = gamemodes_iter
-                maps = {8: {"zh_CN": "水晶之痕", "en_US": "Crystal Scar"}, 10: {"zh_CN": "扭曲丛林", "en_US": "Twisted Treeline"}, 11: {"zh_CN": "召唤师峡谷", "en_US": "Summoner's Rift"}, 12: {"zh_CN": "嚎哭深渊", "en_US": "Howling Abyss"}, 16: {"zh_CN": "宇宙遗迹", "en_US": "Cosmic Ruins"}, 18: {"zh_CN": "瓦罗兰城市公园", "en_US": "Valoran City Park"}, 20: {"zh_CN": "失控地点", "en_US": "Crash Site"}, 21: {"zh_CN": "百合与莲花的神庙", "en_US": "Temple of Lily and Lotus"}, 22: {"zh_CN": "聚点危机", "en_US": "Convergence"}, 30: {"zh_CN": "怒火角斗场", "en_US": "Rings of Wrath"}, 33: {"zh_CN": "最终都市", "en_US": "Final City"}}
+                maps = {8: {"zh_CN": "水晶之痕", "en_US": "Crystal Scar"}, 10: {"zh_CN": "扭曲丛林", "en_US": "Twisted Treeline"}, 11: {"zh_CN": "召唤师峡谷", "en_US": "Summoner's Rift"}, 12: {"zh_CN": "嚎哭深渊", "en_US": "Howling Abyss"}, 16: {"zh_CN": "星界废墟", "en_US": "Cosmic Ruins"}, 18: {"zh_CN": "瓦洛兰城市公园", "en_US": "Valoran City Park"}, 20: {"zh_CN": "失控地点", "en_US": "Crash Site"}, 21: {"zh_CN": "百合与莲花的神庙", "en_US": "Temple of Lily and Lotus"}, 22: {"zh_CN": "聚点危机", "en_US": "Convergence"}, 30: {"zh_CN": "怒火角斗场", "en_US": "Rings of Wrath"}, 33: {"zh_CN": "最终都市", "en_US": "Final City"}}
                 
                 #print("召唤师信息如下：\nSummoner information is as follows:")
                 ranked = await (await connection.request("GET", "/lol-ranked/v1/ranked-stats/" + info["puuid"])).json()
-                tier = {"": "", "NONE": "没有段位", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
+                tiers = {"": "", "NONE": "没有段位", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
+                #tiers = {"": "", "NONE": "NONE", "IRON": "IRON", "BRONZE": "BRONZE", "SILVER": "SILVER", "GOLD": "GOLD", "PLATINUM": "PLATINUM", "EMERALD": "EMERALD", "DIAMOND": "DIAMOND", "MASTER": "MASTER", "GRANDMASTER": "GRANDMASTER", "CHALLENGER": "CHALLENGER"}
+                ratedTiers = {"": "", "NONE": "没有段位", "GRAY": "灰白", "GREEN": "翠绿", "BLUE": "天蓝", "PURPLE": "绛紫", "ORANGE": "耀橙"}
+                #ratedTiers = {"": "", "NONE": "NONE", "GRAY": "GRAY", "GREEN": "GREEN", "BLUE": "BLUE", "PURPLE": "PURPLE", "ORANGE": "ORANGE"}
                 #print(info)
 
                 #下面设置输出文件的位置（The following code determines the output files' location）
@@ -1265,9 +1268,9 @@ async def search_profile(connection):
                 if "errorCode" in ranked and ranked["httpStatus"] == 404: #很久以前，国服体验服的排位数据API未知。现在已经与正式服统一（Long ago, API of ranked stats on Chinese PBE was unknown. Now it accords with Live servers）
                     info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"]]}
                 elif not "highestPreviousSeasonAchievedDivision" in ranked and not "highestPreviousSeasonAchievedTier" in ranked: #在美测服14.2版本发现这两个键被删除了（These two keys are found to be deleted in PBE Patch 14.2）
-                    info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验", "当前赛季段位点", "已获得段位奖励物品序号", "当前赛季最高段位（召唤师峡谷）", "过往赛季结束段位", "过往赛季结束段位分级"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel", "currentSeasonSplitPoints", "earnedRegaliaRewardIds", "highestCurrentSeasonReachedTierSR", "highestPreviousSeasonEndTier", "highestPreviousSeasonEndDivision"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"], ranked["currentSeasonSplitPoints"], ranked["earnedRegaliaRewardIds"], tier[ranked["highestCurrentSeasonReachedTierSR"]], tier[ranked["highestPreviousSeasonEndTier"]], ranked["highestPreviousSeasonEndDivision"]]}
+                    info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验", "当前赛季段位点", "已获得的段位奖励物品序号", "当前赛季最高段位（召唤师峡谷）", "过往赛季结束段位", "过往赛季结束段位分级"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel", "currentSeasonSplitPoints", "earnedRegaliaRewardIds", "highestCurrentSeasonReachedTierSR", "highestPreviousSeasonEndTier", "highestPreviousSeasonEndDivision"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"], ranked["currentSeasonSplitPoints"], ranked["earnedRegaliaRewardIds"], tiers[ranked["highestCurrentSeasonReachedTierSR"]], tiers[ranked["highestPreviousSeasonEndTier"]], ranked["highestPreviousSeasonEndDivision"]]}
                 else:
-                    info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验", "当前赛季赛段点", "已获得的段位奖励物品序号", "当前赛季最高段位（召唤师峡谷）", "过往赛季最高段位", "过往赛季最高段位分级", "过往赛季结束段位", "过往赛季结束段位分级"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel", "currentSeasonSplitPoints", "earnedRegaliaRewardIds", "highestCurrentSeasonReachedTierSR", "highestPreviousSeasonAchievedTier", "highestPreviousSeasonAchievedDivision", "highestPreviousSeasonEndTier", "highestPreviousSeasonEndDivision"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"], ranked["currentSeasonSplitPoints"], ranked["earnedRegaliaRewardIds"], tier[ranked["highestCurrentSeasonReachedTierSR"]], tier[ranked["highestPreviousSeasonAchievedTier"]], ranked["highestPreviousSeasonAchievedDivision"], tier[ranked["highestPreviousSeasonEndTier"]], ranked["highestPreviousSeasonEndDivision"]]}
+                    info_data = {"项目": ["帐户序号", "召唤师名称", "玩家昵称", "内置名称", "改名警告", "升级进度", "生涯公开性", "生涯背景序号", "玩家通用唯一识别码", "当前大乱斗重随次数", "最大重随次数", "当前大乱斗重随点", "单次重随消耗大乱斗重随点", "增加一次重随次数所需大乱斗重随点", "召唤师序号", "召唤师等级", "昵称编号", "尚未命名", "目前经验", "升级所需经验", "当前赛季赛段点", "已获得的段位奖励物品序号", "当前赛季最高段位（召唤师峡谷）", "过往赛季最高段位", "过往赛季最高段位分级", "过往赛季结束段位", "过往赛季结束段位分级"], "Items": ["accountID", "displayName", "gameName", "internalName", "nameChangeFlag", "percentCompleteforNextLevel", "privacy", "profileIconId", "puuid", "numberOfRolls", "maxRerollPoints", "currentRerollPoints", "pointsCostToRoll", "pointsToRoll", "summonerId", "summonerLevel", "tagLine", "unnamed", "xpSinceLastLevel", "xpUntilNextLevel", "currentSeasonSplitPoints", "earnedRegaliaRewardIds", "highestCurrentSeasonReachedTierSR", "highestPreviousSeasonAchievedTier", "highestPreviousSeasonAchievedDivision", "highestPreviousSeasonEndTier", "highestPreviousSeasonEndDivision"], "值": [info["accountId"], info["displayName"], info["gameName"], info["internalName"], info["nameChangeFlag"], info["percentCompleteForNextLevel"], info["privacy"], info["profileIconId"], info["puuid"], info["rerollPoints"]["numberOfRolls"], info["rerollPoints"]["maxRolls"], info["rerollPoints"]["currentPoints"], info["rerollPoints"]["pointsCostToRoll"], info["rerollPoints"]["pointsToReroll"], info["summonerId"], info["summonerLevel"], info["tagLine"], info["unnamed"], info["xpSinceLastLevel"], info["xpUntilNextLevel"], ranked["currentSeasonSplitPoints"], ranked["earnedRegaliaRewardIds"], tiers[ranked["highestCurrentSeasonReachedTierSR"]], tiers[ranked["highestPreviousSeasonAchievedTier"]], ranked["highestPreviousSeasonAchievedDivision"], tiers[ranked["highestPreviousSeasonEndTier"]], ranked["highestPreviousSeasonEndDivision"]]}
                 info_df = pandas.DataFrame(data = info_data)
                 
                 #print("召唤师英雄成就如下：\nSummoner champion mastery is as follows:")
@@ -1390,8 +1393,10 @@ async def search_profile(connection):
                 pkl3name = "Intermediate Object - ranked (Rank) - %s (%s).pkl" %(displayName, currentTime)
                 #with open(os.path.join(folder, pkl3name), "wb") as IntObj3:
                     #pickle.dump(ranked, IntObj3)
-                ranked_header = {"division": "分级", "isProvisional": "定位中", "leaguePoints": "胜点", "losses": "负场", "miniSeriesProgress": "定位赛/晋级赛进展", "previousSeasonAchievedDivision": "过往赛季最高段位分级", "previousSeasonAchievedTier": "过往赛季最高段位", "previousSeasonEndDivision": "过往赛季结束段位分级", "previousSeasonEndTier": "过往赛季结束段位", "provisionalGameThreshold": "总定位场次", "provisionalGamesRemaining": "剩余定位场次", "queueType": "对局类型", "ratedRating": "段位点", "ratedTier": "段位", "tier": "段位", "warnings": "警告消息", "wins": "胜场"}
-                queueType = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战 (BETA测试)", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
+                ranked_header = {"division": "分级", "isProvisional": "定位中", "leaguePoints": "胜点", "losses": "负场", "miniSeriesProgress": "定位赛/晋级赛进展", "previousSeasonAchievedDivision": "过往赛季最高段位分级", "previousSeasonAchievedTier": "过往赛季最高段位", "previousSeasonEndDivision": "过往赛季结束段位分级", "previousSeasonEndTier": "过往赛季结束段位", "provisionalGameThreshold": "总定位场次", "provisionalGamesRemaining": "剩余定位场次", "queueType": "对局类型", "ratedRating": "排名分", "ratedTier": "段位", "tier": "段位", "warnings": "警告消息", "wins": "胜场"} #ratedRating也可译为战力积分（ratedRating can be expressed as GR）
+                #queueTypes = {"ARAM_BOT": "极地大乱斗 人机对战", "ARAM_CLASH": "极地大乱斗 冠军杯赛", "ARAM_UNRANKED_1x1": "极地大乱斗1v1", "ARAM_UNRANKED_5x5": "极地大乱斗5v5", "BOT": "人机对战", "CHERRY": "斗魂竞技场", "CHERRY_UNRANKED": "斗魂竞技场 匹配模式", "CHONCC_TREASURE_TFT": "云顶之弈（恭喜发财）", "CLASH": "冠军杯赛", "FIVE_YEAR_ANNIVERSARY_TFT": "云顶之弈 5周年时光机", "LNY23_TFT": "云顶之弈（恭喜发财）", "LNY24_TFT": "云顶之弈 （第3.5赛季回归：再战星海）", "NEXUSBLITZ": "极限闪击", "NORMAL": "匹配模式", "NORMAL_TFT": "云顶之弈 匹配模式", "ONEFORALL": "克隆大作战", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_SOLO_5x5": "单人/双人", "RANKED_TFT": "云顶之弈 排位赛", "RANKED_TFT_DOUBLE_UP": "双人作战 (BETA测试)", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_TURBO": "狂暴模式", "RIOTSCRIPT_BOT": "人机对战", "SF_TFT": "云顶之弈（斗魂锦标赛）", "STRAWBERRY": "无尽狂潮", "TURBO_TFT": "云顶之弈 狂暴模式 自定义", "TUTORIAL_MODULE_1": "新手教程 第一部分", "TUTORIAL_MODULE_2": "新手教程 第二部分", "TUTORIAL_MODULE_3": "新手教程 第三部分", "TUTORIAL_TFT": "云顶之弈 新手教程", "ULTBOOK": "终极魔典", "URF": "无限火力"}
+                queueTypes = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战 (BETA测试)", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
+                #queueTypes = {"RANKED_SOLO_5x5": "Ranked Solo/Duo", "RANKED_FLEX_SR": "Ranked Flex", "RANKED_TFT": "Ranked TFT", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "Double Up (Workshop)", "RANKED_TFT_TURBO": "Hyper Roll", "CHERRY": "Arena"}
                 ranked_header_keys = list(ranked_header.keys())
                 ranked_data = {}
                 for i in range(len(ranked["queues"])):
@@ -1421,12 +1426,15 @@ async def search_profile(connection):
                     elif i == 6 or i == 8 or i == 14:
                         for j in range(len(ranked["queues"])):
                             try:
-                                ranked_data[key].append(tier[ranked["queues"][j][key]])
+                                ranked_data[key].append(tiers[ranked["queues"][j][key]])
                             except KeyError: #在美测服14.2版本发现“previousSeasonAchievedTier”这个键被删除了（The key `previousSeasonAchievedTier` are found to be deleted in PBE Patch 14.2）
                                 ranked_data[key].append("")
                     elif i == 11:
                         for j in range(len(ranked["queues"])):
-                            ranked_data[key].append(queueType[ranked["queues"][j][key]])
+                            ranked_data[key].append(queueTypes[ranked["queues"][j][key]])
+                    elif i == 13:
+                        for j in range(len(ranked["queues"])):
+                            ranked_data[key].append(ratedTiers[ranked["queues"][j][key]])
                     else:
                         for j in range(len(ranked["queues"])):
                             ranked_data[key].append(ranked["queues"][j][key])
@@ -1442,12 +1450,77 @@ async def search_profile(connection):
                     elif i == 14: #段位放在分级的前面，所以在i = 14时进行特殊处理（Since tier is designed to be in front of division, measures are taken specifically when i equals 14）
                         key = "tier / ratedTier"
                         ranked_data_organized[key] = ranked_data["tier"][:turboNo] + [ranked_data["ratedTier"][turboNo]] + ranked_data["tier"][turboNo + 1:]
-                    elif i == 2: #胜点放在段位点的前面，所以在i = 2时进行特殊处理（Since leaguePoints is designed to be in front of ratedRating, measures are taken specifically when i equals 2）
+                    elif i == 2: #胜点放在排名分的前面，所以在i = 2时进行特殊处理（Since leaguePoints is designed to be in front of ratedRating, measures are taken specifically when i equals 2）
                         key = "leaguePoints / ratedRating"
                         ranked_data_organized[key] = ranked_data["leaguePoints"][:turboNo] + [ranked_data["ratedRating"][turboNo]] + ranked_data["leaguePoints"][turboNo + 1:]
                     else: #i = 2或14时合并完成，所以i = 12和13可以舍弃（Merge is finished when i equals 2 or 14, so the case where i equals 12 or 13 can be abandoned）
                         continue
                 ranked_df = pandas.DataFrame(data = ranked_data_organized)
+                
+                #print("召唤师所在赛段天梯数据如下：\nSummoner league ladders data are as follows:")
+                ladders = await (await connection.request("GET", f"/lol-ranked/v1/league-ladders/{current_puuid}")).json()
+                json4name = "Ranked Ladders - " + displayName + ".json"
+                while True:
+                    try:
+                        jsonfile4 = open(os.path.join(folder, json4name), "w", encoding = "utf-8")
+                    except FileNotFoundError:
+                        os.makedirs(folder, exist_ok = True)
+                    else:
+                        break
+                try:
+                    jsonfile4.write(json.dumps(ladders, indent = 4, ensure_ascii = False))
+                except UnicodeEncodeError:
+                    print("召唤师排位天梯数据文本文档生成失败！请检查召唤师名称是否包含不常用字符！\nSummoner league ladder data text generation failure! Please check if the summoner name includes any abnormal characters!\n")
+                else:
+                    print('召唤师排位天梯数据已保存为“%s”。\nSummoner league ladder data are saved as "%s".\n' %(os.path.join(folder, json4name), os.path.join(folder, json4name)))
+                jsonfile4.close()
+                currentTime = time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime())
+                pkl4name = "Intermediate Object - ranked (Rank) - %s (%s).pkl" %(displayName, currentTime)
+                #with open(os.path.join(folder, pkl4name), "wb") as IntObj3:
+                    #pickle.dump(ladders, IntObj3)
+                ladders_header = {"queueType": "战区", "division": "当前分级", "earnedRegaliaRewardIds": "已获得的段位奖励物品序号", "isProvisional": "定位中", "leaguePoints": "胜点", "losses": "负场", "miniseriesResults": "晋升赛结果", "pendingDemotion": "即将降级", "pendingPromotion": "即将晋级", "position": "当前位次", "positionDelta": "位次变化", "previousPosition": "过往位次", "previousSeasonEndDivision": "过往赛季结束段位分级", "previousSeasonEndTier": "过往赛季结束段位", "provisionalGamesRemaining": "剩余定位场次", "puuid": "玩家通用唯一识别码", "rankedRegaliaLevel": "华甲等级", "summonerId": "召唤师序号", "summonerName": "召唤师名", "tier": "当前段位", "wins": "胜场", "gameName": "玩家昵称", "tagLine": "昵称编号", "mark": "本人标记"}
+                ladders_header_keys = list(ladders_header.keys())
+                ladders_data = {}
+                for i in range(len(ladders_header_keys)):
+                    key = ladders_header_keys[i]
+                    ladders_data[key] = []
+                for i in range(len(ladders)):
+                    ladder = ladders[i]
+                    for j in range(len(ladder["divisions"])):
+                        division = ladder["divisions"][j]
+                        for k in range(len(division["standings"])):
+                            standing = division["standings"][k]
+                            standing_summoner = await (await connection.request("GET", f"/lol-summoner/v2/summoners/puuid/{standing["puuid"]}")).json()
+                            for l in range(len(ladders_header_keys)):
+                                key = ladders_header_keys[l]
+                                if l == 0:
+                                    ladders_data[key].append(queueTypes[ladder["queueType"]])
+                                elif l <= 20:
+                                    if l == 1 or l == 12:
+                                        ladders_data[key].append("") if standing[key] == "NA" else ladders_data[key].append(standing[key])
+                                    elif l == 13 or l == 19:
+                                        ladders_data[key].append(tiers[standing[key]])
+                                    else:
+                                        ladders_data[key].append(standing[key])
+                                elif l <= 22:
+                                    if l == 21:
+                                        ladders_data[key].append(standing_summoner["gameName"])
+                                    else:
+                                        ladders_data[key].append(standing_summoner["tagLine"])
+                                else:
+                                    ladders_data[key].append("☆") if standing_summoner["puuid"] == current_puuid else ladders_data[key].append("")
+                ladders_statistics_display_order = [0, 9, 11, 10, 17, 15, 18, 21, 22, 19, 1, 4, 3, 14, 8, 7, 6, 20, 5, 13, 12, 2, 16, 23]
+                ladders_data_organized = {}
+                for i in ladders_statistics_display_order:
+                    key = ladders_header_keys[i]
+                    ladders_data_organized[key] = [ladders_header[key]] + ladders_data[key]
+                ladders_df = pandas.DataFrame(data = ladders_data_organized)
+                for i in range(ladders_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
+                    for j in range(ladders_df.shape[1]):
+                        if str(ladders_df.iat[i, j]) == "True":
+                            ladders_df.iat[i, j] = "√"
+                        elif str(ladders_df.iat[i, j]) == "False":
+                            ladders_df.iat[i, j] = ""
                 
                 game_info_dfs = {}
                 game_timeline_dfs = {}
@@ -1483,28 +1556,28 @@ async def search_profile(connection):
                                     LoLHistory_get = False
                                     print("这位召唤师从5月1日起就没有进行过任何英雄联盟对局。\nThis summoner hasn't played any LoL game yet since May 1st.")
                                     break
-                            json4name = "Match History (LoL) - " + displayName + ".json"
+                            json5name = "Match History (LoL) - " + displayName + ".json"
                             while True:
                                 try:
-                                    jsonfile4 = open(os.path.join(folder, json4name), "w", encoding = "utf-8")
+                                    jsonfile5 = open(os.path.join(folder, json5name), "w", encoding = "utf-8")
                                 except FileNotFoundError:
                                     os.makedirs(folder, exist_ok = True)
                                 else:
                                     break
                             try:
-                                jsonfile4.write(json.dumps(LoLHistory, indent = 4, ensure_ascii = False))
+                                jsonfile5.write(json.dumps(LoLHistory, indent = 4, ensure_ascii = False))
                             except UnicodeEncodeError:
                                 print("召唤师英雄联盟对局记录文本文档生成失败！请检查召唤师名称和所选语言是否包含不常用字符！\nSummoner LoL match history text generation failure! Please check if the summoner name and the chosen language include any abnormal characters!\n")
-                            jsonfile4.close()
+                            jsonfile5.close()
                             currentTime = time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime())
-                            pkl4name = "Intermediate Object - LoLHistory - %s (%s).pkl" %(displayName, currentTime)
-                            #with open(os.path.join(folder, pkl4name), "wb") as IntObj4:
+                            pkl5name = "Intermediate Object - LoLHistory - %s (%s).pkl" %(displayName, currentTime)
+                            #with open(os.path.join(folder, pkl5name), "wb") as IntObj4:
                                 #pickle.dump(LoLHistory, IntObj4)
                             if count > 3:
                                 LoLHistory_get = False
                                 print("英雄联盟对局记录获取失败！请等待官方修复对局记录服务！\nLoL match history capture failure! Please wait for Tencent to fix the match history service!")
                                 break
-                            print('该玩家共进行%d场英雄联盟对局。近期对局（最近20场）已保存为“%s”。\nThis player has played %d LoL matches. Recent matches (last 20 played) are saved as "%s".\n' %(LoLHistory["games"]["gameCount"], os.path.join(folder, json4name), LoLHistory["games"]["gameCount"], os.path.join(folder, json4name)))
+                            print('该玩家共进行%d场英雄联盟对局。近期对局（最近20场）已保存为“%s”。\nThis player has played %d LoL matches. Recent matches (last 20 played) are saved as "%s".\n' %(LoLHistory["games"]["gameCount"], os.path.join(folder, json5name), LoLHistory["games"]["gameCount"], os.path.join(folder, json5name)))
                         except KeyError:
                             print(LoLHistory)
                             LoLHistory_url = "%s/lol-match-history/v1/products/lol/%s/matches?begIndex=0&endIndex=200" %(connection.address, info["puuid"])
@@ -2212,25 +2285,7 @@ async def search_profile(connection):
                                     currentPlatformId = LoLGame_info["participantIdentities"][0]["player"]["currentPlatformId"]
                                     save = True #指示保存是否成功，成功则输出保存进度，不成功则提示生成失败（Indicates whether the saving process is successful. If so, output the saving process, otherwise give a hint of generation failure）
                                     if export_json and reserve:
-                                        json6name = "Match Information (LoL) - " + currentPlatformId + "-" + matchID + ".json"
-                                        while True:
-                                            try:
-                                                jsonfile6 = open(os.path.join(folder, json6name), "w", encoding = "utf-8")
-                                            except FileNotFoundError:
-                                                os.makedirs(folder, exist_ok = True)
-                                            else:
-                                                break
-                                        try:
-                                            jsonfile6.write(json.dumps(LoLGame_info, indent = 4, ensure_ascii = False))
-                                        except UnicodeEncodeError:
-                                            print("对局%s信息文本文档生成失败！请检查召唤师名称是否包含不常用字符！\nMatch %s information text generation failure! Please check if the summoner name includes any abnormal characters!" %(matchID, matchID))
-                                            save = False
-                                        jsonfile6.close()
-                                        currentTime = time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime())
-                                        pkl6name = "Intermediate Object - Match Information (LoL) - %s-%s.pkl" %(currentPlatformId, matchID)
-                                        #with open(os.path.join(folder, pkl6name), "wb") as IntObj6:
-                                            #pickle.dump(LoLGame_info, IntObj6)
-                                        json7name = "Match Timeline (LoL) - " + currentPlatformId + "-" + matchID + ".json"
+                                        json7name = "Match Information (LoL) - " + currentPlatformId + "-" + matchID + ".json"
                                         while True:
                                             try:
                                                 jsonfile7 = open(os.path.join(folder, json7name), "w", encoding = "utf-8")
@@ -2239,16 +2294,35 @@ async def search_profile(connection):
                                             else:
                                                 break
                                         try:
-                                            jsonfile7.write(json.dumps(LoLGame_timeline, indent = 4, ensure_ascii = False))
+                                            jsonfile7.write(json.dumps(LoLGame_info, indent = 4, ensure_ascii = False))
                                         except UnicodeEncodeError:
-                                            print("对局%s时间轴文本文档生成失败！请检查召唤师名称是否包含不常用字符！\nMatch %s timeline text generation failure! Please check if the summoner name includes any abnormal characters!" %(matchID, matchID))
+                                            print("对局%s信息文本文档生成失败！请检查召唤师名称是否包含不常用字符！\nMatch %s information text generation failure! Please check if the summoner name includes any abnormal characters!" %(matchID, matchID))
                                             save = False
                                         jsonfile7.close()
                                         currentTime = time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime())
-                                        pkl7name = "Intermediate Object - Match Timeline (LoL) - %s-%s.pkl" %(currentPlatformId, matchID)
-                                        #with open(os.path.join(folder, pkl7name), "wb") as IntObj7:
+                                        pkl7name = "Intermediate Object - Match Information (LoL) - %s-%s.pkl" %(currentPlatformId, matchID)
+                                        #with open(os.path.join(folder, pkl7name), "wb") as IntObj6:
+                                            #pickle.dump(LoLGame_info, IntObj6)
+                                        json8name = "Match Timeline (LoL) - " + currentPlatformId + "-" + matchID + ".json"
+                                        while True:
+                                            try:
+                                                jsonfile8 = open(os.path.join(folder, json8name), "w", encoding = "utf-8")
+                                            except FileNotFoundError:
+                                                os.makedirs(folder, exist_ok = True)
+                                            else:
+                                                break
+                                        try:
+                                            jsonfile8.write(json.dumps(LoLGame_timeline, indent = 4, ensure_ascii = False))
+                                        except UnicodeEncodeError:
+                                            print("对局%s时间轴文本文档生成失败！请检查召唤师名称是否包含不常用字符！\nMatch %s timeline text generation failure! Please check if the summoner name includes any abnormal characters!" %(matchID, matchID))
+                                            save = False
+                                        jsonfile8.close()
+                                        currentTime = time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime())
+                                        pkl8name = "Intermediate Object - Match Timeline (LoL) - %s-%s.pkl" %(currentPlatformId, matchID)
+                                        #with open(os.path.join(folder, pkl8name), "wb") as IntObj7:
                                             #pickle.dump(LoLGame_timeline, IntObj7)
                                     if save:
+                                        print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                                         if export_json:
                                             print('保存进度（Saving process）：%d/%d\t对局序号（MatchID）： %s' %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
                                         else:
@@ -2312,7 +2386,7 @@ async def search_profile(connection):
                                                 except KeyError:
                                                     LoLGame_info_data[key].append(LoLGame_info["participants"][j]["championId"])
                                             elif i == 14:
-                                                LoLGame_info_data[key].append(tier[LoLGame_info["participants"][j]["highestAchievedSeasonTier"]])
+                                                LoLGame_info_data[key].append(tiers[LoLGame_info["participants"][j]["highestAchievedSeasonTier"]])
                                             elif i == 15 or i == 16: #需要注意电脑玩家的召唤师技能序号都是0（Note that Spell Ids of bot players are both 0s）
                                                 spellId = LoLGame_info["participants"][j][key + "Id"]
                                                 if spellId == 0:
@@ -2870,28 +2944,28 @@ async def search_profile(connection):
                                         count += 1
                                         print("正在进行第%d次尝试……\nTimes trying: No. %d ..." %(count, count))
                                         TFTHistory = await (await connection.request("GET", "/lol-match-history/v1/products/tft/%s/matches?begin=%d&count=%d" %(info["puuid"], begin_get, count_get))).json()
-                            json5name = "Match History (TFT) - " + displayName + ".json"
+                            json6name = "Match History (TFT) - " + displayName + ".json"
                             while True:
                                 try:
-                                    jsonfile5 = open(os.path.join(folder, json5name), "w", encoding = "utf-8")
+                                    jsonfile6 = open(os.path.join(folder, json6name), "w", encoding = "utf-8")
                                 except FileNotFoundError:
                                     os.makedirs(folder, exist_ok = True)
                                 else:
                                     break
                             try:
-                                jsonfile5.write(json.dumps(TFTHistory, indent = 4, ensure_ascii = False))
+                                jsonfile6.write(json.dumps(TFTHistory, indent = 4, ensure_ascii = False))
                             except UnicodeEncodeError:
                                 print("召唤师云顶之弈对局记录文本文档生成失败！请检查召唤师名称和所选语言是否包含不常用字符！\nSummoner TFT match history text generation failure! Please check if the summoner name and the chosen language include any abnormal characters!\n")
-                            jsonfile5.close()
+                            jsonfile6.close()
                             currentTime = time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime())
-                            pkl5name = "Intermediate Object - TFTHistory - %s (%s).pkl" %(displayName, currentTime)
-                            #with open(os.path.join(folder, pkl5name), "wb") as IntObj5:
+                            pkl6name = "Intermediate Object - TFTHistory - %s (%s).pkl" %(displayName, currentTime)
+                            #with open(os.path.join(folder, pkl6name), "wb") as IntObj5:
                                 #pickle.dump(TFTHistory, IntObj5)
                             if count > 3:
                                 TFTHistory_get = False
                                 print("云顶之弈对局记录获取失败！请等待官方修复对局记录服务！\TFT match history capture failure! Please wait for Tencent to fix the match history service!")
                                 break
-                            print('该玩家共进行%d场云顶之弈对局。近期云顶之弈对局（最近20场）已保存为“%s”。\nThis player has played %d TFT matches. Recent TFT matches (last 20 played) are saved as "%s".\n' %(len(TFTHistory["games"]), os.path.join(folder, json5name), len(TFTHistory["games"]), os.path.join(folder, json5name)))
+                            print('该玩家共进行%d场云顶之弈对局。近期云顶之弈对局（最近20场）已保存为“%s”。\nThis player has played %d TFT matches. Recent TFT matches (last 20 played) are saved as "%s".\n' %(len(TFTHistory["games"]), os.path.join(folder, json6name), len(TFTHistory["games"]), os.path.join(folder, json6name)))
                         except KeyError:
                             if "errorCode" in TFTHistory:
                                 print(TFTHistory)
@@ -2928,7 +3002,7 @@ async def search_profile(connection):
                     TFTHistory_header_keys = list(TFTHistory_header.keys())
                     #traitStyles = {"kThreat": "威慑", "kBronze": "青铜", "kSilver": "白银", "kGold": "黄金", "kChromatic": "炫金"}
                     traitStyles = {0: "", 1: "青铜", 2: "白银", 3: "黄金", 4: "炫金", 5: "独行"}
-                    rarity = {"Default": "经典", "NoRarity": "其它", "Epic": "史诗", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极"}
+                    rarities = {"Default": "经典", "NoRarity": "其它", "Epic": "史诗", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极"}
                     TFTGamePlayed = len(TFTHistory) != 0 #标记该玩家是否进行过云顶之弈对局（Mark whether this summoner has played any TFT game）
                     TFT_main_player_indices = [] #云顶之弈对局记录中记录了所有玩家的数据，但是在历史记录的工作表中只要显示主召唤师的数据，因此必须知道每场对局中主召唤师的索引（Each match in TFT history records all players' data, but only the main player's data are needed to display in the match history worksheet, so the index of the main player in each match is necessary）
                     version_re = re.compile("\d*\.\d*\.\d*\.\d*") #云顶之弈的对局版本信息是一串字符串，从中识别四位对局版本（TFT match version is a long string, from which the 4-number version is identified）
@@ -2956,24 +3030,25 @@ async def search_profile(connection):
                         currentPlatformId = TFTGame_info["metadata"]["match_id"].split("_")[0]
                         if export_json and TFTGame_info["json"] and not (update_unsaved_only and matchID in saved_TFTMatchIDs): #一些旧版本的云顶之弈对局数据在API中被删除了。这样的对局信息不应覆盖写到本地保存完好的json文件（Some old TFT matches are deleted from API. These matches shouldn't overwrite the complete local json files）
                             save = True
-                            json8name = "Match Information (TFT) - " + currentPlatformId + "-" + str(matchID) + ".json"
+                            json9name = "Match Information (TFT) - " + currentPlatformId + "-" + str(matchID) + ".json"
                             while True:
                                 try:
-                                    jsonfile8 = open(os.path.join(folder, json8name), "w", encoding = "utf-8")
+                                    jsonfile9 = open(os.path.join(folder, json9name), "w", encoding = "utf-8")
                                 except FileNotFoundError:
                                     os.makedirs(folder, exist_ok = True)
                                 else:
                                     break
                             try:
-                                jsonfile8.write(json.dumps(TFTHistory[i], indent = 4, ensure_ascii = False))
+                                jsonfile9.write(json.dumps(TFTHistory[i], indent = 4, ensure_ascii = False))
                             except UnicodeDecodeError:
                                 print("对局%s信息文本文档生成失败！请检查召唤师名称是否包含不常用字符！\nMatch %s information text generation failure! Please check if the summoner name includes any abnormal characters!" %(matchID, matchID))
                                 save = False
-                            jsonfile8.close()
-                            pkl8name = "Intermediate Object - Match Information (TFT) - %s-%d.pkl" %(currentPlatformId, matchID)
-                            #with open(os.path.join(folder, pkl8name), "wb") as IntObj8:
+                            jsonfile9.close()
+                            pkl9name = "Intermediate Object - Match Information (TFT) - %s-%d.pkl" %(currentPlatformId, matchID)
+                            #with open(os.path.join(folder, pkl9name), "wb") as IntObj8:
                                 #pickle.dump(TFTGame_info, IntObj8)
                         if save:
+                            print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                             if export_json:
                                 print('保存进度（Saving process）：%d/%d\t对局序号（MatchID）： %d' %(i + 1, len(TFTHistory), matchID), end = "")
                                 if update_unsaved_only and matchID in saved_TFTMatchIDs:
@@ -3130,10 +3205,10 @@ async def search_profile(connection):
                                                             to_append = {13: contentId, 14: "NA", 15: "NA"}
                                                             break
                                                         else:
-                                                            to_append = {13: TFTCompanion_iter["name"], 14: TFTCompanion_iter["level"], 15: rarity[TFTCompanion_iter["rarity"]]}
+                                                            to_append = {13: TFTCompanion_iter["name"], 14: TFTCompanion_iter["level"], 15: rarities[TFTCompanion_iter["rarity"]]}
                                                             break
                                             else:
-                                                to_append = {13: TFTCompanion_iter["name"], 14: TFTCompanion_iter["level"], 15: rarity[TFTCompanion_iter["rarity"]]}
+                                                to_append = {13: TFTCompanion_iter["name"], 14: TFTCompanion_iter["level"], 15: rarities[TFTCompanion_iter["rarity"]]}
                                             TFTGame_info_data[key].append(to_append[j])
                                             if TFTPlayer["puuid"] == current_puuid:
                                                 TFTHistory_data[key].append(to_append[j])
@@ -3488,6 +3563,8 @@ async def search_profile(connection):
                                 print("召唤师生涯导出完成！\nSummoner profile exported!\n")
                                 ranked_df.to_excel(excel_writer = writer, sheet_name = "Rank")
                                 print("召唤师排位数据导出完成！\nSummoner ranked data exported!\n")
+                                ladders_df.to_excel(excel_writer = writer, sheet_name = "Ladders")
+                                print("召唤师排位天梯数据导出完成！\nSummoner league ladder data exported!\n")
                                 mastery_df.to_excel(excel_writer = writer, sheet_name = "Champion Mastery")
                                 print("召唤师英雄成就导出完成！\nSummoner champion mastery exported!\n")
                                 if LoLHistory_searched:
@@ -3553,6 +3630,8 @@ async def search_profile(connection):
                                 print("召唤师生涯导出完成！\nSummoner profile exported!\n")
                                 ranked_df.to_excel(excel_writer = writer, sheet_name = "Rank")
                                 print("召唤师排位数据导出完成！\nSummoner ranked data exported!\n")
+                                ladders_df.to_excel(excel_writer = writer, sheet_name = "Ladders")
+                                print("召唤师排位天梯数据导出完成！\nSummoner league ladder data exported!\n")
                                 mastery_df.to_excel(excel_writer = writer, sheet_name = "Champion Mastery")
                                 print("召唤师英雄成就导出完成！\nSummoner champion mastery exported!\n")
                                 pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "Recently Played Summoners (LoL)")
@@ -3623,9 +3702,12 @@ async def search_profile(connection):
                                         print("已花费的总时间（Total time used）                          ：", format_runtime(total_used))
                                         print("剩余时间（Time remaining）                                 ：", format_runtime(total_remaining))
                                         print("预计总时间（Expected total time）                          ：", format_runtime(total_used + total_remaining), end = "\n\n")
+                                if len(matchIDs) != 0:
+                                    print("对局信息和时间轴导出完成！\nMatch information and timeline exported!")
                             break
                         else:
-                            print("对局信息和时间轴导出完成！\nMatch information and timeline exported!")
+                            if len(matchIDs) != 0:
+                                print("对局信息和时间轴导出完成！\nMatch information and timeline exported!")
                             break
                     if workbook_exist:
                         print("警告：由于该文件已存在，本次导出已追加新工作表到工作簿的末尾。这可能导致对局序号顺序的错乱。是否需要对工作表进行排序？（输入任意键排序，否则不排序）\nWarning: Because the excel workbook has existed, new sheets are appended to the last of the original sheet list. This may result in the disarrangement of matchID order. Do you want to sort the sheets? (Input anything to sort the sheets, or null to skip sorting)")
@@ -3648,11 +3730,11 @@ async def search_profile(connection):
                                 sheetnames = wb.sheetnames #第一次获取原工作簿的工作表名称列表（The first time to get the sheet name list of the original workbook）
                                 #下面锁定基础信息类的工作表顺序（The following code lock the order of sheets in basic data class）
                                 print("正在创建顺序工作表列表……\nCreating the ordered sheet list ...")
-                                basic_info_list = ["Profile", "Rank", "Champion Mastery", "Recently Played Summoners (LoL)", "Recently Played Summoners (TFT)", "LoL Match History", "LoL Match History - Scan", "LoL Match History - Manual", "TFT Match History", "TFT Match History - Manual"]
+                                basic_info_list = ["Profile", "Rank", "Ladders", "Champion Mastery", "Recently Played Summoners (LoL)", "Recently Played Summoners (TFT)", "LoL Match History", "LoL Match History - Scan", "LoL Match History - Manual", "TFT Match History", "TFT Match History - Manual"]
                                 match_dict = {}
                                 for sheet_iter in sheetnames:
                                     if sheet_iter.startswith("Match "):
-                                        matchID = int(sheet_iter.split()[1]) #目前暂不需要考虑对局序号因工作表名长度限制而被截断的问题（Currently the issue that matchID may be cut off due to the sheet name length limit isn't considered）
+                                        matchID = int(sheet_iter.split()[1]) #目前暂不需要考虑对局序号因工作表名长度限制而被截断的问题（Currently the issue that matchID may be cut off due to the sheet name length limit doesn't need to be considered）
                                         key = sheet_iter.split()[3][0] #以工作表名的内容部分的首字母为排序依据（Sort the sheetnames by the initial letter of the content part of the sheet name）
                                         if not matchID in match_dict:
                                             match_dict[matchID] = {}
@@ -3660,7 +3742,6 @@ async def search_profile(connection):
                                 sheetnames_sorted = [] #所有工作表的期望顺序存储在sheetnames_sorted变量中（The ordered result of all sheets is stored in the variable `sheetnames_sorted`）
                                 for sheet_iter in basic_info_list:
                                     if sheet_iter in sheetnames:
-                                        sheetnames.remove(sheet_iter)
                                         sheetnames_sorted.append(sheet_iter)
                                 for matchID in sorted(match_dict.keys()):
                                     if "I" in match_dict[matchID]:
@@ -3688,7 +3769,6 @@ async def search_profile(connection):
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    await get_lockfile(connection)
     await search_profile(connection)
 
 #-----------------------------------------------------------------------------

@@ -80,6 +80,9 @@ def getUrl(url: str, log):
             elif 'certificate verify failed' in str(ssl_error):
                 print("SSL证书验证失败！正在尝试第%d次重新获取数据！\nSSL certificate verify failed! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
                 log.write("SSL证书验证失败！正在尝试第%d次重新获取数据！\nSSL certificate verify failed! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
+            elif 'Max retries exceeded with url' in str(ssl_error):
+                print("请求数量超过限制！正在尝试第%d次重新获取数据！\nMax retries exceed with url! Trying to recapture the data with url: %s. Time(s) tried: %d" %(retry, url, retry))
+                log.write("请求数量超过限制！正在尝试第%d次重新获取数据！\nMax retries exceed with url! Trying to recapture the data with url: %s. Time(s) tried: %d\n" %(retry, url, retry))
         except requests.exceptions.ProxyError:
             if retry > 5:
                 break
@@ -212,7 +215,8 @@ while True:
                     soup = BeautifulSoup(line, 'lxml')
                     name = soup.find("a")["href"]
                     locales_pbe.append(name)
-            cdragon_folders = ["latest/cdragon/tft/"] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_latest] + ["pbe/cdragon/tft/"] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_pbe]
+            cdragon_folders = ["latest/cdragon/tft/"] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_latest] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/champions" %locale for locale in locales_latest] + ["pbe/cdragon/tft/"] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_pbe] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/champions" %locale for locale in locales_pbe]
+            cdragon_folders.sort()
         elif mode == "4":
             print("请选择输入方式：\nPlease choose an input method:\n1\t逐行输入（Line by line）\n2\t来自文件（From file）")
             log.write("请选择输入方式：\nPlease choose an input method:\n1\t逐行输入（Line by line）\n2\t来自文件（From file）\n")
@@ -295,10 +299,14 @@ while True:
             cdragon_folders =  ["latest/cdragon/arena/", "latest/cdragon/tft/"] + list(map(lambda x: "latest/" + x, text_folders_exported_latest)) + ["pbe/cdragon/arena/", "pbe/cdragon/tft/"] + list(map(lambda x: "pbe/" + x, text_folders_exported_pbe)) #索引文件中不包含cdragon文件夹内的文件，因此这里需要单独添加到文件夹列表中（The index file doesn't contain files in cdragon folder, so they should be added to the folder list specially）
             complete_scan = True
             if task_continue_hint:
+                print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+                log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
                 print("如果您之前有文件夹未检查，那么请在这里输入本次检查的文件夹的索引下界和上界。输入空字符串以检查所有文件夹。\nIf there're some folders unchecked before, please enter the lower and upper limit of the index of the folders to be checked this time. Submit an empty string to check all folders.\n提示：如果想要包含最后一个文件夹，请将上界指定为大于当前文件夹列表长度的任意一个正整数。\nHint: If you expect the program not to neglect the last folder, please specify the upper limit as any integer greater than the length of the current folder list.\n文件夹总个数（Total number of folders）：%d" %len(cdragon_folders))
                 log.write("如果您之前有文件夹未检查，那么请在这里输入本次检查的文件夹的索引下界和上界。输入空字符串以检查所有文件夹。\nIf there're some folders unchecked before, please enter the lower and upper limit of the index of the folders to be checked this time. Submit an empty string to check all folders.\n提示：如果想要包含最后一个文件夹，请将上界指定为大于当前文件夹列表长度的任意一个正整数。\nHint: If you expect the program not to neglect the last folder, please specify the upper limit as any integer greater than the length of the current folder list.\n文件夹总个数（Total number of folders）：%d\n" %len(cdragon_folders))
                 task_continue_hint = False
             else:
+                print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+                log.write("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())))
                 print("如果您之前有文件夹未检查，那么请在这里输入本次检查的文件夹的索引下界和上界。输入空字符串以检查所有文件夹。\nIf there're some folders unchecked before, please enter the lower and upper limit of the index of the folders to be checked this time. Submit an empty string to check all folders.\n文件夹总个数（Total number of folders）：%d" %len(cdragon_folders))
                 log.write("如果您之前有文件夹未检查，那么请在这里输入本次检查的文件夹的索引下界和上界。输入空字符串以检查所有文件夹。\nIf there're some folders unchecked before, please enter the lower and upper limit of the index of the folders to be checked this time. Submit an empty string to check all folders.\n文件夹总个数（Total number of folders）：%d\n" %len(cdragon_folders))
             while True:
@@ -385,6 +393,7 @@ while True:
                     local_date = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(local_timestamp))
                     if name.endswith((".json", ".txt", ".js", ".yaml")):
                         if mode == "2" and time_get_method == "1" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp + time.localtime().tm_gmtoff < latest_mod_timestamp or mode == "3" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["champion-summary.json", "cherry-augments.json", "companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"] or mode == "4" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp:
+                        #if mode == "2" and time_get_method == "1" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "2" and time_get_method == "2" and web_timestamp + time.localtime().tm_gmtoff < latest_mod_timestamp or mode == "3" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "3" and folder.endswith("v1/") and not name in ["champion-summary.json", "cherry-augments.json", "companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"] or mode == "4" and web_timestamp + time.localtime().tm_gmtoff < local_timestamp or mode == "4" and folder.endswith("v1/") and not name in ["champion-summary.json", "cherry-augments.json", "companions.json", "items.json", "perks.json", "perkstyles.json", "skins.json", "statstones.json", "summoner-emotes.json", "summoner-icons.json", "summoner-spells.json", "tftchampions.json", "tftdamageskins.json", "tftitems.json", "tftmapskins.json", "tfttraits.json", "ward-skins.json"]: #仅供发行版使用（Only for release）
                             continue
                         table["file"].append(name)
                         table["size"].append(size)
@@ -549,7 +558,7 @@ while True:
         for root, dirs, files in os.walk(src_folder):
             for file in files:
                 update = added = False
-                if mode == "1" and file.endswith(".json") or mode == "2":
+                if mode == "1" and file.endswith(".json") or mode == "2" and file == "champion.json":
                     src_path = os.path.join(root, file).replace("\\", "/")
                     relative_path = os.path.relpath(root, src_folder).replace("\\", "/")
                     dst_path = os.path.join(dst_folder, relative_path, file).replace("\\", "/")

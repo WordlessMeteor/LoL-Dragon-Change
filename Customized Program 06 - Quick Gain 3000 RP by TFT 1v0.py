@@ -121,7 +121,6 @@ async def RP_generator(connection):
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    await get_lockfile(connection)
     await RP_generator(connection)
 
 #-----------------------------------------------------------------------------

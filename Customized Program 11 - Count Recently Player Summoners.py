@@ -1189,7 +1189,7 @@ async def search_recent_players(connection):
                 current_summonerName = "" if info["gameName"] == "" and info["tagLine"] == "" else info["gameName"] + "#" + info["tagLine"] #作用同上，用于模糊定位，主要应用于玩家通用唯一识别码发生变动的大区且在昵称编号引入后注册的主召唤师的对局记录扫描模式（Acts as the same role as the above variable for a rough localization. It's mainly designed for Scan Mode on players that signed up after tagLine was introduced on servers that changed the players' puuids）
                 infos[current_puuid] = info
                 #下面准备一些数据资源（The following code prepare data resources）
-                tier = {"": "", "NONE": "没有段位", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
+                tiers = {"": "", "NONE": "没有段位", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
                 #下面设置扫描模式的扫描目录（The following code determines the scanning directory for scan mode）
                 riot_client_info = await (await connection.request("GET", "/riotclient/command-line-args")).json()
                 client_info = {}
@@ -1668,7 +1668,7 @@ async def search_recent_players(connection):
                                                     else:
                                                         LoLGame_info_data[key].append(LoLChampions[championID]["alias"])
                                                 elif j == 21:
-                                                    LoLGame_info_data[key].append(tier[LoLGame_info["participants"][i]["highestAchievedSeasonTier"]])
+                                                    LoLGame_info_data[key].append(tiers[LoLGame_info["participants"][i]["highestAchievedSeasonTier"]])
                                                 elif j in {22, 23}:
                                                     spellId = LoLGame_info["participants"][i][key + "Id"]
                                                     try:
@@ -1853,6 +1853,7 @@ async def search_recent_players(connection):
                                                 else:
                                                     LoLGame_info_data[key].append(stats[key])
                                     fetched_info = True
+                                    print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                                     print("加载进度（Loading process）：%d/%d\t对局序号（MatchID）： %s" %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
                                 else:
                                     matches_to_remove.append(matchID)
@@ -1949,7 +1950,7 @@ async def search_recent_players(connection):
                             TFTHistory_data = {}
                             TFTHistory_header_keys = list(TFTHistory_header.keys())
                             traitStyles = {0: "", 1: "青铜", 2: "白银", 3: "黄金", 4: "炫金", 5: "独行"}
-                            rarity = {"Default": "经典", "NoRarity": "其它", "Epic": "史诗", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极"}
+                            rarities = {"Default": "经典", "NoRarity": "其它", "Epic": "史诗", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极"}
                             TFTGamePlayed = len(TFTHistory) != 0 #标记该玩家是否进行过云顶之弈对局（Mark whether this summoner has played any TFT game）
                             TFT_main_player_indices = [] #云顶之弈对局记录中记录了所有玩家的数据，但是在历史记录的工作表中只要显示主召唤师的数据，因此必须知道每场对局中主召唤师的索引（Each match in TFT history records all players' data, but only the main player's data are needed to display in the match history worksheet, so the index of the main player in each match is necessary）
                             version_re = re.compile("\d*\.\d*\.\d*\.\d*") #云顶之弈的对局版本信息是一串字符串，从中识别四位对局版本（TFT match version is a long string, from which the 4-number version is identified）
@@ -1972,6 +1973,7 @@ async def search_recent_players(connection):
                                 TFTHistory_data[key] = []
                             for i in range(len(TFTHistory)): #由于不同对局意味着不同版本，不同版本的云顶之弈数据相差较大，所以为了使得一次获取的版本能够尽可能用到多个对局中，第一层迭代器应当是对局序号（Because different matches mean different patches, and TFT data differ greatly among different patches, to make a recently captured version of TFT data applicable in as more matches as possible, the first iterator should be the ID of the matches）
                                 if TFT_main_player_indices[i] == -1: #对局数据记录存在异常时的处理（Exception of match data recording exception）
+                                    print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                                     print("加载进度（Loading process）：%d/%d\t对局序号（MatchID）： %s （Exceptional match neglected）" %(i + 1, len(TFTHistory), TFTHistory[i]["metadata"]["match_id"].split("_")[1]))
                                 else:
                                     TFTHistoryJson = TFTHistory[i]["json"] #该数据结构应用于1 ≤ j ≤ 8（This variable applies when 1 ≤ j ≤ 8）
@@ -2098,10 +2100,10 @@ async def search_recent_players(connection):
                                                                     to_append = {13: contentId, 14: "NA", 15: "NA"}
                                                                     break
                                                                 else:
-                                                                    to_append = {13: TFTCompanion_iter["name"], 14: TFTCompanion_iter["level"], 15: rarity[TFTCompanion_iter["rarity"]]}
+                                                                    to_append = {13: TFTCompanion_iter["name"], 14: TFTCompanion_iter["level"], 15: rarities[TFTCompanion_iter["rarity"]]}
                                                                     break
                                                     else:
-                                                        to_append = {13: TFTCompanion_iter["name"], 14: TFTCompanion_iter["level"], 15: rarity[TFTCompanion_iter["rarity"]]}
+                                                        to_append = {13: TFTCompanion_iter["name"], 14: TFTCompanion_iter["level"], 15: rarities[TFTCompanion_iter["rarity"]]}
                                                     if TFTPlayer["puuid"] != current_puuid:
                                                         TFTHistory_data[key].append(to_append[j])
                                                 elif j in {16, 23, 24, 25}:
@@ -2383,6 +2385,7 @@ async def search_recent_players(connection):
                                                     else:
                                                         if TFTHistory[i]["json"]["participants"][k]["puuid"] != current_puuid:
                                                             TFTHistory_data[key].append("")
+                                    print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                                     print("加载进度（Loading process）：%d/%d\t对局序号（MatchID）： %d" %(i + 1, len(TFTHistory), TFTHistory[i]["json"]["game_id"]))
                             recent_TFTPlayers_statistics_display_order = [24, 16, 25, 23, 22, 2, 1, 3, 5, 6, 4, 13, 14, 15, 19, 18, 26, 17, 27, 21, 20, 10, 11, 12, 93, 94, 95, 126, 127, 128, 96, 97, 98, 129, 130, 131, 99, 100, 101, 132, 133, 134, 102, 103, 104, 135, 136, 137, 105, 106, 107, 138, 139, 140, 108, 109, 110, 141, 142, 143, 111, 112, 113, 144, 145, 146, 114, 115, 116, 147, 148, 149, 117, 118, 119, 150, 151, 152, 120, 121, 122, 153, 154, 155, 123, 124, 125, 156, 157, 158, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
                             recent_TFTPlayers_data_organized = {}
@@ -3374,7 +3377,6 @@ async def search_recent_players(connection):
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    await get_lockfile(connection)
     await search_recent_players(connection)
 
 #-----------------------------------------------------------------------------

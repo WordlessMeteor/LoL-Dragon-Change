@@ -1,4 +1,3 @@
-del "Champion List.txt"
 del "temporary data.json"
 del "Recently Played Summoners in Friend List.xlsx"
 del "Recently Played Summoners in Friend Requests.xlsx"

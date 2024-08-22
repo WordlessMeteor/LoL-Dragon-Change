@@ -82,8 +82,6 @@ async def create_custom_lobby(connection):
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    await update_lockfile(connection)
-    await get_lockfile(connection)
     await create_custom_lobby(connection)
 
 #-----------------------------------------------------------------------------

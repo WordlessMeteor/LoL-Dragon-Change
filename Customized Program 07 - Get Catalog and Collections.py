@@ -381,7 +381,7 @@ async def fetch_store(connection):
         print("数据资源加载完成。\nData resources loaded successfully.")
         break
     #下面准备数据资源（The following code prepare the data resource）
-    inventoryTypes = ["AUGMENT", "AUGMENT_SLOT", "BOOST", "BUNDLES", "CHAMPION", "CHAMPION_SKIN", "COMPANION", "CURRENCY", "EMOTE", "EVENT_PASS", "GIFT", "HEXTECH_CRAFTING", "MODE_PROGRESSION_REWARD", "MYSTERY", "QUEUE_ENTRY", "RP", "SPELL_BOOK_PAGE", "STATSTONE", "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON", "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN", "TFT_MAP_SKIN", "TOURNAMENT_TROPHY", "TRANSFER", "WARD_SKIN"]
+    inventoryTypes = ["ACHIEVEMENT_TITLE", "AUGMENT", "AUGMENT_SLOT", "BOOST", "BUNDLES", "CHAMPION", "CHAMPION_SKIN", "COMPANION", "CURRENCY", "EMOTE", "EVENT_PASS", "GIFT", "HEXTECH_CRAFTING", "MODE_PROGRESSION_REWARD", "MYSTERY", "QUEUE_ENTRY", "REGALIA_BANNER", "REGALIA_CREST", "RP", "SKIN_AUGMENT", "SKIN_BORDER", "SPELL_BOOK_PAGE", "STATSTONE", "STRAWBERRY_BOON", "STRAWBERRY_LOADOUT_ITEM", "STRAWBERRY_MAP", "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON", "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN", "TFT_MAP_SKIN", "TFT_PLAYBOOK", "TOURNAMENT_FLAG", "TOURNAMENT_FRAME", "TOURNAMENT_LOGO", "TOURNAMENT_TROPHY", "TRANSFER", "WARD_SKIN"]
     catalogDicts = {} #该变量并未投入使用，只是用于观察时分类（This variable isn't put to use. It's only intended for classifcation during inspection）
     catalogList = []
     for inventoryType in inventoryTypes:
@@ -400,7 +400,7 @@ async def fetch_store(connection):
     #with open(os.path.join(folder, txt1name), "w", encoding = "utf-8") as fp:
         #json.dump(catalogList, fp, indent = 4, ensure_ascii = False)
     print('商品信息已保存为“%s”。\nCatalog information is saved as "%s".\n' %(os.path.join(folder, txt1name), os.path.join(folder, txt1name)))
-    collection = await (await connection.request("GET", '/lol-inventory/v1/inventory?inventoryTypes=["AUGMENT","AUGMENT_SLOT","BOOST","BUNDLES","CHAMPION","CHAMPION_SKIN","COMPANION","CURRENCY","EMOTE","EVENT_PASS","GIFT","HEXTECH_CRAFTING","MODE_PROGRESSION_REWARD","MYSTERY","QUEUE_ENTRY","RP","SPELL_BOOK_PAGE","STATSTONE","SUMMONER_CUSTOMIZATION","SUMMONER_ICON","TEAM_SKIN_PURCHASE","TFT_DAMAGE_SKIN","TFT_MAP_SKIN","TOURNAMENT_TROPHY","TRANSFER","WARD_SKIN"]')).json()
+    collection = await (await connection.request("GET", '/lol-inventory/v1/inventory?inventoryTypes=["ACHIEVEMENT_TITLE","AUGMENT","AUGMENT_SLOT","BOOST","BUNDLES","CHAMPION","CHAMPION_SKIN","COMPANION","CURRENCY","EMOTE","EVENT_PASS","GIFT","HEXTECH_CRAFTING","MODE_PROGRESSION_REWARD","MYSTERY","QUEUE_ENTRY","REGALIA_BANNER","REGALIA_CREST","RP","SKIN_AUGMENT","SKIN_BORDER","SPELL_BOOK_PAGE","STATSTONE","STRAWBERRY_BOON","STRAWBERRY_LOADOUT_ITEM","STRAWBERRY_MAP","SUMMONER_CUSTOMIZATION","SUMMONER_ICON","TEAM_SKIN_PURCHASE","TFT_DAMAGE_SKIN","TFT_MAP_SKIN","TFT_PLAYBOOK","TOURNAMENT_FLAG","TOURNAMENT_FRAME","TOURNAMENT_LOGO","TOURNAMENT_TROPHY","TRANSFER","WARD_SKIN"]')).json()
     txt2name = "Collection - %s.json" %(get_info_name(info))
     while True:
         try:
@@ -475,19 +475,40 @@ async def fetch_store(connection):
         wardSkins_hashtable[wardSkin["id"]] = {}
         wardSkins_hashtable[wardSkin["id"]]["name"] = wardSkin["name"]
         wardSkins_hashtable[wardSkin["id"]]["description"] = wardSkin["description"]
-    hashtable_dicts = {"CHAMPION_SKIN": championSkins_hashtable, "COMPANION": companions_hashtable, "STATSTONE": statstones_hashtable, "EMOTE": summonerEmotes_hashtable, "SUMMONER_ICON": summonerIcons_hashtable, "TFT_DAMAGE_SKIN": tftdamageskins_hashtable, "TFT_MAP_SKIN": tftmapskins_hashtable, "WARD_SKIN": wardSkins_hashtable}
+    #以下类型的藏品在商品中也没有记录名称，需要借助其它接口来获取其名称（Collection items of the following types aren't recorded the names in catalog, so other APIs are required to get their names）
+    titles_all = await (await connection.request("GET", "/lol-challenges/v2/titles/all")).json()
+    titles_hashtable = {}
+    for title in titles_all.values():
+        titles_hashtable[title["itemId"]] = {}
+        titles_hashtable[title["itemId"]]["name"] = title["name"]
+    TFTTeamPlanner_dirty = await (await connection.request("GET", "/lol-tft-team-planner/v1/team/dirty")).json()
+    TFTSetName = TFTTeamPlanner_dirty["setName"]
+    TFTPlaybooks = await (await connection.request("GET", f"/lol-cosmetics/v1/inventories/{TFTSetName}/playbooks")).json() #实际上，TFTSetName用任何不包含元字符的非空字符串代替，返回的结果都是一样的（As a matter of fact, No matter which non-empty string without metacharacters takes the place of TFTSetName, this function returns the same result）
+    TFTPlaybooks_hashtable = {}
+    for group in TFTPlaybooks["groups"]:
+        for item in group["items"]:
+            TFTPlaybooks_hashtable[item["itemId"]] = {}
+            TFTPlaybooks_hashtable[item["itemId"]]["name"] = item["name"]
+    regaliaBanners = await (await connection.request("GET", "/lol-regalia/v3/inventory/REGALIA_BANNER")).json()
+    regaliaBanners_hashtable = {}
+    for bannerId in regaliaBanners:
+        regaliaBanners_hashtable[int(regaliaBanners[bannerId]["items"][0]["id"])] = {}
+        regaliaBanners_hashtable[int(regaliaBanners[bannerId]["items"][0]["id"])]["name"] = regaliaBanners[bannerId]["items"][0]["localizedName"]
+        regaliaBanners_hashtable[int(regaliaBanners[bannerId]["items"][0]["id"])]["description"] = regaliaBanners[bannerId]["items"][0]["localizedDescription"]
+    regaliaCrests = await (await connection.request("GET", "/lol-regalia/v3/inventory/REGALIA-CREST")).json()
+    hashtable_dicts = {"ACHIEVEMENT_TITLE": titles_hashtable, "CHAMPION_SKIN": championSkins_hashtable, "COMPANION": companions_hashtable, "STATSTONE": statstones_hashtable, "EMOTE": summonerEmotes_hashtable, "REGALIA_BANNER": regaliaBanners_hashtable, "SUMMONER_ICON": summonerIcons_hashtable, "TFT_DAMAGE_SKIN": tftdamageskins_hashtable, "TFT_MAP_SKIN": tftmapskins_hashtable, "TFT_PLAYBOOK": TFTPlaybooks_hashtable, "WARD_SKIN": wardSkins_hashtable}
     #定义商品数据结构（Define the store item data structure）
     catalog_header = {"active": "可用性", "description": "简介", "imagePath": "缩略图路径", "inactiveDate": "停止销售日期", "inventoryType": "道具类型", "itemId": "序号", "itemInstanceId": "识别码", "metadata": "元数据", "name": "名称", "offerId": "赠送代码", "owned": "已拥有", "ownershipType": "拥有权", "price_IP": "价格（蓝色精粹）", "price_RP": "价格（点券）", "purchaseDate": "购买日期", "questSkinInfo": "赠送皮肤信息", "releaseDate": "发布日期", "sale": "销售信息", "subInventoryType": "次级道具类型", "subTitle": "副标题", "tags": "搜索关键词"}
     catalog_data = {}
     catalog_header_keys = list(catalog_header.keys())
-    inventoryType_dict = {"AUGMENT": "AUGMENT", "AUGMENT_SLOT": "AUGMENT_SLOT", "BOOST": "加成道具", "BUNDLES": "道具包", "CHAMPION": "英雄", "CHAMPION_SKIN": "皮肤", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "表情", "EVENT_PASS": "事件通行证", "GIFT": "礼物", "HEXTECH_CRAFTING": "海克斯科技宝箱", "MODE_PROGRESSION_REWARD": "MODE_PROGRESSION_REWARD", "MYSTERY": "MYSTERY", "QUEUE_ENTRY": "队列通行证", "RP": "点券", "SPELL_BOOK_PAGE": "符文页", "STATSTONE": "永恒星碑", "SUMMONER_CUSTOMIZATION": "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON": "召唤师图标", "TEAM_SKIN_PURCHASE": "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN": "云顶之弈进攻特效", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TOURNAMENT_TROPHY": "赛事奖励", "TRANSFER": "转区项目", "WARD_SKIN": "守卫（眼）皮肤"}
+    inventoryType_dict = {"ACHIEVEMENT_TITLE": "头衔", "AUGMENT": "AUGMENT", "AUGMENT_SLOT": "AUGMENT_SLOT", "BOOST": "加成道具", "BUNDLES": "道具包", "CHAMPION": "英雄", "CHAMPION_SKIN": "皮肤", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "表情", "EVENT_PASS": "事件通行证", "GIFT": "礼物", "HEXTECH_CRAFTING": "海克斯科技宝箱", "MODE_PROGRESSION_REWARD": "游戏模式进度奖励", "MYSTERY": "神秘道具", "QUEUE_ENTRY": "队列通行证", "REGALIA_BANNER": "旗帜", "REGALIA_CREST": "纹章", "RP": "点券", "SKIN_AUGMENT": "签名升级", "SKIN_BORDER": "边框", "SPELL_BOOK_PAGE": "符文页", "STATSTONE": "永恒星碑", "STRAWBERRY_BOON": "无尽狂潮增益效果", "STRAWBERRY_LOADOUT_ITEM": "无尽狂潮配置", "STRAWBERRY_MAP": "无尽狂潮地图", "SUMMONER_CUSTOMIZATION": "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON": "召唤师图标", "TEAM_SKIN_PURCHASE": "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN": "云顶之弈进攻特效", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TFT_PLAYBOOK": "云顶之弈指导手册", "TOURNAMENT_FLAG": "赛事旗帜", "TOURNAMENT_FRAME": "赛事镜头", "TOURNAMENT_LOGO": "赛事标志", "TOURNAMENT_TROPHY": "赛事纪念品", "TRANSFER": "转区项目", "WARD_SKIN": "守卫（眼）皮肤"}
     ownershipType_dict = {None: "未拥有", "F2P": "免费使用", "RENTED": "租借中", "OWNED": "已拥有"}
-    subInventoryType_dict = {"": "", "lol_clash_tickets": "冠军杯赛挑战券", "tft_star_fragments": "星之碎片", "TFT_PASS": "云顶之弈事件通行证", "RECOLOR": "炫彩", "lol_clash_premium_tickets": "冠军杯赛豪华版挑战券", "LOL_EVENT_PASS": "英雄联盟事件通行证"}
+    subInventoryType_dict = {"": "", "lol_clash_premium_tickets": "冠军杯赛豪华版挑战券", "lol_clash_tickets": "冠军杯赛挑战券", "LOL_EVENT_PASS": "英雄联盟事件通行证", "RECOLOR": "炫彩", "TFT_PASS": "云顶之弈事件通行证", "tft_star_fragments": "星之碎片", "TFT_TREASURE_TROVE_TOKEN": "召唤商店宝藏代币"}
     for i in range(len(catalog_header)):
         key = catalog_header_keys[i]
         catalog_data[key] = []
     #定义藏品数据结构（Define the collection item data structure）
-    collection_header = {"expirationDate": "租赁到期时间", "f2p": "免费使用", "inventoryType": "道具类型", "itemId": "序号", "loyalty": "", "loyaltySources": "", "owned": "已拥有", "ownershipType": "拥有权", "purchaseDate": "购买时间", "quantity": "数量", "rental": "租借中", "uuid": "唯一识别码", "wins": "使用该道具获得的胜场数", "isVintage": "典藏皮肤", "name": "名称"}
+    collection_header = {"expirationDate": "租赁到期时间", "f2p": "免费使用", "inventoryType": "道具类型", "itemId": "序号", "loyalty": "", "loyaltySources": "", "owned": "已拥有", "ownershipType": "拥有权", "purchaseDate": "购买时间", "quantity": "数量", "rental": "租借中", "uuid": "唯一识别码", "wins": "使用该道具可获得增益的胜场数", "isVintage": "典藏皮肤", "name": "名称"}
     collection_data = {}
     collection_header_keys = list(collection_header.keys())
     for i in range(len(collection_header)):
@@ -672,7 +693,6 @@ async def fetch_store(connection):
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    await get_lockfile(connection)
     await fetch_store(connection)
 
 #-----------------------------------------------------------------------------

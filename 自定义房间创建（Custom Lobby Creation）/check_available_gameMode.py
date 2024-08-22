@@ -1,4 +1,5 @@
 from lcu_driver import Connector
+import os, time
 
 #=============================================================================
 # * 声明（Declaration）
@@ -15,15 +16,7 @@ from lcu_driver import Connector
 #    https://github.com/sousa-andre/lcu-driver
 #-----------------------------------------------------------------------------
 
-#-----------------------------------------------------------------------------
-# 获取自定义模式电脑玩家列表（Get access to the bot list in Custom）
-#-----------------------------------------------------------------------------
-import os, pandas, random, time
-localdata = pandas.read_excel("../available-bots.xlsx")
-champions_CN = { int(localdata["championId"][bot]): localdata["CN"][bot] for bot in range(len(localdata)) }
-champions_EN = { int(localdata["championId"][bot]): localdata["EN"][bot] for bot in range(len(localdata)) }
-all_champions = list(champions_CN.keys())
-gameMode = {1: "CLASSIC", 2: "ODIN", 3: "ARAM", 4: "TUTORIAL", 5: "URF", 6: "DOOMBOTSTEEMO", 7: "ONEFORALL", 8: "ASCENSION", 9: "FIRSTBLOOD", 10: "KINGPORO", 11: "SIEGE", 12: "ASSASSINATE", 13: "ARSR", 14: "DARKSTAR", 15: "STARGUARDIAN", 16: "PROJECT", 17: "GAMEMODEX", 18: "ODYSSEY", 19: "NEXUSBLITZ", 20: "ULTBOOK"}
+gamemodes = ["CLASSIC", "ODIN", "ARAM", "TUTORIAL", "URF", "DOOMBOTSTEEMO", "ONEFORALL", "ASCENSION", "FIRSTBLOOD", "KINGPORO", "SIEGE", "ASSASSINATE", "ARSR", "DARKSTAR", "STARGUARDIAN", "PROJECT", "GAMEMODEX", "ODYSSEY", "NEXUSBLITZ", "ULTBOOK", "CHERRY", "STRAWBERRY"]
 
 connector = Connector()
 
@@ -62,12 +55,12 @@ async def create_custom_lobby(connection):
     available_custom_game = []
     data = await connection.request("GET", "/lol-summoner/v1/current-summoner")
     summoner = await data.json()
-    for i in gameMode:
-        for j in range(0,100):
+    for i in range(len(gamemodes)):
+        for j in range(0, 100):
             custom = {
                 "customGameLobby": {
                     "configuration": {
-                        "gameMode": gameMode[i],
+                        "gameMode": gamemodes[i],
                         "gameMutator": "",
                         "gameServerRegion": "",
                         "mapId": j,
@@ -77,23 +70,23 @@ async def create_custom_lobby(connection):
                     "spectatorPolicy": "AllAllowed",
                     "teamSize": 1
                     },
-                    "lobbyName": summoner["displayName"] + "'s Game",
+                    "lobbyName": summoner["gameName"] + "'s Game",
                     "lobbyPassword": ""
                 },
                 "isCustom": True
             }
-            await connection.request("POST", "/lol-lobby/v2/lobby", data=custom)
-            bot = { "championId": 11, "botDifficulty": "MEDIUM", "teamId": "200"}
-            await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data=bot)
+            await connection.request("POST", "/lol-lobby/v2/lobby", data = custom)
+            bot = {"championId": 11, "botDifficulty": "RSINTERMEDIATE", "teamId": "200", "position": "TOP"}
+            await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)
             time.sleep(0.1)
             data = await connection.request("GET", "/lol-lobby/v2/lobby")
             bot = await data.json()
             try:
                 if bool(bot["gameConfig"]["customTeam200"]):
-                    available_custom_game.append((gameMode[i],j))
+                    available_custom_game.append((gamemodes[i],j))
                     print(custom)
             except KeyError:
-                print("游戏模式为%s、地图序号为%d的自定义房间不可用。\nThe lobby of gameMode %s and mapId %d isn't available."%(gameMode[i], j, gameMode[i], j))
+                print("游戏模式为%s、地图序号为%d的自定义房间不可用。\nThe lobby of gameMode %s and mapId %d isn't available."%(gamemodes[i], j, gamemodes[i], j))
     time.sleep(2)
 
 #-----------------------------------------------------------------------------
@@ -103,16 +96,14 @@ async def create_queue_lobby(connection):
     print("正在检查队列房间有效性……\nChecking the availability of different queue lobbies ...")
     global available_queueId
     available_queueId = []
-    for queueId in range(3000):
+    for queueId in range(10000):
         lobby = await connection.request("GET", "/lol-lobby/v2/lobby")
         lobby_information = await lobby.json()
         if "gameConfig" in lobby_information:
             prequeueId = lobby_information["gameConfig"]["queueId"]
         else:
             prequeueId = ""
-        queue = {
-                    "queueId": queueId
-                }
+        queue = {"queueId": queueId}
         await connection.request("POST", "/lol-lobby/v2/lobby", data=queue)
         lobby = await connection.request("GET", "/lol-lobby/v2/lobby")
         lobby_information = await lobby.json()
@@ -123,58 +114,27 @@ async def create_queue_lobby(connection):
                 print('{\n\t"queueId": ' + str(queueId) + "\n}")
                 print(lobby_information)
             else:
-                print("序号为%d的房间不可用。\nThe lobby of queueId %d isn't available."%(queueId, queueId))
+                print("序号为%d的队列房间不可用。\nThe lobby of queueId %d isn't available."%(queueId, queueId))
         else:
-            print("序号为%d的房间不可用。\nThe lobby of queueId %d isn't available."%(queueId, queueId))
+            print("序号为%d的队列房间不可用。\nThe lobby of queueId %d isn't available."%(queueId, queueId))
         time.sleep(0.1)
     time.sleep(2)
-
-#-----------------------------------------------------------------------------
-# 批量添加机器人（Add a batch of bots）
-#-----------------------------------------------------------------------------
-async def add_bots_team1(connection):
-    activedata = await connection.request("GET", "/lol-lobby/v2/lobby/custom/available-bots")
-    champions = { bot["id"]: bot["name"] for bot in await activedata.json() }
-    all_champions = list(champions.keys())
-    
-    team1 = random.sample(all_champions,5)
-
-    for Id in team1:
-        bot = { "championId": Id, "botDifficulty": "MEDIUM", "teamId": "100"}
-        await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data=bot)
-
-#-----------------------------------------------------------------------------
-# 批量添加机器人（Add a batch of bots）
-#-----------------------------------------------------------------------------
-async def add_bots_team2(connection):
-    activedata = await connection.request("GET", "/lol-lobby/v2/lobby/custom/available-bots")
-    champions = { bot["id"]: bot["name"] for bot in await activedata.json() }
-    all_champions = list(champions.keys())
-    
-    team2 = random.sample(all_champions,5)
-
-    for Id in team2:
-        bot = { "championId": Id, "botDifficulty": "MEDIUM", "teamId": "200"}
-        await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data=bot)
 
 #-----------------------------------------------------------------------------
 # websocket
 #-----------------------------------------------------------------------------
 @connector.ready
 async def connect(connection):
-    #await get_summoner_data(connection)
-    #await get_lockfile(connection)
+    await get_summoner_data(connection)
     await create_custom_lobby(connection)
     await create_queue_lobby(connection)
-    #await add_bots_team1(connection)
-    #await add_bots_team2(connection)
 
 #-----------------------------------------------------------------------------
 # Main
 #-----------------------------------------------------------------------------
 
 connector.start()
-print("可用自定义房间游戏模式和地图序号如下：\nAvailable custom lobby gameModes and mapIds are as follows:")
+print("可用自定义房间游戏模式和地图序号如下：\nAvailable custom lobby game modes and mapIds are as follows:")
 print(available_custom_game)
 print("可用队列房间序号如下：\nAvailable lobby queueIds are as follows:")
 print(available_queueId)

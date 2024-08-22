@@ -112,7 +112,6 @@ async def send_commands(connection):
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    await get_lockfile(connection)
     await send_commands(connection)
 
 #-----------------------------------------------------------------------------

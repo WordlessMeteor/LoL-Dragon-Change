@@ -117,15 +117,15 @@ async def analyze_player_loots(connection): #导出玩家目前含有的战利�
         print("玩家战利品信息文本文档生成失败！请检查战利品信息是否包含不常用字符！\nPlayer loot text generation failure! Please check if the loot information includes any abnormal characters!\n")
     else:
         print('玩家战利品信息已保存为“%s”。\nPlayer loot information is saved as "%s".\n' %(os.path.join(folder, jsonname), os.path.join(folder, jsonname)))
-    player_loot_header = {"asset": "资产类型", "count": "数量", "disenchantLootName": "分解获得精萃类型", "disenchantRecipeName": "战利品分解种类", "disenchantValue": "分解返还", "displayCategories": "战利品类别", "expiryTime": "到期时间戳", "isNew": "是否未查看", "isRental": "是否租赁", "itemDesc": "物品描述", "itemStatus": "战利品拥有状态", "localizedDescription": "战利品附加说明", "localizedName": "战利品简称", "localizedRecipeSubtitle": "战利品兑换界面说明", "localizedRecipeTitle": "战利品兑换界面标题", "lootId": "战利品序号", "lootName": "战利品名称", "parentItemStatus": "升级所需物品状态", "parentStoreItemId": "升级所需商品序号", "rarity": "内容阶位", "redeemableStatus": "可解锁状况", "refId": "解锁商品序号", "rentalGames": "可租借局数", "rentalSeconds": "可租借时间（秒）", "shadowPath": "阴影图示路径", "splashPath": "背景图路径", "storeItemId": "商品序号", "tags": "关键词", "tilePath": "方块图路径", "type": "战利品类型", "upgradeEssenceName": "升级所需精萃类型", "upgradeEssenceValue": "升级所需精萃数量", "upgradeLootName": "升级后的战利品名称", "value": "对应商品原价"}
+    player_loot_header = {"asset": "资产类型", "count": "数量", "disenchantLootName": "分解获得精萃类型", "disenchantRecipeName": "战利品分解种类", "disenchantValue": "分解返还", "displayCategories": "战利品类别", "expiryTime": "到期时间戳", "isNew": "是否未查看", "isRental": "是否租赁", "itemDesc": "物品描述", "itemStatus": "战利品拥有状态", "localizedDescription": "战利品附加说明", "localizedName": "译名", "localizedRecipeSubtitle": "战利品兑换界面说明", "localizedRecipeTitle": "战利品兑换界面标题", "lootId": "战利品序号", "lootName": "战利品名称", "parentItemStatus": "升级所需物品状态", "parentStoreItemId": "升级所需商品序号", "rarity": "内容阶位", "redeemableStatus": "可解锁状况", "refId": "解锁商品序号", "rentalGames": "可租借局数", "rentalSeconds": "可租借时间（秒）", "shadowPath": "阴影图示路径", "splashPath": "背景图路径", "storeItemId": "商品序号", "tags": "关键词", "tilePath": "方块图路径", "type": "战利品类型", "upgradeEssenceName": "升级所需精萃类型", "upgradeEssenceValue": "升级所需精萃数量", "upgradeLootName": "升级后的战利品名称", "value": "对应商品原价"}
     player_loot_data = {}
     player_loot_header_keys = list(player_loot_header.keys())
-    essenceType = {"CURRENCY_champion": "蓝色精萃", "CURRENCY_cosmetic": "橙色精萃", "": ""}
+    essenceTypes = {"CURRENCY_champion": "蓝色精萃", "CURRENCY_cosmetic": "橙色精萃", "": ""}
     lootCategories = {"": "其它", "CHAMPION": "英雄", "CHEST": "宝箱", "COMPANION": "小小英雄", "EMOTE": "表情", "ETERNALS": "永恒星碑", "SKIN": "皮肤", "SUMMONERICON": "图标", "WARDSKIN": "守卫皮肤"}
-    itemStatus = {"NONE": "未拥有", "RENTAL": "租借中", "OWNED": "已拥有"}
-    rarity = {"": "无", "DEFAULT": "经典", "EPIC": "史诗", "LEGENDARY": "传说", "MYTHIC": "神话", "RARE": "稀有", "ULTIMATE": "终极"}
-    redeemableStatus = {"ALREADY_OWNED": "已拥有", "CHAMPION_NOT_OWNED": "英雄未拥有", "NOT_REDEEMABLE": "不可解锁", "REDEEMABLE": "可解锁", "REDEEMABLE_RENTAL": "可激活租借"}
-    lootType = {"": "其它", "BOOST": "加成道具", "CHAMPION": "永久英雄", "CHAMPION_RENTAL": "英雄碎片", "CHAMPION_TOKEN": "成就代币", "CHEST": "宝箱", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "永久表情", "EMOTE_RENTAL": "表情碎片", "MATERIAL": "材料", "SKIN": "永久皮肤", "SKIN_RENTAL": "皮肤碎片", "STATSTONE": "永久永恒星碑", "STATSTONE_SHARD": "永恒星碑碎片", "SUMMONERICON": "召唤师图标", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TOURNAMENTLOGO": "冠军杯赛图标", "WARDSKIN": "永久守卫皮肤", "WARDSKIN_RENTAL": "守卫皮肤碎片"}
+    itemStatus_dict = {"NONE": "未拥有", "RENTAL": "租借中", "OWNED": "已拥有"}
+    rarities = {"": "无", "DEFAULT": "经典", "EPIC": "史诗", "LEGENDARY": "传说", "MYTHIC": "神话", "RARE": "稀有", "ULTIMATE": "终极"}
+    redeemableStatus_dict = {"ALREADY_OWNED": "已拥有", "CHAMPION_NOT_OWNED": "英雄未拥有", "NOT_REDEEMABLE": "不可解锁", "REDEEMABLE": "可解锁", "REDEEMABLE_RENTAL": "可激活租借"}
+    lootTypes = {"": "其它", "BOOST": "加成道具", "CHAMPION": "永久英雄", "CHAMPION_RENTAL": "英雄碎片", "CHAMPION_TOKEN": "成就代币", "CHEST": "宝箱", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "永久表情", "EMOTE_RENTAL": "表情碎片", "MATERIAL": "材料", "SKIN": "永久皮肤", "SKIN_RENTAL": "皮肤碎片", "STATSTONE": "永久永恒星碑", "STATSTONE_SHARD": "永恒星碑碎片", "SUMMONERICON": "召唤师图标", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TOURNAMENTLOGO": "冠军杯赛图标", "WARDSKIN": "永久守卫皮肤", "WARDSKIN_RENTAL": "守卫皮肤碎片"}
     for i in range(len(player_loot_header_keys)):
         key = player_loot_header_keys[i]
         player_loot_data[key] = []
@@ -133,17 +133,17 @@ async def analyze_player_loots(connection): #导出玩家目前含有的战利�
         for j in range(len(player_loot_header_keys)):
             key = player_loot_header_keys[j]
             if j == 2 or j == 30:
-                player_loot_data[key].append(essenceType[player_loot[i][key]])
+                player_loot_data[key].append(essenceTypes[player_loot[i][key]])
             elif j == 5:
                 player_loot_data[key].append(lootCategories[player_loot[i][key]])
             elif j == 10 or j == 17:
-                player_loot_data[key].append(itemStatus[player_loot[i][key]])
+                player_loot_data[key].append(itemStatus_dict[player_loot[i][key]])
             elif j == 19:
-                player_loot_data[key].append(rarity[player_loot[i][key]])
+                player_loot_data[key].append(rarities[player_loot[i][key]])
             elif j == 20:
-                player_loot_data[key].append(redeemableStatus[player_loot[i][key]])
+                player_loot_data[key].append(redeemableStatus_dict[player_loot[i][key]])
             elif j == 29:
-                player_loot_data[key].append(lootType[player_loot[i][key]])
+                player_loot_data[key].append(lootTypes[player_loot[i][key]])
             else:
                 player_loot_data[key].append(player_loot[i][key])
     player_loot_statistics_display_order = [15, 9, 12, 1, 0, 19, 30, 31, 32, 2, 4, 33, 5, 29, 20, 17, 10, 27]
@@ -178,7 +178,6 @@ async def analyze_player_loots(connection): #导出玩家目前含有的战利�
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    await get_lockfile(connection)
     await analyze_player_loots(connection)
     input()
 

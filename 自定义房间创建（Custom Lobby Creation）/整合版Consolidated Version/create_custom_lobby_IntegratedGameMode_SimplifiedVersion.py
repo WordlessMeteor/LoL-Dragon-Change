@@ -1,4 +1,5 @@
 from lcu_driver import Connector
+import os, pandas, random, time
 
 #=============================================================================
 # * 声明（Declaration）
@@ -18,11 +19,10 @@ from lcu_driver import Connector
 #-----------------------------------------------------------------------------
 # 获取自定义模式电脑玩家列表（Get access to the bot list in Custom）
 #-----------------------------------------------------------------------------
-import os, pandas, random, time
-localdata = pandas.read_excel("../../available-bots.xlsx")
-champions_CN = { int(localdata["championId"][bot]): localdata["name"][bot] for bot in range(len(localdata)) }
-champions_EN = { int(localdata["championId"][bot]): localdata["alias"][bot] for bot in range(len(localdata)) }
-all_champions = list(champions_CN.keys())
+localdata = pandas.read_excel("../../available-bots.xlsx", index_col = 0, usecols = list(range(1, 5)), skiprows = [1])
+names = {championId: localdata.at[championId, "name"] for championId in localdata.index}
+aliases = {championId: localdata.at[championId, "alias"] for championId in localdata.index}
+all_bots = list(names.keys())
 
 connector = Connector()
 
@@ -58,41 +58,41 @@ async def get_lockfile(connection):
 async def create_custom_lobby(connection):
     data = await connection.request("GET", "/lol-summoner/v1/current-summoner")
     summoner = await data.json()
-    gameMode = ["CLASSIC","ARAM","PRACTICETOOL","NEXUSBLITZ"]
-    mapId = [11,12,11,21]
-    print("请选择自定义房间的游戏模式：\nPlease select a game mode of the lobby:\n1\t召唤师峡谷（Summoner's Rift）\n2\t嚎哭深渊（Howling Abyss）\n3\t训练模式（Practice Tool）\n4\t极限闪击（国服不可用）【Nexus Blitz (Unavailable on Chinese servers)】")
+    gamemodes = ["CLASSIC", "ARAM", "PRACTICETOOL", "NEXUSBLITZ", "GAMEMODEX"]
+    mapId = [11, 12, 11, 21, 21]
+    print("请选择自定义房间的游戏模式：\nPlease select a game mode of the lobby:\n1\t召唤师峡谷（Summoner's Rift）\n2\t嚎哭深渊（Howling Abyss）\n3\t训练模式（Practice Tool）\n4\t极限闪击（不可用）【Nexus Blitz (Unavailable)】\n5\t极限闪击（Nexus Blitz）")
     while True:
-        TypeNumber = input()
-        if TypeNumber == "":
+        typeNumber = input()
+        if typeNumber == "":
             continue
-        elif TypeNumber in {"1","2","3","4"}:
-            TypeNumber = int(TypeNumber)
-            print("请选择自定义房间的游戏类型：\nPlease select a game type of the lobby:\n1\t自选模式（Blind Pick）\n2\t征召模式（Draft Mode）\n4\t全随机模式（All Random）\n6\t竞技征召模式（国服正式服不可用）【Tournament Draft (Unavailable on Chinese Live servers)】")
+        elif typeNumber in map(str, range(1, 6)):
+            typeNumber = int(typeNumber)
+            print("请选择自定义房间的游戏类型：\nPlease select a game type of the lobby:\n1\t自选模式（Blind Pick）\n2\t征召模式（Draft Mode）\n4\t全随机模式（All Random）\n6\t竞技征召模式（Tournament Draft）")
             while True:
-                mutatorid = input()
-                if mutatorid == "":
+                mutatorId = input()
+                if mutatorId == "":
                     continue
-                elif mutatorid in {"1","2","4","6"}:
-                    mutatorid = int(mutatorid)
+                elif mutatorId in {"1", "2", "4", "6"}:
+                    mutatorId = int(mutatorId)
                     custom = {
                         "customGameLobby": {
                             "configuration": {
-                                "gameMode": gameMode[TypeNumber - 1],
+                                "gameMode": gamemodes[typeNumber - 1],
                                 "gameMutator": "",
                                 "gameServerRegion": "",
-                                "mapId": mapId[TypeNumber - 1],
+                                "mapId": mapId[typeNumber - 1],
                                 "mutators": {
-                                    "id": mutatorid
+                                    "id": mutatorId
                                 },
                             "spectatorPolicy": "AllAllowed",
                             "teamSize": 5
                             },
-                            "lobbyName": summoner["displayName"] + "'s Game",
+                            "lobbyName": summoner["gameName"] + "'s Game",
                             "lobbyPassword": ""
                         },
                         "isCustom": True
                     }
-                    await connection.request("POST", "/lol-lobby/v2/lobby", data=custom)
+                    await connection.request("POST", "/lol-lobby/v2/lobby", data = custom)
                     break
                 else:
                     print("游戏类型输入错误！请重新输入：\nError input of game type! Please try again:")
@@ -104,21 +104,101 @@ async def create_custom_lobby(connection):
 # 批量添加机器人（Add a batch of bots）
 #-----------------------------------------------------------------------------
 async def add_bots_team1(connection):
-    team1 = random.sample(all_champions,5)
-
-    for Id in team1:
-        bot = { "championId": Id, "botDifficulty": "MEDIUM", "teamId": "100"}
-        await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data=bot)
+    lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+    maxTeamSize = lobby_information["gameConfig"]["maxTeamSize"]
+    current_summonerId = (await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json())["summonerId"]
+    LoLChampions = await (await connection.request("GET", f"/lol-champions/v1/inventories/{current_summonerId}/champions")).json()
+    LoLChampions = {champion["id"]: champion for champion in LoLChampions}
+    recommended_position_for_champion = await (await connection.request("GET", "/lol-perks/v1/recommended-champion-positions")).json()
+    recommended_position_for_champion_keys = list(recommended_position_for_champion.keys())
+    for championId in recommended_position_for_champion_keys:
+        if not int(championId) in all_bots:
+            del recommended_position_for_champion[championId]
+    botPositions = set()
+    for champion in recommended_position_for_champion.values():
+        botPositions |= set(champion["recommendedPositions"])
+    #将botPositions排序整理为["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
+    botPositions = list(botPositions)
+    botPositions_tmp = []
+    for position in ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]:
+        if position in botPositions:
+            botPositions.remove(position)
+            botPositions_tmp.append(position)
+    botPositions = botPositions_tmp + botPositions
+    recommended_champion_for_position = {} #用于生成某条分路的随机英雄（Used to generate random champions of specific positions respectively）
+    for position in botPositions:
+        recommended_champion_for_position[position] = []
+    for championId in recommended_position_for_champion:
+        for position in recommended_position_for_champion[championId]["recommendedPositions"]:
+            recommended_champion_for_position[position].append(int(championId))
+    for position in recommended_champion_for_position:
+        recommended_champion_for_position[position].sort()
+    
+    team = []
+    for position in botPositions:
+        team += random.sample(recommended_champion_for_position[position], 1)
+    
+    team1 = team[:]
+    botPosition_team = botPositions[:]
+    for i in range(len(team)):
+        Id = team[i]
+        bot = {"championId": Id, "botDifficulty": "RSINTERMEDIATE", "teamId": "100", "position": botPositions[i]}
+        response = await (await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)).json()
+    
+    print("队伍1的电脑玩家：\nTeam 1 bots:\n*****************************************************************************")
+    for i in range(len(team1)):
+        print("{0:<14}".format(names[team1[i]]) + "\t" + "{0:<14}".format(aliases[team1[i]]) + "\tRSINTERMEDIATE\t" + botPosition_team[i])
+    print("*****************************************************************************\n")
 
 #-----------------------------------------------------------------------------
 # 批量添加机器人（Add a batch of bots）
 #-----------------------------------------------------------------------------
 async def add_bots_team2(connection):
-    team2 = random.sample(all_champions,5)
-
-    for Id in team2:
-        bot = { "championId": Id, "botDifficulty": "MEDIUM", "teamId": "200"}
-        await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data=bot)
+    lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+    maxTeamSize = lobby_information["gameConfig"]["maxTeamSize"]
+    current_summonerId = (await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json())["summonerId"]
+    LoLChampions = await (await connection.request("GET", f"/lol-champions/v1/inventories/{current_summonerId}/champions")).json()
+    LoLChampions = {champion["id"]: champion for champion in LoLChampions}
+    recommended_position_for_champion = await (await connection.request("GET", "/lol-perks/v1/recommended-champion-positions")).json()
+    recommended_position_for_champion_keys = list(recommended_position_for_champion.keys())
+    for championId in recommended_position_for_champion_keys:
+        if not int(championId) in all_bots:
+            del recommended_position_for_champion[championId]
+    botPositions = set()
+    for champion in recommended_position_for_champion.values():
+        botPositions |= set(champion["recommendedPositions"])
+    #将botPositions排序整理为["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
+    botPositions = list(botPositions)
+    botPositions_tmp = []
+    for position in ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]:
+        if position in botPositions:
+            botPositions.remove(position)
+            botPositions_tmp.append(position)
+    botPositions = botPositions_tmp + botPositions
+    recommended_champion_for_position = {} #用于生成某条分路的随机英雄（Used to generate random champions of specific positions respectively）
+    for position in botPositions:
+        recommended_champion_for_position[position] = []
+    for championId in recommended_position_for_champion:
+        for position in recommended_position_for_champion[championId]["recommendedPositions"]:
+            recommended_champion_for_position[position].append(int(championId))
+    for position in recommended_champion_for_position:
+        recommended_champion_for_position[position].sort()
+    
+    team = []
+    for position in botPositions:
+        team += random.sample(recommended_champion_for_position[position], 1)
+    
+    team2 = team[:]
+    botPosition_team = botPositions[:]
+    for i in range(len(team)):
+        Id = team[i]
+        bot = {"championId": Id, "botDifficulty": "RSINTERMEDIATE", "teamId": "200", "position": botPositions[i]}
+        response = await (await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)).json()
+    
+    print("队伍2的电脑玩家：\nTeam 2 bots:\n*****************************************************************************")
+    for i in range(len(team2)):
+        print("{0:<14}".format(names[team2[i]]) + "\t" + "{0:<14}".format(aliases[team2[i]]) + "\tRSINTERMEDIATE\t" + botPosition_team[i])
+    print("*****************************************************************************\n")
 
 #-----------------------------------------------------------------------------
 # 开始游戏（Start Game）
@@ -132,7 +212,6 @@ async def start_game(connection):
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    await get_lockfile(connection)
     await create_custom_lobby(connection)
     await add_bots_team1(connection)
     await add_bots_team2(connection)

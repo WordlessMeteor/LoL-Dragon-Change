@@ -358,7 +358,6 @@ def search_summoner_offline(connection): #由于无法使用requests.get函数�
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    await get_lockfile(connection)
     await search_summoner_online(connection)
 
 #-----------------------------------------------------------------------------
