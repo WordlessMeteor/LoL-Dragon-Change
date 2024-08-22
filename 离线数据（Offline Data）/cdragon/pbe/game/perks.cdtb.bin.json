@@ -129348,13 +129348,13 @@
                     "HealBonusADRatio": 0.10000000149011612,
                     "HealAPRatio": 0.05000000074505806,
                     "HealBase": 5.0,
-                    "HealMax": 120.0,
-                    "MSBuff": 0.20000000298023224,
+                    "HealMax": 100.0,
+                    "MSBuff": 0.15000000596046448,
                     "MinionHealMod": 1.0,
-                    "MSDuration": 1.25,
+                    "MSDuration": 1.0,
                     "HealCritMod": 0.0,
                     "RangedMinionReduction": 0.10000000149011612,
-                    "{2feea9cc}": 0.20000000298023224,
+                    "{2feea9cc}": 0.15000000596046448,
                     "MeleeMinionReduction": 0.20000000298023224
                 },
                 "mCalculations": {
@@ -129363,7 +129363,7 @@
                         "mFormulaParts": [
                             {
                                 "mStartValue": 5.0,
-                                "mEndValue": 120.0,
+                                "mEndValue": 100.0,
                                 "mScaleByStatProgressionMultiplier": true,
                                 "__type": "ByCharLevelInterpolationCalculationPart"
                             },
@@ -129384,7 +129384,7 @@
                         "mFormulaParts": [
                             {
                                 "mStartValue": 5.0,
-                                "mEndValue": 120.0,
+                                "mEndValue": 100.0,
                                 "mScaleByStatProgressionMultiplier": true,
                                 "__type": "ByCharLevelInterpolationCalculationPart"
                             }
@@ -137686,10 +137686,21 @@
                     "HealAmount": {
                         "mFormulaParts": [
                             {
-                                "mStartValue": 1.0,
-                                "mEndValue": 23.0,
-                                "mScaleByStatProgressionMultiplier": true,
-                                "__type": "ByCharLevelInterpolationCalculationPart"
+                                "mLevel1Value": 1.0,
+                                "mInitialBonusPerLevel": 0.25,
+                                "mBreakpoints": [
+                                    {
+                                        "mLevel": 6,
+                                        "mBonusPerLevelAtAndAfter": 1.0,
+                                        "__type": "Breakpoint"
+                                    },
+                                    {
+                                        "mLevel": 11,
+                                        "mBonusPerLevelAtAndAfter": 2.0,
+                                        "__type": "Breakpoint"
+                                    }
+                                ],
+                                "__type": "ByCharLevelBreakpointsCalculationPart"
                             }
                         ],
                         "__type": "GameCalculation"
