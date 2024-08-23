@@ -175,7 +175,8 @@ async def get_challenger_tier(connection):
     
     tiers_zh = {"": "", "NONE": "没有段位", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
     tiers_en = {"": "", "NONE": "NONE", "IRON": "IRON", "BRONZE": "BRONZE", "SILVER": "SILVER", "GOLD": "GOLD", "PLATINUM": "PLATINUM", "EMERALD": "EMERALD", "DIAMOND": "DIAMOND", "MASTER": "MASTER", "GRANDMASTER": "GRANDMASTER", "CHALLENGER": "CHALLENGER"}
-    ratedTiers = {"": "", "NONE": "没有段位", "GRAY": "灰白", "GREEN": "翠绿", "BLUE": "天蓝", "PURPLE": "绛紫", "ORANGE": "耀橙"}
+    ratedTiers_turbo = {"": "", "NONE": "没有段位", "GRAY": "灰白", "GREEN": "翠绿", "BLUE": "天蓝", "PURPLE": "绛紫", "ORANGE": "耀橙"}
+    ratedTiers_cherry = {"": "", "NONE": "没有段位", "GRAY": "木木角斗士", "GREEN": "青铜角斗士", "BLUE": "白银角斗士", "PURPLE": "黄金角斗士", "ORANGE": "王者角斗士"}
     #ratedTiers = {"": "", "NONE": "NONE", "GRAY": "GRAY", "GREEN": "GREEN", "BLUE": "BLUE", "PURPLE": "PURPLE", "ORANGE": "ORANGE"}
     queueTypes_zh = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战 (BETA测试)", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
     queueTypes_en = {"RANKED_SOLO_5x5": "Ranked Solo/Duo", "RANKED_FLEX_SR": "Ranked Flex", "RANKED_TFT": "Ranked TFT", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "Double Up (Workshop)", "RANKED_TFT_TURBO": "Hyper Roll", "CHERRY": "Arena"}
@@ -298,7 +299,7 @@ async def get_challenger_tier(connection):
                 key = topRated_ladders_header_keys[j]
                 if j <= 8:
                     if j == 5:
-                        queue_ladder_data[key].append(ratedTiers[standing[key]])
+                        queue_ladder_data[key].append(ratedTiers_cherry[standing[key]] if queueType == "CHERRY" else ratedTiers_turbo[standing[key]])
                     else:
                         queue_ladder_data[key].append(standing[key])
                 else:
@@ -430,15 +431,15 @@ async def get_challenger_tier(connection):
                             if any(sheet_iter.split(maxsplit = 1)[0] == queueType for queueType in challenger_ladder_queueTypes):
                                 queueType_tmp = sheet_iter.split(maxsplit = 1)[0] #以工作表名的队列部分为排序依据（Sort the sheetnames by the queueType part of the sheet name）
                                 time_str = sheet_iter.split(maxsplit = 1)[1] #目前暂不需要考虑时间因工作表名长度限制而被截断的问题（Currently the issue that the time may be cut off due to the sheet name length limit doesn't need to be considered）
-                                if not time_str in challenger_ladders_dict:
-                                    challenger_ladders_dict[time_str] = {}
-                                challenger_ladders_dict[time_str][queueType_tmp] = sheet_iter
+                                if not queueType_tmp in challenger_ladders_dict:
+                                    challenger_ladders_dict[queueType_tmp] = {}
+                                challenger_ladders_dict[queueType_tmp][time_str] = sheet_iter
                             elif any(sheet_iter.split(maxsplit = 1)[0] == queueType for queueType in topRated_ladder_queueTypes):
                                 queueType_tmp = sheet_iter.split(maxsplit = 1)[0] #以工作表名的队列部分为排序依据（Sort the sheetnames by the queueType part of the sheet name）
                                 time_str = sheet_iter.split(maxsplit = 1)[1] #目前暂不需要考虑时间因工作表名长度限制而被截断的问题（Currently the issue that the time may be cut off due to the sheet name length limit doesn't need to be considered）
-                                if not time_str in topRated_ladders_dict:
-                                    topRated_ladders_dict[time_str] = {}
-                                topRated_ladders_dict[time_str][queueType_tmp] = sheet_iter
+                                if not queueType_tmp in topRated_ladders_dict:
+                                    topRated_ladders_dict[queueType_tmp] = {}
+                                topRated_ladders_dict[queueType_tmp][time_str] = sheet_iter
                         sheetnames_sorted = [] #所有工作表的期望顺序存储在sheetnames_sorted变量中（The ordered result of all sheets is stored in the variable `sheetnames_sorted`）
                         for season in sorted(set(split_config_dict.keys()) | set(reward_track_dict.keys())): #第一部分：赛季信息类工作表（Part 1: Split config sheets）
                             if split_config_dict[season] in sheetnames:
@@ -448,15 +449,13 @@ async def get_challenger_tier(connection):
                         for season in sorted(tier_apex_metadata_dict.keys()): #第二部分：天梯元数据工作表（Part 2: Apex metadata sheets）
                             if tier_apex_metadata_dict[season] in sheetnames:
                                 sheetnames_sorted.append(tier_apex_metadata_dict[season])
-                        for time_iter in sorted(set(challenger_ladders_dict.keys()) | set(topRated_ladders_dict.keys())): #第三部分：天梯工作表（Part 3: Apex sheets）
-                            if time_iter in challenger_ladders_dict:
-                                for queueType_iter in challenger_ladder_queueTypes: #队列顺序以API中记录的队列顺序为准。下同（The queueType order of sheets adopts that recorded in API. So does the following）
-                                    if queueType_iter in challenger_ladders_dict[time_iter]:
-                                        sheetnames_sorted.append(challenger_ladders_dict[time_iter][queueType_iter])
-                            if time_iter in topRated_ladders_dict:
-                                for queueType_iter in topRated_ladder_queueTypes:
-                                    if queueType_iter in topRated_ladders_dict[time_iter]:
-                                        sheetnames_sorted.append(topRated_ladders_dict[time_iter][queueType_iter])
+                        for queueType_iter in challenger_ladder_queueTypes + topRated_ladder_queueTypes: #第三部分：天梯工作表（Part 3: Apex sheets）
+                            if queueType_iter in challenger_ladders_dict:
+                                for time_iter in sorted(challenger_ladders_dict[queueType_iter].keys()): #队列顺序以API中记录的队列顺序为准。下同（The queueType order of sheets adopts that recorded in API. So does the following）
+                                    sheetnames_sorted.append(challenger_ladders_dict[queueType_iter][time_iter])
+                            if queueType_iter in topRated_ladders_dict:
+                                for time_iter in sorted(topRated_ladders_dict[queueType_iter].keys()):
+                                    sheetnames_sorted.append(topRated_ladders_dict[queueType_iter][time_iter])
                         #下面排列所有工作表（The following code arrange all sheets）
                         print("正在排序……\nOrdering ...")
                         for i in range(len(sheetnames_sorted)): #排序的思路是每次将一个工作表根据其在原工作表列表中的索引和在顺序工作表列表中的索引的差值进行移动（The main idea of sheets' sorting is to move each sheet according to the difference of the indices between in the original sheet list and in the ordered sheet list）
