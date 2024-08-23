@@ -6,6 +6,7 @@ The following explanations only apply to the current branch. For other details (
 **本程序集仅供学习和个人娱乐，不得用于其它盈利用途！**
 # 程序集功能简述
 本程序集支持<ins>创建自定义房间（包括5v5训练模式）</ins>、<ins>检查可用电脑玩家和游戏模式</ins>以及其它探索性功能的开发。\
+**克隆本存储库**，需要本地至少有<ins>25 GB</ins>的存储空间。如果**仅使用发行版中的压缩包**，请保证本地至少有<ins>2 GB</ins>的存储空间。\
 关于自定义房间创建之外的脚本，请参阅第6点注意事项。
 1. 本程序集提供所有模式与电脑玩家难度设置和路线选择的整合版。
 	- 整合版采用的电脑玩家数据为主目录下的`available-bots.xlsx`文件。因此**请勿移动任何离线版文件和该xlsx文件**。
@@ -502,6 +503,7 @@ The following explanations only apply to the current branch. For other details (
 **This program set only supports study use or personal entertainment. Any commercial use is forbidden!**
 # Program Set Functionality
 This program set allows <ins>creating custom lobbies (including 5V5 Practice Tool)</ins>, <ins>checking available bot players and game modes</ins> and development of other exploratory functions.\
+**Cloning this repository** requires about <ins>25 GiB</ins> local storage. **The compressed file in release** takes up about <ins>2 GiB</ins> local storage.\
 For details about customized programs that is beyond the scope of creating a custom lobby, please check the sixth instruction.
 1. This program set provides the consolidated version for all game modes and all levels and positions of bot difficulity.
 	- The consolidated version takes `available-bots.xlsx` in the home directory as the bot player data. For its sake, **please don't move any offline files (this file included)**.
