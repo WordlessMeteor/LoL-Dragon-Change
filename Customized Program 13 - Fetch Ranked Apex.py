@@ -119,7 +119,7 @@ async def get_challenger_tier(connection):
                     splits_info_data[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(split[key + "Millis"] // 1000)))
                 else:
                     splits_info_data[key].append(split[key])
-            elif j == 4:
+            elif j == 6:
                 splits_info_data[key].append(split["victoriousSkinRewardGroup"]["itemInstanceId"])
             else:
                 splits_info_data[key].append(split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"][key[27:]])
@@ -180,7 +180,7 @@ async def get_challenger_tier(connection):
     queueTypes_zh = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战 (BETA测试)", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
     queueTypes_en = {"RANKED_SOLO_5x5": "Ranked Solo/Duo", "RANKED_FLEX_SR": "Ranked Flex", "RANKED_TFT": "Ranked TFT", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "Double Up (Workshop)", "RANKED_TFT_TURBO": "Hyper Roll", "CHERRY": "Arena"}
     challenger_ladder_queueTypes = await (await connection.request("GET", "/lol-ranked/v1/challenger-ladders-enabled")).json()
-    challenger_ladders_metadata_header = {"nextApexUpdateMillis": "下次天梯更新时间戳（毫秒）", "provisionalGameThreshold": "定位赛场次", "queueType": "队列类型", "requestedRankedEntry": "排位解锁条件", "apexUnlockTimeMillis": "天梯解锁时间戳（毫秒）", "division": "段位分级", "maxLeagueSize": "段位容量", "minLpForApexTier": "上榜所需胜点", "tier": "段位", "topNumberOfPlayers": "上榜所需名次", "nextApexUpdate": "下次天梯更新时间", "apexUnlockTime": "天梯解锁时间"}
+    challenger_ladders_metadata_header = {"nextApexUpdateMillis": "下次天梯更新时间戳（毫秒）", "nextApexUpdate": "下次天梯更新时间", "provisionalGameThreshold": "定位赛场次", "queueType": "队列类型", "requestedRankedEntry": "排位解锁条件", "apexUnlockTimeMillis": "天梯解锁时间戳（毫秒）", "apexUnlockTime": "天梯解锁时间", "division": "段位分级", "maxLeagueSize": "段位容量", "minLpForApexTier": "上榜所需胜点", "tier": "段位", "topNumberOfPlayers": "上榜所需名次"}
     challenger_ladders_metadata_header_keys = list(challenger_ladders_metadata_header.keys())
     challenger_ladders_metadata = {}
     for i in range(len(challenger_ladders_metadata_header_keys)):
@@ -213,21 +213,21 @@ async def get_challenger_tier(connection):
                     break
             for i in range(len(ladders["divisions"])):
                 division = ladders["divisions"][i]
-                for i1 in range(len(challenger_ladders_metadata_header_keys)):
-                    key = challenger_ladders_metadata_header_keys[i1]
-                    if i1 <= 4:
-                        if i1 == 1:
+                for j in range(len(challenger_ladders_metadata_header_keys)):
+                    key = challenger_ladders_metadata_header_keys[j]
+                    if j <= 4:
+                        if j == 1:
                             challenger_ladders_metadata[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(ladders[key + "Millis"] // 1000)))
-                        elif i1 == 3:
+                        elif j == 3:
                             challenger_ladders_metadata[key].append(queueTypes_zh[ladders[key]])
                         else:
                             challenger_ladders_metadata[key].append(ladders[key])
                     else:
-                        if i1 == 6:
+                        if j == 6:
                             challenger_ladders_metadata[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(division[key + "Millis"] // 1000)))
-                        if i1 == 7:
+                        elif j == 7:
                             challenger_ladders_metadata[key].append("") if division[key] == "" else challenger_ladders_metadata[key].append(division[key])
-                        elif i1 == 10:
+                        elif j == 10:
                             challenger_ladders_metadata[key].append(tiers_zh[division[key]])
                         else:
                             challenger_ladders_metadata[key].append(division[key])
