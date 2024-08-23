@@ -215,7 +215,7 @@ while True:
                     soup = BeautifulSoup(line, 'lxml')
                     name = soup.find("a")["href"]
                     locales_pbe.append(name)
-            cdragon_folders = ["latest/cdragon/tft/"] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_latest] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/champions" %locale for locale in locales_latest] + ["pbe/cdragon/tft/"] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_pbe] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/champions" %locale for locale in locales_pbe]
+            cdragon_folders = ["latest/cdragon/tft/"] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_latest] + ["latest/plugins/rcp-be-lol-game-data/global/%sv1/champions/" %locale for locale in locales_latest] + ["pbe/cdragon/tft/"] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/" %locale for locale in locales_pbe] + ["pbe/plugins/rcp-be-lol-game-data/global/%sv1/champions/" %locale for locale in locales_pbe] #由于urljoin函数的特性，所有文件夹类地址必须以斜杠结尾。下同（Due to the feature of `urljoin` function, all folder URLs must end with a slash. So do the following）
             cdragon_folders.sort()
         elif mode == "4":
             print("请选择输入方式：\nPlease choose an input method:\n1\t逐行输入（Line by line）\n2\t来自文件（From file）")
