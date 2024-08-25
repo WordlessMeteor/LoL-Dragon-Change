@@ -284,14 +284,14 @@ The following explanations only apply to the current branch. For other details (
 		- 商品信息中的缩略图路径是与**LCU API**相关的网址，需要在**英雄联盟客户端启动**的情况下才能打开。初次打开网站需要输入用户名和密码，请在该脚本的输出的最开始部分找到<ins>带有“riot”的一行</ins>，用户名为<ins>“riot”</ins>，密码为<ins>“riot”后面的一串字符串</ins>。
 			- 缩略图路径标为<ins>default.png</ins>的商品的缩略图尚未找到。
 		- 该程序涉及以下数据资源：
-			https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/companions.json
-			https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/skins.json
-			https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/statstones.json
-			https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/summoner-emotes.json
-			https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/summoner-icons.json
-			https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/tftdamageskins.json
-			https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/tftmapskins.json
-			https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/ward-skins.json
+			- https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/companions.json
+			- https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/skins.json
+			- https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/statstones.json
+			- https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/summoner-emotes.json
+			- https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/summoner-icons.json
+			- https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/tftdamageskins.json
+			- https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/tftmapskins.json
+			- https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/ward-skins.json
 	- 自定义脚本8从来没有被寄予统计一个服务器上所有召唤师的数量的厚望。（因为人实在是太多了，并且遍历是最盲目的！）
 	- 自定义脚本9用于**查询和导出当前服务器存在的游戏模式**。
 		- 尝试在多个服务器上运行此程序，并比较开放的游戏模式。兴许你会发现自己可以在国测服玩到卡莎打一般难度的1v1人机的云顶之弈1v0狂暴模式。
@@ -781,14 +781,14 @@ For details about customized programs that is beyond the scope of creating a cus
 		- The imagePath field of the store table refers to URLs related to **LCU API**, which can be accessed **only during when the League Client is running**. The first visit of these URLs requires a username and a password. Please look for <ins>a line that starts with "riot"</ins> at the beginning of this program's output. The username is <ins>"riot"</ins>, and the password is <ins>a string that follows "riot"</ins>.
 			- The imagePath temporarily marked as <ins>default.png</ins> is actually inaccessible.
 		- This program involves the following data resources:
-			https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/companions.json
-			https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/skins.json
-			https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/statstones.json
-			https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/summoner-emotes.json
-			https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/summoner-icons.json
-			https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/tftdamageskins.json
-			https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/tftmapskins.json
-			https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/ward-skins.json
+			- https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/companions.json
+			- https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/skins.json
+			- https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/statstones.json
+			- https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/summoner-emotes.json
+			- https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/summoner-icons.json
+			- https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/tftdamageskins.json
+			- https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/tftmapskins.json
+			- https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/ward-skins.json
 	- Customized Program 08 is never expected to count the number of summoners on a server. (since the number is too large, let alone the brute-force traversal of summonerId)!
 	- Customized Program 09 is designed to **search and export the existing game modes on the current server**.
 		- Try running this program on multiple servers, and compare the available game modes on different servers. If lucky, you may find that on Chinese PBE server, you'll use Kai'Sa to solo with a bot player of intermediate difficulty in TFT Turbo 1v0.
