@@ -4521,26 +4521,26 @@
                 {
                     "mName": "PercentAD",
                     "mValues": [
-                        0.5,
-                        0.5,
-                        0.5,
-                        0.5,
-                        0.5,
-                        0.5,
-                        0.5
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645
                     ],
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "Duration",
+                    "mName": "BaseDamage",
                     "mValues": [
+                        8.0,
                         5.0,
-                        5.0,
-                        5.0,
-                        5.0,
-                        5.0,
-                        5.0,
-                        5.0
+                        8.0,
+                        12.0,
+                        8.0,
+                        8.0,
+                        8.0
                     ],
                     "__type": "SpellDataValue"
                 }
@@ -4550,21 +4550,32 @@
                     "mSimpleTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
-                            "mStat": 2,
-                            "mDataValue": "PercentAD",
-                            "__type": "StatByNamedDataValueCalculationPart"
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "BaseDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mStat": 2,
+                                    "mDataValue": "PercentAD",
+                                    "__type": "StatByNamedDataValueCalculationPart"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
                 },
-                "TotalDuration": {
+                "ModifiedBaseDamage": {
                     "mSimpleTooltipCalculationDisplay": 5,
-                    "mExpandedTooltipCalculationDisplay": 5,
-                    "StaticTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "Duration",
+                                "mDataValue": "BaseDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 0.009999999776482582,
@@ -4634,9 +4645,9 @@
                             "levelCount": 3,
                             "elements": [
                                 {
-                                    "type": "Duration",
+                                    "type": "BaseDamage",
                                     "nameOverride": "Spell_TFT12_AsheSpell_Duration",
-                                    "Style": 2,
+                                    "Style": 1,
                                     "__type": "TooltipInstanceListElement"
                                 },
                                 {

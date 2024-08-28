@@ -11504,74 +11504,100 @@
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "DamageRatio",
-                    "mValues": [
-                        0.25,
-                        0.25,
-                        0.25,
-                        0.25,
-                        0.25,
-                        0.25,
-                        0.25
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
                     "mName": "AttackSpeed",
                     "mValues": [
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0
+                        1.399999976158142,
+                        1.399999976158142,
+                        1.399999976158142,
+                        1.399999976158142,
+                        1.399999976158142,
+                        1.399999976158142,
+                        1.399999976158142
                     ],
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "BaseBonusDamage",
+                    "mName": "BaseDamage",
                     "mValues": [
                         5.0,
-                        8.0,
-                        12.0,
-                        20.0,
-                        25.0,
+                        16.0,
+                        24.0,
+                        36.0,
+                        54.0,
                         30.0,
                         35.0
                     ],
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "ResetDuration",
+                    "mName": "RocketADScalar",
                     "mValues": [
-                        3.0,
-                        3.0,
-                        3.0,
-                        3.0,
-                        3.0,
-                        3.0,
-                        3.0
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "PercentArmorPen",
+                    "mValues": [
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5
                     ],
                     "__type": "SpellDataValue"
                 }
             ],
             "mSpellCalculations": {
-                "BonusDamage": {
+                "RocketDamage": {
                     "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "BaseDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mStat": 2,
+                                    "mSubpart": {
+                                        "mDataValue": "{ece5c5a4}",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "__type": "StatBySubPartCalculationPart"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedBaseDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "BaseBonusDamage",
+                                "mDataValue": "BaseDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 0.009999999776482582,
                             "__type": "SubPartScaledProportionalToStat"
-                        },
-                        {
-                            "mStat": 2,
-                            "mDataValue": "DamageRatio",
-                            "__type": "StatByNamedDataValueCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
@@ -11638,9 +11664,15 @@
                             "levelCount": 3,
                             "elements": [
                                 {
-                                    "type": "BaseBonusDamage",
-                                    "nameOverride": "Spell_TFT12_JinxSpell_BonusDamage",
+                                    "type": "BaseDamage",
+                                    "nameOverride": "Spell_TFT12_JinxSpell_BaseDamage",
                                     "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "BaseDamage",
+                                    "nameOverride": "Spell_TFT12_JinxSpell_BonusDamage",
+                                    "Style": 2,
                                     "__type": "TooltipInstanceListElement"
                                 }
                             ],

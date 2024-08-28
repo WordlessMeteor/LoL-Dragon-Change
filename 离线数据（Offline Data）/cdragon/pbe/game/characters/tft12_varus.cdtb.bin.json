@@ -138,8 +138,8 @@
                     "mTargetHeightAugment": -10.0,
                     "mOffsetInitialTargetHeight": -10.0,
                     "mStartBoneName": "",
-                    "mTravelTime": 0.75,
-                    "__type": "FixedTimeMovement"
+                    "mSpeed": 660.0,
+                    "__type": "FixedSpeedMovement"
                 },
                 "heightSolver": {
                     "mGravity": 7000.0,
@@ -264,6 +264,7 @@
     "Characters/TFT12_Varus/Spells/TFT12_VarusSpell": {
         "mScriptName": "TFT12_VarusSpell",
         "mSpell": {
+            "flags": 4,
             "mAffectsTypeFlags": 6154,
             "mAffectsStatusFlags": 32,
             "mDataValues": [
@@ -425,6 +426,28 @@
                         }
                     ],
                     "__type": "GameCalculation"
+                },
+                "{dd2d742e}": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mStat": 28,
+                                    "mCoefficient": 0.004999999888241291,
+                                    "__type": "StatByCoefficientCalculationPart"
+                                },
+                                {
+                                    "mNumber": 1.0,
+                                    "__type": "NumberCalculationPart"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
                 }
             },
             "mAnimationName": "",
@@ -450,26 +473,6 @@
                 2500.0
             ],
             "castConeDistance": 100.0,
-            "mMissileSpec": {
-                "movementComponent": {
-                    "mStartBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
-                    "mSpeed": 3000.0,
-                    "__type": "FixedSpeedMovement"
-                },
-                "verticalFacing": {
-                    "__type": "VeritcalFacingMatchVelocity"
-                },
-                "behaviors": [
-                    {
-                        "__type": "CastOnMovementComplete"
-                    },
-                    {
-                        "__type": "DestroyOnMovementComplete"
-                    }
-                ],
-                "__type": "MissileSpecification"
-            },
-            "mCastType": 1,
             "missileSpeed": 1400.0,
             "mHitEffectOrientType": 2,
             "bHaveHitBone": true,
@@ -521,7 +524,7 @@
                                     "__type": "TooltipInstanceListElement"
                                 },
                                 {
-                                    "type": "Cost",
+                                    "type": "BonusDamage",
                                     "nameOverride": "Spell_TFT12_VarusSpell_TotalDamage",
                                     "Style": 2,
                                     "__type": "TooltipInstanceListElement"
@@ -531,6 +534,12 @@
                                     "multiplier": 100.0,
                                     "nameOverride": "Spell_TFT12_VarusSpell_ClusterDamage",
                                     "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "CastRange",
+                                    "nameOverride": "Spell_TFT12_VarusSpell_CastRange",
+                                    "Style": 2,
                                     "__type": "TooltipInstanceListElement"
                                 }
                             ],
@@ -7942,7 +7951,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Maps/Particles/TFT/TFT6_Colossus_Cracks_Glow_V04.TFT_Set12.dds",
+                "texture": "ASSETS/Maps/Particles/TFT/TFT6_Colossus_Cracks_Glow_V04.TFT_1418.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -10737,7 +10746,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Maps/Particles/TFT/TFT_FlipbookExplosion.TFT_Set12.dds",
+                "texture": "ASSETS/Maps/Particles/TFT/TFT_FlipbookExplosion.TFT_1418.dds",
                 "frameRate": 22.0,
                 "numFrames": 16,
                 "texAddressModeBase": 2,
@@ -10868,7 +10877,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Maps/Particles/TFT/TFT_FlipbookExplosion.TFT_Set12.dds",
+                "texture": "ASSETS/Maps/Particles/TFT/TFT_FlipbookExplosion.TFT_1418.dds",
                 "frameRate": 22.0,
                 "numFrames": 16,
                 "texAddressModeBase": 2,
@@ -13602,7 +13611,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Maps/Particles/TFT/TFT6_Colossus_Cracks_Glow_V04.TFT_Set12.dds",
+                "texture": "ASSETS/Maps/Particles/TFT/TFT6_Colossus_Cracks_Glow_V04.TFT_1418.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {

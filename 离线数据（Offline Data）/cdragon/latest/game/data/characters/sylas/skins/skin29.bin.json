@@ -174,9 +174,9 @@
                 0,
                 255
             ],
-            "initialSubmeshToHide": "JellyBase JellyHead JellySpikes Lock LockFace",
-            "initialSubmeshShadowsToHide": "LockFace Helmet",
-            "submeshRenderOrder": "Helmet Sylas_Body Gauntlet_L Gauntlet_R Chain_R Chain_L Lock",
+            "initialSubmeshToHide": "JellyBase JellyHead JellySpikes Lock LockFace Helmet",
+            "initialSubmeshShadowsToHide": "LockFace",
+            "submeshRenderOrder": "Helmet Sylas_Body Chain_R Chain_L Lock",
             "materialOverride": [
                 {
                     "material": "Characters/Sylas/Skins/Skin29/Materials/Sylas_Chains_Dissovle_inst",
@@ -222,11 +222,6 @@
                     "material": "Characters/Sylas/Skins/Skin29/Materials/HKG_Polarized_Mask_Sylas_Anim_inst",
                     "submesh": "Sylas_Body",
                     "__type": "SkinMeshDataProperties_MaterialOverride"
-                },
-                {
-                    "material": "Characters/Sylas/Skins/Skin24/Materials/Diffuse_Alpha_inst",
-                    "submesh": "Helmet",
-                    "__type": "SkinMeshDataProperties_MaterialOverride"
                 }
             ],
             "rigPoseModifierData": [
@@ -264,7 +259,7 @@
         "iconSquare": "ASSETS/Characters/Sylas/HUD/Sylas_Square.dds",
         "healthBarData": {
             "attachToBone": "Buffbone_Cstm_Healthbar",
-            "unitHealthBarStyle": 10,
+            "unitHealthBarStyle": 11,
             "__type": "CharacterHealthBarDataRecord"
         },
         "mResourceResolver": "Characters/Sylas/Skins/Skin29/Resources",
@@ -309,6 +304,9 @@
                         "effectKey": "{1f29eae7}",
                         "__type": "PersistentVfxData"
                     }
+                ],
+                "SubmeshesToShow": [
+                    "Helmet"
                 ],
                 "__type": "PersistentEffectConditionData"
             }
@@ -15919,47 +15917,6 @@
                     "__type": "ValueVector2"
                 },
                 "__type": "VfxEmitterDefinitionData"
-            },
-            {
-                "rate": {
-                    "constantValue": 1.0,
-                    "__type": "ValueFloat"
-                },
-                "particleLifetime": {
-                    "constantValue": 100.0,
-                    "__type": "ValueFloat"
-                },
-                "particleLinger": 100.0,
-                "lifetime": 100.0,
-                "isSingleParticle": 1,
-                "emitterLinger": 100.0,
-                "emitterName": "DefaultMaterialOverride",
-                "particleColorTexture": "ASSETS/Characters/Shaco/Skins/Skin15/Particles/color-hold.dds",
-                "pass": 1000,
-                "alphaRef": 0,
-                "depthBiasFactors": [
-                    -1.0,
-                    -60.0
-                ],
-                "isUniformScale": 1,
-                "birthScale0": {
-                    "constantValue": [
-                        1.0099999904632568,
-                        1.0,
-                        1.0
-                    ],
-                    "__type": "ValueVector3"
-                },
-                "texture": "ASSETS/Characters/Sylas/Skins/Skin29/Sylas_Skin29_TX_CM.dds",
-                "materialOverrideDefinitions": [
-                    {
-                        "priority": 1,
-                        "subMeshName": "Helmet",
-                        "material": "Characters/Sylas/Skins/Skin29/Materials/Diffuse_Mask01",
-                        "__type": "VfxMaterialOverrideDefinitionData"
-                    }
-                ],
-                "__type": "VfxEmitterDefinitionData"
             }
         ],
         "particleName": "Sylas_Skin29_R_Ult_Absorbed",
@@ -18799,61 +18756,88 @@
         "particlePath": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_chain_R",
         "__type": "VfxSystemDefinitionData"
     },
-    "Characters/Sylas/Skins/Skin29/Materials/Diffuse_Mask01": {
-        "name": "Characters/Sylas/Skins/Skin29/Materials/Diffuse_Mask01",
-        "samplerValues": [
-            {
-                "samplerName": "Diffuse_Texture",
-                "textureName": "ASSETS/Characters/Sylas/Skins/Skin29/Sylas_Skin29_TX_CM.dds",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            }
-        ],
-        "paramValues": [
-            {
-                "name": "Alpha",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            }
-        ],
-        "shaderMacros": {
-            "NUM_BLEND_WEIGHTS": "4"
+    "Characters/Sylas/Skins/Skin29/Resources": {
+        "resourceMap": {
+            "Sylas_E_Root": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_Root",
+            "{92bce02e}": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_E_Banish",
+            "Sylas_R_hookmis": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_R_hookmis",
+            "Sylas_E_chain": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_chain",
+            "Sylas_W_Nova": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_P_Nova",
+            "Sylas_W_tar": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_W_tar",
+            "Sylas_BA_tar": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_BA_tar",
+            "Sylas_E_cas": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_E_cas",
+            "Sylas_R_timer": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_timer",
+            "{68464318}": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Emote_Death_Sound",
+            "{5dd2f61f}": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Emote_Joke_Sound",
+            "{324c9bc7}": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Emote_Laugh_Sound",
+            "{90508386}": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Emote_Taunt_Sound",
+            "{5b5c5119}": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Taunt",
+            "Sylas_R_Beam": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_R_Beam",
+            "{1f29eae7}": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_R_Ult_Absorbed",
+            "Sylas_W_Hand_Hit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_W_Hand_Hit",
+            "Sylas_Q_GroundAoE": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Q_GroundAoE",
+            "Sylas_Q_POF_charge": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_POF_charge",
+            "Sylas_Q_POF_tar": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_POF_tar",
+            "Sylas_W_tar_avatar": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_W_tar_avatar",
+            "Sylas_BA_Trail_01": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_BA_Trail_01",
+            "Sylas_BA_Trail_02": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_BA_Trail_02",
+            "Sylas_E_chain_R": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_chain_R",
+            "Sylas_R_Cas_Arm": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Cas_Arm",
+            "Sylas_R_Cas_Start": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Cas_Start",
+            "Sylas_R_Hand_Buff": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Hand_Buff",
+            "Sylas_R_Ult_chain_sparks": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Ult_chain_sparks",
+            "Sylas_Q_GroundAoE_R": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Q_GroundAoE_R",
+            "Sylas_Q_cas_chains": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_cas_chains",
+            "Sylas_Q_Test_beam": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_Test_beam",
+            "Sylas_E_cas_hand": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_E_cas_hand",
+            "Sylas_Q_Indicator": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_Indicator",
+            "Sylas_E_chain_move": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_chain_move",
+            "Sylas_E_chain_move_R": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_chain_move_R",
+            "Sylas_Idle_Arm": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Idle_Arm",
+            "Sylas_R_Ult_Absorbed_Chest": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Ult_Absorbed_Chest",
+            "Sylas_Q_X_Mark_Anticipation": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Q_X_Mark_Anticipation",
+            "Sylas_W_Dash_In": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_W_Dash_In",
+            "Sylas_P_hit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_P_hit",
+            "Sylas_R_Clone_Transform": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Clone_Transform",
+            "Sylas_Q_hit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_hit",
+            "Sylas_Q_Indicator_Left": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_Indicator_Left",
+            "Sylas_P_Hand": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_P_Hand",
+            "Sylas_Death_Dust": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Death_Dust",
+            "Sylas_Recall_Arm": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Arm",
+            "Sylas_E_cas_swipe": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_E_cas_swipe",
+            "Sylas_R_Hit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Hit",
+            "Sylas_Recall_Break": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Break",
+            "Sylas_Recall_Lock": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Lock",
+            "Sylas_Recall_Lock_R": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Lock_R",
+            "Sylas_Recall_Break_R": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Break_R",
+            "Sylas_Recall_Chains": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Chains",
+            "Sylas_Recall_Break_ToRun": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Recall_Break_ToRun",
+            "Sylas_Recall_Break_ToRun_R": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Recall_Break_ToRun_R",
+            "Sylas_R_Clone_Transform_Exit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Clone_Transform_Exit",
+            "Sylas_BA_tar_R": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_BA_tar_R",
+            "Sylas_Emote_Taunt": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Emote_Taunt",
+            "Sylas_Q_outro_chains": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_outro_chains",
+            "Sylas_Skin24_Recall_Sparkle_Glow_Child": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sparkle_Glow_Child",
+            "Sylas_Skin24_Recall_Ground": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Ground",
+            "Sylas_Skin24_Recall_Jelly_Hit_Imapct": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Hit_Imapct",
+            "Sylas_Skin24_Recall_Jelly_Trail": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Trail",
+            "Sylas_Skin24_Recall_Jelly_Shot": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot",
+            "Sylas_Skin24_Recall_Jelly_Glow": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Glow",
+            "Sylas_Skin24_Recall_Jellyfish": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jellyfish",
+            "Sylas_Skin24_Idle_LockFace": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Idle_LockFace",
+            "Sylas_Skin24_Recall_Jelly_Hit02_Imapct": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Hit02_Imapct",
+            "Sylas_Skin24_Recall_Jelly_Shot02": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot02",
+            "Sylas_Skin24_Recall_Jelly_Shot03": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot03",
+            "Sylas_Skin24_Recall_Jelly_Shot04": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot04",
+            "Sylas_Skin24_Recall_Jelly_Shot04_cast": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot04_cast",
+            "Sylas_Skin24_Recall_Sylas_Shot01": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sylas_Shot01",
+            "Sylas_Skin24_Recall_Sylas_Shot02": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sylas_Shot02",
+            "Sylas_Skin24_Recall_Sylas_Shot02_Cas": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sylas_Shot02_Cas",
+            "Sylas_Skin24_Recall_Sprint": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sprint",
+            "Sylas_Skin24_Recall_Jelly_Death": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Death",
+            "Sylas_Skin24_Recall_Final_Pose": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Final_Pose"
         },
-        "techniques": [
-            {
-                "name": "normal",
-                "passes": [
-                    {
-                        "shader": "Shaders/SkinnedMesh/Diffuse_Alpha",
-                        "blendEnable": true,
-                        "srcColorBlendFactor": 6,
-                        "srcAlphaBlendFactor": 6,
-                        "dstColorBlendFactor": 7,
-                        "dstAlphaBlendFactor": 7,
-                        "__type": "StaticMaterialPassDef"
-                    }
-                ],
-                "__type": "StaticMaterialTechniqueDef"
-            }
-        ],
-        "childTechniques": [
-            {
-                "name": "transition",
-                "parentName": "normal",
-                "shaderMacros": {
-                    "TRANSITION": "1"
-                },
-                "__type": "StaticMaterialChildTechniqueDef"
-            }
-        ],
-        "__type": "StaticMaterialDef"
+        "__type": "ResourceResolver"
     },
     "Characters/Sylas/Skins/Skin29/Materials/HKG_Polarized_Mask_Sylas_Anim_inst": {
         "name": "Characters/Sylas/Skins/Skin29/Materials/HKG_Polarized_Mask_Sylas_Anim_inst",
@@ -19235,88 +19219,5 @@
             "__type": "DynamicMaterialDef"
         },
         "__type": "StaticMaterialDef"
-    },
-    "Characters/Sylas/Skins/Skin29/Resources": {
-        "resourceMap": {
-            "Sylas_E_Root": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_Root",
-            "{92bce02e}": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_E_Banish",
-            "Sylas_R_hookmis": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_R_hookmis",
-            "Sylas_E_chain": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_chain",
-            "Sylas_W_Nova": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_P_Nova",
-            "Sylas_W_tar": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_W_tar",
-            "Sylas_BA_tar": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_BA_tar",
-            "Sylas_E_cas": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_E_cas",
-            "Sylas_R_timer": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_timer",
-            "{68464318}": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Emote_Death_Sound",
-            "{5dd2f61f}": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Emote_Joke_Sound",
-            "{324c9bc7}": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Emote_Laugh_Sound",
-            "{90508386}": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Emote_Taunt_Sound",
-            "{5b5c5119}": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Taunt",
-            "Sylas_R_Beam": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_R_Beam",
-            "{1f29eae7}": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_R_Ult_Absorbed",
-            "Sylas_W_Hand_Hit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_W_Hand_Hit",
-            "Sylas_Q_GroundAoE": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Q_GroundAoE",
-            "Sylas_Q_POF_charge": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_POF_charge",
-            "Sylas_Q_POF_tar": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_POF_tar",
-            "Sylas_W_tar_avatar": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_W_tar_avatar",
-            "Sylas_BA_Trail_01": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_BA_Trail_01",
-            "Sylas_BA_Trail_02": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_BA_Trail_02",
-            "Sylas_E_chain_R": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_chain_R",
-            "Sylas_R_Cas_Arm": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Cas_Arm",
-            "Sylas_R_Cas_Start": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Cas_Start",
-            "Sylas_R_Hand_Buff": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Hand_Buff",
-            "Sylas_R_Ult_chain_sparks": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Ult_chain_sparks",
-            "Sylas_Q_GroundAoE_R": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Q_GroundAoE_R",
-            "Sylas_Q_cas_chains": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_cas_chains",
-            "Sylas_Q_Test_beam": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_Test_beam",
-            "Sylas_E_cas_hand": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_E_cas_hand",
-            "Sylas_Q_Indicator": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_Indicator",
-            "Sylas_E_chain_move": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_chain_move",
-            "Sylas_E_chain_move_R": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_E_chain_move_R",
-            "Sylas_Idle_Arm": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Idle_Arm",
-            "Sylas_R_Ult_Absorbed_Chest": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Ult_Absorbed_Chest",
-            "Sylas_Q_X_Mark_Anticipation": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Q_X_Mark_Anticipation",
-            "Sylas_W_Dash_In": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_W_Dash_In",
-            "Sylas_P_hit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_P_hit",
-            "Sylas_R_Clone_Transform": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Clone_Transform",
-            "Sylas_Q_hit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_hit",
-            "Sylas_Q_Indicator_Left": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_Indicator_Left",
-            "Sylas_P_Hand": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_P_Hand",
-            "Sylas_Death_Dust": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Death_Dust",
-            "Sylas_Recall_Arm": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Arm",
-            "Sylas_E_cas_swipe": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_E_cas_swipe",
-            "Sylas_R_Hit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Hit",
-            "Sylas_Recall_Break": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Break",
-            "Sylas_Recall_Lock": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Lock",
-            "Sylas_Recall_Lock_R": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Lock_R",
-            "Sylas_Recall_Break_R": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Recall_Break_R",
-            "Sylas_Recall_Chains": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Chains",
-            "Sylas_Recall_Break_ToRun": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Recall_Break_ToRun",
-            "Sylas_Recall_Break_ToRun_R": "Characters/Sylas/Skins/Skin29/Particles/Sylas_Skin29_Recall_Break_ToRun_R",
-            "Sylas_R_Clone_Transform_Exit": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_R_Clone_Transform_Exit",
-            "Sylas_BA_tar_R": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_BA_tar_R",
-            "Sylas_Emote_Taunt": "Characters/Sylas/Skins/Skin0/Particles/Sylas_Base_Emote_Taunt",
-            "Sylas_Q_outro_chains": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Q_outro_chains",
-            "Sylas_Skin24_Recall_Sparkle_Glow_Child": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sparkle_Glow_Child",
-            "Sylas_Skin24_Recall_Ground": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Ground",
-            "Sylas_Skin24_Recall_Jelly_Hit_Imapct": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Hit_Imapct",
-            "Sylas_Skin24_Recall_Jelly_Trail": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Trail",
-            "Sylas_Skin24_Recall_Jelly_Shot": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot",
-            "Sylas_Skin24_Recall_Jelly_Glow": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Glow",
-            "Sylas_Skin24_Recall_Jellyfish": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jellyfish",
-            "Sylas_Skin24_Idle_LockFace": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Idle_LockFace",
-            "Sylas_Skin24_Recall_Jelly_Hit02_Imapct": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Hit02_Imapct",
-            "Sylas_Skin24_Recall_Jelly_Shot02": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot02",
-            "Sylas_Skin24_Recall_Jelly_Shot03": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot03",
-            "Sylas_Skin24_Recall_Jelly_Shot04": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot04",
-            "Sylas_Skin24_Recall_Jelly_Shot04_cast": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Shot04_cast",
-            "Sylas_Skin24_Recall_Sylas_Shot01": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sylas_Shot01",
-            "Sylas_Skin24_Recall_Sylas_Shot02": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sylas_Shot02",
-            "Sylas_Skin24_Recall_Sylas_Shot02_Cas": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sylas_Shot02_Cas",
-            "Sylas_Skin24_Recall_Sprint": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Sprint",
-            "Sylas_Skin24_Recall_Jelly_Death": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Jelly_Death",
-            "Sylas_Skin24_Recall_Final_Pose": "Characters/Sylas/Skins/Skin24/Particles/Sylas_Skin24_Recall_Final_Pose"
-        },
-        "__type": "ResourceResolver"
     }
 }
