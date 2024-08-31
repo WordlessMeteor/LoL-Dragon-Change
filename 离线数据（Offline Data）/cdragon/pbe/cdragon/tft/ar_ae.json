@@ -26903,7 +26903,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>تأثير كامن:</spellPassive> تطير حول أقرب الأعداء وتهاجمه. <br><br><spellActive>تأثير نشط:</spellActive> تكسب <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> سرعة هجوم وتستبدل هجمات سمولدر بكرات نارية تلحق <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> ضرر مادي لمدة <TFTBonus>@SpellDuration@</TFTBonus>ث. <br><br><specialRules>ترقية التنين:</specialRules> تعالج كل كرة نارية أيضًا بمقدار <scaleHealth>@Heal@</scaleHealth> صحة. ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "تعلّم الطيران",
                         "variables": [
@@ -26968,15 +26968,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -28665,24 +28689,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -33685,7 +33697,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "يكسب الصيادون %i:scaleAD% ضرر هجوم، ويزداد عند تحقيق أول إطاحة في كل معركة.<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%، @BonusADAfterTakedown@% بعد الإطاحة</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -33693,6 +33705,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -33702,6 +33715,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -33710,8 +33724,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -33890,7 +33905,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "يكسب الزمنيون @BaseAP@ %i:scaleAP% قوة قدرة. <br><br>عند بداية القتال: تبدأ عدًا تنازليًا لمدة @Timer@ث، يتسارع بمقدار @SecondsPerCast@ث بعد كل إلقاء قدرة لأحد الزمنيين. عند نهاية العد التنازلي تحصل على تأثير خاص:<br><br><row>(@MinUnits@) يستعيد فريقك @MaxHealthHeal*100@% من الصحة، ويكسب الزمنيون @BonusAP@ إضافية %i:scaleAP%</row><br><row>(@MinUnits@) ويوقفون الزمن لمدة @FreezeDuration@ث، ويستمر الزمنيون بالقتال ويكسبون @BonusAP@ %i:scaleAP% </row><br><row>(@MinUnits@) كما يكسب الزمنيون @BonusAS*100@% %i:scaleAS% ويعالج فريقك بنسبة @TimeHeal*100@% من الصحة بدلًا مما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -33928,9 +33943,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -33992,38 +34007,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "تكسب المخلوقات الجنية %i:scaleHealth% صحة وتصنع عناصر خاصة تزداد قوة بحسب مستويات الخاصية. <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، تكسب تاج الملكة الذي يمنح @DamageAmp*100@% %i:scaleDA% تضخيم ضرر</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، تكسب دروع حارس الملكة</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، يصبح كلا العنصرين مشعين</row><br><br><rules>يمكن للمخلوقات الجنية فقط حمل عناصر المخلوقات الجنية.</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -34032,9 +34047,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -34203,7 +34218,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "يكسب متغيرو الأشكال %i:scaleHealth% الصحة القصوى. بعد الإلقاء الأول لقدرتهم، يقومون بمضاعفة هذا التأثير ثلاث مرات. <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -34234,7 +34249,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -34397,17 +34414,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "يكسب عرّافو العسل النحل الذي يلحق ضرر السحر بهدفهم كل @Period@ث. تلحق كل نحلة @BonusDamage*100@% من الضرر الملحق على يد عرّافي العسل و @DamageReceived*100@% من الضرر الذي يتلقونه. <br><br>عند موت أحد عرّافي العسل، يترك نحلة واحدة تتبع عرّافي العسل المجاورين طيلة الفترة المتبقية من القتال.<br><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات، وتنجو @NumTransfers@ من النحلات عوضًا عما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -34416,10 +34433,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -34428,11 +34445,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -41483,7 +41500,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>تأثير كامن:</spellPassive> تطير حول أقرب الأعداء وتهاجمه. <br><br><spellActive>تأثير نشط:</spellActive> تكسب <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> سرعة هجوم وتستبدل هجمات سمولدر بكرات نارية تلحق <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> ضرر مادي لمدة <TFTBonus>@SpellDuration@</TFTBonus>ث. <br><br><specialRules>ترقية التنين:</specialRules> تعالج كل كرة نارية أيضًا بمقدار <scaleHealth>@Heal@</scaleHealth> صحة. ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "تعلّم الطيران",
                         "variables": [
@@ -41548,15 +41565,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -43245,24 +43286,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -48226,7 +48255,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "يكسب الصيادون %i:scaleAD% ضرر هجوم، ويزداد عند تحقيق أول إطاحة في كل معركة.<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%، @BonusADAfterTakedown@% بعد الإطاحة</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -48234,6 +48263,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -48243,6 +48273,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -48251,8 +48282,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -48431,7 +48463,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "يكسب الزمنيون @BaseAP@ %i:scaleAP% قوة قدرة. <br><br>عند بداية القتال: تبدأ عدًا تنازليًا لمدة @Timer@ث، يتسارع بمقدار @SecondsPerCast@ث بعد كل إلقاء قدرة لأحد الزمنيين. عند نهاية العد التنازلي تحصل على تأثير خاص:<br><br><row>(@MinUnits@) يستعيد فريقك @MaxHealthHeal*100@% من الصحة، ويكسب الزمنيون @BonusAP@ إضافية %i:scaleAP%</row><br><row>(@MinUnits@) ويوقفون الزمن لمدة @FreezeDuration@ث، ويستمر الزمنيون بالقتال ويكسبون @BonusAP@ %i:scaleAP% </row><br><row>(@MinUnits@) كما يكسب الزمنيون @BonusAS*100@% %i:scaleAS% ويعالج فريقك بنسبة @TimeHeal*100@% من الصحة بدلًا مما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -48469,9 +48501,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -48533,38 +48565,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "تكسب المخلوقات الجنية %i:scaleHealth% صحة وتصنع عناصر خاصة تزداد قوة بحسب مستويات الخاصية. <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، تكسب تاج الملكة الذي يمنح @DamageAmp*100@% %i:scaleDA% تضخيم ضرر</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، تكسب دروع حارس الملكة</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، يصبح كلا العنصرين مشعين</row><br><br><rules>يمكن للمخلوقات الجنية فقط حمل عناصر المخلوقات الجنية.</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -48573,9 +48605,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -48744,7 +48776,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "يكسب متغيرو الأشكال %i:scaleHealth% الصحة القصوى. بعد الإلقاء الأول لقدرتهم، يقومون بمضاعفة هذا التأثير ثلاث مرات. <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -48775,7 +48807,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -48938,17 +48972,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "يكسب عرّافو العسل النحل الذي يلحق ضرر السحر بهدفهم كل @Period@ث. تلحق كل نحلة @BonusDamage*100@% من الضرر الملحق على يد عرّافي العسل و @DamageReceived*100@% من الضرر الذي يتلقونه. <br><br>عند موت أحد عرّافي العسل، يترك نحلة واحدة تتبع عرّافي العسل المجاورين طيلة الفترة المتبقية من القتال.<br><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات، وتنجو @NumTransfers@ من النحلات عوضًا عما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -48957,10 +48991,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -48969,11 +49003,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -78211,7 +78245,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>تأثير كامن:</spellPassive> تطير حول أقرب الأعداء وتهاجمه. <br><br><spellActive>تأثير نشط:</spellActive> تكسب <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> سرعة هجوم وتستبدل هجمات سمولدر بكرات نارية تلحق <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> ضرر مادي لمدة <TFTBonus>@SpellDuration@</TFTBonus>ث. <br><br><specialRules>ترقية التنين:</specialRules> تعالج كل كرة نارية أيضًا بمقدار <scaleHealth>@Heal@</scaleHealth> صحة. ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "تعلّم الطيران",
                         "variables": [
@@ -78276,15 +78310,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -79973,24 +80031,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -85018,7 +85064,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "يكسب الصيادون %i:scaleAD% ضرر هجوم، ويزداد عند تحقيق أول إطاحة في كل معركة.<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%، @BonusADAfterTakedown@% بعد الإطاحة</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -85026,6 +85072,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -85035,6 +85082,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -85043,8 +85091,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -85223,7 +85272,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "يكسب الزمنيون @BaseAP@ %i:scaleAP% قوة قدرة. <br><br>عند بداية القتال: تبدأ عدًا تنازليًا لمدة @Timer@ث، يتسارع بمقدار @SecondsPerCast@ث بعد كل إلقاء قدرة لأحد الزمنيين. عند نهاية العد التنازلي تحصل على تأثير خاص:<br><br><row>(@MinUnits@) يستعيد فريقك @MaxHealthHeal*100@% من الصحة، ويكسب الزمنيون @BonusAP@ إضافية %i:scaleAP%</row><br><row>(@MinUnits@) ويوقفون الزمن لمدة @FreezeDuration@ث، ويستمر الزمنيون بالقتال ويكسبون @BonusAP@ %i:scaleAP% </row><br><row>(@MinUnits@) كما يكسب الزمنيون @BonusAS*100@% %i:scaleAS% ويعالج فريقك بنسبة @TimeHeal*100@% من الصحة بدلًا مما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -85261,9 +85310,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -85325,38 +85374,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "تكسب المخلوقات الجنية %i:scaleHealth% صحة وتصنع عناصر خاصة تزداد قوة بحسب مستويات الخاصية. <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، تكسب تاج الملكة الذي يمنح @DamageAmp*100@% %i:scaleDA% تضخيم ضرر</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، تكسب دروع حارس الملكة</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، يصبح كلا العنصرين مشعين</row><br><br><rules>يمكن للمخلوقات الجنية فقط حمل عناصر المخلوقات الجنية.</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -85365,9 +85414,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -85536,7 +85585,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "يكسب متغيرو الأشكال %i:scaleHealth% الصحة القصوى. بعد الإلقاء الأول لقدرتهم، يقومون بمضاعفة هذا التأثير ثلاث مرات. <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -85567,7 +85616,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -85730,17 +85781,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "يكسب عرّافو العسل النحل الذي يلحق ضرر السحر بهدفهم كل @Period@ث. تلحق كل نحلة @BonusDamage*100@% من الضرر الملحق على يد عرّافي العسل و @DamageReceived*100@% من الضرر الذي يتلقونه. <br><br>عند موت أحد عرّافي العسل، يترك نحلة واحدة تتبع عرّافي العسل المجاورين طيلة الفترة المتبقية من القتال.<br><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات، وتنجو @NumTransfers@ من النحلات عوضًا عما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -85749,10 +85800,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -85761,11 +85812,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -87288,7 +87339,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>تأثير كامن:</spellPassive> تطير حول أقرب الأعداء وتهاجمه. <br><br><spellActive>تأثير نشط:</spellActive> تكسب <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> سرعة هجوم وتستبدل هجمات سمولدر بكرات نارية تلحق <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> ضرر مادي لمدة <TFTBonus>@SpellDuration@</TFTBonus>ث. <br><br><specialRules>ترقية التنين:</specialRules> تعالج كل كرة نارية أيضًا بمقدار <scaleHealth>@Heal@</scaleHealth> صحة. ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "تعلّم الطيران",
                         "variables": [
@@ -87353,15 +87404,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -89050,24 +89125,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -94070,7 +94133,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "يكسب الصيادون %i:scaleAD% ضرر هجوم، ويزداد عند تحقيق أول إطاحة في كل معركة.<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%، @BonusADAfterTakedown@% بعد الإطاحة</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -94078,6 +94141,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -94087,6 +94151,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -94095,8 +94160,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -94275,7 +94341,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "يكسب الزمنيون @BaseAP@ %i:scaleAP% قوة قدرة. <br><br>عند بداية القتال: تبدأ عدًا تنازليًا لمدة @Timer@ث، يتسارع بمقدار @SecondsPerCast@ث بعد كل إلقاء قدرة لأحد الزمنيين. عند نهاية العد التنازلي تحصل على تأثير خاص:<br><br><row>(@MinUnits@) يستعيد فريقك @MaxHealthHeal*100@% من الصحة، ويكسب الزمنيون @BonusAP@ إضافية %i:scaleAP%</row><br><row>(@MinUnits@) ويوقفون الزمن لمدة @FreezeDuration@ث، ويستمر الزمنيون بالقتال ويكسبون @BonusAP@ %i:scaleAP% </row><br><row>(@MinUnits@) كما يكسب الزمنيون @BonusAS*100@% %i:scaleAS% ويعالج فريقك بنسبة @TimeHeal*100@% من الصحة بدلًا مما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -94313,9 +94379,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -94377,38 +94443,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "تكسب المخلوقات الجنية %i:scaleHealth% صحة وتصنع عناصر خاصة تزداد قوة بحسب مستويات الخاصية. <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، تكسب تاج الملكة الذي يمنح @DamageAmp*100@% %i:scaleDA% تضخيم ضرر</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، تكسب دروع حارس الملكة</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، يصبح كلا العنصرين مشعين</row><br><br><rules>يمكن للمخلوقات الجنية فقط حمل عناصر المخلوقات الجنية.</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -94417,9 +94483,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -94588,7 +94654,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "يكسب متغيرو الأشكال %i:scaleHealth% الصحة القصوى. بعد الإلقاء الأول لقدرتهم، يقومون بمضاعفة هذا التأثير ثلاث مرات. <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -94619,7 +94685,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -94782,17 +94850,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "يكسب عرّافو العسل النحل الذي يلحق ضرر السحر بهدفهم كل @Period@ث. تلحق كل نحلة @BonusDamage*100@% من الضرر الملحق على يد عرّافي العسل و @DamageReceived*100@% من الضرر الذي يتلقونه. <br><br>عند موت أحد عرّافي العسل، يترك نحلة واحدة تتبع عرّافي العسل المجاورين طيلة الفترة المتبقية من القتال.<br><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات، وتنجو @NumTransfers@ من النحلات عوضًا عما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -94801,10 +94869,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -94813,11 +94881,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -128820,7 +128888,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>تأثير كامن:</spellPassive> تطير حول أقرب الأعداء وتهاجمه. <br><br><spellActive>تأثير نشط:</spellActive> تكسب <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> سرعة هجوم وتستبدل هجمات سمولدر بكرات نارية تلحق <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> ضرر مادي لمدة <TFTBonus>@SpellDuration@</TFTBonus>ث. <br><br><specialRules>ترقية التنين:</specialRules> تعالج كل كرة نارية أيضًا بمقدار <scaleHealth>@Heal@</scaleHealth> صحة. ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "تعلّم الطيران",
                         "variables": [
@@ -128885,15 +128953,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -130582,24 +130674,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -135225,7 +135305,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "يكسب الصيادون %i:scaleAD% ضرر هجوم، ويزداد عند تحقيق أول إطاحة في كل معركة.<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%، @BonusADAfterTakedown@% بعد الإطاحة</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -135233,6 +135313,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -135242,6 +135323,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -135250,8 +135332,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -135430,7 +135513,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "يكسب الزمنيون @BaseAP@ %i:scaleAP% قوة قدرة. <br><br>عند بداية القتال: تبدأ عدًا تنازليًا لمدة @Timer@ث، يتسارع بمقدار @SecondsPerCast@ث بعد كل إلقاء قدرة لأحد الزمنيين. عند نهاية العد التنازلي تحصل على تأثير خاص:<br><br><row>(@MinUnits@) يستعيد فريقك @MaxHealthHeal*100@% من الصحة، ويكسب الزمنيون @BonusAP@ إضافية %i:scaleAP%</row><br><row>(@MinUnits@) ويوقفون الزمن لمدة @FreezeDuration@ث، ويستمر الزمنيون بالقتال ويكسبون @BonusAP@ %i:scaleAP% </row><br><row>(@MinUnits@) كما يكسب الزمنيون @BonusAS*100@% %i:scaleAS% ويعالج فريقك بنسبة @TimeHeal*100@% من الصحة بدلًا مما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -135468,9 +135551,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -135532,38 +135615,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "تكسب المخلوقات الجنية %i:scaleHealth% صحة وتصنع عناصر خاصة تزداد قوة بحسب مستويات الخاصية. <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، تكسب تاج الملكة الذي يمنح @DamageAmp*100@% %i:scaleDA% تضخيم ضرر</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، تكسب دروع حارس الملكة</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%، التاج @DamageAmp*100@% %i:scaleDA%، يصبح كلا العنصرين مشعين</row><br><br><rules>يمكن للمخلوقات الجنية فقط حمل عناصر المخلوقات الجنية.</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -135572,9 +135655,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -135743,7 +135826,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "يكسب متغيرو الأشكال %i:scaleHealth% الصحة القصوى. بعد الإلقاء الأول لقدرتهم، يقومون بمضاعفة هذا التأثير ثلاث مرات. <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -135774,7 +135857,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -135937,17 +136022,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "يكسب عرّافو العسل النحل الذي يلحق ضرر السحر بهدفهم كل @Period@ث. تلحق كل نحلة @BonusDamage*100@% من الضرر الملحق على يد عرّافي العسل و @DamageReceived*100@% من الضرر الذي يتلقونه. <br><br>عند موت أحد عرّافي العسل، يترك نحلة واحدة تتبع عرّافي العسل المجاورين طيلة الفترة المتبقية من القتال.<br><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات</row><br><row>(@MinUnits@) @MiniCount@ من النحلات، وتنجو @NumTransfers@ من النحلات عوضًا عما سبق</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -135956,10 +136041,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -135968,11 +136053,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],

@@ -291,7 +291,7 @@
                 "TFT12_Dragon"
             ],
             "composition": [],
-            "desc": "「ドラゴン」の体力が@Health*100@%、攻撃速度が@AttackSpeed*100@%増加する。「ドラゴン」がチャンピオンから@TakedownThreshold@回キルまたはアシストを奪うと、スモルダーを1体獲得する。ノムジー1体、シヴァーナ1体を獲得する。<br><br>キルまたはアシスト: @TFTUnitProperty.item:TFT12_Augment_Dragon_BurnDamage@",
+            "desc": "「ドラゴン」の体力が@Health*100@%、攻撃速度が@AttackSpeed*100@%増加する。「ドラゴン」がチャンピオンから@TakedownThreshold@回キルまたはアシストを奪うと、スモルダーを1体獲得する。ノムジーとシヴァーナを1体ずつ獲得する。<br><br>キルまたはアシスト: @TFTUnitProperty.item:TFT12_Augment_Dragon_BurnDamage@",
             "effects": {
                 "AttackSpeed": 0.18000000715255737,
                 "Health": 0.10000000149011612,
@@ -1095,7 +1095,7 @@
                 "TFT12_Frost"
             ],
             "composition": [],
-            "desc": "凍結の特性により、「プロテクターの誓い」を装備した配置可能な「フロスト ウルフ」が@NumDummies@体付与される。ウルフは「凍結」のティアごとに攻撃速度が@BonusAS*100@%、体力が@BonusHPPerTier@増加する。ワーウィックとジリアンを1体ずつ獲得する。",
+            "desc": "「凍結」の特性により、「プロテクターの誓い」を装備した配置可能な「フロスト ウルフ」が@NumDummies@体付与される。ウルフは「凍結」のティアごとに攻撃速度が@BonusAS*100@%、体力が@BonusHPPerTier@増加する。ワーウィックとジリアンを1体ずつ獲得する。",
             "effects": {
                 "BonusAS": 0.4000000059604645,
                 "BonusHPPerTier": 300.0,
@@ -5670,7 +5670,7 @@
             "apiName": "TFT12_Zap_Barrier",
             "associatedTraits": [],
             "composition": [],
-            "desc": "次の戦闘時:味方チームが耐久値@ShieldAmount@のシールドを獲得する。このシールドは@DecayTime@秒かけて徐々に減少する。",
+            "desc": "次の戦闘時: 味方チームが耐久値@ShieldAmount@のシールドを獲得する。このシールドは@DecayTime@秒かけて徐々に減少する。",
             "effects": {
                 "DecayTime": 5.0,
                 "ShieldAmount": 2000.0
@@ -6674,7 +6674,7 @@
             "apiName": "TFT12_Zap_Counterspell",
             "associatedTraits": [],
             "composition": [],
-            "desc": "次の戦闘時:すべての敵にマナリーヴを付与する。",
+            "desc": "次の戦闘時: すべての敵にマナリーヴを付与する。",
             "effects": {},
             "from": null,
             "icon": "ASSETS/UX/TFT/Hud/ZAPS/Wands/ZAPS_ScoreboardBadge_CombatWand_Self.TFT_Set12.tex",
@@ -26903,7 +26903,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive> 周囲を飛び回り、最も近い敵を攻撃する。<br><br><spellActive>発動効果:</spellActive> 攻撃速度が<scaleLevel>@BonusAttackSpeed*100@%</scaleLevel>増加する。スモルダーの攻撃が火の玉に変化し、<TFTBonus>@SpellDuration@</TFTBonus>秒間、<physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。<br><br><specialRules>ドラゴンアップグレード:</specialRules> 火の玉はそれぞれ体力を<scaleHealth>@Heal@</scaleHealth>回復する。 ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "飛び方を学ぶ",
                         "variables": [
@@ -26968,15 +26968,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -28436,7 +28460,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive>現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive>その後@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
+                        "desc": "<spellPassive>自動効果:</spellPassive> 現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive> 次の@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
                         "icon": "ASSETS/Characters/TFT12_Hecarim/HUD/TFT12_Hecarim_Q.TFT_Set12.tex",
                         "name": "ランページ",
                         "variables": [
@@ -28665,24 +28689,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -33685,7 +33697,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "「ハンター」は、各戦闘で最初にキルまたはアシストを奪った時に攻撃力 %i:scaleAD%が増加する。<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%、キルまたはアシスト後@BonusADAfterTakedown@%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -33693,6 +33705,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -33702,6 +33715,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -33710,8 +33724,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -33890,7 +33905,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "「クロノ」の魔力が@BaseAP@ %i:scaleAP%増加する。<br><br>戦闘開始時: @Timer@秒のカウントダウンを開始する。これは、「クロノ」がスキルを発動するたびに@SecondsPerCast@秒ずつ早まる。カウントダウン終了時に、特殊効果を得る:<br><br><row>(@MinUnits@) 味方チームの体力が@MaxHealthHeal*100@%回復する。「クロノ」は%i:scaleAP%が@BonusAP@増加する。</row><br><row>(@MinUnits@) @FreezeDuration@秒間、凍結状態になり、その後「クロノ」は戦い続けて@BonusAP@ %i:scaleAP%を獲得する。</row><br><row>(@MinUnits@) 「クロノ」は@BonusAS*100@% %i:scaleAS%を獲得し、 代わりに味方チームの体力が@TimeHeal*100@%回復する。</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -33928,9 +33943,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -33992,38 +34007,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "「妖精」は体力 %i:scaleHealth%が増加し、特性のレベルに応じて強化される特別なアイテムを作成する。<br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、@DamageAmp*100@% %i:scaleDA% のダメージ増加を付与する「女王の王冠」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、「クイーンガードの鎧」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、アイテムがいずれもラディアントになる</row><br><br><rules>「妖精」だけがこのアイテムを所持することができる。</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -34032,9 +34047,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -34203,7 +34218,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "「シェイプシフター」は最大体力 %i:scaleHealth%が増加する。最初にスキルを使用した際に、その効果を3倍にする。<br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -34234,7 +34249,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -34397,17 +34414,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "「ハニーマンシー」は、@Period@秒ごとに対象に魔法ダメージを与えるハチを獲得する。それぞれのハチは、「ハニーマンシー」の与ダメージの@BonusDamage*100@%と自身の被ダメージの@DamageReceived*100@%のダメージを与える。<br><br>「ハニーマンシー」が倒されると、そのハチが1匹残って残りの戦闘の間、近くの「ハニーマンシー」の後を追う。<br><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ、 @NumTransfers@体のハチが代わりに生き残る</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -34416,10 +34433,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -34428,11 +34445,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -41483,7 +41500,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive> 周囲を飛び回り、最も近い敵を攻撃する。<br><br><spellActive>発動効果:</spellActive> 攻撃速度が<scaleLevel>@BonusAttackSpeed*100@%</scaleLevel>増加する。スモルダーの攻撃が火の玉に変化し、<TFTBonus>@SpellDuration@</TFTBonus>秒間、<physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。<br><br><specialRules>ドラゴンアップグレード:</specialRules> 火の玉はそれぞれ体力を<scaleHealth>@Heal@</scaleHealth>回復する。 ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "飛び方を学ぶ",
                         "variables": [
@@ -41548,15 +41565,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -43016,7 +43057,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive>現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive>その後@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
+                        "desc": "<spellPassive>自動効果:</spellPassive> 現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive> 次の@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
                         "icon": "ASSETS/Characters/TFT12_Hecarim/HUD/TFT12_Hecarim_Q.TFT_Set12.tex",
                         "name": "ランページ",
                         "variables": [
@@ -43245,24 +43286,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -48226,7 +48255,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "「ハンター」は、各戦闘で最初にキルまたはアシストを奪った時に攻撃力 %i:scaleAD%が増加する。<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%、キルまたはアシスト後@BonusADAfterTakedown@%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -48234,6 +48263,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -48243,6 +48273,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -48251,8 +48282,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -48431,7 +48463,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "「クロノ」の魔力が@BaseAP@ %i:scaleAP%増加する。<br><br>戦闘開始時: @Timer@秒のカウントダウンを開始する。これは、「クロノ」がスキルを発動するたびに@SecondsPerCast@秒ずつ早まる。カウントダウン終了時に、特殊効果を得る:<br><br><row>(@MinUnits@) 味方チームの体力が@MaxHealthHeal*100@%回復する。「クロノ」は%i:scaleAP%が@BonusAP@増加する。</row><br><row>(@MinUnits@) @FreezeDuration@秒間、凍結状態になり、その後「クロノ」は戦い続けて@BonusAP@ %i:scaleAP%を獲得する。</row><br><row>(@MinUnits@) 「クロノ」は@BonusAS*100@% %i:scaleAS%を獲得し、 代わりに味方チームの体力が@TimeHeal*100@%回復する。</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -48469,9 +48501,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -48533,38 +48565,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "「妖精」は体力 %i:scaleHealth%が増加し、特性のレベルに応じて強化される特別なアイテムを作成する。<br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、@DamageAmp*100@% %i:scaleDA% のダメージ増加を付与する「女王の王冠」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、「クイーンガードの鎧」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、アイテムがいずれもラディアントになる</row><br><br><rules>「妖精」だけがこのアイテムを所持することができる。</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -48573,9 +48605,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -48744,7 +48776,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "「シェイプシフター」は最大体力 %i:scaleHealth%が増加する。最初にスキルを使用した際に、その効果を3倍にする。<br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -48775,7 +48807,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -48938,17 +48972,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "「ハニーマンシー」は、@Period@秒ごとに対象に魔法ダメージを与えるハチを獲得する。それぞれのハチは、「ハニーマンシー」の与ダメージの@BonusDamage*100@%と自身の被ダメージの@DamageReceived*100@%のダメージを与える。<br><br>「ハニーマンシー」が倒されると、そのハチが1匹残って残りの戦闘の間、近くの「ハニーマンシー」の後を追う。<br><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ、 @NumTransfers@体のハチが代わりに生き残る</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -48957,10 +48991,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -48969,11 +49003,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -78211,7 +78245,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive> 周囲を飛び回り、最も近い敵を攻撃する。<br><br><spellActive>発動効果:</spellActive> 攻撃速度が<scaleLevel>@BonusAttackSpeed*100@%</scaleLevel>増加する。スモルダーの攻撃が火の玉に変化し、<TFTBonus>@SpellDuration@</TFTBonus>秒間、<physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。<br><br><specialRules>ドラゴンアップグレード:</specialRules> 火の玉はそれぞれ体力を<scaleHealth>@Heal@</scaleHealth>回復する。 ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "飛び方を学ぶ",
                         "variables": [
@@ -78276,15 +78310,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -79744,7 +79802,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive>現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive>その後@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
+                        "desc": "<spellPassive>自動効果:</spellPassive> 現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive> 次の@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
                         "icon": "ASSETS/Characters/TFT12_Hecarim/HUD/TFT12_Hecarim_Q.TFT_Set12.tex",
                         "name": "ランページ",
                         "variables": [
@@ -79973,24 +80031,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -85018,7 +85064,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "「ハンター」は、各戦闘で最初にキルまたはアシストを奪った時に攻撃力 %i:scaleAD%が増加する。<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%、キルまたはアシスト後@BonusADAfterTakedown@%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -85026,6 +85072,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -85035,6 +85082,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -85043,8 +85091,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -85223,7 +85272,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "「クロノ」の魔力が@BaseAP@ %i:scaleAP%増加する。<br><br>戦闘開始時: @Timer@秒のカウントダウンを開始する。これは、「クロノ」がスキルを発動するたびに@SecondsPerCast@秒ずつ早まる。カウントダウン終了時に、特殊効果を得る:<br><br><row>(@MinUnits@) 味方チームの体力が@MaxHealthHeal*100@%回復する。「クロノ」は%i:scaleAP%が@BonusAP@増加する。</row><br><row>(@MinUnits@) @FreezeDuration@秒間、凍結状態になり、その後「クロノ」は戦い続けて@BonusAP@ %i:scaleAP%を獲得する。</row><br><row>(@MinUnits@) 「クロノ」は@BonusAS*100@% %i:scaleAS%を獲得し、 代わりに味方チームの体力が@TimeHeal*100@%回復する。</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -85261,9 +85310,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -85325,38 +85374,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "「妖精」は体力 %i:scaleHealth%が増加し、特性のレベルに応じて強化される特別なアイテムを作成する。<br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、@DamageAmp*100@% %i:scaleDA% のダメージ増加を付与する「女王の王冠」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、「クイーンガードの鎧」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、アイテムがいずれもラディアントになる</row><br><br><rules>「妖精」だけがこのアイテムを所持することができる。</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -85365,9 +85414,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -85536,7 +85585,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "「シェイプシフター」は最大体力 %i:scaleHealth%が増加する。最初にスキルを使用した際に、その効果を3倍にする。<br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -85567,7 +85616,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -85730,17 +85781,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "「ハニーマンシー」は、@Period@秒ごとに対象に魔法ダメージを与えるハチを獲得する。それぞれのハチは、「ハニーマンシー」の与ダメージの@BonusDamage*100@%と自身の被ダメージの@DamageReceived*100@%のダメージを与える。<br><br>「ハニーマンシー」が倒されると、そのハチが1匹残って残りの戦闘の間、近くの「ハニーマンシー」の後を追う。<br><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ、 @NumTransfers@体のハチが代わりに生き残る</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -85749,10 +85800,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -85761,11 +85812,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -87288,7 +87339,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive> 周囲を飛び回り、最も近い敵を攻撃する。<br><br><spellActive>発動効果:</spellActive> 攻撃速度が<scaleLevel>@BonusAttackSpeed*100@%</scaleLevel>増加する。スモルダーの攻撃が火の玉に変化し、<TFTBonus>@SpellDuration@</TFTBonus>秒間、<physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。<br><br><specialRules>ドラゴンアップグレード:</specialRules> 火の玉はそれぞれ体力を<scaleHealth>@Heal@</scaleHealth>回復する。 ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "飛び方を学ぶ",
                         "variables": [
@@ -87353,15 +87404,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -88821,7 +88896,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive>現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive>その後@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
+                        "desc": "<spellPassive>自動効果:</spellPassive> 現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive> 次の@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
                         "icon": "ASSETS/Characters/TFT12_Hecarim/HUD/TFT12_Hecarim_Q.TFT_Set12.tex",
                         "name": "ランページ",
                         "variables": [
@@ -89050,24 +89125,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -94070,7 +94133,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "「ハンター」は、各戦闘で最初にキルまたはアシストを奪った時に攻撃力 %i:scaleAD%が増加する。<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%、キルまたはアシスト後@BonusADAfterTakedown@%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -94078,6 +94141,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -94087,6 +94151,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -94095,8 +94160,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -94275,7 +94341,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "「クロノ」の魔力が@BaseAP@ %i:scaleAP%増加する。<br><br>戦闘開始時: @Timer@秒のカウントダウンを開始する。これは、「クロノ」がスキルを発動するたびに@SecondsPerCast@秒ずつ早まる。カウントダウン終了時に、特殊効果を得る:<br><br><row>(@MinUnits@) 味方チームの体力が@MaxHealthHeal*100@%回復する。「クロノ」は%i:scaleAP%が@BonusAP@増加する。</row><br><row>(@MinUnits@) @FreezeDuration@秒間、凍結状態になり、その後「クロノ」は戦い続けて@BonusAP@ %i:scaleAP%を獲得する。</row><br><row>(@MinUnits@) 「クロノ」は@BonusAS*100@% %i:scaleAS%を獲得し、 代わりに味方チームの体力が@TimeHeal*100@%回復する。</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -94313,9 +94379,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -94377,38 +94443,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "「妖精」は体力 %i:scaleHealth%が増加し、特性のレベルに応じて強化される特別なアイテムを作成する。<br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、@DamageAmp*100@% %i:scaleDA% のダメージ増加を付与する「女王の王冠」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、「クイーンガードの鎧」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、アイテムがいずれもラディアントになる</row><br><br><rules>「妖精」だけがこのアイテムを所持することができる。</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -94417,9 +94483,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -94588,7 +94654,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "「シェイプシフター」は最大体力 %i:scaleHealth%が増加する。最初にスキルを使用した際に、その効果を3倍にする。<br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -94619,7 +94685,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -94782,17 +94850,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "「ハニーマンシー」は、@Period@秒ごとに対象に魔法ダメージを与えるハチを獲得する。それぞれのハチは、「ハニーマンシー」の与ダメージの@BonusDamage*100@%と自身の被ダメージの@DamageReceived*100@%のダメージを与える。<br><br>「ハニーマンシー」が倒されると、そのハチが1匹残って残りの戦闘の間、近くの「ハニーマンシー」の後を追う。<br><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ、 @NumTransfers@体のハチが代わりに生き残る</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -94801,10 +94869,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -94813,11 +94881,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -128820,7 +128888,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive> 周囲を飛び回り、最も近い敵を攻撃する。<br><br><spellActive>発動効果:</spellActive> 攻撃速度が<scaleLevel>@BonusAttackSpeed*100@%</scaleLevel>増加する。スモルダーの攻撃が火の玉に変化し、<TFTBonus>@SpellDuration@</TFTBonus>秒間、<physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。<br><br><specialRules>ドラゴンアップグレード:</specialRules> 火の玉はそれぞれ体力を<scaleHealth>@Heal@</scaleHealth>回復する。 ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "飛び方を学ぶ",
                         "variables": [
@@ -128885,15 +128953,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -130353,7 +130445,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>自動効果:</spellPassive>現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive>その後@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
+                        "desc": "<spellPassive>自動効果:</spellPassive> 現在の対象からキルまたはアシストを奪うと、次の通常攻撃が<physicalDamage>@ModifiedChargeDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage>の物理ダメージを与える。次の対象が射程外だった場合は、そこまで突撃する。<br><br><spellActive>発動効果:</spellActive> 次の@CleaveDuration@秒間、通常攻撃が隣接する敵をなぎ払い、<physicalDamage>@TotalCleaveDamage@&nbsp;(%i:scaleAD%)</physicalDamage>の物理ダメージを与える。",
                         "icon": "ASSETS/Characters/TFT12_Hecarim/HUD/TFT12_Hecarim_Q.TFT_Set12.tex",
                         "name": "ランページ",
                         "variables": [
@@ -130582,24 +130674,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -135225,7 +135305,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "「ハンター」は、各戦闘で最初にキルまたはアシストを奪った時に攻撃力 %i:scaleAD%が増加する。<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%、キルまたはアシスト後@BonusADAfterTakedown@%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -135233,6 +135313,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -135242,6 +135323,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -135250,8 +135332,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -135430,7 +135513,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "「クロノ」の魔力が@BaseAP@ %i:scaleAP%増加する。<br><br>戦闘開始時: @Timer@秒のカウントダウンを開始する。これは、「クロノ」がスキルを発動するたびに@SecondsPerCast@秒ずつ早まる。カウントダウン終了時に、特殊効果を得る:<br><br><row>(@MinUnits@) 味方チームの体力が@MaxHealthHeal*100@%回復する。「クロノ」は%i:scaleAP%が@BonusAP@増加する。</row><br><row>(@MinUnits@) @FreezeDuration@秒間、凍結状態になり、その後「クロノ」は戦い続けて@BonusAP@ %i:scaleAP%を獲得する。</row><br><row>(@MinUnits@) 「クロノ」は@BonusAS*100@% %i:scaleAS%を獲得し、 代わりに味方チームの体力が@TimeHeal*100@%回復する。</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -135468,9 +135551,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -135532,38 +135615,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "「妖精」は体力 %i:scaleHealth%が増加し、特性のレベルに応じて強化される特別なアイテムを作成する。<br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、@DamageAmp*100@% %i:scaleDA% のダメージ増加を付与する「女王の王冠」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、「クイーンガードの鎧」を獲得</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth%、王冠のダメージ増加 @DamageAmp*100@% %i:scaleDA%、アイテムがいずれもラディアントになる</row><br><br><rules>「妖精」だけがこのアイテムを所持することができる。</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -135572,9 +135655,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -135743,7 +135826,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "「シェイプシフター」は最大体力 %i:scaleHealth%が増加する。最初にスキルを使用した際に、その効果を3倍にする。<br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -135774,7 +135857,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -135937,17 +136022,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "「ハニーマンシー」は、@Period@秒ごとに対象に魔法ダメージを与えるハチを獲得する。それぞれのハチは、「ハニーマンシー」の与ダメージの@BonusDamage*100@%と自身の被ダメージの@DamageReceived*100@%のダメージを与える。<br><br>「ハニーマンシー」が倒されると、そのハチが1匹残って残りの戦闘の間、近くの「ハニーマンシー」の後を追う。<br><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ</row><br><row>(@MinUnits@) @MiniCount@体のハチ、 @NumTransfers@体のハチが代わりに生き残る</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -135956,10 +136041,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -135968,11 +136053,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],

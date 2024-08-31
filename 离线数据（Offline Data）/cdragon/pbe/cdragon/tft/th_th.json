@@ -1095,7 +1095,7 @@
                 "TFT12_Frost"
             ],
             "composition": [],
-            "desc": "คุณสมบัติ Frost มอบ Frost Wolf เพิ่มเติม @NumDummies@&nbsp;ตัว ที่คุณสามารถเลือกวางในสนาม และมาพร้อม Protector's Vow โดยพวกมันจะได้รับความเร็วโจมตี @BonusAS*100@% และพลังชีวิต @BonusHPPerTier@ หน่วยตามระดับของคุณสมบัติ Frost ได้รับ Warwick และ Zilean",
+            "desc": "คุณสมบัติ Frost มอบ Frost Wolf เพิ่มเติม @NumDummies@&nbsp;ตัว ที่คุณสามารถเลือกวางในสนาม และมาพร้อม Protector's Vow โดยพวกมันจะได้รับความเร็วโจมตี @BonusAS*100@% และพลังชีวิต @BonusHPPerTier@&nbsp;หน่วย ตามระดับของคุณสมบัติ Frost ได้รับ Warwick และ Zilean",
             "effects": {
                 "BonusAS": 0.4000000059604645,
                 "BonusHPPerTier": 300.0,
@@ -26903,7 +26903,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>ติดตัว:</spellPassive> บินไปรอบ ๆ และโจมตีใส่ศัตรูที่อยู่ใกล้ที่สุด <br><br><spellActive>เปิดใช้:</spellActive> ได้รับความเร็วโจมตี <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> และแทนที่การโจมตีของ Smolder ด้วยลูกไฟที่สร้างความเสียหายกายภาพ <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> หน่วยเป็นเวลา <TFTBonus>@SpellDuration@</TFTBonus>&nbsp;วินาที <br><br><specialRules>อัปเกรด Dragon:</specialRules> ลูกไฟแต่ละลูกจะฮีลพลังชีวิต <scaleHealth>@Heal@</scaleHealth> หน่วยด้วย ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "Learning to Fly",
                         "variables": [
@@ -26968,15 +26968,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -28665,24 +28689,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -33685,7 +33697,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "แชมเปี้ยน Hunter ได้รับพลังโจมตี %i:scaleAD% และได้รับเพิ่มหลังจากพวกเขา โค่นล้มศัตรูเป็นครั้งแรก ในการต่อสู้<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%, @BonusADAfterTakedown@% หลังจากโค่นล้มศัตรู</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -33693,6 +33705,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -33702,6 +33715,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -33710,8 +33724,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -33890,7 +33905,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% @BaseAP@ หน่วย<br><br>เมื่อการต่อสู้เริ่มขึ้น: เริ่มนับถอยหลัง @Timer@ วินาที ซึ่งจะเร็วขึ้น @SecondsPerCast@ วินาทีในทุก ๆ ครั้งที่แชมเปี้ยน Chrono ร่ายสกิล เมื่อการนับถอยหลังเสร็จสิ้น ทีมของคุณจะได้รับ เอฟเฟกต์พิเศษดังต่อไปนี้:<br><br><row>(@MinUnits@) ทีมของคุณฟื้นฟูพลังชีวิต @MaxHealthHeal*100@%, แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% เพิ่ม @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และหยุดเวลาเป็นเวลา @FreezeDuration@ วินาที, แชมเปี้ยน Chrono ไม่ได้รับผลจากการหยุดเวลา และได้รับพลังเวท %i:scaleAP% @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และแชมเปี้ยน Chrono ได้รับความเร็วโจมตี @BonusAS*100@% %i:scaleAS% และทีมของคุณจะฮีลพลังชีวิต @TimeHeal*100@% แทน</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -33928,9 +33943,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -33992,38 +34007,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "แชมเปี้ยน Faerie ได้รับพลังชีวิต %i:scaleHealth% และสร้างไอเทมพิเศษขึ้นมา ที่จะแข็งแกร่งขึ้นตามระดับของคุณสมบัติ <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย และได้รับ Queen's Crown ที่จะมอบการคูณความเสียหาย @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และได้รับ Queenguard's Armor</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และไอเทมทั้งสองชิ้น กลายเป็นเวอร์ชันแสง</row><br><br><rules>มีเพียงยูนิต Faerie เท่านั้นที่สามารถใส่ไอเทม Faerie ได้</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -34032,9 +34047,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -34203,7 +34218,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "แชมเปี้ยน Shapeshifter ได้รับพลังชีวิตสูงสุด %i:scaleHealth% เพิ่ม โดยเอฟเฟกต์นี้จะเพิ่มเป็นสามเท่า หลังร่ายสกิลเป็นครั้งแรก <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -34234,7 +34249,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -34397,17 +34414,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "แชมเปี้ยน Honeymancer เรียกผึ้งออกมา ที่จะสร้างความเสียหายเวท แก่เป้าหมายในทุก ๆ @Period@ วินาที โดยผึ้งแต่ละตัว จะสร้างความเสียหาย @BonusDamage*100@% ของความเสียหายที่แชมเปี้ยน Honeymancer ทำได้ รวมถึง @DamageReceived*100@% ของความเสียหาย ที่พวกเขาได้รับ <br><br>เมื่อแชมเปี้ยน Honeymancer ถูกสังหาร ผึ้ง 1 ตัว จะเปลี่ยนไปติดตามแชมเปี้ยน Honeymancer ใกล้เคียงไปจนจบการต่อสู้<br><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว และทิ้งผึ้งเพิ่มเป็น @NumTransfers@ ตัวแทน</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -34416,10 +34433,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -34428,11 +34445,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -41483,7 +41500,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>ติดตัว:</spellPassive> บินไปรอบ ๆ และโจมตีใส่ศัตรูที่อยู่ใกล้ที่สุด <br><br><spellActive>เปิดใช้:</spellActive> ได้รับความเร็วโจมตี <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> และแทนที่การโจมตีของ Smolder ด้วยลูกไฟที่สร้างความเสียหายกายภาพ <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> หน่วยเป็นเวลา <TFTBonus>@SpellDuration@</TFTBonus>&nbsp;วินาที <br><br><specialRules>อัปเกรด Dragon:</specialRules> ลูกไฟแต่ละลูกจะฮีลพลังชีวิต <scaleHealth>@Heal@</scaleHealth> หน่วยด้วย ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "Learning to Fly",
                         "variables": [
@@ -41548,15 +41565,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -43245,24 +43286,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -48226,7 +48255,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "แชมเปี้ยน Hunter ได้รับพลังโจมตี %i:scaleAD% และได้รับเพิ่มหลังจากพวกเขา โค่นล้มศัตรูเป็นครั้งแรก ในการต่อสู้<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%, @BonusADAfterTakedown@% หลังจากโค่นล้มศัตรู</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -48234,6 +48263,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -48243,6 +48273,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -48251,8 +48282,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -48431,7 +48463,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% @BaseAP@ หน่วย<br><br>เมื่อการต่อสู้เริ่มขึ้น: เริ่มนับถอยหลัง @Timer@ วินาที ซึ่งจะเร็วขึ้น @SecondsPerCast@ วินาทีในทุก ๆ ครั้งที่แชมเปี้ยน Chrono ร่ายสกิล เมื่อการนับถอยหลังเสร็จสิ้น ทีมของคุณจะได้รับ เอฟเฟกต์พิเศษดังต่อไปนี้:<br><br><row>(@MinUnits@) ทีมของคุณฟื้นฟูพลังชีวิต @MaxHealthHeal*100@%, แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% เพิ่ม @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และหยุดเวลาเป็นเวลา @FreezeDuration@ วินาที, แชมเปี้ยน Chrono ไม่ได้รับผลจากการหยุดเวลา และได้รับพลังเวท %i:scaleAP% @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และแชมเปี้ยน Chrono ได้รับความเร็วโจมตี @BonusAS*100@% %i:scaleAS% และทีมของคุณจะฮีลพลังชีวิต @TimeHeal*100@% แทน</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -48469,9 +48501,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -48533,38 +48565,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "แชมเปี้ยน Faerie ได้รับพลังชีวิต %i:scaleHealth% และสร้างไอเทมพิเศษขึ้นมา ที่จะแข็งแกร่งขึ้นตามระดับของคุณสมบัติ <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย และได้รับ Queen's Crown ที่จะมอบการคูณความเสียหาย @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และได้รับ Queenguard's Armor</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และไอเทมทั้งสองชิ้น กลายเป็นเวอร์ชันแสง</row><br><br><rules>มีเพียงยูนิต Faerie เท่านั้นที่สามารถใส่ไอเทม Faerie ได้</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -48573,9 +48605,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -48744,7 +48776,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "แชมเปี้ยน Shapeshifter ได้รับพลังชีวิตสูงสุด %i:scaleHealth% เพิ่ม โดยเอฟเฟกต์นี้จะเพิ่มเป็นสามเท่า หลังร่ายสกิลเป็นครั้งแรก <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -48775,7 +48807,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -48938,17 +48972,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "แชมเปี้ยน Honeymancer เรียกผึ้งออกมา ที่จะสร้างความเสียหายเวท แก่เป้าหมายในทุก ๆ @Period@ วินาที โดยผึ้งแต่ละตัว จะสร้างความเสียหาย @BonusDamage*100@% ของความเสียหายที่แชมเปี้ยน Honeymancer ทำได้ รวมถึง @DamageReceived*100@% ของความเสียหาย ที่พวกเขาได้รับ <br><br>เมื่อแชมเปี้ยน Honeymancer ถูกสังหาร ผึ้ง 1 ตัว จะเปลี่ยนไปติดตามแชมเปี้ยน Honeymancer ใกล้เคียงไปจนจบการต่อสู้<br><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว และทิ้งผึ้งเพิ่มเป็น @NumTransfers@ ตัวแทน</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -48957,10 +48991,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -48969,11 +49003,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -78211,7 +78245,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>ติดตัว:</spellPassive> บินไปรอบ ๆ และโจมตีใส่ศัตรูที่อยู่ใกล้ที่สุด <br><br><spellActive>เปิดใช้:</spellActive> ได้รับความเร็วโจมตี <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> และแทนที่การโจมตีของ Smolder ด้วยลูกไฟที่สร้างความเสียหายกายภาพ <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> หน่วยเป็นเวลา <TFTBonus>@SpellDuration@</TFTBonus>&nbsp;วินาที <br><br><specialRules>อัปเกรด Dragon:</specialRules> ลูกไฟแต่ละลูกจะฮีลพลังชีวิต <scaleHealth>@Heal@</scaleHealth> หน่วยด้วย ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "Learning to Fly",
                         "variables": [
@@ -78276,15 +78310,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -79973,24 +80031,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -85018,7 +85064,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "แชมเปี้ยน Hunter ได้รับพลังโจมตี %i:scaleAD% และได้รับเพิ่มหลังจากพวกเขา โค่นล้มศัตรูเป็นครั้งแรก ในการต่อสู้<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%, @BonusADAfterTakedown@% หลังจากโค่นล้มศัตรู</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -85026,6 +85072,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -85035,6 +85082,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -85043,8 +85091,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -85223,7 +85272,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% @BaseAP@ หน่วย<br><br>เมื่อการต่อสู้เริ่มขึ้น: เริ่มนับถอยหลัง @Timer@ วินาที ซึ่งจะเร็วขึ้น @SecondsPerCast@ วินาทีในทุก ๆ ครั้งที่แชมเปี้ยน Chrono ร่ายสกิล เมื่อการนับถอยหลังเสร็จสิ้น ทีมของคุณจะได้รับ เอฟเฟกต์พิเศษดังต่อไปนี้:<br><br><row>(@MinUnits@) ทีมของคุณฟื้นฟูพลังชีวิต @MaxHealthHeal*100@%, แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% เพิ่ม @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และหยุดเวลาเป็นเวลา @FreezeDuration@ วินาที, แชมเปี้ยน Chrono ไม่ได้รับผลจากการหยุดเวลา และได้รับพลังเวท %i:scaleAP% @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และแชมเปี้ยน Chrono ได้รับความเร็วโจมตี @BonusAS*100@% %i:scaleAS% และทีมของคุณจะฮีลพลังชีวิต @TimeHeal*100@% แทน</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -85261,9 +85310,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -85325,38 +85374,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "แชมเปี้ยน Faerie ได้รับพลังชีวิต %i:scaleHealth% และสร้างไอเทมพิเศษขึ้นมา ที่จะแข็งแกร่งขึ้นตามระดับของคุณสมบัติ <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย และได้รับ Queen's Crown ที่จะมอบการคูณความเสียหาย @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และได้รับ Queenguard's Armor</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และไอเทมทั้งสองชิ้น กลายเป็นเวอร์ชันแสง</row><br><br><rules>มีเพียงยูนิต Faerie เท่านั้นที่สามารถใส่ไอเทม Faerie ได้</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -85365,9 +85414,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -85536,7 +85585,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "แชมเปี้ยน Shapeshifter ได้รับพลังชีวิตสูงสุด %i:scaleHealth% เพิ่ม โดยเอฟเฟกต์นี้จะเพิ่มเป็นสามเท่า หลังร่ายสกิลเป็นครั้งแรก <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -85567,7 +85616,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -85730,17 +85781,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "แชมเปี้ยน Honeymancer เรียกผึ้งออกมา ที่จะสร้างความเสียหายเวท แก่เป้าหมายในทุก ๆ @Period@ วินาที โดยผึ้งแต่ละตัว จะสร้างความเสียหาย @BonusDamage*100@% ของความเสียหายที่แชมเปี้ยน Honeymancer ทำได้ รวมถึง @DamageReceived*100@% ของความเสียหาย ที่พวกเขาได้รับ <br><br>เมื่อแชมเปี้ยน Honeymancer ถูกสังหาร ผึ้ง 1 ตัว จะเปลี่ยนไปติดตามแชมเปี้ยน Honeymancer ใกล้เคียงไปจนจบการต่อสู้<br><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว และทิ้งผึ้งเพิ่มเป็น @NumTransfers@ ตัวแทน</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -85749,10 +85800,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -85761,11 +85812,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -87288,7 +87339,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>ติดตัว:</spellPassive> บินไปรอบ ๆ และโจมตีใส่ศัตรูที่อยู่ใกล้ที่สุด <br><br><spellActive>เปิดใช้:</spellActive> ได้รับความเร็วโจมตี <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> และแทนที่การโจมตีของ Smolder ด้วยลูกไฟที่สร้างความเสียหายกายภาพ <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> หน่วยเป็นเวลา <TFTBonus>@SpellDuration@</TFTBonus>&nbsp;วินาที <br><br><specialRules>อัปเกรด Dragon:</specialRules> ลูกไฟแต่ละลูกจะฮีลพลังชีวิต <scaleHealth>@Heal@</scaleHealth> หน่วยด้วย ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "Learning to Fly",
                         "variables": [
@@ -87353,15 +87404,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -89050,24 +89125,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -94070,7 +94133,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "แชมเปี้ยน Hunter ได้รับพลังโจมตี %i:scaleAD% และได้รับเพิ่มหลังจากพวกเขา โค่นล้มศัตรูเป็นครั้งแรก ในการต่อสู้<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%, @BonusADAfterTakedown@% หลังจากโค่นล้มศัตรู</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -94078,6 +94141,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -94087,6 +94151,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -94095,8 +94160,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -94275,7 +94341,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% @BaseAP@ หน่วย<br><br>เมื่อการต่อสู้เริ่มขึ้น: เริ่มนับถอยหลัง @Timer@ วินาที ซึ่งจะเร็วขึ้น @SecondsPerCast@ วินาทีในทุก ๆ ครั้งที่แชมเปี้ยน Chrono ร่ายสกิล เมื่อการนับถอยหลังเสร็จสิ้น ทีมของคุณจะได้รับ เอฟเฟกต์พิเศษดังต่อไปนี้:<br><br><row>(@MinUnits@) ทีมของคุณฟื้นฟูพลังชีวิต @MaxHealthHeal*100@%, แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% เพิ่ม @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และหยุดเวลาเป็นเวลา @FreezeDuration@ วินาที, แชมเปี้ยน Chrono ไม่ได้รับผลจากการหยุดเวลา และได้รับพลังเวท %i:scaleAP% @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และแชมเปี้ยน Chrono ได้รับความเร็วโจมตี @BonusAS*100@% %i:scaleAS% และทีมของคุณจะฮีลพลังชีวิต @TimeHeal*100@% แทน</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -94313,9 +94379,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -94377,38 +94443,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "แชมเปี้ยน Faerie ได้รับพลังชีวิต %i:scaleHealth% และสร้างไอเทมพิเศษขึ้นมา ที่จะแข็งแกร่งขึ้นตามระดับของคุณสมบัติ <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย และได้รับ Queen's Crown ที่จะมอบการคูณความเสียหาย @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และได้รับ Queenguard's Armor</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และไอเทมทั้งสองชิ้น กลายเป็นเวอร์ชันแสง</row><br><br><rules>มีเพียงยูนิต Faerie เท่านั้นที่สามารถใส่ไอเทม Faerie ได้</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -94417,9 +94483,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -94588,7 +94654,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "แชมเปี้ยน Shapeshifter ได้รับพลังชีวิตสูงสุด %i:scaleHealth% เพิ่ม โดยเอฟเฟกต์นี้จะเพิ่มเป็นสามเท่า หลังร่ายสกิลเป็นครั้งแรก <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -94619,7 +94685,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -94782,17 +94850,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "แชมเปี้ยน Honeymancer เรียกผึ้งออกมา ที่จะสร้างความเสียหายเวท แก่เป้าหมายในทุก ๆ @Period@ วินาที โดยผึ้งแต่ละตัว จะสร้างความเสียหาย @BonusDamage*100@% ของความเสียหายที่แชมเปี้ยน Honeymancer ทำได้ รวมถึง @DamageReceived*100@% ของความเสียหาย ที่พวกเขาได้รับ <br><br>เมื่อแชมเปี้ยน Honeymancer ถูกสังหาร ผึ้ง 1 ตัว จะเปลี่ยนไปติดตามแชมเปี้ยน Honeymancer ใกล้เคียงไปจนจบการต่อสู้<br><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว และทิ้งผึ้งเพิ่มเป็น @NumTransfers@ ตัวแทน</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -94801,10 +94869,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -94813,11 +94881,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
@@ -128820,7 +128888,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "<spellPassive>ติดตัว:</spellPassive> บินไปรอบ ๆ และโจมตีใส่ศัตรูที่อยู่ใกล้ที่สุด <br><br><spellActive>เปิดใช้:</spellActive> ได้รับความเร็วโจมตี <scaleLevel>@BonusAttackSpeed*100@%</scaleLevel> และแทนที่การโจมตีของ Smolder ด้วยลูกไฟที่สร้างความเสียหายกายภาพ <physicalDamage>@ModifiedDamage@ (%i:scaleAD%%i:scaleAP%)</physicalDamage> หน่วยเป็นเวลา <TFTBonus>@SpellDuration@</TFTBonus>&nbsp;วินาที <br><br><specialRules>อัปเกรด Dragon:</specialRules> ลูกไฟแต่ละลูกจะฮีลพลังชีวิต <scaleHealth>@Heal@</scaleHealth> หน่วยด้วย ",
+                        "desc": "Spell_TFT12_SmolderSpell_Tooltip",
                         "icon": "ASSETS/Characters/TFT12_Smolder/HUD/Icons2D/Icons_Smolder_E.TFT_Set12.tex",
                         "name": "Learning to Fly",
                         "variables": [
@@ -128885,15 +128953,39 @@
                                 ]
                             },
                             {
-                                "name": "Heal",
+                                "name": "NumFireballs",
                                 "value": [
-                                    0.0,
-                                    20.0,
+                                    4.0,
+                                    4.0,
+                                    4.0,
                                     30.0,
-                                    200.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
+                                    4.0,
+                                    4.0,
+                                    4.0
+                                ]
+                            },
+                            {
+                                "name": "DragonNumFireballs",
+                                "value": [
+                                    6.0,
+                                    6.0,
+                                    6.0,
+                                    99.0,
+                                    6.0,
+                                    6.0,
+                                    6.0
+                                ]
+                            },
+                            {
+                                "name": "DragonDamageModifier",
+                                "value": [
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842,
+                                    1.2999999523162842
                                 ]
                             }
                         ]
@@ -130582,24 +130674,12 @@
                                 "name": "PortalMissileAttackDamageRatio",
                                 "value": [
                                     1.100000023841858,
-                                    3.0,
-                                    3.0,
-                                    3.0999999046325684,
-                                    1.100000023841858,
+                                    3.700000047683716,
+                                    3.700000047683716,
+                                    3.75,
+                                    3.75,
                                     1.100000023841858,
                                     1.100000023841858
-                                ]
-                            },
-                            {
-                                "name": "PortalMissileAPScalingDamage",
-                                "value": [
-                                    0.0,
-                                    50.0,
-                                    60.0,
-                                    75.0,
-                                    0.0,
-                                    0.0,
-                                    0.0
                                 ]
                             },
                             {
@@ -135225,7 +135305,7 @@
                 },
                 {
                     "apiName": "TFT12_Hunter",
-                    "desc": "แชมเปี้ยน Hunter ได้รับพลังโจมตี %i:scaleAD% และได้รับเพิ่มหลังจากพวกเขา โค่นล้มศัตรูเป็นครั้งแรก ในการต่อสู้<br><br><expandRow>(@MinUnits@) @BaseAD@% %i:scaleAD%, @BonusADAfterTakedown@% หลังจากโค่นล้มศัตรู</expandRow>",
+                    "desc": "tft_trait_description_Set12_Hunter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -135233,6 +135313,7 @@
                             "style": 1,
                             "variables": {
                                 "BaseAD": 15.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 30.0
                             }
                         },
@@ -135242,6 +135323,7 @@
                             "style": 3,
                             "variables": {
                                 "BaseAD": 45.0,
+                                "BaseAS": "null",
                                 "BonusADAfterTakedown": 70.0
                             }
                         },
@@ -135250,8 +135332,9 @@
                             "minUnits": 6,
                             "style": 4,
                             "variables": {
-                                "BaseAD": 80.0,
-                                "BonusADAfterTakedown": 120.0
+                                "BaseAD": 70.0,
+                                "BaseAS": 0.4000000059604645,
+                                "BonusADAfterTakedown": 110.0
                             }
                         }
                     ],
@@ -135430,7 +135513,7 @@
                 },
                 {
                     "apiName": "TFT12_Chrono",
-                    "desc": "แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% @BaseAP@ หน่วย<br><br>เมื่อการต่อสู้เริ่มขึ้น: เริ่มนับถอยหลัง @Timer@ วินาที ซึ่งจะเร็วขึ้น @SecondsPerCast@ วินาทีในทุก ๆ ครั้งที่แชมเปี้ยน Chrono ร่ายสกิล เมื่อการนับถอยหลังเสร็จสิ้น ทีมของคุณจะได้รับ เอฟเฟกต์พิเศษดังต่อไปนี้:<br><br><row>(@MinUnits@) ทีมของคุณฟื้นฟูพลังชีวิต @MaxHealthHeal*100@%, แชมเปี้ยน Chrono ได้รับพลังเวท %i:scaleAP% เพิ่ม @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และหยุดเวลาเป็นเวลา @FreezeDuration@ วินาที, แชมเปี้ยน Chrono ไม่ได้รับผลจากการหยุดเวลา และได้รับพลังเวท %i:scaleAP% @BonusAP@ หน่วย</row><br><row>(@MinUnits@) และแชมเปี้ยน Chrono ได้รับความเร็วโจมตี @BonusAS*100@% %i:scaleAS% และทีมของคุณจะฮีลพลังชีวิต @TimeHeal*100@% แทน</row>",
+                    "desc": "tft_trait_description_Set12_Chrono",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -135468,9 +135551,9 @@
                             "style": 4,
                             "variables": {
                                 "BaseAP": 15.0,
-                                "BonusAP": 45.0,
-                                "BonusAS": 0.800000011920929,
-                                "FreezeDuration": 3.0,
+                                "BonusAP": 80.0,
+                                "BonusAS": 40.0,
+                                "FreezeDuration": 4.0,
                                 "MaxHealthHeal": 0.20000000298023224,
                                 "SecondsPerCast": 1.0,
                                 "TimeHeal": 1.0,
@@ -135532,38 +135615,38 @@
                 },
                 {
                     "apiName": "TFT12_Faerie",
-                    "desc": "แชมเปี้ยน Faerie ได้รับพลังชีวิต %i:scaleHealth% และสร้างไอเทมพิเศษขึ้นมา ที่จะแข็งแกร่งขึ้นตามระดับของคุณสมบัติ <br><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย และได้รับ Queen's Crown ที่จะมอบการคูณความเสียหาย @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และได้รับ Queenguard's Armor</row><br><row>(@MinUnits@) @BonusHealth@ %i:scaleHealth% หน่วย, Crown @DamageAmp*100@% %i:scaleDA% และไอเทมทั้งสองชิ้น กลายเป็นเวอร์ชันแสง</row><br><br><rules>มีเพียงยูนิต Faerie เท่านั้นที่สามารถใส่ไอเทม Faerie ได้</rules>",
+                    "desc": "tft_trait_description_Set12_Faerie",
                     "effects": [
                         {
-                            "maxUnits": 3,
-                            "minUnits": 2,
+                            "maxUnits": 4,
+                            "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusHealth": 100.0,
-                                "DamageAmp": 0.25,
+                                "BonusHealth": 200.0,
+                                "DamageAmp": 0.30000001192092896,
                                 "{10c8d947}": 1.0,
                                 "{d0c29d53}": "null"
                             }
                         },
                         {
-                            "maxUnits": 5,
-                            "minUnits": 4,
+                            "maxUnits": 6,
+                            "minUnits": 5,
                             "style": 3,
                             "variables": {
                                 "BonusHealth": 400.0,
-                                "DamageAmp": 0.4000000059604645,
+                                "DamageAmp": 0.44999998807907104,
                                 "{10c8d947}": 1.0,
-                                "{d0c29d53}": "null"
+                                "{d0c29d53}": 1.0
                             }
                         },
                         {
                             "maxUnits": 8,
-                            "minUnits": 6,
+                            "minUnits": 7,
                             "style": 4,
                             "variables": {
                                 "BonusHealth": 600.0,
-                                "DamageAmp": 0.5,
-                                "{10c8d947}": 1.0,
+                                "DamageAmp": 0.550000011920929,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         },
@@ -135572,9 +135655,9 @@
                             "minUnits": 9,
                             "style": 4,
                             "variables": {
-                                "BonusHealth": 850.0,
+                                "BonusHealth": 900.0,
                                 "DamageAmp": 0.75,
-                                "{10c8d947}": 1.0,
+                                "{10c8d947}": 2.0,
                                 "{d0c29d53}": 1.0
                             }
                         }
@@ -135743,7 +135826,7 @@
                 },
                 {
                     "apiName": "TFT12_Shapeshifter",
-                    "desc": "แชมเปี้ยน Shapeshifter ได้รับพลังชีวิตสูงสุด %i:scaleHealth% เพิ่ม โดยเอฟเฟกต์นี้จะเพิ่มเป็นสามเท่า หลังร่ายสกิลเป็นครั้งแรก <br><br><expandRow>(@MinUnits@) @BonusHealthRatio*100@% %i:scaleHealth%</expandRow>",
+                    "desc": "tft_trait_description_Set12_Shapeshifter",
                     "effects": [
                         {
                             "maxUnits": 3,
@@ -135774,7 +135857,9 @@
                             "minUnits": 8,
                             "style": 4,
                             "variables": {
-                                "BonusHealthRatio": 0.3499999940395355
+                                "BonusHealthRatio": 0.3499999940395355,
+                                "HealDuration": 2.0,
+                                "MaxHeal": 0.029999999329447746
                             }
                         }
                     ],
@@ -135937,17 +136022,17 @@
                 },
                 {
                     "apiName": "TFT12_Honeymancy",
-                    "desc": "แชมเปี้ยน Honeymancer เรียกผึ้งออกมา ที่จะสร้างความเสียหายเวท แก่เป้าหมายในทุก ๆ @Period@ วินาที โดยผึ้งแต่ละตัว จะสร้างความเสียหาย @BonusDamage*100@% ของความเสียหายที่แชมเปี้ยน Honeymancer ทำได้ รวมถึง @DamageReceived*100@% ของความเสียหาย ที่พวกเขาได้รับ <br><br>เมื่อแชมเปี้ยน Honeymancer ถูกสังหาร ผึ้ง 1 ตัว จะเปลี่ยนไปติดตามแชมเปี้ยน Honeymancer ใกล้เคียงไปจนจบการต่อสู้<br><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว</row><br><row>(@MinUnits@) ผึ้ง @MiniCount@ ตัว และทิ้งผึ้งเพิ่มเป็น @NumTransfers@ ตัวแทน</row>",
+                    "desc": "tft_trait_description_Set12_Honeymancy",
                     "effects": [
                         {
                             "maxUnits": 4,
                             "minUnits": 3,
                             "style": 1,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 3.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.05999999865889549,
+                                "DamageReceived": 0.019999999552965164,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -135956,10 +136041,10 @@
                             "minUnits": 5,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 6.0,
-                                "NumTransfers": 1.0,
+                                "BonusDamage": 0.07999999821186066,
+                                "DamageReceived": 0.03999999910593033,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
                                 "Period": 3.0
                             }
                         },
@@ -135968,11 +136053,11 @@
                             "minUnits": 7,
                             "style": 4,
                             "variables": {
-                                "BonusDamage": 0.07500000298023224,
-                                "DamageReceived": 0.02500000037252903,
-                                "MiniCount": 9.0,
-                                "NumTransfers": 3.0,
-                                "Period": 3.0
+                                "BonusDamage": 0.11999999731779099,
+                                "DamageReceived": 0.05999999865889549,
+                                "MiniCount": 5.0,
+                                "NumTransfers": 2.0,
+                                "Period": 1.5
                             }
                         }
                     ],
