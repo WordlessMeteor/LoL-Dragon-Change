@@ -4776,7 +4776,7 @@
         "trait_id": "TFT12_Mage",
         "set": "TFTSet12",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_2_Mage.png",
-        "tooltip_text": "Mages cast their Abilities twice and have modified total %i:scaleAP% Ability Power.<br><br><expandRow>(@MinUnits@) @APMultiplier*100@% %i:scaleAP%</expandRow>",
+        "tooltip_text": "Mages cast their Abilities twice and have modified total %i:scaleAP% Ability Power.<br><br><row>(@MinUnits@) @APMultiplier*100@% %i:scaleAP%</row><br><row>(@MinUnits@) @APMultiplier*100@% %i:scaleAP%</row><br><row>(@MinUnits@) @APMultiplier*100@% %i:scaleAP%</row><br><row>(@MinUnits@) @APMultiplier*100@% %i:scaleAP%, Mages cast MUCH more frequently</row>",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -4822,13 +4822,18 @@
                 "effect_amounts": [
                     {
                         "name": "APMultiplier",
-                        "value": 1.5,
+                        "value": 1.4,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "MaxMana",
+                        "value": 20.0,
                         "format_string": ""
                     }
                 ],
-                "min_units": 9,
-                "style_idx": 4,
-                "style_name": "kGold"
+                "min_units": 10,
+                "style_idx": 5,
+                "style_name": "kChromatic"
             }
         ]
     },
@@ -5614,7 +5619,7 @@
         "trait_id": "TFT12_Scholar",
         "set": "TFTSet12",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_6_Scholar.png",
-        "tooltip_text": "Scholars gain bonus %i:scaleMana% Mana on attack.<br><br><expandRow>(@MinUnits@) @ManaPerAttack@ %i:scaleMana% per attack</expandRow>",
+        "tooltip_text": "Scholars gain bonus %i:scaleMana% Mana on attack and %i:scaleAP% Ability Power.<br><br><row>(@MinUnits@) @ManaPerAttack@ %i:scaleMana% per attack, @AP@ %i:scaleAP%</row><br><row>(@MinUnits@) @ManaPerAttack@ %i:scaleMana% per attack, @AP@ %i:scaleAP%</row><br><row>(@MinUnits@) @ManaPerAttack@ %i:scaleMana% per attack, @AP@ %i:scaleAP%, and Abilities heal an ally for @AllyHealing*100@% of damage dealt</row>",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -5622,6 +5627,11 @@
                     {
                         "name": "ManaPerAttack",
                         "value": 3.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "AP",
+                        "value": 10.0,
                         "format_string": ""
                     }
                 ],
@@ -5634,7 +5644,12 @@
                 "effect_amounts": [
                     {
                         "name": "ManaPerAttack",
-                        "value": 6.0,
+                        "value": 5.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "AP",
+                        "value": 20.0,
                         "format_string": ""
                     }
                 ],
@@ -5647,7 +5662,17 @@
                 "effect_amounts": [
                     {
                         "name": "ManaPerAttack",
-                        "value": 12.0,
+                        "value": 10.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "AP",
+                        "value": 35.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "AllyHealing",
+                        "value": 0.2,
                         "format_string": ""
                     }
                 ],
@@ -5709,7 +5734,7 @@
                 "effect_amounts": [
                     {
                         "name": "BonusHealthRatio",
-                        "value": 0.35,
+                        "value": 0.3,
                         "format_string": ""
                     },
                     {
@@ -5930,7 +5955,7 @@
         "trait_id": "TFT12_Warrior",
         "set": "TFTSet12",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_12_Warrior.TFT_Set12.png",
-        "tooltip_text": "Warriors gain %i:scaleSV% Omnivamp and %i:scaleDA% Damage Amp. When Warriors drop below @HealthThreshold*100@% health, they gain double %i:scaleDA%.<br><br><expandRow>(@MinUnits@) @Omnivamp*100@% %i:scaleSV%, @BonusDamage*100@% %i:scaleDA%</expandRow>",
+        "tooltip_text": "Warriors gain %i:scaleSV% Omnivamp and %i:scaleDA% Damage Amp. When Warriors drop below @HealthThreshold*100@% health, they gain double %i:scaleDA%.<br><br><row>(@MinUnits@) @Omnivamp*100@% %i:scaleSV%, @BonusDamage*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @Omnivamp*100@% %i:scaleSV%, @BonusDamage*100@% %i:scaleDA%</row><br><row>(@MinUnits@) @Omnivamp*100@% %i:scaleSV%, @BonusDamage*100@% %i:scaleDA%, also gain @DamageReduction*100@% %i:scaleDR% Durability</row>",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -5947,7 +5972,7 @@
                     },
                     {
                         "name": "HealthThreshold",
-                        "value": 0.6,
+                        "value": 0.7,
                         "format_string": ""
                     },
                     {
@@ -5975,7 +6000,7 @@
                     },
                     {
                         "name": "HealthThreshold",
-                        "value": 0.6,
+                        "value": 0.7,
                         "format_string": ""
                     },
                     {
@@ -6003,12 +6028,17 @@
                     },
                     {
                         "name": "HealthThreshold",
-                        "value": 0.6,
+                        "value": 0.7,
                         "format_string": ""
                     },
                     {
                         "name": "LowHealthMultiplier",
                         "value": 2.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "DamageReduction",
+                        "value": 0.15,
                         "format_string": ""
                     }
                 ],
@@ -6023,7 +6053,7 @@
         "trait_id": "TFT12_Witchcraft",
         "set": "TFTSet12",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_12_Witch.TFT_Set12.png",
-        "tooltip_text": "Witch Abilities apply a curse to enemies for @CurseDuration@ seconds. When a cursed enemy dies, the curse spreads to the nearest enemy.<br><br>Cursed enemies become:<br><br><row>(@MinUnits@) smaller, losing @MaxHealthReduce@ %i:scaleHealth%</row><br><row>(@MinUnits@) AND green, healing the lowest Health Witch for @CurseHealPct@% of damage taken</row><br><row>(@MinUnits@) AND frail, taking @TrueDamagePct@% bonus true damage from Witches</row><br><row>(@MinUnits@) AND a frog, stunned for @FrogPolymorphDuration@ seconds every @FrogPolymorphCooldown@ seconds. All other curse effects are increased by @ChaseIncreasePercent@%.</row>",
+        "tooltip_text": "Witch Abilities apply a curse to enemies for @CurseDuration@ seconds. When a cursed enemy dies, the curse spreads to the nearest enemy.<br><br>Cursed enemies become:<br><br><row>(@MinUnits@) smaller, losing @MaxHealthReduce@ %i:scaleHealth%</row><br><row>(@MinUnits@) AND green, taking @CurseHealPct@% of their max Health as magic damage per second</row><br><row>(@MinUnits@) AND frail, taking @TrueDamagePct@% bonus true damage from Witches</row><br><row>(@MinUnits@) AND a frog, stunned for @FrogPolymorphDuration@ seconds every @FrogPolymorphCooldown@ seconds. All other curse effects are increased by @ChaseIncreasePercent@%.</row>",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -6083,7 +6113,7 @@
                     },
                     {
                         "name": "CurseHealPct",
-                        "value": 18.0,
+                        "value": 3.0,
                         "format_string": ""
                     },
                     {
@@ -6126,7 +6156,7 @@
                     },
                     {
                         "name": "CurseHealPct",
-                        "value": 18.0,
+                        "value": 3.0,
                         "format_string": ""
                     },
                     {
@@ -6169,7 +6199,7 @@
                     },
                     {
                         "name": "CurseHealPct",
-                        "value": 18.0,
+                        "value": 3.0,
                         "format_string": ""
                     },
                     {

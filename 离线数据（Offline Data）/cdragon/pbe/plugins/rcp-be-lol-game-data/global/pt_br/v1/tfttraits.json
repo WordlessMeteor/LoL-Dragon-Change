@@ -4776,7 +4776,7 @@
         "trait_id": "TFT12_Mage",
         "set": "TFTSet12",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_2_Mage.png",
-        "tooltip_text": "Magos conjuram suas habilidades duas vezes e têm %i:scaleAP% de Poder de Habilidade total modificado.<br><br><expandRow>(@MinUnits@) @APMultiplier*100@% %i:scaleAP%</expandRow>",
+        "tooltip_text": "tft_trait_description_Set12_Mage",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -4822,13 +4822,18 @@
                 "effect_amounts": [
                     {
                         "name": "APMultiplier",
-                        "value": 1.5,
+                        "value": 1.4,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "MaxMana",
+                        "value": 20.0,
                         "format_string": ""
                     }
                 ],
-                "min_units": 9,
-                "style_idx": 4,
-                "style_name": "kGold"
+                "min_units": 10,
+                "style_idx": 5,
+                "style_name": "kChromatic"
             }
         ]
     },
@@ -5614,7 +5619,7 @@
         "trait_id": "TFT12_Scholar",
         "set": "TFTSet12",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_6_Scholar.png",
-        "tooltip_text": "Ao atacar, Intelectuais recebem %i:scaleMana% de Mana adicional.<br><br><expandRow>(@MinUnits@) @ManaPerAttack@ %i:scaleMana% por ataque</expandRow>",
+        "tooltip_text": "tft_trait_description_Set12_Scholar",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -5622,6 +5627,11 @@
                     {
                         "name": "ManaPerAttack",
                         "value": 3.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "AP",
+                        "value": 10.0,
                         "format_string": ""
                     }
                 ],
@@ -5634,7 +5644,12 @@
                 "effect_amounts": [
                     {
                         "name": "ManaPerAttack",
-                        "value": 6.0,
+                        "value": 5.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "AP",
+                        "value": 20.0,
                         "format_string": ""
                     }
                 ],
@@ -5647,7 +5662,17 @@
                 "effect_amounts": [
                     {
                         "name": "ManaPerAttack",
-                        "value": 12.0,
+                        "value": 10.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "AP",
+                        "value": 35.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "AllyHealing",
+                        "value": 0.2,
                         "format_string": ""
                     }
                 ],
@@ -5709,7 +5734,7 @@
                 "effect_amounts": [
                     {
                         "name": "BonusHealthRatio",
-                        "value": 0.35,
+                        "value": 0.3,
                         "format_string": ""
                     },
                     {
@@ -5930,7 +5955,7 @@
         "trait_id": "TFT12_Warrior",
         "set": "TFTSet12",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_12_Warrior.TFT_Set12.png",
-        "tooltip_text": "Guerreiros recebem %i:scaleSV% Vampirismo Universal e %i:scaleDA% Amplificação de Dano. Quando Guerreiros ficam com menos de @HealthThreshold*100@% de Vida, eles recebem o dobro de %i:scaleDA%.<br><br><expandRow>(@MinUnits@) @Omnivamp*100@% %i:scaleSV%, @BonusDamage*100@% %i:scaleDA%</expandRow>",
+        "tooltip_text": "tft_trait_description_Set12_Warrior",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -5947,7 +5972,7 @@
                     },
                     {
                         "name": "HealthThreshold",
-                        "value": 0.6,
+                        "value": 0.7,
                         "format_string": ""
                     },
                     {
@@ -5975,7 +6000,7 @@
                     },
                     {
                         "name": "HealthThreshold",
-                        "value": 0.6,
+                        "value": 0.7,
                         "format_string": ""
                     },
                     {
@@ -6003,12 +6028,17 @@
                     },
                     {
                         "name": "HealthThreshold",
-                        "value": 0.6,
+                        "value": 0.7,
                         "format_string": ""
                     },
                     {
                         "name": "LowHealthMultiplier",
                         "value": 2.0,
+                        "format_string": ""
+                    },
+                    {
+                        "name": "DamageReduction",
+                        "value": 0.15,
                         "format_string": ""
                     }
                 ],
@@ -6023,7 +6053,7 @@
         "trait_id": "TFT12_Witchcraft",
         "set": "TFTSet12",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_12_Witch.TFT_Set12.png",
-        "tooltip_text": "As habilidades das Bruxas aplicam uma maldição aos inimigos por @CurseDuration@s. Quando um inimigo amaldiçoado morre, a maldição se espalha para o inimigo mais próximo.<br><br>Inimigos amaldiçoados ficam:<br><br><row>(@MinUnits@) menores, perdendo @MaxHealthReduce@ %i:scaleHealth%</row><br><row>(@MinUnits@), E verdes, curando a Bruxa com a Vida mais baixa em @CurseHealPct@% do dano sofrido</row><br><row>(@MinUnits@), E frágeis, sofrendo @TrueDamagePct@% de Dano Verdadeiro adicional de Bruxas</row><br><row>(@MinUnits@), E se tornam sapos, ficando Atordoados por @FrogPolymorphDuration@s a cada @FrogPolymorphCooldown@s. Os efeitos de outras maldições são aumentados em @ChaseIncreasePercent@%.</row>",
+        "tooltip_text": "tft_trait_description_Set12_Witchcraft",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -6083,7 +6113,7 @@
                     },
                     {
                         "name": "CurseHealPct",
-                        "value": 18.0,
+                        "value": 3.0,
                         "format_string": ""
                     },
                     {
@@ -6126,7 +6156,7 @@
                     },
                     {
                         "name": "CurseHealPct",
-                        "value": 18.0,
+                        "value": 3.0,
                         "format_string": ""
                     },
                     {
@@ -6169,7 +6199,7 @@
                     },
                     {
                         "name": "CurseHealPct",
-                        "value": 18.0,
+                        "value": 3.0,
                         "format_string": ""
                     },
                     {
