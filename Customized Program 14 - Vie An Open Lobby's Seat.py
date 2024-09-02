@@ -25,8 +25,8 @@ def is_admin():
         return False
 
 if not is_admin():
-    print("请以管理员权限运行此程序。\nPlease run this program as adminstrator.")
-    os.system("pause")  # Windows下暂停终端，等待用户操作
+    print("请以管理员权限运行此程序。\nPlease run this program as administrator.")
+    os.system("pause")
     exit()
 
 connector = Connector()
@@ -79,6 +79,18 @@ async def seatVie(connection):
         elif summoner_name == "":
             print("请输入非空字符串！\nPlease input a string instead of null!")
             continue
+        elif summoner_name == "partyId":
+            print('请输入小队编号，返回上一层请输入0。\nPlease input the partyId. Submit "0" to return to the last step.')
+            while True:
+                partyId = input()
+                if partyId == "0":
+                    print('请输入您想要加入的小队的拥有者的玩家名称，退出请输入0。如果要中断程序运行，请按Ctrl-C结束程序。\nPlease enter the player name of the party leader that you want to play with. Submit "0" to exit. If you want to cancel the program later, please press Ctrl-C.')
+                    break
+                response = await (await connection.request("POST", f"/lol-lobby/v2/party/{partyId}/join")).json()
+                if response == None:
+                    print("您已成功加入小队！\nYou've successfully joined the party!")
+                else:
+                    print(response)
         else:
             if summoner_name == "current-summoner":
                 search_by_puuid = False
@@ -211,7 +223,7 @@ async def seatVie(connection):
                                         print('请输入您想要加入的小队的拥有者的玩家名称，退出请输入0。如果要中断程序运行，请按Ctrl-C结束程序。\nPlease enter the player name of the party leader that you want to play with. Submit "0" to exit. If you want to cancel the program later, please press Ctrl-C.')
                                         break
                                 else:
-                                    #小队私密提示（The prompt of a closed party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'INVALID_ROLE_TRANSITION'}
+                                    #小队私密或被踢出小队的提示（The prompt of a closed or kicked party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'INVALID_ROLE_TRANSITION'}
                                     #小队已满的提示（The prompt of a full party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'PARTY_SIZE_LIMIT'}
                                     #小队排队中的提示（The prompt of a queuing party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'INVALID_WHILE_PARTY_IN_ACTION'}
                                     if response != response_previous:
