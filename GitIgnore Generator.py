@@ -11,8 +11,8 @@ for root, dirs, files in os.walk("离线数据（Offline Data）"):
             LNF.append(os.path.join(root, file).replace("\\", "/"))
 
 with open(".gitignore", "w", encoding = "utf-8") as fp:
-    print("#Vscode个人配置文件（Stores paths of Vscode setting files）\n.vscode/*\n#日志文件（Log files）\n离线数据（Offline Data）/Update Logs/*\n#由程序生成的数据文件\n召唤师信息（Summoner Information）/*\n顶尖排位玩家（Ranked Apex）/*")
-    fp.write("#Vscode个人配置文件（Stores paths of Vscode setting files）\n.vscode/*\n#日志文件（Log files）\n离线数据（Offline Data）/Update Logs/*\n#由程序生成的数据文件\n召唤师信息（Summoner Information）/*\n顶尖排位玩家（Ranked Apex）/*\n")
+    print("#Vscode个人配置文件（Stores paths of Vscode setting files）\n.vscode/*\n#日志文件（Log files）\n离线数据（Offline Data）/Update Logs/*\n#由程序生成的数据文件（Generated data files）\n召唤师信息（Summoner Information）/*\n顶尖排位玩家（Ranked Apex）/*")
+    fp.write("#Vscode个人配置文件（Stores paths of Vscode setting files）\n.vscode/*\n#日志文件（Log files）\n离线数据（Offline Data）/Update Logs/*\n#由程序生成的数据文件（Generated data files）\n召唤师信息（Summoner Information）/*\n顶尖排位玩家（Ranked Apex）/*\n")
     if LF:
         print("#文件大小超过100 MB（File size exceeds 100 MiB）")
         fp.write("#文件大小超过100 MB（File size exceeds 100 MiB）\n")
