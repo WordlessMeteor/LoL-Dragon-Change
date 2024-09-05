@@ -166,7 +166,7 @@
             "bHaveHitBone": true,
             "mHitBoneName": "root",
             "mTargetingTypeData": {
-                "__type": "Location"
+                "__type": "TargetOrLocation"
             },
             "mSpellCooldownOrSealedQueueThreshold": 0.5,
             "mCastingBreaksStealth": true,
@@ -3001,7 +3001,6 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Add_Glow_Yellow",
-                "importance": 2,
                 "bindWeight": {
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
@@ -3444,7 +3443,7 @@
             },
             {
                 "rate": {
-                    "constantValue": 0.10000000149011612,
+                    "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
@@ -3455,13 +3454,12 @@
                 "lifetime": 0.6499999761581421,
                 "rateByVelocityFunction": {
                     "constantValue": [
-                        1.5,
+                        0.004999999888241291,
                         -20.0
                     ],
                     "__type": "ValueVector2"
                 },
                 "emitterName": "Trail_Front_Orange",
-                "importance": 2,
                 "primitive": {
                     "mTrail": {
                         "mMode": 1,
@@ -3475,6 +3473,7 @@
                             "__type": "ValueVector3"
                         },
                         "mSmoothingMode": 1,
+                        "mMaxAddedPerFrame": 25,
                         "__type": "VfxTrailDefinitionData"
                     },
                     "__type": "VfxPrimitiveCameraTrail"
@@ -3608,7 +3607,7 @@
             },
             {
                 "rate": {
-                    "constantValue": 0.10000000149011612,
+                    "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
@@ -3619,13 +3618,12 @@
                 "lifetime": 0.6499999761581421,
                 "rateByVelocityFunction": {
                     "constantValue": [
-                        1.5,
+                        0.004999999888241291,
                         -20.0
                     ],
                     "__type": "ValueVector2"
                 },
                 "emitterName": "Trail_Front_Brown",
-                "importance": 2,
                 "primitive": {
                     "mTrail": {
                         "mMode": 1,
@@ -3639,6 +3637,7 @@
                             "__type": "ValueVector3"
                         },
                         "mSmoothingMode": 1,
+                        "mMaxAddedPerFrame": 25,
                         "__type": "VfxTrailDefinitionData"
                     },
                     "__type": "VfxPrimitiveCameraTrail"
@@ -3788,7 +3787,6 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "Add_BigGlow_Orange",
-                "importance": 2,
                 "bindWeight": {
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
@@ -3838,7 +3836,7 @@
             },
             {
                 "rate": {
-                    "constantValue": 100.0,
+                    "constantValue": 15.0,
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -3848,7 +3846,7 @@
                                 ],
                                 "keyValues": [
                                     0.5,
-                                    2.0
+                                    1.0
                                 ],
                                 "__type": "VfxProbabilityTableData"
                             }
@@ -3857,7 +3855,7 @@
                             0.0
                         ],
                         "values": [
-                            100.0
+                            15.0
                         ],
                         "__type": "VfxAnimatedFloatVariableData"
                     },
@@ -4161,7 +4159,7 @@
             },
             {
                 "rate": {
-                    "constantValue": 50.0,
+                    "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
@@ -4171,8 +4169,14 @@
                 "particleLinger": 2.0,
                 "lifetime": 2.0,
                 "emitterLinger": 1.0,
+                "rateByVelocityFunction": {
+                    "constantValue": [
+                        0.004999999888241291,
+                        0.0
+                    ],
+                    "__type": "ValueVector2"
+                },
                 "emitterName": "Trail_Lava_Orange",
-                "importance": 2,
                 "primitive": {
                     "mTrail": {
                         "mMode": 1,
@@ -4186,6 +4190,7 @@
                             "__type": "ValueVector3"
                         },
                         "mSmoothingMode": 1,
+                        "mMaxAddedPerFrame": 25,
                         "__type": "VfxTrailDefinitionData"
                     },
                     "__type": "VfxPrimitiveCameraTrail"
@@ -4385,18 +4390,24 @@
             },
             {
                 "rate": {
-                    "constantValue": 50.0,
+                    "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
                     "constantValue": 0.4000000059604645,
                     "__type": "ValueFloat"
                 },
-                "particleLinger": 2.0,
+                "particleLinger": 0.4000000059604645,
                 "lifetime": 2.0,
                 "emitterLinger": 1.0,
+                "rateByVelocityFunction": {
+                    "constantValue": [
+                        0.004999999888241291,
+                        0.0
+                    ],
+                    "__type": "ValueVector2"
+                },
                 "emitterName": "Trail_Lava_Red",
-                "importance": 2,
                 "primitive": {
                     "mTrail": {
                         "mMode": 1,
@@ -4410,6 +4421,7 @@
                             "__type": "ValueVector3"
                         },
                         "mSmoothingMode": 1,
+                        "mMaxAddedPerFrame": 25,
                         "__type": "VfxTrailDefinitionData"
                     },
                     "__type": "VfxPrimitiveCameraTrail"
@@ -4643,10 +4655,11 @@
                 "rateByVelocityFunction": {
                     "constantValue": [
                         0.05000000074505806,
-                        0.05000000074505806
+                        0.0
                     ],
                     "__type": "ValueVector2"
                 },
+                "MaximumRateByVelocity": 10.0,
                 "emitterName": "Add_Sparks_Red",
                 "importance": 0,
                 "birthOrbitalVelocity": {
@@ -4966,207 +4979,6 @@
                     3.0,
                     3.0
                 ],
-                "__type": "VfxEmitterDefinitionData"
-            },
-            {
-                "rate": {
-                    "constantValue": 1.0,
-                    "__type": "ValueFloat"
-                },
-                "particleLifetime": {
-                    "constantValue": 0.20000000298023224,
-                    "__type": "ValueFloat"
-                },
-                "particleLinger": 0.20000000298023224,
-                "lifetime": 1.0,
-                "isSingleParticle": 1,
-                "emitterName": "Beam_Arrow_Orange",
-                "importance": 0,
-                "bindWeight": {
-                    "constantValue": 1.0,
-                    "__type": "ValueFloat"
-                },
-                "primitive": {
-                    "mMesh": {
-                        "mSimpleMeshName": "ASSETS/Characters/Varus/Skins/Skin53/Particles/Varus_Skin53_Q_Cast_beam.SKINS_Varus_Skin53.scb",
-                        "__type": "VfxMeshDefinitionData"
-                    },
-                    "__type": "VfxPrimitiveBeam"
-                },
-                "blendMode": 1,
-                "pass": 57,
-                "alphaErosionDefinition": {
-                    "erosionDriveCurve": {
-                        "dynamics": {
-                            "times": [
-                                0.0,
-                                1.0
-                            ],
-                            "values": [
-                                0.0,
-                                1.0
-                            ],
-                            "__type": "VfxAnimatedFloatVariableData"
-                        },
-                        "__type": "ValueFloat"
-                    },
-                    "erosionMapName": "ASSETS/Shared/Particles/TFT/Rumble_Skin04_Z_OilySmoke_erode.dds",
-                    "__type": "VfxAlphaErosionDefinitionData"
-                },
-                "disableBackfaceCull": true,
-                "particleIsLocalOrientation": 1,
-                "birthScale0": {
-                    "constantValue": [
-                        100.0,
-                        100.0,
-                        20.0
-                    ],
-                    "__type": "ValueVector3"
-                },
-                "texture": "ASSETS/Shared/Particles/TFT/Varus_Skin53_Q_Channel_hand_Flames.dds",
-                "particleUVScrollRate": {
-                    "constantValue": [
-                        0.0,
-                        2.0
-                    ],
-                    "dynamics": {
-                        "times": [
-                            0.0
-                        ],
-                        "values": [
-                            [
-                                0.0,
-                                2.0
-                            ]
-                        ],
-                        "__type": "VfxAnimatedVector2fVariableData"
-                    },
-                    "__type": "IntegratedValueVector2"
-                },
-                "uvScale": {
-                    "constantValue": [
-                        1.0,
-                        0.5
-                    ],
-                    "__type": "ValueVector2"
-                },
-                "textureMult": {
-                    "textureMult": "ASSETS/Characters/TFT12_Varus/Skins/Base/Particles/Varus_Skin53_WQ_Arrow_Palette2.TFT_Set12.tex",
-                    "birthUvScrollRateMult": {
-                        "constantValue": [
-                            2.0,
-                            0.0
-                        ],
-                        "__type": "ValueVector2"
-                    },
-                    "TextureMultFilpV": 1,
-                    "__type": "VfxTextureMultDefinitionData"
-                },
-                "__type": "VfxEmitterDefinitionData"
-            },
-            {
-                "rate": {
-                    "constantValue": 1.0,
-                    "__type": "ValueFloat"
-                },
-                "particleLifetime": {
-                    "constantValue": 0.20000000298023224,
-                    "__type": "ValueFloat"
-                },
-                "particleLinger": 0.20000000298023224,
-                "lifetime": 1.0,
-                "isSingleParticle": 1,
-                "emitterName": "Beam_Arrowbright_Orange",
-                "importance": 0,
-                "bindWeight": {
-                    "constantValue": 1.0,
-                    "__type": "ValueFloat"
-                },
-                "primitive": {
-                    "mMesh": {
-                        "mSimpleMeshName": "ASSETS/Characters/Varus/Skins/Skin53/Particles/Varus_Skin53_Q_Cast_beam.SKINS_Varus_Skin53.scb",
-                        "__type": "VfxMeshDefinitionData"
-                    },
-                    "__type": "VfxPrimitiveBeam"
-                },
-                "blendMode": 4,
-                "birthColor": {
-                    "constantValue": [
-                        1.0,
-                        1.0,
-                        1.0,
-                        0.3000076413154602
-                    ],
-                    "__type": "ValueColor"
-                },
-                "pass": 60,
-                "alphaErosionDefinition": {
-                    "erosionDriveCurve": {
-                        "dynamics": {
-                            "times": [
-                                0.0,
-                                1.0
-                            ],
-                            "values": [
-                                0.0,
-                                1.0
-                            ],
-                            "__type": "VfxAnimatedFloatVariableData"
-                        },
-                        "__type": "ValueFloat"
-                    },
-                    "erosionMapName": "ASSETS/Shared/Particles/TFT/Rumble_Skin04_Z_OilySmoke_erode.dds",
-                    "__type": "VfxAlphaErosionDefinitionData"
-                },
-                "disableBackfaceCull": true,
-                "particleIsLocalOrientation": 1,
-                "birthScale0": {
-                    "constantValue": [
-                        100.0,
-                        100.0,
-                        20.0
-                    ],
-                    "__type": "ValueVector3"
-                },
-                "texture": "ASSETS/Shared/Particles/TFT/Varus_Skin53_Q_Channel_hand_Flames.dds",
-                "particleUVScrollRate": {
-                    "constantValue": [
-                        0.0,
-                        2.0
-                    ],
-                    "dynamics": {
-                        "times": [
-                            0.0
-                        ],
-                        "values": [
-                            [
-                                0.0,
-                                2.0
-                            ]
-                        ],
-                        "__type": "VfxAnimatedVector2fVariableData"
-                    },
-                    "__type": "IntegratedValueVector2"
-                },
-                "uvScale": {
-                    "constantValue": [
-                        1.0,
-                        0.5
-                    ],
-                    "__type": "ValueVector2"
-                },
-                "textureMult": {
-                    "textureMult": "ASSETS/Characters/TFT12_Varus/Skins/Base/Particles/Varus_Skin53_WQ_Arrow_Palette2.TFT_Set12.tex",
-                    "birthUvScrollRateMult": {
-                        "constantValue": [
-                            2.0,
-                            0.0
-                        ],
-                        "__type": "ValueVector2"
-                    },
-                    "TextureMultFilpV": 1,
-                    "__type": "VfxTextureMultDefinitionData"
-                },
                 "__type": "VfxEmitterDefinitionData"
             }
         ],
@@ -5602,7 +5414,7 @@
             },
             {
                 "rate": {
-                    "constantValue": 0.10000000149011612,
+                    "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
@@ -5613,7 +5425,7 @@
                 "lifetime": 1.0,
                 "rateByVelocityFunction": {
                     "constantValue": [
-                        0.20000000298023224,
+                        0.007000000216066837,
                         -0.20000000298023224
                     ],
                     "__type": "ValueVector2"
@@ -5633,6 +5445,7 @@
                             "__type": "ValueVector3"
                         },
                         "mSmoothingMode": 1,
+                        "mMaxAddedPerFrame": 5,
                         "__type": "VfxTrailDefinitionData"
                     },
                     "__type": "VfxPrimitiveCameraTrail"
@@ -5766,18 +5579,18 @@
             },
             {
                 "rate": {
-                    "constantValue": 0.10000000149011612,
+                    "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
                     "constantValue": 0.20000000298023224,
                     "__type": "ValueFloat"
                 },
-                "particleLinger": 1.0,
+                "particleLinger": 0.20000000298023224,
                 "lifetime": 1.0,
                 "rateByVelocityFunction": {
                     "constantValue": [
-                        0.20000000298023224,
+                        0.007000000216066837,
                         -0.20000000298023224
                     ],
                     "__type": "ValueVector2"
@@ -5797,6 +5610,7 @@
                             "__type": "ValueVector3"
                         },
                         "mSmoothingMode": 1,
+                        "mMaxAddedPerFrame": 5,
                         "__type": "VfxTrailDefinitionData"
                     },
                     "__type": "VfxPrimitiveCameraTrail"
@@ -5942,11 +5756,11 @@
                     "constantValue": 0.15000000596046448,
                     "__type": "ValueFloat"
                 },
-                "particleLinger": 1.0,
+                "particleLinger": 0.15000000596046448,
                 "lifetime": 1.0,
                 "rateByVelocityFunction": {
                     "constantValue": [
-                        0.20000000298023224,
+                        0.007000000216066837,
                         -0.20000000298023224
                     ],
                     "__type": "ValueVector2"
@@ -5966,6 +5780,7 @@
                             "__type": "ValueVector3"
                         },
                         "mSmoothingMode": 1,
+                        "mMaxAddedPerFrame": 5,
                         "__type": "VfxTrailDefinitionData"
                     },
                     "__type": "VfxPrimitiveCameraTrail"
@@ -6126,7 +5941,7 @@
             },
             {
                 "rate": {
-                    "constantValue": 40.0,
+                    "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
@@ -6135,6 +5950,13 @@
                 },
                 "particleLinger": 1.0,
                 "lifetime": 0.800000011920929,
+                "rateByVelocityFunction": {
+                    "constantValue": [
+                        0.007000000216066837,
+                        0.0
+                    ],
+                    "__type": "ValueVector2"
+                },
                 "emitterName": "Trail_Glow_Purple",
                 "importance": 2,
                 "primitive": {
@@ -6150,6 +5972,7 @@
                             "__type": "ValueVector3"
                         },
                         "mSmoothingMode": 1,
+                        "mMaxAddedPerFrame": 5,
                         "__type": "VfxTrailDefinitionData"
                     },
                     "__type": "VfxPrimitiveCameraTrail"
