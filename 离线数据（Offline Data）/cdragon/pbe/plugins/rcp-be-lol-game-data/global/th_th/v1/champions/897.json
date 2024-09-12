@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "สกิลของ K'Sante จะทำเครื่องหมายใส่เป้าหมาย เพื่อสร้างความเสียหายมากขึ้นในการโจมตีครั้งถัดไป"
+        "description": "สกิลของ K'Sante จะทำเครื่องหมายใส่เป้าหมายซึ่งทำให้ได้รับความเสียหายจากการโจมตีครั้งถัดไปของเขามากขึ้น<br><br>ขณะ All Out มีผล K'Sante จะสร้างความเสียหายจากการโจมตีและสกิลทั้งหมดมากขึ้น"
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@f1.2@ วินาที",
-            "description": "ฟาดอาวุธไปข้างหน้า สร้างความเสียหายและสโลว์ศัตรูทั้งหมดเป็นเส้นตรงสั้น ๆ<br><br>เมื่อโจมตีโดน จะมอบสแตค 1 สแตคเป็นเวลาชั่วครู่ ที่ 2 สแตค สกิลนี้จะส่งคลื่นกระแทกที่จะดึงศัตรูเข้ามา",
-            "dynamicDescription": "K'Sante ทุบอาวุธลงพื้น สร้าง<physicalDamage>ความเสียหายกายภาพ @BaseDamage@ หน่วย</physicalDamage> และ<status>สโลว์</status>ศัตรูที่โดน @SlowPercent*100@% เป็นเวลาชั่วครู่<br><br>เมื่อโจมตีโดนศัตรู K'Sante จะได้รับสแตค Ntofo Strikes 1 สแตคเป็นเวลา @RecastWindow@ วินาที ที่ 2 สแตค K'Sante จะส่งคลื่นกระแทกออกไปที่จะ<status>สตัน</status>และ<status>ดึง</status>ศัตรูเป็นเวลา @StunDuration@ วินาที<br><br><rules>คูลดาวน์ของสกิลนี้ลดลงตามโบนัส<scaleArmor>เกราะ</scaleArmor>และ<scaleMR>ต้านทานเวท</scaleMR>: @BonusResistsTooltip@ / @DefenseCapforCooldown@ วินาที<br>ระยะเวลาร่ายจะลดลงตามโบนัส<healing>พลังชีวิต</healing>: @BonusHealthTooltip@ / @HealthCapForCastTime@ วินาที</rules><br><br><keywordMajor>ทุ่มสุดตัว</keywordMajor>: คูลดาวน์ของสกิลนี้ลดลงแต่จะไม่<status>สโลว์</status>อีกต่อไป@SpellModifierDescriptionAppend@",
+            "cooldown": "คูลดาวน์ @f1.-1@ วินาที %i:cooldown%",
+            "description": "K'Sante ฟาดอาวุธสร้างความเสียหายและสโลว์ศัตรูในแนวเส้นตรงสั้น ๆ<br><br>เมื่อสกิลโดนศัตรู จะได้รับ Ntofo Strikes หนึ่งสแตค เมื่อครบ 2 สแตค K'Sante จะส่งคลื่นกระแทกออกไปเพื่อดึงศัตรูเข้ามา<br><br>ขณะ All Out มีผล คูลดาวน์จะลดลง",
+            "dynamicDescription": "K'Sante ฟาดอาวุธของเขา สร้าง<physicalDamage>ความเสียหายกายภาพ @BaseDamage@ หน่วย</physicalDamage>และ<status>สโลว์</status>ศัตรู @SlowPercent*100@% เป็นเวลา @SlowDuration@ วินาที ถ้าเขาใช้สกิลโดน เขาจะได้รับ Ntofo Strikes หนึ่งสแตคเป็นเวลา @RecastWindow@ วินาที เมื่อครบ 2 สแตค เขาจะส่งคลื่นกระแทกออกไปที่<status>สตัน</status>และ<status>ดึง</status>ศัตรูเป็นเวลา @StunDuration@ วินาที<br><br><keywordMajor>All Out</keywordMajor>: คูลดาวน์ลดลง @RCooldownReduction.0*100@%@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ วินาที %i:cooldown%",
-            "description": "K'Sante ชาร์จก่อนทำการพุ่ง K'Sante ไม่สามารถถูกหยุดได้และได้รับความเสียหายน้อยลงขณะชาร์จ เป้าหมายที่โดนพุ่งชนจะถูกกระแทกออกไปจนสุดระยะทางและถูกสตัน<br><br>",
-            "dynamicDescription": "K'Sante ตั้งอาวุธขึ้นมาในรูปแบบป้องกันเป็นเวลา @MinDurationTOOLTIP@ - @MaxDuration@ วินาที ไม่สามารถถูกหยุดได้ และได้รับความเสียหายน้อยลง @DamageReductionCharLevel@%<br><br>หลังจากชาร์จเสร็จ K'Sante จะพุ่งไปข้างหน้า สร้าง<physicalDamage>ความเสียหายกายภาพ @BaseDamageCalc@ หน่วย บวกด้วย @MaxHealthDamage*100@% ตามพลังชีวิตสูงสุด</physicalDamage> K'Sante <status>กระแทก</status>และ<status>สตัน</status>ศัตรูที่เขาพุ่งไปหาเป็นเวลา @MaxKnockbackDuration@ วินาที<br><br><keywordMajor>ทุ่มสุดตัว:</keywordMajor> รีเฟรชคูลดาวน์สกิลนี้ และสามารถลดความเสียหายได้มากขึ้น @DamageReductionCalcAO@% ความเร็วในการพุ่งตัวเพิ่มขึ้นแต่จะไม่มีเอฟเฟกต์<status>กระแทก</status>หรือ<status>สตัน</status>@SpellModifierDescriptionAppend@",
+            "description": "K'Sante ชาร์จพลังและได้รับความเสียหายน้อยลงชั่วขณะ จากนั้นเขาจะพุ่งตัวเพื่อกระแทกและสตันศัตรู<br><br>ขณะ All Out มีผล จะสร้างความเสียหายเพิ่มขึ้นแต่ไม่กระแทกหรือสตันศัตรูอีกต่อไป",
+            "dynamicDescription": "K'Sante ตั้งอาวุธขึ้นมาในรูปแบบป้องกันเป็นเวลา @MinDurationTOOLTIP@-@MaxDuration.1@ วินาที ระหว่างนี้เขาไม่สามารถถูกหยุดได้ และลดความเสียหายที่ได้รับลง @DamageReduction*100@% จากนั้นเขาจะพุ่งไปข้างหน้า สร้าง<physicalDamage>ความเสียหายกายภาพ @BaseDamage@ หน่วย + @TotalMaxHealthDamage@ ของพลังชีวิตสูงสุด</physicalDamage> ศัตรูที่โดนจะถูก<status>กระแทก</status>และ<status>สตัน</status>เป็นเวลา @MinKnockbackDuration@-@MaxKnockbackDuration@ วินาที (ขึ้นอยู่กับเวลาที่ชาร์จ)<br><br><keywordMajor>All Out:</keywordMajor> คูลดาวน์ของสกิลนี้ถูกรีเฟรช สร้าง<trueDamage>ความเสียหายจริง</trueDamage>เพิ่มเติม @RDamageIncreaseMin*100@-@RDamageIncreaseMax*100@% (ขึ้นอยู่กับเวลาที่ชาร์จ) ผลลดความเสียหายที่ได้รับเพิ่มเป็น @RDamageReduction*100@% และความเร็วในการพุ่งตั้วจะเพิ่มขึ้น แต่จะไม่<status>กระแทก</status>หรือ<status>สตัน</status>ศัตรูอีกต่อไป@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@Cooldown@ วินาที %i:cooldown%",
-            "description": "K'Sante จะพุ่งไปหาเพื่อนร่วมทีมและทั้งคู่จะได้รับโล่ป้องกัน หากไม่มีเพื่อนร่วมทีม K'Sante จะยังคงพุ่งไปยังตำแหน่งที่เลือกโดยมีระยะการพุ่งที่สั้นลงและได้รับโล่ป้องกัน<br>",
-            "dynamicDescription": "K'Sante พุ่งไปยังตำแหน่งที่เลือก ได้รับ<shield>โล่ป้องกัน @TotalShield@ หน่วย</shield>เป็นเวลา @ShieldDuration@ วินาที หากพุ่งไปหาเพื่อนร่วมทีม ระยะการพุ่งจะเพิ่มขึ้นและพวกเขาจะได้รับ<shield>โล่ป้องกัน</shield>อีกด้วย<br><br><keywordMajor>ทุ่มสุดตัว</keywordMajor>: ความเร็วในการพุ่งของสกิลนี้เพิ่มขึ้น การพุ่งโดยไม่มีเพื่อนร่วมทีมจะมีระยะเพิ่มขึ้นและสามารถข้ามกำแพงได้@SpellModifierDescriptionAppend@",
+            "cooldown": "คูลดาวน์ @f1.-1@ วินาที %i:cooldown%",
+            "description": "K'Sante พุ่งตัวและได้รับโล่ป้องกัน ถ้าเล็งเพื่อนร่วมทีมเป็นเป้าหมาย ระยะการพุ่งตัวของ K'Sante จะเพิ่มขึ้น และทั้งคุณและเพื่อนร่วมทีมคนนั้นจะได้รับโล่ป้องกัน<br><br>ขณะ All Out มีผล คูลดาวน์จะลดลงและความเร็วจะเพิ่มขึ้น",
+            "dynamicDescription": "K'Sante พุ่งตัว ได้รับ<shield>โล่ป้องกันความเสียหาย @TotalShield@ หน่วย</shield>เป็นเวลา @ShieldDuration@ วินาที ถ้าเล็งเพื่อนร่วมทีมเป็นเป้าหมาย ระยะการพุ่งตัวของ K'Sante จะเพิ่มขึ้นเป็นอย่างมาก และเพื่อนร่วมทีมคนนั้นจะได้รับ<shield>โล่ป้องกัน</shield>ด้วย<br><br><keywordMajor>All Out</keywordMajor>: คูลดาวน์ลดลง @CooldownModAO*100@% และความเร็วในการพุ่งตัวเพิ่มขึ้น@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ วินาที %i:cooldown%",
-            "description": "K'Sante ฟาดศัตรูให้กระเด็นออกไป หากศัตรูดังกล่าวกระแทกเข้ากับกำแพง พวกเขาจะทะลุผ่านกำแพงไปและได้รับความเสียหายมากขึ้น K'Sante จะปรากฏตัวที่ด้านหลังเป้าหมายและทำการทุ่มสุดตัว โดยการสละการป้องกันแลกกับพลังโจมตีที่เพิ่มขึ้นอย่างมหาศาล<br><br>",
-            "dynamicDescription": "K'Sante ทุบ Ntofo ของเขาให้แตกออก สร้าง<magicDamage>ความเสียหายเวท @TotalDamage@ หน่วย</magicDamage> และ<status>กระแทก</status>แชมเปี้ยนศัตรูหนึ่งตัวออกไป ศัตรูที่กระแทกเข้ากับกำแพงจะได้รับ<magicDamage>ความเสียหายเวทเพิ่มเติม @TotalDamageSlamDown@ หน่วย</magicDamage> <status>ถูกกระแทก</status>ทะลุกำแพง และ<status>ถูกสตัน</status>เป็นเวลาชั่วครู่ จากนั้น K'Sante จะพุ่งตามเป้าหมายไปและจะ<keywordMajor>ทุ่มสุดตัว</keywordMajor>เป็นเวลา 20 วินาที<br><br><keywordMajor>ทุ่มสุดตัว</keywordMajor>: K'Sante สูญเสีย<healing>พลังชีวิตสูงสุด @HealthLost*100@%</healing> <scaleArmor>โบนัสเกราะ @DefensesLost*100@%</scaleArmor> และ<scaleMR>โบนัสต้านทานเวท @DefensesLost*100@%</scaleMR> แต่จะได้รับ<scaleAD>พลังโจมตี @AllOutAttackDamage@ หน่วย</scaleAD> <attackSpeed>ความเร็วโจมตี @AttackSpeedIncrease*100@%</attackSpeed> ฮีลจากความเสียหายที่ทำได้กับแชมเปี้ยน <healing>@AllOutOmnivamp@%</healing> และเปลี่ยนแปลงสกิลของเขา@SpellModifierDescriptionAppend@",
+            "description": "K'Sante กระแทกศัตรูออกไป โดยจะส่งศัตรูทะลุกำแพงใด ๆ ที่ขวางทางกระเด็น จากนั้น K'Sante จะเข้าโหมด All Out แล้วพุ่งตัวตามไป ระหว่างนี้เขาจะสร้างความเสียหายเพิ่มขึ้น ฮีลเพิ่มขึ้น และมีสกิลแบบอัปเกรดโดยแลกกับพลังป้องกันทุกด้านที่ลดลง",
+            "dynamicDescription": "K'Sante ทุบ Ntofo ของเขาให้แตกออกเพื่อ<status>กระแทก</status>แชมเปี้ยนศัตรูออกไป สร้าง<physicalDamage>ความเสียหายกายภาพ @BaseDamage@ หน่วย</physicalDamage> จากนั้นพุ่งตัวไปด้านหลังศัตรูแล้วเข้าโหมด <keywordMajor>All Out</keywordMajor> เป็นเวลา @AllOutDuration@ วินาที หากศัตรูจะกระเด็นไปชนกำแพง ศัตรูจะถูก<status>กระแทก</status>ทะลุผ่านกำแพงแทน และ K'Sante จะฟาดอีกครั้งเพื่อสร้าง<physicalDamage>ความเสียหายกายภาพ @TotalDamageSlamDown@ หน่วย</physicalDamage><br><br>ขณะ <keywordMajor>All Out</keywordMajor> มีผล สกิลของ K'Sante จะได้รับการอัปเกรด และเขาจะได้รับ<attackSpeed>ความเร็วโจมตี @AttackSpeed*100@%</attackSpeed> โบนัสเจาะเกราะ @ArmorPenPercent*100@% และ<omnivamp>ดูดเลือด @Omnivamp*100@%</omnivamp> แต่จะเสีย<healing>พลังชีวิตสูงสุด @HealthLost*100@%</healing> <scaleArmor>โบนัสเกราะ @DefensesLost*100@%</scaleArmor> และ<scaleMR>โบนัสต้านทานเวท @DefensesLost*100@%</scaleMR>@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

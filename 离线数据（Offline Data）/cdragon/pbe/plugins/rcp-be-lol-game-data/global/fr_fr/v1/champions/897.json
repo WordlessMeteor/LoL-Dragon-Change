@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "Les compétences de K'Santé marquent ses cibles pour que sa prochaine attaque leur inflige plus de dégâts."
+        "description": "Les compétences de K'Santé marquent ses cibles pour que sa prochaine attaque leur inflige plus de dégâts.<br><br>Dans sa forme Grand jeu, les attaques et les compétences de K'Santé infligent plus de dégâts."
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@f1.2@ sec",
-            "description": "K'Santé frappe devant lui, blessant et ralentissant tous les ennemis sur une courte ligne.<br><br>À l'impact, cela lui octroie un effet pendant quelques secondes. À 2 effets cumulés, cette compétence tire une onde de choc qui attire les ennemis.",
-            "dynamicDescription": "K'Santé assène un puissant coup avec son arme, infligeant <physicalDamage>@BaseDamage@ pts de dégâts physiques</physicalDamage> et <status>ralentissant</status> les ennemis touchés de @SlowPercent*100@% pendant un court instant.<br><br>Quand un ennemi est touché, K'Santé gagne un effet de Coups de ntofo pendant @RecastWindow@ sec. À 2 effets cumulés, K'Santé tire à la place une onde de choc qui <status>étourdit</status> et <status>attire</status> les ennemis pendant @StunDuration@ sec.<br><br><rules>L'<scaleArmor>armure</scaleArmor> et la <scaleMR>résistance magique</scaleMR> bonus réduisent le délai de récupération : @BonusResistsTooltip@ / @DefenseCapforCooldown@.<br>Les <healing>PV</healing> bonus réduisent le délai d'incantation : @BonusHealthTooltip@ / @HealthCapForCastTime@.</rules><br><br><keywordMajor>Grand jeu</keywordMajor> : le délai de récupération de cette compétence est réduit, mais elle ne <status>ralentit</status> plus.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ sec %i:cooldown%",
+            "description": "K'Santé frappe le sol, blessant et ralentissant tous les ennemis sur une courte ligne.<br><br>À l'impact, cela lui octroie un effet Coups de ntofo. À 2 effets cumulés, K'Santé lance une onde de choc qui attire les ennemis à lui.<br><br>Dans sa forme Grand jeu, le délai de récupération est réduit.",
+            "dynamicDescription": "K'Santé assène un puissant coup avec son arme, infligeant <physicalDamage>@BaseDamage@ pts de dégâts physiques</physicalDamage> et <status>ralentissant</status> les ennemis touchés de @SlowPercent*100@% pendant @SlowDuration@ sec. Quand un ennemi est touché, K'Santé gagne un effet Coups de ntofo pendant @RecastWindow@ sec. À 2 effets cumulés, il tire à la place une onde de choc qui <status>étourdit</status> et <status>attire</status> les ennemis pendant @StunDuration@ sec.<br><br><keywordMajor>Grand jeu</keywordMajor> : le délai de récupération est réduit de @RCooldownReduction.0*100@%.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
-            "description": "K'Santé charge son attaque avant d'effectuer une ruée. K'Santé est impossible à arrêter et subit moins de dégâts pendant sa charge. Les cibles touchées par la ruée sont repoussées jusqu'au bout de sa portée et sont étourdies.<br><br>",
-            "dynamicDescription": "K'Santé lève ses armes en position défensive pendant @MinDurationTOOLTIP@ - @MaxDuration@ sec, devenant impossible à arrêter et réduisant de @DamageReductionCharLevel@% les dégâts qu'il subit.<br><br>Après la canalisation, il fonce droit devant, infligeant <physicalDamage>@BaseDamageCalc@ + @MaxHealthDamage*100@% des PV max en dégâts physiques</physicalDamage>. K'Santé <status>repousse</status> et <status>étourdit</status> pendant @MaxKnockbackDuration@ sec les ennemis dans lesquels il fonce.<br><br><keywordMajor>Grand jeu :</keywordMajor> le délai de récupération de cette compétence est réinitialisé. La réduction des dégâts augmente à @DamageReductionCalcAO@% et sa vitesse de ruée augmente, mais cette compétence ne <status>repousse</status> plus et n'<status>étourdit</status> plus.@SpellModifierDescriptionAppend@",
+            "description": "K'Santé charge son attaque, subissant moins de dégâts avant de se ruer en avant, ce qui repousse et étourdit les ennemis.<br><br>En forme Grand jeu, K'Santé inflige des dégâts bonus et ne repousse ni n'étourdit plus.",
+            "dynamicDescription": "K'Santé lève ses armes en position défensive pendant @MinDurationTOOLTIP@ - @MaxDuration.1@ sec, devenant impossible à arrêter et réduisant de @DamageReduction*100@% les dégâts qu'il subit. Puis, il fonce droit devant, infligeant <physicalDamage>@BaseDamage@ + @TotalMaxHealthDamage@ des PV max en dégâts physiques</physicalDamage>. Les ennemis touchés sont <status>repoussés</status> et <status>étourdis</status> pendant @MinKnockbackDuration@ - @MaxKnockbackDuration@ sec (selon la durée de la charge).<br><br><keywordMajor>Grand jeu :</keywordMajor> le délai de récupération est réinitialisé. La compétence inflige @RDamageIncreaseMin*100@ - @RDamageIncreaseMax*100@% de <trueDamage>dégâts bruts</trueDamage> bonus (selon la durée de la charge), la réduction des dégâts augmente à @RDamageReduction*100@% et la vitesse de la ruée est augmentée, mais la ruée ne <status>repousse</status> ni n'<status>étourdit</status> plus.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@Cooldown@ sec %i:cooldown%",
-            "description": "K'Santé se rue vers un allié et tous deux gagnent un bouclier. S'il n'y a pas d'allié, K'Santé se rue vers l'endroit ciblé (sur une plus courte distance) et gagne un bouclier.<br>",
-            "dynamicDescription": "K'Santé effectue une ruée et gagne un <shield>bouclier de @TotalShield@ PV</shield> pendant @ShieldDuration@ sec. S'il se rue vers un allié, sa portée est considérablement augmentée et cet allié gagne lui aussi un <shield>bouclier</shield>.<br><br><keywordMajor>Grand jeu</keywordMajor> : la vitesse de la ruée est augmentée. Les ruées sans allié ciblé ont une plus grande portée et permettent de franchir les murs.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ sec %i:cooldown%",
+            "description": "K'Santé se rue vers sa cible et gagne un bouclier. S'il cible un allié, la ruée de K'Santé a une plus grande portée et son allié gagne également un bouclier.<br><br>Dans sa forme Grand jeu, le délai de récupération est réduit et la vitesse de la ruée est augmentée.",
+            "dynamicDescription": "K'Santé se rue vers sa cible et gagne un bouclier de <shield>@TotalShield@ PV</shield> pendant @ShieldDuration@ sec. S'il se rue vers un allié, sa portée est considérablement augmentée et cet allié gagne lui aussi un <shield>bouclier</shield>.<br><br><keywordMajor>Grand jeu</keywordMajor> : le délai de récupération est réduit de @CooldownModAO*100@% et la vitesse de la ruée est augmentée.@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
-            "description": "K'Santé repousse un ennemi. Si ce dernier touche un mur, il le traverse et subit plus de dégâts. K'Santé apparaît derrière la cible et sort le Grand jeu, ce qui réduit ses défenses, mais augmente grandement ses dégâts.<br><br>",
-            "dynamicDescription": "K'Santé brise ses ntofos, infligeant <magicDamage>@TotalDamage@ pts de dégâts magiques</magicDamage> et <status>repoussant</status> un champion ennemi. Si ce dernier touche un mur, il subit <magicDamage>@TotalDamageSlamDown@ pts de dégâts magiques</magicDamage> supplémentaires, est <status>repoussé</status> par-delà le mur et est <status>étourdi</status> un court instant. K'Santé se rue ensuite après cet ennemi et sort le <keywordMajor>Grand jeu</keywordMajor> pendant 20 sec.<br><br><keywordMajor>Grand jeu</keywordMajor> : K'Santé perd <healing>@HealthLost*100@% de ses PV max</healing>, <scaleArmor>@DefensesLost*100@% de son armure bonus</scaleArmor> et <scaleMR>@DefensesLost*100@% de sa résistance magique bonus</scaleMR>. À la place, il gagne <scaleAD>+@AllOutAttackDamage@ pts de dégâts d'attaque</scaleAD> et <attackSpeed>+@AttackSpeedIncrease*100@% de vitesse d'attaque</attackSpeed>, et il récupère des PV équivalents à <healing>@AllOutOmnivamp@%</healing> des dégâts qu'il inflige aux champions. De plus, il transforme ses compétences.@SpellModifierDescriptionAppend@",
+            "description": "K'Santé repousse un ennemi, le forçant à traverser tout mur sur sa trajectoire. Puis, K'Santé sort le Grand jeu et se rue sur l'ennemi, renforce ses dégâts et ses soins, et transforme ses compétences, au détriment de ses défenses.",
+            "dynamicDescription": "K'Santé brise ses ntofos pour <status>repousser</status> un champion ennemi, lui infligeant <physicalDamage>@BaseDamage@ pts de dégâts physiques</physicalDamage>. K'Santé se rue ensuite après cet ennemi et sort le <keywordMajor>Grand jeu</keywordMajor> pendant @AllOutDuration@ sec. Si l'ennemi est repoussé contre un mur, il est <status>repoussé</status> à travers et K'Santé le frappe à nouveau, lui infligeant <physicalDamage>@TotalDamageSlamDown@ pts de dégâts physiques</physicalDamage>.<br><br>En forme <keywordMajor>Grand jeu</keywordMajor>, les compétences de K'Santé sont renforcées et il gagne <attackSpeed>+@AttackSpeed*100@% de vitesse d'attaque</attackSpeed>, +@ArmorPenPercent*100@% de pénétration d'armure bonus et <omnivamp>+@Omnivamp*100@% d'omnivampirisme</omnivamp>, mais il perd <healing>@HealthLost*100@% de ses PV max</healing>, <scaleArmor>@DefensesLost*100@% de son armure bonus</scaleArmor> et <scaleMR>@DefensesLost*100@% de sa résistance magique bonus</scaleMR>.@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

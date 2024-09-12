@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "卡桑帝的傷害性技能會標記目標，使他的下一次普攻對其造成更多傷害。"
+        "description": "卡桑帝的技能會標記目標，使他的下一次普攻對其造成更多傷害。<br><br>在「拼死一搏」狀態時，卡桑帝的所有普攻跟技能將造成更多傷害。"
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@f1.2@ 秒",
-            "description": "將武器向前猛擊，對短距離直線上的敵人造成傷害與緩速。<br><br>命中時，提供 1 層堆層，持續數秒。堆積至 2 層時，此技能打出一道衝擊波將敵人往回拉曳。",
-            "dynamicDescription": "卡桑帝將武器朝地面猛擊，造成<physicalDamage>@BaseDamage@物理傷害</physicalDamage>，命中的敵軍將短暫<status>緩速</status>@SlowPercent*100@%。<br><br>當此技能命中一位敵軍時，卡桑帝會獲得1層恩屠浮強擊，持續@RecastWindow@秒。累加至2層時，卡桑帝將改為打出一道衝擊波，<status>暈眩</status>並<status>拉曳</status>敵軍@StunDuration@秒。<br><br><rules>冷卻時間會根據額外<scaleArmor>物理防禦</scaleArmor>和<scaleMR>魔法防禦</scaleMR>(@BonusResistsTooltip@ / @DefenseCapforCooldown@)而減少。<br>施放時間會根據額外<healing>生命</healing>(@BonusHealthTooltip@ / @HealthCapForCastTime@)而減少。</rules><br><br><keywordMajor>拼死一搏</keywordMajor>：此技能的冷卻時間縮短，但不再造成<status>緩速</status>效果。@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@秒 %i:cooldown%",
+            "description": "卡桑帝猛擊，對短距離直線上的敵軍造成傷害與緩速。<br><br>命中時，賦予1層恩屠浮強擊。堆滿2層時，卡桑帝打出一道衝擊波將敵軍往回拉曳。<br><br>在「拼死一搏」狀態時，將縮短冷卻時間。",
+            "dynamicDescription": "卡桑帝利用武器猛擊，造成<physicalDamage>@BaseDamage@物理傷害</physicalDamage>，並<status>緩速</status>敵軍@SlowPercent*100@%，持續@SlowDuration@秒。若命中敵軍，則卡桑帝會獲得1層恩屠浮強擊，持續@RecastWindow@秒。堆滿2層時，卡桑帝將改為打出一道衝擊波，<status>暈眩</status>並<status>拉曳</status>敵軍@StunDuration@秒。<br><br><keywordMajor>拼死一搏：</keywordMajor>此技能的冷卻時間縮短@RCooldownReduction.0*100@%。@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
-            "description": "卡桑帝蓄力後向前衝刺。卡桑帝在蓄力時無法阻擋且減少承受傷害。被衝刺命中的任何目標將被擊退至衝刺終點且受到暈眩。",
-            "dynamicDescription": "卡桑帝舉起武器擺出防禦架式，持續@MinDurationTOOLTIP@至@MaxDuration@秒，並進入無法阻擋狀態，使受到的傷害減少@DamageReductionCharLevel@%。<br><br>蓄力後，卡桑帝向前猛撞，造成<physicalDamage>@BaseDamageCalc@ + @MaxHealthDamage*100@%最大生命的物理傷害</physicalDamage>。卡桑帝<status>擊退</status>並<status>暈眩</status>撞到的敵軍，持續@MaxKnockbackDuration@秒。<br><br><keywordMajor>拼死一搏：</keywordMajor>此技能的冷卻時間重置，傷害減免效果增加至@DamageReductionCalcAO@%，增加衝刺速度，但無法<status>擊退</status>或<status>暈眩</status>。@SpellModifierDescriptionAppend@",
+            "description": "卡桑帝開始蓄力，減少所受傷害，接著向前衝刺，擊退並暈眩敵軍。<br><br>在「拼死一搏」狀態時，造成的傷害提升，但不會再造成擊退或暈眩效果。",
+            "dynamicDescription": "卡桑帝舉起武器擺出防禦架式，持續@MinDurationTOOLTIP@-@MaxDuration.1@秒，並進入無法阻擋狀態，使受到的傷害減少@DamageReduction*100@%。接著，卡桑帝向前猛撞，造成<physicalDamage>@BaseDamage@ + @TotalMaxHealthDamage@最大生命的物理傷害</physicalDamage>。命中的敵軍將被<status>擊退</status>並<status>暈眩</status>，持續@MinKnockbackDuration@-@MaxKnockbackDuration@秒(根據蓄力時間而定)。<br><br><keywordMajor>拼死一搏：</keywordMajor>重置冷卻時間。造成額外@RDamageIncreaseMin*100@-@RDamageIncreaseMax*100@%<trueDamage>真實傷害</trueDamage>(根據蓄力時間而定)，傷害減免提升至@RDamageReduction*100@%且衝刺速度也會提升，但不再造成<status>擊退</status>或<status>暈眩</status>。@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@Cooldown@ 秒 %i:cooldown%",
-            "description": "卡桑帝將會衝刺向一名友軍，使雙方都獲得護盾；如果沒有友軍，卡桑帝仍會以較短的距離衝刺向目標地點，並獲得護盾。<br>",
-            "dynamicDescription": "卡桑帝衝刺，獲得 <shield>@TotalShield@ 護盾</shield>，持續 @ShieldDuration@ 秒。如果是朝著一名友軍衝刺，則衝刺距離將被大幅提升，且該友軍也會獲得<shield>護盾</shield>。<br><br><keywordMajor>拼死一搏：</keywordMajor>此技能的衝刺速度提升。在附近沒有友軍時會增加衝刺距離，並可以穿過牆壁。@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@秒 %i:cooldown%",
+            "description": "卡桑帝向前衝刺並獲得護盾。若指定友軍為目標，則卡桑帝衝刺的距離增加，且雙方皆會獲得護盾。<br><br>在「拼死一搏」狀態時，會縮短技能的冷卻時間並提升衝刺的速度。",
+            "dynamicDescription": "卡桑帝衝刺，獲得<shield>@TotalShield@護盾</shield>，持續@ShieldDuration@秒。如果是朝著一名友軍衝刺，則衝刺距離將大幅提升，且該友軍也會獲得<shield>護盾</shield>。<br><br><keywordMajor>拼死一搏</keywordMajor>：縮短此技能的冷卻時間@CooldownModAO*100@%，並提升衝刺速度。@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
-            "description": "卡桑帝將敵人砸飛。如果該敵人命中牆壁，將被推到牆後並受到更多傷害。卡桑帝將出現在目標身後，進入拼死一搏狀態，自損防禦力但大幅提升傷害。<br><br>",
-            "dynamicDescription": "卡桑帝擊碎自己的恩屠浮，對一名敵方英雄造成<magicDamage>@TotalDamage@魔法傷害</magicDamage>，並將其<status>擊退</status>。撞上牆壁的敵軍會額外受到<magicDamage>@TotalDamageSlamDown@魔法傷害</magicDamage>，被<status>擊退</status>到牆後，並被短暫<status>暈眩</status>。卡桑帝隨後會衝刺到敵軍身邊，並進入<keywordMajor>拼死一搏</keywordMajor>狀態，持續20秒。<br><br>卡桑帝<keywordMajor>拼死一搏</keywordMajor>時會失去<healing>@HealthLost*100@%最大生命</healing>、<scaleArmor>@DefensesLost*100@%額外物理防禦</scaleArmor>，以及<scaleMR>@DefensesLost*100@%額外魔法防禦</scaleMR>，但會增加<scaleAD>@AllOutAttackDamage@物理攻擊</scaleAD>、<attackSpeed>@AttackSpeedIncrease*100@%攻速</attackSpeed>，回復生命(回復量等同於對英雄造成傷害的<healing>@AllOutOmnivamp@%</healing>)，並切換他的技能組。@SpellModifierDescriptionAppend@",
+            "description": "卡桑帝擊退一名敵軍，若路徑中碰到牆面則會將敵軍推至牆後。接著卡桑帝進入拼死一搏狀態，朝敵軍衝刺，提升傷害和治療量，並切換技能組，但必須以降低自身防禦力為代價。",
+            "dynamicDescription": "卡桑帝擊碎自己的恩屠浮以<status>擊退</status>一名敵方英雄，造成<physicalDamage>@BaseDamage@物理傷害</physicalDamage>，接著快速衝到其背後，進入<keywordMajor>拼死一搏</keywordMajor>狀態，持續@AllOutDuration@秒。如果被擊退的敵軍會撞到牆面，他們將被<status>擊退</status>至牆面後方，且卡桑帝將再次對他們發起攻擊，造成<physicalDamage>@TotalDamageSlamDown@物理傷害</physicalDamage>。<br><br><keywordMajor>在拼死一搏</keywordMajor>狀態時，卡桑帝的技能將會升級，且他會增加<attackSpeed>@AttackSpeed*100@%攻速</attackSpeed>、@ArmorPenPercent*100@%額外物理穿透，以及<omnivamp>@Omnivamp*100@%全能吸血</omnivamp>，但會失去<healing>@HealthLost*100@%最大生命</healing>、<scaleArmor>@DefensesLost*100@%額外物理防禦</scaleArmor>，以及<scaleMR>@DefensesLost*100@%額外魔法防禦</scaleMR>。@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

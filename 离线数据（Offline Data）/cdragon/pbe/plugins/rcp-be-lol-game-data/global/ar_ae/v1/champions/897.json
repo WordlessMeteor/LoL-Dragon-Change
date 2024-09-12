@@ -343,19 +343,19 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "تقوم قدرات كاسانتي بوسم الأهداف ليتلقى المزيد من الضرر في هجومه التالي."
+        "description": "تقوم قدرات كاسانتي بوسم الأهداف لتتلقى المزيد من الضرر في هجومه التالي.<br><br>في طور القوة الجامحة، يلحق كاسانتي المزيد من الضرر باستخدام كل قدراته وهجماته."
     },
     "spells": [
         {
             "spellKey": "q",
-            "name": "ضربات إنتوفو",
+            "name": "ضربات سلاح إنتوفو",
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_Q1.png",
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@f1.2@ث",
-            "description": "يضرب بسلاحٍ نحو الأمام، فيُلحق الضرر ويبطئ كل الأعداء ضمن خط قصير.<br><br>عند الإصابة، يحصل على تكدس لبضع ثوانٍ. عند بلوغ 2 تكدس، تطلق هذه المهارة موجة ارتجاجية تسحب الأعداء إليها.",
-            "dynamicDescription": "يضرب كاسانتي بسلاحه إلى الأسفل، ملحقًا <physicalDamage>@BaseDamage@ ضرر مادي</physicalDamage> ويقوم <status>بإبطاء</status> الأعداء المصابين لفترة وجيزة بنسبة @SlowPercent*100@%.<br><br>عند إصابة عدو، يكسب كاسانتي تكدس ضربات إنتوفو لمدة @RecastWindow@ث. عند بلوغ 2 من التكدسات، تتحول ضربات كاسانتي لموجة ارتجاجية <status>تصعق</status> و <status>تجذب</status> الأعداء لمدة @StunDuration@ث.<br><br><rules>فترة التبريد المقلصة بمكافأة <scaleArmor>الدروع</scaleArmor> و <scaleMR>مقاومة السحر</scaleMR>: @BonusResistsTooltip@ \\ @DefenseCapforCooldown@.<br>زمن الإلقاء المقلص بمكافأة <healing>الصحة</healing>: @BonusHealthTooltip@ \\ @HealthCapForCastTime@.</rules><br><br><keywordMajor>القوة الجامحة</keywordMajor>: يتم تقليص فترة تبريد هذه القدرة لكنها تتوقف عن إلحاق تأثير <status>الإبطاء</status>.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ث %i:cooldown%",
+            "description": "يضرب كاسانتي، فيلحق الضرر بالأعداء ويبطئ حركتهم في خط قصير.<br><br>عند الإصابة، يمنح تكدرسًا من قدرة ضربات سلاح إنتوفو. عند بلوغ تكدسين، يطلق كاسانتي موجة ارتجاجية تسحب الأعداء إليها.<br><br>في طور القوة الجامحة، تتقلص فترة التبريد.",
+            "dynamicDescription": "يخبط كاسانتي سلاحه، ملحقًا <physicalDamage>@BaseDamage@ ضرر مادي</physicalDamage> كما <status>يبطىء</status> الأعداء بنسبة @SlowPercent*100@% لمدة @SlowDuration@ث. وإذا أصاب الهدف، يكسب تكدسًا من قدرة ضربات سلاح إنتوفو لمدة @RecastWindow@ث. عند بلوغ تكدسين، يطلق كاسانتي موجة ارتجاجية <status>تصعق</status> و<status>تسحب</status> الأعداء لمدة @StunDuration@ث.<br><br><keywordMajor>القوة الجامحة</keywordMajor>: تتقلص فترة التبريد بتسبة @RCooldownReduction.0*100@%.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ %i:cooldown%",
-            "description": "يشحن كاسانتي قبل الاندفاع. كاسانتي لا يقهر ويتلقى ضرر أقل رغم الشحن. تتم الإطاحة بأي هدف مصاب بالاندفاعة إلى نهايتها، كما يتم صعقه.<br><br>",
-            "dynamicDescription": "يحتمي كاسانتي بأسلحته لمدة @MinDurationTOOLTIP@ - @MaxDuration@ث، مما يدخله في طور \"لا يُقهر\"، فيتم تخفيض الضرر المُلحَق به بنسبة @DamageReductionCharLevel@%.<br><br>بعد الشحن، يندفع للأمام برأسه، ملحقًا <physicalDamage>@BaseDamageCalc@ + @MaxHealthDamage*100@% من الصحة القصوى على شكل ضررٍ مادي</physicalDamage>. <status>يطيح</status> كاسانتي و <status>يصعق</status> الأعداء الذين يصطدم بهم لمدة @MaxKnockbackDuration@ث.<br><br><keywordMajor>القوة الجامحة:</keywordMajor> تتجدد فترة تبريد هذه القدرة. تزداد نسبة تقليص الضرر إلى @DamageReductionCalcAO@% وتزداد سرعة الاندفاع لكنها لن تتسبب في <status>الإطاحة إلى الخلف</status> أو <status>الصعق</status>.@SpellModifierDescriptionAppend@",
+            "description": "يشحن كاسانتي طاقته، فيتلقى ضررًا أقل، ثم يندفع، فيطيح بالأعداء إلى الخلف ويصعقهم.<br><br>في طور القوة الجامحة، يلحق ضررًا أكبر ولا يعود قادرًا على الإطاحة بالأعداء إلى الخلف أو صعقهم.",
+            "dynamicDescription": "يُشهر كاسانتي أسلحته في وضعية دفاعية لمدة @MinDurationTOOLTIP@ - @MaxDuration.1@ث، مما يدخله في طور \"لا يُقهر\" ويقلص الضرر الذي يصيبه بنسبة @DamageReduction*100@%. ثم يندفع للأمام برأسه، ملحقًا <physicalDamage>@BaseDamage@ + @TotalMaxHealthDamage@ من الصحة القصوى على شكل ضررٍ مادي</physicalDamage>. تتم <status>الإطاحة إلى الخلف</status> بالأعداء المصابين، كما يتم <status>صعقهم</status> لمدة @MinKnockbackDuration@ - @MaxKnockbackDuration@ث (بناءً على وقت الاندفاع).<br><br><keywordMajor>القوة الجامحة:</keywordMajor> يتم تجديد فترة التبريد. يلحق @RDamageIncreaseMin*100@ - @RDamageIncreaseMax*100@% ضررًا إضافيًا على شكل <trueDamage>ضرر حقيقي</trueDamage> (بناءً على وقت الاندفاع)، يزداد تقليص الضرر إلى @RDamageReduction*100@%، كما تزداد سرعة الاندفاع، ولكن تختفي القدرة على <status>الإطاحة إلى الخلف</status> أو <status>الصعق</status>.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@Cooldown@ %i:cooldown%",
-            "description": "سوف يندفع كاسانتي إلى أحد الحلفاء وسيكسب كلاهما درعًا. إذا لم يكن هناك حليف، فسيظل كاسانتي يندفع إلى الموقع على مسافة منخفضة ويحصل على درع.<br>",
-            "dynamicDescription": "يندفع كاسانتي ويكسب <shield>@TotalShield@ درعًا</shield> لمدة @ShieldDuration@ث. إذا كان الاندفاع نحو حليف، تزداد مسافة الاندفاع بشكل ملحوظ ويحصل الحليف أيضًا على <shield>دروع</shield>.<br><br><keywordMajor>القوة الجامحة</keywordMajor>: تزداد سرعة اندفاع هذه القدرة. يزيد الاندفاع من دون حليف النطاقَ ويمكنه تخطي الجدران.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ث %i:cooldown%",
+            "description": "يندفع كاسانتي ويكسب درعًا. إذا كان يستهدف حليفًا، يندفع كاسانتي نحو الحليف بنطاق أوسع ويحصل كلاهما على درع.<br><br>في طور القوة الجامحة، تتقلص فترة التبريد وتزداد السرعة.",
+            "dynamicDescription": "يندفع كاسانتي، فيكسب <shield>درعًا بقيمة @TotalShield@</shield> لمدة @ShieldDuration@ث. إذا كان الاندفاع نحو حليف، تزداد مسافة الاندفاع بشكل ملحوظ، ويحصل الحليف أيضًا على <shield>درع</shield>.<br><br><keywordMajor>القوة الجامحة</keywordMajor>: تتقلص فترة التبريد بنسبة @CooldownModAO*100@% وتزداد سرعة الاندفاع.@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ %i:cooldown%",
-            "description": "يضرب كاسانتي أحد الأعداء ليطيح به بعيدًا. إذا اصطدم العدو بجدار، فسوف يمر عبره ويتلقى المزيد من الضرر. سيظهر كاسانتي خلف الهدف ويخرج بالقوة الجامحة عن طريق تمزيق دفاعاته ولكنه سوف يزيد مقدار ضرره بصورة كبيرة.<br><br>",
-            "dynamicDescription": "يفتت كاسانتي التونفاس ملحقًا <magicDamage>@TotalDamage@ ضرر سحر</magicDamage> و <status>الإطاحة</status> ببطل معادٍ إلى الخلف. يتلقى الأعداء الذي يصطدمون بجدار كمية إضافية من <magicDamage>@TotalDamageSlamDown@ ضرر سحر</magicDamage> وتتم <status>الإطاحة</status> بهم عبر الجدار، و <status>يُصعَقون</status> لمدة قصيرة. يندفع كاسانتي بعدها خلف العدو ويدخل في طور <keywordMajor>القوة الجامحة</keywordMajor> لمدة 20 ثانية.<br><br><keywordMajor>القوة الجامحة</keywordMajor> تُخسر كاسانتي <healing>@HealthLost*100@% صحة قصوى</healing> و <scaleArmor>@DefensesLost*100@% دروع إضافية</scaleArmor> و <scaleMR>@DefensesLost*100@% مقاومة سحر إضافية</scaleMR> لكنه يكسب <scaleAD>@AllOutAttackDamage@ ضرر هجوم</scaleAD> و <attackSpeed>@AttackSpeedIncrease*100@% سرعة هجوم</attackSpeed> و يعالج بنسبة <healing>@AllOutOmnivamp@%</healing> من الضرر الذي يلحقه بالأبطال، ويقوم بتحويل قدراته.@SpellModifierDescriptionAppend@",
+            "description": "يطيح كاسانتي بعدو إلى الخلف، فيرمي به عبر أي جدار في طريقه. ثم يدخل كاسانتي في طور القوة الجامحة ويندفع خلفه، فيكسب المزيد من الضرر والعلاج والقدرات المتحولة على حساب تقليص دفاعاته.",
+            "dynamicDescription": "يفتت كاسانتي سلاحي إنتوفو لديه <status>ليطيح إلى الخلف</status> ببطل معادٍ، فيلحق <physicalDamage>@BaseDamage@ ضرر مادي</physicalDamage>، ثم يندفع خلفه ويدخل في طور <keywordMajor>القوة الجامحة</keywordMajor> لمدة @AllOutDuration@ث. إذا اصطدم العدو بجدار، يتعرض <status>للإطاحة إلى الخلف</status> عبر الجدار ويضربه كاسانتي مرة أخرى ملحقًا <physicalDamage>@TotalDamageSlamDown@ ضرر مادي</physicalDamage>.<br><br>في طور <keywordMajor>القوة الجامحة</keywordMajor>، تتم ترقية قدرات كاسانتي ويكسب <attackSpeed>@AttackSpeed*100@% سرعة هجوم</attackSpeed> و @ArmorPenPercent*100@% اختراق دروع إضافي و <omnivamp>@Omnivamp*100@% علاج كامن</omnivamp>، لكنه يخسر <healing>@HealthLost*100@% صحة قصوى</healing> و <scaleArmor>@DefensesLost*100@% دروع إضافية</scaleArmor> و <scaleMR>@DefensesLost*100@% مقاومة سحر إضافية</scaleMR>.@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "Abilitățile lui K'Sante însemnează țintele pentru a suferi mai multe daune din partea următorului său atac."
+        "description": "Abilitățile lui K'Sante însemnează țintele pentru a suferi mai multe daune din partea următorului său atac.<br><br>Când se dezlănțuie, K'Sante provoacă mai multe daune cu toate atacurile și abilitățile sale."
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@f1.2@ sec.",
-            "description": "Lovește cu arma în față, provocându-le daune inamicilor aflați într-o linie și încetinindu-i.<br><br>La impact, oferă un cumul timp de câteva secunde. La 2 cumuluri, această abilitate lansează o undă de șoc care trage inamicii.",
-            "dynamicDescription": "K'Sante lovește în jos cu arma, provocând <physicalDamage>@BaseDamage@ daune fizice</physicalDamage> și <status>încetinind</status> pentru scurt timp inamicii loviți cu @SlowPercent*100@%.<br><br>Dacă lovește un inamic, K'Sante primește un cumul de ''Lovituri ntofo'' timp de @RecastWindow@ secunde. La 2 cumuluri, K'Sante lansează o undă de șoc care <status>amețește</status> și <status>trage</status> inamicii timp de @StunDuration@ secundă.<br><br><rules>Timpul de reactivare al abilității este redus de <scaleArmor>armura</scaleArmor> și <scaleMR>rezistența la magie</scaleMR> bonus: @BonusResistsTooltip@ / @DefenseCapforCooldown@.<br>Timpul de pregătire este redus de <healing>viața</healing> bonus: @BonusHealthTooltip@ / @HealthCapForCastTime@.</rules><br><br><keywordMajor>Dezlănțuit</keywordMajor>: timpul de reactivare al abilității este redus, dar nu mai <status>încetinește</status>.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@s %i:cooldown%",
+            "description": "K'Sante lovește, provocându-le daune inamicilor aflați într-o linie și încetinindu-i.<br><br>La impact, primește un cumul de ''Lovituri ntofo''. La 2 cumuluri, K'Sante lansează o undă de șoc care trage inamicii spre el.<br><br>Când se dezlănțuie, timpul de reactivare se reduce.",
+            "dynamicDescription": "K'Sante lovește cu arma, provocând <physicalDamage>@BaseDamage@ daune fizice</physicalDamage> și <status>încetinind</status> inamicii cu @SlowPercent*100@% timp de @SlowDuration@ sec. Dacă nimerește cel puțin un inamic, primește un cumul de ''Lovituri ntofo'' timp de @RecastWindow@ sec. La 2 cumuluri, înlocuiește efectul cu o undă de șoc care <status>amețește</status> și <status>trage</status> inamicii timp de @StunDuration@ sec.<br><br><keywordMajor>Dezlănțuit</keywordMajor>: timpul de reactivare se reduce cu @RCooldownReduction.0*100@%.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
-            "description": "K'Sante se pregătește înainte să se năpustească. Este de neoprit și suferă daune reduse în timpul pregătirii. Țintele lovite de năpustire sunt aruncate la capătul traseului și sunt amețite.<br><br>",
-            "dynamicDescription": "K'Sante își ridică armele într-o postură defensivă timp de @MinDurationTOOLTIP@-@MaxDuration@ sec., devenind de neoprit și reducând daunele primite cu @DamageReductionCharLevel@%.<br><br>După pregătire, K'Sante se avântă înainte, provocând <physicalDamage>daune fizice în valoare de @BaseDamageCalc@ + @MaxHealthDamage*100@% din viața maximă</physicalDamage>. K'Sante <status>aruncă în spate</status> și <status>amețește</status> inamicii de care se izbește timp de @MaxKnockbackDuration@ secunde.<br><br><keywordMajor>Dezlănțuit:</keywordMajor> timpul de reactivare al acestei abilități este resetat. Reducerea daunelor crește la @DamageReductionCalcAO@%, viteza năpustirii crește și ea, dar abilitatea nu va mai <status>arunca în spate</status> sau <status>ameți</status>.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante își adună puterile, suferind daune reduse, apoi se năpustește, aruncând în spate inamicii și amețindu-i.<br><br>Când se dezlănțuie, provoacă daune mai mari, dar nu mai aruncă în spate inamicii și nici nu-i mai amețește.",
+            "dynamicDescription": "K'Sante își ridică armele într-o manieră defensivă timp de @MinDurationTOOLTIP@-@MaxDuration.1@ sec., devenind de neoprit și reducând daunele primite cu @DamageReduction*100@%. Apoi, se avântă înainte, provocând <physicalDamage>daune fizice în valoare de @BaseDamage@ + @TotalMaxHealthDamage@ din viața maximă</physicalDamage>. Inamicii loviți sunt <status>aruncați în spate</status> și <status>amețiți</status> timp de @MinKnockbackDuration@-@MaxKnockbackDuration@ sec., în funcție de durata pregătirii.<br><br><keywordMajor>Dezlănțuit:</keywordMajor> timpul de reactivare al abilității este resetat. Provoacă <trueDamage>daune reale</trueDamage> suplimentare în valoare de @RDamageIncreaseMin*100@-@RDamageIncreaseMax*100@% din daune, în funcție de durata pregătirii. Reducerea daunelor crește la @RDamageReduction*100@% și viteza năpustirii crește, dar nu mai <status>aruncă în spate</status> și nici nu mai <status>amețește</status> inamicii.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "%i:cooldown%: @Cooldown@ sec",
-            "description": "K'Sante se va năpusti spre un aliat și amândoi vor primi un scut. Dacă nu există niciun aliat, K'Sante se va năpusti spre locație, cu o rază redusă, și va primi un scut.<br>",
-            "dynamicDescription": "K'Sante se năpustește, primind un <shield>scut în valoare de @TotalShield@</shield> timp de @ShieldDuration@ secunde. Dacă se năpustește spre un aliat, distanța deplasării este mărită semnificativ, iar aliatul primește și el un <shield>scut</shield>.<br><br><keywordMajor>Dezlănțuit</keywordMajor>: viteza de năpustire a acestei abilități este crescută. Năpustirea fără un aliat are o rază mai mare și poate trece peste ziduri.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@s %i:cooldown%",
+            "description": "K'Sante se năpustește și primește un scut. Dacă țintește un aliat, K'Sante se năpustește spre aliat pe o rază mai mare și amândoi primesc un scut.<br><br>Când se dezlănțuie, timpul de reactivare se reduce, iar viteza crește.",
+            "dynamicDescription": "K'Sante se năpustește, primind un <shield>scut de @TotalShield@</shield> timp de @ShieldDuration@ secunde. Dacă se năpustește spre un aliat, distanța deplasării crește semnificativ, iar aliatul primește și el un <shield>scut</shield>.<br><br><keywordMajor>Dezlănțuit</keywordMajor>: timpul de reactivare scade cu @CooldownModAO*100@%, iar viteza de năpustire crește.@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
-            "description": "K'Sante se izbește de un inamic, aruncându-l în spate. Dacă inamicul lovește un zid, va trece prin el, suferind mai multe daune. K'Sante va apărea în spatele țintei în forma dezlănțuită, renunțând la atributele defensive, dar provocând daune crescute.<br><br>",
-            "dynamicDescription": "K'Sante își zdrobește armele ntofo, provocând <magicDamage>@TotalDamage@ daune magice</magicDamage> și <status>aruncând în spate</status> un campion inamic. Inamicii care se lovesc de un zid suferă <magicDamage>@TotalDamageSlamDown@ daune magice</magicDamage> suplimentare, sunt <status>aruncați în spate</status> peste zid și sunt <status>amețiți</status> pentru scurt timp. K'Sante se năpustește apoi după inamic și se <keywordMajor>dezlănțuie</keywordMajor> timp de 20 de secunde.<br><br><keywordMajor>Dezlănțuit</keywordMajor>: K'Sante pierde <healing>@HealthLost*100@% din viața maximă</healing>, <scaleArmor>@DefensesLost*100@% din armura bonus</scaleArmor> și <scaleMR>@DefensesLost*100@% din rezistența la magie bonus</scaleMR>, dar primește <scaleAD>@AllOutAttackDamage@ daune din atac</scaleAD> și <attackSpeed>@AttackSpeedIncrease*100@% viteză de atac</attackSpeed>, se vindecă în valoare de <healing>@AllOutOmnivamp@%</healing> din daunele provocate împotriva campionilor și își transformă abilitățile.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante aruncă un inamic în spate, care poate trece chiar și prin ziduri. Apoi, se dezlănțuie și se năpustește după el, primind daune suplimentare, vindecându-se și transformându-și abilitățile, dar pierzând din atributele defensive.",
+            "dynamicDescription": "K'Sante își zdrobește armele ntofo, <status>aruncând în spate</status> un campion inamic și provocându-i <physicalDamage>@BaseDamage@ daune fizice</physicalDamage>, apoi se năpustește în spatele lui și se <keywordMajor>dezlănțuie</keywordMajor> timp de @AllOutDuration@ sec. Dacă inamicul ar lovi un zid, este <status>aruncat în spate</status> prin zid, iar K'Sante îl lovește din nou, provocându-i <physicalDamage>@TotalDamageSlamDown@ daune fizice</physicalDamage>.<br><br>Cât timp K'Sante este <keywordMajor>dezlănțuit</keywordMajor>, abilitățile sale sunt îmbunătățite și primește <attackSpeed>@AttackSpeed*100@% viteză de atac</attackSpeed>, @ArmorPenPercent*100@% penetrare a armurii bonus și <omnivamp>@Omnivamp*100@% omni-vampirism</omnivamp>, dar pierde <healing>@HealthLost*100@% viață maximă</healing>, <scaleArmor>@DefensesLost*100@% armură bonus</scaleArmor> și <scaleMR>@DefensesLost*100@% rezistență la magie bonus</scaleMR>.@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

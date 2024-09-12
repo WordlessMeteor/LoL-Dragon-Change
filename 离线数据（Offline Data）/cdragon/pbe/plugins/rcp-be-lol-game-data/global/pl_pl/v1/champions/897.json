@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "Umiejętności K'Santego oznaczają cele, przez co jego następny atak zadaje im więcej obrażeń."
+        "description": "Umiejętności K'Santego oznaczają cele, przez co jego następny atak zadaje im więcej obrażeń.<br><br>Gdy K'Sante idzie Na Całego, wszystkie jego ataki i umiejętności zadają więcej obrażeń."
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ pkt. (@AbilityResourceName@)",
-            "cooldown": "@f1.2@ sek.",
-            "description": "Atakuje w przód, zadając obrażenia wszystkim wrogom w krótkiej linii i spowalniając ich.<br><br>Przy trafieniu bohater na kilka sekund otrzymuje ładunek. Przy dwóch ładunkach umiejętność uwalnia falę uderzeniową, która przyciąga przeciwników.",
-            "dynamicDescription": "K'Sante uderza swoją bronią w ziemię, zadając <physicalDamage>@BaseDamage@ pkt. obrażeń fizycznych</physicalDamage> i na krótko <status>spowalniając</status> trafionych wrogów o @SlowPercent*100@%.<br><br>Po trafieniu wroga K'Sante zyska ładunek Uderzeń Ntofo na @RecastWindow@ sek. Dwa ładunki pozwolą mu uwolnić falę uderzeniową, która <status>ogłusza</status> i <status>przyciąga</status> przeciwników na @StunDuration@ sek.<br><br><rules>Czas rzucenia tej umiejętności zostaje skrócony o premię do <scaleArmor>pancerza</scaleArmor> i <scaleMR>odporności na magię</scaleMR>: @BonusResistsTooltip@ / @DefenseCapforCooldown@.<br>Czas użycia tej umiejętności zostaje skrócony o premię do <healing>zdrowia</healing>: @BonusHealthTooltip@ / @HealthCapForCastTime@.</rules><br><br><keywordMajor>Na Całego</keywordMajor>: Czas odnowienia zostaje skrócony, ale umiejętność nie <status>spowalnia</status>.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ sek. %i:cooldown%",
+            "description": "K'Sante uderza, zadając obrażenia i spowalniając wrogów w krótkiej linii.<br><br>Przy trafieniu zapewnia ładunek Uderzenia Ntofo. Przy 2 ładunkach K'Sante uwalnia falę uderzeniową, która przyciąga wrogów.<br><br>Gdy K'Sante idzie Na Całego, czas odnowienia zostaje skrócony.",
+            "dynamicDescription": "K'Sante uderza swoją bronią w ziemię, zadając <physicalDamage>@BaseDamage@ pkt. obrażeń fizycznych</physicalDamage> i <status>spowalniając</status> wrogów o @SlowPercent*100@% na @SlowDuration@ sek. Jeśli trafi, zyskuje ładunek Uderzenia Ntofo na @RecastWindow@ sek. Przy 2 ładunkach K'Sante uwalnia falę uderzeniową, która <status>ogłusza</status> i <status>przyciąga</status> wrogów na @StunDuration@ sek.<br><br><keywordMajor>Na Całego</keywordMajor>: Czas odnowienia zostaje skrócony o @RCooldownReduction.0*100@%.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ pkt. (@AbilityResourceName@)",
             "cooldown": "@Cooldown@ sek. %i:cooldown%",
-            "description": "K'Sante przygotowuje się przed doskokiem. K'Sante jest niepowstrzymany i otrzymuje mniejsze obrażenia podczas przygotowania. Cele trafione doskokiem zostają odepchnięte do końca linii doskoku oraz ogłuszone.<br><br>",
-            "dynamicDescription": "K'Sante unosi ntofo, broniąc się przez @MinDurationTOOLTIP@-@MaxDuration@ sek. i stając się niepowstrzymany, a otrzymywane przez niego obrażenia zostają zmniejszone o @DamageReductionCharLevel@%.<br><br>Po naładowaniu K'Sante prze naprzód, zadając <physicalDamage>obrażenia fizyczne równe @BaseDamageCalc@ pkt. + @MaxHealthDamage*100@% maksymalnego zdrowia celu</physicalDamage>. K'Sante <status>odrzuca</status> i <status>ogłusza</status> staranowanych wrogów na @MaxKnockbackDuration@ sek.<br><br><keywordMajor>Na Całego:</keywordMajor> Czas odnowienia tej umiejętności zostaje odświeżony. Redukcja otrzymywanych obrażeń zostaje zwiększona do @DamageReductionCalcAO@%, a prędkość doskoku wzrasta, ale doskok już nie <status>odrzuca</status> ani nie <status>ogłusza</status>.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante przygotowuje się, otrzymując w tym czasie zmniejszone obrażenia, a następnie doskakuje, odrzucając wrogów i ogłuszając ich.<br><br>Gdy K'Sante idzie Na Całego, zadaje zwiększone obrażenia, ale nie będzie już odrzucać ani ogłuszać.",
+            "dynamicDescription": "K'Sante unosi ntofo, broniąc się przez @MinDurationTOOLTIP@-@MaxDuration.1@ sek. i jest niepowstrzymany, a otrzymywane przez niego obrażenia zostają zmniejszone o @DamageReduction*100@%. Następnie K'Sante napiera naprzód, zadając <physicalDamage>obrażenia fizyczne równe @BaseDamage@ pkt. + @TotalMaxHealthDamage@ maksymalnego zdrowia</physicalDamage>. Trafieni wrogowie zostają <status>odrzuceni</status> i <status>ogłuszeni</status> na @MinKnockbackDuration@-@MaxKnockbackDuration@ sek. (zależnie od czasu ładowania).<br><br><keywordMajor>Na Całego</keywordMajor>: Czas odnowienia resetuje się. Zadaje dodatkowo @RDamageIncreaseMin*100@-@RDamageIncreaseMax*100@% obrażeń jako <trueDamage>obrażenia nieuchronne</trueDamage> (zależnie od czasu ładowania). Zmniejszenie otrzymywanych obrażeń wzrasta do @RDamageReduction*100@%, a szybkość doskoku jest zwiększona, ale nie będzie już <status>odrzucać</status> ani <status>ogłuszać</status>.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ pkt. (@AbilityResourceName@)",
-            "cooldown": "@Cooldown@ sek. %i:cooldown%",
-            "description": "K'Sante doskoczy do sojusznika i oboje zyskają tarczę. Jeśli nie ma sojusznika, K'Sante nadal doskoczy w wyznaczonym kierunku na mniejszy dystans i otrzyma tarczę.<br>",
-            "dynamicDescription": "K'Sante doskakuje, zyskując <shield>@TotalShield@ pkt. tarczy</shield> na @ShieldDuration@ sek. Jeśli doskakuje do sojusznika, zasięg doskoku jest znacznie większy, a sojusznik również zyskuje <shield>tarczę</shield>.<br><br><keywordMajor>Na Całego</keywordMajor>: Doskok jest szybszy. Zasięg doskoku bez sojusznika zostaje zwiększony, a K'Sante może doskakiwać przez ściany.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ sek. %i:cooldown%",
+            "description": "K'Sante doskakuje i zyskuje tarczę. Jeśli doskakuje do sojusznika, zasięg doskoku jest większy, a sojusznik również zyskuje tarczę.<br><br>Gdy K'Sante idzie Na Całego, czas odnowienia zostaje skrócony, a doskok jest szybszy.",
+            "dynamicDescription": "K'Sante doskakuje, zyskując <shield>tarczę o wytrzymałości @TotalShield@ pkt.</shield> na @ShieldDuration@ sek. Jeśli doskakuje do sojusznika, zasięg doskoku jest znacznie większy, a sojusznik również zyskuje <shield>tarczę</shield>.<br><br><keywordMajor>Na Całego</keywordMajor>: Czas odnowienia zostaje skrócony o @CooldownModAO*100@%, a doskok jest szybszy.@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ pkt. (@AbilityResourceName@)",
             "cooldown": "@Cooldown@ sek. %i:cooldown%",
-            "description": "K'Sante odrzuca wroga uderzeniem. Jeśli wróg uderzy w ścianę, przebije się przez nią i otrzyma więcej obrażeń. K'Sante pojawia się za celem i idzie Na Całego, zmniejszając swój pancerz i odporność na magię, ale znacznie zwiększając obrażenia.<br><br>",
-            "dynamicDescription": "K'Sante rozbija swoje ntofo, zadając <magicDamage>@TotalDamage@ pkt. obrażeń magicznych</magicDamage> i <status>odrzucając</status> wrogiego bohatera. Wrogowie, którzy uderzą o ścianę, otrzymają dodatkowo <magicDamage>@TotalDamageSlamDown@ pkt. obrażeń magicznych</magicDamage>, zostaną <status>odrzuceni</status> za ścianę i na krótko <status>ogłuszeni</status>. K'Sante doskakuje do wroga i idzie <keywordMajor>Na Całego</keywordMajor> przez 20 sek.<br><br><keywordMajor>Na Całego:</keywordMajor> K'Sante traci <healing>@HealthLost*100@% maks. zdrowia</healing>, <scaleArmor>@DefensesLost*100@% dodatkowego pancerza</scaleArmor> i <scaleMR>@DefensesLost*100@% dodatkowej odporności na magię</scaleMR>, ale zyskuje <scaleAD>@AllOutAttackDamage@ pkt. obrażeń od ataku</scaleAD> i <attackSpeed>@AttackSpeedIncrease*100@% prędkości ataku</attackSpeed>, leczy się o <healing>@AllOutOmnivamp@%</healing> obrażeń zadanych przez niego bohaterom i przemienia swoje umiejętności.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante odrzuca wroga do tyłu, przebijając go przez dowolną ścianę na jego drodze. Następnie K'Sante idzie Na Całego, doskakuje za wrogiem, zyskuje zwiększenie obrażeń, leczenie oraz zmienione umiejętności kosztem mniejszej obrony.",
+            "dynamicDescription": "K'Sante rozbija swoje ntofo, aby <status>odrzucić</status> wrogiego bohatera i zadać mu <physicalDamage>@BaseDamage@ pkt. obrażeń fizycznych</physicalDamage>. Następnie doskakuje do niego i idzie <keywordMajor>Na Całego</keywordMajor> na @AllOutDuration@ sek. Jeśli wróg uderzyłby w ścianę, zostaje <status>odrzucony</status> przez tę ścianę, a K'Sante uderza ponownie, zadając <physicalDamage>@TotalDamageSlamDown@ pkt. obrażeń fizycznych</physicalDamage>.<br><br>Gdy K'Sante idzie <keywordMajor>Na Całego</keywordMajor>, jego umiejętności zostają ulepszone i zyskuje on <attackSpeed>@AttackSpeed*100@% prędkości ataku</attackSpeed>, @ArmorPenPercent*100@% przebicia dodatkowego pancerza i <omnivamp>@Omnivamp*100@% wszechwampiryzmu</omnivamp>, natomiast traci <healing>@HealthLost*100@% maksymalnego zdrowia</healing>, <scaleArmor>@DefensesLost*100@% dodatkowego pancerza</scaleArmor> i <scaleMR>@DefensesLost*100@% dodatkowej odporności na magię</scaleMR>.@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

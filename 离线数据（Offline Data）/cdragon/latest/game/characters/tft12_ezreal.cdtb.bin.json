@@ -10350,7 +10350,7 @@
     "Characters/TFT12_Ezreal/Spells/TFT12_EzrealSpell": {
         "mScriptName": "TFT12_EzrealSpell",
         "mSpell": {
-            "mAffectsTypeFlags": 13327,
+            "mAffectsTypeFlags": 13342,
             "mAffectsStatusFlags": 32,
             "mRequiredUnitTags": {
                 "mObjectTagList": [
@@ -10363,25 +10363,12 @@
                     "mName": "PortalMissileAttackDamageRatio",
                     "mValues": [
                         1.100000023841858,
-                        3.0,
-                        3.0,
-                        3.0999999046325684,
-                        1.100000023841858,
+                        3.700000047683716,
+                        3.700000047683716,
+                        3.75,
+                        3.75,
                         1.100000023841858,
                         1.100000023841858
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "PortalMissileAPScalingDamage",
-                    "mValues": [
-                        0.0,
-                        50.0,
-                        60.0,
-                        75.0,
-                        0.0,
-                        0.0,
-                        0.0
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -10410,6 +10397,19 @@
                         3.0
                     ],
                     "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "FirstTargetDamage",
+                    "mValues": [
+                        200.0,
+                        150.0,
+                        225.0,
+                        335.0,
+                        445.0,
+                        200.0,
+                        200.0
+                    ],
+                    "__type": "SpellDataValue"
                 }
             ],
             "mSpellCalculations": {
@@ -10427,17 +10427,25 @@
                                         "__type": "NamedDataValueCalculationPart"
                                     },
                                     "__type": "StatBySubPartCalculationPart"
-                                },
-                                {
-                                    "mSubpart": {
-                                        "mDataValue": "PortalMissileAPScalingDamage",
-                                        "__type": "NamedDataValueCalculationPart"
-                                    },
-                                    "mRatio": 0.009999999776482582,
-                                    "__type": "SubPartScaledProportionalToStat"
                                 }
                             ],
                             "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedFirstTargetDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "FirstTargetDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
                         }
                     ],
                     "__type": "GameCalculation"
@@ -10483,20 +10491,14 @@
                                 {
                                     "type": "PortalMissileAttackDamageRatio",
                                     "multiplier": 100.0,
-                                    "nameOverride": "Spell_TFT12_EzrealSpell_MissileDamagePhysical",
-                                    "Style": 1,
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "PortalMissileAPScalingDamage",
-                                    "nameOverride": "Spell_TFT12_EzrealSpell_MissileDamageAPScale",
-                                    "Style": 1,
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "Cost",
                                     "nameOverride": "Spell_TFT12_EzrealSpell_TotalDamage",
-                                    "Style": 2,
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "FirstTargetDamage",
+                                    "nameOverride": "Spell_TFT12_EzrealSpell_FirstTargetDamage",
+                                    "Style": 1,
                                     "__type": "TooltipInstanceListElement"
                                 }
                             ],

@@ -2240,28 +2240,47 @@
                 "name": "Parameter0",
                 "data": [
                     0.6000000238418579,
-                    10.0,
-                    0.5,
-                    0.5
+                    0.0,
+                    0.30000001192092896,
+                    0.0
                 ],
                 "logicalParameters": [
                     {
                         "name": "Length",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
-                        "name": "Steps_HighQ",
-                        "fields": 2,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
-                        "name": "BlurCenter",
-                        "fields": 12,
+                        "fields": 15,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
                 "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "data": [
+                    10.0,
+                    0.5,
+                    0.5,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Steps_HighQ",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "BlurCenter",
+                        "fields": 6,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "staticSwitches": [
+            {
+                "name": "USE_RADIAL_BLUR",
+                "onByDefault": true,
+                "__type": "ShaderStaticSwitch"
             }
         ],
         "textures": [
@@ -8480,6 +8499,17 @@
                 "name": "Parameter1",
                 "logicalParameters": [
                     {
+                        "name": "BoneInfo",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "logicalParameters": [
+                    {
                         "name": "PlaneOffset",
                         "fields": 7,
                         "__type": "ShaderLogicalParameter"
@@ -8493,7 +8523,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter2",
+                "name": "Parameter3",
                 "logicalParameters": [
                     {
                         "name": "PlanePos",
@@ -8504,7 +8534,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter3",
+                "name": "Parameter4",
                 "data": [
                     0.0,
                     -1.0,
@@ -8521,7 +8551,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter4",
+                "name": "Parameter5",
                 "data": [
                     0.0,
                     0.0,
@@ -8538,7 +8568,7 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter5",
+                "name": "Parameter6",
                 "data": [
                     0.0,
                     100.0,
@@ -8556,6 +8586,10 @@
             }
         ],
         "staticSwitches": [
+            {
+                "name": "USING_BONE_AS_PLANE_POS",
+                "__type": "ShaderStaticSwitch"
+            },
             {
                 "name": "FAKE_REFLECTION",
                 "__type": "ShaderStaticSwitch"
@@ -17915,9 +17949,9 @@
                 "name": "Parameter0",
                 "data": [
                     0.0,
-                    1.2999999523162842,
                     1.0,
-                    1.0
+                    1000.0,
+                    0.0
                 ],
                 "logicalParameters": [
                     {
@@ -17926,30 +17960,13 @@
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "ratio",
-                        "fields": 14,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Parameter1",
-                "data": [
-                    1000.0,
-                    0.0,
-                    1.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "distance",
-                        "fields": 1,
+                        "name": "MaxTransitionFactor",
+                        "fields": 2,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "ProgressScope",
-                        "fields": 6,
+                        "name": "distance",
+                        "fields": 4,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
@@ -17961,31 +17978,48 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter2",
+                "name": "Parameter1",
                 "data": [
-                    0.6000000238418579,
+                    1.2999999523162842,
                     1.0,
-                    0.1599999964237213,
-                    0.30000001192092896
+                    1.0,
+                    0.6000000238418579
                 ],
                 "logicalParameters": [
                     {
+                        "name": "ratio",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
                         "name": "EdgeNoiseIntensity",
-                        "fields": 1,
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "data": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    0.1599999964237213
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "ProgressScope",
+                        "fields": 3,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
                         "name": "NoiseTexTilling",
-                        "fields": 2,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
-                        "name": "EdgeRangeOuter",
                         "fields": 4,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "EdgeRange",
+                        "name": "EdgeRangeOuter",
                         "fields": 8,
                         "__type": "ShaderLogicalParameter"
                     }
@@ -17994,6 +18028,28 @@
             },
             {
                 "name": "Parameter3",
+                "data": [
+                    0.30000001192092896,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "EdgeRange",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "ColorTexTilling",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter4",
                 "data": [
                     1.0,
                     1.0,
@@ -18010,22 +18066,11 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter4",
-                "data": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
+                "name": "Parameter5",
                 "logicalParameters": [
                     {
-                        "name": "ColorTexTilling",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
                         "name": "centeroffset",
-                        "fields": 14,
+                        "fields": 7,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
@@ -18033,6 +18078,14 @@
             }
         ],
         "staticSwitches": [
+            {
+                "name": "DEBUG_MODE",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "INVERSE",
+                "__type": "ShaderStaticSwitch"
+            },
             {
                 "name": "TRANSITION_OUT",
                 "onByDefault": true,
@@ -39349,10 +39402,26 @@
         "parameters": [
             {
                 "name": "Parameter0",
+                "data": [
+                    0.0,
+                    3.0,
+                    0.4000000059604645,
+                    0.6000000238418579
+                ],
                 "logicalParameters": [
                     {
                         "name": "PitchFactor",
                         "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "FogClipDistance",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "FogMinMax",
+                        "fields": 12,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
@@ -39374,6 +39443,45 @@
                     }
                 ],
                 "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "data": [
+                    0.0,
+                    0.2726939916610718,
+                    0.3990691900253296,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "FogColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter3",
+                "data": [
+                    0.699999988079071,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "FogSize",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "DistanceBias",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
             }
         ],
         "staticSwitches": [
@@ -39383,6 +39491,10 @@
             },
             {
                 "name": "ENABLE_BILLBOARD",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "ENABLE_DEPTHFOG",
                 "__type": "ShaderStaticSwitch"
             }
         ],

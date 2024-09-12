@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "As Habilidades de K'Sante marcam os alvos para que sofram mais dano do próximo Ataque dele."
+        "description": "As habilidades de K'Sante marcam os alvos para que sofram mais dano do próximo ataque dele.<br><br>Na Forma Irrestrita, K'Sante causa mais dano com todos os ataques e habilidades."
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ de @AbilityResourceName@",
-            "cooldown": "@f1.2@s",
-            "description": "Golpeia à frente com a arma, causando dano e Lentidão a todos os inimigos em uma curta linha reta.<br><br>Ao contato, ganha um acúmulo por alguns segundos. Com 2 acúmulos, dispara uma onda de choque que puxa os inimigos.",
-            "dynamicDescription": "K'Sante bate com força a arma no chão, causando <physicalDamage>@BaseDamage@ de Dano Físico</physicalDamage> e @SlowPercent*100@% de breve <status>Lentidão</status> a todos os inimigos atingidos.<br><br>Quando um inimigo é atingido, K'Sante recebe um acúmulo de Golpes de Ntofo por @RecastWindow@s. Com 2 acúmulos, K'Sante dispara uma onda de choque que <status>Atordoa</status> e <status>Puxa</status> os inimigos por @StunDuration@s.<br><br><rules>O Tempo de Recarga é reduzido por <scaleArmor>Armadura</scaleArmor> e <scaleMR>Resistência Mágica</scaleMR> adicionais: @BonusResistsTooltip@/@DefenseCapforCooldown@.<br>O tempo de conjuração é reduzido por <healing>Vida adicional</healing>: @BonusHealthTooltip@/@HealthCapForCastTime@.</rules><br><br><keywordMajor>Forma Irrestrita</keywordMajor>: o Tempo de Recarga da Habilidade é reduzido, mas ela não causa mais <status>Lentidão</status>.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@s %i:cooldown%",
+            "description": "K'Sante executa um golpe, causando dano e Lentidão aos inimigos em uma linha curta à frente.<br><br>Ao contato, concede um acúmulo de Golpes de Ntofo. Com 2 acúmulos, ele dispara uma onda de choque que puxa os inimigos.<br><br>Na Forma Irrestrita, o Tempo de Recarga é reduzido.",
+            "dynamicDescription": "K'Sante bate com força a arma no chão, causando <physicalDamage>@BaseDamage@ de Dano Físico</physicalDamage> e @SlowPercent*100@% de <status>Lentidão</status> aos inimigos por @SlowDuration@s. Se acertar, ele recebe um acúmulo de Golpes de Ntofo por @RecastWindow@s. Com 2 acúmulos, ele dispara uma onda de choque que <status>Atordoa</status> e <status>Puxa</status> os inimigos por @StunDuration@s.<br><br><keywordMajor>Forma Irrestrita</keywordMajor>: o Tempo de Recarga é reduzido em @RCooldownReduction.0*100@%.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ de @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
-            "description": "K'Sante carrega antes de avançar. K'Sante fica Imbatível e sofre dano reduzido durante o carregamento. Alvos atingidos pelo avanço são empurrados até o fim do trajeto e atordoados.<br><br>",
-            "dynamicDescription": "K'Sante levanta suas armas defensivamente por @MinDurationTOOLTIP@s - @MaxDuration@s, tornando-se Imbatível e sofrendo menos @DamageReductionCharLevel@% de dano.<br><br>Após carregar, ele avança, causando <physicalDamage>@BaseDamageCalc@ + @MaxHealthDamage*100@% da Vida máxima como Dano Físico</physicalDamage>. K'Sante <status>Empurra</status> e <status>Atordoa</status> inimigos com quem ele colidir por @MaxKnockbackDuration@s.<br><br><keywordMajor>Forma Irrestrita:</keywordMajor> o Tempo de Recarga da Habilidade é redefinido. A redução de dano aumenta para @DamageReductionCalcAO@% junto à velocidade do avanço, mas a Habilidade não <status>Empurra</status> ou <status>Atordoa</status> mais.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante carrega, sofrendo dano reduzido, e depois avança, empurrando e atordoando os inimigos.<br><br>Na Forma Irrestrita, causa dano aumentado e não empurra nem atordoa mais.",
+            "dynamicDescription": "K'Sante levanta suas armas defensivamente por @MinDurationTOOLTIP@s - @MaxDuration.1@s, tornando-se Imbatível e sofrendo @DamageReduction*100@% a menos de dano. Depois, ele avança, causando <physicalDamage>@BaseDamage@ + @TotalMaxHealthDamage@ da Vida máxima como Dano Físico</physicalDamage>. Inimigos atingidos são <status>Empurrados</status> e <status>Atordoados</status> por @MinKnockbackDuration@s - @MaxKnockbackDuration@s (com base no tempo de carregamento).<br><br><keywordMajor>Forma Irrestrita:</keywordMajor> o Tempo de Recarga é redefinido. Causa @RDamageIncreaseMin*100@% - @RDamageIncreaseMax*100@% de dano adicional como <trueDamage>Dano Verdadeiro</trueDamage> (com base no tempo de carregamento), a redução de dano aumenta para @RDamageReduction*100@% e a velocidade do avanço é aumentada, mas não <status>Empurra</status> nem <status>Atordoa</status> mais.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ de @AbilityResourceName@",
-            "cooldown": "@Cooldown@s %i:cooldown%",
-            "description": "K'Sante avançará até um aliado e ambos receberão um Escudo. Se não houver aliados por perto, K'Sante ainda avançará até o local com um alcance reduzido, recebendo um Escudo.<br>",
-            "dynamicDescription": "K'Sante avança, recebendo <shield>@TotalShield@ de Escudo</shield> por @ShieldDuration@s. Ao avançar até um aliado, a distância do avanço é significativamente aumentada e o aliado também recebe um <shield>Escudo</shield>.<br><br><keywordMajor>Forma Irrestrita</keywordMajor>: a velocidade do avanço desta Habilidade é aumentada. Avançar sem um aliado tem alcance maior e pode atravessar paredes.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@s %i:cooldown%",
+            "description": "K'Sante avança e recebe um Escudo. Se o alvo for um aliado, K'Sante avança até o aliado com alcance aumentado e os dois recebem Escudo.<br><br>Quando na Forma Irrestrita, o Tempo de Recarga é reduzido e a velocidade é aumentada.",
+            "dynamicDescription": "K'Sante avança, recebendo <shield>@TotalShield@ de Escudo</shield> por @ShieldDuration@s. Ao avançar até um aliado, a distância do avanço é significativamente aumentada e o aliado também recebe um <shield>Escudo</shield>.<br><br><keywordMajor>Forma Irrestrita</keywordMajor>: o Tempo de Recarga é reduzido em @CooldownModAO*100@% e a velocidade do avanço é aumentada.@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ de @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
-            "description": "K'Sante empurra um inimigo para longe. Se o inimigo atingir uma parede, ele a atravessa e sofre mais dano. K'Sante aparece atrás do alvo e usa Forma Irrestrita, fragmentando as próprias defesas, mas aumentando drasticamente o próprio dano.<br><br>",
-            "dynamicDescription": "K'Sante quebra seus ntofos, causando <magicDamage>@TotalDamage@ de Dano Mágico</magicDamage> e <status>Empurrando</status> um Campeão inimigo. Inimigos que atingirem uma parede sofrerão <magicDamage>@TotalDamageSlamDown@ de Dano Mágico adicional</magicDamage>, sendo <status>Empurrados</status> por cima dela e brevemente <status>Atordoados</status>. Então, K'Sante avança em direção ao inimigo e usa <keywordMajor>Forma Irrestrita</keywordMajor> por 20s.<br><br><keywordMajor>Forma Irrestrita:</keywordMajor> K'Sante perde <healing>@HealthLost*100@% da Vida máxima</healing>, <scaleArmor>@DefensesLost*100@% de Armadura adicional</scaleArmor> e <scaleMR>@DefensesLost*100@% de Resistência Mágica adicional</scaleMR>, mas recebe <scaleAD>@AllOutAttackDamage@ de Dano de Ataque</scaleAD>, <attackSpeed>@AttackSpeedIncrease*100@% de Velocidade de Ataque</attackSpeed>, além de se curar em <healing>@AllOutOmnivamp@%</healing> do dano que ele causar a Campeões e transformar suas Habilidades.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante empurra um inimigo, fazendo-o atravessar qualquer parede no caminho. Depois, K'Sante assume a Forma Irrestrita e avança em direção ao inimigo, recebendo aumento de dano, cura e habilidades transformadas ao custo da redução das defesas.",
+            "dynamicDescription": "K'Sante quebra seus ntofos para <status>Empurrar</status> um Campeão inimigo, causando <physicalDamage>@BaseDamage@ de Dano Físico</physicalDamage>. Depois, ele avança para trás e assume a <keywordMajor>Forma Irrestrita</keywordMajor> por @AllOutDuration@s. Se o inimigo atingir uma parede, ele será <status>Empurrado</status> através dela e K'Sante golpeará novamente, causando <physicalDamage>@TotalDamageSlamDown@ de Dano Físico</physicalDamage>.<br><br>Enquanto K'Sante estiver na <keywordMajor>Forma Irrestrita</keywordMajor>, suas habilidades são melhoradas e ele recebe <attackSpeed>@AttackSpeed*100@% de Velocidade de Ataque</attackSpeed>, @ArmorPenPercent*100@% de Penetração de Armadura adicional e <omnivamp>@Omnivamp*100@% de Vampirismo Universal</omnivamp>, mas perde <healing>@HealthLost*100@% da Vida máxima</healing>, <scaleArmor>@DefensesLost*100@% da Armadura adicional</scaleArmor> e <scaleMR>@DefensesLost*100@% da Resistência Mágica adicional</scaleMR>.@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

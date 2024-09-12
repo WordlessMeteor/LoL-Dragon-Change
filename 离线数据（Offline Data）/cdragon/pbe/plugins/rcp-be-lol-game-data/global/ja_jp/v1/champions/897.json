@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "スキルが対象をマークする。マークされた対象への次の通常攻撃は、与えるダメージが増加する。"
+        "description": "Spell_KSanteP_Summary"
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
-            "cooldown": "@f1.2@秒",
-            "description": "前方に武器を叩きつけ、短い直線上にいたすべての敵にダメージとスロウ効果を与える。<br><br>命中時に数秒間スタックを1獲得する。2スタックになると、このスキルが衝撃波を放って、敵を自身の方向に引き寄せるようになる。",
-            "dynamicDescription": "武器を叩きつけて<physicalDamage>@BaseDamage@の物理ダメージ</physicalDamage>を与え、命中した敵に少しの間@SlowPercent*100@%の<status>スロウ効果</status>を付与する。<br><br>敵に命中すると、@RecastWindow@秒間「破撃のエントーフォ」のスタックを1獲得する。2スタックになると衝撃波を放つようになり、@StunDuration@秒間敵を<status>スタン</status>させて<status>引き寄せる</status>。<br><br><rules>増加<scaleArmor>物理防御</scaleArmor>および<scaleMR>魔法防御</scaleMR>で短縮されたクールダウン: @BonusResistsTooltip@ / @DefenseCapforCooldown@<br>増加<healing>体力</healing>で短縮された詠唱時間: @BonusHealthTooltip@ / @HealthCapForCastTime@</rules><br><br><keywordMajor>オールアウト</keywordMajor>: このスキルのクールダウンが短縮されるが、<status>スロウ効果</status>を与えなくなる。@SpellModifierDescriptionAppend@",
+            "cooldown": "Spell_KSanteQ_Cooldown",
+            "description": "Spell_KSanteQ_Summary",
+            "dynamicDescription": "Spell_KSanteQ_Tooltip@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
-            "description": "チャージしてからダッシュする。チャージ中はアンストッパブル状態になり、受けるダメージが軽減される。ダッシュが命中したすべての対象を、ダッシュ終了地点までノックバックさせて、スタンさせる。<br><br>",
-            "dynamicDescription": "@MinDurationTOOLTIP@ - @MaxDuration@秒間、武器を構えて防御態勢を取る。この間はアンストッパブル状態になって、受けるダメージが@DamageReductionCharLevel@%軽減される。<br><br>チャージ後は、前方に突撃して<physicalDamage>@BaseDamageCalc@ + 最大体力の@MaxHealthDamage*100@%の物理ダメージ</physicalDamage>を与える。また@MaxKnockbackDuration@秒間、命中した敵を<status>ノックバック</status>させて<status>スタン</status>させる。<br><br><keywordMajor>オールアウト:</keywordMajor> このスキルのクールダウンが解消される。このスキルのダメージ軽減効果が@DamageReductionCalcAO@%に増加し、ダッシュ速度が増加するが、<status>ノックバック</status>と<status>スタン</status>を与えなくなる。@SpellModifierDescriptionAppend@",
+            "description": "Spell_KSanteW_Summary",
+            "dynamicDescription": "Spell_KSanteW_Tooltip@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
-            "cooldown": "@Cooldown@秒 %i:cooldown%",
-            "description": "味方までダッシュして、自身とその味方がシールドを獲得する。味方がいない場合でも、射程は短くなるが指定地点までダッシュし、シールドを獲得できる。<br>",
-            "dynamicDescription": "ダッシュして@ShieldDuration@秒間、<shield>耐久値@TotalShield@のシールド</shield>を獲得する。味方までダッシュする場合はダッシュ距離が大幅に増加し、その味方も<shield>シールドを獲得</shield>する。<br><br><keywordMajor>オールアウト</keywordMajor>: このスキルのダッシュ速度が増加する。味方以外にダッシュする場合の射程が増加し、壁を超えられる。@SpellModifierDescriptionAppend@",
+            "cooldown": "Spell_KSanteE_Cooldown",
+            "description": "Spell_KSanteE_Summary",
+            "dynamicDescription": "Spell_KSanteE_Tooltip@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
-            "description": "敵1体を弾き飛ばす。壁にぶつかった敵は壁を通り抜け、さらにダメージを受ける。自身は対象の背後に現れて「オールアウト」し、防御力が低下する代わりに与ダメージが大幅に増加する。<br><br>",
-            "dynamicDescription": "エントーフォを砕き、敵チャンピオン1体に<magicDamage>@TotalDamage@の魔法ダメージ</magicDamage>を与えて<status>ノックバック</status>させる。壁にぶつかった敵は追加で<magicDamage>@TotalDamageSlamDown@の魔法ダメージ</magicDamage>を受け、壁を越えて<status>ノックバック</status>し、少しの間<status>スタン</status>する。その後、自身はその敵をダッシュして追いかけ、20秒間<keywordMajor>「オールアウト」</keywordMajor>する。<br><br><keywordMajor>オールアウト</keywordMajor>: <healing>最大体力が@HealthLost*100@%</healing>、<scaleArmor>増加物理防御が@DefensesLost*100@%</scaleArmor>、<scaleMR>増加魔法防御が@DefensesLost*100@%</scaleMR>低下するが、<scaleAD>攻撃力が@AllOutAttackDamage@</scaleAD>、<attackSpeed>攻撃速度が@AttackSpeedIncrease*100@%</attackSpeed>増加して、チャンピオンに与えたダメージの<healing>@AllOutOmnivamp@%</healing>にあたる体力を回復する。また、他のスキルが変化する。@SpellModifierDescriptionAppend@",
+            "description": "Spell_KSanteR_Summary",
+            "dynamicDescription": "Spell_KSanteR_Tooltip@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

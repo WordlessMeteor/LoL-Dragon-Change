@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "K'Sante képességei megjelölik a célpontokat, akiknek a következő támadásával több sebzést okoz."
+        "description": "K'Sante képességei megjelölik a célpontokat, akiknek a következő támadásával több sebzést okoz.<br><br>A Mindent bele! időtartama alatt K'Sante támadásai és képességei több sebzést okoznak."
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@f1.2@ mp",
-            "description": "Előrelendíti a fegyvert, ezzel megsebezi és lelassítja az összes ellenséget egy rövid vonal mentén.<br><br>Találat esetén egy jelzőt kap néhány másodpercre. Két jelző elérésekor a képesség egy vonzáshullámot indít el, amely maga felé húzza az ellenfeleket.",
-            "dynamicDescription": "K'Sante lesújt a fegyverével, amivel <physicalDamage>@BaseDamage@ fizikai sebzést</physicalDamage> okoz, és rövid időre @SlowPercent*100@%-kal <status>lelassítja</status> az eltalált ellenfeleket.<br><br>Az eltalált ellenfelek után K'Sante @RecastWindow@ másodpercre Ntofócsapás-jelzőre tesz szert. Két jelző elérésekor K'Sante egy vonzáshullámot indít el, amely @StunDuration@ másodpercre <status>elkábítja</status> és <status>maga felé húzza</status> az ellenfeleket.<br><br><rules>A töltési időt a bónusz <scaleArmor>páncél</scaleArmor> és <scaleMR>varázsellenállás</scaleMR> csökkenti (@BonusResistsTooltip@ / @DefenseCapforCooldown@).<br>Az elsütési időt a bónusz <healing>életerő</healing> csökkenti (@BonusHealthTooltip@ / @HealthCapForCastTime@).</rules><br><br><keywordMajor>Mindent bele!</keywordMajor>: a képesség töltési ideje csökken, de többé nem okoz <status>lassítást</status>.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ mp %i:cooldown%",
+            "description": "K'Sante a földre sújt fegyverével, megsebezve és lelassítva az ellenfeleket egy rövid vonal mentén.<br><br>Az eltalált ellenfelek után Ntofócsapás-jelzőre tesz szert. Két jelző elérésekor K'Sante egy vonzáshullámot indít el, amely maga felé húzza az ellenfeleket.<br><br>A Mindent bele! időtartama alatt csökkenti a képesség töltési idejét.",
+            "dynamicDescription": "K'Sante lesújt a fegyverével, amivel <physicalDamage>@BaseDamage@ fizikai sebzést</physicalDamage> okoz, és @SlowDuration@ másodpercre @SlowPercent*100@%-kal <status>lelassítja</status> az ellenfeleket. Az eltalált ellenfelek után K'Sante @RecastWindow@ másodpercre Ntofócsapás-jelzőre tesz szert. Két jelző elérésekor K'Sante egy vonzáshullámot indít el, amely @StunDuration@ másodpercre <status>elkábítja</status> és <status>maga felé húzza</status> az ellenfeleket.<br><br><keywordMajor>Mindent bele!</keywordMajor>: @RCooldownReduction.0*100@%-kal csökkenti a képesség töltési idejét.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ mp %i:cooldown%",
-            "description": "K'Sante a roham előtt feltöltődik. K'Sante a töltés közben megállíthatatlan, és kevesebb sebzést szenved el. A roham során eltalált hősöket a roham útvonalának végéig löki, és elkábítja.<br><br>",
-            "dynamicDescription": "K'Sante @MinDurationTOOLTIP@–@MaxDuration@ másodpercig védekező állásba emeli a fegyvereit, Megállíthatatlanná válik, és @DamageReductionCharLevel@%-kal csökkenti az őt érő sebzést.<br><br>Ha feltöltődött a képesség, <physicalDamage>a maximális életerő @BaseDamageCalc@ + @MaxHealthDamage*100@%-ával egyenlő fizikai sebzést okoz</physicalDamage>. K'Sante @MaxKnockbackDuration@ másodpercre <status>hátralöki</status> és <status>elkábítja</status> a felöklelt ellenfeleket.<br><br><keywordMajor>Mindent bele!:</keywordMajor> Frissül a képesség töltési ideje. A sebzéscsökkentés @DamageReductionCalcAO@%-ra nő, valamint megnő a rohamsebessége, viszont mostantól nem okoz <status>hátralökést</status> vagy <status>kábítást</status>.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante feltöltődik, csökkentett sebzést szenvedve el, majd rohamot indít, amivel hátralöki és elkábítja az ellenfeleket.<br><br>A Mindent bele! időtartama alatt megnövelt sebzést okoz, és többé nem löki hátra vagy kábítja el az ellenfeleket.",
+            "dynamicDescription": "K'Sante @MinDurationTOOLTIP@–@MaxDuration.1@ másodpercig védekező állásba emeli a fegyvereit, Megállíthatatlanná válik, és @DamageReduction*100@%-kal csökkenti az őt érő sebzést. Ezután előretör, és <physicalDamage>@BaseDamage@ + a maximális életerő @TotalMaxHealthDamage@-ával egyenlő fizikai sebzést</physicalDamage> okoz, valamint @MinKnockbackDuration@–@MaxKnockbackDuration@ másodpercre (a feltöltési időtől függően) <status>hátralöki</status> és <status>elkábítja</status> az ellenfeleket, akiken áthalad.<br><br><keywordMajor>Mindent bele!:</keywordMajor> frissül a képesség töltési ideje, további @RDamageIncreaseMin*100@–@RDamageIncreaseMax*100@% sebzést okoz <trueDamage>tényleges sebzésként</trueDamage> (a feltöltési időtől függően), a sebzéscsökkentés @RDamageReduction*100@%-ra nő, és megnő a roham sebessége, viszont többé nem <status>löki hátra</status> vagy <status>kábítja el</status> az ellenfeleket.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@Cooldown@ mp %i:cooldown%",
-            "description": "K'Sante egy szövetségeshez siet, és mindketten pajzsot kapnak. Ha nincs a közelben szövetséges, K'Sante a kisebb hatótávon belül megadott helyre siet, és pajzsot kap.<br>",
-            "dynamicDescription": "K'Sante előretör, és @ShieldDuration@ másodpercre <shield>@TotalShield@ pajzsot</shield> kap. Ha egy szövetséges a célpont, jelentősen megnő a roham távolsága, és a szövetséges is megkapja a <shield>pajzsot</shield>.<br><br><keywordMajor>Mindent bele!</keywordMajor>: Megnő a rohamozási sebesség. Ha szövetséges megcélzása nélkül rohamoz, megnő a hatótáv, és áthaladhat falakon is.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ mp %i:cooldown%",
+            "description": "K'Sante rohamot indít, és pajzsra tesz szert. Ha egy szövetséges a célpont, jelentősen megnő a roham távolsága, és mindketten megkapják a pajzsot.<br><br>A Mindent bele! időtartama alatt a töltési idő csökken és a sebesség megnő.",
+            "dynamicDescription": "K'Sante rohamot indít, és @ShieldDuration@ másodpercre <shield>@TotalShield@ pajzsot</shield> kap. Ha egy szövetséges a célpont, jelentősen megnő a roham távolsága, és a szövetséges is megkapja a <shield>pajzsot</shield>.<br><br><keywordMajor>Mindent bele!</keywordMajor>: A töltési idő @CooldownModAO*100@%-kal csökken, és megnő a rohamozási sebesség.@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ mp %i:cooldown%",
-            "description": "K'Sante hátrataszít egy ellenfelet. Ha az ellenfél falnak csapódik, átesik a falon, és megnövelt sebzést szenved el. K'Sante megjelenik a célpont mögött, és beveti a Mindent bele! képességet. Ezzel meggyengíti a védelmét, de jelentősen növeli a sebzését.<br><br>",
-            "dynamicDescription": "K'Sante összetöri az ntofóit, amivel <magicDamage>@TotalDamage@ varázssebzést</magicDamage> okoz egy ellenséges hősnek, és <status>hátra is löki</status>. Ha az ellenfél falnak csapódik, további <magicDamage>@TotalDamageSlamDown@ varázssebzést</magicDamage> szenved el, <status>átlökődik</status> a falon, és rövid időre <status>elkábul</status>. K'Sante ezután az ellenfélhez rohamoz, és 20 másodpercre aktiválja a <keywordMajor>Mindent bele!</keywordMajor> képességet.<br><br><keywordMajor>Mindent bele!</keywordMajor> K'Sante <healing>@HealthLost*100@%-nyi maximális életerőt</healing>, <scaleArmor>@DefensesLost*100@%-nyi bónusz páncélt</scaleArmor> és <scaleMR>@DefensesLost*100@%-nyi bónusz varázsellenállást</scaleMR> veszít, de <scaleAD>@AllOutAttackDamage@ sebzést</scaleAD> és <attackSpeed>@AttackSpeedIncrease*100@% támadási sebességet</attackSpeed> kap, a hősöknek okozott sebzése <healing>@AllOutOmnivamp@%</healing>-ának megfelelő mértékben gyógyul, és átalakulnak a képességei.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante hátralök egy ellenfelet, átlökve őt minden az útjába kerülő falon. Ezután aktiválja a Mindent bele! képességét, és utánarohamoz, megnövelt sebzést okoz, megnövelt gyógyulást kap, és a képességei átalakulnak csökkent védelem árán.",
+            "dynamicDescription": "K'Sante a ntofóit összetörve <status>hátralök</status> egy ellenséges hőst, amivel <physicalDamage>@BaseDamage@ fizikai sebzést</physicalDamage> okoz, majd a hős mögé rohamoz, és @AllOutDuration@ másodpercre aktiválja a <keywordMajor>Mindent bele!</keywordMajor> képességet. Ha az ellenfél egy falba ütközne, K'Sante <status>hátralöki</status> a falon keresztül, és további <physicalDamage>@TotalDamageSlamDown@ fizikai sebzést</physicalDamage> okoz.<br><br>A <keywordMajor>Mindent bele!</keywordMajor> időtartama alatt K'Sante képességei fel vannak fejlesztve, és <attackSpeed>@AttackSpeed*100@% támadási sebességet</attackSpeed>, @ArmorPenPercent*100@% bónusz páncéltörést és <omnivamp>@Omnivamp*100@% életvarázst</omnivamp> kap, de elveszít <healing>@HealthLost*100@% maximális életerőt</healing>, <scaleArmor>@DefensesLost*100@% bónusz páncélt</scaleArmor> és <scaleMR>@DefensesLost*100@% bónusz varázsellenállást</scaleMR>.@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,
