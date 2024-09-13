@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "Spell_KSanteP_Summary"
+        "description": "スキルが対象をマークする。マークされた対象への次の通常攻撃は、与えるダメージが増加する。<br><br>「オールアウト」中はあらゆる通常攻撃とスキルが与えるダメージが増加する。"
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
-            "cooldown": "Spell_KSanteQ_Cooldown",
-            "description": "Spell_KSanteQ_Summary",
-            "dynamicDescription": "Spell_KSanteQ_Tooltip@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@秒 %i:cooldown%",
+            "description": "攻撃して、短い直線上にいた敵にダメージとスロウ効果を与える。<br><br>命中時に「破撃のエントーフォ」のスタックを獲得する。2スタックになると衝撃波を放って、敵を自身の方向に引き寄せる。<br><br>「オールアウト」中はクールダウンが短縮される。",
+            "dynamicDescription": "武器を叩きつけて<physicalDamage>@BaseDamage@の物理ダメージ</physicalDamage>を与え、@SlowDuration@秒間、@SlowPercent*100@%の<status>スロウ効果</status>を与える。敵に命中すると、@RecastWindow@秒間「破撃のエントーフォ」のスタックを1獲得する。2スタックになると衝撃波を放つようになり、@StunDuration@秒間敵を<status>スタン</status>させて<status>引き寄せる</status>。<br><br><keywordMajor>オールアウト</keywordMajor>: クールダウンが@RCooldownReduction.0*100@%短縮される。@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
-            "description": "Spell_KSanteW_Summary",
-            "dynamicDescription": "Spell_KSanteW_Tooltip@SpellModifierDescriptionAppend@",
+            "description": "突撃して受けるダメージが軽減され、その後、ダッシュして敵をノックバックしてスタンさせる。<br><br>「オールアウト」中は与ダメージが増加するがノックバックとスタンを与えなくなる。",
+            "dynamicDescription": "@MinDurationTOOLTIP@-@MaxDuration.1@秒間、武器を構えて防御態勢を取る。この間はアンストッパブル状態になって、受けるダメージが@DamageReduction*100@%軽減される。その後、前方に突撃して<physicalDamage>@BaseDamage@ + 最大体力の@TotalMaxHealthDamage@の物理ダメージ</physicalDamage>を与え、命中した敵を<status>ノックバック</status>し、@MinKnockbackDuration@-@MaxKnockbackDuration@秒間(チャージ時間に応じて)<status>スタン</status>させる。<br><br><keywordMajor>オールアウト:</keywordMajor> クールダウンが解消される。追加で@RDamageIncreaseMin*100@-@RDamageIncreaseMax*100@%の<trueDamage>確定ダメージ</trueDamage>(チャージ時間に応じて)を与え、ダメージ軽減効果が@RDamageReduction*100@%に増加し、ダッシュ速度が増加するが、<status>ノックバック</status>と<status>スタン</status>を与えなくなる。@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
-            "cooldown": "Spell_KSanteE_Cooldown",
-            "description": "Spell_KSanteE_Summary",
-            "dynamicDescription": "Spell_KSanteE_Tooltip@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@秒 %i:cooldown%",
+            "description": "ダッシュしてシールドを獲得する。味方を対象にした場合は射程が増加し、自身と味方の両方がシールドを獲得する。<br><br>「オールアウト」中はクールダウンが短縮され、速度が増加する。",
+            "dynamicDescription": "ダッシュして@ShieldDuration@秒間、<shield>耐久値@TotalShield@のシールド</shield>を獲得する。味方までダッシュする場合はダッシュ距離が大幅に増加し、その味方も<shield>シールドを獲得</shield>する。<br><br><keywordMajor>オールアウト</keywordMajor>: クールダウンが@CooldownModAO*100@%短縮されて、ダッシュ速度が増加する。@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
-            "description": "Spell_KSanteR_Summary",
-            "dynamicDescription": "Spell_KSanteR_Tooltip@SpellModifierDescriptionAppend@",
+            "description": "敵をノックバックし、敵は通り道のあらゆる壁を通り抜けて弾き飛ばされる。その後、自身は「オールアウト」状態になり、相手を追ってダッシュし、防御力が低下する代わりにダメージと体力回復量が大幅に増加し、スキルが変化する。",
+            "dynamicDescription": "エントーフォを砕き、敵チャンピオン1体を<status>ノックバック</status>して<physicalDamage>@BaseDamage@の物理ダメージ</physicalDamage>を与え、その後、対象の背後までダッシュして、@AllOutDuration@秒間、<keywordMajor>「オールアウト」</keywordMajor>状態になる。敵が壁にぶつかった場合は壁を越えて<status>ノックバック</status>し、自身はもう一度攻撃を行って<physicalDamage>@TotalDamageSlamDown@の物理ダメージ</physicalDamage>を与える。<br><br><keywordMajor>「オールアウト」</keywordMajor>中はスキルがアップグレードされて、<attackSpeed>攻撃速度が@AttackSpeed*100@%</attackSpeed>、増加物理防御貫通が@ArmorPenPercent*100@%、<omnivamp>オムニヴァンプが@Omnivamp*100@%</omnivamp>増加するが、<healing>最大体力が@HealthLost*100@%</healing>、<scaleArmor>増加物理防御が@DefensesLost*100@%</scaleArmor>、<scaleMR>増加魔法防御が@DefensesLost*100@%</scaleMR>低下する。@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,
