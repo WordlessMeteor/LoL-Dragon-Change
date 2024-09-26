@@ -1283,7 +1283,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Tristana tire plus rapidement avec son arme ; sa vitesse d'attaque est augmentée temporairement.",
-            "dynamicDescription": "Tristana passe en mode de tir automatique, gagnant <attackSpeed>+@Effect1Amount*100@% de vitesse d'attaque</attackSpeed> pendant @Effect2Amount@ sec.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Tristana passe en mode de tir automatique, gagnant <attackSpeed>+@AttackSpeedMod*100@% de vitesse d'attaque</attackSpeed> pendant @BuffDuration@ sec.@SpellModifierDescriptionAppend@",
             "range": [
                 20.0,
                 20.0,
@@ -1314,22 +1314,22 @@
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    0.5,
-                    0.5,
-                    0.65,
-                    0.8,
-                    0.95,
-                    1.1,
-                    1.25
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1433,7 +1433,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Tristana pointe son arme vers le sol et tire pour se propulser jusqu'à une destination éloignée, infligeant des dégâts aux unités proches et les ralentissant pendant un court instant à l'atterrissage.",
-            "dynamicDescription": "Tristana se propulse dans une direction, infligeant <magicDamage>@LandingDamage@ pts de dégâts magiques</magicDamage> et appliquant un <status>ralentissement</status> de @Effect3Amount*-100@% pendant @Effect2Amount@ sec lorsqu'elle atterrit.<br><br>Le délai de récupération de cette compétence prend fin si vous participez à l'élimination d'un champion ou si vous faites exploser le maximum d'effets <spellName>Charge explosive</spellName> sur un champion.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Tristana se propulse dans une direction, infligeant <magicDamage>@LandingDamage@ pts de dégâts magiques</magicDamage> et appliquant un <status>ralentissement</status> de @SlowMod*-100@% pendant @SlowDuration@ sec lorsqu'elle atterrit.<br><br>Le délai de récupération de cette compétence prend fin si vous participez à l'élimination d'un champion ou si vous faites exploser le maximum d'effets <spellName>Charge explosive</spellName> sur un champion.@SpellModifierDescriptionAppend@",
             "range": [
                 900.0,
                 900.0,
@@ -1459,45 +1459,45 @@
                 14.0
             ],
             "coefficients": {
-                "coefficient1": 0.5,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    95.0,
-                    95.0,
-                    145.0,
-                    195.0,
-                    245.0,
-                    295.0,
-                    295.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    1.0,
-                    1.0,
-                    1.5,
-                    2.0,
-                    2.5,
-                    3.0,
-                    3.5
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
                     0.0,
@@ -1733,7 +1733,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Tristana charge un énorme boulet de canon dans son arme et tire sur une unité ennemie, ce qui inflige des dégâts magiques et repousse la cible. Si la cible porte une Charge explosive, le rayon de déflagration de la charge est doublé.",
-            "dynamicDescription": "Tristana tire un énorme boulet de canon, infligeant <magicDamage>@DamageCalc@ pts de dégâts magiques</magicDamage> à la cible et <status>repoussant</status> la cible et les ennemis proches.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Tristana tire un énorme boulet de canon, infligeant <magicDamage>@DamageCalc@ pts de dégâts magiques</magicDamage> à la cible, <status>repoussant</status> la cible et les ennemis proches et les <status>étourdissant</status> pendant @StunDuration@ sec.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -1748,11 +1748,11 @@
                 100.0,
                 100.0,
                 100.0,
-                0.0
+                100.0
             ],
             "cooldownCoefficients": [
-                120.0,
-                110.0,
+                100.0,
+                100.0,
                 100.0,
                 100.0,
                 100.0,

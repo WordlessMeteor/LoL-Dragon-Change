@@ -1019,10 +1019,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirW.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_W1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_W1.jpg",
-            "cost": "Coûte <font color='#CC3300'>@Effect2Amount@% des PV actuels (@f2@)</font>",
+            "cost": "Coûte <font color='#CC3300'>@HealthCost*100@% des PV actuels (@f2@)</font>",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Vladimir plonge dans une flaque de sang, devenant impossible à cibler pendant 2 sec. Les ennemis dans la flaque sont ralentis et Vladimir peut aspirer leur vie.",
-            "dynamicDescription": "Vladimir plonge dans une flaque de sang pendant 2 sec, gagnant <speed>+37.5% de vitesse de déplacement</speed> (ce bonus diminue progressivement) pendant 1 sec, devenant impossible à cibler et fantomatique et <status>ralentissant</status> de @Effect3Amount@% les ennemis dans la flaque.<br><br>Vladimir inflige <magicDamage>@TotalDamageTooltip@ pts de dégâts magiques</magicDamage> sur la durée et récupère des <healing>PV équivalents à @Effect5Amount@% des dégâts infligés</healing>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Vladimir plonge dans une flaque de sang pendant 2 sec, gagnant <speed>+@HasteBoost*100@% de vitesse de déplacement</speed> (ce bonus diminue progressivement) pendant @HasteDuration@ sec, devenant <keyword>impossible à cibler</keyword> et <keyword>fantomatique</keyword> et <status>ralentissant</status> de @MoveSpeedMod*-100@% les ennemis dans la flaque.<br><br>Vladimir inflige <magicDamage>@TotalDamage@ pts de dégâts magiques</magicDamage> et récupère <healing>@TotalHeal@ PV</healing> par ennemi sur la durée.@SpellModifierDescriptionAppend@",
             "range": [
                 350.0,
                 350.0,
@@ -1048,54 +1048,54 @@
                 16.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    25.0,
-                    80.0,
-                    135.0,
-                    190.0,
-                    245.0,
-                    300.0,
-                    355.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1169,10 +1169,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirE.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_E1.jpg",
-            "cost": "Coût de canalisation : <font color='#CC3300'>@Effect2Amount@% des PV max (@f3@)</font>",
+            "cost": "Coût de canalisation : <font color='#CC3300'>@Effect2Amount@% des PV max (@ChargeHealthTooltip@)</font>",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Vladimir dépense ses propres PV pour charger un orbe de sang qui, une fois lâché, infligera des dégâts de zone autour de lui. Les Vagues de sang peuvent être bloquées par les unités ennemies.",
-            "dynamicDescription": "<charge>Début de la charge : </charge>Vladimir charge un orbe de sang, dépensant jusqu'à @ChargeHealthTooltip@ PV. Quand l'orbe est pleinement chargé, Vladimir est <status>ralenti</status> de 20%.<br><br><release>Relâchement : </release>Vladimir lance des projectiles de sang sur les ennemis proches, leur infligeant entre <magicDamage>@MinDamageTooltip@</magicDamage> et <magicDamage>@MaxDamageTooltip@ pts de dégâts magiques</magicDamage> selon la durée de la charge. Si cette compétence a été chargée pendant au moins 1 sec, elle <status>ralentit</status> également les cibles de @Effect9Amount@% pendant 0.5 sec.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<charge>Début de la charge :</charge> Vladimir charge un orbe de sang, dépensant jusqu'à <font color='#CC3300'>@ChargeHealthTooltip@ PV</font>. Quand l'orbe est pleinement chargé, Vladimir est <status>ralenti</status> de 20%.<br><br><release>Relâcher :</release> Vladimir lance des projectiles de sang sur les ennemis proches, leur infligeant entre <magicDamage>@MinDamageTooltip@</magicDamage> et <magicDamage>@MaxDamageTooltip@ pts de dégâts magiques</magicDamage> selon la durée de la charge. Si cette compétence a été chargée pendant au moins 1 sec, elle <status>ralentit</status> également les cibles de @Effect9Amount@% pendant 0.5 sec.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,

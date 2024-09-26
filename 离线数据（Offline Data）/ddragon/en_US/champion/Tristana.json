@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.17.1",
+    "version": "14.19.1",
     "data": {
         "Tristana": {
             "id": "Tristana",
@@ -144,18 +144,18 @@
                 "mpperlevel": 32,
                 "movespeed": 325,
                 "armor": 30,
-                "armorperlevel": 4.5,
+                "armorperlevel": 4,
                 "spellblock": 28,
                 "spellblockperlevel": 1.3,
-                "attackrange": 525,
+                "attackrange": 550,
                 "hpregen": 4,
-                "hpregenperlevel": 0.65,
+                "hpregenperlevel": 0.5,
                 "mpregen": 7.2,
                 "mpregenperlevel": 0.45,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 59,
-                "attackdamageperlevel": 3.7,
+                "attackdamage": 60,
+                "attackdamageperlevel": 2.5,
                 "attackspeedperlevel": 1.5,
                 "attackspeed": 0.656
             },
@@ -164,15 +164,15 @@
                     "id": "TristanaQ",
                     "name": "Rapid Fire",
                     "description": "Tristana fires her weapon rapidly, increasing her Attack Speed for a short time.",
-                    "tooltip": "Tristana goes full-auto, gaining <attackSpeed>{{ e1 }}% Attack Speed</attackSpeed> for {{ e2 }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Tristana goes full-auto, gaining <attackSpeed>{{ attackspeedmod*100 }}% Attack Speed</attackSpeed> for {{ buffduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
-                            "Attack Speed"
+                            "Attack Speed",
+                            "Cooldown"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%"
+                            "{{ attackspeedmod*100.000000 }}% -> {{ attackspeedmodnl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -196,18 +196,18 @@
                     "effect": [
                         null,
                         [
-                            50,
-                            65,
-                            80,
-                            95,
-                            110
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            7,
-                            7,
-                            7,
-                            7,
-                            7
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -268,8 +268,8 @@
                     ],
                     "effectBurn": [
                         null,
-                        "50/65/80/95/110",
-                        "7",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -305,16 +305,14 @@
                     "id": "TristanaW",
                     "name": "Rocket Jump",
                     "description": "Tristana fires at the ground to propel her to a distant location, dealing damage and slowing surrounding units for a brief period where she lands.",
-                    "tooltip": "Tristana launches herself, dealing <magicDamage>{{ landingdamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ e3 }}% for {{ e2 }} seconds upon landing.<br /><br />Champion takedowns and max stack <spellName>Explosive Charge</spellName> detonations on champions refresh this Ability's Cooldown.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Tristana launches herself, dealing <magicDamage>{{ landingdamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ slowmod*-100 }}% for {{ slowduration }} seconds upon landing.<br /><br />Champion takedowns and max stack <spellName>Explosive Charge</spellName> detonations on champions refresh this Ability's Cooldown.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Slow Duration",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }} -> {{ e2NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -339,32 +337,32 @@
                     "effect": [
                         null,
                         [
-                            95,
-                            145,
-                            195,
-                            245,
-                            295
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1,
-                            1.5,
-                            2,
-                            2.5,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            60,
-                            60,
-                            60,
-                            60,
-                            60
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            350,
-                            350,
-                            350,
-                            350,
-                            350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -411,10 +409,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "95/145/195/245/295",
-                        "1/1.5/2/2.5/3",
-                        "60",
-                        "350",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -451,18 +449,18 @@
                     "tooltip": "<spellPassive>Passive: </spellPassive>Tristana's Attacks that kill enemies deal <magicDamage>{{ passivedamage }} magic damage</magicDamage> to surrounding enemies.<br /><br /><spellActive>Active:</spellActive> Tristana attaches a bomb to an enemy or turret that deals <physicalDamage>{{ activedamage }} physical damage</physicalDamage> to surrounding enemies after {{ activeduration }} seconds. The damage is increased by {{ critchanceamp*100 }}% Critical Strike Chance and by {{ activeperstackamp*100 }}% each time Tristana hits an Attack or Ability (max 4 stacks).<br /><br />At {{ activemaxstacks }} stacks, the bomb explodes immediately (max <physicalDamage>{{ activemaxdamage }} physical damage</physicalDamage>).{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
-                            "@AbilityResourceName@ Cost",
                             "Passive Explosion Damage",
                             "Base Charge Damage",
-                            "Attack Damage"
+                            "Attack Damage Ratio",
+                            "Cooldown",
+                            "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ cost }} -> {{ costNL }}",
                             "{{ passivebasedamage }} -> {{ passivebasedamageNL }}",
                             "{{ activebasedamage }} -> {{ activebasedamageNL }}",
-                            "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%"
+                            "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -595,26 +593,26 @@
                     "id": "TristanaR",
                     "name": "Buster Shot",
                     "description": "Tristana loads a massive cannonball into her weapon and fires it at an enemy unit. This deals Magic Damage and knocks the target back. If the target is carrying the Explosive Charge bomb, the bomb detonation radius is doubled.",
-                    "tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> to the target and <status>Knocking</status> them <status>Back</status> along with surrounding enemies.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> to the target, <status>Knocking Back</status> and <status>Stunning</status> them and surrounding enemies for {{ stunduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
                             "Damage",
-                            "Knockback Distance"
+                            "Knockback Distance",
+                            "Stun Duration"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}"
+                            "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}",
+                            "{{ stunduration }} -> {{ stundurationNL }}"
                         ]
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        120,
-                        110,
+                        100,
+                        100,
                         100
                     ],
-                    "cooldownBurn": "120/110/100",
+                    "cooldownBurn": "100",
                     "cost": [
                         100,
                         100,

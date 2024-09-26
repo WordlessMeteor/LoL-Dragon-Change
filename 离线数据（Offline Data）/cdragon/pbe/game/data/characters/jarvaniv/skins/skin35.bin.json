@@ -151,7 +151,7 @@
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 },
                 {
-                    "material": "Characters/JarvanIV/Skins/Skin35/Materials/Recall_Weapon",
+                    "texture": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_Recallbody_TX_CM.dds",
                     "submesh": "Recall_Weapon",
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 },
@@ -210,704 +210,6 @@
         },
         "mResourceResolver": "Characters/JarvanIV/Skins/Skin35/Resources",
         "__type": "SkinCharacterDataProperties"
-    },
-    "Characters/JarvanIV/Skins/Skin35/Materials/Recall_Weapon": {
-        "name": "Characters/JarvanIV/Skins/Skin35/Materials/Recall_Weapon",
-        "samplerValues": [
-            {
-                "samplerName": "Diffuse_Texture",
-                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_TX_CM.dds",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Diffuse_Texture_2",
-                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_Recallbody_TX_CM.dds",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Scroll_Texture",
-                "textureName": "ASSETS/Shared/Materials/black.dds",
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Outline_Mask",
-                "textureName": "ASSETS/Shared/Materials/white.dds",
-                "__type": "StaticMaterialShaderSamplerDef"
-            }
-        ],
-        "paramValues": [
-            {
-                "name": "Diffuse_Lerp_Factor",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Alpha_Mult",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "OutlineColor",
-                "value": [
-                    0.699999988079071,
-                    0.20000000298023224,
-                    0.15000000596046448,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "OutlineControl",
-                "value": [
-                    0.10000000149011612,
-                    0.5,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollTex_TintColor",
-                "value": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollTexB_MaskStrength",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollTexR_Color",
-                "value": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollTexG_Color",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollTexR_Tiles",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollTexG_Tiles",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollTexR_Speed",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ScrollTexG_Speed",
-                "__type": "StaticMaterialShaderParamDef"
-            }
-        ],
-        "switches": [
-            {
-                "name": "OUTLINE_ON",
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "SCROLLTEX_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            }
-        ],
-        "shaderMacros": {
-            "NUM_BLEND_WEIGHTS": "4"
-        },
-        "techniques": [
-            {
-                "name": "normal",
-                "passes": [
-                    {
-                        "shader": "Shaders/SkinnedMesh/2_Diffuse_Lerp",
-                        "blendEnable": true,
-                        "srcColorBlendFactor": 6,
-                        "srcAlphaBlendFactor": 6,
-                        "dstColorBlendFactor": 7,
-                        "dstAlphaBlendFactor": 7,
-                        "__type": "StaticMaterialPassDef"
-                    }
-                ],
-                "__type": "StaticMaterialTechniqueDef"
-            }
-        ],
-        "childTechniques": [
-            {
-                "name": "transition",
-                "parentName": "normal",
-                "shaderMacros": {
-                    "TRANSITION": "1"
-                },
-                "__type": "StaticMaterialChildTechniqueDef"
-            }
-        ],
-        "dynamicMaterial": {
-            "parameters": [
-                {
-                    "name": "Alpha_Mult",
-                    "enabled": false,
-                    "driver": {
-                        "mElements": [
-                            {
-                                "mCondition": {
-                                    "mAnimationNames": [
-                                        "Recall"
-                                    ],
-                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "mBoolDriver": {
-                                        "mDriver": {
-                                            "mAnimationNames": [
-                                                "Recall"
-                                            ],
-                                            "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
-                                        },
-                                        "__type": "NotMaterialDriver"
-                                    },
-                                    "mTurnOnTimeSec": 0.0,
-                                    "mTurnOffTimeSec": 0.20000000298023224,
-                                    "__type": "LerpMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            }
-                        ],
-                        "mDefaultValue": {
-                            "mValue": 1.0,
-                            "__type": "FloatLiteralMaterialDriver"
-                        },
-                        "__type": "SwitchMaterialDriver"
-                    },
-                    "__type": "DynamicMaterialParameterDef"
-                },
-                {
-                    "name": "OutlineControl",
-                    "driver": {
-                        "mElements": [
-                            {
-                                "mCondition": {
-                                    "mAnimationNames": [
-                                        "Recall"
-                                    ],
-                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "driver": {
-                                        "mAnimationName": "Recall",
-                                        "__type": "AnimationFractionDynamicMaterialFloatDriver"
-                                    },
-                                    "graph": {
-                                        "times": [
-                                            0.48380565643310547,
-                                            0.48380565643310547,
-                                            0.48380565643310547,
-                                            0.6957071423530579,
-                                            0.7159149050712585,
-                                            0.7999711632728577
-                                        ],
-                                        "values": [
-                                            -0.004291845485568047,
-                                            -0.004291845485568047,
-                                            -0.004291845485568047,
-                                            -0.0016762142768129706,
-                                            0.20438887178897858,
-                                            -0.35502368211746216
-                                        ],
-                                        "__type": "VfxAnimatedFloatVariableData"
-                                    },
-                                    "__type": "FloatGraphMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            }
-                        ],
-                        "mDefaultValue": {
-                            "mValue": 0.10000000149011612,
-                            "__type": "FloatLiteralMaterialDriver"
-                        },
-                        "__type": "SwitchMaterialDriver"
-                    },
-                    "__type": "DynamicMaterialParameterDef"
-                },
-                {
-                    "name": "Diffuse_Lerp_Factor",
-                    "driver": {
-                        "ClipAccessoryToRead": "{4948ec29}",
-                        "__type": "KeyFrameFloatClipReaderDriver"
-                    },
-                    "__type": "DynamicMaterialParameterDef"
-                }
-            ],
-            "__type": "DynamicMaterialDef"
-        },
-        "__type": "StaticMaterialDef"
-    },
-    "Characters/JarvanIV/Skins/Skin35/Materials/Fire_Mask_Bloom_inst": {
-        "name": "Characters/JarvanIV/Skins/Skin35/Materials/Fire_Mask_Bloom_inst",
-        "samplerValues": [
-            {
-                "samplerName": "Diffuse_Texture",
-                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_TX_CM.dds",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Gradient_Texture",
-                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/Particles/JarvanIV_Skin35_Material_Gradient.dds",
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Mask_Texture",
-                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_Alpha_TX_CM.dds",
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            }
-        ],
-        "paramValues": [
-            {
-                "name": "Low_Quality_Bias",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Film_Depth",
-                "value": [
-                    0.19249999523162842,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Mask_Power",
-                "value": [
-                    2.2750000953674316,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Specular_Power",
-                "value": [
-                    6.650000095367432,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "UV_Scale",
-                "value": [
-                    3.0,
-                    3.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Scroll_Speed",
-                "value": [
-                    0.20000000298023224,
-                    0.10000000149011612,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Bloom_Color",
-                "value": [
-                    0.003921568859368563,
-                    0.43529412150382996,
-                    1.0,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Mult_Intensity",
-                "value": [
-                    2.5250000953674316,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Bloom_Intensity",
-                "value": [
-                    1.0750000476837158,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Alpha_Bias",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            }
-        ],
-        "switches": [
-            {
-                "name": "LERP_BLEND_MODE",
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "GRADIENT_SWAP",
-                "__type": "StaticMaterialSwitchDef"
-            }
-        ],
-        "shaderMacros": {
-            "NUM_BLEND_WEIGHTS": "4"
-        },
-        "techniques": [
-            {
-                "name": "normal",
-                "passes": [
-                    {
-                        "shader": "Shaders/SkinnedMesh/Iridesence_Mask_Bloom",
-                        "blendEnable": true,
-                        "srcColorBlendFactor": 6,
-                        "srcAlphaBlendFactor": 6,
-                        "dstColorBlendFactor": 7,
-                        "dstAlphaBlendFactor": 7,
-                        "__type": "StaticMaterialPassDef"
-                    }
-                ],
-                "__type": "StaticMaterialTechniqueDef"
-            }
-        ],
-        "childTechniques": [
-            {
-                "name": "transition",
-                "parentName": "normal",
-                "shaderMacros": {
-                    "TRANSITION": "1"
-                },
-                "__type": "StaticMaterialChildTechniqueDef"
-            }
-        ],
-        "dynamicMaterial": {
-            "parameters": [
-                {
-                    "name": "Bloom_Color",
-                    "driver": {
-                        "mBoolDriver": {
-                            "mScriptName": "LilliaPranceMaterial",
-                            "__type": "HasBuffDynamicMaterialBoolDriver"
-                        },
-                        "mColorOn": [
-                            0.8765544891357422,
-                            0.7831234931945801,
-                            0.23439383506774902,
-                            1.0
-                        ],
-                        "mColorOff": [
-                            1.0,
-                            0.43418020009994507,
-                            0.13725490868091583,
-                            1.0
-                        ],
-                        "__type": "ColorChooserMaterialDriver"
-                    },
-                    "__type": "DynamicMaterialParameterDef"
-                },
-                {
-                    "name": "Mask_Power",
-                    "driver": {
-                        "mElements": [
-                            {
-                                "mCondition": {
-                                    "mScriptName": "LilliaPranceMaterial",
-                                    "__type": "HasBuffDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "mValue": 1.0,
-                                    "__type": "FloatLiteralMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            }
-                        ],
-                        "mDefaultValue": {
-                            "mValue": 0.75,
-                            "__type": "FloatLiteralMaterialDriver"
-                        },
-                        "__type": "SwitchMaterialDriver"
-                    },
-                    "__type": "DynamicMaterialParameterDef"
-                },
-                {
-                    "name": "Mult_Intensity",
-                    "driver": {
-                        "mElements": [
-                            {
-                                "mCondition": {
-                                    "mScriptName": "LilliaPranceMaterial",
-                                    "__type": "HasBuffDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "mValue": 2.25,
-                                    "__type": "FloatLiteralMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            }
-                        ],
-                        "mDefaultValue": {
-                            "mValue": 2.0,
-                            "__type": "FloatLiteralMaterialDriver"
-                        },
-                        "__type": "SwitchMaterialDriver"
-                    },
-                    "__type": "DynamicMaterialParameterDef"
-                },
-                {
-                    "name": "Scroll_Speed",
-                    "driver": {
-                        "mElements": [
-                            {
-                                "mCondition": {
-                                    "mScriptName": "LilliaPranceMaterial",
-                                    "__type": "HasBuffDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "mValue": 0.5,
-                                    "__type": "FloatLiteralMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            }
-                        ],
-                        "mDefaultValue": {
-                            "mValue": 0.15000000596046448,
-                            "__type": "FloatLiteralMaterialDriver"
-                        },
-                        "__type": "SwitchMaterialDriver"
-                    },
-                    "__type": "DynamicMaterialParameterDef"
-                },
-                {
-                    "name": "Bloom_Intensity",
-                    "driver": {
-                        "mElements": [
-                            {
-                                "mCondition": {
-                                    "mScriptName": "LilliaPranceMaterial",
-                                    "__type": "HasBuffDynamicMaterialBoolDriver"
-                                },
-                                "mValue": {
-                                    "mValue": 2.0,
-                                    "__type": "FloatLiteralMaterialDriver"
-                                },
-                                "__type": "SwitchMaterialDriverElement"
-                            }
-                        ],
-                        "mDefaultValue": {
-                            "mValue": 1.0,
-                            "__type": "FloatLiteralMaterialDriver"
-                        },
-                        "__type": "SwitchMaterialDriver"
-                    },
-                    "__type": "DynamicMaterialParameterDef"
-                }
-            ],
-            "textures": [
-                {
-                    "name": "Gradient_Texture",
-                    "options": [
-                        {
-                            "driver": {
-                                "mScriptName": "LilliaPranceMaterial",
-                                "__type": "HasBuffDynamicMaterialBoolDriver"
-                            },
-                            "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_Mat_Gradient_Empowered.dds",
-                            "__type": "DynamicMaterialTextureSwapOption"
-                        }
-                    ],
-                    "__type": "DynamicMaterialTextureSwapDef"
-                }
-            ],
-            "staticSwitch": {
-                "name": "GRADIENT_SWAP",
-                "driver": {
-                    "mScriptName": "LilliaPranceMaterial",
-                    "__type": "HasBuffDynamicMaterialBoolDriver"
-                },
-                "__type": "DynamicMaterialStaticSwitch"
-            },
-            "__type": "DynamicMaterialDef"
-        },
-        "__type": "StaticMaterialDef"
-    },
-    "Characters/JarvanIV/Skins/Skin35/Materials/HKG_Eyes_Blink_Mat_inst": {
-        "name": "Characters/JarvanIV/Skins/Skin35/Materials/HKG_Eyes_Blink_Mat_inst",
-        "samplerValues": [
-            {
-                "samplerName": "Eyelid_Texture",
-                "textureName": "ASSETS/Shared/Materials/black.dds",
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Diffuse_Texture",
-                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_TX_CM.dds",
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Eyes_Mask",
-                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_EyesMask_TX_CM.dds",
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Blink_Texture",
-                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_Eyes_Blink_TX_CM.dds",
-                "__type": "StaticMaterialShaderSamplerDef"
-            }
-        ],
-        "paramValues": [
-            {
-                "name": "TimeOffset",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "eyelid_color",
-                "value": [
-                    0.3803921639919281,
-                    0.0941176488995552,
-                    0.10196078568696976,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Blink_speed",
-                "value": [
-                    0.07999999821186066,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "ControlAll",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Bloom_Color",
-                "value": [
-                    0.5137255191802979,
-                    0.0,
-                    0.3490196168422699,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Bloom_Intensity",
-                "value": [
-                    0.30000001192092896,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            }
-        ],
-        "switches": [
-            {
-                "name": "USE_EYELID_TEX",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            }
-        ],
-        "shaderMacros": {
-            "NUM_BLEND_WEIGHTS": "4"
-        },
-        "techniques": [
-            {
-                "name": "normal",
-                "passes": [
-                    {
-                        "shader": "Shaders/SkinnedMesh/HKG_Eyes_Blink_Mat",
-                        "blendEnable": true,
-                        "srcColorBlendFactor": 6,
-                        "srcAlphaBlendFactor": 6,
-                        "dstColorBlendFactor": 7,
-                        "dstAlphaBlendFactor": 7,
-                        "__type": "StaticMaterialPassDef"
-                    }
-                ],
-                "__type": "StaticMaterialTechniqueDef"
-            }
-        ],
-        "childTechniques": [
-            {
-                "name": "transition",
-                "parentName": "normal",
-                "shaderMacros": {
-                    "TRANSITION": "1"
-                },
-                "__type": "StaticMaterialChildTechniqueDef"
-            }
-        ],
-        "__type": "StaticMaterialDef"
     },
     "Characters/JarvanIV/Skins/Skin35/Particles/JarvanIV_Skin35_Idle_Eyes_R": {
         "complexEmitterDefinitionData": [
@@ -7651,6 +6953,7 @@
                 "lifetime": 1.0,
                 "isSingleParticle": 1,
                 "emitterName": "WeaponMesh",
+                "disabled": true,
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
@@ -7858,6 +7161,7 @@
                 },
                 "lifetime": 1.5,
                 "emitterName": "WeaponMesh1",
+                "disabled": true,
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
@@ -18036,5 +17340,440 @@
             "{48c65767}": "Characters/JarvanIV/Skins/Skin35/Particles/JarvanIV_Skin35_Z_Recall_06_BodyFire"
         },
         "__type": "ResourceResolver"
+    },
+    "Characters/JarvanIV/Skins/Skin35/Materials/Fire_Mask_Bloom_inst": {
+        "name": "Characters/JarvanIV/Skins/Skin35/Materials/Fire_Mask_Bloom_inst",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_TX_CM.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Gradient_Texture",
+                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/Particles/JarvanIV_Skin35_Material_Gradient.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask_Texture",
+                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_Alpha_TX_CM.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Low_Quality_Bias",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Film_Depth",
+                "value": [
+                    0.19249999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Mask_Power",
+                "value": [
+                    2.2750000953674316,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Specular_Power",
+                "value": [
+                    6.650000095367432,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "UV_Scale",
+                "value": [
+                    3.0,
+                    3.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Scroll_Speed",
+                "value": [
+                    0.20000000298023224,
+                    0.10000000149011612,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Color",
+                "value": [
+                    0.003921568859368563,
+                    0.43529412150382996,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Mult_Intensity",
+                "value": [
+                    2.5250000953674316,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "value": [
+                    1.0750000476837158,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Bias",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "LERP_BLEND_MODE",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "GRADIENT_SWAP",
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/Iridesence_Mask_Bloom",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "Bloom_Color",
+                    "driver": {
+                        "mBoolDriver": {
+                            "mScriptName": "LilliaPranceMaterial",
+                            "__type": "HasBuffDynamicMaterialBoolDriver"
+                        },
+                        "mColorOn": [
+                            0.8765544891357422,
+                            0.7831234931945801,
+                            0.23439383506774902,
+                            1.0
+                        ],
+                        "mColorOff": [
+                            1.0,
+                            0.43418020009994507,
+                            0.13725490868091583,
+                            1.0
+                        ],
+                        "__type": "ColorChooserMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Mask_Power",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "LilliaPranceMaterial",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 1.0,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 0.75,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Mult_Intensity",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "LilliaPranceMaterial",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 2.25,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 2.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Scroll_Speed",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "LilliaPranceMaterial",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 0.5,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 0.15000000596046448,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Bloom_Intensity",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "LilliaPranceMaterial",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 2.0,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "textures": [
+                {
+                    "name": "Gradient_Texture",
+                    "options": [
+                        {
+                            "driver": {
+                                "mScriptName": "LilliaPranceMaterial",
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_Mat_Gradient_Empowered.dds",
+                            "__type": "DynamicMaterialTextureSwapOption"
+                        }
+                    ],
+                    "__type": "DynamicMaterialTextureSwapDef"
+                }
+            ],
+            "staticSwitch": {
+                "name": "GRADIENT_SWAP",
+                "driver": {
+                    "mScriptName": "LilliaPranceMaterial",
+                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                },
+                "__type": "DynamicMaterialStaticSwitch"
+            },
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    },
+    "Characters/JarvanIV/Skins/Skin35/Materials/HKG_Eyes_Blink_Mat_inst": {
+        "name": "Characters/JarvanIV/Skins/Skin35/Materials/HKG_Eyes_Blink_Mat_inst",
+        "samplerValues": [
+            {
+                "samplerName": "Eyelid_Texture",
+                "textureName": "ASSETS/Shared/Materials/black.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_TX_CM.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Eyes_Mask",
+                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_EyesMask_TX_CM.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Blink_Texture",
+                "textureName": "ASSETS/Characters/JarvanIV/Skins/Skin35/JarvanIV_Skin35_Eyes_Blink_TX_CM.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "TimeOffset",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "eyelid_color",
+                "value": [
+                    0.3803921639919281,
+                    0.0941176488995552,
+                    0.10196078568696976,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Blink_speed",
+                "value": [
+                    0.07999999821186066,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ControlAll",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Color",
+                "value": [
+                    0.5137255191802979,
+                    0.0,
+                    0.3490196168422699,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "value": [
+                    0.30000001192092896,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "USE_EYELID_TEX",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/HKG_Eyes_Blink_Mat",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
     }
 }

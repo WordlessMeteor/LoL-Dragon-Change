@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.17.1",
+    "version": "14.19.1",
     "data": {
         "Tristana": {
             "id": "Tristana",
@@ -144,18 +144,18 @@
                 "mpperlevel": 32,
                 "movespeed": 325,
                 "armor": 30,
-                "armorperlevel": 4.5,
+                "armorperlevel": 4,
                 "spellblock": 28,
                 "spellblockperlevel": 1.3,
-                "attackrange": 525,
+                "attackrange": 550,
                 "hpregen": 4,
-                "hpregenperlevel": 0.65,
+                "hpregenperlevel": 0.5,
                 "mpregen": 7.2,
                 "mpregenperlevel": 0.45,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 59,
-                "attackdamageperlevel": 3.7,
+                "attackdamage": 60,
+                "attackdamageperlevel": 2.5,
                 "attackspeedperlevel": 1.5,
                 "attackspeed": 0.656
             },
@@ -164,15 +164,15 @@
                     "id": "TristanaQ",
                     "name": "急速射击",
                     "description": "崔丝塔娜急速射击，短时间内提升攻击速度。",
-                    "tooltip": "崔丝塔娜开始全自动射击，获得<attackSpeed>{{ e1 }}%攻击速度</attackSpeed>，持续{{ e2 }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "崔丝塔娜开始全自动射击，获得持续{{ buffduration }}秒的<attackSpeed>{{ attackspeedmod*100 }}%攻击速度</attackSpeed>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
-                            "攻击速度"
+                            "攻击速度",
+                            "冷却时间"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%"
+                            "{{ attackspeedmod*100.000000 }}% -> {{ attackspeedmodnl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -196,18 +196,18 @@
                     "effect": [
                         null,
                         [
-                            50,
-                            65,
-                            80,
-                            95,
-                            110
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            7,
-                            7,
-                            7,
-                            7,
-                            7
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -268,8 +268,8 @@
                     ],
                     "effectBurn": [
                         null,
-                        "50/65/80/95/110",
-                        "7",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -305,16 +305,14 @@
                     "id": "TristanaW",
                     "name": "火箭跳跃",
                     "description": "崔丝塔娜朝地面开火，跳跃至目标区域，落地造成伤害并减速附近敌人一小段时间。",
-                    "tooltip": "崔丝塔娜将自己推送出去，在着陆时造成<magicDamage>{{ landingdamage }}魔法伤害</magicDamage>和持续{{ e2 }}秒的{{ e3 }}%<status>减速</status>。<br /><br />参与击杀后，或者满层<spellName>爆炸火花</spellName>爆炸后，会重置这个技能的冷却时间。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "崔丝塔娜将自己推送出去，在着陆时造成<magicDamage>{{ landingdamage }}魔法伤害</magicDamage>和持续{{ slowduration }}秒的{{ slowmod*-100 }}%<status>减速</status>。<br /><br />参与击杀后，或者满层<spellName>爆炸火花</spellName>爆炸后，会重置这个技能的冷却时间。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "减速时长",
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }} -> {{ e2NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -339,32 +337,32 @@
                     "effect": [
                         null,
                         [
-                            95,
-                            145,
-                            195,
-                            245,
-                            295
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1,
-                            1.5,
-                            2,
-                            2.5,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            60,
-                            60,
-                            60,
-                            60,
-                            60
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            350,
-                            350,
-                            350,
-                            350,
-                            350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -411,10 +409,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "95/145/195/245/295",
-                        "1/1.5/2/2.5/3",
-                        "60",
-                        "350",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -451,18 +449,18 @@
                     "tooltip": "<spellPassive>被动：</spellPassive>崔丝塔娜的攻击在击杀敌人时会对周围敌人造成<magicDamage>{{ passivedamage }}魔法伤害</magicDamage>。<br /><br /><spellActive>主动：</spellActive>崔丝塔娜将一颗炸弹附着在一名敌人或防御塔上，来在{{ activeduration }}秒后对周围敌人造成<physicalDamage>{{ activedamage }}物理伤害</physicalDamage>。崔丝塔娜对带着炸弹的目标进行的每次攻击和技能都会使这个伤害提升{{ activeperstackamp*100 }}%(最多4层)，并且叠加暴击几率也会使这个伤害提升{{ critchanceamp*100 }}%。<br /><br />在{{ activemaxstacks }}层时，这个炸弹会立刻爆炸(最大值为<physicalDamage>{{ activemaxdamage }}物理伤害</physicalDamage>)。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
-                            "@AbilityResourceName@消耗",
                             "被动爆炸伤害",
                             "基础火花伤害",
-                            "攻击力"
+                            "攻击力收益",
+                            "冷却时间",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ cost }} -> {{ costNL }}",
                             "{{ passivebasedamage }} -> {{ passivebasedamageNL }}",
                             "{{ activebasedamage }} -> {{ activebasedamageNL }}",
-                            "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%"
+                            "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -595,26 +593,26 @@
                     "id": "TristanaR",
                     "name": "毁灭射击",
                     "description": "崔丝塔娜装填巨型加农炮弹攻击目标单位，造成巨大伤害并击退目标。如果目标携带着【爆炸火花】的炸弹，那么该炸弹的爆炸半径翻倍。",
-                    "tooltip": "崔丝塔娜发射一颗大型加农炮弹，对目标造成<magicDamage>{{ damagecalc }}魔法伤害</magicDamage>并将其与周围敌人一起<status>击退</status>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "崔丝塔娜发射一颗大型加农炮弹，对目标造成<magicDamage>{{ damagecalc }}魔法伤害</magicDamage>，并对其与周围敌人们施加<status>击退</status>和{{ stunduration }}秒<status>晕眩</status>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
                             "伤害",
-                            "击退距离"
+                            "击退距离",
+                            "晕眩时长"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}"
+                            "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}",
+                            "{{ stunduration }} -> {{ stundurationNL }}"
                         ]
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        120,
-                        110,
+                        100,
+                        100,
                         100
                     ],
-                    "cooldownBurn": "120/110/100",
+                    "cooldownBurn": "100",
                     "cost": [
                         100,
                         100,

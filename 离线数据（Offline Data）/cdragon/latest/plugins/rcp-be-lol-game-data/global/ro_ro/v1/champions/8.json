@@ -1019,10 +1019,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirW.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_W1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_W1.jpg",
-            "cost": "Costă <font color='#CC3300'>@Effect2Amount@% din viața actuală (@f2@)</font>",
+            "cost": "Costă <font color='#CC3300'>@HealthCost*100@% din viața actuală (@f2@)</font>",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Vladimir se scufundă într-o baltă de sânge, devenind imposibil de țintit timp de 2 secunde. În plus, inamicii din baltă sunt încetiniți, iar Vladimir le absoarbe forța vitală.",
-            "dynamicDescription": "Vladimir se scufundă într-o baltă de sânge timp de 2 secunde, primind un bonus de <speed>37,5% la viteza de mișcare</speed> ce scade timp de 1 secundă. Devine imposibil de țintit, primește efectul ''Fantomă'' și <status>încetinește</status> inamicii din baltă cu @Effect3Amount@%.<br><br>Vladimir provoacă <magicDamage>@TotalDamageTooltip@ daune magice</magicDamage> de-a lungul duratei și își reface <healing>viață în valoare de @Effect5Amount@% din daunele provocate</healing>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Vladimir se scufundă într-o baltă de sânge timp de 2 secunde, primind un bonus de <speed>@HasteBoost*100@% la viteza de mișcare</speed> timp de @HasteDuration@ sec. care scade de-a lungul duratei. Devine <keyword>imposibil de țintit</keyword>, primește efectul <keyword>''Fantomă''</keyword> și <status>încetinește</status> inamicii din baltă cu @MoveSpeedMod*-100@%.<br><br>Vladimir provoacă <magicDamage>@TotalDamage@ daune magice</magicDamage> de-a lungul duratei și își reface <healing>@TotalHeal@ viață</healing> per inamic.@SpellModifierDescriptionAppend@",
             "range": [
                 350.0,
                 350.0,
@@ -1048,54 +1048,54 @@
                 16.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    25.0,
-                    80.0,
-                    135.0,
-                    190.0,
-                    245.0,
-                    300.0,
-                    355.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1169,10 +1169,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirE.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_E1.jpg",
-            "cost": "Cost de pregătire: <font color='#CC3300'>@Effect2Amount@% din viața maximă (@f3@)</font>",
+            "cost": "Cost de pregătire: <font color='#CC3300'>@Effect2Amount@% din viața maximă (@ChargeHealthTooltip@)</font>",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Vladimir își consumă propria viață pentru a crea o rezervă de sânge care, atunci când explodează, provoacă daune într-o zonă din jurul lui, dar care poate fi blocată de unitățile inamice.",
-            "dynamicDescription": "<charge>Începutul încărcării: </charge>Vladimir umple un rezervor cu propriul său sânge, consumându-și cel mult @ChargeHealthTooltip@ viață. După ce l-a umplut complet, Vladimir este <status>încetinit</status> cu 20%.<br><br><release>Declanșare: </release>Vladimir dezlănțuie un torent de proiectile din sânge spre inamicii din jur, provocându-le între <magicDamage>@MinDamageTooltip@</magicDamage> și <magicDamage>@MaxDamageTooltip@ daune magice</magicDamage>, în funcție de timpul de încărcare. Dacă abilitatea a fost încărcată timp de cel puțin 1 secundă, va și <status>încetini</status> țintele cu @Effect9Amount@% timp de 0,5 secunde.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<charge>Începutul încărcării: </charge>Vladimir umple un rezervor cu propriul său sânge, consumându-și cel mult <font color='#CC3300'>@ChargeHealthTooltip@ viață</font>. După ce l-a umplut complet, Vladimir este <status>încetinit</status> cu 20%.<br><br><release>Declanșare: </release>Vladimir dezlănțuie un torent de proiectile din sânge spre inamicii din jur, provocându-le între <magicDamage>@MinDamageTooltip@</magicDamage> și <magicDamage>@MaxDamageTooltip@ daune magice</magicDamage>, în funcție de timpul de încărcare. Dacă abilitatea a fost încărcată timp de cel puțin 1 secundă, va și <status>încetini</status> țintele cu @Effect9Amount@% timp de 0,5 secunde.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,

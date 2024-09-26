@@ -1019,10 +1019,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirW.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_W1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_W1.jpg",
-            "cost": "Cuesta <font color='#CC3300'>@Effect2Amount@% de la Vida actual (@f2@)</font>",
+            "cost": "Cuesta un <font color='#CC3300'>@HealthCost*100@% de la Vida actual (@f2@)</font>",
             "cooldown": "@Cooldown@ seg %i:cooldown%",
             "description": "Vladimir se hunde en un charco de sangre y se vuelve inalcanzable durante 2 seg. Además, los enemigos en el charco quedan ralentizados y Vladimir extrae vida de ellos.",
-            "dynamicDescription": "Vladimir se hunde en un charco de sangre durante 2 seg, con lo que obtiene un <speed>37.5% de Velocidad de Movimiento</speed> que decae a lo largo de 1 seg y se vuelve Inalcanzable y Fantasma mientras <status>ralentiza</status> a los enemigos en el charco un @Effect3Amount@%.<br><br>Vladimir inflige <magicDamage>@TotalDamageTooltip@ de daño mágico</magicDamage> a lo largo del efecto y recupera <healing>Vida igual al @Effect5Amount@% del daño infligido</healing>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Vladimir se hunde en un charco de sangre durante 2 seg, con lo que obtiene un <speed>@HasteBoost*100@% de Velocidad de Movimiento que decae</speed> a lo largo de @HasteDuration@ seg. También se vuelve <keyword>inalcanzable</keyword> y <keyword>Fantasma</keyword>, mientras que <status>ralentiza</status> a los enemigos sobre el charco en un @MoveSpeedMod*-100@%.<br><br>Vladimir inflige <magicDamage>@TotalDamage@ de daño mágico</magicDamage> y se cura <healing>@TotalHeal@ de Vida</healing> por cada enemigo afectado mientras dure el efecto.@SpellModifierDescriptionAppend@",
             "range": [
                 350.0,
                 350.0,
@@ -1048,54 +1048,54 @@
                 16.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    25.0,
-                    80.0,
-                    135.0,
-                    190.0,
-                    245.0,
-                    300.0,
-                    355.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1169,10 +1169,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirE.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_E1.jpg",
-            "cost": "Costo de canalización <font color='#CC3300'>@Effect2Amount@% de Vida Máxima (@f3@)</font>",
+            "cost": "Canalizar tiene un costo de un <font color='#CC3300'>@Effect2Amount@% de la Vida Máxima (@ChargeHealthTooltip@)</font>",
             "cooldown": "@Cooldown@ seg %i:cooldown%",
             "description": "Vladimir paga su propia vida para cargar una reserva de sangre que, al ser liberada, inflige daño en el área a su alrededor. Las unidades enemigas la pueden bloquear.",
-            "dynamicDescription": "<charge>Inicio de carga: </charge>Vladimir carga una reserva de sangre que gasta hasta @ChargeHealthTooltip@ de su Vida. Al tener la carga completa, Vladimir queda <status>ralentizado</status> un 20%.<br><br><release>Lanzamiento: </release>Vladimir desata un torrente de misiles de sangre a los enemigos cercanos, lo que inflige de <magicDamage>@MinDamageTooltip@</magicDamage> a <magicDamage>@MaxDamageTooltip@ de daño mágico</magicDamage> según el tiempo de carga. Si cargas esta habilidad al menos 1 seg, también <status>ralentiza</status> a los objetivos un @Effect9Amount@% durante 0.5 seg.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<charge>Iniciar carga: </charge>Vladimir carga una reserva de sangre, utilizando hasta <font color='#CC3300'>@ChargeHealthTooltip@ de Vida</font>. Al tener la carga máxima, Vladimir es <status>ralentizado</status> en un 20%.<br><br><release>Al lanzar: </release>Vladimir desata una ráfaga de proyectiles de sangre contra los enemigos a su alrededor, lo que inflige entre <magicDamage>@MinDamageTooltip@</magicDamage> y <magicDamage>@MaxDamageTooltip@ de daño mágico</magicDamage> según el tiempo de carga. Si la habilidad fue cargada durante al menos 1 seg, también <status>ralentiza</status> a los objetivos en un @Effect9Amount@% durante 0.5 seg.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,

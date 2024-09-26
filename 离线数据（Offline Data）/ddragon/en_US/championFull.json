@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.17.1",
+    "version": "14.19.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -8320,11 +8320,11 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        400,
-                        400,
-                        400
+                        250,
+                        250,
+                        250
                     ],
-                    "rangeBurn": "400",
+                    "rangeBurn": "250",
                     "image": {
                         "full": "AuroraR.png",
                         "sprite": "spell1.png",
@@ -8407,6 +8407,12 @@
                     "id": "268014",
                     "num": 14,
                     "name": "Worlds 2022 Azir",
+                    "chromas": true
+                },
+                {
+                    "id": "268019",
+                    "num": 19,
+                    "name": "Attorney Azir",
                     "chromas": true
                 }
             ],
@@ -8608,11 +8614,13 @@
                     "leveltip": {
                         "label": [
                             "Solder Attack Damage",
+                            "Total AP Ratio",
                             "Recharge Time",
                             "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ apratio }} -> {{ apratioNL }}",
                             "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -8898,8 +8906,8 @@
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e3 }} -> {{ e3NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ numberofsoldiers }} -> {{ numberofsoldiersNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -20131,7 +20139,7 @@
                     "id": "EliseHumanQ",
                     "name": "Neurotoxin / Venomous Bite",
                     "description": "Human Form: Deals damage based upon how high the target's Health is.<br><br>Spider Form: Lunges at an enemy and deals damage based upon how low their Health is.",
-                    "tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise injects neurotoxin, dealing <magicDamage>{{ e1 }} plus {{ humanpercenthealth }} current Health magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise injects neurotoxin, dealing <magicDamage>{{ basedamage }} plus {{ humanpercenthealth }} current Health magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Neurotoxin Damage",
@@ -20276,7 +20284,7 @@
                     "id": "EliseHumanW",
                     "name": "Volatile Spiderling / Skittering Frenzy",
                     "description": "Human Form: Releases a venom-gorged Spiderling that explodes when it nears a target.<br><br>Spider Form: Elise and her Spiderlings gain Attack Speed.",
-                    "tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise summons an explosive spider that moves to a location and explodes when it nears an enemy or after 3 seconds. The spider deals <magicDamage>{{ spell.elisehumanw:totalspiderdamage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise summons an explosive spider that moves to a location and explodes when it nears an enemy or after 3 seconds. The spider deals <magicDamage>{{ spell.elisehumanw:totaldamage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -20417,7 +20425,7 @@
                     "id": "EliseHumanE",
                     "name": "Cocoon / Rappel",
                     "description": "Human Form: Stuns the first enemy unit hit and reveals them if they are not stealthed.<br><br>Spider Form: Elise and her Spiderlings ascend into the air and then descend upon target enemy. After descending on an enemy target, Elise's bonus damage and healing from Spider Queen is increased.",
-                    "tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise fires a cocoon, <status>Stunning</status> and revealing the first enemy hit for {{ e5 }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise fires a cocoon, <status>Stunning</status> and revealing the first enemy hit for {{ stunduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Stun Duration",
@@ -20562,7 +20570,7 @@
                     "id": "EliseR",
                     "name": "Spider Form",
                     "description": "Transforms into a menacing spider, reducing her attack range in exchange for Move Speed, new abilities, and a Spiderling swarm that will attack her foes.",
-                    "tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise transforms into a menacing spider, becoming melee ranged, and gaining <speed>{{ e3 }} Move Speed</speed> and access to <keywordMajor>Spider Form</keywordMajor> Abilities. She also summons all dormant <keywordMajor>Spiderlings</keywordMajor>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise transforms into a menacing spider, becoming melee, gaining access to <keywordMajor>Spider Form</keywordMajor> Abilities and summons all dormant <keywordMajor>Spiderlings</keywordMajor>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Spider Form Bite Damage",
@@ -20572,21 +20580,21 @@
                             "Spiderling Magic Resist"
                         ],
                         "effect": [
-                            "{{ e2 }} -> {{ e2NL }}",
+                            "{{ passivebonusdamage }} -> {{ passivebonusdamageNL }}",
                             "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e5 }} -> {{ e5NL }}",
+                            "{{ spiderlingsstored }} -> {{ spiderlingsstoredNL }}",
                             "{{ e6 }} -> {{ e6NL }}",
                             "{{ e7 }} -> {{ e7NL }}"
                         ]
                     },
                     "maxrank": 4,
                     "cooldown": [
-                        4,
-                        4,
-                        4,
-                        4
+                        3,
+                        3,
+                        3,
+                        3
                     ],
-                    "cooldownBurn": "4",
+                    "cooldownBurn": "3",
                     "cost": [
                         0,
                         0,
@@ -26518,7 +26526,7 @@
                 "mpregenperlevel": 0,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 57,
+                "attackdamage": 60,
                 "attackdamageperlevel": 3.2,
                 "attackspeedperlevel": 6,
                 "attackspeed": 0.625
@@ -30750,7 +30758,7 @@
                     "id": "HweiW",
                     "name": "Subject: Serenity",
                     "description": "Hwei envisions a series of serenities, allowing him to paint invigorating settings.<br><br>This ability replaces Hwei's abilities with utility abilities: Fleeting Current, Pool of Reflection, and Stirring Lights.",
-                    "tooltip": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br /><br /><spellName>Fleeting Current</spellName><br />Hwei launches a current of swift waters in a line that grants allies <speed>{{ tooltip_wqmovespeed }} Move Speed</speed>.<br /><br /><spellName>Pool of Reflection</spellName><br />Hwei forms a protective pool that grants <shield>{{ tooltip_wwshieldamount }} Shields</shield> over time to allied champions inside reduced by {{ spell.hweiww:allymod*100 }}% for allies.<br /><br /><spellName>Stirring Lights</spellName><br />Hwei creates three swirling lights that empower his next three Abilities or Attacks to deal an additional <magicDamage>{{ tooltip_weonhitdamage }} magic damage</magicDamage> and restore <scaleMana>{{ tooltip_weonhitmanarestore }} Mana</scaleMana> each.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Hwei paints visions of serenity that provide utility for himself and allied champions.<br /><br /><spellName>Fleeting Current</spellName><br />Hwei launches a current of swift waters in a line that grants allies <speed>{{ tooltip_wqmovespeed }} Move Speed</speed>.<br /><br /><spellName>Pool of Reflection</spellName><br />Hwei forms a protective pool that grants <shield>{{ tooltip_wwshieldamount }} Shields</shield> over time to allied champions inside reduced by {{ spell.hweiww:tooltipallymod*100 }}% for allies.<br /><br /><spellName>Stirring Lights</spellName><br />Hwei creates three swirling lights that empower his next three Abilities or Attacks to deal an additional <magicDamage>{{ tooltip_weonhitdamage }} magic damage</magicDamage> and restore <scaleMana>{{ tooltip_weonhitmanarestore }} Mana</scaleMana> each.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "<spellName>Fleeting Current</spellName> | Move Speed",
@@ -36887,7 +36895,7 @@
                 "critperlevel": 0,
                 "attackdamage": 59,
                 "attackdamageperlevel": 2.9,
-                "attackspeedperlevel": 1,
+                "attackspeedperlevel": 1.4,
                 "attackspeed": 0.625
             },
             "spells": [
@@ -46492,7 +46500,7 @@
                 "armorperlevel": 5.2,
                 "spellblock": 30,
                 "spellblockperlevel": 2.1,
-                "attackrange": 175,
+                "attackrange": 150,
                 "hpregen": 9.5,
                 "hpregenperlevel": 1,
                 "mpregen": 7,
@@ -46508,8 +46516,8 @@
                 {
                     "id": "KSanteQ",
                     "name": "Ntofo Strikes",
-                    "description": "Strike a weapon forward, damaging and slowing all enemies in a short line.<br><br>On hit, grants a stack for a few seconds. At 2 stacks, this skill fires a shockwave that pulls enemies in.",
-                    "tooltip": "K'Sante slams his weapon down, dealing <physicalDamage>{{ basedamage }} physical damage</physicalDamage> and briefly <status>Slowing</status> the enemies struck by {{ slowpercent*100 }}%.<br /><br />When an enemy is hit, K'Sante gains a stack of Ntofo Strikes for {{ recastwindow }} seconds. At 2 stacks, K'Sante instead fires a shockwave that <status>Stuns</status> and <status>Pulls</status> enemies for {{ stunduration }} second.<br /><br /><rules>Cooldown reduced by Bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>: {{ bonusresiststooltip }} / {{ defensecapforcooldown }}.<br />Cast time reduced by Bonus <healing>Health</healing>: {{ bonushealthtooltip }} / {{ healthcapforcasttime }}.</rules><br /><br /><keywordMajor>All Out</keywordMajor>: This Ability's Cooldown is reduced but no longer <status>slows</status>.{{ spellmodifierdescriptionappend }}",
+                    "description": "K'Sante strikes, damaging and slowing enemies in a short line.<br><br>On hit, grants a stack of Ntofo Strikes. At 2 stacks, K'Sante fires a shockwave that pulls enemies in.<br><br>When All Out, cooldown is reduced.",
+                    "tooltip": "K'Sante slams his weapon, dealing <physicalDamage>{{ basedamage }} physical damage</physicalDamage> and <status>Slowing</status> enemies by {{ slowpercent*100 }}% for {{ slowduration }}s. If he hits, he gains a stack of Ntofo Strikes for {{ recastwindow }} seconds. At 2 stacks, he instead fires a shockwave that <status>Stuns</status> and <status>Pulls</status> enemies for {{ stunduration }} second.<br /><br /><keywordMajor>All Out</keywordMajor>: Cooldown is reduced by {{ rcooldownreduction.0*100 }}%.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage"
@@ -46520,13 +46528,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        4,
-                        4,
-                        4,
-                        4,
-                        4
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5
                     ],
-                    "cooldownBurn": "4",
+                    "cooldownBurn": "3.5",
                     "cost": [
                         20,
                         20,
@@ -46647,31 +46655,29 @@
                 {
                     "id": "KSanteW",
                     "name": "Path Maker",
-                    "description": "K'Sante charges up before dashing. K'Sante is unstoppable and takes less damage while charging. Any targets hit by the dash are knocked to the end of the dash and stunned.<br><br>",
-                    "tooltip": "K'Sante raises his weapons defensively for {{ mindurationtooltip }} - {{ maxduration }}s, becoming Unstoppable and reducing incoming damage by {{ damagereductioncharlevel }}%.<br /><br />After charging, he rams forward, dealing <physicalDamage>{{ basedamagecalc }} + {{ maxhealthdamage*100 }}% max Health physical damage</physicalDamage>. K'Sante <status>Knocks Back</status> and <status>Stuns</status> enemies he rams into for {{ maxknockbackduration }} seconds.<br /><br /><keywordMajor>All Out:</keywordMajor> This Ability's Cooldown is refreshed. Damage reduction increases to {{ damagereductioncalcao }}% and its dash speed increases but will no longer <status>Knock Back</status> or <status>Stun</status>.{{ spellmodifierdescriptionappend }}",
+                    "description": "K'Sante charges up, taking reduced damage, then dashes, knocking back and stunning enemies.<br><br>When All Out, deals increased damage and no longer knocks back or stuns.",
+                    "tooltip": "K'Sante raises his weapons defensively for {{ mindurationtooltip }}-{{ maxduration.1 }}s, becoming Unstoppable and reducing incoming damage by {{ damagereduction*100 }}%. Then, he rams forward, dealing <physicalDamage>{{ basedamage }} + {{ totalmaxhealthdamage }} max Health physical damage</physicalDamage>. Enemies hit are <status>Knocked Back</status> and <status>Stunned</status> for {{ minknockbackduration }}-{{ maxknockbackduration }}s (based on charge time).<br /><br /><keywordMajor>All Out:</keywordMajor> Cooldown is refreshed. Deals an additional {{ rdamageincreasemin*100 }}-{{ rdamageincreasemax*100 }}% damage as <trueDamage>true damage</trueDamage> (based on charge time), damage reduction is increased to {{ rdamagereduction*100 }}% and dash speed is increased, but no longer <status>Knocks Back</status> or <status>Stuns</status>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Base Damage",
-                            "Max Health %",
+                            "Damage",
                             "Cooldown",
                             "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ maxhealthdamage*100.000000 }}% -> {{ maxhealthdamagenl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        24,
-                        22,
-                        20,
-                        18,
-                        16
+                        14,
+                        13,
+                        12,
+                        11,
+                        10
                     ],
-                    "cooldownBurn": "24/22/20/18/16",
+                    "cooldownBurn": "14/13/12/11/10",
                     "cost": [
                         40,
                         45,
@@ -46792,29 +46798,29 @@
                 {
                     "id": "KSanteE",
                     "name": "Footwork",
-                    "description": "K'Sante will dash to an ally and both will gain a shield. If there is no ally, K'Sante will still dash to the location at a reduced range and gain a shield.<br>",
-                    "tooltip": "K'Sante dashes, gaining <shield>{{ totalshield }} Shield</shield> for {{ shieldduration }} seconds. If dashing to an ally, the distance of the dash is significantly increased and the ally is also <shield>Shielded</shield>.<br /><br /><keywordMajor>All Out</keywordMajor>: This Ability's dash speed is increased. Dashing without an ally has increased range and can go over walls.{{ spellmodifierdescriptionappend }}",
+                    "description": "K'Sante dashes and gains a shield. If targeting an ally, K'Sante dashes to the ally with increased range and both gain a shield.<br><br>When All Out, cooldown is reduced and speed is increased.",
+                    "tooltip": "K'Sante dashes, gaining <shield>{{ totalshield }} Shield</shield> for {{ shieldduration }} seconds. If dashing to an ally, the distance of the dash is significantly increased and the ally is also <shield>Shielded</shield>.<br /><br /><keywordMajor>All Out</keywordMajor>: Cooldown is decreased by {{ cooldownmodao*100 }}% and dash speed is increased.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Shield",
-                            "@AbilityResourceName@ Cost",
-                            "Cooldown"
+                            "Cooldown",
+                            "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
                             "{{ shieldbaseamountfast }} -> {{ shieldbaseamountfastNL }}",
-                            "{{ cost }} -> {{ costNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        10.5,
                         10,
                         9.5,
                         9,
-                        8.5
+                        8.5,
+                        8
                     ],
-                    "cooldownBurn": "10.5/10/9.5/9/8.5",
+                    "cooldownBurn": "10/9.5/9/8.5/8",
                     "cost": [
                         45,
                         50,
@@ -46935,24 +46941,20 @@
                 {
                     "id": "KSanteR",
                     "name": "All Out",
-                    "description": "K'Sante smashes an enemy away. If the enemy hits a wall they will go through the wall taking more damage. K'Sante will appear behind the target and goes All Out by shredding his defenses but greatly increasing his damage.<br><br>",
-                    "tooltip": "K'Sante shatters his ntofos, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Knocking Back</status> an enemy champion. Enemies that hit a wall take an additional <magicDamage>{{ totaldamageslamdown }} magic damage</magicDamage>, are <status>Knocked Back</status> over the wall, and are briefly <status>Stunned</status>. K'Sante then dashes after the enemy and goes <keywordMajor>All Out</keywordMajor> for 20 seconds.<br /><br /><keywordMajor>All Out</keywordMajor> K'Sante loses <healing>{{ healthlost*100 }}% max Health</healing>, <scaleArmor>{{ defenseslost*100 }}% Bonus Armor</scaleArmor>, and <scaleMR>{{ defenseslost*100 }}% Bonus Magic Resistance</scaleMR> but gains <scaleAD>{{ alloutattackdamage }} Attack Damage</scaleAD>, <attackSpeed>{{ attackspeedincrease*100 }}% Attack Speed</attackSpeed>, heals for <healing>{{ alloutomnivamp }}%</healing> of the damage he deals to Champions, and transforms his Abilities.{{ spellmodifierdescriptionappend }}",
+                    "description": "K'Sante knocks an enemy back, launching them through any wall in their path. Then, K'Sante goes All Out and dashes after them, gaining increased damage, healing, and transformed abilities at the cost of reduced defenses.",
+                    "tooltip": "K'Sante shatters his ntofos to <status>Knock Back</status> an enemy champion, dealing <physicalDamage>{{ basedamage }} physical damage</physicalDamage>, then dashes behind them and goes <keywordMajor>All Out</keywordMajor> for {{ alloutduration }}s. If the enemy would hit a wall, they are <status>Knocked Back</status> through the wall and K'Sante strikes them again for <physicalDamage>{{ totaldamageslamdown }} physical damage</physicalDamage>.<br /><br />While <keywordMajor>All Out</keywordMajor>, K'Sante's Abilities are upgraded and he gains <attackSpeed>{{ attackspeed*100 }}% Attack Speed</attackSpeed>, {{ armorpenpercent*100 }}% Bonus Armor Penetration, and <omnivamp>{{ omnivamp*100 }}% Omnivamp</omnivamp>, but loses <healing>{{ healthlost*100 }}% max Health</healing>, <scaleArmor>{{ defenseslost*100 }}% Bonus Armor</scaleArmor>, and <scaleMR>{{ defenseslost*100 }}% Bonus Magic Resistance</scaleMR>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
                             "Damage",
-                            "Wall Damage",
-                            "Attack Damage",
-                            "Attack Speed",
-                            "Healing"
+                            "Follow-Up Damage",
+                            "Cooldown",
+                            "Attack Speed"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ slamdownstrikedamage }} -> {{ slamdownstrikedamageNL }}",
-                            "{{ alloutbaseattackdamage }} -> {{ alloutbaseattackdamageNL }}",
-                            "{{ attackspeedincrease*100.000000 }}% -> {{ attackspeedincreasenl*100.000000 }}%",
-                            "{{ alloutbaseomnivamp }}% -> {{ alloutbaseomnivampNL }}%"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ attackspeed*100.000000 }}% -> {{ attackspeednl*100.000000 }}%"
                         ]
                     },
                     "maxrank": 3,
@@ -47058,7 +47060,7 @@
             ],
             "passive": {
                 "name": "Dauntless Instinct",
-                "description": "K'Sante's Abilities mark targets to take more damage on his next Attack.",
+                "description": "K'Sante's Abilities mark targets to take more damage on his next Attack.<br><br>When All Out, K'Sante deals more damage with all Attacks and Abilities.",
                 "image": {
                     "full": "Icons_KSante_P.png",
                     "sprite": "passive2.png",
@@ -48668,7 +48670,7 @@
                 "mp": 302,
                 "mpperlevel": 40,
                 "movespeed": 335,
-                "armor": 47,
+                "armor": 43,
                 "armorperlevel": 4.8,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -49760,12 +49762,10 @@
                     "leveltip": {
                         "label": [
                             "Cooldown",
-                            "Duration",
                             "Break Damage"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ sleepduration }} -> {{ sleepdurationNL }}",
                             "{{ breakdamagebase }} -> {{ breakdamagebaseNL }}"
                         ]
                     },
@@ -54558,13 +54558,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        18,
+                        17,
                         16,
                         15,
-                        14,
-                        13,
-                        12
+                        14
                     ],
-                    "cooldownBurn": "16/15/14/13/12",
+                    "cooldownBurn": "18/17/16/15/14",
                     "cost": [
                         60,
                         65,
@@ -56372,7 +56372,7 @@
                 "mpregenperlevel": 0.8,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 55,
+                "attackdamage": 53,
                 "attackdamageperlevel": 2.4,
                 "attackspeedperlevel": 3,
                 "attackspeed": 0.656
@@ -60834,11 +60834,11 @@
                     "effect": [
                         null,
                         [
-                            11,
-                            19,
-                            27,
-                            35,
-                            43
+                            10,
+                            16,
+                            22,
+                            28,
+                            34
                         ],
                         [
                             30,
@@ -60855,11 +60855,11 @@
                             5
                         ],
                         [
-                            55,
-                            95,
-                            135,
-                            175,
-                            215
+                            50,
+                            80,
+                            110,
+                            140,
+                            170
                         ],
                         [
                             0,
@@ -60906,10 +60906,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "11/19/27/35/43",
+                        "10/16/22/28/34",
                         "30/35/40/45/50",
                         "5",
-                        "55/95/135/175/215",
+                        "50/80/110/140/170",
                         "0",
                         "0",
                         "0",
@@ -61147,6 +61147,12 @@
                     "id": "111027",
                     "num": 27,
                     "name": "Cosmic Paladin Nautilus",
+                    "chromas": false
+                },
+                {
+                    "id": "111036",
+                    "num": 36,
+                    "name": "Crystalis Indomitus Nautilus",
                     "chromas": false
                 }
             ],
@@ -64579,6 +64585,12 @@
                     "id": "20035",
                     "num": 35,
                     "name": "Cosmic Paladins Nunu & Willump",
+                    "chromas": true
+                },
+                {
+                    "id": "20044",
+                    "num": 44,
+                    "name": "Fright Night Nunu & Willump",
                     "chromas": true
                 }
             ],
@@ -68717,6 +68729,12 @@
                     "num": 54,
                     "name": "Prestige Soul Fighter Pyke",
                     "chromas": false
+                },
+                {
+                    "id": "555064",
+                    "num": 64,
+                    "name": "Fright Night Pyke",
+                    "chromas": true
                 }
             ],
             "lore": "A renowned harpooner from the slaughter docks of Bilgewater, Pyke should have met his death in the belly of a gigantic jaull-fish… and yet, he returned. Now, stalking the dank alleys and backways of his former hometown, he uses his new supernatural gifts to bring a swift and gruesome end to those who make their fortune by exploiting others—and a city that prides itself on hunting monsters now finds a monster hunting them.",
@@ -80902,6 +80920,12 @@
                     "num": 44,
                     "name": "Prestige Soul Fighter Shaco",
                     "chromas": false
+                },
+                {
+                    "id": "35054",
+                    "num": 54,
+                    "name": "Fright Night Shaco",
+                    "chromas": true
                 }
             ],
             "lore": "Crafted long ago as a plaything for a lonely prince, the enchanted marionette Shaco now delights in murder and mayhem. Corrupted by dark magic and the loss of his beloved charge, the once-kind puppet finds pleasure only in the misery of the poor souls he torments. He uses toys and simple tricks to deadly effect, finding the results of his bloody “games” hilarious—and for those who hear a dark chuckle in the dead of night, the Demon Jester may have marked them as his next plaything.",
@@ -85709,7 +85733,7 @@
                 "difficulty": 6
             },
             "stats": {
-                "hp": 605,
+                "hp": 575,
                 "hpperlevel": 100,
                 "mp": 300,
                 "mpperlevel": 40,
@@ -86387,6 +86411,12 @@
                     "num": 46,
                     "name": "Prestige Immortal Journey Sona",
                     "chromas": false
+                },
+                {
+                    "id": "37056",
+                    "num": 56,
+                    "name": "Victorious Sona",
+                    "chromas": true
                 }
             ],
             "lore": "Sona is Demacia's foremost virtuoso of the stringed etwahl, speaking only through her graceful chords and vibrant arias. This genteel manner has endeared her to the highborn, though others suspect her spellbinding melodies to actually emanate magic—a Demacian taboo. Silent to outsiders but somehow understood by close companions, Sona plucks her harmonies not only to soothe injured allies, but also to strike down unsuspecting enemies.",
@@ -93267,6 +93297,12 @@
                     "num": 49,
                     "name": "Winterblessed Thresh",
                     "chromas": true
+                },
+                {
+                    "id": "412059",
+                    "num": 59,
+                    "name": "Janitor Thresh",
+                    "chromas": true
                 }
             ],
             "lore": "Sadistic and cunning, Thresh is an ambitious and restless spirit of the Shadow Isles. Once the custodian of countless arcane secrets, he was undone by a power greater than life or death, and now sustains himself by tormenting and breaking others with slow, excruciating inventiveness. His victims suffer far beyond their brief mortal coil as Thresh wreaks agony upon their souls, imprisoning them in his unholy lantern to torture for all eternity.",
@@ -94018,18 +94054,18 @@
                 "mpperlevel": 32,
                 "movespeed": 325,
                 "armor": 30,
-                "armorperlevel": 4.5,
+                "armorperlevel": 4,
                 "spellblock": 28,
                 "spellblockperlevel": 1.3,
-                "attackrange": 525,
+                "attackrange": 550,
                 "hpregen": 4,
-                "hpregenperlevel": 0.65,
+                "hpregenperlevel": 0.5,
                 "mpregen": 7.2,
                 "mpregenperlevel": 0.45,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 59,
-                "attackdamageperlevel": 3.7,
+                "attackdamage": 60,
+                "attackdamageperlevel": 2.5,
                 "attackspeedperlevel": 1.5,
                 "attackspeed": 0.656
             },
@@ -94038,15 +94074,15 @@
                     "id": "TristanaQ",
                     "name": "Rapid Fire",
                     "description": "Tristana fires her weapon rapidly, increasing her Attack Speed for a short time.",
-                    "tooltip": "Tristana goes full-auto, gaining <attackSpeed>{{ e1 }}% Attack Speed</attackSpeed> for {{ e2 }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Tristana goes full-auto, gaining <attackSpeed>{{ attackspeedmod*100 }}% Attack Speed</attackSpeed> for {{ buffduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
-                            "Attack Speed"
+                            "Attack Speed",
+                            "Cooldown"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%"
+                            "{{ attackspeedmod*100.000000 }}% -> {{ attackspeedmodnl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -94070,18 +94106,18 @@
                     "effect": [
                         null,
                         [
-                            50,
-                            65,
-                            80,
-                            95,
-                            110
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            7,
-                            7,
-                            7,
-                            7,
-                            7
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -94142,8 +94178,8 @@
                     ],
                     "effectBurn": [
                         null,
-                        "50/65/80/95/110",
-                        "7",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -94179,16 +94215,14 @@
                     "id": "TristanaW",
                     "name": "Rocket Jump",
                     "description": "Tristana fires at the ground to propel her to a distant location, dealing damage and slowing surrounding units for a brief period where she lands.",
-                    "tooltip": "Tristana launches herself, dealing <magicDamage>{{ landingdamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ e3 }}% for {{ e2 }} seconds upon landing.<br /><br />Champion takedowns and max stack <spellName>Explosive Charge</spellName> detonations on champions refresh this Ability's Cooldown.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Tristana launches herself, dealing <magicDamage>{{ landingdamage }} magic damage</magicDamage> and <status>Slowing</status> by {{ slowmod*-100 }}% for {{ slowduration }} seconds upon landing.<br /><br />Champion takedowns and max stack <spellName>Explosive Charge</spellName> detonations on champions refresh this Ability's Cooldown.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Slow Duration",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }} -> {{ e2NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -94213,32 +94247,32 @@
                     "effect": [
                         null,
                         [
-                            95,
-                            145,
-                            195,
-                            245,
-                            295
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1,
-                            1.5,
-                            2,
-                            2.5,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            60,
-                            60,
-                            60,
-                            60,
-                            60
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            350,
-                            350,
-                            350,
-                            350,
-                            350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -94285,10 +94319,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "95/145/195/245/295",
-                        "1/1.5/2/2.5/3",
-                        "60",
-                        "350",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -94325,18 +94359,18 @@
                     "tooltip": "<spellPassive>Passive: </spellPassive>Tristana's Attacks that kill enemies deal <magicDamage>{{ passivedamage }} magic damage</magicDamage> to surrounding enemies.<br /><br /><spellActive>Active:</spellActive> Tristana attaches a bomb to an enemy or turret that deals <physicalDamage>{{ activedamage }} physical damage</physicalDamage> to surrounding enemies after {{ activeduration }} seconds. The damage is increased by {{ critchanceamp*100 }}% Critical Strike Chance and by {{ activeperstackamp*100 }}% each time Tristana hits an Attack or Ability (max 4 stacks).<br /><br />At {{ activemaxstacks }} stacks, the bomb explodes immediately (max <physicalDamage>{{ activemaxdamage }} physical damage</physicalDamage>).{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
-                            "@AbilityResourceName@ Cost",
                             "Passive Explosion Damage",
                             "Base Charge Damage",
-                            "Attack Damage"
+                            "Attack Damage Ratio",
+                            "Cooldown",
+                            "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ cost }} -> {{ costNL }}",
                             "{{ passivebasedamage }} -> {{ passivebasedamageNL }}",
                             "{{ activebasedamage }} -> {{ activebasedamageNL }}",
-                            "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%"
+                            "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -94469,26 +94503,26 @@
                     "id": "TristanaR",
                     "name": "Buster Shot",
                     "description": "Tristana loads a massive cannonball into her weapon and fires it at an enemy unit. This deals Magic Damage and knocks the target back. If the target is carrying the Explosive Charge bomb, the bomb detonation radius is doubled.",
-                    "tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> to the target and <status>Knocking</status> them <status>Back</status> along with surrounding enemies.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Tristana fires a massive cannonball, dealing <magicDamage>{{ damagecalc }} magic damage</magicDamage> to the target, <status>Knocking Back</status> and <status>Stunning</status> them and surrounding enemies for {{ stunduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
                             "Damage",
-                            "Knockback Distance"
+                            "Knockback Distance",
+                            "Stun Duration"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}"
+                            "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}",
+                            "{{ stunduration }} -> {{ stundurationNL }}"
                         ]
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        120,
-                        110,
+                        100,
+                        100,
                         100
                     ],
-                    "cooldownBurn": "120/110/100",
+                    "cooldownBurn": "100",
                     "cost": [
                         100,
                         100,
@@ -97965,7 +97999,7 @@
                     "tooltip": "<spellActive>Storm Stance:</spellActive> Udyr surrounds himself in a glacial storm for {{ buffduration }} seconds, dealing <magicDamage>{{ stormdamage }} magic damage</magicDamage> per second to nearby enemies and <status>Slowing</status> them by {{ slowpotency*100 }}%. Additionally, Udyr's next two Attacks in this stance deal <magicDamage>{{ pulsedamage }} magic damage</magicDamage> to enemies in the storm.<br /><br /><keywordMajor>Awaken:</keywordMajor> Unleash the storm, causing it to follow Udyr's last Attacked enemy, deal an additional <magicDamage>{{ percenthpblast }} max Health magic damage</magicDamage> over the duration, and <status>Slow</status> by an additional {{ empoweredslow }}.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Magic Damage: <magicDamage>@MagicDamage@ (%i:scaleAP%)</magicDamage>",
+                            "Magic Damage: ",
                             "Slow"
                         ],
                         "effect": [
@@ -98948,15 +98982,15 @@
                     "leveltip": {
                         "label": [
                             "Maximum Damage",
+                            "Bonus AD Ratio",
                             "Cooldown",
-                            "Mana Cost",
-                            "Bonus AD Ratio"
+                            "Mana Cost"
                         ],
                         "effect": [
                             "{{ basedamagemax }} -> {{ basedamagemaxNL }}",
+                            "{{ tadratiomax }} -> {{ tadratiomaxNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ basecost }} -> {{ basecostNL }}",
-                            "{{ tadratiomax }} -> {{ tadratiomaxNL }}"
+                            "{{ basecost }} -> {{ basecostNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -100332,6 +100366,12 @@
                     "id": "45051",
                     "num": 51,
                     "name": "King Beegar",
+                    "chromas": true
+                },
+                {
+                    "id": "45060",
+                    "num": 60,
+                    "name": "Fright Night Veigar",
                     "chromas": true
                 }
             ],
@@ -102991,6 +103031,12 @@
                     "num": 30,
                     "name": "Soul Fighter Viego",
                     "chromas": false
+                },
+                {
+                    "id": "234037",
+                    "num": 37,
+                    "name": "Worlds 2024 Viego",
+                    "chromas": false
                 }
             ],
             "lore": "Once ruler of a long-lost kingdom, Viego perished over a thousand years ago when his attempt to bring his wife back from the dead triggered the magical catastrophe known as the Ruination. Transformed into a powerful, unliving wraith tortured by an obsessive longing for his centuries-dead queen, Viego now stands as the Ruined King, controlling the deadly Harrowings as he scours Runeterra for anything that might one day restore her, and destroying all in his path as the Black Mist pours endlessly from his cruel, broken heart.",
@@ -103025,7 +103071,7 @@
                 "mpregenperlevel": 0,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 57,
+                "attackdamage": 60,
                 "attackdamageperlevel": 3.5,
                 "attackspeedperlevel": 2.5,
                 "attackspeed": 0.658
@@ -104541,14 +104587,14 @@
                     "id": "VladimirSanguinePool",
                     "name": "Sanguine Pool",
                     "description": "Vladimir sinks into a pool of blood, becoming untargetable for 2 seconds. Additionally, enemies on the pool are slowed and Vladimir siphons life from them.",
-                    "tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining <speed>37.5% decaying Move Speed</speed> for 1 second and becoming Untargetable and Ghosted while <status>Slowing</status> enemies in the pool by {{ e3 }}%.<br /><br />Vladimir deals <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> over the duration and restores <healing>Health equal to {{ e5 }}% of the damage dealt</healing>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining <speed>{{ hasteboost*100 }}% decaying Move Speed</speed> for {{ hasteduration }} second and becoming <keyword>Untargetable</keyword> and <keyword>Ghosted</keyword> while <status>Slowing</status> enemies in the pool by {{ movespeedmod*-100 }}%.<br /><br />Vladimir deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> and restores <healing>{{ totalheal }} Health</healing> per enemy over the duration.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -104573,39 +104619,39 @@
                     "effect": [
                         null,
                         [
-                            80,
-                            135,
-                            190,
-                            245,
-                            300
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            40,
-                            40,
-                            40,
-                            40,
-                            40
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -104645,11 +104691,11 @@
                     ],
                     "effectBurn": [
                         null,
-                        "80/135/190/245/300",
-                        "15",
-                        "40",
-                        "15",
-                        "30",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -104676,13 +104722,13 @@
                         "w": 48,
                         "h": 48
                     },
-                    "resource": "{{ e2 }}% of current Health"
+                    "resource": "{{ healthcost*100 }}% of current Health"
                 },
                 {
                     "id": "VladimirE",
                     "name": "Tides of Blood",
                     "description": "Vladimir pays his own health to charge up a reservoir of blood which, when released, deals damage in the area around him but can be blocked by enemy units.",
-                    "tooltip": "<charge>Begin Charging: </charge>Vladimir charges up a reservoir of blood, spending up to {{ chargehealthtooltip }} Health. While at full charge, Vladimir is <status>Slowed</status> by 20%.<br /><br /><release>Release: </release>Vladimir unleashes a torrent of blood missiles at surrounding enemies, dealing between <magicDamage>{{ mindamagetooltip }}</magicDamage> and <magicDamage>{{ maxdamagetooltip }} magic damage</magicDamage> based on charge time. If this Ability was charged for at least 1 second, it also <status>Slows</status> targets by {{ e9 }}% for 0.5 seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<charge>Begin Charging: </charge>Vladimir charges up a reservoir of blood, spending up to <span class=\"colorCC3300\">{{ chargehealthtooltip }} Health</span>. While at full charge, Vladimir is <status>Slowed</status> by 20%.<br /><br /><release>Release: </release>Vladimir unleashes a torrent of blood missiles at surrounding enemies, dealing between <magicDamage>{{ mindamagetooltip }}</magicDamage> and <magicDamage>{{ maxdamagetooltip }} magic damage</magicDamage> based on charge time. If this Ability was charged for at least 1 second, it also <status>Slows</status> targets by {{ e9 }}% for 0.5 seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Minimum Damage",
@@ -104802,7 +104848,7 @@
                         "60/90/120/150/180"
                     ],
                     "vars": [],
-                    "costType": "% of max Health",
+                    "costType": "% of max Health ({{ chargehealthtooltip }})",
                     "maxammo": "-1",
                     "range": [
                         600,
@@ -104821,7 +104867,7 @@
                         "w": 48,
                         "h": 48
                     },
-                    "resource": "Channeling Cost {{ e2 }}% of max Health"
+                    "resource": "Channeling Cost {{ e2 }}% of max Health ({{ chargehealthtooltip }})"
                 },
                 {
                     "id": "VladimirHemoplague",
@@ -107820,7 +107866,7 @@
                 "mpperlevel": 55,
                 "movespeed": 345,
                 "armor": 35,
-                "armorperlevel": 4.7,
+                "armorperlevel": 5,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 175,
@@ -107873,10 +107919,10 @@
                         null,
                         [
                             16,
-                            25,
-                            34,
-                            43,
-                            52
+                            29,
+                            42,
+                            55,
+                            68
                         ],
                         [
                             0.75,
@@ -107944,7 +107990,7 @@
                     ],
                     "effectBurn": [
                         null,
-                        "16/25/34/43/52",
+                        "16/29/42/55/68",
                         "0.75",
                         "0",
                         "0",
@@ -112533,6 +112579,18 @@
                     "num": 19,
                     "name": "Immortal Journey Zeri",
                     "chromas": true
+                },
+                {
+                    "id": "221028",
+                    "num": 28,
+                    "name": "Fright Night Zeri",
+                    "chromas": true
+                },
+                {
+                    "id": "221029",
+                    "num": 29,
+                    "name": "Prestige Fright Night Zeri",
+                    "chromas": false
                 }
             ],
             "lore": "A headstrong, spirited young woman from Zaun's working-class, Zeri channels her electric magic to charge herself and her custom-crafted gun. Her volatile power mirrors her emotions, its sparks reflecting her lightning-fast approach to life. Deeply compassionate toward others, Zeri carries the love of her family and her home into every fight. Though her eagerness to help can sometimes backfire, Zeri believes one truth to be certain: stand up for your community, and it will stand up with you.",

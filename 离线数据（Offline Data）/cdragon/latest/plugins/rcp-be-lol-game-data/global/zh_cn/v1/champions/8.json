@@ -1064,10 +1064,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirW.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_W1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_W1.jpg",
-            "cost": "消耗<font color='#CC3300'>@Effect2Amount@%当前生命值(@f2@)</font>",
+            "cost": "消耗<font color='#CC3300'>@HealthCost*100@%当前生命值(@f2@)</font>",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "弗拉基米尔潜入血泊之中，变得不可被选取，持续2秒。血泊上的敌人被减速，同时弗拉基米尔会从他们身上吸取生命。",
-            "dynamicDescription": "弗拉基米尔化成一滩持续2秒的血池，获得<speed>37.5%持续衰减的移动速度</speed>，持续1秒，并进入无法被选取和幽灵状态，同时使血池中的敌人<status>减速</status>@Effect3Amount@%。<br><br>弗拉基米尔在期间会持续造成<magicDamage>@TotalDamageTooltip@魔法伤害</magicDamage>，并为弗拉基米尔回复<healing>相当于@Effect5Amount@%实际伤害值的生命值</healing>。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "弗拉基米尔化成一滩持续2秒的血池，获得<speed>@HasteBoost*100@%持续衰减的移动速度</speed>，持续@HasteDuration@秒，并进入<keyword>无法被选取</keyword>和<keyword>幽灵</keyword>状态，同时使血池中的敌人<status>减速</status>@MoveSpeedMod*-100@%。<br><br>弗拉基米尔在期间会持续造成<magicDamage>@TotalDamage@魔法伤害</magicDamage>，并且每命中一个敌人就会为弗拉基米尔回复<healing>@TotalHeal@生命值</healing>。@SpellModifierDescriptionAppend@",
             "range": [
                 350.0,
                 350.0,
@@ -1093,54 +1093,54 @@
                 16.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    25.0,
-                    80.0,
-                    135.0,
-                    190.0,
-                    245.0,
-                    300.0,
-                    355.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1214,10 +1214,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirE.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_E1.jpg",
-            "cost": "引导过程消耗<font color='#CC3300'>@Effect2Amount@%最大生命值(@f3@)</font>",
+            "cost": "引导过程消耗<font color='#CC3300'>@Effect2Amount@%最大生命值(@ChargeHealthTooltip@)</font>",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "弗拉基米尔消耗他的生命值来持续灌注一个蓄血库，蓄血库在释放时会对他身边的敌人造成伤害，但会被敌方单位所阻挡。",
-            "dynamicDescription": "<charge>开始蓄力：</charge>弗拉基米尔积攒一个蓄血库，至多消耗@ChargeHealthTooltip@生命值。在攒满后，弗拉基米尔会被<status>减速</status>20%。<br><br><release>释放：</release>弗拉基米尔对附近的敌人释放一股血弹激流，基于蓄力时间造成<magicDamage>@MinDamageTooltip@</magicDamage>至<magicDamage>@MaxDamageTooltip@魔法伤害</magicDamage>。如果这个技能蓄力了至少1秒，那么它还会使目标<status>减速</status>@Effect9Amount@%，持续0.5秒。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<charge>开始蓄力：</charge>弗拉基米尔积攒一个蓄血库，至多消耗<font color='#CC3300'>@ChargeHealthTooltip@生命值</font>。在攒满后，弗拉基米尔会被<status>减速</status>20%。<br><br><release>释放：</release>弗拉基米尔对附近的敌人释放一股血弹激流，基于蓄力时间造成<magicDamage>@MinDamageTooltip@</magicDamage>至<magicDamage>@MaxDamageTooltip@魔法伤害</magicDamage>。如果这个技能蓄力了至少1秒，那么它还会使目标<status>减速</status>@Effect9Amount@%，持续0.5秒。@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,

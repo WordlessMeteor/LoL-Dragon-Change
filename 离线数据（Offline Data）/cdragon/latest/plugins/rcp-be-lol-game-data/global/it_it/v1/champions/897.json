@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "Le abilità di K'Sante marchiano i bersagli per infliggere più danni all'attacco successivo."
+        "description": "Le abilità di K'Sante marchiano i bersagli per infliggere più danni all'attacco successivo.<br><br>In Tutto per tutto, gli attacchi e le abilità di K'Sante infliggono più danni."
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@f1.2@ sec",
-            "description": "Colpisce in avanti con un'arma, danneggiando e rallentando tutti i nemici in una breve linea.<br><br>Sul colpo, conferisce una carica per qualche secondo. A due cariche, questa abilità spara un'onda d'urto che attira i nemici.",
-            "dynamicDescription": "K'Sante colpisce il terreno con la sua arma, infliggendo <physicalDamage>@BaseDamage@ danni fisici</physicalDamage> e <status>rallentando</status> brevemente i nemici colpiti di un @SlowPercent*100@%.<br><br>Se un nemico viene colpito, K'Sante ottiene una carica di Colpi di Ntofo per @RecastWindow@ secondi. A 2 cariche, K'Sante spara un'onda d'urto che <status>stordisce</status> e <status>attira</status> i nemici per @StunDuration@ secondo/i.<br><br><rules>Ricarica ridotta del bonus di <scaleArmor>armatura</scaleArmor> e <scaleMR>resistenza magica</scaleMR>: @BonusResistsTooltip@/@DefenseCapforCooldown@.<br>Il tempo di lancio è ridotto della <healing>salute</healing> bonus: @BonusHealthTooltip@/@HealthCapForCastTime@.</rules><br><br><keywordMajor>Tutto per tutto</keywordMajor>: questa abilità ha una ricarica ridotta, ma non <status>rallenta</status> più.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ secondo/i %i:cooldown%",
+            "description": "K'Sante colpisce, danneggiando e rallentando i nemici lungo una breve linea.<br><br>Sul colpo, conferisce una carica di Colpi di Ntofo. A 2 cariche, K'Sante spara un'onda d'urto che attira i nemici.<br><br>In Tutto per tutto, la ricarica è ridotta.",
+            "dynamicDescription": "K'Sante colpisce il terreno con la sua arma, infliggendo <physicalDamage>@BaseDamage@ danni fisici</physicalDamage> e <status>rallentando</status> i nemici di un @SlowPercent*100@% per @SlowDuration@ secondo/i. Se colpisce, conferisce una carica di Colpi di Ntofo per @RecastWindow@ secondi. A 2 cariche, K'Sante spara invece un'onda d'urto che <status>stordisce</status> e <status>attira</status> i nemici per @StunDuration@ secondo/i.<br><br><keywordMajor>Tutto per tutto</keywordMajor>: la ricarica è ridotta di un @RCooldownReduction.0*100@%.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ secondi di %i:cooldown%",
-            "description": "K'Sante si carica prima dello scatto. K'Sante è inarrestabile e subisce meno danni durante la carica. I bersagli colpiti dallo scatto vengono lanciati alla fine dello scatto e storditi.<br><br>",
-            "dynamicDescription": "K'Sante alza le sue armi per difendersi per @MinDurationTOOLTIP@ - @MaxDuration@ secondi, diventa inarrestabile e riduce i danni subiti di un @DamageReductionCharLevel@%.<br><br>Dopo la carica, parte all'attacco, infliggendo <physicalDamage>@BaseDamageCalc@ + @MaxHealthDamage*100@% danni fisici in base alla salute massima</physicalDamage>. K'Sante <status>respinge</status> e <status>stordisce</status> i nemici che colpisce per @MaxKnockbackDuration@ secondi.<br><br><keywordMajor>Tutto per tutto:</keywordMajor> la ricarica di questa abilità si azzera. La riduzione dei danni aumenta a un @DamageReductionCalcAO@% e la velocità dello scatto aumenta, senza più <status>respingere</status> o <status>stordire</status>.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante si carica subendo danni ridotti, poi scatta, respingendo e stordendo i nemici.<br><br>In Tutto per tutto, infligge danni aumentati e perde gli effetti di respinta e stordimento.",
+            "dynamicDescription": "K'Sante alza le sue armi per difendersi per @MinDurationTOOLTIP@-@MaxDuration.1@ secondo/i, diventa inarrestabile e riduce i danni subiti di un @DamageReduction*100@%. Poi parte alla carica, infliggendo <physicalDamage>@BaseDamage@ + @TotalMaxHealthDamage@ della salute massima in danni fisici</physicalDamage>. I nemici colpiti vengono <status>respinti</status> e <status>storditi</status> per @MinKnockbackDuration@-@MaxKnockbackDuration@ secondo/i (in base al tempo di carica).<br><br><keywordMajor>Tutto per tutto:</keywordMajor> la ricarica si azzera. Infligge un @RDamageIncreaseMin*100@-@RDamageIncreaseMax*100@% di danni aggiuntivi come <trueDamage>danni puri</trueDamage> (in base al tempo di carica), la riduzione dei danni aumenta a @RDamageReduction*100@% e la velocità dello scatto aumenta, ma non ci sono più gli effetti di <status>respinta</status> o <status>stordimento</status>.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@Cooldown@ secondi di %i:cooldown%",
-            "description": "K'Sante scatta verso un alleato ed entrambi ottengono uno scudo. Se non ci sono alleati, K'Sante scatta comunque verso la posizione con gittata ridotta e ottiene uno scudo.<br>",
-            "dynamicDescription": "K'Sante scatta, ottenendo uno <shield>scudo da @TotalShield@</shield> per @ShieldDuration@ secondi. Se scatta verso un alleato, la distanza dello scatto aumenta sensibilmente e l'alleato ottiene uno <shield>scudo</shield>.<br><br><keywordMajor>Tutto per tutto</keywordMajor>: la velocità dello scatto di questa abilità è aumentata. Lo scatto senza un alleato ha gittata aumentata e permette di superare i muri.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ secondo/i %i:cooldown%",
+            "description": "K'Sante scatta e ottiene uno scudo. Se si punta un alleato, K'Sante scatta verso di esso con gittata aumentata ed entrambi ottengono uno scudo.<br><br>In Tutto per tutto, la ricarica è ridotta e la velocità è aumentata.",
+            "dynamicDescription": "K'Sante scatta e ottiene <shield>uno scudo da @TotalShield@</shield> per @ShieldDuration@ secondi. Se scatta verso un alleato, la distanza dello scatto aumenta sensibilmente e anche l'alleato ottiene uno <shield>scudo</shield>.<br><br><keywordMajor>Tutto per tutto</keywordMajor>: la ricarica è ridotta di un @CooldownModAO*100@% e la velocità dello scatto è aumentata.@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ secondi di %i:cooldown%",
-            "description": "K'Sante scaglia via un nemico. Se il nemico colpisce un muro, lo attraversa e subisce più danni. K'Sante appare dietro al bersaglio e si gioca il Tutto per tutto, rinunciando alle sue difese ma aumentando notevolmente i suoi danni.<br><br>",
-            "dynamicDescription": "K'Sante distrugge i suoi ntofos, infliggendo <magicDamage>@TotalDamage@ danni magici</magicDamage> e <status>respingendo</status> un campione nemico. I nemici che colpiscono un muro subiscono <magicDamage>@TotalDamageSlamDown@ danni magici</magicDamage> aggiuntivi, vengono <status>respinti</status> oltre il muro e <status>storditi</status> per un breve periodo. K'Sante scatta verso il nemico e si gioca il <keywordMajor>Tutto per tutto</keywordMajor> per 20 secondi.<br><br>In <keywordMajor>Tutto per tutto</keywordMajor> K'Sante perde un <healing>@HealthLost*100@% di salute massima</healing>, un <scaleArmor>@DefensesLost*100@% di armatura bonus</scaleArmor> e un <scaleMR>@DefensesLost*100@% di resistenza magica bonus</scaleMR>, ma ottiene <scaleAD>@AllOutAttackDamage@ attacco fisico</scaleAD>, un <attackSpeed>@AttackSpeedIncrease*100@% di velocità d'attacco</attackSpeed>, guarisce per un <healing>@AllOutOmnivamp@%</healing> dei danni che infligge ai campioni e trasforma le sue abilità.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante respinge un nemico, lanciandolo contro i muri lungo la traiettoria. Poi, entra nello stato Tutto per tutto e scatta verso il bersaglio, ottenendo un aumento di danni, cure e abilità trasformate, al costo di una riduzione delle difese.",
+            "dynamicDescription": "K'Sante distrugge i suoi ntofo per <status>respingere</status> un campione nemico, infliggendo <physicalDamage>@BaseDamage@ danni fisici</physicalDamage>, poi scatta alle sue spalle ed entra nello stato <keywordMajor>Tutto per tutto</keywordMajor> per @AllOutDuration@ secondo/i. Se il nemico colpisce un muro, viene <status>respinto</status> e K'Sante lo colpisce ancora infliggendo <physicalDamage>@TotalDamageSlamDown@ danni fisici</physicalDamage>.<br><br>In <keywordMajor>Tutto per tutto</keywordMajor>, le abilità di K'Sante vengono potenziate e lui ottiene <attackSpeed>@AttackSpeed*100@% velocità d'attacco</attackSpeed>, @ArmorPenPercent*100@% penetrazione armatura bonus e <omnivamp>@Omnivamp*100@% Rubavita globale</omnivamp>, ma perde un <healing>@HealthLost*100@% della salute massima</healing>, un <scaleArmor>@DefensesLost*100@% dell'armatura bonus</scaleArmor> e un <scaleMR>@DefensesLost*100@% della resistenza magica bonus</scaleMR>.@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

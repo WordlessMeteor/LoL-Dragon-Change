@@ -1283,7 +1283,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "高速で連射を行い、攻撃速度が数秒間増加する。",
-            "dynamicDescription": "フルオート射撃になり、@Effect2Amount@秒間<attackSpeed>攻撃速度が@Effect1Amount*100@%</attackSpeed>増加する。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "フルオート射撃になり、@BuffDuration@秒間<attackSpeed>攻撃速度が@AttackSpeedMod*100@%</attackSpeed>増加する。@SpellModifierDescriptionAppend@",
             "range": [
                 20.0,
                 20.0,
@@ -1314,22 +1314,22 @@
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    0.5,
-                    0.5,
-                    0.65,
-                    0.8,
-                    0.95,
-                    1.1,
-                    1.25
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1433,7 +1433,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "地面を砲撃した反動で指定地点へジャンプし、着地と同時に周辺のユニット全員にダメージを与え、短時間スロウ効果を付与する。",
-            "dynamicDescription": "自身を飛ばして、着地時に<magicDamage>@LandingDamage@の魔法ダメージ</magicDamage>を与え、@Effect2Amount@秒間@Effect3Amount*-100@%の<status>スロウ効果</status>を付与する。<br><br>チャンピオンからキルまたはアシストを獲得するか、チャンピオンに付着した<spellName>「ヨードルグレネード」</spellName>を最大スタックにして爆発させると、このスキルのクールダウンが解消される。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "自身を飛ばして、着地時に<magicDamage>@LandingDamage@の魔法ダメージ</magicDamage>を与え、@SlowDuration@秒間@SlowMod*-100@%の<status>スロウ効果</status>を付与する。<br><br>チャンピオンからキルまたはアシストを獲得するか、チャンピオンに付着した<spellName>「ヨードルグレネード」</spellName>を最大スタックにして爆発させると、このスキルのクールダウンが解消される。@SpellModifierDescriptionAppend@",
             "range": [
                 900.0,
                 900.0,
@@ -1459,45 +1459,45 @@
                 14.0
             ],
             "coefficients": {
-                "coefficient1": 0.5,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    95.0,
-                    95.0,
-                    145.0,
-                    195.0,
-                    245.0,
-                    295.0,
-                    295.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    1.0,
-                    1.0,
-                    1.5,
-                    2.0,
-                    2.5,
-                    3.0,
-                    3.5
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
                     0.0,
@@ -1733,7 +1733,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "敵ユニット1体へ向けて巨大な砲弾を発射し、魔法ダメージを与えてノックバックさせる。対象に「ヨードルグレネード」が付着していた場合、爆発半径が2倍になる。",
-            "dynamicDescription": "巨大な砲弾を発射して、対象に<magicDamage>@DamageCalc@の魔法ダメージ</magicDamage>を与え、周囲の敵と一緒に<status>ノック</status><status>バック</status>させる。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "巨大な砲弾を発射して、対象に<magicDamage>@DamageCalc@の魔法ダメージ</magicDamage>を与え、周囲の敵と一緒に<status>ノックバック</status>させ、@StunDuration@秒間<status>スタン</status>させる。@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -1748,11 +1748,11 @@
                 100.0,
                 100.0,
                 100.0,
-                0.0
+                100.0
             ],
             "cooldownCoefficients": [
-                120.0,
-                110.0,
+                100.0,
+                100.0,
                 100.0,
                 100.0,
                 100.0,

@@ -1019,10 +1019,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirW.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_W1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_W1.jpg",
-            "cost": "<font color='#CC3300'>@Effect2Amount@% текущего здоровья (@f2@)</font>",
+            "cost": "<font color='#CC3300'>@HealthCost*100@% текущего здоровья (@f2@)</font>",
             "cooldown": "@Cooldown@ сек. %i:cooldown%",
             "description": "Владимир погружается в омут крови и становится недосягаемым на 2 сек., замедляя врагов над собой и вытягивая у них здоровье.",
-            "dynamicDescription": "Владимир погружается в омут крови на 2 сек., увеличивая свою <speed>скорость передвижения на 37.5% (эффект ослабевает со временем)</speed> на 1 сек., а также становясь недосягаемым и призрачным. Враги в омуте <status>замедляются</status> на @Effect3Amount@%.<br><br>Владимир наносит <magicDamage>@TotalDamageTooltip@ магического урона</magicDamage> за время действия умения и восстанавливает себе <healing>здоровье в размере @Effect5Amount@% от нанесенного урона</healing>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Владимир погружается в омут крови на 2 сек., увеличивая свою <speed>скорость передвижения на @HasteBoost*100@% (эффект ослабевает со временем)</speed> на @HasteDuration@ сек., а также становясь <keyword>недосягаемым</keyword> и <keyword>призрачным</keyword>. Враги в омуте <status>замедляются</status> на @MoveSpeedMod*-100@%.<br><br>Владимир наносит <magicDamage>@TotalDamage@ магического урона</magicDamage> и восстанавливает себе <healing>@TotalHeal@ здоровья</healing> за каждого врага на протяжении действия умения.@SpellModifierDescriptionAppend@",
             "range": [
                 350.0,
                 350.0,
@@ -1048,54 +1048,54 @@
                 16.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    25.0,
-                    80.0,
-                    135.0,
-                    190.0,
-                    245.0,
-                    300.0,
-                    355.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0,
-                    40.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1169,10 +1169,10 @@
             "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Vladimir/HUD/Icons2D/VladimirE.png",
             "abilityVideoPath": "champion-abilities/0008/ability_0008_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0008/ability_0008_E1.jpg",
-            "cost": "Стоимость: <font color='#CC3300'>@Effect2Amount@% от макс. запаса здоровья (@f3@)</font>",
+            "cost": "Стоимость: <font color='#CC3300'>@Effect2Amount@% от макс. запаса здоровья (@ChargeHealthTooltip@)</font>",
             "cooldown": "@Cooldown@ сек. %i:cooldown%",
             "description": "Владимир тратит собственное здоровье, чтобы наполнить резервуар крови. После использования он нанесет урон по площади, но вражеские бойцы могут его заблокировать.",
-            "dynamicDescription": "<charge>Начало подготовки:</charge> Владимир заполняет резервуар крови, расходуя до @ChargeHealthTooltip@ здоровья. При максимальном уровне заряда Владимир <status>замедляется</status> на 20%.<br><br><release>Применение:</release> Владимир выпускает фонтан крови, поражая окружающих врагов и нанося от <magicDamage>@MinDamageTooltip@</magicDamage> до <magicDamage>@MaxDamageTooltip@ магического урона</magicDamage> в зависимости от времени подготовки. Если подготовка длилась хотя бы 1 сек., умение также <status>замедляет</status> цели на @Effect9Amount@% на 0.5 сек.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<charge>Начало подготовки:</charge> Владимир заполняет резервуар крови, расходуя до <font color='#CC3300'>@ChargeHealthTooltip@ здоровья</font>. При максимальном уровне заряда Владимир <status>замедляется</status> на 20%.<br><br><release>Применение:</release> Владимир выпускает фонтан крови, поражая окружающих врагов и нанося от <magicDamage>@MinDamageTooltip@</magicDamage> до <magicDamage>@MaxDamageTooltip@ магического урона</magicDamage> в зависимости от времени подготовки. Если подготовка длилась хотя бы 1 сек., умение также <status>замедляет</status> цели на @Effect9Amount@% на 0.5 сек.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,

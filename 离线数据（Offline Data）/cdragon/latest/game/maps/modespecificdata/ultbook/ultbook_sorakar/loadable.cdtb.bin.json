@@ -144,7 +144,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             30.0,
@@ -201,7 +201,7 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "isUniformScale": 1,
                 "birthScale0": {
@@ -284,116 +284,17 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_heal_sparkle.dds",
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_heal_sparkle.UltBook_2024.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
+                "timeBeforeFirstEmission": 0.20000000298023224,
                 "rate": {
-                    "constantValue": 2.0,
+                    "constantValue": 20.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
-                    "constantValue": 1.5,
-                    "__type": "ValueFloat"
-                },
-                "particleLinger": 3.0,
-                "lifetime": 1.0,
-                "isSingleParticle": 1,
-                "emitterName": "spotlight",
-                "bindWeight": {
-                    "constantValue": 1.0,
-                    "__type": "ValueFloat"
-                },
-                "primitive": {
-                    "__type": "VfxPrimitiveRay"
-                },
-                "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_heal_color.dds",
-                "color": {
-                    "dynamics": {
-                        "times": [
-                            0.0,
-                            0.6000000238418579,
-                            1.0
-                        ],
-                        "values": [
-                            [
-                                1.0,
-                                1.0,
-                                1.0,
-                                0.0
-                            ],
-                            [
-                                1.0,
-                                1.0,
-                                1.0,
-                                1.0
-                            ],
-                            [
-                                1.0,
-                                1.0,
-                                1.0,
-                                0.0
-                            ]
-                        ],
-                        "__type": "VfxAnimatedColorVariableData"
-                    },
-                    "__type": "ValueColor"
-                },
-                "birthRotation0": {
-                    "constantValue": [
-                        -90.0,
-                        0.0,
-                        0.0
-                    ],
-                    "__type": "ValueVector3"
-                },
-                "isLocalOrientation": 0,
-                "birthScale0": {
-                    "constantValue": [
-                        160.0,
-                        1200.0,
-                        0.0
-                    ],
-                    "__type": "ValueVector3"
-                },
-                "scale0": {
-                    "dynamics": {
-                        "times": [
-                            0.0,
-                            0.4000000059604645,
-                            0.699999988079071
-                        ],
-                        "values": [
-                            [
-                                0.0,
-                                1.0,
-                                0.0
-                            ],
-                            [
-                                0.5,
-                                1.0,
-                                0.0
-                            ],
-                            [
-                                1.0,
-                                1.0,
-                                0.0
-                            ]
-                        ],
-                        "__type": "VfxAnimatedVector3fVariableData"
-                    },
-                    "__type": "ValueVector3"
-                },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/soraka_ultbeams.dds",
-                "__type": "VfxEmitterDefinitionData"
-            },
-            {
-                "rate": {
-                    "constantValue": 120.0,
-                    "__type": "ValueFloat"
-                },
-                "particleLifetime": {
-                    "constantValue": 1.600000023841858,
+                    "constantValue": 0.5,
                     "dynamics": {
                         "probabilityTables": [
                             {
@@ -402,8 +303,8 @@
                                     1.0
                                 ],
                                 "keyValues": [
-                                    0.4000000059604645,
-                                    1.0
+                                    1.0,
+                                    2.0
                                 ],
                                 "__type": "VfxProbabilityTableData"
                             }
@@ -412,32 +313,108 @@
                             0.0
                         ],
                         "values": [
-                            1.600000023841858
+                            0.5
                         ],
                         "__type": "VfxAnimatedFloatVariableData"
                     },
                     "__type": "ValueFloat"
                 },
-                "particleLinger": 11.600000381469727,
-                "lifetime": 0.5,
-                "emitterName": "fallingsparkles2",
-                "birthVelocity": {
+                "particleLinger": 2.0,
+                "lifetime": 1.0,
+                "emitterName": "fallingsparkles1",
+                "birthOrbitalVelocity": {
                     "constantValue": [
-                        -1.0,
                         0.0,
+                        1.5,
                         0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.5,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.5,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "birthDrag": {
+                    "constantValue": [
+                        3.0,
+                        1.0,
+                        3.0
                     ],
                     "__type": "ValueVector3"
                 },
-                "bindWeight": {
-                    "constantValue": 1.0,
-                    "__type": "ValueFloat"
+                "worldAcceleration": {
+                    "constantValue": [
+                        0.0,
+                        60.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                60.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "IntegratedValueVector3"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
-                            20.0,
-                            1200.0,
+                            120.0,
+                            150.0,
                             0.0
                         ],
                         "dynamics": {
@@ -448,20 +425,12 @@
                                         1.0
                                     ],
                                     "keyValues": [
-                                        1.0,
-                                        1.2999999523162842
+                                        0.699999988079071,
+                                        1.0
                                     ],
                                     "__type": "VfxProbabilityTableData"
                                 },
                                 {
-                                    "keyTimes": [
-                                        0.0,
-                                        1.0
-                                    ],
-                                    "keyValues": [
-                                        0.20000000298023224,
-                                        1.0
-                                    ],
                                     "__type": "VfxProbabilityTableData"
                                 },
                                 {
@@ -469,12 +438,18 @@
                                 }
                             ],
                             "times": [
-                                0.0
+                                0.0,
+                                1.0
                             ],
                             "values": [
                                 [
-                                    20.0,
-                                    1200.0,
+                                    120.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                [
+                                    120.0,
+                                    150.0,
                                     0.0
                                 ]
                             ],
@@ -517,52 +492,33 @@
                             0.0
                         ]
                     ],
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "primitive": {
-                    "__type": "VfxPrimitiveArbitraryQuad"
+                "FlexShapeDefinition": {
+                    "scaleEmitOffsetByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
-                "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/common_color-bellcurve.dds",
-                "color": {
-                    "constantValue": [
-                        0.8999999761581421,
-                        0.6000000238418579,
-                        0.0,
-                        1.0
-                    ],
-                    "__type": "ValueColor"
-                },
-                "isDirectionOriented": 1,
-                "isRandomStartFrame": 1,
-                "birthRotation0": {
-                    "constantValue": [
-                        0.0,
-                        0.0,
-                        90.0
-                    ],
-                    "__type": "ValueVector3"
-                },
-                "isLocalOrientation": 0,
+                "isUniformScale": 1,
                 "birthScale0": {
                     "constantValue": [
-                        -80.0,
-                        30.0,
+                        20.0,
+                        20.0,
                         20.0
                     ],
                     "dynamics": {
                         "probabilityTables": [
-                            {
-                                "__type": "VfxProbabilityTableData"
-                            },
                             {
                                 "keyTimes": [
                                     0.0,
                                     1.0
                                 ],
                                 "keyValues": [
-                                    0.699999988079071,
-                                    1.2999999523162842
+                                    0.15000000596046448,
+                                    0.699999988079071
                                 ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
                                 "__type": "VfxProbabilityTableData"
                             },
                             {
@@ -574,8 +530,8 @@
                         ],
                         "values": [
                             [
-                                -80.0,
-                                30.0,
+                                20.0,
+                                20.0,
                                 20.0
                             ]
                         ],
@@ -587,35 +543,148 @@
                     "dynamics": {
                         "times": [
                             0.0,
+                            0.10000000149011612,
+                            0.30000001192092896,
+                            0.6000000238418579,
                             1.0
                         ],
                         "values": [
                             [
-                                0.0,
-                                1.0,
-                                1.0
+                                0.10000000149011612,
+                                0.10000000149011612,
+                                0.10000000149011612
                             ],
                             [
-                                5.0,
-                                1.0,
-                                1.0
+                                0.30000001192092896,
+                                0.30000001192092896,
+                                0.30000001192092896
+                            ],
+                            [
+                                2.0,
+                                2.0,
+                                2.0
+                            ],
+                            [
+                                0.30000001192092896,
+                                0.30000001192092896,
+                                0.30000001192092896
+                            ],
+                            [
+                                0.10000000149011612,
+                                0.10000000149011612,
+                                0.10000000149011612
                             ]
                         ],
                         "__type": "VfxAnimatedVector3fVariableData"
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_Wisp_Stardust.dds",
-                "numFrames": 4,
-                "texDiv": [
-                    2.0,
-                    2.0
-                ],
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_heal_sparkle.UltBook_2024.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
                 "rate": {
-                    "constantValue": 8.0,
+                    "constantValue": 2.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.600000023841858,
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 3.0,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "spotlight",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveRay"
+                },
+                "particleColorTexture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_heal_color.UltBook_2024.dds",
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.6000000238418579,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "birthRotation0": {
+                    "constantValue": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        180.0,
+                        1200.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.20000000298023224,
+                            0.699999988079071
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                0.699999988079071,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/soraka_ultbeams.UltBook_2024.dds",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 5.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
@@ -659,7 +728,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             0.0,
@@ -700,20 +769,20 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleEmitOffsetByBoundObjectSize": 0.004999999888241291,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "primitive": {
                     "mMesh": {
-                        "mSimpleMeshName": "ASSETS/Characters/Soraka/Skins/Base/Particles/common_Xerath_DI_Blastring.sco",
+                        "mSimpleMeshName": "ASSETS/Maps/Particles/UltBook/Soraka/common_Xerath_DI_Blastring.UltBook_2024.sco",
                         "__type": "VfxMeshDefinitionData"
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/common_color-healbell.dds",
+                "particleColorTexture": "ASSETS/Maps/Particles/UltBook/Soraka/common_color-healbell.UltBook_2024.dds",
                 "color": {
                     "dynamics": {
                         "times": [
@@ -789,8 +858,8 @@
                 },
                 "birthScale0": {
                     "constantValue": [
-                        23.0,
-                        23.0,
+                        25.0,
+                        25.0,
                         12.0
                     ],
                     "__type": "ValueVector3"
@@ -817,7 +886,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/soraka_healstreaks.dds",
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/soraka_healstreaks.UltBook_2024.dds",
                 "birthUvScrollRate": {
                     "constantValue": [
                         0.0,
@@ -896,7 +965,7 @@
             },
             {
                 "rate": {
-                    "constantValue": 75.0,
+                    "constantValue": 40.0,
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
@@ -1036,7 +1105,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             60.0,
@@ -1093,13 +1162,13 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleEmitOffsetByBoundObjectSize": 0.004999999888241291,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
-                "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/common_color-bellcurve.dds",
+                "particleColorTexture": "ASSETS/Maps/Particles/UltBook/Soraka/common_color-bellcurve.UltBook_2024.dds",
                 "miscRenderFlags": 1,
                 "isUniformScale": 1,
                 "isLocalOrientation": 0,
@@ -1183,7 +1252,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_Heal_Sparkle_Green.dds",
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Heal_Sparkle_Green.UltBook_2024.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -1192,7 +1261,7 @@
                     "__type": "ValueFloat"
                 },
                 "particleLifetime": {
-                    "constantValue": 1.2999999523162842,
+                    "constantValue": 1.5,
                     "__type": "ValueFloat"
                 },
                 "particleLinger": 2.0,
@@ -1203,23 +1272,15 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
-                    "emitOffset": [
-                        0.0,
-                        -200.0,
-                        0.0
-                    ],
+                "SpawnShape": {
                     "__type": "{ee39916f}"
                 },
                 "primitive": {
-                    "mProjection": {
-                        "mYRange": 200.0,
-                        "__type": "VfxProjectionDefinitionData"
-                    },
-                    "__type": "VfxPrimitivePlanarProjection"
+                    "__type": "VfxPrimitiveArbitraryQuad"
                 },
-                "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_heal_color.dds",
+                "particleColorTexture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_heal_color.UltBook_2024.dds",
                 "meshRenderFlags": 0,
+                "alphaRef": 0,
                 "isUniformScale": 1,
                 "birthRotation0": {
                     "constantValue": [
@@ -1271,7 +1332,118 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/common_glow-soft.dds",
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/common_glow-soft.UltBook_2024.dds",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.5,
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 1.5,
+                "lifetime": 1.0,
+                "emitterLinger": 1.0,
+                "emitterName": "base1",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "SpawnShape": {
+                    "__type": "{ee39916f}"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "particleColorTexture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_heal_color.UltBook_2024.dds",
+                "blendMode": 1,
+                "birthColor": {
+                    "constantValue": [
+                        0.9799954295158386,
+                        0.8899977207183838,
+                        0.5900053381919861,
+                        0.5000076293945312
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.5,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": -20,
+                "meshRenderFlags": 0,
+                "alphaRef": 0,
+                "isUniformScale": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        350.0,
+                        250.0,
+                        250.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.5,
+                                0.5,
+                                0.5
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Base_Background.UltBook_2024.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -1292,7 +1464,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         100.0,
@@ -1300,8 +1472,52 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_heal_color.dds",
+                "color": {
+                    "constantValue": [
+                        0.0,
+                        1.0,
+                        0.14000152051448822,
+                        0.800000011920929
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.20000000298023224,
+                            0.5,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.0,
+                                0.14000152051448822,
+                                0.0
+                            ],
+                            [
+                                0.0,
+                                1.0,
+                                0.14000152051448822,
+                                0.800000011920929
+                            ],
+                            [
+                                0.0,
+                                1.0,
+                                0.14000152051448822,
+                                0.40000611543655396
+                            ],
+                            [
+                                0.0,
+                                1.0,
+                                0.14000152051448822,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
                 "meshRenderFlags": 0,
+                "alphaRef": 0,
                 "miscRenderFlags": 1,
                 "isUniformScale": 1,
                 "isLocalOrientation": 0,
@@ -1346,7 +1562,1588 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/common_glow-soft.dds",
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/common_glow-soft.UltBook_2024.dds",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 2.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.5,
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 1.0,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Wisps_",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -300.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveRay"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        1.0,
+                        0.8399938941001892,
+                        0.43999388813972473,
+                        0.2500038146972656
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.10000000149011612,
+                            0.20000000298023224,
+                            0.5,
+                            0.699999988079071,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.45000380277633667
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.06666667014360428
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": -21,
+                "alphaRef": 0,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.30000001192092896,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                1.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherIn": 0.20000000298023224,
+                    "erosionFeatherOut": 0.20000000298023224,
+                    "erosionMapName": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Base_Trail_Mult.UltBook_2024.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "birthRotation0": {
+                    "constantValue": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        -100.0,
+                        1600.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "constantValue": [
+                        2.200000047683716,
+                        1.0,
+                        1.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.1820787489414215,
+                            0.35009562969207764,
+                            0.4964793622493744,
+                            0.650191605091095,
+                            0.8154932260513306,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.7733725309371948,
+                                1.0,
+                                0.7929666042327881
+                            ],
+                            [
+                                2.6330807209014893,
+                                1.0,
+                                1.196854829788208
+                            ],
+                            [
+                                3.136296510696411,
+                                1.0,
+                                1.4146628379821777
+                            ],
+                            [
+                                3.296781301498413,
+                                1.0,
+                                1.481963872909546
+                            ],
+                            [
+                                3.3543360233306885,
+                                1.0,
+                                1.532829999923706
+                            ],
+                            [
+                                3.4275083541870117,
+                                1.0,
+                                1.5579583644866943
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Base_Trail_03.UltBook_2024.dds",
+                "birthUVOffset": {
+                    "constantValue": [
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "particleUVScrollRate": {
+                    "constantValue": [
+                        -1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.30000001192092896,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                -1.0,
+                                0.0
+                            ],
+                            [
+                                -0.20000000298023224,
+                                0.0
+                            ],
+                            [
+                                -0.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "IntegratedValueVector2"
+                },
+                "uvScale": {
+                    "constantValue": [
+                        1.0,
+                        2.0
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "uvRotation": {
+                    "constantValue": 90.0,
+                    "__type": "ValueFloat"
+                },
+                "textureMult": {
+                    "textureMult": "ASSETS/Maps/Particles/UltBook/Soraka/Aura_Self.UltBook_2024.dds",
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 2.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.5,
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 1.0,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Wisps_1",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -300.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveRay"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        0.020004577934741974,
+                        0.9400015473365784,
+                        0.14000152051448822,
+                        0.22000457346439362
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.10000000149011612,
+                            0.20000000298023224,
+                            0.5,
+                            0.699999988079071,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.45000380277633667
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.06666667014360428
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": -21,
+                "alphaRef": 0,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.30000001192092896,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                1.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherIn": 0.20000000298023224,
+                    "erosionFeatherOut": 0.20000000298023224,
+                    "erosionMapName": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Skin15_Trail_Mult.UltBook_2024.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "birthRotation0": {
+                    "constantValue": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        -100.0,
+                        1600.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "constantValue": [
+                        1.5,
+                        1.0,
+                        1.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.1820787489414215,
+                            0.35009562969207764,
+                            0.4964793622493744,
+                            0.650191605091095,
+                            0.8154932260513306,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.2091176509857178,
+                                1.0,
+                                0.7929666042327881
+                            ],
+                            [
+                                1.795282244682312,
+                                1.0,
+                                1.196854829788208
+                            ],
+                            [
+                                2.1383838653564453,
+                                1.0,
+                                1.4146628379821777
+                            ],
+                            [
+                                2.24780535697937,
+                                1.0,
+                                1.481963872909546
+                            ],
+                            [
+                                2.2870471477508545,
+                                1.0,
+                                1.532829999923706
+                            ],
+                            [
+                                2.336937427520752,
+                                1.0,
+                                1.5579583644866943
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Base_Trail_03.UltBook_2024.dds",
+                "birthUVOffset": {
+                    "constantValue": [
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "texDiv": [
+                    0.699999988079071,
+                    1.0
+                ],
+                "particleUVScrollRate": {
+                    "constantValue": [
+                        -0.800000011920929,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.30000001192092896,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                -0.800000011920929,
+                                0.0
+                            ],
+                            [
+                                -0.1599999964237213,
+                                0.0
+                            ],
+                            [
+                                -0.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "IntegratedValueVector2"
+                },
+                "uvScale": {
+                    "constantValue": [
+                        1.0,
+                        2.0
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "uvRotation": {
+                    "constantValue": 90.0,
+                    "__type": "ValueFloat"
+                },
+                "textureMult": {
+                    "textureMult": "ASSETS/Maps/Particles/UltBook/Soraka/Aura_Self.UltBook_2024.dds",
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "timeBeforeFirstEmission": 0.20000000298023224,
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 0.4000000059604645,
+                    "__type": "ValueFloat"
+                },
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Constelations",
+                "importance": 2,
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "SpawnShape": {
+                    "emitOffset": [
+                        0.0,
+                        10.0,
+                        0.0
+                    ],
+                    "__type": "{ee39916f}"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveArbitraryQuad"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        0.4000000059604645
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                0.7839170098304749,
+                                0.23056381940841675,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                0.4583352506160736,
+                                0.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 20,
+                "alphaRef": 0,
+                "miscRenderFlags": 1,
+                "isUniformScale": 1,
+                "isGroundLayer": 1,
+                "useNavmeshMask": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        -90.0,
+                        -90.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        160.0,
+                        285.0,
+                        275.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.20000000298023224,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                1.0499999523162842,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                1.100000023841858,
+                                0.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Base_Decal_.UltBook_2024.tex",
+                "textureMult": {
+                    "textureMult": "ASSETS/Maps/Particles/UltBook/Soraka/Darius_Skin54_Einstein_01_mult.UltBook_2024.dds",
+                    "birthUvScrollRateMult": {
+                        "constantValue": [
+                            0.0,
+                            0.30000001192092896
+                        ],
+                        "__type": "ValueVector2"
+                    },
+                    "__type": "VfxTextureMultDefinitionData"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Halo",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        50.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "blendMode": 4,
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.10000000149011612,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                0.8898756504058838,
+                                0.30666056275367737,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                0.7146715521812439,
+                                0.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                0.49752041697502136,
+                                0.005325398873537779,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 999,
+                "colorLookUpTypeY": 3,
+                "alphaRef": 0,
+                "miscRenderFlags": 1,
+                "isUniformScale": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        30.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "birthRotationalVelocity0": {
+                    "constantValue": [
+                        50.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        150.0,
+                        1800.0,
+                        150.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.15000000596046448,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.6000000238418579,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                0.5,
+                                1.0
+                            ],
+                            [
+                                1.100000023841858,
+                                0.5,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Base_Halo_1.UltBook_2024.dds",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 0.5,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "BG_BrighterInterior",
+                "importance": 0,
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        50.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "primitive": {
+                    "mMesh": {
+                        "mSimpleMeshName": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Base_Soraka_Base_Swirl_Mesh.UltBook_2024.scb",
+                        "__type": "VfxMeshDefinitionData"
+                    },
+                    "{6aec9e7a}": true,
+                    "__type": "VfxPrimitiveMesh"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        0.9900053143501282,
+                        0.6899977326393127,
+                        0.020004577934741974,
+                        0.8500038385391235
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.10000000149011612,
+                            0.5,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.5000076293945312
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 801,
+                "softParticleParams": {
+                    "deltaIn": 50.0,
+                    "__type": "VfxSoftParticleDefinitionData"
+                },
+                "disableBackfaceCull": true,
+                "miscRenderFlags": 1,
+                "isUniformScale": 1,
+                "isGroundLayer": 1,
+                "TextureFlipV": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "birthScale0": {
+                    "constantValue": [
+                        3.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.5,
+                                0.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                0.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Base_Fire_Noise_BW.UltBook_2024.dds",
+                "birthUVOffset": {
+                    "constantValue": [
+                        0.0,
+                        1.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "particleUVScrollRate": {
+                    "constantValue": [
+                        0.0,
+                        -0.5
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                -0.5
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "IntegratedValueVector2"
+                },
+                "uvScale": {
+                    "constantValue": [
+                        1.0,
+                        0.800000011920929
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 2.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.0,
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    1.2000000476837158,
+                                    0.800000011920929
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            1.0
+                        ],
+                        "__type": "VfxAnimatedFloatVariableData"
+                    },
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 1.0,
+                "lifetime": 0.5,
+                "emitterName": "orb",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "SpawnShape": {
+                    "__type": "{ee39916f}"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        20.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "FlexShapeDefinition": {
+                    "scaleBirthScaleByBoundObjectSize": 0.004000000189989805,
+                    "__type": "VfxFlexShapeDefinitionData"
+                },
+                "primitive": {
+                    "mMesh": {
+                        "mSimpleMeshName": "ASSETS/Maps/Particles/UltBook/Soraka/Janna_Skin08_Wind_Swipe.UltBook_2024.scb",
+                        "__type": "VfxMeshDefinitionData"
+                    },
+                    "__type": "VfxPrimitiveMesh"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        0.7000076174736023
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.5,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.7000076174736023
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "constantValue": [
+                        0.9725490212440491,
+                        0.9725490212440491,
+                        0.9725490212440491,
+                        1.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.20000000298023224,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.5797154903411865,
+                                0.9725490212440491,
+                                0.32036909461021423,
+                                0.0
+                            ],
+                            [
+                                0.19450980424880981,
+                                0.9725490212440491,
+                                0.4538561999797821,
+                                1.0
+                            ],
+                            [
+                                0.06483659893274307,
+                                0.49580931663513184,
+                                0.11354196071624756,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "pass": 100,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                1.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherIn": 0.20000000298023224,
+                    "erosionFeatherOut": 0.20000000298023224,
+                    "erosionSliceWidth": 1.7999999523162842,
+                    "erosionMapName": "ASSETS/Maps/Particles/UltBook/Soraka/alphaslice_mesh.UltBook_2024.dds",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "erosionMapAddressMode": 0,
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "disableBackfaceCull": true,
+                "isRandomStartFrame": 1,
+                "birthRotation0": {
+                    "constantValue": [
+                        0.0,
+                        360.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                360.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "birthScale0": {
+                    "constantValue": [
+                        0.800000011920929,
+                        0.800000011920929,
+                        0.800000011920929
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "constantValue": [
+                        2.799999952316284,
+                        6.0,
+                        2.799999952316284
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.30000001192092896,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.399999976158142,
+                                3.0,
+                                1.399999976158142
+                            ],
+                            [
+                                2.799999952316284,
+                                6.0,
+                                2.799999952316284
+                            ],
+                            [
+                                3.3600001335144043,
+                                7.200000286102295,
+                                3.3600001335144043
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Riven_Skin23_Trail03_EROSION.UltBook_2024.dds",
+                "birthUvScrollRate": {
+                    "constantValue": [
+                        -0.5,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.5
+                                ],
+                                "keyValues": [
+                                    0.5
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -0.20000000298023224,
+                                    0.5
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                -0.5,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "birthUVOffset": {
+                    "constantValue": [
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    1.0,
+                                    -1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 2.0,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 1.2999999523162842,
+                    "__type": "ValueFloat"
+                },
+                "particleLinger": 1.0,
+                "lifetime": 1.0,
+                "isSingleParticle": 1,
+                "emitterName": "Wisps_2",
+                "bindWeight": {
+                    "constantValue": 1.0,
+                    "__type": "ValueFloat"
+                },
+                "EmitterPosition": {
+                    "constantValue": [
+                        0.0,
+                        -200.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "primitive": {
+                    "__type": "VfxPrimitiveRay"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        0.1600061058998108,
+                        1.0,
+                        0.2699931263923645,
+                        0.4000000059604645
+                    ],
+                    "__type": "ValueColor"
+                },
+                "color": {
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.10000000149011612,
+                            0.20000000298023224,
+                            0.5,
+                            0.699999988079071,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.45000380277633667
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.06666667014360428
+                            ],
+                            [
+                                1.0,
+                                1.0,
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "alphaRef": 0,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                1.0
+                            ],
+                            "values": [
+                                0.0,
+                                1.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherIn": 0.30000001192092896,
+                    "erosionFeatherOut": 0.30000001192092896,
+                    "erosionMapName": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Skin37_Sword_Dissolve_1.UltBook_2024.dds",
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "birthRotation0": {
+                    "constantValue": [
+                        -90.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "isLocalOrientation": 0,
+                "birthScale0": {
+                    "constantValue": [
+                        140.0,
+                        1600.0,
+                        0.0
+                    ],
+                    "__type": "ValueVector3"
+                },
+                "scale0": {
+                    "constantValue": [
+                        2.0,
+                        1.0,
+                        1.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.30000001192092896,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                0.6000000238418579,
+                                1.0,
+                                0.0
+                            ],
+                            [
+                                1.399999976158142,
+                                1.0,
+                                1.0
+                            ],
+                            [
+                                3.0,
+                                1.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector3fVariableData"
+                    },
+                    "__type": "ValueVector3"
+                },
+                "texture": "ASSETS/Maps/Particles/UltBook/Soraka/Soraka_Skin37_Wisps.UltBook_2024.dds",
+                "birthUVOffset": {
+                    "constantValue": [
+                        1.0,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    -1.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "particleUVScrollRate": {
+                    "constantValue": [
+                        -0.5,
+                        0.0
+                    ],
+                    "dynamics": {
+                        "times": [
+                            0.0,
+                            0.30000001192092896,
+                            1.0
+                        ],
+                        "values": [
+                            [
+                                -0.5,
+                                0.0
+                            ],
+                            [
+                                -0.10000000149011612,
+                                0.0
+                            ],
+                            [
+                                -0.0,
+                                0.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "IntegratedValueVector2"
+                },
+                "uvScale": {
+                    "constantValue": [
+                        0.699999988079071,
+                        1.0
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "uvRotation": {
+                    "constantValue": 90.0,
+                    "__type": "ValueFloat"
+                },
+                "textureMult": {
+                    "textureMult": "ASSETS/Maps/Particles/UltBook/Soraka/Aura_Self.UltBook_2024.dds",
+                    "__type": "VfxTextureMultDefinitionData"
+                },
                 "__type": "VfxEmitterDefinitionData"
             }
         ],
@@ -1373,51 +3170,6 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{4b901db3}": {
-                    "material": "Maps/ModeSpecificData/ULTBOOK/Materials/UltBook_StarGuardian_Fresnel_inst",
-                    "materialDrivers": {
-                        "Fresnel_Color": {
-                            "colors": {
-                                "times": [
-                                    0.0,
-                                    0.5199999809265137,
-                                    0.9466666579246521,
-                                    1.0
-                                ],
-                                "values": [
-                                    [
-                                        1.0,
-                                        1.0,
-                                        1.0,
-                                        1.0
-                                    ],
-                                    [
-                                        1.0,
-                                        1.0,
-                                        1.0,
-                                        1.0
-                                    ],
-                                    [
-                                        1.0,
-                                        1.0,
-                                        1.0,
-                                        1.0
-                                    ],
-                                    [
-                                        1.0,
-                                        1.0,
-                                        1.0,
-                                        1.0
-                                    ]
-                                ],
-                                "__type": "VfxAnimatedColorVariableData"
-                            },
-                            "__type": "VfxColorOverLifeMaterialDriver"
-                        }
-                    },
-                    "__type": "{2820c167}"
-                },
-                "renderPhaseOverride": 0,
                 "primitive": {
                     "mMesh": {
                         "mMeshName": "ASSETS/Characters/Soraka/Skins/Base/Soraka.skn",
@@ -1428,54 +3180,32 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "blendMode": 4,
+                "blendMode": 1,
                 "birthColor": {
                     "constantValue": [
-                        1.0,
-                        1.0,
-                        1.0,
-                        0.4313725531101227
+                        0.4000000059604645,
+                        0.40784314274787903,
+                        0.5411764979362488,
+                        1.0
                     ],
                     "__type": "ValueColor"
                 },
-                "color": {
-                    "dynamics": {
-                        "times": [
-                            0.0,
-                            0.20000000298023224,
-                            1.0
-                        ],
-                        "values": [
-                            [
-                                1.0,
-                                1.0,
-                                1.0,
-                                0.0
-                            ],
-                            [
-                                1.0,
-                                1.0,
-                                1.0,
-                                1.0
-                            ],
-                            [
-                                1.0,
-                                1.0,
-                                1.0,
-                                0.0
-                            ]
-                        ],
-                        "__type": "VfxAnimatedColorVariableData"
-                    },
-                    "__type": "ValueColor"
-                },
                 "pass": 2,
+                "reflectionDefinition": {
+                    "fresnel": 0.15000000596046448,
+                    "fresnelColor": [
+                        0.5490196347236633,
+                        0.615686297416687,
+                        1.0,
+                        0.0
+                    ],
+                    "__type": "VfxReflectionDefinitionData"
+                },
                 "depthBiasFactors": [
                     -1.0,
                     -13.0
                 ],
                 "disableBackfaceCull": true,
-                "miscRenderFlags": 1,
                 "particleIsLocalOrientation": 1,
                 "isUniformScale": 1,
                 "isRandomStartFrame": 1,
@@ -1487,6 +3217,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
+                "texture": "ASSETS/Shared/Particles/white_RGB.StrawberryRebuild.dds",
                 "uvMode": 1,
                 "birthUvScrollRate": {
                     "constantValue": [
@@ -1647,7 +3378,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             30.0,
@@ -1704,7 +3435,7 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
                 "isUniformScale": 1,
                 "birthScale0": {
@@ -1787,7 +3518,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/soraka_cleric_sparkle.dds",
+                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_cleric_sparkle.SPARX_Soraka_VFX_Update.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -1906,7 +3637,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             0.0,
@@ -1947,11 +3678,11 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleEmitOffsetByBoundObjectSize": 0.004999999888241291,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "primitive": {
                     "mMesh": {
@@ -2283,7 +4014,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             60.0,
@@ -2340,11 +4071,11 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleEmitOffsetByBoundObjectSize": 0.004999999888241291,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/color_soraka_cleric_idle.dds",
                 "colorLookUpTypeY": 3,
@@ -2431,7 +4162,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/soraka_cleric_sparkle.dds",
+                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_cleric_sparkle.SPARX_Soraka_VFX_Update.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -2451,7 +4182,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         0.0,
@@ -2564,7 +4295,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{563d4a22}": {
+                "EmitterPosition": {
                     "constantValue": [
                         0.0,
                         100.0,
@@ -2888,7 +4619,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             1.0499999523162842,
@@ -2993,11 +4724,11 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleEmitOffsetByBoundObjectSize": 0.004000000189989805,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/color_soraka_cleric_idle.dds",
                 "colorLookUpTypeY": 3,
@@ -3084,7 +4815,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/soraka_cleric_sparkle.dds",
+                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_cleric_sparkle.SPARX_Soraka_VFX_Update.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -3190,7 +4921,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             1.0,
@@ -3283,11 +5014,11 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleEmitOffsetByBoundObjectSize": 0.004000000189989805,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/color_soraka_cleric_idle.dds",
                 "colorLookUpTypeY": 3,
@@ -3374,7 +5105,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/soraka_cleric_sparkle.dds",
+                "texture": "ASSETS/Characters/Soraka/Skins/Base/Particles/Soraka_cleric_sparkle.SPARX_Soraka_VFX_Update.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -3394,7 +5125,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         -200.0,
@@ -3483,7 +5214,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": [
                         0.0,
                         100.0,
@@ -3581,7 +5312,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             0.0,
@@ -3638,11 +5369,11 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/color_cleric_gold.dds",
                 "blendMode": 4,
@@ -3739,7 +5470,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "{3bf0b4ed}": {
+                "SpawnShape": {
                     "emitOffset": {
                         "constantValue": [
                             0.0,
@@ -3796,11 +5527,11 @@
                         },
                         "__type": "ValueVector3"
                     },
-                    "__type": "{4f4e2ed7}"
+                    "__type": "VfxShapeLegacy"
                 },
-                "{4ffce322}": {
+                "FlexShapeDefinition": {
                     "scaleBirthScaleByBoundObjectSize": 0.004999999888241291,
-                    "__type": "{b13097f0}"
+                    "__type": "VfxFlexShapeDefinitionData"
                 },
                 "particleColorTexture": "ASSETS/Characters/Soraka/Skins/Base/Particles/color-bellcurveyellow.dds",
                 "blendMode": 4,

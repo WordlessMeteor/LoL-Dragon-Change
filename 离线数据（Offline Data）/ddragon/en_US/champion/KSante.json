@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.17.1",
+    "version": "14.19.1",
     "data": {
         "KSante": {
             "id": "KSante",
@@ -76,7 +76,7 @@
                 "armorperlevel": 5.2,
                 "spellblock": 30,
                 "spellblockperlevel": 2.1,
-                "attackrange": 175,
+                "attackrange": 150,
                 "hpregen": 9.5,
                 "hpregenperlevel": 1,
                 "mpregen": 7,
@@ -92,8 +92,8 @@
                 {
                     "id": "KSanteQ",
                     "name": "Ntofo Strikes",
-                    "description": "Strike a weapon forward, damaging and slowing all enemies in a short line.<br><br>On hit, grants a stack for a few seconds. At 2 stacks, this skill fires a shockwave that pulls enemies in.",
-                    "tooltip": "K'Sante slams his weapon down, dealing <physicalDamage>{{ basedamage }} physical damage</physicalDamage> and briefly <status>Slowing</status> the enemies struck by {{ slowpercent*100 }}%.<br /><br />When an enemy is hit, K'Sante gains a stack of Ntofo Strikes for {{ recastwindow }} seconds. At 2 stacks, K'Sante instead fires a shockwave that <status>Stuns</status> and <status>Pulls</status> enemies for {{ stunduration }} second.<br /><br /><rules>Cooldown reduced by Bonus <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>: {{ bonusresiststooltip }} / {{ defensecapforcooldown }}.<br />Cast time reduced by Bonus <healing>Health</healing>: {{ bonushealthtooltip }} / {{ healthcapforcasttime }}.</rules><br /><br /><keywordMajor>All Out</keywordMajor>: This Ability's Cooldown is reduced but no longer <status>slows</status>.{{ spellmodifierdescriptionappend }}",
+                    "description": "K'Sante strikes, damaging and slowing enemies in a short line.<br><br>On hit, grants a stack of Ntofo Strikes. At 2 stacks, K'Sante fires a shockwave that pulls enemies in.<br><br>When All Out, cooldown is reduced.",
+                    "tooltip": "K'Sante slams his weapon, dealing <physicalDamage>{{ basedamage }} physical damage</physicalDamage> and <status>Slowing</status> enemies by {{ slowpercent*100 }}% for {{ slowduration }}s. If he hits, he gains a stack of Ntofo Strikes for {{ recastwindow }} seconds. At 2 stacks, he instead fires a shockwave that <status>Stuns</status> and <status>Pulls</status> enemies for {{ stunduration }} second.<br /><br /><keywordMajor>All Out</keywordMajor>: Cooldown is reduced by {{ rcooldownreduction.0*100 }}%.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage"
@@ -104,13 +104,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        4,
-                        4,
-                        4,
-                        4,
-                        4
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5
                     ],
-                    "cooldownBurn": "4",
+                    "cooldownBurn": "3.5",
                     "cost": [
                         20,
                         20,
@@ -231,31 +231,29 @@
                 {
                     "id": "KSanteW",
                     "name": "Path Maker",
-                    "description": "K'Sante charges up before dashing. K'Sante is unstoppable and takes less damage while charging. Any targets hit by the dash are knocked to the end of the dash and stunned.<br><br>",
-                    "tooltip": "K'Sante raises his weapons defensively for {{ mindurationtooltip }} - {{ maxduration }}s, becoming Unstoppable and reducing incoming damage by {{ damagereductioncharlevel }}%.<br /><br />After charging, he rams forward, dealing <physicalDamage>{{ basedamagecalc }} + {{ maxhealthdamage*100 }}% max Health physical damage</physicalDamage>. K'Sante <status>Knocks Back</status> and <status>Stuns</status> enemies he rams into for {{ maxknockbackduration }} seconds.<br /><br /><keywordMajor>All Out:</keywordMajor> This Ability's Cooldown is refreshed. Damage reduction increases to {{ damagereductioncalcao }}% and its dash speed increases but will no longer <status>Knock Back</status> or <status>Stun</status>.{{ spellmodifierdescriptionappend }}",
+                    "description": "K'Sante charges up, taking reduced damage, then dashes, knocking back and stunning enemies.<br><br>When All Out, deals increased damage and no longer knocks back or stuns.",
+                    "tooltip": "K'Sante raises his weapons defensively for {{ mindurationtooltip }}-{{ maxduration.1 }}s, becoming Unstoppable and reducing incoming damage by {{ damagereduction*100 }}%. Then, he rams forward, dealing <physicalDamage>{{ basedamage }} + {{ totalmaxhealthdamage }} max Health physical damage</physicalDamage>. Enemies hit are <status>Knocked Back</status> and <status>Stunned</status> for {{ minknockbackduration }}-{{ maxknockbackduration }}s (based on charge time).<br /><br /><keywordMajor>All Out:</keywordMajor> Cooldown is refreshed. Deals an additional {{ rdamageincreasemin*100 }}-{{ rdamageincreasemax*100 }}% damage as <trueDamage>true damage</trueDamage> (based on charge time), damage reduction is increased to {{ rdamagereduction*100 }}% and dash speed is increased, but no longer <status>Knocks Back</status> or <status>Stuns</status>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Base Damage",
-                            "Max Health %",
+                            "Damage",
                             "Cooldown",
                             "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ maxhealthdamage*100.000000 }}% -> {{ maxhealthdamagenl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        24,
-                        22,
-                        20,
-                        18,
-                        16
+                        14,
+                        13,
+                        12,
+                        11,
+                        10
                     ],
-                    "cooldownBurn": "24/22/20/18/16",
+                    "cooldownBurn": "14/13/12/11/10",
                     "cost": [
                         40,
                         45,
@@ -376,29 +374,29 @@
                 {
                     "id": "KSanteE",
                     "name": "Footwork",
-                    "description": "K'Sante will dash to an ally and both will gain a shield. If there is no ally, K'Sante will still dash to the location at a reduced range and gain a shield.<br>",
-                    "tooltip": "K'Sante dashes, gaining <shield>{{ totalshield }} Shield</shield> for {{ shieldduration }} seconds. If dashing to an ally, the distance of the dash is significantly increased and the ally is also <shield>Shielded</shield>.<br /><br /><keywordMajor>All Out</keywordMajor>: This Ability's dash speed is increased. Dashing without an ally has increased range and can go over walls.{{ spellmodifierdescriptionappend }}",
+                    "description": "K'Sante dashes and gains a shield. If targeting an ally, K'Sante dashes to the ally with increased range and both gain a shield.<br><br>When All Out, cooldown is reduced and speed is increased.",
+                    "tooltip": "K'Sante dashes, gaining <shield>{{ totalshield }} Shield</shield> for {{ shieldduration }} seconds. If dashing to an ally, the distance of the dash is significantly increased and the ally is also <shield>Shielded</shield>.<br /><br /><keywordMajor>All Out</keywordMajor>: Cooldown is decreased by {{ cooldownmodao*100 }}% and dash speed is increased.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Shield",
-                            "@AbilityResourceName@ Cost",
-                            "Cooldown"
+                            "Cooldown",
+                            "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
                             "{{ shieldbaseamountfast }} -> {{ shieldbaseamountfastNL }}",
-                            "{{ cost }} -> {{ costNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        10.5,
                         10,
                         9.5,
                         9,
-                        8.5
+                        8.5,
+                        8
                     ],
-                    "cooldownBurn": "10.5/10/9.5/9/8.5",
+                    "cooldownBurn": "10/9.5/9/8.5/8",
                     "cost": [
                         45,
                         50,
@@ -519,24 +517,20 @@
                 {
                     "id": "KSanteR",
                     "name": "All Out",
-                    "description": "K'Sante smashes an enemy away. If the enemy hits a wall they will go through the wall taking more damage. K'Sante will appear behind the target and goes All Out by shredding his defenses but greatly increasing his damage.<br><br>",
-                    "tooltip": "K'Sante shatters his ntofos, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and <status>Knocking Back</status> an enemy champion. Enemies that hit a wall take an additional <magicDamage>{{ totaldamageslamdown }} magic damage</magicDamage>, are <status>Knocked Back</status> over the wall, and are briefly <status>Stunned</status>. K'Sante then dashes after the enemy and goes <keywordMajor>All Out</keywordMajor> for 20 seconds.<br /><br /><keywordMajor>All Out</keywordMajor> K'Sante loses <healing>{{ healthlost*100 }}% max Health</healing>, <scaleArmor>{{ defenseslost*100 }}% Bonus Armor</scaleArmor>, and <scaleMR>{{ defenseslost*100 }}% Bonus Magic Resistance</scaleMR> but gains <scaleAD>{{ alloutattackdamage }} Attack Damage</scaleAD>, <attackSpeed>{{ attackspeedincrease*100 }}% Attack Speed</attackSpeed>, heals for <healing>{{ alloutomnivamp }}%</healing> of the damage he deals to Champions, and transforms his Abilities.{{ spellmodifierdescriptionappend }}",
+                    "description": "K'Sante knocks an enemy back, launching them through any wall in their path. Then, K'Sante goes All Out and dashes after them, gaining increased damage, healing, and transformed abilities at the cost of reduced defenses.",
+                    "tooltip": "K'Sante shatters his ntofos to <status>Knock Back</status> an enemy champion, dealing <physicalDamage>{{ basedamage }} physical damage</physicalDamage>, then dashes behind them and goes <keywordMajor>All Out</keywordMajor> for {{ alloutduration }}s. If the enemy would hit a wall, they are <status>Knocked Back</status> through the wall and K'Sante strikes them again for <physicalDamage>{{ totaldamageslamdown }} physical damage</physicalDamage>.<br /><br />While <keywordMajor>All Out</keywordMajor>, K'Sante's Abilities are upgraded and he gains <attackSpeed>{{ attackspeed*100 }}% Attack Speed</attackSpeed>, {{ armorpenpercent*100 }}% Bonus Armor Penetration, and <omnivamp>{{ omnivamp*100 }}% Omnivamp</omnivamp>, but loses <healing>{{ healthlost*100 }}% max Health</healing>, <scaleArmor>{{ defenseslost*100 }}% Bonus Armor</scaleArmor>, and <scaleMR>{{ defenseslost*100 }}% Bonus Magic Resistance</scaleMR>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
                             "Damage",
-                            "Wall Damage",
-                            "Attack Damage",
-                            "Attack Speed",
-                            "Healing"
+                            "Follow-Up Damage",
+                            "Cooldown",
+                            "Attack Speed"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ slamdownstrikedamage }} -> {{ slamdownstrikedamageNL }}",
-                            "{{ alloutbaseattackdamage }} -> {{ alloutbaseattackdamageNL }}",
-                            "{{ attackspeedincrease*100.000000 }}% -> {{ attackspeedincreasenl*100.000000 }}%",
-                            "{{ alloutbaseomnivamp }}% -> {{ alloutbaseomnivampNL }}%"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ attackspeed*100.000000 }}% -> {{ attackspeednl*100.000000 }}%"
                         ]
                     },
                     "maxrank": 3,
@@ -642,7 +636,7 @@
             ],
             "passive": {
                 "name": "Dauntless Instinct",
-                "description": "K'Sante's Abilities mark targets to take more damage on his next Attack.",
+                "description": "K'Sante's Abilities mark targets to take more damage on his next Attack.<br><br>When All Out, K'Sante deals more damage with all Attacks and Abilities.",
                 "image": {
                     "full": "Icons_KSante_P.png",
                     "sprite": "passive2.png",

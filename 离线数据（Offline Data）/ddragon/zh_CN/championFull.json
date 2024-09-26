@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.17.1",
+    "version": "14.19.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -8320,11 +8320,11 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        400,
-                        400,
-                        400
+                        250,
+                        250,
+                        250
                     ],
-                    "rangeBurn": "400",
+                    "rangeBurn": "250",
                     "image": {
                         "full": "AuroraR.png",
                         "sprite": "spell1.png",
@@ -8407,6 +8407,12 @@
                     "id": "268014",
                     "num": 14,
                     "name": "2022 全球总决赛 阿兹尔",
+                    "chromas": true
+                },
+                {
+                    "id": "268019",
+                    "num": 19,
+                    "name": "精英律师 阿兹尔",
                     "chromas": true
                 }
             ],
@@ -8608,11 +8614,13 @@
                     "leveltip": {
                         "label": [
                             "沙兵攻击力",
+                            "总法强收益",
                             "充能时间",
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ apratio }} -> {{ apratioNL }}",
                             "{{ ammorechargetime }} -> {{ ammorechargetimeNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -8898,8 +8906,8 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e3 }} -> {{ e3NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ numberofsoldiers }} -> {{ numberofsoldiersNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -20131,7 +20139,7 @@
                     "id": "EliseHumanQ",
                     "name": "神经毒素 / 剧毒之蜇",
                     "description": "人类形态：根据目标的当前生命值来造成伤害。<br><br>蜘蛛形态：戳刺目标，并根据目标已损失的生命值来造成伤害。",
-                    "tooltip": "<keywordMajor>人类形态</keywordMajor>：伊莉丝注入神经毒素，造成<magicDamage>{{ e1 }}外加 {{ humanpercenthealth }}当前生命值的魔法伤害</magicDamage>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>人类形态</keywordMajor>：伊莉丝注入神经毒素，造成<magicDamage>{{ basedamage }}外加 {{ humanpercenthealth }}当前生命值的魔法伤害</magicDamage>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "神经毒素 伤害",
@@ -20276,7 +20284,7 @@
                     "id": "EliseHumanW",
                     "name": "自爆蜘蛛 / 掠行狂暴",
                     "description": "人类形态：召唤一个注满毒液的小蜘蛛，并在靠近目标时爆炸。<br><br>蜘蛛形态：伊莉丝和她的小蜘蛛们获得攻击速度加成。",
-                    "tooltip": "<keywordMajor>人类形态</keywordMajor>：伊莉丝召唤一个爆炸蜘蛛朝着一个位置移动，并在它接近一名敌人或3秒后爆炸。蜘蛛造成<magicDamage>{{ spell.elisehumanw:totalspiderdamage }}魔法伤害</magicDamage>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>人类形态</keywordMajor>：伊莉丝召唤一个爆炸蜘蛛朝着一个位置移动，并在它接近一名敌人或3秒后爆炸。这个蜘蛛造成<magicDamage>{{ spell.elisehumanw:totaldamage }}魔法伤害</magicDamage>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -20417,7 +20425,7 @@
                     "id": "EliseHumanE",
                     "name": "结茧 / 盘丝",
                     "description": "人类形态：将命中的第一个敌人晕眩，如敌方未处于潜行状态则将其暴露在己方视野中。<br><br>蜘蛛形态：伊莉丝和她的小蜘蛛们拉升至半空中，随后降落到目标敌人身上。在降落到目标敌方处时，伊莉丝的来自蜘蛛形态的额外伤害和治疗效果都会提升。",
-                    "tooltip": "<keywordMajor>人类形态</keywordMajor>：伊莉丝发射一颗蜘蛛茧，<status>晕眩</status>并使命中的第一个敌人显形{{ e5 }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>人类形态</keywordMajor>：伊莉丝发射一颗蜘蛛茧，<status>晕眩</status>并使命中的第一个敌人显形{{ stunduration }}秒。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "晕眩时长",
@@ -20562,7 +20570,7 @@
                     "id": "EliseR",
                     "name": "蜘蛛形态",
                     "description": "变成一只凶恶的蜘蛛，减少攻击距离，但获得移动速度加成、一套全新技能并且会有一群小蜘蛛来攻击她的敌人。",
-                    "tooltip": "<keywordMajor>人类形态</keywordMajor>：伊莉丝变形为一只令人生畏的蜘蛛，变成近战，并且获得<speed>{{ e3 }}移动速度</speed>和一套<keywordMajor>蜘蛛形态</keywordMajor>技能的使用权。她还可以召唤出所有休眠中的<keywordMajor>小蜘蛛</keywordMajor>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>人类形态</keywordMajor>：伊莉丝变形为一只令人生畏的蜘蛛，变成近战，获得一套<keywordMajor>蜘蛛形态</keywordMajor>技能的使用权并且还可以召唤出所有休眠中的<keywordMajor>小蜘蛛</keywordMajor>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "蜘蛛形态 蜇咬伤害",
@@ -20572,21 +20580,21 @@
                             "小蜘蛛 魔法抗性"
                         ],
                         "effect": [
-                            "{{ e2 }} -> {{ e2NL }}",
+                            "{{ passivebonusdamage }} -> {{ passivebonusdamageNL }}",
                             "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e5 }} -> {{ e5NL }}",
+                            "{{ spiderlingsstored }} -> {{ spiderlingsstoredNL }}",
                             "{{ e6 }} -> {{ e6NL }}",
                             "{{ e7 }} -> {{ e7NL }}"
                         ]
                     },
                     "maxrank": 4,
                     "cooldown": [
-                        4,
-                        4,
-                        4,
-                        4
+                        3,
+                        3,
+                        3,
+                        3
                     ],
-                    "cooldownBurn": "4",
+                    "cooldownBurn": "3",
                     "cost": [
                         0,
                         0,
@@ -26518,7 +26526,7 @@
                 "mpregenperlevel": 0,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 57,
+                "attackdamage": 60,
                 "attackdamageperlevel": 3.2,
                 "attackspeedperlevel": 6,
                 "attackspeed": 0.625
@@ -30749,7 +30757,7 @@
                     "id": "HweiW",
                     "name": "主题：靖",
                     "description": "彗画下眼中所见到的宁静，抚慰并激励众人。<br><br>这个技能会用这些功能型技能替换掉彗的技能：飞染、渲浓、宿墨",
-                    "tooltip": "彗画下眼中所见到的宁静来为他和友方英雄们提供功能性。<br /><br /><spellName>飞染</spellName><br />彗画出一条激流来使友军提升<speed>{{ tooltip_wqmovespeed }}移动速度</speed>。<br /><br /><spellName>渲浓</spellName><br />彗画下一汪池水来持续为其中的友方英雄提供<shield>{{ tooltip_wwshieldamount }}护盾值</shield>并且对友军时减少{{ spell.hweiww:allymod*100 }}%护盾值。<br /><br /><spellName>宿墨</spellName><br />彗在身边点出三团光芒来强化他的下三次技能或攻击，每次造成额外的<magicDamage>{{ tooltip_weonhitdamage }}魔法伤害</magicDamage>并回复<scaleMana>{{ tooltip_weonhitmanarestore }}法力值</scaleMana>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "彗画下眼中所见到的宁静来为他和友方英雄们提供功能性。<br /><br /><spellName>飞染</spellName><br />彗画出一条激流来使友军提升<speed>{{ tooltip_wqmovespeed }}移动速度</speed>。<br /><br /><spellName>渲浓</spellName><br />彗画下一汪池水来持续为其中的友方英雄提供<shield>{{ tooltip_wwshieldamount }}护盾值</shield>并且对友军时减少{{ spell.hweiww:tooltipallymod*100 }}%护盾值。<br /><br /><spellName>宿墨</spellName><br />彗在身边点出三团光芒来强化他的下三次技能或攻击，每次造成额外的<magicDamage>{{ tooltip_weonhitdamage }}魔法伤害</magicDamage>并回复<scaleMana>{{ tooltip_weonhitmanarestore }}法力值</scaleMana>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "<spellName>飞染</spellName> | 移动速度",
@@ -36886,7 +36894,7 @@
                 "critperlevel": 0,
                 "attackdamage": 59,
                 "attackdamageperlevel": 2.9,
-                "attackspeedperlevel": 1,
+                "attackspeedperlevel": 1.4,
                 "attackspeed": 0.625
             },
             "spells": [
@@ -46491,7 +46499,7 @@
                 "armorperlevel": 5.2,
                 "spellblock": 30,
                 "spellblockperlevel": 2.1,
-                "attackrange": 175,
+                "attackrange": 150,
                 "hpregen": 9.5,
                 "hpregenperlevel": 1,
                 "mpregen": 7,
@@ -46507,8 +46515,8 @@
                 {
                     "id": "KSanteQ",
                     "name": "无双陀斧",
-                    "description": "向前进行一次武器打击，对一条较短直线内的所有敌人造成伤害和减速效果。<br><br>命中敌人时会叠加1层持续数秒的效果。叠加至2层时，这个技能会放出一道冲击波来将敌人拉向奎桑提。",
-                    "tooltip": "奎桑提将他的武器猛砸下去，对击中的敌人们造成<physicalDamage>{{ basedamage }}物理伤害</physicalDamage>和短暂的{{ slowpercent*100 }}%<status>减速</status>。<br /><br />在命中一名敌人时，奎桑提会获得一层持续{{ recastwindow }}秒的【无双陀斧】效果。在2层时，奎桑提会转而发射一道冲击波来对敌人们造成持续{{ stunduration }}秒的<status>晕眩</status>和<status>拉拽</status>。<br /><br /><rules>冷却时间已通过额外<scaleArmor>护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>缩短： {{ bonusresiststooltip }} / {{ defensecapforcooldown }}。<br />施放时间已通过额外<healing>生命值</healing>缩短：{{ bonushealthtooltip }} / {{ healthcapforcasttime }}。</rules><br /><br /><keywordMajor>全盛姿态</keywordMajor>：这个技能的冷却时间会缩短，但不再造成<status>减速</status>效果。{{ spellmodifierdescriptionappend }}",
+                    "description": "奎桑提进行打击，对一条较短直线内的所有敌人造成伤害和减速效果。<br><br>命中敌人时会提供一层【无双陀斧】。在2层时，奎桑提会发射一道可将敌人拉近的冲击波。<br><br>在全盛姿态下，冷却时间会缩短。",
+                    "tooltip": "奎桑提猛击他的武器，对敌人们造成<physicalDamage>{{ basedamage }}物理伤害</physicalDamage>和持续{{ slowduration }}秒的{{ slowpercent*100 }}%<status>减速</status>。如果他命中了敌人，那么他会获得一层持续{{ recastwindow }}秒的【无双陀斧】。在2层时，他会转而发射一道冲击波来对敌人们造成持续{{ stunduration }}秒的<status>晕眩</status>和<status>拉拽</status>。<br /><br /><keywordMajor>全盛姿态</keywordMajor>：冷却时间缩短{{ rcooldownreduction.0*100 }}%。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害"
@@ -46519,13 +46527,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        4,
-                        4,
-                        4,
-                        4,
-                        4
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5
                     ],
-                    "cooldownBurn": "4",
+                    "cooldownBurn": "3.5",
                     "cost": [
                         20,
                         20,
@@ -46646,31 +46654,29 @@
                 {
                     "id": "KSanteW",
                     "name": "辟路先锋",
-                    "description": "奎桑提蓄力然后冲刺。奎桑提在蓄力时处于不可阻挡状态并且所受伤害降低。任何被这个冲刺命中的目标都会被震到这个冲刺的终点并被晕眩。<br><br>",
-                    "tooltip": "奎桑提架起武器{{ mindurationtooltip }} - {{ maxduration }}秒，变为不可阻挡，并使即将到来的伤害降低{{ damagereductioncharlevel }}%。<br /><br />在蓄力后，他会向前猛撞，造成<physicalDamage>{{ basedamagecalc }} + {{ maxhealthdamage*100 }}%最大生命值的物理伤害</physicalDamage>。奎桑提将对被他撞到的敌人造成<status>击退</status>和{{ maxknockbackduration }}秒<status>晕眩</status>。<br /><br /><keywordMajor>全盛姿态：</keywordMajor>这个技能的冷却时间已经刷新。伤害减免提升至{{ damagereductioncalcao }}%并且它的冲刺速度提升，但将不再造成<status>击退</status>或<status>晕眩</status>。{{ spellmodifierdescriptionappend }}",
+                    "description": "奎桑提进行蓄力，期间获得伤害减免，然后进行冲刺，对敌人造成击退和晕眩。<br><br>在全盛姿态下，造成提升过的伤害并且不再造成击退或晕眩。",
+                    "tooltip": "奎桑提架起武器{{ mindurationtooltip }}-{{ maxduration.1 }}秒，变为不可阻挡，并使即将到来的伤害降低{{ damagereduction*100 }}%。然后，他会向前猛撞，造成<physicalDamage>{{ basedamage }} + {{ totalmaxhealthdamage }}最大生命值的物理伤害</physicalDamage>。会对命中的敌人们造成<status>击退</status>和{{ minknockbackduration }}-{{ maxknockbackduration }}秒<status>晕眩</status>(基于蓄力时间)。<br /><br /><keywordMajor>全盛姿态：</keywordMajor>冷却时间会刷新。造成额外的{{ rdamageincreasemin*100 }}-{{ rdamageincreasemax*100 }}%伤害(伤害类型为<trueDamage>真实伤害</trueDamage>，幅度基于蓄力时间)，伤害减免提升至{{ rdamagereduction*100 }}%并且冲刺速度提升，但不再造成<status>击退</status>或<status>晕眩</status>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "基础伤害",
-                            "最大生命值百分比",
+                            "伤害",
                             "冷却时间",
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ maxhealthdamage*100.000000 }}% -> {{ maxhealthdamagenl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        24,
-                        22,
-                        20,
-                        18,
-                        16
+                        14,
+                        13,
+                        12,
+                        11,
+                        10
                     ],
-                    "cooldownBurn": "24/22/20/18/16",
+                    "cooldownBurn": "14/13/12/11/10",
                     "cost": [
                         40,
                         45,
@@ -46791,29 +46797,29 @@
                 {
                     "id": "KSanteE",
                     "name": "大步驰援",
-                    "description": "奎桑提将冲刺至一名友方英雄处，并且两人都会获得一层护盾。如果没有友方英雄，奎桑提将依然朝目标位置进行较短距离的冲刺并获得一层护盾。<br>",
-                    "tooltip": "奎桑提进行冲刺，获得持续{{ shieldduration }}秒的<shield>{{ totalshield }}护盾值</shield>。如果冲刺至一名友方英雄处，那么冲刺距离会显著提升并且该友方英雄也会<shield>获得护盾值</shield>。<br /><br /><keywordMajor>全盛姿态</keywordMajor>：这个技能的冲刺速度获得提升。不朝友方英雄冲刺的距离得到提升并且可以翻越墙体。{{ spellmodifierdescriptionappend }}",
+                    "description": "奎桑提进行冲刺并获得一个护盾。如果以一个友军为目标，则奎桑提的冲刺距离会提升并冲刺至该友军处，两人都会获得一个护盾。<br><br>在全盛姿态下，冷却时间会缩短，并且速度会提升。",
+                    "tooltip": "奎桑提进行冲刺，获得持续{{ shieldduration }}秒的<shield>{{ totalshield }}护盾值</shield>。如果冲刺至一名友方英雄处，那么冲刺距离会显著提升并且该友方英雄也会<shield>获得护盾值</shield>。<br /><br /><keywordMajor>全盛姿态</keywordMajor>：冷却时间缩短{{ cooldownmodao*100 }}%并且冲刺速度提升。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "护盾",
-                            "@AbilityResourceName@消耗",
-                            "冷却时间"
+                            "冷却时间",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
                             "{{ shieldbaseamountfast }} -> {{ shieldbaseamountfastNL }}",
-                            "{{ cost }} -> {{ costNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        10.5,
                         10,
                         9.5,
                         9,
-                        8.5
+                        8.5,
+                        8
                     ],
-                    "cooldownBurn": "10.5/10/9.5/9/8.5",
+                    "cooldownBurn": "10/9.5/9/8.5/8",
                     "cost": [
                         45,
                         50,
@@ -46934,24 +46940,20 @@
                 {
                     "id": "KSanteR",
                     "name": "傲岸雄姿",
-                    "description": "奎桑提将一名敌方英雄撞走。如果这名敌方英雄命中了一段墙体，那么该英雄会穿过墙体并受到更多伤害。奎桑提将出现在目标英雄身后并进入“全盛姿态”，通过降低他自身的各项防御属性来极大地提升他的伤害。<br><br>",
-                    "tooltip": "奎桑提分开他的陀斧，造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>并<status>击退</status>一名敌方英雄。被推至墙体的敌人会受到额外的<magicDamage>{{ totaldamageslamdown }}魔法伤害</magicDamage>，并被<status>击退</status>至墙体另一侧，并被短暂<status>晕眩</status>。奎桑提然后会冲刺到该敌方英雄身后并进入持续20秒的<keywordMajor>全盛姿态</keywordMajor>。<br /><br /><keywordMajor>全盛姿态</keywordMajor>：奎桑提损失<healing>{{ healthlost*100 }}%最大生命值</healing>、<scaleArmor>{{ defenseslost*100 }}%额外护甲</scaleArmor>和<scaleMR>{{ defenseslost*100 }}%额外魔法抗性</scaleMR>，但获得<scaleAD>{{ alloutattackdamage }}攻击力</scaleAD>、<attackSpeed>{{ attackspeedincrease*100 }}%攻击速度</attackSpeed>、<healing>{{ alloutomnivamp }}%</healing>对英雄的全能吸血，并且他的各个技能将变换形态。{{ spellmodifierdescriptionappend }}",
+                    "description": "奎桑提将一个敌人击退，并带其翻越沿途的任何墙体。然后，奎桑提进入【全盛姿态】并冲刺至其身后，获得提升过的伤害、治疗效果、以及转化过的各个技能，但代价是各防御属性降低。",
+                    "tooltip": "奎桑提分开他的陀斧以<status>击退</status>一名敌方英雄，造成<physicalDamage>{{ basedamage }}物理伤害</physicalDamage>，然后冲刺至其后方并获得持续{{ alloutduration }}秒的<keywordMajor>全盛姿态</keywordMajor>。如果该敌人将要命中一段墙体，则会被<status>击退</status>至墙体后，并且奎桑提会对其再次造成<physicalDamage>{{ totaldamageslamdown }}物理伤害</physicalDamage>。<br /><br />在<keywordMajor>全盛姿态</keywordMajor>下，奎桑提的技能会获得升级并且他获得<attackSpeed>{{ attackspeed*100 }}%攻击速度</attackSpeed>、{{ armorpenpercent*100 }}%额外护甲穿透、以及<omnivamp>{{ omnivamp*100 }}%全能吸血</omnivamp>，但失去<healing>{{ healthlost*100 }}%最大生命值</healing>、<scaleArmor>{{ defenseslost*100 }}%额外护甲</scaleArmor>、以及<scaleMR>{{ defenseslost*100 }}%额外魔法抗性</scaleMR>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
                             "伤害",
-                            "墙体伤害",
-                            "攻击力",
-                            "攻击速度",
-                            "治疗效果"
+                            "追加伤害",
+                            "冷却时间",
+                            "攻击速度"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ slamdownstrikedamage }} -> {{ slamdownstrikedamageNL }}",
-                            "{{ alloutbaseattackdamage }} -> {{ alloutbaseattackdamageNL }}",
-                            "{{ attackspeedincrease*100.000000 }}% -> {{ attackspeedincreasenl*100.000000 }}%",
-                            "{{ alloutbaseomnivamp }}% -> {{ alloutbaseomnivampNL }}%"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ attackspeed*100.000000 }}% -> {{ attackspeednl*100.000000 }}%"
                         ]
                     },
                     "maxrank": 3,
@@ -47057,7 +47059,7 @@
             ],
             "passive": {
                 "name": "血性本能",
-                "description": "奎桑提的技能会标记目标来使他的下一次攻击对其造成更多伤害。",
+                "description": "奎桑提的技能会标记目标来使他的下一次攻击对其造成更多伤害。<br><br>在全盛姿态下，奎桑提的所有攻击和技能造成更多伤害。",
                 "image": {
                     "full": "Icons_KSante_P.png",
                     "sprite": "passive2.png",
@@ -48667,7 +48669,7 @@
                 "mp": 302,
                 "mpperlevel": 40,
                 "movespeed": 335,
-                "armor": 47,
+                "armor": 43,
                 "armorperlevel": 4.8,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -49759,12 +49761,10 @@
                     "leveltip": {
                         "label": [
                             "冷却时间",
-                            "持续时间",
                             "惊醒伤害"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ sleepduration }} -> {{ sleepdurationNL }}",
                             "{{ breakdamagebase }} -> {{ breakdamagebaseNL }}"
                         ]
                     },
@@ -54557,13 +54557,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        18,
+                        17,
                         16,
                         15,
-                        14,
-                        13,
-                        12
+                        14
                     ],
-                    "cooldownBurn": "16/15/14/13/12",
+                    "cooldownBurn": "18/17/16/15/14",
                     "cost": [
                         60,
                         65,
@@ -56371,7 +56371,7 @@
                 "mpregenperlevel": 0.8,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 55,
+                "attackdamage": 53,
                 "attackdamageperlevel": 2.4,
                 "attackspeedperlevel": 3,
                 "attackspeed": 0.656
@@ -60833,11 +60833,11 @@
                     "effect": [
                         null,
                         [
-                            11,
-                            19,
-                            27,
-                            35,
-                            43
+                            10,
+                            16,
+                            22,
+                            28,
+                            34
                         ],
                         [
                             30,
@@ -60854,11 +60854,11 @@
                             5
                         ],
                         [
-                            55,
-                            95,
-                            135,
-                            175,
-                            215
+                            50,
+                            80,
+                            110,
+                            140,
+                            170
                         ],
                         [
                             0,
@@ -60905,10 +60905,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "11/19/27/35/43",
+                        "10/16/22/28/34",
                         "30/35/40/45/50",
                         "5",
-                        "55/95/135/175/215",
+                        "50/80/110/140/170",
                         "0",
                         "0",
                         "0",
@@ -61146,6 +61146,12 @@
                     "id": "111027",
                     "num": 27,
                     "name": "星界圣骑 诺提勒斯",
+                    "chromas": false
+                },
+                {
+                    "id": "111036",
+                    "num": 36,
+                    "name": "水晶泰坦 诺提勒斯",
                     "chromas": false
                 }
             ],
@@ -64578,6 +64584,12 @@
                     "id": "20035",
                     "num": 35,
                     "name": "星界圣骑双子 努努和威朗普",
+                    "chromas": true
+                },
+                {
+                    "id": "20044",
+                    "num": 44,
+                    "name": "魔域梦魇 努努和威朗普",
                     "chromas": true
                 }
             ],
@@ -68716,6 +68728,12 @@
                     "num": 54,
                     "name": "至臻 斗魂觉醒 派克",
                     "chromas": false
+                },
+                {
+                    "id": "555064",
+                    "num": 64,
+                    "name": "魔域梦魇 派克",
+                    "chromas": true
                 }
             ],
             "lore": "在比尔吉沃特屠宰码头颇有名气的鱼叉手派克，据说早已葬身于一条巨大的琢珥鱼腹内……现在，他却回来了。派克在阴街陋巷中徘徊，用常人无法理解的手段解决那些鱼肉他人的恶棍——这座因捕猎怪物而闻名的码头，如今反而成了他的猎场。",
@@ -80901,6 +80919,12 @@
                     "num": 44,
                     "name": "至臻 斗魂觉醒 萨科",
                     "chromas": false
+                },
+                {
+                    "id": "35054",
+                    "num": 54,
+                    "name": "魔域梦魇 萨科",
+                    "chromas": true
                 }
             ],
             "lore": "很久以前有人为一个孤独的小王子制作了一个玩物，一只附有魔法的提线人偶，它就是如今那个以杀人和破坏取乐的萨科。由于黑魔法的腐化，再加上痛失爱主，曾经友善的人偶如今只能在折磨灵魂制造苦痛的时候才能感到愉悦。小孩子的玩具和简单的戏法在他手中都有了致命的效果。而且，他觉得自己的血腥“游戏”滑稽至极——如果有谁在死寂的夜里听到了阴森的窃笑，或许那就是恶魔小丑看中了他们，作为自己新的玩物。",
@@ -85708,7 +85732,7 @@
                 "difficulty": 6
             },
             "stats": {
-                "hp": 605,
+                "hp": 575,
                 "hpperlevel": 100,
                 "mp": 300,
                 "mpperlevel": 40,
@@ -86386,6 +86410,12 @@
                     "num": 46,
                     "name": "至臻 玉剑传说 琴仙子",
                     "chromas": false
+                },
+                {
+                    "id": "37056",
+                    "num": 56,
+                    "name": "胜利女神 娑娜",
+                    "chromas": true
                 }
             ],
             "lore": "作为德玛西亚一流的琴师，娑娜唯一的语言就是“叆华”优美的和声与多变的曲调。抚琴的才华让她深得上流社会的宠爱，不过也有人怀疑娑娜如魔咒一般的迷人的旋律，其实是在施放魔法——而这在德玛西亚可是大忌。对此娑娜始终一言不发，但她最亲密的盟友却能完全理解她。娑娜指间流淌的和声，不仅能够安抚受伤的盟友，还能打击掉以轻心的敌人。",
@@ -93266,6 +93296,12 @@
                     "num": 49,
                     "name": "北极星典狱长 锤石",
                     "chromas": true
+                },
+                {
+                    "id": "412059",
+                    "num": 59,
+                    "name": "洗地专家 锤石",
+                    "chromas": true
                 }
             ],
             "lore": "暴虐又狡猾的锤石是一个来自暗影岛的亡灵，野心勃勃、不知疲倦。他曾经是无数奥秘的看守，在一种超越生死的力量下骨肉瓦解，而现在他则使用自己独创的钻心痛苦缓慢地折磨并击溃其他人，以此作为自己存在下去的手段。被他迫害的人需要承受远超死亡的痛苦，因为锤石会让他们的灵魂也饱尝剧痛，将他们的灵魂囚禁在自己的灯笼中，经受永世的折磨。",
@@ -94017,18 +94053,18 @@
                 "mpperlevel": 32,
                 "movespeed": 325,
                 "armor": 30,
-                "armorperlevel": 4.5,
+                "armorperlevel": 4,
                 "spellblock": 28,
                 "spellblockperlevel": 1.3,
-                "attackrange": 525,
+                "attackrange": 550,
                 "hpregen": 4,
-                "hpregenperlevel": 0.65,
+                "hpregenperlevel": 0.5,
                 "mpregen": 7.2,
                 "mpregenperlevel": 0.45,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 59,
-                "attackdamageperlevel": 3.7,
+                "attackdamage": 60,
+                "attackdamageperlevel": 2.5,
                 "attackspeedperlevel": 1.5,
                 "attackspeed": 0.656
             },
@@ -94037,15 +94073,15 @@
                     "id": "TristanaQ",
                     "name": "急速射击",
                     "description": "崔丝塔娜急速射击，短时间内提升攻击速度。",
-                    "tooltip": "崔丝塔娜开始全自动射击，获得<attackSpeed>{{ e1 }}%攻击速度</attackSpeed>，持续{{ e2 }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "崔丝塔娜开始全自动射击，获得持续{{ buffduration }}秒的<attackSpeed>{{ attackspeedmod*100 }}%攻击速度</attackSpeed>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
-                            "攻击速度"
+                            "攻击速度",
+                            "冷却时间"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ effect1amount*100.000000 }}% -> {{ effect1amountnl*100.000000 }}%"
+                            "{{ attackspeedmod*100.000000 }}% -> {{ attackspeedmodnl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -94069,18 +94105,18 @@
                     "effect": [
                         null,
                         [
-                            50,
-                            65,
-                            80,
-                            95,
-                            110
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            7,
-                            7,
-                            7,
-                            7,
-                            7
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -94141,8 +94177,8 @@
                     ],
                     "effectBurn": [
                         null,
-                        "50/65/80/95/110",
-                        "7",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -94178,16 +94214,14 @@
                     "id": "TristanaW",
                     "name": "火箭跳跃",
                     "description": "崔丝塔娜朝地面开火，跳跃至目标区域，落地造成伤害并减速附近敌人一小段时间。",
-                    "tooltip": "崔丝塔娜将自己推送出去，在着陆时造成<magicDamage>{{ landingdamage }}魔法伤害</magicDamage>和持续{{ e2 }}秒的{{ e3 }}%<status>减速</status>。<br /><br />参与击杀后，或者满层<spellName>爆炸火花</spellName>爆炸后，会重置这个技能的冷却时间。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "崔丝塔娜将自己推送出去，在着陆时造成<magicDamage>{{ landingdamage }}魔法伤害</magicDamage>和持续{{ slowduration }}秒的{{ slowmod*-100 }}%<status>减速</status>。<br /><br />参与击杀后，或者满层<spellName>爆炸火花</spellName>爆炸后，会重置这个技能的冷却时间。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "减速时长",
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }} -> {{ e2NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -94212,32 +94246,32 @@
                     "effect": [
                         null,
                         [
-                            95,
-                            145,
-                            195,
-                            245,
-                            295
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1,
-                            1.5,
-                            2,
-                            2.5,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            60,
-                            60,
-                            60,
-                            60,
-                            60
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            350,
-                            350,
-                            350,
-                            350,
-                            350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -94284,10 +94318,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "95/145/195/245/295",
-                        "1/1.5/2/2.5/3",
-                        "60",
-                        "350",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -94324,18 +94358,18 @@
                     "tooltip": "<spellPassive>被动：</spellPassive>崔丝塔娜的攻击在击杀敌人时会对周围敌人造成<magicDamage>{{ passivedamage }}魔法伤害</magicDamage>。<br /><br /><spellActive>主动：</spellActive>崔丝塔娜将一颗炸弹附着在一名敌人或防御塔上，来在{{ activeduration }}秒后对周围敌人造成<physicalDamage>{{ activedamage }}物理伤害</physicalDamage>。崔丝塔娜对带着炸弹的目标进行的每次攻击和技能都会使这个伤害提升{{ activeperstackamp*100 }}%(最多4层)，并且叠加暴击几率也会使这个伤害提升{{ critchanceamp*100 }}%。<br /><br />在{{ activemaxstacks }}层时，这个炸弹会立刻爆炸(最大值为<physicalDamage>{{ activemaxdamage }}物理伤害</physicalDamage>)。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
-                            "@AbilityResourceName@消耗",
                             "被动爆炸伤害",
                             "基础火花伤害",
-                            "攻击力"
+                            "攻击力收益",
+                            "冷却时间",
+                            "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ cost }} -> {{ costNL }}",
                             "{{ passivebasedamage }} -> {{ passivebasedamageNL }}",
                             "{{ activebasedamage }} -> {{ activebasedamageNL }}",
-                            "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%"
+                            "{{ activebadratio*100.000000 }}% -> {{ activebadrationl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -94468,26 +94502,26 @@
                     "id": "TristanaR",
                     "name": "毁灭射击",
                     "description": "崔丝塔娜装填巨型加农炮弹攻击目标单位，造成巨大伤害并击退目标。如果目标携带着【爆炸火花】的炸弹，那么该炸弹的爆炸半径翻倍。",
-                    "tooltip": "崔丝塔娜发射一颗大型加农炮弹，对目标造成<magicDamage>{{ damagecalc }}魔法伤害</magicDamage>并将其与周围敌人一起<status>击退</status>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "崔丝塔娜发射一颗大型加农炮弹，对目标造成<magicDamage>{{ damagecalc }}魔法伤害</magicDamage>，并对其与周围敌人们施加<status>击退</status>和{{ stunduration }}秒<status>晕眩</status>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
                             "伤害",
-                            "击退距离"
+                            "击退距离",
+                            "晕眩时长"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}"
+                            "{{ knockbackdistance }} -> {{ knockbackdistanceNL }}",
+                            "{{ stunduration }} -> {{ stundurationNL }}"
                         ]
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        120,
-                        110,
+                        100,
+                        100,
                         100
                     ],
-                    "cooldownBurn": "120/110/100",
+                    "cooldownBurn": "100",
                     "cost": [
                         100,
                         100,
@@ -97964,7 +97998,7 @@
                     "tooltip": "<spellActive>飓风姿态：</spellActive>乌迪尔召唤冰川风暴环绕自身{{ buffduration }}秒，每秒对附近的敌人造成<magicDamage>{{ stormdamage }}魔法伤害</magicDamage>，并对这些敌人造成{{ slowpotency*100 }}%<status>减速</status>。此外，乌迪尔在这个姿态中的下两次攻击对风暴中的敌人造成<magicDamage>{{ pulsedamage }}魔法伤害</magicDamage>。<br /><br /><keywordMajor>觉醒：</keywordMajor>释放风暴，使它跟随乌迪尔最后攻击的那名敌人，在持续期间造成额外的<magicDamage>{{ percenthpblast }}最大生命值的魔法伤害</magicDamage>，和额外的{{ empoweredslow }}<status>减速</status>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "魔法伤害：<magicDamage>@MagicDamage@ (%i:scaleAP%)</magicDamage>",
+                            "魔法伤害： ",
                             "减速"
                         ],
                         "effect": [
@@ -98947,15 +98981,15 @@
                     "leveltip": {
                         "label": [
                             "最大伤害",
+                            "额外攻击收益率",
                             "冷却时间",
-                            "法力消耗",
-                            "额外攻击收益率"
+                            "法力消耗"
                         ],
                         "effect": [
                             "{{ basedamagemax }} -> {{ basedamagemaxNL }}",
+                            "{{ tadratiomax }} -> {{ tadratiomaxNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ basecost }} -> {{ basecostNL }}",
-                            "{{ tadratiomax }} -> {{ tadratiomaxNL }}"
+                            "{{ basecost }} -> {{ basecostNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -100331,6 +100365,12 @@
                     "id": "45051",
                     "num": 51,
                     "name": "蜂大王 维迦",
+                    "chromas": true
+                },
+                {
+                    "id": "45060",
+                    "num": 60,
+                    "name": "魔域梦魇 维迦",
                     "chromas": true
                 }
             ],
@@ -102990,6 +103030,12 @@
                     "num": 30,
                     "name": "斗魂觉醒 佛耶戈",
                     "chromas": false
+                },
+                {
+                    "id": "234037",
+                    "num": 37,
+                    "name": "2024 全球总决赛 佛耶戈",
+                    "chromas": false
                 }
             ],
             "lore": "这位失落千年的王国之主——佛耶戈，为了让亡妻死而复生，引发了一场被后世称为“破败之咒”的魔灾，自己也不幸因此殒命。如今的佛耶戈已经变成了一个强大的亡魂怨灵，依然执着地迷恋着几百年前便已死去的王后。他号称破败之王，操纵着夺命的蚀魂夜，在符文之地上不懈地搜寻着，希望有朝一日能将她追回。无穷无尽的黑雾从他早已支离的心中涌出，扫除他面前的一切阻碍。",
@@ -103024,7 +103070,7 @@
                 "mpregenperlevel": 0,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 57,
+                "attackdamage": 60,
                 "attackdamageperlevel": 3.5,
                 "attackspeedperlevel": 2.5,
                 "attackspeed": 0.658
@@ -104540,14 +104586,14 @@
                     "id": "VladimirSanguinePool",
                     "name": "血红之池",
                     "description": "弗拉基米尔潜入血泊之中，变得不可被选取，持续2秒。血泊上的敌人被减速，同时弗拉基米尔会从他们身上吸取生命。",
-                    "tooltip": "弗拉基米尔化成一滩持续2秒的血池，获得<speed>37.5%持续衰减的移动速度</speed>，持续1秒，并进入无法被选取和幽灵状态，同时使血池中的敌人<status>减速</status>{{ e3 }}%。<br /><br />弗拉基米尔在期间会持续造成<magicDamage>{{ totaldamagetooltip }}魔法伤害</magicDamage>，并为弗拉基米尔回复<healing>相当于{{ e5 }}%实际伤害值的生命值</healing>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "弗拉基米尔化成一滩持续2秒的血池，获得<speed>{{ hasteboost*100 }}%持续衰减的移动速度</speed>，持续{{ hasteduration }}秒，并进入<keyword>无法被选取</keyword>和<keyword>幽灵</keyword>状态，同时使血池中的敌人<status>减速</status>{{ movespeedmod*-100 }}%。<br /><br />弗拉基米尔在期间会持续造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，并且每命中一个敌人就会为弗拉基米尔回复<healing>{{ totalheal }}生命值</healing>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -104572,39 +104618,39 @@
                     "effect": [
                         null,
                         [
-                            80,
-                            135,
-                            190,
-                            245,
-                            300
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            40,
-                            40,
-                            40,
-                            40,
-                            40
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -104644,11 +104690,11 @@
                     ],
                     "effectBurn": [
                         null,
-                        "80/135/190/245/300",
-                        "15",
-                        "40",
-                        "15",
-                        "30",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -104675,13 +104721,13 @@
                         "w": 48,
                         "h": 48
                     },
-                    "resource": "消耗{{ e2 }}%当前生命值"
+                    "resource": "消耗{{ healthcost*100 }}%当前生命值"
                 },
                 {
                     "id": "VladimirE",
                     "name": "血之潮汐",
                     "description": "弗拉基米尔消耗他的生命值来持续灌注一个蓄血库，蓄血库在释放时会对他身边的敌人造成伤害，但会被敌方单位所阻挡。",
-                    "tooltip": "<charge>开始蓄力：</charge>弗拉基米尔积攒一个蓄血库，至多消耗{{ chargehealthtooltip }}生命值。在攒满后，弗拉基米尔会被<status>减速</status>20%。<br /><br /><release>释放：</release>弗拉基米尔对附近的敌人释放一股血弹激流，基于蓄力时间造成<magicDamage>{{ mindamagetooltip }}</magicDamage>至<magicDamage>{{ maxdamagetooltip }}魔法伤害</magicDamage>。如果这个技能蓄力了至少1秒，那么它还会使目标<status>减速</status>{{ e9 }}%，持续0.5秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<charge>开始蓄力：</charge>弗拉基米尔积攒一个蓄血库，至多消耗<span class=\"colorCC3300\">{{ chargehealthtooltip }}生命值</span>。在攒满后，弗拉基米尔会被<status>减速</status>20%。<br /><br /><release>释放：</release>弗拉基米尔对附近的敌人释放一股血弹激流，基于蓄力时间造成<magicDamage>{{ mindamagetooltip }}</magicDamage>至<magicDamage>{{ maxdamagetooltip }}魔法伤害</magicDamage>。如果这个技能蓄力了至少1秒，那么它还会使目标<status>减速</status>{{ e9 }}%，持续0.5秒。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "最小伤害",
@@ -104801,7 +104847,7 @@
                         "60/90/120/150/180"
                     ],
                     "vars": [],
-                    "costType": "%最大生命值",
+                    "costType": "%最大生命值({{ chargehealthtooltip }})",
                     "maxammo": "-1",
                     "range": [
                         600,
@@ -104820,7 +104866,7 @@
                         "w": 48,
                         "h": 48
                     },
-                    "resource": "引导过程消耗{{ e2 }}%最大生命值"
+                    "resource": "引导过程消耗{{ e2 }}%最大生命值({{ chargehealthtooltip }})"
                 },
                 {
                     "id": "VladimirHemoplague",
@@ -107819,7 +107865,7 @@
                 "mpperlevel": 55,
                 "movespeed": 345,
                 "armor": 35,
-                "armorperlevel": 4.7,
+                "armorperlevel": 5,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 175,
@@ -107872,10 +107918,10 @@
                         null,
                         [
                             16,
-                            25,
-                            34,
-                            43,
-                            52
+                            29,
+                            42,
+                            55,
+                            68
                         ],
                         [
                             0.75,
@@ -107943,7 +107989,7 @@
                     ],
                     "effectBurn": [
                         null,
-                        "16/25/34/43/52",
+                        "16/29/42/55/68",
                         "0.75",
                         "0",
                         "0",
@@ -112533,6 +112579,18 @@
                     "num": 19,
                     "name": "玉剑传说 神机花火",
                     "chromas": true
+                },
+                {
+                    "id": "221028",
+                    "num": 28,
+                    "name": "魔域梦魇 泽丽",
+                    "chromas": true
+                },
+                {
+                    "id": "221029",
+                    "num": 29,
+                    "name": "至臻 魔域梦魇 泽丽",
+                    "chromas": false
                 }
             ],
             "lore": "泽丽是一个顽强固执、意志坚定的女孩。她出身自祖安的工人阶层，可以引导电能魔法来为自身和她特制的枪械充能。动荡难测的能量也是她内心情绪的写照，闪烁的火花反映出她轻快如电的生活态度。泽丽对他人抱有深切的同情，而来自家人和故乡的爱也伴随着她投身于每一场战斗。虽然这种迫切的渴望有时也会给她带来麻烦，但是泽丽毫不怀疑的是，为你的同胞奋起抗争，便一定能够一呼百应。",

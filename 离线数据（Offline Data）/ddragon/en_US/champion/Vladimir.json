@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.17.1",
+    "version": "14.19.1",
     "data": {
         "Vladimir": {
             "id": "Vladimir",
@@ -290,14 +290,14 @@
                     "id": "VladimirSanguinePool",
                     "name": "Sanguine Pool",
                     "description": "Vladimir sinks into a pool of blood, becoming untargetable for 2 seconds. Additionally, enemies on the pool are slowed and Vladimir siphons life from them.",
-                    "tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining <speed>37.5% decaying Move Speed</speed> for 1 second and becoming Untargetable and Ghosted while <status>Slowing</status> enemies in the pool by {{ e3 }}%.<br /><br />Vladimir deals <magicDamage>{{ totaldamagetooltip }} magic damage</magicDamage> over the duration and restores <healing>Health equal to {{ e5 }}% of the damage dealt</healing>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Vladimir sinks into a pool of blood for 2 seconds, gaining <speed>{{ hasteboost*100 }}% decaying Move Speed</speed> for {{ hasteduration }} second and becoming <keyword>Untargetable</keyword> and <keyword>Ghosted</keyword> while <status>Slowing</status> enemies in the pool by {{ movespeedmod*-100 }}%.<br /><br />Vladimir deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> and restores <healing>{{ totalheal }} Health</healing> per enemy over the duration.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -322,39 +322,39 @@
                     "effect": [
                         null,
                         [
-                            80,
-                            135,
-                            190,
-                            245,
-                            300
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            40,
-                            40,
-                            40,
-                            40,
-                            40
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -394,11 +394,11 @@
                     ],
                     "effectBurn": [
                         null,
-                        "80/135/190/245/300",
-                        "15",
-                        "40",
-                        "15",
-                        "30",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -425,13 +425,13 @@
                         "w": 48,
                         "h": 48
                     },
-                    "resource": "{{ e2 }}% of current Health"
+                    "resource": "{{ healthcost*100 }}% of current Health"
                 },
                 {
                     "id": "VladimirE",
                     "name": "Tides of Blood",
                     "description": "Vladimir pays his own health to charge up a reservoir of blood which, when released, deals damage in the area around him but can be blocked by enemy units.",
-                    "tooltip": "<charge>Begin Charging: </charge>Vladimir charges up a reservoir of blood, spending up to {{ chargehealthtooltip }} Health. While at full charge, Vladimir is <status>Slowed</status> by 20%.<br /><br /><release>Release: </release>Vladimir unleashes a torrent of blood missiles at surrounding enemies, dealing between <magicDamage>{{ mindamagetooltip }}</magicDamage> and <magicDamage>{{ maxdamagetooltip }} magic damage</magicDamage> based on charge time. If this Ability was charged for at least 1 second, it also <status>Slows</status> targets by {{ e9 }}% for 0.5 seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<charge>Begin Charging: </charge>Vladimir charges up a reservoir of blood, spending up to <span class=\"colorCC3300\">{{ chargehealthtooltip }} Health</span>. While at full charge, Vladimir is <status>Slowed</status> by 20%.<br /><br /><release>Release: </release>Vladimir unleashes a torrent of blood missiles at surrounding enemies, dealing between <magicDamage>{{ mindamagetooltip }}</magicDamage> and <magicDamage>{{ maxdamagetooltip }} magic damage</magicDamage> based on charge time. If this Ability was charged for at least 1 second, it also <status>Slows</status> targets by {{ e9 }}% for 0.5 seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Minimum Damage",
@@ -551,7 +551,7 @@
                         "60/90/120/150/180"
                     ],
                     "vars": [],
-                    "costType": "% of max Health",
+                    "costType": "% of max Health ({{ chargehealthtooltip }})",
                     "maxammo": "-1",
                     "range": [
                         600,
@@ -570,7 +570,7 @@
                         "w": 48,
                         "h": 48
                     },
-                    "resource": "Channeling Cost {{ e2 }}% of max Health"
+                    "resource": "Channeling Cost {{ e2 }}% of max Health ({{ chargehealthtooltip }})"
                 },
                 {
                     "id": "VladimirHemoplague",

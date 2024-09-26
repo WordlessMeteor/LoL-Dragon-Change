@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "K'Sante'nin yetenekleri, hedefleri işaretleyerek onların bir sonraki saldırısından daha fazla hasar almalarını sağlar."
+        "description": "K'Sante'nin yetenekleri, hedefleri işaretleyerek onların bir sonraki saldırısından daha fazla hasar almalarını sağlar.<br><br>Hodri Meydan etkisindeyken K'Sante tüm saldırıları ve yetenekleriyle daha fazla hasar verir."
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@f1.2@ sn.",
-            "description": "Silahını yere vurarak kısa bir hat üstündeki tüm rakiplere hasar verir ve onları yavaşlatır.<br><br>İsabet halinde birkaç saniyeliğine yük kazandırır. İki yük biriktiğinde bu yetenek rakipleri K'Sante'ye doğru çeken bir şok dalgası gönderir.",
-            "dynamicDescription": "K'Sante silahını yere vurarak <physicalDamage>@BaseDamage@ Fiziksel Hasar</physicalDamage> verir ve isabet alan rakipleri kısa süreliğine %@SlowPercent*100@ <status>yavaşlatır</status>.<br><br>Saldırı bir rakibe isabet ederse K'Sante @RecastWindow@ saniyeliğine bir Ntofo Darbeleri yükü kazanır. İki yük biriktiğinde K'Sante rakipleri @StunDuration@ saniyeliğine <status>sersemleten</status> ve kendisine doğru <status>çeken</status> bir şok dalgası gönderir.<br><br><rules>Bekleme süresi ilave <scaleArmor>zırh</scaleArmor> ve <scaleMR>büyü direncine</scaleMR> bağlı olarak azalır: @BonusResistsTooltip@ / @DefenseCapforCooldown@.<br>Kullanım süresi ilave <healing>cana</healing> bağlı olarak azalır: @BonusHealthTooltip@ / @HealthCapForCastTime@.</rules><br><br><keywordMajor>Hodri Meydan</keywordMajor>: Bu yeteneğin bekleme süresi azalır ama <status>yavaşlatma</status> etkisi kaybolur.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ sn. %i:cooldown%",
+            "description": "K'Sante kısa bir hat üstündeki rakiplere saldırarak hasar verir ve onları yavaşlatır.<br><br>İsabet halinde bir Ntofo Darbeleri yükü kazanır. İki yük biriktiğinde K'Sante rakipleri çeken bir şok dalgası gönderir.<br><br>Hodri Meydan etkisindeyken bekleme süresi azalır.",
+            "dynamicDescription": "K'Sante silahını yere vurarak <physicalDamage>@BaseDamage@ Fiziksel Hasar</physicalDamage> verir ve @SlowDuration@ saniyeliğine rakipleri %@SlowPercent*100@ <status>yavaşlatır</status>. Yeteneği isabet ettirirse @RecastWindow@ saniyeliğine bir Ntofo Darbeleri yükü kazanır. İki yük biriktiğinde K'Sante rakipleri @StunDuration@ saniyeliğine <status>sersemleten</status> ve kendisine doğru <status>çeken</status> bir şok dalgası gönderir.<br><br><keywordMajor>Hodri Meydan</keywordMajor>: Bekleme süresi %@RCooldownReduction.0*100@ azalır.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sn. %i:cooldown%",
-            "description": "K'Sante atılmadan önce güç toplar. Güç topladığı sırada durdurulamaz hale gelir ve daha az hasar alır. Atılmadan isabet alan tüm hedefler atılma menzilinin sonuna savrulur ve sersemler.<br><br>",
-            "dynamicDescription": "K'Sante silahlarını savunma amacıyla @MinDurationTOOLTIP@ ila @MaxDuration@ saniyeliğine kaldırır. Bu esnada durdurulamaz hale gelir ve aldığı hasarı %@DamageReductionCharLevel@ azaltır.<br><br>Yoğunlaşmanın ardından ileri hücum ederek rakiplerine <physicalDamage>@BaseDamageCalc@ + azami canlarının %@MaxHealthDamage*100@ kadarına eşdeğer miktarda fiziksel hasar</physicalDamage> verir. K'Sante üstüne hücum ettiği rakipleri @MaxKnockbackDuration@ saniyeliğine <status>geri savurur</status> ve <status>sersemletir</status>.<br><br><keywordMajor>Hodri Meydan:</keywordMajor> Yeteneğin bekleme süresi sıfırlanır. Ayrıca hasar azaltma oranı artarak %@DamageReductionCalcAO@ olur ve atılma hızı artar ama <status>geri savurma</status> ve <status>sersemletme</status> etkilerini kaybeder.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante güç toplar, daha az hasar alır ve ardından atılarak rakipleri geri savurup sersemletir.<br><br>Hodri Meydan etkisindeyken fazladan hasar verir ama hedefleri geri savurmaz veya sersemletmez.",
+            "dynamicDescription": "K'Sante silahlarını savunma amacıyla @MinDurationTOOLTIP@ ila @MaxDuration.1@ saniye kaldırır. Bu esnada durdurulamaz hale gelir ve aldığı hasarı %@DamageReduction*100@ azaltır. Ardından ileri hücum ederek <physicalDamage>@BaseDamage@ artı azami canın @TotalMaxHealthDamage@ kadarına eşdeğer miktarda fiziksel hasar</physicalDamage> verir. İsabet alan rakipler güç toplama süresine bağlı olarak @MinKnockbackDuration@ ila @MaxKnockbackDuration@ saniye <status>geri savrulur</status> ve <status>sersemler</status>.<br><br><keywordMajor>Hodri Meydan</keywordMajor>: Bekleme süresi sıfırlanır. Güç toplama süresine bağlı olarak fazladan %@RDamageIncreaseMin*100@ ila %@RDamageIncreaseMax*100@ <trueDamage>Gerçek Hasar</trueDamage> verir, hasar azaltma artarak %@RDamageReduction*100@ olur ve atılma hızı artar. Ancak <status>geri savurmaz</status> veya <status>sersemletmez</status>.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
-            "cooldown": "@Cooldown@ sn. %i:cooldown%",
-            "description": "K'Sante bir takım arkadaşına doğru atılır ve onunla birlikte kalkan kazanır. Hedeflenen yerde takım arkadaşı yoksa K'Sante o konuma doğru daha kısa mesafeli bir atılma gerçekleştirerek kalkan kazanır.<br>",
-            "dynamicDescription": "K'Sante ileri atılarak @ShieldDuration@ saniyeliğine <shield>@TotalShield@ Kalkan</shield> kazanır. Bir takım arkadaşına doğru atılıyorsa kat ettiği mesafe önemli ölçüde artar ve takım arkadaşı da <shield>kalkan</shield> kazanır.<br><br><keywordMajor>Hodri Meydan</keywordMajor>: Yeteneğin atılma hızı artar. Bir takım arkadaşına doğru atılmıyorsa da kat ettiği mesafe artar ve K'Sante duvarların üstünden geçebilir.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ sn. %i:cooldown%",
+            "description": "K'Sante atılır ve bir kalkan kazanır. Bir takım arkadaşını hedef alırsa yeteneğin menzili artar ve K'Sante ona atıldığında ikisi de kalkan kazanır.<br><br>Hodri Meydan etkisindeyken bekleme süresi azalır ve hızı artar.",
+            "dynamicDescription": "K'Sante atılır ve @ShieldDuration@ saniyeliğine <shield>@TotalShield@ Kalkan</shield> kazanır. Bir takım arkadaşına doğru atılıyorsa kat ettiği mesafe önemli ölçüde artar ve takım arkadaşı da <shield>kalkan</shield> kazanır.<br><br><keywordMajor>Hodri Meydan</keywordMajor>: Bekleme süresi %@CooldownModAO*100@ azalır ve atılma hızı artar.@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sn. %i:cooldown%",
-            "description": "K'Sante bir rakibi uzağa fırlatır. Rakibi bir duvara çarparsa daha fazla hasar alarak duvarın içinden geçer. Ardından K'Sante hedefin arkasında belirir ve savunma niteliklerini eksiltip hasarını arttırarak Hodri Meydan yeteneğini etkinleştirir.<br><br>",
-            "dynamicDescription": "K'Sante ntofo'larını parçalayarak <magicDamage>@TotalDamage@ Büyü Hasarı</magicDamage> verir ve bir rakip şampiyonu <status>geri savurur</status>. Duvara çarpan rakipler fazladan <magicDamage>@TotalDamageSlamDown@ Büyü Hasarı</magicDamage> alır, duvarın üstünden <status>geri savrulur</status> ve kısa süreliğine <status>sersemler</status>. Ardından K'Sante rakibin arkasından atılır ve 20 saniyeliğine <keywordMajor>Hodri Meydan</keywordMajor> haline girer.<br><br><keywordMajor>Hodri Meydan</keywordMajor> halindeki K'Sante <healing>%@HealthLost*100@ Azami Can</healing>, <scaleArmor>%@DefensesLost*100@ İlave Zırh</scaleArmor> ve <scaleMR>%@DefensesLost*100@ İlave Büyü Direnci</scaleMR> kaybeder. Ancak hem <scaleAD>@AllOutAttackDamage@ Saldırı Gücü</scaleAD>, <attackSpeed>%@AttackSpeedIncrease*100@ Saldırı Hızı</attackSpeed> kazanır hem şampiyonlara verdiği hasarın <healing>%@AllOutOmnivamp@</healing> kadarına eşdeğer miktarda can yeniler hem de yeteneklerini dönüştürür.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante bir rakibi geri savurur ve yoluna çıkan herhangi bir duvarın içinden fırlatır. Ardından K'Sante Hodri Meydan etkisine girer, rakibin peşinden atılır ve savunmasını azaltmanın karşılığında hasar ile iyileştirme artışı kazanıp yeteneklerini dönüştürür.",
+            "dynamicDescription": "K'Sante ntofo'larını parçalayarak bir rakip şampiyonu <status>geri savurur</status> ve ona <physicalDamage>@BaseDamage@ Fiziksel Hasar</physicalDamage> verir. Daha sonra onun ardından atılır ve @AllOutDuration@ saniyeliğine <keywordMajor>Hodri Meydan</keywordMajor> etkisine girer. Rakip bir duvara isabet ederse duvarın içinden <status>geri savrulur</status> ve K'Sante ona yeniden saldırarak <physicalDamage>@TotalDamageSlamDown@ Fiziksel Hasar</physicalDamage> verir.<br><br><keywordMajor>Hodri Meydan</keywordMajor> etkisindeyken K'Sante'nin yetenekleri gelişir. Ayrıca K'Sante <attackSpeed>%@AttackSpeed*100@ Saldırı Hızı</attackSpeed>, %@ArmorPenPercent*100@ İlave Zırh Delme ve <omnivamp>%@Omnivamp*100@ Mutlak Sömürü</omnivamp> kazanır ama <healing>%@HealthLost*100@ Azami Can</healing>, <scaleArmor>%@DefensesLost*100@ İlave Zırh</scaleArmor> ve <scaleMR>%@DefensesLost*100@ İlave Büyü Direnci</scaleMR> kaybeder.@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,

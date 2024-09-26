@@ -1283,7 +1283,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ mp %i:cooldown%",
             "description": "Tristana gyors ütemben elsüti a fegyverét, így egy rövid időre megnöveli a támadási sebességét.",
-            "dynamicDescription": "Tristana teljesen automata üzemmódra kapcsol, és @Effect2Amount@ másodpercre <attackSpeed>@Effect1Amount*100@% támadási sebességet</attackSpeed> nyer.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Tristana teljesen automata üzemmódra kapcsol, és @BuffDuration@ másodpercre <attackSpeed>@AttackSpeedMod*100@% támadási sebességet</attackSpeed> nyer.@SpellModifierDescriptionAppend@",
             "range": [
                 20.0,
                 20.0,
@@ -1314,22 +1314,22 @@
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    0.5,
-                    0.5,
-                    0.65,
-                    0.8,
-                    0.95,
-                    1.1,
-                    1.25
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1433,7 +1433,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ mp %i:cooldown%",
             "description": "Tristana a földre lő, hogy ezzel egy távolabbi helyre repítse magát. Landoláskor sebzést okoz a körülötte lévő egységeknek, és rövid időre lelassítja őket.",
-            "dynamicDescription": "Tristana kilövi magát, amivel <magicDamage>@LandingDamage@ varázssebzést</magicDamage> és @Effect3Amount*-100@%-os <status>lassítást</status> okoz @Effect2Amount@ másodpercig a landolás után.<br><br>A hősök kiiktatása és a maximális jelzőszámmal, hősök ellen végrehajtott <spellName>Robbanó töltetek</spellName>-robbantások nullázzák a képesség töltési idejét.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Tristana kilövi magát, amivel @SlowDuration@ másodpercig <magicDamage>@LandingDamage@ varázssebzést</magicDamage> és @SlowMod*-100@%-os <status>lassítást</status> okoz a landolás után.<br><br>A hősök kiiktatása és a maximális jelzőszámmal, hősök ellen végrehajtott <spellName>Robbanó töltetek</spellName>-robbantások nullázzák a képesség töltési idejét.@SpellModifierDescriptionAppend@",
             "range": [
                 900.0,
                 900.0,
@@ -1459,45 +1459,45 @@
                 14.0
             ],
             "coefficients": {
-                "coefficient1": 0.5,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    95.0,
-                    95.0,
-                    145.0,
-                    195.0,
-                    245.0,
-                    295.0,
-                    295.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    1.0,
-                    1.0,
-                    1.5,
-                    2.0,
-                    2.5,
-                    3.0,
-                    3.5
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6,
-                    -0.6
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0,
-                    350.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
                     0.0,
@@ -1733,7 +1733,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ mp %i:cooldown%",
             "description": "Tristana egy hatalmas ágyúgolyót tölt a fegyverébe, majd kilövi azt egy ellenséges egységre. A találat varázssebzést okoz, és hátralöki a célpontot.",
-            "dynamicDescription": "Tristana egy óriási ágyúgolyót lő ki, így <magicDamage>@DamageCalc@ varázssebzést</magicDamage> okoz a célpontnak, akit a közelében lévő ellenfelekkel együtt <status>hátra</status> is <status>lök</status>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Tristana egy óriási ágyúgolyót lő ki, így <magicDamage>@DamageCalc@ varázssebzést</magicDamage> okoz a célpontnak, és <status>hátralöki</status>, valamint @StunDuration@ másodpercre <status>elkábítja</status> őt és a közeli ellenfeleket.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -1748,11 +1748,11 @@
                 100.0,
                 100.0,
                 100.0,
-                0.0
+                100.0
             ],
             "cooldownCoefficients": [
-                120.0,
-                110.0,
+                100.0,
+                100.0,
                 100.0,
                 100.0,
                 100.0,

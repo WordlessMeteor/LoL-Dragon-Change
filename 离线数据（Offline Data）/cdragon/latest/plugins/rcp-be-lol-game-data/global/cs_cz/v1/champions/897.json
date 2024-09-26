@@ -343,7 +343,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/KSante/HUD/Icons2D/Icons_KSante_P.png",
         "abilityVideoPath": "champion-abilities/0897/ability_0897_P1.webm",
         "abilityVideoImagePath": "champion-abilities/0897/ability_0897_P1.jpg",
-        "description": "K'Santeho schopnosti označují cíle, aby jim jeho příští útok způsobil zvýšené poškození."
+        "description": "K'Santeho schopnosti označují cíle, aby jim jeho příští útok způsobil zvýšené poškození.<br><br>V režimu Naplno způsobují všechny K'Santeho útoky a schopnosti vyšší poškození."
     },
     "spells": [
         {
@@ -353,9 +353,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_Q1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_Q1.jpg",
             "cost": "@AbilityResourceName@: @Cost@",
-            "cooldown": "@f1.2@ sek.",
-            "description": "Udeří zbraní před sebe a všem nepřátelům v krátké řadě tak způsobí poškození a zpomalí je.<br><br>Při zásahu získá na několik sekund jeden stupeň efektu. Po nasčítání 2 stupňů vystřelí tato schopnost tlakovou vlnu, která přitáhne nepřátele.",
-            "dynamicDescription": "K'Sante udeří svou zbraní, čímž způsobí <physicalDamage>@BaseDamage@ bodů fyzického poškození</physicalDamage> a zasažené cíle na chvíli <status>zpomalí</status> o @SlowPercent*100@&nbsp;%.<br><br>Zasáhne-li K'Sante nějakého nepřítele, získá tím na @RecastWindow@&nbsp;sek. jeden stupeň Úderů ntofo. Po nasčítání 2 stupňů K'Sante místo toho vypálí tlakovou vlnu, která nepřátele na @StunDuration@&nbsp;sek. <status>omráčí</status> a <status>přitahuje</status>.<br><br><rules>Přebíjecí doba se zkracuje bonusovým <scaleArmor>brněním</scaleArmor> a <scaleMR>odolností vůči magii</scaleMR>: @BonusResistsTooltip@ / @DefenseCapforCooldown@.<br>Doba sesílání se zkracuje bonusovým <healing>zdravím</healing>: @BonusHealthTooltip@ / @HealthCapForCastTime@.</rules><br><br><keywordMajor>Naplno</keywordMajor>: Tato schopnost má kratší přebíjecí dobu, ale už nezpůsobuje <status>zpomalení</status>.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ sek. %i:cooldown%",
+            "description": "K'Sante udeří, čímž nepřátelům v krátké řadě způsobí poškození a zpomalí je.<br><br>Při zásahu získá jeden stupeň Úderů ntofo. Po nasbírání 2 stupňů K'Sante vyšle tlakovou vlnu, pomocí které přitáhne nepřátele k sobě.<br><br>V režimu Naplno je přebíjecí doba kratší.",
+            "dynamicDescription": "K'Sante udeří svou zbraní, zasaženým nepřátelům tak způsobí <physicalDamage>@BaseDamage@ bodů fyzického poškození</physicalDamage> a na @SlowDuration@&nbsp;sek. je <status>zpomalí</status> o @SlowPercent*100@&nbsp;%. Pokud někoho zasáhne, získá na @RecastWindow@&nbsp;sek. jeden stupeň Úderů ntofo. Po nasčítání 2 stupňů místo uvedeného efektu vypálí tlakovou vlnu, která nepřátele na @StunDuration@&nbsp;sek. <status>omráčí</status> a <status>přitáhne</status> je.<br><br><keywordMajor>Naplno</keywordMajor>: Přebíjecí doba je o @RCooldownReduction.0*100@&nbsp;% kratší.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -373,12 +373,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0,
-                4.0
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5,
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -504,8 +504,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_W1.jpg",
             "cost": "@AbilityResourceName@: @Cost@",
             "cooldown": "@Cooldown@ sek. %i:cooldown%",
-            "description": "K'Sante nasbírá sílu a vyrazí kupředu. Během nabíjení je K'Sante nezastavitelný a je mu způsobováno snížené poškození. Cíle zasažené přeběhem jsou odhozeny na konec jeho přeběhu a omráčeny.<br><br>",
-            "dynamicDescription": "K'Sante na @MinDurationTOOLTIP@–@MaxDuration@&nbsp;sek. pozvedne své zbraně k obraně, stane se nezastavitelným a utrpěné poškození se mu sníží o @DamageReductionCharLevel@&nbsp;%.<br><br>Po dokončení nabíjení bodne zbraněmi před sebe a způsobí <physicalDamage>fyzické poškození ve výši @BaseDamageCalc@ bodů + @MaxHealthDamage*100@&nbsp;% maximálního zdraví</physicalDamage>. Zasažené nepřátele K'Sante <status>odhodí</status> a <status>omráčí</status> na @MaxKnockbackDuration@&nbsp;sek.<br><br><keywordMajor>Naplno:</keywordMajor> Přebíjecí doba této schopnosti se obnoví. Snižování poškození se zvýší na @DamageReductionCalcAO@&nbsp;% a přeběh bude rychlejší, schopnost však už nebude <status>odhazovat</status> ani <status>omračovat</status> nepřátele.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante nabírá sílu, během této doby mu je způsobováno snížené poškození. Poté vyrazí kupředu a zasažené nepřátele odhodí a omráčí.<br><br>V režimu Naplno způsobuje zvýšené poškození, už ale neodhazuje a neomračuje nepřátele.",
+            "dynamicDescription": "K'Sante na @MinDurationTOOLTIP@–@MaxDuration.1@&nbsp;sek. pozvedne své zbraně k obraně, stane se nezastavitelným a utrpěné poškození se mu sníží o @DamageReduction*100@&nbsp;%. Poté se vrhne vpřed a způsobí <physicalDamage>fyzické poškození ve výši @BaseDamage@ bodů + @TotalMaxHealthDamage@ maximálního zdraví</physicalDamage>. Zasažené nepřátele <status>odhodí</status> a <status>omráčí</status> na @MinKnockbackDuration@–@MaxKnockbackDuration@&nbsp;sek. (v závislosti na době nabíjení).<br><br><keywordMajor>Naplno</keywordMajor>: Přebíjecí doba se obnoví. Schopnost způsobí dodatečné <trueDamage>přímé poškození</trueDamage> ve výši @RDamageIncreaseMin*100@–@RDamageIncreaseMax*100@&nbsp;% (v závislosti na době nabíjení), snížení utrpěného poškození vzroste na @RDamageReduction*100@&nbsp;% a rychlost přeběhu se zvýší, už ale <status>neodhazuje</status> a <status>neomračuje</status> nepřátele.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -523,12 +523,12 @@
                 65.0
             ],
             "cooldownCoefficients": [
-                24.0,
-                22.0,
-                20.0,
-                18.0,
-                16.0,
-                14.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                12.0
             ],
             "coefficients": {
                 "coefficient1": 0.7,
@@ -653,9 +653,9 @@
             "abilityVideoPath": "champion-abilities/0897/ability_0897_E1.webm",
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_E1.jpg",
             "cost": "@AbilityResourceName@: @Cost@",
-            "cooldown": "@Cooldown@ sek. %i:cooldown%",
-            "description": "K'Sante přeběhne ke spojenci a oba získají štít. Není-li na daném místě žádný spojenec, přeběhne K'Sante o kratší vzdálenost a získá štít.<br>",
-            "dynamicDescription": "K'Sante popoběhne a na @ShieldDuration@&nbsp;sek. získá <shield>štít o síle @TotalShield@ bodů</shield>. Pokud přeběhne ke spojenci, vzdálenost přeběhu se výrazně prodlouží a <shield>štít</shield> získá i spojenec.<br><br><keywordMajor>Naplno</keywordMajor>: Rychlost přeběhu této schopnosti se zvýší. Přeběh na pozici bez spojence má delší dosah a lze s ním překonat i zdi.@SpellModifierDescriptionAppend@",
+            "cooldown": "@f1.-1@ sek. %i:cooldown%",
+            "description": "K'Sante se přeběhem přesune a získá štít. Pokud zaměřil spojence, přeběhne k němu i na delší vzdálenost a oba získají štít.<br><br>V režimu Naplno je přebíjecí doba kratší a rychlost vyšší.",
+            "dynamicDescription": "K'Sante se přeběhem přesune a získá na @ShieldDuration@&nbsp;sek. <shield>štít o síle @TotalShield@ bodů</shield>. Pokud přeběhne ke spojenci, vzdálenost přeběhu se výrazně prodlouží a <shield>štít</shield> získá i spojenec.<br><br><keywordMajor>Naplno</keywordMajor>: Přebíjecí doba je o @CooldownModAO*100@&nbsp;% kratší a rychlost přeběhu je zvýšená.@SpellModifierDescriptionAppend@",
             "range": [
                 525.0,
                 525.0,
@@ -673,11 +673,11 @@
                 70.0
             ],
             "cooldownCoefficients": [
-                10.5,
                 10.0,
                 9.5,
                 9.0,
                 8.5,
+                8.0,
                 8.0
             ],
             "coefficients": {
@@ -804,8 +804,8 @@
             "abilityVideoImagePath": "champion-abilities/0897/ability_0897_R1.jpg",
             "cost": "@AbilityResourceName@: @Cost@",
             "cooldown": "@Cooldown@ sek. %i:cooldown%",
-            "description": "K'Sante úderem odhodí nepřítele. Pokud nepřítel narazí do zdi, projde skrz ni a utrpí zvýšené poškození. K'Sante se objeví za cílem a aktivuje své posílení Naplno, čímž se mu sníží obrana, ale výrazně mu vzroste způsobované poškození.<br><br>",
-            "dynamicDescription": "K'Sante roztříští své ntofo, čímž způsobí <magicDamage>@TotalDamage@ bodů magického poškození</magicDamage> a <status>odhodí</status> nepřátelského šampiona. Nepřátelé, kteří narazí na zeď, utrpí dodatečných <magicDamage>@TotalDamageSlamDown@ bodů magického poškození</magicDamage>, budou <status>odhozeni</status> a na chvíli také <status>omráčeni</status>. K'Sante pak k nepříteli přeběhne a na 20&nbsp;sekund přejde do režimu <keywordMajor>Naplno</keywordMajor>.<br><br><keywordMajor>Naplno</keywordMajor>: K'Sante přijde o <healing>@HealthLost*100@&nbsp;% maximálního zdraví</healing>, <scaleArmor>@DefensesLost*100@&nbsp;% bonusového brnění</scaleArmor> a <scaleMR>@DefensesLost*100@&nbsp;% bonusové odolnosti vůči magii</scaleMR>, ale získá <scaleAD>@AllOutAttackDamage@ k útočnému poškození</scaleAD>, <attackSpeed>@AttackSpeedIncrease*100@&nbsp;% k rychlosti útoků</attackSpeed>, léčí se ve výši <healing>@AllOutOmnivamp@&nbsp;%</healing> poškození způsobeného šampionům a přemění své schopnosti.@SpellModifierDescriptionAppend@",
+            "description": "K'Sante odhodí nepřítele a prohodí ho libovolnou překážkou, která mu stojí v cestě. Poté K'Sante přejde do režimu Naplno, přeběhem se přesune k cíli, získá bonus k poškození a léčení a jeho schopnosti se přemění, ovšem za cenu snížené obrany.",
+            "dynamicDescription": "K'Sante roztříští své ntofo, čímž <status>odhodí</status> nepřátelského šampiona a způsobí mu <physicalDamage>@BaseDamage@ bodů fyzického poškození</physicalDamage>. Poté se přeběhem přesune za něj a přejde na @AllOutDuration@&nbsp;sek. do režimu <keywordMajor>Naplno</keywordMajor>. Pokud by měl nepřítel vrazit do zdi, bude <status>odhozen</status> skrz ni a K'Sante ho zasáhne znovu, čímž mu způsobí <physicalDamage>@TotalDamageSlamDown@ bodů fyzického poškození</physicalDamage>.<br><br>Během působení režimu <keywordMajor>Naplno</keywordMajor> jsou K'Santeho schopnosti vylepšené a získá <attackSpeed>@AttackSpeed*100@&nbsp;% k rychlosti útoků</attackSpeed>, @ArmorPenPercent*100@&nbsp;% k průraznosti bonusovým brněním a <omnivamp>@Omnivamp*100@&nbsp;% k léčení poškozením</omnivamp>, přijde však o <healing>@HealthLost*100@&nbsp;% maximálního zdraví</healing>, <scaleArmor>@DefensesLost*100@&nbsp;% bonusového brnění</scaleArmor> a <scaleMR>@DefensesLost*100@&nbsp;% bonusové odolnosti vůči magii</scaleMR>.@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,
