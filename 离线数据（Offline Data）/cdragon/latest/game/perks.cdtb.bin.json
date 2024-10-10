@@ -2605,7 +2605,7 @@
         "mEndOfGameStatDescriptions": [
             "perk_eog_stat_desc_CheapShot"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_total",
+        "mDisplayStatLocalizationKey": "perk_display_stat_CheapShot",
         "mIconTextureName": "ASSETS/Perks/Styles/Domination/CheapShot/CheapShot.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Domination/CheapShot/CheapShot.lua",
@@ -2614,6 +2614,19 @@
                     "DamageIncMin": 10.0,
                     "DamageIncMax": 45.0,
                     "Cooldown": 4.0
+                },
+                "mCalculations": {
+                    "DamageCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 10.0,
+                                "mEndValue": 45.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    }
                 },
                 "__type": "PerkScriptData"
             },
@@ -2641,20 +2654,17 @@
                 "mEffectAmount": {
                     "HarvestThreshold": 0.5,
                     "Cooldown": 35.0,
-                    "BaseDamageLow": 20.0,
-                    "BaseDamageHigh": 20.0,
+                    "BaseDamage": 20.0,
                     "ADRatio": 0.10000000149011612,
                     "APRatio": 0.05000000074505806,
                     "DamagePerSoulEssence": 9.0,
-                    "CooldownResetValue": 1.0,
-                    "{bbae84bb}": 4.0
+                    "CooldownResetValue": 1.0
                 },
                 "mEffectAmountGameMode": {
                     "{48eea983}": {
                         "mEffectAmountPerMode": {
                             "DamagePerSoulEssence": 2.0,
-                            "BaseDamageLow": 15.0,
-                            "BaseDamageHigh": 55.0
+                            "BaseDamage": 15.0
                         },
                         "__type": "PerkEffectAmountPerMode"
                     },
@@ -2662,12 +2672,39 @@
                         "mEffectAmountPerMode": {
                             "Cooldown": 12.0,
                             "DamagePerSoulEssence": 2.0,
-                            "BaseDamageLow": 10.0,
-                            "BaseDamageHigh": 50.0,
+                            "BaseDamage": 10.0,
                             "APRatio": 0.10000000149011612,
                             "ADRatio": 0.20000000298023224
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    },
+                    "ARAM": {
+                        "mEffectAmountPerMode": {
+                            "DamagePerSoulEssence": 4.0
+                        },
+                        "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "TotalDamage": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "BaseDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            {
+                                "mDataValue": "APRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 2,
+                                "mStatFormula": 2,
+                                "mDataValue": "ADRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -16691,7 +16728,7 @@
         "mEndOfGameStatDescriptions": [
             "perk_eog_stat_desc_TasteOfBlood1"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_total",
+        "mDisplayStatLocalizationKey": "perk_display_stat_TasteOfBlood",
         "mIconTextureName": "ASSETS/Perks/Styles/Domination/TasteOfBlood/GreenTerror_TasteOfBlood.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Domination/TasteOfBlood/TasteOfBloodTemp.lua",
@@ -16728,6 +16765,29 @@
                             "Cooldown": 15.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "HealCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 16.0,
+                                "mEndValue": 40.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            },
+                            {
+                                "mDataValue": "APRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 2,
+                                "mStatFormula": 2,
+                                "mDataValue": "ADRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -16775,7 +16835,8 @@
         "mShortDescLocalizationKey": "perk_short_desc_UltimateHunter",
         "mLongDescLocalizationKey": "perk_long_desc_UltimateHunter",
         "mEndOfGameStatDescriptions": [
-            "perk_eog_stat_desc_UltimateHunter"
+            "perk_eog_stat_desc_UltimateHunter",
+            "perk_eog_stat_desc_UltimateHunter2"
         ],
         "mDisplayStatLocalizationKey": "perk_display_stat_BountyHunter",
         "mIconTextureName": "ASSETS/Perks/Styles/Domination/UltimateHunter/UltimateHunter.dds",
@@ -18808,8 +18869,8 @@
         "mShortDescLocalizationKey": "perk_short_desc_TreasureHunter",
         "mLongDescLocalizationKey": "perk_long_desc_TreasureHunter",
         "mEndOfGameStatDescriptions": [
-            "perk_eog_stat_desc_TreasureHunter1",
-            "perk_eog_stat_desc_TreasureHunter2"
+            "perk_eog_stat_desc_TreasureHunter2",
+            "perk_eog_stat_desc_TreasureHunter1"
         ],
         "mDisplayStatLocalizationKey": "perk_display_stat_BountyHunter",
         "mIconTextureName": "ASSETS/Perks/Styles/Domination/TreasureHunter/TreasureHunter.dds",
@@ -27344,7 +27405,7 @@
         "mEndOfGameStatDescriptions": [
             "perk_eog_stat_desc_SuddenImpact1"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_total",
+        "mDisplayStatLocalizationKey": "perk_display_stat_SuddenImpact",
         "mIconTextureName": "ASSETS/Perks/Styles/Domination/SuddenImpact/SuddenImpact.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Domination/SuddenImpact/SuddenImpact.lua",
@@ -27532,7 +27593,7 @@
             "mSpellScriptData": {
                 "mEffectAmount": {
                     "SlowZoneDuration": 3.0,
-                    "SlowZoneSlowBase": 0.20000000298023224,
+                    "SlowZoneSlowBase": 20.0,
                     "SlowZoneLength": 700.0,
                     "SlowZoneWidth": 80.0,
                     "RayCount": 3.0,
@@ -27542,7 +27603,7 @@
                     "DmgReduction": 0.15000000596046448,
                     "SlowZoneSlowAPRatio": 0.05999999865889549,
                     "SlowZoneSlowbADRatio": 0.07000000029802322,
-                    "SlowZoneSlowHealShieldRatio": 0.09000000357627869
+                    "SlowZoneSlowHealShieldRatio": 90.0
                 },
                 "mEffectAmountGameMode": {
                     "URF": {
@@ -27550,6 +27611,39 @@
                             "Cooldown": 15.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "SlowZoneCalc": {
+                        "mMultiplier": {
+                            "mNumber": 0.009999999776482582,
+                            "__type": "NumberCalculationPart"
+                        },
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "SlowZoneSlowBase",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            {
+                                "mDataValue": "SlowZoneSlowAPRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 2,
+                                "mStatFormula": 2,
+                                "mDataValue": "SlowZoneSlowbADRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 31,
+                                "mDataValue": "SlowZoneSlowHealShieldRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "mDisplayAsPercent": true,
+                        "mPrecision": 1,
+                        "__type": "GameCalculation"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -55606,7 +55700,6 @@
                 "mEffectAmount": {
                     "BlockBase": 30.0,
                     "BlockMax": 60.0,
-                    "HealthRatio": 0.0,
                     "BlockCount": 3.0,
                     "BlockDuration": 1.5,
                     "Cooldown": 55.0
@@ -55617,6 +55710,19 @@
                             "Cooldown": 40.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "BlockCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 30.0,
+                                "mEndValue": 60.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -56618,7 +56724,7 @@
                 },
                 "pass": 1,
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": -10.0,
                     "reflectionFresnelColor": [
                         0.5176470875740051,
@@ -56860,7 +56966,7 @@
         "mEndOfGameStatDescriptions": [
             "perk_eog_stat_desc_Guardian1"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_total",
+        "mDisplayStatLocalizationKey": "perk_display_stat_Guardian",
         "mIconTextureName": "ASSETS/Perks/Styles/Resolve/Guardian/Guardian.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Resolve/Guardian/Guardian.lua",
@@ -56873,7 +56979,6 @@
                     "HPRatio": 0.07999999821186066,
                     "ShieldDuration": 1.5,
                     "Cooldown": 90.0,
-                    "Haste": 0.0,
                     "GuardDuration": 2.5,
                     "CooldownMaxLevel": 40.0,
                     "ThresholdMin": 90.0,
@@ -56886,6 +56991,52 @@
                             "CooldownMaxLevel": 30.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "ThresholdCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 90.0,
+                                "mEndValue": 250.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "ShieldCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 45.0,
+                                "mEndValue": 120.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            },
+                            {
+                                "mStatFormula": 2,
+                                "mDataValue": "APRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 11,
+                                "mStatFormula": 2,
+                                "mDataValue": "HPRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "CooldownCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 90.0,
+                                "mEndValue": 40.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -63956,7 +64107,7 @@
                 },
                 "pass": 15,
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": -1.0,
                     "reflectionOpacityGlancing": 2.0,
                     "reflectionFresnel": 0.10000000149011612,
@@ -64962,7 +65113,7 @@
         "mEndOfGameStatDescriptions": [
             "perk_eog_stat_desc_Demolish1"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_total",
+        "mDisplayStatLocalizationKey": "perk_display_stat_Demolish",
         "mIconTextureName": "ASSETS/Perks/Styles/Resolve/Demolish/Demolish.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Resolve/Demolish/Demolish.lua",
@@ -65010,6 +65161,23 @@
                             "OutputDamagePerStack": 50.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "DamageCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "OutputDamagePerStack",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 11,
+                                "mDataValue": "{58937909}",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -84053,7 +84221,7 @@
             "perk_eog_stat_desc_ConditioningArmor",
             "perk_eog_stat_desc_ConditioningMR"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_veteran",
+        "mDisplayStatLocalizationKey": "perk_display_stat_Conditioning",
         "mIconTextureName": "ASSETS/Perks/Styles/Resolve/Conditioning/Conditioning.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Resolve/Conditioning/Conditioning.lua",
@@ -84061,7 +84229,7 @@
                 "mEffectAmount": {
                     "ArmorBase": 8.0,
                     "MRBase": 8.0,
-                    "ExtraResist": 3.0,
+                    "ExtraResist": 0.029999999329447746,
                     "Range": 800.0,
                     "MinutesRequired": 12.0
                 },
@@ -84089,6 +84257,38 @@
                             "MinutesRequired": 8.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "ArmorCalcTooltip": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "ArmorBase",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 1,
+                                "mDataValue": "ExtraResist",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "MagicResistCalcTooltip": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "MRBase",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 5,
+                                "mDataValue": "ExtraResist",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -85586,16 +85786,8 @@
                     "StartingBaseDamage": 25.0,
                     "MaxBaseDamage": 120.0,
                     "DelayBeforeBurst": 2.5,
-                    "ResistInc": 0.0,
-                    "HealthRatio": 8.0,
-                    "MRRatio": 0.0,
-                    "SizeInc": 0.25,
-                    "SlowAmount": 0.15000000596046448,
-                    "SlowDuration": 2.5,
+                    "HealthRatio": 0.07999999821186066,
                     "FlatResists": 35.0,
-                    "FlatResistMaximum": 35.0,
-                    "DamageRatioAD": 0.0,
-                    "DamageRatioAP": 0.0,
                     "BonusResistMin": 80.0,
                     "BonusResistMax": 150.0,
                     "PercentBonusResist": 0.800000011920929
@@ -85606,6 +85798,68 @@
                             "Cooldown": 15.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "MaxResistCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 80.0,
+                                "mEndValue": 150.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "ArmorBuff": {
+                        "mSimpleTooltipCalculationDisplay": 2,
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "FlatResists",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 1,
+                                "mStatFormula": 2,
+                                "mDataValue": "PercentBonusResist",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "MagicResistBuff": {
+                        "mSimpleTooltipCalculationDisplay": 2,
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "FlatResists",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 5,
+                                "mStatFormula": 2,
+                                "mDataValue": "PercentBonusResist",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "DamageCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 25.0,
+                                "mEndValue": 120.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            },
+                            {
+                                "mStat": 11,
+                                "mStatFormula": 2,
+                                "mDataValue": "HealthRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -87697,7 +87951,7 @@
                 },
                 "pass": 15,
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": -0.5,
                     "reflectionOpacityGlancing": 2.0,
                     "reflectionFresnel": 0.10000000149011612,
@@ -89399,6 +89653,7 @@
                 },
                 "mCalculations": {
                     "BaseHeal": {
+                        "mSimpleTooltipCalculationDisplay": 4,
                         "mFormulaParts": [
                             {
                                 "mStartValue": 10.0,
@@ -89406,7 +89661,11 @@
                                 "__type": "ByCharLevelInterpolationCalculationPart"
                             }
                         ],
-                        "__type": "GameCalculation"
+                        "mRangedMultiplier": {
+                            "mDataValue": "RangedMod",
+                            "__type": "NamedDataValueCalculationPart"
+                        },
+                        "__type": "{e9a3c91d}"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -93217,20 +93476,20 @@
             "perk_eog_stat_desc_GraspOfTheUndying",
             "perk_eog_stat_desc_GraspOfTheUndyingHeal"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_total",
+        "mDisplayStatLocalizationKey": "perk_display_stat_GraspOfTheUndying",
         "mIconTextureName": "ASSETS/Perks/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.lua",
             "mSpellScriptData": {
                 "mEffectAmount": {
-                    "PercentHealthDamage": 3.5,
+                    "PercentHealthDamage": 0.03500000014901161,
                     "Window": 5.0,
                     "TriggerTime": 4.0,
-                    "PercentHealthHeal": 0.012000000104308128,
-                    "MaxHealthPerProc": 7.0,
-                    "RangedPenaltyMod": 0.4000000059604645,
-                    "RangedHealthPerProc": 4.0,
-                    "MeleeFlatHeal": 3.0
+                    "PercentHealthHeal": 0.013000000268220901,
+                    "MaxHealthPerProc": 5.0,
+                    "RangedPenaltyMod": 0.6000000238418579,
+                    "RangedHealthPerProc": 3.0,
+                    "MeleeFlatHeal": 0.0
                 },
                 "mEffectAmountGameMode": {
                     "{48eea983}": {
@@ -93260,6 +93519,38 @@
                             "RangedHealthPerProc": 6.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "DamageCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStat": 11,
+                                "mDataValue": "PercentHealthDamage",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "mRangedMultiplier": {
+                            "mDataValue": "RangedPenaltyMod",
+                            "__type": "NamedDataValueCalculationPart"
+                        },
+                        "__type": "{e9a3c91d}"
+                    },
+                    "HealCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStat": 11,
+                                "mDataValue": "PercentHealthHeal",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "mRangedMultiplier": {
+                            "mDataValue": "RangedPenaltyMod",
+                            "__type": "NamedDataValueCalculationPart"
+                        },
+                        "__type": "{e9a3c91d}"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -97821,6 +98112,41 @@
                             "RechargeTime": 15.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "DamageCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 30.0,
+                                "mEndValue": 130.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            },
+                            {
+                                "mDataValue": "APRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 2,
+                                "mStatFormula": 2,
+                                "mDataValue": "ADRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "CooldownCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 20.0,
+                                "mEndValue": 8.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "mPrecision": 1,
+                        "__type": "GameCalculation"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -102566,6 +102892,7 @@
                 },
                 "mCalculations": {
                     "NullifyingShieldSize": {
+                        "mSimpleTooltipCalculationDisplay": 4,
                         "mFormulaParts": [
                             {
                                 "mStartValue": 35.0,
@@ -102719,7 +103046,7 @@
                     "__type": "VfxAlphaErosionDefinitionData"
                 },
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": -2.0,
                     "reflectionOpacityGlancing": 0.0,
                     "reflectionFresnel": 0.30000001192092896,
@@ -104351,7 +104678,7 @@
                 },
                 "pass": 1,
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": -2.0,
                     "reflectionOpacityGlancing": 0.0,
                     "reflectionFresnel": 0.30000001192092896,
@@ -104717,24 +105044,23 @@
         "mEndOfGameStatDescriptions": [
             "perk_eog_stat_desc_PhaseRush"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_percent100",
+        "mDisplayStatLocalizationKey": "perk_display_stat_PhaseRush",
         "mIconTextureName": "ASSETS/Perks/Styles/Sorcery/PhaseRush/PhaseRush.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Sorcery/PhaseRush/PhaseRush.lua",
             "mSpellScriptData": {
                 "mEffectAmount": {
-                    "HasteBase": 0.15000000596046448,
-                    "HasteMax": 0.4000000059604645,
+                    "HasteBase": 0.25,
+                    "HasteMax": 0.5,
                     "SlowResist": 0.75,
                     "Duration": 3.0,
                     "Window": 4.0,
-                    "HasteBaseMelee": 0.25,
-                    "HasteMaxMelee": 0.5,
                     "MaxBonusSeconds": 4.0,
                     "{f9adb0b2}": 1.0,
                     "MinCooldown": 10.0,
                     "MaxCooldown": 30.0,
-                    "NumberToProc": 3.0
+                    "NumberToProc": 3.0,
+                    "RangedEffectiveness": 0.75
                 },
                 "mEffectAmountGameMode": {
                     "URF": {
@@ -104743,6 +105069,35 @@
                             "MaxCooldown": 10.0
                         },
                         "__type": "PerkEffectAmountPerMode"
+                    }
+                },
+                "mCalculations": {
+                    "CooldownCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 30.0,
+                                "mEndValue": 10.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "MoveSpeedCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 0.25,
+                                "mEndValue": 0.5,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "mDisplayAsPercent": true,
+                        "mRangedMultiplier": {
+                            "mDataValue": "RangedEffectiveness",
+                            "__type": "NamedDataValueCalculationPart"
+                        },
+                        "__type": "{e9a3c91d}"
                     }
                 },
                 "__type": "PerkScriptData"
@@ -107245,7 +107600,52 @@
                     "DamageBase": 10.0,
                     "DamageAPRatio": 0.05000000074505806,
                     "DamageADRatio": 0.10000000149011612,
-                    "ShieldRatioAD": 0.10000000149011612
+                    "ShieldRatioAD": 0.10000000149011612,
+                    "ShieldDuration": 2.5
+                },
+                "mCalculations": {
+                    "DamageCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 10.0,
+                                "mEndValue": 50.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            },
+                            {
+                                "mDataValue": "DamageAPRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 2,
+                                "mStatFormula": 2,
+                                "mDataValue": "DamageADRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "ShieldCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 30.0,
+                                "mEndValue": 100.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            },
+                            {
+                                "mDataValue": "ShieldRatio",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            },
+                            {
+                                "mStat": 2,
+                                "mStatFormula": 2,
+                                "mDataValue": "ShieldRatioAD",
+                                "__type": "StatByNamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    }
                 },
                 "__type": "PerkScriptData"
             },
@@ -107436,7 +107836,7 @@
                     "__type": "ValueColor"
                 },
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": -1.0,
                     "reflectionOpacityGlancing": 0.30000001192092896,
                     "reflectionFresnelColor": [
@@ -107522,7 +107922,7 @@
                     "__type": "ValueColor"
                 },
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": -1.0,
                     "reflectionOpacityGlancing": 0.75,
                     "reflectionFresnelColor": [
@@ -109244,7 +109644,7 @@
                     "__type": "ValueColor"
                 },
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": -1.0,
                     "reflectionOpacityGlancing": 0.75,
                     "reflectionFresnelColor": [
@@ -109730,7 +110130,7 @@
                     "__type": "ValueColor"
                 },
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": 5.0,
                     "reflectionOpacityGlancing": 1.100000023841858,
                     "reflectionFresnelColor": [
@@ -109871,7 +110271,7 @@
                     "__type": "ValueColor"
                 },
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": 3.0,
                     "reflectionOpacityGlancing": 0.30000001192092896,
                     "reflectionFresnelColor": [
@@ -113463,7 +113863,7 @@
         "mEndOfGameStatDescriptions": [
             "perk_eog_stat_desc_Waterwalking1"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_adaptive",
+        "mDisplayStatLocalizationKey": "perk_display_stat_Waterwalking",
         "mIconTextureName": "ASSETS/Perks/Styles/Sorcery/Waterwalking/Waterwalking.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Sorcery/Waterwalking/Waterwalking.lua",
@@ -113472,9 +113872,20 @@
                     "MovementSpeed": 10.0,
                     "{6f2f0d30}": 1.0,
                     "MinAdaptive": 13.0,
-                    "MaxAdaptive": 30.0,
-                    "{2721ae6e}": 0.0,
-                    "{8262575d}": 0.0
+                    "MaxAdaptive": 30.0
+                },
+                "mCalculations": {
+                    "AdaptiveForceCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 13.0,
+                                "mEndValue": 30.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    }
                 },
                 "__type": "PerkScriptData"
             },
@@ -113525,9 +113936,9 @@
             "mSpellScriptData": {
                 "mEffectAmount": {
                     "Duration": 2.0,
-                    "LowCDMSBoost": 0.11999999731779099,
-                    "{1c32110c}": 0.2800000011920929,
-                    "HighCDMSBoost": 0.3499999940395355,
+                    "LowCDMSBoost": 0.14000000059604645,
+                    "{1c32110c}": 0.3199999928474426,
+                    "HighCDMSBoost": 0.4000000059604645,
                     "{2fd68801}": 100.0,
                     "{b0d06764}": 250.0
                 },
@@ -119555,8 +119966,20 @@
                     "DamageMax": 40.0,
                     "DotDuration": 1.0,
                     "OOCTimer": 0.0,
-                    "{45ce49ab}": 10.0,
                     "{89367404}": 0.10000000149011612
+                },
+                "mCalculations": {
+                    "DamageCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 20.0,
+                                "mEndValue": 40.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    }
                 },
                 "__type": "PerkScriptData"
             },
@@ -129078,6 +129501,19 @@
                     "HealthPercent": 0.699999988079071,
                     "MinAdaptive": 3.0,
                     "MaxAdaptive": 30.0
+                },
+                "mCalculations": {
+                    "AdaptiveForceCalc": {
+                        "mSimpleTooltipCalculationDisplay": 4,
+                        "mFormulaParts": [
+                            {
+                                "mStartValue": 3.0,
+                                "mEndValue": 30.0,
+                                "__type": "ByCharLevelInterpolationCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    }
                 },
                 "__type": "PerkScriptData"
             },
@@ -150583,7 +151019,7 @@
             "perk_eog_stat_desc_Triumph1",
             "perk_eog_stat_desc_Triumph2"
         ],
-        "mDisplayStatLocalizationKey": "perk_display_stat_total",
+        "mDisplayStatLocalizationKey": "perk_display_stat_Triumph",
         "mIconTextureName": "ASSETS/Perks/Styles/Precision/Triumph.dds",
         "mScript": {
             "mSpellScriptName": "ASSETS/Perks/Styles/Precision/Triumph.lua",
@@ -158539,7 +158975,7 @@
                 },
                 "alphaRef": 0,
                 "reflectionDefinition": {
-                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Viego_Skin37.dds",
+                    "reflectionMapTexture": "ASSETS/Shared/Particles/Generic_White_Cubemap.SKINS_Yasuo_Skin87.dds",
                     "reflectionOpacityDirect": -1.0,
                     "reflectionFresnel": 0.20000000298023224,
                     "reflectionFresnelColor": [
