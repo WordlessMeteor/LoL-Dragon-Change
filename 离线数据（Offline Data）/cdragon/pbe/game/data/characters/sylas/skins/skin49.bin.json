@@ -260,6 +260,13 @@
             "unitHealthBarStyle": 11,
             "__type": "CharacterHealthBarDataRecord"
         },
+        "mEmblems": [
+            {
+                "mEmblemData": "Emblems/31",
+                "mLoadingScreenAnchor": 1,
+                "__type": "SkinEmblem"
+            }
+        ],
         "mResourceResolver": "Characters/Sylas/Skins/Skin49/Resources",
         "PersistentEffectConditions": [
             {
@@ -302,6 +309,14 @@
                         {
                             "mDriver": {
                                 "Spell": "Characters/Viego/Spells/ViegoPassiveAbility/ViegoPassiveSoul",
+                                "mDeactivateEarlySeconds": -1.0,
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "mScriptName": "KalistaRAllySpellLock",
                                 "mDeactivateEarlySeconds": -1.0,
                                 "__type": "HasBuffDynamicMaterialBoolDriver"
                             },
@@ -371,6 +386,14 @@
                                 "__type": "HasBuffDynamicMaterialBoolDriver"
                             },
                             "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "mScriptName": "KalistaRAllySpellLock",
+                                "mDeactivateEarlySeconds": -1.0,
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
                         }
                     ],
                     "__type": "AllTrueMaterialDriver"
@@ -397,7 +420,8 @@
                                         "mAnimationNames": [
                                             "Respawn",
                                             "Recall_Winddown",
-                                            "{cd46dbb8}"
+                                            "{cd46dbb8}",
+                                            "Death"
                                         ],
                                         "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
                                     },
@@ -449,6 +473,29 @@
                                         }
                                     ],
                                     "__type": "AllTrueMaterialDriver"
+                                },
+                                {
+                                    "mDrivers": [
+                                        {
+                                            "mAnimationNames": [
+                                                "Death"
+                                            ],
+                                            "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                        },
+                                        {
+                                            "mOperator": 4,
+                                            "mValueA": {
+                                                "mAnimationName": "Death",
+                                                "__type": "AnimationFractionDynamicMaterialFloatDriver"
+                                            },
+                                            "mValueB": {
+                                                "mValue": 0.5,
+                                                "__type": "FloatLiteralMaterialDriver"
+                                            },
+                                            "__type": "FloatComparisonMaterialDriver"
+                                        }
+                                    ],
+                                    "__type": "AllTrueMaterialDriver"
                                 }
                             ],
                             "__type": "OneTrueMaterialDriver"
@@ -456,6 +503,14 @@
                         {
                             "mDriver": {
                                 "Spell": "Characters/Viego/Spells/ViegoPassiveAbility/ViegoPassiveSoul",
+                                "mDeactivateEarlySeconds": -1.0,
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "mScriptName": "KalistaRAllySpellLock",
                                 "mDeactivateEarlySeconds": -1.0,
                                 "__type": "HasBuffDynamicMaterialBoolDriver"
                             },
@@ -512,6 +567,21 @@
                                     },
                                     {
                                         "Spell": "Characters/Viego/Spells/ViegoPassiveAbility/ViegoPassiveSoul",
+                                        "mDeactivateEarlySeconds": -1.0,
+                                        "__type": "HasBuffDynamicMaterialBoolDriver"
+                                    },
+                                    {
+                                        "mScriptName": "NeekoWClone",
+                                        "mDeactivateEarlySeconds": -1.0,
+                                        "__type": "HasBuffDynamicMaterialBoolDriver"
+                                    },
+                                    {
+                                        "mScriptName": "IllaoieSpirit",
+                                        "mDeactivateEarlySeconds": -1.0,
+                                        "__type": "HasBuffDynamicMaterialBoolDriver"
+                                    },
+                                    {
+                                        "mScriptName": "KalistaRAllySpellLock",
                                         "mDeactivateEarlySeconds": -1.0,
                                         "__type": "HasBuffDynamicMaterialBoolDriver"
                                     }
@@ -598,6 +668,21 @@
                                     },
                                     {
                                         "Spell": "Characters/Viego/Spells/ViegoPassiveAbility/ViegoPassiveSoul",
+                                        "mDeactivateEarlySeconds": -1.0,
+                                        "__type": "HasBuffDynamicMaterialBoolDriver"
+                                    },
+                                    {
+                                        "mScriptName": "NeekoWClone",
+                                        "mDeactivateEarlySeconds": -1.0,
+                                        "__type": "HasBuffDynamicMaterialBoolDriver"
+                                    },
+                                    {
+                                        "mScriptName": "IllaoieSpirit",
+                                        "mDeactivateEarlySeconds": -1.0,
+                                        "__type": "HasBuffDynamicMaterialBoolDriver"
+                                    },
+                                    {
+                                        "mScriptName": "KalistaRAllySpellLock",
                                         "mDeactivateEarlySeconds": -1.0,
                                         "__type": "HasBuffDynamicMaterialBoolDriver"
                                     }
@@ -698,7 +783,8 @@
                                         "mAnimationNames": [
                                             "Respawn",
                                             "Recall_Winddown",
-                                            "{cd46dbb8}"
+                                            "{cd46dbb8}",
+                                            "Death"
                                         ],
                                         "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
                                     },
@@ -750,6 +836,29 @@
                                         }
                                     ],
                                     "__type": "AllTrueMaterialDriver"
+                                },
+                                {
+                                    "mDrivers": [
+                                        {
+                                            "mAnimationNames": [
+                                                "Death"
+                                            ],
+                                            "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                        },
+                                        {
+                                            "mOperator": 4,
+                                            "mValueA": {
+                                                "mAnimationName": "Death",
+                                                "__type": "AnimationFractionDynamicMaterialFloatDriver"
+                                            },
+                                            "mValueB": {
+                                                "mValue": 0.5,
+                                                "__type": "FloatLiteralMaterialDriver"
+                                            },
+                                            "__type": "FloatComparisonMaterialDriver"
+                                        }
+                                    ],
+                                    "__type": "AllTrueMaterialDriver"
                                 }
                             ],
                             "__type": "OneTrueMaterialDriver"
@@ -757,6 +866,14 @@
                         {
                             "mDriver": {
                                 "Spell": "Characters/Viego/Spells/ViegoPassiveAbility/ViegoPassiveSoul",
+                                "mDeactivateEarlySeconds": -1.0,
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "mScriptName": "KalistaRAllySpellLock",
                                 "mDeactivateEarlySeconds": -1.0,
                                 "__type": "HasBuffDynamicMaterialBoolDriver"
                             },
