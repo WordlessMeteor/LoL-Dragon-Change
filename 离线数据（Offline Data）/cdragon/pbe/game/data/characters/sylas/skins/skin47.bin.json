@@ -321,6 +321,14 @@
                                 "__type": "HasBuffDynamicMaterialBoolDriver"
                             },
                             "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "mScriptName": "IllaoieSpirit",
+                                "mDeactivateEarlySeconds": -1.0,
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
                         }
                     ],
                     "__type": "AllTrueMaterialDriver"
@@ -390,6 +398,14 @@
                         {
                             "mDriver": {
                                 "mScriptName": "KalistaRAllySpellLock",
+                                "mDeactivateEarlySeconds": -1.0,
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "mScriptName": "IllaoieSpirit",
                                 "mDeactivateEarlySeconds": -1.0,
                                 "__type": "HasBuffDynamicMaterialBoolDriver"
                             },
@@ -511,6 +527,14 @@
                         {
                             "mDriver": {
                                 "mScriptName": "KalistaRAllySpellLock",
+                                "mDeactivateEarlySeconds": -1.0,
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "mScriptName": "IllaoieSpirit",
                                 "mDeactivateEarlySeconds": -1.0,
                                 "__type": "HasBuffDynamicMaterialBoolDriver"
                             },
@@ -892,6 +916,14 @@
                         {
                             "mDriver": {
                                 "mScriptName": "KalistaRAllySpellLock",
+                                "mDeactivateEarlySeconds": -1.0,
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "mScriptName": "IllaoieSpirit",
                                 "mDeactivateEarlySeconds": -1.0,
                                 "__type": "HasBuffDynamicMaterialBoolDriver"
                             },
@@ -25255,7 +25287,6 @@
             {
                 "samplerName": "Mask_2",
                 "textureName": "ASSETS/Characters/Sylas/Skins/Skin46/Sylas_Skin46_Hair_MaskSet_02_TX_CM.dds",
-                "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
@@ -25450,6 +25481,22 @@
             }
         ],
         "dynamicMaterial": {
+            "textures": [
+                {
+                    "name": "Diffuse_Texture",
+                    "options": [
+                        {
+                            "driver": {
+                                "SpellSlot": 0,
+                                "__type": "IsCastingBoolDriver"
+                            },
+                            "textureName": "ASSETS/Characters/Sylas/Skins/Skin46/Sylas_Skin46_Hair_Spell1_TX_CM.SKINS_Sylas_Skin46.dds",
+                            "__type": "DynamicMaterialTextureSwapOption"
+                        }
+                    ],
+                    "__type": "DynamicMaterialTextureSwapDef"
+                }
+            ],
             "__type": "DynamicMaterialDef"
         },
         "__type": "StaticMaterialDef"
@@ -25480,7 +25527,6 @@
             {
                 "samplerName": "Mask_2",
                 "textureName": "ASSETS/Characters/Sylas/Skins/Skin46/Sylas_Skin46_Hair_MaskSet_02_TX_CM.dds",
-                "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
@@ -25497,7 +25543,7 @@
                 "name": "SS_Scale",
                 "value": [
                     40.0,
-                    4.0,
+                    0.0,
                     0.0,
                     0.0
                 ],
@@ -25546,21 +25592,15 @@
             {
                 "name": "Dodge_Color",
                 "value": [
-                    0.9405203461647034,
-                    0.9405203461647034,
-                    0.4325017035007477,
+                    0.9400015473365784,
+                    0.9400015473365784,
+                    0.4299992322921753,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
                 "name": "Dodge_Bias",
-                "value": [
-                    -0.15000000596046448,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -25586,9 +25626,9 @@
             {
                 "name": "Fresnel_Color",
                 "value": [
-                    0.7507896423339844,
-                    0.024277104064822197,
-                    0.45146867632865906,
+                    0.7499961853027344,
+                    0.020004577934741974,
+                    0.45000380277633667,
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
@@ -25749,6 +25789,30 @@
                         "__type": "SwitchMaterialDriver"
                     },
                     "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Fresnel_Size",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "SpellSlot": 0,
+                                    "__type": "IsCastingBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 7.0,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 3.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
                 }
             ],
             "textures": [
@@ -25760,32 +25824,13 @@
                                 "SpellSlot": 0,
                                 "__type": "IsCastingBoolDriver"
                             },
-                            "textureName": "ASSETS/Characters/Sylas/Skins/Skin46/Sylas_Skin46_Hair_Spell1_TX_CM.SKINS_Sylas_Skin46.dds",
-                            "__type": "DynamicMaterialTextureSwapOption"
-                        },
-                        {
-                            "driver": {
-                                "SpellSlot": 2,
-                                "__type": "IsCastingBoolDriver"
-                            },
-                            "textureName": "ASSETS/Characters/Sylas/Skins/Skin46/Sylas_Skin46_Hair_Spell1_TX_CM.SKINS_Sylas_Skin46.dds",
+                            "textureName": "ASSETS/Characters/Sylas/Skins/Skin46/Sylas_Skin46_Hair_TX_CM.SKINS_Sylas_Skin46.dds",
                             "__type": "DynamicMaterialTextureSwapOption"
                         }
                     ],
                     "__type": "DynamicMaterialTextureSwapDef"
                 }
             ],
-            "staticSwitch": {
-                "name": "USE_FRESNEL_MASK_COLOR",
-                "driver": {
-                    "mDriver": {
-                        "SpellSlot": 0,
-                        "__type": "IsCastingBoolDriver"
-                    },
-                    "__type": "NotMaterialDriver"
-                },
-                "__type": "DynamicMaterialStaticSwitch"
-            },
             "__type": "DynamicMaterialDef"
         },
         "__type": "StaticMaterialDef"
