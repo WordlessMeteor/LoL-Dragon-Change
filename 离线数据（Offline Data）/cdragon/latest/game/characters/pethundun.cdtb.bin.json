@@ -80546,16 +80546,22 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask1",
+                "samplerName": "Mask_1",
                 "textureName": "ASSETS/Characters/PetHundun/Themes/Base/PetHundun_Base_Classic5_Mask_TX_CM.dds",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask2",
+                "samplerName": "Mask_2",
                 "textureName": "ASSETS/Characters/PetHundun/Themes/Base/PetHundun_Base_Classic5_TX_CM.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Fresnel_Texture",
+                "textureName": "ASSETS/Shared/Materials/black.dds",
                 "addressU": 1,
                 "addressV": 1,
+                "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -80581,17 +80587,17 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Color",
+                "name": "SS_Intensity",
                 "value": [
-                    0.8314793705940247,
-                    0.5932555198669434,
-                    0.033859770745038986,
-                    1.0
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Blue_Scale",
+                "name": "Dodge_Scale",
                 "value": [
                     10.0,
                     10.0,
@@ -80601,7 +80607,7 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Blue_Rate",
+                "name": "Dodge_Rate",
                 "value": [
                     0.35499998927116394,
                     0.0,
@@ -80611,7 +80617,21 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "BloomIntensity",
+                "name": "Dodge_Color",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dodge_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
                 "value": [
                     0.7250000238418579,
                     0.0,
@@ -80631,8 +80651,83 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Dodge_Bias",
+                "name": "Fresnel_Contrast",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Color",
+                "value": [
+                    0.8314793705940247,
+                    0.5932555198669434,
+                    0.033859770745038986,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Saturation",
+                "value": [
+                    5.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Scale",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Rate",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Override",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "ADD_SCREEN_SPACE_TEXTURE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OVERRLAY_DODGE_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_SATURATED_DIFFUSE_AS_FRESNEL_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FRESNEL_TEXTURE_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FRESNEL_TEXTURE_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
@@ -80722,17 +80817,23 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask1",
+                "samplerName": "Mask_1",
                 "textureName": "ASSETS/Characters/PetHundun/Themes/Base/PetHundun_Base_Classic5_Mask_TX_CM.dds",
                 "addressU": 3,
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask2",
+                "samplerName": "Mask_2",
                 "textureName": "ASSETS/Characters/PetHundun/Themes/Base/PetHundun_Base_Classic5_Mask_TX_CM.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Fresnel_Texture",
+                "textureName": "ASSETS/Shared/Materials/black.dds",
                 "addressU": 1,
                 "addressV": 1,
+                "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -80758,17 +80859,17 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Color",
+                "name": "SS_Intensity",
                 "value": [
-                    0.43576714396476746,
-                    0.40332648158073425,
-                    0.5493095517158508,
-                    1.0
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Blue_Scale",
+                "name": "Dodge_Scale",
                 "value": [
                     10.0,
                     10.0,
@@ -80778,7 +80879,7 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Blue_Rate",
+                "name": "Dodge_Rate",
                 "value": [
                     0.35499998927116394,
                     0.0,
@@ -80788,7 +80889,21 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "BloomIntensity",
+                "name": "Dodge_Color",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dodge_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
                 "value": [
                     0.7250000238418579,
                     0.0,
@@ -80808,8 +80923,83 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Dodge_Bias",
+                "name": "Fresnel_Contrast",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Color",
+                "value": [
+                    0.43576714396476746,
+                    0.40332648158073425,
+                    0.5493095517158508,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Saturation",
+                "value": [
+                    5.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Scale",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Rate",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Override",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "ADD_SCREEN_SPACE_TEXTURE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OVERRLAY_DODGE_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_SATURATED_DIFFUSE_AS_FRESNEL_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FRESNEL_TEXTURE_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FRESNEL_TEXTURE_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
@@ -80899,17 +81089,23 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask1",
+                "samplerName": "Mask_1",
                 "textureName": "ASSETS/Characters/PetHundun/Themes/Base/PetHundun_Base_Classic5_Mask_TX_CM.dds",
                 "addressU": 3,
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask2",
+                "samplerName": "Mask_2",
                 "textureName": "ASSETS/Characters/PetHundun/Themes/Base/PetHundun_Base_Classic5_Mask_TX_CM.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Fresnel_Texture",
+                "textureName": "ASSETS/Shared/Materials/black.dds",
                 "addressU": 1,
                 "addressV": 1,
+                "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -80935,17 +81131,17 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Color",
+                "name": "SS_Intensity",
                 "value": [
-                    0.43999388813972473,
-                    0.4000000059604645,
-                    0.5499961972236633,
-                    1.0
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Blue_Scale",
+                "name": "Dodge_Scale",
                 "value": [
                     10.0,
                     10.0,
@@ -80955,7 +81151,7 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Blue_Rate",
+                "name": "Dodge_Rate",
                 "value": [
                     0.35499998927116394,
                     0.0,
@@ -80965,7 +81161,21 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "BloomIntensity",
+                "name": "Dodge_Color",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dodge_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
                 "value": [
                     0.7250000238418579,
                     0.0,
@@ -80985,8 +81195,83 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Dodge_Bias",
+                "name": "Fresnel_Contrast",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Color",
+                "value": [
+                    0.43999388813972473,
+                    0.4000000059604645,
+                    0.5499961972236633,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Saturation",
+                "value": [
+                    5.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Scale",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Rate",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Override",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "ADD_SCREEN_SPACE_TEXTURE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OVERRLAY_DODGE_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_SATURATED_DIFFUSE_AS_FRESNEL_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FRESNEL_TEXTURE_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FRESNEL_TEXTURE_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
@@ -81076,17 +81361,23 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask1",
+                "samplerName": "Mask_1",
                 "textureName": "ASSETS/Characters/PetHundun/Themes/Base/PetHundun_Base_Classic5_OpenmouthMask_TX_CM.dds",
                 "addressU": 3,
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask2",
+                "samplerName": "Mask_2",
                 "textureName": "ASSETS/Characters/PetHundun/Themes/Base/PetHundun_Base_Classic5_OpenmouthMask_TX_CM.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Fresnel_Texture",
+                "textureName": "ASSETS/Shared/Materials/black.dds",
                 "addressU": 1,
                 "addressV": 1,
+                "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -81112,17 +81403,17 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Color",
+                "name": "SS_Intensity",
                 "value": [
-                    0.43999388813972473,
-                    0.4000000059604645,
-                    0.5499961972236633,
-                    1.0
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Blue_Scale",
+                "name": "Dodge_Scale",
                 "value": [
                     10.0,
                     10.0,
@@ -81132,7 +81423,7 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Blue_Rate",
+                "name": "Dodge_Rate",
                 "value": [
                     0.35499998927116394,
                     0.0,
@@ -81142,7 +81433,21 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "BloomIntensity",
+                "name": "Dodge_Color",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dodge_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
                 "value": [
                     0.7250000238418579,
                     0.0,
@@ -81162,8 +81467,83 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Dodge_Bias",
+                "name": "Fresnel_Contrast",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Color",
+                "value": [
+                    0.43999388813972473,
+                    0.4000000059604645,
+                    0.5499961972236633,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Saturation",
+                "value": [
+                    5.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Scale",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Rate",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Additional_Alpha_Override",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Bias",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "ADD_SCREEN_SPACE_TEXTURE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OVERRLAY_DODGE_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_SATURATED_DIFFUSE_AS_FRESNEL_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FRESNEL_TEXTURE_COLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FRESNEL_TEXTURE_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
