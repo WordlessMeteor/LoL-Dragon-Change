@@ -133448,7 +133448,15 @@
         "name": "Characters/Leblanc/Skins/Skin57/Materials/Matcap_Iridescent_Holographic_Cape",
         "samplerValues": [
             {
-                "samplerName": "OutlineMask_Texture",
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/Leblanc/Skins/Skin57/Leblanc_Skin57_TX_CM.Chroma_Leblanc_HallOfLegends.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask_Texture",
                 "textureName": "ASSETS/Characters/Leblanc/Skins/Skin57/Leblanc_Skin57_Mask_TX_CM.Chroma_Leblanc_HallOfLegends.dds",
                 "addressU": 1,
                 "addressV": 1,
@@ -133462,14 +133470,6 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Diffuse_Texture",
-                "textureName": "ASSETS/Characters/Leblanc/Skins/Skin57/Leblanc_Skin57_TX_CM.Chroma_Leblanc_HallOfLegends.dds",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
                 "samplerName": "iridescentTex",
                 "textureName": "ASSETS/Characters/Leblanc/Skins/Skin57/Holochroma_Gradient.Chroma_Leblanc_HallOfLegends.dds",
                 "addressW": 1,
@@ -133477,7 +133477,7 @@
             },
             {
                 "samplerName": "Noise_Texture",
-                "textureName": "ASSETS/Shared/Materials/Cloth_test_RMA.tex",
+                "textureName": "ASSETS/Shared/Materials/SRI_Icon_Noise.dds",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
@@ -133503,8 +133503,12 @@
             },
             {
                 "name": "MatCap_Strength",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "MatCapSpecularPower",
                 "value": [
-                    1.2999999523162842,
+                    1.0,
                     0.0,
                     0.0,
                     0.0
@@ -133512,9 +133516,19 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "SpecularPower",
+                "name": "MatCapSpecularTintColor",
                 "value": [
-                    0.800000011920929,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Iridescent_Strength",
+                "value": [
+                    0.05000000074505806,
                     0.0,
                     0.0,
                     0.0
@@ -133522,29 +133536,29 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "SpecularTintColor",
+                "name": "Iridescent_Value",
                 "value": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    0.5000076293945312
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "IridescentControl",
-                "value": [
-                    1.0,
-                    3.0,
-                    0.5,
+                    0.6000000238418579,
+                    0.0,
+                    0.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "NoiseStrength",
+                "name": "Iridescent_Power",
                 "value": [
-                    1.149999976158142,
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Iridescent_Normal_Blend",
+                "value": [
+                    1.0,
                     0.0,
                     0.0,
                     0.0
@@ -133554,7 +133568,7 @@
             {
                 "name": "Holo_Strength",
                 "value": [
-                    1.2000000476837158,
+                    0.30000001192092896,
                     0.0,
                     0.0,
                     0.0
@@ -133562,30 +133576,40 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Holo_Size",
-                "value": [
-                    1.3250000476837158,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Speed",
-                "value": [
-                    0.2750000059604645,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Noise_UV_TileAmount",
+                "name": "Holo_Gradient_Contrast",
                 "value": [
                     1.0,
-                    0.20000000298023224,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BaseNoiseUVTile",
+                "value": [
+                    0.5,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BaseNoiseScrollSpeed",
+                "value": [
+                    0.10000000149011612,
+                    0.10000000149011612,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "NoiseStrength",
+                "value": [
+                    0.5,
+                    0.0,
                     0.0,
                     0.0
                 ],
@@ -133594,7 +133618,7 @@
             {
                 "name": "Flowspeed",
                 "value": [
-                    0.6000000238418579,
+                    0.3499999940395355,
                     0.0,
                     0.0,
                     0.0
@@ -133604,20 +133628,33 @@
         ],
         "switches": [
             {
-                "name": "IRIDESCENCE_ON",
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "MATCAP_MASK_ON",
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
                 "name": "MATCAP_ON",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
             },
             {
+                "name": "MATCAP_MASK_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "IRIDESCENCE_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "IRIDESCENT_MASK_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "HOLOGRAPHIC_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "HOLOGRAPHIC_MASK_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWMAP_ON",
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
@@ -133801,7 +133838,15 @@
         "name": "Characters/Leblanc/Skins/Skin57/Materials/Matcap_Iridescent_Holographic_Body",
         "samplerValues": [
             {
-                "samplerName": "OutlineMask_Texture",
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/Leblanc/Skins/Skin57/Leblanc_Skin57_TX_CM.Chroma_Leblanc_HallOfLegends.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Mask_Texture",
                 "textureName": "ASSETS/Characters/Leblanc/Skins/Skin57/Leblanc_Skin57_Mask_TX_CM.Chroma_Leblanc_HallOfLegends.dds",
                 "addressU": 1,
                 "addressV": 1,
@@ -133815,14 +133860,6 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Diffuse_Texture",
-                "textureName": "ASSETS/Characters/Leblanc/Skins/Skin57/Leblanc_Skin57_TX_CM.Chroma_Leblanc_HallOfLegends.dds",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
                 "samplerName": "iridescentTex",
                 "textureName": "ASSETS/Characters/Leblanc/Skins/Skin57/iridescent.Chroma_Leblanc_HallOfLegends.dds",
                 "addressW": 1,
@@ -133830,7 +133867,7 @@
             },
             {
                 "samplerName": "Noise_Texture",
-                "textureName": "ASSETS/Shared/Materials/Cloth_test_RMA.tex",
+                "textureName": "ASSETS/Shared/Materials/SRI_Icon_Noise.dds",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
@@ -133865,7 +133902,7 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "SpecularPower",
+                "name": "MatCapSpecularPower",
                 "value": [
                     1.399999976158142,
                     0.0,
@@ -133875,7 +133912,7 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "SpecularTintColor",
+                "name": "MatCapSpecularTintColor",
                 "value": [
                     1.0,
                     1.0,
@@ -133885,11 +133922,81 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "IridescentControl",
+                "name": "Iridescent_Strength",
                 "value": [
-                    0.6000000238418579,
+                    0.20000000298023224,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Iridescent_Value",
+                "value": [
+                    0.20000000298023224,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Iridescent_Power",
+                "value": [
+                    0.30000001192092896,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Iridescent_Normal_Blend",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Holo_Strength",
+                "value": [
+                    0.25,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Holo_Gradient_Contrast",
+                "value": [
                     2.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BaseNoiseUVTile",
+                "value": [
                     0.5,
+                    0.10000000149011612,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BaseNoiseScrollSpeed",
+                "value": [
+                    0.009999999776482582,
+                    -0.007000000216066837,
+                    0.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
@@ -133905,49 +134012,9 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Holo_Strength",
-                "value": [
-                    0.800000011920929,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Holo_Size",
-                "value": [
-                    2.450000047683716,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Speed",
-                "value": [
-                    0.4000000059604645,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Noise_UV_TileAmount",
-                "value": [
-                    1.0,
-                    0.20000000298023224,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Flowspeed",
                 "value": [
-                    0.375,
+                    0.20000000298023224,
                     0.0,
                     0.0,
                     0.0
@@ -133957,20 +134024,33 @@
         ],
         "switches": [
             {
-                "name": "IRIDESCENCE_ON",
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "MATCAP_MASK_ON",
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
                 "name": "MATCAP_ON",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
             },
             {
+                "name": "MATCAP_MASK_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "IRIDESCENCE_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "IRIDESCENT_MASK_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "HOLOGRAPHIC_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "HOLOGRAPHIC_MASK_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWMAP_ON",
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
