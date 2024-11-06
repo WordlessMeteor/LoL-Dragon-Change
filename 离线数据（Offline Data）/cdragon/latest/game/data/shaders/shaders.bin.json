@@ -25411,7 +25411,7 @@
             },
             {
                 "name": "Dissolve_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Materials/TFT_Darkstar_Noise.dds",
+                "defaultTexturePath": "ASSETS/Shared/Materials/TFT_Darkstar_Noise.tex",
                 "__type": "ShaderTexture"
             }
         ],
@@ -30784,19 +30784,90 @@
                 "name": "Parameter1",
                 "data": [
                     1.0,
-                    2.0,
-                    0.0,
-                    0.0
+                    1.0,
+                    1.0,
+                    1.0
                 ],
                 "logicalParameters": [
                     {
-                        "name": "MatCap_Strength",
+                        "name": "MatCapSpecularTintColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "data": [
+                    1.0,
+                    0.5,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "MatCapSpecularPower",
                         "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "SpecularPower",
+                        "name": "MatCap_Strength",
                         "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Iridescent_Value",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Iridescent_Power",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter3",
+                "data": [
+                    1.0,
+                    0.5,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Iridescent_Normal_Blend",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Iridescent_Strength",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "BaseNoiseUVTile",
+                        "fields": 12,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter4",
+                "data": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "BaseNoiseScrollSpeed",
+                        "fields": 3,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
@@ -30813,60 +30884,21 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter2",
-                "data": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "SpecularTintColor",
-                        "fields": 15,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Parameter3",
+                "name": "Parameter5",
                 "data": [
                     1.0,
                     0.5,
-                    1.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "IridescentControl",
-                        "fields": 7,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
-                        "name": "Speed",
-                        "fields": 8,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Parameter4",
-                "data": [
-                    1.0,
-                    2.0,
                     0.0,
                     0.0
                 ],
                 "logicalParameters": [
                     {
-                        "name": "Holo_Strength",
+                        "name": "Holo_Gradient_Contrast",
                         "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "Holo_Size",
+                        "name": "Holo_Strength",
                         "fields": 2,
                         "__type": "ShaderLogicalParameter"
                     }
@@ -30884,7 +30916,19 @@
                 "__type": "ShaderStaticSwitch"
             },
             {
+                "name": "IRIDESCENT_MASK_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "IRIDESCENCE_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "FLOWMAP_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "HOLOGRAPHIC_MASK_ON",
                 "__type": "ShaderStaticSwitch"
             },
             {
@@ -30894,8 +30938,8 @@
         ],
         "textures": [
             {
-                "name": "OutlineMask_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Materials/Atlast_Test.dds",
+                "name": "Diffuse_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/white.dds",
                 "__type": "ShaderTexture"
             },
             {
@@ -30904,8 +30948,8 @@
                 "__type": "ShaderTexture"
             },
             {
-                "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Materials/rock_texture.dds",
+                "name": "Mask_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/Atlast_Test.dds",
                 "__type": "ShaderTexture"
             },
             {
@@ -37423,7 +37467,7 @@
         "textures": [
             {
                 "name": "Border_Texture",
-                "defaultTexturePath": "ASSETS/Maps/KitPieces/TFT/Galaxy/Textures/GalaxyCeremonyRing_01.dds",
+                "defaultTexturePath": "ASSETS/Maps/KitPieces/TFT/Galaxy/Textures/GalaxyCeremonyRing_01.tex",
                 "__type": "ShaderTexture"
             },
             {

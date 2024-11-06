@@ -150,13 +150,11 @@
                         "Play_vo_SamiraSkin30_Kill3DNaafiriSkin01",
                         "Play_vo_SamiraSkin30_Kill3DPenta",
                         "Play_vo_SamiraSkin30_Kill3DPykeSkin53",
-                        "Play_vo_SamiraSkin30_Kill3DR",
                         "Play_vo_SamiraSkin30_Kill3DSettSkin45",
                         "Play_vo_SamiraSkin30_Kill3DShacoSkin43",
                         "Play_vo_SamiraSkin30_Kill3DTurret",
                         "Play_vo_SamiraSkin30_Kill3DViegoSkin30",
                         "Play_vo_SamiraSkin30_Laugh3DGeneral",
-                        "Play_vo_SamiraSkin30_LevelUp3DGeneral",
                         "Play_vo_SamiraSkin30_Move2DFirst",
                         "Play_vo_SamiraSkin30_Move2DFirstAllySoulFighter",
                         "Play_vo_SamiraSkin30_Move2DFirstAllyViegoSkin30",
@@ -175,6 +173,7 @@
                         "Play_vo_SamiraSkin30_SamiraR_cast3D",
                         "Play_vo_SamiraSkin30_SamiraW_cast3D",
                         "Play_vo_SamiraSkin30_Shop2DOpen",
+                        "Play_vo_SamiraSkin30_Spell2DRankUpGeneral",
                         "Play_vo_SamiraSkin30_Spell2DRRankOne",
                         "Play_vo_SamiraSkin30_Spell3DRCastReady",
                         "Play_vo_SamiraSkin30_Taunt3DGeneral",
@@ -210617,34 +210616,10 @@
                 ],
                 "__type": "ContextualSituation"
             },
-            "CharacterLevelUp": {
-                "mRules": [
-                    {
-                        "mRuleName": "Level up",
-                        "mConditions": [
-                            {
-                                "mPercentChanceToPlay": 30,
-                                "__type": "ContextualConditionChanceToPlay"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mMaxOccurences": 6,
-                            "mSelfEventName": "LevelUp3DGeneral",
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "CooldownModifications": {
-                            "IgnoreTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
-                        },
-                        "__type": "ContextualRule"
-                    }
-                ],
-                "__type": "ContextualSituation"
-            },
             "SpellLevelUp": {
                 "mRules": [
                     {
-                        "mRuleName": "Level up",
+                        "mRuleName": "Level up R",
                         "mConditions": [
                             {
                                 "mSpellLevel": 1,
@@ -210665,6 +210640,25 @@
                             "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Level up General",
+                        "mConditions": [
+                            {
+                                "mPercentChanceToPlay": 30,
+                                "__type": "ContextualConditionChanceToPlay"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 6,
+                            "mSelfEventName": "Spell2DRankUpGeneral",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
                     }
                 ],
                 "__type": "ContextualSituation"
@@ -210677,11 +210671,14 @@
                             {
                                 "SpellBuff": "{af22fda5}",
                                 "__type": "ContextualConditionSpellBuffName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 100,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
                             "mSelfEventName": "Spell3DRCastReady",
-                            "mWaitForAnnouncerQueue": true,
                             "__type": "ContextualActionPlayVO"
                         },
                         "mPriority": 80,

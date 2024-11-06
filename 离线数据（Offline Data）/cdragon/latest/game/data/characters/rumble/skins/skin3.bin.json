@@ -33,7 +33,6 @@
                         "Play_vo_RumbleSkin03_Move2DStandard",
                         "Play_vo_RumbleSkin03_Recall3DGeneral",
                         "Play_vo_RumbleSkin03_RumbleBasicAttack2_cast3D",
-                        "Play_vo_RumbleSkin03_RumbleBasicAttack3_cast3D",
                         "Play_vo_RumbleSkin03_RumbleBasicAttack_cast3D",
                         "Play_vo_RumbleSkin03_RumbleCarpetBomb_cast3D",
                         "Play_vo_RumbleSkin03_RumbleCritAttack_cast3D",
@@ -41,12 +40,11 @@
                         "Play_vo_RumbleSkin03_RumbleFlameThrowerVODangerZone_cast3D",
                         "Play_vo_RumbleSkin03_RumbleGrenadeVO_cast3D",
                         "Play_vo_RumbleSkin03_RumbleGrenadeVODangerZone_cast3D",
-                        "Play_vo_RumbleSkin03_RumbleOverheat_OnBuffActivate",
-                        "Play_vo_RumbleSkin03_RumbleOverheatSound_OnBuffActivate",
                         "Play_vo_RumbleSkin03_RumbleShieldVO_cast3D",
                         "Play_vo_RumbleSkin03_RumbleShieldVODangerZone_cast3D",
-                        "Play_vo_RumbleSkin03_Taunt3DGeneral",
-                        "Stop_vo_RumbleSkin03_RumbleOverheatSound_OnBuffActivate"
+                        "Play_vo_RumbleSkin03_Spell3DPCast",
+                        "Play_vo_RumbleSkin03_Spell3DPEnd",
+                        "Play_vo_RumbleSkin03_Taunt3DGeneral"
                     ],
                     "voiceOver": true,
                     "__type": "BankUnit"
@@ -111,34 +109,6 @@
                         "ASSETS/Sounds/Wwise2016/SFX/Characters/Rumble/Skins/Base/Rumble_Base_SFX_audio.bnk",
                         "ASSETS/Sounds/Wwise2016/SFX/Characters/Rumble/Skins/Base/Rumble_Base_SFX_events.bnk"
                     ],
-                    "__type": "BankUnit"
-                },
-                {
-                    "name": "Rumble_Base_VO",
-                    "bankPath": [
-                        "ASSETS/Sounds/Wwise2016/VO/en_US/Characters/Rumble/Skins/Base/Rumble_Base_VO_audio.bnk",
-                        "ASSETS/Sounds/Wwise2016/VO/en_US/Characters/Rumble/Skins/Base/Rumble_Base_VO_events.bnk",
-                        "ASSETS/Sounds/Wwise2016/VO/en_US/Characters/Rumble/Skins/Base/Rumble_Base_VO_audio.wpk"
-                    ],
-                    "events": [
-                        "Play_vo_Rumble_Attack2DGeneral",
-                        "Play_vo_Rumble_Death3D",
-                        "Play_vo_Rumble_Joke3DGeneral",
-                        "Play_vo_Rumble_Laugh3DGeneral",
-                        "Play_vo_Rumble_Move2DStandard",
-                        "Play_vo_Rumble_RumbleBasicAttack2_cast3D",
-                        "Play_vo_Rumble_RumbleBasicAttack_cast3D",
-                        "Play_vo_Rumble_RumbleCarpetBomb_cast3D",
-                        "Play_vo_Rumble_RumbleCritAttack_cast3D",
-                        "Play_vo_Rumble_RumbleFlameThrowerVO_cast3D",
-                        "Play_vo_Rumble_RumbleFlameThrowerVODangerZone_cast3D",
-                        "Play_vo_Rumble_RumbleOverheat_OnBuffActivate",
-                        "Play_vo_Rumble_RumbleOverheat_OnBuffDeactivate",
-                        "Play_vo_Rumble_RumbleOverheatSound_OnBuffActivate",
-                        "Play_vo_Rumble_Taunt3DGeneral",
-                        "Stop_vo_Rumble_RumbleOverheatSound_OnBuffActivate"
-                    ],
-                    "voiceOver": true,
                     "__type": "BankUnit"
                 }
             ],
@@ -2320,7 +2290,7 @@
                     },
                     "erosionFeatherIn": 0.30000001192092896,
                     "erosionFeatherOut": 0.30000001192092896,
-                    "erosionMapName": "ASSETS/Shared/Particles/Base_SmokeErode.TFT_Set12.dds",
+                    "erosionMapName": "ASSETS/Shared/Particles/Base_SmokeErode.HA_CREPE.dds",
                     "erosionMapChannelMixer": {
                         "constantValue": [
                             1.0,
@@ -31545,15 +31515,27 @@
         "mCooldown": 15.0,
         "mSituations": {
             "RecallLeadIn": {
-                "mCoolDownTime": 10.0,
                 "mRules": [
                     {
                         "mRuleName": "Recall",
+                        "mConditions": [
+                            {
+                                "mRuleCooldown": 10.0,
+                                "__type": "ContextualConditionRuleCooldown"
+                            },
+                            {
+                                "mPercentChanceToPlay": 50,
+                                "__type": "ContextualConditionChanceToPlay"
+                            }
+                        ],
                         "mAudioAction": {
                             "mSelfEventName": "Recall3DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -31571,7 +31553,7 @@
                             }
                         ],
                         "mAudioAction": {
-                            "mSelfEventName": "MoveOrder2D",
+                            "mSelfEventName": "Move2DStandard",
                             "__type": "ContextualActionPlayVO"
                         },
                         "__type": "ContextualRule"
@@ -31632,6 +31614,10 @@
                             {
                                 "mSpell": "Characters/Rumble/Spells/RumbleBasicAttack",
                                 "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 35,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
@@ -31642,7 +31628,11 @@
                             "mWaitTimeout": -1.0,
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
@@ -31651,6 +31641,10 @@
                             {
                                 "mSpell": "Characters/Rumble/Spells/RumbleBasicAttack2",
                                 "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 35,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
@@ -31661,7 +31655,11 @@
                             "mWaitTimeout": -1.0,
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
@@ -31670,6 +31668,10 @@
                             {
                                 "mSpell": "Characters/Rumble/Spells/RumbleCritAttack",
                                 "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 35,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
@@ -31680,7 +31682,173 @@
                             "mWaitTimeout": -1.0,
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Q",
+                        "mConditions": [
+                            {
+                                "mSpell": "Characters/Rumble/Spells/RumbleFlameThrowerAbility/RumbleFlameThrowerVO",
+                                "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 45,
+                                "__type": "ContextualConditionChanceToPlay"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "cast3D",
+                            "mAllyEventName": "cast3D",
+                            "mEnemyEventName": "cast3D",
+                            "mSpectatorEventName": "cast3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Q Danger",
+                        "mConditions": [
+                            {
+                                "mSpell": "Characters/Rumble/Spells/RumbleFlameThrowerAbility/RumbleFlameThrowerVODangerZone",
+                                "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 40,
+                                "__type": "ContextualConditionChanceToPlay"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "cast3D",
+                            "mAllyEventName": "cast3D",
+                            "mEnemyEventName": "cast3D",
+                            "mSpectatorEventName": "cast3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "W",
+                        "mConditions": [
+                            {
+                                "mSpell": "Characters/Rumble/Spells/RumbleShieldAbility/RumbleShieldVO",
+                                "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 50,
+                                "__type": "ContextualConditionChanceToPlay"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "cast3D",
+                            "mAllyEventName": "cast3D",
+                            "mEnemyEventName": "cast3D",
+                            "mSpectatorEventName": "cast3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "W Danger",
+                        "mConditions": [
+                            {
+                                "mSpell": "Characters/Rumble/Spells/RumbleShieldAbility/RumbleShieldVODangerZone",
+                                "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 35,
+                                "__type": "ContextualConditionChanceToPlay"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "cast3D",
+                            "mAllyEventName": "cast3D",
+                            "mEnemyEventName": "cast3D",
+                            "mSpectatorEventName": "cast3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "E",
+                        "mConditions": [
+                            {
+                                "mSpell": "{a8100813}",
+                                "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 50,
+                                "__type": "ContextualConditionChanceToPlay"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "cast3D",
+                            "mAllyEventName": "cast3D",
+                            "mEnemyEventName": "cast3D",
+                            "mSpectatorEventName": "cast3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "E Danger",
+                        "mConditions": [
+                            {
+                                "mSpell": "Characters/Rumble/Spells/RumbleGrenadeAbility/RumbleGrenadeVODangerZone",
+                                "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 30,
+                                "__type": "ContextualConditionChanceToPlay"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "cast3D",
+                            "mAllyEventName": "cast3D",
+                            "mEnemyEventName": "cast3D",
+                            "mSpectatorEventName": "cast3D",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
@@ -31699,121 +31867,12 @@
                             "mWaitTimeout": -1.0,
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
-                        "__type": "ContextualRule"
-                    },
-                    {
-                        "mRuleName": "Q",
-                        "mConditions": [
-                            {
-                                "mSpell": "Characters/Rumble/Spells/RumbleFlameThrowerAbility/RumbleFlameThrowerVO",
-                                "__type": "ContextualConditionSpellName"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mSelfEventName": "cast3D",
-                            "mAllyEventName": "cast3D",
-                            "mEnemyEventName": "cast3D",
-                            "mSpectatorEventName": "cast3D",
-                            "mWaitTimeout": -1.0,
-                            "__type": "ContextualActionPlayVO"
+                        "mPriority": 100,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
                         },
-                        "mOverrideCacCooldown": true,
-                        "__type": "ContextualRule"
-                    },
-                    {
-                        "mRuleName": "QDanger",
-                        "mConditions": [
-                            {
-                                "mSpell": "Characters/Rumble/Spells/RumbleFlameThrowerAbility/RumbleFlameThrowerVODangerZone",
-                                "__type": "ContextualConditionSpellName"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mSelfEventName": "cast3D",
-                            "mAllyEventName": "cast3D",
-                            "mEnemyEventName": "cast3D",
-                            "mSpectatorEventName": "cast3D",
-                            "mWaitTimeout": -1.0,
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "mOverrideCacCooldown": true,
-                        "__type": "ContextualRule"
-                    },
-                    {
-                        "mRuleName": "W",
-                        "mConditions": [
-                            {
-                                "mSpell": "Characters/Rumble/Spells/RumbleShieldAbility/RumbleShieldVO",
-                                "__type": "ContextualConditionSpellName"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mSelfEventName": "cast3D",
-                            "mAllyEventName": "cast3D",
-                            "mEnemyEventName": "cast3D",
-                            "mSpectatorEventName": "cast3D",
-                            "mWaitTimeout": -1.0,
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "mOverrideCacCooldown": true,
-                        "__type": "ContextualRule"
-                    },
-                    {
-                        "mRuleName": "WDanger",
-                        "mConditions": [
-                            {
-                                "mSpell": "Characters/Rumble/Spells/RumbleShieldAbility/RumbleShieldVODangerZone",
-                                "__type": "ContextualConditionSpellName"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mSelfEventName": "cast3D",
-                            "mAllyEventName": "cast3D",
-                            "mEnemyEventName": "cast3D",
-                            "mSpectatorEventName": "cast3D",
-                            "mWaitTimeout": -1.0,
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "mOverrideCacCooldown": true,
-                        "__type": "ContextualRule"
-                    },
-                    {
-                        "mRuleName": "E",
-                        "mConditions": [
-                            {
-                                "mSpell": "Characters/Rumble/Spells/RumbleGrenadeAbility/RumbleGrenadeVO",
-                                "__type": "ContextualConditionSpellName"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mSelfEventName": "cast3D",
-                            "mAllyEventName": "cast3D",
-                            "mEnemyEventName": "cast3D",
-                            "mSpectatorEventName": "cast3D",
-                            "mWaitTimeout": -1.0,
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "mOverrideCacCooldown": true,
-                        "__type": "ContextualRule"
-                    },
-                    {
-                        "mRuleName": "EDanger",
-                        "mConditions": [
-                            {
-                                "mSpell": "Characters/Rumble/Spells/RumbleGrenadeAbility/RumbleGrenadeVODangerZone",
-                                "__type": "ContextualConditionSpellName"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mSelfEventName": "cast3D",
-                            "mAllyEventName": "cast3D",
-                            "mEnemyEventName": "cast3D",
-                            "mSpectatorEventName": "cast3D",
-                            "mWaitTimeout": -1.0,
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "mOverrideCacCooldown": true,
                         "__type": "ContextualRule"
                     }
                 ],
@@ -31824,8 +31883,13 @@
                     {
                         "mRuleName": "First Move",
                         "mAudioAction": {
+                            "mMaxOccurences": 1,
                             "mSelfEventName": "Move2DStandard",
                             "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
                     }
@@ -31844,7 +31908,10 @@
                             "mWaitTimeout": -1.0,
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -31862,7 +31929,10 @@
                             "mWaitTimeout": -1.0,
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -31880,7 +31950,10 @@
                             "mWaitTimeout": -1.0,
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -31907,11 +31980,66 @@
                         "mAudioAction": {
                             "mMaxOccurences": 1,
                             "mSelfEventName": "FirstEncounter3DTristana",
-                            "mEnemyEventName": "FirstEncounter3DTristana",
                             "__type": "ContextualActionPlayVO"
                         },
                         "CooldownModifications": {
                             "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "SpellBuffRemove": {
+                "mRules": [
+                    {
+                        "mRuleName": "Overheat end",
+                        "mConditions": [
+                            {
+                                "SpellBuff": "{b890fcbc}",
+                                "__type": "ContextualConditionSpellBuffName"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "Spell3DPEnd",
+                            "mAllyEventName": "Spell3DPEnd",
+                            "mEnemyEventName": "Spell3DPEnd",
+                            "mSpectatorEventName": "Spell3DPEnd",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{20749c51}": false,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "SpellBuffCast": {
+                "mRules": [
+                    {
+                        "mRuleName": "Overheat start",
+                        "mConditions": [
+                            {
+                                "SpellBuff": "{b890fcbc}",
+                                "__type": "ContextualConditionSpellBuffName"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "Spell3DPCast",
+                            "mAllyEventName": "Spell3DPCast",
+                            "mEnemyEventName": "Spell3DPCast",
+                            "mSpectatorEventName": "Spell3DPCast",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "mPriority": 10,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
                             "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
