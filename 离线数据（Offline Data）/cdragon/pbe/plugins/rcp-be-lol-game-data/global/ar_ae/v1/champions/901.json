@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ %i:cooldown%",
             "description": "ينفث سمولدر النار على الأعداء. كلما اكتسب المزيد من التكدسات، ازدادت قدرته قوة.",
-            "dynamicDescription": "يطلق سمولدر لهبًا، فيُلحق <physicalDamage>@TooltipQDamage@ ضرر مادي</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ ضرر سحر</magicDamage>.<br><br>تتطور هذه القدرة بناءً على تكدسات <spellName>تدريبات التنين</spellName> لاكتساب التأثيرات التالية:<li><keywordMajor>@StackTier1@ من التكدسات</keywordMajor>: تُلحق الضرر بجميع الأعداء المحيطين بالهدف.</li><li><keywordMajor>@StackTier2@ من التكدسات</keywordMajor>: ترسل <spellName>@Tier2_NumberOfBlowback@</spellName> من الانفجارات التي تتخطى الهدف، وتلحق @Tier2_BlowbackPercentageDamage@% من ضرر هذه القدرة.</li><li><keywordMajor>@StackTier3@ من التكدسات</keywordMajor>: تحرق الهدف وتلحق <trueDamage>@Tier3_Burn@% من الصحة القصوى على شكل ضرر حقيقي</trueDamage> خلال @Tier3_DotLength@ث. يُقتَل أبطال العدو الذين تنخفض صحتهم لأقل من <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> صحة إجمالية أثناء احتراقهم فورًا.</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "يطلق سمولدر لهبًا، فيُلحق <physicalDamage>@TotalDamage@ ضرر مادي</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ ضرر سحر</magicDamage>. إذا مات الهدف، يستعيد سمولدر @ManaRestore@ مانا، مرة واحدة لكل إلقاء.<br><br>تتطور هذه القدرة بناءً على تكدسات <spellName>تدريبات التنين</spellName> لكسب التأثيرات التالية:<li><keywordMajor>@StackTier1@ من التكدسات</keywordMajor>: تلحق الضرر بجميع الأعداء المحيطين بالهدف.<li><keywordMajor>@StackTier2@ من التكدسات</keywordMajor>: ترسل <spellName>@Tier2_NumberOfBlowback@</spellName> من الانفجارات التي تتخطى الهدف، لتلحق @Tier2_BlowbackPercentageDamage@% من ضرر هذه القدرة.<li><keywordMajor>@StackTier3@ من التكدسات</keywordMajor>: تحرق الهدف، فتلحق <trueDamage>@Tier3_Burn@ من الصحة القصوى على شكل ضرر حقيقي</trueDamage> خلال @Tier3_DotLength@ث. يُقتَل أبطال العدو الذين تنخفض صحتهم لأقل من <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> صحة إجمالية أثناء احتراقهم فورًا.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ %i:cooldown%",
             "description": "يطلق سمولدر عطسة ملتهبة ظريفة تنفجر عند إصابة أبطال العدو.",
-            "dynamicDescription": "سمولدر يطلق عطسة ملهبة ظريفة تُلحق <physicalDamage>@InitialDamage@ من الضرر المادي </physicalDamage> وتؤدي <status>للإبطاء</status> بنسبة @SlowAmount*100@% لمدة @SlowDuration@ث.<br><br>تؤدي إصابة الأبطال لانفجار، ما يُلحق <physicalDamage>@ExplosionDamage@ من الضرر المادي</physicalDamage> + <magicDamage>@Passive_Damage@ من ضرر السحر</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "يطلق سمولدر عطسة ملتهبة ظريفة تُلحق <physicalDamage>@InitialDamage@ ضرر مادي</physicalDamage> كما <status>تبطئ</status> بنسبة @SlowAmount*100@% لمدة @SlowDuration@ث.<br><br>تؤدي إصابة الأبطال إلى انفجار، مما يُلحق <physicalDamage>@ExplosionDamage@ ضرر مادي</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ ضرر سحر</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ %i:cooldown%",
             "description": "يحلق سمولدر متجاهلًا التضاريس ويقصف العدو ذا الصحة الأقل.",
-            "dynamicDescription": "يحلق سمولدر، فيكسب <speed>@MoveSpeed*100@% سرعة حركة</speed> ويتجاهل التضاريس لمدة @Duration@ث.<br><br>أثناء طيرانه، يقصف سمولدر العدو ذا الصحة الأقل <spellName>@TotalNumberOfAttacks@</spellName> (مع الجبر للقيمة الأقل) من المرات مما يتسبب في <physicalDamage>@DamagePerHit@ ضرر مادي</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ ضرر سحر</magicDamage> لكل إصابة.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "يحلق سمولدر، فيكسب <speed>@MoveSpeed*100@% سرعة حركة</speed> ويتجاهل التضاريس لمدة @Duration@ث.<br><br>أثناء طيرانه، يقصف سمولدر العدو ذا الصحة الأقل <spellName>@TotalNumberOfAttacks@</spellName> (مع الجبر للقيمة الأقل) من المرات مما يتسبب في <physicalDamage>@DamagePerHit@ ضرر مادي</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ ضرر سحر</magicDamage> لكل إصابة.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ %i:cooldown%",
             "description": "يطلب سمولدر من أمه نفث النار من الأعلى، لتلحق ضررًا إضافيًا وتبطئ الأعداء وسط نيرانها.",
-            "dynamicDescription": "تنفث أم سمولدر النيران من الأعلى، ملحقةً <physicalDamage>@TotalDamage@ من الضرر المادي</physicalDamage>. الأعداء في المنتصف يتلقون <physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage> ويتم <status>إبطاء</status> حركتهم بنسبة @SlowAmount*100@% لمدة @SlowDuration@ث.<br><br>تعالج أم سمولدر ابنها مقابل <healing>@MomHealCalc@ من الصحة</healing> إذا أصابته.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "تنفث أم سمولدر النيران من الأعلى، ملحقةً <physicalDamage>@TotalDamage@ ضرر مادي</physicalDamage>. يتلقى الأعداء في المنتصف <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ ضرر مادي</physicalDamage> بدلًا مما سبق ويتم <status>إبطاؤهم</status> بنسبة @SlowAmount*100@% لمدة @SlowDuration@ث.<br><br>تعالج أم سمولدر ابنها بمقدار <healing>@MomHealCalc@ صحة</healing> إذا أصابته.@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

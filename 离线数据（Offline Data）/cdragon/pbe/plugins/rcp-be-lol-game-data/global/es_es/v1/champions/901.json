@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ s %i:cooldown%",
             "description": "Smolder escupe fuego hacia un enemigo. Esta habilidad se vuelve más poderosa conforme obtiene acumulaciones.",
-            "dynamicDescription": "Smolder escupe fuego e inflige <physicalDamage>@TooltipQDamage@ de daño físico</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ de daño mágico</magicDamage>.<br><br>Según las acumulaciones de <spellName>Entrenamiento dracónico</spellName>, esta habilidad evoluciona y obtiene los siguientes efectos:<li><keywordMajor>@StackTier1@ acumulaciones</keywordMajor>: Inflige daño a todos los enemigos que rodean al objetivo.</li><li><keywordMajor>@StackTier2@ acumulaciones</keywordMajor>: Genera <spellName>@Tier2_NumberOfBlowback@</spellName> explosiones tras el objetivo, que infligen un @Tier2_BlowbackPercentageDamage@% del daño de la habilidad.</li><li><keywordMajor>@StackTier3@ acumulaciones</keywordMajor>: Quema al objetivo, lo que inflige un <trueDamage>@Tier3_Burn@ de la vida máxima en forma de daño verdadero</trueDamage> a lo largo de @Tier3_DotLength@ s. Ejecuta al instante a los campeones enemigos quemados con menos del <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> de la vida total.</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder escupe fuego e inflige <physicalDamage>@TotalDamage@ de daño físico</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ de daño mágico</magicDamage>. Si el objetivo muere, Smolder recupera @ManaRestore@ de maná una vez por lanzamiento.<br><br>Según las acumulaciones de <spellName>Entrenamiento dracónico</spellName>, esta habilidad evoluciona y obtiene los siguientes efectos:<li><keywordMajor>@StackTier1@ acumulaciones</keywordMajor>: Inflige daño a los enemigos cercanos al objetivo.<li><keywordMajor>@StackTier2@ acumulaciones</keywordMajor>: Genera <spellName>@Tier2_NumberOfBlowback@</spellName> explosiones tras el objetivo, que infligen un @Tier2_BlowbackPercentageDamage@% del daño de la habilidad.<li><keywordMajor>@StackTier3@ acumulaciones</keywordMajor>: Quema al objetivo, lo que inflige <trueDamage>@Tier3_Burn@ de daño verdadero en función de la vida máxima</trueDamage> a lo largo de @Tier3_DotLength@ s. Ejecuta al instante a los campeones enemigos quemados con menos del <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> de la vida total.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ s %i:cooldown%",
             "description": "A Smolder se le escapa un adorable estornudo ígneo que explota al golpear a los campeones enemigos.",
-            "dynamicDescription": "A Smolder se le escapa un adorable estornudo ígneo que inflige <physicalDamage>@InitialDamage@ de daño físico</physicalDamage> y <status>ralentiza</status> un @SlowAmount*100@% durante @SlowDuration@ s.<br><br>Golpear a campeones genera una explosión que inflige <physicalDamage>@ExplosionDamage@ de daño físico</physicalDamage> + <magicDamage>@Passive_Damage@ de daño mágico</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "A Smolder se le escapa un adorable estornudo ígneo que inflige <physicalDamage>@InitialDamage@ de daño físico</physicalDamage> y <status>ralentiza</status> un @SlowAmount*100@% durante @SlowDuration@ s.<br><br>Golpear a campeones genera una explosión que inflige <physicalDamage>@ExplosionDamage@ de daño físico</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ de daño mágico</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ s %i:cooldown%",
             "description": "Smolder alza el vuelo ignorando los obstáculos del terreno y bombardea al enemigo con menos vida.",
-            "dynamicDescription": "Smolder alza el vuelo, obtiene un <speed>@MoveSpeed*100@% de velocidad de movimiento</speed> e ignora los obstáculos del terreno durante @Duration@ s.<br><br>Mientras vuela, Smolder bombardea al enemigo con menos vida <spellName>@TotalNumberOfAttacks@</spellName> veces (redondeado hacia abajo) y le inflige <physicalDamage>@DamagePerHit@ de daño físico</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ de daño mágico</magicDamage> por golpe.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder alza el vuelo, obtiene un <speed>@MoveSpeed*100@% de velocidad de movimiento</speed> e ignora los obstáculos del terreno durante @Duration@ s.<br><br>Mientras vuela, Smolder bombardea al enemigo con menos vida <spellName>@TotalNumberOfAttacks@</spellName> veces (redondeado hacia abajo) y le inflige <physicalDamage>@DamagePerHit@ de daño físico</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ de daño mágico</magicDamage> por golpe.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ s %i:cooldown%",
             "description": "Smolder llama a su madre para que escupa fuego desde los cielos, lo que inflige daño adicional y ralentiza a los enemigos que se encuentren en el centro de las llamas.",
-            "dynamicDescription": "La madre de Smolder escupe fuego desde los cielos, lo que inflige <physicalDamage>@TotalDamage@ de daño físico</physicalDamage>. Los enemigos en el centro reciben <physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage> y sufren una <status>ralentización</status> del @SlowAmount*100@% durante @SlowDuration@ s.<br><br>Si la madre de Smolder lo alcanza con sus llamas, lo cura <healing>@MomHealCalc@ de vida</healing>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "La madre de Smolder escupe fuego desde los cielos, lo que inflige <physicalDamage>@TotalDamage@ de daño físico</physicalDamage>. Los enemigos en el centro reciben <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ de daño físico</physicalDamage> y sufren una <status>ralentización</status> del @SlowAmount*100@% durante @SlowDuration@ s.<br><br>Si la madre de Smolder lo alcanza con sus llamas, lo cura <healing>@MomHealCalc@ de vida</healing>.@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

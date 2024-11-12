@@ -1,4 +1,338 @@
 {
+    "{202b438c}": {
+        "mCooldown": 1.0,
+        "mSituations": {
+            "Ambient": {
+                "mRules": [
+                    {
+                        "mRuleName": "Ambient - 25s",
+                        "mConditions": [
+                            {
+                                "mCustomTimer": 25.0,
+                                "__type": "ContextualConditionCustomTimer"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mAllyEventName": "Ambient3DGeneral",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "Browsing": {
+                "mRules": [
+                    {
+                        "mRuleName": "Browsing - 22s",
+                        "mConditions": [
+                            {
+                                "mCustomTimer": 22.0,
+                                "__type": "ContextualConditionCustomTimer"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mAllyEventName": "Browsing2DGeneral",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "ShopClose": {
+                "mRules": [
+                    {
+                        "mRuleName": "Close",
+                        "mAudioAction": {
+                            "mAllyEventName": "Close3DGeneral",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Game Timer",
+                        "mAudioAction": {
+                            "mAllyEventName": "Close3DGameTimer25",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "General",
+                        "mAudioAction": {
+                            "mAllyEventName": "Close3DGeneral",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "ShopOpen": {
+                "mRules": [
+                    {
+                        "mRuleName": "Specific Faction/Race",
+                        "mConditions": [
+                            {
+                                "mCharacterType": 1,
+                                "mChildConditions": [
+                                    {
+                                        "mCategory": "faction",
+                                        "mData": "piltover",
+                                        "__type": "ContextualConditionCharacterMetadata"
+                                    }
+                                ],
+                                "__type": "ContextualConditionCharacter"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mAllyEventName": "Open2DPiltover",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Specific Champion",
+                        "mConditions": [
+                            {
+                                "mCharacterType": 1,
+                                "mChildConditions": [
+                                    {
+                                        "mCharacters": [
+                                            "Characters/Blitzcrank/CharacterRecords/Root"
+                                        ],
+                                        "__type": "ContextualConditionCharacterName"
+                                    }
+                                ],
+                                "__type": "ContextualConditionCharacter"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mAllyEventName": "Open2DBlitzcrank",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Game Timer",
+                        "mConditions": [
+                            {
+                                "mGameTimeInMinutes": 25.0,
+                                "__type": "ContextualConditionGameTimer"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Open2DGameTimer25",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Open Count",
+                        "mConditions": [
+                            {
+                                "mShopOpenCount": 10,
+                                "__type": "ContextualConditionShopOpenCount"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Open2DCount10",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Nearby Ally Count",
+                        "mConditions": [
+                            {
+                                "mCount": 2,
+                                "mCompareOp": 3,
+                                "__type": "ContextualConditionNearbyChampionCount"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Open2DNearbyAllyCount2",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Nearby Enemy Count",
+                        "mConditions": [
+                            {
+                                "mTeamCompareOp": 1,
+                                "mCount": 2,
+                                "mCompareOp": 3,
+                                "__type": "ContextualConditionNearbyChampionCount"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Open2DNearbyEnemyCount2",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Gold",
+                        "mConditions": [
+                            {
+                                "mGold": 3000.0,
+                                "__type": "ContextualConditionHasGold"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Open2DGold3000",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "General",
+                        "mAudioAction": {
+                            "mAllyEventName": "Open2DGeneral",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "Purchase": {
+                "mRules": [
+                    {
+                        "mRuleName": "MinimumPrice",
+                        "mConditions": [
+                            {
+                                "mItemPriceMinimum": 2900,
+                                "__type": "ContextualConditionItemPriceMinimum"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Purchase2DMinimumPrice2900",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Specific Item",
+                        "mConditions": [
+                            {
+                                "mItems": [
+                                    "Items/6609",
+                                    "Items/226609"
+                                ],
+                                "__type": "ContextualConditionItemID"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mAllyEventName": "Purchase2DChempunkChainsword",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "General",
+                        "mAudioAction": {
+                            "mAllyEventName": "Purchase2DGeneral",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            }
+        },
+        "mObjectPath": "Characters/HA_AP_Viking/CAC/Shopkeeper_CAC_Template",
+        "__type": "ContextualActionData"
+    },
     "Characters/HA_AP_Viking/CharacterRecords/Root": {
         "mCharacterName": "HA_AP_Viking",
         "primaryAbilityResource": {

@@ -257,7 +257,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "敵1体に炎のブレスを吐きかける。スタックを獲得するほど、このスキルが強化されていく。",
-            "dynamicDescription": "炎を吐き出し、<physicalDamage>@TooltipQDamage@の物理ダメージ</physicalDamage> + <magicDamage>@Passive_Damage_Increase@の魔法ダメージ</magicDamage>を与える。<br><br>このスキルは<spellName>「駆けだしドラゴン」</spellName>のスタック数に応じて進化し、以下の効果を獲得する:<li><keywordMajor>@StackTier1@スタック</keywordMajor>: 対象の周囲のすべての敵にダメージを与える。</li><li><keywordMajor>@StackTier2@スタック</keywordMajor>: 対象の向こう側にも<spellName>@Tier2_NumberOfBlowback@</spellName>発の爆発を起こし、このスキルのダメージの@Tier2_BlowbackPercentageDamage@%を与える。</li><li><keywordMajor>@StackTier3@スタック</keywordMajor>: 対象を炎上させ、@Tier3_DotLength@秒かけて<trueDamage>最大体力の@Tier3_Burn@の確定ダメージ</trueDamage>を与える。炎上中の敵チャンピオンは、体力が最大値の<trueDamage>@Tier3_ExecuteThreshold@</trueDamage>未満になると即座にデスする。</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "炎を吐き出し、<physicalDamage>@TotalDamage@の物理ダメージ</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@の魔法ダメージ</magicDamage>を与える。対象が倒された場合は、一度のスキル使用につきマナを@ManaRestore@回復する。<br><br>このスキルは<spellName>「駆けだしドラゴン」</spellName>のスタック数に応じて進化し、以下の効果を獲得する: <li><keywordMajor>@StackTier1@スタック</keywordMajor>:対象の周囲のすべての敵にダメージを与える。<li><keywordMajor>@StackTier2@スタック</keywordMajor>:対象の向こう側にも<spellName>@Tier2_NumberOfBlowback@</spellName>発の爆発を起こし、このスキルのダメージの@Tier2_BlowbackPercentageDamage@%を与える。<li><keywordMajor>@StackTier3@スタック</keywordMajor>:対象を炎上させ、@Tier3_DotLength@秒かけて<trueDamage>最大体力の@Tier3_Burn@の確定ダメージ</trueDamage>を与える。炎上中の敵チャンピオンは、体力が最大値の<trueDamage>@Tier3_ExecuteThreshold@</trueDamage>未満になると即座にデスする。@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "可愛らしいくしゃみと共に炎を吐く。この炎は敵チャンピオンに命中すると爆発する。",
-            "dynamicDescription": "可愛らしいくしゃみと共に炎を吐き、<physicalDamage>@InitialDamage@の物理ダメージ</physicalDamage>を与えて、@SlowDuration@秒間@SlowAmount*100@%の<status>スロウ効果</status>を付与する。<br><br>チャンピオンに命中すると爆発が起こり、<physicalDamage>@ExplosionDamage@の物理ダメージ</physicalDamage> + <magicDamage>@Passive_Damage@の魔法ダメージ</magicDamage>を与える。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "可愛らしいくしゃみと共に炎を吐き、<physicalDamage>@InitialDamage@の物理ダメージ</physicalDamage>を与えて、@SlowDuration@秒間@SlowAmount*100@%の<status>スロウ効果</status>を付与する。<br><br>チャンピオンに命中すると爆発が起こり、<physicalDamage>@ExplosionDamage@の物理ダメージ</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@の魔法ダメージ</magicDamage>を与える。@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "飛翔して地形を無視するようになり、最も体力が低い敵を空から攻撃する。",
-            "dynamicDescription": "@Duration@秒間飛翔して<speed>移動速度が@MoveSpeed*100@%</speed>増加し、地形を無視するようになる。<br><br>飛翔中は最も体力が低い敵を空から<spellName>@TotalNumberOfAttacks@</spellName>回(端数は切り捨て)攻撃して、命中するごとに<physicalDamage>@DamagePerHit@の物理ダメージ</physicalDamage> + <magicDamage>@Passive_Damage_Increase@の魔法ダメージ</magicDamage>を与える。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "@Duration@秒間飛翔して<speed>移動速度が@MoveSpeed*100@%</speed>増加し、地形を無視するようになる。<br><br>飛翔中は最も体力が低い敵を空から<spellName>@TotalNumberOfAttacks@</spellName>回(端数は切り捨て)攻撃して、命中するごとに<physicalDamage>@DamagePerHit@の物理ダメージ</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@の魔法ダメージ</magicDamage>を与える。@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "母ドラゴンを呼び寄せて、上空から炎を吐いてもらう。炎の中心部にいる敵には、追加ダメージとスロウ効果を与える。",
-            "dynamicDescription": "母ドラゴンが上空から炎を吐き、<physicalDamage>@TotalDamage@の物理ダメージ</physicalDamage>を与える。中心部にいる敵には<physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage>のダメージを与え、@SlowDuration@秒間@SlowAmount*100@%の<status>スロウ効果</status>を付与する。<br><br>スモルダーはこの炎を受けると、<healing>体力が@MomHealCalc@</healing>回復する。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "母ドラゴンが上空から炎を吐き、<physicalDamage>@TotalDamage@の物理ダメージ</physicalDamage>を与える。中心部にいる敵には<physicalDamage>@TooltipOnly_TotalSweetspotDamage@の物理ダメージ</physicalDamage>を与え、@SlowDuration@秒間@SlowAmount*100@%の<status>スロウ効果</status>を付与する。<br><br>スモルダーはこの炎を受けると、<healing>体力が@MomHealCalc@</healing>回復する。@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

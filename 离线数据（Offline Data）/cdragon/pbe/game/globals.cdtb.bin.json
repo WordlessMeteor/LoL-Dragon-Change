@@ -9857,6 +9857,16 @@
         "name": "RecallFail",
         "__type": "DesignerEvent"
     },
+    "{13ede49c}": {
+        "name": "TFTPreConsumableUsed",
+        "EventParameters": {
+            "ConsumableName": {
+                "Var": "{ac201559}",
+                "__type": "ScriptTableGet"
+            }
+        },
+        "__type": "DesignerEvent"
+    },
     "{17b56471}": {
         "name": "TFTCombatInitAmbushItems",
         "__type": "DesignerEvent"
@@ -10393,6 +10403,10 @@
         "name": "PerkHextechFlashtraptionSetFlash",
         "__type": "DesignerEvent"
     },
+    "{8a4d43f2}": {
+        "name": "TFTOnPreSpellCast",
+        "__type": "DesignerEvent"
+    },
     "{8b312d9d}": {
         "name": "ShyvanaAllyKillsTower",
         "__type": "DesignerEvent"
@@ -10612,6 +10626,16 @@
         "EventParameters": {
             "IsTrapped": {
                 "Var": "{678dc767}",
+                "__type": "ScriptTableGet"
+            }
+        },
+        "__type": "DesignerEvent"
+    },
+    "{c01825dd}": {
+        "name": "TFTPreTakePlayerDamage",
+        "EventParameters": {
+            "TotalDamage": {
+                "Var": "TotalDamage",
                 "__type": "ScriptTableGet"
             }
         },
@@ -11184,10 +11208,11 @@
             "DisableSpectator",
             "EarlySurrenderTimeout(600)",
             "MaxGameLength(5400)",
-            "TFT_Set12(1)",
+            "TFT_Set13(1)",
             "Pride_Trail(1)",
             "TFT_ShopV2(1)",
-            "TFTRespawnOnDeployRefactor(1)"
+            "TFTRespawnOnDeployRefactor(1)",
+            "TFT_IncredibleItems"
         ],
         "__type": "GameMutatorExpansions"
     },
@@ -11628,9 +11653,8 @@
     "{3afe8d29}": {
         "mExpandedMutator": "TFT_PAIRS",
         "mMutators": [
-            "TFT_Set12_PAIRS(1)",
-            "TFTSetOverride(TFTSet12_PAIRS)",
-            "AudioFeature(TFTSet12)"
+            "TFT_Set13(1)",
+            "TFTSetOverride(TFTSet13_PAIRS)"
         ],
         "__type": "GameMutatorExpansions"
     },
@@ -11666,6 +11690,13 @@
     },
     "{3f359987}": {
         "mExpandedMutator": "Clash_Zaun",
+        "__type": "GameMutatorExpansions"
+    },
+    "{3ffb2f8f}": {
+        "mExpandedMutator": "TFT_Set13_Carousel",
+        "mMutators": [
+            "MapSkin_TFT_CarouselSet13(1)"
+        ],
         "__type": "GameMutatorExpansions"
     },
     "{402d1ae4}": {
@@ -11973,6 +12004,16 @@
         ],
         "__type": "GameMutatorExpansions"
     },
+    "{642fa72d}": {
+        "mExpandedMutator": "TFT_IncredibleItems",
+        "mMutators": [
+            "TFTBuyItemInCodexBuildEntry(0)",
+            "TFTBuyItemInTooltip(1)",
+            "TFTHoldToCombine(1)",
+            "TFTCombineOnTimeReached(0)"
+        ],
+        "__type": "GameMutatorExpansions"
+    },
     "{66109257}": {
         "mExpandedMutator": "TFT_Event_5YR",
         "mMutators": [
@@ -12138,6 +12179,15 @@
         "mExpandedMutator": "TFT3_SetVariation_Finale",
         "mMutators": [
             "Set3_Finale(1)"
+        ],
+        "__type": "GameMutatorExpansions"
+    },
+    "{7fb46714}": {
+        "mExpandedMutator": "TFT_Set13",
+        "mMutators": [
+            "TFTSetOverride(TFTSet13)",
+            "TFTGoopBuffEnabled(1)",
+            "TFTEncounterEnabled(1)"
         ],
         "__type": "GameMutatorExpansions"
     },
@@ -12485,6 +12535,13 @@
         ],
         "__type": "GameMutatorExpansions"
     },
+    "{a7eb913e}": {
+        "mExpandedMutator": "MapSkin_TFT_CarouselSet13",
+        "mMutators": [
+            "MapID(22)?MapSkinName(CarouselSet13)"
+        ],
+        "__type": "GameMutatorExpansions"
+    },
     "{a8eb92d1}": {
         "mExpandedMutator": "MapSkin_TFT_CarouselSet12",
         "mMutators": [
@@ -12568,12 +12625,26 @@
         ],
         "__type": "GameMutatorExpansions"
     },
+    "{b65f69b9}": {
+        "mExpandedMutator": "TFT_PVE_PUZZLE_SET13",
+        "mMutators": [
+            "TFTSetOverride(TFTSet13_PVEMODE)",
+            "AudioFeature(TFTSet13)",
+            "TFT_PVE(1)",
+            "TFTGoopBuffEnabled(1)"
+        ],
+        "__type": "GameMutatorExpansions"
+    },
     "{b7a2e3fc}": {
         "mExpandedMutator": "Lightopia",
         "mMutators": [
             "MapID(0)?MapSkinName(Lightopia)",
             "CLASSIC"
         ],
+        "__type": "GameMutatorExpansions"
+    },
+    "{b7dcdea1}": {
+        "mExpandedMutator": "TFT_Set4_Stage2_Revival",
         "__type": "GameMutatorExpansions"
     },
     "{b91c7d78}": {
@@ -13007,11 +13078,10 @@
             "DisableSpectator(1)",
             "LoadingScreenTipsOverride(TFT)",
             "DisableSpectator",
-            "AudioFeature(TFTSet12)",
             "MaxGameLength(5400)",
             "TFTTargetAfterMove(1)",
-            "TFTSet12_TURBO(1)",
-            "TFTSetOverride(TFTSet12_TURBO)",
+            "TFT_Set13(1)",
+            "TFTSetOverride(TFTSet13_TURBO)",
             "EarlySurrenderTimeout(420)",
             "TFT_Playbooks(0)"
         ],
@@ -13738,7 +13808,6 @@
             "Special_MonsterIgnores",
             "Special_EpicMonsterIgnores",
             "Special_Peaceful",
-            "Special_AscXerath",
             "Special_PerksWormhole",
             "Special_UntargetableBySpells",
             "Special_SyndraSphere",
@@ -13770,6 +13839,7 @@
             "Monster_Baron",
             "Monster_RiftHerald",
             "Monster_Horde",
+            "Monster_Atakhan",
             "Monster_Camp",
             "Plant",
             "IsolationNonImpacting",
@@ -15170,7 +15240,8 @@
             "GDSEnum::MonarchItemSlotType",
             "GDSEnum::TFTBotType",
             "MinionType",
-            "GDSEnum::NeutralTimerTypes"
+            "GDSEnum::NeutralTimerTypes",
+            "GDSEnum::FeatType"
         ],
         "__type": "GameModeConstantStringVector"
     },

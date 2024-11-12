@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ mp %i:cooldown%",
             "description": "Smolder tüzet fúj egy ellenfélre. Ahogy gyűjti a jelzőket, ez a képesség egyre erősebb lesz.",
-            "dynamicDescription": "Smolder lángot okád, amivel <physicalDamage>@TooltipQDamage@ fizikai sebzést</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ varázssebzést</magicDamage> okoz.<br><br>A <spellName>Sárkányedzés</spellName> jelzőinek számától függően a képesség továbbfejlődik, és a következő hatásokkal bővül:<li><keywordMajor>@StackTier1@ jelző</keywordMajor>: a célpontot körülvevő összes ellenfelet sebzi.</li><li><keywordMajor>@StackTier2@ jelző</keywordMajor>: <spellName>@Tier2_NumberOfBlowback@</spellName> robbanást küld a célpont mögé, amelyek a képessége sebzésének @Tier2_BlowbackPercentageDamage@%-ával egyenlő sebzést okoznak.</li><li><keywordMajor>@StackTier3@ jelző</keywordMajor>: lángba borítja a célpontot, és ezzel @Tier3_DotLength@ másodpercre <trueDamage>a maximális életerő @Tier3_Burn@-ával egyelő tényleges sebzést</trueDamage> okoz. Azok az ellenséges hősök, akiknek a teljes életereje <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> alá csökken égés közben, azonnal meghalnak.</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder lángot okád, amivel <physicalDamage>@TotalDamage@ fizikai sebzést</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ varázssebzést</magicDamage> okoz. Ha a célpont meghal, Smolder visszatölt @ManaRestore@ manát, elsütésenként egyszer.<br><br>A <spellName>Sárkányedzés</spellName> jelzőinek számától függően a képesség továbbfejlődik, és a következő hatásokkal bővül:<li><keywordMajor>@StackTier1@ jelző</keywordMajor>: megsebzi a célpont körüli összes ellenfelet.<li><keywordMajor>@StackTier2@ jelző</keywordMajor>: <spellName>@Tier2_NumberOfBlowback@</spellName> robbanást küld a célpont mögé, amelyek a képessége sebzésének @Tier2_BlowbackPercentageDamage@%-ával egyenlő sebzést okoznak.<li><keywordMajor>@StackTier3@ jelző</keywordMajor>: lángba borítja a célpontot, és ezzel @Tier3_DotLength@ másodpercre <trueDamage>a maximális életerő @Tier3_Burn@-ával egyelő tényleges sebzést</trueDamage> okoz. Azok az ellenséges hősök, akiknek a teljes életereje <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> alá csökken égés közben, azonnal meghalnak.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ mp %i:cooldown%",
             "description": "Smolder imádni való, lángoló tüsszentése felrobban, amikor eltalálja az ellenséges hősöket.",
-            "dynamicDescription": "Smolder imádni való, lángoló tüsszentése <physicalDamage>@InitialDamage@ fizikai sebzést</physicalDamage> és @SlowDuration@ másodpercig @SlowAmount*100@%-os <status>lassítást</status> okoz.<br><br>A hősök eltalálása robbanást okoz, ami <physicalDamage>@ExplosionDamage@ fizikai sebzést</physicalDamage> + <magicDamage>@Passive_Damage@ varázssebzést</magicDamage> okoz.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder imádni való, lángoló tüsszentése <physicalDamage>@InitialDamage@ fizikai sebzést</physicalDamage> és @SlowDuration@ másodpercig @SlowAmount*100@%-os <status>lassítást</status> okoz.<br><br>A hősök eltalálása robbanást okoz, ami <physicalDamage>@ExplosionDamage@ fizikai sebzést</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ varázssebzést</magicDamage> okoz.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ mp %i:cooldown%",
             "description": "Smolder a levegőbe emelkedik, figyelmen kívül hagyja a tereptárgyakat, és bombázni kezdi a legalacsonyabb életerejű ellenfelet.",
-            "dynamicDescription": "Smolder a levegőbe emelkedik, @Duration@ másodpercre <speed>@MoveSpeed*100@% mozgási sebességre</speed> tesz szert, és figyelmen kívül hagyja a tereptárgyakat.<br><br>Repülés közben Smolder <spellName>@TotalNumberOfAttacks@</spellName> (lefelé kerekítve) alkalommal lebombázza a legalacsonyabb életerejű ellenfelet találatonként <physicalDamage>@DamagePerHit@ fizikai sebzést</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ varázssebzést</magicDamage> okozva.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder a levegőbe emelkedik, @Duration@ másodpercre <speed>@MoveSpeed*100@% mozgási sebességre</speed> tesz szert, és figyelmen kívül hagyja a tereptárgyakat.<br><br>Repülés közben Smolder <spellName>@TotalNumberOfAttacks@</spellName> (lefelé kerekítve) alkalommal lebombázza a legalacsonyabb életerejű ellenfelet találatonként <physicalDamage>@DamagePerHit@ fizikai sebzést</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ varázssebzést</magicDamage> okozva.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ mp %i:cooldown%",
             "description": "Smolder az anyukájáért kiált, hogy tüzet leheljen a magasból, amivel megnövelt sebzést okoz, és lelassítja a tűz közepén lévő ellenfeleket.",
-            "dynamicDescription": "Smolder anyukája tüzet lehel a magasból, amivel <physicalDamage>@TotalDamage@ fizikai sebzést</physicalDamage> okoz. A középen lévő ellenségek <physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage> sebzést szenvednek, és @SlowDuration@ másodpercig @SlowAmount*100@%-kal <status>lelassulnak</status>.<br><br>Smolder anyukája <healing>@MomHealCalc@ életerővel</healing> gyógyítja a fiát, ha eltalálja.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder anyukája tüzet lehel a magasból, amivel <physicalDamage>@TotalDamage@ fizikai sebzést</physicalDamage> okoz. A középen lévő ellenségek <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ fizikai sebzést</physicalDamage> szenvednek, és @SlowDuration@ másodpercig @SlowAmount*100@%-kal <status>lelassulnak</status>.<br><br>Smolder anyukája <healing>@MomHealCalc@ életerővel</healing> gyógyítja a fiát, ha eltalálja.@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

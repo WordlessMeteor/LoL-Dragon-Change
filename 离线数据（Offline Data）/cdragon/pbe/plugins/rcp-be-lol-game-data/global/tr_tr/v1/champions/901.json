@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sn. %i:cooldown%",
             "description": "Smolder bir rakibe doğru alev püskürtür. Yük biriktirdikçe bu yetenek daha da güçlenir.",
-            "dynamicDescription": "Smolder alev püskürterek <physicalDamage>@TooltipQDamage@ Fiziksel Hasar</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ Büyü Hasarı</magicDamage> verir.<br><br>Bu yetenek, <spellName>Ejder Talimi</spellName> yükü miktarına bağlı olarak gelişir ve şu etkileri kazanır:<li><keywordMajor>@StackTier1@ yük</keywordMajor>: Hedefin çevresindeki tüm rakiplere hasar verir.</li><li><keywordMajor>@StackTier2@ yük</keywordMajor>: Hedefin arkasında bu yeteneğin hasarının %@Tier2_BlowbackPercentageDamage@ kadarına eşdeğer miktarda hasar veren <spellName>@Tier2_NumberOfBlowback@</spellName> patlama oluşturur.</li><li><keywordMajor>@StackTier3@ Yük</keywordMajor>: Hedefi yakarak @Tier3_DotLength@ saniye boyunca <trueDamage>azami canının @Tier3_Burn@ kadarına eşdeğer miktarda gerçek hasar</trueDamage> verir. Yanarken <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> Canın altına düşen rakip şampiyonlar anında katledilir.</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder alev püskürterek <physicalDamage>@TotalDamage@ Fiziksel Hasar</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ Büyü Hasarı</magicDamage> verir. Hedef katledilirse Smolder'a kullanım başına @ManaRestore@ Mana iade edilir.<br><br>Bu yetenek <spellName>Ejder Talimi</spellName> yükü miktarına bağlı olarak gelişir ve şu etkileri kazanır:<li><keywordMajor>@StackTier1@ yük</keywordMajor>: Hedefin etrafındaki tüm rakiplere hasar verir.<li><keywordMajor>@StackTier2@ yük</keywordMajor>: Hedefin arkasında bu yeteneğin hasarının %@Tier2_BlowbackPercentageDamage@ kadarına eşdeğer miktarda hasar veren <spellName>@Tier2_NumberOfBlowback@</spellName> patlama oluşturur.<li><keywordMajor>@StackTier3@ yük</keywordMajor>: Hedefi yakarak @Tier3_DotLength@ saniye boyunca <trueDamage>azami canının @Tier3_Burn@ kadarına eşdeğer miktarda gerçek hasar</trueDamage> verir. Yanarken <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> Canın altına düşen rakip şampiyonlar anında katledilir.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sn. %i:cooldown%",
             "description": "Smolder tüm sevimliliğiyle hapşırarak rakip şampiyonlara isabet ettiğinde patlayan bir alev topu gönderir.",
-            "dynamicDescription": "Smolder tüm sevimliliğiyle hapşırarak rakiplere <physicalDamage>@InitialDamage@ Fiziksel Hasar</physicalDamage> verir ve onları @SlowDuration@ saniyeliğine %@SlowAmount*100@ <status>yavaşlatır</status>.<br><br>Bu yetenek şampiyonlara isabet ederse <physicalDamage>@ExplosionDamage@ Fiziksel Hasar</physicalDamage> + <magicDamage>@Passive_Damage@ Büyü Hasarı</magicDamage> veren bir patlama oluşturur.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder tüm sevimliliğiyle hapşırarak rakiplere <physicalDamage>@InitialDamage@ Fiziksel Hasar</physicalDamage> verir ve onları @SlowDuration@ saniyeliğine %@SlowAmount*100@ <status>yavaşlatır</status>.<br><br>Bu yetenek şampiyonlara isabet ederse <physicalDamage>@ExplosionDamage@ Fiziksel Hasar</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ Büyü Hasarı</magicDamage> veren bir patlama oluşturur.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sn. %i:cooldown%",
             "description": "Smolder havalanarak yüzey şekillerinin üstünden uçar ve en düşük cana sahip rakibi bombardımana tutar.",
-            "dynamicDescription": "Smolder havalanarak @Duration@ saniyeliğine <speed>%@MoveSpeed*100@ Hareket Hızı</speed> kazanır ve yüzey şekillerinin üstünden uçabilir.<br><br>Smolder uçarken en düşük cana sahip rakibi bombardımana tutarak isabet başına <physicalDamage>@DamagePerHit@ Fiziksel Hasar</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ Büyü Hasarı</magicDamage> verecek şekilde <spellName>@TotalNumberOfAttacks@</spellName> defa (en yakın düşük sayıya yuvarlanır) saldırır.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder havalanarak @Duration@ saniyeliğine <speed>%@MoveSpeed*100@ Hareket Hızı</speed> kazanır ve yüzey şekillerinin üstünden uçabilir.<br><br>Smolder uçarken en düşük cana sahip rakibi bombardımana tutarak isabet başına <physicalDamage>@DamagePerHit@ Fiziksel Hasar</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ Büyü Hasarı</magicDamage> verecek şekilde <spellName>@TotalNumberOfAttacks@</spellName> defa (en yakın düşük sayıya yuvarlanır) saldırır.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,
