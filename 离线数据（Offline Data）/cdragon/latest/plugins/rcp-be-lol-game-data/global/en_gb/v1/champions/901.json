@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Smolder breathes fire on an enemy. As he gains more stacks, this ability becomes more powerful.",
-            "dynamicDescription": "Smolder belches flame, dealing <physicalDamage>@TooltipQDamage@ physical damage</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ magic damage</magicDamage>.<br><br>Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>@StackTier1@ Stacks</keywordMajor>: Damages all enemies surrounding the target.</li><li><keywordMajor>@StackTier2@ Stacks</keywordMajor>: Sends <spellName>@Tier2_NumberOfBlowback@</spellName> explosions beyond the target that deal @Tier2_BlowbackPercentageDamage@% of this Ability's damage.</li><li><keywordMajor>@StackTier3@ Stacks</keywordMajor>: Burns the target, dealing <trueDamage>@Tier3_Burn@ max Health true damage</trueDamage> over @Tier3_DotLength@ seconds. Enemy champions that drop below <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> total health while burning are killed instantly.</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder belches flame, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ magic damage</magicDamage>. If the target dies, Smolder refunds @ManaRestore@ Mana, once per cast.<br><br>Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>@StackTier1@ Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>@StackTier2@ Stacks</keywordMajor>: Sends <spellName>@Tier2_NumberOfBlowback@</spellName> explosions beyond the target that deal @Tier2_BlowbackPercentageDamage@% of this Ability's damage.<li><keywordMajor>@StackTier3@ Stacks</keywordMajor>: Burns the target, dealing <trueDamage>@Tier3_Burn@ max Health true damage</trueDamage> over @Tier3_DotLength@ seconds. Enemy champions that drop below <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> total health while burning are killed instantly.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Smolder lets out an adorable flaming sneeze that explodes when hitting enemy champions.",
-            "dynamicDescription": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Hitting champions causes an explosion, dealing <physicalDamage>@ExplosionDamage@ physical damage</physicalDamage> + <magicDamage>@Passive_Damage@ magic damage</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>@InitialDamage@ physical damage</physicalDamage> and <status>Slowing</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Hitting champions causes an explosion, dealing <physicalDamage>@ExplosionDamage@ physical</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ magic damage</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Smolder takes flight ignoring terrain and bombarding the lowest health enemy.",
-            "dynamicDescription": "Smolder takes flight, gaining <speed>@MoveSpeed*100@% Move Speed</speed> and ignoring terrain for @Duration@ seconds.<br><br>While flying, Smolder bombards the lowest Health enemy <spellName>@TotalNumberOfAttacks@</spellName> (rounded down) times for <physicalDamage>@DamagePerHit@ physical damage</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ magic damage</magicDamage> per hit.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder takes flight, gaining <speed>@MoveSpeed*100@% Move Speed</speed> and ignoring terrain for @Duration@ seconds.<br><br>While flying, Smolder bombards the lowest Health enemy <spellName>@TotalNumberOfAttacks@</spellName> (rounded down) times for <physicalDamage>@DamagePerHit@ physical damage</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ magic damage</magicDamage> per hit.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Smolder calls his mom to breath fire from above, dealing extra damage and slowing enemies in the center of her fire.",
-            "dynamicDescription": "Smolder's mom breathes fire from above, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies in the center instead take <physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage> and are <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Smolder's mom heals her son for <healing>@MomHealCalc@ Health</healing> if she hits him.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder's mom breathes fire from above, dealing <physicalDamage>@TotalDamage@ physical damage</physicalDamage>. Enemies in the center take <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ physical damage</physicalDamage> instead and are <status>Slowed</status> by @SlowAmount*100@% for @SlowDuration@ seconds.<br><br>Smolder's mom heals her son for <healing>@MomHealCalc@ Health</healing> if she hits him.@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

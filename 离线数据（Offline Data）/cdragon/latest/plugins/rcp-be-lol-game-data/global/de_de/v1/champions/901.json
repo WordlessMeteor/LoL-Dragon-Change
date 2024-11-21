@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@&nbsp;s %i:cooldown%",
             "description": "Smolder speit Feuer auf einen Gegner. Je mehr Steigerungen er erhält, desto mächtiger wird diese Fähigkeit.",
-            "dynamicDescription": "Smolder speit Feuer und verursacht <physicalDamage>@TooltipQDamage@&nbsp;normalen Schaden</physicalDamage> + <magicDamage>@Passive_Damage_Increase@&nbsp;magischen Schaden</magicDamage>.<br><br>Abhängig von den <spellName>Drachentraining</spellName>-Steigerungen entwickelt sich diese Fähigkeit und erhält folgende Effekte:<li><keywordMajor>@StackTier1@&nbsp;Steigerungen</keywordMajor>: Fügt allen Gegnern im Umfeld des Ziels Schaden zu.</li><li><keywordMajor>@StackTier2@&nbsp;Steigerungen</keywordMajor>: Löst <spellName>@Tier2_NumberOfBlowback@</spellName> Explosionen hinter dem Ziel aus, die @Tier2_BlowbackPercentageDamage@&nbsp;% des Schadens dieser Fähigkeit verursachen.</li><li><keywordMajor>@StackTier3@&nbsp;Steigerungen</keywordMajor>: Verbrennt das Ziel und verursacht über @Tier3_DotLength@&nbsp;Sekunden hinweg <trueDamage>absoluten Schaden</trueDamage> in Höhe von @Tier3_Burn@ des maximalen Lebens. Gegnerische Champions, deren Gesamtleben unter <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> fällt, während sie brennen, sterben sofort.</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder speit Feuer und verursacht <physicalDamage>@TotalDamage@&nbsp;normalen Schaden</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@&nbsp;magischen Schaden</magicDamage>. Wenn das Ziel stirbt, erhält Smolder einmal pro Aktivierung @ManaRestore@ Mana zurück.<br><br>Abhängig von den Steigerungen von <spellName>Drachentraining</spellName> erhält diese Fähigkeit weitere Effekte:<li><keywordMajor>@StackTier1@ Steigerungen</keywordMajor>: Fügt allen Gegnern um das Ziel Schaden zu.<li><keywordMajor>@StackTier2@ Steigerungen</keywordMajor>: Löst <spellName>@Tier2_NumberOfBlowback@</spellName> Explosionen hinter dem Ziel aus, die @Tier2_BlowbackPercentageDamage@&nbsp;% des Schadens dieser Fähigkeit verursachen.<li><keywordMajor>@StackTier3@ Steigerungen</keywordMajor>: Verbrennt das Ziel und verursacht über @Tier3_DotLength@&nbsp;Sekunden hinweg <trueDamage>absoluten Schaden</trueDamage> in Höhe von @Tier3_Burn@ des maximalen Lebens. Gegnerische Champions, deren Gesamtleben unter <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> fällt, während sie brennen, sterben sofort.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@&nbsp;s %i:cooldown%",
             "description": "Smolder gibt ein niedliches, flammendes Niesen von sich, das explodiert, wenn gegnerische Champions getroffen werden.",
-            "dynamicDescription": "Smolder gibt ein niedliches, flammendes Niesen von sich, das <physicalDamage>@InitialDamage@&nbsp;normalen Schaden</physicalDamage> verursacht und @SlowDuration@&nbsp;Sekunden lang um @SlowAmount*100@&nbsp;% <status>verlangsamt</status>.<br><br>Treffer an Champions lösen eine Explosion aus, die <physicalDamage>@ExplosionDamage@&nbsp;normalen Schaden</physicalDamage> + <magicDamage>@Passive_Damage@&nbsp;magischen Schaden</magicDamage> verursacht.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder gibt ein niedliches, flammendes Niesen von sich, das <physicalDamage>@InitialDamage@&nbsp;normalen Schaden</physicalDamage> verursacht und @SlowDuration@&nbsp;Sekunden lang um @SlowAmount*100@&nbsp;% <status>verlangsamt</status>.<br><br>Treffer an Champions lösen eine Explosion aus, die <physicalDamage>@ExplosionDamage@&nbsp;normalen Schaden</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@&nbsp;magischen Schaden</magicDamage> verursacht.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@&nbsp;s %i:cooldown%",
             "description": "Smolder fliegt los, ignoriert Terrain und bombardiert den Gegner mit dem niedrigsten Leben.",
-            "dynamicDescription": "Smolder fliegt los, erhält <speed>@MoveSpeed*100@&nbsp;% Lauftempo</speed> und ignoriert @Duration@&nbsp;Sekunden lang Terrain.<br><br>Im Flug greift Smolder den Gegner mit dem niedrigsten Leben <spellName>@TotalNumberOfAttacks@</spellName>-mal an (abgerundet) und verursacht pro Treffer <physicalDamage>@DamagePerHit@&nbsp;normalen Schaden</physicalDamage> + <magicDamage>@Passive_Damage_Increase@&nbsp;magischen Schaden</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder fliegt los, erhält <speed>@MoveSpeed*100@&nbsp;% Lauftempo</speed> und ignoriert @Duration@&nbsp;Sekunden lang Terrain.<br><br>Im Flug greift Smolder den Gegner mit dem niedrigsten Leben <spellName>@TotalNumberOfAttacks@</spellName>-mal an (abgerundet) und verursacht pro Treffer <physicalDamage>@DamagePerHit@&nbsp;normalen Schaden</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@&nbsp;magischen Schaden</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@&nbsp;s %i:cooldown%",
             "description": "Smolder ruft seine Mama herbei, die Feuer von oben herabspeit. Gegner im Zentrum ihres Feuers erleiden zusätzlichen Schaden und werden verlangsamt.",
-            "dynamicDescription": "Smolders Mama speit Feuer von oben herab und verursacht <physicalDamage>@TotalDamage@&nbsp;normalen Schaden</physicalDamage>. Gegner im Zentrum erleiden stattdessen <physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage> und werden @SlowDuration@&nbsp;Sekunden lang um @SlowAmount*100@&nbsp;% <status>verlangsamt</status>.<br><br>Mama heilt außerdem ihren Sohn um <healing>@MomHealCalc@&nbsp;Leben</healing>, wenn sie ihn trifft.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolders Mama speit Feuer von oben herab und verursacht <physicalDamage>@TotalDamage@&nbsp;normalen Schaden</physicalDamage>. Gegner im Zentrum erleiden <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ normalen Schaden</physicalDamage> und werden @SlowDuration@&nbsp;Sekunden lang um @SlowAmount*100@&nbsp;% <status>verlangsamt</status>.<br><br>Mama heilt außerdem ihren Sohn um <healing>@MomHealCalc@&nbsp;Leben</healing>, wenn sie ihn trifft.@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

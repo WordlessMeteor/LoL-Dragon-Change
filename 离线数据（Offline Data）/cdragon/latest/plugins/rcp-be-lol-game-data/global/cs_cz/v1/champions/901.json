@@ -257,7 +257,7 @@
             "cost": "@AbilityResourceName@: @Cost@",
             "cooldown": "@Cooldown@ sek. %i:cooldown%",
             "description": "Smolder vychrlí na nepřítele oheň. Postupným nasčítáváním stupňů nabírá tato schopnost na síle.",
-            "dynamicDescription": "Smolder vychrlí plamen, kterým způsobí <physicalDamage>@TooltipQDamage@ bodů fyzického poškození</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ bodů magického poškození</magicDamage>.<br><br>Tato schopnost se vyvíjí s počtem stupňů <spellName>Dračího výcviku</spellName> a může získat následující efekty:<li><keywordMajor>@StackTier1@ stupňů</keywordMajor>: Způsobí poškození všem nepřátelům kolem cíle.</li><li><keywordMajor>@StackTier2@ stupňů</keywordMajor>: Vyšle za cíl <spellName>@Tier2_NumberOfBlowback@</spellName> výbuchy, které způsobí @Tier2_BlowbackPercentageDamage@&nbsp;% poškození této schopnosti.</li><li><keywordMajor>@StackTier3@ stupňů</keywordMajor>: Sežehne cíl a po dobu @Tier3_DotLength@&nbsp;sek. mu bude způsobovat <trueDamage>přímé poškození ve výši @Tier3_Burn@ maximálního zdraví</trueDamage>. Nepřátelští šampioni, kterým během hoření klesne celkové zdraví pod <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> celkového zdraví, budou okamžitě zabiti.</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder vychrlí plamen, kterým způsobí <physicalDamage>@TotalDamage@ bodů fyzického</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ bodů magického poškození</magicDamage>. Pokud cíl zemře, vrátí se Smolderovi jednou za seslání @ManaRestore@ many.<br><br>Tato schopnost se vyvíjí s počtem stupňů <spellName>Dračího výcviku</spellName> a může získat následující efekty:<li><keywordMajor>@StackTier1@ stupňů</keywordMajor>: Způsobí poškození všem nepřátelům kolem cíle.<li><keywordMajor>@StackTier2@ stupňů</keywordMajor>: Vyšle za cíl <spellName>@Tier2_NumberOfBlowback@</spellName> výbuchy, které způsobí @Tier2_BlowbackPercentageDamage@&nbsp;% poškození této schopnosti.<li><keywordMajor>@StackTier3@ stupňů</keywordMajor>: Sežehne cíl a po dobu @Tier3_DotLength@&nbsp;sek. mu bude způsobovat <trueDamage>přímé poškození ve výši @Tier3_Burn@ maximálního zdraví</trueDamage>. Nepřátelští šampioni, kterým během hoření klesne celkové zdraví pod <trueDamage>@Tier3_ExecuteThreshold@</trueDamage>, budou okamžitě zabiti.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@AbilityResourceName@: @Cost@",
             "cooldown": "@Cooldown@ sek. %i:cooldown%",
             "description": "Smolder si rozkošně ohnivě kýchne, načež poškodí a zpomalí zasažené nepřátele.",
-            "dynamicDescription": "Smolder si rozkošně ohnivě kýchne, čímž způsobí <physicalDamage>@InitialDamage@ bodů fyzického poškození</physicalDamage> a @SlowAmount*100@% <status>zpomalení</status> na dobu @SlowDuration@&nbsp;sek.<br><br>Pokud zasáhne nějakého šampiona, dojde k výbuchu, který způsobí <physicalDamage>@ExplosionDamage@ bodů fyzického poškození</physicalDamage> + <magicDamage>@Passive_Damage@ bodů magického poškození</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder si rozkošně ohnivě kýchne, čímž způsobí <physicalDamage>@InitialDamage@ bodů fyzického poškození</physicalDamage> a @SlowAmount*100@% <status>zpomalení</status> na dobu @SlowDuration@&nbsp;sek.<br><br>Pokud zasáhne nějakého šampiona, dojde k výbuchu, který způsobí <physicalDamage>@ExplosionDamage@ bodů fyzického</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ bodů magického poškození</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@AbilityResourceName@: @Cost@",
             "cooldown": "@Cooldown@ sek. %i:cooldown%",
             "description": "Smolder vzlétne, ignoruje terénní překážky a bombarduje nepřítele s nejnižším zdravím.",
-            "dynamicDescription": "Smolder vzlétne, na @Duration@&nbsp;sek. tak získá <speed>@MoveSpeed*100@&nbsp;% k rychlosti pohybu</speed> a ignoruje terénní překážky.<br><br>Během letu Smolder <spellName>@TotalNumberOfAttacks@</spellName>x (zaokrouhleno dolů) zaútočí bombardováním na nepřítele s nejnižším zdravím, každým zásahem mu způsobí <physicalDamage>@DamagePerHit@ bodů fyzického poškození</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ bodů magického poškození</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder vzlétne, na @Duration@&nbsp;sek. tak získá <speed>@MoveSpeed*100@&nbsp;% k rychlosti pohybu</speed> a ignoruje terénní překážky.<br><br>Během letu Smolder <spellName>@TotalNumberOfAttacks@</spellName>x (zaokrouhleno dolů) zaútočí bombardováním na nepřítele s nejnižším zdravím, každým zásahem mu způsobí <physicalDamage>@DamagePerHit@ bodů fyzického</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ bodů magického poškození</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@AbilityResourceName@: @Cost@",
             "cooldown": "@Cooldown@ sek. %i:cooldown%",
             "description": "Smolder přivolá svou matku, která vychrlí shůry oheň, čímž způsobí dodatečné poškození a zpomalí nepřátele uprostřed svého ohně.",
-            "dynamicDescription": "Smolderova matka vychrlí oheň shůry, čímž způsobí <physicalDamage>@TotalDamage@ bodů fyzického poškození</physicalDamage>. Nepřátelé, kteří se nacházejí uprostřed oblasti, utrpí místo uvedené hodnoty <physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage> bodů poškození a budou na @SlowDuration@&nbsp;sek. <status>zpomaleni</status> o @SlowAmount*100@&nbsp;%.<br><br>Pokud Smolderova matka zasáhne svého syna, vyléčí mu <healing>@MomHealCalc@ zdraví</healing>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolderova matka vychrlí shůry oheň, čímž způsobí <physicalDamage>@TotalDamage@ bodů fyzického poškození</physicalDamage>. Nepřátelé, kteří se nacházejí uprostřed oblasti, utrpí místo uvedené hodnoty <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ bodů fyzického poškození</physicalDamage> a budou na @SlowDuration@&nbsp;sek. <status>zpomaleni</status> o @SlowAmount*100@&nbsp;%.<br><br>Pokud Smolderova matka zasáhne svého syna, vyléčí mu <healing>@MomHealCalc@ zdraví</healing>.@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

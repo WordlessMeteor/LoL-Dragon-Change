@@ -664,7 +664,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@&nbsp;s %i:cooldown%",
             "description": "Beritten: Rell springt ab und schützt sich mit ihrer Rüstung. Gegner werden hochgeschleudert und sie erhält einen starken Schild. Wenn sie zu Fuß unterwegs ist, erhält sie Rüstung, Magieresistenz, Angriffstempo und Angriffsreichweite, ist aber verlangsamt.<br><br>Zu Fuß: Rell erschafft ihr Reittier, erhält einen Lauftemposchub und schleudert den nächsten Gegner, den sie angreift, in die Luft.<br><br>",
-            "dynamicDescription": "Rell springt von ihrem Reittier ab, <status>schleudert</status> Gegner @spell.RellW_Dismount:StunDuration@&nbsp;Sekunde lang hoch und fügt ihnen <magicDamage>@spell.RellW_Dismount:DismountDamage@&nbsp;magischen Schaden</magicDamage> zu. Rell erhält einen <shield>Schild</shield> in Höhe von @spell.RellW_Dismount:Shield@, der bestehen bleibt, bis sie wieder auf ihr Reittier steigt. <br><br>Dann schützt sich Rell mit ihrer Rüstung. Sie erhält dabei <scaleArmor>@spell.RellW_Dismount:ResistanceIncrease*100@&nbsp;% zusätzliche Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>, <attackSpeed>@spell.RellW_Dismount:DismountedASBoost*100@&nbsp;% Angriffstempo</attackSpeed> und @spell.RellW_Dismount:DismountedRangeBoost@&nbsp;Angriffsreichweite, ist aber um <slow>@spell.RellW_Dismount:DismountedMSPenalty*-100@&nbsp;%</slow> <status>verlangsamt</status>. In dieser Form kann sie <spellName>Ferromantie: Aufsitzen</spellName> einsetzen.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<spellPassive>Passiv&nbsp;– Berittene Gewandtheit:</spellPassive> Rell erhält <speed>@spell.RellW_Dismount:MountedMoveSpeed@&nbsp;Lauftempo</speed>, wenn sie mit ihrem Reittier unterwegs ist.<br><br><spellActive>Aktiv&nbsp;– Ferromantie: Abspringen:</spellActive> Rell springt von ihrem Reittier ab, <status>schleudert</status> Gegner hoch und fügt ihnen <magicDamage>@spell.RellW_Dismount:DismountDamage@&nbsp;magischen Schaden</magicDamage> zu. Rell erhält einen <shield>Schild</shield> in Höhe von @spell.RellW_Dismount:Shield@, der bestehen bleibt, bis sie wieder auf ihr Reittier steigt.<br><br>Dann schützt sich Rell mit ihrer Rüstung. Sie erhält dabei <scaleArmor>@spell.RellW_Dismount:ResistanceIncrease*100@&nbsp;% zusätzliche Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>, <attackSpeed>@spell.RellW_Dismount:DismountedASBoost*100@&nbsp;% Angriffstempo</attackSpeed> und @spell.RellW_Dismount:DismountedRangeBoost@&nbsp;Angriffsreichweite. In dieser geschützten Form kann sie <spellName>Ferromantie: Aufsitzen</spellName> einsetzen.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -682,12 +682,12 @@
                 40.0
             ],
             "cooldownCoefficients": [
-                11.0,
-                11.0,
-                11.0,
-                11.0,
-                11.0,
-                11.0
+                10.0,
+                10.0,
+                10.0,
+                10.0,
+                10.0,
+                10.0
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -814,7 +814,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@&nbsp;s %i:cooldown%",
             "description": "Passiv: Rell erhält Lauftempo außerhalb des Kampfes.<br><br>Aktiv: Rell und ein Verbündeter erhalten ansteigendes Lauftempo, das verdoppelt wird, wenn sie sich auf Gegner oder aufeinander zubewegen. Ihr nächster Angriff explodiert und verursacht magischen Schaden.<br>",
-            "dynamicDescription": "<spellPassive>Passiv – Berittene Gewandtheit:</spellPassive> Rell erhält <speed>@PassiveMovespeed@&nbsp;Lauftempo</speed>, wenn sie mit ihrem Reittier unterwegs ist (im Kampf auf <speed>@CombatMSTooltipOnly@</speed> verringert). <br><br><spellActive>Aktiv – Gefährlicher Galopp:</spellActive> Rell und ein Verbündeter stürmen los und erhalten über @Duration@&nbsp;Sekunden hinweg ansteigendes <speed>Lauftempo (bis zu @BaseMS*100@&nbsp;%</speed>). Dieser Betrag wird verdoppelt auf <speed>@MaxMS*100@&nbsp;%</speed> in Richtung von Gegnern oder deinem anvisierten Verbündeten.<br><br>Außerdem explodiert <spellName>Vernichtender Schlag</spellName> oder der nächste Angriff von Rell und verursacht in einem Bereich <magicDamage>magischen Schaden</magicDamage> in Höhe von @Damage@ plus @PercentHealthDamage*100@&nbsp;% des maximalen Lebens.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Rell und ein Verbündeter stürmen vor und erhalten <speed>@MinMS*100@&nbsp;% Lauftempo</speed>, das sich auf <speed>@MaxMS*100@&nbsp;%</speed> erhöht, wenn sie einem gegnerischen Champion oder sich selbst @Duration@&nbsp;Sekunden lang gegenüberstehen. Rells nächster Angriff oder <spellName>Vernichtender Schlag</spellName> explodiert in einem Bereich und verursacht magischen Schaden<magicDamage> in Höhe von </magicDamage>@MaxHealthDamageCalc@ des maximalen Lebens.@SpellModifierDescriptionAppend@",
             "range": [
                 1200.0,
                 1200.0,
@@ -832,12 +832,12 @@
                 40.0
             ],
             "cooldownCoefficients": [
-                15.0,
-                15.0,
-                15.0,
-                15.0,
-                15.0,
-                15.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                10.0
             ],
             "coefficients": {
                 "coefficient1": 0.0,

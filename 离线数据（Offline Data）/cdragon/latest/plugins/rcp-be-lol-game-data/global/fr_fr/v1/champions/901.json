@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Smolder crache du feu sur un ennemi. Au fil des effets cumulés, cette compétence devient plus puissante.",
-            "dynamicDescription": "Smolder crache du feu, infligeant <physicalDamage>@TooltipQDamage@ pts de dégâts physiques</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ pts de dégâts magiques</magicDamage>.<br><br>Selon le nombre d'effets de <spellName>Dragon en herbe</spellName> cumulés, cette compétence évolue pour gagner les bonus suivants :<li><keywordMajor>@StackTier1@ effets cumulés</keywordMajor> : blesse tous les ennemis autour de la cible.</li><li><keywordMajor>@StackTier2@ effets cumulés</keywordMajor> : envoie <spellName>@Tier2_NumberOfBlowback@</spellName> explosions derrière la cible. Ces explosions infligent @Tier2_BlowbackPercentageDamage@% des dégâts de cette compétence.</li><li><keywordMajor>@StackTier3@ effets cumulés</keywordMajor> : brûle la cible, infligeant des <trueDamage>dégâts bruts équivalents à @Tier3_Burn@ des PV max</trueDamage> en @Tier3_DotLength@ sec. Les champions ennemis qui tombent sous <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> PV lorsqu'ils brûlent sont instantanément tués.</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder crache du feu, infligeant <physicalDamage>@TotalDamage@ pts de dégâts physiques</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ pts de dégâts magiques</magicDamage>. Si la cible meurt sur le coup, Smolder récupère @ManaRestore@ pts de mana (une fois par lancement de la compétence).<br><br>Selon le nombre d'effets de <spellName>Dragon en herbe</spellName> cumulés, cette compétence évolue pour gagner les bonus suivants :<li><keywordMajor>@StackTier1@ effets cumulés</keywordMajor> : blesse tous les ennemis autour de la cible.<li><keywordMajor>@StackTier2@ effets cumulés</keywordMajor> : envoie <spellName>@Tier2_NumberOfBlowback@</spellName> explosions derrière la cible. Ces explosions infligent @Tier2_BlowbackPercentageDamage@% des dégâts de cette compétence.<li><keywordMajor>@StackTier3@ effets cumulés</keywordMajor> : brûle la cible, infligeant des <trueDamage>dégâts bruts équivalents à @Tier3_Burn@ des PV max</trueDamage> en @Tier3_DotLength@ sec. Les champions ennemis qui tombent sous <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> PV lorsqu'ils brûlent sont instantanément tués.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Smolder laisse échapper un adorable éternuement enflammé qui explose s'il touche des champions ennemis.",
-            "dynamicDescription": "Smolder laisse échapper un adorable éternuement enflammé, infligeant <physicalDamage>@InitialDamage@ pts de dégâts physiques</physicalDamage> et <status>ralentissant</status> les ennemis de @SlowAmount*100@% pendant @SlowDuration@ sec.<br><br>Toucher des champions provoque une explosion, infligeant <physicalDamage>@ExplosionDamage@ pts de dégâts physiques</physicalDamage> + <magicDamage>@Passive_Damage@ pts de dégâts magiques</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder laisse échapper un adorable éternuement enflammé, infligeant <physicalDamage>@InitialDamage@ pts de dégâts physiques</physicalDamage> et <status>ralentissant</status> les ennemis de @SlowAmount*100@% pendant @SlowDuration@ sec.<br><br>Toucher des champions provoque une explosion, infligeant <physicalDamage>@ExplosionDamage@ pts de dégâts physiques</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ pts de dégâts magiques</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Smolder s'envole, ignorant les obstacles et bombardant l'ennemi qui a le moins de PV.",
-            "dynamicDescription": "Smolder s'envole, gagnant <speed>+@MoveSpeed*100@% de vitesse de déplacement</speed> et ignorant les obstacles pendant @Duration@ sec.<br><br>Pendant son vol, Smolder bombarde <spellName>@TotalNumberOfAttacks@</spellName> (arrondi à l'inférieur) fois l'ennemi qui a le moins de PV, lui infligeant <physicalDamage>@DamagePerHit@ pts de dégâts physiques</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ pts de dégâts magiques</magicDamage> par coup.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder s'envole, gagnant <speed>+@MoveSpeed*100@% de vitesse de déplacement</speed> et ignorant les obstacles pendant @Duration@ sec.<br><br>Pendant son vol, Smolder bombarde <spellName>@TotalNumberOfAttacks@</spellName> (arrondi à l'inférieur) fois l'ennemi qui a le moins de PV, lui infligeant <physicalDamage>@DamagePerHit@ pts de dégâts physiques</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ pts de dégâts magiques</magicDamage> par coup.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "烟炎向敌人喷射火焰。获得的叠层数越多，该技能就会变得越强大。",
-            "dynamicDescription": "烟炎喷出火焰，造成<physicalDamage>@TooltipQDamage@物理伤害</physicalDamage> + <magicDamage>@Passive_Damage_Increase@魔法伤害</magicDamage>.<br><br>该技能会基于<spellName>飞龙练习</spellName>的叠层数发生进化，获得以下效果：<li><keywordMajor>@StackTier1@层</keywordMajor>：对目标周围所有敌人造成伤害。</li><li><keywordMajor>@StackTier2@层</keywordMajor>：在目标身后引发<spellName>@Tier2_NumberOfBlowback@</spellName>次爆炸，造成@Tier2_BlowbackPercentageDamage@%的技能伤害。</li><li><keywordMajor>@StackTier3@层</keywordMajor>：燃烧目标，在@Tier3_DotLength@秒内造成<trueDamage>@Tier3_Burn@最大生命值的真实伤害</trueDamage>。燃烧期间，生命值低于<trueDamage>@Tier3_ExecuteThreshold@</trueDamage>的敌方英雄时将会被立即处决。</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "烟炎喷出火焰，造成<physicalDamage>@TotalDamage@物理伤害</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@魔法伤害</magicDamage>。如果目标死亡，烟炎会返还@ManaRestore@魔力，每次施放返还一次。<br><br>该技能会基于<spellName>飞龙练习</spellName>的叠层数发生进化，获得以下效果：<li><keywordMajor>@StackTier1@叠层</keywordMajor>：对目标周围的所有敌人造成伤害。<li><keywordMajor>@StackTier2@叠层</keywordMajor>：在目标身后引发<spellName>@Tier2_NumberOfBlowback@</spellName>次爆炸，造成@Tier2_BlowbackPercentageDamage@%的此技能伤害。<li><keywordMajor>@StackTier3@叠层</keywordMajor>：燃烧目标，在@Tier3_DotLength@秒内造成<trueDamage>@Tier3_Burn@最大生命值的真实伤害</trueDamage>。燃烧期间，生命值低于<trueDamage>@Tier3_ExecuteThreshold@</trueDamage>的敌方英雄时将会被立即处决。@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "烟炎打出一个可爱的烈焰喷嚏，在击中敌方英雄时触发爆炸。",
-            "dynamicDescription": "烟炎打出一个可爱的烈焰喷嚏，造成<physicalDamage>@InitialDamage@物理伤害</physicalDamage>和@SlowAmount*100@%<status>减速</status>效果，持续@SlowDuration@秒。<br><br>击中英雄可触发一次爆炸，造成<physicalDamage>@ExplosionDamage@物理伤害</physicalDamage> + <magicDamage>@Passive_Damage@魔法伤害</magicDamage>。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "烟炎打出一个可爱的烈焰喷嚏，造成<physicalDamage>@InitialDamage@物理伤害</physicalDamage>和@SlowAmount*100@%<status>减速</status>效果，持续@SlowDuration@秒。<br><br>击中英雄可触发一次爆炸，造成<physicalDamage>@ExplosionDamage@物理</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@魔法伤害</magicDamage>。@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "烟炎飞翔时无视地形，并炮轰生命值最低的敌人。",
-            "dynamicDescription": "烟炎展翅飞翔，获得<speed>@MoveSpeed*100@%移动速度</speed>并在@Duration@秒内无视地形。<br><br>飞翔期间，烟炎会炮轰生命值最低的敌人<spellName>@TotalNumberOfAttacks@</spellName>（向下取整）次，每次命中造成<physicalDamage>@DamagePerHit@物理伤害</physicalDamage> + <magicDamage>@Passive_Damage_Increase@魔法伤害</magicDamage>。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "烟炎展翅飞翔，获得<speed>@MoveSpeed*100@%移动速度</speed>并在@Duration@秒内无视地形。<br><br>飞翔期间，烟炎会炮轰生命值最低的敌人<spellName>@TotalNumberOfAttacks@</spellName>（向下取整）次，每次命中造成<physicalDamage>@DamagePerHit@物理伤害</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@魔法伤害</magicDamage>。@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "烟炎呼唤母亲从天空喷吐火焰，对火焰中央的敌人造成额外伤害和减速效果。",
-            "dynamicDescription": "烟炎的母亲从天空喷吐火焰，对火焰中央的敌人造成<physicalDamage>@TotalDamage@物理伤害</physicalDamage>。位于中心区域的敌人转而承受<physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage>伤害和@SlowAmount*100@%<status>减速</status>效果，持续@SlowDuration@秒。<br><br>如果母亲的火焰击中烟炎，则会对其治疗<healing>@MomHealCalc@生命值</healing>。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "烟炎的母亲从天空喷吐火焰，造成<physicalDamage>@TotalDamage@物理伤害</physicalDamage>。位于中心区域的敌人转而承受<physicalDamage>@TooltipOnly_TotalSweetspotDamage@物理伤害</physicalDamage>和@SlowAmount*100@%<status>减速</status>效果，持续@SlowDuration@秒。<br><br>如果母亲的火焰击中烟炎，则会对其治疗<healing>@MomHealCalc@生命值</healing>。@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

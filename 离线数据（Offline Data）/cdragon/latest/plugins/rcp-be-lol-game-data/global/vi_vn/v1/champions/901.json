@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ giây %i:cooldown%",
             "description": "Smolder phun lửa vào một kẻ địch. Khi nhận thêm điểm cộng dồn, kỹ năng này sẽ được cường hóa.",
-            "dynamicDescription": "Smolder phun lửa, gây <physicalDamage>@TooltipQDamage@ sát thương vật lý</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ sát thương phép</magicDamage>.<br><br>Theo số cộng dồn của <spellName>Long Hỏa</spellName>, Kỹ năng này sẽ tiến hóa, nhận các hiệu ứng sau:<li><keywordMajor>@StackTier1@ Cộng dồn</keywordMajor>: Gây sát thương lên tất cả kẻ địch xung quanh mục tiêu.</li><li><keywordMajor>@StackTier2@ Cộng dồn</keywordMajor>: Tạo ra <spellName>@Tier2_NumberOfBlowback@</spellName> một vụ nổ phía sau mục tiêu, gây @Tier2_BlowbackPercentageDamage@% sát thương của Kỹ Năng này.</li><li><keywordMajor>@StackTier3@ Cộng dồn</keywordMajor>: Thiêu đốt mục tiêu, gây <trueDamage>@Tier3_Burn@ Máu tối đa thành sát thương chuẩn</trueDamage> trong vòng @Tier3_DotLength@ giây. Nếu tổng lượng máu tụt xuống dưới ngưỡng <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> trong khi bị thiêu đốt, tướng địch sẽ bị kết liễu ngay lập tức.</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder phun lửa, gây <physicalDamage>@TotalDamage@ sát thương vật lý</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ sát thương phép</magicDamage>. Nếu mục tiêu bị tiêu diệt, Smolder hồi lại @ManaRestore@ Năng Lượng, một lần với một chiêu thức tung ra.<br><br>Theo số cộng dồn của <spellName>Long Hỏa</spellName>, Kỹ năng này sẽ tiến hóa, nhận các hiệu ứng sau:<li><keywordMajor>@StackTier1@ Cộng Dồn</keywordMajor>: Gây sát thương lên tất cả kẻ địch xung quanh mục tiêu.<li><keywordMajor>@StackTier2@ Cộng Dồn</keywordMajor>: Bắn ra <spellName>@Tier2_NumberOfBlowback@</spellName> vụ nổ ra sau mục tiêu, gây @Tier2_BlowbackPercentageDamage@% sát thương của Kỹ Năng này.<li><keywordMajor>@StackTier3@ Cộng Dồn</keywordMajor>: Thiêu đốt mục tiêu, gây <trueDamage>@Tier3_Burn@ Máu tối đa thành sát thương chuẩn</trueDamage> trong vòng @Tier3_DotLength@ giây. Nếu tổng lượng máu tụt xuống dưới ngưỡng <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> trong khi bị thiêu đốt, tướng địch sẽ bị kết liễu ngay lập tức.@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ giây %i:cooldown%",
             "description": "Smolder hắt xì, phun ra một ngọn lửa tí nị, phát nổ khi trúng tướng địch.",
-            "dynamicDescription": "Smolder phun ra một ngọn lửa tí nị, gây sát thương, gây <physicalDamage>@InitialDamage@ sát thương vật lý</physicalDamage> và <status>Làm Chậm</status> đi @SlowAmount*100@% trong @SlowDuration@ giây.<br><br>Khi đánh trúng tướng địch, kỹ năng này sẽ gây ra thêm một vụ nổ, gây <physicalDamage>@ExplosionDamage@ sát thương vật lý</physicalDamage> + <magicDamage>@Passive_Damage@ sát thương phép</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder phun ra một ngọn lửa tí nị, gây sát thương, gây <physicalDamage>@InitialDamage@ sát thương vật lý</physicalDamage> và <status>Làm Chậm</status> đi @SlowAmount*100@% trong @SlowDuration@ giây.<br><br>Khi đánh trúng tướng địch, kỹ năng này sẽ tạo ra một vụ nổ, gây <physicalDamage>@ExplosionDamage@ sát thương vật lý</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ sát thương phép</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ giây %i:cooldown%",
             "description": "Smolder cất cánh bay lên, di chuyển vượt địa hình và công phá kẻ địch thấp máu nhất.",
-            "dynamicDescription": "Smolder cất cánh bay lên, tăng <speed>@MoveSpeed*100@% Tốc Độ Di Chuyển</speed>, di chuyển vượt địa hình trong @Duration@ giây.<br><br>Khi đang bay, Smolder công phá kẻ địch thấp Máu nhất <spellName>@TotalNumberOfAttacks@</spellName> (làm tròn) lần, gây <physicalDamage>@DamagePerHit@ sát thương vật lý</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ sát thương phép</magicDamage> mỗi đòn.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder cất cánh bay lên, tăng <speed>@MoveSpeed*100@% Tốc Độ Di Chuyển</speed>, di chuyển vượt địa hình trong @Duration@ giây.<br><br>Khi đang bay, Smolder công phá kẻ địch thấp Máu nhất <spellName>@TotalNumberOfAttacks@</spellName> (làm tròn) lần, gây <physicalDamage>@DamagePerHit@ sát thương vật lý</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ sát thương phép</magicDamage> mỗi đòn.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ giây %i:cooldown%",
             "description": "Smolder gọi mẹ xuất hiện và phun lửa từ không trung, gây thêm sát thương và làm chậm kẻ địch ở chính giữa ngọn lửa.",
-            "dynamicDescription": "Mẹ của Smolder phun lửa từ không trung, gây <physicalDamage>@TotalDamage@ sát thương vật lý</physicalDamage>. Kẻ địch ở vùng trung tâm chịu <physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage> và bị <status>Làm Chậm</status> đi @SlowAmount*100@% trong @SlowDuration@ giây.<br><br>Mẹ của Smolder hồi cho con trai <healing>@MomHealCalc@ Máu</healing> nếu phun lửa trúng vị tướng này.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Mẹ của Smolder phun lửa từ không trung, gây <physicalDamage>@TotalDamage@ sát thương vật lý</physicalDamage>. Kẻ địch ở vùng trung tâm chịu <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ sát thương vật lý</physicalDamage> và bị <status>Làm Chậm</status> đi @SlowAmount*100@% trong @SlowDuration@ giây.<br><br>Mẹ của Smolder hồi cho con trai <healing>@MomHealCalc@ Máu</healing> nếu phun lửa trúng vị tướng này.@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

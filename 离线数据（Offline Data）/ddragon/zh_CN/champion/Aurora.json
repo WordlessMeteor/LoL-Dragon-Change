@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.22.1",
+    "version": "14.23.1",
     "data": {
         "Aurora": {
             "id": "Aurora",
@@ -73,7 +73,7 @@
                     "id": "AuroraQ",
                     "name": "飞去来咒",
                     "description": "阿萝拉放出一道飞弹，诅咒所有命中的敌人。阿萝拉可以再次施放该技能，来将所有激活的诅咒抽回自己身上。诅咒在返回途中会对命中的敌人造成伤害。",
-                    "tooltip": "朝一个方向发射诅咒能量，对沿途所有敌人造成<magicDamage>{{ damage }}魔法伤害</magicDamage>和持续{{ markduration }}秒的诅咒印记。<br /><br /><recast>再次施放：</recast>终止诅咒，将该敌人的一部分灵魂抽回到自己身上，对途经的敌人造成至多<magicDamage>{{ q2damagemax }}魔法伤害</magicDamage>(基于其已损失生命值)。第一次命中后的伤害降低至20%。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "发射诅咒能量至一个方向，对敌人们造成<magicDamage>{{ damage }}魔法伤害</magicDamage>和持续{{ markduration }}秒的诅咒。<br /><br /><recast>再次施放：</recast>终止诅咒，将该敌人的一部分灵物抽回到自己身上，对途经的敌人造成至多<magicDamage>{{ q2damagemax }}魔法伤害</magicDamage>(基于其已损失生命值)。第一次命中后的伤害被降低至20%。<br /><br />如果持续时间耗尽，那么阿萝拉将会自动再次施放这个技能。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -86,13 +86,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        9,
+                        8.5,
                         8,
                         7.5,
-                        7,
-                        6.5,
-                        6
+                        7
                     ],
-                    "cooldownBurn": "8/7.5/7/6.5/6",
+                    "cooldownBurn": "9/8.5/8/7.5/7",
                     "cost": [
                         60,
                         60,
@@ -192,13 +192,13 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        850,
-                        850,
-                        850,
-                        850,
-                        850
+                        900,
+                        900,
+                        900,
+                        900,
+                        900
                     ],
-                    "rangeBurn": "850",
+                    "rangeBurn": "900",
                     "image": {
                         "full": "AuroraQ.png",
                         "sprite": "spell1.png",
@@ -218,11 +218,13 @@
                     "leveltip": {
                         "label": [
                             "冷却时间",
-                            "持续时间"
+                            "持续时间",
+                            "移动速度"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ invisduration }} -> {{ invisdurationNL }}"
+                            "{{ invisduration }} -> {{ invisdurationNL }}",
+                            "{{ movespeedbonus }}% -> {{ movespeedbonusNL }}%"
                         ]
                     },
                     "maxrank": 5,
@@ -474,13 +476,13 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        850,
-                        850,
-                        850,
-                        850,
-                        850
+                        825,
+                        825,
+                        825,
+                        825,
+                        825
                     ],
-                    "rangeBurn": "850",
+                    "rangeBurn": "825",
                     "image": {
                         "full": "AuroraE.png",
                         "sprite": "spell1.png",
@@ -496,7 +498,7 @@
                     "id": "AuroraR",
                     "name": "双界合一",
                     "description": "阿萝拉跳向选定方向，释放出一片灵冲击波，对命中的敌人造成伤害和减速。然后，她会创造一个区域来困住其中的敌人们，并且允许阿萝拉从该区域的一侧传送到另一侧。",
-                    "tooltip": "跳向一个方向。落地时，阿萝拉将双界合二为一，发出一道灵魂能量激波，对命中的敌人们造成<magicDamage>{{ damagecalc }}魔法伤害</magicDamage>和持续2秒的{{ slowpercent*-100 }}%<status>减速</status>。<br /><br />交界领域会持续存在{{ areaduration }}秒，强化阿萝拉的<keywordMajor>双界行者</keywordMajor>效果，并让她能够从区域边缘传送至另一侧边缘。<br /><br />任何尝试进入或离开该区域的敌人都会被推向中心，同时获得持续{{ stunduration }}秒的{{ exitslowpercent*-100 }}%<status>减速</status>。<br /><br />阿萝拉可以<recast>再次施放</recast>这个技能来提前结束区域效果。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "跳向一个方向。落地时，阿萝拉将双界合二为一，发出一道灵魂能量激波，对命中的敌人们造成<magicDamage>{{ damagecalc }}魔法伤害</magicDamage>和持续2秒的{{ slowpercent*-100 }}%<status>减速</status>。<br /><br />交界领域会持续存在{{ areaduration }}秒，为阿萝拉提供<keywordMajor>双界行者</keywordMajor>效果，并让她能够从区域边缘传送至另一侧边缘。<br /><br />任何尝试进入或离开该区域的敌人都会被施加持续{{ stunduration }}秒的{{ exitslowpercent*-100 }}%<status>减速</status>。<br /><br />阿萝拉可以<recast>再次施放</recast>这个技能来提前结束区域效果。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "冷却时间",

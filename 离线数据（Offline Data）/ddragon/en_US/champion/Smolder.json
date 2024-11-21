@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.22.1",
+    "version": "14.23.1",
     "data": {
         "Smolder": {
             "id": "Smolder",
@@ -82,15 +82,15 @@
                     "id": "SmolderQ",
                     "name": "Super Scorcher Breath",
                     "description": "Smolder breathes fire on an enemy. As he gains more stacks, this ability becomes more powerful.",
-                    "tooltip": "Smolder belches flame, dealing <physicalDamage>{{ tooltipqdamage }} physical damage</physicalDamage> + <magicDamage>{{ passive_damage_increase }} magic damage</magicDamage>.<br /><br />Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>{{ stacktier1 }} Stacks</keywordMajor>: Damages all enemies surrounding the target.</li><li><keywordMajor>{{ stacktier2 }} Stacks</keywordMajor>: Sends <spellName>{{ tier2_numberofblowback }}</spellName> explosions beyond the target that deal {{ tier2_blowbackpercentagedamage }}% of this Ability's damage.</li><li><keywordMajor>{{ stacktier3 }} Stacks</keywordMajor>: Burns the target, dealing <trueDamage>{{ tier3_burn }} max Health true damage</trueDamage> over {{ tier3_dotlength }} seconds. Enemy champions that drop below <trueDamage>{{ tier3_executethreshold }}</trueDamage> total health while burning are killed instantly.</li>{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Smolder belches flame, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> + <magicDamage>{{ spell.smolderp:passive_qdamageincrease }} magic damage</magicDamage>. If the target dies, Smolder refunds {{ manarestore }} Mana, once per cast.<br /><br />Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>{{ stacktier1 }} Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>{{ stacktier2 }} Stacks</keywordMajor>: Sends <spellName>{{ tier2_numberofblowback }}</spellName> explosions beyond the target that deal {{ tier2_blowbackpercentagedamage }}% of this Ability's damage.<li><keywordMajor>{{ stacktier3 }} Stacks</keywordMajor>: Burns the target, dealing <trueDamage>{{ tier3_burn }} max Health true damage</trueDamage> over {{ tier3_dotlength }} seconds. Enemy champions that drop below <trueDamage>{{ tier3_executethreshold }}</trueDamage> total health while burning are killed instantly.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
-                            "Base Damage"
+                            "Base Damage",
+                            "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ basedamage }} -> {{ basedamageNL }}"
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -223,17 +223,19 @@
                     "id": "SmolderW",
                     "name": "Achooo!",
                     "description": "Smolder lets out an adorable flaming sneeze that explodes when hitting enemy champions.",
-                    "tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>{{ initialdamage }} physical damage</physicalDamage> and <status>Slowing</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />Hitting champions causes an explosion, dealing <physicalDamage>{{ explosiondamage }} physical damage</physicalDamage> + <magicDamage>{{ passive_damage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>{{ initialdamage }} physical damage</physicalDamage> and <status>Slowing</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />Hitting champions causes an explosion, dealing <physicalDamage>{{ explosiondamage }} physical</physicalDamage> + <magicDamage>{{ spell.smolderp:passive_wdamageincrease }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
                             "Damage",
-                            "Explosion Damage"
+                            "Explosion Damage",
+                            "Cooldown",
+                            "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}"
+                            "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}",
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -246,13 +248,13 @@
                     ],
                     "cooldownBurn": "14/13/12/11/10",
                     "cost": [
+                        50,
+                        55,
                         60,
-                        60,
-                        60,
-                        60,
-                        60
+                        65,
+                        70
                     ],
-                    "costBurn": "60",
+                    "costBurn": "50/55/60/65/70",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -366,7 +368,7 @@
                     "id": "SmolderE",
                     "name": "Flap, Flap, Flap",
                     "description": "Smolder takes flight ignoring terrain and bombarding the lowest health enemy.",
-                    "tooltip": "Smolder takes flight, gaining <speed>{{ movespeed*100 }}% Move Speed</speed> and ignoring terrain for {{ duration }} seconds.<br /><br />While flying, Smolder bombards the lowest Health enemy <spellName>{{ totalnumberofattacks }}</spellName> (rounded down) times for <physicalDamage>{{ damageperhit }} physical damage</physicalDamage> + <magicDamage>{{ passive_damage_increase }} magic damage</magicDamage> per hit.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Smolder takes flight, gaining <speed>{{ movespeed*100 }}% Move Speed</speed> and ignoring terrain for {{ duration }} seconds.<br /><br />While flying, Smolder bombards the lowest Health enemy <spellName>{{ totalnumberofattacks }}</spellName> (rounded down) times for <physicalDamage>{{ damageperhit }} physical damage</physicalDamage> + <magicDamage>{{ spell.smolderp:ebonusdamage }} magic damage</magicDamage> per hit.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -507,26 +509,24 @@
                     "id": "SmolderR",
                     "name": "MMOOOMMMM!",
                     "description": "Smolder calls his mom to breath fire from above, dealing extra damage and slowing enemies in the center of her fire.",
-                    "tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Enemies in the center instead take <physicalDamage>{{ tooltiponly_totalsweetspotdamage }}</physicalDamage> and are <status>Slowed</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />Smolder's mom heals her son for <healing>{{ momhealcalc }} Health</healing> if she hits him.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Enemies in the center take <physicalDamage>{{ tooltiponly_totalsweetspotdamage }} physical damage</physicalDamage> instead and are <status>Slowed</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />Smolder's mom heals her son for <healing>{{ momhealcalc }} Health</healing> if she hits him.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
                             "Damage",
                             "Heal"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ momheal }} -> {{ momhealNL }}"
                         ]
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        140,
-                        130,
+                        120,
+                        120,
                         120
                     ],
-                    "cooldownBurn": "140/130/120",
+                    "cooldownBurn": "120",
                     "cost": [
                         100,
                         100,

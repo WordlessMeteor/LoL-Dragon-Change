@@ -664,7 +664,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ %i:cooldown%",
             "description": "الامتطاء: تترجل ريل وتهبط بثقل دروعها لتطيح بالأعداء في الهواء مكتسبةً درعًا كبيرًا. حين تترجل، تكتسب دروعًا ومقاومة سحر وسرعة هجوم ومدى هجوم، لكنها تتعرض للإبطاء.<br><br>الترجل: تشكل ريل دابتها، فتكسب دفقة من السرعة وتطيح بالعدو التالي الذي تهاجمه في الهواء.<br><br>",
-            "dynamicDescription": "تثب ريل من على ظهر دابتها، وتسبب <status>الإطاحة في الهواء</status> للأعداء لمدة @spell.RellW_Dismount:StunDuration@ ثوان وتلحق <magicDamage>@spell.RellW_Dismount:DismountDamage@ ضرر سحر</magicDamage>. تكسب ريل <shield>@spell.RellW_Dismount:Shield@ درعًا</shield> يدوم إلى أن تمتطي دابتها ثانيةً. <br><br>تدخل بعدها ريل بالهيئة المدرعة فتكسب <scaleArmor>@spell.RellW_Dismount:ResistanceIncrease*100@% دروع إضافية</scaleArmor> و <scaleMR>مقاومة سحر</scaleMR> و <attackSpeed>@spell.RellW_Dismount:DismountedASBoost*100@% سرعة هجوم</attackSpeed> و @spell.RellW_Dismount:DismountedRangeBoost@ مدى هجوم، لكنها تتعرض <status>للإبطاء</status> بنسبة <slow>@spell.RellW_Dismount:DismountedMSPenalty*-100@%</slow>. في هذه الهيئة، تستطيع استخدام <spellName>السحر المعدني: امتطاء الفرس</spellName>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<spellPassive>التأثير الكامن - همّة الخيّالة:</spellPassive> تكسب ريل <speed>@spell.RellW_Dismount:MountedMoveSpeed@ سرعة حركة</speed> أثناء ركوبها.<br><br><spellActive>تأثير نشط - السحر المعدني: الهبوط المدمر:</spellActive> تثب ريل من على ظهر حصانها، <status>فتطيح بالأعداء في الهواء</status> وتلحق <magicDamage>@spell.RellW_Dismount:DismountDamage@ ضرر سحر</magicDamage>. تكسب ريل <shield>درعًا بقيمة @spell.RellW_Dismount:Shield@</shield> يدوم إلى أن تمتطي حصانها ثانيةً.<br><br>تدخل بعدها ريل في الهيئة المدرعة، فتكسب <scaleArmor>@spell.RellW_Dismount:ResistanceIncrease*100@% زيادة في الدروع</scaleArmor> و<scaleMR>مقاومة السحر</scaleMR> و <attackSpeed>@spell.RellW_Dismount:DismountedASBoost*100@% سرعة هجوم</attackSpeed> و @spell.RellW_Dismount:DismountedRangeBoost@ مدى هجوم. في هذه الهيئة المدرعة، تستطيع استخدام <spellName>السحر المعدني: امتطاء الفرس</spellName>.@SpellModifierDescriptionAppend@",
             "range": [
                 450.0,
                 450.0,
@@ -682,12 +682,12 @@
                 40.0
             ],
             "cooldownCoefficients": [
-                11.0,
-                11.0,
-                11.0,
-                11.0,
-                11.0,
-                11.0
+                10.0,
+                10.0,
+                10.0,
+                10.0,
+                10.0,
+                10.0
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -814,7 +814,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ %i:cooldown%",
             "description": "التأثير الكامن: تكسب ريل سرعة حركة خارج القتال.<br><br>التأثير النشط: تكتسب ريل وحليف لها سرعة حركة متراكمة، تتضاعف باتجاه الأعداء وباتجاه بعضهما البعض. ينفجر هجومها التالي ملحقًا ضرر سحر.<br>",
-            "dynamicDescription": "<spellPassive>التأثير الكامن - همّة الخيّالة:</spellPassive> تكسب ريل <speed>@PassiveMovespeed@ سرعة حركة</speed> أثناء ركوبها تنخفض إلى <speed>@CombatMSTooltipOnly@</speed> أثناء القتال. <br><br><spellActive>التأثير النشط - السرعة القصوى:</spellActive> تندفع ريل رفقة حليفٍ مكتسبين <speed>سرعة حركة تتراكم لحد أقصاه @BaseMS*100@%</speed> خلال @Duration@ ثوان، تتم مضاعفة هذه السرعة إلى <speed>@MaxMS*100@%</speed> باتجاه الأعداء أو الحليف المستهدف.<br><br>بالإضافة إلى ذلك، هجوم ريل التالي أو <spellName>الضربة المحطِّمة</spellName> يتسبب في انفجار يلحق <magicDamage>@Damage@ زائد @PercentHealthDamage*100@% من الصحة القصوى على شكل ضرر سحر</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "تندفع ريل برفقة حليفٍ، فيكسبان <speed>@MinMS*100@% سرعة حركة</speed>، تزداد حتى <speed>@MaxMS*100@%</speed> عند مواجهة أبطال العدو أو أحدهما الآخر لمدة @Duration@ث. ينفجر هجوم ريل التالي أو <spellName>الضربة المحطِّمة</spellName> في منطقة معينة ملحقًا <magicDamage>@MaxHealthDamageCalc@ من الصحة القصوى على شكل ضرر سحر</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 1200.0,
                 1200.0,
@@ -832,12 +832,12 @@
                 40.0
             ],
             "cooldownCoefficients": [
-                15.0,
-                15.0,
-                15.0,
-                15.0,
-                15.0,
-                15.0
+                14.0,
+                13.0,
+                12.0,
+                11.0,
+                10.0,
+                10.0
             ],
             "coefficients": {
                 "coefficient1": 0.0,

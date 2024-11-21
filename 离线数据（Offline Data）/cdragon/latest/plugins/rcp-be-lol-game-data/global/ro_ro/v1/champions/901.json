@@ -257,7 +257,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Smolder suflă foc asupra unui inamic. Pe măsură ce strânge cumuluri, această abilitate devine mai puternică.",
-            "dynamicDescription": "Smolder scuipă flăcări, provocând <physicalDamage>@TooltipQDamage@ daune fizice</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ daune magice</magicDamage>.<br><br>În funcție de numărul de cumuluri de <spellName>''Antrenamentul dragonului''</spellName>, abilitatea evoluează, primind următoarele efecte:<li><keywordMajor>@StackTier1@ cumuluri</keywordMajor>: le provoacă daune tuturor inamicilor din apropierea țintei.</li><li><keywordMajor>@StackTier2@ cumuluri</keywordMajor>: creează <spellName>@Tier2_NumberOfBlowback@</spellName> explozii dincolo de țintă, care provoacă @Tier2_BlowbackPercentageDamage@% din daunele abilității.</li><li><keywordMajor>@StackTier3@ cumuluri</keywordMajor>: arde ținta, provocând <trueDamage>daune reale în valoare de @Tier3_Burn@ din viața maximă</trueDamage> de-a lungul a @Tier3_DotLength@ secunde. Campionii inamici a căror viață scade sub <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> din viața totală când ard sunt uciși instantaneu</li>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder scuipă flăcări, provocând <physicalDamage>@TotalDamage@ daune fizice</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_QDamageIncrease@ daune magice</magicDamage>. Dacă ținta moare, Smolder își reface @ManaRestore@ mană (o dată per folosire).<br><br>În funcție de numărul de cumuluri de <spellName>''Antrenamentul dragonului''</spellName>, abilitatea evoluează, primind următoarele efecte:<li><keywordMajor>@StackTier1@ cumuluri</keywordMajor>: le provoacă daune tuturor inamicilor din jurul țintei.<li><keywordMajor>@StackTier2@ cumuluri</keywordMajor>: creează <spellName>@Tier2_NumberOfBlowback@</spellName> explozii dincolo de țintă, care provoacă @Tier2_BlowbackPercentageDamage@% din daunele abilității.<li><keywordMajor>@StackTier3@ cumuluri</keywordMajor>: arde ținta, provocând <trueDamage>daune reale în valoare de @Tier3_Burn@ din viața maximă</trueDamage> de-a lungul a @Tier3_DotLength@ secunde. Campionii inamici a căror viață scade sub <trueDamage>@Tier3_ExecuteThreshold@</trueDamage> din viața totală când ard sunt uciși instantaneu@SpellModifierDescriptionAppend@",
             "range": [
                 550.0,
                 550.0,
@@ -407,7 +407,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Smolder strănută, cauzând explozii când lovește campionii inamici.",
-            "dynamicDescription": "Smolder strănută, lansând flăcări care provoacă <physicalDamage>@InitialDamage@ daune fizice</physicalDamage> și <status>încetinesc</status> inamicii cu @SlowAmount*100@% timp de @SlowDuration@ secunde.<br><br>Când lovește campionii, creează o explozie care provoacă <physicalDamage>@ExplosionDamage@ daune fizice</physicalDamage> + <magicDamage>@Passive_Damage@ daune magice</magicDamage>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder strănută, lansând flăcări care provoacă <physicalDamage>@InitialDamage@ daune fizice</physicalDamage> și <status>încetinesc</status> inamicii cu @SlowAmount*100@% timp de @SlowDuration@ secunde.<br><br>Când lovește campionii, creează o explozie care provoacă <physicalDamage>@ExplosionDamage@ daune fizice</physicalDamage> + <magicDamage>@spell.SmolderP:Passive_WDamageIncrease@ daune magice</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -417,12 +417,12 @@
                 1500.0
             ],
             "costCoefficients": [
+                50.0,
+                55.0,
                 60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0,
-                60.0
+                65.0,
+                70.0,
+                70.0
             ],
             "cooldownCoefficients": [
                 14.0,
@@ -557,7 +557,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Smolder zboară, ignoră terenul și îl bombardează pe inamicul cu viața cea mai scăzută.",
-            "dynamicDescription": "Smolder începe să zboare, primind <speed>@MoveSpeed*100@% viteză de mișcare</speed> și ignorând terenul timp de @Duration@ secunde.<br><br>În timp ce zboară, Smolder îl bombardează pe inamicul cu viața cea mai scăzută de <spellName>@TotalNumberOfAttacks@</spellName> ori (număr care se rotunjește în jos), provocându-i <physicalDamage>@DamagePerHit@ daune fizice</physicalDamage> + <magicDamage>@Passive_Damage_Increase@ daune magice</magicDamage> per lovitură.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Smolder începe să zboare, primind <speed>@MoveSpeed*100@% viteză de mișcare</speed> și ignorând terenul timp de @Duration@ secunde.<br><br>În timp ce zboară, Smolder îl bombardează pe inamicul cu viața cea mai scăzută de <spellName>@TotalNumberOfAttacks@</spellName> ori (număr care se rotunjește în jos), provocându-i <physicalDamage>@DamagePerHit@ daune fizice</physicalDamage> + <magicDamage>@spell.SmolderP:EBonusDamage@ daune magice</magicDamage> per lovitură.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -707,7 +707,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Smolder o cheamă pe mama lui, care suflă flăcări de sus, provocând daune suplimentare și încetinind inamicii din mijlocul focului ei.",
-            "dynamicDescription": "Mama lui Smolder suflă flăcări de sus, provocând <physicalDamage>@TotalDamage@ daune fizice</physicalDamage>. Inamicii din centrul zonei suferă <physicalDamage>@TooltipOnly_TotalSweetspotDamage@</physicalDamage> daune și sunt <status>încetiniți</status> cu @SlowAmount*100@% timp de @SlowDuration@ secunde.<br><br>Dacă îl atinge, mama lui Smolder îi reface puiului ei <healing>@MomHealCalc@ viață</healing>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Mama lui Smolder suflă flăcări de sus, provocând <physicalDamage>@TotalDamage@ daune fizice</physicalDamage>. Inamicii din centrul zonei suferă <physicalDamage>@TooltipOnly_TotalSweetspotDamage@ daune fizice</physicalDamage> și sunt <status>încetiniți</status> cu @SlowAmount*100@% timp de @SlowDuration@ secunde.<br><br>Dacă îl atinge, mama lui Smolder îi reface puiului ei <healing>@MomHealCalc@ viață</healing>.@SpellModifierDescriptionAppend@",
             "range": [
                 4200.0,
                 4200.0,
@@ -725,8 +725,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                140.0,
-                130.0,
+                120.0,
+                120.0,
                 120.0,
                 120.0,
                 120.0,

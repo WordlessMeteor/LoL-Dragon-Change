@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "14.22.1",
+    "version": "14.23.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -5021,7 +5021,7 @@
                         "label": [
                             "Damage",
                             "Detonation Damage",
-                            "Stun Duration",
+                            "Stun Duration:",
                             "Cooldown",
                             "@AbilityResourceName@ Cost"
                         ],
@@ -8432,7 +8432,7 @@
                     "id": "AuroraQ",
                     "name": "Twofold Hex",
                     "description": "Aurora sends out a missile that curses any enemies it hits. She can then recast the ability to draw active curses back toward herself, damaging foes who are hit along the way.",
-                    "tooltip": "Fire cursed energy in a direction, dealing <magicDamage>{{ damage }} magic damage</magicDamage> to enemies and cursing them for {{ markduration }} seconds.<br /><br /><recast>Recast:</recast> End the curse, drawing back part of the enemy's spirit to Aurora, dealing up to <magicDamage>{{ q2damagemax }} magic damage</magicDamage> to enemies passed through based on their missing health. Damage beyond the first hit is reduced to 20%.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Fire cursed energy in a direction, dealing <magicDamage>{{ damage }} magic damage</magicDamage> to enemies and cursing them for {{ markduration }} seconds.<br /><br /><recast>Recast:</recast> End the curse, drawing back part of the enemy's spirit to Aurora, dealing up to <magicDamage>{{ q2damagemax }} magic damage</magicDamage> to enemies passed through based on their missing health. Damage beyond the first hit is reduced to 20%.<br /><br />If the duration runs out, Aurora will automatically recast the ability.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -8445,13 +8445,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        9,
+                        8.5,
                         8,
                         7.5,
-                        7,
-                        6.5,
-                        6
+                        7
                     ],
-                    "cooldownBurn": "8/7.5/7/6.5/6",
+                    "cooldownBurn": "9/8.5/8/7.5/7",
                     "cost": [
                         60,
                         60,
@@ -8551,13 +8551,13 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        850,
-                        850,
-                        850,
-                        850,
-                        850
+                        900,
+                        900,
+                        900,
+                        900,
+                        900
                     ],
-                    "rangeBurn": "850",
+                    "rangeBurn": "900",
                     "image": {
                         "full": "AuroraQ.png",
                         "sprite": "spell1.png",
@@ -8577,11 +8577,13 @@
                     "leveltip": {
                         "label": [
                             "Cooldown",
-                            "Duration"
+                            "Duration",
+                            "Move Speed"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ invisduration }} -> {{ invisdurationNL }}"
+                            "{{ invisduration }} -> {{ invisdurationNL }}",
+                            "{{ movespeedbonus }}% -> {{ movespeedbonusNL }}%"
                         ]
                     },
                     "maxrank": 5,
@@ -8833,13 +8835,13 @@
                     "costType": " {{ abilityresourcename }}",
                     "maxammo": "-1",
                     "range": [
-                        850,
-                        850,
-                        850,
-                        850,
-                        850
+                        825,
+                        825,
+                        825,
+                        825,
+                        825
                     ],
-                    "rangeBurn": "850",
+                    "rangeBurn": "825",
                     "image": {
                         "full": "AuroraE.png",
                         "sprite": "spell1.png",
@@ -8855,7 +8857,7 @@
                     "id": "AuroraR",
                     "name": "Between Worlds",
                     "description": "Aurora leaps in a direction of her choosing, releasing a shockwave that damages and slows any enemies it hits. Afterward, she creates an area that traps enemies within it and allows Aurora to teleport from one side of the area to the other.",
-                    "tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> and <status>Slows</status> enemies hit by {{ slowpercent*-100 }}% for 2 seconds.<br /><br />The area of convergence stays active for {{ areaduration }} seconds, empowering Aurora's <keywordMajor>Realm Hopper</keywordMajor> and allowing her to jump from one edge of the area to another.<br /><br />Enemies attempting to enter or leave the area are <status>Slowed</status> by {{ exitslowpercent*-100 }}% for {{ stunduration }} seconds after being pushed back toward the center.<br /><br />Aurora can <recast>Recast</recast> this Ability to end the effect early.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> and <status>Slows</status> enemies hit by {{ slowpercent*-100 }}% for 2 seconds.<br /><br />The area of convergence stays active for {{ areaduration }} seconds, granting Aurora <keywordMajor>Realm Hopper</keywordMajor> and allowing her to jump from one edge of the area to another.<br /><br />Enemies attempting to enter or leave the area are <status>Slowed</status> by {{ exitslowpercent*-100 }}% for {{ stunduration }} seconds.<br /><br />Aurora can <recast>Recast</recast> this Ability to end the effect early.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -9778,7 +9780,7 @@
                         "label": [
                             "Damage",
                             "Slow Duration",
-                            "Stun Duration",
+                            "Stun Duration:",
                             "Cooldown"
                         ],
                         "effect": [
@@ -13822,10 +13824,22 @@
                     "num": 48,
                     "name": "DRX Caitlyn",
                     "chromas": true
+                },
+                {
+                    "id": "51050",
+                    "num": 50,
+                    "name": "Arcane Commander Caitlyn",
+                    "chromas": true
+                },
+                {
+                    "id": "51051",
+                    "num": 51,
+                    "name": "Prestige Arcane Commander Caitlyn",
+                    "chromas": true
                 }
             ],
-            "lore": "Renowned as its finest peacekeeper, Caitlyn is also Piltover's best shot at ridding the city of its elusive criminal elements. She is often paired with Vi, acting as a cool counterpoint to her partner's more impetuous nature. Even though she carries a one-of-a-kind hextech rifle, Caitlyn's most powerful weapon is her superior intellect, allowing her to lay elaborate traps for any lawbreakers foolish enough to operate in the City of Progress.",
-            "blurb": "Renowned as its finest peacekeeper, Caitlyn is also Piltover's best shot at ridding the city of its elusive criminal elements. She is often paired with Vi, acting as a cool counterpoint to her partner's more impetuous nature. Even though she carries a...",
+            "lore": "Renowned as its finest peacekeeper, Caitlyn Kiramman is also Piltover's best shot at ridding the city of its elusive criminal elements. She is often paired with Vi, acting as a cool counterpoint to her partner's more impetuous nature. Even though she carries a one-of-a-kind hextech rifle, Caitlyn's most powerful weapon is her superior intellect, allowing her to lay elaborate traps for any lawbreakers foolish enough to operate in the City of Progress.",
+            "blurb": "Renowned as its finest peacekeeper, Caitlyn Kiramman is also Piltover's best shot at ridding the city of its elusive criminal elements. She is often paired with Vi, acting as a cool counterpoint to her partner's more impetuous nature. Even though she...",
             "allytips": [
                 "Make use of her Yordle Snap Traps by placing them pre-emptively to ensure that you'll have one off of cooldown during combat.",
                 "Avoid using Ace in the Hole in large team melees as it might be blocked by the wrong target.",
@@ -20051,8 +20065,8 @@
                     "chromas": false
                 }
             ],
-            "lore": "A prodigy from the rough streets of Zaun, Ekko manipulates time to twist any situation to his advantage. Using his own invention, the Zero Drive, he explores the branching possibilities of reality to craft the perfect moment. Though he revels in this freedom, when there's a threat to his friends he'll do anything to defend them. To outsiders, Ekko seems to achieve the impossible the first time, every time.",
-            "blurb": "A prodigy from the rough streets of Zaun, Ekko manipulates time to twist any situation to his advantage. Using his own invention, the Zero Drive, he explores the branching possibilities of reality to craft the perfect moment. Though he revels in this...",
+            "lore": "A prodigy from the rough streets of Zaun, Ekko is able to manipulate time to twist any situation to his advantage. He uses his own invention, the Z-Drive, to explore the branching possibilities of reality, crafting the perfect moment to seemingly achieve the impossible the first time, every time. Though Ekko revels in this freedom, when there's a threat to those he cares about, he and the Firelights will do anything to defend them.",
+            "blurb": "A prodigy from the rough streets of Zaun, Ekko is able to manipulate time to twist any situation to his advantage. He uses his own invention, the Z-Drive, to explore the branching possibilities of reality, crafting the perfect moment to seemingly...",
             "allytips": [
                 "Chronobreak is a potent escape tool, but it can also be quite powerful when used offensively. Don't underestimate its damage potential.",
                 "If you can proc Z-Drive Resonance on an enemy champion, it's worth taking risks to do so. The bonus Move Speed makes it easy to escape.",
@@ -21072,7 +21086,7 @@
                     "tooltip": "<keywordMajor>Human Form</keywordMajor>: Elise fires a cocoon, <status>Stunning</status> and revealing the first enemy hit for {{ stunduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Stun Duration",
+                            "Stun Duration:",
                             "Cooldown (Cocoon)",
                             "Cooldown (Rappel)",
                             "Damage and Healing Increase"
@@ -30571,8 +30585,8 @@
                     "chromas": false
                 }
             ],
-            "lore": "A brilliant yet eccentric yordle scientist, Professor Cecil B. Heimerdinger is one of the most innovative and esteemed inventors Piltover has ever known. Relentless in his work to the point of neurotic obsession, he thrives on answering the universe's most impenetrable questions. Though his theories often appear opaque and esoteric, Heimerdinger has crafted some of Piltover's most miraculous—not to mention lethal—machinery, and constantly tinkers with his inventions to make them even more efficient.",
-            "blurb": "A brilliant yet eccentric yordle scientist, Professor Cecil B. Heimerdinger is one of the most innovative and esteemed inventors Piltover has ever known. Relentless in his work to the point of neurotic obsession, he thrives on answering the universe's...",
+            "lore": "The eccentric Professor Cecil B. Heimerdinger is one of the most innovative and esteemed inventors the world has ever known. As the longest serving member of the Council of Piltover, he saw the best and the worst of the city's unending desire for progress. Nonetheless, this brilliant scientist and teacher will always remain dedicated to using his unconventional devices to improve the lives of others.",
+            "blurb": "The eccentric Professor Cecil B. Heimerdinger is one of the most innovative and esteemed inventors the world has ever known. As the longest serving member of the Council of Piltover, he saw the best and the worst of the city's unending desire for...",
             "allytips": [
                 "Turret placement can be a deciding factor in a battle. Against most enemies turrets are best when they can support each other, but if the enemy has a lot of area of effect damage your turrets can be destroyed quickly. Placing turrets in brush can lead to a surprise attack in your favor.",
                 "The success of Electron Storm Grenade is very important to Heimerdinger's survival. The slow and stun both are capable of keeping enemies in place long enough to punish them, but it is also the first line of defense against a surprise attack.",
@@ -36101,14 +36115,20 @@
                     "chromas": true
                 },
                 {
+                    "id": "126035",
+                    "num": 35,
+                    "name": "Arcane Survivor Jayce",
+                    "chromas": false
+                },
+                {
                     "id": "126036",
                     "num": 36,
                     "name": "Prestige T1 Jayce",
                     "chromas": false
                 }
             ],
-            "lore": "Jayce is a brilliant inventor who has pledged his life to the defense of Piltover and its unyielding pursuit of progress. With his transforming hextech hammer in hand, Jayce uses his strength, courage, and considerable intelligence to protect his hometown. While revered throughout the city as a hero, he hasn't taken well to the attention heroism brings. Still, Jayce's heart is in the right place, and even those who envy his natural skills are grateful for his protection in the City of Progress.",
-            "blurb": "Jayce is a brilliant inventor who has pledged his life to the defense of Piltover and its unyielding pursuit of progress. With his transforming hextech hammer in hand, Jayce uses his strength, courage, and considerable intelligence to protect his...",
+            "lore": "Jayce Talis is a brilliant inventor who, along with his friend Viktor, made the first great discoveries in the field of hextech. Celebrated across Piltover, he tries to live up to his reputation as \"the Man of Progress,\" but often struggles with the expectations placed upon him. Because of this, Jayce has begun to see the ways in which his invention has furthered the division between Piltover and Zaun—and armed with his hextech hammer, he stands ready to defend tomorrow.",
+            "blurb": "Jayce Talis is a brilliant inventor who, along with his friend Viktor, made the first great discoveries in the field of hextech. Celebrated across Piltover, he tries to live up to his reputation as \"the Man of Progress,\" but often struggles with the...",
             "allytips": [
                 "Be sure to switch stances often. It will enhance your attacks and grant you quick bursts of speed.",
                 "If you find yourself taking lots of damage, try using Jayce's Hammer Stance, as it grants you additional defenses.",
@@ -37502,8 +37522,8 @@
                     "chromas": false
                 }
             ],
-            "lore": "A manic and impulsive criminal from Zaun, Jinx lives to wreak havoc without care for the consequences. With an arsenal of deadly weapons, she unleashes the loudest blasts and brightest explosions to leave a trail of mayhem and panic in her wake. Jinx despises boredom, and gleefully brings her own chaotic brand of pandemonium wherever she goes.",
-            "blurb": "A manic and impulsive criminal from Zaun, Jinx lives to wreak havoc without care for the consequences. With an arsenal of deadly weapons, she unleashes the loudest blasts and brightest explosions to leave a trail of mayhem and panic in her wake. Jinx...",
+            "lore": "An unhinged and impulsive criminal from the undercity, Jinx is haunted by the consequences of her past—but that doesn't stop her from bringing her own chaotic brand of pandemonium to Piltover and Zaun. She uses her arsenal of DIY weapons to devastating effect, unleashing torrents of colorful explosions and gunfire, inspiring the disenfranchised to rebellion and resistance with the mayhem she leaves in her wake.",
+            "blurb": "An unhinged and impulsive criminal from the undercity, Jinx is haunted by the consequences of her past—but that doesn't stop her from bringing her own chaotic brand of pandemonium to Piltover and Zaun. She uses her arsenal of DIY weapons to devastating...",
             "allytips": [
                 "Rockets aren't always the best choice! Jinx's minigun is incredibly powerful when fully ramped up. Switch to it whenever an enemy champion gets too close.",
                 "Jinx's rockets deal full damage to all enemies in the explosion. Use them on minions in lane to hit nearby enemy champions without drawing minion aggro.",
@@ -37542,7 +37562,7 @@
                 "crit": 0,
                 "critperlevel": 0,
                 "attackdamage": 59,
-                "attackdamageperlevel": 2.9,
+                "attackdamageperlevel": 3.25,
                 "attackspeedperlevel": 1.4,
                 "attackspeed": 0.625
             },
@@ -44479,7 +44499,7 @@
                 "mp": 327,
                 "mpperlevel": 40,
                 "movespeed": 350,
-                "armor": 36,
+                "armor": 32,
                 "armorperlevel": 4.2,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -44715,11 +44735,11 @@
                             2
                         ],
                         [
-                            75,
-                            75,
-                            75,
-                            75,
-                            75
+                            60,
+                            60,
+                            60,
+                            60,
+                            60
                         ],
                         [
                             0,
@@ -44751,7 +44771,7 @@
                         "2",
                         "0",
                         "2",
-                        "75",
+                        "60",
                         "0",
                         "0",
                         "0"
@@ -46547,7 +46567,7 @@
                         "effect": [
                             "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%",
                             "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e3 }}% -> {{ e3NL }}%"
+                            "{{ shredamount }}% -> {{ shredamountNL }}%"
                         ]
                     },
                     "maxrank": 5,
@@ -46585,11 +46605,11 @@
                             30
                         ],
                         [
-                            23,
-                            25,
-                            27,
-                            29,
-                            31
+                            16,
+                            20,
+                            24,
+                            28,
+                            32
                         ],
                         [
                             4,
@@ -46645,7 +46665,7 @@
                         null,
                         "90/140/190/240/290",
                         "10/15/20/25/30",
-                        "23/25/27/29/31",
+                        "16/20/24/28/32",
                         "4",
                         "1",
                         "1",
@@ -46855,11 +46875,11 @@
                     "effect": [
                         null,
                         [
-                            75,
-                            120,
-                            165,
-                            210,
-                            255
+                            70,
+                            110,
+                            150,
+                            190,
+                            230
                         ],
                         [
                             30,
@@ -46927,7 +46947,7 @@
                     ],
                     "effectBurn": [
                         null,
-                        "75/120/165/210/255",
+                        "70/110/150/190/230",
                         "30/35/40/45/50",
                         "4",
                         "0.25",
@@ -51326,8 +51346,8 @@
                     "chromas": true
                 }
             ],
-            "lore": "Lucian, a Sentinel of Light, is a grim hunter of undying spirits, pursuing them relentlessly and annihilating them with his twin relic pistols. After the wraith Thresh slew his wife, Lucian embarked on the path of vengeance—but even with her return to life, his rage is undiminished. Merciless and single-minded, Lucian will stop at nothing to protect the living from the long-dead horrors of the Black Mist.",
-            "blurb": "Lucian, a Sentinel of Light, is a grim hunter of undying spirits, pursuing them relentlessly and annihilating them with his twin relic pistols. After the wraith Thresh slew his wife, Lucian embarked on the path of vengeance—but even with her return to...",
+            "lore": "Lucian, a Sentinel of Light, is a grim hunter of wraiths and specters, pursuing them relentlessly and annihilating them with his twin relic pistols. After the specter Thresh slew his wife, Lucian embarked on the path of vengeance—but even with her return to life, his rage is undiminished. Merciless and single-minded, Lucian will stop at nothing to protect the living from the long-dead horrors of the Black Mist.",
+            "blurb": "Lucian, a Sentinel of Light, is a grim hunter of wraiths and specters, pursuing them relentlessly and annihilating them with his twin relic pistols. After the specter Thresh slew his wife, Lucian embarked on the path of vengeance—but even with her...",
             "allytips": [
                 "For optimal burst, try to combine Relentless Pursuit into Piercing Light.",
                 "Ardent Blaze actually explodes in a star pattern. Try to line it up so the spokes hit enemy champions.",
@@ -57051,12 +57071,10 @@
                     "tooltip": "Miss Fortune fires a bouncing shot, dealing <physicalDamage>{{ totaldamagetooltip }} physical damage</physicalDamage> to an enemy and to another one behind them. <br /><br />The second shot can critically strike. It always critically strikes if the first shot kills its target. {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "@AbilityResourceName@ Cost",
                             "Cooldown",
                             "Damage"
                         ],
                         "effect": [
-                            "{{ cost }} -> {{ costNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ e2 }} -> {{ e2NL }}"
                         ]
@@ -57071,13 +57089,13 @@
                     ],
                     "cooldownBurn": "7/6/5/4/3",
                     "cost": [
-                        43,
-                        46,
-                        49,
-                        52,
-                        55
+                        40,
+                        40,
+                        40,
+                        40,
+                        40
                     ],
-                    "costBurn": "43/46/49/52/55",
+                    "costBurn": "40",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -59562,7 +59580,7 @@
                         "label": [
                             "Damage",
                             "Move Speed",
-                            "Stun Duration",
+                            "Stun Duration:",
                             "Cooldown"
                         ],
                         "effect": [
@@ -62304,7 +62322,7 @@
                         "label": [
                             "Cooldown",
                             "Pass Through Damage",
-                            "Stun Duration",
+                            "Stun Duration:",
                             "Explosion Damage"
                         ],
                         "effect": [
@@ -69066,7 +69084,7 @@
                         "label": [
                             "Initial Damage",
                             "Wall Damage",
-                            "Stun Duration",
+                            "Stun Duration:",
                             "Cooldown"
                         ],
                         "effect": [
@@ -72187,13 +72205,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        16,
-                        13.5,
-                        11,
-                        8.5,
+                        12,
+                        10.5,
+                        9,
+                        7.5,
                         6
                     ],
-                    "cooldownBurn": "16/13.5/11/8.5/6",
+                    "cooldownBurn": "12/10.5/9/7.5/6",
                     "cost": [
                         60,
                         60,
@@ -73442,23 +73460,23 @@
             "stats": {
                 "hp": 610,
                 "hpperlevel": 104,
-                "mp": 350,
-                "mpperlevel": 45,
-                "movespeed": 330,
-                "armor": 36,
-                "armorperlevel": 4.2,
-                "spellblock": 30,
-                "spellblockperlevel": 2.05,
+                "mp": 320,
+                "mpperlevel": 40,
+                "movespeed": 315,
+                "armor": 30,
+                "armorperlevel": 4.3,
+                "spellblock": 28,
+                "spellblockperlevel": 1.8,
                 "attackrange": 175,
                 "hpregen": 7.5,
                 "hpregenperlevel": 0.85,
-                "mpregen": 6,
-                "mpregenperlevel": 0.35,
+                "mpregen": 7,
+                "mpregenperlevel": 0.7,
                 "crit": 0,
                 "critperlevel": 0,
                 "attackdamage": 55,
                 "attackdamageperlevel": 3,
-                "attackspeedperlevel": 1.5,
+                "attackspeedperlevel": 2,
                 "attackspeed": 0.625
             },
             "spells": [
@@ -73607,28 +73625,30 @@
                     "id": "RellW_Dismount",
                     "name": "Ferromancy: Crash Down",
                     "description": "Mounted: Rell Dismounts, crashing down in her armor, Knocking enemies up and gaining a large Shield. While dismounted, she gains Armor, Magic Resist, Attack Speed, and Attack Range, but is Slowed.<br><br>Dismounted: Rell forms her Mount, gaining a burst of speed and Knocking Up the next enemy she attacks.<br><br>",
-                    "tooltip": "Rell leaps off her mount, <status>Knocking Up</status> enemies for {{ spell.rellw_dismount:stunduration }} second and dealing <magicDamage>{{ spell.rellw_dismount:dismountdamage }} magic damage</magicDamage>. Rell gains <shield>{{ spell.rellw_dismount:shield }} Shield</shield>, which lasts until she remounts. <br /><br />Rell then enters armored form, gaining <scaleArmor>{{ spell.rellw_dismount:resistanceincrease*100 }}% bonus Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, <attackSpeed>{{ spell.rellw_dismount:dismountedasboost*100 }}% Attack Speed</attackSpeed> and {{ spell.rellw_dismount:dismountedrangeboost }} Attack Range, but is <status>Slowed</status> by <slow>{{ spell.rellw_dismount:dismountedmspenalty*-100 }}%</slow>. In this form, she can use <spellName>Ferromancy: Mount Up</spellName>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>Passive - Mounted Alacrity:</spellPassive> Rell gains <speed>{{ spell.rellw_dismount:mountedmovespeed }} Move Speed</speed> while mounted.<br /><br /><spellActive>Active - Ferromancy: Crash Down:</spellActive> Rell leaps off her mount, <status>Knocking Up</status> enemies and dealing <magicDamage>{{ spell.rellw_dismount:dismountdamage }} magic damage</magicDamage>. Rell gains <shield>{{ spell.rellw_dismount:shield }} Shield</shield>, which lasts until she remounts.<br /><br />Rell then enters her armored form, gaining <scaleArmor>{{ spell.rellw_dismount:resistanceincrease*100 }}% increased Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, <attackSpeed>{{ spell.rellw_dismount:dismountedasboost*100 }}% Attack Speed</attackSpeed> and {{ spell.rellw_dismount:dismountedrangeboost }} Attack Range. In this armored form, she can use <spellName>Ferromancy: Mount Up</spellName>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Damage",
+                            "Dismount Damage",
                             "Shield Amount",
-                            "Flip Damage"
+                            "Flip Damage",
+                            "Passive Move Speed"
                         ],
                         "effect": [
-                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ crashdowndamage }} -> {{ crashdowndamageNL }}",
                             "{{ shieldbase }} -> {{ shieldbaseNL }}",
-                            "{{ flipattackdamagetooltiponly }} -> {{ flipattackdamagetooltiponlyNL }}"
+                            "{{ mountupdamage }} -> {{ mountupdamageNL }}",
+                            "{{ mountedmovespeed }} -> {{ mountedmovespeedNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        11,
-                        11,
-                        11,
-                        11,
-                        11
+                        10,
+                        10,
+                        10,
+                        10,
+                        10
                     ],
-                    "cooldownBurn": "11",
+                    "cooldownBurn": "10",
                     "cost": [
                         40,
                         40,
@@ -73750,28 +73770,26 @@
                     "id": "RellE",
                     "name": "Full Tilt",
                     "description": "Passive: Rell gains out of combat Move Speed.<br><br>Active: Rell and an ally gain ramping Move Speed, doubled toward enemies and each other. Her next Attack explodes, dealing magic damage.<br>",
-                    "tooltip": "<spellPassive>Passive - Mounted Alacrity:</spellPassive> Rell gains <speed>{{ passivemovespeed }} Move Speed</speed> while mounted, reduced to <speed>{{ combatmstooltiponly }}</speed> in combat. <br /><br /><spellActive>Active - Full Tilt:</spellActive> Rell and an ally charge, gaining ramping <speed>Move Speed up to {{ basems*100 }}%</speed> over {{ duration }} seconds, this is doubled to <speed>{{ maxms*100 }}%</speed> toward enemies or your targeted ally.<br /><br />Additionally, Rell's next Attack or <spellName>Shattering Strike</spellName> explode in an area for <magicDamage>{{ damage }} plus {{ percenthealthdamage*100 }}% max Health magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Rell and an ally charge, gaining <speed>{{ minms*100 }}% Move Speed</speed>, increased to <speed>{{ maxms*100 }}%</speed> when facing enemy champions or each other for {{ duration }} seconds. Rell's next Attack or <spellName>Shattering Strike</spellName> explodes in an area for <magicDamage>{{ maxhealthdamagecalc }} max Health magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Move Speed",
-                            "Max Move Speed"
+                            "Cooldown"
                         ],
                         "effect": [
-                            "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ basems*100.000000 }}% -> {{ basemsnl*100.000000 }}%",
-                            "{{ maxms*100.000000 }}% -> {{ maxmsnl*100.000000 }}%"
+                            "{{ percenthealthdamage*100.000000 }}% -> {{ percenthealthdamagenl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        15,
-                        15,
-                        15,
-                        15,
-                        15
+                        14,
+                        13,
+                        12,
+                        11,
+                        10
                     ],
-                    "cooldownBurn": "15",
+                    "cooldownBurn": "14/13/12/11/10",
                     "cost": [
                         40,
                         40,
@@ -73897,11 +73915,11 @@
                     "leveltip": {
                         "label": [
                             "Cooldown",
-                            "Damage Per Second"
+                            "Damage"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ basedamagepersecond }} -> {{ basedamagepersecondNL }}"
+                            "{{ basedamagepersecond*2.000000 }} -> {{ basedamagepersecondnl*2.000000 }}"
                         ]
                     },
                     "maxrank": 3,
@@ -79558,8 +79576,8 @@
                     "chromas": false
                 }
             ],
-            "lore": "Cursed from childhood to be haunted by the supernatural Black Mist, Senna joined a sacred order known as the Sentinels of Light, and fiercely fought back—only to be killed, her soul imprisoned in a lantern by the cruel wraith Thresh. But refusing to lose hope, within the lantern Senna learned to use the Mist, and reemerged to new life, forever changed. Now wielding darkness along with light, Senna seeks to end the Black Mist by turning it against itself—with every blast of her relic weapon, redeeming the souls lost within.",
-            "blurb": "Cursed from childhood to be haunted by the supernatural Black Mist, Senna joined a sacred order known as the Sentinels of Light, and fiercely fought back—only to be killed, her soul imprisoned in a lantern by the cruel wraith Thresh. But refusing to...",
+            "lore": "Cursed from childhood to be haunted by the supernatural Black Mist, Senna joined a sacred order known as the Sentinels of Light, and fiercely fought back—only to be killed, her soul imprisoned in a lantern by the cruel specter Thresh. But refusing to lose hope, within the lantern Senna learned to use the Mist, and reemerged to new life, forever changed. Now wielding darkness along with light, Senna seeks to end the Black Mist by turning it against itself—with every blast of her relic weapon, redeeming the souls lost within.",
+            "blurb": "Cursed from childhood to be haunted by the supernatural Black Mist, Senna joined a sacred order known as the Sentinels of Light, and fiercely fought back—only to be killed, her soul imprisoned in a lantern by the cruel specter Thresh. But refusing to...",
             "allytips": [],
             "enemytips": [],
             "tags": [
@@ -83008,7 +83026,7 @@
                 "armor": 38,
                 "armorperlevel": 4.55,
                 "spellblock": 32,
-                "spellblockperlevel": 2.05,
+                "spellblockperlevel": 1.5,
                 "attackrange": 125,
                 "hpregen": 8.5,
                 "hpregenperlevel": 0.8,
@@ -83668,10 +83686,16 @@
                     "num": 19,
                     "name": "Astronaut Singed",
                     "chromas": true
+                },
+                {
+                    "id": "27028",
+                    "num": 28,
+                    "name": "Arcane Shimmer Lab Singed",
+                    "chromas": false
                 }
             ],
-            "lore": "Singed is a Zaunite alchemist of unmatched intellect, who has devoted his life to pushing the boundaries of knowledge—with no price, even his own sanity, too high to pay. Is there a method to his madness? His concoctions rarely fail, but it appears to many that Singed has lost all sense of humanity, leaving a toxic trail of misery and terror in his wake.",
-            "blurb": "Singed is a Zaunite alchemist of unmatched intellect, who has devoted his life to pushing the boundaries of knowledge—with no price, even his own sanity, too high to pay. Is there a method to his madness? His concoctions rarely fail, but it appears to...",
+            "lore": "Singed is a brilliant alchemist of dubious morality, whose experiments would turn the stomach of even the most cutthroat criminal. Selling his skills to the highest bidder, he cares little for how his noxious concoctions are used, with the ensuing chaos an experiment in itself. His most infamous work is “shimmer”, which enabled the chembarons to turn Zaun into their personal playground—but fueled by madness, Singed is always working on something new, with each endeavor more depraved than the last...",
+            "blurb": "Singed is a brilliant alchemist of dubious morality, whose experiments would turn the stomach of even the most cutthroat criminal. Selling his skills to the highest bidder, he cares little for how his noxious concoctions are used, with the ensuing chaos...",
             "allytips": [
                 "Poison Trail is very effective at farming and harassing, allowing Singed to dominate the flow of whatever lane he's in.",
                 "Use Insanity Potion to trick your opponents into chasing you through your Poison Trail.",
@@ -86441,15 +86465,15 @@
                     "id": "SmolderQ",
                     "name": "Super Scorcher Breath",
                     "description": "Smolder breathes fire on an enemy. As he gains more stacks, this ability becomes more powerful.",
-                    "tooltip": "Smolder belches flame, dealing <physicalDamage>{{ tooltipqdamage }} physical damage</physicalDamage> + <magicDamage>{{ passive_damage_increase }} magic damage</magicDamage>.<br /><br />Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>{{ stacktier1 }} Stacks</keywordMajor>: Damages all enemies surrounding the target.</li><li><keywordMajor>{{ stacktier2 }} Stacks</keywordMajor>: Sends <spellName>{{ tier2_numberofblowback }}</spellName> explosions beyond the target that deal {{ tier2_blowbackpercentagedamage }}% of this Ability's damage.</li><li><keywordMajor>{{ stacktier3 }} Stacks</keywordMajor>: Burns the target, dealing <trueDamage>{{ tier3_burn }} max Health true damage</trueDamage> over {{ tier3_dotlength }} seconds. Enemy champions that drop below <trueDamage>{{ tier3_executethreshold }}</trueDamage> total health while burning are killed instantly.</li>{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Smolder belches flame, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> + <magicDamage>{{ spell.smolderp:passive_qdamageincrease }} magic damage</magicDamage>. If the target dies, Smolder refunds {{ manarestore }} Mana, once per cast.<br /><br />Based on stacks of <spellName>Dragon Practice</spellName>, this Ability evolves to gain the following effects:<li><keywordMajor>{{ stacktier1 }} Stacks</keywordMajor>: Damages all enemies surrounding the target.<li><keywordMajor>{{ stacktier2 }} Stacks</keywordMajor>: Sends <spellName>{{ tier2_numberofblowback }}</spellName> explosions beyond the target that deal {{ tier2_blowbackpercentagedamage }}% of this Ability's damage.<li><keywordMajor>{{ stacktier3 }} Stacks</keywordMajor>: Burns the target, dealing <trueDamage>{{ tier3_burn }} max Health true damage</trueDamage> over {{ tier3_dotlength }} seconds. Enemy champions that drop below <trueDamage>{{ tier3_executethreshold }}</trueDamage> total health while burning are killed instantly.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
-                            "Base Damage"
+                            "Base Damage",
+                            "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ basedamage }} -> {{ basedamageNL }}"
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -86582,17 +86606,19 @@
                     "id": "SmolderW",
                     "name": "Achooo!",
                     "description": "Smolder lets out an adorable flaming sneeze that explodes when hitting enemy champions.",
-                    "tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>{{ initialdamage }} physical damage</physicalDamage> and <status>Slowing</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />Hitting champions causes an explosion, dealing <physicalDamage>{{ explosiondamage }} physical damage</physicalDamage> + <magicDamage>{{ passive_damage }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Smolder lets out an adorable flaming sneeze, dealing <physicalDamage>{{ initialdamage }} physical damage</physicalDamage> and <status>Slowing</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />Hitting champions causes an explosion, dealing <physicalDamage>{{ explosiondamage }} physical</physicalDamage> + <magicDamage>{{ spell.smolderp:passive_wdamageincrease }} magic damage</magicDamage>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
                             "Damage",
-                            "Explosion Damage"
+                            "Explosion Damage",
+                            "Cooldown",
+                            "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}"
+                            "{{ explosionbasedamage }} -> {{ explosionbasedamageNL }}",
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ cost }} -> {{ costNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -86605,13 +86631,13 @@
                     ],
                     "cooldownBurn": "14/13/12/11/10",
                     "cost": [
+                        50,
+                        55,
                         60,
-                        60,
-                        60,
-                        60,
-                        60
+                        65,
+                        70
                     ],
-                    "costBurn": "60",
+                    "costBurn": "50/55/60/65/70",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -86725,7 +86751,7 @@
                     "id": "SmolderE",
                     "name": "Flap, Flap, Flap",
                     "description": "Smolder takes flight ignoring terrain and bombarding the lowest health enemy.",
-                    "tooltip": "Smolder takes flight, gaining <speed>{{ movespeed*100 }}% Move Speed</speed> and ignoring terrain for {{ duration }} seconds.<br /><br />While flying, Smolder bombards the lowest Health enemy <spellName>{{ totalnumberofattacks }}</spellName> (rounded down) times for <physicalDamage>{{ damageperhit }} physical damage</physicalDamage> + <magicDamage>{{ passive_damage_increase }} magic damage</magicDamage> per hit.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Smolder takes flight, gaining <speed>{{ movespeed*100 }}% Move Speed</speed> and ignoring terrain for {{ duration }} seconds.<br /><br />While flying, Smolder bombards the lowest Health enemy <spellName>{{ totalnumberofattacks }}</spellName> (rounded down) times for <physicalDamage>{{ damageperhit }} physical damage</physicalDamage> + <magicDamage>{{ spell.smolderp:ebonusdamage }} magic damage</magicDamage> per hit.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -86866,26 +86892,24 @@
                     "id": "SmolderR",
                     "name": "MMOOOMMMM!",
                     "description": "Smolder calls his mom to breath fire from above, dealing extra damage and slowing enemies in the center of her fire.",
-                    "tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Enemies in the center instead take <physicalDamage>{{ tooltiponly_totalsweetspotdamage }}</physicalDamage> and are <status>Slowed</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />Smolder's mom heals her son for <healing>{{ momhealcalc }} Health</healing> if she hits him.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Smolder's mom breathes fire from above, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage>. Enemies in the center take <physicalDamage>{{ tooltiponly_totalsweetspotdamage }} physical damage</physicalDamage> instead and are <status>Slowed</status> by {{ slowamount*100 }}% for {{ slowduration }} seconds.<br /><br />Smolder's mom heals her son for <healing>{{ momhealcalc }} Health</healing> if she hits him.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
                             "Damage",
                             "Heal"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ momheal }} -> {{ momhealNL }}"
                         ]
                     },
                     "maxrank": 3,
                     "cooldown": [
-                        140,
-                        130,
+                        120,
+                        120,
                         120
                     ],
-                    "cooldownBurn": "140/130/120",
+                    "cooldownBurn": "120",
                     "cost": [
                         100,
                         100,
@@ -94002,8 +94026,8 @@
                     "chromas": true
                 }
             ],
-            "lore": "Sadistic and cunning, Thresh is an ambitious and restless spirit of the Shadow Isles. Once the custodian of countless arcane secrets, he was undone by a power greater than life or death, and now sustains himself by tormenting and breaking others with slow, excruciating inventiveness. His victims suffer far beyond their brief mortal coil as Thresh wreaks agony upon their souls, imprisoning them in his unholy lantern to torture for all eternity.",
-            "blurb": "Sadistic and cunning, Thresh is an ambitious and restless spirit of the Shadow Isles. Once the custodian of countless arcane secrets, he was undone by a power greater than life or death, and now sustains himself by tormenting and breaking others with...",
+            "lore": "Sadistic and cunning, Thresh is an ambitious and restless specter of the Shadow Isles. Once the custodian of countless arcane secrets, he was undone by a power greater than life or death, and now sustains himself by tormenting and breaking others with slow, excruciating inventiveness. His victims suffer far beyond their brief mortal coil as Thresh wreaks agony upon their souls, imprisoning them in his unholy lantern to torture for all eternity.",
+            "blurb": "Sadistic and cunning, Thresh is an ambitious and restless specter of the Shadow Isles. Once the custodian of countless arcane secrets, he was undone by a power greater than life or death, and now sustains himself by tormenting and breaking others with...",
             "allytips": [
                 "Communication is key when making use of Thresh's lantern. Let your teammates know how you like to use it.",
                 "Death Sentence and Flay can be combined in either cast order for powerful combinations.",
@@ -95209,7 +95233,7 @@
                         "label": [
                             "Damage",
                             "Knockback Distance",
-                            "Stun Duration"
+                            "Stun Duration:"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
@@ -101422,7 +101446,7 @@
                     "tooltip": "Veigar twists the edges of space, creating a cage that <status>Stuns</status> enemies that pass through for {{ e1 }} seconds. The cage lasts for 3 seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Stun Duration",
+                            "Stun Duration:",
                             "Cooldown",
                             "@AbilityResourceName@ Cost"
                         ],
@@ -103078,10 +103102,16 @@
                     "num": 39,
                     "name": "Primal Ambush Vi",
                     "chromas": true
+                },
+                {
+                    "id": "254048",
+                    "num": 48,
+                    "name": "Arcane Brawler Vi",
+                    "chromas": false
                 }
             ],
-            "lore": "Once a criminal from the mean streets of Zaun, Vi is a hotheaded, impulsive, and fearsome woman with only a very loose respect for authority figures. Growing up all but alone, Vi developed finely honed survival instincts as well as a wickedly abrasive sense of humor. Now working with the Wardens of Piltover to keep the peace, she wields mighty hextech gauntlets that can punch through walls and suspects with equal ease.",
-            "blurb": "Once a criminal from the mean streets of Zaun, Vi is a hotheaded, impulsive, and fearsome woman with only a very loose respect for authority figures. Growing up all but alone, Vi developed finely honed survival instincts as well as a wickedly abrasive...",
+            "lore": "Raised on the mean streets of Zaun, Vi is a hotheaded, impulsive, and fearsome woman with very little respect for authority. She has always been a shrewd survivor, both from her youthful troublemaking topside and an unfairly long stint in Stillwater Hold. Now working with the Piltover Enforcers to keep the peace instead of breaking it, she wields mighty hextech gauntlets that can punch through walls—and criminals—with equal ease.",
+            "blurb": "Raised on the mean streets of Zaun, Vi is a hotheaded, impulsive, and fearsome woman with very little respect for authority. She has always been a shrewd survivor, both from her youthful troublemaking topside and an unfairly long stint in Stillwater...",
             "allytips": [
                 "A fully charged Vault Breaker will deal double damage. It's great for catching and finishing off fleeing enemies.",
                 "Relentless Force does full damage to anyone caught in the shockwave. Use it on minions in lane to hit enemies hiding behind them.",
@@ -103746,8 +103776,8 @@
                     "chromas": false
                 }
             ],
-            "lore": "Once ruler of a long-lost kingdom, Viego perished over a thousand years ago when his attempt to bring his wife back from the dead triggered the magical catastrophe known as the Ruination. Transformed into a powerful, unliving wraith tortured by an obsessive longing for his centuries-dead queen, Viego now stands as the Ruined King, controlling the deadly Harrowings as he scours Runeterra for anything that might one day restore her, and destroying all in his path as the Black Mist pours endlessly from his cruel, broken heart.",
-            "blurb": "Once ruler of a long-lost kingdom, Viego perished over a thousand years ago when his attempt to bring his wife back from the dead triggered the magical catastrophe known as the Ruination. Transformed into a powerful, unliving wraith tortured by an...",
+            "lore": "Once ruler of a long-lost kingdom, Viego perished over a thousand years ago when his attempt to bring his wife back from the dead triggered the magical catastrophe known as the Ruination. Transformed into a powerful, unliving specter tortured by an obsessive longing for his centuries-dead queen, Viego now stands as the Ruined King, controlling the deadly Harrowings as he scours Runeterra for anything that might one day restore her, and destroying all in his path as the Black Mist pours endlessly from his cruel, broken heart.",
+            "blurb": "Once ruler of a long-lost kingdom, Viego perished over a thousand years ago when his attempt to bring his wife back from the dead triggered the magical catastrophe known as the Ruination. Transformed into a powerful, unliving specter tortured by an...",
             "allytips": [],
             "enemytips": [],
             "tags": [
@@ -106489,8 +106519,8 @@
                     "chromas": false
                 }
             ],
-            "lore": "Warwick is a monster who hunts the gray alleys of Zaun. Transformed by agonizing experiments, his body is fused with an intricate system of chambers and pumps, machinery filling his veins with alchemical rage. Bursting out of the shadows, he preys upon those criminals who terrorize the city's depths. Warwick is drawn to blood, and driven mad by its scent. None who spill it can escape him.",
-            "blurb": "Warwick is a monster who hunts the gray alleys of Zaun. Transformed by agonizing experiments, his body is fused with an intricate system of chambers and pumps, machinery filling his veins with alchemical rage. Bursting out of the shadows, he preys upon...",
+            "lore": "Warwick is a monster who hunts the gray alleys of Zaun. Transformed by agonizing experiments, his body is fused with an intricate system of chambers and pumps, machinery filling his veins with alchemical rage. He bursts from the shadows to prey upon those criminals who terrorize the city's depths. Warwick is drawn to blood, driven mad by its scent… and none who spill it can escape him.",
+            "blurb": "Warwick is a monster who hunts the gray alleys of Zaun. Transformed by agonizing experiments, his body is fused with an intricate system of chambers and pumps, machinery filling his veins with alchemical rage. He bursts from the shadows to prey upon...",
             "allytips": [
                 "Follow your Blood Hunt trails to low health enemy champions.",
                 "Infinite Duress (R)'s distance scales with any Move Speed you gain, even from ally buffs and summoner spells.",
@@ -110608,8 +110638,8 @@
                     "chromas": true
                 }
             ],
-            "lore": "The last survivor of a long-forgotten religious order, Yorick is both blessed and cursed with power over the dead. Trapped on the Shadow Isles, his only companions are the rotting corpses and shrieking spirits that he gathers to him. Yorick's monstrous actions belie his noble purpose: to free his home from the curse of the Ruination.",
-            "blurb": "The last survivor of a long-forgotten religious order, Yorick is both blessed and cursed with power over the dead. Trapped on the Shadow Isles, his only companions are the rotting corpses and shrieking spirits that he gathers to him. Yorick's monstrous...",
+            "lore": "The last survivor of a long-forgotten religious order, Yorick is both blessed and cursed with power over the dead. Trapped on the Shadow Isles, his only companions are the rotting corpses and shrieking wraiths that he gathers to him. Yorick's monstrous actions belie his noble purpose: to free his home from the curse of the Ruination.",
+            "blurb": "The last survivor of a long-forgotten religious order, Yorick is both blessed and cursed with power over the dead. Trapped on the Shadow Isles, his only companions are the rotting corpses and shrieking wraiths that he gathers to him. Yorick's monstrous...",
             "allytips": [
                 "You do not need to cast Awakening to regain the ability to cast Last Rites.",
                 "The Maiden will attempt to assist you in a fight, so choose your targets well.",
@@ -114725,7 +114755,7 @@
                             "Cooldown",
                             "@AbilityResourceName@ Cost",
                             "Damage",
-                            "Stun Duration"
+                            "Stun Duration:"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
