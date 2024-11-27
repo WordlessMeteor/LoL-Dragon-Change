@@ -681,7 +681,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "塔姆用他的舌头进行猛击，对命中的第一个单位造成伤害和减速效果并在他命中一名敌方英雄时治疗自身。<br><br>对敌方英雄施加一层<spellName>培养品味</spellName>效果。如果目标英雄已经被叠加了3层<spellName>培养品味</spellName>，那么该英雄还会被晕眩，并且层数会被消耗掉。",
-            "dynamicDescription": "对命中的第一个敌人造成<magicDamage>@TotalDamage@魔法伤害</magicDamage>和持续@SlowDuration@秒的@SlowAmount*100@%减速。<br><br>在命中英雄时，塔姆会回复他<healing>@BaseHeal@ +@PercentHealthHealing*100@%的已损失生命值</healing>并施加一层<spellName>培养品味</spellName>效果并造成<magicDamage>@Spell.TahmKenchPassive:TotalDamage@额外魔法伤害</magicDamage>。如果目标英雄已经被叠加了3层<spellName>培养品味</spellName>，那么该英雄还会被晕眩@StunDuration@秒，并且层数会被消耗掉。<br><br>当你的舌头处在半空中，且命中了远处已经被叠加了3层<spellName>培养品味</spellName>的敌方英雄时，激活<font color='#0bf7de'>大快朵颐</font>即可将其吞噬。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "对命中的第一个敌人造成<magicDamage>@TotalDamage@魔法伤害</magicDamage>和持续@SlowDuration@秒的@SlowAmount*100@%<status>减速</status>。<br><br>在命中英雄时，塔姆会回复他<healing>@BaseHeal@ +他的@PercentHealthHealing*100@%已损失生命值</healing>并施加一层<spellName>培养品味</spellName>效果并造成<magicDamage>@Spell.TahmKenchPassive:TotalDamage@额外魔法伤害</magicDamage>。如果目标英雄已经被叠加了3层<spellName>培养品味</spellName>，那么该英雄还会被<status>晕眩</status>@StunDuration@秒，并且层数会被消耗掉。<br><br>当你的舌头处在半空中，且命中了远处已经被叠加了3层<spellName>培养品味</spellName>的敌方英雄时，激活<font color='#0bf7de'>大快朵颐</font>即可将其吞噬。@SpellModifierDescriptionAppend@",
             "range": [
                 900.0,
                 900.0,
@@ -831,7 +831,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "下潜然后重新出现在目标位置，对一个区域内的所有敌人造成魔法伤害和击飞效果。",
-            "dynamicDescription": "下潜然后重新出现在目标位置，对一个区域内的所有敌人造成<magicDamage>@TotalDamage@魔法伤害</magicDamage>和@KnockupDuration@秒击飞效果。如果命中至少一名敌方英雄，则会返还@ChampRefund*100@%的冷却时间和法力消耗。<br><br><font color='#0bf7de'>被吞噬</font>的友方英雄能够被带着一起潜航（但总能够提前下船）。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "下潜然后重新出现在目标位置，对一个区域内的所有敌人造成<magicDamage>@TotalDamage@魔法伤害</magicDamage>和@KnockupDuration@秒<status>击飞</status>效果。如果命中至少一名敌方英雄，则会返还@ChampRefund*100@%的冷却时间和<scaleMana>法力</scaleMana>消耗。<br><br><font color='#0bf7de'>被吞噬</font>的友方英雄能够被带着一起潜航（但总能够提前下船）。@SpellModifierDescriptionAppend@",
             "range": [
                 1000.0,
                 1050.0,
@@ -1131,7 +1131,7 @@
             "cost": "@DataManaCost@法力",
             "cooldown": "@CDCalc@%i:cooldown% (@Cooldown@秒)",
             "description": "塔姆吞噬一名英雄若干秒，如果该英雄是敌人则对其造成魔法伤害，如果该英雄是队友则为其提供护盾。",
-            "dynamicDescription": "塔姆吞噬一名英雄若干秒。他可以再次施放这个技能来将其吐出。<br><br><specialRules>敌方英雄：</specialRules>需要3层<spellName>培养品味</spellName>。至多被吞噬@EnemyDuration@秒并受到<magicDamage>@BaseDamage@ (+目标@PercentHPDamage@最大生命值)魔法伤害</magicDamage>。在这个效果期间，塔姆自身被减速@SlowAmount*100@%并被<keywordName>缚地</keywordName>。<br><br><specialRules>友方英雄：</specialRules>至多被吞噬@AllyDuration@秒并在被吐出后获得持续衰减的<shield>@TotalShield@护盾值</shield>。友方英雄可以选择提前离开。在这个效果期间，塔姆自身被<keywordName>缚地</keywordName>，但他可以施放<keywordName>深渊潜航</keywordName>并获得持续@AllyDuration@秒的<speed>@AllySpeedAmount*100@%移动速度</speed>。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "塔姆吞噬一名英雄若干秒。他可以<recast>再次施放</recast>这个技能来将其吐出。<br><br><specialRules>敌方英雄：</specialRules>需要3层<spellName>培养品味</spellName>。至多被吞噬@EnemyDuration@秒并受到<magicDamage>@BaseDamage@ (+目标@PercentHPDamage@最大生命值)魔法伤害</magicDamage>。在这个效果期间，塔姆自身被<status>减速</status>@SlowAmount*100@%并被<keywordName>缚地</keywordName>。<br><br><specialRules>友方英雄：</specialRules>至多被吞噬@AllyDuration@秒并在被吐出后获得持续衰减的<shield>@TotalShield@护盾值</shield>。友方英雄可以选择提前离开。在这个效果期间，塔姆自身被<status>缚地</status>，但他可以施放<keywordName>深渊潜航</keywordName>并获得持续@AllyDuration@秒的<speed>@AllySpeedAmount*100@%移动速度</speed>。@SpellModifierDescriptionAppend@",
             "range": [
                 25000.0,
                 25000.0,

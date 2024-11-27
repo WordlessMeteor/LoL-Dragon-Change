@@ -36,7 +36,7 @@
                 "__type": "AtomicClipData"
             },
             "Death": {
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mEventDataMap": {
                     "{58125715}": {
                         "mName": "{58125715}",
@@ -79,7 +79,7 @@
                     "Audio_idle2": {
                         "mName": "Audio_idle2",
                         "mStartFrame": 14.0,
-                        "mEffectKey": "{88dd41e6}",
+                        "mEffectKey": "Zed_idle2_sound_BV2",
                         "mParticleEventDataPairList": [
                             {
                                 "mBoneName": "Root",
@@ -118,7 +118,7 @@
                         "mEffectKey": "Zed_Idle_Shuriken",
                         "mParticleEventDataPairList": [
                             {
-                                "mBoneName": "{31f1f509}",
+                                "mBoneName": "R_Shuriken",
                                 "__type": "ParticleEventDataPair"
                             }
                         ],
@@ -132,7 +132,7 @@
                         "mEffectKey": "Zed_Idle_Shuriken",
                         "mParticleEventDataPairList": [
                             {
-                                "mBoneName": "{1d6eba27}",
+                                "mBoneName": "L_Shuriken",
                                 "__type": "ParticleEventDataPair"
                             }
                         ],
@@ -143,7 +143,7 @@
                     "Audio_idle3": {
                         "mName": "Audio_idle3",
                         "mStartFrame": 4.0,
-                        "mEffectKey": "{9b8a7959}",
+                        "mEffectKey": "Zed_idle3_sound_BV2",
                         "mParticleEventDataPairList": [
                             {
                                 "mBoneName": "Root",
@@ -207,7 +207,7 @@
             "{34b1b0b9}": {
                 "mFlags": 1,
                 "mMaskDataName": "{cc1ab82c}",
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mTickDuration": 0.02222222276031971,
                 "mAnimationResourceData": {
                     "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Base/Animations/Zed_spell3.anm",
@@ -228,7 +228,7 @@
                 "mEventDataMap": {
                     "Audio_Taunt": {
                         "mName": "Audio_Taunt",
-                        "mEffectKey": "{a2e0bae1}",
+                        "mEffectKey": "Zed_emote_taunt_sound_BV2",
                         "mParticleEventDataPairList": [
                             {
                                 "mBoneName": "Root",
@@ -303,12 +303,13 @@
                 "__type": "AtomicClipData"
             },
             "Run": {
-                "mFlags": 2,
-                "mClipNameList": [
-                    "{5513f195}",
-                    "{7970f94b}"
-                ],
-                "__type": "SequencerClipData"
+                "Updater": {
+                    "__type": "IsHomeguardParametricUpdater"
+                },
+                "mChangeAnimationMidPlay": true,
+                "mTrueConditionClipName": "{f636cdf6}",
+                "mFalseConditionClipName": "{f636cdf6}",
+                "__type": "ConditionBoolClipData"
             },
             "{3a74e46c}": {
                 "mTrackDataName": "Default",
@@ -327,25 +328,19 @@
                 "__type": "ParallelClipData"
             },
             "{b59fd238}": {
-                "mTrackDataName": "Default",
+                "mFlags": 8,
+                "mTrackDataName": "{3efd79bb}",
                 "mEventDataMap": {
-                    "{54fda511}": {
-                        "mName": "{54fda511}",
-                        "mStartFrame": 30.0,
-                        "mEndFrame": 130.0,
-                        "mEffectKey": "Zed_Idle_Meditate",
-                        "mParticleEventDataPairList": [
-                            {
-                                "mBoneName": "BUFFBONE_GLB_GROUND_LOC",
-                                "__type": "ParticleEventDataPair"
-                            }
-                        ],
+                    "Audio": {
+                        "mName": "Audio",
+                        "mSoundName": "Play_sfx_Zed_Skin03_Recall_respawn",
                         "mIsLoop": false,
-                        "__type": "ParticleEventData"
+                        "mIsKillEvent": false,
+                        "__type": "SoundEventData"
                     }
                 },
                 "mAnimationResourceData": {
-                    "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Base/Animations/Zed_idle4.anm",
+                    "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Skin03/Animations/Zed_Skin03_Respawn.anm",
                     "__type": "AnimationResourceData"
                 },
                 "__type": "AtomicClipData"
@@ -423,7 +418,7 @@
                     "{bc45bbc5}": {
                         "mName": "{bc45bbc5}",
                         "mStartFrame": 56.0,
-                        "mEffectKey": "{e82427be}",
+                        "mEffectKey": "Zed_emote_dance_sound_BV2",
                         "mParticleEventDataPairList": [
                             {
                                 "mBoneName": "Root",
@@ -447,12 +442,81 @@
                 ],
                 "__type": "SequencerClipData"
             },
+            "Recall": {
+                "mTrackDataName": "{3efd79bb}",
+                "mEventDataMap": {
+                    "Throne": {
+                        "mName": "Throne",
+                        "mStartFrame": 20.0,
+                        "mShowSubmeshList": [
+                            "Throne"
+                        ],
+                        "__type": "SubmeshVisibilityEventData"
+                    },
+                    "{ba9cf0e1}": {
+                        "mName": "{ba9cf0e1}",
+                        "mStartFrame": 15.0,
+                        "mEffectKey": "Zed_Recall_Chair",
+                        "mParticleEventDataPairList": [
+                            {
+                                "mBoneName": "Chair_Skin10",
+                                "__type": "ParticleEventDataPair"
+                            }
+                        ],
+                        "mIsLoop": false,
+                        "__type": "ParticleEventData"
+                    },
+                    "{09433d1e}": {
+                        "mName": "{09433d1e}",
+                        "mStartFrame": 160.0,
+                        "mEffectKey": "Zed_Recall_HandFlash",
+                        "mParticleEventDataPairList": [
+                            {
+                                "mBoneName": "R_Hand",
+                                "__type": "ParticleEventDataPair"
+                            }
+                        ],
+                        "mIsLoop": false,
+                        "mIsKillEvent": false,
+                        "__type": "ParticleEventData"
+                    },
+                    "{13434cdc}": {
+                        "mName": "{13434cdc}",
+                        "mStartFrame": 160.0,
+                        "mEffectKey": "Zed_Recall_HandFlash",
+                        "mParticleEventDataPairList": [
+                            {
+                                "mBoneName": "l_hand",
+                                "__type": "ParticleEventDataPair"
+                            }
+                        ],
+                        "mIsLoop": false,
+                        "mIsKillEvent": false,
+                        "__type": "ParticleEventData"
+                    },
+                    "{564a6ae0}": {
+                        "mName": "{564a6ae0}",
+                        "mSoundName": "Play_sfx_ZedSkin10_Recall_buffactivate",
+                        "mIsLoop": false,
+                        "__type": "SoundEventData"
+                    },
+                    "FaceCamera": {
+                        "YRotationDegrees": 210.0,
+                        "__type": "FaceTargetEventData"
+                    }
+                },
+                "mAnimationResourceData": {
+                    "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Skin10/Animations/Zed_Skin10_Recall.anm",
+                    "__type": "AnimationResourceData"
+                },
+                "__type": "AtomicClipData"
+            },
             "Joke_KG_Loss": {
                 "mTrackDataName": "Default",
                 "mEventDataMap": {
                     "{163e320d}": {
                         "mName": "{163e320d}",
-                        "mEffectKey": "{4167560e}",
+                        "mEffectKey": "Zed_emote_joke-lose_sound_BV2",
                         "mParticleEventDataPairList": [
                             {
                                 "mBoneName": "Root",
@@ -475,7 +539,7 @@
                     "{eface412}": {
                         "mName": "{eface412}",
                         "mStartFrame": 6.0,
-                        "mEffectKey": "{a3e7bd1d}",
+                        "mEffectKey": "Zed_emote_joke-win_sound_BV2",
                         "mParticleEventDataPairList": [
                             {
                                 "mBoneName": "Root",
@@ -530,7 +594,7 @@
                 "__type": "AtomicClipData"
             },
             "Spell4_Strike": {
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mTickDuration": 0.032258063554763794,
                 "mAnimationResourceData": {
                     "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Base/Animations/Zed_spell4_strike.anm",
@@ -541,7 +605,7 @@
             "{2d8938d7}": {
                 "mFlags": 1,
                 "mMaskDataName": "{cc1ab82c}",
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mEventDataMap": {
                     "{54fda511}": {
                         "mName": "{54fda511}",
@@ -574,7 +638,7 @@
             "{7b63b438}": {
                 "mFlags": 4,
                 "mMaskDataName": "{cc1ab82c}",
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mEventDataMap": {
                     "{54fda511}": {
                         "mName": "{54fda511}",
@@ -613,7 +677,7 @@
             },
             "{c4d95ec9}": {
                 "mMaskDataName": "{cc1ab82c}",
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mAnimationResourceData": {
                     "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Base/Animations/Zed_attack1.anm",
                     "__type": "AnimationResourceData"
@@ -630,7 +694,7 @@
             "{15a9a5b2}": {
                 "mFlags": 4,
                 "mMaskDataName": "{cc1ab82c}",
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mEventDataMap": {
                     "{54fda511}": {
                         "mName": "{54fda511}",
@@ -638,7 +702,7 @@
                         "mEffectKey": "Zed_BA_cas_2",
                         "mParticleEventDataPairList": [
                             {
-                                "mBoneName": "{5137ac7f}",
+                                "mBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
                                 "__type": "ParticleEventDataPair"
                             }
                         ],
@@ -683,7 +747,7 @@
             "{7025230c}": {
                 "mFlags": 4,
                 "mMaskDataName": "{cc1ab82c}",
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mTickDuration": 0.03333333879709244,
                 "mAnimationResourceData": {
                     "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Base/Animations/Zed_spell2_cast.anm",
@@ -715,10 +779,17 @@
                 },
                 "__type": "AtomicClipData"
             },
+            "Recall_Winddown": {
+                "mFlags": 2,
+                "mClipNameList": [
+                    "{9f860cd2}"
+                ],
+                "__type": "SequencerClipData"
+            },
             "{a5b3b915}": {
                 "mFlags": 4,
                 "mMaskDataName": "{cc1ab82c}",
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mTickDuration": 0.032258063554763794,
                 "mAnimationResourceData": {
                     "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Base/Animations/Zed_attack_spell4.anm",
@@ -736,7 +807,7 @@
             "{9337444a}": {
                 "mFlags": 4,
                 "mMaskDataName": "{cc1ab82c}",
-                "mTrackDataName": "{1d3b565f}",
+                "mTrackDataName": "UpperBody",
                 "mTickDuration": 0.032258063554763794,
                 "mAnimationResourceData": {
                     "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Base/Animations/Zed_attack_passive.anm",
@@ -769,98 +840,45 @@
                 },
                 "__type": "AtomicClipData"
             },
-            "Recall": {
-                "mTrackDataName": "{3efd79bb}",
-                "mEventDataMap": {
-                    "Throne": {
-                        "mName": "Throne",
-                        "mStartFrame": 20.0,
-                        "mShowSubmeshList": [
-                            "Throne"
-                        ],
-                        "__type": "SubmeshVisibilityEventData"
+            "{bc1ef3fb}": {
+                "mConditionFloatPairDataList": [
+                    {
+                        "mClipName": "Run_Normal",
+                        "mValue": 300.0,
+                        "__type": "ConditionFloatPairData"
                     },
-                    "{ba9cf0e1}": {
-                        "mName": "{ba9cf0e1}",
-                        "mStartFrame": 15.0,
-                        "mEffectKey": "Zed_Recall_Chair",
-                        "mParticleEventDataPairList": [
-                            {
-                                "mBoneName": "{7033e79f}",
-                                "__type": "ParticleEventDataPair"
-                            }
-                        ],
-                        "mIsLoop": false,
-                        "__type": "ParticleEventData"
-                    },
-                    "{09433d1e}": {
-                        "mName": "{09433d1e}",
-                        "mStartFrame": 160.0,
-                        "mEffectKey": "Zed_Recall_HandFlash",
-                        "mParticleEventDataPairList": [
-                            {
-                                "mBoneName": "R_Hand",
-                                "__type": "ParticleEventDataPair"
-                            }
-                        ],
-                        "mIsLoop": false,
-                        "mIsKillEvent": false,
-                        "__type": "ParticleEventData"
-                    },
-                    "{13434cdc}": {
-                        "mName": "{13434cdc}",
-                        "mStartFrame": 160.0,
-                        "mEffectKey": "Zed_Recall_HandFlash",
-                        "mParticleEventDataPairList": [
-                            {
-                                "mBoneName": "{dabe2b5d}",
-                                "__type": "ParticleEventDataPair"
-                            }
-                        ],
-                        "mIsLoop": false,
-                        "mIsKillEvent": false,
-                        "__type": "ParticleEventData"
-                    },
-                    "{564a6ae0}": {
-                        "mName": "{564a6ae0}",
-                        "mSoundName": "Play_sfx_ZedSkin10_Recall_buffactivate",
-                        "mIsLoop": false,
-                        "__type": "SoundEventData"
-                    },
-                    "FaceCamera": {
-                        "{b9cfc1ab}": 210.0,
-                        "__type": "{d7a6b107}"
+                    {
+                        "mClipName": "Run_Fast",
+                        "mValue": 400.0,
+                        "__type": "ConditionFloatPairData"
                     }
+                ],
+                "Updater": {
+                    "__type": "MoveSpeedParametricUpdater"
                 },
-                "mAnimationResourceData": {
-                    "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Skin10/Animations/Zed_Skin10_Recall.anm",
-                    "__type": "AnimationResourceData"
-                },
-                "__type": "AtomicClipData"
+                "mChangeAnimationMidPlay": true,
+                "__type": "ConditionFloatClipData"
             },
-            "{9f860cd2}": {
-                "mFlags": 8,
-                "mTrackDataName": "{3efd79bb}",
-                "mEventDataMap": {
-                    "Audio": {
-                        "mName": "Audio",
-                        "mSoundName": "Play_sfx_Zed_Skin03_Recall_respawn",
-                        "mIsLoop": false,
-                        "mIsKillEvent": false,
-                        "__type": "SoundEventData"
-                    }
-                },
-                "mAnimationResourceData": {
-                    "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Skin03/Animations/Zed_Skin03_Respawn.anm",
-                    "__type": "AnimationResourceData"
-                },
-                "__type": "AtomicClipData"
-            },
-            "Respawn": {
+            "Run_Normal": {
+                "mFlags": 2,
                 "mClipNameList": [
-                    "{9f860cd2}"
+                    "{5513f195}",
+                    "{7970f94b}"
                 ],
                 "__type": "SequencerClipData"
+            },
+            "{f636cdf6}": {
+                "Updater": {
+                    "driver": {
+                        "BuffType": 15,
+                        "__type": "HasBuffOfTypeBoolDriver"
+                    },
+                    "__type": "LogicDriverBoolParametricUpdater"
+                },
+                "mChangeAnimationMidPlay": true,
+                "mTrueConditionClipName": "Run_Haste",
+                "mFalseConditionClipName": "{bc1ef3fb}",
+                "__type": "ConditionBoolClipData"
             },
             "{2e9fbee3}": {
                 "mFlags": 2,
@@ -886,8 +904,25 @@
                 },
                 "__type": "AtomicClipData"
             },
-            "Recall_Winddown": {
-                "mFlags": 2,
+            "{9f860cd2}": {
+                "mFlags": 8,
+                "mTrackDataName": "{3efd79bb}",
+                "mEventDataMap": {
+                    "Audio": {
+                        "mName": "Audio",
+                        "mSoundName": "Play_sfx_Zed_Skin03_Recall_respawn",
+                        "mIsLoop": false,
+                        "mIsKillEvent": false,
+                        "__type": "SoundEventData"
+                    }
+                },
+                "mAnimationResourceData": {
+                    "mAnimationFilePath": "ASSETS/Characters/Zed/Skins/Skin03/Animations/Zed_Skin03_Respawn.anm",
+                    "__type": "AnimationResourceData"
+                },
+                "__type": "AtomicClipData"
+            },
+            "Respawn": {
                 "mClipNameList": [
                     "{9f860cd2}"
                 ],
@@ -1114,19 +1149,19 @@
             }
         },
         "mTrackDataMap": {
-            "{1d3b565f}": {
+            "UpperBody": {
                 "__type": "TrackData"
             },
             "Run": {
                 "mPriority": 1,
                 "__type": "TrackData"
             },
-            "{3efd79bb}": {
-                "mPriority": 2,
-                "__type": "TrackData"
-            },
             "Default": {
                 "mPriority": 3,
+                "__type": "TrackData"
+            },
+            "{3efd79bb}": {
+                "mPriority": 2,
                 "__type": "TrackData"
             }
         },
@@ -2427,6 +2462,10 @@
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
             },
+            "6188666904543187793": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
             "6188666904603669574": {
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
@@ -3507,14 +3546,6 @@
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
             },
-            "11494889198123473431": {
-                "mTime": 0.0,
-                "__type": "TimeBlendData"
-            },
-            "11494889198810247975": {
-                "mTime": 0.0,
-                "__type": "TimeBlendData"
-            },
             "11831733632021145010": {
                 "mTime": 0.10000000149011612,
                 "__type": "TimeBlendData"
@@ -4195,6 +4226,10 @@
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
             },
+            "13255853230094766929": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
             "13255853230155248710": {
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
@@ -4655,6 +4690,94 @@
                 "mTime": 0.10000000149011612,
                 "__type": "TimeBlendData"
             },
+            "13727907696876299698": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907696973403698": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907697179723863": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907697199285229": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907697276827863": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907697396920505": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907697493599340": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907697953771458": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
+            "13727907698297766489": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907698394342156": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907698582991928": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907698751936255": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907698855234008": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907698982732874": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907699020637045": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907699292879125": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907699565673761": {
+                "mTime": 0.05000000074505806,
+                "__type": "TimeBlendData"
+            },
+            "13727907699599228999": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907699686423885": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
+            "13727907699709137745": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
+            "13727907699815440073": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
+            "13727907699917238620": {
+                "mTime": 0.10000000149011612,
+                "__type": "TimeBlendData"
+            },
             "13987674968275133874": {
                 "mTime": 0.10000000149011612,
                 "__type": "TimeBlendData"
@@ -5088,6 +5211,14 @@
                 "__type": "TimeBlendData"
             },
             "17876238949570624845": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
+            "11494889198123473431": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
+            "11494889198810247975": {
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
             }
