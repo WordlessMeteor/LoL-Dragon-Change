@@ -6454,7 +6454,7 @@
             },
             {
                 "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/3161color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/DefaultColorOverlifetime.dds",
                 "__type": "ShaderTexture"
             },
             {
@@ -10356,20 +10356,20 @@
             {
                 "name": "Parameter0",
                 "data": [
+                    0.0,
                     10.0,
                     -3.5,
-                    120.0,
-                    0.0
+                    120.0
                 ],
                 "logicalParameters": [
                     {
-                        "name": "_LargeWaveInfo",
-                        "fields": 7,
+                        "name": "PitchFactor",
+                        "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "_AlphaTestValue",
-                        "fields": 8,
+                        "name": "_LargeWaveInfo",
+                        "fields": 14,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
@@ -10381,6 +10381,11 @@
                     {
                         "name": "_FrequencyOffsetByWorldPos",
                         "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "_AlphaTestValue",
+                        "fields": 8,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
@@ -10436,6 +10441,16 @@
                     }
                 ],
                 "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "staticSwitches": [
+            {
+                "name": "ENABLE_MESH_PIVOT",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "ENABLE_BILLBOARD",
+                "__type": "ShaderStaticSwitch"
             }
         ],
         "textures": [
@@ -10586,7 +10601,7 @@
         "textures": [
             {
                 "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/color-hold.dds",
                 "__type": "ShaderTexture"
             },
             {
@@ -29312,12 +29327,12 @@
         "textures": [
             {
                 "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/3161color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/DefaultColorOverlifetime.dds",
                 "__type": "ShaderTexture"
             },
             {
                 "name": "Alt_Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/3161color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/DefaultColorOverlifetime.dds",
                 "__type": "ShaderTexture"
             },
             {
@@ -33654,7 +33669,7 @@
         "textures": [
             {
                 "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/color-hold.dds",
                 "__type": "ShaderTexture"
             },
             {
@@ -34382,12 +34397,12 @@
             },
             {
                 "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/color-hold.dds",
                 "__type": "ShaderTexture"
             },
             {
                 "name": "Alt_Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/color-hold.dds",
                 "__type": "ShaderTexture"
             }
         ],
@@ -34669,7 +34684,7 @@
             },
             {
                 "name": "Mask",
-                "defaultTexturePath": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/color-hold.dds",
                 "__type": "ShaderTexture"
             }
         ],
@@ -35384,12 +35399,12 @@
             },
             {
                 "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/color-hold.dds",
                 "__type": "ShaderTexture"
             },
             {
                 "name": "Alt_Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/color-hold.dds",
                 "__type": "ShaderTexture"
             },
             {
@@ -37097,6 +37112,150 @@
         },
         "featureMask": 12,
         "objectPath": "Shaders/StaticMesh/TFT_VertexOffset",
+        "__type": "CustomShaderDef"
+    },
+    "Shaders/SkinnedMesh/Viktor_Skin04_Deathsworne_Shader": {
+        "ShadingModel": "{baebc346}",
+        "parameters": [
+            {
+                "name": "Parameter0",
+                "data": [
+                    1.0,
+                    0.5,
+                    0.75,
+                    0.75
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Fresnel_Size",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Diffuse_Subtract_InvertedFresnel_Value",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Fresnel_Mult",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "ClawTip_Color_Mult",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "logicalParameters": [
+                    {
+                        "name": "ClawTip_Color",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter2",
+                "data": [
+                    0.3499999940395355,
+                    1.25,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Fresnel_Mult_Map",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Flow_Mult",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Face_Fresnel_Size",
+                        "fields": 8,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter3",
+                "data": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "FlowNoise_TilePan",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter4",
+                "data": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Face_Fresnel_Mult",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Bloom_Mult",
+                        "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "textures": [
+            {
+                "name": "Diffuse_Color",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "Mask_RClawTip_GClawArm_BFace",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "Fresnel_Gradient",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "FlowNoise",
+                "defaultTexturePath": "ASSETS/Shared/Materials/TFT_Darkstar_Noise.tex",
+                "__type": "ShaderTexture"
+            }
+        ],
+        "featureDefines": {
+            "FEATURE_BLOOM": "1",
+            "FEATURE_WORLD_NORMAL": "1",
+            "FEATURE_WORLD_POSITION": "1"
+        },
+        "featureMask": 1,
+        "objectPath": "Shaders/SkinnedMesh/Viktor_Skin04_Deathsworne_Shader",
         "__type": "CustomShaderDef"
     },
     "Shaders/SkinnedMesh/HKG_InkOutline": {
@@ -42545,12 +42704,12 @@
             },
             {
                 "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/color-hold.dds",
                 "__type": "ShaderTexture"
             },
             {
                 "name": "Alt_Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Particles/common_color-hold.dds",
+                "defaultTexturePath": "ASSETS/Shared/Particles/color-hold.dds",
                 "__type": "ShaderTexture"
             }
         ],

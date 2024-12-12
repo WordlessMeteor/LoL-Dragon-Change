@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "14.23.1",
+    "version": "14.24.1",
     "data": {
         "Renekton": {
             "id": "Renekton",
@@ -158,17 +158,19 @@
                     "id": "RenektonCleave",
                     "name": "Cull the Meek",
                     "description": "Renekton swings his blade, dealing moderate physical damage to all targets around him, and heals for a small portion of the damage dealt. If he has more than 50 Fury, his damage and heal are increased.",
-                    "tooltip": "Renekton swings his blade, dealing <physicalDamage>{{ basicdamage }} physical damage</physicalDamage> and restoring <healing>{{ nonchamphealing }} Health</healing> per non-champion and <healing>{{ champhealing }}</healing> per champion hit (max <healing>{{ e4 }} Health</healing>). He also generates <keywordMajor>2.5 Fury</keywordMajor> per non-champion and <keywordMajor>10 Fury</keywordMajor> per champion (max <keywordMajor>30 Fury</keywordMajor>).<br /><br /><keywordMajor>Fury Bonus</keywordMajor>: Damage is increased to <physicalDamage>{{ empdamage }} physical damage</physicalDamage> and healing is increased to <healing>{{ empnonchamphealing }} Health</healing> against non-champions and <healing>{{ empchamphealing }} Health</healing> against champions (max <healing>{{ e9 }} Health</healing>). Does not generate any <keywordMajor>Fury</keywordMajor>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Renekton swings his blade, dealing <physicalDamage>{{ basicdamage }} physical damage</physicalDamage> and restoring <healing>{{ nonchamphealing }} Health</healing> per non-champion and <healing>{{ champhealing }}</healing> per champion hit. He also generates <keywordMajor>{{ minionfurygain }} Fury</keywordMajor> per non-champion and <keywordMajor>{{ championfurygain }} Fury</keywordMajor> per champion.<br /><br /><keywordMajor>Fury Bonus</keywordMajor>: Damage is increased to <physicalDamage>{{ empdamage }} physical damage</physicalDamage> and healing is increased to <healing>{{ empnonchamphealing }} Health</healing> against non-champions and <healing>{{ empchamphealing }} Health</healing> against champions. Does not generate any <keywordMajor>Fury</keywordMajor>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Max Health Gain",
-                            "Fury Damage"
+                            "Healing per Champion",
+                            "Healing per non-Champion",
+                            "Maximum Heal"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e9 }} -> {{ e9NL }}",
-                            "{{ e6 }} -> {{ e6NL }}"
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ champheal }} -> {{ champhealNL }}",
+                            "{{ baseminionheal }} -> {{ baseminionhealNL }}",
+                            "{{ basichealcap }} -> {{ basichealcapNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -192,67 +194,67 @@
                     "effect": [
                         null,
                         [
-                            60,
-                            90,
-                            120,
-                            150,
-                            180
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            3,
-                            4,
-                            5,
-                            6
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.02,
-                            0.02,
-                            0.02,
-                            0.02,
-                            0.02
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            50,
-                            75,
-                            100,
-                            125,
-                            150
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            400,
-                            400,
-                            400,
-                            400,
-                            400
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            90,
-                            135,
-                            180,
-                            225,
-                            270
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            6,
-                            9,
-                            12,
-                            15,
-                            18
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.06,
-                            0.06,
-                            0.06,
-                            0.06,
-                            0.06
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            200,
-                            300,
-                            400,
-                            500,
-                            600
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -264,15 +266,15 @@
                     ],
                     "effectBurn": [
                         null,
-                        "60/90/120/150/180",
-                        "2/3/4/5/6",
-                        "0.02",
-                        "50/75/100/125/150",
-                        "400",
-                        "90/135/180/225/270",
-                        "6/9/12/15/18",
-                        "0.06",
-                        "200/300/400/500/600",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0"
                     ],
                     "vars": [],
@@ -301,16 +303,16 @@
                     "id": "RenektonPreExecute",
                     "name": "Ruthless Predator",
                     "description": "Renekton slashes his target twice, dealing moderate physical damage and stuns them for 0.75 seconds. If Renekton has more than 50 Fury, he slashes his target three times, destroying damage shields on the target, dealing high physical damage, and stunning them for 1.5 seconds.",
-                    "tooltip": "Renekton's next Attack strikes twice, <status>Stunning</status> for {{ e3 }} seconds and dealing a total of <physicalDamage>{{ basictotaldamage }} physical damage</physicalDamage>. Hitting a champion generates an additional <keywordMajor>{{ e7 }} Fury</keywordMajor>.<br /><br /><keywordMajor>Fury Bonus</keywordMajor>: Renekton Attacks 3 times instead, destroying <shield>Shields</shield> before dealing <physicalDamage>{{ emptotaldamage }} physical damage</physicalDamage> and <status>Stunning</status> for {{ e4 }} seconds. Does not generate any <keywordMajor>Fury</keywordMajor>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Renekton's next Attack strikes twice, <status>Stunning</status> for {{ stunduration }} seconds and dealing a total of <physicalDamage>{{ basictotaldamage }} physical damage</physicalDamage>. Hitting a champion generates an additional <keywordMajor>{{ bonusfuryvschamps }} Fury</keywordMajor>.<br /><br /><keywordMajor>Fury Bonus</keywordMajor>: Renekton Attacks 3 times instead, destroying <shield>Shields</shield> before dealing <physicalDamage>{{ emptotaldamage }} physical damage</physicalDamage> and <status>Stunning</status> for {{ enragedstunduration }} seconds. Does not generate any <keywordMajor>Fury</keywordMajor>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Bonus Damage",
+                            "Empowered Damage",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e5 }} -> {{ e5NL }}",
-                            "{{ e6 }} -> {{ e6NL }}",
+                            "{{ basedamageperhit*2.000000 }} -> {{ basedamageperhitnl*2.000000 }}",
+                            "{{ basedamageperhit*3.000000 }} -> {{ basedamageperhitnl*3.000000 }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -335,53 +337,53 @@
                     "effect": [
                         null,
                         [
-                            5,
-                            20,
-                            35,
-                            50,
-                            65
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.75,
-                            0.75,
-                            0.75,
-                            0.75,
-                            0.75
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.75,
-                            0.75,
-                            0.75,
-                            0.75,
-                            0.75
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            10,
-                            40,
-                            70,
-                            100,
-                            130
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            60,
-                            105,
-                            150,
-                            195
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            10,
-                            10,
-                            10,
-                            10,
-                            10
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -407,13 +409,13 @@
                     ],
                     "effectBurn": [
                         null,
-                        "5/20/35/50/65",
-                        "0.75",
-                        "0.75",
-                        "1.5",
-                        "10/40/70/100/130",
-                        "15/60/105/150/195",
-                        "10",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0"
@@ -444,16 +446,18 @@
                     "id": "RenektonSliceAndDice",
                     "name": "Slice and Dice",
                     "description": "Renekton dashes, dealing damage to units along the way. Empowered, Renekton deals bonus damage and reduces the Armor of units hit.",
-                    "tooltip": "Renekton dashes, dealing <physicalDamage>{{ basicdamage }} physical damage</physicalDamage>. He generates <keywordMajor>{{ e4 }} Fury</keywordMajor> per non-champion and <keywordMajor>{{ e5 }} Fury</keywordMajor> per champion hit. Hitting at least one enemy allows Renekton to <recast>Recast</recast> this Ability once for {{ e8 }} seconds. <br /><br /><keywordMajor>Fury Bonus</keywordMajor>: The <recast>Recast</recast> dash deals <physicalDamage>{{ empdamage }} physical damage</physicalDamage> instead and removes <scaleArmor>{{ e2 }}% Armor</scaleArmor> for {{ e9 }} seconds. Does not generate <keywordMajor>Fury</keywordMajor>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Renekton dashes, dealing <physicalDamage>{{ basicdamage }} physical damage</physicalDamage>. He generates <keywordMajor>{{ minionragegeneration }} Fury</keywordMajor> per non-champion and <keywordMajor>{{ championragegeneration }} Fury</keywordMajor> per champion hit. Hitting at least one enemy allows Renekton to <recast>Recast</recast> this Ability once for {{ dicetimer }} seconds. <br /><br /><keywordMajor>Fury Bonus</keywordMajor>: The <recast>Recast</recast> dash deals <physicalDamage>{{ empdamage }} physical damage</physicalDamage> instead and removes <scaleArmor>{{ enragedarmorshred }}% Armor</scaleArmor> for {{ shredtimer }} seconds. Does not generate <keywordMajor>Fury</keywordMajor>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Bonus Damage",
+                            "Damage",
+                            "Empowered Damage",
                             "Armor Reduction %",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e2 }}% -> {{ e2NL }}%",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ enragedbasedamage }} -> {{ enragedbasedamageNL }}",
+                            "{{ enragedarmorshred }}% -> {{ enragedarmorshredNL }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -478,88 +482,88 @@
                     "effect": [
                         null,
                         [
-                            40,
-                            70,
-                            100,
-                            130,
-                            160
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            25,
-                            27.5,
-                            30,
-                            32.5,
-                            35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            70,
-                            115,
-                            160,
-                            205,
-                            250
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            10,
-                            10,
-                            10,
-                            10,
-                            10
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.9,
-                            0.9,
-                            0.9,
-                            0.9,
-                            0.9
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.35,
-                            1.35,
-                            1.35,
-                            1.35,
-                            1.35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
-                        "40/70/100/130/160",
-                        "25/27.5/30/32.5/35",
-                        "70/115/160/205/250",
-                        "2",
-                        "10",
-                        "0.9",
-                        "1.35",
-                        "4",
-                        "4",
-                        "30"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": "No Cost",

@@ -1231,6 +1231,32 @@
                         1.0
                     ],
                     "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "SpellDamage",
+                    "mValues": [
+                        -20.0,
+                        10.0,
+                        40.0,
+                        70.0,
+                        100.0,
+                        130.0,
+                        160.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ADRatio",
+                    "mValues": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "__type": "SpellDataValue"
                 }
             ],
             "DataValuesModeOverride": {
@@ -1255,16 +1281,15 @@
             },
             "mSpellCalculations": {
                 "ShotDamage": {
-                    "tooltipOnly": true,
                     "mFormulaParts": [
                         {
-                            "mEffectIndex": 1,
-                            "__type": "EffectValueCalculationPart"
+                            "mDataValue": "SpellDamage",
+                            "__type": "NamedDataValueCalculationPart"
                         },
                         {
                             "mStat": 2,
-                            "mCoefficient": 1.0,
-                            "__type": "StatByCoefficientCalculationPart"
+                            "mDataValue": "ADRatio",
+                            "__type": "StatByNamedDataValueCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
