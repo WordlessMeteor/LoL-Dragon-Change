@@ -5,7 +5,7 @@
         "skinParent": 10,
         "metaDataTags": "faction:bilgewater,gender:female,race:human,element:water,skinline:cosmic",
         "loadscreen": {
-            "image": "ASSETS/Characters/Illaoi/Skins/Skin10/IllaoiLoadScreen_10.dds",
+            "image": "ASSETS/Characters/Illaoi/Skins/Skin10/IllaoiLoadScreen_10.tex",
             "__type": "CensoredImage"
         },
         "skinAudioProperties": {
@@ -209,17 +209,17 @@
         "armorMaterial": "Flesh",
         "idleParticlesEffects": [
             {
-                "effectKey": "{441486d0}",
+                "effectKey": "Illaoi_Idle_Eye_Glow",
                 "boneName": "C_Buffbone_Glb_Head_Loc",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
-                "effectKey": "{016ac00f}",
+                "effectKey": "Illaoi_Idle_Relic_Head_Glow",
                 "boneName": "L_Buffbone_Glb_Hand_Loc",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
-                "effectKey": "{016ac00f}",
+                "effectKey": "Illaoi_Idle_Relic_Head_Glow",
                 "boneName": "R_Buffbone_Glb_Hand_Loc",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             }
@@ -2091,22 +2091,16 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask_1",
+                "samplerName": "Mask1",
                 "textureName": "ASSETS/Characters/Illaoi/Skins/Skin10/Illaoi_Skin10_ScreenspaceMask_TX_CM.dds",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "samplerName": "Mask_2",
+                "samplerName": "Mask2",
                 "textureName": "ASSETS/Characters/Illaoi/Skins/Skin10/Illaoi_Skin10_Fresnel_Masks_TX_CM.dds",
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "samplerName": "Fresnel_Texture",
-                "textureName": "ASSETS/Shared/Materials/black.dds",
                 "addressU": 1,
                 "addressV": 1,
-                "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -2132,17 +2126,17 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "SS_Intensity",
+                "name": "Color",
                 "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
+                    0.3843137323856354,
+                    0.01568627543747425,
+                    0.125490203499794,
+                    0.2705882489681244
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Dodge_Scale",
+                "name": "Blue_Scale",
                 "value": [
                     2.0,
                     2.0,
@@ -2152,7 +2146,7 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Dodge_Rate",
+                "name": "Blue_Rate",
                 "value": [
                     -0.04500000178813934,
                     0.0,
@@ -2162,27 +2156,7 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Dodge_Color",
-                "value": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Dodge_Bias",
-                "value": [
-                    -0.4749999940395355,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Bloom_Intensity",
+                "name": "BloomIntensity",
                 "value": [
                     0.824999988079071,
                     0.0,
@@ -2202,83 +2176,14 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Fresnel_Contrast",
+                "name": "Dodge_Bias",
                 "value": [
-                    1.0,
+                    -0.4749999940395355,
                     0.0,
                     0.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Fresnel_Color",
-                "value": [
-                    0.3843137323856354,
-                    0.01568627543747425,
-                    0.125490203499794,
-                    0.2705882489681244
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Fresnel_Saturation",
-                "value": [
-                    5.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Additional_Alpha_Scale",
-                "value": [
-                    1.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Additional_Alpha_Rate",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Additional_Alpha_Override",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Alpha_Bias",
-                "__type": "StaticMaterialShaderParamDef"
-            }
-        ],
-        "switches": [
-            {
-                "name": "ADD_SCREEN_SPACE_TEXTURE",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "OVERRLAY_DODGE_COLOR",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "USE_SATURATED_DIFFUSE_AS_FRESNEL_COLOR",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "USE_FRESNEL_TEXTURE_COLOR",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "USE_FRESNEL_TEXTURE_ALPHA",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
@@ -2315,8 +2220,8 @@
     },
     "Characters/Illaoi/Skins/Skin17/Resources": {
         "resourceMap": {
-            "{7a70e18f}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_E_SpiritTimerA",
-            "{79830bde}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_E_SpiritTimerOutline",
+            "IllaoiBase_E_SpiritTimerA_BV2": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_E_SpiritTimerA",
+            "IllaoiBase_E_SpiritTimerOutline_BV2": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_E_SpiritTimerOutline",
             "Illaoi_BA_1": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_BA_1",
             "Illaoi_BA_Crit": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_BA_Crit",
             "Illaoi_BA_hitsound": "Characters/Illaoi/Skins/Skin0/Particles/Illaoi_Base_BA_hitsound",
@@ -2429,26 +2334,26 @@
             "Illaoi_Z_TentacleTrail": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_TentacleTrail",
             "Illaoi_P_IndicatorBLU": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_P_IndicatorBLU",
             "Illaoi_P_IndicatorRed": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_P_IndicatorRed",
-            "{c6c8071c}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Idle_Star_Trail",
-            "{e2dec7c6}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Idle_Star_Child",
-            "{ef67bb89}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Idle_STAR_TRAIL_CHILD",
-            "{430a2bbd}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_System",
-            "{bb14817b}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Spawn",
-            "{3d169869}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Suck_In_Bottle",
-            "{70d89f96}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Aquarius_Formation",
-            "{4249b5ce}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Cosmic_spotlight",
-            "{baec6b54}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Bomb",
-            "{d23f50c5}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Bomb_Poof",
-            "{d98b69d9}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Bottle_Slam",
-            "{83ac857f}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Idle_Relic_Mat",
-            "{00c20091}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Power_Star_Formation",
-            "{1104d17a}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Spawn_Child",
-            "{169e5164}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_System_Child",
-            "{e97aeb52}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Formation_Child",
-            "{f6c0b7e1}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Bomb_Child",
-            "{d15d1e6f}": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Wind_Up",
-            "{441486d0}": "Characters/Illaoi/Skins/Skin17/Particles/Illaoi_Skin17_Idle_Eye_Glow",
-            "{016ac00f}": "Characters/Illaoi/Skins/Skin17/Particles/Illaoi_Skin17_Idle_Relic_Head_Glow"
+            "Illaoi_Idle_Star_Trail": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Idle_Star_Trail",
+            "Illaoi_Idle_Star_Child": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Idle_Star_Child",
+            "Illaoi_Idle_STAR_TRAIL_CHILD": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Idle_STAR_TRAIL_CHILD",
+            "Illaoi_Z_Star_System": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_System",
+            "Illaoi_Z_Star_Spawn": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Spawn",
+            "Illaoi_Z_Star_Suck_In_Bottle": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Suck_In_Bottle",
+            "Illaoi_Z_Aquarius_Formation": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Aquarius_Formation",
+            "Illaoi_Z_Cosmic_spotlight": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Cosmic_spotlight",
+            "Illaoi_Z_Star_Bomb": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Bomb",
+            "Illaoi_Z_Star_Bomb_Poof": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Bomb_Poof",
+            "Illaoi_Z_Bottle_Slam": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Bottle_Slam",
+            "Illaoi_Idle_Relic_Mat": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Idle_Relic_Mat",
+            "Illaoi_Z_Power_Star_Formation": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Power_Star_Formation",
+            "Illaoi_Z_Star_Spawn_Child": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Spawn_Child",
+            "Illaoi_Z_Star_System_Child": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_System_Child",
+            "Illaoi_Z_Star_Formation_Child": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Formation_Child",
+            "Illaoi_Z_Star_Bomb_Child": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Star_Bomb_Child",
+            "Illaoi_Z_Wind_Up": "Characters/Illaoi/Skins/Skin10/Particles/Illaoi_Skin10_Z_Wind_Up",
+            "Illaoi_Idle_Eye_Glow": "Characters/Illaoi/Skins/Skin17/Particles/Illaoi_Skin17_Idle_Eye_Glow",
+            "Illaoi_Idle_Relic_Head_Glow": "Characters/Illaoi/Skins/Skin17/Particles/Illaoi_Skin17_Idle_Relic_Head_Glow"
         },
         "__type": "ResourceResolver"
     }

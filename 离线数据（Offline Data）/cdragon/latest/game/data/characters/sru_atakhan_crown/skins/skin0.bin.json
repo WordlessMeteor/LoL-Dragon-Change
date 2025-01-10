@@ -1,0 +1,495 @@
+{
+    "{7cf110bc}": {
+        "championSkinName": "SRU_Atakhan_Crown",
+        "skinAnimationProperties": {
+            "animationGraphData": "{c9d31b95}",
+            "__type": "SkinAnimationProperties"
+        },
+        "skinMeshProperties": {
+            "skeleton": "ASSETS/Characters/SRU_Atakhan_Crown/Skins/Base/SRU_Atakhan_Crown_Base.SRT_2025_Split1_SolKimLayer.skl",
+            "simpleSkin": "ASSETS/Characters/SRU_Atakhan_Crown/Skins/Base/SRU_Atakhan_Crown_Base.SRT_2025_Split1_SolKimLayer.skn",
+            "skinScale": 1.5,
+            "selfIllumination": 0.699999988079071,
+            "overrideBoundingBox": [
+                270.0,
+                300.0,
+                270.0
+            ],
+            "material": "Characters/SRU_Atakhan_Crown/Skins/Skin0/Materials/Helmet_Dissolver",
+            "boundingCylinderRadius": 60.0,
+            "reflectionFresnelColor": [
+                0,
+                0,
+                0,
+                255
+            ],
+            "initialSubmeshShadowsToHide": "Puddle",
+            "materialOverride": [
+                {
+                    "material": "Characters/SRU_Atakhan_Crown/Skins/Skin0/Materials/Puddle_Dissolver",
+                    "submesh": "Puddle",
+                    "__type": "SkinMeshDataProperties_MaterialOverride"
+                }
+            ],
+            "__type": "SkinMeshDataProperties"
+        },
+        "armorMaterial": "Flesh",
+        "idleParticlesEffects": [
+            {
+                "effectKey": "{96da66ef}",
+                "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
+            }
+        ],
+        "iconCircle": "ASSETS/Characters/SRU_Atakhan/HUD/Atakhan_R_circle_128.tex",
+        "iconCircleScale": 1.2000000476837158,
+        "iconSquare": "ASSETS/Characters/SRU_Atakhan/HUD/Atakhan_R_square_128.tex",
+        "emoteBuffbone": "",
+        "godrayFXbone": "",
+        "healthBarData": {
+            "hpPerTick": 1000.0,
+            "unitHealthBarStyle": 21,
+            "__type": "CharacterHealthBarDataRecord"
+        },
+        "mResourceResolver": "Characters/SRU_Atakhan_Crown/Skins/Skin0/Resources",
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/SRU_Atakhan_Crown/Skins/Skin0/Materials/Helmet_Dissolver": {
+        "name": "Characters/SRU_Atakhan_Crown/Skins/Skin0/Materials/Helmet_Dissolver",
+        "samplerValues": [
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/SRU_Atakhan_Crown/Skins/Base/SRU_Atakhan_Crown_Base_Helmet_TX_CM.SRT_2025_Split1_SolKimLayer.tex",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Dissolve_Texture",
+                "textureName": "ASSETS/Maps/Particles/SR/Dragon_Elder_Tar_Dust_Erosion.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Alt_Diffuse_Texture",
+                "addressU": 1,
+                "addressV": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "DissolveBias",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dissolve_Power",
+                "value": [
+                    5.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Emissive_Factor",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Lighting_Intensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dissolve_Color",
+                "value": [
+                    0.8299992084503174,
+                    0.05999847501516342,
+                    0.11999695003032684,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DissolveWidth",
+                "value": [
+                    0.25,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "DARKEN_DIFFUSE",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DEBUG_VIEW_DISSOLVE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_POST_LIGHT",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DISSOLVE_OUT_ALPHA",
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/Dissolve_Diffuse_Or_Alpha",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "DissolveBias",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "Spawn"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "driver": {
+                                        "mBoolDriver": {
+                                            "mAnimationNames": [
+                                                "Spawn"
+                                            ],
+                                            "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                        },
+                                        "mTurnOnTimeSec": 1.25,
+                                        "mTurnOffTimeSec": 0.0,
+                                        "__type": "LerpMaterialDriver"
+                                    },
+                                    "graph": {
+                                        "times": [
+                                            0.0021115264389663935,
+                                            0.11402028053998947,
+                                            0.27315470576286316,
+                                            0.38591518998146057,
+                                            0.5327737927436829,
+                                            0.8263806700706482,
+                                            1.0
+                                        ],
+                                        "values": [
+                                            -0.26647552847862244,
+                                            -0.2236798107624054,
+                                            0.04607158899307251,
+                                            0.35772502422332764,
+                                            0.6930238008499146,
+                                            0.9379943609237671,
+                                            1.0
+                                        ],
+                                        "__type": "VfxAnimatedFloatVariableData"
+                                    },
+                                    "__type": "FloatGraphMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "__type": "IsDeadDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mBoolDriver": {
+                                        "__type": "IsDeadDynamicMaterialBoolDriver"
+                                    },
+                                    "mOnValue": -0.25,
+                                    "mOffValue": 1.0,
+                                    "mTurnOnTimeSec": 1.25,
+                                    "mTurnOffTimeSec": 0.0,
+                                    "__type": "LerpMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    },
+    "Characters/SRU_Atakhan_Crown/Skins/Skin0/Materials/Puddle_Dissolver": {
+        "name": "Characters/SRU_Atakhan_Crown/Skins/Skin0/Materials/Puddle_Dissolver",
+        "samplerValues": [
+            {
+                "samplerName": "Dissolve_Texture",
+                "textureName": "ASSETS/Maps/Particles/SR/Dragon_Elder_Tar_Dust_Erosion.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Diffuse_Texture",
+                "textureName": "ASSETS/Characters/SRU_Atakhan_Crown/Skins/Base/SRU_Atakhan_Crown_Base_Puddle_TX_CM.SRT_2025_Split1_SolKimLayer.tex",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "samplerName": "Alt_Diffuse_Texture",
+                "textureName": "ASSETS/Shared/Particles/color-hold.SKINS_Ezreal_Skin65.dds",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "DissolveWidth",
+                "value": [
+                    0.25,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DissolveBias",
+                "value": [
+                    1.2000000476837158,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Diffuse_AlphaClip",
+                "value": [
+                    0.02500000037252903,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Emissive_Factor",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dissolve_Color",
+                "value": [
+                    0.8299992084503174,
+                    0.05999847501516342,
+                    0.11999695003032684,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DissolveIntensity",
+                "value": [
+                    5.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Lighting_Intensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "DISSOLVE_OUT_ALPHA",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DEBUG_VIEW_DISSOLVE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_POST_LIGHT",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/Dissolve_Diffuse_Or_Alpha_MultDiffuseAlpha",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "writeMask": 15,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "DissolveBias",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "Spawn"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "driver": {
+                                        "mBoolDriver": {
+                                            "mAnimationNames": [
+                                                "Spawn"
+                                            ],
+                                            "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                        },
+                                        "mTurnOnTimeSec": 1.25,
+                                        "mTurnOffTimeSec": 0.0,
+                                        "__type": "LerpMaterialDriver"
+                                    },
+                                    "graph": {
+                                        "times": [
+                                            0.0021115264389663935,
+                                            0.11402028053998947,
+                                            0.27315470576286316,
+                                            0.38591518998146057,
+                                            0.5327737927436829,
+                                            0.8263806700706482,
+                                            1.0
+                                        ],
+                                        "values": [
+                                            -0.26647552847862244,
+                                            -0.2236798107624054,
+                                            0.04607158899307251,
+                                            0.35772502422332764,
+                                            0.6930238008499146,
+                                            0.9379943609237671,
+                                            1.0
+                                        ],
+                                        "__type": "VfxAnimatedFloatVariableData"
+                                    },
+                                    "__type": "FloatGraphMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "__type": "IsDeadDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mBoolDriver": {
+                                        "__type": "IsDeadDynamicMaterialBoolDriver"
+                                    },
+                                    "mOnValue": -0.25,
+                                    "mOffValue": 1.0,
+                                    "mTurnOnTimeSec": 1.25,
+                                    "mTurnOffTimeSec": 0.0,
+                                    "__type": "LerpMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    }
+}
