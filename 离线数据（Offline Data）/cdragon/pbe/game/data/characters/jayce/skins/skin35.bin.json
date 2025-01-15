@@ -42162,10 +42162,10 @@
                 "primitive": {
                     "mMesh": {
                         "mSubmeshesToDraw": [
-                            "{dac6d693}"
+                            "Small_Hammer"
                         ],
                         "mSubmeshesToDrawAlways": [
-                            "{dac6d693}"
+                            "Small_Hammer"
                         ],
                         "mLockMeshToAttachment": true,
                         "__type": "VfxMeshDefinitionData"
@@ -133258,6 +133258,66 @@
             "FirstMove2D": {
                 "mRules": [
                     {
+                        "mRuleName": "First Move - Ally Mel",
+                        "mConditions": [
+                            {
+                                "mChildConditions": [
+                                    {
+                                        "__type": "ContextualConditionIsAlly"
+                                    },
+                                    {
+                                        "mCharacters": [
+                                            "Characters/Viktor/CharacterRecords/Root"
+                                        ],
+                                        "__type": "ContextualConditionCharacterName"
+                                    }
+                                ],
+                                "__type": "ContextualConditionAnyOtherHero"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mSelfEventName": "Move2DFirstAllyMel",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "First Move - Enemy Mel",
+                        "mConditions": [
+                            {
+                                "mChildConditions": [
+                                    {
+                                        "__type": "ContextualConditionIsAlly"
+                                    },
+                                    {
+                                        "mCharacters": [
+                                            "Characters/Viktor/CharacterRecords/Root"
+                                        ],
+                                        "__type": "ContextualConditionCharacterName"
+                                    }
+                                ],
+                                "__type": "ContextualConditionAnyOtherHero"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mSelfEventName": "Move2DFirstEnemyMel",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
                         "mRuleName": "First Move - Enemy Viktor",
                         "mConditions": [
                             {
@@ -133514,6 +133574,35 @@
                             "mMaxOccurences": 1,
                             "mSelfEventName": "Kill3DEkko",
                             "mEnemyEventName": "Kill3DEkko",
+                            "mWaitForAnnouncerQueue": true,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Kill - Mel",
+                        "mConditions": [
+                            {
+                                "mCharacterType": 1,
+                                "mChildConditions": [
+                                    {
+                                        "mCharacters": [
+                                            "Characters/Viktor/CharacterRecords/Root"
+                                        ],
+                                        "__type": "ContextualConditionCharacterName"
+                                    }
+                                ],
+                                "__type": "ContextualConditionCharacter"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mSelfEventName": "Kill3DMel",
+                            "mEnemyEventName": "Kill3DMel",
                             "mWaitForAnnouncerQueue": true,
                             "__type": "ContextualActionPlayVO"
                         },
@@ -134106,6 +134195,33 @@
                         "__type": "ContextualRule"
                     },
                     {
+                        "mRuleName": "First Encounter - Mel",
+                        "mConditions": [
+                            {
+                                "mCharacterType": 1,
+                                "mChildConditions": [
+                                    {
+                                        "mCharacters": [
+                                            "{a8d3dd6f}"
+                                        ],
+                                        "__type": "ContextualConditionCharacterName"
+                                    }
+                                ],
+                                "__type": "ContextualConditionCharacter"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mSelfEventName": "FirstEncounter3DMel",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
                         "mRuleName": "First Encounter - Ekko",
                         "mConditions": [
                             {
@@ -134167,7 +134283,7 @@
                                 "mChildConditions": [
                                     {
                                         "mCharacters": [
-                                            "Characters/Warwick/CharacterRecords/Root"
+                                            "Characters/Viktor/CharacterRecords/Root"
                                         ],
                                         "__type": "ContextualConditionCharacterName"
                                     }
