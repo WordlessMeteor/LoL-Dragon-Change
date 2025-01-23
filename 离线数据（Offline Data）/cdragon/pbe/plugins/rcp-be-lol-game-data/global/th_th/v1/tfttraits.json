@@ -5683,7 +5683,7 @@
         "trait_id": "TFT13_Crime",
         "set": "TFTSet13",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_13_Crime.TFT_Set13.png",
-        "tooltip_text": "ได้รับชิมเมอร์หลังจบการต่อสู้ กับผู้เล่น หากคุณแพ้ต่อเนื่อง อย่างน้อย @MinStreakLength@ ครั้งขึ้นไป จะได้รับชิมเมอร์เพิ่มขึ้น<br><br>ตลาดมืดจะเข้ามาเสนอไอเทม ต้องห้ามที่ Chem-Baron สามารถใช้งานได้ เมื่อสะสมชิมเมอร์ได้ทุก @ShimmerBreakpoint@ สแตค อีกทั้ง Chem-Baron จะได้รับพลังชีวิตสูงสุดเพิ่ม ขึ้นอยู่กับจำนวนตลาดมืด ที่คุณข้ามไป<br><br><expandRow>(@MinUnits@) @ShimmerPerCombat@ หรือ @ShimmerPerCombatStreaking@ หน่วย; @HealthPerSkip@&nbsp;%i:scaleHealth% หน่วย</expandRow><br><br><rules>ตลาดมืดที่ข้ามไป: @TFTUnitProperty.trait:TFT13_Crime_PassedMarkets@ ครั้ง</rules><br><rules>พลังชีวิตปัจจุบัน: %i:scaleHealth% @TFTUnitProperty.trait:TFT13_Crime_CurrentHealth@&nbsp;หน่วย</rules>",
+        "tooltip_text": "tft_trait_description_TFT13_CrimeDU",
         "innate_trait_sets": [
             {
                 "constants": [
@@ -5718,8 +5718,16 @@
                         "value": 35.0
                     },
                     {
+                        "name": "ShimmerPerCombatStreaking_DU",
+                        "value": 25.0
+                    },
+                    {
                         "name": "ShimmerPerCombatStreaking_HR",
                         "value": 50.0
+                    },
+                    {
+                        "name": "ShimmerPerCombat_DU",
+                        "value": 10.0
                     },
                     {
                         "name": "ShimmerPerCombat_HR",
@@ -5747,15 +5755,23 @@
                     },
                     {
                         "name": "ShimmerPerCombat",
-                        "value": 20.0
+                        "value": 15.0
                     },
                     {
                         "name": "ShimmerPerCombatStreaking",
-                        "value": 45.0
+                        "value": 50.0
+                    },
+                    {
+                        "name": "ShimmerPerCombatStreaking_DU",
+                        "value": 35.0
                     },
                     {
                         "name": "ShimmerPerCombatStreaking_HR",
                         "value": 60.0
+                    },
+                    {
+                        "name": "ShimmerPerCombat_DU",
+                        "value": 10.0
                     },
                     {
                         "name": "ShimmerPerCombat_HR",
@@ -5787,11 +5803,19 @@
                     },
                     {
                         "name": "ShimmerPerCombatStreaking",
-                        "value": 55.0
+                        "value": 65.0
+                    },
+                    {
+                        "name": "ShimmerPerCombatStreaking_DU",
+                        "value": 50.0
                     },
                     {
                         "name": "ShimmerPerCombatStreaking_HR",
                         "value": 70.0
+                    },
+                    {
+                        "name": "ShimmerPerCombat_DU",
+                        "value": 15.0
                     },
                     {
                         "name": "ShimmerPerCombat_HR",
@@ -5823,11 +5847,19 @@
                     },
                     {
                         "name": "ShimmerPerCombatStreaking",
+                        "value": 90.0
+                    },
+                    {
+                        "name": "ShimmerPerCombatStreaking_DU",
                         "value": 70.0
                     },
                     {
                         "name": "ShimmerPerCombatStreaking_HR",
                         "value": 90.0
+                    },
+                    {
+                        "name": "ShimmerPerCombat_DU",
+                        "value": 20.0
                     },
                     {
                         "name": "ShimmerPerCombat_HR",
@@ -5843,42 +5875,6 @@
                     }
                 ],
                 "min_units": 6,
-                "max_units": 6,
-                "style_idx": 5,
-                "style_name": "kGold"
-            },
-            {
-                "constants": [
-                    {
-                        "name": "HealthPerSkip",
-                        "value": 220.0
-                    },
-                    {
-                        "name": "ShimmerPerCombat",
-                        "value": 30.0
-                    },
-                    {
-                        "name": "ShimmerPerCombatStreaking",
-                        "value": 100.0
-                    },
-                    {
-                        "name": "ShimmerPerCombatStreaking_HR",
-                        "value": 125.0
-                    },
-                    {
-                        "name": "ShimmerPerCombat_HR",
-                        "value": 60.0
-                    },
-                    {
-                        "name": "ShimmerPerDeath_PVE",
-                        "value": 15.0
-                    },
-                    {
-                        "name": "ShimmerPerRound_PVE",
-                        "value": 65.0
-                    }
-                ],
-                "min_units": 7,
                 "style_idx": 5,
                 "style_name": "kGold"
             }
@@ -9953,7 +9949,7 @@
         "trait_id": "TFT4_Keeper",
         "set": "TFTSet4",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_4_Keeper.png",
-        "tooltip_text": "เมื่อการต่อสู้เริ่มขึ้น ผู้ป้องกันและเพื่อนร่วมทีมที่อยู่ใกล้ ๆ จะได้รับโล่ป้องกัน ช่วงเวลาหนึ่ง โล่ป้องกัน จะมีผลมากขึ้น 50% กับผู้ป้องกัน<br><br><expandRow>(@MinUnits@) พลังของโล่ @ShieldAmount@ หน่วย ระยะเวลา @Duration@ วินาที</expandRow>",
+        "tooltip_text": "เมื่อการต่อสู้เริ่มขึ้น ผู้ป้องกันและเพื่อนร่วมทีมที่อยู่ใกล้ ๆ จะได้รับโล่ป้องกัน ช่วงเวลาหนึ่ง โล่ป้องกัน จะมีผลมากขึ้น 50% กับผู้ป้องกัน<br><br><expandRow>(@MinUnits@) พลังของโล่ @ShieldAmount@ หน่วย ระยะเวลา @Duration@ วินาที</expandRow>",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -10089,7 +10085,7 @@
                     }
                 ],
                 "min_units": 7,
-                "max_units": 8,
+                "max_units": 9,
                 "style_idx": 5,
                 "style_name": "kGold"
             },
@@ -10108,7 +10104,7 @@
                         "value": 190.0
                     }
                 ],
-                "min_units": 9,
+                "min_units": 10,
                 "style_idx": 6,
                 "style_name": "kChromatic"
             }
