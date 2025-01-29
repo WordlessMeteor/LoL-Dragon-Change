@@ -8982,6 +8982,514 @@
         "mScriptName": "UrgotPassiveZone3Active",
         "__type": "SpellObject"
     },
+    "Characters/Urgot/Spells/UrgotEAbility": {
+        "mRootSpell": "Characters/Urgot/Spells/UrgotEAbility/UrgotE",
+        "mChildSpells": [
+            "Characters/Urgot/Spells/UrgotEAbility/UrgotE",
+            "Characters/Urgot/Spells/UrgotEAbility/UrgotEDash",
+            "Characters/Urgot/Spells/UrgotEAbility/UrgotEStun"
+        ],
+        "mName": "UrgotEAbility",
+        "AbilityTraits": 2560,
+        "__type": "AbilityObject"
+    },
+    "{192f342e}": {
+        "mScriptName": "UrgotEToss",
+        "__type": "SpellObject"
+    },
+    "Characters/Urgot/Spells/UrgotEAbility/UrgotEStun": {
+        "mScriptName": "UrgotEStun",
+        "mBuff": {
+            "mDescription": "game_buff_tooltip_UrgotEStun",
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+            ],
+            "__type": "BuffData"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/Urgot/Spells/UrgotEAbility/UrgotE": {
+        "mScriptName": "UrgotE",
+        "mSpell": {
+            "mAffectsTypeFlags": 6154,
+            "mSpellTags": [
+                "PositiveEffect_MoveBlock",
+                "Trait_ImmobilizingCCSpell"
+            ],
+            "mDataValues": [
+                {
+                    "mName": "EShieldDuration",
+                    "mValues": [
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "EShieldBaseHealth",
+                    "mValues": [
+                        35.0,
+                        55.0,
+                        75.0,
+                        95.0,
+                        115.0,
+                        135.0,
+                        155.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "EShieldbADRatio",
+                    "mValues": [
+                        1.5,
+                        1.350000023841858,
+                        1.350000023841858,
+                        1.350000023841858,
+                        1.350000023841858,
+                        1.350000023841858,
+                        1.350000023841858
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "EBaseDamage",
+                    "mValues": [
+                        60.0,
+                        90.0,
+                        120.0,
+                        150.0,
+                        180.0,
+                        210.0,
+                        240.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "EShieldBonusHealthRatio",
+                    "mValues": [
+                        0.0,
+                        0.13500000536441803,
+                        0.13500000536441803,
+                        0.13500000536441803,
+                        0.13500000536441803,
+                        0.13500000536441803,
+                        0.13500000536441803
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "StunDuration",
+                    "mValues": [
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BaseDashSpeed",
+                    "mValues": [
+                        1200.0,
+                        1200.0,
+                        1200.0,
+                        1200.0,
+                        1200.0,
+                        1200.0,
+                        1200.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "MinimumDashRange",
+                    "mValues": [
+                        450.0,
+                        450.0,
+                        450.0,
+                        450.0,
+                        450.0,
+                        450.0,
+                        450.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ThrowDistance",
+                    "mValues": [
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "WHalterDuration",
+                    "mValues": [
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ETotalShieldHealth": {
+                    "mFormulaParts": [
+                        {
+                            "mDataValue": "EShieldBaseHealth",
+                            "__type": "NamedDataValueCalculationPart"
+                        },
+                        {
+                            "mStat": 2,
+                            "mStatFormula": 2,
+                            "mDataValue": "EShieldbADRatio",
+                            "__type": "StatByNamedDataValueCalculationPart"
+                        },
+                        {
+                            "mStat": 11,
+                            "mStatFormula": 2,
+                            "mDataValue": "EShieldBonusHealthRatio",
+                            "__type": "StatByNamedDataValueCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "EDamage": {
+                    "mFormulaParts": [
+                        {
+                            "mDataValue": "EBaseDamage",
+                            "__type": "NamedDataValueCalculationPart"
+                        },
+                        {
+                            "mStat": 2,
+                            "mStatFormula": 2,
+                            "mCoefficient": 1.0,
+                            "__type": "StatByCoefficientCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mCoefficient": 0.5,
+            "mAnimationName": "Spell3",
+            "mImgIconName": [
+                "ASSETS/Characters/Urgot/HUD/Icons2D/Urgot_E.dds"
+            ],
+            "mCastTime": 0.44999998807907104,
+            "cooldownTime": [
+                16.0,
+                16.0,
+                15.5,
+                15.0,
+                14.5,
+                14.0,
+                13.5
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "mCantCancelWhileWindingUp": true,
+            "cantCastWhileRooted": true,
+            "mSpellRevealsChampion": false,
+            "alwaysSnapFacing": true,
+            "useAnimatorFramerate": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRangeDisplayOverride": [
+                475.0,
+                475.0,
+                475.0,
+                475.0,
+                475.0,
+                475.0,
+                475.0
+            ],
+            "castRadius": [
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 7.5,
+            "missileSpeed": 1500.0,
+            "mLineWidth": 100.0,
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "mana": [
+                60.0,
+                70.0,
+                80.0,
+                90.0,
+                100.0,
+                110.0
+            ],
+            "selectionPriority": 1,
+            "mTargetingTypeData": {
+                "__type": "Location"
+            },
+            "mCastingBreaksStealth": true,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "UrgotE",
+                    "mFormat": "{d7c27163}",
+                    "mLocKeys": {
+                        "keyName": "Spell_UrgotE_Name",
+                        "keySummary": "Spell_UrgotE_Summary",
+                        "keyTooltip": "Spell_UrgotE_Tooltip",
+                        "keyTooltipExtendedBelowLine": "Spell_UrgotE_TooltipExtendedBelowLine"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 5,
+                            "elements": [
+                                {
+                                    "type": "EBaseDamage",
+                                    "typeIndex": 1,
+                                    "nameOverride": "Spell_ListType_Damage",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "EShieldBaseHealth",
+                                    "nameOverride": "Spell_ListType_ShieldAmount",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Cost",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Cooldown",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "BotData": {
+            "DamageTag": 0,
+            "{6d548702}": {
+                "mFormulaParts": [
+                    {
+                        "mSpellCalculationKey": "EDamage",
+                        "__type": "{f3cbe7b2}"
+                    }
+                ],
+                "__type": "GameCalculation"
+            },
+            "{ec17e271}": [
+                {
+                    "EffectTag": 128,
+                    "EffectCalculation": {
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "MinimumDashRange",
+                                "__type": "NamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                },
+                {
+                    "EffectTag": 4194304,
+                    "EffectCalculation": {
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "ThrowDistance",
+                                "__type": "NamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                },
+                {
+                    "EffectTag": 4096,
+                    "EffectCalculation": {
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "StunDuration",
+                                "__type": "NamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                },
+                {
+                    "EffectTag": 2048,
+                    "EffectCalculation": {
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "StunDuration",
+                                "__type": "NamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                },
+                {
+                    "EffectTag": 16384,
+                    "EffectCalculation": {
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "StunDuration",
+                                "__type": "NamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                }
+            ],
+            "__type": "BotsSpellData"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/Urgot/Spells/UrgotEAbility/UrgotEDash": {
+        "mScriptName": "UrgotEDash",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 6154,
+            "mSpellTags": [
+                "PositiveEffect_MoveBlock"
+            ],
+            "mAnimationName": "",
+            "mImgIconName": [
+                "ASSETS/Characters/Urgot/HUD/Icons2D/Urgot_E.dds"
+            ],
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "alwaysSnapFacing": true,
+            "useAnimatorFramerate": true,
+            "castRange": [
+                450.0,
+                450.0,
+                450.0,
+                450.0,
+                450.0,
+                450.0,
+                450.0
+            ],
+            "castRangeDisplayOverride": [
+                475.0,
+                475.0,
+                475.0,
+                475.0,
+                475.0,
+                475.0,
+                475.0
+            ],
+            "castRadius": [
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0,
+                300.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 7.5,
+            "missileSpeed": 1500.0,
+            "mLineWidth": 100.0,
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "selectionPriority": 1,
+            "mTargetingTypeData": {
+                "__type": "LocationClamped"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
     "Characters/Urgot/Spells/UrgotWOnHitManager": {
         "mScriptName": "UrgotWOnHitManager",
         "mBuff": {
@@ -9470,6 +9978,10 @@
         "mBuff": {
             "__type": "BuffData"
         },
+        "__type": "SpellObject"
+    },
+    "{ddf77325}": {
+        "mScriptName": "UrgotREscapedVO",
         "__type": "SpellObject"
     },
     "Characters/Urgot/Spells/UrgotBasicAttack": {
@@ -10130,510 +10642,6 @@
     "Characters/Urgot/Spells/UrgotRRecastChannel": {
         "mScriptName": "UrgotRRecastChannel",
         "mSpell": {
-            "__type": "SpellDataResource"
-        },
-        "__type": "SpellObject"
-    },
-    "Characters/Urgot/Spells/UrgotEAbility": {
-        "mRootSpell": "Characters/Urgot/Spells/UrgotEAbility/UrgotE",
-        "mChildSpells": [
-            "Characters/Urgot/Spells/UrgotEAbility/UrgotE",
-            "Characters/Urgot/Spells/UrgotEAbility/UrgotEDash",
-            "Characters/Urgot/Spells/UrgotEAbility/UrgotEStun"
-        ],
-        "mName": "UrgotEAbility",
-        "AbilityTraits": 2560,
-        "__type": "AbilityObject"
-    },
-    "Characters/Urgot/Spells/UrgotEAbility/UrgotEStun": {
-        "mScriptName": "UrgotEStun",
-        "mBuff": {
-            "mDescription": "game_buff_tooltip_UrgotEStun",
-            "mFloatVarsDecimals": [
-                0,
-                0,
-                0,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2
-            ],
-            "__type": "BuffData"
-        },
-        "__type": "SpellObject"
-    },
-    "Characters/Urgot/Spells/UrgotEAbility/UrgotE": {
-        "mScriptName": "UrgotE",
-        "mSpell": {
-            "mAffectsTypeFlags": 6154,
-            "mSpellTags": [
-                "PositiveEffect_MoveBlock",
-                "Trait_ImmobilizingCCSpell"
-            ],
-            "mDataValues": [
-                {
-                    "mName": "EShieldDuration",
-                    "mValues": [
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "EShieldBaseHealth",
-                    "mValues": [
-                        35.0,
-                        55.0,
-                        75.0,
-                        95.0,
-                        115.0,
-                        135.0,
-                        155.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "EShieldbADRatio",
-                    "mValues": [
-                        1.5,
-                        1.350000023841858,
-                        1.350000023841858,
-                        1.350000023841858,
-                        1.350000023841858,
-                        1.350000023841858,
-                        1.350000023841858
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "EBaseDamage",
-                    "mValues": [
-                        60.0,
-                        90.0,
-                        120.0,
-                        150.0,
-                        180.0,
-                        210.0,
-                        240.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "EShieldBonusHealthRatio",
-                    "mValues": [
-                        0.0,
-                        0.13500000536441803,
-                        0.13500000536441803,
-                        0.13500000536441803,
-                        0.13500000536441803,
-                        0.13500000536441803,
-                        0.13500000536441803
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "StunDuration",
-                    "mValues": [
-                        1.5,
-                        1.5,
-                        1.5,
-                        1.5,
-                        1.5,
-                        1.5,
-                        1.5
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "BaseDashSpeed",
-                    "mValues": [
-                        1200.0,
-                        1200.0,
-                        1200.0,
-                        1200.0,
-                        1200.0,
-                        1200.0,
-                        1200.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "MinimumDashRange",
-                    "mValues": [
-                        450.0,
-                        450.0,
-                        450.0,
-                        450.0,
-                        450.0,
-                        450.0,
-                        450.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "ThrowDistance",
-                    "mValues": [
-                        100.0,
-                        100.0,
-                        100.0,
-                        100.0,
-                        100.0,
-                        100.0,
-                        100.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "WHalterDuration",
-                    "mValues": [
-                        1.5,
-                        1.5,
-                        1.5,
-                        1.5,
-                        1.5,
-                        1.5,
-                        1.5
-                    ],
-                    "__type": "SpellDataValue"
-                }
-            ],
-            "mSpellCalculations": {
-                "ETotalShieldHealth": {
-                    "mFormulaParts": [
-                        {
-                            "mDataValue": "EShieldBaseHealth",
-                            "__type": "NamedDataValueCalculationPart"
-                        },
-                        {
-                            "mStat": 2,
-                            "mStatFormula": 2,
-                            "mDataValue": "EShieldbADRatio",
-                            "__type": "StatByNamedDataValueCalculationPart"
-                        },
-                        {
-                            "mStat": 11,
-                            "mStatFormula": 2,
-                            "mDataValue": "EShieldBonusHealthRatio",
-                            "__type": "StatByNamedDataValueCalculationPart"
-                        }
-                    ],
-                    "__type": "GameCalculation"
-                },
-                "EDamage": {
-                    "mFormulaParts": [
-                        {
-                            "mDataValue": "EBaseDamage",
-                            "__type": "NamedDataValueCalculationPart"
-                        },
-                        {
-                            "mStat": 2,
-                            "mStatFormula": 2,
-                            "mCoefficient": 1.0,
-                            "__type": "StatByCoefficientCalculationPart"
-                        }
-                    ],
-                    "__type": "GameCalculation"
-                }
-            },
-            "mCoefficient": 0.5,
-            "mAnimationName": "Spell3",
-            "mImgIconName": [
-                "ASSETS/Characters/Urgot/HUD/Icons2D/Urgot_E.dds"
-            ],
-            "mCastTime": 0.44999998807907104,
-            "cooldownTime": [
-                16.0,
-                16.0,
-                15.5,
-                15.0,
-                14.5,
-                14.0,
-                13.5
-            ],
-            "delayCastOffsetPercent": -1.0,
-            "delayTotalTimePercent": -1.0,
-            "mCantCancelWhileWindingUp": true,
-            "cantCastWhileRooted": true,
-            "mSpellRevealsChampion": false,
-            "alwaysSnapFacing": true,
-            "useAnimatorFramerate": true,
-            "castRange": [
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0,
-                25000.0
-            ],
-            "castRangeDisplayOverride": [
-                475.0,
-                475.0,
-                475.0,
-                475.0,
-                475.0,
-                475.0,
-                475.0
-            ],
-            "castRadius": [
-                300.0,
-                300.0,
-                300.0,
-                300.0,
-                300.0,
-                300.0,
-                300.0
-            ],
-            "castConeDistance": 100.0,
-            "castFrame": 7.5,
-            "missileSpeed": 1500.0,
-            "mLineWidth": 100.0,
-            "mFloatVarsDecimals": [
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "mana": [
-                60.0,
-                70.0,
-                80.0,
-                90.0,
-                100.0,
-                110.0
-            ],
-            "selectionPriority": 1,
-            "mTargetingTypeData": {
-                "__type": "Location"
-            },
-            "mCastingBreaksStealth": true,
-            "mClientData": {
-                "mTooltipData": {
-                    "mObjectName": "UrgotE",
-                    "mFormat": "{d7c27163}",
-                    "mLocKeys": {
-                        "keyName": "Spell_UrgotE_Name",
-                        "keySummary": "Spell_UrgotE_Summary",
-                        "keyTooltip": "Spell_UrgotE_Tooltip",
-                        "keyTooltipExtendedBelowLine": "Spell_UrgotE_TooltipExtendedBelowLine"
-                    },
-                    "mLists": {
-                        "LevelUp": {
-                            "levelCount": 5,
-                            "elements": [
-                                {
-                                    "type": "EBaseDamage",
-                                    "typeIndex": 1,
-                                    "nameOverride": "Spell_ListType_Damage",
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "EShieldBaseHealth",
-                                    "nameOverride": "Spell_ListType_ShieldAmount",
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "Cost",
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "Cooldown",
-                                    "__type": "TooltipInstanceListElement"
-                                }
-                            ],
-                            "__type": "TooltipInstanceList"
-                        }
-                    },
-                    "__type": "TooltipInstanceSpell"
-                },
-                "__type": "SpellDataResourceClient"
-            },
-            "__type": "SpellDataResource"
-        },
-        "BotData": {
-            "DamageTag": 0,
-            "{6d548702}": {
-                "mFormulaParts": [
-                    {
-                        "mSpellCalculationKey": "EDamage",
-                        "__type": "{f3cbe7b2}"
-                    }
-                ],
-                "__type": "GameCalculation"
-            },
-            "{ec17e271}": [
-                {
-                    "EffectTag": 128,
-                    "EffectCalculation": {
-                        "mFormulaParts": [
-                            {
-                                "mDataValue": "MinimumDashRange",
-                                "__type": "NamedDataValueCalculationPart"
-                            }
-                        ],
-                        "__type": "GameCalculation"
-                    },
-                    "__type": "{b09016f6}"
-                },
-                {
-                    "EffectTag": 4194304,
-                    "EffectCalculation": {
-                        "mFormulaParts": [
-                            {
-                                "mDataValue": "ThrowDistance",
-                                "__type": "NamedDataValueCalculationPart"
-                            }
-                        ],
-                        "__type": "GameCalculation"
-                    },
-                    "__type": "{b09016f6}"
-                },
-                {
-                    "EffectTag": 4096,
-                    "EffectCalculation": {
-                        "mFormulaParts": [
-                            {
-                                "mDataValue": "StunDuration",
-                                "__type": "NamedDataValueCalculationPart"
-                            }
-                        ],
-                        "__type": "GameCalculation"
-                    },
-                    "__type": "{b09016f6}"
-                },
-                {
-                    "EffectTag": 2048,
-                    "EffectCalculation": {
-                        "mFormulaParts": [
-                            {
-                                "mDataValue": "StunDuration",
-                                "__type": "NamedDataValueCalculationPart"
-                            }
-                        ],
-                        "__type": "GameCalculation"
-                    },
-                    "__type": "{b09016f6}"
-                },
-                {
-                    "EffectTag": 16384,
-                    "EffectCalculation": {
-                        "mFormulaParts": [
-                            {
-                                "mDataValue": "StunDuration",
-                                "__type": "NamedDataValueCalculationPart"
-                            }
-                        ],
-                        "__type": "GameCalculation"
-                    },
-                    "__type": "{b09016f6}"
-                }
-            ],
-            "__type": "BotsSpellData"
-        },
-        "__type": "SpellObject"
-    },
-    "Characters/Urgot/Spells/UrgotEAbility/UrgotEDash": {
-        "mScriptName": "UrgotEDash",
-        "mSpell": {
-            "flags": 4,
-            "mAffectsTypeFlags": 6154,
-            "mSpellTags": [
-                "PositiveEffect_MoveBlock"
-            ],
-            "mAnimationName": "",
-            "mImgIconName": [
-                "ASSETS/Characters/Urgot/HUD/Icons2D/Urgot_E.dds"
-            ],
-            "cooldownTime": [
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0,
-                0.0
-            ],
-            "alwaysSnapFacing": true,
-            "useAnimatorFramerate": true,
-            "castRange": [
-                450.0,
-                450.0,
-                450.0,
-                450.0,
-                450.0,
-                450.0,
-                450.0
-            ],
-            "castRangeDisplayOverride": [
-                475.0,
-                475.0,
-                475.0,
-                475.0,
-                475.0,
-                475.0,
-                475.0
-            ],
-            "castRadius": [
-                300.0,
-                300.0,
-                300.0,
-                300.0,
-                300.0,
-                300.0,
-                300.0
-            ],
-            "castConeDistance": 100.0,
-            "castFrame": 7.5,
-            "missileSpeed": 1500.0,
-            "mLineWidth": 100.0,
-            "mFloatVarsDecimals": [
-                0,
-                0,
-                1,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            ],
-            "selectionPriority": 1,
-            "mTargetingTypeData": {
-                "__type": "LocationClamped"
-            },
             "__type": "SpellDataResource"
         },
         "__type": "SpellObject"
@@ -11503,7 +11511,7 @@
         "mDescriptionTraKey": "stat_stone_description_UrgotEFlings",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -11532,7 +11540,7 @@
         "mDescriptionTraKey": "stat_stone_description_UrgotRKills",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -11561,7 +11569,7 @@
         "mDescriptionTraKey": "stat_stone_description_Urgot3Shells",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -11590,7 +11598,7 @@
         "mDescriptionTraKey": "stat_stone_description_UrgotRFears",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -11619,7 +11627,7 @@
         "mDescriptionTraKey": "stat_stone_description_UrgotWDamage",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -11648,7 +11656,7 @@
         "mDescriptionTraKey": "stat_stone_description_UrgotQTakedowns",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -11706,7 +11714,7 @@
                 "__type": "StatStoneEventToTrack"
             },
             {
-                "EventToTrack": 210,
+                "EventToTrack": 216,
                 "__type": "StatStoneEventToTrack"
             }
         ],
