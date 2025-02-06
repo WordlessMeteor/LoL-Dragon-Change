@@ -481,25 +481,27 @@
     "{a55ccb27}": {
         "RecSpellRankUpInfos": [
             {
-                "MapId": 12,
-                "position": "{ada7afdb}",
-                "IsDefaultRecommendation": true,
-                "mDefaultPriority": [
-                    3,
+                "mEarlyLevelOverrides": [
                     0,
+                    1,
                     2,
-                    1
+                    0
                 ],
+                "__type": "RecSpellRankUpInfo"
+            },
+            {
+                "IsDefaultRecommendation": true,
                 "mEarlyLevelOverrides": [
                     0,
                     2,
-                    1
+                    1,
+                    0
                 ],
                 "__type": "RecSpellRankUpInfo"
             },
             {
                 "MapId": 11,
-                "position": "middle",
+                "position": "utility",
                 "mDefaultPriority": [
                     3,
                     0,
@@ -509,7 +511,8 @@
                 "mEarlyLevelOverrides": [
                     0,
                     2,
-                    1
+                    1,
+                    0
                 ],
                 "__type": "RecSpellRankUpInfo"
             }
@@ -11922,6 +11925,221 @@
         "AbilityTraits": 32,
         "__type": "AbilityObject"
     },
+    "{0c1b1d1e}": {
+        "mScriptName": "MelWReflectVO",
+        "__type": "SpellObject"
+    },
+    "{4b797443}": {
+        "mScriptName": "MelWReflectUltVO",
+        "__type": "SpellObject"
+    },
+    "{66b920b1}": {
+        "mScriptName": "MelWReflect",
+        "mSpell": {
+            "mImgIconName": [
+                "ASSETS/Characters/Mel/HUD/Icons2D/Mel_W.dds"
+            ],
+            "__type": "SpellDataResource"
+        },
+        "mBuff": {
+            "mTooltipData": {
+                "mObjectName": "MelWReflect",
+                "mFormat": "{b34f999a}",
+                "mLocKeys": {
+                    "keyName": "Buff_MelWReflect_Name",
+                    "keyTooltip": "Buff_MelWReflect_Tooltip"
+                },
+                "__type": "TooltipInstanceBuff"
+            },
+            "__type": "BuffData"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/Mel/Spells/MelWAbility/MelW": {
+        "mScriptName": "MelW",
+        "mSpell": {
+            "flags": 36,
+            "mAffectsTypeFlags": 8193,
+            "mExcludedUnitTags": {
+                "mObjectTagList": [
+                    "{c87e0da5}"
+                ],
+                "__type": "ObjectTags"
+            },
+            "mDataValues": [
+                {
+                    "mName": "Duration",
+                    "mValues": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ShieldRadius",
+                    "mValues": [
+                        175.0,
+                        175.0,
+                        175.0,
+                        175.0,
+                        175.0,
+                        175.0,
+                        175.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BaseDamagePercent",
+                    "mValues": [
+                        0.32499998807907104,
+                        0.4000000059604645,
+                        0.4749999940395355,
+                        0.550000011920929,
+                        0.625,
+                        0.699999988079071,
+                        0.7749999761581421
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "MoveSpeed",
+                    "mValues": [
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "DamagePercent": {
+                    "mFormulaParts": [
+                        {
+                            "mDataValue": "BaseDamagePercent",
+                            "__type": "NamedDataValueCalculationPart"
+                        },
+                        {
+                            "mCoefficient": 0.0005000000237487257,
+                            "__type": "StatByCoefficientCalculationPart"
+                        }
+                    ],
+                    "mDisplayAsPercent": true,
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "Spell2",
+            "mImgIconName": [
+                "ASSETS/Characters/Mel/HUD/Icons2D/Mel_W.dds"
+            ],
+            "cooldownTime": [
+                35.0,
+                35.0,
+                32.0,
+                29.0,
+                26.0,
+                23.0,
+                23.0
+            ],
+            "delayCastOffsetPercent": -0.5,
+            "delayTotalTimePercent": -0.5,
+            "canCastOrQueueWhileCasting": true,
+            "mProjectTargetToCastRange": true,
+            "mSpellRevealsChampion": false,
+            "castRangeUseBoundingBoxes": true,
+            "mCanMoveWhileChanneling": true,
+            "mDoNotNeedToFaceTarget": true,
+            "mIgnoreRangeCheck": true,
+            "castRange": [
+                250.0,
+                250.0,
+                250.0,
+                250.0,
+                250.0,
+                250.0,
+                250.0
+            ],
+            "mFloatVarsDecimals": [
+                0,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+            ],
+            "mana": [
+                60.0,
+                45.0,
+                30.0,
+                15.0,
+                0.0,
+                0.0
+            ],
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "mCastingBreaksStealth": true,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "MelW",
+                    "mFormat": "{d7c27163}",
+                    "mLocKeys": {
+                        "keyName": "Spell_MelW_Name",
+                        "keyTooltip": "Spell_MelW_Tooltip",
+                        "keyTooltipExtendedBelowLine": "Spell_MelW_TooltipBelowLine",
+                        "keySummary": "Spell_MelW_Summary"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 5,
+                            "elements": [
+                                {
+                                    "type": "BaseDamagePercent",
+                                    "multiplier": 100.0,
+                                    "nameOverride": "Spell_MelW_ReflectedDamage",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Cooldown",
+                                    "nameOverride": "Spell_ListType_Cooldown",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Cost",
+                                    "nameOverride": "Spell_ListType_ManaCost",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
     "{1031c47f}": {
         "mScriptName": "MelBasicAttack",
         "mSpell": {
@@ -12415,12 +12633,12 @@
                     "mName": "BasePassiveFlatDamage",
                     "mValues": [
                         50.0,
-                        65.0,
+                        60.0,
+                        70.0,
                         80.0,
-                        95.0,
-                        110.0,
-                        125.0,
-                        140.0
+                        90.0,
+                        100.0,
+                        110.0
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -12453,13 +12671,13 @@
                 {
                     "mName": "BaseUltFlatDamage",
                     "mValues": [
-                        75.0,
-                        125.0,
-                        175.0,
-                        225.0,
-                        275.0,
-                        325.0,
-                        375.0
+                        50.0,
+                        100.0,
+                        150.0,
+                        200.0,
+                        250.0,
+                        300.0,
+                        350.0
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -12498,7 +12716,7 @@
                             "__type": "NamedDataValueCalculationPart"
                         },
                         {
-                            "mCoefficient": 0.25,
+                            "mCoefficient": 0.10000000149011612,
                             "__type": "StatByCoefficientCalculationPart"
                         }
                     ],
@@ -12524,7 +12742,7 @@
                             "__type": "NamedDataValueCalculationPart"
                         },
                         {
-                            "mCoefficient": 0.4000000059604645,
+                            "mCoefficient": 0.30000001192092896,
                             "__type": "StatByCoefficientCalculationPart"
                         }
                     ],
@@ -13880,13 +14098,13 @@
                 {
                     "mName": "ExplosionDamage",
                     "mValues": [
-                        10.0,
+                        10.5,
                         13.0,
-                        16.0,
-                        19.0,
-                        22.0,
-                        25.0,
-                        28.0
+                        15.5,
+                        18.0,
+                        20.5,
+                        23.0,
+                        25.5
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -14179,213 +14397,6 @@
                         "__type": "TargeterDefinitionAoe"
                     }
                 ],
-                "__type": "SpellDataResourceClient"
-            },
-            "__type": "SpellDataResource"
-        },
-        "__type": "SpellObject"
-    },
-    "{66b920b1}": {
-        "mScriptName": "MelWReflect",
-        "mSpell": {
-            "mImgIconName": [
-                "ASSETS/Characters/Mel/HUD/Icons2D/Mel_W.dds"
-            ],
-            "__type": "SpellDataResource"
-        },
-        "mBuff": {
-            "mTooltipData": {
-                "mObjectName": "MelWReflect",
-                "mFormat": "{b34f999a}",
-                "mLocKeys": {
-                    "keyName": "Buff_MelWReflect_Name",
-                    "keyTooltip": "Buff_MelWReflect_Tooltip"
-                },
-                "__type": "TooltipInstanceBuff"
-            },
-            "__type": "BuffData"
-        },
-        "__type": "SpellObject"
-    },
-    "Characters/Mel/Spells/MelWAbility/MelW": {
-        "mScriptName": "MelW",
-        "mSpell": {
-            "flags": 36,
-            "mAffectsTypeFlags": 8193,
-            "mExcludedUnitTags": {
-                "mObjectTagList": [
-                    "{c87e0da5}"
-                ],
-                "__type": "ObjectTags"
-            },
-            "mDataValues": [
-                {
-                    "mName": "Duration",
-                    "mValues": [
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "ShieldRadius",
-                    "mValues": [
-                        175.0,
-                        175.0,
-                        175.0,
-                        175.0,
-                        175.0,
-                        175.0,
-                        175.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "BaseDamagePercent",
-                    "mValues": [
-                        0.32499998807907104,
-                        0.4000000059604645,
-                        0.4749999940395355,
-                        0.550000011920929,
-                        0.625,
-                        0.699999988079071,
-                        0.7749999761581421
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "MoveSpeed",
-                    "mValues": [
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896
-                    ],
-                    "__type": "SpellDataValue"
-                }
-            ],
-            "mSpellCalculations": {
-                "DamagePercent": {
-                    "mFormulaParts": [
-                        {
-                            "mDataValue": "BaseDamagePercent",
-                            "__type": "NamedDataValueCalculationPart"
-                        },
-                        {
-                            "mCoefficient": 0.0005000000237487257,
-                            "__type": "StatByCoefficientCalculationPart"
-                        }
-                    ],
-                    "mDisplayAsPercent": true,
-                    "__type": "GameCalculation"
-                }
-            },
-            "mAnimationName": "Spell2",
-            "mImgIconName": [
-                "ASSETS/Characters/Mel/HUD/Icons2D/Mel_W.dds"
-            ],
-            "cooldownTime": [
-                35.0,
-                35.0,
-                32.0,
-                29.0,
-                26.0,
-                23.0,
-                23.0
-            ],
-            "delayCastOffsetPercent": -0.5,
-            "delayTotalTimePercent": -0.5,
-            "canCastOrQueueWhileCasting": true,
-            "mProjectTargetToCastRange": true,
-            "mSpellRevealsChampion": false,
-            "castRangeUseBoundingBoxes": true,
-            "mCanMoveWhileChanneling": true,
-            "mDoNotNeedToFaceTarget": true,
-            "mIgnoreRangeCheck": true,
-            "castRange": [
-                250.0,
-                250.0,
-                250.0,
-                250.0,
-                250.0,
-                250.0,
-                250.0
-            ],
-            "mFloatVarsDecimals": [
-                0,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2,
-                2
-            ],
-            "mana": [
-                60.0,
-                45.0,
-                30.0,
-                15.0,
-                0.0,
-                0.0
-            ],
-            "mTargetingTypeData": {
-                "__type": "Self"
-            },
-            "mCastingBreaksStealth": true,
-            "mClientData": {
-                "mTooltipData": {
-                    "mObjectName": "MelW",
-                    "mFormat": "{d7c27163}",
-                    "mLocKeys": {
-                        "keyName": "Spell_MelW_Name",
-                        "keyTooltip": "Spell_MelW_Tooltip",
-                        "keyTooltipExtendedBelowLine": "Spell_MelW_TooltipBelowLine",
-                        "keySummary": "Spell_MelW_Summary"
-                    },
-                    "mLists": {
-                        "LevelUp": {
-                            "levelCount": 5,
-                            "elements": [
-                                {
-                                    "type": "BaseDamagePercent",
-                                    "multiplier": 100.0,
-                                    "nameOverride": "Spell_MelW_ReflectedDamage",
-                                    "Style": 1,
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "Cooldown",
-                                    "nameOverride": "Spell_ListType_Cooldown",
-                                    "__type": "TooltipInstanceListElement"
-                                },
-                                {
-                                    "type": "Cost",
-                                    "nameOverride": "Spell_ListType_ManaCost",
-                                    "__type": "TooltipInstanceListElement"
-                                }
-                            ],
-                            "__type": "TooltipInstanceList"
-                        }
-                    },
-                    "__type": "TooltipInstanceSpell"
-                },
                 "__type": "SpellDataResourceClient"
             },
             "__type": "SpellDataResource"
@@ -15015,7 +15026,7 @@
         "mDescriptionTraKey": "stat_stone_description_MelEChampionsRooted",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -15044,7 +15055,7 @@
         "mDescriptionTraKey": "stat_stone_description_MelWReflectCC",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -15073,7 +15084,7 @@
         "mDescriptionTraKey": "stat_stone_description_MelRDealBigDamage",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -15117,7 +15128,7 @@
         "mDescriptionTraKey": "stat_stone_description_MelQHitAllProjectiles",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -15146,7 +15157,7 @@
         "mDescriptionTraKey": "stat_stone_description_MelWReflectUltimates",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -15175,7 +15186,7 @@
         "mDescriptionTraKey": "stat_stone_description_MelPDealDamage",
         "EventsToTrack": [
             {
-                "EventToTrack": 229,
+                "EventToTrack": 235,
                 "__type": "StatStoneEventToTrack"
             }
         ],
@@ -15328,7 +15339,7 @@
                 "__type": "StatStoneEventToTrack"
             },
             {
-                "EventToTrack": 210,
+                "EventToTrack": 216,
                 "__type": "StatStoneEventToTrack"
             }
         ],

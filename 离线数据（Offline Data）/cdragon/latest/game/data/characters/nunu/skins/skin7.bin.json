@@ -86,14 +86,11 @@
                         "Play_vo_NunuSkin07_NunuBloodBoilAttack1_cast3D",
                         "Play_vo_NunuSkin07_NunuBloodBoilAttack2_cast3D",
                         "Play_vo_NunuSkin07_NunuBloodBoilAttack_OnCast",
-                        "Play_vo_NunuSkin07_NunuE_OnCast",
+                        "Play_vo_NunuSkin07_NunuE_cast3D",
                         "Play_vo_NunuSkin07_NunuR_cast3D",
                         "Play_vo_NunuSkin07_Recall3DGeneral",
-                        "Play_vo_NunuSkin07_Taunt3DGeneral",
-                        "Stop_vo_NunuSkin07_Joke3DGeneral",
-                        "Stop_vo_NunuSkin07_Laugh3DGeneral",
-                        "Stop_vo_NunuSkin07_Recall3DGeneral",
-                        "Stop_vo_NunuSkin07_Taunt3DGeneral"
+                        "Play_vo_NunuSkin07_Spell3DREnd",
+                        "Play_vo_NunuSkin07_Taunt3DGeneral"
                     ],
                     "voiceOver": true,
                     "__type": "BankUnit"
@@ -59598,7 +59595,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Shared/Particles/bigglow02.SKINS_Samira_Skin33.dds",
+                "texture": "ASSETS/Shared/Particles/bigglow02.Swiftplay_Sudden_Death.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -93834,30 +93831,16 @@
                 ],
                 "__type": "ContextualSituation"
             },
-            "Respawn2D": {
-                "mRules": [
-                    {
-                        "mRuleName": "Respawn",
-                        "mConditions": [
-                            {
-                                "mPercentChanceToPlay": 100,
-                                "__type": "ContextualConditionChanceToPlay"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mSelfEventName": "Respawn2DGeneral",
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "__type": "ContextualRule"
-                    }
-                ],
-                "__type": "ContextualSituation"
-            },
             "RecallLeadIn": {
-                "mCoolDownTime": 10.0,
                 "mRules": [
                     {
                         "mRuleName": "Recall",
+                        "mConditions": [
+                            {
+                                "mRuleCooldown": 10.0,
+                                "__type": "ContextualConditionRuleCooldown"
+                            }
+                        ],
                         "mAudioAction": {
                             "mSelfEventName": "Recall3DGeneral",
                             "__type": "ContextualActionPlayVO"
@@ -93896,7 +93879,10 @@
                             "mSpectatorEventName": "Laugh3DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -93913,7 +93899,10 @@
                             "mSpectatorEventName": "Joke3DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -93927,6 +93916,10 @@
                             {
                                 "mSpell": "Characters/Nunu/Spells/NunuBloodBoilAttack1",
                                 "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 40,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
@@ -93936,7 +93929,11 @@
                             "mSpectatorEventName": "cast3D",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
@@ -93945,6 +93942,10 @@
                             {
                                 "mSpell": "Characters/Nunu/Spells/NunuBloodBoilAttack2",
                                 "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 40,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
@@ -93954,7 +93955,11 @@
                             "mSpectatorEventName": "cast3D",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
@@ -93963,6 +93968,10 @@
                             {
                                 "mSpell": "Characters/Nunu/Spells/NunuBloodBoilAttack3",
                                 "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 40,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
@@ -93973,14 +93982,23 @@
                             "__type": "ContextualActionPlayVO"
                         },
                         "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
-                        "mRuleName": "BasicAttack",
+                        "mRuleName": "Basic 1",
                         "mConditions": [
                             {
                                 "mSpell": "Characters/Nunu/Spells/NunuBasicAttack",
                                 "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 40,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
@@ -93990,15 +94008,23 @@
                             "mSpectatorEventName": "cast3D",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
-                        "mRuleName": "BasicAttack2",
+                        "mRuleName": "Basic 2",
                         "mConditions": [
                             {
                                 "mSpell": "Characters/Nunu/Spells/NunuBasicAttack2",
                                 "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 40,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
@@ -94008,7 +94034,11 @@
                             "mSpectatorEventName": "cast3D",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
@@ -94017,6 +94047,10 @@
                             {
                                 "mSpell": "Characters/Nunu/Spells/NunuEAbility/NunuE",
                                 "__type": "ContextualConditionSpellName"
+                            },
+                            {
+                                "mPercentChanceToPlay": 50,
+                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
@@ -94026,7 +94060,11 @@
                             "mSpectatorEventName": "cast3D",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
@@ -94044,25 +94082,10 @@
                             "mSpectatorEventName": "cast3D",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
-                        "__type": "ContextualRule"
-                    }
-                ],
-                "__type": "ContextualSituation"
-            },
-            "SpellHit": {
-                "mRules": [
-                    {
-                        "mRuleName": "W",
-                        "mConditions": [
-                            {
-                                "mSpell": "Characters/Nunu/Spells/NunuWAbility/NunuWStun",
-                                "__type": "ContextualConditionSpellName"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mSelfEventName": "buffcast2D",
-                            "__type": "ContextualActionPlayVO"
+                        "mPriority": 100,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
                     }
@@ -94090,6 +94113,29 @@
                             "mSelfEventName": "Attack2DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "SpellBuffRemove": {
+                "mRules": [
+                    {
+                        "mRuleName": "R End",
+                        "mConditions": [
+                            {
+                                "SpellBuff": "Characters/Nunu/Spells/NunuRAbility/NunuR",
+                                "__type": "ContextualConditionSpellBuffName"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "Spell3DREnd",
+                            "mAllyEventName": "Spell3DREnd",
+                            "mEnemyEventName": "Spell3DREnd",
+                            "mSpectatorEventName": "Spell3DREnd",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{20749c51}": false,
                         "__type": "ContextualRule"
                     }
                 ],

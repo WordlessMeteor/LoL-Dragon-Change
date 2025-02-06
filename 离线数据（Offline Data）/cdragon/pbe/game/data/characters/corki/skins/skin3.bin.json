@@ -71,11 +71,6 @@
                 "effectKey": "Corki_Idle_RB_Prop_01",
                 "boneName": "gun",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
-            },
-            {
-                "effectKey": "Corki_idle_1",
-                "boneName": "root",
-                "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             }
         ],
         "mContextualActionData": "Characters/Corki/CAC/Corki_Base",
@@ -93,6 +88,44 @@
             }
         ],
         "mResourceResolver": "Characters/Corki/Skins/Skin3/Resources",
+        "PersistentEffectConditions": [
+            {
+                "OwnerCondition": {
+                    "mDrivers": [
+                        {
+                            "mDriver": {
+                                "Spell": "{b618b908}",
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "mScriptName": "KalistaRAllySpellLock",
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "Spell": "Characters/TahmKench/Spells/TahmKenchRWrapperAbility/TahmKenchRTargetAlly",
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        }
+                    ],
+                    "__type": "AllTrueMaterialDriver"
+                },
+                "PersistentVfxs": [
+                    {
+                        "boneName": "root",
+                        "effectKey": "Corki_idle_1",
+                        "__type": "PersistentVfxData"
+                    }
+                ],
+                "__type": "PersistentEffectConditionData"
+            }
+        ],
         "__type": "SkinCharacterDataProperties"
     },
     "Characters/Corki/Skins/Skin3/Particles/Corki_Skin03_idle_1": {
@@ -106,8 +139,8 @@
                     "constantValue": 2.0,
                     "__type": "ValueFloat"
                 },
-                "particleLinger": null,
-                "emitterLinger": null,
+                "particleLinger": 0.10000000149011612,
+                "emitterLinger": 0.10000000149011612,
                 "emitterName": "X_Avatar",
                 "importance": 2,
                 "Filtering": {
