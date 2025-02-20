@@ -33,8 +33,8 @@
             "apiName": "ChainLightning",
             "calculations": {},
             "dataValues": {
-                "DamageMod": 0.5,
-                "Range": 1000.0
+                "DamageMod": 0.4000000059604645,
+                "Range": 800.0
             },
             "desc": "对一个敌人造成伤害时，还会对其搭档造成<trueDamage>@DamageMod*100@%真实伤害</trueDamage>，前提是其友军在附近。",
             "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
@@ -265,6 +265,18 @@
             "tooltip": "对你和你的友军施放<abilityName>屏障</abilityName>和<abilityName>治疗术</abilityName>。提供<shield>@BarrierAmount@护盾值</shield>，回复<healing>@HealAmount@生命值</healing>并提供持续1秒的<speed>30%移动速度</speed>。<br><br>已造成的治疗效果总和：@f1@<br>已生成的护盾值总和：@f2@"
         },
         {
+            "apiName": "TransmuteChaos",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "获得1个随机的黄金阶和随机的白银阶强化符文。",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmutechaos_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmutechaos_small.png",
+            "id": 243,
+            "name": "质变：混沌",
+            "rarity": 2,
+            "tooltip": "获得1个随机的黄金阶和随机的白银阶强化符文。"
+        },
+        {
             "apiName": "Chauffeur",
             "calculations": {},
             "dataValues": {
@@ -397,9 +409,70 @@
             "tooltip": "当你的友军跌到<health>@AllyHealthThreshold*100@%生命值</health>以下时，将<health>你的@CurrentHealthToDrain*100@%当前生命值</health>换成等额<shield>护盾值</shield>来提供给你的队友。<br><br>这个回合已生成的护盾值：@f1@<br>已生成的护盾值总和：@f2@"
         },
         {
+            "apiName": "Firefox",
+            "calculations": {
+                "MultiFireDamage": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "SingleFireDamage",
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "RepeatDamageMod"
+                    },
+                    "mSimpleTooltipCalculationDisplay": 6
+                },
+                "SingleFireDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 45.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.25,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AcquisitionRange": 550.0,
+                "BaseDamage": 20.0,
+                "BonusAcquisitionRange": 725.0,
+                "Cooldown": 7.0,
+                "FlameDuration": 2.5,
+                "InitialDelay": 0.25,
+                "MinionBonusDamageMultiplier": 2.0,
+                "MinionBonusDamageThreshold": 0.20000000298023224,
+                "MovementSpeed": 0.4000000059604645,
+                "MovementSpeedDuration": 2.0,
+                "OrbitRadius": 150.0,
+                "RepeatDamageMod": 0.30000001192092896,
+                "SecondaryDelay": 0.4000000059604645
+            },
+            "desc": "<keywordMajor>自动施放</keywordMajor><br>获得移动速度并召唤3道烈焰环绕于你，瞄准距离内相距最近的那个可见英雄并造成自适应伤害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/firfox_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firfox_small.png",
+            "id": 308,
+            "name": "Cherry_Firefox_Name",
+            "rarity": 0,
+            "tooltip": "<keywordMajor>自动施放</keywordMajor>：每@Cooldown@秒获得<speed>@MovementSpeed*100@%移动速度</speed>并召唤3道烈焰环绕于你，瞄准距离内相距最近的那个可见英雄并造成@SingleFireDamage@自适应伤害。后续命中造成@RepeatDamageMod*100@%伤害。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+        },
+        {
             "apiName": "SummonerRevolution",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "CooldownBetweenCasts": 3.0
+            },
             "desc": "每个召唤师技能在每回合都会刷新其冷却时间一次。",
             "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
@@ -486,16 +559,15 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
-            "desc": "需求：参与@TakedownsNeeded@次击杀，如果是作为你的第二个强化符文，这个次数提升至@2ndPickTakendownsNeeded@次。<br><br>奖励：金铲铲",
+            "desc": "需求：参与击杀@TakedownsNeeded@次。<br><br>奖励：金铲铲",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_urfschampion_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
             "id": 154,
             "name": "任务：海牛阿福的勇士",
             "rarity": 1,
-            "tooltip": "需求：参与@TakedownsNeeded@次击杀，如果是作为你的第二个强化符文，这个次数提升至@2ndPickTakendownsNeeded@次。<br><br>奖励：金铲铲"
+            "tooltip": "{{Cherry_Quest_UrfsChampion_Summary}}<br><br>参与击杀：@f1@"
         },
         {
             "apiName": "Vengeance",
@@ -672,15 +744,16 @@
             "apiName": "SlapAround",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForce": 20.0
+                "AdaptiveForce": 20.0,
+                "SpellIDCD": 5.0
             },
-            "desc": "每当你<status>定身</status>一个敌人时，获得持续到回合结束的@AdaptiveForce@适应之力，可无限叠加。",
+            "desc": "每当你<status>定身</status>或<status>缚地</status>一个敌人时，获得持续到回合结束的@AdaptiveForce@适应之力，可无限叠加。",
             "iconLarge": "assets/ux/cherry/augments/icons/slaparound_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/slaparound_small.png",
             "id": 136,
             "name": "扇巴掌",
             "rarity": 0,
-            "tooltip": "每当你<status>定身</status>一个敌人时，获得持续到回合结束的@AdaptiveForce@适应之力，可无限叠加。"
+            "tooltip": "{{ Cherry_SlapAround_Summary }}<br><br>当前适应之力：@f1@"
         },
         {
             "apiName": "MagicMissile",
@@ -835,7 +908,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/vulnerability_small.png",
             "id": 92,
             "name": "易损",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "你的装备和持续伤害效果可以暴击来造成@CritDamage*100@%额外伤害。获得@CritChance*100@%暴击几率。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
@@ -847,7 +920,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/cannonfodder_small.png",
             "id": 10,
             "name": "炮灰",
-            "rarity": 1,
+            "rarity": 0,
             "tooltip": "你会被一门大炮给发射进战斗中。"
         },
         {
@@ -863,6 +936,138 @@
             "name": "终极转盘",
             "rarity": 2,
             "tooltip": "将【闪人】替换成一个随机英雄的终极技能。在施放这个技能后，会将它替换为另一个随机英雄的终极技能。"
+        },
+        {
+            "apiName": "ClownCollege",
+            "calculations": {
+                "BasicAttackDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 35.0,
+                            "mStartValue": 20.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.3499999940395355
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "QCritDamageMod": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "SumOfSubPartsCalculationPart",
+                            "mSubparts": [
+                                {
+                                    "__type": "NumberCalculationPart",
+                                    "mNumber": 1.5499999523162842
+                                },
+                                {
+                                    "__type": "StatByCoefficientCalculationPart",
+                                    "mCoefficient": 1.0,
+                                    "mStat": 8,
+                                    "mStatFormula": 2
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "TotalDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.5,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.550000011920929
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "BaseDamage": 100.0,
+                "CastRange": 400.0,
+                "EDITDECEIVEFORREALVALUES": 0,
+                "ExtraAATime": 1.0,
+                "FearDamage": 0.25,
+                "FearDuration": 1.0,
+                "FearRadius": 350.0,
+                "PseudoCastTime": 0.125,
+                "StealthDuration": 3.0
+            },
+            "desc": "在【闪人】栏位获得<spellName>欺诈魔术</spellName>。<br>获得<spellName>背刺</spellName>被动。<br>在你阵亡时，生成一个爆炸盒子来对附近的敌人们造成大量真实伤害和<status>恐惧</status>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/clowncollege_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/clowncollege_small.png",
+            "id": 310,
+            "name": "小丑学院",
+            "rarity": 2,
+            "tooltip": "<spellName>背刺</spellName>：你从背后袭击敌人时，会造成@BasicAttackDamage@<physicalDamage>额外伤害</physicalDamage>。<br><br><spellName>欺诈魔术</spellName>：你传送并变为<keywordStealth>隐形</keywordStealth>，持续@StealthDuration@秒。你在<keywordStealth>隐形</keywordStealth>状态下的第一次攻击将造成额外的<physicalDamage>@TotalDamage@物理伤害</physicalDamage>。如果从背后进行打击，那么这个攻击会暴击，造成@QCritDamageMod@伤害。<br><br><spellName>幻像：阵亡</spellName>：在阵亡时，在你周围造成@FearDamage*100@%最大生命值的真实伤害以及@FearDuration@秒恐惧。"
+        },
+        {
+            "apiName": "NumbToPain",
+            "calculations": {
+                "ChampRange": {
+                    "__type": "GameCalculationConditional",
+                    "mConditionalCalculationRequirements": {
+                        "__type": "IsRangedCastRequirement"
+                    },
+                    "mConditionalGameCalculation": "{06387172}",
+                    "mDefaultGameCalculation": "{792cf56b}"
+                },
+                "{06387172}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{48b676ff}"
+                        }
+                    ]
+                },
+                "{792cf56b}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{c8202a54}"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 6.0,
+                "MeleeReduction": 0.30000001192092896,
+                "RangedReduction": 0.15000000596046448
+            },
+            "desc": "每当你受到伤害时，该伤害的@MeleeReduction*100@%将转而造成一个持续@BleedDuration@秒的流血效果。<br><br><rules>远程英雄的伤害减免效果降低至@RangedReduction*100@%。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/numbtopain_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/numbtopain_small.png",
+            "id": 251,
+            "name": "疼痛钝感",
+            "rarity": 0,
+            "tooltip": "每当你受到伤害时，该伤害的@MeleeReduction*100@%将转而造成一个持续@BleedDuration@秒的流血效果。<br><br><rules>远程英雄的伤害减免效果降低至@RangedReduction*100@%。</rules>"
         },
         {
             "apiName": "MadScientist",
@@ -908,6 +1113,44 @@
             "tooltip": "每回合一次，在你施放终极技能后刷新你的终极技能。"
         },
         {
+            "apiName": "TricksterDemon",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 100.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 0.6000000238418579,
+                "BaseDamage": 100.0,
+                "Radius": 300.0,
+                "bonusADRatio": 0.4000000059604645
+            },
+            "desc": "当你离开潜行状态时会引发爆炸，造成<magicDamage>@TotalDamage@魔法伤害</magicDamage>，你的复制体和陷阱将在阵亡时造成相同效果。",
+            "iconLarge": "assets/ux/cherry/augments/icons/tricksterdemon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tricksterdemon_small.png",
+            "id": 236,
+            "name": "诡术恶魔",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_TricksterDemon_Summary }}<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+        },
+        {
             "apiName": "Dematerialize",
             "calculations": {},
             "dataValues": {
@@ -921,6 +1164,36 @@
             "name": "去质",
             "rarity": 0,
             "tooltip": "{{Cherry_Dematerialize_Summary}}<br><br>已获得的适应之力：@f1@"
+        },
+        {
+            "apiName": "SlowAndSteady",
+            "calculations": {
+                "{779aafdb}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "ASMultiplier"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.009999999776482582
+                    },
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "ASMultiplier": 75.0,
+                "StaticRatio": 0.625
+            },
+            "desc": "你的<speed>攻击速度</speed>变为@StaticRatio@。所有额外<speed>攻击速度</speed>会被转化为<scaleAD>攻击力</scaleAD>。(每<speed>1%攻速</speed>转<scaleAD>@ADPerAS@攻击力</scaleAD>)。<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowandsteady_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowandsteady_small.png",
+            "id": 250,
+            "name": "一板一眼",
+            "rarity": 1,
+            "tooltip": "你的<speed>攻击速度</speed>变为@StaticRatio@。所有额外<speed>攻击速度</speed>加成会被转化为<scaleAD>攻击力</scaleAD> (每<speed>1%攻速</speed>转<scaleAD>@ADPerAS@攻击力</scaleAD>)。<br><br>目前获得：@f1@ <scaleAD>攻击力</scaleAD>"
         },
         {
             "apiName": "FrostWraith",
@@ -1115,13 +1388,13 @@
             "apiName": "Quest_WoogletsWitchcap",
             "calculations": {},
             "dataValues": {},
-            "desc": "即刻：获得【无用大棒】。<br><br>需求：持有【无用大棒】、【灭世者的死亡之帽】和【中娅沙漏】。<br><br>奖励:获得【沃格勒特的巫师帽】",
+            "desc": "即刻：获得【无用大棒】。<br><br>需求：持有【灭世者的死亡之帽】和【中娅沙漏】。<br><br>奖励：获得【沃格勒特的巫师帽】。",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
             "id": 156,
             "name": "任务：沃格勒特的巫师帽",
             "rarity": 2,
-            "tooltip": "即刻：获得【无用大棒】。<br><br>需求：持有【无用大棒】、【灭世者的死亡之帽】和【中娅沙漏】。<br><br>奖励:获得【沃格勒特的巫师帽】"
+            "tooltip": "即刻：获得【无用大棒】。<br><br>需求：持有【灭世者的死亡之帽】和【中娅沙漏】。<br><br>奖励：获得【沃格勒特的巫师帽】。"
         },
         {
             "apiName": "Earthwake",
@@ -1256,6 +1529,18 @@
             "tooltip": "每第三次攻击，你附带的攻击特效会触发第二次。"
         },
         {
+            "apiName": "SymbioticMutation",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "每回合，这个会转变为你友军们的强化符文之一，随机选择。 ",
+            "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
+            "id": 239,
+            "name": "共生突变",
+            "rarity": 1,
+            "tooltip": "每回合，这个会转变为你友军们的强化符文之一，随机选择。 "
+        },
+        {
             "apiName": "CelestialBody",
             "calculations": {},
             "dataValues": {
@@ -1364,6 +1649,44 @@
             "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>灼烧伤害受益于治疗与护盾效果对受援助英雄最大生命值的相关占比。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
+            "apiName": "Overflow",
+            "calculations": {
+                "{1e85060f}": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{5cc662bd}"
+                        },
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.004999999888241291
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.009999999776482582
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "InitialDamageAmpPercent": 10.0,
+                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
+                "ManaRatio": 200.0
+            },
+            "desc": "你的<scaleMana>法力型</scaleMana>技能的消耗翻倍。获得<scaleMana>@ManaCalc@</scaleMana>技能伤害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
+            "id": 311,
+            "name": "溢流",
+            "rarity": 0,
+            "tooltip": "你的<scaleMana>法力型</scaleMana>技能的消耗翻倍。获得<scaleMana>@ManaCalc@</scaleMana>技能伤害。"
+        },
+        {
             "apiName": "FeeltheBurn",
             "calculations": {
                 "DamagePerSecond": {
@@ -1436,15 +1759,16 @@
                 }
             },
             "dataValues": {
-                "HealPercentage": 0.014999999664723873
+                "HealPercentage": 0.014999999664723873,
+                "SpellIDCD": 5.0
             },
-            "desc": "<status>定身</status>敌方英雄时<healing>回复@TotalHeal@生命值</healing>。",
+            "desc": "<status>定身</status>或<status>缚地</status>敌方英雄时<healing>回复@TotalHeal@生命值</healing>。",
             "iconLarge": "assets/ux/cherry/augments/icons/guiltypleasure_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/guiltypleasure_small.png",
             "id": 42,
             "name": "恶趣味",
             "rarity": 0,
-            "tooltip": "<status>定身</status>敌方英雄时<healing>回复@TotalHeal@生命值</healing>。<br><br>这个回合已造成的治疗效果：@f1@<br>已造成的治疗效果总和：@f2@"
+            "tooltip": "<status>定身</status>或<status>缚地</status>敌方英雄时<healing>回复@TotalHeal@生命值</healing>。<br><br>这个回合已造成的治疗效果：@f1@<br>已造成治疗效果的总和：@f2@"
         },
         {
             "apiName": "ScopierWeapons",
@@ -1624,10 +1948,9 @@
             "calculations": {},
             "dataValues": {
                 "KillStackCredit": 1.0,
-                "RequiredKillCount": 5.0,
-                "RequiredKillCountSubsequent": 6.0
+                "RequiredKillCount": 5.0
             },
-            "desc": "每当你参与一次击杀后获得@KillStackCredit@层，每回合仅会从每个英雄身上获得一次。在@RequiredKillCount@层时，这会孵化出一个【棱彩锻造器】。这个任务可被多次完成，但在第一次孵化后需要@RequiredKillCountSubsequent@层。",
+            "desc": "参与击杀时获得@KillStackCredit@层，每回合每个英雄仅触发一次此效果。<br><br>在@RequiredKillCount@层时，这会孵化出一个【棱彩锻造器】。这个任务可被多次完成。",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
             "id": 224,
@@ -1730,29 +2053,50 @@
                 "CritChance": 0.25,
                 "HealPercentage": 0.11999999731779099
             },
-            "desc": "获得<crit>@CritChance*100@%暴击几率</crit>和作用于<crit>暴击</crit>的@HealPercentage*100@%生命偷取。",
+            "desc": "获得<crit>@CritChance*100@%暴击几率</crit>和<lifeSteal>作用于<crit>暴击</crit>的@HealPercentage*100@%生命偷取</lifeSteal>。",
             "iconLarge": "assets/ux/cherry/augments/icons/soulsiphon_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/soulsiphon_small.png",
             "id": 77,
             "name": "灵魂虹吸",
             "rarity": 1,
-            "tooltip": "获得<crit>@CritChance*100@%暴击几率</crit>和作用于<crit>暴击</crit>的@HealPercentage*100@%生命偷取。<br><br>这个回合已造成的治疗效果：@f1@<br>已造成的治疗效果总和：@f2@"
+            "tooltip": "获得<crit>@CritChance*100@%暴击几率</crit>和<lifeSteal>作用于<crit>暴击</crit>的@HealPercentage*100@%生命偷取</lifeSteal>。<br><br>这个回合已造成的治疗：@f1@<br>已造成治疗的总和：@f2@"
         },
         {
             "apiName": "GambaAnvil",
             "calculations": {},
             "dataValues": {
-                "GoldBasisDiscount": 1250.0,
                 "GoldBonus": 1000.0,
-                "PrismaticCostReduction": 1000.0
+                "LegendaryCostReduction": -500.0,
+                "LegendaryGoldBasisDiscount": 1000.0,
+                "PrismaticCostReduction": -1000.0,
+                "PrismaticGoldBasisDiscount": 1250.0,
+                "StatCostReduction": -100.0
             },
-            "desc": "获得@GoldBonus@金币。棱彩锻造器花费减少@PrismaticCostReduction@金币，并且从现在起获得的棱彩装备的转售减少500金币。",
+            "desc": "获得@GoldBonus@金币。降低所有锻造器的价格，并且从锻造器中获得的装备的售价降低500金币。<br><br>棱彩阶锻造器数量：@PrismaticCostReduction@<br>传说级锻造器数量：@LegendaryCostReduction@<br>属性锻造器数量：@StatCostReduction@",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
             "id": 234,
             "name": "财运锻造器",
             "rarity": 2,
-            "tooltip": "获得@GoldBonus@金币。棱彩锻造器花费减少@PrismaticCostReduction@金币，并且从现在起获得的棱彩装备的转售减少500金币。"
+            "tooltip": "获得@GoldBonus@金币。降低所有锻造器的价格，并且从锻造器中获得的装备的售价降低500金币。<br><br>棱彩阶锻造器数量：@PrismaticCostReduction@<br>传说级锻造器数量：@LegendaryCostReduction@<br>属性锻造器数量：@StatCostReduction@"
+        },
+        {
+            "apiName": "DivineIntervention",
+            "calculations": {},
+            "dataValues": {
+                "BaseCD": 35.0,
+                "InitalDelay": 15.0,
+                "InvulnerabilityDuration": 2.5,
+                "Radius": 400.0,
+                "WarningDelay": 2.5
+            },
+            "desc": "在战斗开始@InitalDelay@秒后，召唤一颗护体星星缓慢地降落在你身上。在它着陆时，你和附近的友军们进入持续@InvulnerabilityDuration@秒的<keywordMajor>免疫伤害</keywordMajor>状态。每@BaseCD@秒<keywordMajor>自动施放</keywordMajor>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowactingpainkillers_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowactingpainkillers_small.png",
+            "id": 301,
+            "name": "神圣干预",
+            "rarity": 1,
+            "tooltip": "在战斗开始@InitalDelay@秒后，召唤一颗护体星星缓慢地降落在你身上。在它着陆时，你和附近的友军们进入持续@InvulnerabilityDuration@秒的<keywordMajor>免疫伤害</keywordMajor>状态。每@BaseCD@秒<keywordMajor>自动施放</keywordMajor>。"
         },
         {
             "apiName": "ThreadtheNeedle",
@@ -1890,20 +2234,48 @@
             "tooltip": "赐福你脚下的大地4秒，防止其中的任一单位跌到10%最大生命值以下。在效果结束时，其中的单位们都会被治疗<healing>@HealFlatTooltip@生命值</healing>。 "
         },
         {
+            "apiName": "Augment404",
+            "calculations": {},
+            "dataValues": {
+                "HatsToGrant": 3.0
+            },
+            "desc": "你怎么找到这个的？！？！？<br><br>获得@HatsToGrant@顶帽子。",
+            "iconLarge": "assets/ux/cherry/augments/icons/augment404_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augment404_small.png",
+            "id": 404,
+            "name": "404 强化符文未找到",
+            "rarity": 0,
+            "tooltip": "你怎么找到这个的？！？！？<br><br>获得@HatsToGrant@顶帽子。"
+        },
+        {
             "apiName": "DualWield",
             "calculations": {},
             "dataValues": {
-                "AttackReduction": 0.44999998807907104,
+                "AttackReduction": 0.3499999940395355,
                 "AttackSpeed": 1.0,
-                "OnHitMod": 0.550000011920929
+                "OnHitMod": 0.5
             },
-            "desc": "你的攻击和攻击特效造成的伤害降低@AttackReduction*100@%。获得<attackSpeed>@AttackSpeed*100@%总攻击速度</attackSpeed>。",
+            "desc": "Cherry_DualWield_Tooltip",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "双刀流",
             "rarity": 2,
-            "tooltip": "你的攻击和攻击特效造成的伤害降低@AttackReduction*100@%。获得<attackSpeed>@AttackSpeed*100@%总攻击速度</attackSpeed>。"
+            "tooltip": "Cherry_DualWield_Tooltip"
+        },
+        {
+            "apiName": "Augment405",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmpPerHat": 0.05000000074505806
+            },
+            "desc": "你每穿戴一顶帽子，就会获得@DamageAmpPerHat*100@%伤害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/augment405_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augment405_small.png",
+            "id": 405,
+            "name": "强化符文405",
+            "rarity": 2,
+            "tooltip": "你每穿戴一顶帽子，就会获得@DamageAmpPerHat*100@%伤害。"
         },
         {
             "apiName": "SpiritLink",
@@ -1921,6 +2293,24 @@
             "tooltip": "你的友军受到的@DamageRedirectPercentage*100@%实际伤害值将被转移给你，并且其所受的@HealCopyPercentage*100@%<healing>治疗效果</healing>也会转移给你。<br><br>已转移的伤害总和：@f1@<br>已造成的治疗效果总和：@f2@<br>"
         },
         {
+            "apiName": "Deathtouch",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeedRatio": 0.0010000000474974513,
+                "BleedDuration": 5.0,
+                "CurseCounter": 1.0,
+                "OnHitDamageRatio": 0.3400000035762787,
+                "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
+            },
+            "desc": "你的攻击为你提供@CurseCounter@层<keywordMajor>诅咒</keywordMajor>并造成额外<trueDamage>真实伤害</trueDamage>。<br><br>你的攻击对敌人们永久造成基于<keywordMajor>诅咒</keywordMajor>层数的额外<magicDamage>魔法伤害</magicDamage>。<br><br>此外，提升你可以拥有的最大<keywordMajor>诅咒</keywordMajor>层数。",
+            "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
+            "id": 217,
+            "name": "死亡触摸",
+            "rarity": 1,
+            "tooltip": "你的攻击为你提供@CurseCounter@层<keywordMajor>诅咒</keywordMajor>并造成额外<trueDamage>真实伤害</trueDamage>，伤害额相当于你已从这个回合获得的<keywordMajor>诅咒</keywordMajor>层数。<br><br>{{ Cherry_CurseShared }}<br><br>你的攻击造成<magicDamage>@f1@魔法伤害</magicDamage>，基于你的<keywordMajor>诅咒层数总和</keywordMajor>。<br><br><rules>你@OnHitDamageRatio*100@%的<keywordMajor>诅咒层数总和</keywordMajor>会被转化为额外攻击附伤。</rules> "
+        },
+        {
             "apiName": "Quest_AngelofRetribution",
             "calculations": {
                 "BaseDamage": {
@@ -1929,9 +2319,7 @@
                     "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
-                            "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 100.0,
-                            "mStartValue": 50.0
+                            "__type": "ByCharLevelInterpolationCalculationPart"
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -1939,7 +2327,7 @@
             },
             "dataValues": {
                 "AttackSpeed": 1.0,
-                "HealPowerToDamageConversion": 3.0,
+                "HealPowerToDamageConversion": 3.5,
                 "RequirementAmount": 2500.0
             },
             "desc": "需求：给友军回复或预防@RequirementAmount@伤害。<br>奖励：获得<attackspeed>@AttackSpeed*100@%攻击速度</attackspeed>，并且你的攻击造成相当于<healing>@HealPowerToDamageConversion*100@%治疗/护盾值</healing>的额外<magicdamage>魔法伤害</magicdamage>。",
@@ -1978,6 +2366,44 @@
             "name": "渴血",
             "rarity": 0,
             "tooltip": "获得@Omnivamp*100@%全能吸血。"
+        },
+        {
+            "apiName": "WellBeRightBack",
+            "calculations": {
+                "TooltipTrueDamageCalculation": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 410.0,
+                            "mStartValue": 70.0
+                        }
+                    ]
+                },
+                "{7c50d74e}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 600.0,
+                            "mStartValue": 100.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealAmountPercent": 0.4000000059604645,
+                "Range": 600.0,
+                "SelfDuration": 1.75,
+                "StasisDuration": 2.5
+            },
+            "desc": "获得<spellName>时间停止</spellName>（替代【闪人】栏位）。<br><br><rules><spellName>时间停止</spellName>：800码内的所有英雄都被置入<status>凝滞</status>状态（替代【闪人】栏位）。你离开<status>凝滞</status>状态的时间加快0.75秒并且治疗你40%已损失生命值。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/wellberightback_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/wellberightback_small.png",
+            "id": 312,
+            "name": "我们马上就回来",
+            "rarity": 1,
+            "tooltip": "<spellName>时间停止</spellName>：@Range@码内的所有英雄都被置入持续@StasisDuration@秒的<status>凝滞</status>状态。你在@SelfDuration@秒后离开<status>凝滞</status>状态并且<healing>治疗</healing>你@HealAmountPercent*100@%<scaleHealth>已损失生命值</scaleHealth>。"
         },
         {
             "apiName": "FirstAidKit",
@@ -2020,7 +2446,9 @@
                     "mSimpleTooltipCalculationDisplay": 4
                 }
             },
-            "dataValues": {},
+            "dataValues": {
+                "BaseCooldown": 7.0
+            },
             "desc": "每7秒朝着一个附近的敌人<keywordMajor>自动施放</keywordMajor>一个回力镖。",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
@@ -2116,6 +2544,46 @@
             "tooltip": "每@Cooldown@秒，<keywordMajor>自动施放</keywordMajor>来自你身体的一团粘液，对附近的敌人们造成<magicDamage>@BaseDamage@外加@PercentDamage@最大生命值的魔法伤害</magicDamage>。如果你命中了一个英雄，则会分泌出一个液团。走到液团上会回复<healing>@BlobHeal@生命值</healing>，而敌人可以摧毁该液团。"
         },
         {
+            "apiName": "Dreadbringer",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.02500000037252903,
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "CurseStacksPerTick": 1.0,
+                "MaxHealthRatio": 1.5,
+                "Range": 500.0,
+                "TickCadence": 1.0
+            },
+            "desc": "每@TickCadence@秒，从附近的敌方英雄那里获得@CurseStacksPerTick@<keywordMajor>层</keywordMajor>诅咒。<br><br>从每层<keywordMajor>诅咒</keywordMajor>中获得永久的<healing>最大生命值</healing>。<br><br>提升你可以拥有的最大<keywordMajor>诅咒</keywordMajor>层数。<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/plaguebearer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/plaguebearer_small.png",
+            "id": 216,
+            "name": "恐惧使者",
+            "rarity": 2,
+            "tooltip": "每@TickCadence@秒，从附近的敌方英雄那里获得@CurseStacksPerTick@层<keywordMajor>诅咒</keywordMajor>并对其造成额外<trueDamage>真实伤害</trueDamage>，伤害额相当于你已在这个回合获得的<keywordMajor>诅咒</keywordMajor>层数。<br><br>{{ Cherry_CurseShared }}<br><br>从你的<keywordMajor>诅咒层数总和</keywordMajor>中获得@f1@<healing>最大生命值</healing>。<br><br><rules>你@MaxHealthRatio*100@%的<keywordMajor>诅咒层数总和</keywordMajor>会被转化为<healing>最大生命值</healing>。</rules>"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2177,6 +2645,24 @@
             "tooltip": "你的攻击还会<keywordMajor>灼烧</keywordMajor>敌人，在@BleedDuration@秒的持续时间里每秒持续造成<scaleAP>@PercentMaxHPDamagePer5Seconds*20@%最大生命值的魔法伤害</scaleAP>。<keywordMajor>灼烧</keywordMajor>可无限叠加。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
+            "apiName": "Doomsayer",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForceRatio": 0.5,
+                "BleedDuration": 5.0,
+                "Cooldown": 3.0,
+                "CurseCounter": 1.0,
+                "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
+            },
+            "desc": "你的技能每命中一个敌方英雄，就会为你提供@CurseCounter@层<keywordMajor>诅咒</keywordMajor>。<br><br>从每层<keywordMajor>诅咒</keywordMajor>中获得永久的适应之力。<br><br>此外，提升你可以拥有的最大<keywordMajor>诅咒</keywordMajor>层数。",
+            "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
+            "id": 219,
+            "name": "末日预言者",
+            "rarity": 2,
+            "tooltip": "你的技能施加@CurseCounter@层<keywordMajor>诅咒</keywordMajor>并造成额外<trueDamage>真实伤害</trueDamage>，伤害额相当于你已在这个回合获得的<keywordMajor>诅咒</keywordMajor>层数。<br><br>{{ Cherry_CurseShared }}<br><br>从你的<keywordMajor>诅咒层数总和</keywordMajor>中获得@f1@适应之力。<br><br><rules>你@AdaptiveForceRatio*100@%的<keywordMajor>诅咒层数总和</keywordMajor>会被转化为适应之力。</rules>"
+        },
+        {
             "apiName": "Flashy",
             "calculations": {},
             "dataValues": {
@@ -2187,7 +2673,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
             "id": 116,
             "name": "闪现向前",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "你的【闪现】有3层充能，并且冷却时间为@FlashCooldown@秒。"
         },
         {
@@ -2266,15 +2752,16 @@
             "calculations": {},
             "dataValues": {
                 "BleedDuration": 5.0,
-                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033
+                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033,
+                "SpellIDCD": 5.0
             },
-            "desc": "<status>定身</status>敌方英雄时提供一层<keywordMajor>灼烧</keywordMajor>，这个效果会持续造成伤害并可无限叠加。",
+            "desc": "<status>定身</status>或<status>缚地</status>敌方英雄时提供一层<keywordMajor>灼烧</keywordMajor>，这个效果会持续造成伤害并可无限叠加。",
             "iconLarge": "assets/ux/cherry/augments/icons/tormentor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/tormentor_small.png",
             "id": 85,
             "name": "折磨之叉",
             "rarity": 0,
-            "tooltip": "<status>定身</status>敌方英雄时还会施加一层<keywordMajor>灼烧</keywordMajor>，@BleedDuration@秒的持续时间里每秒持续造成<scaleAP>@PercentMaxHPDamagePer5Seconds*20@%最大生命值的魔法伤害</scaleAP>。<keywordMajor>灼烧</keywordMajor>可无限叠加。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+            "tooltip": "<status>定身</status>或<status>缚地</status>敌方英雄时还会施加一层<keywordMajor>灼烧</keywordMajor>，在@BleedDuration@秒的持续时间里每秒持续造成<scaleAP>@PercentMaxHPDamagePer5Seconds*20@%最大生命值的魔法伤害</scaleAP>。 这个<keywordMajor>灼烧</keywordMajor>可无限叠加。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
             "apiName": "Minionmancer",
@@ -2476,6 +2963,18 @@
             "tooltip": "获得<spellName>先攻</spellName>和<spellName>黑暗收割</spellName>基石符文。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@<br>已获得的金币总和：@f3@"
         },
         {
+            "apiName": "ParasiticMutation",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "每回合，这个会转变为你对手们的强化符文之一，随机选择。 ",
+            "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
+            "id": 240,
+            "name": "寄生突变",
+            "rarity": 0,
+            "tooltip": "每回合，这个会转变为你对手们的强化符文之一，随机选择。 "
+        },
+        {
             "apiName": "CantTouchThis",
             "calculations": {},
             "dataValues": {
@@ -2508,7 +3007,7 @@
             "apiName": "ItsCritical",
             "calculations": {},
             "dataValues": {
-                "CritChance": 0.4000000059604645
+                "CritChance": 0.5
             },
             "desc": "获得<crit>@CritChance*100@%暴击几率</crit>。",
             "iconLarge": "assets/ux/cherry/augments/icons/itscritical_large.png",
@@ -2621,13 +3120,13 @@
             "dataValues": {
                 "AttackSpeed": 0.6000000238418579
             },
-            "desc": "获得@AttackSpeed*100@%攻击速度。",
+            "desc": "获得@AttackSpeed*100@%<speed>攻击速度</speed>。",
             "iconLarge": "assets/ux/cherry/augments/icons/deft_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deft_small.png",
             "id": 22,
             "name": "灵巧",
             "rarity": 0,
-            "tooltip": "获得@AttackSpeed*100@%攻击速度。"
+            "tooltip": "获得@AttackSpeed*100@%<speed>攻击速度</speed>。"
         },
         {
             "apiName": "Goliath",
@@ -2645,6 +3144,39 @@
             "name": "歌利亚巨人",
             "rarity": 2,
             "tooltip": "体型变大，获得@HealthAmp*100@%<scaleHealth>生命值</scaleHealth>和@ADAmp*100@% <scaleAP>适应之力</scaleAP>。"
+        },
+        {
+            "apiName": "JuicePress",
+            "calculations": {},
+            "dataValues": {
+                "BonusHats": 1.0,
+                "JuiceAmp": 0.5,
+                "PowerJuicePercentPen": 0.10000000149011612,
+                "SpeedJuiceMSBoost": 0.15000000596046448,
+                "VitalityJuiceHealShieldPower": 0.20000000298023224
+            },
+            "desc": "各饮品会为你和你的队友提供额外效果。",
+            "iconLarge": "assets/ux/cherry/augments/icons/juicepress_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/juicepress_small.png",
+            "id": 242,
+            "name": "榨汁机",
+            "rarity": 0,
+            "tooltip": "各饮品会为你和你的队友提供额外效果。<br><br>威能饮品：@PowerJuicePercentPen*100@% <scaleAD>护甲穿透</scaleAD>或<scaleAP>法术穿透</scaleAP><br>活力饮品：@VitalityJuiceHealShieldPower*100@%<healing>治疗和护盾强度</healing><br>急速饮品： @SpeedJuiceMSBoost*100@%<speed>移动速度</speed><br>帽子饮品：@BonusHats@额外的一顶帽子。"
+        },
+        {
+            "apiName": "LegDay",
+            "calculations": {},
+            "dataValues": {
+                "MovementSpeed": 50.0,
+                "SlowResist": 0.4000000059604645
+            },
+            "desc": "获得@MovementSpeed@<speed>移动速度</speed>和@SlowResist*100@% <speed>减速抗性</speed>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/legday_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/legday_small.png",
+            "id": 305,
+            "name": "练腿日",
+            "rarity": 0,
+            "tooltip": "获得@MovementSpeed@<speed>移动速度</speed>和@SlowResist*100@% <speed>减速抗性</speed>。"
         },
         {
             "apiName": "Trailblazer",
@@ -2710,7 +3242,6 @@
             "dataValues": {
                 "AOESize": 550.0,
                 "CastRange": 5500.0,
-                "Cooldown": 20.0,
                 "DamagetoChampions": 0.30000001192092896,
                 "GroundDuration": 3.0,
                 "LaserDelay": 2.5,
@@ -2753,6 +3284,55 @@
             "name": "家园卫士",
             "rarity": 0,
             "tooltip": "获得<speed>@spell.Augment_Homeguard:MovementSpeed*100@%移动速度</speed>，在受到伤害后失效@spell.Augment_Homeguard:DisableCooldown@秒。"
+        },
+        {
+            "apiName": "NullAugment",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "虚无",
+            "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
+            "id": 3,
+            "name": "虚无强化符文",
+            "rarity": 0,
+            "tooltip": "虚无"
+        },
+        {
+            "apiName": "HatTrick",
+            "calculations": {
+                "ShieldHealth": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{8bfcfef7}",
+                            "mStat": 6,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 3.0,
+                "HatTrickPriceReduction": 250.0,
+                "HatsToGrant": 3.0,
+                "LowHealthThreshold": 0.30000001192092896,
+                "MovespeedBoostPercent": 0.25,
+                "MovespeedShieldPercent": 0.75,
+                "ShieldDuration": 3.0
+            },
+            "desc": "即刻获得@HatsToGrant@顶帽子，并且【帽子饮品】的价格降低@HatTrickPriceReduction@。<br><br>在受到将使你的生命值跌入@LowHealthThreshold*100@%以下的伤害时，获得<speed>@MoveSpeedBoostPercent*100@%移动速度</speed>和<shield>@ShieldHealth@护盾值</shield>，持续@ShieldDuration@秒，但失去一顶帽子。@Cooldown@秒冷却时间。",
+            "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
+            "id": 241,
+            "name": "帽子戏法",
+            "rarity": 1,
+            "tooltip": "即刻获得@HatsToGrant@顶帽子，并且【帽子饮品】的价格降低@HatTrickPriceReduction@。<br><br>在受到将使你的生命值跌入@LowHealthThreshold*100@%以下的伤害时，获得<speed>@MoveSpeedBoostPercent*100@%移动速度</speed>和<shield>@ShieldHealth@护盾值</shield>，持续@ShieldDuration@秒，但失去一顶帽子。@Cooldown@秒冷却时间。"
         },
         {
             "apiName": "HeavyHitter",
@@ -2829,6 +3409,18 @@
             "tooltip": "体型变小，获得<speed>@MovespeedMod*100@%移动速度</speed>，并基于敌方英雄体型大于你的程度造成@SmallBonusDamage*100@%到@XLargeBonusDamage*100@%额外伤害。<br><br>这个回合已造成的伤害：@f1@<br>这局游戏的伤害：@f2@"
         },
         {
+            "apiName": "TransmutePrismatic",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "获得1个随机棱彩阶强化符文。",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmuteprismatic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmuteprismatic_small.png",
+            "id": 238,
+            "name": "质变：棱彩阶",
+            "rarity": 1,
+            "tooltip": "获得1个随机棱彩阶强化符文。"
+        },
+        {
             "apiName": "FrozenFoundations",
             "calculations": {},
             "dataValues": {
@@ -2861,6 +3453,18 @@
             "tooltip": "你的治疗和护盾可以暴击，获得@CritHeal*100@%额外数额的效果。获得@CritChance*100@%暴击几率。<br><br>额外治疗：@f1@<br>额外护盾：@f2@"
         },
         {
+            "apiName": "TransmuteGold",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "获得1个随机黄金阶强化符文。",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmutegold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmutegold_small.png",
+            "id": 237,
+            "name": "质变：黄金阶",
+            "rarity": 0,
+            "tooltip": "获得1个随机黄金阶强化符文。"
+        },
+        {
             "apiName": "ApexInventor",
             "calculations": {},
             "dataValues": {
@@ -2879,18 +3483,35 @@
             "apiName": "MirrorImage",
             "calculations": {},
             "dataValues": {
-                "AugmentCooldown": 60.0,
+                "AugmentCooldown": 30.0,
                 "CloneDuration": 8.0,
                 "HealthThreshold": 0.30000001192092896,
                 "StealthDuration": 1.25
             },
-            "desc": "当你跌下@HealthThreshold*100@%生命值时，暂时<keywordStealth>隐形</keywordStealth>并生成你自己的一个复制体。",
+            "desc": "当你跌下@HealthThreshold*100@%生命值时，暂时<keywordStealth>隐形</keywordStealth>并生成你自己的4个复制体。",
             "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
             "id": 172,
             "name": "镜花水月",
             "rarity": 0,
-            "tooltip": "当你跌下@HealthThreshold*100@%生命值时，暂时<keywordStealth>隐形</keywordStealth>并生成你自己的一个复制体。"
+            "tooltip": "当你跌下@HealthThreshold*100@%生命值时，暂时<keywordStealth>隐形</keywordStealth>并生成你自己的4个复制体。"
+        },
+        {
+            "apiName": "Desecrator",
+            "calculations": {},
+            "dataValues": {
+                "ArmorMRRatio": 0.11999999731779099,
+                "BleedDuration": 5.0,
+                "CurseCounter": 3.0,
+                "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
+            },
+            "desc": "<status>定身</status>敌方英雄时为你提供@CurseCounter@层<keywordMajor>诅咒</keywordMajor>。<br><br>从每层<keywordMajor>诅咒</keywordMajor>中获得永久的<armor>护甲</armor>和<magicresistance>魔法抗性</magicresistance>。<br><br>此外，提升你可以拥有的最大<keywordMajor>诅咒</keywordMajor>层数。",
+            "iconLarge": "assets/ux/cherry/augments/icons/desecrator_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/desecrator_small.png",
+            "id": 218,
+            "name": "亵渎者",
+            "rarity": 0,
+            "tooltip": "<status>定身</status>敌方英雄时为你提供@CurseCounter@层<keywordMajor>诅咒</keywordMajor>并造成额外<trueDamage>真实伤害</trueDamage>，伤害额相当于你已在这个回合获得的<keywordMajor>诅咒</keywordMajor>层数。<br><br>{{ Cherry_CurseShared }}<br><br>从你的<keywordMajor>诅咒层数总和</keywordMajor>中获得@f1@<armor>护甲</armor>和<magicresistance>魔法抗性</magicresistance>。<br><br><rules>你@ArmorMRRatio*100@%的<keywordMajor>诅咒层数总和</keywordMajor>会被转化为<armor>护甲</armor>和<magicresistance>魔法抗性</magicresistance>。</rules>"
         },
         {
             "apiName": "AllForYou",
@@ -3030,7 +3651,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 4000.0,
+                "PrismaticSellValue": 3750.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "立刻售出你的所有非任务装备，换取它们的@SellValueTooltip@%直购价格。对那些打折购买的锻造器来说非常不错。",
@@ -3045,15 +3666,18 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "ASToADConversion": 25.0
+                "Breakpoint1": 5.0,
+                "OnHitDamage": 40.0,
+                "SlowResistValue": 1.0,
+                "TotalASValue": 0.25
             },
-            "desc": "获得受益于你<attackSpeed>攻击速度</attackSpeed>的<scaleAD>攻击力</scaleAD>。",
+            "desc": "Cherry_LightningStrikes_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
             "name": "闪电打击",
             "rarity": 1,
-            "tooltip": "每<attackSpeed>0.1攻击速度</attackSpeed>提供<scaleAD>@ASToADConversion*.1@攻击力</scaleAD>。"
+            "tooltip": "Cherry_LightningStrikes_Tooltip"
         },
         {
             "apiName": "Repulsor",
@@ -3064,13 +3688,13 @@
                 "KnockbackDistance": 750.0,
                 "KnockbackRange": 500.0
             },
-            "desc": "在你跌到@HealthThreshold1*100@或@HealthThreshold2*100@%生命值时，附近的敌人们会被<status>击退</status>。",
+            "desc": "在你跌下@HealthThreshold1*100@%或@HealthThreshold2*100@%生命值时，附近的敌人们会被<status>击退</status>。",
             "iconLarge": "assets/ux/cherry/augments/icons/repulsor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/repulsor_small.png",
             "id": 69,
             "name": "退敌力场",
             "rarity": 0,
-            "tooltip": "在你跌到@HealthThreshold1*100@或@HealthThreshold2*100@%生命值时，附近的敌人们会被<status>击退</status>。"
+            "tooltip": "在你跌下@HealthThreshold1*100@%或@HealthThreshold2*100@%生命值时，附近的敌人们会被<status>击退</status>。"
         },
         {
             "apiName": "SkilledSniper",
@@ -3183,8 +3807,23 @@
             "iconSmall": "assets/ux/cherry/augments/icons/divebomber_small.png",
             "id": 25,
             "name": "俯冲轰炸",
-            "rarity": 1,
+            "rarity": 0,
             "tooltip": "你的队伍在每回合的第一次阵亡会爆炸，对附近的敌人们造成<trueDamage>目标@PercentMaxHPDamage*100@%最大生命值的真实伤害</trueDamage>。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+        },
+        {
+            "apiName": "GoHSacrificeForGold",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0.25,
+                "RoundCountCap": 4.0
+            },
+            "desc": "献祭<lifeSteal>你的@HealthReduction*100@%当前生命值</lifeSteal>。<br><br>在@RoundCountCap@回合后，获得一个额外的<keywordMajor>黄金阶强化符文</keywordMajor>并回复你的生命值。",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificeforgold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 303,
+            "name": "献祭：换取黄金阶",
+            "rarity": 1,
+            "tooltip": "献祭<lifeSteal>你的@HealthReduction*100@%当前生命值</lifeSteal>。<br><br>在@RoundCountCap@回合后，获得一个额外的<keywordMajor>黄金阶强化符文</keywordMajor>并回复你的生命值。<br><br>剩余回合数：@f1@"
         },
         {
             "apiName": "BluntForce",
@@ -3204,13 +3843,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "将召唤师技能【闪人】替换为<spellName>命运的召唤</spellName>。<br><br><rules><spellName>命运的召唤</spellName>会将你的搭档拉到你的体内至多4秒，让其变为不可被选取状态。搭档可以点击来将自己投放出去，<status>击退</status>命中的第一个英雄和所有附近的敌人。</rules><br>",
+            "desc": "Cherry_Oathsworn_Tooltip",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "誓约者",
             "rarity": 1,
-            "tooltip": "将召唤师技能【闪人】替换为<spellName>命运的召唤</spellName>。<br><br><rules><spellName>命运的召唤</spellName>会将你的搭档拉到你的体内至多4秒，让其变为不可被选取状态。搭档可以点击来将自己投放出去，<status>击退</status>命中的第一个英雄和所有附近的敌人。</rules><br>"
+            "tooltip": "Cherry_Oathsworn_Tooltip"
         },
         {
             "apiName": "Flashbang",
@@ -3262,6 +3901,21 @@
             "tooltip": "将你的召唤师技能替换为随机一个召唤师技能。在你在战斗状态下使用一个召唤师技能时，将其换成另一个随机的召唤师技能，并设置@Cooldown@秒的冷却时间。"
         },
         {
+            "apiName": "GoHSacrificeForSilver",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0,
+                "RoundCountCap": 2.0
+            },
+            "desc": "在@RoundCountCap@回合后，获得一个额外的<keywordMajor>白银阶强化符文</keywordMajor>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificefor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 302,
+            "name": "献祭：换取白银阶",
+            "rarity": 0,
+            "tooltip": "在@RoundCountCap@回合后，获得一个额外的<keywordMajor>白银阶强化符文</keywordMajor>。<br><br>剩余回合数：@f1@"
+        },
+        {
             "apiName": "ShrinkRay",
             "calculations": {},
             "dataValues": {
@@ -3295,8 +3949,8 @@
             "calculations": {},
             "dataValues": {
                 "StackMultiplication": 6.0,
-                "StackThreshold": 325.0,
-                "StacktoRegenConversion": 0.10000000149011612
+                "StackThreshold": 400.0,
+                "StacktoRegenConversion": 0.125
             },
             "desc": "需求：持有【心之钢】且层数在@StackThreshold@层或以上。<br><br>奖励：将你的心之钢层数乘以@StackMultiplication@。使你的<healing>生命回复</healing>提升@StacktoRegenConversion*100@%x你的【心之钢】层数。",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_steelyourheart_large.png",
@@ -3344,15 +3998,16 @@
                 }
             },
             "dataValues": {
-                "HealthScalar": 0.05000000074505806
+                "HealthScalar": 0.05000000074505806,
+                "SpellIDCD": 5.0
             },
-            "desc": "在<status>定身</status>一名敌方英雄后获得<shield>@TotalShield@护盾值</shield>。",
+            "desc": "<status>定身</status>或<status>缚地</status>一个敌方英雄后获得<shield>@TotalShield@护盾值</shield>。",
             "iconLarge": "assets/ux/cherry/augments/icons/courageofthecolossus_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
             "id": 18,
             "name": "巨像的勇气",
             "rarity": 2,
-            "tooltip": "在<status>定身</status>一名敌方英雄后获得<shield>@TotalShield@护盾值</shield>。<br><br>这个回合已生成的护盾值：@f1@<br>已生成的护盾值总和：@f2@"
+            "tooltip": "<status>定身</status>或<status>缚地</status>一个敌方英雄后获得<shield>@TotalShield@护盾值</shield>。<br><br>这个回合已生成的护盾值：@f1@<br>已生成护盾值的总和：@f2@"
         },
         {
             "apiName": "FruitsOfYourLabor",
@@ -3364,13 +4019,13 @@
                 "Duration": 2.0,
                 "MSBoost": 0.4000000059604645
             },
-            "desc": "与附近的友军分享能量花卉的效果，并使你获得的好处增加@AmpAmountTooltip@%。",
+            "desc": "与你附近@AllyMaxRange@码内的友军分享能量花卉的效果，并使你获得的好处增加@AmpAmountTooltip@%。",
             "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
             "id": 222,
             "name": "你的劳动果实",
-            "rarity": 1,
-            "tooltip": "与附近的友军分享能量花卉的效果，并使你获得的好处增加@AmpAmountTooltip@%。"
+            "rarity": 0,
+            "tooltip": "与你附近@AllyMaxRange@码内的友军分享能量花卉的效果，并使你获得的好处增加@AmpAmountTooltip@%。"
         },
         {
             "apiName": "InfernalSoul",
@@ -3438,6 +4093,24 @@
             "tooltip": "获得<spellName>电刑</spellName>和<spellName>相位猛冲</spellName>基石符文。<br><br>这个回合的【电刑】伤害：@f1@<br>【电刑】伤害总和：@f2@"
         },
         {
+            "apiName": "DarkBlessing",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHasteRatio": 0.25,
+                "BleedDuration": 5.0,
+                "Cooldown": 1.5,
+                "CurseCounter": 3.0,
+                "Radius": 450.0
+            },
+            "desc": "在你提供治疗/护盾时，获得@CurseCounter@层<keywordMajor>诅咒</keywordMajor>。<br><br>从每层<keywordMajor>诅咒</keywordMajor>中获得永久的技能急速。<br><br>此外，提升你可以拥有的最大<keywordMajor>诅咒</keywordMajor>层数。<br><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/darkblessing_small.png",
+            "id": 215,
+            "name": "黑暗赐福",
+            "rarity": 1,
+            "tooltip": "在你提供治疗/护盾时，获得@CurseCounter@层<keywordMajor>诅咒</keywordMajor>并造成额外<trueDamage>真实伤害</trueDamage>，伤害额相当于你已从这个回合获得的<keywordMajor>诅咒</keywordMajor>层数。<br><br>{{ Cherry_CurseShared }}<br><br>从你的<keywordMajor>诅咒层数总和</keywordMajor>中获得@f1@技能急速。<br><br><rules>你@AbilityHasteRatio*100@%的<keywordMajor>诅咒层数总和</keywordMajor>会被转化为技能急速。</rules>"
+        },
+        {
             "apiName": "MindtoMatter",
             "calculations": {},
             "dataValues": {
@@ -3479,6 +4152,21 @@
             "name": "时光之智慧",
             "rarity": 2,
             "tooltip": "立刻提升1级，并且每隔一回合额外提升1级。你的等级上限已被移除。"
+        },
+        {
+            "apiName": "GoHSacrificeForPrismatic",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0.5,
+                "RoundCountCap": 7.0
+            },
+            "desc": "献祭<lifeSteal>你的@HealthReduction*100@%当前生命值</lifeSteal>。<br><br>在@RoundCountCap@回合后，获得一个额外的<keywordMajor>棱彩阶强化符文</keywordMajor>并回复你的生命值。",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificeforprismatic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 304,
+            "name": "献祭：换取棱彩阶",
+            "rarity": 2,
+            "tooltip": "献祭<lifeSteal>你的@HealthReduction*100@%当前生命值</lifeSteal>。<br><br>在@RoundCountCap@回合后，获得一个额外的<keywordMajor>棱彩阶强化符文</keywordMajor>并回复你的生命值。<br><br>剩余回合数：@f1@"
         },
         {
             "apiName": "NowYouSeeMe",
@@ -3536,6 +4224,51 @@
             "name": "珠光护手",
             "rarity": 2,
             "tooltip": "你的技能可以造成暴击，造成@CritDamage*100@%总伤害。获得@CritChance*100@%暴击几率。获得随法术强度增长的额外@APToCritConversion@暴击几率。<br><br>这个回合的额外伤害：@f1@<br>额外伤害总和：@f2@"
+        },
+        {
+            "apiName": "AndMyAxe",
+            "calculations": {
+                "TotalDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 225.0,
+                            "mStartValue": 60.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.6000000238418579
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AutoCastRange": 950.0,
+                "BaseDamage": 10.0,
+                "CDIfPickedUp": 1.5,
+                "Cooldown": 8.0,
+                "DebuffDuration": 4.0,
+                "ShredAmount": 0.20000000298023224,
+                "SlowAmount": 0.4000000059604645,
+                "SlowDuration": 1.5
+            },
+            "desc": "<keywordMajor>自动施放</keywordMajor>：<br>周期性地向相距最近的那个对手投掷一柄斧头，造成伤害、减速、护甲击碎和魔抗击碎。如果这柄斧头被拾取，那么这个冷却时间会缩短。",
+            "iconLarge": "assets/ux/cherry/augments/icons/andmyaxe_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/andmyaxe_small.png",
+            "id": 309,
+            "name": "还有我的斧头！",
+            "rarity": 1,
+            "tooltip": "<keywordMajor>自动施放</keywordMajor>： 每@Cooldown@秒向相距最近的那个对手投掷一柄斧头，对目标造成@TotalDamage@自适应伤害、持续@SlowDuration@秒的@SlowAmount*100@%<status>减速</status>、持续@DebuffDuration@秒的<scaleArmor>@ShredAmount*100@%护甲击碎</scaleArmor>和<scaleMR>魔抗击碎</scaleMR>。 如果你拾取了该斧头，那么这个冷却时间会缩短至@CDIfPickedUp@秒(%i:cooldown%)。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@<br>"
         }
     ]
 }

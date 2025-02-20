@@ -33,8 +33,8 @@
             "apiName": "ChainLightning",
             "calculations": {},
             "dataValues": {
-                "DamageMod": 0.5,
-                "Range": 1000.0
+                "DamageMod": 0.4000000059604645,
+                "Range": 800.0
             },
             "desc": "Egy ellenfélnek okozott sebzés <trueDamage>@DamageMod*100@% tényleges sebzést</trueDamage> okoz egy közelben lévő társának is.",
             "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
@@ -265,6 +265,18 @@
             "tooltip": "Alkalmazza az idézői <abilityName>pajzsot</abilityName> és <abilityName>gyógyítást</abilityName> rád és a csapattársadra. <shield>@BarrierAmount@ pajzsot</shield> biztosít, visszaállít <healing>@HealAmount@ életerőt</healing>, és 1 másodpercre <speed>30% mozgási sebességet ad</speed>.<br><br>Elvégzett gyógyítás összesen: @f1@<br>Létrehozott pajzs összesen: @f2@"
         },
         {
+            "apiName": "TransmuteChaos",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Egy véletlenszerű Arany és egy véletlenszerű Ezüst osztályú erősítést kapsz.",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmutechaos_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmutechaos_small.png",
+            "id": 243,
+            "name": "Átalakítás: Káosz",
+            "rarity": 2,
+            "tooltip": "Egy véletlenszerű Arany és egy véletlenszerű Ezüst osztályú erősítést kapsz."
+        },
+        {
             "apiName": "Chauffeur",
             "calculations": {},
             "dataValues": {
@@ -397,9 +409,70 @@
             "tooltip": "Ha a szövetségesed <health>életereje @AllyHealthThreshold*100@%</health> alá csökken, a <health>pillanatnyi életerőd @CurrentHealthToDrain*100@%-áért</health> cserébe ennek megfelelő <shield>pajzsot</shield> adhatsz a szövetségesnek.<br><br>A körben biztosított pajzsok: @f1@<br>Biztosított pajzsok összesen: @f2@"
         },
         {
+            "apiName": "Firefox",
+            "calculations": {
+                "MultiFireDamage": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "SingleFireDamage",
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "RepeatDamageMod"
+                    },
+                    "mSimpleTooltipCalculationDisplay": 6
+                },
+                "SingleFireDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 45.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.25,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AcquisitionRange": 550.0,
+                "BaseDamage": 20.0,
+                "BonusAcquisitionRange": 725.0,
+                "Cooldown": 7.0,
+                "FlameDuration": 2.5,
+                "InitialDelay": 0.25,
+                "MinionBonusDamageMultiplier": 2.0,
+                "MinionBonusDamageThreshold": 0.20000000298023224,
+                "MovementSpeed": 0.4000000059604645,
+                "MovementSpeedDuration": 2.0,
+                "OrbitRadius": 150.0,
+                "RepeatDamageMod": 0.30000001192092896,
+                "SecondaryDelay": 0.4000000059604645
+            },
+            "desc": "<keywordMajor>Automatikus elsütés</keywordMajor><br>Mozgási sebességet biztosít, és megidéz köréd három lángot, amelyek célba veszik a hatótávolságon belüli legközelebbi látható ellenfelet, és adaptív sebzést okoznak neki.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firfox_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firfox_small.png",
+            "id": 308,
+            "name": "Cherry_Firefox_Name",
+            "rarity": 0,
+            "tooltip": "<keywordMajor>Automatikus elsütés</keywordMajor>: <speed>@MovementSpeed*100@% mozgási sebességet</speed> biztosít, és megidéz három lángot, amelyek @Cooldown@ másodpercenként leírnak körülötted egy kört, célba veszik a hatótávolságon belüli legközelebbi látható ellenfelet, és @SingleFireDamage@ adaptív sebzést okoznak neki. Az elsőt követő találatok @RepeatDamageMod*100@%-os sebzést okoznak.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
+        },
+        {
             "apiName": "SummonerRevolution",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "CooldownBetweenCasts": 3.0
+            },
             "desc": "Minden idézői varázslat esetén a töltési idő körönként egyszer nullázódik.",
             "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
@@ -486,16 +559,15 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
-            "desc": "Követelmény: érj el @TakedownsNeeded@ kiiktatást. Ha a második erősítésedként választottad, a követelmény @2ndPickTakendownsNeeded@ kiiktatásra növekszik.<br><br>Jutalom: Aranyspatula",
+            "desc": "Követelmény: Érj el @TakedownsNeeded@ kiiktatást.<br><br>Jutalom: Aranyspatula",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_urfschampion_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
             "id": 154,
             "name": "Küldetés: Az URF bajnoka",
             "rarity": 1,
-            "tooltip": "Követelmény: érj el @TakedownsNeeded@ kiiktatást. Ha a második erősítésedként választottad, a követelmény @2ndPickTakendownsNeeded@ kiiktatásra növekszik.<br><br>Jutalom: Aranyspatula"
+            "tooltip": "{{Cherry_Quest_UrfsChampion_Summary}}<br><br>Kiiktatások: @f1@"
         },
         {
             "apiName": "Vengeance",
@@ -672,15 +744,16 @@
             "apiName": "SlapAround",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForce": 20.0
+                "AdaptiveForce": 20.0,
+                "SpellIDCD": 5.0
             },
-            "desc": "Valahányszor <status>mozgásképtelenné</status> teszel egy ellenfelet, @AdaptiveForce@ adaptív erőre teszel szert a kör végéig, ami korlátlanul halmozódhat.",
+            "desc": "Valahányszor <status>mozgásképtelenné</status> teszel vagy <status>röghöz kötsz</status> egy ellenfelet, @AdaptiveForce@ adaptív erőre teszel szert a kör végéig, ami korlátlanul halmozódhat.",
             "iconLarge": "assets/ux/cherry/augments/icons/slaparound_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/slaparound_small.png",
             "id": 136,
             "name": "Pofozkodás",
             "rarity": 0,
-            "tooltip": "Valahányszor <status>mozgásképtelenné</status> teszel egy ellenfelet, @AdaptiveForce@ adaptív erőre teszel szert a kör végéig, ami korlátlanul halmozódhat."
+            "tooltip": "{{ Cherry_SlapAround_Summary }}<br><br>Jelenlegi adaptív erő: @f1@"
         },
         {
             "apiName": "MagicMissile",
@@ -835,7 +908,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/vulnerability_small.png",
             "id": 92,
             "name": "Sebezhetőség",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "A tárgyaiddal és folyamatosan sebző hatásaiddal kritikus csapást mérhetsz, további @CritDamage*100@% sebzést okozva. @CritChance*100@% kritikus csapási esélyt kapsz.<br><br>A körben okozott sebzés: @f1@<br>Okozott sebzés összesen: @f2@"
         },
         {
@@ -847,7 +920,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/cannonfodder_small.png",
             "id": 10,
             "name": "Ágyútöltelék",
-            "rarity": 1,
+            "rarity": 0,
             "tooltip": "Egy ágyúból kilőve érkezel a csatába."
         },
         {
@@ -863,6 +936,138 @@
             "name": "Végső rulett",
             "rarity": 2,
             "tooltip": "A megfutamodás helyébe egy véletlenszerű végső hősképesség lép. A képessége elsütése után egy másik véletlenszerű hősképesség lép a helyébe."
+        },
+        {
+            "apiName": "ClownCollege",
+            "calculations": {
+                "BasicAttackDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 35.0,
+                            "mStartValue": 20.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.3499999940395355
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "QCritDamageMod": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "SumOfSubPartsCalculationPart",
+                            "mSubparts": [
+                                {
+                                    "__type": "NumberCalculationPart",
+                                    "mNumber": 1.5499999523162842
+                                },
+                                {
+                                    "__type": "StatByCoefficientCalculationPart",
+                                    "mCoefficient": 1.0,
+                                    "mStat": 8,
+                                    "mStatFormula": 2
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "TotalDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.5,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.550000011920929
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "BaseDamage": 100.0,
+                "CastRange": 400.0,
+                "EDITDECEIVEFORREALVALUES": 0,
+                "ExtraAATime": 1.0,
+                "FearDamage": 0.25,
+                "FearDuration": 1.0,
+                "FearRadius": 350.0,
+                "PseudoCastTime": 0.125,
+                "StealthDuration": 3.0
+            },
+            "desc": "Megkapod a <spellName>Megtévesztést</spellName> a Menekülj helyére. <br>Megkapod a <spellName>Hátbaszúrás</spellName> passzív képességet. <br>Amikor meghalsz, megjelenik egy robbanó doboz, ami jelentős tényleges sebzést okoz, és <status>megrémíti</status> a körülötted lévő ellenfeleket.",
+            "iconLarge": "assets/ux/cherry/augments/icons/clowncollege_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/clowncollege_small.png",
+            "id": 310,
+            "name": "Bohóciskola",
+            "rarity": 2,
+            "tooltip": "<spellName>Hátbaszúrás</spellName>: @BasicAttackDamage@ <physicalDamage>bónusz fizikai sebzést</physicalDamage> okozol, amikor hátulról támadsz az ellenfelekre.<br><br><spellName>Megtévesztés</spellName>: Teleportálsz, és @StealthDuration@ másodpercig <keywordStealth>lopakodsz</keywordStealth>. A következő támadásod <keywordStealth>lopakodás</keywordStealth> közben további <physicalDamage>@TotalDamage@ fizikai sebzést</physicalDamage> okoz. Ha hátulról támadsz, a támadás kritikus csapás lesz, és @QCritDamageMod@ sebzést okoz.<br><br><spellName>Hallucináció: Halál</spellName>: halál esetén a maximális életerő @FearDamage*100@%-ával egyenlő tényleges sebzést okozol, valamint @FearDuration@ másodpercre megrémíted a körülötted lévő ellenfeleket."
+        },
+        {
+            "apiName": "NumbToPain",
+            "calculations": {
+                "ChampRange": {
+                    "__type": "GameCalculationConditional",
+                    "mConditionalCalculationRequirements": {
+                        "__type": "IsRangedCastRequirement"
+                    },
+                    "mConditionalGameCalculation": "{06387172}",
+                    "mDefaultGameCalculation": "{792cf56b}"
+                },
+                "{06387172}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{48b676ff}"
+                        }
+                    ]
+                },
+                "{792cf56b}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{c8202a54}"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 6.0,
+                "MeleeReduction": 0.30000001192092896,
+                "RangedReduction": 0.15000000596046448
+            },
+            "desc": "Amikor sebzés ér, a kapott sebzés @MeleeReduction*100@%-a vérzéssé alakul, amely @BleedDuration@ másodperc alatt fejti ki a hatását. <br><br><rules>Távolsági harcosok esetén a sebzéscsökkentés a teljes érték @RangedReduction*100@%-a.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/numbtopain_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/numbtopain_small.png",
+            "id": 251,
+            "name": "Fájdalomtűrés",
+            "rarity": 0,
+            "tooltip": "Amikor sebzés ér, a kapott sebzés @MeleeReduction*100@%-a vérzéssé alakul, amely @BleedDuration@ másodperc alatt fejti ki a hatását. <br><br><rules>Távolsági harcosok esetén a sebzéscsökkentés a teljes érték @RangedReduction*100@%-a.</rules>"
         },
         {
             "apiName": "MadScientist",
@@ -908,6 +1113,44 @@
             "tooltip": "Körönként egyszer frissítheted a végső képességed, miután elsütötted."
         },
         {
+            "apiName": "TricksterDemon",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 100.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 0.6000000238418579,
+                "BaseDamage": 100.0,
+                "Radius": 300.0,
+                "bonusADRatio": 0.4000000059604645
+            },
+            "desc": "A láthatatlanság megtörésekor <magicDamage>@TotalDamage@ varázssebzést</magicDamage> okozol magad körül, a klónjaid és csapdáid ugyanezt teszik a halálukkor.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tricksterdemon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tricksterdemon_small.png",
+            "id": 236,
+            "name": "Trükkös démon",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_TricksterDemon_Summary }}<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
+        },
+        {
             "apiName": "Dematerialize",
             "calculations": {},
             "dataValues": {
@@ -921,6 +1164,36 @@
             "name": "Dematerializálás",
             "rarity": 0,
             "tooltip": "{{Cherry_Dematerialize_Summary}}<br><br>Összegyűlt adaptív erő: @f1@"
+        },
+        {
+            "apiName": "SlowAndSteady",
+            "calculations": {
+                "{779aafdb}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "ASMultiplier"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.009999999776482582
+                    },
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "ASMultiplier": 75.0,
+                "StaticRatio": 0.625
+            },
+            "desc": "A <speed>támadási sebességed</speed> @StaticRatio@ lesz. Minden bónusz <speed>támadási sebességed</speed> <scaleAD>sebzéssé</scaleAD> alakul. (<scaleAD>@ADPerAS@ sebzés</scaleAD> <speed>1% támadási sebességenként</speed>).<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowandsteady_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowandsteady_small.png",
+            "id": 250,
+            "name": "Lassan, de biztosan",
+            "rarity": 1,
+            "tooltip": "A <speed>támadási sebességed</speed> @StaticRatio@ lesz. Minden bónusz <speed>támadási sebességed</speed> <scaleAD>sebzéssé</scaleAD> alakul (<scaleAD>@ADPerAS@ sebzés</scaleAD> <speed>1% támadási sebességenként</speed>).<br><br>Jelenlegi bónusz: @f1@ <scaleAD>sebzés</scaleAD>"
         },
         {
             "apiName": "FrostWraith",
@@ -1115,13 +1388,13 @@
             "apiName": "Quest_WoogletsWitchcap",
             "calculations": {},
             "dataValues": {},
-            "desc": "Azonnali: kapsz egy Feleslegesen nagy pálcát.<br><br>Követelmény: birtokold a Feleslegesen nagy pálcát, a Rabadon halálsüvegét és a Zhonya homokóráját.<br><br>Jutalom: kapsz egy Wooglet boszorkánykalapját.",
+            "desc": "Azonnali: Kapsz egy Feleslegesen nagy pálcát.<br><br>Követelmény: Birtokold a Rabadon halálsüvegét vagy a Zhonya homokóráját.<br><br>Jutalom: Kapsz egy Wooglet boszorkánykalapját",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
             "id": 156,
             "name": "Küldetés: Wooglet boszorkánykalapja",
             "rarity": 2,
-            "tooltip": "Azonnali: kapsz egy Feleslegesen nagy pálcát.<br><br>Követelmény: birtokold a Feleslegesen nagy pálcát, a Rabadon halálsüvegét és a Zhonya homokóráját.<br><br>Jutalom: kapsz egy Wooglet boszorkánykalapját."
+            "tooltip": "Azonnali: Kapsz egy Feleslegesen nagy pálcát.<br><br>Követelmény: Birtokold a Rabadon halálsüvegét vagy a Zhonya homokóráját.<br><br>Jutalom: Kapsz egy Wooglet boszorkánykalapját"
         },
         {
             "apiName": "Earthwake",
@@ -1256,6 +1529,18 @@
             "tooltip": "Minden harmadik támadás duplán aktiválja a találati hatásokat."
         },
         {
+            "apiName": "SymbioticMutation",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Minden körben átalakul a szövetségesed egyik véletlenszerűen választott erősítésévé. ",
+            "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
+            "id": 239,
+            "name": "Szimbiotikus mutáció",
+            "rarity": 1,
+            "tooltip": "Minden körben átalakul egy véletlenszerűen választott szövetségesed valamelyik erősítésévé. "
+        },
+        {
             "apiName": "CelestialBody",
             "calculations": {},
             "dataValues": {
@@ -1364,6 +1649,44 @@
             "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>Az Égetés sebzése a gyógyítás vagy pajzs mértéke és a megsegített hős maximális életereje közti aránytól függ.<br><br>A körben okozott sebzés: @f1@<br>Okozott sebzés összesen: @f2@"
         },
         {
+            "apiName": "Overflow",
+            "calculations": {
+                "{1e85060f}": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{5cc662bd}"
+                        },
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.004999999888241291
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.009999999776482582
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "InitialDamageAmpPercent": 10.0,
+                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
+                "ManaRatio": 200.0
+            },
+            "desc": "A varázslatok <scaleMana>manaköltsége</scaleMana> megkétszereződik. A varázslatok sebzése <scaleMana>@ManaCalc@</scaleMana>-kal nagyobb.",
+            "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
+            "id": 311,
+            "name": "Túlcsordulás",
+            "rarity": 0,
+            "tooltip": "A varázslatok <scaleMana>manaköltsége</scaleMana> megkétszereződik. A varázslatok sebzése <scaleMana>@ManaCalc@</scaleMana>-kal nagyobb."
+        },
+        {
             "apiName": "FeeltheBurn",
             "calculations": {
                 "DamagePerSecond": {
@@ -1436,15 +1759,16 @@
                 }
             },
             "dataValues": {
-                "HealPercentage": 0.014999999664723873
+                "HealPercentage": 0.014999999664723873,
+                "SpellIDCD": 5.0
             },
-            "desc": "Az ellenséges hősök <status>mozgásképtelenné tétele</status> <healing>visszatölt @TotalHeal@ életerőt</healing>.",
+            "desc": "Az ellenséges hősök <status>mozgásképtelenné tétele</status> vagy <status>röghöz kötése</status> <healing>visszatölt @TotalHeal@ életerőt</healing>.",
             "iconLarge": "assets/ux/cherry/augments/icons/guiltypleasure_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/guiltypleasure_small.png",
             "id": 42,
             "name": "Bűnös élvezet",
             "rarity": 0,
-            "tooltip": "Az ellenséges hősök <status>mozgásképtelenné tétele</status> <healing>visszatölt @TotalHeal@ életerőt</healing>.<br><br>A körben elvégzett gyógyítás: @f1@<br>Elvégzett gyógyítás összesen: @f2@"
+            "tooltip": "Az ellenséges hősök <status>mozgásképtelenné tétele</status> vagy <status>röghöz kötése</status> <healing>visszatölt @TotalHeal@ életerőt</healing>.<br><br>A körben végzett gyógyítás: @f1@<br>Összes elvégzett gyógyítás: @f2@"
         },
         {
             "apiName": "ScopierWeapons",
@@ -1624,10 +1948,9 @@
             "calculations": {},
             "dataValues": {
                 "KillStackCredit": 1.0,
-                "RequiredKillCount": 5.0,
-                "RequiredKillCountSubsequent": 6.0
+                "RequiredKillCount": 5.0
             },
-            "desc": "Körönként és hősönként @KillStackCredit@ jelzőt szerezhetsz a kiiktatásokért. @RequiredKillCount@ jelző elérésekor egy Spektrum osztályú üllő kel ki belőle. Ez többször teljesíthető, de az első kikelés után @RequiredKillCountSubsequent@ jelzőt igényel.",
+            "desc": "@KillStackCredit@ jelző kiiktatás szerzésekor, hősönként és körönként egyszer.<br><br>@RequiredKillCount@ jelző elérésekor egy Spektrum osztályú üllő kel ki belőle. Ez többször teljesíthető.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
             "id": 224,
@@ -1730,29 +2053,50 @@
                 "CritChance": 0.25,
                 "HealPercentage": 0.11999999731779099
             },
-            "desc": "<crit>@CritChance*100@% kritikus csapási esély</crit> és @HealPercentage*100@% életlopás a <crit>kritikus csapások</crit> során.",
+            "desc": "<crit>@CritChance*100@% kritikus csapási esély</crit> és <lifeSteal>@HealPercentage*100@% életlopás a <crit>kritikus csapások</crit></lifeSteal> során.",
             "iconLarge": "assets/ux/cherry/augments/icons/soulsiphon_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/soulsiphon_small.png",
             "id": 77,
             "name": "Lélekszipoly",
             "rarity": 1,
-            "tooltip": "<crit>@CritChance*100@% kritikus csapási esély</crit> és @HealPercentage*100@% életlopás a <crit>kritikus csapások</crit> során.<br><br>A körben elvégzett gyógyítás: @f1@<br>Elvégzett gyógyítás összesen: @f2@"
+            "tooltip": "<crit>@CritChance*100@% kritikus csapási esély</crit> és <lifeSteal>@HealPercentage*100@% életlopás a <crit>kritikus csapások</crit></lifeSteal> során.<br><br>A körben végzett gyógyítás: @f1@<br>Összes elvégzett gyógyítás: @f2@"
         },
         {
             "apiName": "GambaAnvil",
             "calculations": {},
             "dataValues": {
-                "GoldBasisDiscount": 1250.0,
                 "GoldBonus": 1000.0,
-                "PrismaticCostReduction": 1000.0
+                "LegendaryCostReduction": -500.0,
+                "LegendaryGoldBasisDiscount": 1000.0,
+                "PrismaticCostReduction": -1000.0,
+                "PrismaticGoldBasisDiscount": 1250.0,
+                "StatCostReduction": -100.0
             },
-            "desc": "Kapsz @GoldBonus@ aranyat. A Spektrum osztályú üllők @PrismaticCostReduction@ arannyal olcsóbbak, és a mostantól megszerzett Spektrum osztályú tárgyak 500 arannyal kevesebbért adhatók el.",
+            "desc": "Kapsz @GoldBonus@ aranyat. Csökkentettük az összes üllő árát, és az üllőkből szerzett tárgyakat 500 arannyal kevesebbért lehet eladni.<br><br>Spektrum osztályú üllők: @PrismaticCostReduction@<br>Legendás üllők: @LegendaryCostReduction@<br>Értéknövelő üllők: @StatCostReduction@",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
             "id": 234,
             "name": "Gamba üllő",
             "rarity": 2,
-            "tooltip": "Kapsz @GoldBonus@ aranyat. A Spektrum osztályú üllők @PrismaticCostReduction@ arannyal olcsóbbak, és a mostantól megszerzett Spektrum osztályú tárgyak 500 arannyal kevesebbért adhatók el."
+            "tooltip": "Kapsz @GoldBonus@ aranyat. Csökkentettük az összes üllő árát, és az üllőkből szerzett tárgyakat 500 arannyal kevesebbért lehet eladni.<br><br>Spektrum osztályú üllők: @PrismaticCostReduction@<br>Legendás üllők: @LegendaryCostReduction@<br>Értéknövelő üllők: @StatCostReduction@"
+        },
+        {
+            "apiName": "DivineIntervention",
+            "calculations": {},
+            "dataValues": {
+                "BaseCD": 35.0,
+                "InitalDelay": 15.0,
+                "InvulnerabilityDuration": 2.5,
+                "Radius": 400.0,
+                "WarningDelay": 2.5
+            },
+            "desc": "A harc @InitalDelay@. másodpercében egy védelmező csillag kezd lassan leereszkedni. Amikor földet ér, te és a közeli szövetségesek @InvulnerabilityDuration@ másodpercre <keywordMajor>sebezhetetlenné</keywordMajor> váltok. @BaseCD@ másodpercenként <keywordMajor>automatikusan elsül</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowactingpainkillers_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowactingpainkillers_small.png",
+            "id": 301,
+            "name": "Égi beavatkozás",
+            "rarity": 1,
+            "tooltip": "A harc @InitalDelay@. másodpercében egy védelmező csillag kezd lassan leereszkedni. Amikor földet ér, te és a közeli szövetségesek @InvulnerabilityDuration@ másodpercre <keywordMajor>sebezhetetlenné</keywordMajor> váltok. @BaseCD@ másodpercenként <keywordMajor>automatikusan elsül</keywordMajor>."
         },
         {
             "apiName": "ThreadtheNeedle",
@@ -1890,20 +2234,48 @@
             "tooltip": "4 másodpercre megáldja a hős alatt a talajt, és az ott tartózkodó egységek életereje nem csökkenhet a maximális életerő 10%-a alá. Az időtartam végén <healing>@HealFlatTooltip@ életerővel</healing> gyógyítja a területen lévő egységeket. "
         },
         {
+            "apiName": "Augment404",
+            "calculations": {},
+            "dataValues": {
+                "HatsToGrant": 3.0
+            },
+            "desc": "Hogy találtad meg ezt?!?!? <br><br>Kapsz @HatsToGrant@ sapkát.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augment404_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augment404_small.png",
+            "id": 404,
+            "name": "404 Az erősítés nem található",
+            "rarity": 0,
+            "tooltip": "Hogy találtad meg ezt?!?!? <br><br>Kapsz @HatsToGrant@ sapkát."
+        },
+        {
             "apiName": "DualWield",
             "calculations": {},
             "dataValues": {
-                "AttackReduction": 0.44999998807907104,
+                "AttackReduction": 0.3499999940395355,
                 "AttackSpeed": 1.0,
-                "OnHitMod": 0.550000011920929
+                "OnHitMod": 0.5
             },
-            "desc": "A támadásaid és találati hatásaid @AttackReduction*100@%-kal kevesebb sebzést okoznak. <attackSpeed>@AttackSpeed*100@% teljes támadási sebességet</attackSpeed> biztosít.",
+            "desc": "Cherry_DualWield_Tooltip",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Dupla csapás",
             "rarity": 2,
-            "tooltip": "A támadásaid és találati hatásaid @AttackReduction*100@%-kal kevesebb sebzést okoznak. <attackSpeed>@AttackSpeed*100@% teljes támadási sebességet</attackSpeed> biztosít."
+            "tooltip": "Cherry_DualWield_Tooltip"
+        },
+        {
+            "apiName": "Augment405",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmpPerHat": 0.05000000074505806
+            },
+            "desc": "Minden rajtad lévő sapka után @DamageAmpPerHat*100@%-kal nő a sebzésed.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augment405_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augment405_small.png",
+            "id": 405,
+            "name": "405-ös erősítés",
+            "rarity": 2,
+            "tooltip": "Minden rajtad lévő sapka után @DamageAmpPerHat*100@%-kal nő a sebzésed."
         },
         {
             "apiName": "SpiritLink",
@@ -1921,6 +2293,24 @@
             "tooltip": "A szövetségesnek okozott sebzés @DamageRedirectPercentage*100@%-át te kapod, akárcsak az általuk kapott <healing>gyógyítás</healing> @HealCopyPercentage*100@%-át.<br><br>Átirányított sebzés összesen: @f1@<br>Elvégzett gyógyítás összesen: @f2@<br>"
         },
         {
+            "apiName": "Deathtouch",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeedRatio": 0.0010000000474974513,
+                "BleedDuration": 5.0,
+                "CurseCounter": 1.0,
+                "OnHitDamageRatio": 0.3400000035762787,
+                "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
+            },
+            "desc": "A támadásaid @CurseCounter@ <keywordMajor>Átok</keywordMajor> jelzőt biztosítanak, és bónusz <trueDamage>tényleges sebzést</trueDamage> okoznak.<br><br>A támadásaid ezután további <magicDamage>varázssebzést</magicDamage> okoznak minden <keywordMajor>Átok</keywordMajor> jelző után.<br><br>Ezenkívül megnöveli a maximálisan szerezhető <keywordMajor>Átok</keywordMajor> jelzők számát.",
+            "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
+            "id": 217,
+            "name": "A halál jeges karma",
+            "rarity": 1,
+            "tooltip": "A támadásaid @CurseCounter@ <keywordMajor>Átok</keywordMajor> jelzőt biztosítanak, és bónusz <trueDamage>tényleges sebzést</trueDamage> okoznak, amelynek mértéke a körben szerzett <keywordMajor>Átok</keywordMajor> jelzők számától függ<br><br>{{ Cherry_CurseShared }}<br><br>A támadásaid további <magicDamage>@f1@ varázssebzést</magicDamage> okoznak, az <keywordMajor>Összes Átok jelződ</keywordMajor> alapján.<br><br><rules>Az <keywordMajor>Összes Átok jelződ</keywordMajor> @OnHitDamageRatio*100@%-a bónusz találati sebzéssé alakul.</rules> "
+        },
+        {
             "apiName": "Quest_AngelofRetribution",
             "calculations": {
                 "BaseDamage": {
@@ -1929,9 +2319,7 @@
                     "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
-                            "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 100.0,
-                            "mStartValue": 50.0
+                            "__type": "ByCharLevelInterpolationCalculationPart"
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -1939,7 +2327,7 @@
             },
             "dataValues": {
                 "AttackSpeed": 1.0,
-                "HealPowerToDamageConversion": 3.0,
+                "HealPowerToDamageConversion": 3.5,
                 "RequirementAmount": 2500.0
             },
             "desc": "Követelmény: Tölts vissza vagy akadályozz meg @RequirementAmount@, a szövetségeidet érő sebzést.<br><br>Jutalom: <attackspeed>@AttackSpeed*100@% támadási sebességre</attackspeed> teszel szert, és a támadásaid a <healing>gyógyítás/pajzserő @HealPowerToDamageConversion*100@%-ával</healing> egyenlő bónusz <magicdamage>varázssebzést</magicdamage> okoznak.",
@@ -1978,6 +2366,44 @@
             "name": "Vérivás",
             "rarity": 0,
             "tooltip": "@Omnivamp*100@% életvarázst biztosít."
+        },
+        {
+            "apiName": "WellBeRightBack",
+            "calculations": {
+                "TooltipTrueDamageCalculation": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 410.0,
+                            "mStartValue": 70.0
+                        }
+                    ]
+                },
+                "{7c50d74e}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 600.0,
+                            "mStartValue": 100.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealAmountPercent": 0.4000000059604645,
+                "Range": 600.0,
+                "SelfDuration": 1.75,
+                "StasisDuration": 2.5
+            },
+            "desc": "Megkapod az <spellName>Időmegállítást</spellName> a Menekülj helyére.<br><br><rules><spellName>Időmegállítás</spellName>: 800 egység távolságon belül minden hős <status>sztázisba</status> kerül (a Menekülj helyét veszi át). Te 0,75 másodperccel hamarabb hagyod el a <status>sztázist</status>, és visszanyered a hiányzó életerőd 40%-át.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/wellberightback_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/wellberightback_small.png",
+            "id": 312,
+            "name": "Visszatérünk",
+            "rarity": 1,
+            "tooltip": "<spellName>Időmegállítás</spellName>: @Range@ egység távolságon belül minden hős @StasisDuration@ másodpercre <status>sztázisba</status> kerül. Te @SelfDuration@ másodperc után hagyod el a <status>sztázist</status>, és <healing>visszanyered</healing> a <scaleHealth>hiányzó életerőd</scaleHealth> @HealAmountPercent*100@%-át."
         },
         {
             "apiName": "FirstAidKit",
@@ -2020,7 +2446,9 @@
                     "mSimpleTooltipCalculationDisplay": 4
                 }
             },
-            "dataValues": {},
+            "dataValues": {
+                "BaseCooldown": 7.0
+            },
             "desc": "<keywordMajor>Automatikus elsütés</keywordMajor>: 7 másodpercenként kilő egy bumerángot egy közeli ellenfélre.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
@@ -2116,6 +2544,46 @@
             "tooltip": "@Cooldown@ másodpercenként <keywordMajor>automatikusan</keywordMajor> nyálka lövell ki a testedből, ami <magicDamage>@BaseDamage@ plusz a maximális életerejük @PercentDamage@-ával megegyező varázssebzést</magicDamage> okoz a közelben lévő ellenfeleknek. Ha egy hőst találsz el, egy pacát bocsát ki a közeledben. A pacán áthaladó szövetségesek <healing>@BlobHeal@ életerőt</healing> nyernek vissza, az ellenfelek pedig elpusztítják a pacát."
         },
         {
+            "apiName": "Dreadbringer",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.02500000037252903,
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "CurseStacksPerTick": 1.0,
+                "MaxHealthRatio": 1.5,
+                "Range": 500.0,
+                "TickCadence": 1.0
+            },
+            "desc": "@TickCadence@ másodpercenként @CurseStacksPerTick@ <keywordMajor>Átok</keywordMajor> jelzőt kapsz a közeli ellenséges hősök után.<br><br>Minden <keywordMajor>Átok</keywordMajor> jelző után végleges <healing>maximális életerőt</healing> kapsz.<br><br>Megnöveli a maximálisan szerezhető <keywordMajor>Átok</keywordMajor> jelzők számát.<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/plaguebearer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/plaguebearer_small.png",
+            "id": 216,
+            "name": "Rettegéshozó",
+            "rarity": 2,
+            "tooltip": "@TickCadence@ másodpercenként @CurseStacksPerTick@ <keywordMajor>Átok</keywordMajor> jelzőt kapsz minden közeli ellenséges hős után, és bónusz <trueDamage>tényleges sebzést</trueDamage> okozol nekik, amelynek mértéke a körben szerzett <keywordMajor>Átok</keywordMajor> jelzők számától függ.<br><br>{{ Cherry_CurseShared }}<br><br>@f1@ <healing>maximális életerőre</healing> teszel szert az <keywordMajor>Összes Átok</keywordMajor> jelződ alapján.<br><br><rules>Az <keywordMajor>Összes Átok</keywordMajor> jelződ @MaxHealthRatio*100@%-a <healing>maximális életerővé</healing> alakul.</rules>"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2177,6 +2645,24 @@
             "tooltip": "A támadások meg is <keywordMajor>égetik</keywordMajor> az ellenfeleket, ezáltal @BleedDuration@ másodpercen át másodpercenként <scaleAP>@PercentMaxHPDamagePer5Seconds*20@% maximális életerőnyi varázssebzést</scaleAP> okoznak. Az <keywordMajor>Égetés</keywordMajor> korlátlanul halmozódik.<br><br>A körben okozott sebzés: @f1@<br>Okozott sebzés összesen: @f2@"
         },
         {
+            "apiName": "Doomsayer",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForceRatio": 0.5,
+                "BleedDuration": 5.0,
+                "Cooldown": 3.0,
+                "CurseCounter": 1.0,
+                "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
+            },
+            "desc": "A képességeid minden eltalált ellenséges hős után @CurseCounter@ <keywordMajor>Átok</keywordMajor> jelzőt biztosítanak.<br><br>Minden <keywordMajor>Átok</keywordMajor> jelző után végleges adaptív erőt kapsz.<br><br>Ezenkívül megnöveli a maximálisan szerezhető <keywordMajor>Átok</keywordMajor> jelzők számát.",
+            "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
+            "id": 219,
+            "name": "Vészmadár",
+            "rarity": 2,
+            "tooltip": "A képességeid @CurseCounter@ <keywordMajor>Átkot</keywordMajor> alkalmaznak, és bónusz <trueDamage>tényleges sebzést</trueDamage> okoznak, amelynek mértéke a körben szerzett <keywordMajor>Átok</keywordMajor> jelzők számától függ.<br><br>{{ Cherry_CurseShared }}<br><br>@f1@ adaptív erőre teszel szert az <keywordMajor>Összes Átok jelző</keywordMajor> alapján.<br><br><rules>Az <keywordMajor>Összes Átok jelződ</keywordMajor> @AdaptiveForceRatio*100@%-a adaptív erővé alakul.</rules>"
+        },
+        {
             "apiName": "Flashy",
             "calculations": {},
             "dataValues": {
@@ -2187,7 +2673,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
             "id": 116,
             "name": "Látványos",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Az Átvillanás háromszor használható, és @FlashCooldown@ másodperc a töltési ideje."
         },
         {
@@ -2266,15 +2752,16 @@
             "calculations": {},
             "dataValues": {
                 "BleedDuration": 5.0,
-                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033
+                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033,
+                "SpellIDCD": 5.0
             },
-            "desc": "Az ellenséges hősök <status>mozgásképtelenné</status> tétele <keywordMajor>Égetést</keywordMajor> alkalmaz, amely egy ideig korlát nélkül halmozódva okoz sebzést.",
+            "desc": "Az ellenséges hősök <status>mozgásképtelenné</status> tétele vagy <status>röghöz kötése</status> <keywordMajor>Égetést</keywordMajor> alkalmaz, amely egy ideig korlát nélkül halmozódva okoz sebzést.",
             "iconLarge": "assets/ux/cherry/augments/icons/tormentor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/tormentor_small.png",
             "id": 85,
             "name": "Gyötrelem",
             "rarity": 0,
-            "tooltip": "Az ellenséges hősök <status>mozgásképtelenné</status> tétele <keywordMajor>Égetést</keywordMajor> alkalmaz, másodpercenként a maximális életerő <scaleAP>@PercentMaxHPDamagePer5Seconds*20@%-ának megfelelő varázssebzést</scaleAP> okozva @BleedDuration@ másodpercig. Az <keywordMajor>Égetés</keywordMajor> korlát nélkül halmozódik.<br><br>A körben okozott sebzés: @f1@<br>Okozott sebzés összesen: @f2@"
+            "tooltip": "Az ellenséges hősök <status>mozgásképtelenné</status> tétele vagy <status>röghöz kötése</status> <keywordMajor>Égetést</keywordMajor> alkalmaz, másodpercenként a maximális életerő <scaleAP>@PercentMaxHPDamagePer5Seconds*20@%-ának megfelelő varázssebzést</scaleAP> okozva @BleedDuration@ másodpercig. Az <keywordMajor>Égetés</keywordMajor> korlát nélkül halmozódik.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
         },
         {
             "apiName": "Minionmancer",
@@ -2476,6 +2963,18 @@
             "tooltip": "Biztosítja az <spellName>Első csapás</spellName> és a <spellName>Sötét szüret</spellName> kiemelt rúnát.<br><br>A körben okozott sebzés: @f1@<br>Okozott sebzés összesen: @f2@<br>Összes megszerzett arany: @f3@"
         },
         {
+            "apiName": "ParasiticMutation",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Minden körben átalakul az egyik ellenfél valamelyik véletlenszerűen választott erősítésévé. ",
+            "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
+            "id": 240,
+            "name": "Élősködő mutáció",
+            "rarity": 0,
+            "tooltip": "Minden körben átalakul az egyik ellenfél valamelyik véletlenszerűen választott erősítésévé. "
+        },
+        {
             "apiName": "CantTouchThis",
             "calculations": {},
             "dataValues": {
@@ -2508,7 +3007,7 @@
             "apiName": "ItsCritical",
             "calculations": {},
             "dataValues": {
-                "CritChance": 0.4000000059604645
+                "CritChance": 0.5
             },
             "desc": "<crit>@CritChance*100@% kritikus csapási esélyt</crit> kapsz.",
             "iconLarge": "assets/ux/cherry/augments/icons/itscritical_large.png",
@@ -2621,13 +3120,13 @@
             "dataValues": {
                 "AttackSpeed": 0.6000000238418579
             },
-            "desc": "@AttackSpeed*100@% támadási sebességet biztosít.",
+            "desc": "@AttackSpeed*100@% <speed>támadási sebességre</speed> teszel szert.",
             "iconLarge": "assets/ux/cherry/augments/icons/deft_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deft_small.png",
             "id": 22,
             "name": "Iparkodás",
             "rarity": 0,
-            "tooltip": "@AttackSpeed*100@% támadási sebességet biztosít."
+            "tooltip": "@AttackSpeed*100@% <speed>támadási sebességre</speed> teszel szert."
         },
         {
             "apiName": "Goliath",
@@ -2645,6 +3144,39 @@
             "name": "Góliát",
             "rarity": 2,
             "tooltip": "A hős óriás lesz, ezáltal @HealthAmp*100@% <scaleHealth>életerőre</scaleHealth> és @ADAmp*100@% <scaleAP>adaptív erőre</scaleAP> tesz szert."
+        },
+        {
+            "apiName": "JuicePress",
+            "calculations": {},
+            "dataValues": {
+                "BonusHats": 1.0,
+                "JuiceAmp": 0.5,
+                "PowerJuicePercentPen": 0.10000000149011612,
+                "SpeedJuiceMSBoost": 0.15000000596046448,
+                "VitalityJuiceHealShieldPower": 0.20000000298023224
+            },
+            "desc": "Az italok további hatásokat biztosítanak neked és a csapattársadnak.",
+            "iconLarge": "assets/ux/cherry/augments/icons/juicepress_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/juicepress_small.png",
+            "id": 242,
+            "name": "Gyümölcsprés",
+            "rarity": 0,
+            "tooltip": "Az italok további hatásokat biztosítanak neked és a csapattársadnak.<br><br>A hatalom itala: @PowerJuicePercentPen*100@% <scaleAD>páncéltörés</scaleAD> vagy <scaleAP>varázstörés</scaleAP><br>A vitalitás itala: @VitalityJuiceHealShieldPower*100@% <healing>gyógyítás és pajzserő</healing><br>A gyorsítás itala: @SpeedJuiceMSBoost*100@% <speed>mozgási sebesség</speed><br>Az erő itala: @BonusHats@ további sapka."
+        },
+        {
+            "apiName": "LegDay",
+            "calculations": {},
+            "dataValues": {
+                "MovementSpeed": 50.0,
+                "SlowResist": 0.4000000059604645
+            },
+            "desc": "@MovementSpeed@ <speed>mozgási sebességet</speed> és @SlowResist*100@% <speed>lassítás-ellenállást</speed> biztosít.",
+            "iconLarge": "assets/ux/cherry/augments/icons/legday_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/legday_small.png",
+            "id": 305,
+            "name": "Lábnap",
+            "rarity": 0,
+            "tooltip": "@MovementSpeed@ <speed>mozgási sebességet</speed> és @SlowResist*100@% <speed>lassítás-ellenállást</speed> biztosít."
         },
         {
             "apiName": "Trailblazer",
@@ -2710,7 +3242,6 @@
             "dataValues": {
                 "AOESize": 550.0,
                 "CastRange": 5500.0,
-                "Cooldown": 20.0,
                 "DamagetoChampions": 0.30000001192092896,
                 "GroundDuration": 3.0,
                 "LaserDelay": 2.5,
@@ -2753,6 +3284,55 @@
             "name": "Bázisvédő",
             "rarity": 0,
             "tooltip": "<speed>@spell.Augment_Homeguard:MovementSpeed*100@% mozgási sebességre</speed> teszel szert, amely @spell.Augment_Homeguard:DisableCooldown@ másodpercre megszűnik, miután sebzést szenvedsz el."
+        },
+        {
+            "apiName": "NullAugment",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Null",
+            "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
+            "id": 3,
+            "name": "Null erősítés",
+            "rarity": 0,
+            "tooltip": "Null"
+        },
+        {
+            "apiName": "HatTrick",
+            "calculations": {
+                "ShieldHealth": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{8bfcfef7}",
+                            "mStat": 6,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 3.0,
+                "HatTrickPriceReduction": 250.0,
+                "HatsToGrant": 3.0,
+                "LowHealthThreshold": 0.30000001192092896,
+                "MovespeedBoostPercent": 0.25,
+                "MovespeedShieldPercent": 0.75,
+                "ShieldDuration": 3.0
+            },
+            "desc": "Azonnal kapsz @HatsToGrant@ sapkát, és @HatTrickPriceReduction@ arannyal kevesebbe fog kerülni az Erő itala.<br><br>Ha az elszenvedett sebzés @LowHealthThreshold*100@% alá csökkentené az életerőd, <speed>@MoveSpeedBoostPercent*100@% mozgási sebességet</speed> és @ShieldDuration@ másodpercre <shield>@ShieldHealth@ pajzsot</shield> kapsz, de elveszítesz egy sapkát. @Cooldown@ másodperces töltési ideje van.",
+            "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
+            "id": 241,
+            "name": "Bűvészmutatvány",
+            "rarity": 1,
+            "tooltip": "Azonnal kapsz @HatsToGrant@ sapkát, és @HatTrickPriceReduction@ arannyal kevesebbe fog kerülni az Erő itala.<br><br>Ha az elszenvedett sebzés @LowHealthThreshold*100@% alá csökkentené az életerőd, <speed>@MoveSpeedBoostPercent*100@% mozgási sebességet</speed> és @ShieldDuration@ másodpercre <shield>@ShieldHealth@ pajzsot</shield> kapsz, de elveszítesz egy sapkát. @Cooldown@ másodperces töltési ideje van."
         },
         {
             "apiName": "HeavyHitter",
@@ -2829,6 +3409,18 @@
             "tooltip": "Kicsivé válsz, <speed>@MovespeedMod*100@% mozgási sebességet</speed> kapsz, és @SmallBonusDamage*100@–@XLargeBonusDamage*100@% bónusz sebzésre teszel szert a hősök ellen attól függően, hogy mennyivel nagyobbak nálad.<br><br>Sebzés a körben: @f1@<br>Sebzés a játék során: @f2@"
         },
         {
+            "apiName": "TransmutePrismatic",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Kapsz egy véletlenszerű Spektrum osztályú erősítést.",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmuteprismatic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmuteprismatic_small.png",
+            "id": 238,
+            "name": "Átalakítás: Spektrum",
+            "rarity": 1,
+            "tooltip": "Kapsz egy véletlenszerű Spektrum osztályú erősítést."
+        },
+        {
             "apiName": "FrozenFoundations",
             "calculations": {},
             "dataValues": {
@@ -2861,6 +3453,18 @@
             "tooltip": "A gyógyító és pajzsot adó képességeid okozhatnak kritikus csapást @CritHeal*100@% bónusz értékkel. @CritChance*100@% kritikus csapási esélyt kapsz. <br><br>Bónusz gyógyítás: @f1@<br>Bónusz pajzs: @f2@"
         },
         {
+            "apiName": "TransmuteGold",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Kapsz egy véletlenszerű Arany osztályú erősítést.",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmutegold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmutegold_small.png",
+            "id": 237,
+            "name": "Átalakítás: Arany",
+            "rarity": 0,
+            "tooltip": "Kapsz egy véletlenszerű Arany osztályú erősítést."
+        },
+        {
             "apiName": "ApexInventor",
             "calculations": {},
             "dataValues": {
@@ -2879,18 +3483,35 @@
             "apiName": "MirrorImage",
             "calculations": {},
             "dataValues": {
-                "AugmentCooldown": 60.0,
+                "AugmentCooldown": 30.0,
                 "CloneDuration": 8.0,
                 "HealthThreshold": 0.30000001192092896,
                 "StealthDuration": 1.25
             },
-            "desc": "Amikor @HealthThreshold*100@% alá csökken az életerőd, rövid időre <keywordStealth>lopakodni</keywordStealth> kezdesz, és egy klónt hagysz hátra.",
+            "desc": "Amikor @HealthThreshold*100@% alá csökken az életerőd, rövid időre <keywordStealth>lopakodni</keywordStealth> kezdesz, és 4 klónt hagysz hátra.",
             "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
             "id": 172,
             "name": "Tükörkép",
             "rarity": 0,
-            "tooltip": "Amikor @HealthThreshold*100@% alá csökken az életerőd, rövid időre <keywordStealth>lopakodni</keywordStealth> kezdesz, és egy klónt hagysz hátra."
+            "tooltip": "Amikor @HealthThreshold*100@% alá csökken az életerőd, rövid időre <keywordStealth>lopakodni</keywordStealth> kezdesz, és 4 klónt hagysz hátra."
+        },
+        {
+            "apiName": "Desecrator",
+            "calculations": {},
+            "dataValues": {
+                "ArmorMRRatio": 0.11999999731779099,
+                "BleedDuration": 5.0,
+                "CurseCounter": 3.0,
+                "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
+            },
+            "desc": "Az ellenséges hősök <status>mozgásképtelenné</status> tétele @CurseCounter@ <keywordMajor>Átok</keywordMajor> jelzőt biztosít.<br><br>Minden <keywordMajor>Átok</keywordMajor> jelző után végleges <armor>páncélt</armor> és <magicresistance>varázsellenállást</magicresistance> kapsz.<br><br>Ezenkívül megnöveli a maximálisan szerezhető <keywordMajor>Átok</keywordMajor> jelzők számát.",
+            "iconLarge": "assets/ux/cherry/augments/icons/desecrator_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/desecrator_small.png",
+            "id": 218,
+            "name": "Megszentségtelenítő",
+            "rarity": 0,
+            "tooltip": "Az ellenséges hősök <status>mozgásképtelenné</status> tétele @CurseCounter@ <keywordMajor>Átok jelzőt</keywordMajor> biztosít, és bónusz <trueDamage>tényleges sebzést</trueDamage> okoz, amelynek mértéke a körben szerzett <keywordMajor>Átok</keywordMajor> jelzők számától függ.<br><br>{{ Cherry_CurseShared }}<br><br>@f1@ <armor>páncélra</armor> és <magicresistance>varázsellenállásra</magicresistance> teszel szert az <keywordMajor>Összes Átok jelződ</keywordMajor> alapján.<br><br><rules>Az <keywordMajor>Összes Átok jelződ</keywordMajor> @ArmorMRRatio*100@%-a <armor>páncéllá</armor> és <magicresistance>varázsellenállássá</magicresistance> alakul.</rules>"
         },
         {
             "apiName": "AllForYou",
@@ -3030,7 +3651,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 4000.0,
+                "PrismaticSellValue": 3750.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "Azonnal eladja az összes nem küldetéses tárgyadat, azok közvetlen vételárának @SellValueTooltip@%-áért. Remekül jön az összes kedvezményes üllő esetében.",
@@ -3045,15 +3666,18 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "ASToADConversion": 25.0
+                "Breakpoint1": 5.0,
+                "OnHitDamage": 40.0,
+                "SlowResistValue": 1.0,
+                "TotalASValue": 0.25
             },
-            "desc": "A <attackSpeed>támadási sebességgel</attackSpeed> arányosan növekvő <scaleAD>sebzést</scaleAD> biztosít.",
+            "desc": "Cherry_LightningStrikes_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
             "name": "Lecsapó villám",
             "rarity": 1,
-            "tooltip": "<scaleAD>@ASToADConversion*.1@ sebzést</scaleAD> biztosít <attackSpeed>0,1 támadási sebességenként</attackSpeed>."
+            "tooltip": "Cherry_LightningStrikes_Tooltip"
         },
         {
             "apiName": "Repulsor",
@@ -3064,13 +3688,13 @@
                 "KnockbackDistance": 750.0,
                 "KnockbackRange": 500.0
             },
-            "desc": "Ha az életerő @HealthThreshold1*100@ vagy @HealthThreshold2*100@% alá esik, <status>hátralöki</status> a közelben tartózkodó ellenfeleket.",
+            "desc": "Ha az életerő @HealthThreshold1*100@% vagy @HealthThreshold2*100@% alá esik, <status>hátralöki</status> a közelben tartózkodó ellenfeleket.",
             "iconLarge": "assets/ux/cherry/augments/icons/repulsor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/repulsor_small.png",
             "id": 69,
             "name": "Visszaverő",
             "rarity": 0,
-            "tooltip": "Ha az életerő @HealthThreshold1*100@ vagy @HealthThreshold2*100@% alá esik, <status>hátralöki</status> a közelben tartózkodó ellenfeleket."
+            "tooltip": "Ha az életerő @HealthThreshold1*100@% vagy @HealthThreshold2*100@% alá esik, <status>hátralöki</status> a közelben tartózkodó ellenfeleket."
         },
         {
             "apiName": "SkilledSniper",
@@ -3183,8 +3807,23 @@
             "iconSmall": "assets/ux/cherry/augments/icons/divebomber_small.png",
             "id": 25,
             "name": "Öngyilkos bomba",
-            "rarity": 1,
+            "rarity": 0,
             "tooltip": "Minden körben a csapatod első halottja felrobban, és <trueDamage>a célpont maximális életerejének @PercentMaxHPDamage*100@%-ával egyenlő tényleges sebzést</trueDamage> okoz a közeli ellenfeleknek.<br><br>A körben okozott sebzés: @f1@<br>Okozott sebzés összesen: @f2@"
+        },
+        {
+            "apiName": "GoHSacrificeForGold",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0.25,
+                "RoundCountCap": 4.0
+            },
+            "desc": "Feláldozod <lifeSteal>az aktuális életerőd @HealthReduction*100@%-át</lifeSteal>. <br><br>@RoundCountCap@ kör múlva egy bónusz <keywordMajor>Arany osztályú erősítést</keywordMajor> kapsz, és életerőt nyersz vissza.",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificeforgold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 303,
+            "name": "Áldozat: Arany osztályért",
+            "rarity": 1,
+            "tooltip": "Feláldozod <lifeSteal>az aktuális életerőd @HealthReduction*100@%-át</lifeSteal>. <br><br>@RoundCountCap@ kör múlva egy bónusz <keywordMajor>Arany osztályú erősítést</keywordMajor> kapsz, és életerőt nyersz vissza.<br><br>Hátralévő körök száma: @f1@"
         },
         {
             "apiName": "BluntForce",
@@ -3204,13 +3843,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Az Idéző elmenekül varázslat helyét a <spellName>Túlvilági hívás</spellName> veszi át. <br><br><rules>A <spellName>Túlvilági hívás</spellName> legfeljebb 4 másodpercig beléd húzza a szövetségesedet, és megcélozhatatlanná teszi. A partner egy mozdulattal kilőheti magát, <status>hátralökve</status> az első eltalált hőst és a közelben lévő összes ellenfelet.</rules><br>",
+            "desc": "Cherry_Oathsworn_Tooltip",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Véreskü",
             "rarity": 1,
-            "tooltip": "Az Idéző elmenekül varázslat helyét a <spellName>Túlvilági hívás</spellName> veszi át. <br><br><rules>A <spellName>Túlvilági hívás</spellName> legfeljebb 4 másodpercig beléd húzza a szövetségesedet, és megcélozhatatlanná teszi. A partner egy mozdulattal kilőheti magát, <status>hátralökve</status> az első eltalált hőst és a közelben lévő összes ellenfelet.</rules><br>"
+            "tooltip": "Cherry_Oathsworn_Tooltip"
         },
         {
             "apiName": "Flashbang",
@@ -3262,6 +3901,21 @@
             "tooltip": "Az idézői varázslataidat véletlenszerűekre cseréli. Amikor egy idézői varázslatot használsz a csatában, lecseréli egy véletlenszerűre @Cooldown@ másodperc töltési idővel."
         },
         {
+            "apiName": "GoHSacrificeForSilver",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0,
+                "RoundCountCap": 2.0
+            },
+            "desc": "@RoundCountCap@ kör múlva egy bónusz <keywordMajor>Ezüst osztályú erősítést</keywordMajor> kapsz.",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificefor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 302,
+            "name": "Áldozat: Ezüst osztályért",
+            "rarity": 0,
+            "tooltip": "@RoundCountCap@ kör múlva egy bónusz <keywordMajor>Ezüst osztályú erősítést</keywordMajor> kapsz.<br><br>Hátralévő körök száma: @f1@"
+        },
+        {
             "apiName": "ShrinkRay",
             "calculations": {},
             "dataValues": {
@@ -3295,8 +3949,8 @@
             "calculations": {},
             "dataValues": {
                 "StackMultiplication": 6.0,
-                "StackThreshold": 325.0,
-                "StacktoRegenConversion": 0.10000000149011612
+                "StackThreshold": 400.0,
+                "StacktoRegenConversion": 0.125
             },
             "desc": "Követelmény: birtokolj egy legalább @StackThreshold@ jelzővel rendelkező Acélos szívet.<br><br>Jutalom: @StackMultiplication@ ponttal szorozza meg az Acélos szív-jelzők számát. Az Acélos szív-jelzők @StacktoRegenConversion*100@%-ával növeli az <healing>életerő-regenerálódást</healing>.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_steelyourheart_large.png",
@@ -3344,15 +3998,16 @@
                 }
             },
             "dataValues": {
-                "HealthScalar": 0.05000000074505806
+                "HealthScalar": 0.05000000074505806,
+                "SpellIDCD": 5.0
             },
-            "desc": "<shield>@TotalShield@ erejű pajzsot</shield> biztosít egy ellenséges hős <status>mozgásképtelenné tétele</status> után.<br>",
+            "desc": "<shield>@TotalShield@ erejű pajzsot</shield> kapsz egy ellenséges hős <status>mozgásképtelenné tétele</status> vagy <status>röghöz kötése</status> után.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/courageofthecolossus_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
             "id": 18,
             "name": "A kolosszus kurázsija",
             "rarity": 2,
-            "tooltip": "<shield>@TotalShield@ erejű pajzsot</shield> biztosít egy ellenséges hős <status>mozgásképtelenné tételekor</status>.<br><br>A körben létrehozott pajzs: @f1@<br>Létrehozott pajzs összesen: @f2@"
+            "tooltip": "<shield>@TotalShield@ erejű pajzsot</shield> kapsz egy ellenséges hős <status>mozgásképtelenné tétele</status> vagy <status>röghöz kötése</status> után.<br><br>A körben létrehozott pajzs: @f1@<br>Létrehozott pajzs összesen: @f2@"
         },
         {
             "apiName": "FruitsOfYourLabor",
@@ -3364,13 +4019,13 @@
                 "Duration": 2.0,
                 "MSBoost": 0.4000000059604645
             },
-            "desc": "Megosztja a varázsvirágok hatásait közeli szövetségeseddel, és @AmpAmountTooltip@%-kal növeli az általad elért előnyöket.",
+            "desc": "Megosztja a varázsvirágok hatásait a szövetségeseddel @AllyMaxRange@ hatótávon belül, és @AmpAmountTooltip@%-kal növeli az általad elért előnyöket.",
             "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
             "id": 222,
             "name": "Munkád gyümölcsei",
-            "rarity": 1,
-            "tooltip": "Megosztja a varázsvirágok hatásait közeli szövetségeseddel, és @AmpAmountTooltip@%-kal növeli az általad elért előnyöket."
+            "rarity": 0,
+            "tooltip": "Megosztja a varázsvirágok hatásait a szövetségeseddel @AllyMaxRange@ hatótávon belül, és @AmpAmountTooltip@%-kal növeli az általad elért előnyöket."
         },
         {
             "apiName": "InfernalSoul",
@@ -3438,6 +4093,24 @@
             "tooltip": "Az <spellName>Áramütés</spellName> és a <spellName>Fázisroham</spellName> kiemelt rúnát biztosítja.<br><br>Az Áramütés sebzése ebben a körben: @f1@<br>Az Áramütés sebzése összesen: @f2@"
         },
         {
+            "apiName": "DarkBlessing",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHasteRatio": 0.25,
+                "BleedDuration": 5.0,
+                "Cooldown": 1.5,
+                "CurseCounter": 3.0,
+                "Radius": 450.0
+            },
+            "desc": "A gyógyító és pajzsot adó képességeid elsütésekor @CurseCounter@ <keywordMajor>Átok</keywordMajor> jelzőt kapsz.<br><br>Minden <keywordMajor>Átok</keywordMajor> jelző után végleges képességgyorsítást kapsz.<br><br>Ezenkívül megnöveli a maximálisan szerezhető <keywordMajor>Átok</keywordMajor> jelzők számát.<br><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/darkblessing_small.png",
+            "id": 215,
+            "name": "Sötét áldás",
+            "rarity": 1,
+            "tooltip": "A gyógyító és pajzsot adó képességeid elsütésekor @CurseCounter@ <keywordMajor>Átok</keywordMajor> jelzőt kapsz, és bónusz <trueDamage>tényleges sebzést</trueDamage> okozol, amelynek mértéke a körben szerzett <keywordMajor>Átok</keywordMajor> jelzők számától függ.<br><br>{{ Cherry_CurseShared }}<br><br>@f1@ képességgyorsításra teszel szert az <keywordMajor>Összes Átok jelző</keywordMajor> alapján.<br><br><rules>Az <keywordMajor>Összes Átok jelződ</keywordMajor> @AbilityHasteRatio*100@%-a képességgyorsítássá alakul.</rules>"
+        },
+        {
             "apiName": "MindtoMatter",
             "calculations": {},
             "dataValues": {
@@ -3479,6 +4152,21 @@
             "name": "Korok bölcsessége",
             "rarity": 2,
             "tooltip": "Lépj azonnal 1 szintet, és minden további körben 1 bónusz szintet. A szintkorlátod megszűnik."
+        },
+        {
+            "apiName": "GoHSacrificeForPrismatic",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0.5,
+                "RoundCountCap": 7.0
+            },
+            "desc": "Feláldozod <lifeSteal>az aktuális életerőd @HealthReduction*100@%-át</lifeSteal>. <br><br>@RoundCountCap@ kör múlva egy bónusz <keywordMajor>Spektrum osztályú erősítést</keywordMajor> kapsz, és életerőt nyersz vissza.",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificeforprismatic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 304,
+            "name": "Áldozat: Spektrum osztályért",
+            "rarity": 2,
+            "tooltip": "Feláldozod <lifeSteal>az aktuális életerőd @HealthReduction*100@%-át</lifeSteal>. <br><br>@RoundCountCap@ kör múlva egy bónusz <keywordMajor>Spektrum osztályú erősítést</keywordMajor> kapsz, és életerőt nyersz vissza.<br><br>Hátralévő körök száma: @f1@"
         },
         {
             "apiName": "NowYouSeeMe",
@@ -3536,6 +4224,51 @@
             "name": "Drágaköves kesztyű",
             "rarity": 2,
             "tooltip": "A képességek kritikus csapást okozhatnak a teljes sebzés @CritDamage*100@%-ának megfelelő mértékben. @CritChance*100@% kritikus csapási esélyt kapsz. A sebzésértékkel arányosan további @APToCritConversion@ kritikus csapási esélyt ad.<br><br>Bónusz sebzés a körben: @f1@<br>Bónusz sebzés összesen: @f2@"
+        },
+        {
+            "apiName": "AndMyAxe",
+            "calculations": {
+                "TotalDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 225.0,
+                            "mStartValue": 60.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.6000000238418579
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AutoCastRange": 950.0,
+                "BaseDamage": 10.0,
+                "CDIfPickedUp": 1.5,
+                "Cooldown": 8.0,
+                "DebuffDuration": 4.0,
+                "ShredAmount": 0.20000000298023224,
+                "SlowAmount": 0.4000000059604645,
+                "SlowDuration": 1.5
+            },
+            "desc": "<keywordMajor>Automatikus elsütés</keywordMajor>: <br>Időnként megdobja a legközelebbi ellenfelet egy fejszével, ami sebzést okoz neki, lelassítja, valamint csökkenti a páncélját és a varázsellenállását. Ha a fejszét felveszik, csökken a töltési idő.",
+            "iconLarge": "assets/ux/cherry/augments/icons/andmyaxe_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/andmyaxe_small.png",
+            "id": 309,
+            "name": "És az én fejszém!",
+            "rarity": 1,
+            "tooltip": "<keywordMajor>Automatikus elsütés</keywordMajor>: @Cooldown@ másodpercenként megdobja a legközelebbi ellenfelet egy fejszével, ami @TotalDamage@ adaptív sebzést okoz a célpontnak, @SlowDuration@ másodpercre @SlowAmount*100@%-kal <status>lelassítja</status>, valamint @DebuffDuration@ másodpercre <scaleArmor>@ShredAmount*100@%-kal lecsökkenti a páncélját</scaleArmor> és a <scaleMR>varázsellenállását</scaleMR>. A töltési idő @CDIfPickedUp@ másodpercre csökken (%i:cooldown%), ha felveszed a fejszét.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@<br>"
         }
     ]
 }
