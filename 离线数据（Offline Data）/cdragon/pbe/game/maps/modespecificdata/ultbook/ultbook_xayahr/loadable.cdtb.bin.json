@@ -5621,23 +5621,25 @@
                         "mRuleName": "First Move",
                         "mConditions": [
                             {
-                                "mCharacterType": 3,
                                 "mChildConditions": [
                                     {
                                         "mCharacters": [
-                                            "Characters/Rakan/CharacterRecords/Root",
-                                            "Characters/Xayah/CharacterRecords/Root"
+                                            "Characters/Rakan/CharacterRecords/Root"
                                         ],
                                         "__type": "ContextualConditionCharacterName"
+                                    },
+                                    {
+                                        "mIsAlly": true,
+                                        "__type": "ContextualConditionIsAlly"
                                     }
                                 ],
-                                "__type": "ContextualConditionCharacter"
+                                "__type": "ContextualConditionAnyOtherHero"
                             }
                         ],
                         "mAudioAction": {
                             "mMaxOccurences": 1,
-                            "mSelfEventName": "Move2DFirst",
-                            "mAllyEventName": "Move2DFirst",
+                            "mSelfEventName": "Chat3DRakanNear_Move2DFirst",
+                            "mAllyEventName": "Chat3DRakanNear_Move2DFirst",
                             "__type": "ContextualActionPlayVO"
                         },
                         "CooldownModifications": {
@@ -5652,30 +5654,77 @@
             "MoveOrder2D": {
                 "mRules": [
                     {
-                        "mRuleName": "Standard",
+                        "mRuleName": "Near",
                         "mConditions": [
-                            {
-                                "mCharacterType": 3,
-                                "mChildConditions": [
-                                    {
-                                        "mCharacters": [
-                                            "Characters/Rakan/CharacterRecords/Root",
-                                            "Characters/Xayah/CharacterRecords/Root"
-                                        ],
-                                        "__type": "ContextualConditionCharacterName"
-                                    }
-                                ],
-                                "__type": "ContextualConditionCharacter"
-                            },
                             {
                                 "mDistance": 400.0,
                                 "mCompareOp": 3,
                                 "__type": "ContextualConditionMoveDistance"
+                            },
+                            {
+                                "mChildConditions": [
+                                    {
+                                        "mCharacters": [
+                                            "Characters/Rakan/CharacterRecords/Root"
+                                        ],
+                                        "__type": "ContextualConditionCharacterName"
+                                    },
+                                    {
+                                        "mDistance": 1400.0,
+                                        "__type": "ContextualConditionCharacterDistance"
+                                    },
+                                    {
+                                        "mIsAlly": true,
+                                        "__type": "ContextualConditionIsAlly"
+                                    }
+                                ],
+                                "__type": "ContextualConditionAnyOtherHero"
                             }
                         ],
                         "mAudioAction": {
-                            "mSelfEventName": "Move2DStandard",
-                            "mAllyEventName": "Move2DStandard",
+                            "mSelfEventName": "Chat3DRakanNear_Move2DStandard",
+                            "mAllyEventName": "Chat3DRakanNear_Move2DStandard",
+                            "mWaitTimeout": -1.0,
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Far",
+                        "mConditions": [
+                            {
+                                "mDistance": 400.0,
+                                "mCompareOp": 3,
+                                "__type": "ContextualConditionMoveDistance"
+                            },
+                            {
+                                "mChildConditions": [
+                                    {
+                                        "mCharacters": [
+                                            "Characters/Rakan/CharacterRecords/Root"
+                                        ],
+                                        "__type": "ContextualConditionCharacterName"
+                                    },
+                                    {
+                                        "mDistance": 1400.0,
+                                        "mCompareOp": 3,
+                                        "__type": "ContextualConditionCharacterDistance"
+                                    },
+                                    {
+                                        "mIsAlly": true,
+                                        "__type": "ContextualConditionIsAlly"
+                                    },
+                                    {
+                                        "mDistance": 2000.0,
+                                        "__type": "ContextualConditionCharacterDistance"
+                                    }
+                                ],
+                                "__type": "ContextualConditionAnyOtherHero"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "Chat3DRakanFar_Move2DStandard",
+                            "mAllyEventName": "Chat3DRakanFar_Move2DStandard",
                             "mWaitTimeout": -1.0,
                             "__type": "ContextualActionPlayVO"
                         },
@@ -5690,22 +5739,28 @@
                         "mRuleName": "Rakan Near",
                         "mConditions": [
                             {
-                                "mCharacterType": 3,
                                 "mChildConditions": [
                                     {
                                         "mCharacters": [
-                                            "Characters/Rakan/CharacterRecords/Root",
-                                            "Characters/Xayah/CharacterRecords/Root"
+                                            "Characters/Rakan/CharacterRecords/Root"
                                         ],
                                         "__type": "ContextualConditionCharacterName"
+                                    },
+                                    {
+                                        "mDistance": 1400.0,
+                                        "__type": "ContextualConditionCharacterDistance"
+                                    },
+                                    {
+                                        "mIsAlly": true,
+                                        "__type": "ContextualConditionIsAlly"
                                     }
                                 ],
-                                "__type": "ContextualConditionCharacter"
+                                "__type": "ContextualConditionAnyOtherHero"
                             }
                         ],
                         "mAudioAction": {
-                            "mSelfEventName": "Attack2DGeneral",
-                            "mAllyEventName": "Attack2DGeneral",
+                            "mSelfEventName": "Chat3DRakanNear_Attack2DGeneral",
+                            "mAllyEventName": "Chat3DRakanNear_Attack2DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
                         "__type": "ContextualRule"
@@ -5740,7 +5795,7 @@
             "NearbyChampionDeath": {
                 "mRules": [
                     {
-                        "mRuleName": "Xayah Kill",
+                        "mRuleName": "Xayah/Rakan kill",
                         "mConditions": [
                             {
                                 "mCharacterType": 4,
@@ -5751,22 +5806,26 @@
                                             "Characters/Rakan/CharacterRecords/Root"
                                         ],
                                         "__type": "ContextualConditionCharacterName"
+                                    },
+                                    {
+                                        "mIsAlly": true,
+                                        "__type": "ContextualConditionIsAlly"
                                     }
                                 ],
                                 "__type": "ContextualConditionCharacter"
-                            },
-                            {
-                                "mPercentChanceToPlay": 50,
-                                "__type": "ContextualConditionChanceToPlay"
                             }
                         ],
                         "mAudioAction": {
-                            "mSelfEventName": "Kill3DGeneral",
-                            "mAllyEventName": "Kill3DGeneral",
+                            "mMaxOccurences": 1,
+                            "mSelfEventName": "Chat3DRakanNear_Kill3DGeneral",
+                            "mAllyEventName": "Chat3DRakanNear_Kill3DGeneral",
                             "mWaitForAnnouncerQueue": true,
                             "__type": "ContextualActionPlayVO"
                         },
-                        "mOverrideCacCooldown": true,
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -12271,7 +12330,7 @@
         "flags": 198,
         "__type": "VfxSystemDefinitionData"
     },
-    "{bac0b3b5}": {
+    "Maps/ModeSpecificData/ULTBOOK/UltBook_XayahR/Loadable/Resources": {
         "resourceMap": {
             "UltBook_Xayah_Passive_Dagger_child8s": "Maps/ModeSpecificData/ULTBOOK/UltBook_XayahR/Loadable/Particles/UltBook_Xayah_Passive_Dagger_child8s",
             "UltBook_Xayah_Passive_Dagger_death_child": "Maps/ModeSpecificData/ULTBOOK/UltBook_XayahR/Loadable/Particles/UltBook_Xayah_Passive_Dagger_death_child",
