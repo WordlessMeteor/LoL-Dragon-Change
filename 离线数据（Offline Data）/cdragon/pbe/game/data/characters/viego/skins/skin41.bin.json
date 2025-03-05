@@ -4,13 +4,6 @@
         "championSkinName": "ViegoSkin41",
         "skinParent": 37,
         "metaDataTags": "faction:shadowisles,gender:male,race:human,skinline:worldchampionship",
-        "skinUpgradeData": {
-            "mGearSkinUpgrades": [
-                "{de29e37f}",
-                "{4790c8cb}"
-            ],
-            "__type": "SkinUpgradeData"
-        },
         "loadscreen": {
             "image": "ASSETS/Characters/Viego/Skins/Skin37/ViegoLoadScreen_37.SKINS_Viego_Skin37.tex",
             "__type": "CensoredImage"
@@ -255,6 +248,34 @@
             }
         ],
         "mResourceResolver": "Characters/Viego/Skins/Skin41/Resources",
+        "PersistentEffectConditions": [
+            {
+                "OwnerCondition": {
+                    "mDrivers": [
+                        {
+                            "Spell": "{263b99a7}",
+                            "__type": "HasBuffDynamicMaterialBoolDriver"
+                        },
+                        {
+                            "mDriver": {
+                                "Spell": "{a5541978}",
+                                "__type": "HasBuffDynamicMaterialBoolDriver"
+                            },
+                            "__type": "NotMaterialDriver"
+                        }
+                    ],
+                    "__type": "AllTrueMaterialDriver"
+                },
+                "SubmeshesToShow": [
+                    "Wraith"
+                ],
+                "SubmeshesToHide": [
+                    "Default",
+                    "Crown"
+                ],
+                "__type": "PersistentEffectConditionData"
+            }
+        ],
         "__type": "SkinCharacterDataProperties"
     },
     "Characters/Viego/Skins/Skin41/Materials/MistBody_inst": {
@@ -873,6 +894,21 @@
         "name": "Characters/Viego/Skins/Skin41/Materials/Crown_inst",
         "samplerValues": [
             {
+                "textureName": "Grid_Texture",
+                "texturePath": "ASSETS/Shared/Particles/21.SKINS_Sion_Skin49.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Crystal_Texture",
+                "texturePath": "ASSETS/Shared/Materials/CrystalPattern.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Alpha_Texture",
+                "texturePath": "ASSETS/Shared/Materials/Default/Default_Grid.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
                 "textureName": "DiffuseTexture",
                 "texturePath": "ASSETS/Characters/Viego/Skins/Skin41/Viego_Skin41_Crown_Sword_TX_CM.Chroma_Viego_World2024.tex",
                 "addressU": 1,
@@ -896,6 +932,92 @@
             }
         ],
         "paramValues": [
+            {
+                "name": "MoveIntensity",
+                "value": [
+                    0.20000000298023224,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DissolveEndPoint",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DissolveStartPoint",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Panning_Params",
+                "value": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Crystal_Params",
+                "value": [
+                    2.0,
+                    2.0,
+                    0.20000000298023224,
+                    0.20000000298023224
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Intensity",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Mat_Control",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Fresnel_Size",
+                "value": [
+                    2.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Color_A",
+                "value": [
+                    0.17000076174736023,
+                    1.0,
+                    0.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Grid_Contrast",
+                "value": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Noise_Tiling",
+                "value": [
+                    2.0,
+                    3.0,
+                    0.0,
+                    0.10000000149011612
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
             {
                 "name": "ColorFresnelSize",
                 "__type": "StaticMaterialShaderParamDef"
@@ -1052,6 +1174,11 @@
             }
         ],
         "switches": [
+            {
+                "name": "USE_DIRECTIONALDISSOLUTION",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
             {
                 "name": "DESATURATE_REFLECTION",
                 "__type": "StaticMaterialSwitchDef"
@@ -6096,7 +6223,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Shared/Particles/color-hold.SKINS_Seraphine_Skin50.dds",
+                "texture": "ASSETS/Shared/Particles/color-hold.SKINS_Rakan_Skin47.dds",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -6844,7 +6971,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.SKINS_Seraphine_Skin50.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.SKINS_Rakan_Skin47.dds",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [

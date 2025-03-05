@@ -5624,6 +5624,7 @@
                                 "mChildConditions": [
                                     {
                                         "mCharacters": [
+                                            "Characters/Xayah/CharacterRecords/Root",
                                             "Characters/Rakan/CharacterRecords/Root"
                                         ],
                                         "__type": "ContextualConditionCharacterName"
@@ -5631,6 +5632,9 @@
                                     {
                                         "mIsAlly": true,
                                         "__type": "ContextualConditionIsAlly"
+                                    },
+                                    {
+                                        "__type": "ContextualConditionIsSelf"
                                     }
                                 ],
                                 "__type": "ContextualConditionAnyOtherHero"
@@ -5654,7 +5658,7 @@
             "MoveOrder2D": {
                 "mRules": [
                     {
-                        "mRuleName": "Near",
+                        "mRuleName": "Standard",
                         "mConditions": [
                             {
                                 "mDistance": 400.0,
@@ -5665,17 +5669,21 @@
                                 "mChildConditions": [
                                     {
                                         "mCharacters": [
+                                            "Characters/Xayah/CharacterRecords/Root",
                                             "Characters/Rakan/CharacterRecords/Root"
                                         ],
                                         "__type": "ContextualConditionCharacterName"
                                     },
                                     {
-                                        "mDistance": 1400.0,
+                                        "mIsAlly": true,
+                                        "__type": "ContextualConditionIsAlly"
+                                    },
+                                    {
+                                        "mDistance": 750.0,
                                         "__type": "ContextualConditionCharacterDistance"
                                     },
                                     {
-                                        "mIsAlly": true,
-                                        "__type": "ContextualConditionIsAlly"
+                                        "__type": "ContextualConditionIsSelf"
                                     }
                                 ],
                                 "__type": "ContextualConditionAnyOtherHero"
@@ -5690,7 +5698,7 @@
                         "__type": "ContextualRule"
                     },
                     {
-                        "mRuleName": "Far",
+                        "mRuleName": "Standard",
                         "mConditions": [
                             {
                                 "mDistance": 400.0,
@@ -5701,21 +5709,25 @@
                                 "mChildConditions": [
                                     {
                                         "mCharacters": [
+                                            "Characters/Xayah/CharacterRecords/Root",
                                             "Characters/Rakan/CharacterRecords/Root"
                                         ],
                                         "__type": "ContextualConditionCharacterName"
-                                    },
-                                    {
-                                        "mDistance": 1400.0,
-                                        "mCompareOp": 3,
-                                        "__type": "ContextualConditionCharacterDistance"
                                     },
                                     {
                                         "mIsAlly": true,
                                         "__type": "ContextualConditionIsAlly"
                                     },
                                     {
-                                        "mDistance": 2000.0,
+                                        "mDistance": 750.0,
+                                        "mCompareOp": 3,
+                                        "__type": "ContextualConditionCharacterDistance"
+                                    },
+                                    {
+                                        "__type": "ContextualConditionIsSelf"
+                                    },
+                                    {
+                                        "mDistance": 1300.0,
                                         "__type": "ContextualConditionCharacterDistance"
                                     }
                                 ],
@@ -5742,17 +5754,21 @@
                                 "mChildConditions": [
                                     {
                                         "mCharacters": [
+                                            "Characters/Xayah/CharacterRecords/Root",
                                             "Characters/Rakan/CharacterRecords/Root"
                                         ],
                                         "__type": "ContextualConditionCharacterName"
                                     },
                                     {
-                                        "mDistance": 1400.0,
+                                        "mIsAlly": true,
+                                        "__type": "ContextualConditionIsAlly"
+                                    },
+                                    {
+                                        "mDistance": 750.0,
                                         "__type": "ContextualConditionCharacterDistance"
                                     },
                                     {
-                                        "mIsAlly": true,
-                                        "__type": "ContextualConditionIsAlly"
+                                        "__type": "ContextualConditionIsSelf"
                                     }
                                 ],
                                 "__type": "ContextualConditionAnyOtherHero"
@@ -5763,30 +5779,6 @@
                             "mAllyEventName": "Chat3DRakanNear_Attack2DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "__type": "ContextualRule"
-                    }
-                ],
-                "__type": "ContextualSituation"
-            },
-            "TauntEndedNearby": {
-                "mRules": [
-                    {
-                        "mRuleName": "VOTaunt3DEndedNearby",
-                        "mConditions": [
-                            {
-                                "mCharacterType": 7,
-                                "mChildConditions": [
-                                    {
-                                        "__type": "ContextualConditionIsAlly"
-                                    }
-                                ],
-                                "__type": "ContextualConditionCharacter"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "mOverrideCacCooldown": true,
                         "__type": "ContextualRule"
                     }
                 ],
@@ -5826,24 +5818,6 @@
                             "IgnoreTimer": true,
                             "__type": "ContextualActionCooldownModifications"
                         },
-                        "__type": "ContextualRule"
-                    }
-                ],
-                "__type": "ContextualSituation"
-            },
-            "Taunt": {
-                "mRules": [
-                    {
-                        "mRuleName": "Taunt3DGeneral",
-                        "mConditions": [
-                            {
-                                "__type": "ContextualConditionChanceToPlay"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "mOverrideCacCooldown": true,
                         "__type": "ContextualRule"
                     }
                 ],
