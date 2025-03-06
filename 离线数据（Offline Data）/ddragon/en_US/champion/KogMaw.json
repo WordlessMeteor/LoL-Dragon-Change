@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.4.1",
+    "version": "15.5.1",
     "data": {
         "KogMaw": {
             "id": "KogMaw",
@@ -166,7 +166,7 @@
                     "id": "KogMawQ",
                     "name": "Caustic Spittle",
                     "description": "Kog'Maw launches a corrosive projectile which deals magic damage and corrodes the target's armor and magic resist for a short time. Kog'Maw also gains additional attack speed.",
-                    "tooltip": "<spellPassive>Passive:</spellPassive> Kog'Maw gains <attackSpeed>{{ e2 }}% Attack Speed</attackSpeed>.<br /><br /><spellActive>Active:</spellActive> Kog'Maw vomits a corrosive projectile that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the first enemy hit and shreds <scaleArmor>{{ shredamount }}% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for {{ e4 }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>Passive:</spellPassive> Kog'Maw gains <attackSpeed>{{ attackspeed*100 }}% Attack Speed</attackSpeed>.<br /><br /><spellActive>Active:</spellActive> Kog'Maw vomits a corrosive projectile that deals <magicDamage>{{ totaldamage }} magic damage</magicDamage> to the first enemy hit and shreds <scaleArmor>{{ shredamount }}% Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> for {{ shredduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Attack Speed",
@@ -174,8 +174,8 @@
                             "Armor and Magic Resist Shred"
                         ],
                         "effect": [
-                            "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%",
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ attackspeed*100.000000 }}% -> {{ attackspeednl*100.000000 }}%",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ shredamount }}% -> {{ shredamountNL }}%"
                         ]
                     },
@@ -200,32 +200,32 @@
                     "effect": [
                         null,
                         [
-                            80,
-                            125,
-                            170,
-                            215,
-                            260
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            10,
-                            15,
-                            20,
-                            25,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            16,
-                            20,
-                            24,
-                            28,
-                            32
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             1,
@@ -272,10 +272,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "80/125/170/215/260",
-                        "10/15/20/25/30",
-                        "16/20/24/28/32",
-                        "4",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "1",
                         "1",
                         "100",
@@ -309,14 +309,14 @@
                     "id": "KogMawBioArcaneBarrage",
                     "name": "Bio-Arcane Barrage",
                     "description": "Kog'Maw's attacks gain range and deal a percent of the target's maximum health as magic damage.",
-                    "tooltip": "Kog'Maw gains {{ e1 }} Attack Range and his Attacks deal an additional <magicDamage>{{ totalhealthdamage }} max Health magic damage</magicDamage> for {{ e3 }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Kog'Maw gains {{ range }} Attack Range and his Attacks deal an additional <magicDamage>{{ totalhealthdamage }} max Health magic damage</magicDamage> for {{ duration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Range",
                             "Maximum Health Damage"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ range }} -> {{ rangeNL }}",
                             "{{ maxhealthdamage }}% -> {{ maxhealthdamageNL }}%"
                         ]
                     },
@@ -341,39 +341,11 @@
                     "effect": [
                         null,
                         [
-                            130,
-                            150,
-                            170,
-                            190,
-                            210
-                        ],
-                        [
-                            3,
-                            3.75,
-                            4.5,
-                            5.25,
-                            6
-                        ],
-                        [
-                            8,
-                            8,
-                            8,
-                            8,
-                            8
-                        ],
-                        [
-                            100,
-                            100,
-                            100,
-                            100,
-                            100
-                        ],
-                        [
-                            100,
-                            100,
-                            100,
-                            100,
-                            100
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -383,46 +355,74 @@
                             0
                         ],
                         [
-                            100,
-                            100,
-                            100,
-                            100,
-                            100
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.15,
-                            0.2,
-                            0.25,
-                            0.3,
-                            0.35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            20,
-                            25,
-                            30,
-                            35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
-                        "130/150/170/190/210",
-                        "3/3.75/4.5/5.25/6",
-                        "8",
-                        "100",
-                        "100",
                         "0",
-                        "100",
-                        "15",
-                        "0.15/0.2/0.25/0.3/0.35",
-                        "15/20/25/30/35"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
@@ -450,7 +450,7 @@
                     "id": "KogMawVoidOoze",
                     "name": "Void Ooze",
                     "description": "Kog'Maw launches a peculiar ooze which damages all enemies it passes through and leaves a trail which slows enemies who stand on it.",
-                    "tooltip": "Kog'Maw spits bile, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and leaving a trail of ooze for {{ e3 }} seconds. Enemies in the ooze are <status>Slowed</status> by {{ slowamount }}%.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Kog'Maw spits bile, dealing <magicDamage>{{ totaldamage }} magic damage</magicDamage> and leaving a trail of ooze for {{ trailduration }} seconds. Enemies in the ooze are <status>Slowed</status> by {{ slowamount }}%.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -458,7 +458,7 @@
                             "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ slowamount }}% -> {{ slowamountNL }}%",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -484,32 +484,32 @@
                     "effect": [
                         null,
                         [
-                            70,
-                            110,
-                            150,
-                            190,
-                            230
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            35,
-                            40,
-                            45,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.25,
-                            0.25,
-                            0.25,
-                            0.25,
-                            0.25
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -556,10 +556,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "70/110/150/190/230",
-                        "30/35/40/45/50",
-                        "4",
-                        "0.25",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",

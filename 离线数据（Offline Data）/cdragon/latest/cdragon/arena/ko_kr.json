@@ -33,8 +33,8 @@
             "apiName": "ChainLightning",
             "calculations": {},
             "dataValues": {
-                "DamageMod": 0.5,
-                "Range": 1000.0
+                "DamageMod": 0.4000000059604645,
+                "Range": 800.0
             },
             "desc": "적에게 피해를 입힐 때 주변에 해당 적의 동료가 있다면 <trueDamage>@DamageMod*100@%의 고정 피해</trueDamage>를 입힙니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
@@ -265,6 +265,18 @@
             "tooltip": "자신과 아군에게 <abilityName>방어막</abilityName> 및 <abilityName>회복</abilityName> 소환사 주문을 사용합니다. <shield>@BarrierAmount@의 피해를 흡수하는 보호막</shield>을 부여하고 <healing>체력을 @HealAmount@</healing> 회복하며 1초 동안 <speed>이동 속도가 30%</speed> 증가합니다.<br><br>총 체력 회복량: @f1@<br>생성한 총 보호막: @f2@"
         },
         {
+            "apiName": "TransmuteChaos",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "무작위 골드 및 무작위 실버 증강을 얻습니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmutechaos_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmutechaos_small.png",
+            "id": 243,
+            "name": "전환: 혼돈",
+            "rarity": 2,
+            "tooltip": "무작위 골드 및 무작위 실버 증강을 얻습니다."
+        },
+        {
             "apiName": "Chauffeur",
             "calculations": {},
             "dataValues": {
@@ -397,9 +409,70 @@
             "tooltip": "아군의 <health>체력이 @AllyHealthThreshold*100@%</health> 이하로 떨어지면 <health>현재 체력의 @CurrentHealthToDrain*100@%</health>를 <shield>보호막</shield>으로 바꿔 아군에게 부여합니다.<br><br>이번 라운드에 생성한 보호막: @f1@<br>생성한 총 보호막: @f2@"
         },
         {
+            "apiName": "Firefox",
+            "calculations": {
+                "MultiFireDamage": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "SingleFireDamage",
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "RepeatDamageMod"
+                    },
+                    "mSimpleTooltipCalculationDisplay": 6
+                },
+                "SingleFireDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 45.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.25,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AcquisitionRange": 550.0,
+                "BaseDamage": 20.0,
+                "BonusAcquisitionRange": 725.0,
+                "Cooldown": 7.0,
+                "FlameDuration": 2.5,
+                "InitialDelay": 0.25,
+                "MinionBonusDamageMultiplier": 2.0,
+                "MinionBonusDamageThreshold": 0.20000000298023224,
+                "MovementSpeed": 0.4000000059604645,
+                "MovementSpeedDuration": 2.0,
+                "OrbitRadius": 150.0,
+                "RepeatDamageMod": 0.30000001192092896,
+                "SecondaryDelay": 0.4000000059604645
+            },
+            "desc": "<keywordMajor>자동 사용</keywordMajor><br>이동 속도가 증가하고 주위를 빙빙 도는 불꽃 3개를 생성합니다. 불꽃은 시야에 들어오는 가장 가까운 적을 대상으로 지정해 적응형 피해를 입힙니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firfox_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firfox_small.png",
+            "id": 308,
+            "name": "불여우",
+            "rarity": 0,
+            "tooltip": "<keywordMajor>자동 사용</keywordMajor>: 이동 속도가 <speed>@MovementSpeed*100@%</speed> 증가하고 @Cooldown@초마다 주위를 빙빙 도는 불꽃 3개를 생성합니다. 불꽃은 시야에 들어오는 가장 가까운 적을 대상으로 지정해 @SingleFireDamage@의 적응형 피해를 입힙니다. 연달아 적중하면 @RepeatDamageMod*100@%의 피해를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
+        },
+        {
             "apiName": "SummonerRevolution",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "CooldownBetweenCasts": 3.0
+            },
             "desc": "라운드마다 한 번 각 소환사 주문의 재사용 대기시간이 초기화됩니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
@@ -486,16 +559,15 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
-            "desc": "조건: 처치에 @TakedownsNeeded@회 관여해야 합니다. 두 번째 증강일 경우 조건이 @2ndPickTakendownsNeeded@회로 증가합니다.<br><br>보상: 황금 뒤집개",
+            "desc": "조건: 처치에 @TakedownsNeeded@회 관여해야 합니다.<br><br>보상: 황금 뒤집개",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_urfschampion_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
             "id": 154,
             "name": "퀘스트: 우르프의 챔피언",
             "rarity": 1,
-            "tooltip": "조건: 처치에 @TakedownsNeeded@회 관여해야 합니다. 두 번째 증강일 경우 조건이 @2ndPickTakendownsNeeded@회로 증가합니다.<br><br>보상: 황금 뒤집개"
+            "tooltip": "{{Cherry_Quest_UrfsChampion_Summary}}<br><br>처치 관여: @f1@"
         },
         {
             "apiName": "Vengeance",
@@ -672,15 +744,16 @@
             "apiName": "SlapAround",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForce": 20.0
+                "AdaptiveForce": 20.0,
+                "SpellIDCD": 5.0
             },
-            "desc": "적을 <status>이동 불가</status> 상태로 만들 때마다 해당 라운드에 @AdaptiveForce@의 적응형 능력치를 얻습니다. 이 효과는 무한히 중첩됩니다.",
+            "desc": "적을 <status>이동 불가</status> 상태로 만들거나 <status>이동 스킬을 사용할 수 없게</status> 하면 해당 라운드에 @AdaptiveForce@의 적응형 능력치를 얻습니다. 이 효과는 무한히 중첩됩니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/slaparound_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/slaparound_small.png",
             "id": 136,
             "name": "우당탕탕",
             "rarity": 0,
-            "tooltip": "적을 <status>이동 불가</status> 상태로 만들 때마다 해당 라운드에 @AdaptiveForce@의 적응형 능력치를 얻습니다. 이 효과는 무한히 중첩됩니다."
+            "tooltip": "{{ Cherry_SlapAround_Summary }}<br><br>현재 적응형 능력치: @f1@"
         },
         {
             "apiName": "MagicMissile",
@@ -786,7 +859,7 @@
             "calculations": {},
             "dataValues": {
                 "APPerProc": 2.0,
-                "ProcCooldown": 0.75,
+                "ProcCooldown": 1.0,
                 "SpellIDCD": 5.0,
                 "StartingAPIfSecondAugment": 40.0
             },
@@ -835,7 +908,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/vulnerability_small.png",
             "id": 92,
             "name": "취약",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "아이템 및 지속 피해 효과에 @CritDamage*100@%의 추가 피해를 입히는 치명타가 적용될 수 있습니다. 치명타 확률이 @CritChance*100@% 증가합니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
@@ -847,7 +920,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/cannonfodder_small.png",
             "id": 10,
             "name": "포탄",
-            "rarity": 1,
+            "rarity": 0,
             "tooltip": "대포에서 발사되어 전투를 시작합니다."
         },
         {
@@ -863,6 +936,138 @@
             "name": "궁극의 룰렛",
             "rarity": 2,
             "tooltip": "도주를 무작위 챔피언의 궁극기로 교체합니다. 이 스킬을 사용한 후 또 다른 무작위 챔피언의 궁극기로 교체합니다."
+        },
+        {
+            "apiName": "ClownCollege",
+            "calculations": {
+                "BasicAttackDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 35.0,
+                            "mStartValue": 20.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.3499999940395355
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "QCritDamageMod": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "SumOfSubPartsCalculationPart",
+                            "mSubparts": [
+                                {
+                                    "__type": "NumberCalculationPart",
+                                    "mNumber": 1.5499999523162842
+                                },
+                                {
+                                    "__type": "StatByCoefficientCalculationPart",
+                                    "mCoefficient": 1.0,
+                                    "mStat": 8,
+                                    "mStatFormula": 2
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "TotalDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.5,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.550000011920929
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "BaseDamage": 100.0,
+                "CastRange": 400.0,
+                "EDITDECEIVEFORREALVALUES": 0,
+                "ExtraAATime": 1.0,
+                "FearDamage": 0.25,
+                "FearDuration": 1.0,
+                "FearRadius": 350.0,
+                "PseudoCastTime": 0.125,
+                "StealthDuration": 3.0
+            },
+            "desc": "도주 슬롯에 <spellName>속임수</spellName>를 얻습니다. <br><spellName>암습</spellName> 기본 지속 효과를 얻습니다.<br><br>사망 시 폭발하는 상자를 생성하여 엄청난 <trueDamage>고정 피해</trueDamage>를 입히고 주변 적을 <status>공포</status>에 빠뜨립니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/clowncollege_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/clowncollege_small.png",
+            "id": 310,
+            "name": "광대 대학",
+            "rarity": 2,
+            "tooltip": "<spellName>암습</spellName>: 뒤에서 공격 시 @BasicAttackDamage@의 <physicalDamage>추가 물리 피해</physicalDamage>를 입힙니다.<br><br><spellName>속임수</spellName>: 근처로 순간이동해 @StealthDuration@초 동안 <keywordStealth>투명</keywordStealth> 상태가 됩니다. <keywordStealth>투명</keywordStealth> 상태에서 다음 기본 공격 시 <physicalDamage>@TotalDamage@의 물리 피해</physicalDamage>를 추가로 입힙니다. 뒤에서 기본 공격 시 치명타가 적용되어 @QCritDamageMod@의 피해를 입힙니다.<br><br><spellName>환각: 죽음</spellName>: 사망 시 최대 체력의 @FearDamage*100@%에 해당하는 <trueDamage>고정 피해</trueDamage>를 입히고 주변을 @FearDuration@초 동안 공포에 빠뜨립니다."
+        },
+        {
+            "apiName": "NumbToPain",
+            "calculations": {
+                "ChampRange": {
+                    "__type": "GameCalculationConditional",
+                    "mConditionalCalculationRequirements": {
+                        "__type": "IsRangedCastRequirement"
+                    },
+                    "mConditionalGameCalculation": "{06387172}",
+                    "mDefaultGameCalculation": "{792cf56b}"
+                },
+                "{06387172}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{48b676ff}"
+                        }
+                    ]
+                },
+                "{792cf56b}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{c8202a54}"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 6.0,
+                "MeleeReduction": 0.30000001192092896,
+                "RangedReduction": 0.15000000596046448
+            },
+            "desc": "피해를 받을 때마다 @BleedDuration@초 동안 해당 피해량의 @MeleeReduction*100@%를 출혈 효과로 받습니다. <br><br><rules>원거리 챔피언의 경우 피해량 감소 효과가 @RangedReduction*100@%로 감소합니다.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/numbtopain_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/numbtopain_small.png",
+            "id": 251,
+            "name": "무통각증",
+            "rarity": 0,
+            "tooltip": "피해를 받을 때마다 @BleedDuration@초 동안 해당 피해량의 @MeleeReduction*100@%를 출혈 효과로 받습니다. <br><br><rules>원거리 챔피언의 경우 피해량 감소 효과가 @RangedReduction*100@%로 감소합니다.</rules>"
         },
         {
             "apiName": "MadScientist",
@@ -908,6 +1113,44 @@
             "tooltip": "라운드마다 한 번 궁극기를 사용한 다음 초기화합니다."
         },
         {
+            "apiName": "TricksterDemon",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 100.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 0.6000000238418579,
+                "BaseDamage": 100.0,
+                "Radius": 300.0,
+                "bonusADRatio": 0.4000000059604645
+            },
+            "desc": "은신에서 벗어나면 폭발을 일으켜 <magicDamage>@TotalDamage@의 마법 피해</magicDamage>를 입힙니다. 분신과 함정도 사망 시 폭발합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tricksterdemon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tricksterdemon_small.png",
+            "id": 236,
+            "name": "기만하는 악마",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_TricksterDemon_Summary }}<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
+        },
+        {
             "apiName": "Dematerialize",
             "calculations": {},
             "dataValues": {
@@ -921,6 +1164,36 @@
             "name": "해체분석",
             "rarity": 0,
             "tooltip": "{{Cherry_Dematerialize_Summary}}<br><br>얻은 적응형 능력치: @f1@"
+        },
+        {
+            "apiName": "SlowAndSteady",
+            "calculations": {
+                "{779aafdb}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "ASMultiplier"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.009999999776482582
+                    },
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "ASMultiplier": 75.0,
+                "StaticRatio": 0.625
+            },
+            "desc": "<speed>공격 속도</speed>가 @StaticRatio@으로 고정됩니다. 모든 추가 <speed>공격 속도</speed>가 <scaleAD>공격력</scaleAD>으로 전환됩니다. (<speed>공격 속도 1%</speed>당 <scaleAD>@ADPerAS@의 공격력</scaleAD>)<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowandsteady_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowandsteady_small.png",
+            "id": 250,
+            "name": "천천히, 꾸준히",
+            "rarity": 1,
+            "tooltip": "<speed>공격 속도</speed>가 @StaticRatio@으로 고정됩니다. 모든 추가 <speed>공격 속도</speed>가 <scaleAD>공격력</scaleAD>으로 전환됩니다. (<speed>공격 속도 1%</speed>당 <scaleAD>@ADPerAS@의 공격력</scaleAD>)<br><br>현재 부여 중인 능력치: @f1@의 <scaleAD>공격력</scaleAD>"
         },
         {
             "apiName": "FrostWraith",
@@ -1115,13 +1388,13 @@
             "apiName": "Quest_WoogletsWitchcap",
             "calculations": {},
             "dataValues": {},
-            "desc": "즉시: 쓸데없이 큰 지팡이를 획득합니다.<br><br>조건: 쓸데없이 큰 지팡이, 라바돈의 죽음모자, 존야의 모래시계를 보유해야 합니다.<br><br>보상: 우글렛의 마녀 모자를 획득합니다.",
+            "desc": "즉시: 쓸데없이 큰 지팡이를 획득합니다.<br><br>조건: 라바돈의 죽음모자와 존야의 모래시계를 보유해야 합니다.<br><br>보상: 우글렛의 마녀 모자를 획득합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
             "id": 156,
             "name": "퀘스트: 우글렛의 마녀 모자",
             "rarity": 2,
-            "tooltip": "즉시: 쓸데없이 큰 지팡이를 획득합니다.<br><br>조건: 쓸데없이 큰 지팡이, 라바돈의 죽음모자, 존야의 모래시계를 보유해야 합니다.<br><br>보상: 우글렛의 마녀 모자를 획득합니다."
+            "tooltip": "즉시: 쓸데없이 큰 지팡이를 획득합니다.<br><br>조건: 라바돈의 죽음모자와 존야의 모래시계를 보유해야 합니다.<br><br>보상: 우글렛의 마녀 모자를 획득합니다."
         },
         {
             "apiName": "Earthwake",
@@ -1256,6 +1529,18 @@
             "tooltip": "세 번째 기본 공격을 가할 때마다 적중 시 효과가 두 번 발동합니다."
         },
         {
+            "apiName": "SymbioticMutation",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "라운드마다 무작위로 선택된 아군의 증강 중 하나로 변이합니다. <br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
+            "id": 239,
+            "name": "공생 돌연변이",
+            "rarity": 1,
+            "tooltip": "라운드마다 무작위로 선택된 아군의 증강 중 하나로 변이합니다. <br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>"
+        },
+        {
             "apiName": "CelestialBody",
             "calculations": {},
             "dataValues": {
@@ -1364,6 +1649,44 @@
             "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>화상 피해는 도움을 받는 챔피언의 최대 체력 대비 체력 회복량 또는 보호막 크기에 비례합니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
+            "apiName": "Overflow",
+            "calculations": {
+                "{1e85060f}": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{5cc662bd}"
+                        },
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.004999999888241291
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.009999999776482582
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "InitialDamageAmpPercent": 10.0,
+                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
+                "ManaRatio": 200.0
+            },
+            "desc": "<scaleMana>마나</scaleMana> 스킬의 비용이 2배가 됩니다. 스킬 피해량이 <scaleMana>@ManaCalc@</scaleMana> 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
+            "id": 311,
+            "name": "범람",
+            "rarity": 0,
+            "tooltip": "<scaleMana>마나</scaleMana> 스킬의 비용이 2배가 됩니다. 스킬 피해량이 <scaleMana>@ManaCalc@</scaleMana> 증가합니다."
+        },
+        {
             "apiName": "FeeltheBurn",
             "calculations": {
                 "DamagePerSecond": {
@@ -1436,15 +1759,16 @@
                 }
             },
             "dataValues": {
-                "HealPercentage": 0.014999999664723873
+                "HealPercentage": 0.014999999664723873,
+                "SpellIDCD": 5.0
             },
-            "desc": "적 챔피언을 <status>이동 불가</status> 상태로 만들면 <healing>체력을 @TotalHeal@ 회복</healing>합니다.",
+            "desc": "적 챔피언을 <status>이동 불가</status> 상태로 만들거나 <status>이동 스킬을 사용할 수 없게</status> 하면 <healing>@TotalHeal@의 체력을 회복</healing>합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/guiltypleasure_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/guiltypleasure_small.png",
             "id": 42,
             "name": "죄책감의 쾌락",
             "rarity": 0,
-            "tooltip": "적 챔피언을 <status>이동 불가</status> 상태로 만들면 <healing>체력을 @TotalHeal@ 회복</healing>합니다.<br><br>이번 라운드 체력 회복량: @f1@<br>총 체력 회복량: @f2@"
+            "tooltip": "적 챔피언을 <status>이동 불가</status> 상태로 만들거나 <status>이동 스킬을 사용할 수 없게</status> 하면 <healing>@TotalHeal@의 체력을 회복</healing>합니다.<br><br>이번 라운드 체력 회복량: @f1@<br>총 체력 회복량: @f2@"
         },
         {
             "apiName": "ScopierWeapons",
@@ -1624,10 +1948,9 @@
             "calculations": {},
             "dataValues": {
                 "KillStackCredit": 1.0,
-                "RequiredKillCount": 5.0,
-                "RequiredKillCountSubsequent": 6.0
+                "RequiredKillCount": 5.0
             },
-            "desc": "각 라운드에서 챔피언당 한 번씩 처치에 관여할 때마다 중첩을 @KillStackCredit@회 얻습니다. @RequiredKillCount@회 중첩 시 프리즘 모루로 부화합니다. 여러 번 완성할 수 있지만 첫 부화 후에는 중첩이 @RequiredKillCountSubsequent@회 필요합니다.",
+            "desc": "각 라운드에서 챔피언당 한 번씩 처치에 관여할 때마다 중첩을 @KillStackCredit@회 얻습니다.<br><br>@RequiredKillCount@회 중첩 시 프리즘 모루로 부화합니다. 여러 번 완성할 수 있습니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
             "id": 224,
@@ -1730,29 +2053,50 @@
                 "CritChance": 0.25,
                 "HealPercentage": 0.11999999731779099
             },
-            "desc": "<crit>치명타 확률이 @CritChance*100@%</crit> 증가하고 <crit>치명타</crit> 적중 시 @HealPercentage*100@%의 생명력 흡수 효과를 얻습니다.",
+            "desc": "<crit>치명타 확률이 @CritChance*100@%</crit> 증가하고 <lifeSteal><crit>치명타</crit> 적중 시 @HealPercentage*100@%의 생명력 흡수 효과</lifeSteal>를 얻습니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/soulsiphon_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/soulsiphon_small.png",
             "id": 77,
             "name": "영혼 흡수",
             "rarity": 1,
-            "tooltip": "<crit>치명타 확률이 @CritChance*100@%</crit> 증가하고 <crit>치명타</crit> 적중 시 @HealPercentage*100@%의 생명력 흡수 효과를 얻습니다.<br><br>이번 라운드 체력 회복량: @f1@<br>총 체력 회복량: @f2@"
+            "tooltip": "<crit>치명타 확률이 @CritChance*100@%</crit> 증가하고 <lifeSteal><crit>치명타</crit> 적중 시 @HealPercentage*100@%의 생명력 흡수 효과</lifeSteal>를 얻습니다.<br><br>이번 라운드 체력 회복량: @f1@<br>총 체력 회복량: @f2@"
         },
         {
             "apiName": "GambaAnvil",
             "calculations": {},
             "dataValues": {
-                "GoldBasisDiscount": 1250.0,
                 "GoldBonus": 1000.0,
-                "PrismaticCostReduction": 1000.0
+                "LegendaryCostReduction": -500.0,
+                "LegendaryGoldBasisDiscount": 1000.0,
+                "PrismaticCostReduction": -1000.0,
+                "PrismaticGoldBasisDiscount": 1250.0,
+                "StatCostReduction": -100.0
             },
-            "desc": "@GoldBonus@골드를 획득합니다. 프리즘 모루 비용이 @PrismaticCostReduction@골드 감소하고 이후에 획득하는 프리즘 아이템을 되팔 때 받는 비용이 500골드 감소합니다.",
+            "desc": "@GoldBonus@골드를 획득합니다. 모든 모루의 가격이 감소하며, 모루로 획득한 아이템을 되팔 때 받는 비용이 500골드 감소합니다.<br><br>프리즘 모루: @PrismaticCostReduction@<br>전설급 모루: @LegendaryCostReduction@<br>능력치 모루: @StatCostReduction@",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
             "id": 234,
             "name": "감바 모루",
             "rarity": 2,
-            "tooltip": "@GoldBonus@골드를 획득합니다. 프리즘 모루 비용이 @PrismaticCostReduction@골드 감소하고 이후에 획득하는 프리즘 아이템을 되팔 때 받는 비용이 500골드 감소합니다."
+            "tooltip": "@GoldBonus@골드를 획득합니다. 모든 모루의 가격이 감소하며, 모루로 획득한 아이템을 되팔 때 받는 비용이 500골드 감소합니다.<br><br>프리즘 모루: @PrismaticCostReduction@<br>전설급 모루: @LegendaryCostReduction@<br>능력치 모루: @StatCostReduction@"
+        },
+        {
+            "apiName": "DivineIntervention",
+            "calculations": {},
+            "dataValues": {
+                "BaseCD": 35.0,
+                "InitalDelay": 15.0,
+                "InvulnerabilityDuration": 2.5,
+                "Radius": 400.0,
+                "WarningDelay": 2.5
+            },
+            "desc": "전투 시작 @InitalDelay@초 후 보호의 별이 천천히 내려옵니다. 별이 착지하면 자신과 주변 아군이 @InvulnerabilityDuration@초 동안 <keywordMajor>무적</keywordMajor> 상태가 됩니다. @BaseCD@초마다 <keywordMajor>자동 사용</keywordMajor>합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowactingpainkillers_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowactingpainkillers_small.png",
+            "id": 301,
+            "name": "신성한 중재",
+            "rarity": 1,
+            "tooltip": "전투 시작 @InitalDelay@초 후 보호의 별이 천천히 내려옵니다. 별이 착지하면 자신과 주변 아군이 @InvulnerabilityDuration@초 동안 <keywordMajor>무적</keywordMajor> 상태가 됩니다. @BaseCD@초마다 <keywordMajor>자동 사용</keywordMajor>합니다."
         },
         {
             "apiName": "ThreadtheNeedle",
@@ -1830,13 +2174,13 @@
             "dataValues": {
                 "Cooldown": 12.0
             },
-            "desc": "12초마다 <keywordMajor>자동으로</keywordMajor> 주변 적에게 블리츠크랭크 로켓 손을 발사합니다.",
+            "desc": "<keywordMajor>자동 사용</keywordMajor>으로 12초마다 주변 적에게 블리츠크랭크 로켓 손을 발사합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/extendoarm_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/extendoarm_small.png",
             "id": 33,
             "name": "늘어나는 팔",
             "rarity": 1,
-            "tooltip": "12초마다 <keywordMajor>자동으로</keywordMajor> 주변 적에게 블리츠크랭크 로켓 손을 발사합니다.<br><br>적중한 손: @f1@"
+            "tooltip": "<keywordMajor>자동 사용</keywordMajor>으로 12초마다 주변 적에게 블리츠크랭크 로켓 손을 발사합니다.<br><br>적중한 손: @f1@"
         },
         {
             "apiName": "SlowCooker",
@@ -1890,20 +2234,48 @@
             "tooltip": "4초 동안 지면을 축복해 영역 내의 모든 유닛의 체력이 최대 체력의 10% 아래로 떨어지는 것을 방지합니다. 주문이 끝나면 영역 내의 유닛들은 <healing>@HealFlatTooltip@의 체력</healing>을 회복합니다. "
         },
         {
+            "apiName": "Augment404",
+            "calculations": {},
+            "dataValues": {
+                "HatsToGrant": 3.0
+            },
+            "desc": "이걸 어떻게 찾아낸 건가요?! <br><br>모자 @HatsToGrant@개를 획득합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augment404_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augment404_small.png",
+            "id": 404,
+            "name": "404: 증강을 찾을 수 없습니다",
+            "rarity": 0,
+            "tooltip": "이걸 어떻게 찾아낸 건가요?! <br><br>모자 @HatsToGrant@개를 획득합니다."
+        },
+        {
             "apiName": "DualWield",
             "calculations": {},
             "dataValues": {
-                "AttackReduction": 0.44999998807907104,
+                "AttackReduction": 0.3499999940395355,
                 "AttackSpeed": 1.0,
-                "OnHitMod": 0.550000011920929
+                "OnHitMod": 0.5
             },
-            "desc": "기본 공격과 적중 시 피해량이 @AttackReduction*100@% 감소합니다. <attackSpeed>총 공격 속도가 @AttackSpeed*100@%</attackSpeed> 증가합니다.",
+            "desc": "<attackSpeed>총 공격 속도가 @AttackSpeed*100@%</attackSpeed> 증가합니다. 기본 공격 시 피해량이 @AttackReduction*100@% 감소하고 적중 시 피해량이 @OnHitMod*100@% 감소합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "양손잡이",
             "rarity": 2,
-            "tooltip": "기본 공격과 적중 시 피해량이 @AttackReduction*100@% 감소합니다. <attackSpeed>총 공격 속도가 @AttackSpeed*100@%</attackSpeed> 증가합니다."
+            "tooltip": "<attackSpeed>총 공격 속도가 @AttackSpeed*100@%</attackSpeed> 증가합니다. 기본 공격 시 피해량이 @AttackReduction*100@% 감소하고 적중 시 피해량이 @OnHitMod*100@% 감소합니다."
+        },
+        {
+            "apiName": "Augment405",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmpPerHat": 0.05000000074505806
+            },
+            "desc": "착용 중인 모자 하나당 피해량이 @DamageAmpPerHat*100@% 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augment405_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augment405_small.png",
+            "id": 405,
+            "name": "증강 405",
+            "rarity": 2,
+            "tooltip": "착용 중인 모자 하나당 피해량이 @DamageAmpPerHat*100@% 증가합니다."
         },
         {
             "apiName": "SpiritLink",
@@ -1921,6 +2293,24 @@
             "tooltip": "아군이 입는 피해를 @DamageRedirectPercentage*100@%만큼 대신 입고 아군이 받는 <healing>회복</healing> 효과도 @HealCopyPercentage*100@%만큼 받습니다.<br><br>대신 입은 총 피해량: @f1@<br>총 체력 회복량: @f2@<br>"
         },
         {
+            "apiName": "Deathtouch",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeedRatio": 0.0010000000474974513,
+                "BleedDuration": 5.0,
+                "CurseCounter": 2.0,
+                "OnHitDamageRatio": 0.3799999952316284,
+                "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
+            },
+            "desc": "기본 공격 시 <keywordMajor>저주</keywordMajor> @CurseCounter@중첩을 얻으며 <keywordMajor>저주</keywordMajor> 중첩 하나당 추가 <magicDamage>마법 피해</magicDamage>를 입힙니다.<br><br>또한 보유할 수 있는 <keywordMajor>저주</keywordMajor> 최대 중첩이 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
+            "id": 217,
+            "name": "죽음의 손길",
+            "rarity": 1,
+            "tooltip": "기본 공격 시 <keywordMajor>저주</keywordMajor> @CurseCounter@중첩을 얻고 이번 라운드에 얻은 <keywordMajor>저주</keywordMajor> 중첩에 해당하는 추가 <trueDamage>고정 피해</trueDamage>를 입힙니다.<br><br>{{ Cherry_CurseShared }}<br><br>기본 공격 시 <keywordMajor>총 저주</keywordMajor>에 따라 <magicDamage>@f1@의 추가 마법 피해</magicDamage>를 입힙니다.<br><br><rules><keywordMajor>총 저주</keywordMajor>의 @OnHitDamageRatio*100@%를 추가 적중 시 피해량으로 전환합니다.</rules> "
+        },
+        {
             "apiName": "Quest_AngelofRetribution",
             "calculations": {
                 "BaseDamage": {
@@ -1929,9 +2319,7 @@
                     "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
-                            "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 100.0,
-                            "mStartValue": 50.0
+                            "__type": "ByCharLevelInterpolationCalculationPart"
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -1939,7 +2327,7 @@
             },
             "dataValues": {
                 "AttackSpeed": 1.0,
-                "HealPowerToDamageConversion": 3.0,
+                "HealPowerToDamageConversion": 3.5,
                 "RequirementAmount": 2500.0
             },
             "desc": "조건: @RequirementAmount@만큼 아군의 체력을 회복시키거나 피해량을 막아야 합니다.<br><br>보상: <attackspeed>@AttackSpeed*100@%의 공격 속도</attackspeed>를 얻습니다. 또한 기본 공격 시 <healing>체력 회복과 보호막 효과의 @HealPowerToDamageConversion*100@%</healing>에 해당하는 추가 <magicdamage>마법 피해</magicdamage>를 입힙니다.",
@@ -1978,6 +2366,44 @@
             "name": "선혈포식",
             "rarity": 0,
             "tooltip": "모든 피해 흡혈 @Omnivamp*100@%를 얻습니다."
+        },
+        {
+            "apiName": "WellBeRightBack",
+            "calculations": {
+                "TooltipTrueDamageCalculation": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 410.0,
+                            "mStartValue": 70.0
+                        }
+                    ]
+                },
+                "{7c50d74e}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 600.0,
+                            "mStartValue": 100.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealAmountPercent": 0.4000000059604645,
+                "Range": 600.0,
+                "SelfDuration": 1.75,
+                "StasisDuration": 2.5
+            },
+            "desc": "<spellName>시간 정지</spellName> 효과를 얻습니다(도주 슬롯 대체).<br><br><rules><spellName>시간 정지</spellName>: 800의 사거리 내에 있는 모든 챔피언이 <status>경직</status> 상태에 빠집니다(도주 슬롯 대체). 자신은 <status>경직</status> 상태를 0.75초 먼저 벗어나며, <scaleHealth>잃은 체력</scaleHealth>의 40%를 회복합니다.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/wellberightback_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/wellberightback_small.png",
+            "id": 312,
+            "name": "금방 돌아올게",
+            "rarity": 1,
+            "tooltip": "<spellName>시간 정지</spellName>: @Range@의 사거리 내에 있는 모든 챔피언이 @StasisDuration@ 동안 <status>경직</status> 상태에 빠집니다. 자신은 @SelfDuration@초 후 <status>경직</status> 상태를 벗어나며, <scaleHealth>잃은 체력</scaleHealth>의 @HealAmountPercent*100@%를 <healing>회복</healing>합니다."
         },
         {
             "apiName": "FirstAidKit",
@@ -2020,7 +2446,9 @@
                     "mSimpleTooltipCalculationDisplay": 4
                 }
             },
-            "dataValues": {},
+            "dataValues": {
+                "BaseCooldown": 7.0
+            },
             "desc": "<keywordMajor>자동 사용</keywordMajor>: 7초마다 근처 적에게 부메랑을 던집니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
@@ -2116,6 +2544,46 @@
             "tooltip": "@Cooldown@초마다 <keywordMajor>자동 사용</keywordMajor>으로 몸에서 점액을 터뜨려 주변 적에게 <magicDamage>@BaseDamage@+최대 체력의 @PercentDamage@에 해당하는 마법 피해</magicDamage>를 입힙니다. 챔피언에게 적중 시 주변에 방울을 분비합니다. 방울을 밟으면 <healing>체력을 @BlobHeal@</healing> 회복하고 적은 방울을 파괴합니다."
         },
         {
+            "apiName": "Dreadbringer",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.02500000037252903,
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "CurseStacksPerTick": 1.0,
+                "MaxHealthRatio": 2.25,
+                "Range": 500.0,
+                "TickCadence": 1.0
+            },
+            "desc": "근처 적 챔피언에게서 <keywordMajor>저주</keywordMajor> @CurseStacksPerTick@중첩을 얻습니다. <keywordMajor>저주</keywordMajor> 중첩 하나당 <healing>최대 체력</healing>이 영구히 상승합니다.<br><br>보유할 수 있는 <keywordMajor>저주</keywordMajor> 최대 중첩이 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/plaguebearer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/plaguebearer_small.png",
+            "id": 216,
+            "name": "공포를 부르는 자",
+            "rarity": 2,
+            "tooltip": "@TickCadence@초마다 근처 적 챔피언에게서 <keywordMajor>저주</keywordMajor> @CurseStacksPerTick@중첩을 얻고 이번 라운드에 얻은 <keywordMajor>저주</keywordMajor> 중첩만큼 추가 <trueDamage>고정 피해</trueDamage>를 입힙니다.<br><br>{{ Cherry_CurseShared }}<br><br><keywordMajor>총 저주</keywordMajor>에 따라 @f1@의 <healing>최대 체력</healing>을 얻습니다.<br><br><rules><keywordMajor>총 저주</keywordMajor>의 @MaxHealthRatio*100@%를 <healing>최대 체력</healing>으로 전환합니다.</rules>"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2177,6 +2645,24 @@
             "tooltip": "기본 공격 시 적에게 <keywordMajor>화상</keywordMajor> 효과를 적용해 @BleedDuration@초 동안 <scaleAP>최대 체력의 @PercentMaxHPDamagePer5Seconds*20@%에 해당하는 마법 피해</scaleAP>를 입힙니다. <keywordMajor>화상</keywordMajor> 효과는 무한히 중첩됩니다.<br><br>이번 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
+            "apiName": "Doomsayer",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForceRatio": 1.0,
+                "BleedDuration": 5.0,
+                "Cooldown": 3.0,
+                "CurseCounter": 2.0,
+                "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
+            },
+            "desc": "스킬 사용 시 적중한 적 챔피언 하나당 <keywordMajor>저주</keywordMajor> @CurseCounter@중첩을 얻습니다. <keywordMajor>저주</keywordMajor> 중첩 하나당 적응형 능력치가 영구히 상승합니다.<br><br>또한 보유할 수 있는 <keywordMajor>저주</keywordMajor> 최대 중첩이 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
+            "id": 219,
+            "name": "파멸의 예언자",
+            "rarity": 2,
+            "tooltip": "스킬 사용 시 <keywordMajor>저주</keywordMajor> @CurseCounter@중첩을 얻고 이번 라운드에 얻은 <keywordMajor>저주</keywordMajor> 중첩에 해당하는 추가 <trueDamage>고정 피해</trueDamage>를 입힙니다.<br><br>{{ Cherry_CurseShared }}<br><br><keywordMajor>총 저주</keywordMajor>에 따라 @f1@의 적응형 능력치를 얻습니다.<br><br><rules><keywordMajor>총 저주</keywordMajor>의 @AdaptiveForceRatio*100@%를 적응형 능력치로 전환합니다.</rules>"
+        },
+        {
             "apiName": "Flashy",
             "calculations": {},
             "dataValues": {
@@ -2187,7 +2673,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
             "id": 116,
             "name": "점멸 난사",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "점멸 사용 가능 횟수가 3번, 재사용 대기시간이 @FlashCooldown@초가 됩니다."
         },
         {
@@ -2266,15 +2752,16 @@
             "calculations": {},
             "dataValues": {
                 "BleedDuration": 5.0,
-                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033
+                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033,
+                "SpellIDCD": 5.0
             },
-            "desc": "적 챔피언을 <status>이동 불가</status> 상태로 만들면 무한히 중첩되는 <keywordMajor>화상</keywordMajor> 효과를 적용해 지속적으로 피해를 입힙니다.",
+            "desc": "적 챔피언을 <status>이동 불가</status> 상태로 만들거나 <status>이동 스킬을 사용할 수 없게</status> 하면 무한히 중첩되는 <keywordMajor>화상</keywordMajor> 효과를 적용해 지속적으로 피해를 입힙니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/tormentor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/tormentor_small.png",
             "id": 85,
             "name": "고문자",
             "rarity": 0,
-            "tooltip": "적 챔피언을 <status>이동 불가</status> 상태로 만들면 중첩되는 <keywordMajor>화상</keywordMajor> 효과를 적용해 @BleedDuration@초 동안 초당 <scaleAP>최대 체력의 @PercentMaxHPDamagePer5Seconds*20@%에 해당하는 마법 피해</scaleAP>를 입힙니다. <keywordMajor>화상</keywordMajor> 효과는 무한히 중첩됩니다.<br><br>이번 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
+            "tooltip": "적 챔피언을 <status>이동 불가</status> 상태로 만들거나 <status>이동 스킬을 사용할 수 없게</status> 하면 <keywordMajor>화상</keywordMajor> 효과를 적용해 @BleedDuration@초 동안 초당 <scaleAP>최대 체력의 @PercentMaxHPDamagePer5Seconds*20@%에 해당하는 마법 피해</scaleAP>를 입힙니다. <keywordMajor>화상</keywordMajor> 효과는 무한히 중첩됩니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
             "apiName": "Minionmancer",
@@ -2476,6 +2963,18 @@
             "tooltip": "<spellName>선제공격</spellName>과 <spellName>어둠의 수확</spellName> 핵심 룬을 얻습니다.<br><br>이번 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@<br>획득한 총 골드: @f3@"
         },
         {
+            "apiName": "ParasiticMutation",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "라운드마다 무작위로 선택된 상대의 증강 중 하나로 변이합니다. <br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
+            "id": 240,
+            "name": "기생 돌연변이",
+            "rarity": 0,
+            "tooltip": "라운드마다 무작위로 선택된 상대의 증강 중 하나로 변이합니다. <br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>"
+        },
+        {
             "apiName": "CantTouchThis",
             "calculations": {},
             "dataValues": {
@@ -2508,7 +3007,7 @@
             "apiName": "ItsCritical",
             "calculations": {},
             "dataValues": {
-                "CritChance": 0.4000000059604645
+                "CritChance": 0.5
             },
             "desc": "<crit>치명타 확률이 @CritChance*100@%</crit> 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/itscritical_large.png",
@@ -2621,13 +3120,13 @@
             "dataValues": {
                 "AttackSpeed": 0.6000000238418579
             },
-            "desc": "공격 속도가 @AttackSpeed*100@% 증가합니다.",
+            "desc": "@AttackSpeed*100@%의 <speed>공격 속도</speed>를 얻습니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/deft_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deft_small.png",
             "id": 22,
             "name": "능수능란",
             "rarity": 0,
-            "tooltip": "공격 속도가 @AttackSpeed*100@% 증가합니다."
+            "tooltip": "@AttackSpeed*100@%의 <speed>공격 속도</speed>를 얻습니다."
         },
         {
             "apiName": "Goliath",
@@ -2645,6 +3144,40 @@
             "name": "거인",
             "rarity": 2,
             "tooltip": "크기가 커져 <scaleHealth>체력</scaleHealth>이 @HealthAmp*100@% 증가하고 <scaleAP>적응형 능력치</scaleAP>가 @ADAmp*100@% 증가합니다."
+        },
+        {
+            "apiName": "JuicePress",
+            "calculations": {},
+            "dataValues": {
+                "BonusHats": 2.0,
+                "JuiceAmp": 0.5,
+                "PowerJuicePercentPen": 0.15000000596046448,
+                "PriceReduction": 0.5,
+                "SpeedJuiceMSBoost": 0.20000000298023224,
+                "VitalityJuiceHealShieldPower": 0.25
+            },
+            "desc": "주스가 자신과 아군에게 추가 효과를 부여합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/juicepress_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/juicepress_small.png",
+            "id": 242,
+            "name": "주스 압착기",
+            "rarity": 0,
+            "tooltip": "아군이 주스로 추가 효과를 얻고 모든 이로운 효과 주스 구매 시 비용이 @PriceReduction*100@% 감소합니다.<br><br>힘의 주스: <scaleAD>방어력</scaleAD> 또는 <scaleAP>마법 관통력</scaleAP> @PowerJuicePercentPen*100@%<br>활력의 주스: <healing>체력 회복량과 보호막 흡수량</healing> @VitalityJuiceHealShieldPower*100@%<br>가속의 주스: <speed>이동 속도</speed> @SpeedJuiceMSBoost*100@%<br>카파 주스: 추가 모자 @BonusHats@개"
+        },
+        {
+            "apiName": "LegDay",
+            "calculations": {},
+            "dataValues": {
+                "MovementSpeed": 50.0,
+                "SlowResist": 0.4000000059604645
+            },
+            "desc": "@MovementSpeed@의 <speed>이동 속도</speed>와 @SlowResist*100@%의 <speed>둔화 저항</speed>을 얻습니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/legday_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/legday_small.png",
+            "id": 305,
+            "name": "하체 운동의 날",
+            "rarity": 0,
+            "tooltip": "@MovementSpeed@의 <speed>이동 속도</speed>와 @SlowResist*100@%의 <speed>둔화 저항</speed>을 얻습니다."
         },
         {
             "apiName": "Trailblazer",
@@ -2710,7 +3243,6 @@
             "dataValues": {
                 "AOESize": 550.0,
                 "CastRange": 5500.0,
-                "Cooldown": 20.0,
                 "DamagetoChampions": 0.30000001192092896,
                 "GroundDuration": 3.0,
                 "LaserDelay": 2.5,
@@ -2753,6 +3285,55 @@
             "name": "민병대",
             "rarity": 0,
             "tooltip": "<speed>이동 속도가 @spell.Augment_Homeguard:MovementSpeed*100@%</speed> 증가합니다. 피해를 입은 후 @spell.Augment_Homeguard:DisableCooldown@초 동안은 효과가 멈춥니다."
+        },
+        {
+            "apiName": "NullAugment",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "없음",
+            "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
+            "id": 3,
+            "name": "증강 없음",
+            "rarity": 0,
+            "tooltip": "없음"
+        },
+        {
+            "apiName": "HatTrick",
+            "calculations": {
+                "ShieldHealth": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 300.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{8bfcfef7}",
+                            "mStat": 6,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 3.0,
+                "HatTrickPriceReduction": 350.0,
+                "HatsToGrant": 3.0,
+                "LowHealthThreshold": 0.30000001192092896,
+                "MovespeedBoostPercent": 0.3499999940395355,
+                "MovespeedShieldPercent": 0.75,
+                "ShieldDuration": 3.0
+            },
+            "desc": "즉시 모자 @HatsToGrant@개를 얻고 카파 주스의 가격이 @HatTrickPriceReduction@ 감소합니다.<br><br>체력이 @LowHealthThreshold*100@% 밑으로 떨어질 만큼 피해를 받으면 @ShieldDuration@초 동안 <speed>@MoveSpeedBoostPercent*100@%의 이동 속도</speed>와 <shield>@ShieldHealth@의 피해를 흡수하는 보호막</shield>을 얻지만 모자를 하나 잃습니다. @Cooldown@초의 재사용 대기시간이 적용됩니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
+            "id": 241,
+            "name": "해트트릭",
+            "rarity": 1,
+            "tooltip": "즉시 모자 @HatsToGrant@개를 얻고 카파 주스의 가격이 @HatTrickPriceReduction@ 감소합니다.<br><br>체력이 @LowHealthThreshold*100@% 밑으로 떨어질 만큼 피해를 받으면 @ShieldDuration@초 동안 <speed>@MoveSpeedBoostPercent*100@%의 이동 속도</speed>와 <shield>@ShieldHealth@의 피해를 흡수하는 보호막</shield>을 얻지만 모자를 하나 잃습니다. @Cooldown@초의 재사용 대기시간이 적용됩니다."
         },
         {
             "apiName": "HeavyHitter",
@@ -2829,6 +3410,18 @@
             "tooltip": "크기가 작아져 <speed>이동 속도가 @MovespeedMod*100@%</speed> 증가하며 상대가 자신보다 큰 정도에 비례해 챔피언에게 @SmallBonusDamage*100@%~@XLargeBonusDamage*100@%의 추가 피해를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>이 게임에서 입힌 피해량: @f2@"
         },
         {
+            "apiName": "TransmutePrismatic",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "무작위 프리즘 증강을 얻습니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmuteprismatic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmuteprismatic_small.png",
+            "id": 238,
+            "name": "전환: 프리즘",
+            "rarity": 1,
+            "tooltip": "무작위 프리즘 증강을 얻습니다."
+        },
+        {
             "apiName": "FrozenFoundations",
             "calculations": {},
             "dataValues": {
@@ -2861,6 +3454,18 @@
             "tooltip": "체력 회복 및 보호막 효과에 치명타가 적용되어 @CritHeal*100@% 증폭될 수 있습니다. 치명타 확률이 @CritChance*100@% 증가합니다. <br><br>추가 체력 회복량: @f1@<br>추가 보호막 흡수량: @f2@"
         },
         {
+            "apiName": "TransmuteGold",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "무작위 골드 증강을 얻습니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmutegold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmutegold_small.png",
+            "id": 237,
+            "name": "전환: 골드",
+            "rarity": 0,
+            "tooltip": "무작위 골드 증강을 얻습니다."
+        },
+        {
             "apiName": "ApexInventor",
             "calculations": {},
             "dataValues": {
@@ -2879,18 +3484,35 @@
             "apiName": "MirrorImage",
             "calculations": {},
             "dataValues": {
-                "AugmentCooldown": 60.0,
+                "AugmentCooldown": 30.0,
                 "CloneDuration": 8.0,
                 "HealthThreshold": 0.30000001192092896,
                 "StealthDuration": 1.25
             },
-            "desc": "체력이 @HealthThreshold*100@% 아래로 떨어지면 잠시 <keywordStealth>투명</keywordStealth> 상태가 되고 자신의 분신을 생성합니다.",
+            "desc": "체력이 @HealthThreshold*100@% 아래로 떨어지면 잠시 <keywordStealth>투명</keywordStealth> 상태가 되고 자신의 분신 4명을 생성합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
             "id": 172,
             "name": "거울 환영",
             "rarity": 0,
-            "tooltip": "체력이 @HealthThreshold*100@% 아래로 떨어지면 잠시 <keywordStealth>투명</keywordStealth> 상태가 되고 자신의 분신을 생성합니다."
+            "tooltip": "체력이 @HealthThreshold*100@% 아래로 떨어지면 잠시 <keywordStealth>투명</keywordStealth> 상태가 되고 자신의 분신 4명을 생성합니다."
+        },
+        {
+            "apiName": "Desecrator",
+            "calculations": {},
+            "dataValues": {
+                "ArmorMRRatio": 0.20000000298023224,
+                "BleedDuration": 5.0,
+                "CurseCounter": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
+            },
+            "desc": "적 챔피언을 <status>이동 불가</status> 상태로 만들면 <keywordMajor>저주</keywordMajor> @CurseCounter@중첩을 얻습니다. <keywordMajor>저주</keywordMajor> 중첩 하나당 <armor>방어력</armor>과 <magicresistance>마법 저항력</magicresistance>이 영구히 상승합니다.<br><br>또한 보유할 수 있는 <keywordMajor>저주</keywordMajor> 최대 중첩이 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/desecrator_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/desecrator_small.png",
+            "id": 218,
+            "name": "신성 모독자",
+            "rarity": 0,
+            "tooltip": "적 챔피언을 <status>이동 불가</status> 상태로 만들면 <keywordMajor>저주</keywordMajor> @CurseCounter@중첩을 얻고 이번 라운드에 얻은 <keywordMajor>저주</keywordMajor> 중첩에 해당하는 추가 <trueDamage>고정 피해</trueDamage>를 입힙니다.<br><br>{{ Cherry_CurseShared }}<br><br><keywordMajor>총 저주</keywordMajor>에 따라 @f1@의 <armor>방어력</armor> 및 <magicresistance>마법 저항력</magicresistance>을 얻습니다.<br><br><rules><keywordMajor>총 저주</keywordMajor>의 @ArmorMRRatio*100@%를 <armor>방어력</armor> 및 <magicresistance>마법 저항력</magicresistance>으로 전환합니다.</rules>"
         },
         {
             "apiName": "AllForYou",
@@ -3030,7 +3652,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 4000.0,
+                "PrismaticSellValue": 3750.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "보유한 모든 퀘스트 아이템이 아닌 아이템을 구매한 가격의 @SellValueTooltip@%로 즉시 판매합니다. 할인된 모루에 적격입니다.",
@@ -3045,15 +3667,18 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "ASToADConversion": 25.0
+                "Breakpoint1": 5.0,
+                "OnHitDamage": 40.0,
+                "SlowResistValue": 1.0,
+                "TotalASValue": 0.25
             },
-            "desc": "<attackSpeed>공격 속도</attackSpeed>에 비례해 <scaleAD>공격력</scaleAD>이 증가합니다.",
+            "desc": "<attackSpeed>총 공격 속도가 @TotalASValue*100@%</attackSpeed> 증가합니다. 초당 <attackSpeed>공격 횟수</attackSpeed> @Breakpoint1@에서 새로운 효과를 얻습니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
             "name": "벼락",
             "rarity": 1,
-            "tooltip": "<attackSpeed>0.1의 공격 속도</attackSpeed>당 <scaleAD>@ASToADConversion*.1@의 공격력</scaleAD>을 얻습니다."
+            "tooltip": "<attackSpeed>총 공격 속도가 @TotalASValue*100@%</attackSpeed> 증가합니다.<br><br><attackSpeed>초당 공격 횟수</attackSpeed> @Breakpoint1@회에서 <magicDamage>마법 피해</magicDamage>({{ Item_Keyword_OnHit }})가 @OnHitDamage@ 증가합니다.<br><br><rules><attackSpeed>총 공격 속도</attackSpeed>가 <attackSpeed>추가 공격 속도</attackSpeed>의 증가율로 계산됩니다.</rules><br><br>적에게 입힌 적중 시 마법 피해: @f1@"
         },
         {
             "apiName": "Repulsor",
@@ -3064,13 +3689,13 @@
                 "KnockbackDistance": 750.0,
                 "KnockbackRange": 500.0
             },
-            "desc": "체력이 @HealthThreshold1*100@ 또는 @HealthThreshold2*100@% 이하로 내려가면 주변 적들을 <status>뒤로 밀어냅니다</status>.",
+            "desc": "체력이 @HealthThreshold1*100@% 또는 @HealthThreshold2*100@% 이하로 내려가면 주변 적들을 <status>뒤로 밀어냅니다</status>.",
             "iconLarge": "assets/ux/cherry/augments/icons/repulsor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/repulsor_small.png",
             "id": 69,
             "name": "반발",
             "rarity": 0,
-            "tooltip": "체력이 @HealthThreshold1*100@ 또는 @HealthThreshold2*100@% 이하로 내려가면 주변 적들을 <status>뒤로 밀어냅니다</status>."
+            "tooltip": "체력이 @HealthThreshold1*100@% 또는 @HealthThreshold2*100@% 이하로 내려가면 주변 적들을 <status>뒤로 밀어냅니다</status>."
         },
         {
             "apiName": "SkilledSniper",
@@ -3183,8 +3808,23 @@
             "iconSmall": "assets/ux/cherry/augments/icons/divebomber_small.png",
             "id": 25,
             "name": "폭격기",
-            "rarity": 1,
+            "rarity": 0,
             "tooltip": "라운드마다 처음으로 사망하는 아군이 폭발해 주변 적에게 <trueDamage>대상 최대 체력의 @PercentMaxHPDamage*100@%에 해당하는 고정 피해</trueDamage>를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
+        },
+        {
+            "apiName": "GoHSacrificeForGold",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0.25,
+                "RoundCountCap": 4.0
+            },
+            "desc": "<lifeSteal>현재 체력의 @HealthReduction*100@%</lifeSteal>를 희생합니다. <br><br>@RoundCountCap@라운드 후 추가 <keywordMajor>골드 증강</keywordMajor>을 얻고 체력을 회복합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificeforgold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 303,
+            "name": "희생: 골드",
+            "rarity": 1,
+            "tooltip": "<lifeSteal>현재 체력의 @HealthReduction*100@%</lifeSteal>를 희생합니다. <br><br>@RoundCountCap@라운드 후 추가 <keywordMajor>골드 증강</keywordMajor>을 얻고 체력을 회복합니다.<br><br>남은 라운드: @f1@"
         },
         {
             "apiName": "BluntForce",
@@ -3204,13 +3844,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "소환사 질주를 <spellName>운명의 부름</spellName>으로 교체합니다. <br><br><rules><spellName>운명의 부름</spellName>이 동료를 최대 4초 동안 끌어당겨 대상으로 지정할 수 없는 상태로 만듭니다. 동료가 이동할 경우 동료는 해당 방향으로 날아가 처음 충돌하는 챔피언과 주변 모든 적을 <status>밀어냅니다</status>.</rules><br>",
+            "desc": "소환사 질주를 <spellName>운명의 부름</spellName>으로 교체합니다. <br><br><rules><spellName>운명의 부름</spellName>으로 동료가 최대 4초 동안 대상으로 지정할 수 없는 상태가 됩니다. 동료는 직접 날아가 적을 <status>밀어낼 수 있습니다</status>.</rules><br>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "계약",
             "rarity": 1,
-            "tooltip": "소환사 질주를 <spellName>운명의 부름</spellName>으로 교체합니다. <br><br><rules><spellName>운명의 부름</spellName>이 동료를 최대 4초 동안 끌어당겨 대상으로 지정할 수 없는 상태로 만듭니다. 동료가 이동할 경우 동료는 해당 방향으로 날아가 처음 충돌하는 챔피언과 주변 모든 적을 <status>밀어냅니다</status>.</rules><br>"
+            "tooltip": "소환사 질주를 <spellName>운명의 부름</spellName>으로 교체합니다. <br><br><rules><spellName>운명의 부름</spellName>으로 동료가 최대 4초 동안 대상으로 지정할 수 없는 상태가 됩니다. 동료는 직접 날아가 적을 <status>밀어낼 수 있습니다</status>.</rules><br>"
         },
         {
             "apiName": "Flashbang",
@@ -3262,6 +3902,21 @@
             "tooltip": "보유한 소환사 주문이 무작위로 바뀝니다. 전투 중 소환사 주문을 사용하면 무작위로 바뀌고 재사용 대기시간 @Cooldown@초가 적용됩니다."
         },
         {
+            "apiName": "GoHSacrificeForSilver",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0,
+                "RoundCountCap": 2.0
+            },
+            "desc": "@RoundCountCap@라운드 후 추가 <keywordMajor>실버 증강</keywordMajor>을 얻습니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificefor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 302,
+            "name": "희생: 실버",
+            "rarity": 0,
+            "tooltip": "@RoundCountCap@라운드 후 추가 <keywordMajor>실버 증강</keywordMajor>을 얻습니다.<br><br>남은 라운드: @f1@"
+        },
+        {
             "apiName": "ShrinkRay",
             "calculations": {},
             "dataValues": {
@@ -3295,8 +3950,8 @@
             "calculations": {},
             "dataValues": {
                 "StackMultiplication": 6.0,
-                "StackThreshold": 325.0,
-                "StacktoRegenConversion": 0.10000000149011612
+                "StackThreshold": 400.0,
+                "StacktoRegenConversion": 0.125
             },
             "desc": "조건: 효과가 @StackThreshold@중첩 이상 적용된 강철심장을 보유해야 합니다.<br><br>보상: 강철심장 중첩이 @StackMultiplication@배가 됩니다. <healing>체력 재생</healing>이 강철심장 중첩의 @StacktoRegenConversion*100@%만큼 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_steelyourheart_large.png",
@@ -3344,15 +3999,16 @@
                 }
             },
             "dataValues": {
-                "HealthScalar": 0.05000000074505806
+                "HealthScalar": 0.05000000074505806,
+                "SpellIDCD": 5.0
             },
-            "desc": "적 챔피언을 <status>이동 불가</status> 상태로 만든 후 <shield>@TotalShield@의 피해를 흡수하는 보호막</shield>을 얻습니다.<br>",
+            "desc": "적 챔피언을 <status>이동 불가</status> 상태로 만들거나 <status>이동 스킬을 사용할 수 없게</status> 하면 <shield>@TotalShield@의 피해를 흡수하는 보호막</shield>을 얻습니다.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/courageofthecolossus_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
             "id": 18,
             "name": "거석상의 용기",
             "rarity": 2,
-            "tooltip": "적 챔피언을 <status>이동 불가</status> 상태로 만든 후 <shield>@TotalShield@의 피해를 흡수하는 보호막</shield>을 얻습니다.<br><br>이번 라운드에 생성한 보호막: @f1@<br>생성한 총 보호막: @f2@"
+            "tooltip": "적 챔피언을 <status>이동 불가</status> 상태로 만들거나 <status>이동 스킬을 사용할 수 없게</status> 하면 <shield>@TotalShield@의 피해를 흡수하는 보호막</shield>을 얻습니다.<br><br>이번 라운드에 생성한 보호막: @f1@<br>생성한 총 보호막: @f2@"
         },
         {
             "apiName": "FruitsOfYourLabor",
@@ -3364,13 +4020,13 @@
                 "Duration": 2.0,
                 "MSBoost": 0.4000000059604645
             },
-            "desc": "근처 아군과 힘의 꽃 효과를 공유하고, 누리는 효과를 @AmpAmountTooltip@% 높입니다.",
+            "desc": "@AllyMaxRange@의 사거리 내에 있는 근처 아군과 힘의 꽃 효과를 공유하고, 효과를 @AmpAmountTooltip@% 높입니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
             "id": 222,
             "name": "노력의 결실",
-            "rarity": 1,
-            "tooltip": "근처 아군과 힘의 꽃 효과를 공유하고, 누리는 효과를 @AmpAmountTooltip@% 높입니다."
+            "rarity": 0,
+            "tooltip": "@AllyMaxRange@의 사거리 내에 있는 근처 아군과 힘의 꽃 효과를 공유하고, 효과를 @AmpAmountTooltip@% 높입니다."
         },
         {
             "apiName": "InfernalSoul",
@@ -3438,6 +4094,24 @@
             "tooltip": "<spellName>감전</spellName>과 <spellName>난입</spellName> 핵심 룬을 얻습니다.<br><br>이번 라운드에 입힌 감전 피해량: @f1@<br>총 감전 피해량: @f2@"
         },
         {
+            "apiName": "DarkBlessing",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHasteRatio": 0.33000001311302185,
+                "BleedDuration": 5.0,
+                "Cooldown": 1.5,
+                "CurseCounter": 4.0,
+                "Radius": 450.0
+            },
+            "desc": "체력을 회복시키거나 보호막을 씌우면 <keywordMajor>저주</keywordMajor> @CurseCounter@중첩을 얻습니다. <keywordMajor>저주</keywordMajor> 중첩 하나당 스킬 가속이 영구히 상승합니다.<br><br>또한 보유할 수 있는 <keywordMajor>저주</keywordMajor> 최대 중첩이 증가합니다.<br><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/darkblessing_small.png",
+            "id": 215,
+            "name": "어둠의 축복",
+            "rarity": 1,
+            "tooltip": "체력을 회복시키거나 보호막을 씌우면 <keywordMajor>저주</keywordMajor> @CurseCounter@중첩을 얻으며, 이번 라운드에 얻은 <keywordMajor>저주</keywordMajor> 중첩에 해당하는 추가 <trueDamage>고정 피해</trueDamage>를 주변 적 챔피언에게 입힙니다.<br><br>{{ Cherry_CurseShared }}<br><br><keywordMajor>총 저주</keywordMajor>에 따라 @f1@의 스킬 가속을 얻습니다.<br><br><rules><keywordMajor>총 저주</keywordMajor>의 @AbilityHasteRatio*100@%를 스킬 가속으로 전환합니다.</rules>"
+        },
+        {
             "apiName": "MindtoMatter",
             "calculations": {},
             "dataValues": {
@@ -3479,6 +4153,21 @@
             "name": "세월의 지혜",
             "rarity": 2,
             "tooltip": "지금 1레벨이 증가하고 두 라운드마다 추가로 1레벨이 증가합니다. 레벨 제한이 사라집니다."
+        },
+        {
+            "apiName": "GoHSacrificeForPrismatic",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0.5,
+                "RoundCountCap": 7.0
+            },
+            "desc": "<lifeSteal>현재 체력의 @HealthReduction*100@%</lifeSteal>를 희생합니다. <br><br>@RoundCountCap@라운드 후 추가 <keywordMajor>프리즘 증강</keywordMajor>을 얻고 체력을 회복합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificeforprismatic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 304,
+            "name": "희생: 프리즘",
+            "rarity": 2,
+            "tooltip": "<lifeSteal>현재 체력의 @HealthReduction*100@%</lifeSteal>를 희생합니다. <br><br>@RoundCountCap@라운드 후 추가 <keywordMajor>프리즘 증강</keywordMajor>을 얻고 체력을 회복합니다.<br><br>남은 라운드: @f1@"
         },
         {
             "apiName": "NowYouSeeMe",
@@ -3527,7 +4216,7 @@
             },
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 1.399999976158142
+                "CritDamage": 1.5499999523162842
             },
             "desc": "스킬에 치명타가 적용될 수 있습니다. 치명타 확률이 @CritChance*100@% 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/jeweledgauntlet_large.png",
@@ -3536,6 +4225,51 @@
             "name": "보석 건틀릿",
             "rarity": 2,
             "tooltip": "스킬에 총 @CritDamage*100@%의 피해를 입히는 치명타가 적용될 수 있습니다. 치명타 확률이 @CritChance*100@% 증가합니다. 주문력에 비례해 @APToCritConversion@의 치명타 확률을 추가로 얻습니다.<br><br>이번 라운드에 입힌 추가 피해량: @f1@<br>총 추가 피해량: @f2@"
+        },
+        {
+            "apiName": "AndMyAxe",
+            "calculations": {
+                "TotalDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 225.0,
+                            "mStartValue": 60.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.6000000238418579
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AutoCastRange": 950.0,
+                "BaseDamage": 10.0,
+                "CDIfPickedUp": 1.5,
+                "Cooldown": 8.0,
+                "DebuffDuration": 4.0,
+                "ShredAmount": 0.20000000298023224,
+                "SlowAmount": 0.4000000059604645,
+                "SlowDuration": 1.5
+            },
+            "desc": "<keywordMajor>자동 사용</keywordMajor>: <br>주기적으로 가장 가까운 적에게 도끼를 던져 피해를 입히고 둔화를 적용하며, 방어력과 마법 저항력을 감소시킵니다. 도끼를 획득하면 재사용 대기시간이 감소합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/andmyaxe_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/andmyaxe_small.png",
+            "id": 309,
+            "name": "도끼 받아라!",
+            "rarity": 1,
+            "tooltip": "<keywordMajor>자동 사용</keywordMajor>: @Cooldown@초마다 가장 가까운 적에게 도끼를 던져 대상에게 @TotalDamage@의 적응형 피해를 입히고 @SlowDuration@초 동안 @SlowAmount*100@% <status>둔화</status>를 적용하며, @DebuffDuration@초 동안 <scaleArmor>방어력</scaleArmor>과 <scaleMR>마법 저항력</scaleMR>을 @ShredAmount*100@% 감소시킵니다. 도끼를 획득하면 재사용 대기시간이 @CDIfPickedUp@초(%i:cooldown%)로 감소합니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@<br>"
         }
     ]
 }

@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.4.1",
+    "version": "15.5.1",
     "data": {
         "KogMaw": {
             "id": "KogMaw",
@@ -166,7 +166,7 @@
                     "id": "KogMawQ",
                     "name": "腐蚀唾液",
                     "description": "克格莫发射一团腐蚀性物质，对目标造成魔法伤害，并暂时腐蚀目标的护甲和魔法抗性。克格莫还会获得额外攻速。",
-                    "tooltip": "<spellPassive>被动：</spellPassive>克格莫获得<attackSpeed>{{ e2 }}%攻击速度</attackSpeed>。<br /><br /><spellActive>主动：</spellActive>克格莫抛射出一团腐蚀性的唾沫，对命中的第一个敌人造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，以及持续{{ e4 }}秒的<scaleArmor>{{ shredamount }}%护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>击碎。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>被动：</spellPassive>克格莫获得<attackSpeed>{{ attackspeed*100 }}%攻击速度</attackSpeed>。<br /><br /><spellActive>主动：</spellActive>克格莫抛射出一团腐蚀性的唾沫，对命中的第一个敌人造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，以及持续{{ shredduration }}秒的<scaleArmor>{{ shredamount }}%护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>击碎。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "攻击速度",
@@ -174,8 +174,8 @@
                             "护甲和魔法抗性击碎"
                         ],
                         "effect": [
-                            "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%",
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ attackspeed*100.000000 }}% -> {{ attackspeednl*100.000000 }}%",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ shredamount }}% -> {{ shredamountNL }}%"
                         ]
                     },
@@ -200,32 +200,32 @@
                     "effect": [
                         null,
                         [
-                            80,
-                            125,
-                            170,
-                            215,
-                            260
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            10,
-                            15,
-                            20,
-                            25,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            16,
-                            20,
-                            24,
-                            28,
-                            32
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             1,
@@ -272,10 +272,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "80/125/170/215/260",
-                        "10/15/20/25/30",
-                        "16/20/24/28/32",
-                        "4",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "1",
                         "1",
                         "100",
@@ -309,14 +309,14 @@
                     "id": "KogMawBioArcaneBarrage",
                     "name": "生化弹幕",
                     "description": "克格莫的攻击距离得到了提升，并且能够对目标造成额外的魔法伤害，伤害值基于目标的最大生命值。",
-                    "tooltip": "克格莫获得{{ e1 }}攻击距离并且他的攻击造成额外的<magicDamage>{{ totalhealthdamage }}最大生命值的魔法伤害</magicDamage>，持续{{ e3 }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "克格莫获得{{ range }}攻击距离，并且他的攻击附带额外的<magicDamage>{{ totalhealthdamage }}最大生命值的魔法伤害</magicDamage>，持续{{ duration }}秒。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "距离",
                             "最大生命值伤害"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ range }} -> {{ rangeNL }}",
                             "{{ maxhealthdamage }}% -> {{ maxhealthdamageNL }}%"
                         ]
                     },
@@ -341,39 +341,11 @@
                     "effect": [
                         null,
                         [
-                            130,
-                            150,
-                            170,
-                            190,
-                            210
-                        ],
-                        [
-                            3,
-                            3.75,
-                            4.5,
-                            5.25,
-                            6
-                        ],
-                        [
-                            8,
-                            8,
-                            8,
-                            8,
-                            8
-                        ],
-                        [
-                            100,
-                            100,
-                            100,
-                            100,
-                            100
-                        ],
-                        [
-                            100,
-                            100,
-                            100,
-                            100,
-                            100
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -383,46 +355,74 @@
                             0
                         ],
                         [
-                            100,
-                            100,
-                            100,
-                            100,
-                            100
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.15,
-                            0.2,
-                            0.25,
-                            0.3,
-                            0.35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            20,
-                            25,
-                            30,
-                            35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
-                        "130/150/170/190/210",
-                        "3/3.75/4.5/5.25/6",
-                        "8",
-                        "100",
-                        "100",
                         "0",
-                        "100",
-                        "15",
-                        "0.15/0.2/0.25/0.3/0.35",
-                        "15/20/25/30/35"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
@@ -450,7 +450,7 @@
                     "id": "KogMawVoidOoze",
                     "name": "虚空淤泥",
                     "description": "克格莫抛射出一团特殊的分泌物，对经过或停留在分泌物上的敌人造成伤害和减速效果。",
-                    "tooltip": "克格莫呕出胆汁，造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>并留下一条持续{{ e3 }}秒的软泥路径。软泥中的敌人们会被<status>减速</status>{{ slowamount }}%。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "克格莫呕出胆汁，造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>并留下一条持续{{ trailduration }}秒的软泥路径。软泥中的敌人们会被<status>减速</status>{{ slowamount }}%。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -458,7 +458,7 @@
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ slowamount }}% -> {{ slowamountNL }}%",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -484,32 +484,32 @@
                     "effect": [
                         null,
                         [
-                            70,
-                            110,
-                            150,
-                            190,
-                            230
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            35,
-                            40,
-                            45,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.25,
-                            0.25,
-                            0.25,
-                            0.25,
-                            0.25
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -556,10 +556,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "70/110/150/190/230",
-                        "30/35/40/45/50",
-                        "4",
-                        "0.25",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",

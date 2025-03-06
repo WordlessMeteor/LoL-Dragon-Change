@@ -33,8 +33,8 @@
             "apiName": "ChainLightning",
             "calculations": {},
             "dataValues": {
-                "DamageMod": 0.5,
-                "Range": 1000.0
+                "DamageMod": 0.4000000059604645,
+                "Range": 800.0
             },
             "desc": "Zadanie obrażeń wrogowi zadaje też <trueDamage>@DamageMod*100@% obrażeń nieuchronnych</trueDamage> jego partnerowi, o ile ten znajduje się w pobliżu.",
             "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
@@ -265,6 +265,18 @@
             "tooltip": "Rzucasz czary przywoływacza <abilityName>Bariera</abilityName> i <abilityName>Uzdrowienie</abilityName> na ciebie i twojego sojusznika. Zapewnia <shield>tarczę o wytrzymałości @BarrierAmount@ pkt.</shield>, przywraca <healing>@HealAmount@ pkt. zdrowia</healing> i zwiększa <speed>prędkość ruchu o 30%</speed> na 1 sek.<br><br>Całkowite leczenie: @f1@ pkt.<br>Wytrzymałość stworzonych tarcz: @f2@ pkt."
         },
         {
+            "apiName": "TransmuteChaos",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Zdobywasz losowe złote i srebrne ulepszenie.",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmutechaos_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmutechaos_small.png",
+            "id": 243,
+            "name": "Transmutacja: Chaos",
+            "rarity": 2,
+            "tooltip": "Zdobywasz losowe złote i srebrne ulepszenie."
+        },
+        {
             "apiName": "Chauffeur",
             "calculations": {},
             "dataValues": {
@@ -397,9 +409,70 @@
             "tooltip": "Gdy zdrowie twojego sojusznika spadnie poniżej <health>@AllyHealthThreshold*100@%</health>, zamieniasz <health>@CurrentHealthToDrain*100@% swojego aktualnego zdrowia</health> na <shield>tarczę</shield> o takiej samej wartości dla niego.<br><br>Wytrzymałość tarcz wygenerowanych w tej rundzie: @f1@ pkt.<br>Całkowita wytrzymałość tarcz: @f2@ pkt."
         },
         {
+            "apiName": "Firefox",
+            "calculations": {
+                "MultiFireDamage": {
+                    "__type": "GameCalculationModified",
+                    "mModifiedGameCalculation": "SingleFireDamage",
+                    "mMultiplier": {
+                        "__type": "NamedDataValueCalculationPart",
+                        "mDataValue": "RepeatDamageMod"
+                    },
+                    "mSimpleTooltipCalculationDisplay": 6
+                },
+                "SingleFireDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 45.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.4000000059604645
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.25,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AcquisitionRange": 550.0,
+                "BaseDamage": 20.0,
+                "BonusAcquisitionRange": 725.0,
+                "Cooldown": 7.0,
+                "FlameDuration": 2.5,
+                "InitialDelay": 0.25,
+                "MinionBonusDamageMultiplier": 2.0,
+                "MinionBonusDamageThreshold": 0.20000000298023224,
+                "MovementSpeed": 0.4000000059604645,
+                "MovementSpeedDuration": 2.0,
+                "OrbitRadius": 150.0,
+                "RepeatDamageMod": 0.30000001192092896,
+                "SecondaryDelay": 0.4000000059604645
+            },
+            "desc": "<keywordMajor>Automatyczne Użycie</keywordMajor>:<br>Zyskujesz prędkość ruchu i przyzywasz trzy płomienie, które cię okrążają. Płomienie obierają za cel najbliższego widocznego wroga będącego w zasięgu i zadają obrażenia adaptacyjne.",
+            "iconLarge": "assets/ux/cherry/augments/icons/firfox_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/firfox_small.png",
+            "id": 308,
+            "name": "Ognisty Lis",
+            "rarity": 0,
+            "tooltip": "<keywordMajor>Automatyczne użycie</keywordMajor>: Zyskujesz <speed>@MovementSpeed*100@% prędkości ruchu</speed> i co @Cooldown@ sek. przyzywasz 3 płomienie, które cię okrążają. Płomienie obierają za cel najbliższego widocznego wroga będącego w zasięgu i zadają @SingleFireDamage@ pkt. obrażeń adaptacyjnych. Kolejne ciosy zadane temu samemu celowi zadają @RepeatDamageMod*100@% obrażeń.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
+        },
+        {
             "apiName": "SummonerRevolution",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "CooldownBetweenCasts": 3.0
+            },
             "desc": "Za każdy czar przywoływacza odśwież jego czas odnowienia raz na rundę.",
             "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
@@ -486,16 +559,15 @@
             "apiName": "Quest_UrfsChampion",
             "calculations": {},
             "dataValues": {
-                "2ndPickTakendownsNeeded": 13.0,
                 "TakedownsNeeded": 10.0
             },
-            "desc": "Warunek: Zalicz @TakedownsNeeded@ udziałów w zabójstwie, a jeśli użyjesz tego jako drugiego ulepszenia, liczba ta zostanie zwiększona do @2ndPickTakendownsNeeded@.<br><br>Nagroda: Złota Szpatułka",
+            "desc": "Wymagania: Weź udział w @TakedownsNeeded@ zabójstwach.<br><br>Nagroda: Złota Szpatułka",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_urfschampion_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_urfschampion_small.png",
             "id": 154,
             "name": "Zadanie: Czempion Urfa",
             "rarity": 1,
-            "tooltip": "Warunek: Zalicz @TakedownsNeeded@ udziałów w zabójstwie, a jeśli użyjesz tego jako drugiego ulepszenia, liczba ta zostanie zwiększona do @2ndPickTakendownsNeeded@.<br><br>Nagroda: Złota Szpatułka"
+            "tooltip": "{{Cherry_Quest_UrfsChampion_Summary}}<br><br>Udziały w zabójstwach: @f1@"
         },
         {
             "apiName": "Vengeance",
@@ -672,15 +744,16 @@
             "apiName": "SlapAround",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForce": 20.0
+                "AdaptiveForce": 20.0,
+                "SpellIDCD": 5.0
             },
-            "desc": "Za każdym razem, gdy <status>unieruchomisz</status> wroga, zyskujesz @AdaptiveForce@ pkt. Siły Adaptacyjnej do końca rundy. Efekt kumuluje się w nieskończoność.",
+            "desc": "Za każdym razem, gdy <status>unieruchomisz</status> lub <status>uziemisz</status> wroga, zyskujesz @AdaptiveForce@ pkt. siły adaptacyjnej do końca rundy. Efekt kumuluje się w nieskończoność.",
             "iconLarge": "assets/ux/cherry/augments/icons/slaparound_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/slaparound_small.png",
             "id": 136,
             "name": "Sponiewieranie",
             "rarity": 0,
-            "tooltip": "Za każdym razem, gdy <status>unieruchomisz</status> wroga, zyskujesz @AdaptiveForce@ pkt. Siły Adaptacyjnej do końca rundy. Efekt kumuluje się w nieskończoność."
+            "tooltip": "{{ Cherry_SlapAround_Summary }}<br><br>Obecna siła adaptacyjna: @f1@ pkt."
         },
         {
             "apiName": "MagicMissile",
@@ -786,7 +859,7 @@
             "calculations": {},
             "dataValues": {
                 "APPerProc": 2.0,
-                "ProcCooldown": 0.75,
+                "ProcCooldown": 1.0,
                 "SpellIDCD": 5.0,
                 "StartingAPIfSecondAugment": 40.0
             },
@@ -835,7 +908,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/vulnerability_small.png",
             "id": 92,
             "name": "Wrażliwość",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Twoje efekty przedmiotów i obrażenia w czasie mogą trafić krytycznie i zadać @CritDamage*100@% dodatkowych obrażeń. Zyskujesz @CritChance*100@% szansy na trafienie krytyczne.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
@@ -847,7 +920,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/cannonfodder_small.png",
             "id": 10,
             "name": "Mięso Armatnie",
-            "rarity": 1,
+            "rarity": 0,
             "tooltip": "Wystrzeliwujesz się z działa do walki."
         },
         {
@@ -863,6 +936,138 @@
             "name": "Ruletka nad Ruletki",
             "rarity": 2,
             "tooltip": "Zamienia Ucieczkę na superumiejętność losowego bohatera. Po użyciu superumiejętność zostaje zastąpiona kolejną superumiejętnością losowego bohatera."
+        },
+        {
+            "apiName": "ClownCollege",
+            "calculations": {
+                "BasicAttackDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 35.0,
+                            "mStartValue": 20.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.3499999940395355
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.5,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "QCritDamageMod": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "SumOfSubPartsCalculationPart",
+                            "mSubparts": [
+                                {
+                                    "__type": "NumberCalculationPart",
+                                    "mNumber": 1.5499999523162842
+                                },
+                                {
+                                    "__type": "StatByCoefficientCalculationPart",
+                                    "mCoefficient": 1.0,
+                                    "mStat": 8,
+                                    "mStatFormula": 2
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "TotalDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.5,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.550000011920929
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "BaseDamage": 100.0,
+                "CastRange": 400.0,
+                "EDITDECEIVEFORREALVALUES": 0,
+                "ExtraAATime": 1.0,
+                "FearDamage": 0.25,
+                "FearDuration": 1.0,
+                "FearRadius": 350.0,
+                "PseudoCastTime": 0.125,
+                "StealthDuration": 3.0
+            },
+            "desc": "Zyskujesz <spellName>Podstęp</spellName> w polu ucieczki. <br>Zyskujesz umiejętność bierną: <spellName>Cios w Plecy</spellName>.<br><br>Gdy zginiesz, przy tobie pojawia się eksplodujące pudło, które zadaje dużą ilość <trueDamage>obrażeń nieuchronnych</trueDamage> oraz nakłada <status>przestraszenie</status> na pobliskich wrogów.",
+            "iconLarge": "assets/ux/cherry/augments/icons/clowncollege_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/clowncollege_small.png",
+            "id": 310,
+            "name": "Wyższa Szkoła Błaznowania",
+            "rarity": 2,
+            "tooltip": "<spellName>Cios w Plecy</spellName>: Zadajesz @BasicAttackDamage@ pkt. <physicalDamage>dodatkowych obrażeń fizycznych</physicalDamage> podczas atakowania od tyłu.<br><br><spellName>Podstęp</spellName>: Teleportujesz się i zyskujesz <keywordStealth>niewidzialność</keywordStealth> na @StealthDuration@ sek. Twój następny atak po zyskaniu <keywordStealth>niewidzialności</keywordStealth> zadaje dodatkowo <physicalDamage>@TotalDamage@ pkt. obrażeń fizycznych</physicalDamage>. Jeżeli atak zostanie wyprowadzony od tyłu, trafi krytycznie i zada @QCritDamageMod@ obrażeń.<br><br><spellName>Halucynacje: Śmierć</spellName>: Po śmierci zadaje <trueDamage>obrażenia nieuchronne</trueDamage> równe @FearDamage*100@% maksymalnego zdrowia i na obszarze dookoła ciebie nakłada przestraszenie na @FearDuration@ sek."
+        },
+        {
+            "apiName": "NumbToPain",
+            "calculations": {
+                "ChampRange": {
+                    "__type": "GameCalculationConditional",
+                    "mConditionalCalculationRequirements": {
+                        "__type": "IsRangedCastRequirement"
+                    },
+                    "mConditionalGameCalculation": "{06387172}",
+                    "mDefaultGameCalculation": "{792cf56b}"
+                },
+                "{06387172}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{48b676ff}"
+                        }
+                    ]
+                },
+                "{792cf56b}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{c8202a54}"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 6.0,
+                "MeleeReduction": 0.30000001192092896,
+                "RangedReduction": 0.15000000596046448
+            },
+            "desc": "Za każdym razem, gdy otrzymasz obrażenia, @MeleeReduction*100@% tych obrażeń zostaje zadanych jako efekt krwawienia rozłożony na @BleedDuration@ sek. <br><br><rules>Zmniejszenie obrażeń jest zmniejszone do @RangedReduction*100@% w przypadku bohaterów walczących na dystans.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/numbtopain_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/numbtopain_small.png",
+            "id": 251,
+            "name": "Z Odrętwienia w Ból",
+            "rarity": 0,
+            "tooltip": "Za każdym razem, gdy otrzymasz obrażenia, @MeleeReduction*100@% tych obrażeń zostaje zadanych jako efekt krwawienia rozłożony na @BleedDuration@ sek. <br><br><rules>Zmniejszenie obrażeń jest zmniejszone do @RangedReduction*100@% w przypadku bohaterów walczących na dystans.</rules>"
         },
         {
             "apiName": "MadScientist",
@@ -908,6 +1113,44 @@
             "tooltip": "Raz na rundę odświeżasz swoją superumiejętność po użyciu jej."
         },
         {
+            "apiName": "TricksterDemon",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 300.0,
+                            "mStartValue": 100.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 0.6000000238418579,
+                "BaseDamage": 100.0,
+                "Radius": 300.0,
+                "bonusADRatio": 0.4000000059604645
+            },
+            "desc": "Gdy wyjdziesz z ukrycia, eksplodujesz i zadajesz <magicDamage>@TotalDamage@ pkt. obrażeń magicznych</magicDamage>. Twoje klony i pułapki robią to samo przy śmierci.",
+            "iconLarge": "assets/ux/cherry/augments/icons/tricksterdemon_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tricksterdemon_small.png",
+            "id": 236,
+            "name": "Podstępny Demon",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_TricksterDemon_Summary }}<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
+        },
+        {
             "apiName": "Dematerialize",
             "calculations": {},
             "dataValues": {
@@ -921,6 +1164,36 @@
             "name": "Dematerializacja",
             "rarity": 0,
             "tooltip": "{{Cherry_Dematerialize_Summary}}<br><br>Zyskana siła adaptacyjna: @f1@ pkt."
+        },
+        {
+            "apiName": "SlowAndSteady",
+            "calculations": {
+                "{779aafdb}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "ASMultiplier"
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.009999999776482582
+                    },
+                    "mPrecision": 2
+                }
+            },
+            "dataValues": {
+                "ASMultiplier": 75.0,
+                "StaticRatio": 0.625
+            },
+            "desc": "Twoja <speed>prędkość ataku</speed> staje się @StaticRatio@. Całość dodatkowej <speed>prędkości ataku</speed> zostaje zamieniona na <scaleAD>obrażenia od ataku</scaleAD>. (<scaleAD>@ADPerAS@ pkt. obrażeń od ataku</scaleAD> za każdy <speed>1% prędkości ataku</speed>).<br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowandsteady_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowandsteady_small.png",
+            "id": 250,
+            "name": "Powoli i Stabilnie",
+            "rarity": 1,
+            "tooltip": "Twoja <speed>prędkość ataku</speed> staje się @StaticRatio@. Całość dodatkowej <speed>prędkości ataku</speed> zostaje zamieniona na <scaleAD>obrażenia od ataku</scaleAD> (<scaleAD>@ADPerAS@ pkt. obrażeń od ataku</scaleAD> za każdy <speed>1% prędkości ataku</speed>).<br><br>Obecnie zyskujesz: @f1@ pkt. <scaleAD>obrażeń od ataku</scaleAD>"
         },
         {
             "apiName": "FrostWraith",
@@ -1115,13 +1388,13 @@
             "apiName": "Quest_WoogletsWitchcap",
             "calculations": {},
             "dataValues": {},
-            "desc": "Efekt natychmiastowy: Otrzymujesz Absurdalnie Wielką Różdżkę.<br><br>Wymagania: Musisz posiadać Absurdalnie Wielką Różdżkę, Zabójczy Kapelusz Rabadona oraz Klepsydrę Zhonyi.<br><br>Nagroda: Otrzymujesz Wiedźmi Kapelusz Woogleta.",
+            "desc": "Natychmiastowo: Zdobywasz Absurdalnie Wielką Różdżkę.<br><br>Wymagania: Bądź w posiadaniu Zabójczego Kapelusza Rabadona i Klepsydry Zhonyi.<br><br>Nagroda: Zdobywasz Wiedźmi Kapelusz Woogleta.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_woogletswitchcap_small.png",
             "id": 156,
             "name": "Zadanie: Wiedźmi Kapelusz Woogleta",
             "rarity": 2,
-            "tooltip": "Efekt natychmiastowy: Otrzymujesz Absurdalnie Wielką Różdżkę.<br><br>Wymagania: Musisz posiadać Absurdalnie Wielką Różdżkę, Zabójczy Kapelusz Rabadona oraz Klepsydrę Zhonyi.<br><br>Nagroda: Otrzymujesz Wiedźmi Kapelusz Woogleta."
+            "tooltip": "Natychmiastowo: Zdobywasz Absurdalnie Wielką Różdżkę.<br><br>Wymagania: Bądź w posiadaniu Zabójczego Kapelusza Rabadona i Klepsydry Zhonyi.<br><br>Nagroda: Zdobywasz Wiedźmi Kapelusz Woogleta."
         },
         {
             "apiName": "Earthwake",
@@ -1256,6 +1529,18 @@
             "tooltip": "Każdy co trzeci atak dwukrotnie nakłada efekty przy trafieniu."
         },
         {
+            "apiName": "SymbioticMutation",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "W każdej rundzie ewoluuje w jedno z losowo wybranych ulepszeń sojusznika. <br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
+            "id": 239,
+            "name": "Symbiotyczna Mutacja",
+            "rarity": 1,
+            "tooltip": "W każdej rundzie ewoluuje w jedno z losowo wybranych ulepszeń sojusznika. <br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>"
+        },
+        {
             "apiName": "CelestialBody",
             "calculations": {},
             "dataValues": {
@@ -1364,6 +1649,44 @@
             "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>Obrażenia od podpalenia skalują się z wartością leczenia lub tarczy w stosunku do maksymalnego zdrowia bohatera, na którego jest rzucana tarcza lub efekt leczenia.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
+            "apiName": "Overflow",
+            "calculations": {
+                "{1e85060f}": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "{5cc662bd}"
+                        },
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.004999999888241291
+                        }
+                    ],
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.009999999776482582
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "InitialDamageAmpPercent": 10.0,
+                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
+                "ManaRatio": 200.0
+            },
+            "desc": "Twoje zaklęcia korzystające z <scaleMana>many</scaleMana> mają podwójny koszt. Zyskujesz <scaleMana>@ManaCalc@</scaleMana> obrażeń od zaklęć.",
+            "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
+            "id": 311,
+            "name": "Przesyt",
+            "rarity": 0,
+            "tooltip": "Twoje zaklęcia korzystające z <scaleMana>many</scaleMana> mają podwójny koszt. Zyskujesz <scaleMana>@ManaCalc@</scaleMana> obrażeń od zaklęć."
+        },
+        {
             "apiName": "FeeltheBurn",
             "calculations": {
                 "DamagePerSecond": {
@@ -1436,15 +1759,16 @@
                 }
             },
             "dataValues": {
-                "HealPercentage": 0.014999999664723873
+                "HealPercentage": 0.014999999664723873,
+                "SpellIDCD": 5.0
             },
-            "desc": "<status>Unieruchamianie</status> wrogich bohaterów <healing>przywraca ci @TotalHeal@ pkt. zdrowia</healing>.",
+            "desc": "<status>Unieruchamianie</status> lub <status>uziemianie</status> wrogich bohaterów <healing>przywraca ci @TotalHeal@ pkt. zdrowia</healing>.",
             "iconLarge": "assets/ux/cherry/augments/icons/guiltypleasure_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/guiltypleasure_small.png",
             "id": 42,
             "name": "Wstydliwa Przyjemność",
             "rarity": 0,
-            "tooltip": "<status>Unieruchamianie</status> wrogich bohaterów <healing>przywraca ci @TotalHeal@ pkt. zdrowia</healing>.<br><br>Leczenie w tej rundzie: @f1@ pkt.<br>Całkowite leczenie: @f2@ pkt."
+            "tooltip": "<status>Unieruchamianie</status> lub <status>uziemianie</status> wrogich bohaterów <healing>przywraca ci @TotalHeal@ pkt. zdrowia</healing>.<br><br>Obrażenia wyleczone w tej rundzie: @f1@ pkt.<br>Całkowite wyleczone obrażenia: @f2@ pkt."
         },
         {
             "apiName": "ScopierWeapons",
@@ -1624,10 +1948,9 @@
             "calculations": {},
             "dataValues": {
                 "KillStackCredit": 1.0,
-                "RequiredKillCount": 5.0,
-                "RequiredKillCountSubsequent": 6.0
+                "RequiredKillCount": 5.0
             },
-            "desc": "Otrzymaj @KillStackCredit@ ładunek za bohatera podczas każdej rundy, gdy weźmiesz udział w zabójstwie. Przy @RequiredKillCount@ ładunkach z jaja wykluwa się Pryzmatyczne Kowadło. Możesz to zrobić wielokrotnie, jednak po pierwszym wykluciu jajo wymaga @RequiredKillCountSubsequent@ ładunków.",
+            "desc": "Zyskujesz @KillStackCredit@ ładunek przy udziale w zabójstwie, raz za każdego bohatera w danej rundzie.<br><br>Przy @RequiredKillCount@ ładunkach z jaja wykluwa się Pryzmatyczne Kowadło. Możesz to zrobić wielokrotnie.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
             "id": 224,
@@ -1730,29 +2053,50 @@
                 "CritChance": 0.25,
                 "HealPercentage": 0.11999999731779099
             },
-            "desc": "Zyskujesz <crit>@CritChance*100@% szansy na trafienie krytyczne</crit> i @HealPercentage*100@% kradzieży życia w przypadku <crit>trafień krytycznych</crit>.",
+            "desc": "Zyskujesz <crit>@CritChance*100@% szansy na trafienie krytyczne</crit> i <lifeSteal>@HealPercentage*100@% kradzieży życia przy <crit>trafieniach krytycznych</crit></lifeSteal>.",
             "iconLarge": "assets/ux/cherry/augments/icons/soulsiphon_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/soulsiphon_small.png",
             "id": 77,
             "name": "Pochłanianie Dusz",
             "rarity": 1,
-            "tooltip": "Zyskujesz <crit>@CritChance*100@% szansy na trafienie krytyczne</crit> i @HealPercentage*100@% kradzieży życia w przypadku <crit>trafień krytycznych</crit>.<br><br>Leczenie w tej rundzie: @f1@ pkt.<br>Całkowite leczenie: @f2@ pkt."
+            "tooltip": "Zyskujesz <crit>@CritChance*100@% szansy na trafienie krytyczne</crit> i <lifeSteal>@HealPercentage*100@% kradzieży życia przy <crit>trafieniach krytycznych</crit></lifeSteal>.<br><br>Obrażenia wyleczone w tej rundzie: @f1@ pkt.<br>Całkowite wyleczone obrażenia: @f2@ pkt."
         },
         {
             "apiName": "GambaAnvil",
             "calculations": {},
             "dataValues": {
-                "GoldBasisDiscount": 1250.0,
                 "GoldBonus": 1000.0,
-                "PrismaticCostReduction": 1000.0
+                "LegendaryCostReduction": -500.0,
+                "LegendaryGoldBasisDiscount": 1000.0,
+                "PrismaticCostReduction": -1000.0,
+                "PrismaticGoldBasisDiscount": 1250.0,
+                "StatCostReduction": -100.0
             },
-            "desc": "Zdobywasz @GoldBonus@ szt. złota. Pryzmatyczne Kowadła kosztują o @PrismaticCostReduction@ szt. złota mniej, a zyskiwane odtąd pryzmatyczne przedmioty można sprzedać ponownie za 500 szt. złota mniej.",
+            "desc": "Zdobywasz @GoldBonus@ szt. złota. Cena wszystkich kowadeł spada, a przedmioty zdobyte z kowadeł trafiają do ponownej sprzedaży za 500 szt. złota mniej.<br><br>Pryzmatyczne Kowadła: @PrismaticCostReduction@<br>Legendarne Kowadła: @LegendaryCostReduction@<br>Kowadła Statystyk: @StatCostReduction@",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
             "id": 234,
             "name": "Kowadło Hazardu",
             "rarity": 2,
-            "tooltip": "Zdobywasz @GoldBonus@ szt. złota. Pryzmatyczne Kowadła kosztują o @PrismaticCostReduction@ szt. złota mniej, a zyskiwane odtąd pryzmatyczne przedmioty można sprzedać ponownie za 500 szt. złota mniej."
+            "tooltip": "Zdobywasz @GoldBonus@ szt. złota. Cena wszystkich kowadeł spada, a przedmioty zdobyte z kowadeł trafiają do ponownej sprzedaży za 500 szt. złota mniej.<br><br>Pryzmatyczne Kowadła: @PrismaticCostReduction@<br>Legendarne Kowadła: @LegendaryCostReduction@<br>Kowadła Statystyk: @StatCostReduction@"
+        },
+        {
+            "apiName": "DivineIntervention",
+            "calculations": {},
+            "dataValues": {
+                "BaseCD": 35.0,
+                "InitalDelay": 15.0,
+                "InvulnerabilityDuration": 2.5,
+                "Radius": 400.0,
+                "WarningDelay": 2.5
+            },
+            "desc": "Po upływie @InitalDelay@ sek. w walce wzywasz gwiazdę, która powoli spada w twoim kierunku. Gdy wyląduje, ty oraz twoi pobliscy sojusznicy stajecie się <keywordMajor>niewrażliwi</keywordMajor> na @InvulnerabilityDuration@ sek. <keywordMajor>Automatyczne użycie</keywordMajor> co @BaseCD@ sek.",
+            "iconLarge": "assets/ux/cherry/augments/icons/slowactingpainkillers_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/slowactingpainkillers_small.png",
+            "id": 301,
+            "name": "Boska interwencja",
+            "rarity": 1,
+            "tooltip": "Po upływie @InitalDelay@ sek. w walce wzywasz gwiazdę, która powoli spada w twoim kierunku. Gdy wyląduje, ty oraz twoi pobliscy sojusznicy stajecie się <keywordMajor>niewrażliwi</keywordMajor> na @InvulnerabilityDuration@ sek. <keywordMajor>Automatyczne użycie</keywordMajor> co @BaseCD@ sek."
         },
         {
             "apiName": "ThreadtheNeedle",
@@ -1836,7 +2180,7 @@
             "id": 33,
             "name": "Wysięgnikowa Ręka",
             "rarity": 1,
-            "tooltip": "<keywordMajor>Automatycznie</keywordMajor> wystrzeliwujesz hak Blitzcranka w pobliskiego wrogiego bohatera co 12 sek.<br><br>Liczba trafionych haków: @f1@"
+            "tooltip": "<keywordMajor>Automatycznie</keywordMajor> wystrzeliwujesz hak Blitzcranka w pobliskiego wrogiego bohatera co 12 sek.<br><br>Liczba haków, które trafiły cel: @f1@"
         },
         {
             "apiName": "SlowCooker",
@@ -1890,20 +2234,48 @@
             "tooltip": "Błogosławisz ziemię pod sobą na 4 sek. i sprawiasz, że zdrowie wszystkich jednostek znajdujących się na tym obszarze nie może spaść poniżej 10% ich maksymalnego zdrowia. Na koniec wszystkie te jednostki zostaną uleczone o <healing>@HealFlatTooltip@ pkt. zdrowia</healing>. "
         },
         {
+            "apiName": "Augment404",
+            "calculations": {},
+            "dataValues": {
+                "HatsToGrant": 3.0
+            },
+            "desc": "Skąd ty to masz?!?!? <br><br>Zdobywasz następującą liczbę kapeluszy: @HatsToGrant@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augment404_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augment404_small.png",
+            "id": 404,
+            "name": "404 Nie Znaleziono Ulepszenia",
+            "rarity": 0,
+            "tooltip": "Skąd ty to masz?!?!? <br><br>Zdobywasz następującą liczbę kapeluszy: @HatsToGrant@."
+        },
+        {
             "apiName": "DualWield",
             "calculations": {},
             "dataValues": {
-                "AttackReduction": 0.44999998807907104,
+                "AttackReduction": 0.3499999940395355,
                 "AttackSpeed": 1.0,
-                "OnHitMod": 0.550000011920929
+                "OnHitMod": 0.5
             },
-            "desc": "Twoje ataki i efekty przy trafieniu zadają o @AttackReduction*100@% mniej obrażeń. Zyskujesz <attackSpeed>@AttackSpeed*100@% całkowitej prędkości ataku</attackSpeed>.",
+            "desc": "Zyskujesz <attackSpeed>@AttackSpeed*100@% całkowitej prędkości ataku</attackSpeed>. Twoje ataki zadają o @AttackReduction*100@%, a efekty przy trafieniu o @OnHitMod*100@% mniej obrażeń.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Obie Ręce Zajęte",
             "rarity": 2,
-            "tooltip": "Twoje ataki i efekty przy trafieniu zadają o @AttackReduction*100@% mniej obrażeń. Zyskujesz <attackSpeed>@AttackSpeed*100@% całkowitej prędkości ataku</attackSpeed>."
+            "tooltip": "Zyskujesz <attackSpeed>@AttackSpeed*100@% całkowitej prędkości ataku</attackSpeed>. Twoje ataki zadają o @AttackReduction*100@%, a efekty przy trafieniu o @OnHitMod*100@% mniej obrażeń."
+        },
+        {
+            "apiName": "Augment405",
+            "calculations": {},
+            "dataValues": {
+                "DamageAmpPerHat": 0.05000000074505806
+            },
+            "desc": "Zyskujesz @DamageAmpPerHat*100@% obrażeń za każdy założony kapelusz.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augment405_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augment405_small.png",
+            "id": 405,
+            "name": "Ulepszenie 405",
+            "rarity": 2,
+            "tooltip": "Zyskujesz @DamageAmpPerHat*100@% obrażeń za każdy założony kapelusz."
         },
         {
             "apiName": "SpiritLink",
@@ -1921,6 +2293,24 @@
             "tooltip": "@DamageRedirectPercentage*100@% obrażeń zadawanych twojemu sojusznikowi jest przekierowywanych na ciebie i @HealCopyPercentage*100@% otrzymywanego przez niego <healing>leczenia</healing> również jest zapewniane tobie.<br><br>Całkowite przekierowane obrażenia: @f1@ pkt.<br>Całkowite leczenie: @f2@ pkt.<br>"
         },
         {
+            "apiName": "Deathtouch",
+            "calculations": {},
+            "dataValues": {
+                "AttackSpeedRatio": 0.0010000000474974513,
+                "BleedDuration": 5.0,
+                "CurseCounter": 2.0,
+                "OnHitDamageRatio": 0.3799999952316284,
+                "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
+            },
+            "desc": "Twoje ataki zapewniają ci @CurseCounter@ ładunek <keywordMajor>Klątwy</keywordMajor> oraz zadają na stałe dodatkowe <magicDamage>obrażenia magiczne</magicDamage> za każdy ładunek <keywordMajor>Klątwy</keywordMajor>.<br><br>Zwiększa też maksymalną możliwą do zgromadzenia liczbę ładunków <keywordMajor>Klątwy</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
+            "id": 217,
+            "name": "Dotyk Śmierci",
+            "rarity": 1,
+            "tooltip": "Twoje ataki zapewniają ci ładunki <keywordMajor>Klątwy</keywordMajor> (@CurseCounter@) i zadają dodatkowe <trueDamage>obrażenia nieuchronne</trueDamage> równe liczbie ładunków <keywordMajor>Klątwy</keywordMajor> zyskanych w tej rundzie.<br><br>{{ Cherry_CurseShared }}<br><br>Twoje ataki zadają dodatkowo <magicDamage>@f1@ pkt. obrażeń magicznych</magicDamage>. Wartość jest zależna od twojej <keywordMajor>całkowitej liczby Klątw</keywordMajor>.<br><br><rules>@OnHitDamageRatio*100@% twojej <keywordMajor>całkowitej liczby Klątw</keywordMajor> zostaje zamienione na dodatkowe obrażenia przy trafieniu.</rules> "
+        },
+        {
             "apiName": "Quest_AngelofRetribution",
             "calculations": {
                 "BaseDamage": {
@@ -1929,9 +2319,7 @@
                     "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
-                            "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 100.0,
-                            "mStartValue": 50.0
+                            "__type": "ByCharLevelInterpolationCalculationPart"
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -1939,7 +2327,7 @@
             },
             "dataValues": {
                 "AttackSpeed": 1.0,
-                "HealPowerToDamageConversion": 3.0,
+                "HealPowerToDamageConversion": 3.5,
                 "RequirementAmount": 2500.0
             },
             "desc": "Wymaganie: Przywróć sojusznikom @RequirementAmount@ pkt. zdrowia lub zapobiegnij otrzymaniu przez nich takiej samej wartości obrażeń.<br><br>Nagroda: Zyskujesz <attackspeed>@AttackSpeed*100@% prędkości ataku</attackspeed>, a twoje ataki zadają dodatkowe <magicdamage>obrażenia magiczne</magicdamage> równe <healing>@HealPowerToDamageConversion*100@% twojej siły leczenia i tarcz</healing>.",
@@ -1978,6 +2366,44 @@
             "name": "Chłeptanie Posoki",
             "rarity": 0,
             "tooltip": "Zyskujesz @Omnivamp*100@% wszechwampiryzmu."
+        },
+        {
+            "apiName": "WellBeRightBack",
+            "calculations": {
+                "TooltipTrueDamageCalculation": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 410.0,
+                            "mStartValue": 70.0
+                        }
+                    ]
+                },
+                "{7c50d74e}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 600.0,
+                            "mStartValue": 100.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealAmountPercent": 0.4000000059604645,
+                "Range": 600.0,
+                "SelfDuration": 1.75,
+                "StasisDuration": 2.5
+            },
+            "desc": "Zyskujesz <spellName>Zatrzymanie Czasu</spellName> (zastępuje pole ucieczki).<br><br><rules><spellName>Zatrzymanie Czasu</spellName>: Wszyscy bohaterowie w zasięgu 800 jedn. zostają wprowadzeni w <status>stan inercji</status> (zastępuje pole ucieczki). Opuszczasz <status>inercję</status> o 0,75 sek. szybciej z odzyskanymi 40% swojego <scaleHealth>brakującego zdrowia</scaleHealth>.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/wellberightback_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/wellberightback_small.png",
+            "id": 312,
+            "name": "Za Moment Wracamy",
+            "rarity": 1,
+            "tooltip": "<spellName>Zatrzymanie Czasu</spellName>: Wszyscy bohaterowie w zasięgu @Range@ jedn. zostają wprowadzeni w <status>stan inercji</status> na @StasisDuration@ sek. Opuszczasz <status>inercję</status> po @SelfDuration@ sek. i <healing>leczysz się</healing> o @HealAmountPercent*100@% <scaleHealth>brakującego zdrowia</scaleHealth>."
         },
         {
             "apiName": "FirstAidKit",
@@ -2020,7 +2446,9 @@
                     "mSimpleTooltipCalculationDisplay": 4
                 }
             },
-            "dataValues": {},
+            "dataValues": {
+                "BaseCooldown": 7.0
+            },
             "desc": "<keywordMajor>Automatycznie</keywordMajor> ciskasz bumerangiem w pobliskiego wroga co 7 sek.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
@@ -2116,6 +2544,46 @@
             "tooltip": "Co @Cooldown@ sek. z twojego ciała <keywordMajor>automatycznie</keywordMajor> wybucha śluz, zadając pobliskim wrogom <magicDamage>obrażenia magiczne równe @BaseDamage@ pkt. plus @PercentDamage@ maksymalnego zdrowia</magicDamage>. Jeśli trafisz bohatera, wydzielasz w pobliżu kapkę. Przejście po kapce regeneruje <healing>@BlobHeal@ zdrowia</healing>. Przejście wroga niszczy kapkę."
         },
         {
+            "apiName": "Dreadbringer",
+            "calculations": {
+                "BleedDamageTooltip": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculationModified",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mModifiedGameCalculation": "{0a242b94}",
+                    "mMultiplier": {
+                        "__type": "NumberCalculationPart",
+                        "mNumber": 0.20000000298023224
+                    },
+                    "mSimpleTooltipCalculationDisplay": 4
+                },
+                "{0a242b94}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.02500000037252903,
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "BleedDuration": 5.0,
+                "CurseStacksPerTick": 1.0,
+                "MaxHealthRatio": 2.25,
+                "Range": 500.0,
+                "TickCadence": 1.0
+            },
+            "desc": "Zyskujesz ładunki <keywordMajor>Klątwy</keywordMajor> (@CurseStacksPerTick@) od pobliskich wrogich bohaterów. Zyskujesz na stałe <healing>maksymalne zdrowie</healing> za każdy ładunek <keywordMajor>Klątwy</keywordMajor>.<br><br>Zwiększa maksymalną możliwą do zgromadzenia liczbę ładunków <keywordMajor>Klątwy</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/plaguebearer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/plaguebearer_small.png",
+            "id": 216,
+            "name": "Budzący Postrach",
+            "rarity": 2,
+            "tooltip": "Co każde @TickCadence@ sek. zyskujesz ładunki <keywordMajor>Klątwy</keywordMajor> (@CurseStacksPerTick@) od pobliskich wrogich bohaterów i zadajesz im dodatkowe <trueDamage>obrażenia nieuchronne</trueDamage> równe liczbie ładunków <keywordMajor>Klątwy</keywordMajor> zyskanych w tej rundzie.<br><br>{{ Cherry_CurseShared }}<br><br>Zyskujesz @f1@ pkt. <healing>maksymalnego zdrowia</healing> z <keywordMajor>całkowitej liczby Klątw</keywordMajor>.<br><br><rules>@MaxHealthRatio*100@% <keywordMajor>całkowitej liczby Klątw</keywordMajor> zostaje zamienione na <healing>maksymalne zdrowie</healing>.</rules>"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2177,6 +2645,24 @@
             "tooltip": "Twoje ataki również <keywordMajor>podpalają</keywordMajor> wrogów, zadając im <scaleAP>obrażenia magiczne w wysokości @PercentMaxHPDamagePer5Seconds*20@% ich maks. zdrowia</scaleAP> w czasie @BleedDuration@ sek. <keywordMajor>Podpalenie</keywordMajor> kumuluje się bez ograniczeń.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
+            "apiName": "Doomsayer",
+            "calculations": {},
+            "dataValues": {
+                "AdaptiveForceRatio": 1.0,
+                "BleedDuration": 5.0,
+                "Cooldown": 3.0,
+                "CurseCounter": 2.0,
+                "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
+            },
+            "desc": "Umiejętności zapewniają ci @CurseCounter@ ładunek <keywordMajor>Klątwy</keywordMajor> za każdego trafionego wrogiego bohatera. Zyskujesz na stałe siłę adaptacyjną za każdy ładunek <keywordMajor>Klątwy</keywordMajor>.<br><br>Zwiększa też maksymalną możliwą do zgromadzenia liczbę ładunków <keywordMajor>Klątwy</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
+            "id": 219,
+            "name": "Wieszczenie Zagłady",
+            "rarity": 2,
+            "tooltip": "Twoje umiejętności nakładają ładunki <keywordMajor>Klątwy</keywordMajor> (@CurseCounter@) i zadają dodatkowe <trueDamage>obrażenia nieuchronne</trueDamage> równe liczbie ładunków <keywordMajor>Klątwy</keywordMajor> zyskanych w tej rundzie.<br><br>{{ Cherry_CurseShared }}<br><br>Zyskujesz @f1@ pkt. siły adaptacyjnej z <keywordMajor>całkowitej liczby Klątw</keywordMajor>.<br><br><rules>@AdaptiveForceRatio*100@% <keywordMajor>całkowitej liczby Klątw</keywordMajor> zostaje zamienione na siłę adaptacyjną.</rules>"
+        },
+        {
             "apiName": "Flashy",
             "calculations": {},
             "dataValues": {
@@ -2187,7 +2673,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
             "id": 116,
             "name": "Zabłysnąć z Przytupem",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Twój Błysk ma 3 ładunki amunicji i @FlashCooldown@ sek. odnowienia."
         },
         {
@@ -2266,15 +2752,16 @@
             "calculations": {},
             "dataValues": {
                 "BleedDuration": 5.0,
-                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033
+                "PercentMaxHPDamagePer5Seconds": 0.03999999910593033,
+                "SpellIDCD": 5.0
             },
-            "desc": "<status>Unieruchamianie</status> wrogich bohaterów nakłada na nich <keywordMajor>podpalenie</keywordMajor>, które zadaje obrażenia w czasie i kumuluje się w nieskończoność.",
+            "desc": "<status>Unieruchamianie</status> lub <status>uziemianie</status> wrogich bohaterów nakłada na nich <keywordMajor>podpalenie</keywordMajor>, które zadaje obrażenia w czasie i kumuluje się w nieskończoność.",
             "iconLarge": "assets/ux/cherry/augments/icons/tormentor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/tormentor_small.png",
             "id": 85,
             "name": "Okrutnik",
             "rarity": 0,
-            "tooltip": "<status>Unieruchamianie</status> wrogich bohaterów nakłada na nich <keywordMajor>podpalenie</keywordMajor>, które zadaje <scaleAP>obrażenia magiczne w wysokości @PercentMaxHPDamagePer5Seconds*20@% ich maksymalnego zdrowia</scaleAP> na sekundę przez @BleedDuration@ sek. <keywordMajor>Podpalenie</keywordMajor> kumuluje się w nieskończoność.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
+            "tooltip": "<status>Unieruchamianie</status> lub <status>uziemianie</status> wrogich bohaterów nakłada na nich <keywordMajor>podpalenie</keywordMajor>, które zadaje <scaleAP>obrażenia magiczne w wysokości @PercentMaxHPDamagePer5Seconds*20@% ich maksymalnego zdrowia</scaleAP> na sekundę przez @BleedDuration@ sek. <keywordMajor>Podpalenie</keywordMajor> kumuluje się w nieskończoność.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
             "apiName": "Minionmancer",
@@ -2476,6 +2963,18 @@
             "tooltip": "Zyskujesz runy kluczowe <spellName>Pierwsze Uderzenie</spellName> i <spellName>Mroczne Żniwa</spellName>.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia @f2@ pkt.<br>Całkowite uzyskane złoto: @f3@ szt."
         },
         {
+            "apiName": "ParasiticMutation",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "W każdej rundzie ewoluuje w jedno z losowo wybranych ulepszeń przeciwnika. <br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
+            "id": 240,
+            "name": "Pasożytnicza Mutacja",
+            "rarity": 0,
+            "tooltip": "W każdej rundzie ewoluuje w jedno z losowo wybranych ulepszeń przeciwnika. <br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>"
+        },
+        {
             "apiName": "CantTouchThis",
             "calculations": {},
             "dataValues": {
@@ -2508,7 +3007,7 @@
             "apiName": "ItsCritical",
             "calculations": {},
             "dataValues": {
-                "CritChance": 0.4000000059604645
+                "CritChance": 0.5
             },
             "desc": "Zyskujesz <crit>@CritChance*100@% szansy na trafienie krytyczne</crit>.",
             "iconLarge": "assets/ux/cherry/augments/icons/itscritical_large.png",
@@ -2621,13 +3120,13 @@
             "dataValues": {
                 "AttackSpeed": 0.6000000238418579
             },
-            "desc": "Zyskujesz @AttackSpeed*100@% prędkości ataku.",
+            "desc": "Zyskujesz @AttackSpeed*100@% <speed>prędkości ataku</speed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/deft_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deft_small.png",
             "id": 22,
             "name": "Chyżość",
             "rarity": 0,
-            "tooltip": "Zyskujesz @AttackSpeed*100@% prędkości ataku."
+            "tooltip": "Zyskujesz @AttackSpeed*100@% <speed>prędkości ataku</speed>."
         },
         {
             "apiName": "Goliath",
@@ -2645,6 +3144,40 @@
             "name": "Goliat",
             "rarity": 2,
             "tooltip": "Zwiększasz swój rozmiar i zyskujesz @HealthAmp*100@% <scaleHealth>zdrowia</scaleHealth> i @ADAmp*100@% <scaleAP>siły adaptacyjnej</scaleAP>."
+        },
+        {
+            "apiName": "JuicePress",
+            "calculations": {},
+            "dataValues": {
+                "BonusHats": 2.0,
+                "JuiceAmp": 0.5,
+                "PowerJuicePercentPen": 0.15000000596046448,
+                "PriceReduction": 0.5,
+                "SpeedJuiceMSBoost": 0.20000000298023224,
+                "VitalityJuiceHealShieldPower": 0.25
+            },
+            "desc": "Soki zapewniają tobie i twoim współgraczom dodatkowe efekty.",
+            "iconLarge": "assets/ux/cherry/augments/icons/juicepress_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/juicepress_small.png",
+            "id": 242,
+            "name": "Wyciskarka Soku",
+            "rarity": 0,
+            "tooltip": "Twoja drużyna otrzymuje dodatkowe efekty soków oraz zniżkę w wysokości @PriceReduction*100@% na wszystkie soki wzmacniające.<br><br>Sok Potęgi: @PowerJuicePercentPen*100@% <scaleAD>przebicia pancerza</scaleAD> lub <scaleAP>przebicia odporności na magię</scaleAP>.<br>Sok Żywotności: @VitalityJuiceHealShieldPower*100@% <healing>siły leczenia i tarcz</healing>.<br>Sok Szybkości: @SpeedJuiceMSBoost*100@% <speed>prędkości ruchu</speed>.<br>Sok Cappa: dodatkowe kapelusze (@BonusHats@)."
+        },
+        {
+            "apiName": "LegDay",
+            "calculations": {},
+            "dataValues": {
+                "MovementSpeed": 50.0,
+                "SlowResist": 0.4000000059604645
+            },
+            "desc": "Zyskujesz @MovementSpeed@<speed> jedn. prędkości ruchu</speed> i @SlowResist*100@% <speed>odporności na spowolnienia</speed>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/legday_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/legday_small.png",
+            "id": 305,
+            "name": "Dzień Robienia Nóg",
+            "rarity": 0,
+            "tooltip": "Zyskujesz @MovementSpeed@<speed> jedn. prędkości ruchu</speed> i @SlowResist*100@% <speed>odporności na spowolnienia</speed>."
         },
         {
             "apiName": "Trailblazer",
@@ -2710,7 +3243,6 @@
             "dataValues": {
                 "AOESize": 550.0,
                 "CastRange": 5500.0,
-                "Cooldown": 20.0,
                 "DamagetoChampions": 0.30000001192092896,
                 "GroundDuration": 3.0,
                 "LaserDelay": 2.5,
@@ -2753,6 +3285,55 @@
             "name": "Obrona Terytorialna",
             "rarity": 0,
             "tooltip": "Zyskujesz <speed>@spell.Augment_Homeguard:MovementSpeed*100@% prędkości ruchu</speed>. Po otrzymaniu obrażeń efekt zostaje zablokowany na @spell.Augment_Homeguard:DisableCooldown@ sek."
+        },
+        {
+            "apiName": "NullAugment",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Puste",
+            "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
+            "id": 3,
+            "name": "Puste Ulepszenie",
+            "rarity": 0,
+            "tooltip": "Puste"
+        },
+        {
+            "apiName": "HatTrick",
+            "calculations": {
+                "ShieldHealth": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 300.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{8bfcfef7}",
+                            "mStat": 6,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "Cooldown": 3.0,
+                "HatTrickPriceReduction": 350.0,
+                "HatsToGrant": 3.0,
+                "LowHealthThreshold": 0.30000001192092896,
+                "MovespeedBoostPercent": 0.3499999940395355,
+                "MovespeedShieldPercent": 0.75,
+                "ShieldDuration": 3.0
+            },
+            "desc": "Natychmiast zyskujesz następującą liczbę kapeluszy: @HatsToGrant@. Cena Soku Cappa spada o @HatTrickPriceReduction@.<br><br>Przy otrzymaniu obrażeń, które zmniejszyłyby poziom twojego zdrowia poniżej @LowHealthThreshold*100@%, zyskujesz <speed>@MoveSpeedBoostPercent*100@% prędkości ruchu</speed> oraz <shield>tarczę o wytrzymałości @ShieldHealth@ pkt.</shield> na @ShieldDuration@ sek., ale tracisz 1 kapelusz. @Cooldown@ sek. odnowienia.",
+            "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
+            "id": 241,
+            "name": "Sztuczka z Kapeluszem",
+            "rarity": 1,
+            "tooltip": "Natychmiast zyskujesz następującą liczbę kapeluszy: @HatsToGrant@. Cena Soku Cappa spada o @HatTrickPriceReduction@.<br><br>Przy otrzymaniu obrażeń, które zmniejszyłyby poziom twojego zdrowia poniżej @LowHealthThreshold*100@%, zyskujesz <speed>@MoveSpeedBoostPercent*100@% prędkości ruchu</speed> oraz <shield>tarczę o wytrzymałości @ShieldHealth@ pkt.</shield> na @ShieldDuration@ sek., ale tracisz 1 kapelusz. @Cooldown@ sek. odnowienia."
         },
         {
             "apiName": "HeavyHitter",
@@ -2829,6 +3410,18 @@
             "tooltip": "Zmniejszasz się do maleńkich rozmiarów, zyskujesz <speed>@MovespeedMod*100@% prędkości ruchu</speed> i zadajesz @SmallBonusDamage*100@-@XLargeBonusDamage*100@% dodatkowych obrażeń bohaterom w zależności od tego, o ile są od ciebie więksi.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Obrażenia zadane w tej grze: @f2@ pkt."
         },
         {
+            "apiName": "TransmutePrismatic",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Zdobywasz losowe pryzmatyczne ulepszenie.",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmuteprismatic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmuteprismatic_small.png",
+            "id": 238,
+            "name": "Transmutacja: Pryzmatyczne",
+            "rarity": 1,
+            "tooltip": "Zdobywasz losowe pryzmatyczne ulepszenie."
+        },
+        {
             "apiName": "FrozenFoundations",
             "calculations": {},
             "dataValues": {
@@ -2861,6 +3454,18 @@
             "tooltip": "Twoje leczenie i tarcze mogą trafić krytycznie, zadając dodatkowe @CritHeal*100@% obrażeń. Zyskujesz @CritChance*100@% szansy na trafienie krytyczne. <br><br>Dodatkowe leczenie: @f1@ pkt.<br>Dodatkowa tarcza: @f2@ pkt."
         },
         {
+            "apiName": "TransmuteGold",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Zdobywasz losowe złote ulepszenie.",
+            "iconLarge": "assets/ux/cherry/augments/icons/transmutegold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/transmutegold_small.png",
+            "id": 237,
+            "name": "Transmutacja: Złote",
+            "rarity": 0,
+            "tooltip": "Zdobywasz losowe złote ulepszenie."
+        },
+        {
             "apiName": "ApexInventor",
             "calculations": {},
             "dataValues": {
@@ -2879,18 +3484,35 @@
             "apiName": "MirrorImage",
             "calculations": {},
             "dataValues": {
-                "AugmentCooldown": 60.0,
+                "AugmentCooldown": 30.0,
                 "CloneDuration": 8.0,
                 "HealthThreshold": 0.30000001192092896,
                 "StealthDuration": 1.25
             },
-            "desc": "Gdy twoje zdrowie spadnie poniżej @HealthThreshold*100@%, na chwilę zyskujesz <keywordStealth>niewidzialność</keywordStealth> i tworzysz swojego klona.",
+            "desc": "Gdy twoje zdrowie spadnie poniżej @HealthThreshold*100@%, na chwilę zyskujesz <keywordStealth>niewidzialność</keywordStealth> i tworzysz 4 klony siebie.",
             "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
             "id": 172,
             "name": "Lustrzany Obraz",
             "rarity": 0,
-            "tooltip": "Gdy twoje zdrowie spadnie poniżej @HealthThreshold*100@%, na chwilę zyskujesz <keywordStealth>niewidzialność</keywordStealth> i tworzysz swojego klona."
+            "tooltip": "Gdy twoje zdrowie spadnie poniżej @HealthThreshold*100@%, na chwilę zyskujesz <keywordStealth>niewidzialność</keywordStealth> i tworzysz 4 klony siebie."
+        },
+        {
+            "apiName": "Desecrator",
+            "calculations": {},
+            "dataValues": {
+                "ArmorMRRatio": 0.20000000298023224,
+                "BleedDuration": 5.0,
+                "CurseCounter": 5.0,
+                "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
+            },
+            "desc": "<status>Unieruchomienie</status> wrogiego bohatera zapewnia ci ładunki <keywordMajor>Klątwy</keywordMajor> (@CurseCounter@). Zyskujesz na stałe <armor>pancerz</armor> i <magicresistance>odporność na magię</magicresistance> za każdy ładunek <keywordMajor>Klątwy</keywordMajor>.<br><br>Zwiększa też maksymalną możliwą do zgromadzenia liczbę ładunków <keywordMajor>Klątwy</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/desecrator_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/desecrator_small.png",
+            "id": 218,
+            "name": "Bezczeszczenie",
+            "rarity": 0,
+            "tooltip": "<status>Unieruchamianie</status> wrogich bohaterów zapewnia ci <keywordMajor>ładunki Klątwy</keywordMajor> (@CurseCounter@) i zadaje dodatkowe <trueDamage>obrażenia nieuchronne</trueDamage> równe liczbie ładunków <keywordMajor>Klątwy</keywordMajor> zyskanych w tej rundzie.<br><br>{{ Cherry_CurseShared }}<br><br>Zyskujesz @f1@ pkt. <armor>pancerza</armor> i <magicresistance>odporności na magię</magicresistance> z <keywordMajor>całkowitej liczby Klątw</keywordMajor>.<br><br><rules>@ArmorMRRatio*100@% <keywordMajor>całkowitej liczby Klątw</keywordMajor> zostaje zamienione na <armor>pancerz</armor> i <magicresistance>odporność na magię</magicresistance>.</rules>"
         },
         {
             "apiName": "AllForYou",
@@ -3030,7 +3652,7 @@
             "dataValues": {
                 "BootsStarterSellValue": 500.0,
                 "LegendarySellValue": 2500.0,
-                "PrismaticSellValue": 4000.0,
+                "PrismaticSellValue": 3750.0,
                 "SellValueTooltip": 100.0
             },
             "desc": "Natychmiastowo sprzedajesz wszystkie swoje przedmioty niebędące przedmiotami zadania za @SellValueTooltip@% ich bezpośredniej wartości przy zakupie. Świetnie się sprawdza przy wszystkich tych przecenionych kowadłach.",
@@ -3045,15 +3667,18 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "ASToADConversion": 25.0
+                "Breakpoint1": 5.0,
+                "OnHitDamage": 40.0,
+                "SlowResistValue": 1.0,
+                "TotalASValue": 0.25
             },
-            "desc": "Zyskujesz <scaleAD>obrażenia od ataku</scaleAD>, które skalują się z twoją <attackSpeed>prędkością ataku</attackSpeed>.",
+            "desc": "Zyskujesz <attackSpeed>@TotalASValue*100@% całkowitej prędkości ataku</attackSpeed>. Zyskujesz nowe efekty przy progu @Breakpoint1@ <attackSpeed>ataków</attackSpeed> na sekundę.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
             "name": "Błyskawiczne Ciosy",
             "rarity": 1,
-            "tooltip": "Zyskujesz <scaleAD>@ASToADConversion*.1@ pkt. obrażeń od ataku</scaleAD> za każde <attackSpeed>0,1 jedn. prędkości ataku</attackSpeed>."
+            "tooltip": "Zyskujesz <attackSpeed>@TotalASValue*100@% całkowitej prędkości ataku</attackSpeed>.<br><br>Przy @Breakpoint1@ <attackSpeed>atakach na sekundę</attackSpeed> zyskujesz @OnHitDamage@ pkt. <magicDamage>obrażeń magicznych</magicDamage> {{ Item_Keyword_OnHit }}.<br><br><rules><attackSpeed>Całkowita prędkość ataku</attackSpeed> jest obliczana jako mnożnik twojej <attackSpeed>dodatkowej prędkości ataku</attackSpeed></rules><br><br>Obrażenia magiczne zadawane przy trafieniu: @f1@ pkt."
         },
         {
             "apiName": "Repulsor",
@@ -3064,13 +3689,13 @@
                 "KnockbackDistance": 750.0,
                 "KnockbackRange": 500.0
             },
-            "desc": "Gdy twoje zdrowie spadnie do @HealthThreshold1*100@% lub @HealthThreshold2*100@%, pobliscy wrogowie zostają <status>odrzuceni</status>.",
+            "desc": "Gdy twoje zdrowie spadnie poniżej @HealthThreshold1*100@% lub @HealthThreshold2*100@%, pobliscy wrogowie zostają <status>odrzuceni</status>.",
             "iconLarge": "assets/ux/cherry/augments/icons/repulsor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/repulsor_small.png",
             "id": 69,
             "name": "Odpychacz",
             "rarity": 0,
-            "tooltip": "Gdy twoje zdrowie spadnie do @HealthThreshold1*100@% lub @HealthThreshold2*100@%, pobliscy wrogowie zostają <status>odrzuceni</status>."
+            "tooltip": "Gdy twoje zdrowie spadnie poniżej @HealthThreshold1*100@% lub @HealthThreshold2*100@%, pobliscy wrogowie zostają <status>odrzuceni</status>."
         },
         {
             "apiName": "SkilledSniper",
@@ -3183,8 +3808,23 @@
             "iconSmall": "assets/ux/cherry/augments/icons/divebomber_small.png",
             "id": 25,
             "name": "Bombowe Zakończenie",
-            "rarity": 1,
+            "rarity": 0,
             "tooltip": "Bohater, który zginie jako pierwszy w twojej drużynie, wybucha, zadając pobliskim wrogom obrażenia nieuchronne równe <trueDamage>@PercentMaxHPDamage*100@% ich maksymalnego zdrowia</trueDamage>.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
+        },
+        {
+            "apiName": "GoHSacrificeForGold",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0.25,
+                "RoundCountCap": 4.0
+            },
+            "desc": "Poświęć <lifeSteal>@HealthReduction*100@% aktualnego zdrowia</lifeSteal>. <br><br>Po @RoundCountCap@ rundach zdobywasz dodatkowe <keywordMajor>złote ulepszenie</keywordMajor> i odzyskujesz zdrowie.",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificeforgold_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 303,
+            "name": "Poświęcenie: Za Złoto",
+            "rarity": 1,
+            "tooltip": "Poświęć <lifeSteal>@HealthReduction*100@% aktualnego zdrowia</lifeSteal>. <br><br>Po @RoundCountCap@ rundach zdobywasz dodatkowe <keywordMajor>złote ulepszenie</keywordMajor> i odzyskujesz zdrowie.<br><br>Pozostałe rundy: @f1@"
         },
         {
             "apiName": "BluntForce",
@@ -3204,13 +3844,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Zastępujesz Ucieczkę Przywoływacza <spellName>Zewem Przeznaczenia</spellName><br><br><rules><spellName>Zew Przeznaczenia</spellName> przyciąga twojego partnera do ciebie na maksymalnie 4 sek. i sprawia, że jest niemożliwy do obrania za cel. Partner może się poruszyć, by się wystrzelić, <status>odrzucając</status> pierwszego trafionego bohatera i wszystkich pobliskich wrogów.</rules><br>",
+            "desc": "Zastępuje Ucieczkę Przywoływacza <spellName>Zewem Przeznaczenia</spellName> <br><br><rules><spellName>Zew Przeznaczenia</spellName> sprawia, że twój partner staje się niemożliwy do obrania za cel na maks. 4 sek. Partner może się wystrzelić, <status>odrzucając</status> wrogów.</rules><br>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Przysięga",
             "rarity": 1,
-            "tooltip": "Zastępujesz Ucieczkę Przywoływacza <spellName>Zewem Przeznaczenia</spellName><br><br><rules><spellName>Zew Przeznaczenia</spellName> przyciąga twojego partnera do ciebie na maksymalnie 4 sek. i sprawia, że jest niemożliwy do obrania za cel. Partner może się poruszyć, by się wystrzelić, <status>odrzucając</status> pierwszego trafionego bohatera i wszystkich pobliskich wrogów.</rules><br>"
+            "tooltip": "Zastępuje Ucieczkę Przywoływacza <spellName>Zewem Przeznaczenia</spellName> <br><br><rules><spellName>Zew Przeznaczenia</spellName> sprawia, że twój partner staje się niemożliwy do obrania za cel na maks. 4 sek. Partner może się wystrzelić, <status>odrzucając</status> wrogów.</rules><br>"
         },
         {
             "apiName": "Flashbang",
@@ -3262,6 +3902,21 @@
             "tooltip": "Zastępuje twoje czary przywoływacza innymi losowymi. Gdy użyjesz czaru przywoływacza w walce, zastąp go innym losowym. Czas odnowienia: @Cooldown@ sek."
         },
         {
+            "apiName": "GoHSacrificeForSilver",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0,
+                "RoundCountCap": 2.0
+            },
+            "desc": "Po @RoundCountCap@ rundach zdobywasz dodatkowe <keywordMajor>srebrne ulepszenie</keywordMajor>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificefor_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 302,
+            "name": "Poświęcenie: Za Srebro",
+            "rarity": 0,
+            "tooltip": "Po @RoundCountCap@ rundach zdobywasz dodatkowe <keywordMajor>srebrne ulepszenie</keywordMajor>.<br><br>Pozostałe rundy: @f1@"
+        },
+        {
             "apiName": "ShrinkRay",
             "calculations": {},
             "dataValues": {
@@ -3295,8 +3950,8 @@
             "calculations": {},
             "dataValues": {
                 "StackMultiplication": 6.0,
-                "StackThreshold": 325.0,
-                "StacktoRegenConversion": 0.10000000149011612
+                "StackThreshold": 400.0,
+                "StacktoRegenConversion": 0.125
             },
             "desc": "Wymaganie: Musisz mieć Stalowe Serce (co najmniej następującą liczbę ładunków: @StackThreshold@).<br><br>Nagroda: Mnożysz ładunki Stalowego Serca o @StackMultiplication@. Zwiększa <healing>regenerację zdrowia</healing> o @StacktoRegenConversion*100@% twoich ładunków Stalowego Serca.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_steelyourheart_large.png",
@@ -3344,15 +3999,16 @@
                 }
             },
             "dataValues": {
-                "HealthScalar": 0.05000000074505806
+                "HealthScalar": 0.05000000074505806,
+                "SpellIDCD": 5.0
             },
-            "desc": "Zyskujesz <shield>tarczę o wytrzymałości @TotalShield@ pkt.</shield> po <status>unieruchomieniu</status> wrogiego bohatera.<br>",
+            "desc": "Zyskujesz <shield>tarczę o wytrzymałości @TotalShield@ pkt.</shield> po <status>unieruchomieniu</status> lub <status>uziemieniu</status> wrogiego bohatera.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/courageofthecolossus_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
             "id": 18,
             "name": "Odwaga Kolosa",
             "rarity": 2,
-            "tooltip": "Zyskujesz <shield>tarczę o wytrzymałości @TotalShield@ pkt.</shield> po <status>unieruchomieniu</status> wrogiego bohatera.<br><br>Wytrzymałość tarcz wygenerowanych w tej rundzie: @f1@ pkt.<br>Całkowita wytrzymałość wygenerowanych tarcz: @f2@ pkt."
+            "tooltip": "Zyskujesz <shield>tarczę o wytrzymałości @TotalShield@ pkt.</shield> po <status>unieruchomieniu</status> lub <status>uziemieniu</status> wrogiego bohatera.<br><br>Wartość tarcz wygenerowanych w tej rundzie: @f1@ pkt.<br>Całkowita wartość wygenerowanych tarcz: @f2@ pkt."
         },
         {
             "apiName": "FruitsOfYourLabor",
@@ -3364,13 +4020,13 @@
                 "Duration": 2.0,
                 "MSBoost": 0.4000000059604645
             },
-            "desc": "Dzielisz się efektami Kwiatów Mocy z pobliskim sojusznikiem, jednocześnie zwiększając własne premie o @AmpAmountTooltip@%.",
+            "desc": "Dzielisz się efektami Kwiatów Mocy z pobliskim sojusznikiem w zasięgu @AllyMaxRange@ jedn., jednocześnie zwiększając własne premie o @AmpAmountTooltip@%.",
             "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
             "id": 222,
             "name": "Owoce Pracy",
-            "rarity": 1,
-            "tooltip": "Dzielisz się efektami Kwiatów Mocy z pobliskim sojusznikiem, jednocześnie zwiększając własne premie o @AmpAmountTooltip@%."
+            "rarity": 0,
+            "tooltip": "Dzielisz się efektami Kwiatów Mocy z pobliskim sojusznikiem w zasięgu @AllyMaxRange@ jedn., jednocześnie zwiększając własne premie o @AmpAmountTooltip@%."
         },
         {
             "apiName": "InfernalSoul",
@@ -3438,6 +4094,24 @@
             "tooltip": "Zyskujesz runy kluczowe: <spellName>Elektryzacja</spellName> i <spellName>Pęd Fazowy</spellName>.<br><br>Obrażenia Elektryzacji w tej rundzie: @f1@ pkt.<br>Całkowite obrażenia Elektryzacji: @f2@ pkt."
         },
         {
+            "apiName": "DarkBlessing",
+            "calculations": {},
+            "dataValues": {
+                "AbilityHasteRatio": 0.33000001311302185,
+                "BleedDuration": 5.0,
+                "Cooldown": 1.5,
+                "CurseCounter": 4.0,
+                "Radius": 450.0
+            },
+            "desc": "Gdy leczysz lub osłaniasz tarczą, zyskujesz ładunki <keywordMajor>Klątwy</keywordMajor> (@CurseCounter@). Zyskujesz na stałe przyspieszenie umiejętności za każdy ładunek <keywordMajor>Klątwy</keywordMajor>.<br><br>Zwiększa też maksymalną możliwą do zgromadzenia liczbę ładunków <keywordMajor>Klątwy</keywordMajor>.<br><br>",
+            "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/darkblessing_small.png",
+            "id": 215,
+            "name": "Mroczne Błogosławieństwo",
+            "rarity": 1,
+            "tooltip": "Gdy leczysz lub osłaniasz tarczą, zyskujesz <keywordMajor>Klątwy</keywordMajor> (@CurseCounter@) i zadajesz dodatkowe <trueDamage>obrażenia nieuchronne</trueDamage> pobliskiemu wrogiemu bohaterowi równe liczbie <keywordMajor>Klątw</keywordMajor> zyskanych w tej rundzie.<br><br>{{ Cherry_CurseShared }}<br><br>Zyskujesz @f1@ jedn. przyspieszenia umiejętności z <keywordMajor>całkowitej liczby Klątw</keywordMajor>.<br><br><rules>@AbilityHasteRatio*100@% twojej <keywordMajor>całkowitej liczby Klątw</keywordMajor> zostaje zamienione na przyspieszenie umiejętności.</rules>"
+        },
+        {
             "apiName": "MindtoMatter",
             "calculations": {},
             "dataValues": {
@@ -3479,6 +4153,21 @@
             "name": "Mądrość Wieków",
             "rarity": 2,
             "tooltip": "Zyskujesz 1 poziom teraz i 1 dodatkowy poziom co drugą rundę. Twoje ograniczenie poziomu zostaje usunięte."
+        },
+        {
+            "apiName": "GoHSacrificeForPrismatic",
+            "calculations": {},
+            "dataValues": {
+                "HealthReduction": 0.5,
+                "RoundCountCap": 7.0
+            },
+            "desc": "Poświęć <lifeSteal>@HealthReduction*100@% aktualnego zdrowia</lifeSteal>. <br><br>Po @RoundCountCap@ rundach zdobywasz dodatkowe <keywordMajor>pryzmatyczne ulepszenie</keywordMajor> i odzyskujesz zdrowie.",
+            "iconLarge": "assets/ux/cherry/augments/icons/gohsacrificeforprismatic_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/gohsacrificefor_small.png",
+            "id": 304,
+            "name": "Poświęcenie: Za Pryzmat",
+            "rarity": 2,
+            "tooltip": "Poświęć <lifeSteal>@HealthReduction*100@% aktualnego zdrowia</lifeSteal>. <br><br>Po @RoundCountCap@ rundach zdobywasz dodatkowe <keywordMajor>pryzmatyczne ulepszenie</keywordMajor> i odzyskujesz zdrowie.<br><br>Pozostałe rundy: @f1@"
         },
         {
             "apiName": "NowYouSeeMe",
@@ -3527,7 +4216,7 @@
             },
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 1.399999976158142
+                "CritDamage": 1.5499999523162842
             },
             "desc": "Twoje umiejętności mogą trafiać krytycznie. Zyskujesz @CritChance*100@% szansy na trafienie krytyczne.",
             "iconLarge": "assets/ux/cherry/augments/icons/jeweledgauntlet_large.png",
@@ -3536,6 +4225,51 @@
             "name": "Brylantowa Rękawica",
             "rarity": 2,
             "tooltip": "Twoje umiejętności mogą trafiać krytycznie, zadając @CritDamage*100@% obrażeń całkowitych. Zyskujesz @CritChance*100@% szansy na trafienie krytyczne. Zyskujesz dodatkowo @APToCritConversion@ skalowania szansy na trafienie krytyczne z mocą umiejętności.<br><br>Dodatkowe obrażenia w tej rundzie: @f1@ pkt.<br>Całkowite dodatkowe obrażenia: @f2@ pkt."
+        },
+        {
+            "apiName": "AndMyAxe",
+            "calculations": {
+                "TotalDamage": {
+                    "StaticTooltipCalculationDisplay": 4,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 4,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 225.0,
+                            "mStartValue": 60.0
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.6000000238418579
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 4
+                }
+            },
+            "dataValues": {
+                "AutoCastRange": 950.0,
+                "BaseDamage": 10.0,
+                "CDIfPickedUp": 1.5,
+                "Cooldown": 8.0,
+                "DebuffDuration": 4.0,
+                "ShredAmount": 0.20000000298023224,
+                "SlowAmount": 0.4000000059604645,
+                "SlowDuration": 1.5
+            },
+            "desc": "<keywordMajor>Automatyczne użycie</keywordMajor>: <br>Co jakiś czas rzuca toporem w najbliższego przeciwnika, zadając mu obrażenia, spowalniając go oraz obniżając wartość jego pancerza i odporności na magię. W przypadku podniesienia topora czas odnowienia się skraca.",
+            "iconLarge": "assets/ux/cherry/augments/icons/andmyaxe_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/andmyaxe_small.png",
+            "id": 309,
+            "name": "I Mój Topór!",
+            "rarity": 1,
+            "tooltip": "<keywordMajor>Automatyczne użycie</keywordMajor>: Co @Cooldown@ sek. rzuca toporem w najbliższego przeciwnika, zadając @TotalDamage@ pkt. obrażeń adaptacyjnych, <status>spowalniając</status> cel o @SlowAmount*100@% na @SlowDuration@ sek. oraz obniżając wartość jego <scaleArmor>pancerza</scaleArmor> i <scaleMR>odporności na magię</scaleMR> o @ShredAmount*100@% na @DebuffDuration@ sek. Czas odnowienia zostaje skrócony do @CDIfPickedUp@ sek. (%i:cooldown%), jeśli podniesiesz topór.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt.<br>"
         }
     ]
 }

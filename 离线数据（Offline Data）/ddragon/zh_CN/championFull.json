@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "15.4.1",
+    "version": "15.5.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -7590,7 +7590,7 @@
                     "id": "EnchantedCrystalArrow",
                     "name": "魔法水晶箭",
                     "description": "艾希射出一支沿直线飞行的魔法水晶箭。如果水晶箭命中了一名敌方英雄，那么它会对该英雄造成伤害和晕眩效果，晕眩时长取决于水晶箭的飞行距离。此外，该英雄附近的敌方单位会受到伤害和减速效果。",
-                    "tooltip": "艾希射出魔法水晶箭，<status>晕眩</status>命中的第一个敌方英雄，并造成<magicDamage>{{ rmaindamage }}魔法伤害</magicDamage>。<status>晕眩</status>时长取决于飞行距离，至多{{ maxstunduration }}秒。目标周围的敌人会受到<spellName>冰霜射击</spellName>的<status>减速</status>效果和一半伤害。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "艾希射出魔法水晶箭，<status>晕眩</status>命中的第一个敌方英雄，并造成<magicDamage>{{ rmaindamage }}魔法伤害</magicDamage>。<status>晕眩</status>时长取决于飞行距离，至多{{ maxstunduration }}秒。目标周围的敌人会受到<spellName>冰霜射击</spellName>的<status>减速</status>效果。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -16107,10 +16107,10 @@
                         null,
                         [
                             80,
-                            135,
-                            190,
-                            245,
-                            300
+                            130,
+                            180,
+                            230,
+                            280
                         ],
                         [
                             1.6,
@@ -16178,7 +16178,7 @@
                     ],
                     "effectBurn": [
                         null,
-                        "80/135/190/245/300",
+                        "80/130/180/230/280",
                         "1.6/1.7/1.8/1.9/2",
                         "0",
                         "0",
@@ -16220,12 +16220,14 @@
                         "label": [
                             "伤害",
                             "冷却时间",
-                            "减速"
+                            "减速",
+                            "最大生命值伤害"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ slowamountpercentage }}% -> {{ slowamountpercentageNL }}%"
+                            "{{ slowamountpercentage }}% -> {{ slowamountpercentageNL }}%",
+                            "{{ percenthealthdamageinteger }}% -> {{ percenthealthdamageintegerNL }}%"
                         ]
                     },
                     "maxrank": 5,
@@ -16277,11 +16279,11 @@
                             6
                         ],
                         [
+                            2.5,
+                            2.75,
                             3,
-                            3,
-                            3,
-                            3,
-                            3
+                            3.25,
+                            3.5
                         ],
                         [
                             3,
@@ -16325,7 +16327,7 @@
                         "30/35/40/45/50",
                         "1.5",
                         "6",
-                        "3",
+                        "2.5/2.75/3/3.25/3.5",
                         "3",
                         "0.5",
                         "200",
@@ -17271,6 +17273,12 @@
                     "id": "122064",
                     "num": 64,
                     "name": "圣洁神王 德莱厄斯",
+                    "chromas": false
+                },
+                {
+                    "id": "122065",
+                    "num": 65,
+                    "name": "至臻 凯旋将军 德莱厄斯",
                     "chromas": false
                 }
             ],
@@ -18683,6 +18691,12 @@
                     "num": 48,
                     "name": "魂蔷薇 德莱文",
                     "chromas": true
+                },
+                {
+                    "id": "119058",
+                    "num": 58,
+                    "name": "最高清算 德莱文",
+                    "chromas": true
                 }
             ],
             "lore": "在诺克萨斯，有一种战士被称为“清算人”。他们在竞技场里互相厮杀，以鲜血作为赌注进行力量的考验，不过没有任何人能像德莱文那样受人追捧。曾经参过军的他，发现竞技场的观众们尤为喜爱他的耀武扬威和刻意表演，还有他挥舞飞斧时的无匹技艺。这种出神入化的斧技所带来的赞叹令他上瘾，德莱文发誓要不惜代价打败一切对手，以此确保自己的名字在帝国之中永世传唱。",
@@ -19401,7 +19415,7 @@
                 "difficulty": 5
             },
             "stats": {
-                "hp": 613,
+                "hp": 640,
                 "hpperlevel": 103,
                 "mp": 0,
                 "mpperlevel": 0,
@@ -20830,9 +20844,9 @@
                             "法力消耗 (神经毒素)"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ e5 }} -> {{ e5NL }}",
-                            "{{ e2 }} -> {{ e2NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ spiderbasedamage }} -> {{ spiderbasedamageNL }}",
+                            "{{ monstercapdamage }} -> {{ monstercapdamageNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
                     },
@@ -20857,46 +20871,46 @@
                     "effect": [
                         null,
                         [
-                            40,
-                            75,
-                            110,
-                            145,
-                            180
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            75,
-                            100,
-                            125,
-                            150,
-                            175
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            20,
-                            25,
-                            30,
-                            35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            36,
-                            42,
-                            48,
-                            54,
-                            60
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            60,
-                            90,
-                            120,
-                            150,
-                            180
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -20929,12 +20943,12 @@
                     ],
                     "effectBurn": [
                         null,
-                        "40/75/110/145/180",
-                        "75/100/125/150/175",
-                        "15/20/25/30/35",
-                        "36/42/48/54/60",
-                        "60/90/120/150/180",
-                        "4",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -37626,7 +37640,7 @@
                     "id": "JinxQ",
                     "name": "枪炮交响曲！",
                     "description": "金克丝可以通过切换武器来改变普通攻击的方式。在用她的轻机枪“砰砰”攻击时，她的攻击速度会提升。在用她的火箭发射器“鱼骨头”攻击时，她的普通攻击会造成范围伤害，攻击距离提升，但会消耗法力值并且攻击得更慢。",
-                    "tooltip": "金克丝可在【鱼骨头—火箭发射器】和【砰砰枪—轻机枪】之间切换武器。<br /><br />在使用火箭发射器时，金克丝的攻击会对目标和目标附近的敌人造成<physicalDamage>{{ rocketdamage }}物理伤害</physicalDamage>，提升{{ rocketbonusrange }}距离，消耗法力，但所享的攻速加成减少{{ rocketaspdpenalty*100 }}%。<br /><br />在使用轻机枪时，金克丝的攻击提供<attackSpeed>攻击速度</attackSpeed>，持续{{ minigunattackspeedduration }}秒，可叠加至多{{ minigunattackspeedstacks }}次(最大为<attackSpeed>+{{ minigunattackspeedmax }}% %i:scaleAS%</attackSpeed>)。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "金克丝可在【鱼骨头—火箭发射器】和【砰砰枪—轻机枪】之间切换武器。<br /><br />在使用火箭发射器时，金克丝的攻击会对目标和附近的敌人造成<physicalDamage>{{ rocketdamage }}物理伤害</physicalDamage>，提升{{ rocketbonusrange }}距离，消耗法力，但所享的攻速加成减少{{ rocketaspdpenalty*100 }}%。<br /><br />在使用轻机枪时，金克丝的攻击提供<attackSpeed>攻击速度</attackSpeed>，持续{{ minigunattackspeedduration }}秒，可叠加至多{{ minigunattackspeedstacks }}次(<attackSpeed>最大攻速加成为+{{ minigunattackspeedmax }}% %i:scaleAS%</attackSpeed>)。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "火箭额外射程",
@@ -46618,7 +46632,7 @@
                     "id": "KogMawQ",
                     "name": "腐蚀唾液",
                     "description": "克格莫发射一团腐蚀性物质，对目标造成魔法伤害，并暂时腐蚀目标的护甲和魔法抗性。克格莫还会获得额外攻速。",
-                    "tooltip": "<spellPassive>被动：</spellPassive>克格莫获得<attackSpeed>{{ e2 }}%攻击速度</attackSpeed>。<br /><br /><spellActive>主动：</spellActive>克格莫抛射出一团腐蚀性的唾沫，对命中的第一个敌人造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，以及持续{{ e4 }}秒的<scaleArmor>{{ shredamount }}%护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>击碎。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>被动：</spellPassive>克格莫获得<attackSpeed>{{ attackspeed*100 }}%攻击速度</attackSpeed>。<br /><br /><spellActive>主动：</spellActive>克格莫抛射出一团腐蚀性的唾沫，对命中的第一个敌人造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，以及持续{{ shredduration }}秒的<scaleArmor>{{ shredamount }}%护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>击碎。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "攻击速度",
@@ -46626,8 +46640,8 @@
                             "护甲和魔法抗性击碎"
                         ],
                         "effect": [
-                            "{{ effect2amount*100.000000 }}% -> {{ effect2amountnl*100.000000 }}%",
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ attackspeed*100.000000 }}% -> {{ attackspeednl*100.000000 }}%",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ shredamount }}% -> {{ shredamountNL }}%"
                         ]
                     },
@@ -46652,32 +46666,32 @@
                     "effect": [
                         null,
                         [
-                            80,
-                            125,
-                            170,
-                            215,
-                            260
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            10,
-                            15,
-                            20,
-                            25,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            16,
-                            20,
-                            24,
-                            28,
-                            32
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             1,
@@ -46724,10 +46738,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "80/125/170/215/260",
-                        "10/15/20/25/30",
-                        "16/20/24/28/32",
-                        "4",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "1",
                         "1",
                         "100",
@@ -46761,14 +46775,14 @@
                     "id": "KogMawBioArcaneBarrage",
                     "name": "生化弹幕",
                     "description": "克格莫的攻击距离得到了提升，并且能够对目标造成额外的魔法伤害，伤害值基于目标的最大生命值。",
-                    "tooltip": "克格莫获得{{ e1 }}攻击距离并且他的攻击造成额外的<magicDamage>{{ totalhealthdamage }}最大生命值的魔法伤害</magicDamage>，持续{{ e3 }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "克格莫获得{{ range }}攻击距离，并且他的攻击附带额外的<magicDamage>{{ totalhealthdamage }}最大生命值的魔法伤害</magicDamage>，持续{{ duration }}秒。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "距离",
                             "最大生命值伤害"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ range }} -> {{ rangeNL }}",
                             "{{ maxhealthdamage }}% -> {{ maxhealthdamageNL }}%"
                         ]
                     },
@@ -46793,39 +46807,11 @@
                     "effect": [
                         null,
                         [
-                            130,
-                            150,
-                            170,
-                            190,
-                            210
-                        ],
-                        [
-                            3,
-                            3.75,
-                            4.5,
-                            5.25,
-                            6
-                        ],
-                        [
-                            8,
-                            8,
-                            8,
-                            8,
-                            8
-                        ],
-                        [
-                            100,
-                            100,
-                            100,
-                            100,
-                            100
-                        ],
-                        [
-                            100,
-                            100,
-                            100,
-                            100,
-                            100
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -46835,46 +46821,74 @@
                             0
                         ],
                         [
-                            100,
-                            100,
-                            100,
-                            100,
-                            100
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.15,
-                            0.2,
-                            0.25,
-                            0.3,
-                            0.35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            20,
-                            25,
-                            30,
-                            35
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
-                        "130/150/170/190/210",
-                        "3/3.75/4.5/5.25/6",
-                        "8",
-                        "100",
-                        "100",
                         "0",
-                        "100",
-                        "15",
-                        "0.15/0.2/0.25/0.3/0.35",
-                        "15/20/25/30/35"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",
@@ -46902,7 +46916,7 @@
                     "id": "KogMawVoidOoze",
                     "name": "虚空淤泥",
                     "description": "克格莫抛射出一团特殊的分泌物，对经过或停留在分泌物上的敌人造成伤害和减速效果。",
-                    "tooltip": "克格莫呕出胆汁，造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>并留下一条持续{{ e3 }}秒的软泥路径。软泥中的敌人们会被<status>减速</status>{{ slowamount }}%。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "克格莫呕出胆汁，造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>并留下一条持续{{ trailduration }}秒的软泥路径。软泥中的敌人们会被<status>减速</status>{{ slowamount }}%。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
@@ -46910,7 +46924,7 @@
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ slowamount }}% -> {{ slowamountNL }}%",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -46936,32 +46950,32 @@
                     "effect": [
                         null,
                         [
-                            70,
-                            110,
-                            150,
-                            190,
-                            230
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            35,
-                            40,
-                            45,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.25,
-                            0.25,
-                            0.25,
-                            0.25,
-                            0.25
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -47008,10 +47022,10 @@
                     ],
                     "effectBurn": [
                         null,
-                        "70/110/150/190/230",
-                        "30/35/40/45/50",
-                        "4",
-                        "0.25",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -69489,7 +69503,7 @@
             },
             "stats": {
                 "hp": 610,
-                "hpperlevel": 104,
+                "hpperlevel": 110,
                 "mp": 280,
                 "mpperlevel": 40,
                 "movespeed": 345,
@@ -69838,18 +69852,18 @@
                     "effect": [
                         null,
                         [
-                            50,
-                            70,
-                            90,
-                            110,
-                            130
+                            40,
+                            60,
+                            80,
+                            100,
+                            120
                         ],
                         [
-                            50,
-                            70,
-                            90,
-                            110,
-                            130
+                            40,
+                            60,
+                            80,
+                            100,
+                            120
                         ],
                         [
                             1.6,
@@ -69910,8 +69924,8 @@
                     ],
                     "effectBurn": [
                         null,
-                        "50/70/90/110/130",
-                        "50/70/90/110/130",
+                        "40/60/80/100/120",
+                        "40/60/80/100/120",
                         "1.6/1.7/1.8/1.9/2",
                         "1800",
                         "400",
@@ -74163,6 +74177,12 @@
                     "num": 20,
                     "name": "西部魔影 芮尔",
                     "chromas": true
+                },
+                {
+                    "id": "526030",
+                    "num": 30,
+                    "name": "最高清算 芮尔",
+                    "chromas": false
                 }
             ],
             "lore": "芮尔是黑色玫瑰用凶残的试验一手制造出来的产物，她是狂妄的活体武器，决心要颠覆诺克萨斯。她的童年悲惨且惊悚，那些不可言说的处理过程将她的魔法塑造成完美的武器，让她可以任意控制金属。直到最后她展开了一场暴力的逃离，从数量众多的看管者中杀出一条血路。如今，被认定为逃犯的芮尔对诺克萨斯士兵进行无差别攻击，同时寻找着曾经“学院”里的幸存者，保护柔弱者，对曾经的那些教员送去无情的死亡。",
@@ -85135,6 +85155,12 @@
                     "num": 40,
                     "name": "星界圣骑 赛恩",
                     "chromas": true
+                },
+                {
+                    "id": "14049",
+                    "num": 49,
+                    "name": "最高清算 赛恩",
+                    "chromas": false
                 }
             ],
             "lore": "赛恩是一个来自先前时代的诺克萨斯战争英雄，曾经徒手掐死过一代德玛西亚国王。但他拒绝了死亡和湮灭，以活尸的状态继续为帝国效命。只要挡住他的去路，都会被他无差别地屠杀，敌我不分，足可证明他已经失去了从前的人性。即便如此，他腐朽的身体还是被钉进了粗糙的装甲，继续以丧心病狂的鲁莽冲上战场，在每一下巨斧的挥砍中艰难地回忆真正的自我。",
@@ -86894,13 +86920,13 @@
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        22,
+                        21,
                         20,
                         19,
-                        18,
-                        17,
-                        16
+                        18
                     ],
-                    "cooldownBurn": "20/19/18/17/16",
+                    "cooldownBurn": "22/21/20/19/18",
                     "cost": [
                         50,
                         55,
@@ -92701,6 +92727,12 @@
                     "num": 49,
                     "name": "伏虎之力 泰隆",
                     "chromas": true
+                },
+                {
+                    "id": "91059",
+                    "num": 59,
+                    "name": "最高清算 泰隆",
+                    "chromas": false
                 }
             ],
             "lore": "泰隆是黑暗中的匕首，是绝无仁慈的杀手，他出手前不会有任何警告，不会留任何退路，也不会引起任何警觉。泰隆在诺克萨斯的野蛮街巷中深深烙印了自己危险的名号，在这里他被迫为了生存而战斗、杀戮、偷窃。后来恶名昭彰的杜·克卡奥家族收养了他，现在他为帝国的指挥部贡献自己的夺命手段，暗杀敌人的领袖、军官和英雄，当然也包括任何得罪了最高长官们的诺克萨斯蠢货。",

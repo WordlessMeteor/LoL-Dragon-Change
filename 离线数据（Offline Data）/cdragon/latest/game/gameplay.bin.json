@@ -131,7 +131,11 @@
             "ClientStates/Gameplay/UX/LoL/Cherry/CombatInfoDisplay",
             "ClientStates/Gameplay/UX/LoL/Cherry/SpectateMatchDialog",
             "ClientStates/Gameplay/UX/LoL/Cherry/CherryElimination",
-            "ClientStates/Gameplay/UX/LoL/SubteamSurrender"
+            "ClientStates/Gameplay/UX/LoL/SubteamSurrender",
+            "ClientStates/Gameplay/UX/LoL/Cherry/CherryEventChoice",
+            "ClientStates/Gameplay/UX/LoL/TeamFrames",
+            "ClientStates/Gameplay/UX/LoL/Cherry/CherryCombatIntro",
+            "ClientStates/Gameplay/UX/LoL/Cherry/CherryNarrativeBarks"
         ],
         "__type": "ViewControllerList"
     },
@@ -433,10 +437,6 @@
             "Filters": [
                 {
                     "TFTSetData": "Maps/Shipping/Map22/Sets/TFTSet11",
-                    "__type": "{349845d9}"
-                },
-                {
-                    "TFTSetData": "Maps/Shipping/Map22/Sets/TFTSetEventCT",
                     "__type": "{349845d9}"
                 },
                 {
@@ -1134,7 +1134,8 @@
         "ViewControllers": [
             "ClientStates/Gameplay/UX/TFT/TFT13_Armory_Augments",
             "ClientStates/Gameplay/UX/TFT/TFTArmory_Goop",
-            "ClientStates/Gameplay/UX/TFT/TFTArmory_ChemTwoAction"
+            "ClientStates/Gameplay/UX/TFT/TFTArmory_ChemTwoAction",
+            "ClientStates/Gameplay/UX/TFT/TFTSpineAnnouncementPreviewVersion"
         ],
         "__type": "ViewControllerList"
     },
@@ -1360,10 +1361,6 @@
                 },
                 {
                     "TFTSetData": "Maps/Shipping/Map22/Sets/TFTSet12_PVEMODE",
-                    "__type": "{349845d9}"
-                },
-                {
-                    "TFTSetData": "Maps/Shipping/Map22/Sets/TFTSetEventCT",
                     "__type": "{349845d9}"
                 }
             ],
@@ -15469,6 +15466,436 @@
         "dynamicMaterial": {
             "__type": "DynamicMaterialDef"
         },
+        "__type": "StaticMaterialDef"
+    },
+    "ClientStates/Gameplay/UX/TFT/UiMaterials/Set13/UI_PixelateGlitch_D_PreviewVersion": {
+        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Set13/UI_PixelateGlitch_D_PreviewVersion",
+        "type": 3,
+        "samplerValues": [
+            {
+                "textureName": "Effects_Mask",
+                "texturePath": "ASSETS/Shared/Materials/white.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Mask_Texture",
+                "texturePath": "ASSETS/Shared/Materials/white.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "NoiseFX_Texture",
+                "texturePath": "ASSETS/Shared/Materials/white.dds",
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "EffectsMaskRange",
+                "value": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlickerParameters",
+                "value": [
+                    0.0,
+                    0.0,
+                    1.100000023841858,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OpacityMaskParameters",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    -0.10000000149011612
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BaseOpacity",
+                "value": [
+                    0.9599999785423279,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OpacityMaskRange",
+                "value": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DiffuseTint",
+                "value": [
+                    0.2500038146972656,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ScanlinesSpeed",
+                "value": [
+                    0.009999999776482582,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "VerticalJump",
+                "value": [
+                    0.24250000715255737,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WiggleShakeFXParameters",
+                "value": [
+                    20.0,
+                    200.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "RollFXNoiseBlend",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "RollLineOpacity",
+                "value": [
+                    0.06499999761581421,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "StaticFrequency",
+                "value": [
+                    0.17749999463558197,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SketchSpeed",
+                "value": [
+                    -9.25,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "PixelateFrequency",
+                "value": [
+                    0.4325000047683716,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "StaticPulseRange",
+                "value": [
+                    0.5,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "PixelatePulseRange",
+                "value": [
+                    0.4000000059604645,
+                    0.699999988079071,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "StaticPulseStrength",
+                "value": [
+                    0.32499998807907104,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "PixelatePulseStrength",
+                "value": [
+                    0.7200000286102295,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "GrilleLinesAmount",
+                "value": [
+                    83.19999694824219,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ScanlinesAmount",
+                "value": [
+                    117.76000213623047,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WarpStrength",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DiffuseSaturation",
+                "value": [
+                    1.100000023841858,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ScanlinesFXBlend",
+                "value": [
+                    0.2475000023841858,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DiffuseBrightness",
+                "value": [
+                    1.2000000476837158,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "GrilleFXBlend",
+                "value": [
+                    0.027499999850988388,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "NoiseFXTile",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "RollFXStrength",
+                "value": [
+                    0.0949999988079071,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "NoiseMinMax",
+                "value": [
+                    0.5,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ScanlineThickness",
+                "value": [
+                    0.5,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "RollFXSpeed",
+                "value": [
+                    0.17000000178813934,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "RollFXParameters",
+                "value": [
+                    2.0,
+                    20.0,
+                    2.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlipbookParameters",
+                "value": [
+                    2.0,
+                    2.0,
+                    2.0,
+                    3.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AberrationIntensity",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DiffuseContrast",
+                "value": [
+                    1.225000023841858,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DiffuseTiling",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ResolutionSize",
+                "value": [
+                    11.520000457763672,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "ENABLE_SCANLINE_SS_UVS",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_FLICKERFX",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_TINT",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_WIGGLEFX",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_HICONTRAST",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_ROLLFX",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_PIXELATE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_FLIPBOOK",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_CHROMASPLITFX",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ENABLE_VERTJUMPFX",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/UI/TFT/UI_ScrollGlitchPixelate",
+                        "depthEnable": false,
+                        "blendEnable": true,
+                        "cullEnable": false,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
         "__type": "StaticMaterialDef"
     },
     "ClientStates/Gameplay/UX/TFT/UiMaterials/Set12/UI_ZapShopBackground": {
