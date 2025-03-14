@@ -432,12 +432,12 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 175.0,
+                            "mEndValue": 160.0,
                             "mStartValue": 35.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.4000000059604645
+                            "mCoefficient": 0.25
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
@@ -2403,13 +2403,13 @@
                 "SelfDuration": 1.75,
                 "StasisDuration": 2.5
             },
-            "desc": "Вы получаете <spellName>Остановку времени</spellName> (эффект помещается в ячейку Побега).<br><br><rules><spellName>Остановка времени</spellName>: все чемпионы в пределах 800 ед. впадают в <status>стазис</status> (эффект помещается в ячейку Побега). Вы выходите из <status>стазиса</status> на 0,75 сек. раньше и восстанавливаете себе 40% от <scaleHealth>недостающего здоровья</scaleHealth>.</rules>",
+            "desc": "Вы получаете заклинание призывателя <spellName>Остановка времени</spellName>.<br><br><rules><spellName>Остановка времени</spellName>: ВСЕ чемпионы поблизости впадают в <status>стазис</status>. Вы выходите из <status>стазиса</status> раньше и восстанавливаете часть недостающего здоровья, пока находитесь в нем.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/wellberightback_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wellberightback_small.png",
             "id": 312,
             "name": "Скоро вернемся",
             "rarity": 1,
-            "tooltip": "<spellName>Остановка времени</spellName>: все чемпионы в пределах @Range@ ед. впадают в <status>стазис</status> на @StasisDuration@ сек. Вы выходите из <status>стазиса</status> через @SelfDuration@ сек. и <healing>восстанавливаете</healing> себе @HealAmountPercent*100@% от <scaleHealth>недостающего здоровья</scaleHealth>."
+            "tooltip": "<spellName>Остановка времени</spellName>: все чемпионы поблизости впадают в <status>стазис</status> на @StasisDuration@ сек. Вы выходите из <status>стазиса</status> через @SelfDuration@ сек. и восстанавливаете <healing>@HealAmountPercent*100@% от недостающего здоровья</healing>, пока находитесь в нем."
         },
         {
             "apiName": "FirstAidKit",
@@ -3495,13 +3495,13 @@
                 "HealthThreshold": 0.30000001192092896,
                 "StealthDuration": 1.25
             },
-            "desc": "Когда у вас остается @HealthThreshold*100@% здоровья, вы ненадолго получаете <keywordStealth>невидимость</keywordStealth> и создаете 4 своих клонов.",
+            "desc": "Когда у вас остается <scaleHealth>@HealthThreshold*100@% здоровья</scaleHealth>, вы ненадолго получаете <keywordStealth>невидимость</keywordStealth> и создаете 4 своих клонов.",
             "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
             "id": 172,
             "name": "Отражение",
             "rarity": 0,
-            "tooltip": "Когда у вас остается @HealthThreshold*100@% здоровья, вы ненадолго получаете <keywordStealth>невидимость</keywordStealth> и создаете 4 своих клонов."
+            "tooltip": "Когда у вас остается <scaleHealth>@HealthThreshold*100@% здоровья</scaleHealth>, вы ненадолго получаете <keywordStealth>невидимость</keywordStealth> и создаете 4 своих клонов."
         },
         {
             "apiName": "Desecrator",
@@ -3512,7 +3512,7 @@
                 "CurseCounter": 5.0,
                 "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
             },
-            "desc": "<status>Обездвиживая</status> вражеских чемпионов, вы получаете заряды (@CurseCounter@) <keywordMajor>проклятия</keywordMajor>. За каждый заряд <keywordMajor>проклятия</keywordMajor> вы навсегда получаете <armor>броню</armor> и <magicresistance>сопротивление магии</magicresistance>.<br><br>Увеличивает максимальное количество зарядов <keywordMajor>проклятия</keywordMajor>.",
+            "desc": "<status>Обездвиживание</status> вражеских чемпионов дает вам постоянную <keywordMajor>Проклятую силу</keywordMajor>. Вы получаете прибавку к <armor>броне</armor> и <magicresistance>сопротивлению магии</magicresistance>, которая зависит от вашей <keywordMajor>Проклятой силы</keywordMajor><br>.<br>Максимальная <keywordMajor>Проклятая сила</keywordMajor>, которую можно получить за раунд, зависит от количества источников <keywordMajor>проклятия</keywordMajor> у вас и вашего союзника.",
             "iconLarge": "assets/ux/cherry/augments/icons/desecrator_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/desecrator_small.png",
             "id": 218,
@@ -4203,7 +4203,7 @@
             "id": 64,
             "name": "Упорство",
             "rarity": 1,
-            "tooltip": "Cherry_Perseverance_Tooltip"
+            "tooltip": "Вы получаете <healing>@BaseRegen*100@% базового восстановления здоровья</healing>. Прибавка увеличивается до <healing>@AmpedRegen*100@%</healing>, когда у вас менее <scaleHealth>25% здоровья</scaleHealth>.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@"
         },
         {
             "apiName": "JeweledGauntlet",
