@@ -868,7 +868,7 @@
                 "SpellIDCD": 5.0,
                 "StartingAPIfSecondAugment": 40.0
             },
-            "desc": "Permanently gain <scaleAP>@APPerProc@ Ability Power</scaleAP> when you hit enemies with Abilities.<br><br>If taken as your second augment, starts with  <scaleAP>@StartingAPIfSecondAugment@ Ability Power</scaleAP>.",
+            "desc": "Permanently gain <scaleAP>@APPerProc@ Ability Power</scaleAP> when you hit enemies with Abilities.<br><br>If taken as your second Augment, starts with  <scaleAP>@StartingAPIfSecondAugment@ Ability Power</scaleAP>.",
             "iconLarge": "assets/ux/cherry/augments/icons/phenomenalevil_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/phenomenalevil_small.png",
             "id": 65,
@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "Your Item and damage over time effects can Critically Strike. Gain @CritChance*100@% Crit chance.",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Gain <attackSpeed>@AttackSpeed*100@% total Attack Speed</attackSpeed>. Your Attacks deal @AttackReduction*100@% less damage and your On-Hits deal @OnHitMod*100@% less damage.",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "When you Attack, fire a secondary bolt that deals @AttackReduction*100@% damage and applies your On-Hits at @OnHitMod*100@% effectiveness. Gain <attackSpeed>@AttackSpeed*100@% total Attack Speed</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Dual Wield",
             "rarity": 2,
-            "tooltip": "Gain <attackSpeed>@AttackSpeed*100@% total Attack Speed</attackSpeed>. Your Attacks deal @AttackReduction*100@% less damage and your On-Hits deal @OnHitMod*100@% less damage."
+            "tooltip": "When you Attack, fire a secondary bolt that deals @AttackReduction*100@% damage and applies your On-Hits at @OnHitMod*100@% effectiveness. Gain <attackSpeed>@AttackSpeed*100@% total Attack Speed</attackSpeed>."
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "Gain 3 random Dragon Souls.",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "Gain the <spellName>First Strike</spellName> and <spellName>Dark Harvest</spellName> Keystone Runes.",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "Fruits of Your Labor",
             "rarity": 0,
-            "tooltip": "Power Flowers are @AmpAmountTooltip@% more effective on you and are shared with your ally if they are within @AllyMaxRange@ range of it."
+            "tooltip": "Power Flowers are @AmpAmountTooltip@% more effective on you and are shared with your ally."
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "Gain 1 level now, and 1 bonus level every other round. Your level cap is removed.",
+            "desc": "Gain 1 level now, and 1 bonus level every other round. Your level cap is removed.<br><br>If taken as your second Augment, instead gain 3 levels.",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "Wisdom of Ages",
             "rarity": 2,
-            "tooltip": "Gain 1 level now, and 1 bonus level every other round. Your level cap is removed."
+            "tooltip": "Gain 1 level now, and 1 bonus level every other round. Your level cap is removed.<br><br>If taken as your second Augment, instead gain 3 levels."
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

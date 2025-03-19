@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "Tvoje předměty a efekty s poškozením rozloženým v čase mohou způsobit kritický zásah. Získáš @CritChance*100@&nbsp;% k šanci na kritický zásah.",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Získáš <attackSpeed>@AttackSpeed*100@&nbsp;% k celkové rychlosti útoků</attackSpeed>. Tvoje útoky způsobují o @AttackReduction*100@&nbsp;% nižší poškození, u zásahových efektů je tento pokles @OnHitMod*100@&nbsp;%.",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "Při útoku vystřelíš sekundární výboje, které způsobí @AttackReduction*100@% poškození a aplikují tvoje zásahové efekty s @OnHitMod*100@% účinností. Získáš <attackSpeed>@AttackSpeed*100@&nbsp;% k celkové rychlosti útoků</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Dvojice zbraní",
             "rarity": 2,
-            "tooltip": "Získáš <attackSpeed>@AttackSpeed*100@&nbsp;% k celkové rychlosti útoků</attackSpeed>. Tvoje útoky způsobují o @AttackReduction*100@&nbsp;% nižší poškození, u zásahových efektů je tento pokles @OnHitMod*100@&nbsp;%."
+            "tooltip": "Při útoku vystřelíš sekundární výboje, které způsobí @AttackReduction*100@% poškození a aplikují tvoje zásahové efekty s @OnHitMod*100@% účinností. Získáš <attackSpeed>@AttackSpeed*100@&nbsp;% k celkové rychlosti útoků</attackSpeed>."
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "Získáš 3 náhodné dračí duše.",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "Získáš klíčové runy <spellName>První úder</spellName> a <spellName>Temné žně</spellName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "Dřina nese ovoce",
             "rarity": 0,
-            "tooltip": "Květiny síly na tebe působí s o @AmpAmountTooltip@&nbsp;% vyšší efektivitou a jejich účinky se sdílí s tvými spojenci, pokud se nacházejí v okruhu @AllyMaxRange@ jednotek od dané květiny."
+            "tooltip": "Cherry_FruitsOfYourLabor_Tooltip"
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "Získáš 1 úroveň nyní a 1 bonusovou úroveň v každém druhém kole. Strop úrovní se ti odstraní.",
+            "desc": "Získáš 1 úroveň nyní a 1 bonusovou úroveň v každém druhém kole. Strop úrovní se ti odstraní.<br><br>Vezmeš-li si tuto augmentaci jako svou druhou, získáš 3 úrovně.",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "Moudrost věků",
             "rarity": 2,
-            "tooltip": "Získáš 1 úroveň nyní a 1 bonusovou úroveň v každém druhém kole. Strop úrovní se ti odstraní."
+            "tooltip": "Získáš 1 úroveň nyní a 1 bonusovou úroveň v každém druhém kole. Strop úrovní se ti odstraní.<br><br>Vezmeš-li si tuto augmentaci jako svou druhou, získáš 3 úrovně."
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

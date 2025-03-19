@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "Ваши эффекты с периодическим уроном и эффекты предметов могут быть критическими. Вы получаете @CritChance*100@% шанса критического удара.",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Вы получаете <attackSpeed>@AttackSpeed*100@% общей скорости атаки</attackSpeed>. Ваши автоатаки наносят на @AttackReduction*100@% меньше урона, а эффекты при попадании – на @OnHitMod*100@% меньше урона.",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "При автоатаке вы дополнительно выпускаете снаряд, который наносит @AttackReduction*100@% урона и накладывает эффекты при попадании с @OnHitMod*100@% эффективностью. Вы получаете <attackSpeed>@AttackSpeed*100@% общей скорости атаки</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Парное оружие",
             "rarity": 2,
-            "tooltip": "Вы получаете <attackSpeed>@AttackSpeed*100@% общей скорости атаки</attackSpeed>. Ваши автоатаки наносят на @AttackReduction*100@% меньше урона, а эффекты при попадании – на @OnHitMod*100@% меньше урона."
+            "tooltip": "При автоатаке вы дополнительно выпускаете снаряд, который наносит @AttackReduction*100@% урона и накладывает эффекты при попадании с @OnHitMod*100@% эффективностью. Вы получаете <attackSpeed>@AttackSpeed*100@% общей скорости атаки</attackSpeed>."
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "Вы получаете 3 случайные души драконов.",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "Вы получаете ключевые руны <spellName>Удар на опережение</spellName> и <spellName>Темная жатва</spellName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "Плоды трудов",
             "rarity": 0,
-            "tooltip": "Эффективность магических цветков повышена на @AmpAmountTooltip@%. Если ваш союзник находится в пределах @AllyMaxRange@ ед. от магического цветка, когда вы его используете, он получает его эффект."
+            "tooltip": "Cherry_FruitsOfYourLabor_Tooltip"
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "Вы получаете 1 уровень сразу и еще по 1 дополнительному уровню каждый раунд. Кроме того, с вас снимается ограничение на максимальный уровень.",
+            "desc": "Вы получаете 1 уровень сразу и еще по 1 дополнительному уровню в каждом раунде. Кроме того, с вас снимается ограничение на максимальный уровень.<br><br>Выбрав эту аугментацию второй, вместо этого вы получаете сразу 3 уровня.",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "Мудрость веков",
             "rarity": 2,
-            "tooltip": "Вы получаете 1 уровень сразу и еще по 1 дополнительному уровню каждый раунд. Кроме того, с вас снимается ограничение на максимальный уровень."
+            "tooltip": "Вы получаете 1 уровень сразу и еще по 1 дополнительному уровню в каждом раунде. Кроме того, с вас снимается ограничение на максимальный уровень.<br><br>Выбрав эту аугментацию второй, вместо этого вы получаете сразу 3 уровня."
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

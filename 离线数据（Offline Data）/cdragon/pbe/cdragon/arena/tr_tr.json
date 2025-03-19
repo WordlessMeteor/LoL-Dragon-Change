@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "Eşyaların ve zamanla hasar veren etkilerin kritik vuruş yapabilir. Ayrıca %@CritChance*100@ Kritik Vuruş İhtimali kazanırsın.",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "<attackSpeed>%@AttackSpeed*100@ Toplam Saldırı Hızı</attackSpeed> kazanırsın. Saldırıların %@AttackReduction*100@ ve isabet etkilerin %@OnHitMod*100@ daha az hasar verir.",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "Saldırdığında %@AttackReduction*100@ Hasar veren ve %@OnHitMod*100@ etkililikle isabet etkileri uygulayan ikinci bir atış gönderir. <attackSpeed>%@AttackSpeed*100@ Toplam Saldırı Hızı</attackSpeed> kazanırsın.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Çifte Silah",
             "rarity": 2,
-            "tooltip": "<attackSpeed>%@AttackSpeed*100@ Toplam Saldırı Hızı</attackSpeed> kazanırsın. Saldırıların %@AttackReduction*100@ ve isabet etkilerin %@OnHitMod*100@ daha az hasar verir."
+            "tooltip": "Saldırdığında %@AttackReduction*100@ Hasar veren ve %@OnHitMod*100@ etkililikle isabet etkileri uygulayan ikinci bir atış gönderir. <attackSpeed>%@AttackSpeed*100@ Toplam Saldırı Hızı</attackSpeed> kazanırsın."
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "3 rasgele ejder ruhu kazanırsın.",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "<spellName>İlk Vuruş</spellName> ve <spellName>Kara Hasat</spellName> anahtar rünlerini kazanırsın.",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "Çabanın Meyvesi",
             "rarity": 0,
-            "tooltip": "Güç Çiçekleri senin üstünde %@AmpAmountTooltip@ daha etkili olur ve çiçeğin @AllyMaxRange@ menzil yakınındaysa etkiler takım arkadaşınla paylaşılır."
+            "tooltip": "Cherry_FruitsOfYourLabor_Tooltip"
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "Hemen 1 seviye atlarsın ve her iki turda bir fazladan 1 seviye atlamaya devam edersin. Seviye sınırın kalkar.",
+            "desc": "Hemen 1 seviye atlarsın ve her iki turda bir fazladan 1 seviye atlamaya devam edersin. Seviye sınırın kalkar.<br><br>İkinci eklentin olarak seçilirse 3 seviye atlatır.",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "Asırlık Bilgi",
             "rarity": 2,
-            "tooltip": "Hemen 1 seviye atlarsın ve her iki turda bir fazladan 1 seviye atlamaya devam edersin. Seviye sınırın kalkar."
+            "tooltip": "Hemen 1 seviye atlarsın ve her iki turda bir fazladan 1 seviye atlamaya devam edersin. Seviye sınırın kalkar.<br><br>İkinci eklentin olarak seçilirse 3 seviye atlatır."
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

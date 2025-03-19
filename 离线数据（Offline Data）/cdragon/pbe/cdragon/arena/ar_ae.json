@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "يمكن أن تؤدي تأثيرات العنصر والضرر بمرور الوقت إلى إلحاق ضربة. اكسب @CritChance*100@% من فرصة الضربة الحرجة.",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -1956,7 +1956,7 @@
                 "RequiredKillCount": 5.0,
                 "RerollsToGrant": 1.0
             },
-            "desc": "تكسب @KillStackCredit@ من التكدسات عندما تحقق إطاحة، مرة واحدة لكل بطل في كل جولة.<br><br>كل @RequiredKillCount@ من التكدسات، تفقس هذه البيضة عن سندان موشوري و @RerollsToGrant@ من عمليات الاستبدال الإضافية.",
+            "desc": "تكسب @KillStackCredit@ من التكدسات عندما تحقق إطاحة، مرة واحدة لكل بطل في كل جولة.<br><br>كل @RequiredKillCount@ من التكدسات، تفقس هذه البيضة إلى سندان موشوري و @RerollsToGrant@ من عمليات الاستبدال الإضافية.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
             "id": 224,
@@ -2096,13 +2096,13 @@
                 "Radius": 400.0,
                 "WarningDelay": 2.5
             },
-            "desc": "بعد مرور @InitalDelay@ث من بدء القتال، يمكنك استدعاء نجم حماية يهبط نحوك ببطء. عند وصوله، تصبح أنت وحلفاؤك في الجوار <keywordMajor>منيعين</keywordMajor> لبضع ثوانٍ. يتم <keywordMajor>الإلقاء التلقائي</keywordMajor> بعدها كل @BaseCD@ث.",
+            "desc": "بعد مرور @InitalDelay@ث من بدء القتال، يتم استدعاء نجم حماية يهبط نحوك ببطء. عند وصوله، تصبح أنت وحلفاؤك في الجوار <keywordMajor>منيعين</keywordMajor> لبضع ثوانٍ. يتم <keywordMajor>الإلقاء التلقائي</keywordMajor> بعدها كل @BaseCD@ث.",
             "iconLarge": "assets/ux/cherry/augments/icons/slowactingpainkillers_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/slowactingpainkillers_small.png",
             "id": 301,
             "name": "تدخل خارق",
             "rarity": 1,
-            "tooltip": "بعد مرور @InitalDelay@ث من بدء القتال، يمكنك استدعاء نجم حماية يهبط نحوك ببطء. عند وصوله، تصبح أنت وحلفاؤك في الجوار <keywordMajor>منيعين</keywordMajor> لمدة @InvulnerabilityDuration@ث. يتم <keywordMajor>الإلقاء التلقائي</keywordMajor> بعدها كل @BaseCD@ث."
+            "tooltip": "بعد مرور @InitalDelay@ث من بدء القتال، يتم استدعاء نجم حماية يهبط نحوك ببطء. عند وصوله، تصبح أنت وحلفاؤك في الجوار <keywordMajor>منيعين</keywordMajor> لمدة @InvulnerabilityDuration@ث. يتم <keywordMajor>الإلقاء التلقائي</keywordMajor> بعدها كل @BaseCD@ث."
         },
         {
             "apiName": "ThreadtheNeedle",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "تكسب <attackSpeed>@AttackSpeed*100@% إجمالي سرعة هجوم</attackSpeed>. تلحق هجماتك ضررًا أقل بنسبة @AttackReduction*100@%، وتلحق تأثيرات الإصابة لديك @OnHitMod*100@% ضرر أقل.",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "عندما تشن هجومًا، تطلق قذيفة ثانوية تلحق ضررًا بنسبة @AttackReduction*100@% وتطبق تأثيرات الإصابة بنسبة فعاليةٍ قدرها @OnHitMod*100@%. تكسب <attackSpeed>@AttackSpeed*100@% إجمالي سرعة هجوم</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "ثنائي القبضة",
             "rarity": 2,
-            "tooltip": "تكسب <attackSpeed>@AttackSpeed*100@% إجمالي سرعة هجوم</attackSpeed>. تلحق هجماتك ضررًا أقل بنسبة @AttackReduction*100@%، وتلحق تأثيرات الإصابة لديك @OnHitMod*100@% ضرر أقل."
+            "tooltip": "عندما تشن هجومًا، تطلق قذيفة ثانوية تلحق ضررًا بنسبة @AttackReduction*100@% وتطبق تأثيرات الإصابة بنسبة فعاليةٍ قدرها @OnHitMod*100@%. تكسب <attackSpeed>@AttackSpeed*100@% إجمالي سرعة هجوم</attackSpeed>."
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2633,7 +2645,7 @@
             "id": 194,
             "name": "سحر الجنية",
             "rarity": 2,
-            "tooltip": "إلحاق الضرر بأعدائك <status>متغيري الشكل</status> الخارقين لمدة @PolyDuration@ث (@PolyCooldown@ث فترة تبريد)."
+            "tooltip": "عند إلحاق الضرر بقدرتك الخارقة، يتحول الأعداء إلى <status>متغيري الشكل</status> لمدة @PolyDuration@ث (@PolyCooldown@ث فترة تبريد)."
         },
         {
             "apiName": "Firebrand",
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "اكسب 3 أرواح تنانين عشوائية.",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "اكسب رونز أحجار الأساس <spellName>الضربة الأولى</spellName> و<spellName>حصاد الظلام</spellName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "ثمار جهدك",
             "rarity": 0,
-            "tooltip": "تصبح أزهار الطاقة أكثر فعالية عليك بنسبة @AmpAmountTooltip@% وتتم مشاركتها مع حليفك إذا كان ضمن نطاق @AllyMaxRange@."
+            "tooltip": "Cherry_FruitsOfYourLabor_Tooltip"
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "اكسب مستوى واحدًا الآن ومستوى إضافيًا كل جولتين. تمت إزالة الحد الأقصى لمستواك.",
+            "desc": "تكسب مستوى واحدًا الآن ومستوى إضافيًا كل جولتين. تمت إزالة الحد الأقصى لمستواك.<br><br>إذا كان هذا التحسين الثاني لديك، تكسب 3 مستويات بدلًا مما سبق.",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "حكمة العصور",
             "rarity": 2,
-            "tooltip": "اكسب مستوى واحدًا الآن ومستوى إضافيًا كل جولتين. تمت إزالة الحد الأقصى لمستواك."
+            "tooltip": "تكسب مستوى واحدًا الآن ومستوى إضافيًا كل جولتين. تمت إزالة الحد الأقصى لمستواك.<br><br>إذا كان هذا التحسين الثاني لديك، تكسب 3 مستويات بدلًا مما سبق."
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

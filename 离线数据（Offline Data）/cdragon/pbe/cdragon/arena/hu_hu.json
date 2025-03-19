@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "A tárgyaiddal és folyamatosan sebző hatásaiddal kritikus csapást mérhetsz. @CritChance*100@% kritikus csapási esélyt kapsz.",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -1525,13 +1525,13 @@
             "dataValues": {
                 "ProcMultiplier": 1.5
             },
-            "desc": "Minden harmadik támadás duplán aktiválja a {{ Item_Keyword_OnHit }} hatásokat.",
+            "desc": "Minden harmadik támadás duplán aktiválja a hatásokat {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/twicethrice_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/twicethrice_small.png",
             "id": 107,
             "name": "Dupla öröm",
             "rarity": 1,
-            "tooltip": "Minden harmadik támadás duplán aktiválja a {{ Item_Keyword_OnHit }} hatásokat."
+            "tooltip": "Minden harmadik támadás duplán aktiválja a hatásokat {{ Item_Keyword_OnHit }}."
         },
         {
             "apiName": "SymbioticMutation",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "<attackSpeed>@AttackSpeed*100@% teljes támadási sebességet</attackSpeed> biztosít. A támadásaid @AttackReduction*100@%-kal kevesebb sebzést, a találati hatásaid pedig @OnHitMod*100@%-kal kevesebb sebzést okoznak.",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "A támadásaid egy másodlagos lövedéket indítanak útnak, amely @AttackReduction*100@% sebzést okoz, és @OnHitMod*100@%-os hatékonysággal alkalmazza a találati hatásokat. <attackSpeed>@AttackSpeed*100@% teljes támadási sebességet</attackSpeed> biztosít.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Dupla csapás",
             "rarity": 2,
-            "tooltip": "<attackSpeed>@AttackSpeed*100@% teljes támadási sebességet</attackSpeed> biztosít. A támadásaid @AttackReduction*100@%-kal kevesebb sebzést, a találati hatásaid pedig @OnHitMod*100@%-kal kevesebb sebzést okoznak."
+            "tooltip": "A támadásaid egy másodlagos lövedéket indítanak útnak, amely @AttackReduction*100@% sebzést okoz, és @OnHitMod*100@%-os hatékonysággal alkalmazza a találati hatásokat. <attackSpeed>@AttackSpeed*100@% teljes támadási sebességet</attackSpeed> biztosít."
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "3 db véletlenszerű sárkánylelket ad.",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "Biztosítja az <spellName>Első csapás</spellName> és a <spellName>Sötét szüret</spellName> kiemelt rúnát.",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -3648,7 +3663,7 @@
             "iconLarge": "assets/ux/cherry/augments/icons/dashing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dashing_small.png",
             "id": 19,
-            "name": "Érinthetetlen",
+            "name": "Rámenős",
             "rarity": 2,
             "tooltip": "A rohamozás, ugrás, átvillanás és teleportálás képességek <scaleLevel>@Haste@ képességgyorsítást</scaleLevel> biztosítanak."
         },
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "Munkád gyümölcsei",
             "rarity": 0,
-            "tooltip": "A varázsvirágok @AmpAmountTooltip@%-kal erősebben hatnak rád, és a szövetségeseddel is megosztod őket, ha legfeljebb @AllyMaxRange@ egység távolságra van tőle."
+            "tooltip": "Cherry_FruitsOfYourLabor_Tooltip"
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "Lépj azonnal 1 szintet, és minden további körben 1 bónusz szintet. A szintkorlátod megszűnik.",
+            "desc": "Lépj azonnal 1 szintet, és minden további körben 1 bónusz szintet. A szintkorlátod megszűnik.<br><br>Második erősítésként választva 3 szintlépést biztosít.",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "Korok bölcsessége",
             "rarity": 2,
-            "tooltip": "Lépj azonnal 1 szintet, és minden további körben 1 bónusz szintet. A szintkorlátod megszűnik."
+            "tooltip": "Lépj azonnal 1 szintet, és minden további körben 1 bónusz szintet. A szintkorlátod megszűnik.<br><br>Második erősítésként választva 3 szintlépést biztosít."
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

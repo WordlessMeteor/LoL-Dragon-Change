@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "你的装备和持续伤害效果可以暴击。获得@CritChance*100@%暴击几率。",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "获得<attackSpeed>@AttackSpeed*100@%总攻击速度</attackSpeed>。你的攻击造成的伤害降低@AttackReduction*100@%并且攻击特效造成的伤害降低@OnHitMod*100@%。",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "在你攻击时，发射一个次级箭矢，造成@AttackReduction*100@%伤害并以@OnHitMod*100@%效能施加你的附带伤害。获得<attackSpeed>@AttackSpeed*100@%总攻击速度</attackSpeed>。",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "双刀流",
             "rarity": 2,
-            "tooltip": "获得<attackSpeed>@AttackSpeed*100@%总攻击速度</attackSpeed>。你的攻击造成的伤害降低@AttackReduction*100@%并且攻击特效造成的伤害降低@OnHitMod*100@%。"
+            "tooltip": "在你攻击时，发射一个次级箭矢，造成@AttackReduction*100@%伤害并以@OnHitMod*100@%效能施加你的附带伤害。获得<attackSpeed>@AttackSpeed*100@%总攻击速度</attackSpeed>。"
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "获得3个随机龙魂。",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "获得<spellName>先攻</spellName>和<spellName>黑暗收割</spellName>基石符文。",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "你的劳动果实",
             "rarity": 0,
-            "tooltip": "能量花卉在你身上的效能提升@AmpAmountTooltip@%，并且还会分享给你的友军，前提是你的友军在它的@AllyMaxRange@码以内。"
+            "tooltip": "能量花卉在你身上的效能提升@AmpAmountTooltip@%，并且还会分享给你的友军。"
         },
         {
             "apiName": "InfernalSoul",
@@ -4109,7 +4123,7 @@
                 "CurseCounter": 4.0,
                 "Radius": 450.0
             },
-            "desc": "治疗/护盾为你提供永久的获得<keywordMajor>诅咒能量</keywordMajor>。从每层<keywordMajor>诅咒能量</keywordMajor>中获得技能急速。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。<br><br>",
+            "desc": "治疗/护盾为你提供永久的<keywordMajor>诅咒能量</keywordMajor>。从每层<keywordMajor>诅咒能量</keywordMajor>中获得技能急速。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。<br><br>",
             "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/darkblessing_small.png",
             "id": 215,
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "立刻提升1级，并且每隔一回合额外提升1级。你的等级上限已被移除。",
+            "desc": "立刻提升1级，并且每隔一回合额外提升1级。你的等级上限已被移除。<br><br>如果是作为你的第二个强化符文，则转而提升3级。",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "时光之智慧",
             "rarity": 2,
-            "tooltip": "立刻提升1级，并且每隔一回合额外提升1级。你的等级上限已被移除。"
+            "tooltip": "立刻提升1级，并且每隔一回合额外提升1级。你的等级上限已被移除。<br><br>如果是作为你的第二个强化符文，则转而提升3级。"
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

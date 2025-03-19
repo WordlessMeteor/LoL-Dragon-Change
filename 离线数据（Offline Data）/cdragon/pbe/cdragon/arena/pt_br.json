@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "Seus efeitos de dano ao longo do tempo e de itens podem causar Acertos Críticos. Recebe @CritChance*100@% de Chance de Acerto Crítico.",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -2102,7 +2102,7 @@
             "id": 301,
             "name": "Intervenção Divina",
             "rarity": 1,
-            "tooltip": "Depois de @InitalDelay@s em combate, invoca uma estrela protetora que desce lentamente sobre você. Quando ela pousa, você e seus aliados próximos ficam <keywordMajor>Invulneráveis</keywordMajor> por @InvulnerabilityDuration@ alguns segundos. Depois, <keywordMajor>conjura automaticamente</keywordMajor> a cada @BaseCD@s."
+            "tooltip": "Depois de @InitalDelay@s em combate, invoca uma estrela protetora que desce lentamente sobre você. Quando ela pousa, você e seus aliados próximos ficam <keywordMajor>Invulneráveis</keywordMajor> por @InvulnerabilityDuration@ segundos. Depois, <keywordMajor>conjura automaticamente</keywordMajor> a cada @BaseCD@s."
         },
         {
             "apiName": "ThreadtheNeedle",
@@ -2223,7 +2223,7 @@
             "id": 75,
             "name": "Fogo Baixo",
             "rarity": 2,
-            "tooltip": "A cada segundo, aplica uma <keywordMajor>Queimadura</keywordMajor> que acumula infinitamente a Campeões inimigos, causando <magicDamage>@BleedDamageTooltip@ de Dano Mágico</magicDamage> por segundo por @BleedDuration@s.<br><br>Dano causado nesta rodada: @f1@<br>Total de dano causado: @f2@"
+            "tooltip": "A cada segundo, aplica uma <keywordMajor>Queimadura</keywordMajor> que acumula infinitamente a Campeões inimigos próximos, causando <magicDamage>@BleedDamageTooltip@ de Dano Mágico</magicDamage> por segundo por @BleedDuration@s.<br><br>Dano causado nesta rodada: @f1@<br>Total de dano causado: @f2@"
         },
         {
             "apiName": "DieAnotherDay",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Recebe <attackSpeed>@AttackSpeed*100@% de Velocidade de Ataque total</attackSpeed>. Seus Ataques causam @AttackReduction*100@% a menos de dano e seus Ataques ao contato causam @OnHitMod*100@% a menos de dano.",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "Ao Atacar, dispara um projétil secundário que causa @AttackReduction*100@% de dano e aplica efeitos ao contato com @OnHitMod*100@% de eficácia. Recebe <attackSpeed>@AttackSpeed*100@% de Velocidade de Ataque total</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Ataque Duplo",
             "rarity": 2,
-            "tooltip": "Recebe <attackSpeed>@AttackSpeed*100@% de Velocidade de Ataque total</attackSpeed>. Seus Ataques causam @AttackReduction*100@% a menos de dano e seus Ataques ao contato causam @OnHitMod*100@% a menos de dano."
+            "tooltip": "Ao Atacar, dispara um projétil secundário que causa @AttackReduction*100@% de dano e aplica efeitos ao contato com @OnHitMod*100@% de eficácia. Recebe <attackSpeed>@AttackSpeed*100@% de Velocidade de Ataque total</attackSpeed>."
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "Recebe 3 Almas de Dragão aleatórias.",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "Recebe as Runas Essenciais <spellName>Primeiro Ataque</spellName> e <spellName>Colheita Sombria</spellName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "Frutos do Trabalho",
             "rarity": 0,
-            "tooltip": "Flores do Poder são @AmpAmountTooltip@% mais eficazes em você e são compartilhadas com seu aliado se ele estiver em até @AllyMaxRange@ de alcance."
+            "tooltip": "Flores do Poder são @AmpAmountTooltip@% mais eficazes em você e são compartilhadas com seu aliado."
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "Recebe 1 nível agora e 1 nível adicional em rodadas alternadas. Seu limite de nível é removido.",
+            "desc": "Recebe 1 nível agora e 1 nível adicional em rodadas alternadas. Seu limite de nível é removido.<br><br>Se for obtido como seu segundo Aprimoramento, recebe 3 níveis.",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "Sabedoria das Eras",
             "rarity": 2,
-            "tooltip": "Recebe 1 nível agora e 1 nível adicional em rodadas alternadas. Seu limite de nível é removido."
+            "tooltip": "Recebe 1 nível agora e 1 nível adicional em rodadas alternadas. Seu limite de nível é removido.<br><br>Se for obtido como seu segundo Aprimoramento, recebe 3 níveis."
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

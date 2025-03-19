@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "Los efectos de tus objetos y el daño prolongado pueden infligir golpes críticos. Obtienes un @CritChance*100@% de Probabilidad de Golpe Crítico.",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Obtienes un <attackSpeed>@AttackSpeed*100@% de Velocidad de Ataque</attackSpeed>. Tus ataques infligen un @AttackReduction*100@% menos de daño, y tus ataques al impacto infligen un @OnHitMod*100@% menos de daño.",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "Cuando atacas, dispara un proyectil secundario que inflige un @AttackReduction*100@% de daño y aplica efectos al Impacto con un @OnHitMod*100@% de efectividad. Obtienes un <attackSpeed>@AttackSpeed*100@% de Velocidad de Ataque</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Doble Empuñadura",
             "rarity": 2,
-            "tooltip": "Obtienes un <attackSpeed>@AttackSpeed*100@% de Velocidad de Ataque</attackSpeed>. Tus ataques infligen un @AttackReduction*100@% menos de daño, y tus ataques al impacto infligen un @OnHitMod*100@% menos de daño."
+            "tooltip": "Cuando atacas, dispara un proyectil secundario que inflige un @AttackReduction*100@% de daño y aplica efectos al Impacto con un @OnHitMod*100@% de efectividad. Obtienes un <attackSpeed>@AttackSpeed*100@% de Velocidad de Ataque</attackSpeed>."
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "Obtienes 3 almas de dragón aleatorias.",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "Obtienes las runas clave <spellName>Primer Golpe</spellName> y <spellName>Cosecha Oscura</spellName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "El Fruto de tu Labor",
             "rarity": 0,
-            "tooltip": "Las Flores de Poder son un @AmpAmountTooltip@% más efectivas en ti y se comparten con tu aliado si está en un radio de @AllyMaxRange@."
+            "tooltip": "Las Flores de Poder son un @AmpAmountTooltip@% más efectivas en ti y se comparten con tu aliado."
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "Obtienes 1 nivel ahora y 1 nivel adicional cada dos rounds. Se elimina tu límite de nivel.",
+            "desc": "Obtienes 1 nivel ahora y 1 nivel adicional cada dos rondas. Se elimina tu límite de nivel.<br><br>Si lo obtienes como tu segundo aumento, obtienes 3 niveles.",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "Sabiduría Ancestral",
             "rarity": 2,
-            "tooltip": "Obtienes 1 nivel ahora y 1 nivel adicional cada dos rounds. Se elimina tu límite de nivel."
+            "tooltip": "Obtienes 1 nivel ahora y 1 nivel adicional cada dos rondas. Se elimina tu límite de nivel.<br><br>Si lo obtienes como tu segundo aumento, obtienes 3 niveles."
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

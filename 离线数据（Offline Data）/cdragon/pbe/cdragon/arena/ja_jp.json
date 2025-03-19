@@ -36,7 +36,7 @@
                 "DamageMod": 0.4000000059604645,
                 "Range": 800.0
             },
-            "desc": "敵にダメージを与えた際、周囲にそのパートナーがいた場合は、パートナーにも<trueDamage>与えたダメージの@DamageMod*100@%の確定ダメージ</trueDamage>を与える。",
+            "desc": "敵にダメージを与えた際、周囲にその敵のパートナーがいた場合は、パートナーにも<trueDamage>与えたダメージの@DamageMod*100@%の確定ダメージ</trueDamage>を与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/chainlightning_small.png",
             "id": 166,
@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "アイテムおよび継続ダメージ効果がクリティカル判定を持つ。クリティカル率が@CritChance*100@%増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -2255,11 +2255,23 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
             "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
             },
             "desc": "<attackSpeed>合計攻撃速度が@AttackSpeed*100@%</attackSpeed>増加する。通常攻撃が与えるダメージが@AttackReduction*100@%低下し、通常攻撃時効果のダメージが@OnHitMod*100@%減少する。",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "ランダムなドラゴンソウルを3つ獲得する。",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "キーストーンルーンの<spellName>「ファーストストライク」</spellName>と<spellName>「魂の収穫」</spellName>を獲得する。",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "労働の成果",
             "rarity": 0,
-            "tooltip": "パワーフラワーが自身に付与する効果が@AmpAmountTooltip@%増加し、味方が範囲@AllyMaxRange@以内にいた場合は、その味方とも効果が共有される。"
+            "tooltip": "Cherry_FruitsOfYourLabor_Tooltip"
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "レベルが即座に1増加し、その後は1ラウンドおきにレベルが追加で1増加する。自身のレベル上限がなくなる。",
+            "desc": "Cherry_WisdomofAges_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "歴戦の知恵",
             "rarity": 2,
-            "tooltip": "レベルが即座に1増加し、その後は1ラウンドおきにレベルが追加で1増加する。自身のレベル上限がなくなる。"
+            "tooltip": "Cherry_WisdomofAges_Summary"
         },
         {
             "apiName": "GoHSacrificeForPrismatic",

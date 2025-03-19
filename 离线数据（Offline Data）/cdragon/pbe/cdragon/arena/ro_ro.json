@@ -906,7 +906,7 @@
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "Efectele obiectelor și daunelor tale în timp pot lovi critic. Primești @CritChance*100@% șanse de lovitură critică.",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -2255,19 +2255,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "Primești <attackSpeed>@AttackSpeed*100@% viteză de atac totală</attackSpeed>. Atacurile tale provoacă cu @AttackReduction*100@% mai puține daune, iar efectele la impact cu @OnHitMod*100@% mai puține daune.",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "Când ataci, lansezi un proiectil secundar care provoacă @AttackReduction*100@% daune și aplică efectele la impact cu o eficiență de @OnHitMod*100@%. Primești <attackSpeed>@AttackSpeed*100@% viteză de atac totală</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Lupt cu două arme",
             "rarity": 2,
-            "tooltip": "Primești <attackSpeed>@AttackSpeed*100@% viteză de atac totală</attackSpeed>. Atacurile tale provoacă cu @AttackReduction*100@% mai puține daune, iar efectele la impact cu @OnHitMod*100@% mai puține daune."
+            "tooltip": "Când ataci, lansezi un proiectil secundar care provoacă @AttackReduction*100@% daune și aplică efectele la impact cu o eficiență de @OnHitMod*100@%. Primești <attackSpeed>@AttackSpeed*100@% viteză de atac totală</attackSpeed>."
         },
         {
             "apiName": "Augment405",
@@ -2577,7 +2589,7 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 3.0,
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
@@ -2654,7 +2666,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2802,7 +2814,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "Primești 3 suflete de dragoni aleatorii.",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2948,7 +2962,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2958,7 +2972,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "Primești runele esențiale <spellName>''Primul asalt''</spellName> și <spellName>''Recolta sufletelor''</spellName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -4020,7 +4035,6 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
@@ -4032,7 +4046,7 @@
             "id": 222,
             "name": "Roadele muncii tale",
             "rarity": 0,
-            "tooltip": "''Florile puterii'' sunt cu @AmpAmountTooltip@% mai eficiente asupra ta și sunt partajate cu aliatul tău dacă se află pe o rază de @AllyMaxRange@ unități."
+            "tooltip": "Cherry_FruitsOfYourLabor_Tooltip"
         },
         {
             "apiName": "InfernalSoul",
@@ -4152,13 +4166,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "Primești 1 nivel acum și 1 nivel bonus la fiecare două runde. Limita ta de nivel este eliminată.",
+            "desc": "Primești 1 nivel acum și 1 nivel bonus la fiecare două runde. Limita ta de nivel este eliminată.<br><br>Dacă e a doua augmentare aleasă, primești în schimb 3 niveluri.",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "Înțelepciune străveche",
             "rarity": 2,
-            "tooltip": "Primești 1 nivel acum și 1 nivel bonus la fiecare două runde. Limita ta de nivel este eliminată."
+            "tooltip": "Primești 1 nivel acum și 1 nivel bonus la fiecare două runde. Limita ta de nivel este eliminată.<br><br>Dacă e a doua augmentare aleasă, primești în schimb 3 niveluri."
         },
         {
             "apiName": "GoHSacrificeForPrismatic",
