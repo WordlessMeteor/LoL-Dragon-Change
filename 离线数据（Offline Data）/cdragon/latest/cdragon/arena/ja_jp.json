@@ -21,13 +21,13 @@
             "dataValues": {
                 "StealthDuration": 4.0
             },
-            "desc": "サモナースペルの<spellName>「ヴァニッシュ」</spellName>を獲得する。<br><br><rules><spellName>「ヴァニッシュ」</spellName>を発動すると、<stealth>インビジブル</stealth>状態になる。</rules>",
+            "desc": "サモナースペルの「<spellName>ヴァニッシュ</spellName>」を獲得する。<br><br><rules><spellName>「ヴァニッシュ」</spellName>を発動すると、<keywordStealth>インビジブル</keywordStealth>状態になる。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/vanish_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/vanish_small.png",
             "id": 89,
             "name": "ヴァニッシュ",
             "rarity": 1,
-            "tooltip": "@StealthDuration@秒間または通常攻撃かスキルを使用するまで<stealth>インビジブル</stealth>状態になる。<br>このステルスは「アーケイン スイーパー」トリンケットによって可視化できない。"
+            "tooltip": "@StealthDuration@秒間、または通常攻撃かスキルを使用するまで<keywordStealth>インビジブル</keywordStealth>状態になる。"
         },
         {
             "apiName": "ChainLightning",
@@ -36,7 +36,7 @@
                 "DamageMod": 0.4000000059604645,
                 "Range": 800.0
             },
-            "desc": "敵にダメージを与えた際、周囲にそのパートナーがいた場合は、パートナーにも<trueDamage>@DamageMod*100@%の確定ダメージ</trueDamage>を与える。",
+            "desc": "敵にダメージを与えた際、周囲にそのパートナーがいた場合は、パートナーにも<trueDamage>与えたダメージの@DamageMod*100@%の確定ダメージ</trueDamage>を与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/chainlightning_small.png",
             "id": 166,
@@ -78,13 +78,13 @@
                 "MaxHealthDamage": 0.20000000298023224,
                 "Radius": 350.0
             },
-            "desc": "爆弾を装備した状態で各ラウンドを開始する。爆弾は@BombDelay@秒後に爆発し、<trueDamage>最大体力の@MaxHealthDamage*100@%にあたる確定ダメージ</trueDamage>を与えて、@KnockupDuration@秒間<status>ノックアップ</status>させる。<br>",
+            "desc": "爆弾を装備した状態で各ラウンドを開始する。爆弾は@BombDelay@秒後に爆発し、大量のダメージを与えて、周囲の敵を<status>ノックアップ</status>させる。<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/selfdestruct_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/selfdestruct_small.png",
             "id": 108,
             "name": "自己破壊",
             "rarity": 0,
-            "tooltip": "{{ Cherry_SelfDestruct_Summary }}<br><br>このラウンド中に与えたダメージ量: @f1@<br>与えたダメージ量の合計: @f2@"
+            "tooltip": "爆弾を装備した状態で各ラウンドを開始する。爆弾は@BombDelay@秒後に爆発し、<trueDamage>最大体力の@MaxHealthDamage*100@%にあたる確定ダメージ</trueDamage>を与えて、@KnockupDuration@秒間<status>ノックアップ</status>させる。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "ServeBeyondDeath",
@@ -190,13 +190,13 @@
                 "SlowDuration": 2.0,
                 "SlowPercentage": 80.0
             },
-            "desc": "<keywordMajor>自動</keywordMajor>で周囲を斬りつけ、<physicalDamage>物理ダメージ</physicalDamage>を与える。攻撃範囲の外側半分にいた敵には<status>スロウ効果</status>を付与し、<physicalDamage>最大体力に応じた物理ダメージ</physicalDamage>を与える。<healing>チャンピオンに与えた追加ダメージの@OuterConeHealingRatio@%の体力</healing>を回復する。クールダウン@AutoCastCooldown@秒。",
+            "desc": "一定時間ごとに<keywordMajor>自動発動</keywordMajor>で周囲を大きく斬りつけ、<physicalDamage>物理ダメージ</physicalDamage>を与える。攻撃範囲の外側半分にいた敵には<status>スロウ効果</status>を付与し、追加で<physicalDamage>最大体力に応じた物理ダメージ</physicalDamage>を与え、自身は追加ダメージの一定割合にあたる体力を回復する。",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "量子演算",
             "rarity": 2,
-            "tooltip": "<keywordMajor>自動</keywordMajor>で周囲を斬りつけ、<physicalDamage>@BaseDamageTotal@の物理ダメージ</physicalDamage>を与える。攻撃範囲の外側半分にいた敵には@SlowDuration@秒間、@SlowPercentage@%の<status>スロウ効果</status>を付与する。この効果は徐々に減衰する。追加で<physicalDamage>@OuterEdgeTooltip@の最大体力に応じた物理ダメージ</physicalDamage>を与える。<healing>チャンピオンに与えた追加ダメージの@OuterConeHealingRatio@%の体力</healing>を回復する。クールダウン@AutoCastCooldown@秒。<br><br>与えたダメージの合計: @f1@<br>回復した体力の合計: @f2@"
+            "tooltip": "@AutoCastCooldown@秒ごとに<keywordMajor>自動発動</keywordMajor>で周囲を大きく斬りつけ、<physicalDamage>@BaseDamageTotal@の物理ダメージ</physicalDamage>を与える。攻撃範囲の外側半分にいた敵には@SlowPercentage@%の<status>スロウ効果</status>を付与する。この効果は@SlowDuration@秒かけて徐々に減衰する。追加で<physicalDamage>最大体力の@OuterEdgeTooltip@の物理ダメージ</physicalDamage>を与え、自身は<healing>チャンピオンに与えたダメージの@OuterConeHealingRatio@%の体力</healing>を回復する。<br><br>与えたダメージの合計: @f1@<br>体力回復量の合計: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -267,14 +267,19 @@
         {
             "apiName": "TransmuteChaos",
             "calculations": {},
-            "dataValues": {},
-            "desc": "ランダムなゴールドオーグメント1個とランダムなシルバーオーグメント1個を獲得する。",
+            "dataValues": {
+                "Augment1GoldChance": 70.0,
+                "Augment1SilverChance": 30.0,
+                "Augment2GoldChance": 70.0,
+                "Augment2SilverChance": 30.0
+            },
+            "desc": "ランダムなオーグメントを2つ獲得する。",
             "iconLarge": "assets/ux/cherry/augments/icons/transmutechaos_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/transmutechaos_small.png",
             "id": 243,
             "name": "変質: 混沌",
             "rarity": 2,
-            "tooltip": "ランダムなゴールドオーグメント1個とランダムなシルバーオーグメント1個を獲得する。"
+            "tooltip": "ランダムなオーグメントを2つ獲得する。"
         },
         {
             "apiName": "Chauffeur",
@@ -283,7 +288,7 @@
                 "AttackSpeed": 0.6499999761581421,
                 "Haste": 130.0
             },
-            "desc": "味方にくっつき、自分の意思では移動できなくなる。自身の増加移動速度が味方にも付与されるようになり、自身は<scaleLevel>スキルヘイスト</scaleLevel>と<attackSpeed>攻撃速度</attackSpeed>が増加する。",
+            "desc": "味方にくっつき、自らの意思では移動できなくなる。自身の<speed>増加移動速度</speed>が味方にも付与されるようになり、自身は<scaleLevel>スキルヘイスト</scaleLevel>と<attackSpeed>攻撃速度</attackSpeed>が増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/chauffeur_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/chauffeur_small.png",
             "id": 14,
@@ -427,12 +432,12 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 45.0
+                            "mEndValue": 160.0,
+                            "mStartValue": 35.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.4000000059604645
+                            "mCoefficient": 0.25
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
@@ -459,7 +464,7 @@
                 "RepeatDamageMod": 0.30000001192092896,
                 "SecondaryDelay": 0.4000000059604645
             },
-            "desc": "<keywordMajor>自動発動</keywordMajor>: <br>移動速度が増加して、周回する3つの炎を作り出し、可視化されていて射程内で最も近くにいる敵を対象にして、アダプティブダメージを与える。",
+            "desc": "<keywordMajor>自動発動</keywordMajor><br>移動速度が増加して、周回する3つの炎を作り出し、可視化されていて射程内で最も近くにいる敵を対象にアダプティブダメージを与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/firfox_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/firfox_small.png",
             "id": 308,
@@ -473,13 +478,13 @@
             "dataValues": {
                 "CooldownBetweenCasts": 3.0
             },
-            "desc": "各サモナースペルのクールダウンを1ラウンドに1回リフレッシュする。",
+            "desc": "各ラウンド、最初にサモナースペルを使用した際に、そのクールダウンが解消する。",
             "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
             "id": 223,
             "name": "サモナー革命",
             "rarity": 1,
-            "tooltip": "各サモナースペルのクールダウンを1ラウンドに1回リフレッシュする。"
+            "tooltip": "各ラウンド、最初にサモナースペルを使用した際に、そのクールダウンが解消する。"
         },
         {
             "apiName": "IceCold",
@@ -765,13 +770,13 @@
                 "MaxRangeThreshold": 1000.0,
                 "NumberOfMissiles": 3.0
             },
-            "desc": "スキルでダメージを与えると、ダメージを与えた敵それぞれに@NumberOfMissiles@発の魔法のミサイルが発射される。ミサイルはそれぞれ、飛行距離に応じて最大で<trueDamage>最大体力の@MaxHealthDamageTooltip@%の確定ダメージ</trueDamage>を与える。",
+            "desc": "スキルでダメージを与えると、対象に@NumberOfMissiles@発の魔法のミサイルが発射される。ミサイルはそれぞれ、飛行距離に応じて<trueDamage>最大体力の一定割合の確定ダメージ</trueDamage>を与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/magicmissile_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/magicmissile_small.png",
             "id": 133,
             "name": "マジックミサイル",
             "rarity": 1,
-            "tooltip": "{{ Cherry_MagicMissile_Summary }}<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
+            "tooltip": "スキルでダメージを与えると、ダメージを与えた敵それぞれに@NumberOfMissiles@発の魔法のミサイルが発射される。ミサイルはそれぞれ、飛行距離に応じて最大で<trueDamage>最大体力の@MaxHealthDamageTooltip@%の確定ダメージ</trueDamage>を与える。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "Spellwake",
@@ -863,13 +868,13 @@
                 "SpellIDCD": 5.0,
                 "StartingAPIfSecondAugment": 40.0
             },
-            "desc": "敵にスキルを命中させると、<scaleAP>魔力が@APPerProc@</scaleAP>恒久的に増加する(スキルごとに@SpellIDCD@秒間のクールダウン)。<br><br>2つ目のオーグメントとして獲得した場合は、最初に@StartingAPIfSecondAugment@の魔力を獲得する。",
+            "desc": "敵にスキルを命中させると、<scaleAP>魔力が@APPerProc@</scaleAP>恒久的に増加する。<br><br>2つ目のオーグメントとして入手した場合は、<scaleAP>@StartingAPIfSecondAugment@の魔力</scaleAP>で始まる。",
             "iconLarge": "assets/ux/cherry/augments/icons/phenomenalevil_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/phenomenalevil_small.png",
             "id": 65,
             "name": "偉大なる悪",
             "rarity": 1,
-            "tooltip": "敵にスキルを命中させると、<scaleAP>魔力が@APPerProc@</scaleAP>恒久的に増加する。<br><br>この効果にはスキルごとに@SpellIDCD@秒間のクールダウンがある。<br><br>2つ目のオーグメントとして獲得した場合は、最初に@StartingAPIfSecondAugment@の魔力を獲得する。<br><br>増加した魔力: @f1@"
+            "tooltip": "敵にスキルを命中させると、<scaleAP>魔力が@APPerProc@</scaleAP>恒久的に増加する。<br><br>スキルごとにクールダウン@SpellIDCD@秒。<br><br>2つ目のオーグメントとして入手した場合は、<scaleAP>@StartingAPIfSecondAugment@の魔力</scaleAP>で始まる。<br><br>増加した魔力: @f1@"
         },
         {
             "apiName": "BigBrain",
@@ -929,13 +934,13 @@
             "dataValues": {
                 "Cooldown": 6.0
             },
-            "desc": "「逃亡」をランダムなチャンピオンのアルティメットスキルと置き換える。このスキルの発動後、さらに別のランダムなチャンピオンのアルティメットスキルと置き換える。",
+            "desc": "サモナースペルの「逃亡」をランダムなアルティメットスキルに置き換える。そのアルティメットスキルを使用後、別の新たなランダムなアルティメットスキルに置き換わる。",
             "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
             "id": 233,
             "name": "アルティメットルーレット",
             "rarity": 2,
-            "tooltip": "「逃亡」をランダムなチャンピオンのアルティメットスキルと置き換える。このスキルの発動後、さらに別のランダムなチャンピオンのアルティメットスキルと置き換える。"
+            "tooltip": "サモナースペルの「逃亡」をランダムなアルティメットスキルに置き換える。そのアルティメットスキルを使用後、別の新たなランダムなアルティメットスキルに置き換わる。"
         },
         {
             "apiName": "ClownCollege",
@@ -1018,7 +1023,7 @@
                 "PseudoCastTime": 0.125,
                 "StealthDuration": 3.0
             },
-            "desc": "フリースロットに<spellName>「幻惑」</spellName>を獲得する。 <br>固有スキル<spellName>「バックスタブ」</spellName>を獲得する。<br><br>倒されると爆発する箱を出現させ、周囲の敵に大量の<trueDamage>確定ダメージ</trueDamage>と<status>フィアー効果</status>を与える。",
+            "desc": "サモナースペル<spellName>「幻惑」</spellName>を獲得する。<br>固有スキル<spellName>「バックスタブ」</spellName>を獲得する。<br><br>倒されると爆発する箱を出現させ、周囲の敵に大量の<trueDamage>確定ダメージ</trueDamage>と<status>フィアー効果</status>を与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/clowncollege_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/clowncollege_small.png",
             "id": 310,
@@ -1061,13 +1066,13 @@
                 "MeleeReduction": 0.30000001192092896,
                 "RangedReduction": 0.15000000596046448
             },
-            "desc": "ダメージを受けるたびに、被ダメージの@MeleeReduction*100@%は「出血」効果となり、@BleedDuration@秒かけて受ける。 <br><br><rules>遠隔チャンピオンの場合はダメージ軽減効果が@RangedReduction*100@%に減少する。</rules>",
+            "desc": "受けたダメージの@MeleeReduction*100@%を代わりに@BleedDuration@秒かけて受ける(遠隔チャンピオンは@RangedReduction*100@%)。",
             "iconLarge": "assets/ux/cherry/augments/icons/numbtopain_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/numbtopain_small.png",
             "id": 251,
             "name": "痛覚耐性",
             "rarity": 0,
-            "tooltip": "ダメージを受けるたびに、被ダメージの@MeleeReduction*100@%は「出血」効果となり、@BleedDuration@秒かけて受ける。 <br><br><rules>遠隔チャンピオンの場合はダメージ軽減効果が@RangedReduction*100@%に減少する。</rules>"
+            "tooltip": "受けたダメージの@MeleeReduction*100@%を代わりに@BleedDuration@秒かけて受ける(遠隔チャンピオンは@RangedReduction*100@%)。"
         },
         {
             "apiName": "MadScientist",
@@ -1157,7 +1162,7 @@
                 "AdaptiveForce": 15.0,
                 "SecondPickBonus": 30.0
             },
-            "desc": "キルまたはアシストを奪うと@AdaptiveForce@のアダプティブフォースを獲得する(各ラウンドでチャンピオン1体につき1回まで)。<br><br>2つ目のオーグメントとして入手した場合は、最初に@SecondPickBonus@のアダプティブフォースを獲得する。",
+            "desc": "キルまたはアシストを奪うと、@AdaptiveForce@のアダプティブフォースを獲得する(各ラウンドでチャンピオン1体につき1回まで)。<br><br>2つ目のオーグメントとして入手した場合は、@SecondPickBonus@のアダプティブフォースで始まる。",
             "iconLarge": "assets/ux/cherry/augments/icons/dematerialize_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dematerialize_small.png",
             "id": 171,
@@ -1376,13 +1381,13 @@
                 "DamageRange": 1000.0,
                 "HealToDamageConversion": 0.699999988079071
             },
-            "desc": "自身の<health>体力を回復</health>または体力を自動回復すると、最も近くにいる敵チャンピオンに、その回復量の一部を<scaleAP>魔法ダメージ</scaleAP>として与える。",
+            "desc": "自身の<health>体力を回復</health>または<health>体力を自動回復</health>すると、最も近くにいる敵チャンピオンに、その回復量の一部を<magicDamage>魔法ダメージ</magicDamage>として与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/circleofdeath_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/circleofdeath_small.png",
             "id": 15,
             "name": "死の円環",
             "rarity": 2,
-            "tooltip": "自身の<health>体力を回復</health>または体力を自動回復すると、最も近くにいる敵チャンピオンに、<magicDamage>その回復量の@HealToDamageConversion*100@%にあたる魔法ダメージ</magicDamage>を与える。<br><br>このラウンド中に与えたダメージ量: @f1@<br>与えたダメージ量の合計: @f2@"
+            "tooltip": "自身の<health>体力を回復</health>または<health>体力を自動回復</health>すると、最も近くにいる敵チャンピオンに、<magicDamage>その回復量の@HealToDamageConversion*100@%を魔法ダメージ</magicDamage>として与える。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "Quest_WoogletsWitchcap",
@@ -1520,25 +1525,25 @@
             "dataValues": {
                 "ProcMultiplier": 1.5
             },
-            "desc": "通常攻撃3回ごとに、通常攻撃時効果が2回発動する。",
+            "desc": "通常攻撃3回ごとに、{{ Item_Keyword_OnHit }}が2回発動する。",
             "iconLarge": "assets/ux/cherry/augments/icons/twicethrice_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/twicethrice_small.png",
             "id": 107,
             "name": "二度三度",
             "rarity": 1,
-            "tooltip": "通常攻撃3回ごとに、通常攻撃時効果が2回発動する。"
+            "tooltip": "通常攻撃3回ごとに、{{ Item_Keyword_OnHit }}が2回発動する。"
         },
         {
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "毎ラウンド、これが味方のいずれかのオーグメントにランダムに突然変異する。 <br><br><rules>抽選可能なオーグメントにしか突然変異しない。</rules>",
+            "desc": "毎ラウンド、味方のオーグメントのうちランダムに選ばれた1種に突然変異する。",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "共生的変異",
             "rarity": 1,
-            "tooltip": "毎ラウンド、これが味方のいずれかのオーグメントにランダムに突然変異する。 <br><br><rules>抽選可能なオーグメントにしか突然変異しない。</rules>"
+            "tooltip": "毎ラウンド、味方のオーグメントのうちランダムに選ばれた1種に突然変異する。<br><br><rules>変異の対象は抽選可能なオーグメントのみ。</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1640,13 +1645,13 @@
                 "Cooldown": 1.5,
                 "Radius": 650.0
             },
-            "desc": "自身の<healing>体力回復効果</healing>と<shield>シールド</shield>が、周囲の敵に<keywordMajor>炎上</keywordMajor>のスタックを1つ付与し、@BurnDuration@秒かけて最大体力の@BurnPercentMin*100@%-@BurnPercentMax*100@%のダメージを与える。これは無限にスタックする。",
+            "desc": "自身の<healing>体力回復効果</healing>と<shield>シールド</shield>が、近くの敵1体に<keywordMajor>炎上</keywordMajor>のスタックを1つ付与する。これは無限にスタックし、数秒かけて<magicDamage>最大体力の一定割合の魔法ダメージ</magicDamage>を与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/holyfire_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/holyfire_small.png",
             "id": 198,
             "name": "聖なる炎",
             "rarity": 1,
-            "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>体力回復効果およびシールド効果を受けたチャンピオンの最大体力にあたる「炎上」ダメージを与える。このダメージは回復量およびシールド量の割合に応じて増加する。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
+            "tooltip": "自身の<healing>体力回復効果</healing>と<shield>シールド</shield>が、近くの敵1体に<keywordMajor>炎上</keywordMajor>のスタックを1つ付与する。これは無限にスタックし、@BurnDuration@秒かけて<magicDamage>最大体力の@BurnPercentMax*100@%の魔法ダメージ</magicDamage>を与える(最小: @BurnPercentMin*100@%)。<br><br>このダメージは、回復効果またはシールド効果を受けたチャンピオンの<scaleHealth>最大体力</scaleHealth>に対する<healing>回復量</healing>および<shield>シールド量</shield>の割合に応じて増加する。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "Overflow",
@@ -1678,13 +1683,13 @@
                 "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
                 "ManaRatio": 200.0
             },
-            "desc": "自身の<scaleMana>マナ</scaleMana>スキルのコストが2倍になる。スキルダメージが<scaleMana>@ManaCalc@</scaleMana>増加する。",
+            "desc": "自身の<scaleMana>マナ</scaleMana>コストが2倍になる。自身のスキルが与えるダメージが自身の<scaleMana>最大マナ</scaleMana>に応じて増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "オーバーフロー",
             "rarity": 0,
-            "tooltip": "自身の<scaleMana>マナ</scaleMana>スキルのコストが2倍になる。スキルダメージが<scaleMana>@ManaCalc@</scaleMana>増加する。"
+            "tooltip": "自身の<scaleMana>マナ</scaleMana>コストが2倍になる。スキルが与えるダメージが<scaleMana>@ManaCalc@</scaleMana>増加する。"
         },
         {
             "apiName": "FeeltheBurn",
@@ -1810,13 +1815,13 @@
                 "ShieldHealthRatio": 0.3499999940395355,
                 "StatIncrease": 0.4000000059604645
             },
-            "desc": "アリーナの中心に囚われ、行動ができない状態で各ラウンドを開始する。囚われている間は時間経過とともに最大@DamageReductionMax*100@%のダメージ軽減効果を獲得して、サイズ、<healing>体力</healing>、<physicalDamage>攻撃力</physicalDamage>、<magicDamage>魔力</magicDamage>が増加する(最大@StatIncrease*100@%)。@ImprisonDuration@秒後、または残り<healing>体力</healing>が@BreakoutHealthThreshold*100@%になると、勢いよく飛び出して敵を<status>ノックバック</status>させ、最大体力の<shield>@ShieldHealthRatio*100@%にあたるシールド</shield>を獲得する。",
+            "desc": "アリーナの中心に囚われ、行動ができない状態で各ラウンドを開始する。囚われている間は時間経過とともに大量のダメージ軽減効果を獲得し、サイズ、<healing>体力</healing>、<physicalDamage>攻撃力</physicalDamage>、<scaleAP>魔力</scaleAP>が増加する。@ImprisonDuration@秒後、または残り<scaleHealth>体力が@BreakoutHealthThreshold*100@%</scaleHealth>になると、勢いよく飛び出して敵を<status>ノックバック</status>させ、<scaleHealth>最大体力</scaleHealth>に応じた<shield>シールド</shield>を獲得する。",
             "iconLarge": "assets/ux/cherry/augments/icons/raidboss_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/raidboss_small.png",
             "id": 125,
             "name": "レイドボス",
             "rarity": 2,
-            "tooltip": "アリーナの中心に囚われ、行動ができない状態で各ラウンドを開始する。囚われている間は時間経過とともに最大@DamageReductionMax*100@%のダメージ軽減効果を獲得して、サイズ、<healing>体力</healing>、<physicalDamage>攻撃力</physicalDamage>、<magicDamage>魔力</magicDamage>が増加する(最大@StatIncrease*100@%)。@ImprisonDuration@秒後、または残り<healing>体力</healing>が@BreakoutHealthThreshold*100@%になると、勢いよく飛び出して敵を<status>ノックバック</status>させ、最大体力の<shield>@ShieldHealthRatio*100@%にあたるシールド</shield>を獲得する。"
+            "tooltip": "アリーナの中心に囚われ、行動ができない状態で各ラウンドを開始する。囚われている間は時間経過とともに最大@DamageReductionMax*100@%のダメージ軽減効果を獲得し、サイズ、<healing>体力</healing>、<physicalDamage>攻撃力</physicalDamage>、<scaleAP>魔力</scaleAP>が増加する(最大@StatIncrease*100@%)。@ImprisonDuration@秒後、または残り<scaleHealth>体力</scaleHealth>が@BreakoutHealthThreshold*100@%になると、勢いよく飛び出して敵を<status>ノックバック</status>させ、<shield>最大体力の@ShieldHealthRatio*100@%にあたるシールド</shield>を獲得する。"
         },
         {
             "apiName": "OutlawsGrit",
@@ -1902,13 +1907,13 @@
                 "FlatCooldownRefundPerTick": 0.07999999821186066,
                 "ProcCooldown": 1.0
             },
-            "desc": "スキルが<keywordMajor>炎上</keywordMajor>のスタックを付与し、継続的に<scaleAP>魔法ダメージ</scaleAP>を与える。<br><br>敵に<keywordMajor>炎上</keywordMajor>の効果を与えると、通常スキルのクールダウンが短縮される。",
+            "desc": "スキルが無限にスタック可能な<keywordMajor>炎上</keywordMajor>を付与し、継続<magicDamage>魔法ダメージ</magicDamage>を与える。<br><br>敵に<keywordMajor>炎上</keywordMajor>の効果を与えると、自身の通常スキルのクールダウンが短縮される。",
             "iconLarge": "assets/ux/cherry/augments/icons/infernalconduit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/infernalconduit_small.png",
             "id": 45,
             "name": "獄炎路",
             "rarity": 2,
-            "tooltip": "スキルが<keywordMajor>炎上</keywordMajor>のスタックを付与し、@BleedDuration@秒間、毎秒<scaleAP>@BleedDamageTooltip@の魔法ダメージ</scaleAP>を与える。<keywordMajor>炎上</keywordMajor>は無限にスタックする。<br><br>敵に<keywordMajor>炎上</keywordMajor>の効果でダメージを与えるたび、通常スキルの残りクールダウンが@FlatCooldownRefundPerTick@秒短縮される。<br><br>このラウンド中に与えたダメージ量: @f1@<br>与えたダメージ量の合計: @f2@<br>"
+            "tooltip": "スキルが無限にスタック可能な<keywordMajor>炎上</keywordMajor>を付与し、@BleedDuration@秒間、毎秒<magicDamage>@BleedDamageTooltip@の魔法ダメージ</magicDamage>を与える。<br><br>すべての<keywordMajor>炎上</keywordMajor>効果で敵にダメージを与えた時、自身の通常スキルのクールダウンが@FlatCooldownRefundPerTick@秒短縮される。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@<br>"
         },
         {
             "apiName": "ADAPt",
@@ -1948,9 +1953,10 @@
             "calculations": {},
             "dataValues": {
                 "KillStackCredit": 1.0,
-                "RequiredKillCount": 5.0
+                "RequiredKillCount": 5.0,
+                "RerollsToGrant": 1.0
             },
-            "desc": "キルまたはアシストを奪うと@KillStackCredit@スタックを獲得する(各ラウンドでチャンピオンごとに1回まで)。<br><br>タマゴはスタックが@RequiredKillCount@に到達すると孵化してプリズムの金床になる。これは複数回完了できる。",
+            "desc": "キルまたはアシストを奪うと@KillStackCredit@スタックを獲得する(各ラウンドでチャンピオンごとに1回まで)。<br><br>@RequiredKillCount@スタックごとにタマゴが孵化してプリズムの金床になり、追加のリロールを@RerollsToGrant@回獲得する。",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
             "id": 224,
@@ -2072,13 +2078,13 @@
                 "PrismaticGoldBasisDiscount": 1250.0,
                 "StatCostReduction": -100.0
             },
-            "desc": "@GoldBonus@ゴールドを獲得する。すべての金床の価格が低下し、金床から獲得したアイテムの売却価格が500ゴールド低下する。<br><br>プリズムの金床: @PrismaticCostReduction@<br>レジェンダリーの金床: @LegendaryCostReduction@<br>ステータスの金床: @StatCostReduction@",
+            "desc": "@GoldBonus@ゴールドを獲得し、すべての金床の価格が低下する。<br><br>プリズムの金床: @PrismaticCostReduction@<br>レジェンダリーの金床: @LegendaryCostReduction@<br>ステータスの金床: @StatCostReduction@<br><br><rules>金床から獲得したアイテムの売却価格が500ゴールド低下する。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
             "id": 234,
             "name": "ガンバの金床",
             "rarity": 2,
-            "tooltip": "@GoldBonus@ゴールドを獲得する。すべての金床の価格が低下し、金床から獲得したアイテムの売却価格が500ゴールド低下する。<br><br>プリズムの金床: @PrismaticCostReduction@<br>レジェンダリーの金床: @LegendaryCostReduction@<br>ステータスの金床: @StatCostReduction@"
+            "tooltip": "@GoldBonus@ゴールドを獲得し、すべての金床の価格が低下する。<br><br>プリズムの金床: @PrismaticCostReduction@<br>レジェンダリーの金床: @LegendaryCostReduction@<br>ステータスの金床: @StatCostReduction@<br><br><rules>金床から獲得したアイテムの売却価格が500ゴールド低下する。</rules>"
         },
         {
             "apiName": "DivineIntervention",
@@ -2090,13 +2096,13 @@
                 "Radius": 400.0,
                 "WarningDelay": 2.5
             },
-            "desc": "戦闘開始から@InitalDelay@秒後に自身の上にゆっくりと降りてくる守護星を召喚する。星が自身に触れると、自身および周囲の味方が@InvulnerabilityDuration@秒間<keywordMajor>無敵</keywordMajor>状態になる。@BaseCD@秒ごとに<keywordMajor>自動発動</keywordMajor>する。",
+            "desc": "戦闘開始から@InitalDelay@秒後に自身の上にゆっくりと降りてくる守護星を召喚する。星が自身に触れると、自身および周囲の味方が数秒間<keywordMajor>無敵</keywordMajor>状態になる。その後は@BaseCD@秒ごとに<keywordMajor>自動発動</keywordMajor>する。",
             "iconLarge": "assets/ux/cherry/augments/icons/slowactingpainkillers_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/slowactingpainkillers_small.png",
             "id": 301,
             "name": "聖なる介入",
             "rarity": 1,
-            "tooltip": "戦闘開始から@InitalDelay@秒後に自身の上にゆっくりと降りてくる守護星を召喚する。星が自身に触れると、自身および周囲の味方が@InvulnerabilityDuration@秒間<keywordMajor>無敵</keywordMajor>状態になる。@BaseCD@秒ごとに<keywordMajor>自動発動</keywordMajor>する。"
+            "tooltip": "戦闘開始から@InitalDelay@秒後に自身の上にゆっくりと降りてくる守護星を召喚する。星が自身に触れると、自身および周囲の味方が@InvulnerabilityDuration@秒間<keywordMajor>無敵</keywordMajor>状態になる。その後は@BaseCD@秒ごとに<keywordMajor>自動発動</keywordMajor>する。"
         },
         {
             "apiName": "ThreadtheNeedle",
@@ -2211,13 +2217,13 @@
                 "BleedDuration": 5.0,
                 "Range": 500.0
             },
-            "desc": "1秒ごとに、周囲の敵チャンピオンに<keywordMajor>炎上</keywordMajor>のスタックを付与し、自身の<health>最大体力</health>に応じたダメージを与える。<keywordMajor>炎上</keywordMajor>は無限にスタックする。",
+            "desc": "毎秒、周囲の敵チャンピオンに無限にスタック可能な<keywordMajor>炎上</keywordMajor>を付与し、自身の<health>最大体力</health>に応じたダメージを与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/slowcooker_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/slowcooker_small.png",
             "id": 75,
             "name": "スロウクッカー",
             "rarity": 2,
-            "tooltip": "射程@Range@以内の敵チャンピオンに、毎秒<keywordMajor>炎上</keywordMajor>のスタックを付与し、<health>@BleedDuration@秒間、毎秒@BleedDamageTooltip@の<scaleAP>魔法ダメージ</scaleAP></health>を与える。<keywordMajor>炎上</keywordMajor>は無限にスタックする。<br><br>このラウンド中に与えたダメージ量: @f1@<br>与えたダメージ量の合計: @f2@"
+            "tooltip": "毎秒、周囲の敵チャンピオンに無限にスタック可能な<keywordMajor>炎上</keywordMajor>を付与し、@BleedDuration@秒間、毎秒<magicDamage>@BleedDamageTooltip@の魔法ダメージ</magicDamage>を与える。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "DieAnotherDay",
@@ -2255,13 +2261,13 @@
                 "AttackSpeed": 1.0,
                 "OnHitMod": 0.5
             },
-            "desc": "<attackSpeed>合計攻撃速度が@AttackSpeed*100@%</attackSpeed>増加する。通常攻撃のダメージが@AttackReduction*100@%、通常攻撃時効果のダメージが@OnHitMod*100@%減少する。",
+            "desc": "<attackSpeed>合計攻撃速度が@AttackSpeed*100@%</attackSpeed>増加する。通常攻撃が与えるダメージが@AttackReduction*100@%低下し、通常攻撃時効果のダメージが@OnHitMod*100@%減少する。",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "二刀流",
             "rarity": 2,
-            "tooltip": "<attackSpeed>合計攻撃速度が@AttackSpeed*100@%</attackSpeed>増加する。通常攻撃のダメージが@AttackReduction*100@%、通常攻撃時効果のダメージが@OnHitMod*100@%減少する。"
+            "tooltip": "<attackSpeed>合計攻撃速度が@AttackSpeed*100@%</attackSpeed>増加する。通常攻撃が与えるダメージが@AttackReduction*100@%低下し、通常攻撃時効果のダメージが@OnHitMod*100@%減少する。"
         },
         {
             "apiName": "Augment405",
@@ -2284,13 +2290,13 @@
                 "DamageRedirectPercentage": 0.15000000596046448,
                 "HealCopyPercentage": 0.5
             },
-            "desc": "味方の受けるダメージの@DamageRedirectPercentage*100@%を自身が代わりに受ける。また、味方の受ける<healing>体力回復効果</healing>の@HealCopyPercentage*100@%が自身にも付与される。",
+            "desc": "味方の受けるダメージの@DamageRedirectPercentage*100@%を自身が代わりに受ける。また、味方の受ける体力回復効果の@HealCopyPercentage*100@%が自身にも付与される。",
             "iconLarge": "assets/ux/cherry/augments/icons/spiritlink_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/spiritlink_small.png",
             "id": 78,
             "name": "精神の交わり",
             "rarity": 2,
-            "tooltip": "味方の受けるダメージの@DamageRedirectPercentage*100@%を自身が代わりに受ける。また、味方の受ける<healing>体力回復効果</healing>の@HealCopyPercentage*100@%が自身にも付与される。<br><br>代わりに受けたダメージ量の合計: @f1@<br>回復した体力の合計: @f2@<br>"
+            "tooltip": "味方の受けるダメージの@DamageRedirectPercentage*100@%を自身が代わりに受ける。また、味方の受ける体力回復効果の@HealCopyPercentage*100@%が自身にも付与される。<br><br>身代わりとして受けたダメージの合計: @f1@<br>体力回復量の合計: @f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2302,13 +2308,13 @@
                 "OnHitDamageRatio": 0.3799999952316284,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "通常攻撃で<keywordMajor>「呪い」</keywordMajor>を@CurseCounter@スタック獲得し、<keywordMajor>「呪い」</keywordMajor>のスタックごとに恒久的に追加<magicDamage>魔法ダメージ</magicDamage>を与える。<br><br>また、獲得可能な<keywordMajor>「呪い」</keywordMajor>スタックの最大数が増加する。",
+            "desc": "通常攻撃で<keywordMajor>「呪いの力」</keywordMajor>を恒久的に獲得し、自身の<keywordMajor>「呪いの力」</keywordMajor>に応じて追加の<magicDamage>魔法ダメージ</magicDamage>を与える。<br><br>ラウンドごとに獲得可能な<keywordMajor>「呪いの力」</keywordMajor>の最大数は自身と味方の<keywordMajor>「呪い」</keywordMajor>ソースの合計数に応じて増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "死の感触",
             "rarity": 1,
-            "tooltip": "通常攻撃で<keywordMajor>「呪い」</keywordMajor>を@CurseCounter@獲得し、このラウンドで獲得した<keywordMajor>「呪い」</keywordMajor>のスタックと同量の追加<trueDamage>確定ダメージ</trueDamage>を与える。<br><br>{{ Cherry_CurseShared }}<br><br>通常攻撃が自身の<keywordMajor>「呪い」の合計</keywordMajor>に応じて<magicDamage>@f1@魔法ダメージ</magicDamage>を追加で与える。<br><br><rules><keywordMajor>「呪い」の合計</keywordMajor>の@OnHitDamageRatio*100@%が追加の通常攻撃時ダメージに変換される。</rules> "
+            "tooltip": "通常攻撃で<keywordMajor>「呪いの力」</keywordMajor>が@CurseCounter@増加する。<br><br>通常攻撃が<magicDamage>@f1@の魔法ダメージ</magicDamage>(自身の<keywordMajor>「呪いの力」</keywordMajor>の@OnHitDamageRatio*100@%)を追加で与える。<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2397,13 +2403,13 @@
                 "SelfDuration": 1.75,
                 "StasisDuration": 2.5
             },
-            "desc": "<spellName>時間停止</spellName>を獲得する(フリースロットが置き換わる)。<br><br><rules><spellName>時間停止</spellName>: 射程800ユニット以内のすべてのチャンピオンが<status>固有時停止</status>状態になる(フリースロットが置き換わる)。自身は0.75秒早く<status>固有時停止</status>状態が解除され、<scaleHealth>減少体力</scaleHealth>の40%が回復する。</rules>",
+            "desc": "サモナースペルの「<spellName>時間停止</spellName>」を獲得する。<br><br><rules><spellName>時間停止</spellName>: 周囲のすべてのチャンピオンが<status>固有時停止</status>状態になる。自身が受ける<status>固有時停止</status>は効果時間が短縮され、その間、減少体力に応じて体力が回復する。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/wellberightback_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wellberightback_small.png",
             "id": 312,
             "name": "すぐに戻る",
             "rarity": 1,
-            "tooltip": "<spellName>時間停止</spellName>: 射程@Range@ユニット以内のすべてのチャンピオンが@StasisDuration@秒間<status>固有時停止</status>状態になる。自身は@SelfDuration@秒早く<status>固有時停止</status>状態が解除され、自身の<scaleHealth>減少体力</scaleHealth>の@HealAmountPercent*100@%を<healing>回復</healing>する。"
+            "tooltip": "<spellName>時間停止</spellName>: 周囲のすべてのチャンピオンが@StasisDuration@秒間<status>固有時停止</status>状態になる。自身の効果時間は@SelfDuration@秒間になる。効果時間中に<healing>減少体力を@HealAmountPercent*100@%</healing>回復する。"
         },
         {
             "apiName": "FirstAidKit",
@@ -2575,13 +2581,13 @@
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
-            "desc": "周囲の敵チャンピオンから<keywordMajor>「呪い」</keywordMajor>を@CurseStacksPerTick@スタック獲得する。<keywordMajor>「呪い」</keywordMajor>のスタックごとに<healing>最大体力</healing>が恒久的に増加する。<br><br>獲得可能な<keywordMajor>「呪い」</keywordMajor>スタックの最大数が増加する。",
+            "desc": "オーラを獲得する。オーラは範囲内の敵チャンピオン1体ごとに恒久的な<keywordMajor>「呪いの力」</keywordMajor>を継続的に収穫する。自身の<keywordMajor>「呪いの力」</keywordMajor>に応じて<healing>最大体力</healing>が増加する。<br><br>ラウンドごとに獲得可能な<keywordMajor>「呪いの力」</keywordMajor>の最大数は自身と味方の<keywordMajor>「呪い」</keywordMajor>ソースの合計数に応じて増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/plaguebearer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/plaguebearer_small.png",
             "id": 216,
             "name": "ドレッドブリンガー",
             "rarity": 2,
-            "tooltip": "@TickCadence@秒ごとに、周囲の敵チャンピオンから<keywordMajor>「呪い」</keywordMajor>を@CurseStacksPerTick@スタック獲得し、対象に自身がこのラウンドで獲得した<keywordMajor>「呪い」</keywordMajor>のスタック数と同量の追加<trueDamage>確定ダメージ</trueDamage>を与える。<br><br>{{ Cherry_CurseShared }}<br><br><keywordMajor>「呪い」の合計</keywordMajor>から<healing>最大体力</healing>が@f1@増加する。<br><br><rules><keywordMajor>「呪い」の合計</keywordMajor>の@MaxHealthRatio*100@%が<healing>最大体力</healing>に変換される。</rules>"
+            "tooltip": "@TickCadence@秒ごとに、周囲の敵チャンピオン1体につき<keywordMajor>「呪いの力」</keywordMajor>を@CurseStacksPerTick@獲得する。<br><br><healing>体力が@f1@</healing>(自身の<keywordMajor>「呪いの力」</keywordMajor>の@MaxHealthRatio*100@%)増加する。<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "StackosaurusRex",
@@ -2621,7 +2627,7 @@
                 "PolyDuration": 2.0,
                 "WEnemySlow": 60.0
             },
-            "desc": "アルティメットスキルでダメージを与えると、敵に@PolyDuration@秒間の<status>ポリモーフ効果</status>を付与する(クールダウン@PolyCooldown@秒)。",
+            "desc": "アルティメットスキルでダメージを与えると、敵に数秒間の<status>ポリモーフ効果</status>を付与する。",
             "iconLarge": "assets/ux/cherry/augments/icons/feymagic_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/feymagic_small.png",
             "id": 194,
@@ -2654,13 +2660,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "スキルが命中した敵チャンピオン1体ごとに<keywordMajor>「呪い」</keywordMajor>を@CurseCounter@スタック獲得する。<keywordMajor>「呪い」</keywordMajor>のスタックごとにアダプティブフォースが恒久的に増加する。<br><br>また、獲得可能な<keywordMajor>「呪い」</keywordMajor>スタックの最大数が増加する。",
+            "desc": "スキルが命中すると<keywordMajor>「呪いの力」</keywordMajor>が恒久的に増加する。自身の<keywordMajor>「呪いの力」</keywordMajor>に応じてアダプティブフォースが増加する。<br><br>ラウンドごとに獲得可能な<keywordMajor>「呪いの力」</keywordMajor>の最大数は自身と味方の<keywordMajor>「呪い」</keywordMajor>ソースの合計数に応じて増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "災難の予言者",
             "rarity": 2,
-            "tooltip": "スキルが<keywordMajor>「呪い」</keywordMajor>を@CurseCounter@付与し、このラウンドで獲得した<keywordMajor>「呪い」</keywordMajor>のスタックと同量の追加<trueDamage>確定ダメージ</trueDamage>を与える。<br><br>{{ Cherry_CurseShared }}<br><br><keywordMajor>「呪い」の合計</keywordMajor>からアダプティブフォースが@f1@増加する。<br><br><rules><keywordMajor>「呪い」の合計</keywordMajor>の@AdaptiveForceRatio*100@%がアダプティブフォースに変換される。</rules>"
+            "tooltip": "スキルで<keywordMajor>「呪いの力」</keywordMajor>が@CurseCounter@増加する。<br><br>アダプティブ フォースが@f1@(自身の<keywordMajor>「呪いの力」</keywordMajor>の@AdaptiveForceRatio*100@%)増加する。<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2689,13 +2695,13 @@
                 "SelfReviveTimerModMin": 0.4000000059604645,
                 "SizeMod": -0.20000000298023224
             },
-            "desc": "@ReviveArmTime@秒後に自動的に蘇生を開始し、蘇生可能な時間が追加される。蘇生されるたびにサイズが小さくなり、最大体力が@ReviveMod*100@%になる。<br><br>蘇生された際に、周囲の敵を<status>ノックバック</status>する。",
+            "desc": "@ReviveArmTime@秒後に自動的に蘇生を開始し、蘇生可能な回数が追加される。蘇生されるたびにサイズが小さくなり、<scaleHealth>最大体力</scaleHealth>が低下する。<br><br>蘇生された際に、周囲の敵を<status>ノックバック</status>する。",
             "iconLarge": "assets/ux/cherry/augments/icons/nestingdoll_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/nestingdoll_small.png",
             "id": 177,
             "name": "入れ子人形",
             "rarity": 2,
-            "tooltip": "@ReviveArmTime@秒後に自動的に蘇生を開始し、蘇生可能な時間が追加される。蘇生されるたびにサイズが小さくなり、最大体力が@ReviveMod*100@%になる。<br><br>蘇生された際に、周囲の敵を<status>ノックバック</status>する。"
+            "tooltip": "@ReviveArmTime@秒後に自動的に蘇生を開始し、蘇生可能な回数が追加される。蘇生されるたびにサイズが小さくなり、<scaleHealth>最大体力が@ReviveMod*100@%</scaleHealth>になる。<br><br>蘇生された際に、周囲の敵を<status>ノックバック</status>する。"
         },
         {
             "apiName": "TapDancer",
@@ -2704,13 +2710,13 @@
                 "MSPerHit": 10.0,
                 "MSToASConversion": 0.0010000000474974513
             },
-            "desc": "通常攻撃によって、<moveSpeed>移動速度を@MSPerHit@</moveSpeed>増加させるスタックを無限に獲得する。移動速度の@MSToASConversion*10000@%にあたる攻撃速度を獲得する。",
+            "desc": "通常攻撃で<speed>移動速度が@MSPerHit@</speed>増加する。この効果は無限にスタックする。<speed>移動速度</speed>の@MSToASConversion*10000@%にあたる<attackSpeed>攻撃速度</attackSpeed>を獲得する。",
             "iconLarge": "assets/ux/cherry/augments/icons/tapdancer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/tapdancer_small.png",
             "id": 81,
             "name": "タップダンサー",
             "rarity": 2,
-            "tooltip": "通常攻撃によって、<moveSpeed>移動速度を@MSPerHit@</moveSpeed>増加させるスタックを無限に獲得する。移動速度の@MSToASConversion*10000@%にあたる攻撃速度を獲得する。"
+            "tooltip": "通常攻撃で<speed>移動速度が@MSPerHit@</speed>増加する。この効果は無限にスタックする。<speed>移動速度</speed>の@MSToASConversion*10000@%にあたる<attackSpeed>攻撃速度</attackSpeed>を獲得する。"
         },
         {
             "apiName": "FanTheHammer",
@@ -2966,13 +2972,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "毎ラウンド、これが相手のいずれかのオーグメントにランダムに突然変異する。 <br><br><rules>抽選可能なオーグメントにしか突然変異しない。</rules>",
+            "desc": "毎ラウンド、対戦相手のオーグメントのうちランダムに選ばれた1種に突然変異する。<br><br><rules>変異の対象は抽選可能なオーグメントのみ。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "寄生的変異",
             "rarity": 0,
-            "tooltip": "毎ラウンド、これが相手のいずれかのオーグメントにランダムに突然変異する。 <br><br><rules>抽選可能なオーグメントにしか突然変異しない。</rules>"
+            "tooltip": "毎ラウンド、対戦相手のオーグメントのうちランダムに選ばれた1種に突然変異する。"
         },
         {
             "apiName": "CantTouchThis",
@@ -2981,13 +2987,13 @@
                 "Cooldown": 8.0,
                 "InvulnDuration": 2.0
             },
-            "desc": "アルティメットスキルを発動すると、少しの間<status>無敵状態</status>になる。",
+            "desc": "アルティメットスキルを発動すると、少しの間<keywordMajor>無敵状態</keywordMajor>になる。",
             "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
             "id": 11,
             "name": "不可侵",
             "rarity": 2,
-            "tooltip": "アルティメットスキルを発動すると、@InvulnDuration@秒間<status>無敵状態</status>になる。クールダウン@Cooldown@秒。"
+            "tooltip": "アルティメットスキルを発動すると@InvulnDuration@秒間<status>無敵状態</status>になる(クールダウン@Cooldown@秒)。"
         },
         {
             "apiName": "SnowballFight",
@@ -3137,13 +3143,13 @@
                 "HealthAmp": 0.3499999940395355,
                 "SizeAmp": 0.5
             },
-            "desc": "サイズが大きくなり、<scaleHealth>体力</scaleHealth>が@HealthAmp*100@%、<scaleAP>アダプティブフォース</scaleAP>が@ADAmp*100@%増加する。",
+            "desc": "サイズが大きくなり、<scaleHealth>体力が@HealthAmp*100@%</scaleHealth>、<scaleAP>アダプティブフォースが@ADAmp*100@%</scaleAP>増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/goliath_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/goliath_small.png",
             "id": 41,
             "name": "大巨人",
             "rarity": 2,
-            "tooltip": "サイズが大きくなり、<scaleHealth>体力</scaleHealth>が@HealthAmp*100@%、<scaleAP>アダプティブフォース</scaleAP>が@ADAmp*100@%増加する。"
+            "tooltip": "サイズが大きくなり、<scaleHealth>体力が@HealthAmp*100@%</scaleHealth>、<scaleAP>アダプティブフォースが@ADAmp*100@%</scaleAP>増加する。"
         },
         {
             "apiName": "JuicePress",
@@ -3156,7 +3162,7 @@
                 "SpeedJuiceMSBoost": 0.20000000298023224,
                 "VitalityJuiceHealShieldPower": 0.25
             },
-            "desc": "ジュースが自身とチームメイトに追加の効果を付与する。",
+            "desc": "ジュースが自身とチームメイトに追加の効果を付与する。<br><br>バフジュースの価格が@PriceReduction*100@%低下する。",
             "iconLarge": "assets/ux/cherry/augments/icons/juicepress_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/juicepress_small.png",
             "id": 242,
@@ -3382,13 +3388,13 @@
             "dataValues": {
                 "MaxHealthPercentageHeal": 0.009999999776482582
             },
-            "desc": "スキルを使用すると、<healing>体力を@HealAmount@</healing>回復できる。",
+            "desc": "スキルを使用すると<healing>体力が@HealAmount@</healing>回復する。",
             "iconLarge": "assets/ux/cherry/augments/icons/rabblerousing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/rabblerousing_small.png",
             "id": 67,
             "name": "扇動者",
             "rarity": 1,
-            "tooltip": "スキルを使用すると、<healing>体力を@HealAmount@</healing>回復できる。<br><br>このラウンド中の体力回復量: @f1@<br>回復した体力の合計: @f2@"
+            "tooltip": "スキルを使用すると<healing>体力が@HealAmount@</healing>回復する。<br><br>このラウンドの体力回復量: @f1@<br>体力回復量の合計: @f2@"
         },
         {
             "apiName": "GiantSlayer",
@@ -3489,13 +3495,13 @@
                 "HealthThreshold": 0.30000001192092896,
                 "StealthDuration": 1.25
             },
-            "desc": "体力が@HealthThreshold*100@%未満になると、短時間<keywordStealth>インビジブル</keywordStealth>状態となって自身のクローンを4体作り出す。",
+            "desc": "<scaleHealth>体力が@HealthThreshold*100@%</scaleHealth>未満になると、短時間<keywordStealth>インビジブル</keywordStealth>状態となって自身のクローンを4体作り出す。",
             "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
             "id": 172,
             "name": "鏡像",
             "rarity": 0,
-            "tooltip": "体力が@HealthThreshold*100@%未満になると、短時間<keywordStealth>インビジブル</keywordStealth>状態となって自身のクローンを4体作り出す。"
+            "tooltip": "<scaleHealth>体力が@HealthThreshold*100@%</scaleHealth>未満になると、短時間<keywordStealth>インビジブル</keywordStealth>状態となって自身のクローンを4体作り出す。"
         },
         {
             "apiName": "Desecrator",
@@ -3506,13 +3512,13 @@
                 "CurseCounter": 5.0,
                 "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
             },
-            "desc": "敵チャンピオンに<status>移動不能効果</status>を与えると、<keywordMajor>「呪い」</keywordMajor>を@CurseCounter@スタック獲得する。<keywordMajor>「呪い」</keywordMajor>のスタックごとに<armor>物理防御</armor>と<magicresistance>魔法防御</magicresistance>が恒久的に増加する。<br><br>また、獲得可能な<keywordMajor>「呪い」</keywordMajor>スタックの最大数が増加する。",
+            "desc": "敵チャンピオンに<status>移動不能効果</status>を与えると、<keywordMajor>「呪いの力」</keywordMajor>が恒久的に増加する。自身の<keywordMajor>「呪いの力」</keywordMajor>に応じて<armor>物理防御</armor>と<magicresistance>魔法防御</magicresistance>が増加する。<br><br>ラウンドごとに獲得可能な<keywordMajor>「呪いの力」</keywordMajor>の最大数は自身と味方の<keywordMajor>「呪い」</keywordMajor>ソースの合計数に応じて増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/desecrator_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/desecrator_small.png",
             "id": 218,
             "name": "冒涜者",
             "rarity": 0,
-            "tooltip": "敵チャンピオンに<status>移動不能効果</status>を付与すると、<keywordMajor>「呪い」のスタック</keywordMajor>を@CurseCounter@獲得し、このラウンドで獲得した<keywordMajor>「呪い」</keywordMajor>のスタックと同量の追加<trueDamage>確定ダメージ</trueDamage>を与える。<br><br>{{ Cherry_CurseShared }}<br><br>自身の<keywordMajor>「呪い」の合計</keywordMajor>から<armor>物理防御</armor>と<magicresistance>魔法防御</magicresistance>が@f1@増加する。<br><br><rules><keywordMajor>「呪い」の合計</keywordMajor>の@ArmorMRRatio*100@%が<armor>物理防御</armor>と<magicresistance>魔法防御</magicresistance>に変換される。</rules>"
+            "tooltip": "敵チャンピオンに<status>移動不能効果</status>を与えると、<keywordMajor>「呪いの力」</keywordMajor>を@CurseCounter@獲得する。<br><br><armor>物理防御が@f1@</armor>増加し、<magicresistance>魔法防御が@f1@</magicresistance>(自身の<keywordMajor>「呪いの力」</keywordMajor>の@ArmorMRRatio*100@%)増加する。<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "AllForYou",
@@ -3520,7 +3526,7 @@
             "dataValues": {
                 "HealShieldAmp": 0.30000001192092896
             },
-            "desc": "パートナーに対する体力回復効果とシールドが@HealShieldAmp*100@%強化される。",
+            "desc": "パートナーに対する<healing>体力回復効果</healing>と<shield>シールド</shield>が@HealShieldAmp*100@%強化される。",
             "iconLarge": "assets/ux/cherry/augments/icons/allforyou_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/allforyou_small.png",
             "id": 141,
@@ -3705,7 +3711,7 @@
                 "ReducedCooldown": 0.5,
                 "SnipeDistance": 700.0
             },
-            "desc": "射程@SnipeDistance@以上で非アルティメットスキルを敵に命中させると、そのスキルのクールダウンが@ReducedCooldown@秒短縮される。継続的に効果を与えるスキルはクールダウンが@PeriodicReductionAmount@秒にリセットされる。",
+            "desc": "遠距離から非アルティメットスキルを敵に命中させると、そのスキルのクールダウンが@ReducedCooldown@秒短縮される(継続的に効果を与えるスキルは@PeriodicReductionAmount@秒)。",
             "iconLarge": "assets/ux/cherry/augments/icons/skilledsniper_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/skilledsniper_small.png",
             "id": 113,
@@ -3788,13 +3794,13 @@
             "dataValues": {
                 "HealthRatioPer1000Units": 0.019999999552965164
             },
-            "desc": "移動中、継続的に<healing>体力が回復</healing>する。回復量は移動距離に応じて増加する。",
+            "desc": "移動中、継続的に<healing>体力が回復</healing>する。",
             "iconLarge": "assets/ux/cherry/augments/icons/restlessrestoration_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/restlessrestoration_small.png",
             "id": 70,
             "name": "無尽蔵のスタミナ",
             "rarity": 1,
-            "tooltip": "移動距離1000ごとに体力が@HealCalcPer1000Units@回復する。<br><br>このラウンド中の体力回復量: @f1@<br>回復した体力の合計: @f2@"
+            "tooltip": "移動距離1000ごとに、<healing>体力を@HealCalcPer1000Units@</healing>回復する。<br><br>このラウンドの体力回復量: @f1@<br>体力回復量の合計: @f2@"
         },
         {
             "apiName": "DiveBomber",
@@ -3893,13 +3899,13 @@
             "dataValues": {
                 "Cooldown": 5.0
             },
-            "desc": "サモナースペルをランダムなサモナースペルに置き換える。戦闘中にサモナースペルを使用すると、それが@Cooldown@秒間のクールダウンを持つランダムな別のサモナースペルに置き換わる。",
+            "desc": "サモナースペルをランダムなサモナースペルに置き換える。サモナースペルを使用すると、それが@Cooldown@秒間のクールダウンを持つランダムな別のサモナースペルに置き換わる。",
             "iconLarge": "assets/ux/cherry/augments/icons/summonersroulette_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/summonersroulette_small.png",
             "id": 123,
             "name": "サモナーズルーレット",
             "rarity": 2,
-            "tooltip": "サモナースペルをランダムなサモナースペルに置き換える。戦闘中にサモナースペルを使用すると、それが@Cooldown@秒間のクールダウンを持つランダムな別のサモナースペルに置き換わる。"
+            "tooltip": "サモナースペルをランダムなサモナースペルに置き換える。サモナースペルを使用すると、それが@Cooldown@秒間のクールダウンを持つランダムな別のサモナースペルに置き換わる。"
         },
         {
             "apiName": "GoHSacrificeForSilver",
@@ -4014,19 +4020,19 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 700.0,
+                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
                 "MSBoost": 0.4000000059604645
             },
-            "desc": "距離@AllyMaxRange@の範囲内にいる近くの味方に「パワーフラワー」の効果を共有し、得られる効果を@AmpAmountTooltip@%増加させる。",
+            "desc": "パワーフラワーが自身に付与する効果が増加し、味方が近くにいた場合は、その味方とも効果が共有される。",
             "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
             "id": 222,
             "name": "労働の成果",
             "rarity": 0,
-            "tooltip": "距離@AllyMaxRange@の範囲内にいる近くの味方に「パワーフラワー」の効果を共有し、得られる効果を@AmpAmountTooltip@%増加させる。"
+            "tooltip": "パワーフラワーが自身に付与する効果が@AmpAmountTooltip@%増加し、味方が範囲@AllyMaxRange@以内にいた場合は、その味方とも効果が共有される。"
         },
         {
             "apiName": "InfernalSoul",
@@ -4103,13 +4109,13 @@
                 "CurseCounter": 4.0,
                 "Radius": 450.0
             },
-            "desc": "体力回復効果またはシールド適用時、<keywordMajor>「呪い」</keywordMajor>を@CurseCounter@スタック獲得する。<keywordMajor>「呪い」</keywordMajor>のスタックごとにスキルヘイストが恒久的に増加する。<br><br>また、獲得可能な<keywordMajor>「呪い」</keywordMajor>スタックの最大数が増加する。<br><br>",
+            "desc": "体力回復/シールド効果で<keywordMajor>「呪いの力」</keywordMajor>が恒久的に増加する。自身の<keywordMajor>「呪いの力」</keywordMajor>に応じてスキルヘイストが増加する。<br><br>ラウンドごとに獲得可能な<keywordMajor>「呪いの力」</keywordMajor>の最大数は自身と味方の<keywordMajor>「呪い」</keywordMajor>ソースの合計数に応じて増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/darkblessing_small.png",
             "id": 215,
             "name": "闇の祝福",
             "rarity": 1,
-            "tooltip": "体力回復効果またはシールド適用時、<keywordMajor>「呪い」</keywordMajor>を@CurseCounter@獲得し、近くにいる敵チャンピオン1体に、このラウンドで獲得した<keywordMajor>「呪い」</keywordMajor>と同量の追加<trueDamage>確定ダメージ</trueDamage>を与える。<br><br>{{ Cherry_CurseShared }}<br><br><keywordMajor>「呪い」の合計</keywordMajor>からスキルヘイストが@f1@増加する。<br><br><rules><keywordMajor>「呪い」の合計</keywordMajor>の@AbilityHasteRatio*100@%がスキルヘイストに変換される。</rules>"
+            "tooltip": "敵の近くにいるチャンピオンに体力回復/シールド効果を付与すると、<keywordMajor>「呪いの力」</keywordMajor>を@CurseCounter@獲得する。<br><br>スキルヘイストが@f1@(自身の<keywordMajor>「呪いの力」</keywordMajor>の@AbilityHasteRatio*100@%)増加する。<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "MindtoMatter",
@@ -4134,13 +4140,13 @@
                 "MarkDuration": 5.0,
                 "VFXHighDamageThreshold": 500.0
             },
-            "desc": "アルティメットスキル発動後、すべての敵チャンピオンに死のマークを付与する。マークには対象が受けたダメージの@DamageStorePercentage*100@%が蓄積される。@MarkDuration@秒後、マークが爆発して蓄積されたダメージを与える(クールダウン@Cooldown@秒)。",
+            "desc": "アルティメットスキル発動後、すべての敵チャンピオンに死のマークを付与する。マーク中は、対象が受けたダメージの一定割合が蓄積され、マーク終了時に爆発してダメージを与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/itskillingtime_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/itskillingtime_small.png",
             "id": 211,
             "name": "殺戮の時",
             "rarity": 1,
-            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>このラウンド中に与えたダメージ量: @f1@<br>与えたダメージ量の合計: @f2@"
+            "tooltip": "アルティメットスキル発動後、すべての敵チャンピオンに死のマークを付与する。マークには対象が受けたダメージの@DamageStorePercentage*100@%が蓄積される。@MarkDuration@秒後、マークが爆発して蓄積されたダメージを与える(クールダウン@Cooldown@秒)。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "WisdomofAges",
@@ -4192,13 +4198,13 @@
                 "AmpedRegen": 16.0,
                 "BaseRegen": 8.0
             },
-            "desc": "<healing>体力自動回復</healing>が大幅に増加する。体力が低下すると、回復量がさらに増加する。",
+            "desc": "<healing>体力自動回復</healing>が大幅に増加する。<scaleHealth>体力</scaleHealth>が低下すると、回復量がさらに増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/perseverance_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/perseverance_small.png",
             "id": 64,
             "name": "忍耐力",
             "rarity": 1,
-            "tooltip": "<healing>基本体力自動回復が@BaseRegen*100@%</healing>増加する。体力が25%未満の間は、代わりに<healing>基本体力自動回復が@AmpedRegen*100@%</healing>増加する。<br><br>このラウンド中の体力回復量: @f1@<br>回復した体力の合計: @f2@"
+            "tooltip": "<healing>基本体力自動回復が@BaseRegen*100@%</healing>増加する。<scaleHealth>体力が25%</scaleHealth>未満の間は、代わりに<healing>基本体力自動回復が@AmpedRegen*100@%</healing>増加する。<br><br>このラウンドの体力回復量: @f1@<br>体力回復量の合計: @f2@"
         },
         {
             "apiName": "JeweledGauntlet",

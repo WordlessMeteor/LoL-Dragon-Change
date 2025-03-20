@@ -412,6 +412,18 @@
                 "texturePath": "ASSETS/Shared/Materials/Water_B_Nm.dds",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "VertexDeformationMask",
+                "texturePath": "ASSETS/Shared/Materials/white.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Diffuse_Texture",
+                "texturePath": "ASSETS/Shared/Materials/GreenBlue2.tex",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
@@ -446,16 +458,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Distortion_LowHigh",
-                "value": [
-                    0.05999999865889549,
-                    0.10000000149011612,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Color_Outside",
                 "value": [
                     0.9411764740943909,
@@ -471,16 +473,6 @@
                     0.4901960790157318,
                     0.7411764860153198,
                     0.9725490212440491,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "CamSpec_Color",
-                "value": [
-                    0.0,
-                    1.0,
-                    1.0,
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
@@ -514,26 +506,51 @@
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WaveController",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WaveStrength",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WaveMaskStrength",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TranslucentControl",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ScrollDirectionSpeed",
+                "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
-                "name": "DEBUG_VIEW_NORMALS",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "DEBUG_VIEW_COLORS",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
                 "name": "SS_MASK",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DEFORM_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FLOW_MAP",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_DIFFUSE_TEXTURE",
+                "on": false,
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
-            "DISABLE_FOW": "1"
+            "DISABLE_FOW": "1",
+            "NO_BAKED_LIGHTING": "1"
         },
         "techniques": [
             {
@@ -1659,6 +1676,18 @@
                 "texturePath": "ASSETS/Shared/Materials/Water_A_Nm.dds",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "VertexDeformationMask",
+                "texturePath": "ASSETS/Shared/Materials/white.dds",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Diffuse_Texture",
+                "texturePath": "ASSETS/Shared/Materials/GreenBlue2.tex",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
@@ -1693,16 +1722,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Distortion_LowHigh",
-                "value": [
-                    0.009999999776482582,
-                    0.03999999910593033,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Color_Outside",
                 "value": [
                     0.15000000596046448,
@@ -1718,16 +1737,6 @@
                     0.07000000029802322,
                     0.7300000190734863,
                     0.8700000047683716,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "CamSpec_Color",
-                "value": [
-                    0.0,
-                    1.0,
-                    1.0,
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
@@ -1761,26 +1770,51 @@
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WaveController",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WaveStrength",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WaveMaskStrength",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TranslucentControl",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ScrollDirectionSpeed",
+                "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
-                "name": "DEBUG_VIEW_NORMALS",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "DEBUG_VIEW_COLORS",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
                 "name": "SS_MASK",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DEFORM_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_FLOW_MAP",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_DIFFUSE_TEXTURE",
+                "on": false,
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
-            "DISABLE_FOW": "1"
+            "DISABLE_FOW": "1",
+            "NO_BAKED_LIGHTING": "1"
         },
         "techniques": [
             {

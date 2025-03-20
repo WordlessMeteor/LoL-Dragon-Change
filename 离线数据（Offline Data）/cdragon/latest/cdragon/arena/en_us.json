@@ -21,13 +21,13 @@
             "dataValues": {
                 "StealthDuration": 4.0
             },
-            "desc": "Gain the <spellName>Vanish</spellName> Summoner Spell<br><br><rules><spellName>Vanish</spellName> turns you <stealth>Invisible</stealth>.</rules>",
+            "desc": "Gain the <spellName>Vanish</spellName> Summoner Spell<br><br><rules><spellName>Vanish</spellName> turns you <keywordStealth>Invisible</keywordStealth>.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/vanish_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/vanish_small.png",
             "id": 89,
             "name": "Vanish",
             "rarity": 1,
-            "tooltip": "Become <stealth>Invisible</stealth> for @StealthDuration@ seconds or until you Attack or use an Ability.<br>This stealth cannot be revealed by the Arcane Sweeper trinket."
+            "tooltip": "Become <keywordStealth>Invisible</keywordStealth> for @StealthDuration@ seconds or until you Attack or use an Ability."
         },
         {
             "apiName": "ChainLightning",
@@ -36,7 +36,7 @@
                 "DamageMod": 0.4000000059604645,
                 "Range": 800.0
             },
-            "desc": "Dealing damage to an enemy also damages their partner for <trueDamage>@DamageMod*100@% true damage</trueDamage> if they're nearby.",
+            "desc": "Dealing damage to an enemy also damages their partner for <trueDamage>@DamageMod*100@% damage dealt true damage</trueDamage> if they're nearby.",
             "iconLarge": "assets/ux/cherry/augments/icons/chainlightning_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/chainlightning_small.png",
             "id": 166,
@@ -78,13 +78,13 @@
                 "MaxHealthDamage": 0.20000000298023224,
                 "Radius": 350.0
             },
-            "desc": "Start each round with a bomb attached to you. After @BombDelay@ seconds, it explodes for <trueDamage>@MaxHealthDamage*100@% max Health true damage</trueDamage> and <status>Knocks Up</status> for @KnockupDuration@ seconds.<br>",
+            "desc": "Start each round with a bomb attached to you. After @BombDelay@ seconds, it explodes, dealing massive damage and <status>Knocking Up</status> nearby enemies.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/selfdestruct_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/selfdestruct_small.png",
             "id": 108,
             "name": "Self Destruct",
             "rarity": 0,
-            "tooltip": "{{ Cherry_SelfDestruct_Summary }}<br><br>Damage Dealt this round: @f1@<br>Damage Dealt total: @f2@"
+            "tooltip": "Start each round with a bomb attached to you. After @BombDelay@ seconds, it explodes for <trueDamage>@MaxHealthDamage*100@% max Health true damage</trueDamage> and <status>Knocks Up</status> for @KnockupDuration@ seconds.<br><br>Damage Dealt this round: @f1@<br>Damage Dealt total: @f2@"
         },
         {
             "apiName": "ServeBeyondDeath",
@@ -190,13 +190,13 @@
                 "SlowDuration": 2.0,
                 "SlowPercentage": 80.0
             },
-            "desc": "<keywordMajor>Automatically</keywordMajor> slash in a circle around you, dealing <physicalDamage>physical damage</physicalDamage>. Enemies hit by the outer half are <status>Slowed</status> and they take additional <physicalDamage>max Health physical damage</physicalDamage>. Restoring <healing>@OuterConeHealingRatio@% of the bonus damage dealt to champions as Health</healing>. @AutoCastCooldown@ second cooldown.",
+            "desc": "Periodically <keywordMajor>Autocast</keywordMajor> a massive slash around you, dealing <physicalDamage>physical damage</physicalDamage>. Enemies hit by the outer half are <status>Slowed</status>, take additional <physicalDamage>max Health physical damage</physicalDamage>, and you heal for a percent of the bonus damage.",
             "iconLarge": "assets/ux/cherry/augments/icons/quantumcomputing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quantumcomputing_small.png",
             "id": 66,
             "name": "Quantum Computing",
             "rarity": 2,
-            "tooltip": "<keywordMajor>Automatically</keywordMajor> slash in a circle around you, dealing <physicalDamage>@BaseDamageTotal@ physical damage</physicalDamage>. Enemies hit by the outer half are <status>Slowed</status> by @SlowPercentage@% decaying over @SlowDuration@ seconds, and they take an additional <physicalDamage>@OuterEdgeTooltip@ max Health physical damage</physicalDamage>. Restoring <healing>@OuterConeHealingRatio@% of the bonus damage dealt to champions as Health</healing>. @AutoCastCooldown@ second cooldown.<br><br>Damage Dealt Total: @f1@<br>Healing Done Total: @f2@"
+            "tooltip": "Every @AutoCastCooldown@ seconds <keywordMajor>Autocast</keywordMajor> a massive slash around you, dealing <physicalDamage>@BaseDamageTotal@ physical damage</physicalDamage>. Enemies hit by the outer half are <status>Slowed</status> by @SlowPercentage@% decaying over @SlowDuration@ seconds, take an additional <physicalDamage>@OuterEdgeTooltip@ max Health physical damage</physicalDamage>, and you restore <healing>@OuterConeHealingRatio@% champion damage dealt Health</healing>.<br><br>Damage Dealt Total: @f1@<br>Healing Done Total: @f2@"
         },
         {
             "apiName": "DemonsDance",
@@ -267,14 +267,19 @@
         {
             "apiName": "TransmuteChaos",
             "calculations": {},
-            "dataValues": {},
-            "desc": "Gain a random Gold and random Silver Augment.",
+            "dataValues": {
+                "Augment1GoldChance": 70.0,
+                "Augment1SilverChance": 30.0,
+                "Augment2GoldChance": 70.0,
+                "Augment2SilverChance": 30.0
+            },
+            "desc": "Gain 2 random Augments.",
             "iconLarge": "assets/ux/cherry/augments/icons/transmutechaos_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/transmutechaos_small.png",
             "id": 243,
             "name": "Transmute: Chaos",
             "rarity": 2,
-            "tooltip": "Gain a random Gold and random Silver Augment."
+            "tooltip": "Gain 2 random Augments."
         },
         {
             "apiName": "Chauffeur",
@@ -283,7 +288,7 @@
                 "AttackSpeed": 0.6499999761581421,
                 "Haste": 130.0
             },
-            "desc": "You are attached to your ally and can't move on your own. Your bonus movespeed is also granted to your ally, and you gain <scaleLevel>Ability Haste</scaleLevel> and <attackSpeed>Attack Speed</attackSpeed>.",
+            "desc": "You are attached to your ally and can't move on your own. Your <speed>bonus Move Speed</speed> is also granted to your ally, and you gain <scaleLevel>Ability Haste</scaleLevel> and <attackSpeed>Attack Speed</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/chauffeur_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/chauffeur_small.png",
             "id": 14,
@@ -427,12 +432,12 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 45.0
+                            "mEndValue": 160.0,
+                            "mStartValue": 35.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.4000000059604645
+                            "mCoefficient": 0.25
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
@@ -473,13 +478,13 @@
             "dataValues": {
                 "CooldownBetweenCasts": 3.0
             },
-            "desc": "For each Summoner Spell refresh its cooldown once per round.",
+            "desc": "The first time each round you use a Summoner Spell, refresh its Cooldown.",
             "iconLarge": "assets/ux/cherry/augments/icons/summonerrevolution_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/summonerrevolution_small.png",
             "id": 223,
             "name": "Summoner Revolution",
             "rarity": 1,
-            "tooltip": "For each Summoner Spell refresh its cooldown once per round."
+            "tooltip": "The first time each round you use a Summoner Spell, refresh its Cooldown."
         },
         {
             "apiName": "IceCold",
@@ -732,7 +737,7 @@
             "dataValues": {
                 "ProcCooldown": 0.75
             },
-            "desc": "Your Abilities mark enemies, causing them to take extra damage from your ally's next effect.",
+            "desc": "Your Abilities mark enemies, causing them to take extra damage from your ally's next Attack or Ability.",
             "iconLarge": "assets/ux/cherry/augments/icons/searingdawn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/searingdawn_small.png",
             "id": 72,
@@ -765,13 +770,13 @@
                 "MaxRangeThreshold": 1000.0,
                 "NumberOfMissiles": 3.0
             },
-            "desc": "Dealing damage with an Ability fires @NumberOfMissiles@ magic missiles at each enemy hit, each dealing up to <trueDamage>@MaxHealthDamageTooltip@% max Health true damage</trueDamage> based on distance traveled.",
+            "desc": "Dealing damage with an Ability fires @NumberOfMissiles@ magic missiles at them, each dealing <trueDamage>percent max Health true damage</trueDamage> based on distance traveled.",
             "iconLarge": "assets/ux/cherry/augments/icons/magicmissile_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/magicmissile_small.png",
             "id": 133,
             "name": "Magic Missile",
             "rarity": 1,
-            "tooltip": "{{ Cherry_MagicMissile_Summary }}<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
+            "tooltip": "Dealing damage with an Ability fires @NumberOfMissiles@ magic missiles at each enemy hit, each dealing up to <trueDamage>@MaxHealthDamageTooltip@% max Health true damage</trueDamage> based on distance traveled.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "Spellwake",
@@ -863,13 +868,13 @@
                 "SpellIDCD": 5.0,
                 "StartingAPIfSecondAugment": 40.0
             },
-            "desc": "Permanently gain <scaleAP>@APPerProc@ Ability Power</scaleAP> when you hit enemies with Abilities (@SpellIDCD@ second Cooldown per Ability).<br><br>If taken as your second augment, starts with @StartingAPIfSecondAugment@ Ability Power.",
+            "desc": "Permanently gain <scaleAP>@APPerProc@ Ability Power</scaleAP> when you hit enemies with Abilities.<br><br>If taken as your second augment, starts with  <scaleAP>@StartingAPIfSecondAugment@ Ability Power</scaleAP>.",
             "iconLarge": "assets/ux/cherry/augments/icons/phenomenalevil_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/phenomenalevil_small.png",
             "id": 65,
             "name": "Phenomenal Evil",
             "rarity": 1,
-            "tooltip": "Permanently gain <scaleAP>@APPerProc@ Ability Power</scaleAP> when you hit enemies with Abilities.<br><br>@SpellIDCD@ second cooldown per spell.<br><br>If taken as your second augment, starts with @StartingAPIfSecondAugment@ AP.<br><br>AP Gained: @f1@"
+            "tooltip": "Permanently gain <scaleAP>@APPerProc@ Ability Power</scaleAP> when you hit enemies with Abilities.<br><br>@SpellIDCD@ second Cooldown per Ability.<br><br>If taken as your second Augment, starts with  <scaleAP>@StartingAPIfSecondAugment@ Ability Power</scaleAP>.<br><br>AP Gained: @f1@"
         },
         {
             "apiName": "BigBrain",
@@ -929,13 +934,13 @@
             "dataValues": {
                 "Cooldown": 6.0
             },
-            "desc": "Replace Flee with the a random champion's ultimate. After casting this ability replace it with another random champion's ultimate.",
+            "desc": "Replace Summoner Flee with a random Ultimate. After casting the Ultimate, replace it with new random Ultimate.",
             "iconLarge": "assets/ux/cherry/augments/icons/ultimaterevolution_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/ultimaterevolution_small.png",
             "id": 233,
             "name": "Ultimate Roulette",
             "rarity": 2,
-            "tooltip": "Replace Flee with the a random champion's ultimate. After casting this ability replace it with another random champion's ultimate."
+            "tooltip": "Replace Summoner Flee with a random Ultimate. After casting the Ultimate, replace it with new random Ultimate."
         },
         {
             "apiName": "ClownCollege",
@@ -1018,7 +1023,7 @@
                 "PseudoCastTime": 0.125,
                 "StealthDuration": 3.0
             },
-            "desc": "Gain <spellName>Deceive</spellName> in Flee Slot. <br>Gain <spellName>Backstab</spellName> Passive.<br><br>When you die, spawn an exploding box that deals a large amount of <trueDamage>True damage</trueDamage> and <status>Fear</status> nearby enemies.",
+            "desc": "Gain <spellName>Deceive</spellName> Summoner Spell.<br>Gain <spellName>Backstab</spellName> Passive.<br><br>When you die, spawn an exploding box that deals a large amount of <trueDamage>true damage</trueDamage> and <status>Fear</status> nearby enemies.",
             "iconLarge": "assets/ux/cherry/augments/icons/clowncollege_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/clowncollege_small.png",
             "id": 310,
@@ -1061,13 +1066,13 @@
                 "MeleeReduction": 0.30000001192092896,
                 "RangedReduction": 0.15000000596046448
             },
-            "desc": "Whenever you take damage, @MeleeReduction*100@% of that damage is instead dealt as a bleed effect over @BleedDuration@ seconds. <br><br><rules>Damage reduction is reduced to @RangedReduction*100@% for ranged champions.</rules>",
+            "desc": "@MeleeReduction*100@% of damage you take instead happens over @BleedDuration@ seconds (@RangedReduction*100@% for ranged champions).",
             "iconLarge": "assets/ux/cherry/augments/icons/numbtopain_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/numbtopain_small.png",
             "id": 251,
             "name": "Numb to Pain",
             "rarity": 0,
-            "tooltip": "Whenever you take damage, @MeleeReduction*100@% of that damage is instead dealt as a bleed effect over @BleedDuration@ seconds. <br><br><rules>Damage reduction is reduced to @RangedReduction*100@% for ranged champions.</rules>"
+            "tooltip": "@MeleeReduction*100@% of damage you take instead happens over @BleedDuration@ seconds (@RangedReduction*100@% for ranged champions)."
         },
         {
             "apiName": "MadScientist",
@@ -1157,7 +1162,7 @@
                 "AdaptiveForce": 15.0,
                 "SecondPickBonus": 30.0
             },
-            "desc": "Gain @AdaptiveForce@ Adaptive Force on takedown, once per champion per round.<br><br>If taken as your second augment, starts with @SecondPickBonus@ Adaptive Force.",
+            "desc": "Gain @AdaptiveForce@ Adaptive Force on takedown, once per champion per round.<br><br>If taken as your second Augment, starts with @SecondPickBonus@ Adaptive Force.",
             "iconLarge": "assets/ux/cherry/augments/icons/dematerialize_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dematerialize_small.png",
             "id": 171,
@@ -1349,13 +1354,13 @@
             "dataValues": {
                 "APToHasteConversion": 0.30000001192092896
             },
-            "desc": "Gain Ability Haste equal to <scaleAP>@APToHasteConversion*100@% of your Ability Power</scaleAP>",
+            "desc": "Gain Ability Haste equal to <scaleAP>@APToHasteConversion*100@% Ability Power</scaleAP>",
             "iconLarge": "assets/ux/cherry/augments/icons/eureka_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/eureka_small.png",
             "id": 30,
             "name": "Eureka",
             "rarity": 2,
-            "tooltip": "Gain Ability Haste equal to <scaleAP>@APToHasteConversion*100@% of your Ability Power</scaleAP>"
+            "tooltip": "Gain Ability Haste equal to <scaleAP>@APToHasteConversion*100@% Ability Power</scaleAP>"
         },
         {
             "apiName": "OceanSoul",
@@ -1376,13 +1381,13 @@
                 "DamageRange": 1000.0,
                 "HealToDamageConversion": 0.699999988079071
             },
-            "desc": "<health>Healing</health> and Regen you do deals a portion of the value in <scaleAP>Magic Damage</scaleAP> to the nearest enemy champion.",
+            "desc": "<health>Healing</health> and <health>Health Regen</health> you do deals a portion of the value as <magicDamage>magic samage</magicDamage> to the nearest enemy champion.",
             "iconLarge": "assets/ux/cherry/augments/icons/circleofdeath_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/circleofdeath_small.png",
             "id": 15,
             "name": "Circle of Death",
             "rarity": 2,
-            "tooltip": "<health>Healing</health> and Regen you do deals <magicDamage>@HealToDamageConversion*100@% of that value in magic damage</magicDamage> to the nearest enemy champion.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
+            "tooltip": "<health>Healing</health> and <health>Health Regen</health> you do deals <magicDamage>@HealToDamageConversion*100@% of the value magic damage</magicDamage> to the nearest enemy champion.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "Quest_WoogletsWitchcap",
@@ -1520,25 +1525,25 @@
             "dataValues": {
                 "ProcMultiplier": 1.5
             },
-            "desc": "Every third Attack, your On-Hits trigger a second time.",
+            "desc": "Every third Attack, your {{ Item_Keyword_OnHit }} effects trigger a second time.",
             "iconLarge": "assets/ux/cherry/augments/icons/twicethrice_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/twicethrice_small.png",
             "id": 107,
             "name": "Twice Thrice",
             "rarity": 1,
-            "tooltip": "Every third Attack, your On-Hits trigger a second time."
+            "tooltip": "Every third Attack, your {{ Item_Keyword_OnHit }} effects trigger a second time."
         },
         {
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Every round this mutates into one of your allies augments, randomly selected. <br><br><rules>Only mutates into augments you could roll.</rules>",
+            "desc": "Every round this mutates into one of your ally's Augments, randomly selected. ",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Symbiotic Mutation",
             "rarity": 1,
-            "tooltip": "Every round this mutates into one of your allies augments, randomly selected. <br><br><rules>Only mutates into augments you could roll.</rules>"
+            "tooltip": "Every round this mutates into one of your ally's Augments, randomly selected. <br><br><rules>Only mutates into Augments you could roll.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1640,13 +1645,13 @@
                 "Cooldown": 1.5,
                 "Radius": 650.0
             },
-            "desc": "Your <healing>Healing</healing> and <shield>Shielding</shield> apply an infinitely stacking <keywordMajor>Burn</keywordMajor> to a nearby enemy, dealing @BurnPercentMin*100@% to @BurnPercentMax*100@% Max Health over @BurnDuration@ seconds.",
+            "desc": "<healing>Healing</healing> or <shield>Shielding</shield> applies an infinitely stacking <keywordMajor>Burn</keywordMajor> to a nearby enemy, dealing <magicDamage>percent max Health magic damage</magicDamage> over a few seconds.",
             "iconLarge": "assets/ux/cherry/augments/icons/holyfire_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/holyfire_small.png",
             "id": 198,
             "name": "Holy Fire",
             "rarity": 1,
-            "tooltip": "{{Cherry_HolyFire_Summary}}<br><br>Burn damage scales with the relative size of the Heal or Shield against the max health of the champion being aided.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
+            "tooltip": "<healing>Healing</healing> or <shield>Shielding</shield> applies an infinitely stacking <keywordMajor>Burn</keywordMajor> to a nearby enemy, dealing up to <magicDamage>@BurnPercentMax*100@% max Health magic damage</magicDamage> over @BurnDuration@ seconds (min: @BurnPercentMin*100@%).<br><br>The damage scales with the relative size of the <healing>Heal</healing> or <shield>Shielding</shield> to the <scaleHealth>max Health</scaleHealth> of the champion being aided.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "Overflow",
@@ -1678,13 +1683,13 @@
                 "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
                 "ManaRatio": 200.0
             },
-            "desc": "Your <scaleMana>Mana</scaleMana> spells cost double. Gain <scaleMana>@ManaCalc@</scaleMana> Spell Damage.",
+            "desc": "Your <scaleMana>Mana</scaleMana> costs double. Your Abilities do more damage scaling with your <scaleMana>max Mana</scaleMana>.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Overflow",
             "rarity": 0,
-            "tooltip": "Your <scaleMana>Mana</scaleMana> spells cost double. Gain <scaleMana>@ManaCalc@</scaleMana> Spell Damage."
+            "tooltip": "Your <scaleMana>Mana</scaleMana> costs double. Your Abilities deal <scaleMana>@ManaCalc@</scaleMana> more damage."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1810,13 +1815,13 @@
                 "ShieldHealthRatio": 0.3499999940395355,
                 "StatIncrease": 0.4000000059604645
             },
-            "desc": "You start each round imprisoned in the center of the arena, unable to act. While imprisoned, you have up to @DamageReductionMax*100@% damage reduction and gain size, <healing>Health</healing>, <physicalDamage>Attack Damage</physicalDamage>, and <magicDamage>Ability Power</magicDamage> over time (max @StatIncrease*100@%). After @ImprisonDuration@ seconds or reaching <healing>@BreakoutHealthThreshold*100@% Health</healing>, you break out, <status>Knocking Back</status> enemies and gaining <shield>@ShieldHealthRatio*100@% max Health Shield</shield>.",
+            "desc": "You start each round imprisoned in the center of the arena, unable to act. While imprisoned, you have massive damage reduction and accumulate size, <healing>Health</healing>, <physicalDamage>Attack Damage</physicalDamage>, and <scaleAP>Ability Power</scaleAP> over time. After @ImprisonDuration@ seconds or reaching <scaleHealth>@BreakoutHealthThreshold*100@% Health</scaleHealth>, you break out, <status>Knocking Back</status> enemies and gaining <shield>Shield</shield> based on your <scaleHealth>max Health</scaleHealth>.",
             "iconLarge": "assets/ux/cherry/augments/icons/raidboss_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/raidboss_small.png",
             "id": 125,
             "name": "Raid Boss",
             "rarity": 2,
-            "tooltip": "You start each round imprisoned in the center of the arena, unable to act. While imprisoned, you have up to @DamageReductionMax*100@% damage reduction and gain size, <healing>Health</healing>, <physicalDamage>Attack Damage</physicalDamage>, and <magicDamage>Ability Power</magicDamage> over time (max @StatIncrease*100@%). After @ImprisonDuration@ seconds or reaching <healing>@BreakoutHealthThreshold*100@% Health</healing>, you break out, <status>Knocking Back</status> enemies and gaining <shield>@ShieldHealthRatio*100@% max Health Shield</shield>."
+            "tooltip": "You start each round imprisoned in the center of the arena, unable to act. While imprisoned, you have up to @DamageReductionMax*100@% damage reduction and gain size, <healing>Health</healing>, <physicalDamage>Attack Damage</physicalDamage>, and <scaleAP>Ability Power</scaleAP> over time (max @StatIncrease*100@%). After @ImprisonDuration@ seconds or reaching <scaleHealth>@BreakoutHealthThreshold*100@% Health</scaleHealth>, you break out, <status>Knocking Back</status> enemies and gaining <shield>@ShieldHealthRatio*100@% max Health Shield</shield>."
         },
         {
             "apiName": "OutlawsGrit",
@@ -1902,13 +1907,13 @@
                 "FlatCooldownRefundPerTick": 0.07999999821186066,
                 "ProcCooldown": 1.0
             },
-            "desc": "Your Abilities apply a stacking <keywordMajor>Burn</keywordMajor>, dealing <scaleAP>Magic Damage</scaleAP> over time.<br><br>Your <keywordMajor>Burn</keywordMajor> effects reduce your basic Ability cooldowns.",
+            "desc": "Your Abilities apply an infinitely stacking <keywordMajor>Burn</keywordMajor>, dealing <magicDamage>magic damage</magicDamage> over time.<br><br>Your <keywordMajor>Burn</keywordMajor> effects reduce your basic Ability Cooldowns.",
             "iconLarge": "assets/ux/cherry/augments/icons/infernalconduit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/infernalconduit_small.png",
             "id": 45,
             "name": "Infernal Conduit",
             "rarity": 2,
-            "tooltip": "Your Abilities apply a stacking <keywordMajor>Burn</keywordMajor>, dealing <scaleAP>@BleedDamageTooltip@ Magic Damage</scaleAP> per second for @BleedDuration@ seconds. The <keywordMajor>Burn</keywordMajor> stacks infinitely.<br><br>All your <keywordMajor>Burn</keywordMajor> effects lower your remaining Basic Ability Cooldowns by @FlatCooldownRefundPerTick@s when they damage enemies.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@<br>"
+            "tooltip": "Your Abilities apply an infinitely stacking <keywordMajor>Burn</keywordMajor>, dealing <magicDamage>@BleedDamageTooltip@ magic damage</magicDamage> per second for @BleedDuration@ seconds.<br><br>All your <keywordMajor>Burn</keywordMajor> effects lower your basic Ability Cooldowns by @FlatCooldownRefundPerTick@ seconds when they damage enemies.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@<br>"
         },
         {
             "apiName": "ADAPt",
@@ -1948,9 +1953,10 @@
             "calculations": {},
             "dataValues": {
                 "KillStackCredit": 1.0,
-                "RequiredKillCount": 5.0
+                "RequiredKillCount": 5.0,
+                "RerollsToGrant": 1.0
             },
-            "desc": "Gain @KillStackCredit@ stack on takedown, once per champion per round.<br><br>At @RequiredKillCount@ stacks, this hatches into a Prismatic Anvil. This can be completed multiple times.",
+            "desc": "Gain @KillStackCredit@ stack on takedown, once per champion per round.<br><br>Every @RequiredKillCount@ stacks, this hatches into a Prismatic Anvil and @RerollsToGrant@ bonus reroll.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_prismaticegg_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_prismaticegg_small.png",
             "id": 224,
@@ -2072,13 +2078,13 @@
                 "PrismaticGoldBasisDiscount": 1250.0,
                 "StatCostReduction": -100.0
             },
-            "desc": "Gain @GoldBonus@ gold. Reduced the price of all anvils, and items acquired from anvils resell for 500 gold less.<br><br>Prismatic Anvils: @PrismaticCostReduction@<br>Legendary Anvils: @LegendaryCostReduction@<br>Stat Anvils: @StatCostReduction@",
+            "desc": "Gain @GoldBonus@ gold and reduce the price of all anvils.<br><br>Prismatic Anvils: @PrismaticCostReduction@<br>Legendary Anvils: @LegendaryCostReduction@<br>Stat Anvils: @StatCostReduction@<br><br><rules>Items acquired from anvils resell for 500 gold less.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/thiefsgloves_small.png",
             "id": 234,
             "name": "Gamba Anvil",
             "rarity": 2,
-            "tooltip": "Gain @GoldBonus@ gold. Reduced the price of all anvils, and items acquired from anvils resell for 500 gold less.<br><br>Prismatic Anvils: @PrismaticCostReduction@<br>Legendary Anvils: @LegendaryCostReduction@<br>Stat Anvils: @StatCostReduction@"
+            "tooltip": "Gain @GoldBonus@ gold and reduce the price of all anvils.<br><br>Prismatic Anvils: @PrismaticCostReduction@<br>Legendary Anvils: @LegendaryCostReduction@<br>Stat Anvils: @StatCostReduction@<br><br><rules>Items acquired from anvils resell for 500 gold less.</rules>"
         },
         {
             "apiName": "DivineIntervention",
@@ -2090,13 +2096,13 @@
                 "Radius": 400.0,
                 "WarningDelay": 2.5
             },
-            "desc": "@InitalDelay@ seconds into combat, call upon a protective star that slowly descends upon you. When it lands, you and nearby allies become <keywordMajor>Invulnerable</keywordMajor> for @InvulnerabilityDuration@ seconds. <keywordMajor>Autocast</keywordMajor> every @BaseCD@ seconds.",
+            "desc": "@InitalDelay@ seconds into combat, call upon a protective star that slowly descends upon you. When it lands, you and nearby allies become <keywordMajor>Invulnerable</keywordMajor> for a few seconds. Then <keywordMajor>Autocast</keywordMajor> this every @BaseCD@ seconds.",
             "iconLarge": "assets/ux/cherry/augments/icons/slowactingpainkillers_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/slowactingpainkillers_small.png",
             "id": 301,
             "name": "Divine Intervention",
             "rarity": 1,
-            "tooltip": "@InitalDelay@ seconds into combat, call upon a protective star that slowly descends upon you. When it lands, you and nearby allies become <keywordMajor>Invulnerable</keywordMajor> for @InvulnerabilityDuration@ seconds. <keywordMajor>Autocast</keywordMajor> every @BaseCD@ seconds."
+            "tooltip": "@InitalDelay@ seconds into combat, call upon a protective star that slowly descends upon you. When it lands, you and nearby allies become <keywordMajor>Invulnerable</keywordMajor> for @InvulnerabilityDuration@ seconds. Then <keywordMajor>Autocast</keywordMajor> this every @BaseCD@ seconds."
         },
         {
             "apiName": "ThreadtheNeedle",
@@ -2211,13 +2217,13 @@
                 "BleedDuration": 5.0,
                 "Range": 500.0
             },
-            "desc": "Every second, apply a stacking <keywordMajor>Burn</keywordMajor> to nearby enemy champions scaling with your <health>Max Health</health>. The <keywordMajor>Burn</keywordMajor> stacks infinitely.",
+            "desc": "Every second, apply an infinitely stacking <keywordMajor>Burn</keywordMajor> to nearby enemy champions, scaling with your <health>max Health</health>.",
             "iconLarge": "assets/ux/cherry/augments/icons/slowcooker_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/slowcooker_small.png",
             "id": 75,
             "name": "Slow Cooker",
             "rarity": 2,
-            "tooltip": "Every second, apply a stacking <keywordMajor>Burn</keywordMajor>, dealing <health>@BleedDamageTooltip@ per second as <scaleAP>Magic Damage</scaleAP> for @BleedDuration@ seconds</health> to enemy champions within @Range@ range. The <keywordMajor>Burn</keywordMajor> stacks infinitely.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
+            "tooltip": "Every second, apply an infinitely stacking <keywordMajor>Burn</keywordMajor> to nearby enemy champions, dealing <magicDamage>@BleedDamageTooltip@ magic damage</magicDamage> per second for @BleedDuration@ seconds.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "DieAnotherDay",
@@ -2255,13 +2261,13 @@
                 "AttackSpeed": 1.0,
                 "OnHitMod": 0.5
             },
-            "desc": "Gain <attackSpeed>@AttackSpeed*100@% total Attack Speed</attackSpeed>. Your Attacks deal @AttackReduction*100@% and On-Hits deal @OnHitMod*100@% less damage.",
+            "desc": "Gain <attackSpeed>@AttackSpeed*100@% total Attack Speed</attackSpeed>. Your Attacks deal @AttackReduction*100@% less damage and your On-Hits deal @OnHitMod*100@% less damage.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Dual Wield",
             "rarity": 2,
-            "tooltip": "Gain <attackSpeed>@AttackSpeed*100@% total Attack Speed</attackSpeed>. Your Attacks deal @AttackReduction*100@% and On-Hits deal @OnHitMod*100@% less damage."
+            "tooltip": "Gain <attackSpeed>@AttackSpeed*100@% total Attack Speed</attackSpeed>. Your Attacks deal @AttackReduction*100@% less damage and your On-Hits deal @OnHitMod*100@% less damage."
         },
         {
             "apiName": "Augment405",
@@ -2284,13 +2290,13 @@
                 "DamageRedirectPercentage": 0.15000000596046448,
                 "HealCopyPercentage": 0.5
             },
-            "desc": "@DamageRedirectPercentage*100@% of damage dealt to your ally is redirected to you, and @HealCopyPercentage*100@% of <healing>healing</healing> they receive is given to you as well.",
+            "desc": "@DamageRedirectPercentage*100@% of damage dealt to your ally is redirected to you, and @HealCopyPercentage*100@% of healing they receive is also given to you.",
             "iconLarge": "assets/ux/cherry/augments/icons/spiritlink_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/spiritlink_small.png",
             "id": 78,
             "name": "Spirit Link",
             "rarity": 2,
-            "tooltip": "@DamageRedirectPercentage*100@% of damage dealt to your ally is redirected to you, and @HealCopyPercentage*100@% of <healing>healing</healing> they receive is given to you as well.<br><br>Damage Redirected Total: @f1@<br>Healing Done Total: @f2@<br>"
+            "tooltip": "@DamageRedirectPercentage*100@% of damage dealt to your ally is redirected to you, and @HealCopyPercentage*100@% of healing they receive is also given to you.<br><br>Damage Redirected Total: @f1@<br>Healing Done Total: @f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2302,13 +2308,13 @@
                 "OnHitDamageRatio": 0.3799999952316284,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Your Attacks grant you @CurseCounter@ stack of <keywordMajor>Curse</keywordMajor> and permanently deal additional <magicDamage>magic damage</magicDamage> for each stack of <keywordMajor>Curse</keywordMajor>.<br><br>Also, increase the maximum of <keywordMajor>Curse</keywordMajor> stacks you can have.",
+            "desc": "Your Attacks grant you permanent <keywordMajor>Cursed Power</keywordMajor> and deal additional <magicDamage>magic damage</magicDamage> based on your <keywordMajor>Cursed Power</keywordMajor>.<br><br>The max <keywordMajor>Cursed Power</keywordMajor> you can gain per round scales with total <keywordMajor>Curse</keywordMajor> sources between you and your ally.",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "Deathtouch",
             "rarity": 1,
-            "tooltip": "Your Attacks grant you @CurseCounter@ <keywordMajor>Curse</keywordMajor> and deal bonus <trueDamage>True Damage</trueDamage> equal to the amount of <keywordMajor>Curse</keywordMajor> stacks you have gained this round<br><br>{{ Cherry_CurseShared }}<br><br>Your Attacks deal additional <magicDamage>@f1@ magic damage</magicDamage> based on your <keywordMajor>Total Curses</keywordMajor>.<br><br><rules>@OnHitDamageRatio*100@% of your <keywordMajor>Total Curses</keywordMajor> is converted into bonus On-hit damage.</rules> "
+            "tooltip": "Your Attacks grant you @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Your Attacks deal an additional <magicDamage>@f1@ magic damage</magicDamage> (@OnHitDamageRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2397,13 +2403,13 @@
                 "SelfDuration": 1.75,
                 "StasisDuration": 2.5
             },
-            "desc": "Gain <spellName>Time Stop</spellName> (replaces Flee slot).<br><br><rules><spellName>Time Stop</spellName>: All champions within 800 range are put in <status>Stasis</status> (replaces Flee slot). You exit <status>Stasis</status> 0.75s faster and healed for 40% of your <scaleHealth>missing Health</scaleHealth>.</rules>",
+            "desc": "Gain <spellName>Time Stop</spellName> Summoner Spell.<br><br><rules><spellName>Time Stop</spellName>: ALL nearby champions are put in <status>Stasis</status>. The <status>Stasis</status> is shorter on you, and during it you Heal based on missing Health.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/wellberightback_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wellberightback_small.png",
             "id": 312,
             "name": "We'll Be Right Back",
             "rarity": 1,
-            "tooltip": "<spellName>Time Stop</spellName>: All champions within @Range@ range are put in <status>Stasis</status> for @StasisDuration@. You exit <status>Stasis</status> after @SelfDuration@s and <healing>Heal</healing> for @HealAmountPercent*100@% of your <scaleHealth>missing Health</scaleHealth>."
+            "tooltip": "<spellName>Time Stop</spellName>: All nearby champions are put in <status>Stasis</status> for @StasisDuration@ seconds, or @SelfDuration@ seconds for you. During which you restore <healing>@HealAmountPercent*100@% missing Health</healing>."
         },
         {
             "apiName": "FirstAidKit",
@@ -2575,13 +2581,13 @@
                 "Range": 500.0,
                 "TickCadence": 1.0
             },
-            "desc": "Gain @CurseStacksPerTick@ <keywordMajor>Curses</keywordMajor> from nearby enemy champions. Gain permanent <healing>max Health</healing> for each stack of <keywordMajor>Curse</keywordMajor>.<br><br>Increase the maximum number of <keywordMajor>Curse</keywordMajor> stacks you can have.",
+            "desc": "Gain an aura that continuously harvests permanent <keywordMajor>Cursed Power</keywordMajor> per enemy champion inside. Gain <healing>max Health</healing> based on your <keywordMajor>Cursed Power</keywordMajor>.<br><br>The max <keywordMajor>Cursed Power</keywordMajor> you can gain per round scales with total <keywordMajor>Curse</keywordMajor> sources between you and your ally.",
             "iconLarge": "assets/ux/cherry/augments/icons/plaguebearer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/plaguebearer_small.png",
             "id": 216,
             "name": "Dreadbringer",
             "rarity": 2,
-            "tooltip": "Every @TickCadence@ second, gain @CurseStacksPerTick@ <keywordMajor>Curses</keywordMajor> from nearby enemy champions and deal bonus <trueDamage>True Damage</trueDamage> to them equal to the amount of <keywordMajor>Curse</keywordMajor> stacks you have gained this round.<br><br>{{ Cherry_CurseShared }}<br><br>Gain @f1@ <healing>Maximum Health</healing> from your <keywordMajor>Total Curses</keywordMajor>.<br><br><rules>@MaxHealthRatio*100@% of your <keywordMajor>Total Curses</keywordMajor> are converted into <healing>Maximum Health</healing>.</rules>"
+            "tooltip": "Every @TickCadence@ second, gain @CurseStacksPerTick@ <keywordMajor>Cursed Power</keywordMajor> per nearby enemy champion.<br><br>Gain <healing>@f1@ Health</healing> (@MaxHealthRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "StackosaurusRex",
@@ -2621,7 +2627,7 @@
                 "PolyDuration": 2.0,
                 "WEnemySlow": 60.0
             },
-            "desc": "Damaging with your Ultimate <status>Polymorphs</status> enemies for @PolyDuration@ seconds (@PolyCooldown@ second Cooldown).",
+            "desc": "Damaging with your Ultimate <status>Polymorphs</status> enemies for a few seconds.",
             "iconLarge": "assets/ux/cherry/augments/icons/feymagic_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/feymagic_small.png",
             "id": 194,
@@ -2654,13 +2660,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Your Abilities grant you @CurseCounter@ stack of <keywordMajor>Curse</keywordMajor> for each enemy champion hit. Gain permanent Adaptive Force for each stack of <keywordMajor>Curse</keywordMajor>.<br><br>Also, increase the maximum of <keywordMajor>Curse</keywordMajor> stacks you can have.",
+            "desc": "Ability hits grant you permanent <keywordMajor>Cursed Power</keywordMajor>. Gain Adaptive Force based on your <keywordMajor>Cursed Power</keywordMajor>.<br><br>The max <keywordMajor>Cursed Power</keywordMajor> you can gain per round scales with total <keywordMajor>Curse</keywordMajor> sources between you and your ally.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Doomsayer",
             "rarity": 2,
-            "tooltip": "Your Abilities apply @CurseCounter@ <keywordMajor>Curses</keywordMajor> and deal bonus <trueDamage>True Damage</trueDamage> equal to the amount of <keywordMajor>Curse</keywordMajor> stacks you have gained this round.<br><br>{{ Cherry_CurseShared }}<br><br>Gain @f1@ Adaptive Force from your <keywordMajor>Total Curses</keywordMajor>.<br><br><rules>@AdaptiveForceRatio*100@% of your <keywordMajor>Total Curses</keywordMajor> are converted into Adaptive Force.</rules>"
+            "tooltip": "Your Abilities grant you @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Gain @f1@ Adaptive Force (@AdaptiveForceRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2689,13 +2695,13 @@
                 "SelfReviveTimerModMin": 0.4000000059604645,
                 "SizeMod": -0.20000000298023224
             },
-            "desc": "You automatically begin Reviving yourself after @ReviveArmTime@ seconds and you can be Revived an additional time. Each time you Revive, come back smaller and with @ReviveMod*100@% max Health.<br><br>When you revive, <status>Knockback</status> enemies around you.",
+            "desc": "You automatically begin Reviving yourself after @ReviveArmTime@ seconds and you can be Revived an additional time. Each time you Revive, come back smaller and with reduced <scaleHealth>max Health</scaleHealth>.<br><br>When you revive, <status>Knockback</status> enemies around you.",
             "iconLarge": "assets/ux/cherry/augments/icons/nestingdoll_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/nestingdoll_small.png",
             "id": 177,
             "name": "Nesting Doll",
             "rarity": 2,
-            "tooltip": "You automatically begin Reviving yourself after @ReviveArmTime@ seconds and you can be Revived an additional time. Each time you Revive, come back smaller and with @ReviveMod*100@% max Health.<br><br>When you revive, <status>Knockback</status> enemies around you."
+            "tooltip": "You automatically begin Reviving yourself after @ReviveArmTime@ seconds and you can be Revived an additional time. Each time you Revive, come back smaller and with <scaleHealth>@ReviveMod*100@% max Health</scaleHealth>.<br><br>When you revive, <status>Knockback</status> enemies around you."
         },
         {
             "apiName": "TapDancer",
@@ -2704,13 +2710,13 @@
                 "MSPerHit": 10.0,
                 "MSToASConversion": 0.0010000000474974513
             },
-            "desc": "Your Attacks grant you <moveSpeed>@MSPerHit@ Move Speed</moveSpeed>, stacking infinitely. Gain AS equal to @MSToASConversion*10000@% of your MS.",
+            "desc": "Your Attacks grant you <speed>@MSPerHit@ Move Speed</speed>, stacking infinitely. Gain <attackSpeed>Attack Speed</attackSpeed> equal to @MSToASConversion*10000@% of your <speed>Move Speed</speed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/tapdancer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/tapdancer_small.png",
             "id": 81,
             "name": "Tap Dancer",
             "rarity": 2,
-            "tooltip": "Your Attacks grant you <moveSpeed>@MSPerHit@ Move Speed</moveSpeed>, stacking infinitely. Gain AS equal to @MSToASConversion*10000@% of your MS."
+            "tooltip": "Your Attacks grant you <speed>@MSPerHit@ Move Speed</speed>, stacking infinitely. Gain <attackSpeed>Attack Speed</attackSpeed> equal to @MSToASConversion*10000@% of your <speed>Move Speed</speed>."
         },
         {
             "apiName": "FanTheHammer",
@@ -2966,13 +2972,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Every round this mutates into one of your opponent's augments, randomly selected. <br><br><rules>Only mutates into augments you could roll.</rules>",
+            "desc": "Every round this mutates into one of your opponent's Augments, randomly selected.<br><br><rules>Only mutates into Augments you could roll.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Parasitic Mutation",
             "rarity": 0,
-            "tooltip": "Every round this mutates into one of your opponent's augments, randomly selected. <br><br><rules>Only mutates into augments you could roll.</rules>"
+            "tooltip": "Every round this mutates into one of your opponent's Augments, randomly selected."
         },
         {
             "apiName": "CantTouchThis",
@@ -2981,13 +2987,13 @@
                 "Cooldown": 8.0,
                 "InvulnDuration": 2.0
             },
-            "desc": "Casting your Ultimate also makes you <status>Invulnerable</status> for a short duration.",
+            "desc": "Casting your Ultimate makes you <keywordMajor>Invulnerable</keywordMajor> for a short duration.",
             "iconLarge": "assets/ux/cherry/augments/icons/canttouchthis_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/canttouchthis_small.png",
             "id": 11,
             "name": "Can't Touch This",
             "rarity": 2,
-            "tooltip": "Casting your Ultimate also makes you <status>Invulnerable</status> for @InvulnDuration@s. @Cooldown@s cooldown."
+            "tooltip": "Casting your Ultimate makes you <status>Invulnerable</status> for @InvulnDuration@ seconds (@Cooldown@s Cooldown)."
         },
         {
             "apiName": "SnowballFight",
@@ -3137,13 +3143,13 @@
                 "HealthAmp": 0.3499999940395355,
                 "SizeAmp": 0.5
             },
-            "desc": "Become large, gaining @HealthAmp*100@% <scaleHealth>Health</scaleHealth> and @ADAmp*100@% <scaleAP>Adaptive Force</scaleAP>.",
+            "desc": "Become large, gaining<scaleHealth>@HealthAmp*100@% Health</scaleHealth> and <scaleAP>@ADAmp*100@% Adaptive Force</scaleAP>.",
             "iconLarge": "assets/ux/cherry/augments/icons/goliath_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/goliath_small.png",
             "id": 41,
             "name": "Goliath",
             "rarity": 2,
-            "tooltip": "Become large, gaining @HealthAmp*100@% <scaleHealth>Health</scaleHealth> and @ADAmp*100@% <scaleAP>Adaptive Force</scaleAP>."
+            "tooltip": "Become large, gaining<scaleHealth>@HealthAmp*100@% Health</scaleHealth> and <scaleAP>@ADAmp*100@% Adaptive Force</scaleAP>."
         },
         {
             "apiName": "JuicePress",
@@ -3156,7 +3162,7 @@
                 "SpeedJuiceMSBoost": 0.20000000298023224,
                 "VitalityJuiceHealShieldPower": 0.25
             },
-            "desc": "Juices grant you and your teammate additional effects.",
+            "desc": "Juices grant you and your teammate additional effects.<br><br>The price of buff juices is reduced by @PriceReduction*100@%.",
             "iconLarge": "assets/ux/cherry/augments/icons/juicepress_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/juicepress_small.png",
             "id": 242,
@@ -3262,13 +3268,13 @@
             "dataValues": {
                 "CooldownRefund": 1.25
             },
-            "desc": "{{ Item_Keyword_OnHit }} reduce your cooldowns by @CooldownRefund@ seconds.",
+            "desc": "{{ Item_Keyword_OnHit }} reduce your Cooldowns by @CooldownRefund@ seconds.",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "Mystic Punch",
             "rarity": 2,
-            "tooltip": "{{ Item_Keyword_OnHit }} reduce your cooldowns by @CooldownRefund@ seconds."
+            "tooltip": "{{ Item_Keyword_OnHit }} reduce your Cooldowns by @CooldownRefund@ seconds."
         },
         {
             "apiName": "Homeguard",
@@ -3382,13 +3388,13 @@
             "dataValues": {
                 "MaxHealthPercentageHeal": 0.009999999776482582
             },
-            "desc": "Using an Ability heals you for <healing>@HealAmount@ Health</healing>.",
+            "desc": "Using an Ability restores <healing>@HealAmount@ Health</healing>.",
             "iconLarge": "assets/ux/cherry/augments/icons/rabblerousing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/rabblerousing_small.png",
             "id": 67,
             "name": "Rabble Rousing",
             "rarity": 1,
-            "tooltip": "Using an Ability heals you for <healing>@HealAmount@ Health</healing>.<br><br>Healing Done This Round: @f1@<br>Healing Done Total: @f2@"
+            "tooltip": "Using an Ability restores <healing>@HealAmount@ Health</healing>.<br><br>Healing Done This Round: @f1@<br>Healing Done Total: @f2@"
         },
         {
             "apiName": "GiantSlayer",
@@ -3430,7 +3436,7 @@
                 "WallDuration": 5.0,
                 "WallWidth": 400.0
             },
-            "desc": "Gain the <spellName>Frozen Foundations</spellName> Summoner Spell<br><br><rules><spellName>Frozen Foundations</spellName> summons a wall of ice at a location.</rules>",
+            "desc": "Gain the <spellName>Frozen Foundations</spellName> Summoner Spell.<br><br><rules><spellName>Frozen Foundations</spellName> summons a wall of ice at a location.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/frozenfoundations_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/frozenfoundations_small.png",
             "id": 40,
@@ -3489,13 +3495,13 @@
                 "HealthThreshold": 0.30000001192092896,
                 "StealthDuration": 1.25
             },
-            "desc": "When you drop below @HealthThreshold*100@% Health, briefly become <keywordStealth>Invisible</keywordStealth> and create 4 clone of yourself.",
+            "desc": "When you drop below <scaleHealth>@HealthThreshold*100@% Health</scaleHealth>, briefly become <keywordStealth>Invisible</keywordStealth> and create 4 cloness of yourself.",
             "iconLarge": "assets/ux/cherry/augments/icons/mirrorimage_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mirrorimage_small.png",
             "id": 172,
             "name": "Mirror Image",
             "rarity": 0,
-            "tooltip": "When you drop below @HealthThreshold*100@% Health, briefly become <keywordStealth>Invisible</keywordStealth> and create 4 clone of yourself."
+            "tooltip": "When you drop below <scaleHealth>@HealthThreshold*100@% Health</scaleHealth>, briefly become <keywordStealth>Invisible</keywordStealth> and create 4 cloness of yourself."
         },
         {
             "apiName": "Desecrator",
@@ -3506,13 +3512,13 @@
                 "CurseCounter": 5.0,
                 "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
             },
-            "desc": "<status>Immobilizing</status> enemy champions grants you @CurseCounter@ stacks of <keywordMajor>Curse</keywordMajor>. Gain permanent <armor>Armor</armor> and <magicresistance>Magic Resistance</magicresistance> for each stack of <keywordMajor>Curse</keywordMajor>.<br><br>Also, increase the maximum of <keywordMajor>Curse</keywordMajor> stacks you can have.",
+            "desc": "<status>Immobilizing</status> enemy champions grants you permanent <keywordMajor>Cursed Power</keywordMajor>. Gain <armor>Armor</armor> and <magicresistance>Magic Resistance</magicresistance> based on your <keywordMajor>Cursed Power</keywordMajor>.<br><br>The max <keywordMajor>Cursed Power</keywordMajor> you can gain per round scales with total <keywordMajor>Curse</keywordMajor> sources between you and your ally.",
             "iconLarge": "assets/ux/cherry/augments/icons/desecrator_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/desecrator_small.png",
             "id": 218,
             "name": "Desecrator",
             "rarity": 0,
-            "tooltip": "<status>Immobilizing</status> enemy champions grants you @CurseCounter@ <keywordMajor>Curse Stacks</keywordMajor> and deals bonus <trueDamage>True Damage</trueDamage> equal to the amount of <keywordMajor>Curse</keywordMajor> stacks you have gained this round.<br><br>{{ Cherry_CurseShared }}<br><br>Gain @f1@ <armor>Armor</armor> and <magicresistance>Magic Resistance</magicresistance> from your <keywordMajor>Total Curses</keywordMajor>.<br><br><rules>@ArmorMRRatio*100@% of your <keywordMajor>Total Curses</keywordMajor> are converted into <armor>Armor</armor> and <magicresistance>Magic Resistance</magicresistance> .</rules>"
+            "tooltip": "<status>Immobilizing</status> enemy champions grants you @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Gain <armor>@f1@ Armor</armor> and <magicresistance>@f1@ Magic Resistance</magicresistance> (@ArmorMRRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "AllForYou",
@@ -3520,7 +3526,7 @@
             "dataValues": {
                 "HealShieldAmp": 0.30000001192092896
             },
-            "desc": "Your Heals/Shields are @HealShieldAmp*100@% stronger when used on your partner.",
+            "desc": "Your <healing>Heals</healing> abd <shield>Shields</shield> are @HealShieldAmp*100@% stronger when used on your partner.",
             "iconLarge": "assets/ux/cherry/augments/icons/allforyou_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/allforyou_small.png",
             "id": 141,
@@ -3705,7 +3711,7 @@
                 "ReducedCooldown": 0.5,
                 "SnipeDistance": 700.0
             },
-            "desc": "Hitting an enemy with a non-Ultimate Ability at over @SnipeDistance@ range reduces its Cooldown to @ReducedCooldown@ seconds, periodic abilities are instead reset to @PeriodicReductionAmount@ seconds.",
+            "desc": "Hitting an enemy with a non-Ultimate Ability at far range reduces its Cooldown to @ReducedCooldown@ seconds (@PeriodicReductionAmount@ for periodic Abilities).",
             "iconLarge": "assets/ux/cherry/augments/icons/skilledsniper_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/skilledsniper_small.png",
             "id": 113,
@@ -3788,13 +3794,13 @@
             "dataValues": {
                 "HealthRatioPer1000Units": 0.019999999552965164
             },
-            "desc": "You constantly <healing>heal</healing> while moving, increased by distance travelled.",
+            "desc": "You constantly <healing>heal</healing> while moving.",
             "iconLarge": "assets/ux/cherry/augments/icons/restlessrestoration_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/restlessrestoration_small.png",
             "id": 70,
             "name": "Restless Restoration",
             "rarity": 1,
-            "tooltip": "You heal for @HealCalcPer1000Units@ per 1000 distance traveled.<br><br>Healing Done This Round: @f1@<br>Healing Done Total: @f2@"
+            "tooltip": "You restore <healing>@HealCalcPer1000Units@ Health</healing> per 1000 distance traveled.<br><br>Healing Done This Round: @f1@<br>Healing Done Total: @f2@"
         },
         {
             "apiName": "DiveBomber",
@@ -3893,13 +3899,13 @@
             "dataValues": {
                 "Cooldown": 5.0
             },
-            "desc": "Replace your Summoner spells with random ones. When you use a Summoner Spell in combat, replace it with another random one on a @Cooldown@ second Cooldown.",
+            "desc": "Replace your Summoner Spells with random ones. When you use a Summoner Spell, replace it with another random one on a @Cooldown@ second Cooldown.",
             "iconLarge": "assets/ux/cherry/augments/icons/summonersroulette_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/summonersroulette_small.png",
             "id": 123,
             "name": "Summoner's Roulette",
             "rarity": 2,
-            "tooltip": "Replace your Summoner spells with random ones. When you use a Summoner Spell in combat, replace it with another random one on a @Cooldown@ second Cooldown."
+            "tooltip": "Replace your Summoner Spells with random ones. When you use a Summoner Spell, replace it with another random one on a @Cooldown@ second Cooldown."
         },
         {
             "apiName": "GoHSacrificeForSilver",
@@ -4002,31 +4008,31 @@
                 "HealthScalar": 0.05000000074505806,
                 "SpellIDCD": 5.0
             },
-            "desc": "Gain a <shield>@TotalShield@ Shield</shield> after <status>Immobilizing</status> or <status>Grounding</status> an enemy champion.<br>",
+            "desc": "Gain <shield>@TotalShield@ Shield</shield> after <status>Immobilizing</status> or <status>Grounding</status> an enemy champion.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/courageofthecolossus_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/courageofthecolossus_small.png",
             "id": 18,
             "name": "Courage of the Colossus",
             "rarity": 2,
-            "tooltip": "Gain a <shield>@TotalShield@ Shield</shield> after <status>Immobilizing</status> or <status>Grounding</status> an enemy champion.<br><br>Shields Generated This Round: @f1@<br>Shields Generated Total: @f2@"
+            "tooltip": "Gain <shield>@TotalShield@ Shield</shield> after <status>Immobilizing</status> or <status>Grounding</status> an enemy champion.<br><br>Shields Generated This Round: @f1@<br>Shields Generated Total: @f2@"
         },
         {
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 700.0,
+                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
                 "MSBoost": 0.4000000059604645
             },
-            "desc": "Share the effects of Power Flowers with your nearby ally within @AllyMaxRange@ range, and increase the benefits you gain by @AmpAmountTooltip@%.",
+            "desc": "Power Flowers are more effective on you and are shared with your ally if they are near it.",
             "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
             "id": 222,
             "name": "Fruits of Your Labor",
             "rarity": 0,
-            "tooltip": "Share the effects of Power Flowers with your nearby ally within @AllyMaxRange@ range, and increase the benefits you gain by @AmpAmountTooltip@%."
+            "tooltip": "Power Flowers are @AmpAmountTooltip@% more effective on you and are shared with your ally if they are within @AllyMaxRange@ range of it."
         },
         {
             "apiName": "InfernalSoul",
@@ -4103,13 +4109,13 @@
                 "CurseCounter": 4.0,
                 "Radius": 450.0
             },
-            "desc": "When you Heal/Shield, gain @CurseCounter@ stack of <keywordMajor>Curse</keywordMajor>. Gain permanent Ability Haste for each stack of <keywordMajor>Curse</keywordMajor>.<br><br>Also, increase the maximum of <keywordMajor>Curse</keywordMajor> stacks you can have.<br><br>",
+            "desc": "Healing/Shielding grants you permanent <keywordMajor>Cursed Power</keywordMajor>. Gain Ability Haste based on your <keywordMajor>Cursed Power</keywordMajor><br><br>The max <keywordMajor>Cursed Power</keywordMajor> you can gain per round scales with total <keywordMajor>Curse</keywordMajor> sources between you and your ally.",
             "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/darkblessing_small.png",
             "id": 215,
             "name": "Dark Blessing",
             "rarity": 1,
-            "tooltip": "When you Heal/Shield, gain @CurseCounter@ <keywordMajor>Curses</keywordMajor> and deal bonus <trueDamage>True Damage</trueDamage> equal to the amount of <keywordMajor>Curses</keywordMajor> you have gained this round to a nearby enemy champion.<br><br>{{ Cherry_CurseShared }}<br><br>Gain @f1@ Ability Haste from your <keywordMajor>Total Curses</keywordMajor>.<br><br><rules>@AbilityHasteRatio*100@% of your <keywordMajor>Total Curses</keywordMajor> are converted into Ability Haste.</rules>"
+            "tooltip": "When you Heal/Shield a champion that is near an enemy, gain @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Gain @f1@ Ability Haste (@AbilityHasteRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "MindtoMatter",
@@ -4134,13 +4140,13 @@
                 "MarkDuration": 5.0,
                 "VFXHighDamageThreshold": 500.0
             },
-            "desc": "After casting your Ultimate, mark all enemy champions for death. The mark stores @DamageStorePercentage*100@% of damage dealt to them, then detonates for the stored damage after @MarkDuration@ seconds. (@Cooldown@ second Cooldown).",
+            "desc": "After casting your Ultimate, mark all enemy champions for death. While marked, store a percentage of damage dealt to them, and detonate the damage when the mark ends.",
             "iconLarge": "assets/ux/cherry/augments/icons/itskillingtime_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/itskillingtime_small.png",
             "id": 211,
             "name": "It's Killing Time",
             "rarity": 1,
-            "tooltip": "{{Cherry_ItsKillingTime_Summary}}<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
+            "tooltip": "After casting your Ultimate, mark all enemy champions for death. The mark stores @DamageStorePercentage*100@% of damage dealt to them, then detonates for the stored damage after @MarkDuration@ seconds. (@Cooldown@ second Cooldown).<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "WisdomofAges",
@@ -4192,13 +4198,13 @@
                 "AmpedRegen": 16.0,
                 "BaseRegen": 8.0
             },
-            "desc": "Gain hugely increased <healing>Health Regen</healing>, which is further increased while low on Health.",
+            "desc": "Gain hugely increased <healing>Health Regen</healing>, even further increased at low <scaleHealth>Health</scaleHealth>.",
             "iconLarge": "assets/ux/cherry/augments/icons/perseverance_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/perseverance_small.png",
             "id": 64,
             "name": "Perseverance",
             "rarity": 1,
-            "tooltip": "Gain <healing>@BaseRegen*100@% base Health Regen</healing>, increased to <healing>@AmpedRegen*100@% base Health Regen</healing> while below 25% Health.<br><br>Healing Done This Round: @f1@<br>Healing Done Total: @f2@"
+            "tooltip": "Gain <healing>@BaseRegen*100@% base Health Regen</healing>, increased to <healing>@AmpedRegen*100@% base Health Regen</healing> below <scaleHealth>25% Health</scaleHealth>.<br><br>Healing Done This Round: @f1@<br>Healing Done Total: @f2@"
         },
         {
             "apiName": "JeweledGauntlet",

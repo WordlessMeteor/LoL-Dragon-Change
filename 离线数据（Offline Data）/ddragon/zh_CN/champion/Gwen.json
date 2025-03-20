@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.5.1",
+    "version": "15.6.1",
     "data": {
         "Gwen": {
             "id": "Gwen",
@@ -72,8 +72,8 @@
                 "difficulty": 5
             },
             "stats": {
-                "hp": 620,
-                "hpperlevel": 115,
+                "hp": 650,
+                "hpperlevel": 110,
                 "mp": 330,
                 "mpperlevel": 40,
                 "movespeed": 340,
@@ -242,12 +242,10 @@
                     "tooltip": "格温召唤圣霭结界，使她对结界之外的所有敌人(防御塔除外)来说处于无法被选取状态，持续{{ zoneduration }}秒或直到她离开结界为止。在结界中，格温获得{{ totalresists }}<scaleArmor>护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>。<br /><br />格温可以<recast>再次施放</recast>这个技能，来将结界召唤到她所在的位置，但只有1次机会。格温在第一次尝试离开结界时会自动进行<recast>再次施放</recast>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
-                            "额外护甲和魔法抗性"
+                            "冷却时间"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ baseresists }} -> {{ baseresistsNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -385,23 +383,23 @@
                         "label": [
                             "冷却时间",
                             "攻击速度",
-                            "百分比冷却时间返还"
+                            "命中附伤"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ baseattackspeed }}% -> {{ baseattackspeedNL }}%",
-                            "{{ cdrefund*100.000000 }}% -> {{ cdrefundnl*100.000000 }}%"
+                            "{{ basedamage }} -> {{ basedamageNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        13,
-                        12.5,
                         12,
-                        11.5,
-                        11
+                        11,
+                        10,
+                        9,
+                        8
                     ],
-                    "cooldownBurn": "13/12.5/12/11.5/11",
+                    "cooldownBurn": "12/11/10/9/8",
                     "cost": [
                         35,
                         35,
@@ -522,20 +520,16 @@
                 {
                     "id": "GwenR",
                     "name": "引针簇射",
-                    "description": "格温掷出一根针来对命中的敌人们造成减速、魔法伤害，并对命中的英雄们施加【千穿百孔】。<br><br>这个技能至多可进行2段再次施放，每一段再次施放都会投掷更多的针，并造成更多伤害。格温必须在每段施放之间用攻击或技能命中一名敌人才能解锁下一段施放。",
+                    "description": "格温掷出一根针来对命中的敌人们造成减速、魔法伤害，并对命中的英雄们施加【千穿百孔】。<br><br>这个技能至多可进行2段再次施放，每一段再次施放都会投掷更多的针，并造成更多伤害。 ",
                     "tooltip": "<spellActive>第一段施放：</spellActive>掷出一根针来对命中的所有敌人造成<magicDamage>{{ totaldamage }}魔法伤害</magicDamage>，以及持续{{ debuffduration }}秒的{{ initialslow*-100 }}%<status>减速</status>，并施加<spellName>千穿百孔</spellName>。格温可以在6秒内<recast>再次施放</recast>这个技能至多2次(每次施放之间的冷却时间为{{ lockouttime }}秒)。<br /><br /><recast>第二段施放：</recast>发射3根针来造成<magicDamage>{{ totaldamage3 }}魔法伤害</magicDamage><br /><recast>第三段施放：</recast>发射5根针来造成<magicDamage>{{ totaldamage5 }}魔法伤害</magicDamage>{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "冷却时间",
-                            "基础伤害",
-                            "最大减速效果",
-                            "减速"
+                            "基础伤害"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ initialslow*-100.000000 }}% -> {{ initialslownl*-100.000000 }}%",
-                            "{{ subsequentslow*-100.000000 }}% -> {{ subsequentslownl*-100.000000 }}%"
+                            "{{ basedamage }} -> {{ basedamageNL }}"
                         ]
                     },
                     "maxrank": 3,
