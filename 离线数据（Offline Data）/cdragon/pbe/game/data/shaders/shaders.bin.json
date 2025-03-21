@@ -19554,6 +19554,23 @@
                 "data": [
                     1.0,
                     1.0,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "TintColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Parameter1",
+                "data": [
+                    1.0,
+                    1.0,
                     2.0,
                     2.0
                 ],
@@ -19572,12 +19589,12 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "Parameter1",
+                "name": "Parameter2",
                 "data": [
                     0.0,
-                    0.10000000149011612,
                     0.0,
-                    0.0
+                    1.0,
+                    0.10000000149011612
                 ],
                 "logicalParameters": [
                     {
@@ -19586,8 +19603,18 @@
                         "__type": "ShaderLogicalParameter"
                     },
                     {
-                        "name": "ClipAlpha_Value",
+                        "name": "FlipbookAnimSpeed",
                         "fields": 2,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "Final Alpha",
+                        "fields": 4,
+                        "__type": "ShaderLogicalParameter"
+                    },
+                    {
+                        "name": "ClipAlpha_Value",
+                        "fields": 8,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
@@ -19595,6 +19622,14 @@
             }
         ],
         "staticSwitches": [
+            {
+                "name": "FLIPBOOK_ANIMATION_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "TINTCOLOR_ON",
+                "__type": "ShaderStaticSwitch"
+            },
             {
                 "name": "ALPHACLIP_ON",
                 "__type": "ShaderStaticSwitch"
@@ -31142,70 +31177,6 @@
             "FEATURE_UI_ORIGINAL_TEXCOORDS": "1"
         },
         "objectPath": "Shaders/UI/TFT/UI_ZapBackground",
-        "__type": "CustomShaderDef"
-    },
-    "Shaders/SkinnedMesh/AtlasWalk_Simple": {
-        "ShadingModel": "{baebc346}",
-        "parameters": [
-            {
-                "name": "Parameter0",
-                "data": [
-                    2.0,
-                    2.0,
-                    1.0,
-                    3.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Texture_Dims",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
-                        "name": "FPS",
-                        "fields": 4,
-                        "__type": "ShaderLogicalParameter"
-                    },
-                    {
-                        "name": "Frame",
-                        "fields": 8,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Parameter1",
-                "data": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Alpha_Intensity",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            }
-        ],
-        "staticSwitches": [
-            {
-                "name": "USE_GAMETIME",
-                "__type": "ShaderStaticSwitch"
-            }
-        ],
-        "textures": [
-            {
-                "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Materials/Atlast_Test.dds",
-                "__type": "ShaderTexture"
-            }
-        ],
-        "objectPath": "Shaders/SkinnedMesh/AtlasWalk_Simple",
         "__type": "CustomShaderDef"
     },
     "Shaders/SkinnedMesh/ScreenSpacePan_Masked_ColourFresnel": {
