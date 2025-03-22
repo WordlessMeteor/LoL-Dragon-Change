@@ -164,7 +164,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "BonusHPRequiredTooltipOnly",
-                            "mStat": 11,
+                            "mStat": 12,
                             "mStatFormula": 2
                         }
                     ]
@@ -405,13 +405,13 @@
                 "AllyHealthThreshold": 0.30000001192092896,
                 "CurrentHealthToDrain": 0.25
             },
-            "desc": "When your ally drops below <health>@AllyHealthThreshold*100@% Health</health>, trade some of your health for a <shield>Shield</shield> on your ally.",
+            "desc": "When your ally drops below <scaleHealth>@AllyHealthThreshold*100@% Health</scaleHealth>, trade some of your health for a <shield>Shield</shield> on your ally.",
             "iconLarge": "assets/ux/cherry/augments/icons/willingsacrifice_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/willingsacrifice_small.png",
             "id": 94,
             "name": "Willing Sacrifice",
             "rarity": 1,
-            "tooltip": "When your ally drops below <health>@AllyHealthThreshold*100@% Health</health>, trade <health>@CurrentHealthToDrain*100@% of your current Health</health> for that much <shield>Shield</shield> on your ally.<br><br>Shields Generated This Round: @f1@<br>Shields Generated Total: @f2@"
+            "tooltip": "When your ally drops below <scaleHealth>@AllyHealthThreshold*100@% Health</scaleHealth>, trade <scaleHealth>@CurrentHealthToDrain*100@% of your current Health</scaleHealth> for that much <shield>Shield</shield> on your ally.<br><br>Shields Generated This Round: @f1@<br>Shields Generated Total: @f2@"
         },
         {
             "apiName": "Firefox",
@@ -492,13 +492,13 @@
             "dataValues": {
                 "ExtraSlowAmount": 100.0
             },
-            "desc": "Your <status>Slowing</status> effects reduce Move Speed by an extra 100.",
+            "desc": "Your <status>Slowing</status> effects reduce <speed>Move Speed</speed> by an extra 100.",
             "iconLarge": "assets/ux/cherry/augments/icons/icecold_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/icecold_small.png",
             "id": 44,
             "name": "Ice Cold",
             "rarity": 0,
-            "tooltip": "Your <status>Slowing</status> effects reduce Move Speed by an extra 100."
+            "tooltip": "Your <status>Slowing</status> effects reduce <speed>Move Speed</speed> by an extra 100."
         },
         {
             "apiName": "SpinToWin",
@@ -581,13 +581,13 @@
                 "DamageAmp": 0.2800000011920929,
                 "Omnivamp": 0.2800000011920929
             },
-            "desc": "After your partner dies, gain massively increased damage and Omnivamp for the remainder of the round.",
+            "desc": "After your partner dies, gain massively increased damage and <lifeSteal>Omnivamp</lifeSteal> for the remainder of the round.",
             "iconLarge": "assets/ux/cherry/augments/icons/vengeance_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/vengeance_small.png",
             "id": 90,
             "name": "Vengeance",
             "rarity": 1,
-            "tooltip": "Gain @DamageAmp*100@% increased damage and @Omnivamp*100@% Omnivamp after your partner dies.<br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
+            "tooltip": "Gain @DamageAmp*100@% increased damage and <lifeSteal>@Omnivamp*100@% Omnivamp</lifeSteal> after your partner dies.<br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "Erosion",
@@ -884,22 +884,23 @@
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
-                            "mDataValue": "ShieldBase"
+                            "mDataValue": "APRatio"
                         }
                     ]
                 }
             },
             "dataValues": {
                 "AP": 1.0,
+                "APRatio": 3.0,
                 "ShieldBase": 3.0
             },
-            "desc": "At the start of each round, gain<shield> @ShieldBase@ Shield </shield>for every <attention>%i:scaleAP% @AP@</attention> Ability Power.",
+            "desc": "At the start of each round, gain<shield> @ShieldBase@ Shield </shield>for every <scaleAP>%i:scaleAP% @AP@ Ability Power</scaleAP>.",
             "iconLarge": "assets/ux/cherry/augments/icons/bigbrain_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bigbrain_small.png",
             "id": 180,
             "name": "Big Brain",
             "rarity": 1,
-            "tooltip": "At the start of each round, gain<shield> @ShieldBase@ Shield </shield>for every <attention>%i:scaleAP% @AP@</attention> Ability Power."
+            "tooltip": "At the start of each round, gain a <shield>@TotalShield@ Shield</shield>."
         },
         {
             "apiName": "Vulnerability",
@@ -982,7 +983,7 @@
                                 {
                                     "__type": "StatByCoefficientCalculationPart",
                                     "mCoefficient": 1.0,
-                                    "mStat": 8,
+                                    "mStat": 9,
                                     "mStatFormula": 2
                                 }
                             ]
@@ -1085,13 +1086,13 @@
                 "MovespeedAmp": 0.4000000059604645,
                 "SizeAmp": 0.4000000059604645
             },
-            "desc": "On Round start you grow large (<scaleAD>Adaptive Force</scaleAD> and <healing>Health</healing>) or tiny (<scaleLevel>Ability Haste</scaleLevel> and <speed>Move Speed</speed>).",
+            "desc": "On Round start you grow large (<scaleAD>Adaptive Force</scaleAD> and <scaleHealth>Health</scaleHealth>) or tiny (<scaleLevel>Ability Haste</scaleLevel> and <speed>Move Speed</speed>).",
             "iconLarge": "assets/ux/cherry/augments/icons/madscientist_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/madscientist_small.png",
             "id": 53,
             "name": "Mad Scientist",
             "rarity": 2,
-            "tooltip": "On Round start you grow large, gaining (<scaleAD>@ADAmp*100@% Adaptive Force</scaleAD> and <healing>@HealthAmp*100@% Health</healing>) or tiny (<scaleLevel>@Haste@ Ability Haste</scaleLevel> and <speed>@MovespeedAmp*100@% Move Speed</speed>)."
+            "tooltip": "On Round start you grow large, gaining (<scaleAD>@ADAmp*100@% Adaptive Force</scaleAD> and <scaleHealth>@HealthAmp*100@% Health</scaleHealth>) or tiny (<scaleLevel>@Haste@ Ability Haste</scaleLevel> and <speed>@MovespeedAmp*100@% Move Speed</speed>)."
         },
         {
             "apiName": "MountainSoul",
@@ -1381,7 +1382,7 @@
                 "DamageRange": 1000.0,
                 "HealToDamageConversion": 0.699999988079071
             },
-            "desc": "<health>Healing</health> and <health>Health Regen</health> you do deals a portion of the value as <magicDamage>magic samage</magicDamage> to the nearest enemy champion.",
+            "desc": "<healing>Healing</healing> and <healing>Health Regen</healing> you do deals a portion of the value as <magicDamage>magic samage</magicDamage> to the nearest enemy champion.",
             "iconLarge": "assets/ux/cherry/augments/icons/circleofdeath_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/circleofdeath_small.png",
             "id": 15,
@@ -1552,13 +1553,13 @@
                 "DamageReduction": 0.10000000149011612,
                 "Health": 1250.0
             },
-            "desc": "Gain <health>@Health@ Health</health>, but you deal @DamageReduction*100@% less damage.",
+            "desc": "Gain <scaleHealth>@Health@ Health</scaleHealth>, but you deal @DamageReduction*100@% less damage.",
             "iconLarge": "assets/ux/cherry/augments/icons/celestialbody_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/celestialbody_small.png",
             "id": 13,
             "name": "Celestial Body",
             "rarity": 1,
-            "tooltip": "Gain <health>@Health@ Health</health>, but you deal @DamageReduction*100@% less damage."
+            "tooltip": "Gain <scaleHealth>@Health@ Health</scaleHealth>, but you deal @DamageReduction*100@% less damage."
         },
         {
             "apiName": "BreadAndJam",
@@ -1580,13 +1581,13 @@
             "dataValues": {
                 "AbilityHasteToMSConversion": 1.5
             },
-            "desc": "Gain <moveSpeed>Move Speed</moveSpeed> equal to @AbilityHasteToMSConversion@ times your <scaleLevel>Ability Haste</scaleLevel>.",
+            "desc": "Gain <Speed>Move Speed</Speed> equal to @AbilityHasteToMSConversion@ times your <scaleLevel>Ability Haste</scaleLevel>.",
             "iconLarge": "assets/ux/cherry/augments/icons/withhaste_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/withhaste_small.png",
             "id": 98,
             "name": "With Haste",
             "rarity": 1,
-            "tooltip": "Gain <moveSpeed>Move Speed</moveSpeed> equal to @AbilityHasteToMSConversion@ times your <scaleLevel>Ability Haste</scaleLevel>."
+            "tooltip": "Gain <Speed>Move Speed</Speed> equal to @AbilityHasteToMSConversion@ times your <scaleLevel>Ability Haste</scaleLevel>."
         },
         {
             "apiName": "FallenAegis",
@@ -1625,7 +1626,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.02500000037252903,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 },
@@ -1757,7 +1758,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealPercentage",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -1794,13 +1795,13 @@
             "apiName": "BuffBuddies",
             "calculations": {},
             "dataValues": {},
-            "desc": "You gain permanent Red and Blue Buffs.",
+            "desc": "You gain <font color = '#f30c1a'>Crest of Cinders</font> and <font color = '#1542ea'>Crest of Insight</font>.",
             "iconLarge": "assets/ux/cherry/augments/icons/buffbuddies_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/buffbuddies_small.png",
             "id": 9,
             "name": "Buff Buddies",
             "rarity": 0,
-            "tooltip": "You gain permanent Red and Blue Buffs."
+            "tooltip": "{{Cherry_BuffBuddies_Summary}}<br><br><rules><font color = '#f30c1a'>Crest of Cinders</font>: Basic attacks <keywordMajor>Burn</keywordMajor> and <status>Slow</status> enemy champions. While out of combat <healing>heal a percentage of your maximum health</healing>.<br><br><font color = '#1542ea'>Crest of Insight</font>: Gain Ability Haste, and restore <scaleMana>Mana</scaleMana> and <energy>Energy</energy> each second.</rules>"
         },
         {
             "apiName": "RaidBoss",
@@ -1815,13 +1816,13 @@
                 "ShieldHealthRatio": 0.3499999940395355,
                 "StatIncrease": 0.4000000059604645
             },
-            "desc": "You start each round imprisoned in the center of the arena, unable to act. While imprisoned, you have massive damage reduction and accumulate size, <healing>Health</healing>, <physicalDamage>Attack Damage</physicalDamage>, and <scaleAP>Ability Power</scaleAP> over time. After @ImprisonDuration@ seconds or reaching <scaleHealth>@BreakoutHealthThreshold*100@% Health</scaleHealth>, you break out, <status>Knocking Back</status> enemies and gaining <shield>Shield</shield> based on your <scaleHealth>max Health</scaleHealth>.",
+            "desc": "You start each round imprisoned in the center of the arena, unable to act. While imprisoned, you have massive damage reduction and accumulate size, <scaleHealth>Health</scaleHealth>, <physicalDamage>Attack Damage</physicalDamage>, and <scaleAP>Ability Power</scaleAP> over time. After @ImprisonDuration@ seconds or reaching <scaleHealth>@BreakoutHealthThreshold*100@% Health</scaleHealth>, you break out, <status>Knocking Back</status> enemies and gaining <shield>Shield</shield> based on your <scaleHealth>max Health</scaleHealth>.",
             "iconLarge": "assets/ux/cherry/augments/icons/raidboss_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/raidboss_small.png",
             "id": 125,
             "name": "Raid Boss",
             "rarity": 2,
-            "tooltip": "You start each round imprisoned in the center of the arena, unable to act. While imprisoned, you have up to @DamageReductionMax*100@% damage reduction and gain size, <healing>Health</healing>, <physicalDamage>Attack Damage</physicalDamage>, and <scaleAP>Ability Power</scaleAP> over time (max @StatIncrease*100@%). After @ImprisonDuration@ seconds or reaching <scaleHealth>@BreakoutHealthThreshold*100@% Health</scaleHealth>, you break out, <status>Knocking Back</status> enemies and gaining <shield>@ShieldHealthRatio*100@% max Health Shield</shield>."
+            "tooltip": "You start each round imprisoned in the center of the arena, unable to act. While imprisoned, you have up to @DamageReductionMax*100@% damage reduction and gain size, <scaleHealth>Health</scaleHealth>, <physicalDamage>Attack Damage</physicalDamage>, and <scaleAP>Ability Power</scaleAP> over time (max @StatIncrease*100@%). After @ImprisonDuration@ seconds or reaching <scaleHealth>@BreakoutHealthThreshold*100@% Health</scaleHealth>, you break out, <status>Knocking Back</status> enemies and gaining <shield>@ShieldHealthRatio*100@% max Health Shield</shield>."
         },
         {
             "apiName": "OutlawsGrit",
@@ -1914,22 +1915,6 @@
             "name": "Infernal Conduit",
             "rarity": 2,
             "tooltip": "Your Abilities apply an infinitely stacking <keywordMajor>Burn</keywordMajor>, dealing <magicDamage>@BleedDamageTooltip@ magic damage</magicDamage> per second for @BleedDuration@ seconds.<br><br>All your <keywordMajor>Burn</keywordMajor> effects lower your basic Ability Cooldowns by @FlatCooldownRefundPerTick@ seconds when they damage enemies.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@<br>"
-        },
-        {
-            "apiName": "ADAPt",
-            "calculations": {},
-            "dataValues": {
-                "APAmp": 0.15000000596046448,
-                "ConversionRate": 1.666659951210022,
-                "InverseRate": 0.6000000238418579
-            },
-            "desc": "Convert <physicalDamage>Bonus Attack Damage</physicalDamage> to <magicDamage>Ability Power</magicDamage>. Gain <magicDamage>@APAmp*100@% Ability Power</magicDamage>.",
-            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
-            "id": 205,
-            "name": "ADAPt",
-            "rarity": 0,
-            "tooltip": "Convert <physicalDamage>Bonus Attack Damage</physicalDamage> to <magicDamage>Ability Power</magicDamage>. Gain <magicDamage>@APAmp*100@% Ability Power</magicDamage>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2208,7 +2193,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.017500000074505806,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -2302,7 +2287,7 @@
                 "DamageRedirectPercentage": 0.15000000596046448,
                 "HealCopyPercentage": 0.5
             },
-            "desc": "@DamageRedirectPercentage*100@% of damage dealt to your ally is redirected to you, and @HealCopyPercentage*100@% of healing they receive is also given to you.",
+            "desc": "@DamageRedirectPercentage*100@% of damage dealt to your ally is redirected to you, and <healing>@HealCopyPercentage*100@% of healing</healing> they receive is also given to you.",
             "iconLarge": "assets/ux/cherry/augments/icons/spiritlink_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/spiritlink_small.png",
             "id": 78,
@@ -2377,13 +2362,13 @@
             "dataValues": {
                 "Omnivamp": 0.20000000298023224
             },
-            "desc": "Gain @Omnivamp*100@% Omnivamp",
+            "desc": "Gain <lifeSteal>@Omnivamp*100@% Omnivamp</lifeSteal>.",
             "iconLarge": "assets/ux/cherry/augments/icons/goredrink_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/goredrink_small.png",
             "id": 138,
             "name": "Goredrink",
             "rarity": 0,
-            "tooltip": "Gain @Omnivamp*100@% Omnivamp"
+            "tooltip": "Gain <lifeSteal>@Omnivamp*100@% Omnivamp</lifeSteal>."
         },
         {
             "apiName": "WellBeRightBack",
@@ -2581,7 +2566,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.02500000037252903,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -2599,7 +2584,7 @@
             "id": 216,
             "name": "Dreadbringer",
             "rarity": 2,
-            "tooltip": "Every @TickCadence@ second, gain @CurseStacksPerTick@ <keywordMajor>Cursed Power</keywordMajor> per nearby enemy champion.<br><br>Gain <healing>@f1@ Health</healing> (@MaxHealthRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Every @TickCadence@ second, gain @CurseStacksPerTick@ <keywordMajor>Cursed Power</keywordMajor> per nearby enemy champion.<br><br>Gain <scaleHealth>@f1@ Health</scaleHealth> (@MaxHealthRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "StackosaurusRex",
@@ -2614,22 +2599,6 @@
             "name": "Stackosaurus Rex",
             "rarity": 0,
             "tooltip": "When you gain permanent <keywordMajor>Stacks</keywordMajor> of an Ability, gain @StackModifier*100@% more!"
-        },
-        {
-            "apiName": "escAPADe",
-            "calculations": {},
-            "dataValues": {
-                "ADAmp": 0.10000000149011612,
-                "ConversionRate": 0.6000000238418579,
-                "InverseRate": 1.666659951210022
-            },
-            "desc": "Convert <magicDamage>Ability Power</magicDamage> to <physicalDamage>Bonus Attack Damage</physicalDamage>. Gain <physicalDamage>@ADAmp*100@% Attack Damage</physicalDamage>.",
-            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
-            "id": 206,
-            "name": "escAPADe",
-            "rarity": 0,
-            "tooltip": "Convert <magicDamage>Ability Power</magicDamage> to <physicalDamage>Bonus Attack Damage</physicalDamage>. Gain <physicalDamage>@ADAmp*100@% Attack Damage</physicalDamage>."
         },
         {
             "apiName": "FeyMagic",
@@ -2684,15 +2653,16 @@
             "apiName": "Flashy",
             "calculations": {},
             "dataValues": {
+                "FlashAmmoTooltip": 3.0,
                 "FlashCooldown": 2.0
             },
-            "desc": "Your Flash has 3 Ammo and a @FlashCooldown@ second Cooldown.",
+            "desc": "Your Flash has @FlashAmmoTooltip@ Ammo and a @FlashCooldown@ second Cooldown.",
             "iconLarge": "assets/ux/cherry/augments/icons/flashy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
             "id": 116,
             "name": "Flashy",
             "rarity": 1,
-            "tooltip": "Your Flash has 3 Ammo and a @FlashCooldown@ second Cooldown."
+            "tooltip": "Your Flash has @FlashAmmoTooltip@ Ammo and a @FlashCooldown@ second Cooldown."
         },
         {
             "apiName": "NestingDoll",
@@ -2801,7 +2771,7 @@
             "apiName": "TankEngine",
             "calculations": {},
             "dataValues": {
-                "MaxHPIncrement": 0.5,
+                "MaxHPIncrement": 0.05000000074505806,
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Gain @SizeIncrement*100@% increase in size and <scaleHealth>@MaxHPIncrement*100@% max Health</scaleHealth> per takedown.",
@@ -2851,7 +2821,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealAmount",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mMultiplier": {
@@ -2866,13 +2836,13 @@
                 "HealAmount": 0.30000001192092896,
                 "HealthThreshold": 0.5
             },
-            "desc": "Upon dropping below @HealthThreshold*100@% Health, heal for @HealAmount*100@% max Health over 3 seconds.<br>",
+            "desc": "Upon dropping below <scaleHealth>@HealthThreshold*100@% Health</scaleHealth>, <healing>heal for @HealAmount*100@% max Health over 3 seconds</healing>.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
             "id": 20,
             "name": "Dawnbringer's Resolve",
             "rarity": 1,
-            "tooltip": "Upon dropping below @HealthThreshold*100@% Health, heal for @HealAmount*100@% max Health over 3 seconds.<br><br>Healing Done This Round: @f1@<br>Healing Done Total: @f2@"
+            "tooltip": "{{Cherry_DawnbringersResolve_Summary}}<br><br>Healing Done This Round: @f1@<br>Healing Done Total: @f2@"
         },
         {
             "apiName": "HoldVeryStill",
@@ -3173,13 +3143,13 @@
                 "HealthAmp": 0.3499999940395355,
                 "SizeAmp": 0.5
             },
-            "desc": "Become large, gaining<scaleHealth>@HealthAmp*100@% Health</scaleHealth> and <scaleAP>@ADAmp*100@% Adaptive Force</scaleAP>.",
+            "desc": "Become large, gaining <scaleHealth>@HealthAmp*100@% Health</scaleHealth> and <scaleAP>@ADAmp*100@% Adaptive Force</scaleAP>.",
             "iconLarge": "assets/ux/cherry/augments/icons/goliath_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/goliath_small.png",
             "id": 41,
             "name": "Goliath",
             "rarity": 2,
-            "tooltip": "Become large, gaining<scaleHealth>@HealthAmp*100@% Health</scaleHealth> and <scaleAP>@ADAmp*100@% Adaptive Force</scaleAP>."
+            "tooltip": "Become large, gaining <scaleHealth>@HealthAmp*100@% Health</scaleHealth> and <scaleAP>@ADAmp*100@% Adaptive Force</scaleAP>."
         },
         {
             "apiName": "JuicePress",
@@ -3207,13 +3177,13 @@
                 "MovementSpeed": 50.0,
                 "SlowResist": 0.4000000059604645
             },
-            "desc": "Gain @MovementSpeed@ <speed>Movement Speed</speed> and @SlowResist*100@% <speed>Slow Resist</speed>.",
+            "desc": "Gain <speed>@MovementSpeed@ Movement Speed</speed> and <speed>@SlowResist*100@% Slow Resist</speed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/legday_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/legday_small.png",
             "id": 305,
             "name": "Leg Day",
             "rarity": 0,
-            "tooltip": "Gain @MovementSpeed@ <speed>Movement Speed</speed> and @SlowResist*100@% <speed>Slow Resist</speed>."
+            "tooltip": "Gain <speed>@MovementSpeed@ Movement Speed</speed> and <speed>@SlowResist*100@% Slow Resist</speed>."
         },
         {
             "apiName": "Trailblazer",
@@ -3348,7 +3318,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "{8bfcfef7}",
-                            "mStat": 6,
+                            "mStat": 7,
                             "mStatFormula": 2
                         }
                     ]
@@ -3380,7 +3350,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthPercent",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -3388,13 +3358,13 @@
             "dataValues": {
                 "HealthPercent": 0.03500000014901161
             },
-            "desc": "Your Attacks deal additional <physicalDamage>physical damage</physicalDamage> equal to @HealthPercent*100@% of your <healing>max Health.</healing>",
+            "desc": "Your Attacks deal additional <physicalDamage>physical damage</physicalDamage> equal to @HealthPercent*100@% of your <scaleHealth>max Health.</scaleHealth>",
             "iconLarge": "assets/ux/cherry/augments/icons/heavyhitter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/heavyhitter_small.png",
             "id": 181,
             "name": "Heavy Hitter",
             "rarity": 0,
-            "tooltip": "Your Attacks deal additional <physicalDamage>@HealthPercentDamage@ physical damage</physicalDamage> equal to @HealthPercent*100@% of your <healing>max Health.</healing>"
+            "tooltip": "Your Attacks deal additional <physicalDamage>@HealthPercentDamage@ physical damage</physicalDamage> equal to @HealthPercent*100@% of your <scaleHealth>max Health.</scaleHealth>"
         },
         {
             "apiName": "RabbleRousing",
@@ -3405,7 +3375,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "MaxHealthPercentageHeal",
-                            "mStat": 11
+                            "mStat": 12
                         },
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3481,13 +3451,13 @@
                 "CritChance": 0.25,
                 "CritHeal": 0.4000000059604645
             },
-            "desc": "Your Heals and Shields can Critically Strike. Gain @CritChance*100@% Crit Chance.",
+            "desc": "Your <healing>Heals</healing> and <shield>Shields</shield> can Critically Strike for @CritHeal*100@% bonus amount. Gain @CritChance*100@% Crit Chance. ",
             "iconLarge": "assets/ux/cherry/augments/icons/criticalhealing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/criticalhealing_small.png",
             "id": 118,
             "name": "Critical Healing",
             "rarity": 1,
-            "tooltip": "Your Heals and Shields can Critically Strike for @CritHeal*100@% bonus amount. Gain @CritChance*100@% Crit Chance. <br><br>Bonus Healing: @f1@<br>Bonus Shielding: @f2@"
+            "tooltip": "{{Cherry_CriticalHealing_Summary}}<br><br>Bonus Healing: @f1@<br>Bonus Shielding: @f2@"
         },
         {
             "apiName": "TransmuteGold",
@@ -3755,7 +3725,7 @@
             "dataValues": {
                 "HealPercent": 0.15000000596046448
             },
-            "desc": "You heal for @HealPercent*100@% of the damage dealt by your partner.",
+            "desc": "You <healing>heal for @HealPercent*100@%</healing> of the damage dealt by your partner.",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticrelationship_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticrelationship_small.png",
             "id": 175,
@@ -3810,7 +3780,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthRatioPer1000Units",
-                            "mStat": 11
+                            "mStat": 12
                         },
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4028,7 +3998,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthScalar",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -4055,13 +4025,13 @@
                 "Duration": 2.0,
                 "MSBoost": 0.4000000059604645
             },
-            "desc": "Power Flowers are more effective on you and are shared with your ally if they are near it.",
+            "desc": "Power Flowers are @AmpAmountTooltip@% more effective on you and are shared with your ally.",
             "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
             "id": 222,
             "name": "Fruits of Your Labor",
             "rarity": 0,
-            "tooltip": "Power Flowers are @AmpAmountTooltip@% more effective on you and are shared with your ally."
+            "tooltip": "{{Cherry_FruitsOfYourLabor_Summary}}"
         },
         {
             "apiName": "InfernalSoul",
@@ -4259,7 +4229,7 @@
             "id": 48,
             "name": "Jeweled Gauntlet",
             "rarity": 2,
-            "tooltip": "Your Abilities can Critically Strike for @CritDamage*100@% total damage. Gain @CritChance*100@% Crit Chance. Gain an additional @APToCritConversion@ Crit Chance scaling with your AP.<br><br>Bonus Damage This Round: @f1@<br>Bonus Damage Total: @f2@"
+            "tooltip": "Your Abilities can Critically Strike for @CritDamage*100@% total damage. Gain @CritChance*100@% Crit Chance. Gain an additional @APToCritConversion@ Crit Chance.<br><br>Bonus Damage This Round: @f1@<br>Bonus Damage Total: @f2@"
         },
         {
             "apiName": "AndMyAxe",

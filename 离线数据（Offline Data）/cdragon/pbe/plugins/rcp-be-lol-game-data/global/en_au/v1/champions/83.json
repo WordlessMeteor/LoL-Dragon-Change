@@ -888,7 +888,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Yorick deals bonus damage on his next attack and heals himself. If the target dies a grave will be dug.",
-            "dynamicDescription": "Yorick's next Attack deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and restores <healing>@QHeal@ plus @MissingHealthRatio@% of his missing Health</healing>, reduced by @HealReduction@% against non-Champions. If this Attack kills the target, it leaves a grave.<br><br>When there are 3 or more graves nearby and this Ability has already been used, Yorick can <recast>Recast</recast> to raise <keywordMajor>Mist Walkers</keywordMajor> from all nearby graves.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Yorick's next Attack deals an additional <physicalDamage>@BonusDamage@ physical damage</physicalDamage> and restores <healing>@QHeal@ plus @MissingHealthRatio@% of his missing Health</healing>, reduced by @HealReduction@% against non-Champions. If this Attack hits a Champion or large Monster or kills the target, it leaves a grave.<br><br>When there are 3 or more graves nearby and this Ability has already been used, Yorick can <recast>Recast</recast> to raise <keywordMajor>Mist Walkers</keywordMajor> from all nearby graves.@SpellModifierDescriptionAppend@",
             "range": [
                 0.0,
                 0.0,
@@ -906,12 +906,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                7.0,
-                6.25,
+                6.0,
                 5.5,
-                4.75,
+                5.0,
+                4.5,
                 4.0,
-                3.25
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -1038,7 +1038,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Yorick summons a destructible wall at target location that will block enemy movement.",
-            "dynamicDescription": "Yorick summons a wall of spirits blocking enemies' path, but not allies'. The wall can be Attacked, and disappears after @Effect5Amount@ hits.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Yorick summons a wall of spirits blocking enemies' path, but not allies'. The wall has <healing>@WallHealthTooltip@ Health</healing> and disappears after @CircleDuration@ seconds.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -1069,49 +1069,49 @@
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    -1.0,
                     0.0,
                     0.0,
-                    1.0,
-                    1.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.0,
-                    2.0,
-                    2.0,
-                    3.0,
-                    3.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1188,7 +1188,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Yorick throws a globule of Black Mist that damages, slows and marks enemies. Summoned units gain move speed when moving towards marked targets. ",
-            "dynamicDescription": "Yorick throws a globule of Black Mist that deals <magicDamage>@Calc_CurrentHealthDamage@ current Health magic damage (min: @MinimumDamageBonus@)</magicDamage>, <status>Slows</status> by @Calc_Slow@ for @SlowDuration@ seconds, and marks champions and monsters for @MarkDuration@ seconds. Marked enemies continuously <spellName>Awaken</spellName> nearby graves (but not exceeding the maximum of @Spell.YorickPassive:YorickPassiveGhoulMax@), and take @GhoulBonusDamage*100@% increased damage from up to @GhoulBonusCount@ attacks by <keywordMajor>Mist Walkers</keywordMajor>.<br><br>Yorick and his summoned units gain <speed>@Effect5Amount@% Move Speed</speed> toward the mark. <keywordMajor>Mist Walkers</keywordMajor> will leap once at marked enemies that get away from them.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Yorick throws a globule of Black Mist that deals <magicDamage>@Calc_Damage@ magic damage</magicDamage>, <status>Slows</status> by @Calc_Slow@ for @SlowDuration@ seconds, and marks champions and monsters for @MarkDuration@ seconds. Marked enemies continuously <spellName>Awaken</spellName> nearby graves (but not exceeding the maximum of @Spell.YorickPassive:YorickPassiveGhoulMax@), and suffer @ArmorShred*100@% reduced Armor.<br><br>Yorick and his summoned units gain <speed>@HasteAmount*100@% Move Speed</speed> toward the mark. <keywordMajor>Mist Walkers</keywordMajor> will leap once at marked enemies that get away from them.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -1214,81 +1214,81 @@
                 8.0
             ],
             "coefficients": {
-                "coefficient1": 0.7,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    35.0,
-                    70.0,
-                    105.0,
-                    140.0,
-                    175.0,
-                    210.0,
-                    245.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     0.0,

@@ -164,7 +164,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "BonusHPRequiredTooltipOnly",
-                            "mStat": 11,
+                            "mStat": 12,
                             "mStatFormula": 2
                         }
                     ]
@@ -884,13 +884,14 @@
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
-                            "mDataValue": "ShieldBase"
+                            "mDataValue": "APRatio"
                         }
                     ]
                 }
             },
             "dataValues": {
                 "AP": 1.0,
+                "APRatio": 3.0,
                 "ShieldBase": 3.0
             },
             "desc": "At the start of each round, gain<shield> @ShieldBase@ Shield </shield>for every <attention>%i:scaleAP% @AP@</attention> Ability Power.",
@@ -899,7 +900,7 @@
             "id": 180,
             "name": "Big Brain",
             "rarity": 1,
-            "tooltip": "At the start of each round, gain<shield> @ShieldBase@ Shield </shield>for every <attention>%i:scaleAP% @AP@</attention> Ability Power."
+            "tooltip": "At the start of the round, gain<shield> @ShieldBase@ Shield </shield>for every <attention>%i:scaleAP% @AP@</attention> Ability Power."
         },
         {
             "apiName": "Vulnerability",
@@ -982,7 +983,7 @@
                                 {
                                     "__type": "StatByCoefficientCalculationPart",
                                     "mCoefficient": 1.0,
-                                    "mStat": 8,
+                                    "mStat": 9,
                                     "mStatFormula": 2
                                 }
                             ]
@@ -1625,7 +1626,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.02500000037252903,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 },
@@ -1757,7 +1758,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealPercentage",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -1800,7 +1801,7 @@
             "id": 9,
             "name": "Buff Buddies",
             "rarity": 0,
-            "tooltip": "You gain permanent Red and Blue Buffs."
+            "tooltip": "You gain permanent Red and Blue Buffs.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "RaidBoss",
@@ -1914,22 +1915,6 @@
             "name": "Infernal Conduit",
             "rarity": 2,
             "tooltip": "Your Abilities apply an infinitely stacking <keywordMajor>Burn</keywordMajor>, dealing <magicDamage>@BleedDamageTooltip@ magic damage</magicDamage> per second for @BleedDuration@ seconds.<br><br>All your <keywordMajor>Burn</keywordMajor> effects lower your basic Ability Cooldowns by @FlatCooldownRefundPerTick@ seconds when they damage enemies.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@<br>"
-        },
-        {
-            "apiName": "ADAPt",
-            "calculations": {},
-            "dataValues": {
-                "APAmp": 0.15000000596046448,
-                "ConversionRate": 1.666659951210022,
-                "InverseRate": 0.6000000238418579
-            },
-            "desc": "Convert <physicalDamage>Bonus Attack Damage</physicalDamage> to <magicDamage>Ability Power</magicDamage>. Gain <magicDamage>@APAmp*100@% Ability Power</magicDamage>.",
-            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
-            "id": 205,
-            "name": "ADAPt",
-            "rarity": 0,
-            "tooltip": "Convert <physicalDamage>Bonus Attack Damage</physicalDamage> to <magicDamage>Ability Power</magicDamage>. Gain <magicDamage>@APAmp*100@% Ability Power</magicDamage>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2208,7 +2193,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.017500000074505806,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -2581,7 +2566,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.02500000037252903,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -2614,22 +2599,6 @@
             "name": "Stackosaurus Rex",
             "rarity": 0,
             "tooltip": "When you gain permanent <keywordMajor>Stacks</keywordMajor> of an Ability, gain @StackModifier*100@% more!"
-        },
-        {
-            "apiName": "escAPADe",
-            "calculations": {},
-            "dataValues": {
-                "ADAmp": 0.10000000149011612,
-                "ConversionRate": 0.6000000238418579,
-                "InverseRate": 1.666659951210022
-            },
-            "desc": "Convert <magicDamage>Ability Power</magicDamage> to <physicalDamage>Bonus Attack Damage</physicalDamage>. Gain <physicalDamage>@ADAmp*100@% Attack Damage</physicalDamage>.",
-            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
-            "id": 206,
-            "name": "escAPADe",
-            "rarity": 0,
-            "tooltip": "Convert <magicDamage>Ability Power</magicDamage> to <physicalDamage>Bonus Attack Damage</physicalDamage>. Gain <physicalDamage>@ADAmp*100@% Attack Damage</physicalDamage>."
         },
         {
             "apiName": "FeyMagic",
@@ -2684,6 +2653,7 @@
             "apiName": "Flashy",
             "calculations": {},
             "dataValues": {
+                "FlashAmmoTooltip": 3.0,
                 "FlashCooldown": 2.0
             },
             "desc": "Your Flash has 3 Ammo and a @FlashCooldown@ second Cooldown.",
@@ -2801,7 +2771,7 @@
             "apiName": "TankEngine",
             "calculations": {},
             "dataValues": {
-                "MaxHPIncrement": 0.5,
+                "MaxHPIncrement": 0.05000000074505806,
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Gain @SizeIncrement*100@% increase in size and <scaleHealth>@MaxHPIncrement*100@% max Health</scaleHealth> per takedown.",
@@ -2851,7 +2821,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealAmount",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mMultiplier": {
@@ -3348,7 +3318,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "{8bfcfef7}",
-                            "mStat": 6,
+                            "mStat": 7,
                             "mStatFormula": 2
                         }
                     ]
@@ -3380,7 +3350,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthPercent",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -3405,7 +3375,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "MaxHealthPercentageHeal",
-                            "mStat": 11
+                            "mStat": 12
                         },
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3810,7 +3780,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthRatioPer1000Units",
-                            "mStat": 11
+                            "mStat": 12
                         },
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4028,7 +3998,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthScalar",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4

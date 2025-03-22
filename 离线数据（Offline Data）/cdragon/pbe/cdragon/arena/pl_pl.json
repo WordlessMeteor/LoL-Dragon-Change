@@ -164,7 +164,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "BonusHPRequiredTooltipOnly",
-                            "mStat": 11,
+                            "mStat": 12,
                             "mStatFormula": 2
                         }
                     ]
@@ -884,13 +884,14 @@
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
-                            "mDataValue": "ShieldBase"
+                            "mDataValue": "APRatio"
                         }
                     ]
                 }
             },
             "dataValues": {
                 "AP": 1.0,
+                "APRatio": 3.0,
                 "ShieldBase": 3.0
             },
             "desc": "Na początku każdej rundy zyskujesz<shield> @ShieldBase@ pkt. tarczy</shield> za każdy(-e) <attention>%i:scaleAP% @AP@ pkt.</attention> mocy umiejętności.",
@@ -899,7 +900,7 @@
             "id": 180,
             "name": "Megamózg",
             "rarity": 1,
-            "tooltip": "Na początku każdej rundy zyskujesz<shield> @ShieldBase@ pkt. tarczy</shield> za każdy(-e) <attention>%i:scaleAP% @AP@ pkt.</attention> mocy umiejętności."
+            "tooltip": "Na początku rundy zyskujesz<shield> @ShieldBase@ pkt. tarczy</shield> za każdy(-e) <attention>%i:scaleAP% pkt.@AP@</attention> mocy umiejętności."
         },
         {
             "apiName": "Vulnerability",
@@ -982,7 +983,7 @@
                                 {
                                     "__type": "StatByCoefficientCalculationPart",
                                     "mCoefficient": 1.0,
-                                    "mStat": 8,
+                                    "mStat": 9,
                                     "mStatFormula": 2
                                 }
                             ]
@@ -1625,7 +1626,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.02500000037252903,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 },
@@ -1757,7 +1758,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealPercentage",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -1800,7 +1801,7 @@
             "id": 9,
             "name": "Wzmocnienia do Pary",
             "rarity": 0,
-            "tooltip": "Zyskujesz czerwone i niebieskie wzmocnienie na stałe."
+            "tooltip": "Zyskujesz czerwone i niebieskie wzmocnienie na stałe.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt. <br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
             "apiName": "RaidBoss",
@@ -1914,22 +1915,6 @@
             "name": "Piekielny Przewodnik",
             "rarity": 2,
             "tooltip": "Twoje umiejętności nakładają kumulujące się w nieskończoność <keywordMajor>podpalenie</keywordMajor>, zadające <magicDamage>@BleedDamageTooltip@ pkt. obrażeń magicznych</magicDamage> na sekundę przez @BleedDuration@ sek.<br><br>Wszystkie twoje efekty <keywordMajor>podpalenia</keywordMajor> skracają czas odnowienia twoich umiejętności podstawowych o @FlatCooldownRefundPerTick@ sek., gdy zadają obrażenia wrogom.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt.<br>"
-        },
-        {
-            "apiName": "ADAPt",
-            "calculations": {},
-            "dataValues": {
-                "APAmp": 0.15000000596046448,
-                "ConversionRate": 1.666659951210022,
-                "InverseRate": 0.6000000238418579
-            },
-            "desc": "Zamienia <physicalDamage>dodatkowe obrażenia od ataku</physicalDamage> na <magicDamage>moc umiejętności</magicDamage>. Zyskujesz <magicDamage>@APAmp*100@% mocy umiejętności</magicDamage>.",
-            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
-            "id": 205,
-            "name": "AD-AP-tacja",
-            "rarity": 0,
-            "tooltip": "Zamienia <physicalDamage>dodatkowe obrażenia od ataku</physicalDamage> na <magicDamage>moc umiejętności</magicDamage>. Zyskujesz <magicDamage>@APAmp*100@% mocy umiejętności</magicDamage>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2208,7 +2193,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.017500000074505806,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -2581,7 +2566,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.02500000037252903,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -2614,22 +2599,6 @@
             "name": "Ładunkozaurus Rex",
             "rarity": 0,
             "tooltip": "Gdy otrzymasz stałe <keywordMajor>ładunki</keywordMajor> umiejętności, zyskujesz @StackModifier*100@% więcej!"
-        },
-        {
-            "apiName": "escAPADe",
-            "calculations": {},
-            "dataValues": {
-                "ADAmp": 0.10000000149011612,
-                "ConversionRate": 0.6000000238418579,
-                "InverseRate": 1.666659951210022
-            },
-            "desc": "Zamienia <magicDamage>moc umiejętności</magicDamage> na <physicalDamage>dodatkowe obrażenia od ataku</physicalDamage>. Zyskujesz <physicalDamage>@ADAmp*100@% obrażeń od ataku</physicalDamage>.",
-            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
-            "id": 206,
-            "name": "Eskapada",
-            "rarity": 0,
-            "tooltip": "Zamienia <magicDamage>moc umiejętności</magicDamage> na <physicalDamage>dodatkowe obrażenia od ataku</physicalDamage>. Zyskujesz <physicalDamage>@ADAmp*100@% obrażeń od ataku</physicalDamage>."
         },
         {
             "apiName": "FeyMagic",
@@ -2684,6 +2653,7 @@
             "apiName": "Flashy",
             "calculations": {},
             "dataValues": {
+                "FlashAmmoTooltip": 3.0,
                 "FlashCooldown": 2.0
             },
             "desc": "Twój Błysk ma 3 ładunki amunicji i @FlashCooldown@ sek. odnowienia.",
@@ -2801,16 +2771,16 @@
             "apiName": "TankEngine",
             "calculations": {},
             "dataValues": {
-                "MaxHPIncrement": 0.5,
+                "MaxHPIncrement": 0.05000000074505806,
                 "SizeIncrement": 0.15000000596046448
             },
-            "desc": "Cherry_TankEngine_Summary",
+            "desc": "Zwiększasz swój rozmiar o @SizeIncrement*100@% i zyskujesz <scaleHealth>@MaxHPIncrement*100@% maksymalnego zdrowia</scaleHealth> za każdy udział w zabójstwie.",
             "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
             "id": 310,
-            "name": "Cherry_TankEngine_Name",
+            "name": "Taran",
             "rarity": 0,
-            "tooltip": "Cherry_TankEngine_Tooltip"
+            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>Udziały w zabójstwach: @f1@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -2851,7 +2821,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealAmount",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mMultiplier": {
@@ -3348,7 +3318,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "{8bfcfef7}",
-                            "mStat": 6,
+                            "mStat": 7,
                             "mStatFormula": 2
                         }
                     ]
@@ -3380,7 +3350,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthPercent",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -3405,7 +3375,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "MaxHealthPercentageHeal",
-                            "mStat": 11
+                            "mStat": 12
                         },
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3810,7 +3780,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthRatioPer1000Units",
-                            "mStat": 11
+                            "mStat": 12
                         },
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4028,7 +3998,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthScalar",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
