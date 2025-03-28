@@ -1957,8 +1957,24 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 75.0,
-                            "mStartValue": 5.0
+                            "mEndValue": 50.0,
+                            "mStartValue": 1.25
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05000000074505806,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.07500000298023224,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.004999999888241291,
+                            "mStat": 12
                         }
                     ]
                 },
@@ -2005,7 +2021,7 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 150.0,
+                            "mEndValue": 125.0,
                             "mStartValue": 15.0
                         },
                         {
@@ -2302,7 +2318,7 @@
                 "AttackSpeedRatio": 0.0010000000474974513,
                 "BleedDuration": 5.0,
                 "CurseCounter": 2.0,
-                "OnHitDamageRatio": 0.3799999952316284,
+                "OnHitDamageRatio": 0.4000000059604645,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
             "desc": "你的攻击为你提供永久的<keywordMajor>诅咒能量</keywordMajor>并造成基于你<keywordMajor>诅咒能量的</keywordMajor>的额外<magicDamage>魔法伤害</magicDamage>。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
@@ -2574,9 +2590,9 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 3.0,
+                "MaxHealthRatio": 4.0,
                 "Range": 500.0,
-                "TickCadence": 1.0
+                "TickCadence": 0.25
             },
             "desc": "获得一个光环，从其中每个的敌方英雄处持续收割永久的<keywordMajor>诅咒能量</keywordMajor>。获得基于你的<keywordMajor>诅咒能量</keywordMajor>的<healing>最大生命值</healing>。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
             "iconLarge": "assets/ux/cherry/augments/icons/plaguebearer_large.png",
@@ -2635,7 +2651,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.25,
+                "AdaptiveForceRatio": 1.75,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2671,7 +2687,7 @@
                 "ReviveArmTime": 2.0,
                 "ReviveDuration": 1.5,
                 "ReviveMod": 0.4000000059604645,
-                "SecondReviveMod": 0.25,
+                "SecondReviveMod": 0.1599999964237213,
                 "SecondSizeMod": -0.4000000059604645,
                 "SelfReviveTimerModMax": 0.5,
                 "SelfReviveTimerModMin": 0.4000000059604645,
@@ -2878,8 +2894,8 @@
             "dataValues": {
                 "ASDuration": 5.0,
                 "BonusDamage": 0.10000000149011612,
-                "BonusMS": 0.20000000298023224,
-                "HoldStillDuration": 1.5
+                "BonusMS": 0.30000001192092896,
+                "HoldStillDuration": 1.25
             },
             "desc": "获得<spellName>游击队军备</spellName><br><br><rules>在原地不动@HoldStillDuration@秒后，获得<keywordStealth>隐形</keywordStealth>，持续到你移动为止。在你离开这个<keywordStealth>隐形</keywordStealth>状态时，获得<attackSpeed>@BonusAS@攻击速度</attackSpeed>。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/holdverystill_large.png",
@@ -3507,9 +3523,9 @@
             "apiName": "Desecrator",
             "calculations": {},
             "dataValues": {
-                "ArmorMRRatio": 0.20000000298023224,
+                "ArmorMRRatio": 0.25,
                 "BleedDuration": 5.0,
-                "CurseCounter": 5.0,
+                "CurseCounter": 8.0,
                 "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
             },
             "desc": "<status>定身</status>敌方英雄时为你提供永久的<keywordMajor>诅咒能量</keywordMajor>。获得基于你的<keywordMajor>诅咒能量</keywordMajor>的<armor>护甲</armor>和<magicresistance>魔法抗性</magicresistance>。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
@@ -3938,8 +3954,28 @@
         },
         {
             "apiName": "Castle",
-            "calculations": {},
+            "calculations": {
+                "TotalShield": {
+                    "StaticTooltipCalculationDisplay": 1,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 1,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 250.0,
+                            "mStartValue": 80.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthScalar",
+                            "mStat": 12
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 1
+                }
+            },
             "dataValues": {
+                "HealthScalar": 0.05000000074505806,
                 "MSBuffAmount": 0.6000000238418579,
                 "MSBuffDuration": 4.0
             },
@@ -4106,7 +4142,7 @@
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
                 "CurseCounter": 4.0,
-                "Radius": 450.0
+                "Radius": 25000.0
             },
             "desc": "治疗/护盾为你提供永久的<keywordMajor>诅咒能量</keywordMajor>。从每层<keywordMajor>诅咒能量</keywordMajor>中获得技能急速。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。<br><br>",
             "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
@@ -4229,7 +4265,7 @@
             "id": 48,
             "name": "珠光护手",
             "rarity": 2,
-            "tooltip": "你的技能可以造成暴击，造成@CritDamage*100@%总伤害。获得@CritChance*100@%暴击几率。获得随法术强度增长的额外@APToCritConversion@暴击几率。<br><br>这个回合的额外伤害：@f1@<br>额外伤害总和：@f2@"
+            "tooltip": "你的技能可以造成暴击，造成@CritDamage*100@%总伤害。获得@CritChance*100@%暴击几率。获得额外@APToCritConversion@暴击几率。<br><br>这个回合的额外伤害：@f1@<br>额外伤害总和：@f2@"
         },
         {
             "apiName": "AndMyAxe",
@@ -4241,18 +4277,18 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 225.0,
+                            "mEndValue": 200.0,
                             "mStartValue": 60.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0,
+                            "mCoefficient": 0.800000011920929,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.6000000238418579
+                            "mCoefficient": 0.44999998807907104
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -4262,7 +4298,7 @@
                 "AutoCastRange": 950.0,
                 "BaseDamage": 10.0,
                 "CDIfPickedUp": 1.5,
-                "Cooldown": 8.0,
+                "Cooldown": 12.0,
                 "DebuffDuration": 4.0,
                 "ShredAmount": 0.20000000298023224,
                 "SlowAmount": 0.4000000059604645,

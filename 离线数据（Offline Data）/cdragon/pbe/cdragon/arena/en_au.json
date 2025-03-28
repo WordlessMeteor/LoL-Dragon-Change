@@ -1957,8 +1957,24 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 75.0,
-                            "mStartValue": 5.0
+                            "mEndValue": 50.0,
+                            "mStartValue": 1.25
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05000000074505806,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.07500000298023224,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.004999999888241291,
+                            "mStat": 12
                         }
                     ]
                 },
@@ -2005,7 +2021,7 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 150.0,
+                            "mEndValue": 125.0,
                             "mStartValue": 15.0
                         },
                         {
@@ -2302,7 +2318,7 @@
                 "AttackSpeedRatio": 0.0010000000474974513,
                 "BleedDuration": 5.0,
                 "CurseCounter": 2.0,
-                "OnHitDamageRatio": 0.3799999952316284,
+                "OnHitDamageRatio": 0.4000000059604645,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
             "desc": "Your Attacks grant you permanent <keywordMajor>Cursed Power</keywordMajor> and deal additional <magicDamage>magic damage</magicDamage> based on your <keywordMajor>Cursed Power</keywordMajor>.<br><br>The max <keywordMajor>Cursed Power</keywordMajor> you can gain per round scales with total <keywordMajor>Curse</keywordMajor> sources between you and your ally.",
@@ -2574,9 +2590,9 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 3.0,
+                "MaxHealthRatio": 4.0,
                 "Range": 500.0,
-                "TickCadence": 1.0
+                "TickCadence": 0.25
             },
             "desc": "Gain an aura that continuously harvests permanent <keywordMajor>Cursed Power</keywordMajor> per enemy champion inside. Gain <healing>max Health</healing> based on your <keywordMajor>Cursed Power</keywordMajor>.<br><br>The max <keywordMajor>Cursed Power</keywordMajor> you can gain per round scales with total <keywordMajor>Curse</keywordMajor> sources between you and your ally.",
             "iconLarge": "assets/ux/cherry/augments/icons/plaguebearer_large.png",
@@ -2635,7 +2651,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.25,
+                "AdaptiveForceRatio": 1.75,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2671,7 +2687,7 @@
                 "ReviveArmTime": 2.0,
                 "ReviveDuration": 1.5,
                 "ReviveMod": 0.4000000059604645,
-                "SecondReviveMod": 0.25,
+                "SecondReviveMod": 0.1599999964237213,
                 "SecondSizeMod": -0.4000000059604645,
                 "SelfReviveTimerModMax": 0.5,
                 "SelfReviveTimerModMin": 0.4000000059604645,
@@ -2878,8 +2894,8 @@
             "dataValues": {
                 "ASDuration": 5.0,
                 "BonusDamage": 0.10000000149011612,
-                "BonusMS": 0.20000000298023224,
-                "HoldStillDuration": 1.5
+                "BonusMS": 0.30000001192092896,
+                "HoldStillDuration": 1.25
             },
             "desc": "Gain <spellName>Guerrilla Warfare</spellName><br><br><rules>After not moving for @HoldStillDuration@ seconds, turn <keywordStealth>Invisibile</keywordStealth> until you move. When you exit this <keywordStealth>Invisibility</keywordStealth>, gain <attackSpeed>@BonusAS@ Attack Speed</attackSpeed>.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/holdverystill_large.png",
@@ -3507,9 +3523,9 @@
             "apiName": "Desecrator",
             "calculations": {},
             "dataValues": {
-                "ArmorMRRatio": 0.20000000298023224,
+                "ArmorMRRatio": 0.25,
                 "BleedDuration": 5.0,
-                "CurseCounter": 5.0,
+                "CurseCounter": 8.0,
                 "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
             },
             "desc": "<status>Immobilizing</status> enemy champions grants you permanent <keywordMajor>Cursed Power</keywordMajor>. Gain <armor>Armor</armor> and <magicresistance>Magic Resistance</magicresistance> based on your <keywordMajor>Cursed Power</keywordMajor>.<br><br>The max <keywordMajor>Cursed Power</keywordMajor> you can gain per round scales with total <keywordMajor>Curse</keywordMajor> sources between you and your ally.",
@@ -3938,8 +3954,28 @@
         },
         {
             "apiName": "Castle",
-            "calculations": {},
+            "calculations": {
+                "TotalShield": {
+                    "StaticTooltipCalculationDisplay": 1,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 1,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 250.0,
+                            "mStartValue": 80.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthScalar",
+                            "mStat": 12
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 1
+                }
+            },
             "dataValues": {
+                "HealthScalar": 0.05000000074505806,
                 "MSBuffAmount": 0.6000000238418579,
                 "MSBuffDuration": 4.0
             },
@@ -4106,7 +4142,7 @@
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
                 "CurseCounter": 4.0,
-                "Radius": 450.0
+                "Radius": 25000.0
             },
             "desc": "Healing/Shielding grants you permanent <keywordMajor>Cursed Power</keywordMajor>. Gain Ability Haste based on your <keywordMajor>Cursed Power</keywordMajor><br><br>The max <keywordMajor>Cursed Power</keywordMajor> you can gain per round scales with total <keywordMajor>Curse</keywordMajor> sources between you and your ally.",
             "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
@@ -4241,18 +4277,18 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 225.0,
+                            "mEndValue": 200.0,
                             "mStartValue": 60.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0,
+                            "mCoefficient": 0.800000011920929,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.6000000238418579
+                            "mCoefficient": 0.44999998807907104
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -4262,7 +4298,7 @@
                 "AutoCastRange": 950.0,
                 "BaseDamage": 10.0,
                 "CDIfPickedUp": 1.5,
-                "Cooldown": 8.0,
+                "Cooldown": 12.0,
                 "DebuffDuration": 4.0,
                 "ShredAmount": 0.20000000298023224,
                 "SlowAmount": 0.4000000059604645,
