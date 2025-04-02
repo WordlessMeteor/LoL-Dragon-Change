@@ -411,7 +411,7 @@
             "id": 94,
             "name": "Sacrifice",
             "rarity": 1,
-            "tooltip": "Quand votre allié tombe sous <scaleHealth>@AllyHealthThreshold*100@% de ses PV</scaleHealth>, vous donnez <scaleHealth>@CurrentHealthToDrain*100@% de vos PV actuels</scaleHealth> pour lui octroyer un <shield>bouclier</shield> d'une valeur équivalente.<br><br>Boucliers générés lors de cette manche : @f1@<br>Total des boucliers générés : @f2@."
+            "tooltip": "Quand votre allié tombe sous <scaleHealth>@AllyHealthThreshold*100@% de ses PV</scaleHealth>, vous donnez <scaleHealth>@CurrentHealthToDrain*100@% de vos PV actuels</scaleHealth> pour lui octroyer un <shield>bouclier</shield> d'une valeur équivalente.<br><br>Boucliers générés lors de cette manche : @f1@<br>Total des boucliers générés : @f2@"
         },
         {
             "apiName": "Firefox",
@@ -1351,17 +1351,27 @@
         },
         {
             "apiName": "Eureka",
-            "calculations": {},
+            "calculations": {
+                "{e6727bcd}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{552fb3d0}"
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "APToHasteConversion": 0.30000001192092896
             },
-            "desc": "Vous gagnez de l'accélération de compétence équivalente à <scaleAP>@APToHasteConversion*100@% de votre puissance</scaleAP>.",
+            "desc": "Cherry_Eureka_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/eureka_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/eureka_small.png",
             "id": 30,
             "name": "Eurêka",
             "rarity": 2,
-            "tooltip": "Vous gagnez de l'accélération de compétence équivalente à <scaleAP>@APToHasteConversion*100@% de votre puissance</scaleAP>."
+            "tooltip": "Cherry_Eureka_Tooltip"
         },
         {
             "apiName": "OceanSoul",
@@ -1577,7 +1587,18 @@
         },
         {
             "apiName": "WithHaste",
-            "calculations": {},
+            "calculations": {
+                "{9c190060}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{a039c859}",
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "AbilityHasteToMSConversion": 1.5
             },
@@ -1587,7 +1608,7 @@
             "id": 98,
             "name": "Pied au plancher",
             "rarity": 1,
-            "tooltip": "Vous gagnez de la <Speed>vitesse de déplacement</Speed> équivalente à @AbilityHasteToMSConversion@ fois votre <scaleLevel>accélération de compétence</scaleLevel>."
+            "tooltip": "Cherry_WithHaste_Tooltip"
         },
         {
             "apiName": "FallenAegis",
@@ -1915,6 +1936,22 @@
             "name": "Conduit infernal",
             "rarity": 2,
             "tooltip": "Vos compétences appliquent <keywordMajor>brûlure</keywordMajor> (cumulable à l'infini), infligeant <magicDamage>@BleedDamageTooltip@ pts de dégâts magiques</magicDamage> par seconde pendant @BleedDuration@ sec.<br><br>Tous vos effets de <keywordMajor>brûlure</keywordMajor> réduisent le délai de récupération de vos compétences de base de @FlatCooldownRefundPerTick@ sec lorsqu'ils infligent des dégâts aux ennemis.<br><br>Dégâts infligés lors de cette manche : @f1@<br>Total des dégâts infligés : @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Convertit les <physicalDamage>dégâts d'attaque bonus</physicalDamage> en <magicDamage>puissance bonus</magicDamage>. Vous gagnez <magicDamage>+@APAmp*100@% de puissance</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Adaptation",
+            "rarity": 0,
+            "tooltip": "Convertit les <physicalDamage>dégâts d'attaque bonus</physicalDamage> en <magicDamage>puissance bonus</magicDamage>. Vous gagnez <magicDamage>+@APAmp*100@% de puissance</magicDamage>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2600,7 +2637,7 @@
             "id": 216,
             "name": "Porteur d'effroi",
             "rarity": 2,
-            "tooltip": "Toutes les @TickCadence@ sec, les champions ennemis proches vous octroient @CurseStacksPerTick@ effets de <keywordMajor>Puissance maudite</keywordMajor>.<br><br>Vous gagnez <scaleHealth>@f1@ PV</scaleHealth> (@MaxHealthRatio*100@% de votre <keywordMajor>Puissance maudite</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Toutes les @TickCadence@ sec, les champions ennemis proches vous octroient @CurseStacksPerTick@ effet(s) de <keywordMajor>Puissance maudite</keywordMajor>.<br><br>Vous gagnez <scaleHealth>@f1@ PV</scaleHealth> (@MaxHealthRatio*100@% de votre <keywordMajor>Puissance maudite</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "StackosaurusRex",
@@ -2615,6 +2652,22 @@
             "name": "Cumulator",
             "rarity": 0,
             "tooltip": "Quand vous cumulez des <keywordMajor>effets</keywordMajor> permanents avec une compétence, vous en cumulez @StackModifier*100@% de plus !"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Convertit la <magicDamage>puissance</magicDamage> en <physicalDamage>dégâts d'attaque bonus</physicalDamage>. Vous gagnez <physicalDamage>+@ADAmp*100@% de dégâts d'attaque</physicalDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Conversion physique",
+            "rarity": 0,
+            "tooltip": "Convertit la <magicDamage>puissance</magicDamage> en <physicalDamage>dégâts d'attaque bonus</physicalDamage>. Vous gagnez <physicalDamage>+@ADAmp*100@% de dégâts d'attaque</physicalDamage>."
         },
         {
             "apiName": "FeyMagic",
@@ -4150,7 +4203,7 @@
             "id": 215,
             "name": "Bénédiction obscure",
             "rarity": 1,
-            "tooltip": "Lorsque vous soignez/octroyez un bouclier à un champion qui est proche d'un ennemi, vous gagnez @CurseCounter@ effets de <keywordMajor>Puissance maudite</keywordMajor>.<br><br>Vous gagnez @f1@ d'accélération de compétence (@AbilityHasteRatio*100@% de votre <keywordMajor>Puissance maudite</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Lorsque vous octroyez des soins/un bouclier à un champion allié, vous gagnez @CurseCounter@ <keywordMajor>Puissance maudite</keywordMajor>.<br><br>Vous gagnez @f1@ d'accélération de compétence (@AbilityHasteRatio*100@% de votre <keywordMajor>Puissance maudite</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "MindtoMatter",
@@ -4249,14 +4302,15 @@
                     "mDisplayAsPercent": true,
                     "mFormulaParts": [
                         {
-                            "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.00044999999227002263
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{a1904faf}"
                         }
                     ]
                 }
             },
             "dataValues": {
                 "CritChance": 0.25,
+                "CritConverRatio": 0.00044999999227002263,
                 "CritDamage": 1.5499999523162842
             },
             "desc": "Vos capacités peuvent infliger des coups critiques. Vous gagnez +@CritChance*100@% de chances de coup critique.",

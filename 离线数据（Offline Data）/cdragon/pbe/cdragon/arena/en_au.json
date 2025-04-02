@@ -1351,17 +1351,27 @@
         },
         {
             "apiName": "Eureka",
-            "calculations": {},
+            "calculations": {
+                "{e6727bcd}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{552fb3d0}"
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "APToHasteConversion": 0.30000001192092896
             },
-            "desc": "Gain Ability Haste equal to <scaleAP>@APToHasteConversion*100@% Ability Power</scaleAP>",
+            "desc": "Gain Ability Haste equal to <scaleAP>@APToHasteConversion*100@% Ability Power</scaleAP>.",
             "iconLarge": "assets/ux/cherry/augments/icons/eureka_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/eureka_small.png",
             "id": 30,
             "name": "Eureka",
             "rarity": 2,
-            "tooltip": "Gain Ability Haste equal to <scaleAP>@APToHasteConversion*100@% Ability Power</scaleAP>"
+            "tooltip": "Gain @APToHasteConversionCalc@ Ability Haste."
         },
         {
             "apiName": "OceanSoul",
@@ -1382,7 +1392,7 @@
                 "DamageRange": 1000.0,
                 "HealToDamageConversion": 0.699999988079071
             },
-            "desc": "<healing>Healing</healing> and <healing>Health Regen</healing> you do deals a portion of the value as <magicDamage>magic samage</magicDamage> to the nearest enemy champion.",
+            "desc": "<healing>Healing</healing> and <healing>Health Regen</healing> you do deals a portion of the value as <magicDamage>magic damage</magicDamage> to the nearest enemy champion.",
             "iconLarge": "assets/ux/cherry/augments/icons/circleofdeath_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/circleofdeath_small.png",
             "id": 15,
@@ -1577,7 +1587,18 @@
         },
         {
             "apiName": "WithHaste",
-            "calculations": {},
+            "calculations": {
+                "{9c190060}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{a039c859}",
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "AbilityHasteToMSConversion": 1.5
             },
@@ -1587,7 +1608,7 @@
             "id": 98,
             "name": "With Haste",
             "rarity": 1,
-            "tooltip": "Gain <Speed>Move Speed</Speed> equal to @AbilityHasteToMSConversion@ times your <scaleLevel>Ability Haste</scaleLevel>."
+            "tooltip": "Gain <speed>@AbilityHasteToMSConversionCalc@ Move Speed</speed>."
         },
         {
             "apiName": "FallenAegis",
@@ -1915,6 +1936,22 @@
             "name": "Infernal Conduit",
             "rarity": 2,
             "tooltip": "Your Abilities apply an infinitely stacking <keywordMajor>Burn</keywordMajor>, dealing <magicDamage>@BleedDamageTooltip@ magic damage</magicDamage> per second for @BleedDuration@ seconds.<br><br>All your <keywordMajor>Burn</keywordMajor> effects lower your basic Ability Cooldowns by @FlatCooldownRefundPerTick@ seconds when they damage enemies.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Convert <physicalDamage>Bonus Attack Damage</physicalDamage> to <magicDamage>Ability Power</magicDamage>. Gain <magicDamage>@APAmp*100@% Ability Power</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "ADAPt",
+            "rarity": 0,
+            "tooltip": "Convert <physicalDamage>Bonus Attack Damage</physicalDamage> to <magicDamage>Ability Power</magicDamage>. Gain <magicDamage>@APAmp*100@% Ability Power</magicDamage>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2615,6 +2652,22 @@
             "name": "Stackosaurus Rex",
             "rarity": 0,
             "tooltip": "When you gain permanent <keywordMajor>Stacks</keywordMajor> of an Ability, gain @StackModifier*100@% more!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Convert <magicDamage>Ability Power</magicDamage> to <physicalDamage>Bonus Attack Damage</physicalDamage>. Gain <physicalDamage>@ADAmp*100@% Attack Damage</physicalDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "escAPADe",
+            "rarity": 0,
+            "tooltip": "Convert <magicDamage>Ability Power</magicDamage> to <physicalDamage>Bonus Attack Damage</physicalDamage>. Gain <physicalDamage>@ADAmp*100@% Attack Damage</physicalDamage>."
         },
         {
             "apiName": "FeyMagic",
@@ -4150,7 +4203,7 @@
             "id": 215,
             "name": "Dark Blessing",
             "rarity": 1,
-            "tooltip": "When you Heal/Shield a champion that is near an enemy, gain @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Gain @f1@ Ability Haste (@AbilityHasteRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "When you Heal/Shield an allied champion, gain @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Gain @f1@ Ability Haste (@AbilityHasteRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "MindtoMatter",
@@ -4249,14 +4302,15 @@
                     "mDisplayAsPercent": true,
                     "mFormulaParts": [
                         {
-                            "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.00044999999227002263
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{a1904faf}"
                         }
                     ]
                 }
             },
             "dataValues": {
                 "CritChance": 0.25,
+                "CritConverRatio": 0.00044999999227002263,
                 "CritDamage": 1.5499999523162842
             },
             "desc": "Your Abilities can Critically Strike. Gain @CritChance*100@% Crit Chance.",

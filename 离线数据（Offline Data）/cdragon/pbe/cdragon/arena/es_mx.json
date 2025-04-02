@@ -1086,13 +1086,13 @@
                 "MovespeedAmp": 0.4000000059604645,
                 "SizeAmp": 0.4000000059604645
             },
-            "desc": "Al iniciar el round te haces grande (<scaleAD>de Fuerza Adaptable</scaleAD> y <scaleHealth> de vida</scaleHealth>) o pequeño (<scaleLevel> de aceleración de habilidad</scaleLevel> y <speed> de velocidad de movimiento</speed>).",
+            "desc": "Al iniciar la ronda te haces grande (<scaleAD>de Fuerza Adaptable</scaleAD> y <scaleHealth> de vida</scaleHealth>) o pequeño (<scaleLevel>de aceleración de habilidad</scaleLevel> y <speed> de velocidad de movimiento</speed>).",
             "iconLarge": "assets/ux/cherry/augments/icons/madscientist_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/madscientist_small.png",
             "id": 53,
             "name": "Científico Loco",
             "rarity": 2,
-            "tooltip": "Al iniciar el round te haces grande (por lo que obtienes un <scaleAD>@ADAmp*100@% de Fuerza Adaptable</scaleAD> y un <scaleHealth>@HealthAmp*100@% de Vida</scaleHealth>) o pequeño (<scaleLevel>@Haste@ de Aceleración de Habilidad</scaleLevel> y un <speed>@MovespeedAmp*100@% de Velocidad de Movimiento</speed>)."
+            "tooltip": "Al iniciar la ronda te haces grande (por lo que obtienes un <scaleAD>@ADAmp*100@% de Fuerza Adaptable</scaleAD> y un <scaleHealth>@HealthAmp*100@% de Vida</scaleHealth>) o pequeño (<scaleLevel>@Haste@ de Aceleración de Habilidad</scaleLevel> y un <speed>@MovespeedAmp*100@% de Velocidad de Movimiento</speed>)."
         },
         {
             "apiName": "MountainSoul",
@@ -1351,17 +1351,27 @@
         },
         {
             "apiName": "Eureka",
-            "calculations": {},
+            "calculations": {
+                "{e6727bcd}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{552fb3d0}"
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "APToHasteConversion": 0.30000001192092896
             },
-            "desc": "Obtienes una Aceleración de Habilidad equivalente a un <scaleAP>@APToHasteConversion*100@% de tu Poder de Habilidad</scaleAP>",
+            "desc": "Cherry_Eureka_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/eureka_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/eureka_small.png",
             "id": 30,
             "name": "Eureka",
             "rarity": 2,
-            "tooltip": "Obtienes una Aceleración de Habilidad equivalente a un <scaleAP>@APToHasteConversion*100@% de tu Poder de Habilidad</scaleAP>"
+            "tooltip": "Cherry_Eureka_Tooltip"
         },
         {
             "apiName": "OceanSoul",
@@ -1577,7 +1587,18 @@
         },
         {
             "apiName": "WithHaste",
-            "calculations": {},
+            "calculations": {
+                "{9c190060}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{a039c859}",
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "AbilityHasteToMSConversion": 1.5
             },
@@ -1587,7 +1608,7 @@
             "id": 98,
             "name": "Rápido",
             "rarity": 1,
-            "tooltip": "Obtienes <Speed>Velocidad de Movimiento</Speed> igual a tu <scaleLevel>Aceleración de Habilidad</scaleLevel> multiplicada @AbilityHasteToMSConversion@ veces."
+            "tooltip": "Cherry_WithHaste_Tooltip"
         },
         {
             "apiName": "FallenAegis",
@@ -1915,6 +1936,22 @@
             "name": "Conducto Infernal",
             "rarity": 2,
             "tooltip": "Tus habilidades aplican una <keywordMajor>Quemadura</keywordMajor> que se acumula infinitamente e inflige <magicDamage>@BleedDamageTooltip@ de daño mágico</magicDamage> por segundo durante @BleedDuration@ seg.<br><br>Los efectos de tu <keywordMajor>Quemadura</keywordMajor> reducen los enfriamientos de tus habilidades básicas en @FlatCooldownRefundPerTick@ seg cuando le infligen daño a los enemigos.<br><br>Daño infligido esta ronda: @f1@<br>Daño infligido en total: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Convierte el <physicalDamage>daño de ataque adicional</physicalDamage> en <magicDamage>poder de habilidad</magicDamage>. Obtienes un <magicDamage>@APAmp*100@% de Poder de Habilidad</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Daño Habilidoso",
+            "rarity": 0,
+            "tooltip": "Convierte el <physicalDamage>daño de ataque adicional</physicalDamage> en <magicDamage>poder de habilidad</magicDamage>. Obtienes un <magicDamage>@APAmp*100@% de Poder de Habilidad</magicDamage>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2615,6 +2652,22 @@
             "name": "Acumulasaurio Rex",
             "rarity": 0,
             "tooltip": "Cuando obtienes <keywordMajor>acumulaciones</keywordMajor> permanentes de una habilidad, ¡obtienes un @StackModifier*100@% más!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Convierte el <magicDamage>poder de habilidad</magicDamage> en <physicalDamage>daño de ataque adicional</physicalDamage>. Obtiene un <physicalDamage>@ADAmp*100@% de Daño de Ataque</physicalDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "escaPHaDA",
+            "rarity": 0,
+            "tooltip": "Convierte el <magicDamage>poder de habilidad</magicDamage> en <physicalDamage>daño de ataque adicional</physicalDamage>. Obtiene un <physicalDamage>@ADAmp*100@% de Daño de Ataque</physicalDamage>."
         },
         {
             "apiName": "FeyMagic",
@@ -4150,7 +4203,7 @@
             "id": 215,
             "name": "Bendición Oscura",
             "rarity": 1,
-            "tooltip": "Cuando curas o escudas a un campeón cercano a un enemigo, obtienes @CurseCounter@ de <keywordMajor>Poder Maldito</keywordMajor>.<br><br>Obtienes @f1@ de Aceleración de Habilidad (un @AbilityHasteRatio*100@% de tu <keywordMajor>Poder Maldito</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Cuando curas o lanzas un escudo a un campeón aliado, obtienes @CurseCounter@ <keywordMajor>de Poder Maldito</keywordMajor>.<br><br>Obtienes @f1@ de Aceleración de Habilidad (un @AbilityHasteRatio*100@% de tu <keywordMajor>Poder Maldito</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "MindtoMatter",
@@ -4249,14 +4302,15 @@
                     "mDisplayAsPercent": true,
                     "mFormulaParts": [
                         {
-                            "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.00044999999227002263
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{a1904faf}"
                         }
                     ]
                 }
             },
             "dataValues": {
                 "CritChance": 0.25,
+                "CritConverRatio": 0.00044999999227002263,
                 "CritDamage": 1.5499999523162842
             },
             "desc": "Tus habilidades pueden infligir golpes críticos. Obtienes un @CritChance*100@% de Probabilidad de Golpe Crítico.",

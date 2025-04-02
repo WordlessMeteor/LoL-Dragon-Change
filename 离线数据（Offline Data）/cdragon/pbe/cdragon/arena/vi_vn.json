@@ -411,7 +411,7 @@
             "id": 94,
             "name": "Sẵn Lòng Hy Sinh",
             "rarity": 1,
-            "tooltip": "Khi đồng minh còn dưới <scaleHealth>@AllyHealthThreshold*100@% Máu</scaleHealth>, đánh đổi <scaleHealth>@CurrentHealthToDrain*100@% Máu hiện tại của bạn</scaleHealth> để tạo một lượng <shield>Lá Chắn</shield> tương đương cho đồng minh.<br><br>Lá Chắn Nhận Trong Vòng Này: @f1@<br>Tổng Lá Chắn Đã Nhận: @f2@"
+            "tooltip": "Khi đồng minh còn dưới <scaleHealth>@AllyHealthThreshold*100@% Máu</scaleHealth>, đánh đổi <scaleHealth>@CurrentHealthToDrain*100@% Máu hiện tại của bạn</scaleHealth> để tạo một lượng <shield>Lá Chắn</shield> tương đương cho đồng minh.<br><br>Lá Chắn Tạo Trong Vòng Này: @f1@<br>Tổng Lá Chắn Đã Tạo: @f2@"
         },
         {
             "apiName": "Firefox",
@@ -1351,17 +1351,27 @@
         },
         {
             "apiName": "Eureka",
-            "calculations": {},
+            "calculations": {
+                "{e6727bcd}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{552fb3d0}"
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "APToHasteConversion": 0.30000001192092896
             },
-            "desc": "Nhận Điểm Hồi Kỹ Năng tương đương <scaleAP>@APToHasteConversion*100@% Sức Mạnh Phép Thuật</scaleAP>",
+            "desc": "Cherry_Eureka_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/eureka_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/eureka_small.png",
             "id": 30,
             "name": "Eureka",
             "rarity": 2,
-            "tooltip": "Nhận Điểm Hồi Kỹ Năng tương đương <scaleAP>@APToHasteConversion*100@% Sức Mạnh Phép Thuật</scaleAP>"
+            "tooltip": "Cherry_Eureka_Tooltip"
         },
         {
             "apiName": "OceanSoul",
@@ -1577,7 +1587,18 @@
         },
         {
             "apiName": "WithHaste",
-            "calculations": {},
+            "calculations": {
+                "{9c190060}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{a039c859}",
+                            "mStat": 11
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "AbilityHasteToMSConversion": 1.5
             },
@@ -1587,7 +1608,7 @@
             "id": 98,
             "name": "Bứt Tốc",
             "rarity": 1,
-            "tooltip": "Nhận <Speed>Tốc Độ Di Chuyển</Speed> bằng @AbilityHasteToMSConversion@ lần lượng <scaleLevel>Điểm Hồi Kỹ Năng</scaleLevel> của bạn."
+            "tooltip": "Cherry_WithHaste_Tooltip"
         },
         {
             "apiName": "FallenAegis",
@@ -1915,6 +1936,22 @@
             "name": "Hỏa Ngục Dẫn Truyền",
             "rarity": 2,
             "tooltip": "Kỹ Năng của bạn gây cộng dồn <keywordMajor>Thiêu Đốt</keywordMajor> vô hạn, gây <magicDamage>@BleedDamageTooltip@ sát thương phép</magicDamage> mỗi giây trong @BleedDuration@ giây.<br><br>Toàn bộ hiệu ứng <keywordMajor>Thiêu Đốt</keywordMajor> của bạn sẽ giảm hồi chiêu các Kỹ Năng Cơ Bản đi @FlatCooldownRefundPerTick@ giây khi gây sát thương lên kẻ địch.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Chuyển hóa <physicalDamage>Sức Mạnh Công Kích Cộng Thêm</physicalDamage> thành <magicDamage>Sức Mạnh Phép Thuật</magicDamage>. Nhận <magicDamage>@APAmp*100@% Sức Mạnh Phép Thuật</magicDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "THÍCH ỨNG",
+            "rarity": 0,
+            "tooltip": "Chuyển hóa <physicalDamage>Sức Mạnh Công Kích Cộng Thêm</physicalDamage> thành <magicDamage>Sức Mạnh Phép Thuật</magicDamage>. Nhận <magicDamage>@APAmp*100@% Sức Mạnh Phép Thuật</magicDamage>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2274,13 +2311,13 @@
                 "OnHitMod": 0.5,
                 "SecondMissileDelay": 0.15000000596046448
             },
-            "desc": "Khi bạn tung Đòn Đánh, bắn ra một tia đạn thứ hai gây @AttackReduction*100@% sát thương và các hiệu ứng Trên Đòn Đánh với @OnHitMod*100@% hiệu lực. Nhận tổng cộng <attackSpeed>@AttackSpeed*100@% Tốc Độ Đánh</attackSpeed>",
+            "desc": "Khi bạn tung Đòn Đánh, bắn ra một tia đạn thứ hai gây @AttackReduction*100@% sát thương và các hiệu ứng Trên Đòn Đánh với @OnHitMod*100@% hiệu lực. Nhận tổng cộng <attackSpeed>@AttackSpeed*100@% Tốc Độ Đánh</attackSpeed>.",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "Vũ Khí Hạng Nhẹ",
             "rarity": 2,
-            "tooltip": "Khi bạn tung Đòn Đánh, bắn ra một tia đạn thứ hai gây @AttackReduction*100@% sát thương và các hiệu ứng Trên Đòn Đánh với @OnHitMod*100@% hiệu lực. Nhận tổng cộng <attackSpeed>@AttackSpeed*100@% Tốc Độ Đánh</attackSpeed>"
+            "tooltip": "Khi bạn tung Đòn Đánh, bắn ra một tia đạn thứ hai gây @AttackReduction*100@% sát thương và các hiệu ứng Trên Đòn Đánh với @OnHitMod*100@% hiệu lực. Nhận tổng cộng <attackSpeed>@AttackSpeed*100@% Tốc Độ Đánh</attackSpeed>."
         },
         {
             "apiName": "Augment405",
@@ -2615,6 +2652,22 @@
             "name": "Khủng Long Cộng Dồn",
             "rarity": 0,
             "tooltip": "Khi bạn nhận <keywordMajor>Cộng Dồn</keywordMajor> vĩnh viễn cho một Kỹ Năng, nhận thêm @StackModifier*100@% cộng dồn nữa!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Chuyển hóa <magicDamage>Sức Mạnh Phép Thuật</magicDamage> thành <physicalDamage>Sức Mạnh Công Kích Cộng Thêm</physicalDamage>. Nhận <physicalDamage>@ADAmp*100@% Sức Mạnh Công Kích</physicalDamage>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Chuyển Hoá SMPT-SMCK",
+            "rarity": 0,
+            "tooltip": "Chuyển hóa <magicDamage>Sức Mạnh Phép Thuật</magicDamage> thành <physicalDamage>Sức Mạnh Công Kích Cộng Thêm</physicalDamage>. Nhận <physicalDamage>@ADAmp*100@% Sức Mạnh Công Kích</physicalDamage>."
         },
         {
             "apiName": "FeyMagic",
@@ -4050,7 +4103,7 @@
             "id": 18,
             "name": "Khổng Nhân Can Đảm",
             "rarity": 2,
-            "tooltip": "Nhận <shield>@TotalShield@ Lá Chắn</shield> sau khi <status>Làm Bất Động</status> hoặc <status>Sa Lầy</status> một tướng địch.<br><br>Lá Chắn Nhận Trong Vòng Này: @f1@<br>Tổng Lá Chắn Đã Nhận: @f2@"
+            "tooltip": "Nhận <shield>@TotalShield@ Lá Chắn</shield> sau khi <status>Làm Bất Động</status> hoặc <status>Sa Lầy</status> một tướng địch.<br><br>Lá Chắn Tạo Trong Vòng Này: @f1@<br>Tổng Lá Chắn Đã Tạo: @f2@"
         },
         {
             "apiName": "FruitsOfYourLabor",
@@ -4150,7 +4203,7 @@
             "id": 215,
             "name": "Chúc Phúc Hắc Ám",
             "rarity": 1,
-            "tooltip": "Khi bạn Hồi Máu/Tạo Lá Chắn cho một tướng gần kẻ địch, nhận @CurseCounter@ <keywordMajor>Sức Mạnh Nguyền Rủa</keywordMajor>.<br><br>Nhận @f1@ Điểm Hồi Kỹ Năng (@AbilityHasteRatio*100@% <keywordMajor>Sức Mạnh Nguyền Rủa</keywordMajor> của bạn).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Khi bạn Hồi Máu/Tạo Lá Chắn cho tướng đồng minh, nhận @CurseCounter@ <keywordMajor>Sức Mạnh Nguyền Rủa</keywordMajor>.<br><br>Nhận @f1@ Điểm Hồi Kỹ Năng (@AbilityHasteRatio*100@% <keywordMajor>Sức Mạnh Nguyền Rủa</keywordMajor> của bạn).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "MindtoMatter",
@@ -4249,14 +4302,15 @@
                     "mDisplayAsPercent": true,
                     "mFormulaParts": [
                         {
-                            "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 0.00044999999227002263
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{a1904faf}"
                         }
                     ]
                 }
             },
             "dataValues": {
                 "CritChance": 0.25,
+                "CritConverRatio": 0.00044999999227002263,
                 "CritDamage": 1.5499999523162842
             },
             "desc": "Kỹ năng của bạn có thể chí mạng. Nhận @CritChance*100@% Tỉ Lệ Chí Mạng.",
