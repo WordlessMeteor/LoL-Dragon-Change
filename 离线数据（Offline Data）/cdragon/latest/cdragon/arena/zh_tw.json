@@ -164,7 +164,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "BonusHPRequiredTooltipOnly",
-                            "mStat": 11,
+                            "mStat": 12,
                             "mStatFormula": 2
                         }
                     ]
@@ -405,13 +405,13 @@
                 "AllyHealthThreshold": 0.30000001192092896,
                 "CurrentHealthToDrain": 0.25
             },
-            "desc": "當隊友的生命降至<health>@AllyHealthThreshold*100@%</health>時，犧牲你的部分生命值賦予隊友<shield>護盾</shield>。",
+            "desc": "當友軍生命低於<scaleHealth>@AllyHealthThreshold*100@%</scaleHealth>時，犧牲你部分生命值賦予隊友<shield>護盾</shield>。",
             "iconLarge": "assets/ux/cherry/augments/icons/willingsacrifice_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/willingsacrifice_small.png",
             "id": 94,
             "name": "犧牲奉獻",
             "rarity": 1,
-            "tooltip": "當隊友的生命降至<health>@AllyHealthThreshold*100@%</health>時，犧牲你<health>@CurrentHealthToDrain*100@%現有生命值</health>賦予隊友<shield>護盾</shield>。<br><br>本回合護盾量：@f1@<br>總護盾量：@f2@"
+            "tooltip": "當友軍生命低於<scaleHealth>@AllyHealthThreshold*100@%</scaleHealth>時，犧牲<scaleHealth>@CurrentHealthToDrain*100@%目前生命</scaleHealth>賦予友軍相同數值的<shield>護盾</shield>。<br><br>本回合生成的護盾：@f1@<br>生成護盾總計：@f2@"
         },
         {
             "apiName": "Firefox",
@@ -492,13 +492,13 @@
             "dataValues": {
                 "ExtraSlowAmount": 100.0
             },
-            "desc": "造成的<status>緩速</status>效果額外降低100跑速。",
+            "desc": "造成的<status>緩速</status>效果額外降低100<speed>跑速</speed>。",
             "iconLarge": "assets/ux/cherry/augments/icons/icecold_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/icecold_small.png",
             "id": 44,
             "name": "雪地踱步",
             "rarity": 0,
-            "tooltip": "造成的<status>緩速</status>效果額外降低100跑速。"
+            "tooltip": "造成的<status>緩速</status>效果額外降低100<speed>跑速</speed>。"
         },
         {
             "apiName": "SpinToWin",
@@ -581,13 +581,13 @@
                 "DamageAmp": 0.2800000011920929,
                 "Omnivamp": 0.2800000011920929
             },
-            "desc": "隊友陣亡後，大幅增加傷害並獲得全能吸血，直到回合結束。",
+            "desc": "拍檔陣亡後，大幅增加傷害並獲得<lifeSteal>全能吸血</lifeSteal>，直到回合結束。",
             "iconLarge": "assets/ux/cherry/augments/icons/vengeance_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/vengeance_small.png",
             "id": 90,
             "name": "報仇雪恨",
             "rarity": 1,
-            "tooltip": "隊友陣亡後，增加@DamageAmp*100@%傷害並獲得@Omnivamp*100@%全能吸血。<br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
+            "tooltip": "拍檔死亡後，獲得@DamageAmp*100@%傷害提升和<lifeSteal>@Omnivamp*100@%全能吸血</lifeSteal>。<br>本回合造成傷害：@f1@<br>造成傷害總計：@f2@"
         },
         {
             "apiName": "Erosion",
@@ -884,29 +884,30 @@
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
-                            "mDataValue": "ShieldBase"
+                            "mDataValue": "APRatio"
                         }
                     ]
                 }
             },
             "dataValues": {
                 "AP": 1.0,
+                "APRatio": 3.0,
                 "ShieldBase": 3.0
             },
-            "desc": "回合開始時，每有<attention>%i:scaleAP% @AP@</attention>魔法攻擊便獲得<shield>@ShieldBase@護盾</shield>。",
+            "desc": "回合開始時，每有<scaleAP>%i:scaleAP% @AP@魔攻</scaleAP>便獲得<shield>@ShieldBase@護盾</shield>。",
             "iconLarge": "assets/ux/cherry/augments/icons/bigbrain_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bigbrain_small.png",
             "id": 180,
             "name": "超強大腦",
             "rarity": 1,
-            "tooltip": "回合開始時，每有<attention>%i:scaleAP% @AP@</attention>魔法攻擊便獲得<shield>@ShieldBase@護盾</shield>。"
+            "tooltip": "每回合開始時，獲得<shield>@TotalShield@護盾</shield>。"
         },
         {
             "apiName": "Vulnerability",
             "calculations": {},
             "dataValues": {
                 "CritChance": 0.25,
-                "CritDamage": 0.44999998807907104
+                "CritDamage": 1.4500000476837158
             },
             "desc": "道具與持續傷害效果可以暴擊。增加@CritChance*100@%暴擊率。",
             "iconLarge": "assets/ux/cherry/augments/icons/vulnerability_large.png",
@@ -982,7 +983,7 @@
                                 {
                                     "__type": "StatByCoefficientCalculationPart",
                                     "mCoefficient": 1.0,
-                                    "mStat": 8,
+                                    "mStat": 9,
                                     "mStatFormula": 2
                                 }
                             ]
@@ -1085,13 +1086,13 @@
                 "MovespeedAmp": 0.4000000059604645,
                 "SizeAmp": 0.4000000059604645
             },
-            "desc": "回合開始時，體積變大(增加<scaleAD>適性之力</scaleAD>及<healing>生命</healing>)或變小(增加<scaleLevel>技能加速</scaleLevel>及<speed>跑速</speed>)。",
+            "desc": "回合開始時，體型變大(增加<scaleAD>適性之力</scaleAD>及<scaleHealth>生命</scaleHealth>)或變小(增加<scaleLevel>技能加速</scaleLevel>及<speed>跑速</speed>)。",
             "iconLarge": "assets/ux/cherry/augments/icons/madscientist_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/madscientist_small.png",
             "id": 53,
             "name": "瘋狂科學家",
             "rarity": 2,
-            "tooltip": "回合開始時，體積變大(增加<scaleAD>@ADAmp*100@%適性之力</scaleAD>及<healing>@HealthAmp*100@%生命</healing>)或變小(增加<scaleLevel>@Haste@技能加速</scaleLevel>及<speed>@MovespeedAmp*100@%跑速</speed>)。"
+            "tooltip": "回合開始時，體型變大(增加<scaleAD>@ADAmp*100@%適性之力</scaleAD>及<scaleHealth>@HealthAmp*100@%生命</scaleHealth>)或變小(增加<scaleLevel>@Haste@技能加速</scaleLevel>及<speed>@MovespeedAmp*100@%跑速</speed>)。"
         },
         {
             "apiName": "MountainSoul",
@@ -1381,7 +1382,7 @@
                 "DamageRange": 1000.0,
                 "HealToDamageConversion": 0.699999988079071
             },
-            "desc": "進行<health>治療</health>和<health>生命回復</health>後，對最靠近的敵方英雄造成等同於部分治療量的<magicDamage>魔法傷害</magicDamage>。",
+            "desc": "進行<healing>治療</healing>和<healing>生命回復</healing>後，對最靠近的敵方英雄造成等同於部分治療量的<magicDamage>魔法傷害</magicDamage>。",
             "iconLarge": "assets/ux/cherry/augments/icons/circleofdeath_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/circleofdeath_small.png",
             "id": 15,
@@ -1552,13 +1553,13 @@
                 "DamageReduction": 0.10000000149011612,
                 "Health": 1250.0
             },
-            "desc": "增加<health>@Health@生命</health>，但造成的傷害降低@DamageReduction*100@%。",
+            "desc": "增加<scaleHealth>@Health@生命</scaleHealth>，但造成的傷害降低@DamageReduction*100@%。",
             "iconLarge": "assets/ux/cherry/augments/icons/celestialbody_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/celestialbody_small.png",
             "id": 13,
             "name": "天界之身",
             "rarity": 1,
-            "tooltip": "增加<health>@Health@生命</health>，但造成的傷害降低@DamageReduction*100@%。"
+            "tooltip": "增加<scaleHealth>@Health@生命</scaleHealth>，但造成的傷害降低@DamageReduction*100@%。"
         },
         {
             "apiName": "BreadAndJam",
@@ -1580,13 +1581,13 @@
             "dataValues": {
                 "AbilityHasteToMSConversion": 1.5
             },
-            "desc": "增加<moveSpeed>跑速</moveSpeed>，數值等同於@AbilityHasteToMSConversion@倍的<scaleLevel>技能加速</scaleLevel>。",
+            "desc": "增加<Speed>跑速</Speed>，數值等同於@AbilityHasteToMSConversion@倍的<scaleLevel>技能加速</scaleLevel>。",
             "iconLarge": "assets/ux/cherry/augments/icons/withhaste_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/withhaste_small.png",
             "id": 98,
             "name": "腳程加速",
             "rarity": 1,
-            "tooltip": "增加<moveSpeed>跑速</moveSpeed>，數值等同於@AbilityHasteToMSConversion@倍的<scaleLevel>技能加速</scaleLevel>。"
+            "tooltip": "增加<Speed>跑速</Speed>，數值等同於@AbilityHasteToMSConversion@倍的<scaleLevel>技能加速</scaleLevel>。"
         },
         {
             "apiName": "FallenAegis",
@@ -1625,7 +1626,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.02500000037252903,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 },
@@ -1757,7 +1758,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealPercentage",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -1794,13 +1795,13 @@
             "apiName": "BuffBuddies",
             "calculations": {},
             "dataValues": {},
-            "desc": "永久獲得樹精長老和遠古魔像增益效果。",
+            "desc": "你獲得<font color = '#f30c1a'>力量的餘燼</font>和<font color = '#1542ea'>智慧的餘燼</font>。",
             "iconLarge": "assets/ux/cherry/augments/icons/buffbuddies_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/buffbuddies_small.png",
             "id": 9,
             "name": "增益麻吉",
             "rarity": 0,
-            "tooltip": "永久獲得樹精長老和遠古魔像增益效果。"
+            "tooltip": "{{Cherry_BuffBuddies_Summary}}<br><br><rules><font color = '#f30c1a'>力量的餘燼</font>：普攻對敵方英雄造成<keywordMajor>燃燒</keywordMajor>和<status>緩速</status>效果。脫離戰鬥時<healing>回復一定比例的最大生命值</healing>。<br><br><font color = '#1542ea'>智慧的餘燼</font>：獲得技能加速，且每秒回復<scaleMana>魔力</scaleMana>和<energy>能量</energy>。</rules>"
         },
         {
             "apiName": "RaidBoss",
@@ -1815,13 +1816,13 @@
                 "ShieldHealthRatio": 0.3499999940395355,
                 "StatIncrease": 0.4000000059604645
             },
-            "desc": "每回合開始時，你會被困在競技場中間，無法行動。期間，你會獲得大量傷害減免，並隨時間體型變大、增加<healing>生命</healing>、<physicalDamage>物理攻擊</physicalDamage>，以及<scaleAP>魔法攻擊</scaleAP>。@ImprisonDuration@秒後或達到<scaleHealth>@BreakoutHealthThreshold*100@%生命</scaleHealth>時，你會掙脫束縛，<status>擊退</status>敵軍並獲得基於<scaleHealth>最大生命</scaleHealth>的<shield>護盾</shield>。",
+            "desc": "每回合開始時，你會被困在競技場中間，無法行動。期間，獲得大量傷害減免，並隨時間體型變大、增加<scaleHealth>生命</scaleHealth>、<physicalDamage>物攻</physicalDamage>，以及<scaleAP>魔攻</scaleAP>。@ImprisonDuration@秒後或達到<scaleHealth>@BreakoutHealthThreshold*100@%生命</scaleHealth>時，你會掙脫束縛，<status>擊退</status>敵軍並根據<scaleHealth>最大生命</scaleHealth>獲得<shield>護盾</shield>。",
             "iconLarge": "assets/ux/cherry/augments/icons/raidboss_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/raidboss_small.png",
             "id": 125,
             "name": "突襲頭目",
             "rarity": 2,
-            "tooltip": "每回合開始時，你會被困在競技場中間，無法行動。期間，你會獲得最多@DamageReductionMax*100@%傷害減免，並隨時間體型變大、增加<healing>生命</healing>、<physicalDamage>物理攻擊</physicalDamage>，以及<scaleAP>魔法攻擊</scaleAP>(最大@StatIncrease*100@%)。@ImprisonDuration@秒後或達到<scaleHealth>@BreakoutHealthThreshold*100@%生命</scaleHealth>時，你會掙脫束縛，<status>擊退</status>敵軍並獲得等同於<shield>@ShieldHealthRatio*100@%最大生命的護盾</shield>。"
+            "tooltip": "每回合開始時，你會被困在競技場中間，無法行動。期間，獲得最多@DamageReductionMax*100@%傷害減免，並隨時間體型變大、增加<scaleHealth>生命</scaleHealth>、<physicalDamage>物攻</physicalDamage>，以及<scaleAP>魔攻</scaleAP>(最大@StatIncrease*100@%)。@ImprisonDuration@秒後或達到<scaleHealth>@BreakoutHealthThreshold*100@%生命</scaleHealth>時，你會掙脫束縛，<status>擊退</status>敵軍並獲得等同於<shield>@ShieldHealthRatio*100@%最大生命的護盾</shield>。"
         },
         {
             "apiName": "OutlawsGrit",
@@ -1956,8 +1957,24 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 75.0,
-                            "mStartValue": 5.0
+                            "mEndValue": 50.0,
+                            "mStartValue": 1.25
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.05000000074505806,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.07500000298023224,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.004999999888241291,
+                            "mStat": 12
                         }
                     ]
                 },
@@ -2192,7 +2209,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.017500000074505806,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -2239,19 +2256,31 @@
         },
         {
             "apiName": "DualWield",
-            "calculations": {},
-            "dataValues": {
-                "AttackReduction": 0.3499999940395355,
-                "AttackSpeed": 1.0,
-                "OnHitMod": 0.5
+            "calculations": {
+                "{84eb6ffe}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{b1c6c84a}",
+                            "mStat": 2
+                        }
+                    ]
+                }
             },
-            "desc": "增加<attackSpeed>@AttackSpeed*100@%總攻速</attackSpeed>。你的普攻傷害降低@AttackReduction*100@%，命中傷害降低@OnHitMod*100@%。",
+            "dataValues": {
+                "AttackReduction": 0.5,
+                "AttackSpeed": 0.5,
+                "OnHitMod": 0.5,
+                "SecondMissileDelay": 0.15000000596046448
+            },
+            "desc": "普攻時，發射一支額外箭矢，會造成較低的@AttackReduction*100@%傷害並觸發@OnHitMod*100@%的命中效果。增加<attackSpeed>@AttackSpeed*100@%總攻速</attackSpeed>。",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "雙刀流",
             "rarity": 2,
-            "tooltip": "增加<attackSpeed>@AttackSpeed*100@%總攻速</attackSpeed>。你的普攻傷害降低@AttackReduction*100@%，命中傷害降低@OnHitMod*100@%。"
+            "tooltip": "普攻時，發射一支額外箭矢，會造成較低的@AttackReduction*100@%傷害並觸發@OnHitMod*100@%的命中效果。增加<attackSpeed>@AttackSpeed*100@%總攻速</attackSpeed>。"
         },
         {
             "apiName": "Augment405",
@@ -2274,7 +2303,7 @@
                 "DamageRedirectPercentage": 0.15000000596046448,
                 "HealCopyPercentage": 0.5
             },
-            "desc": "友軍承受的@DamageRedirectPercentage*100@%傷害將會轉移至你身上，同時你也能獲得@HealCopyPercentage*100@%友軍受到的治療。",
+            "desc": "友軍承受的@DamageRedirectPercentage*100@%傷害將轉移至你身上，同時你也能獲得<healing>@HealCopyPercentage*100@%友軍受到的治療</healing>。",
             "iconLarge": "assets/ux/cherry/augments/icons/spiritlink_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/spiritlink_small.png",
             "id": 78,
@@ -2289,7 +2318,7 @@
                 "AttackSpeedRatio": 0.0010000000474974513,
                 "BleedDuration": 5.0,
                 "CurseCounter": 2.0,
-                "OnHitDamageRatio": 0.3799999952316284,
+                "OnHitDamageRatio": 0.4000000059604645,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
             "desc": "普攻會獲得永久的<keywordMajor>詛咒之力</keywordMajor>，並根據你的<keywordMajor>詛咒之力</keywordMajor>造成額外<magicDamage>魔法傷害</magicDamage>。<br><br>可獲得的<keywordMajor>詛咒之力</keywordMajor>上限每回合根據自身與友方英雄之間的<keywordMajor>詛咒</keywordMajor>來源總數增加。",
@@ -2349,13 +2378,13 @@
             "dataValues": {
                 "Omnivamp": 0.20000000298023224
             },
-            "desc": "獲得@Omnivamp*100@%全能吸血效果",
+            "desc": "獲得<lifeSteal>@Omnivamp*100@%全能吸血</lifeSteal>效果。",
             "iconLarge": "assets/ux/cherry/augments/icons/goredrink_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/goredrink_small.png",
             "id": 138,
             "name": "飲血",
             "rarity": 0,
-            "tooltip": "獲得@Omnivamp*100@%全能吸血效果"
+            "tooltip": "獲得<lifeSteal>@Omnivamp*100@%全能吸血</lifeSteal>效果。"
         },
         {
             "apiName": "WellBeRightBack",
@@ -2553,7 +2582,7 @@
                         {
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.02500000037252903,
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -2561,9 +2590,9 @@
             "dataValues": {
                 "BleedDuration": 5.0,
                 "CurseStacksPerTick": 1.0,
-                "MaxHealthRatio": 2.25,
+                "MaxHealthRatio": 4.0,
                 "Range": 500.0,
-                "TickCadence": 1.0
+                "TickCadence": 0.25
             },
             "desc": "獲得一個氣場，對每位位於氣場內的敵方英雄持續收割永久<keywordMajor>詛咒之力</keywordMajor>。根據你的<keywordMajor>詛咒之力</keywordMajor>增加<healing>最大生命</healing>。<br><br>可獲得的<keywordMajor>詛咒之力</keywordMajor>上限每回合根據自身與友方英雄之間的<keywordMajor>詛咒</keywordMajor>來源總數增加。",
             "iconLarge": "assets/ux/cherry/augments/icons/plaguebearer_large.png",
@@ -2571,7 +2600,7 @@
             "id": 216,
             "name": "恐懼使者",
             "rarity": 2,
-            "tooltip": "每@TickCadence@秒從鄰近敵方英雄身上獲得@CurseStacksPerTick@<keywordMajor>詛咒之力</keywordMajor>。<br><br>增加<healing>@f1@生命</healing>(相當於自身@MaxHealthRatio*100@%<keywordMajor>詛咒之力</keywordMajor>)。<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "每@TickCadence@秒從每位鄰近敵方英雄身上獲得@CurseStacksPerTick@<keywordMajor>詛咒之力</keywordMajor>。<br><br>增加<scaleHealth>@f1@生命</scaleHealth>(相當於自身@MaxHealthRatio*100@%<keywordMajor>詛咒之力</keywordMajor>)。<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "StackosaurusRex",
@@ -2622,7 +2651,7 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.0,
+                "AdaptiveForceRatio": 1.75,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
@@ -2640,15 +2669,16 @@
             "apiName": "Flashy",
             "calculations": {},
             "dataValues": {
+                "FlashAmmoTooltip": 3.0,
                 "FlashCooldown": 2.0
             },
-            "desc": "你的閃現有3發，冷卻時間為@FlashCooldown@秒。",
+            "desc": "你的閃現有@FlashAmmoTooltip@發，冷卻時間為@FlashCooldown@秒。",
             "iconLarge": "assets/ux/cherry/augments/icons/flashy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/flashy_small.png",
             "id": 116,
             "name": "閃光俠",
             "rarity": 1,
-            "tooltip": "你的閃現有3發，冷卻時間為@FlashCooldown@秒。"
+            "tooltip": "你的閃現有@FlashAmmoTooltip@發，冷卻時間為@FlashCooldown@秒。"
         },
         {
             "apiName": "NestingDoll",
@@ -2657,7 +2687,7 @@
                 "ReviveArmTime": 2.0,
                 "ReviveDuration": 1.5,
                 "ReviveMod": 0.4000000059604645,
-                "SecondReviveMod": 0.25,
+                "SecondReviveMod": 0.1599999964237213,
                 "SecondSizeMod": -0.4000000059604645,
                 "SelfReviveTimerModMax": 0.5,
                 "SelfReviveTimerModMin": 0.4000000059604645,
@@ -2754,6 +2784,21 @@
             "tooltip": "你的召喚物增加@MinionSizeIncrease*100@%體型、生命與傷害。"
         },
         {
+            "apiName": "TankEngine",
+            "calculations": {},
+            "dataValues": {
+                "MaxHPIncrement": 0.05000000074505806,
+                "SizeIncrement": 0.15000000596046448
+            },
+            "desc": "每次參與擊殺，體型增加@SizeIncrement*100@%並獲得<scaleHealth>@MaxHPIncrement*100@%最大生命</scaleHealth>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "id": 310,
+            "name": "坦克引擎",
+            "rarity": 0,
+            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>參與擊殺：@f1@"
+        },
+        {
             "apiName": "EtherealWeapon",
             "calculations": {},
             "dataValues": {
@@ -2770,7 +2815,9 @@
         {
             "apiName": "OmniSoul",
             "calculations": {},
-            "dataValues": {},
+            "dataValues": {
+                "SoulsToAdd": 3.0
+            },
             "desc": "獲得3個隨機龍魂。",
             "iconLarge": "assets/ux/cherry/augments/icons/omnisoul_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/omnisoul_small.png",
@@ -2790,7 +2837,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealAmount",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mMultiplier": {
@@ -2805,13 +2852,13 @@
                 "HealAmount": 0.30000001192092896,
                 "HealthThreshold": 0.5
             },
-            "desc": "生命降到@HealthThreshold*100@%以下後，在3秒內回復@HealAmount*100@%最大生命。<br>",
+            "desc": "生命低於<scaleHealth>@HealthThreshold*100@%</scaleHealth>時，在3秒內<healing>回復@HealAmount*100@%最大生命</healing>。<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
             "id": 20,
             "name": "黎明使者之決意",
             "rarity": 1,
-            "tooltip": "生命降到@HealthThreshold*100@%以下後，在3秒內回復@HealAmount*100@%最大生命。<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
+            "tooltip": "{{Cherry_DawnbringersResolve_Summary}}<br><br>本回合治療量：@f1@<br>治療量總計：@f2@"
         },
         {
             "apiName": "HoldVeryStill",
@@ -2847,8 +2894,8 @@
             "dataValues": {
                 "ASDuration": 5.0,
                 "BonusDamage": 0.10000000149011612,
-                "BonusMS": 0.20000000298023224,
-                "HoldStillDuration": 1.5
+                "BonusMS": 0.30000001192092896,
+                "HoldStillDuration": 1.25
             },
             "desc": "獲得「<spellName>約德爾游擊隊</spellName>」<br><br><rules>停止移動@HoldStillDuration@秒後，進入<keywordStealth>潛隱</keywordStealth>狀態，直到下次移動為止。脫離<keywordStealth>潛隱</keywordStealth>狀態時，增加<attackSpeed>@BonusAS@攻速</attackSpeed>。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/holdverystill_large.png",
@@ -2916,7 +2963,7 @@
                 "CooldownResetValue": 1.5,
                 "DHCooldown": 45.0,
                 "DamageAmp": 0.15000000596046448,
-                "DamagePerSoulEssence": 10.0,
+                "DamagePerSoulEssence": 20.0,
                 "Duration": 3.0,
                 "GoldPercentBonus": 1.2000000476837158,
                 "GoldPercentBonusRanged": 0.8999999761581421,
@@ -2926,7 +2973,8 @@
                 "MissileNoiseNumberLimiter": 3.0,
                 "MissileNoiseRangeLimiter": 1500.0,
                 "ModesCooldownReduction": 1.0,
-                "OOCTimer": 10.0
+                "OOCTimer": 10.0,
+                "StartingSoulsPerAugment": 8.0
             },
             "desc": "獲得<spellName>先發制人</spellName>及<spellName>靈魂收割</spellName>關鍵符文。",
             "iconLarge": "assets/ux/cherry/augments/icons/frombeginningtoend_large.png",
@@ -3145,13 +3193,13 @@
                 "MovementSpeed": 50.0,
                 "SlowResist": 0.4000000059604645
             },
-            "desc": "獲得@MovementSpeed@<speed>跑速</speed>和@SlowResist*100@%<speed>緩速抗性</speed>。",
+            "desc": "獲得<speed>@MovementSpeed@跑速</speed>和<speed>@SlowResist*100@%緩速抗性</speed>。",
             "iconLarge": "assets/ux/cherry/augments/icons/legday_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/legday_small.png",
             "id": 305,
             "name": "腿部訓練日",
             "rarity": 0,
-            "tooltip": "獲得@MovementSpeed@<speed>跑速</speed>和@SlowResist*100@%<speed>緩速抗性</speed>。"
+            "tooltip": "獲得<speed>@MovementSpeed@跑速</speed>和<speed>@SlowResist*100@%緩速抗性</speed>。"
         },
         {
             "apiName": "Trailblazer",
@@ -3286,7 +3334,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "{8bfcfef7}",
-                            "mStat": 6,
+                            "mStat": 7,
                             "mStatFormula": 2
                         }
                     ]
@@ -3318,7 +3366,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthPercent",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ]
                 }
@@ -3326,13 +3374,13 @@
             "dataValues": {
                 "HealthPercent": 0.03500000014901161
             },
-            "desc": "你的普攻額外造成等同於自身<healing>最大生命</healing>@HealthPercent*100@%的<physicalDamage>物理傷害</physicalDamage>。",
+            "desc": "你的普攻額外造成等同於自身<scaleHealth>最大生命</scaleHealth>@HealthPercent*100@%的<physicalDamage>物理傷害</physicalDamage>。",
             "iconLarge": "assets/ux/cherry/augments/icons/heavyhitter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/heavyhitter_small.png",
             "id": 181,
             "name": "重型打手",
             "rarity": 0,
-            "tooltip": "你的普攻額外造成等同於自身<healing>最大生命</healing>@HealthPercent*100@%的<physicalDamage>@HealthPercentDamage@物理傷害</physicalDamage>。"
+            "tooltip": "你的普攻額外造成等同於自身<scaleHealth>最大生命</scaleHealth>@HealthPercent*100@%的<physicalDamage>@HealthPercentDamage@物理傷害</physicalDamage>。"
         },
         {
             "apiName": "RabbleRousing",
@@ -3343,7 +3391,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "MaxHealthPercentageHeal",
-                            "mStat": 11
+                            "mStat": 12
                         },
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3419,13 +3467,13 @@
                 "CritChance": 0.25,
                 "CritHeal": 0.4000000059604645
             },
-            "desc": "你的治療與護盾可以暴擊。獲得@CritChance*100@%暴擊率。",
+            "desc": "你的<healing>治療</healing>與<shield>護盾</shield>可以暴擊，治療量或護盾量提升@CritHeal*100@%。增加@CritChance*100@%暴擊率。 ",
             "iconLarge": "assets/ux/cherry/augments/icons/criticalhealing_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/criticalhealing_small.png",
             "id": 118,
             "name": "暴擊治療",
             "rarity": 1,
-            "tooltip": "你的治療與護盾可以暴擊，提升治療或護盾量額外@CritHeal*100@%。獲得@CritChance*100@%暴擊率。<br><br>額外治療量：@f1@<br>額外護盾量：@f2@"
+            "tooltip": "{{Cherry_CriticalHealing_Summary}}<br><br>額外治療量：@f1@<br>額外護盾：@f2@"
         },
         {
             "apiName": "TransmuteGold",
@@ -3475,9 +3523,9 @@
             "apiName": "Desecrator",
             "calculations": {},
             "dataValues": {
-                "ArmorMRRatio": 0.20000000298023224,
+                "ArmorMRRatio": 0.25,
                 "BleedDuration": 5.0,
-                "CurseCounter": 5.0,
+                "CurseCounter": 8.0,
                 "PercentMaxHPDamagePer5Seconds": 0.05000000074505806
             },
             "desc": "<status>硬控場</status>敵方英雄時永久獲得<keywordMajor>詛咒之力</keywordMajor>。根據你的<keywordMajor>詛咒之力</keywordMajor>增加<armor>物防</armor>和<magicresistance>魔防</magicresistance>。<br><br>可獲得的<keywordMajor>詛咒之力</keywordMajor>上限每回合根據自身與友方英雄之間的<keywordMajor>詛咒</keywordMajor>來源總數增加。",
@@ -3494,7 +3542,7 @@
             "dataValues": {
                 "HealShieldAmp": 0.30000001192092896
             },
-            "desc": "對搭檔施放時，你的<healing>治療</healing>與<shield>護盾量</shield>提升@HealShieldAmp*100@%。護盾",
+            "desc": "對友軍使用時，你的<healing>治療</healing>和<shield>護盾</shield>效果提升@HealShieldAmp*100@%。",
             "iconLarge": "assets/ux/cherry/augments/icons/allforyou_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/allforyou_small.png",
             "id": 141,
@@ -3693,7 +3741,7 @@
             "dataValues": {
                 "HealPercent": 0.15000000596046448
             },
-            "desc": "自身回復拍檔造成傷害@HealPercent*100@%的生命。",
+            "desc": "自身<healing>回復拍檔所造成傷害@HealPercent*100@%的生命</healing>。",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticrelationship_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticrelationship_small.png",
             "id": 175,
@@ -3748,7 +3796,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthRatioPer1000Units",
-                            "mStat": 11
+                            "mStat": 12
                         },
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3906,8 +3954,28 @@
         },
         {
             "apiName": "Castle",
-            "calculations": {},
+            "calculations": {
+                "TotalShield": {
+                    "StaticTooltipCalculationDisplay": 1,
+                    "__type": "GameCalculation",
+                    "mExpandedTooltipCalculationDisplay": 1,
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 250.0,
+                            "mStartValue": 80.0
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "HealthScalar",
+                            "mStat": 12
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 1
+                }
+            },
             "dataValues": {
+                "HealthScalar": 0.05000000074505806,
                 "MSBuffAmount": 0.6000000238418579,
                 "MSBuffDuration": 4.0
             },
@@ -3966,7 +4034,7 @@
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
                             "mDataValue": "HealthScalar",
-                            "mStat": 11
+                            "mStat": 12
                         }
                     ],
                     "mSimpleTooltipCalculationDisplay": 4
@@ -3988,19 +4056,18 @@
             "apiName": "FruitsOfYourLabor",
             "calculations": {},
             "dataValues": {
-                "AllyMaxRange": 10000.0,
                 "AmpAmount": 0.25,
                 "AmpAmountTooltip": 25.0,
                 "Duration": 2.0,
                 "MSBoost": 0.4000000059604645
             },
-            "desc": "力量之花對自身效果提升，附近的友方英雄也可分享此效果。",
+            "desc": "力量之花對自身效果提升@AmpAmountTooltip@%，友方英雄也可分享此效果。",
             "iconLarge": "assets/ux/cherry/augments/icons/fruitarian_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/fruitarian_small.png",
             "id": 222,
             "name": "勞動之果",
             "rarity": 0,
-            "tooltip": "力量之花對自身效果提升@AmpAmountTooltip@%，@AllyMaxRange@範圍內的友方英雄也可分享此效果。"
+            "tooltip": "{{Cherry_FruitsOfYourLabor_Summary}}"
         },
         {
             "apiName": "InfernalSoul",
@@ -4075,7 +4142,7 @@
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
                 "CurseCounter": 4.0,
-                "Radius": 450.0
+                "Radius": 25000.0
             },
             "desc": "治療/護盾賦予你永久<keywordMajor>詛咒之力</keywordMajor>。根據你的<keywordMajor>詛咒之力</keywordMajor>增加技能加速<br><br>可獲得的<keywordMajor>詛咒之力</keywordMajor>上限每回合根據自身與友方英雄之間的<keywordMajor>詛咒</keywordMajor>來源總數增加。",
             "iconLarge": "assets/ux/cherry/augments/icons/darkblessing_large.png",
@@ -4120,13 +4187,13 @@
             "apiName": "WisdomofAges",
             "calculations": {},
             "dataValues": {},
-            "desc": "立刻升級，且每隔一回合獲得1次額外升級。移除等級的上限。",
+            "desc": "立刻升級，且每回合獲得1次額外升級。移除等級的上限。<br><br>若這是你拿的第二件增幅裝置，立刻獲得3等等級。",
             "iconLarge": "assets/ux/cherry/augments/icons/wisdomofages_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/wisdomofages_small.png",
             "id": 96,
             "name": "亙古智慧",
             "rarity": 2,
-            "tooltip": "立刻升級，且每隔一回合獲得1次額外升級。移除等級的上限。"
+            "tooltip": "立刻升級，且每回合獲得1次額外升級。移除等級的上限。<br><br>若這是你拿的第二件增幅裝置，立刻獲得3等等級。"
         },
         {
             "apiName": "GoHSacrificeForPrismatic",
@@ -4198,7 +4265,7 @@
             "id": 48,
             "name": "寶石手套",
             "rarity": 2,
-            "tooltip": "技能可以暴擊，造成@CritDamage*100@%總傷害。增加@CritChance*100@%暴擊率。額外增加@APToCritConversion@暴擊率，隨魔攻成長。<br><br>本回合額外傷害：@f1@<br>總額外傷害：@f2@"
+            "tooltip": "技能可以暴擊，造成@CritDamage*100@%總傷害。增加@CritChance*100@%暴擊率。獲得額外@APToCritConversion@%暴擊率。<br><br>本回合額外傷害：@f1@<br>額外傷害總計：@f2@"
         },
         {
             "apiName": "AndMyAxe",

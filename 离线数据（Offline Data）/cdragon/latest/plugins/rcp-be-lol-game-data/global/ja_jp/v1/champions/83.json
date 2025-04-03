@@ -888,7 +888,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "次に行う通常攻撃が追加ダメージを与えて自身を回復する。対象を倒すと墓が掘られる。",
-            "dynamicDescription": "ヨリックの次の通常攻撃が追加で<physicalDamage>@BonusDamage@の物理ダメージ</physicalDamage>を与え、<healing>@QHeal@ + 自身の減少体力の@MissingHealthRatio@%</healing>の体力を回復する。チャンピオン以外に対しては回復量が@HealReduction@%低下する。この通常攻撃で対象を倒すと墓が残る。<br><br>周囲に3つ以上の墓が存在し、このスキルが使用されていた場合は、<recast>再発動</recast>すると周囲の墓から<keywordMajor>「ミストウォーカー」</keywordMajor>を召喚できる。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "次の通常攻撃が追加で<physicalDamage>@BonusDamage@の物理ダメージ</physicalDamage>を与え、<healing>@QHeal@ + 自身の減少体力の@MissingHealthRatio@%</healing>の体力を回復する。チャンピオン以外に対しては回復量が@HealReduction@%低下する。この通常攻撃がチャンピオンまたは大型モンスターに命中するか、対象を倒すと、墓が残る。<br><br>周囲に3つ以上の墓が存在し、このスキルが使用されていた場合は、<recast>再発動</recast>すると周囲の墓から<keywordMajor>「ミストウォーカー」</keywordMajor>を召喚できる。@SpellModifierDescriptionAppend@",
             "range": [
                 0.0,
                 0.0,
@@ -906,12 +906,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                7.0,
-                6.25,
+                6.0,
                 5.5,
-                4.75,
+                5.0,
+                4.5,
                 4.0,
-                3.25
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -1038,7 +1038,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "指定した地点に破壊可能な壁を召喚し、敵ユニットの動きを阻止する。",
-            "dynamicDescription": "霊の壁を召喚する。敵はこの壁を通り抜けられないが、味方は通り抜けられる。壁は通常攻撃を@Effect5Amount@回受けると消滅する。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "霊の壁を召喚する。敵はこの壁を通り抜けられないが、味方は通り抜けられる。壁の<healing>体力は@WallHealthTooltip@</healing>で、@CircleDuration@秒後に消滅する。@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -1069,49 +1069,49 @@
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    -1.0,
                     0.0,
                     0.0,
-                    1.0,
-                    1.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.0,
-                    2.0,
-                    2.0,
-                    3.0,
-                    3.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1187,8 +1187,8 @@
             "abilityVideoImagePath": "champion-abilities/0083/ability_0083_E1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
-            "description": "「黒き霧」の塊を投げつけてダメージとスロウ効果を与え、対象をマークする。",
-            "dynamicDescription": "「黒き霧」の塊を投げつけて<magicDamage>現在体力の@Calc_CurrentHealthDamage@にあたる魔法ダメージ(最小: @MinimumDamageBonus@)</magicDamage>を与え、@SlowDuration@秒間@Calc_Slow@の<status>スロウ効果</status>を付与し、@MarkDuration@秒間チャンピオンとモンスターをマークする。マークされた敵は継続的に周囲の墓を<spellName>「目覚め」</spellName>させ(最大召喚数である@Spell.YorickPassive:YorickPassiveGhoulMax@体は越えない)、<keywordMajor>「ミストウォーカー」</keywordMajor>の攻撃から受けるダメージが最大@GhoulBonusCount@回まで@GhoulBonusDamage*100@%増加する。<br><br>自身と召喚したユニットは、マークされた対象に向かう際に<speed>移動速度が@Effect5Amount@%</speed>増加する。<keywordMajor>「ミストウォーカー」</keywordMajor>はマークされた敵が逃げると1回だけ飛びついて追いかける。@SpellModifierDescriptionAppend@",
+            "description": "「黒き霧」の塊を投げつけてダメージとスロウ効果を与え、対象をマークする。召喚したユニットはマークされた対象に向かう際は移動速度が増加する。 ",
+            "dynamicDescription": "「黒き霧」の塊を投げつけて<magicDamage>@Calc_Damage@の魔法ダメージ</magicDamage>を与え、@SlowDuration@秒間@Calc_Slow@の<status>スロウ効果</status>を付与し、@MarkDuration@秒間チャンピオンとモンスターをマークする。マークされた敵は継続的に周囲の墓を<spellName>「目覚め」</spellName>させ(最大召喚数である@Spell.YorickPassive:YorickPassiveGhoulMax@体は越えない)、物理防御が@ArmorShred*100@%低下する。<br><br>自身と召喚したユニットは、マークされた対象に向かう際に<speed>移動速度が@HasteAmount*100@%</speed>増加する。<keywordMajor>「ミストウォーカー」</keywordMajor>はマークされた敵が逃げると1回だけ飛びついて追いかける。@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -1214,81 +1214,81 @@
                 8.0
             ],
             "coefficients": {
-                "coefficient1": 0.7,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    35.0,
-                    70.0,
-                    105.0,
-                    140.0,
-                    175.0,
-                    210.0,
-                    245.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     0.0,
@@ -1338,7 +1338,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "ヨリックが「霧の乙女」を召喚する。「霧の乙女」が攻撃している対象を自身が攻撃すると追加ダメージを与える。「霧の乙女」は倒された敵から自動的に「ミストウォーカー」を召喚する。",
-            "dynamicDescription": "<keywordMajor>「霧の乙女」</keywordMajor>と@RGhoulNumbers@体の<keywordMajor>「ミストウォーカー」</keywordMajor>を召喚する。<keywordMajor>「霧の乙女」</keywordMajor>は周囲で倒された敵から自動的に追加の<keywordMajor>「ミストウォーカー」</keywordMajor>を召喚する。<br><br><keywordMajor>「霧の乙女」</keywordMajor>が攻撃している対象を自身が攻撃すると、<magicDamage>最大体力の@RMarkDamagePercent@%にあたる魔法ダメージ</magicDamage>を与える。<br><br>10秒後、このスキルを<recast>再発動</recast>すると<keywordMajor>「霧の乙女」</keywordMajor>が解放されて、最も近いレーンを進んでいく。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<healing>体力@YorickBigGhoulHealth@</healing>、魔法攻撃力<magicDamage>@YorickBigGhoulDamage@</magicDamage>の<keywordMajor>「霧の乙女」</keywordMajor>と@RGhoulNumbers@体の<keywordMajor>「ミストウォーカー」</keywordMajor>を召喚する。<keywordMajor>「霧の乙女」</keywordMajor>は周囲で倒された敵から自動的に<keywordMajor>「ミストウォーカー」</keywordMajor>を召喚する。<br><br><keywordMajor>「霧の乙女」</keywordMajor>が攻撃している対象を自身が攻撃すると、<magicDamage>最大体力の@RMarkDamagePercent@%にあたる魔法ダメージ</magicDamage>を与える。<br><br>10秒後、このスキルを<recast>再発動</recast>すると<keywordMajor>「霧の乙女」</keywordMajor>が解放されて、最も近いレーンを進んでいく。@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,

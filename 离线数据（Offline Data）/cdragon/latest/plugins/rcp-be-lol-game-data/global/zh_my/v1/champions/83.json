@@ -888,7 +888,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "约瑞科的下次基本攻击将会造成额外的伤害，并回复些许生命值。如果目标死亡，约瑞科便会从坟墓召唤出雾行者。",
-            "dynamicDescription": "约瑞科的下次普攻将造成额外的<physicalDamage>@BonusDamage@物理伤害</physicalDamage>，并回复<healing>@QHeal@加上@MissingHealthRatio@%他损失的生命值</healing>，对非英雄单位的伤害降低@HealReduction@%。如果此次普攻击杀了目标，会产生一座坟墓。<br><br>如果约瑞科身边有至少 3 座或以上的坟墓，且此技能已被使用，约瑞科能<recast>再次施放</recast>此技能，从附近的所有坟墓中唤起<keywordMajor>雾行者</keywordMajor>。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "约瑞科的下次普攻将额外造成<physicalDamage>@BonusDamage@物理伤害</physicalDamage>，并回复<healing>@QHeal@外加@MissingHealthRatio@%已损失生命值</healing>，对非英雄单位的伤害降低@HealReduction@%。如果此次普攻命中了英雄或大型野怪，或击杀了目标，就会留下一座坟墓。<br><br>当附近有至少3座或以上的坟墓时，如果此技能已被使用，那么约瑞科就能<recast>重施技能</recast>，从附近的所有坟墓中唤起<keywordMajor>雾行者</keywordMajor>。@SpellModifierDescriptionAppend@",
             "range": [
                 0.0,
                 0.0,
@@ -906,12 +906,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                7.0,
-                6.25,
+                6.0,
                 5.5,
-                4.75,
+                5.0,
+                4.5,
                 4.0,
-                3.25
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -1038,7 +1038,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "约瑞科召唤出一圈可摧毁的尸墙，围住目标区域数秒钟。",
-            "dynamicDescription": "约瑞科召唤一道灵墙来阻挡敌人的道路，但不会影响队友。灵墙能被攻击，并且会在 @Effect5Amount@ 次命中后消失。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "约瑞科召唤一道灵墙来阻挡敌人的道路，但不影响友军。灵墙拥有<healing>@WallHealthTooltip@生命值</healing>，并会在@CircleDuration@秒后消失。@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -1069,49 +1069,49 @@
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    -1.0,
                     0.0,
                     0.0,
-                    1.0,
-                    1.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.0,
-                    2.0,
-                    2.0,
-                    3.0,
-                    3.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1187,8 +1187,8 @@
             "abilityVideoImagePath": "champion-abilities/0083/ability_0083_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
-            "description": "约瑞科投掷一团黯雾，造成魔法伤害，同时缓速并标记敌人。",
-            "dynamicDescription": "约瑞科投掷一团黯雾，对敌方目标造成<magicDamage>@Calc_CurrentHealthDamage@当前生命的魔法伤害（最小：@MinimumDamageBonus@）</magicDamage>，并<status>缓速</status>@Calc_Slow@，持续@SlowDuration@秒，同时标记英雄和野怪@MarkDuration@秒。被标记的敌人会持续对附近的坟墓触发<spellName>逝者苏生</spellName>（但数量不会大于@Spell.YorickPassive:YorickPassiveGhoulMax@的上限）。<keywordMajor>雾行者</keywordMajor>的最多@GhoulBonusCount@次攻击并会对被标记的敌人提升@GhoulBonusDamage*100@%伤害。<br><br>约瑞科和他召唤出来的单位朝被标记目标前进时，获得<speed>@Effect5Amount@%移动速度</speed>。<keywordMajor>雾行者</keywordMajor>会跳向逃离他们身边的被标记敌人一次。@SpellModifierDescriptionAppend@",
+            "description": "约瑞科投掷一团黯雾，造成魔法伤害，同时缓速并标记敌人。朝标记的目标移动时，召唤的单位获得移动速度。 ",
+            "dynamicDescription": "约瑞科投掷一团黯雾，造成<magicDamage>@Calc_Damage@魔法伤害</magicDamage>和@Calc_Slow@<status>减速</status>效果，持续@SlowDuration@秒，同时标记英雄和野怪@MarkDuration@秒。被标记的敌人会不断<spellName>唤醒</spellName>附近的坟墓（但不会超过@Spell.YorickPassive:YorickPassiveGhoulMax@的最大限制），且物理防御会降低@ArmorShred*100@%。<br><br>约瑞科和他召唤出来的单位朝被标记目标前进时，提升<speed>@HasteAmount*100@%移动速度</speed>。<keywordMajor>雾行者</keywordMajor>将在被标记的敌人逃离它们时立刻跳过去。@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -1214,81 +1214,81 @@
                 8.0
             ],
             "coefficients": {
-                "coefficient1": 0.7,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    35.0,
-                    70.0,
-                    105.0,
-                    140.0,
-                    175.0,
-                    210.0,
-                    245.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     0.0,
@@ -1338,7 +1338,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "约瑞科召唤黯雾女士，他攻击黯雾女士锁定的目标时，会对其额外造成伤害。黯雾女士也能自行从死者身上召唤出自己的雾行者大军。",
-            "dynamicDescription": "约瑞科召唤出<keywordMajor>暗雾女士</keywordMajor>与@RGhoulNumbers@ <keywordMajor>雾行者</keywordMajor>。附近有敌人死亡时，<keywordMajor>暗雾女士</keywordMajor>自动召唤出<keywordMajor>雾行者</keywordMajor>。<br><br>约瑞科对<keywordMajor>暗雾女士</keywordMajor>的目标造成伤害时，他会造成<magicDamage>@RMarkDamagePercent@%最大生命值的魔法伤害</magicDamage>。<br><br>10 秒后，约瑞科可<recast>再次施放</recast>此技能，使<keywordMajor>暗雾女士</keywordMajor>获得自由，使其冲向最近的线路。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "约瑞科召唤出<keywordMajor>黯雾女士</keywordMajor>（拥有<healing>@YorickBigGhoulHealth@生命值</healing>，造成<magicDamage>@YorickBigGhoulDamage@魔攻伤害</magicDamage>）与@RGhoulNumbers@个<keywordMajor>雾行者</keywordMajor>。附近有敌人死亡时，<keywordMajor>黯雾女士</keywordMajor>会自动唤起<keywordMajor>雾行者</keywordMajor>。<br><br>当约瑞科对<keywordMajor>黯雾女士</keywordMajor>的目标造成伤害时，他将造成<magicDamage>@RMarkDamagePercent@%最大生命值的魔法伤害</magicDamage>。<br><br>10秒后，约瑞科可<recast>重施技能</recast>来放走<keywordMajor>黯雾女士</keywordMajor>，使其冲向距离最近的分路。@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,

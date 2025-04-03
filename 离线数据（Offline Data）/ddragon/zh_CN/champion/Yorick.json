@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.6.1",
+    "version": "15.7.1",
     "data": {
         "Yorick": {
             "id": "Yorick",
@@ -103,7 +103,7 @@
                 "mpperlevel": 60,
                 "movespeed": 340,
                 "armor": 39,
-                "armorperlevel": 5.2,
+                "armorperlevel": 4.5,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 175,
@@ -123,28 +123,28 @@
                     "id": "YorickQ",
                     "name": "临终仪式",
                     "description": "约里克的下次攻击造成额外伤害并治疗自身。如果目标死亡，则会留下一个坟墓。",
-                    "tooltip": "约里克的下一次普通攻击造成额外的<physicalDamage>{{ bonusdamage }}物理伤害</physicalDamage>并回复<healing>{{ qheal }}外加他的{{ missinghealthratio }}%已损失生命值</healing>，对抗非英雄单位时会削减{{ healreduction }}%。如果这个攻击击杀了目标，就会留下一座坟墓。<br /><br />当附近有3个或以上的坟墓时，如果这个技能已被使用，那么约里克就能<recast>再次施放</recast>来从附近的所有坟墓中唤起<keywordMajor>雾行者</keywordMajor>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "你的下一次普通攻击造成额外的<physicalDamage>{{ bonusdamage }}物理伤害</physicalDamage>并回复<healing>{{ qheal }}外加他的{{ missinghealthratio }}%已损失生命值</healing>，对抗非英雄单位时会削减{{ healreduction }}%。如果这个攻击命中了一个英雄或大型野怪或击杀了目标，就会留下一座坟墓。<br /><br />当附近有3个或以上的坟墓时，如果这个技能已被使用，那么约里克就能<recast>再次施放</recast>来从附近的所有坟墓中唤起<keywordMajor>雾行者</keywordMajor>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "冷却时间",
-                            "伤害",
-                            "已损失生命值%"
+                            "额外伤害",
+                            "治疗效果",
+                            "冷却时间"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ missinghealthratio }} -> {{ missinghealthratioNL }}"
+                            "{{ missinghealthratio }}% -> {{ missinghealthratioNL }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        7,
-                        6.25,
+                        6,
                         5.5,
-                        4.75,
+                        5,
+                        4.5,
                         4
                     ],
-                    "cooldownBurn": "7/6.25/5.5/4.75/4",
+                    "cooldownBurn": "6/5.5/5/4.5/4",
                     "cost": [
                         20,
                         20,
@@ -266,7 +266,7 @@
                     "id": "YorickW",
                     "name": "暗灵缠身",
                     "description": "约里克在目标区域召唤一圈可破坏的暗灵之墙来阻挡敌方移动。",
-                    "tooltip": "约里克召唤一道灵墙来阻挡敌人的道路，但不影响友军。灵墙能被攻击，并且会在{{ e5 }}次命中后消失。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "约里克召唤一道灵墙来阻挡敌人的道路，但不影响友军。灵墙拥有<healing>{{ wallhealthtooltip }}生命值</healing>，并且会在{{ circleduration }}秒后消失。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "冷却时间",
@@ -274,7 +274,7 @@
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ e5 }} -> {{ e5NL }}"
+                            "{{ wallhealthtooltip }} -> {{ wallhealthtooltipNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -298,39 +298,39 @@
                     "effect": [
                         null,
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
-                        ],
-                        [
-                            18,
-                            18,
-                            18,
-                            18,
-                            18
-                        ],
-                        [
-                            0.75,
-                            0.75,
-                            0.75,
-                            0.75,
-                            0.75
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
                             0,
-                            1,
-                            1,
-                            2
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            2,
-                            3,
-                            3,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -370,11 +370,11 @@
                     ],
                     "effectBurn": [
                         null,
-                        "4",
-                        "18",
-                        "0.75",
-                        "0/0/1/1/2",
-                        "2/2/3/3/4",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -406,18 +406,18 @@
                 {
                     "id": "YorickE",
                     "name": "哀伤之雾",
-                    "description": "约里克扔出一小团黑雾，对敌人造成伤害、减速效果并标记敌人。",
-                    "tooltip": "约里克扔出一小团黑雾，来造成<magicDamage>{{ calc_currenthealthdamage }}当前生命值的魔法伤害（最小值：{{ minimumdamagebonus }}）</magicDamage>，以及持续{{ slowduration }}秒的{{ calc_slow }}<status>减速</status>，并标记英雄和野怪{{ markduration }}秒。被标记的敌人们会不断<spellName>唤醒</spellName>附近的坟墓(但数量上限不会超过{{ spell.yorickpassive:yorickpassiveghoulmax }})，并且会从<keywordMajor>雾行者</keywordMajor>们的至多{{ ghoulbonuscount }}次攻击中受到{{ ghoulbonusdamage*100 }}%额外伤害。<br /><br />约里克和他的召唤单位们在朝着标记移动时会获得<speed>{{ e5 }}%移动速度</speed>。<keywordMajor>雾行者</keywordMajor>将在被标记的敌人远离它们时跳跃一次。{{ spellmodifierdescriptionappend }}",
+                    "description": "约里克扔出一小团黑雾，对敌人造成伤害、减速效果并标记敌人。被召唤出的单位在朝带标记的目标移动时会获得移动速度。 ",
+                    "tooltip": "约里克扔出一小团黑雾，来造成<magicDamage>{{ calc_damage }}魔法伤害</magicDamage>，以及持续{{ slowduration }}秒的{{ calc_slow }}<status>减速</status>，并标记英雄和野怪{{ markduration }}秒。被标记的敌人们会不断<spellName>唤醒</spellName>附近的坟墓(但数量上限不会超过{{ spell.yorickpassive:yorickpassiveghoulmax }})，并且遭受{{ armorshred*100 }}%护甲削减。<br /><br />约里克和他的召唤单位们在朝着标记移动时会获得<speed>{{ hasteamount*100 }}%移动速度</speed>。<keywordMajor>雾行者</keywordMajor>将在被标记的敌人远离它们时跳跃一次。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "最小伤害",
-                            "野怪伤害上限",
+                            "伤害",
+                            "减少护甲百分比",
                             "冷却时间",
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ minimumdamage }} -> {{ minimumdamageNL }}",
-                            "{{ monstermaxdamage }} -> {{ monstermaxdamageNL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ armorshred*100.000000 }}% -> {{ armorshrednl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -443,60 +443,60 @@
                     "effect": [
                         null,
                         [
-                            70,
-                            105,
-                            140,
-                            175,
-                            210
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1500,
-                            1500,
-                            1500,
-                            1500,
-                            1500
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            20,
-                            20,
-                            20,
-                            20,
-                            20
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            300,
-                            300,
-                            300,
-                            300,
-                            300
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -515,14 +515,14 @@
                     ],
                     "effectBurn": [
                         null,
-                        "70/105/140/175/210",
-                        "4",
-                        "30",
-                        "1500",
-                        "20",
-                        "2",
-                        "15",
-                        "300",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0"
                     ],
@@ -552,18 +552,18 @@
                     "id": "YorickR",
                     "name": "海屿悼词",
                     "description": "约里克召唤迷雾室女，来让约里克的攻击对室女锁定的目标造成额外伤害。室女也会自动从死亡的敌人身上唤起雾行者。",
-                    "tooltip": "约里克召唤<keywordMajor>迷雾室女</keywordMajor>和{{ rghoulnumbers }}个<keywordMajor>雾行者</keywordMajor>。<keywordMajor>室女</keywordMajor>会自动从附近阵亡的敌人身上唤起<keywordMajor>雾行者</keywordMajor>。<br /><br />当约里克对<keywordMajor>室女</keywordMajor>的目标造成伤害时，他将额外造成<magicDamage>{{ rmarkdamagepercent }}%最大生命值的魔法伤害</magicDamage>。<br /><br />10秒后，约里克可以<recast>再次施放</recast>这个技能来放走<keywordMajor>室女</keywordMajor>，派她去相距最近的一条战线。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "约里克召唤拥有<healing>{{ yorickbigghoulhealth }}生命值</healing>和<magicDamage>{{ yorickbigghouldamage }}魔法攻击力</magicDamage>的<keywordMajor>迷雾室女</keywordMajor>，外加{{ rghoulnumbers }}个<keywordMajor>雾行者</keywordMajor>。<keywordMajor>室女</keywordMajor>会自动从附近阵亡的敌人身上唤起<keywordMajor>雾行者</keywordMajor>。<br /><br />当约里克对<keywordMajor>室女</keywordMajor>的目标造成伤害时，他将额外造成<magicDamage>{{ rmarkdamagepercent }}%最大生命值的魔法伤害</magicDamage>。<br /><br />10秒后，约里克可以<recast>再次施放</recast>这个技能来放走<keywordMajor>室女</keywordMajor>，派她去相距最近的一条战线。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "雾行者数量",
+                            "攻击力",
                             "印记伤害",
-                            "额外攻击力",
+                            "雾行者数量",
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ rghoulnumbers }} -> {{ rghoulnumbersNL }}",
-                            "{{ rmarkdamagepercent }}% -> {{ rmarkdamagepercentNL }}%",
                             "{{ rbigghoulbonusad }} -> {{ rbigghoulbonusadNL }}",
+                            "{{ rmarkdamagepercent }}% -> {{ rmarkdamagepercentNL }}%",
+                            "{{ rghoulnumbers }} -> {{ rghoulnumbersNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },

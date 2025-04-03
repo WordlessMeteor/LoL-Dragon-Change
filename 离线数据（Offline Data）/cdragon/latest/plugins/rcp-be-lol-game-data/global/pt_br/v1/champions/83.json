@@ -888,7 +888,7 @@
             "cost": "@Cost@ de @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Yorick causa dano adicional em seu próximo ataque, além de curar a si mesmo. Se o alvo for abatido, uma cova será aberta.",
-            "dynamicDescription": "O próximo ataque de Yorick causa <physicalDamage>@BonusDamage@ de Dano Físico</physicalDamage> adicional e restaura <healing>@QHeal@ mais @MissingHealthRatio@% da Vida perdida</healing>, reduzido em @HealReduction@% contra não Campeões. Se esse Ataque abater um alvo, ele deixa uma cova.<br><br>Quando houver 3 ou mais covas por perto e esta Habilidade já tiver sido usada, Yorick poderá <recast>Reconjurá-la</recast> para invocar <keywordMajor>Andarilhos da Névoa</keywordMajor> de todas as covas próximas.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "O próximo ataque de Yorick causa <physicalDamage>@BonusDamage@ de Dano Físico</physicalDamage> adicional e restaura <healing>@QHeal@ mais @MissingHealthRatio@% da Vida perdida</healing>, reduzido em @HealReduction@% contra não Campeões. Se esse Ataque atingir um Campeão/monstro grande ou abater o alvo, ele deixará uma cova.<br><br>Quando houver 3 ou mais covas por perto e esta Habilidade já tiver sido usada, Yorick poderá <recast>Reconjurá-la</recast> para invocar <keywordMajor>Andarilhos da Névoa</keywordMajor> de todas as covas próximas.@SpellModifierDescriptionAppend@",
             "range": [
                 0.0,
                 0.0,
@@ -906,12 +906,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                7.0,
-                6.25,
+                6.0,
                 5.5,
-                4.75,
+                5.0,
+                4.5,
                 4.0,
-                3.25
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -1038,7 +1038,7 @@
             "cost": "@Cost@ de @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Yorick invoca uma parede destrutível no local-alvo, que bloqueará a movimentação de inimigos.",
-            "dynamicDescription": "Yorick invoca uma parede de espíritos, bloqueando o trajeto de inimigos, mas não de aliados. A parede pode ser Atacada e desaparece depois de ser atingida @Effect5Amount@ vezes.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Yorick invoca uma parede de espíritos, bloqueando o trajeto de inimigos, mas não de aliados. A parede tem <healing>@WallHealthTooltip@ de Vida</healing> e desaparece depois de @CircleDuration@s.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -1069,49 +1069,49 @@
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    -1.0,
                     0.0,
                     0.0,
-                    1.0,
-                    1.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.0,
-                    2.0,
-                    2.0,
-                    3.0,
-                    3.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1187,8 +1187,8 @@
             "abilityVideoImagePath": "champion-abilities/0083/ability_0083_E1.jpg",
             "cost": "@Cost@ de @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
-            "description": "Yorick arremessa um glóbulo de Névoa Negra que causa dano, redução de velocidade e marca inimigos.",
-            "dynamicDescription": "Yorick arremessa um glóbulo de Névoa Negra que causa <magicDamage>@Calc_CurrentHealthDamage@ da Vida atual como Dano Mágico (mínimo de @MinimumDamageBonus@)</magicDamage>, @Calc_Slow@ de <status>Lentidão</status> por @SlowDuration@s e marca Campeões e monstros por @MarkDuration@s. Inimigos marcados <spellName>Despertam</spellName> covas próximas continuamente (máximo de @Spell.YorickPassive:YorickPassiveGhoulMax@) e sofrem @GhoulBonusDamage*100@% a mais de dano em até @GhoulBonusCount@ Ataques de <keywordMajor>Andarilhos da Névoa</keywordMajor>.<br><br>Yorick e as unidades que ele invocou recebem <speed>@Effect5Amount@% de Velocidade de Movimento</speed> em direção à marca. Os <keywordMajor>Andarilhos da Névoa</keywordMajor> saltarão uma vez sobre os inimigos marcados que se afastarem deles.@SpellModifierDescriptionAppend@",
+            "description": "Yorick arremessa um glóbulo de Névoa Negra que causa dano, redução de velocidade e marca inimigos. Unidades invocadas recebem Velocidade de Movimento ao moverem-se em direção a alvos marcados. ",
+            "dynamicDescription": "Yorick arremessa um glóbulo de Névoa Negra que causa <magicDamage>@Calc_Damage@ de Dano Mágico</magicDamage> e @Calc_Slow@ de <status>Lentidão</status> por @SlowDuration@s, além de marcar Campeões e monstros por @MarkDuration@s. Inimigos marcados <spellName>Despertam</spellName> covas próximas continuamente (máximo de @Spell.YorickPassive:YorickPassiveGhoulMax@) e sofrem @ArmorShred*100@% de redução de Armadura.<br><br>Yorick e as unidades que ele invocou recebem <speed>@HasteAmount*100@% de Velocidade de Movimento</speed> em direção à marca. Os <keywordMajor>Andarilhos da Névoa</keywordMajor> saltarão uma vez sobre os inimigos marcados que se afastarem deles.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -1214,81 +1214,81 @@
                 8.0
             ],
             "coefficients": {
-                "coefficient1": 0.7,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    35.0,
-                    70.0,
-                    105.0,
-                    140.0,
-                    175.0,
-                    210.0,
-                    245.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     0.0,
@@ -1338,7 +1338,7 @@
             "cost": "@Cost@ de @AbilityResourceName@",
             "cooldown": "@Cooldown@s %i:cooldown%",
             "description": "Yorick invoca a Donzela da Névoa, que faz com que seus ataques contra os alvos dela causem dano adicional. A Donzela também faz surgir Andarilhos automaticamente a partir de inimigos mortos.",
-            "dynamicDescription": "Yorick invoca a <keywordMajor>Donzela da Névoa</keywordMajor> e @RGhoulNumbers@ <keywordMajor>Andarilhos da Névoa</keywordMajor>. Automaticamente, a <keywordMajor>Donzela</keywordMajor> invoca <keywordMajor>Andarilhos da Névoa</keywordMajor> a partir de inimigos que morreram ao redor.<br><br>Ao causar dano ao alvo da <keywordMajor>Donzela</keywordMajor>, Yorick causa <magicDamage>@RMarkDamagePercent@% da Vida máxima como Dano Mágico</magicDamage>.<br><br>Depois de 10s, Yorick pode <recast>Reconjurar</recast> para libertar a <keywordMajor>Donzela</keywordMajor>, fazendo com que ela siga a rota mais próxima.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Yorick invoca a <keywordMajor>Donzela da Névoa</keywordMajor> com <healing>@YorickBigGhoulHealth@ de Vida</healing> e <magicDamage>@YorickBigGhoulDamage@ de Dano de Ataque</magicDamage> mais @RGhoulNumbers@ <keywordMajor>Andarilhos da Névoa</keywordMajor>. Automaticamente, a <keywordMajor>Donzela</keywordMajor> invoca <keywordMajor>Andarilhos da Névoa</keywordMajor> de inimigos que tiverem morrido ao redor.<br><br>Ao causar dano ao alvo da <keywordMajor>Donzela</keywordMajor>, Yorick também causará <magicDamage>@RMarkDamagePercent@% da Vida máxima como Dano Mágico</magicDamage>.<br><br>Após 10s, Yorick pode <recast>Reconjurar</recast> a Habilidade para libertar a <keywordMajor>Donzela</keywordMajor>, enviando-a pela rota mais próxima.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,

@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.6.1",
+    "version": "15.7.1",
     "data": {
         "Yorick": {
             "id": "Yorick",
@@ -103,7 +103,7 @@
                 "mpperlevel": 60,
                 "movespeed": 340,
                 "armor": 39,
-                "armorperlevel": 5.2,
+                "armorperlevel": 4.5,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 175,
@@ -123,28 +123,28 @@
                     "id": "YorickQ",
                     "name": "Last Rites",
                     "description": "Yorick deals bonus damage on his next attack and heals himself. If the target dies a grave will be dug.",
-                    "tooltip": "Yorick's next Attack deals an additional <physicalDamage>{{ bonusdamage }} physical damage</physicalDamage> and restores <healing>{{ qheal }} plus {{ missinghealthratio }}% of his missing Health</healing>, reduced by {{ healreduction }}% against non-Champions. If this Attack kills the target, it leaves a grave.<br /><br />When there are 3 or more graves nearby and this Ability has already been used, Yorick can <recast>Recast</recast> to raise <keywordMajor>Mist Walkers</keywordMajor> from all nearby graves.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Yorick's next Attack deals an additional <physicalDamage>{{ bonusdamage }} physical damage</physicalDamage> and restores <healing>{{ qheal }} plus {{ missinghealthratio }}% of his missing Health</healing>, reduced by {{ healreduction }}% against non-Champions. If this Attack hits a Champion or large Monster or kills the target, it leaves a grave.<br /><br />When there are 3 or more graves nearby and this Ability has already been used, Yorick can <recast>Recast</recast> to raise <keywordMajor>Mist Walkers</keywordMajor> from all nearby graves.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Cooldown",
-                            "Damage",
-                            "Missing Health %"
+                            "Bonus Damage",
+                            "Healing",
+                            "Cooldown"
                         ],
                         "effect": [
-                            "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ basedamage }} -> {{ basedamageNL }}",
-                            "{{ missinghealthratio }} -> {{ missinghealthratioNL }}"
+                            "{{ missinghealthratio }}% -> {{ missinghealthratioNL }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        7,
-                        6.25,
+                        6,
                         5.5,
-                        4.75,
+                        5,
+                        4.5,
                         4
                     ],
-                    "cooldownBurn": "7/6.25/5.5/4.75/4",
+                    "cooldownBurn": "6/5.5/5/4.5/4",
                     "cost": [
                         20,
                         20,
@@ -266,7 +266,7 @@
                     "id": "YorickW",
                     "name": "Dark Procession",
                     "description": "Yorick summons a destructible wall at target location that will block enemy movement.",
-                    "tooltip": "Yorick summons a wall of spirits blocking enemies' path, but not allies'. The wall can be Attacked, and disappears after {{ e5 }} hits.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Yorick summons a wall of spirits blocking enemies' path, but not allies'. The wall has <healing>{{ wallhealthtooltip }} Health</healing> and disappears after {{ circleduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -274,7 +274,7 @@
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ e5 }} -> {{ e5NL }}"
+                            "{{ wallhealthtooltip }} -> {{ wallhealthtooltipNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -298,39 +298,39 @@
                     "effect": [
                         null,
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
-                        ],
-                        [
-                            18,
-                            18,
-                            18,
-                            18,
-                            18
-                        ],
-                        [
-                            0.75,
-                            0.75,
-                            0.75,
-                            0.75,
-                            0.75
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
                             0,
-                            1,
-                            1,
-                            2
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            2,
-                            3,
-                            3,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -370,11 +370,11 @@
                     ],
                     "effectBurn": [
                         null,
-                        "4",
-                        "18",
-                        "0.75",
-                        "0/0/1/1/2",
-                        "2/2/3/3/4",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0",
@@ -406,18 +406,18 @@
                 {
                     "id": "YorickE",
                     "name": "Mourning Mist",
-                    "description": "Yorick throws a globule of Black Mist that damages, slows and marks enemies.",
-                    "tooltip": "Yorick throws a globule of Black Mist that deals <magicDamage>{{ calc_currenthealthdamage }} current Health magic damage (min: {{ minimumdamagebonus }})</magicDamage>, <status>Slows</status> by {{ calc_slow }} for {{ slowduration }} seconds, and marks champions and monsters for {{ markduration }} seconds. Marked enemies continuously <spellName>Awaken</spellName> nearby graves (but not exceeding the maximum of {{ spell.yorickpassive:yorickpassiveghoulmax }}), and take {{ ghoulbonusdamage*100 }}% increased damage from up to {{ ghoulbonuscount }} attacks by <keywordMajor>Mist Walkers</keywordMajor>.<br /><br />Yorick and his summoned units gain <speed>{{ e5 }}% Move Speed</speed> toward the mark. <keywordMajor>Mist Walkers</keywordMajor> will leap once at marked enemies that get away from them.{{ spellmodifierdescriptionappend }}",
+                    "description": "Yorick throws a globule of Black Mist that damages, slows and marks enemies. Summoned units gain move speed when moving towards marked targets. ",
+                    "tooltip": "Yorick throws a globule of Black Mist that deals <magicDamage>{{ calc_damage }} magic damage</magicDamage>, <status>Slows</status> by {{ calc_slow }} for {{ slowduration }} seconds, and marks champions and monsters for {{ markduration }} seconds. Marked enemies continuously <spellName>Awaken</spellName> nearby graves (but not exceeding the maximum of {{ spell.yorickpassive:yorickpassiveghoulmax }}), and suffer {{ armorshred*100 }}% reduced Armor.<br /><br />Yorick and his summoned units gain <speed>{{ hasteamount*100 }}% Move Speed</speed> toward the mark. <keywordMajor>Mist Walkers</keywordMajor> will leap once at marked enemies that get away from them.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Minimum Damage",
-                            "Monster Damage Cap",
+                            "Damage",
+                            "Armor Reduction %",
                             "Cooldown",
                             "@AbilityResourceName@ Cost"
                         ],
                         "effect": [
-                            "{{ minimumdamage }} -> {{ minimumdamageNL }}",
-                            "{{ monstermaxdamage }} -> {{ monstermaxdamageNL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ armorshred*100.000000 }}% -> {{ armorshrednl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -443,60 +443,60 @@
                     "effect": [
                         null,
                         [
-                            70,
-                            105,
-                            140,
-                            175,
-                            210
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            30,
-                            30,
-                            30,
-                            30,
-                            30
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1500,
-                            1500,
-                            1500,
-                            1500,
-                            1500
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            20,
-                            20,
-                            20,
-                            20,
-                            20
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            15,
-                            15,
-                            15,
-                            15
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            300,
-                            300,
-                            300,
-                            300,
-                            300
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -515,14 +515,14 @@
                     ],
                     "effectBurn": [
                         null,
-                        "70/105/140/175/210",
-                        "4",
-                        "30",
-                        "1500",
-                        "20",
-                        "2",
-                        "15",
-                        "300",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0"
                     ],
@@ -552,18 +552,18 @@
                     "id": "YorickR",
                     "name": "Eulogy of the Isles",
                     "description": "Yorick summons the Maiden of the Mist that causes Yorick's attacks against the Maiden's target to deal bonus damage. The Maiden will also automatically raise Walkers from dead enemies.",
-                    "tooltip": "Yorick summons the <keywordMajor>Maiden of the Mist</keywordMajor> and {{ rghoulnumbers }} <keywordMajor>Mist Walkers</keywordMajor>. The <keywordMajor>Maiden</keywordMajor> automatically raises <keywordMajor>Mist Walkers</keywordMajor> from nearby enemy deaths.<br /><br />When Yorick damages the <keywordMajor>Maiden's</keywordMajor> target, he deals <magicDamage>{{ rmarkdamagepercent }}% max Health magic damage</magicDamage>.<br /><br />After 10 seconds, Yorick can <recast>Recast</recast> this Ability to free the <keywordMajor>Maiden</keywordMajor>, sending her down the nearest lane.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Yorick summons the <keywordMajor>Maiden of the Mist</keywordMajor> with <healing>{{ yorickbigghoulhealth }} Health</healing> and <magicDamage>{{ yorickbigghouldamage }} Magic Attack Damage</magicDamage> plus {{ rghoulnumbers }} <keywordMajor>Mist Walkers</keywordMajor>. The <keywordMajor>Maiden</keywordMajor> automatically raises <keywordMajor>Mist Walkers</keywordMajor> from nearby enemy deaths.<br /><br />When Yorick damages the <keywordMajor>Maiden's</keywordMajor> target, he deals <magicDamage>{{ rmarkdamagepercent }}% max Health magic damage</magicDamage>.<br /><br />After 10 seconds, Yorick can <recast>Recast</recast> this Ability to free the <keywordMajor>Maiden</keywordMajor>, sending her down the nearest lane.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Mist Walkers",
+                            "Attack Damage",
                             "Mark Damage",
-                            "Bonus Attack Damage",
+                            "Mist Walkers",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ rghoulnumbers }} -> {{ rghoulnumbersNL }}",
-                            "{{ rmarkdamagepercent }}% -> {{ rmarkdamagepercentNL }}%",
                             "{{ rbigghoulbonusad }} -> {{ rbigghoulbonusadNL }}",
+                            "{{ rmarkdamagepercent }}% -> {{ rmarkdamagepercentNL }}%",
+                            "{{ rghoulnumbers }} -> {{ rghoulnumbersNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },

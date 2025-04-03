@@ -888,7 +888,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "La următorul atac de bază, Yorick va provoca daune bonus și se va vindeca. Dacă ținta moare, în locul ei apare un mormânt.",
-            "dynamicDescription": "Următorul atac al lui Yorick provoacă <physicalDamage>@BonusDamage@daune fizice</physicalDamage> suplimentare și îi reface <healing>@QHeal@ plus @MissingHealthRatio@% din viața lipsă</healing>, valoare redusă cu @HealReduction@% împotriva non-campionilor. Dacă acest atac ucide ținta, lasă în urmă un mormânt.<br><br>Când în apropiere există minimum 3 morminte, dacă această abilitate a fost deja activată, Yorick o poate <recast>refolosi</recast> pentru a învia <keywordMajor>moroi</keywordMajor> din toate mormintele din apropiere.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Următorul atac al lui Yorick provoacă <physicalDamage>@BonusDamage@ daune fizice</physicalDamage> suplimentare și îi reface <healing>@QHeal@ plus @MissingHealthRatio@% din viața lipsă</healing>, valoare redusă cu @HealReduction@% împotriva non-campionilor. Dacă aceste atacuri lovesc un campion sau un monstru mare ori ucid ținta, lasă în urmă un mormânt.<br><br>Când în apropiere există minimum 3 morminte, dacă această abilitate a fost deja activată, Yorick o poate <recast>refolosi</recast> pentru a învia <keywordMajor>moroi</keywordMajor> din toate mormintele din apropiere.@SpellModifierDescriptionAppend@",
             "range": [
                 0.0,
                 0.0,
@@ -906,12 +906,12 @@
                 20.0
             ],
             "cooldownCoefficients": [
-                7.0,
-                6.25,
+                6.0,
                 5.5,
-                4.75,
+                5.0,
+                4.5,
                 4.0,
-                3.25
+                3.5
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -1038,7 +1038,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Yorick invocă în zona-țintă un zid destructibil care blochează mișcarea inamicilor.",
-            "dynamicDescription": "Yorick invocă un zid de spirite care blochează inamicii, dar nu și aliații. Zidul poate fi atacat și dispare după @Effect5Amount@ lovituri.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Yorick invocă un zid de spirite care blochează inamicii, dar nu și aliații. Zidul are <healing>@WallHealthTooltip@ viață</healing> și dispare după @CircleDuration@ secunde.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
@@ -1069,49 +1069,49 @@
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0,
-                    18.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75,
-                    0.75
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    -1.0,
                     0.0,
                     0.0,
-                    1.0,
-                    1.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.0,
-                    2.0,
-                    2.0,
-                    3.0,
-                    3.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     0.0,
@@ -1187,8 +1187,8 @@
             "abilityVideoImagePath": "champion-abilities/0083/ability_0083_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
-            "description": "Yorick aruncă negură întunecată spre inamici, provocându-le daune, încetinindu-i și aplicându-le un însemn.",
-            "dynamicDescription": "Yorick aruncă un glob de Negură Întunecată, care provoacă <magicDamage>daune magice în valoare de @Calc_CurrentHealthDamage@ din viața actuală (minimum @MinimumDamageBonus@)</magicDamage>, <status>încetinește</status> cu @Calc_Slow@ timp de @SlowDuration@ secunde și însemnează campionii și monștrii timp de @MarkDuration@ secunde. Inamicii însemnați <spellName>învie</spellName> morții din mormintele din apropiere (fără a depăși cel mult @Spell.YorickPassive:YorickPassiveGhoulMax@) și suferă daune mai mari cu @GhoulBonusDamage*100@% din partea a cel mult @GhoulBonusCount@ atacuri ale <keywordMajor>moroilor</keywordMajor>.<br><br>Yorick și unitățile invocate primesc <speed>@Effect5Amount@% viteză de mișcare</speed> spre țintele însemnate. <keywordMajor>Moroii</keywordMajor> vor sări o dată spre inamicii însemnați care se îndepărtează de ei.@SpellModifierDescriptionAppend@",
+            "description": "Yorick aruncă negură întunecată spre inamici, provocându-le daune, încetinindu-i și aplicându-le un însemn. Unitățile invocate primesc viteză de mișcare când se îndreaptă spre țintele însemnate. ",
+            "dynamicDescription": "Yorick aruncă un glob de Negură Întunecată, care provoacă <magicDamage>@Calc_Damage@ daune magice</magicDamage>, <status>încetinește</status> cu @Calc_Slow@ timp de @SlowDuration@ secunde și însemnează campionii și monștrii timp de @MarkDuration@ secunde. Inamicii însemnați <spellName>învie</spellName> morții din mormintele din apropiere (fără a depăși cel mult @Spell.YorickPassive:YorickPassiveGhoulMax@) și au armura redusă cu @ArmorShred*100@%.<br><br>Yorick și unitățile invocate primesc <speed>@HasteAmount*100@% viteză de mișcare</speed> spre țintele însemnate. <keywordMajor>Moroii</keywordMajor> vor sări o dată spre inamicii însemnați care se îndepărtează de ei.@SpellModifierDescriptionAppend@",
             "range": [
                 700.0,
                 700.0,
@@ -1214,81 +1214,81 @@
                 8.0
             ],
             "coefficients": {
-                "coefficient1": 0.7,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    35.0,
-                    70.0,
-                    105.0,
-                    140.0,
-                    175.0,
-                    210.0,
-                    245.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0,
-                    4.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0,
-                    30.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0,
-                    20.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0,
-                    15.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0,
-                    300.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     0.0,
@@ -1338,7 +1338,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Yorick o invocă pe Fecioara din negură. Atacurile lui Yorick împotriva țintei Fecioarei provoacă daune suplimentare. În plus, Fecioara invocă în mod automat moroi din inamicii uciși.",
-            "dynamicDescription": "Yorick invocă <keywordMajor>Fecioara din negură</keywordMajor> și @RGhoulNumbers@ <keywordMajor>moroi</keywordMajor>. <keywordMajor>Fecioara</keywordMajor> invocă <keywordMajor>moroi</keywordMajor> în mod automat din inamicii uciși în apropierea ei.<br><br>Împotriva țintei <keywordMajor>Fecioarei</keywordMajor>, Yorick provoacă <magicDamage>daune magice în valoare de @RMarkDamagePercent@% din viața maximă</magicDamage>.<br><br>După 10 secunde, Yorick poate <recast>refolosi</recast> această abilitate pentru a elibera <keywordMajor>Fecioara</keywordMajor>, trimițând-o să avanseze pe cel mai apropiat culoar.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Yorick invocă <keywordMajor>Fecioara din negură</keywordMajor> cu <healing>@YorickBigGhoulHealth@ viață</healing> și <magicDamage>@YorickBigGhoulDamage@ daune magice din atac</magicDamage> plus @RGhoulNumbers@ <keywordMajor>moroi</keywordMajor>. <keywordMajor>Fecioara</keywordMajor> invocă <keywordMajor>moroi</keywordMajor> în mod automat din inamicii uciși în apropierea ei.<br><br>Împotriva țintei <keywordMajor>Fecioarei</keywordMajor>, Yorick provoacă <magicDamage>daune magice în valoare de @RMarkDamagePercent@% din viața maximă</magicDamage>.<br><br>După 10 secunde, Yorick poate <recast>refolosi</recast> această abilitate pentru a elibera <keywordMajor>Fecioara</keywordMajor>, trimițând-o să avanseze pe cel mai apropiat culoar.@SpellModifierDescriptionAppend@",
             "range": [
                 600.0,
                 600.0,
