@@ -21,9 +21,9 @@ connector = Connector()
 async def get_summoner_data(connection):
     data = await connection.request('GET', '/lol-summoner/v1/current-summoner')
     summoner = await data.json()
-    print(f"displayName:    {summoner['displayName']}")
-    print(f"summonerId:     {summoner['summonerId']}")
-    print(f"puuid:          {summoner['puuid']}")
+    print("displayName:    %s" %(summoner["gameName"] + "#" + summoner["tagLine"]))
+    print("summonerId:     %s" %(summoner["summonerId"]))
+    print("puuid:          %s" %(summoner["puuid"]))
     print("-")
 
 
@@ -54,16 +54,14 @@ async def get_lockfile(connection):
 # 快速启动云顶之弈对局（Quickly launch a TFT match）
 #-----------------------------------------------------------------------------
 async def RP_generator(connection):
-    queue = {
-                "queueId": 2200
-            }
+    queue = {"queueId": 1220}
     create_lobby = await connection.request("POST", "/lol-lobby/v2/lobby", data = queue)
     create_lobby = await create_lobby.json()
     print("create-lobby = ", end = "")
     print(create_lobby)
     if "errorCode" in create_lobby:
         if create_lobby["message"] == "INVALID_LOBBY":
-            print("请确认当前服务器云顶之弈匹配模式（队列序号：2200）可用！\nPlease ensure TFT Normal (queueId: 2200) is available on current server!")
+            print("请确认当前服务器云顶之弈发条鸟的试炼（队列序号：1220）可用！\nPlease ensure TFT Tocker's Trial (queueId: 1220) is available on current server!")
             time.sleep(5)
             return create_lobby["httpStatus"]
         elif create_lobby["message"] == "Gameflow prevented a lobby.":

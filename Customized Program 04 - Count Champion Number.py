@@ -101,7 +101,7 @@ def getUrl(url: str):
     if retry > 5:
         return (None, 1)
 
-language_ddragon = {1: {"CODE": "cs_CZ", "LANGUAGE (EN)": "Czech (Czech Republic)", "LANGUAGE (ZH)": "捷克语（捷克共和国）", "Applicable CDragon Data Patches": "7.1+"}, 2: {"CODE": "el_GR", "LANGUAGE (EN)": "Greek (Greece)", "LANGUAGE (ZH)": "希腊语（希腊）", "Applicable CDragon Data Patches": "9.1+"}, 3: {"CODE": "pl_PL", "LANGUAGE (EN)": "Polish (Poland)", "LANGUAGE (ZH)": "波兰语（波兰）", "Applicable CDragon Data Patches": "9.1+"}, 4: {"CODE": "ro_RO", "LANGUAGE (EN)": "Romanian (Romania)", "LANGUAGE (ZH)": "罗马尼亚语（罗马尼亚）", "Applicable CDragon Data Patches": "9.1+"}, 5: {"CODE": "hu_HU", "LANGUAGE (EN)": "Hungarian (Hungary)", "LANGUAGE (ZH)": "匈牙利语（匈牙利）", "Applicable CDragon Data Patches": "9.1+"}, 6: {"CODE": "en_GB", "LANGUAGE (EN)": "English (United Kingdom)", "LANGUAGE (ZH)": "英语（英国）", "Applicable CDragon Data Patches": "9.1+"}, 7: {"CODE": "de_DE", "LANGUAGE (EN)": "German (Germany)", "LANGUAGE (ZH)": "德语（德国）", "Applicable CDragon Data Patches": "7.1+"}, 8: {"CODE": "es_ES", "LANGUAGE (EN)": "Spanish (Spain)", "LANGUAGE (ZH)": "西班牙语（西班牙）", "Applicable CDragon Data Patches": "9.1+"}, 9: {"CODE": "it_IT", "LANGUAGE (EN)": "Italian (Italy)", "LANGUAGE (ZH)": "意大利语（意大利）", "Applicable CDragon Data Patches": "9.1+"}, 10: {"CODE": "fr_FR", "LANGUAGE (EN)": "French (France)", "LANGUAGE (ZH)": "法语（法国）", "Applicable CDragon Data Patches": "9.1+"}, 11: {"CODE": "ja_JP", "LANGUAGE (EN)": "Japanese (Japan)", "LANGUAGE (ZH)": "日语（日本）", "Applicable CDragon Data Patches": "9.1+"}, 12: {"CODE": "ko_KR", "LANGUAGE (EN)": "Korean (Korea)", "LANGUAGE (ZH)": "朝鲜语（韩国）", "Applicable CDragon Data Patches": "9.7+"}, 13: {"CODE": "es_MX", "LANGUAGE (EN)": "Spanish (Mexico)", "LANGUAGE (ZH)": "西班牙语（墨西哥）", "Applicable CDragon Data Patches": "9.1+"}, 14: {"CODE": "es_AR", "LANGUAGE (EN)": "Spanish (Argentina)", "LANGUAGE (ZH)": "西班牙语（阿根廷）", "Applicable CDragon Data Patches": "9.7+"}, 15: {"CODE": "pt_BR", "LANGUAGE (EN)": "Portuguese (Brazil)", "LANGUAGE (ZH)": "葡萄牙语（巴西）", "Applicable CDragon Data Patches": "9.1+"}, 16: {"CODE": "en_US", "LANGUAGE (EN)": "English (United States)", "LANGUAGE (ZH)": "英语（美国）", "Applicable CDragon Data Patches": "9.1+"}, 17: {"CODE": "en_AU", "LANGUAGE (EN)": "English (Australia)", "LANGUAGE (ZH)": "英语（澳大利亚）", "Applicable CDragon Data Patches": "9.1+"}, 18: {"CODE": "ru_RU", "LANGUAGE (EN)": "Russian (Russia)", "LANGUAGE (ZH)": "俄语（俄罗斯）", "Applicable CDragon Data Patches": "9.1+"}, 19: {"CODE": "tr_TR", "LANGUAGE (EN)": "Turkish (Turkey)", "LANGUAGE (ZH)": "土耳其语（土耳其）", "Applicable CDragon Data Patches": "9.1+"}, 20: {"CODE": "ms_MY", "LANGUAGE (EN)": "Malay (Malaysia)", "LANGUAGE (ZH)": "马来语（马来西亚）", "Applicable CDragon Data Patches": ""}, 21: {"CODE": "en_PH", "LANGUAGE (EN)": "English (Republic of the Philippines)", "LANGUAGE (ZH)": "英语（菲律宾共和国）", "Applicable CDragon Data Patches": "10.5+"}, 22: {"CODE": "en_SG", "LANGUAGE (EN)": "English (Singapore)", "LANGUAGE (ZH)": "英语（新加坡）", "Applicable CDragon Data Patches": "10.5+"}, 23: {"CODE": "th_TH", "LANGUAGE (EN)": "Thai (Thailand)", "LANGUAGE (ZH)": "泰语（泰国）", "Applicable CDragon Data Patches": "9.7+"}, 24: {"CODE": "vn_VN", "LANGUAGE (EN)": "Vietnamese (Viet Nam)", "LANGUAGE (ZH)": "越南语（越南）", "Applicable CDragon Data Patches": "9.7～13.9"}, 25: {"CODE": "vi_VN", "LANGUAGE (EN)": "Vietnamese (Viet Nam)", "LANGUAGE (ZH)": "越南语（越南）", "Applicable CDragon Data Patches": "12.17+"}, 26: {"CODE": "id_ID", "LANGUAGE (EN)": "Indonesian (Indonesia)", "LANGUAGE (ZH)": "印度尼西亚语（印度尼西亚）", "Applicable CDragon Data Patches": ""}, 27: {"CODE": "zh_MY", "LANGUAGE (EN)": "Chinese (Malaysia)", "LANGUAGE (ZH)": "中文（马来西亚）", "Applicable CDragon Data Patches": "10.5+"}, 28: {"CODE": "zh_CN", "LANGUAGE (EN)": "Chinese (China)", "LANGUAGE (ZH)": "中文（中国）", "Applicable CDragon Data Patches": "9.7+"}, 29: {"CODE": "zh_TW", "LANGUAGE (EN)": "Chinese (Taiwan)", "LANGUAGE (ZH)": "中文（台湾）", "Applicable CDragon Data Patches": "9.7+"}}
+language_ddragon = {1: {"CODE": "ar_AE", "LANGUAGE (EN)": "Arabic (United Arab Emirates)", "LANGUAGE (ZH)": "阿拉伯语（阿拉伯联合酋长国）", "Applicable CDragon Data Patches": "9.20～10.1, 13.20+"}, 2: {"CODE": "cs_CZ", "LANGUAGE (EN)": "Czech (Czech Republic)", "LANGUAGE (ZH)": "捷克语（捷克共和国）", "Applicable CDragon Data Patches": "7.1+"}, 3: {"CODE": "el_GR", "LANGUAGE (EN)": "Greek (Greece)", "LANGUAGE (ZH)": "希腊语（希腊）", "Applicable CDragon Data Patches": "9.1+"}, 4: {"CODE": "pl_PL", "LANGUAGE (EN)": "Polish (Poland)", "LANGUAGE (ZH)": "波兰语（波兰）", "Applicable CDragon Data Patches": "9.1+"}, 5: {"CODE": "ro_RO", "LANGUAGE (EN)": "Romanian (Romania)", "LANGUAGE (ZH)": "罗马尼亚语（罗马尼亚）", "Applicable CDragon Data Patches": "9.1+"}, 6: {"CODE": "hu_HU", "LANGUAGE (EN)": "Hungarian (Hungary)", "LANGUAGE (ZH)": "匈牙利语（匈牙利）", "Applicable CDragon Data Patches": "9.1+"}, 7: {"CODE": "en_GB", "LANGUAGE (EN)": "English (United Kingdom)", "LANGUAGE (ZH)": "英语（英国）", "Applicable CDragon Data Patches": "9.1+"}, 8: {"CODE": "de_DE", "LANGUAGE (EN)": "German (Germany)", "LANGUAGE (ZH)": "德语（德国）", "Applicable CDragon Data Patches": "7.1+"}, 9: {"CODE": "es_ES", "LANGUAGE (EN)": "Spanish (Spain)", "LANGUAGE (ZH)": "西班牙语（西班牙）", "Applicable CDragon Data Patches": "9.1+"}, 10: {"CODE": "it_IT", "LANGUAGE (EN)": "Italian (Italy)", "LANGUAGE (ZH)": "意大利语（意大利）", "Applicable CDragon Data Patches": "9.1+"}, 11: {"CODE": "fr_FR", "LANGUAGE (EN)": "French (France)", "LANGUAGE (ZH)": "法语（法国）", "Applicable CDragon Data Patches": "9.1+"}, 12: {"CODE": "ja_JP", "LANGUAGE (EN)": "Japanese (Japan)", "LANGUAGE (ZH)": "日语（日本）", "Applicable CDragon Data Patches": "9.1+"}, 13: {"CODE": "ko_KR", "LANGUAGE (EN)": "Korean (Korea)", "LANGUAGE (ZH)": "朝鲜语（韩国）", "Applicable CDragon Data Patches": "9.7+"}, 14: {"CODE": "es_MX", "LANGUAGE (EN)": "Spanish (Mexico)", "LANGUAGE (ZH)": "西班牙语（墨西哥）", "Applicable CDragon Data Patches": "9.1+"}, 15: {"CODE": "es_AR", "LANGUAGE (EN)": "Spanish (Argentina)", "LANGUAGE (ZH)": "西班牙语（阿根廷）", "Applicable CDragon Data Patches": "9.7+"}, 16: {"CODE": "pt_BR", "LANGUAGE (EN)": "Portuguese (Brazil)", "LANGUAGE (ZH)": "葡萄牙语（巴西）", "Applicable CDragon Data Patches": "9.1+"}, 17: {"CODE": "en_US", "LANGUAGE (EN)": "English (United States)", "LANGUAGE (ZH)": "英语（美国）", "Applicable CDragon Data Patches": "9.1+"}, 18: {"CODE": "en_AU", "LANGUAGE (EN)": "English (Australia)", "LANGUAGE (ZH)": "英语（澳大利亚）", "Applicable CDragon Data Patches": "9.1+"}, 19: {"CODE": "ru_RU", "LANGUAGE (EN)": "Russian (Russia)", "LANGUAGE (ZH)": "俄语（俄罗斯）", "Applicable CDragon Data Patches": "9.1+"}, 20: {"CODE": "tr_TR", "LANGUAGE (EN)": "Turkish (Turkey)", "LANGUAGE (ZH)": "土耳其语（土耳其）", "Applicable CDragon Data Patches": "9.1+"}, 21: {"CODE": "ms_MY", "LANGUAGE (EN)": "Malay (Malaysia)", "LANGUAGE (ZH)": "马来语（马来西亚）", "Applicable CDragon Data Patches": ""}, 22: {"CODE": "en_PH", "LANGUAGE (EN)": "English (Republic of the Philippines)", "LANGUAGE (ZH)": "英语（菲律宾共和国）", "Applicable CDragon Data Patches": "10.5+"}, 23: {"CODE": "en_SG", "LANGUAGE (EN)": "English (Singapore)", "LANGUAGE (ZH)": "英语（新加坡）", "Applicable CDragon Data Patches": "10.5+"}, 24: {"CODE": "th_TH", "LANGUAGE (EN)": "Thai (Thailand)", "LANGUAGE (ZH)": "泰语（泰国）", "Applicable CDragon Data Patches": "9.7+"}, 25: {"CODE": "vn_VN", "LANGUAGE (EN)": "Vietnamese (Viet Nam)", "LANGUAGE (ZH)": "越南语（越南）", "Applicable CDragon Data Patches": "9.7～13.9"}, 26: {"CODE": "vi_VN", "LANGUAGE (EN)": "Vietnamese (Viet Nam)", "LANGUAGE (ZH)": "越南语（越南）", "Applicable CDragon Data Patches": "12.17+"}, 27: {"CODE": "id_ID", "LANGUAGE (EN)": "Indonesian (Indonesia)", "LANGUAGE (ZH)": "印度尼西亚语（印度尼西亚）", "Applicable CDragon Data Patches": ""}, 28: {"CODE": "zh_MY", "LANGUAGE (EN)": "Chinese (Malaysia)", "LANGUAGE (ZH)": "中文（马来西亚）", "Applicable CDragon Data Patches": "10.5+"}, 29: {"CODE": "zh_CN", "LANGUAGE (EN)": "Chinese (China)", "LANGUAGE (ZH)": "中文（中国）", "Applicable CDragon Data Patches": "9.7+"}, 30: {"CODE": "zh_TW", "LANGUAGE (EN)": "Chinese (Taiwan)", "LANGUAGE (ZH)": "中文（台湾）", "Applicable CDragon Data Patches": "9.7+"}}
 language_cdragon = {}
 for i in language_ddragon:
     if language_ddragon[i]["CODE"] == "en_US":
@@ -114,13 +114,13 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
     if source[0] == "0":
         exit()
     print("请选择输出语言【默认为中文（中国）】：\nPlease select a language for output (the default option is zh_CN):\nNo.\tCODE\tLANGUAGE\t语言\tApplicable CDragon Data Patches")
-    for i in range(1, 30):
+    for i in range(1, 31):
         print(str(i) + "\t" + language_ddragon[i]["CODE"] + "\t" + language_ddragon[i]["LANGUAGE (EN)"] + "\t" + language_ddragon[i]["LANGUAGE (ZH)"] + "\t" + language_ddragon[i]["Applicable CDragon Data Patches"])
     while True:
         language_option = input()
-        if language_option == "" or language_option in [str(i) for i in range(1, 30)]:
+        if language_option == "" or language_option in [str(i) for i in range(1, 31)]:
             if language_option == "":
-                language_option = "28"
+                language_option = "29"
             language_code = language_ddragon[int(language_option)]["CODE"]
             #下面声明一些数据资源的地址（The following code declare some data resources' URLs）
             patches_url = "https://ddragon.leagueoflegends.com/api/versions.json"
@@ -261,6 +261,7 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
             else:
                 print("\n统计完毕，共%d名英雄。请输入任意键退出。\nCount finished! There're %d champions in total. Please press any key to exit." %(count, count))
                 break
+        input()
         exit() #执行到此，程序结束（Here the program terminates）
     else:
         print("请输入您想要获取的版本。输入空字符串以获取最新版本英雄信息。\nPlease input the patch you want to search from. Submit an empty string to get the latest champion data. Examples: ")
@@ -278,8 +279,8 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
             cdragon_homepage = src
             sourceCode = cdragon_homepage.content.decode()
             source_list = list(map(lambda x: x.strip(), sourceCode.split("\n")))
-            line_re = re.compile('<tr><td class="link"><a href="[0-9]*\.[0-9]*/" title="[0-9]*\.[0-9]*">[0-9]*\.[0-9]*/</a></td><td class="size">-</td><td class="date">[0-9]*-[a-zA-Z]*-[0-9]* [0-9]*:[0-9]*</td></tr>')
-            patch_re = re.compile('[0-9]*\.[0-9]*')
+            line_re = re.compile(r'<tr><td class="link"><a href="[0-9]*\.[0-9]*/" title="[0-9]*\.[0-9]*">[0-9]*\.[0-9]*/</a></td><td class="size">-</td><td class="date">[0-9]*-[a-zA-Z]*-[0-9]* [0-9]*:[0-9]*</td></tr>')
+            patch_re = re.compile(r'[0-9]*\.[0-9]*')
             patches_cdragon = []
             for line in source_list:
                 matchedLine = line_re.search(line) #先通过一个比较长的正则表达式筛选包含版本信息的CSS代码行（First filter the CSS code lines that contain patch information through a long regular expression）
@@ -314,8 +315,8 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
             champion_folder = src
             sourceCode = champion_folder.content.decode()
             source_list = list(map(lambda x: x.strip(), sourceCode.split("\n")))
-            line_re = re.compile('<tr><td class="link"><a href="-?[0-9]*\.json" title="-?[0-9]*\.json">-?[0-9]*\.json</a></td><td class="size">.*</td><td class="date">[0-9]*-[a-zA-Z]*-[0-9]* [0-9]*:[0-9]*</td></tr>')
-            json_re = re.compile('-?[0-9]*\.json')
+            line_re = re.compile(r'<tr><td class="link"><a href="-?[0-9]*\.json" title="-?[0-9]*\.json">-?[0-9]*\.json</a></td><td class="size">.*</td><td class="date">[0-9]*-[a-zA-Z]*-[0-9]* [0-9]*:[0-9]*</td></tr>')
+            json_re = re.compile(r'-?[0-9]*\.json')
             champion_urls = []
             champion_files = {}
             for line in source_list:
@@ -425,6 +426,7 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
             else:
                 print("\n统计完毕，共%d名英雄。请输入任意键退出。\nCount finished! There're %d champions in total. Please press any key to exit." %(count, count))
                 break
+        input()
         exit() #执行到此，程序结束（Here the program terminates）
 connector = Connector()
 
@@ -432,9 +434,9 @@ async def get_summoner_data(connection):
     data = await connection.request('GET', '/lol-summoner/v1/current-summoner')
     global summoner
     summoner = await data.json()
-    print(f"displayName:    {summoner['displayName']}")
-    print(f"summonerId:     {summoner['summonerId']}")
-    print(f"puuid:          {summoner['puuid']}")
+    print("displayName:    %s" %(summoner["gameName"] + "#" + summoner["tagLine"]))
+    print("summonerId:     %s" %(summoner["summonerId"]))
+    print("puuid:          %s" %(summoner["puuid"]))
     print("-")
 
 

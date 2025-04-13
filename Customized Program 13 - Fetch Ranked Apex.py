@@ -1,6 +1,7 @@
 from lcu_driver import Connector
 from openpyxl import load_workbook
 import os, pandas, json, time
+from urllib.parse import quote, unquote
 
 #=============================================================================
 # * 声明（Declaration）
@@ -22,9 +23,9 @@ connector = Connector()
 async def get_summoner_data(connection):
     data = await connection.request('GET', '/lol-summoner/v1/current-summoner')
     summoner = await data.json()
-    print(f"displayName:    {summoner['displayName']}")
-    print(f"summonerId:     {summoner['summonerId']}")
-    print(f"puuid:          {summoner['puuid']}")
+    print("displayName:    %s" %(summoner["gameName"] + "#" + summoner["tagLine"]))
+    print("summonerId:     %s" %(summoner["summonerId"]))
+    print("puuid:          %s" %(summoner["puuid"]))
     print("-")
 
 
@@ -65,9 +66,84 @@ def format_runtime(seconds: int):
     
     return " ".join(result) if result else "0"
 
+async def get_info(connection, name: str, searchType: str | int = "riotId"):
+    #searchTypes = {0: "selfCheck", 1: "riotId", 2: "puuid", 3: "summonerId"}
+    current_info = await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json()
+    result = {"searchType": "riotId", "endpoint": "/lol-summoner/v2/summoners/puuid/{puuid}", "info_got": False, "network_error": False, "body": {}, "message": "", "selfInfo": False}
+    try:
+        name = int(name)
+    except ValueError:
+        if name == "current-summoner":
+            result = {"searchType": "selfCheck", "endpoint": "/lol-summoner/v1/current-summoner", "info_got": True, "network_error": False, "body": current_info, "message": "", "selfInfo": True}
+        elif name.count("-") == 4 and len(name.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
+            result["searchType"] = "puuid"
+            result["endpoint"] = "/lol-summoner/v2/summoners/puuid/{puuid}"
+            info = await (await connection.request("GET", f"/lol-summoner/v2/summoners/puuid/{name}")).json()
+            result["body"] = info
+            if "errorCode" in info:
+                if info["httpStatus"] == 400:
+                    result["message"] = "您输入的玩家通用唯一识别码格式有误！请重新输入！\nPUUID wasn't in UUID format! Please try again!"
+                elif info["httpStatus"] == 404:
+                    result["message"] = "未找到玩家通用唯一识别码为%s的玩家；请核对识别码并稍后再试。\nA player with puuid %s was not found; verify the puuid and try again." %(name, name)
+                else:
+                    result["network_error"] = True
+                    result["message"] = "网络异常。\nNetwork Error."
+            else:
+                result["info_got"] = True
+                result["selfInfo"] = info["puuid"] == current_info["puuid"]
+        else:
+            result["searchType"] = "riotId"
+            result["endpoint"] = "/lol-summoner/v1/summoners?name={name}"
+            if name.count("#") == 0:
+                result["message"] = '召唤师名称已变更为拳头ID。请以“{玩家昵称}#{昵称编号}”的格式输入。\nSummoner name has been replaced with Riot ID. Please input the name in this format: "{gameName}#{tagLine}", e.g. "%s#%s".' %(current_info["gameName"], current_info["tagLine"])
+            elif name.count("#") > 1:
+                result["message"] = "该玩家名字包含了无效字符。\nThis player name contains invalid characters."
+            else:
+                gameName, tagLine = name.split("#")
+                if len(gameName) == 0:
+                    result["message"] = "缺少玩家昵称。\nGame name is missing."
+                elif len(tagLine) == 0:
+                    result["message"] = "缺少昵称编号。\nTagline is missing."
+                elif len(gameName) < 3:
+                    result["message"] = "召唤师昵称过短。\nRiot ID is too short."
+                elif len(gameName.replace(" ", "")) > 16:
+                    result["message"] = "召唤师昵称过长。\nRiot ID is too long."
+                else:
+                    info = await (await connection.request("GET", "/lol-summoner/v1/summoners?name=" + quote(name))).json()
+                    result["body"] = info
+                    if "errorCode" in info:
+                        if info["httpStatus"] == 404:
+                            result["message"] = "未找到%s；请核对下名字并稍后再试。\n%s was not found; verify the name and try again." %(name, name)
+                        else:
+                            result["network_error"] = True
+                            result["message"] = "网络异常。\nNetwork Error."
+                    else:
+                        result["info_got"] = True
+                        result["selfInfo"] = info["puuid"] == current_info["puuid"]
+    else:
+        result["searchType"] = "summonerId"
+        result["endpoint"] = "/lol-summoner/v1/summoners/{id}"
+        info = await (await connection.request("GET", f"/lol-summoner/v1/summoners/{name}")).json()
+        result["body"] = info
+        if "errorCode" in info:
+            if info["httpStatus"] == 400:
+                if info["message"] == "Value %d for 'id' of type uint64 is out of range":
+                    result["message"] = "您输入的召唤师序号格式有误！请重新输入！\nValue for 'id' of type uint64 is out of range! Please try again!"
+                else:
+                    result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with puuid %s was not found; verify the summonerId and try again." %(name, name)
+            elif info["httpStatus"] == 404:
+                result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with puuid %s was not found; verify the summonerId and try again." %(name, name)
+            else:
+                result["network_error"] = True
+                result["message"] = "网络异常。\nNetwork Error."
+        else:
+            result["info_got"] = True
+            result["selfInfo"] = info["puuid"] == current_info["puuid"]
+    return result
+
 async def get_challenger_tier(connection):
     platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
-    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
+    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "ME1": "中东服（Middle East）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
     platform_GARENA = {"PH": "菲律宾服（Philippines）", "SG": "新加坡服（Singapore, Malaysia and Indonesia）", "TW": "台服（Taiwan, Hong Kong and Macau）", "VN": "越南服（Vietnam）", "TH": "泰服（Thailand）"}
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
     platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
@@ -122,12 +198,12 @@ async def get_challenger_tier(connection):
             elif j == 6:
                 splits_info_data[key].append(split["victoriousSkinRewardGroup"]["itemInstanceId"])
             else:
-                splits_info_data[key].append(split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"][key[27:]])
+                splits_info_data[key].append(split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"][key[27:]] if key[27:] in split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"] else 0)
         print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
         print("赛季信息整理进度（Split config sorting process）：%d/%d" %(i + 1, len(splitsConfig["splits"])))
-    splits_info_statistics_display_order = [2, 3, 4, 5, 0, 1, 6, 13, 7, 16, 11, 15, 10, 9, 14, 12, 8]
+    splits_info_statistics_output_order = [2, 3, 4, 5, 0, 1, 6, 13, 7, 16, 11, 15, 10, 9, 14, 12, 8]
     splits_info_data_organized = {}
-    for i in splits_info_statistics_display_order:
+    for i in splits_info_statistics_output_order:
         key = splits_info_header_keys[i]
         splits_info_data_organized[key] = [splits_info_header[key]] + splits_info_data[key]
     splits_info_df = pandas.DataFrame(data = splits_info_data_organized)
@@ -166,9 +242,9 @@ async def get_challenger_tier(connection):
                         rewardTrack_data[key].append(rewardNames.get(reward["id"], ""))
                 print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                 print("奖励里程整理进度（Reward track sorting process）：[%d/%d][%d/%d][%d/%d]" %(i + 1, len(splitsConfig["splits"]), j + 1, len(split["rewardTrack"]), k + 1, len(rewards)))
-    rewardTrack_statistics_display_order = [0, 9, 1, 10, 4, 8, 2, 6, 3, 5, 7]
+    rewardTrack_statistics_output_order = [0, 9, 1, 10, 4, 8, 2, 6, 3, 5, 7]
     rewardTrack_data_organized = {}
-    for i in rewardTrack_statistics_display_order:
+    for i in rewardTrack_statistics_output_order:
         key = rewardTrack_header_keys[i]
         rewardTrack_data_organized[key] = [rewardTrack_header[key]] + rewardTrack_data[key]
     rewardTrack_df = pandas.DataFrame(data = rewardTrack_data_organized)
@@ -234,7 +310,12 @@ async def get_challenger_tier(connection):
                             challenger_ladders_metadata[key].append(division[key])
                 for j in range(len(division["standings"])):
                     standing = division["standings"][j]
-                    standing_summoner = await (await connection.request("GET", f"/lol-summoner/v2/summoners/puuid/{standing["puuid"]}")).json()
+                    standing_summoner_recapture = 0
+                    standing_summoner = await get_info(connection, standing["puuid"])
+                    while standing_summoner["network_error"] and standing_summoner_recapture < 3:
+                        standing_summoner_recapture += 1
+                        print("第%d/%d名顶级%s%s%s玩家（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\n[%d/%d] Information of Player (Puuid: %s) in the %s %s %s apex capture failed! Recapturing this player's information ... Times tried: %d" %(j + 1, len(division["standings"]), queueTypes_zh[queueType], tiers_zh[tier], division["division"], standing["puuid"], standing_summoner_recapture, j + 1, len(division["standings"]), standing["puuid"], queueTypes_zh[queueType], tiers_zh[tier], division["division"], standing_summoner_recapture))
+                        standing_summoner = await get_info(connection, standing["puuid"])
                     for k in range(len(challenger_ladders_header_keys)):
                         key = challenger_ladders_header_keys[k]
                         if k == 0 or k == 11:
@@ -244,12 +325,12 @@ async def get_challenger_tier(connection):
                         elif k <= 19:
                             queue_ladder_data[key].append(standing[key])
                         else:
-                            queue_ladder_data[key].append(standing_summoner[key])
+                            queue_ladder_data[key].append(standing_summoner["body"][key] if standing_summoner["info_got"] else "")
                     print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                     print("顶级%s%s玩家信息整理进度（Top %s %s player information sorting process）：[%d/%d][%d/%d]" %(queueTypes_zh[queueType], tiers_zh[tier], queueTypes_en[queueType], tiers_en[tier], i + 1, len(ladders["divisions"]), j + 1, len(division["standings"])))
-        challenger_ladders_statistics_display_order = [8, 10, 9, 16, 14, 17, 20, 21, 18, 0, 3, 2, 13, 7, 6, 5, 19, 4, 12, 11, 1, 15]
+        challenger_ladders_statistics_output_order = [8, 10, 9, 16, 14, 17, 20, 21, 18, 0, 3, 2, 13, 7, 6, 5, 19, 4, 12, 11, 1, 15]
         queue_ladder_data_organized = {}
-        for i in challenger_ladders_statistics_display_order:
+        for i in challenger_ladders_statistics_output_order:
             key = challenger_ladders_header_keys[i]
             queue_ladder_data_organized[key] = [challenger_ladders_header[key]] + queue_ladder_data[key]
         ladders_data["challenger_ladder"][queueType] = queue_ladder_data_organized #注意字典赋值的原理。该语句其实无关紧要（Pay attention to the principle of assigning a dictionary. This statement is actually unnecessary）
@@ -262,9 +343,9 @@ async def get_challenger_tier(connection):
                 elif str(ladders_dfs["challenger_ladder"][queueType].iat[i, j]) == "False":
                     ladders_dfs["challenger_ladder"][queueType].iat[i, j] = ""
         print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
-    challenger_ladders_metadata_statistics_display_order = [3, 10, 7, 2, 8, 11, 9, 4, 0, 1, 5, 6]
+    challenger_ladders_metadata_statistics_output_order = [3, 10, 7, 2, 8, 11, 9, 4, 0, 1, 5, 6]
     challenger_ladders_metadata_organized = {}
-    for i in challenger_ladders_metadata_statistics_display_order:
+    for i in challenger_ladders_metadata_statistics_output_order:
         key = challenger_ladders_metadata_header_keys[i]
         challenger_ladders_metadata_organized[key] = [challenger_ladders_metadata_header[key]] + challenger_ladders_metadata[key]
     challenger_ladders_metadata_df = pandas.DataFrame(data = challenger_ladders_metadata_organized)
@@ -294,7 +375,12 @@ async def get_challenger_tier(connection):
             queue_ladder_data[key] = []
         for i in range(len(ladders["standings"])):
             standing = ladders["standings"][i]
-            standing_summoner = await (await connection.request("GET", f"/lol-summoner/v2/summoners/puuid/{standing["puuid"]}")).json()
+            standing_summoner_recapture = 0
+            standing_summoner = await get_info(connection, standing["puuid"])
+            while standing_summoner["network_error"] and standing_summoner_recapture < 3:
+                standing_summoner_recapture += 1
+                print("第%d/%d名顶级%s玩家（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\n[%d/%d] Information of Player (Puuid: %s) in the %s apex capture failed! Recapturing this player's information ... Times tried: %d" %(j + 1, len(division["standings"]), queueTypes_zh[queueType], standing["puuid"], standing_summoner_recapture, j + 1, len(division["standings"]), standing["puuid"], queueTypes_zh[queueType], standing_summoner_recapture))
+                standing_summoner = await get_info(connection, standing["puuid"])
             for j in range(len(topRated_ladders_header_keys)):
                 key = topRated_ladders_header_keys[j]
                 if j <= 8:
@@ -303,12 +389,12 @@ async def get_challenger_tier(connection):
                     else:
                         queue_ladder_data[key].append(standing[key])
                 else:
-                    queue_ladder_data[key].append(standing_summoner[key])
+                    queue_ladder_data[key].append(standing_summoner["body"][key] if standing_summoner["info_got"] else "")
             print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
             print("顶级%s玩家信息整理进度（Top %s player information sorting process）：%d/%d" %(queueTypes_zh[queueType], queueTypes_en[queueType], i + 1, len(ladders["standings"])))
-        topRated_ladders_statistics_display_order = [1, 3, 2, 6, 4, 7, 9, 10, 5, 0, 8]
+        topRated_ladders_statistics_output_order = [1, 3, 2, 6, 4, 7, 9, 10, 5, 0, 8]
         queue_ladder_data_organized = {}
-        for i in topRated_ladders_statistics_display_order:
+        for i in topRated_ladders_statistics_output_order:
             key = topRated_ladders_header_keys[i]
             queue_ladder_data_organized[key] = [topRated_ladders_header[key]] + queue_ladder_data[key]
         ladders_data["topRated_ladder"][queueType] = queue_ladder_data_organized

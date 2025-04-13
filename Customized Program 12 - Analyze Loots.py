@@ -21,9 +21,9 @@ connector = Connector()
 async def get_summoner_data(connection):
     data = await connection.request('GET', '/lol-summoner/v1/current-summoner')
     summoner = await data.json()
-    print(f"displayName:    {summoner['displayName']}")
-    print(f"summonerId:     {summoner['summonerId']}")
-    print(f"puuid:          {summoner['puuid']}")
+    print("displayName:    %s" %(summoner["gameName"] + "#" + summoner["tagLine"]))
+    print("summonerId:     %s" %(summoner["summonerId"]))
+    print("puuid:          %s" %(summoner["puuid"]))
     print("-")
 
 
@@ -68,11 +68,11 @@ def get_info_name(info: dict, mode = 1) -> str:
                 name = info["displayName"]
         else: #新玩家属于这种类型（This case matches new players）
             if mode == 1:
-                name = str(info["summonerId"])
+                name = str(info["puuid"])
             elif mode == 2: #仅用于设置召唤师数据保存路径（Designed to set the summoner name directory）
-                name = "0. 新玩家\\" + str(info["summonerId"])
+                name = "0. 新玩家\\" + str(info["puuid"])
             elif mode == 3: #仅用于设置召唤师数据保存路径（Designed to set the summoner name directory）
-                name = "0. New Player\\" + str(info["summonerId"])
+                name = "0. New Player\\" + str(info["puuid"])
     return name
 
 async def analyze_player_loots(connection): #导出玩家目前含有的战利品的信息（Exports the user's current loots' information）
@@ -81,7 +81,7 @@ async def analyze_player_loots(connection): #导出玩家目前含有的战利�
     displayName = get_info_name(info)
     current_puuid = info["puuid"]
     platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
-    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
+    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "ME1": "中东服（Middle East）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
     platform_GARENA = {"PH": "菲律宾服（Philippines）", "SG": "新加坡服（Singapore, Malaysia and Indonesia）", "TW": "台服（Taiwan, Hong Kong and Macau）", "VN": "越南服（Vietnam）", "TH": "泰服（Thailand）"}
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
     riot_client_info = await (await connection.request("GET", "/riotclient/command-line-args")).json()
@@ -125,7 +125,7 @@ async def analyze_player_loots(connection): #导出玩家目前含有的战利�
     itemStatus_dict = {"NONE": "未拥有", "RENTAL": "租借中", "OWNED": "已拥有"}
     rarities = {"": "无", "DEFAULT": "经典", "EPIC": "史诗", "LEGENDARY": "传说", "MYTHIC": "神话", "RARE": "稀有", "ULTIMATE": "终极"}
     redeemableStatus_dict = {"ALREADY_OWNED": "已拥有", "CHAMPION_NOT_OWNED": "英雄未拥有", "NOT_REDEEMABLE": "不可解锁", "REDEEMABLE": "可解锁", "REDEEMABLE_RENTAL": "可激活租借"}
-    lootTypes = {"": "其它", "BOOST": "加成道具", "CHAMPION": "永久英雄", "CHAMPION_RENTAL": "英雄碎片", "CHAMPION_TOKEN": "成就代币", "CHEST": "宝箱", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "永久表情", "EMOTE_RENTAL": "表情碎片", "MATERIAL": "材料", "SKIN": "永久皮肤", "SKIN_RENTAL": "皮肤碎片", "STATSTONE": "永久永恒星碑", "STATSTONE_SHARD": "永恒星碑碎片", "SUMMONERICON": "召唤师图标", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TOURNAMENTLOGO": "冠军杯赛图标", "WARDSKIN": "永久守卫皮肤", "WARDSKIN_RENTAL": "守卫皮肤碎片"}
+    lootTypes = {"": "其它", "BOOST": "加成道具", "CHAMPION": "永久英雄", "CHAMPION_RENTAL": "英雄碎片", "CHAMPION_TOKEN": "成就代币", "CHEST": "宝箱", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "永久表情", "EMOTE_RENTAL": "表情碎片", "MATERIAL": "材料", "NEXUS_FINISHER": "终结特效", "SKIN": "永久皮肤", "SKIN_RENTAL": "皮肤碎片", "STATSTONE": "永久永恒星碑", "STATSTONE_SHARD": "永恒星碑碎片", "SUMMONERICON": "召唤师图标", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TOURNAMENTLOGO": "冠军杯赛图标", "WARDSKIN": "永久守卫皮肤", "WARDSKIN_RENTAL": "守卫皮肤碎片"}
     for i in range(len(player_loot_header_keys)):
         key = player_loot_header_keys[i]
         player_loot_data[key] = []
@@ -146,9 +146,9 @@ async def analyze_player_loots(connection): #导出玩家目前含有的战利�
                 player_loot_data[key].append(lootTypes[player_loot[i][key]])
             else:
                 player_loot_data[key].append(player_loot[i][key])
-    player_loot_statistics_display_order = [15, 9, 12, 1, 0, 19, 30, 31, 32, 2, 4, 33, 5, 29, 20, 17, 10, 27]
+    player_loot_statistics_output_order = [15, 9, 12, 1, 0, 19, 30, 31, 32, 2, 4, 33, 5, 29, 20, 17, 10, 27]
     player_loot_data_organized = {}
-    for i in player_loot_statistics_display_order:
+    for i in player_loot_statistics_output_order:
         key = player_loot_header_keys[i]
         player_loot_data_organized[key] = [player_loot_header[key]] + player_loot_data[key]
     player_loot_df = pandas.DataFrame(data = player_loot_data_organized)

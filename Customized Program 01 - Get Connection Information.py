@@ -16,6 +16,7 @@ from lcu_driver import Connector
 #-----------------------------------------------------------------------------
 
 connector = Connector()
+
 #-----------------------------------------------------------------------------
 # 自定义函数（DIY Function）
 #-----------------------------------------------------------------------------
@@ -25,6 +26,8 @@ async def get_connection_data(connection):
     print("address: ", connection.address)
     print("auth_key: ", connection.auth_key)
     print("displayName: ", current_summoner["displayName"])
+    print("gameName: ", current_summoner["gameName"])
+    print("tagLine: ", current_summoner["tagLine"])
     print("installation_path: ", connection.installation_path)
     print("pid: ", connection.pid)
     print("port: ", connection.port)

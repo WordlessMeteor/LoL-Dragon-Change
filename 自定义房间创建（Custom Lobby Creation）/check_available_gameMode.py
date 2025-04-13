@@ -16,7 +16,7 @@ import os, time
 #    https://github.com/sousa-andre/lcu-driver
 #-----------------------------------------------------------------------------
 
-gamemodes = ["CLASSIC", "ODIN", "ARAM", "TUTORIAL", "URF", "DOOMBOTSTEEMO", "ONEFORALL", "ASCENSION", "FIRSTBLOOD", "KINGPORO", "SIEGE", "ASSASSINATE", "ARSR", "DARKSTAR", "STARGUARDIAN", "PROJECT", "GAMEMODEX", "ODYSSEY", "NEXUSBLITZ", "ULTBOOK", "CHERRY", "STRAWBERRY"]
+gamemodes = ["ARAM", "ARSR", "ASCENSION", "ASSASSINATE", "CHERRY", "CLASSIC", "CS", "DARKSTAR", "DOOMBOTSTEEMO", "FIRSTBLOOD", "GAMEMODEX", "HAWTHORN", "HEXAKILL", "KINGPORO", "MAKO_CLASSIC", "NEXUSBLITZ", "ODIN", "ODYSSEY", "ONEFORALL", "PRACTICETOOL", "PROJECT", "SIEGE", "SNOWURF", "STARGUARDIAN", "STRAWBERRY", "SWIFTPLAY", "TFT", "TUTORIAL", "TUTORIAL_MODULE_1", "TUTORIAL_MODULE_2", "ULTBOOK", "URF", "WIPMODEWIP", "WIPMODEWIP3", "WIPMODEWIP4"]
 
 connector = Connector()
 
@@ -26,9 +26,9 @@ connector = Connector()
 async def get_summoner_data(connection):
     data = await connection.request("GET", "/lol-summoner/v1/current-summoner")
     summoner = await data.json()
-    print(f"displayName:    {summoner['displayName']}")
-    print(f"summonerId:     {summoner['summonerId']}")
-    print(f"puuid:          {summoner['puuid']}")
+    print("displayName:    %s" %(summoner["gameName"] + "#" + summoner["tagLine"]))
+    print("summonerId:     %s" %(summoner["summonerId"]))
+    print("puuid:          %s" %(summoner["puuid"]))
     print("-")
 
 

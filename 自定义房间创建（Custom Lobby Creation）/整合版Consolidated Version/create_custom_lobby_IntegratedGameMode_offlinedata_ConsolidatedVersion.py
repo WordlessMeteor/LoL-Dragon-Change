@@ -37,14 +37,17 @@ if check_botlist != "":
 def count_nonASCII(s: str): #统计一个字符串中占用命令行2个宽度单位的字符个数（Count the number of characters that take up 2 width unit in CMD）
     return sum([unicodedata.east_asian_width(character) in ("F", "W") for character in list(str(s))])
 
-def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+    old_index = df.index
     df = df.reset_index(drop = True) #这一步至关重要，因为下面的操作前提是行号是默认的（This step is crucial, for the following operations are based on the dataframe with the default row index）
+    df.index = range(start_index, len(df) + start_index)
     maxLens = {}
     maxWidth = shutil.get_terminal_size()[0]
     fields = df.columns.tolist()
     for field in fields:
-        maxLens[field] = max(max(map(lambda x: wcswidth(str(x)), df[field])), wcswidth(str(field))) + 2
-    if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth:
+        maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(str(x)), df[field])), wcswidth(str(field))) + 2
+    index_len = max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+    if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
             if input() == "":
@@ -58,29 +61,72 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
         else:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！将继续格式化输出！\nThe output width of each record string exceeds the current width of the terminal window! The program is going on formatted printing!")
     result = ""
-    for i in range(df.shape[1]):
-        field = fields[i]
-        tmp = "{0:^{w}}".format(field, w = maxLens[str(field)] - count_nonASCII(str(field)))
-        result += tmp
-        #print(tmp, end = "")
-        if i != df.shape[1] - 1:
-            result += "  "
-            #print("  ", end = "")
-    result += "\n"
-    #print()
-    for i in range(df.shape[0]):
-        for j in range(df.shape[1]):
-            field = fields[j]
-            cell = df[field][i]
-            tmp = "{0:^{w}}".format(cell, w = maxLens[field] - count_nonASCII(str(cell)))
-            result += tmp
-            #print(tmp, end = "")
-            if j != df.shape[1] - 1:
-                result += "  "
-                #print("  ", end = "")
-        if i != df.shape[0] - 1:
+    #确定各列的排列方向（Determine the alignments of all columns）
+    if isinstance(header_align, str) and isinstance(align, str):
+        if not all(map(lambda x: x in {"<", "^", ">"}, header_align)) or not all(map(lambda x: x in {"<", "^", ">"}, align)):
+            print('排列方式字符串参数错误！排列方式必须是“<”“^”或者“>”中的一个。请修改排列方式字符串参数。\nParameter ERROR of the alignment string! The alignment value must be one of {"<", "^", ">"}. Please change the alignment string parameter.')
+        if len(header_align) == 0: #指定为空字符串，即默认居中输出（Specifying it as a null string means output centered by default）
+            header_alignments = ["^"] * df.shape[1]
+        elif len(header_align) == 1:
+            header_alignments = [header_align] * df.shape[1]
+        else:
+            header_alignments_tmp = list(header_align)
+            if len(header_align) < df.shape[1]:
+                if align_replicate_rule == "last":
+                    header_alignments = header_alignments_tmp + [header_alignments_tmp[-1]] * len(df.shape[1] - len(header_align))
+                else:
+                    if align_replicate_rule != "all":
+                        print("排列方式列表补充规则不合法！将默认采用全部填充。\nAlignment list supplement rule illegal! The whole alignment string will be replicated.")
+                    header_alignments = header_alignments_tmp * (df.shape[1] // len(header_align)) + header_alignments_tmp[:df.shape[1] % len(header_align)]
+            else:
+                header_alignments = header_alignments_tmp[:df.shape[1]]
+        if len(align) == 0:
+            alignments = ["^"] * df.shape[1]
+        elif len(align) == 1:
+            alignments = [align] * df.shape[1]
+        else:
+            alignments_tmp = list(align)
+            if len(align) < df.shape[1]:
+                if align_replicate_rule == "last":
+                    alignments = alignments_tmp + [alignments_tmp[-1]] * len(df.shape[1] - len(align))
+                else:
+                    if align_replicate_rule != "all":
+                        print("排列方式列表补充规则不合法！将默认采用全部填充。\nAlignment list supplement rule illegal! The whole alignment string will be replicated.")
+                    alignments = alignments_tmp * (df.shape[1] // len(align)) + alignments_tmp[:df.shape[1] % len(align)]
+            else:
+                alignments = alignments_tmp[:df.shape[1]]
+        if print_header:
+            if print_index:
+                result += " " * (index_len + 2)
+            for i in range(df.shape[1]):
+                field = fields[i]
+                tmp = "{0:{align}{w}}".format(field, align = header_alignments[i], w = maxLens[str(field)] - count_nonASCII(str(field)))
+                result += tmp
+                #print(tmp, end = "")
+                if i != df.shape[1] - 1:
+                    result += "  "
+                    #print("  ", end = "")
             result += "\n"
-        #print() #注意这里的缩进和上一行不同（Note that here the indentation is different from the last line）
+            #print()
+        index = start_index
+        for i in range(df.shape[0]):
+            if print_index:
+                result += "{0:>{w}}".format(old_index[index - start_index] if reserve_index else index, w = index_len) + "  "
+            for j in range(df.shape[1]):
+                field = fields[j]
+                cell = str(list(df[field])[i])
+                tmp = "{0:{align}{w}}".format(cell, align = alignments[j], w = maxLens[field] - count_nonASCII(cell))
+                result += tmp
+                #print(tmp, end = "")
+                if j != df.shape[1] - 1:
+                    result += "  "
+                    #print("  ", end = "")
+            if i != df.shape[0] - 1:
+                result += "\n"
+            #print() #注意这里的缩进和上一行不同（Note that here the indentation is different from the last line）
+            index += 1
+    else:
+        print("排列方式参数错误！请传入字符串。\nAlignment parameter ERROR! Please pass a string instead.")
     return (result, maxLens)
 
 connector = Connector()
@@ -91,9 +137,9 @@ connector = Connector()
 async def get_summoner_data(connection):
     data = await connection.request("GET", "/lol-summoner/v1/current-summoner")
     summoner = await data.json()
-    print(f"displayName:    {summoner['displayName']}")
-    print(f"summonerId:     {summoner['summonerId']}")
-    print(f"puuid:          {summoner['puuid']}")
+    print("displayName:    %s" %(summoner["gameName"] + "#" + summoner["tagLine"]))
+    print("summonerId:     %s" %(summoner["summonerId"]))
+    print("puuid:          %s" %(summoner["puuid"]))
     print("-")
 
 
@@ -116,7 +162,7 @@ async def get_lockfile(connection):
 #-----------------------------------------------------------------------------
 async def check_available_queue(connection):
     queues = await (await connection.request("GET", "/lol-game-queues/v1/queues")).json()
-    map_CN = {8: "水晶之痕", 10: "扭曲丛林", 11: "召唤师峡谷", 12: "嚎哭深渊", 14: "屠夫之桥", 16: "星界废墟", 18: "瓦洛兰城市公园", 19: "第43区", 20: "失控地点", 21: "百合与莲花的神庙", 22: "聚点危机", 30: "怒火角斗场", 33: "最终都市"}
+    map_CN = {8: "水晶之痕", 10: "扭曲丛林", 11: "召唤师峡谷", 12: "嚎哭深渊", 14: "屠夫之桥", 16: "星界废墟", 18: "瓦洛兰城市公园", 19: "第43区", 20: "飞船坠落点", 21: "百合与莲花的神庙", 22: "聚点危机", 30: "怒火角斗场", 33: "最终都市"}
     map_EN = {8: "Crystal Scar", 10: "Twisted Treeline", 11: "Summoner's Rift", 12: "Howling Abyss", 14: "Butcher's Bridge", 16: "Cosmic Ruins", 18: "Valoran City Park", 19: "Substructure 43", 20: "Crash Site", 21: "Temple of Lily and Lotus", 22: "Convergence", 30: "Rings of Wrath", 33: "Final City"}
     pickmode_CN = {"AllRandomPickStrategy": "全随机模式", "SimulPickStrategy": "自选模式", "TeamBuilderDraftPickStrategy": "征召模式", "OneTeamVotePickStrategy": "投票", "TournamentPickStrategy": "竞技征召模式", "QuickplayPickStrategy": "快速匹配", "": "待定"}
     pickmode_EN = {"AllRandomPickStrategy": "All Random", "SimulPickStrategy": "Blind Pick", "TeamBuilderDraftPickStrategy": "Draft Mode", "OneTeamVotePickStrategy": "Vote", "TournamentPickStrategy": "Tournament Draft", "QuickplayPickStrategy": "Quickplay", "": "Pending"}
@@ -145,7 +191,7 @@ async def check_available_queue(connection):
 async def create_custom_lobby(connection):
     summoner = await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json()
     gamemodes = ["CLASSIC", "ARAM", "PRACTICETOOL", "NEXUSBLITZ", "GAMEMODEX", "TUTORIAL"]
-    gamemaps = {8: "水晶之痕（Crystal Scar）", 10: "扭曲丛林（Twisted Treeline）", 11: "召唤师峡谷（Summoner's Rift）", 12: "嚎哭深渊（Howling Abyss）", 14: "屠夫之桥（Butcher's Bridge）", 16: "星界废墟（Cosmic Ruins）", 18: "瓦洛兰城市公园（Valoran City Park）", 19: "第43区（Substructure 43）", 20: "失控地点（Crash Site）", 21: "百合与莲花的神庙（Temple of Lily and Lotus）", 22: "聚点危机（Convergence）", 30: "怒火角斗场（Rings of Wrath）", 33: "最终都市（Final City）"}
+    gamemaps = {8: "水晶之痕（Crystal Scar）", 10: "扭曲丛林（Twisted Treeline）", 11: "召唤师峡谷（Summoner's Rift）", 12: "嚎哭深渊（Howling Abyss）", 14: "屠夫之桥（Butcher's Bridge）", 16: "星界废墟（Cosmic Ruins）", 18: "瓦洛兰城市公园（Valoran City Park）", 19: "第43区（Substructure 43）", 20: "飞船坠落点（Crash Site）", 21: "百合与莲花的神庙（Temple of Lily and Lotus）", 22: "聚点危机（Convergence）", 30: "怒火角斗场（Rings of Wrath）", 33: "最终都市（Final City）"}
     spectatorPolicy = ["LobbyAllowed", "FriendsAllowed", "AllAllowed", "NotAllowed"]
     defaultMapId = {"CLASSIC": 11, "ARAM": 12, "PRACTICETOOL": 11, "NEXUSBLITZ": 21, "GAMEMODEX": 21}
     print("请选择自定义房间的游戏模式：\nPlease select a game mode of the lobby:\n1\t召唤师峡谷（Summoner's Rift）\n2\t嚎哭深渊（Howling Abyss）\n3\t训练模式（Practice Tool）\n4\t极限闪击（不可用）【Nexus Blitz (Unavailable)】\n5\t极限闪击（Nexus Blitz）")
@@ -283,20 +329,26 @@ async def create_queue_lobby(connection):
             queueId = int(queueId)
             if queueId < 0:
                 break
-            queue = {
-                        "queueId": queueId
-                    }
-            await connection.request("DELETE", "/lol-lobby/v2/lobby")
-            await connection.request("POST", "/lol-lobby/v2/lobby", data=queue)
             lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
-            if "gameConfig" in lobby_information:
-                postqueueId = lobby_information["gameConfig"]["queueId"]
-                if prequeueId == postqueueId:
-                    continue
-                else:
+            if "gameConfig" in lobby_information and not lobby_information["gameConfig"]["isCustom"]:
+                response = await (await connection.request("PUT", "/lol-lobby/v1/parties/queue", data = str(queueId))).json()
+                if response == None:
                     print(lobby_information)
+                elif "errorCode" in response and response["message"] == "UNHANDLED_SERVER_SIDE_ERROR":
+                    print("服务器错误。请换一个队列序号并重试。\nUnhandled server side error. Please switch to another queueId and try again.")
             else:
-                print("此房间序号尚不可用。请选择其它序号。\nThis queueId isn't available yet. Please select another ID.")
+                queue = {"queueId": queueId}
+                response = await (await connection.request("DELETE", "/lol-lobby/v2/lobby")).json()
+                response = await (await connection.request("POST", "/lol-lobby/v2/lobby", data = queue)).json()
+                lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+                if "gameConfig" in lobby_information:
+                    postqueueId = lobby_information["gameConfig"]["queueId"]
+                    if prequeueId == postqueueId:
+                        continue
+                    else:
+                        print(lobby_information)
+                else:
+                    print("此房间序号尚不可用。请选择其它序号。\nThis queueId isn't available yet. Please select another ID.")
         except ValueError:
             print("队列房间序号输入错误！请重新输入：\nError input of queueID! Please try again:")
         except KeyError:
@@ -778,7 +830,7 @@ async def start_game(connection):
             #print("start_game = ", end = "")
             #print(start_game)
             if "success" in start_game and start_game["success"] == True:
-                gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json() #gameflow_phase参数（parameters）：None、Lobby、Matchmaking、ReadyCheck、ChampSelect、InProgress、WaitingForStats、EndOfGame
+                gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json() #gameflow_phase参数（parameters）：None、Lobby、Matchmaking、ReadyCheck、ChampSelect、InProgress、Reconnect、WaitingForStats、EndOfGame
                 while gameflow_phase != "ChampSelect":
                     gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json()
                     #print("gameflow-phase = ", end = "")

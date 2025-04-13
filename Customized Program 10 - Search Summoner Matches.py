@@ -24,9 +24,9 @@ connector = Connector()
 async def get_summoner_data(connection):
     data = await connection.request('GET', '/lol-summoner/v1/current-summoner')
     summoner = await data.json()
-    print(f"displayName:    {summoner['displayName']}")
-    print(f"summonerId:     {summoner['summonerId']}")
-    print(f"puuid:          {summoner['puuid']}")
+    print("displayName:    %s" %(summoner["gameName"] + "#" + summoner["tagLine"]))
+    print("summonerId:     %s" %(summoner["summonerId"]))
+    print("puuid:          %s" %(summoner["puuid"]))
     print("-")
 
 
@@ -77,6 +77,81 @@ def platform_format(platform = '{"TENCENT": "国服（TENCENT）", "RIOT": "外�
     print("已复制转换后的平台字典信息。\nSuccessfully copied the transformed dictionary information.")
     return formatted
 
+async def get_info(connection, name: str, searchType: str | int = "riotId"):
+    #searchTypes = {0: "selfCheck", 1: "riotId", 2: "puuid", 3: "summonerId"}
+    current_info = await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json()
+    result = {"searchType": "riotId", "endpoint": "/lol-summoner/v2/summoners/puuid/{puuid}", "info_got": False, "network_error": False, "body": {}, "message": "", "selfInfo": False}
+    try:
+        name = int(name)
+    except ValueError:
+        if name == "current-summoner":
+            result = {"searchType": "selfCheck", "endpoint": "/lol-summoner/v1/current-summoner", "info_got": True, "network_error": False, "body": current_info, "message": "", "selfInfo": True}
+        elif name.count("-") == 4 and len(name.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
+            result["searchType"] = "puuid"
+            result["endpoint"] = "/lol-summoner/v2/summoners/puuid/{puuid}"
+            info = await (await connection.request("GET", f"/lol-summoner/v2/summoners/puuid/{name}")).json()
+            result["body"] = info
+            if "errorCode" in info:
+                if info["httpStatus"] == 400:
+                    result["message"] = "您输入的玩家通用唯一识别码格式有误！请重新输入！\nPUUID wasn't in UUID format! Please try again!"
+                elif info["httpStatus"] == 404:
+                    result["message"] = "未找到玩家通用唯一识别码为%s的玩家；请核对识别码并稍后再试。\nA player with puuid %s was not found; verify the puuid and try again." %(name, name)
+                else:
+                    result["network_error"] = True
+                    result["message"] = "网络异常。\nNetwork Error."
+            else:
+                result["info_got"] = True
+                result["selfInfo"] = info["puuid"] == current_info["puuid"]
+        else:
+            result["searchType"] = "riotId"
+            result["endpoint"] = "/lol-summoner/v1/summoners?name={name}"
+            if name.count("#") == 0:
+                result["message"] = '召唤师名称已变更为拳头ID。请以“{玩家昵称}#{昵称编号}”的格式输入。\nSummoner name has been replaced with Riot ID. Please input the name in this format: "{gameName}#{tagLine}", e.g. "%s#%s".' %(current_info["gameName"], current_info["tagLine"])
+            elif name.count("#") > 1:
+                result["message"] = "该玩家名字包含了无效字符。\nThis player name contains invalid characters."
+            else:
+                gameName, tagLine = name.split("#")
+                if len(gameName) == 0:
+                    result["message"] = "缺少玩家昵称。\nGame name is missing."
+                elif len(tagLine) == 0:
+                    result["message"] = "缺少昵称编号。\nTagline is missing."
+                elif len(gameName) < 3:
+                    result["message"] = "召唤师昵称过短。\nRiot ID is too short."
+                elif len(gameName.replace(" ", "")) > 16:
+                    result["message"] = "召唤师昵称过长。\nRiot ID is too long."
+                else:
+                    info = await (await connection.request("GET", "/lol-summoner/v1/summoners?name=" + quote(name))).json()
+                    result["body"] = info
+                    if "errorCode" in info:
+                        if info["httpStatus"] == 404:
+                            result["message"] = "未找到%s；请核对下名字并稍后再试。\n%s was not found; verify the name and try again." %(name, name)
+                        else:
+                            result["network_error"] = True
+                            result["message"] = "网络异常。\nNetwork Error."
+                    else:
+                        result["info_got"] = True
+                        result["selfInfo"] = info["puuid"] == current_info["puuid"]
+    else:
+        result["searchType"] = "summonerId"
+        result["endpoint"] = "/lol-summoner/v1/summoners/{id}"
+        info = await (await connection.request("GET", f"/lol-summoner/v1/summoners/{name}")).json()
+        result["body"] = info
+        if "errorCode" in info:
+            if info["httpStatus"] == 400:
+                if info["message"] == "Value %d for 'id' of type uint64 is out of range":
+                    result["message"] = "您输入的召唤师序号格式有误！请重新输入！\nValue for 'id' of type uint64 is out of range! Please try again!"
+                else:
+                    result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with puuid %s was not found; verify the summonerId and try again." %(name, name)
+            elif info["httpStatus"] == 404:
+                result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with puuid %s was not found; verify the summonerId and try again." %(name, name)
+            else:
+                result["network_error"] = True
+                result["message"] = "网络异常。\nNetwork Error."
+        else:
+            result["info_got"] = True
+            result["selfInfo"] = info["puuid"] == current_info["puuid"]
+    return result
+
 def get_info_name(info: dict, mode = 1) -> str:
     if not isinstance(info, dict) or not all(i in info for i in ["displayName", "gameName", "tagLine"]):
         print("您的召唤师信息格式有误！\nERROR format of summoner information!")
@@ -92,16 +167,16 @@ def get_info_name(info: dict, mode = 1) -> str:
                 name = info["displayName"]
         else: #新玩家属于这种类型（This case matches new players）
             if mode == 1:
-                name = str(info["summonerId"])
+                name = str(info["puuid"])
             elif mode == 2: #仅用于设置召唤师数据保存路径（Designed to set the summoner name directory）
-                name = "0. 新玩家\\" + str(info["summonerId"])
+                name = "0. 新玩家\\" + str(info["puuid"])
             elif mode == 3: #仅用于设置召唤师数据保存路径（Designed to set the summoner name directory）
-                name = "0. New Player\\" + str(info["summonerId"])
+                name = "0. New Player\\" + str(info["puuid"])
     return name
 
 async def search_summoner_online(connection):
     platform_TENCENT = {"BGP1": {"zh_CN": "全网通区 男爵领域", "en_US": "Baron Zone"}, "BGP2": {"zh_CN": "峡谷之巅", "en_US": "Super Zone"}, "EDU1": {"zh_CN": "教育网专区", "en_US": "CRENET Server"}, "HN1": {"zh_CN": "电信一区 艾欧尼亚", "en_US": "Ionia"}, "HN2": {"zh_CN": "电信二区 祖安", "en_US": "Zaun"}, "HN3": {"zh_CN": "电信三区 诺克萨斯", "en_US": "Noxus 1"}, "HN4": {"zh_CN": "电信四区 班德尔城", "en_US": "Bandle City"}, "HN4_NEW": {"zh_CN": "电信四区 班德尔城", "en_US": "Bandle City"}, "HN5": {"zh_CN": "电信五区 皮尔特沃夫", "en_US": "Piltover"}, "HN6": {"zh_CN": "电信六区 战争学院", "en_US": "the Institute of War"}, "HN7": {"zh_CN": "电信七区 巨神峰", "en_US": "Mount Targon"}, "HN8": {"zh_CN": "电信八区 雷瑟守备", "en_US": "Noxus 2"}, "HN9": {"zh_CN": "电信九区 裁决之地", "en_US": "the Proving Grounds"}, "HN10": {"zh_CN": "电信十区 黑色玫瑰", "en_US": "the Black Rose"}, "HN11": {"zh_CN": "电信十一区 暗影岛", "en_US": "Shadow Isles"}, "HN12": {"zh_CN": "电信十二区 钢铁烈阳", "en_US": "the Iron Solari"}, "HN13": {"zh_CN": "电信十三区 水晶之痕", "en_US": "Crystal Scar"}, "HN14": {"zh_CN": "电信十四区 均衡教派", "en_US": "the Kinkou Order"}, "HN15": {"zh_CN": "电信十五区 影流", "en_US": "the Shadow Order"}, "HN16": {"zh_CN": "电信十六区 守望之海", "en_US": "Guardian's Sea"}, "HN17": {"zh_CN": "电信十七区 征服之海", "en_US": "Conqueror's Sea"}, "HN18": {"zh_CN": "电信十八区 卡拉曼达", "en_US": "Kalamanda"}, "HN19": {"zh_CN": "电信十九区 皮城警备", "en_US": "Piltover Wardens"}, "PBE": {"zh_CN": "体验服 试炼之地", "en_US": "Chinese PBE"}, "WT1": {"zh_CN": "网通一区 比尔吉沃特", "en_US": "Bilgewater"}, "WT1_NEW": {"zh_CN": "网通一区 比尔吉沃特", "en_US": "Bilgewater"}, "WT2": {"zh_CN": "网通二区 德玛西亚", "en_US": "Demacia"}, "WT2_NEW": {"zh_CN": "网通二区 德玛西亚", "en_US": "Demacia"}, "WT3": {"zh_CN": "网通三区 弗雷尔卓德", "en_US": "Freljord"}, "WT3_NEW": {"zh_CN": "网通三区 弗雷尔卓德", "en_US": "Freljord"}, "WT4": {"zh_CN": "网通四区 无畏先锋", "en_US": "House Crownguard"}, "WT4_NEW": {"zh_CN": "网通四区 无畏先锋", "en_US": "House Crownguard"}, "WT5": {"zh_CN": "网通五区 恕瑞玛", "en_US": "Shurima"}, "WT6": {"zh_CN": "网通六区 扭曲丛林", "en_US": "Twisted Treeline"}, "WT7": {"zh_CN": "网通七区 巨龙之巢", "en_US": "the Dragon Camp"}, "FORCES": {"zh_CN": "比赛服 艾欧尼亚", "en_US": "Tournament - Ionia"}, "NJ100": {"zh_CN": "联盟一区", "en_US": ""}, "GZ100": {"zh_CN": "联盟二区", "en_US": ""}, "CQ100": {"zh_CN": "联盟三区", "en_US": ""}, "TJ100": {"zh_CN": "联盟四区", "en_US": ""}, "TJ101": {"zh_CN": "联盟五区", "en_US": ""}}
-    platform_RIOT = {"BR": {"zh_CN": "巴西服", "en_US": "Brazil"}, "EUNE": {"zh_CN": "北欧和东欧服", "en_US": "Europe Nordic & East"}, "EUW": {"zh_CN": "西欧服", "en_US": "Europe West"}, "LAN": {"zh_CN": "北拉美服", "en_US": "Latin America North"}, "LAS": {"zh_CN": "南拉美服", "en_US": "Latin America South"}, "NA": {"zh_CN": "北美服", "en_US": "North America"}, "OCE": {"zh_CN": "大洋洲服", "en_US": "Oceania"}, "RU": {"zh_CN": "俄罗斯服", "en_US": "Russia"}, "TR": {"zh_CN": "土耳其服", "en_US": "Turkey"}, "JP": {"zh_CN": "日服", "en_US": "Japan"}, "KR": {"zh_CN": "韩服", "en_US": "Republic of Korea"}, "PBE": {"zh_CN": "测试服", "en_US": "Public Beta Environment"}}
+    platform_RIOT = {"BR": {"zh_CN": "巴西服", "en_US": "Brazil"}, "EUNE": {"zh_CN": "北欧和东欧服", "en_US": "Europe Nordic & East"}, "EUW": {"zh_CN": "西欧服", "en_US": "Europe West"}, "LAN": {"zh_CN": "北拉美服", "en_US": "Latin America North"}, "LAS": {"zh_CN": "南拉美服", "en_US": "Latin America South"}, "NA": {"zh_CN": "北美服", "en_US": "North America"}, "OCE": {"zh_CN": "大洋洲服", "en_US": "Oceania"}, "RU": {"zh_CN": "俄罗斯服", "en_US": "Russia"}, "TR": {"zh_CN": "土耳其服", "en_US": "Turkey"}, "ME1": {"zh_CN": "中东服", "en_US": "Middle East"}, "JP": {"zh_CN": "日服", "en_US": "Japan"}, "KR": {"zh_CN": "韩服", "en_US": "Republic of Korea"}, "PBE": {"zh_CN": "测试服", "en_US": "Public Beta Environment"}}
     platform_GARENA = {"PH": {"zh_CN": "菲律宾服", "en_US": "Philippines"}, "SG": {"zh_CN": "新加坡服", "en_US": "Singapore, Malaysia and Indonesia"}, "TW": {"zh_CN": "台服", "en_US": "Taiwan, Hong Kong and Macau"}, "VN": {"zh_CN": "越南服", "en_US": "Vietnam"}, "TH": {"zh_CN": "泰服", "en_US": "Thailand"}}
     current_info = await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json()
     while True:
@@ -115,27 +190,16 @@ async def search_summoner_online(connection):
             global opened
             opened = False
             #由于召唤师可能使用过改名卡，因此需要依据玩家通用唯一识别码来查询某玩家是否进行过某场对局（Since a summoner may have used the Summoner Name Change, puuid is used to judge whether a summoner is in a match）
-            if name.replace(" ", "").count("-") == 4 and len(name.replace(" ", "")) > 22: #拳头规定的玩家昵称不超过16个字符，昵称编号不超过5个字符（Riot game name can't exceed 16 characters. The tagline can't exceed 5 characters）
-                search_by_puuid = True
-                info = await (await connection.request("GET", "/lol-summoner/v2/summoners/puuid/" + quote(name))).json()
+            if name == "current-summoner":
+                info = {"searchType": "current-summoner", "endpoint": "/lol-summoner/v1/current-summoner", "info_got": True, "network_error": False, "body": current_info.copy(), "message": "", "selfInfo": True}
             else:
-                search_by_puuid = False
-                info = await (await connection.request("GET", "/lol-summoner/v1/summoners?name=" + quote(name))).json()
-            if "errorCode" in info and info["httpStatus"] == 400:
-                if search_by_puuid:
-                    print("您输入的玩家通用唯一识别码格式有误！请重新输入！\nPUUID wasn't in UUID format! Please try again!")
-                else:
-                    print("您输入的召唤师名称格式有误！请重新输入！\nERROR format of summoner name! Please try again!")
-            if "errorCode" in info and info["httpStatus"] == 404:
-                if search_by_puuid:
-                    print("未找到玩家通用唯一识别码为" + name + "的玩家；请核对识别码并稍后再试。\nA player with puuid " + name + " was not found; verify the puuid and try again.")
-                else:
-                    print("未找到" + name + "；请核对下名字并稍后再试。\n" + name + " was not found; verify the name and try again.")
-            elif "errorCode" in info and info["httpStatus"] == 422:
-                print('召唤师名称已变更为拳头ID。请以“{玩家昵称}#{昵称编号}”的格式输入。\nSummoner name has been replaced with Riot ID. Please input the name in this format: "{gameName}#{tagLine}", e.g. "%s#%s".' %(current_info["gameName"], current_info["tagLine"]))
-            elif "accountId" in info:
-                displayName = get_info_name(info) #用于文件名命名（For use of file naming）
-                puuid = info["puuid"]
+                info = await get_info(connection, name)
+            if not info["info_got"]:
+                print(info["message"])
+            else:
+                info_body = info["body"]
+                displayName = get_info_name(info_body) #用于文件名命名（For use of file naming）
+                puuid = info_body["puuid"]
                 switch_summoner = False #控制是否返回到输入召唤师名称的步骤（Controls returning to the step that requires inputting summoner name）
                 #设置输出信息中关于召唤师大区的描述（Adjust the description of the current server in printed information）
                 riot_client_info = await (await connection.request("GET", "/riotclient/command-line-args")).json()
@@ -148,13 +212,13 @@ async def search_summoner_online(connection):
                 region = client_info["--region"]
                 if region == "TENCENT":
                     platform = platform_TENCENT[client_info["--rso_platform_id"]]
-                    folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[client_info["--rso_platform_id"]]["zh_CN"] + "（" + platform_TENCENT[client_info["--rso_platform_id"]]["en_US"] + "）" + "\\" + get_info_name(info, 2)
+                    folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[client_info["--rso_platform_id"]]["zh_CN"] + "（" + platform_TENCENT[client_info["--rso_platform_id"]]["en_US"] + "）" + "\\" + get_info_name(info_body, 2)
                 elif region == "GARENA":
                     platform = platform_GARENA[region]
-                    folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[region]["zh_CN"] + "（" + platform_GARENA[region]["en_US"] + "）" + "\\" + get_info_name(info, 2)
+                    folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[region]["zh_CN"] + "（" + platform_GARENA[region]["en_US"] + "）" + "\\" + get_info_name(info_body, 2)
                 else:
                     platform = (platform_RIOT | platform_GARENA)[region]
-                    folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[region]["zh_CN"] + "（" + (platform_RIOT | platform_GARENA)[region]["en_US"] + "）" + "\\" + get_info_name(info, 3)
+                    folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[region]["zh_CN"] + "（" + (platform_RIOT | platform_GARENA)[region]["en_US"] + "）" + "\\" + get_info_name(info_body, 3)
                 message = "正在【在线】查询%s大区召唤师%s（玩家通用唯一识别码：%s）的对局……\n[Online] searching for matches of the summoner %s (puuid: %s) on %s server..." %(platform["zh_CN"], displayName, puuid, displayName, puuid, platform["en_US"]) #这里考虑到当程序异常中断时，再次运行该程序，文件中新行会紧跟上次运行的最后一行，不容易区分。所以在字符串最前面加了一个换行符。但是这样的话，在创建文件时，第一行也会变成空行。用户如果觉得不顺眼，可以直接双击日志文件去掉第一行，这样看着舒服一些（Considering when the program 
                 message_save(message, folder, displayName, "【参数设置】")
                 #从输入获取要查询的对局序号范围（Get matchID range from input）

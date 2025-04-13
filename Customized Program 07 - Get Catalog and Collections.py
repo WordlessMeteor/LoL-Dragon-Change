@@ -22,9 +22,9 @@ connector = Connector()
 async def get_summoner_data(connection):
     data = await connection.request('GET', '/lol-summoner/v1/current-summoner')
     summoner = await data.json()
-    print(f"displayName:    {summoner['displayName']}")
-    print(f"summonerId:     {summoner['summonerId']}")
-    print(f"puuid:          {summoner['puuid']}")
+    print("displayName:    %s" %(summoner["gameName"] + "#" + summoner["tagLine"]))
+    print("summonerId:     %s" %(summoner["summonerId"]))
+    print("puuid:          %s" %(summoner["puuid"]))
     print("-")
 
 
@@ -153,11 +153,11 @@ def get_info_name(info: dict, mode = 1) -> str:
                 name = info["displayName"]
         else: #新玩家属于这种类型（This case matches new players）
             if mode == 1:
-                name = str(info["summonerId"])
+                name = str(info["puuid"])
             elif mode == 2: #仅用于设置召唤师数据保存路径（Designed to set the summoner name directory）
-                name = "0. 新玩家\\" + str(info["summonerId"])
+                name = "0. 新玩家\\" + str(info["puuid"])
             elif mode == 3: #仅用于设置召唤师数据保存路径（Designed to set the summoner name directory）
-                name = "0. New Player\\" + str(info["summonerId"])
+                name = "0. New Player\\" + str(info["puuid"])
     return name
 
 async def fetch_store(connection):
@@ -166,7 +166,7 @@ async def fetch_store(connection):
     displayName = get_info_name(info)
     current_puuid = info["puuid"]
     platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
-    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
+    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "ME1": "中东服（Middle East）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
     platform_GARENA = {"PH": "菲律宾服（Philippines）", "SG": "新加坡服（Singapore, Malaysia and Indonesia）", "TW": "台服（Taiwan, Hong Kong and Macau）", "VN": "越南服（Vietnam）", "TH": "泰服（Thailand）"}
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
     riot_client_info = await (await connection.request("GET", "/riotclient/command-line-args")).json()
@@ -191,6 +191,7 @@ async def fetch_store(connection):
     language_cdragon = "default" if URLPatch == "en_US" else locale.lower()
     championSkins_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/skins.json" %(URLPatch, language_cdragon)
     companions_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/companions.json" %(URLPatch, language_cdragon)
+    nexusfinishers_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/nexusfinishers.json" %(URLPatch, language_cdragon)
     statstones_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/statstones.json" %(URLPatch, language_cdragon)
     summonerEmotes_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/summoner-emotes.json" %(URLPatch, language_cdragon)
     summonerIcons_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/summoner-icons.json" %(URLPatch, language_cdragon)
@@ -200,6 +201,7 @@ async def fetch_store(connection):
     #下面声明离线数据资源的默认地址（The following code declare the default paths of offline data resources）
     championSkins_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\skins.json" %(URLPatch, language_cdragon)
     companions_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\companions.json" %(URLPatch, language_cdragon)
+    nexusfinishers_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\nexusfinishers.json" %(URLPatch, language_cdragon)
     statstones_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\statstones.json" %(URLPatch, language_cdragon)
     summonerEmotes_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\summoner-emotes.json" %(URLPatch, language_cdragon)
     summonerIcons_local_default = "离线数据（Offline Data）\\cdragon\\%s\\plugins\\rcp-be-lol-game-data\\global\\%s\\v1\\summoner-icons.json" %(URLPatch, language_cdragon)
@@ -209,6 +211,7 @@ async def fetch_store(connection):
     #下面声明离线数据资源的格式（The following code declare the formats of offline data resources）
     championSkins_format = 'isinstance(data, dict) and all(map(lambda x: isinstance(x, dict), data.values())) and all(i in data[j] for i in ["id", "isBase", "name", "splashPath", "uncenteredSplashPath", "tilePath", "loadScreenPath", "skinType", "rarity", "isLegacy", "splashVideoPath", "collectionSplashVideoPath", "featuresText", "emblems", "regionRarityId", "rarityGemPath", "skinLines", "description"] for j in data) and all("chromaPath" in data[i] for i in data if not i in ["103000", "103016", "103065", "103085", "147000", "147001", "147015"])'
     companions_format = 'isinstance(data, list) and all(isinstance(data[i], dict) for i in range(len(data))) and all(j in data[i] for i in range(len(data)) for j in ["contentId", "itemId", "name", "loadoutsIcon", "description", "level", "speciesName", "speciesId", "rarity", "rarityValue", "isDefault", "upgrades", "TFTOnly"])'
+    nexusfinishers_format = 'isinstance(data, list) and all(isinstance(data[i], dict) for i in range(len(data))) and all(j in data[i] for i in range(len(data)) for j in ["name", "itemId", "contentId", "translatedName", "translatedDescription", "iconPath", "splashPath", "videoPath"]) and all(isinstance(data[i][j], str) for i in range(len(data)) for j in ["name", "contentId", "translatedName", "translatedDescription", "iconPath", "splashPath", "videoPath"]) and all(isinstance(data[i][j], int) for i in range(len(data)) for j in ["itemId"])'
     statstones_format = 'isinstance(data, dict) and all(i in data for i in ["statstoneData", "packData", "packIdToStatStonesIds", "seriesIdToStatStoneIds", "packIdToSubPackIds", "collectionIdToStatStoneIds", "packIdToChampIds", "champIdToPackIds", "packItemIdToContainingPackItemId"]) and all(isinstance(data[i], dict) if i != "statstoneData" and i != "packData" else isinstance(data[i], list) for i in data) and all(i in j for i in ["name", "itemId", "inventoryType", "contentId", "statstones"] for j in data["statstoneData"]) and all(i in j for statstone in data["statstoneData"] for i in ["name", "contentId", "itemId", "isRetired", "trackingType", "isEpic", "description", "milestones", "boundChampion", "category", "iconUnowned", "iconUnlit", "iconLit", "iconFull"] for j in statstone["statstones"]) and all(map(lambda x: all(i in x for i in ["name", "description", "itemId", "contentId", "storeIconImage"]), data["packData"]))'
     summonerEmotes_format = 'isinstance(data, list) and all(map(lambda x: isinstance(x, dict), data)) and all(i in j for i in ["id", "name", "inventoryIcon", "description"] for j in data) and all(map(lambda x: isinstance(x["id"], int) and isinstance(x["name"], str) and isinstance(x["inventoryIcon"], str) and isinstance(x["description"], str), data))'
     summonerIcons_format = 'isinstance(data, list) and all(map(lambda x: isinstance(x, dict), data)) and all(map(lambda x: all(i in x for i in ["id", "title", "yearReleased", "isLegacy", "descriptions", "rarities", "disabledRegions"]), data)) and all(map(lambda x: isinstance(x["id"], int) and isinstance(x["title"], str) and isinstance(x["yearReleased"], int) and isinstance(x["isLegacy"], bool) and isinstance(x["descriptions"], list) and isinstance(x["rarities"], list) and isinstance(x["disabledRegions"], list), data))'
@@ -236,6 +239,15 @@ async def fetch_store(connection):
                 prepareMode == ""
                 continue
             elif companions_initial_dict["exit"]:
+                return 0
+            #下面获取终结特效数据（The following code get nexus finisher data）
+            nexusfinishers_initial_dict = load_data_online("终结特效", "nexus finisher", nexusfinishers_url, nexusfinishers_local_default, nexusfinishers_format)
+            if nexusfinishers_initial_dict["captured"]:
+                nexusfinishers_initial = nexusfinishers_initial_dict["data"]
+            elif nexusfinishers_initial_dict["switch_to_offline"]:
+                prepareMode == ""
+                continue
+            elif nexusfinishers_initial_dict["exit"]:
                 return 0
             #下面获取永恒星碑数据（The following code get statstone data）
             statstones_initial_dict = load_data_online("永恒星碑", "statstone", statstones_url, statstones_local_default, statstones_format)
@@ -293,13 +305,13 @@ async def fetch_store(connection):
                 return 0
         else:
             switch_prepare_mode = False
-            print('请在浏览器中打开以下网页，待加载完成后按Ctrl + S保存网页json文件至同目录的“离线数据（Offline Data）”文件夹下，并根据括号内的提示放置和命名文件。\nPlease open the following URLs in a browser, then press Ctrl + S to save the online json files into the folder "离线数据（Offline Data）" under the same directory after the website finishes loading and organize and rename the downloaded files according to the hints in the circle brackets.\n皮肤（%s）： %s\n云顶之弈小小英雄（%s）： %s\n永恒星碑（%s）： %s\n表情（%s）： %s\n召唤师图标（%s）： %s\n云顶之弈进攻特效（%s）： %s\n云顶之弈棋盘皮肤（%s）： %s\n守卫（眼）皮肤（%s）： %s' %(championSkins_local_default[19:], championSkins_url, companions_local_default[19:], companions_url, statstones_local_default[19:], statstones_url, summonerEmotes_local_default[19:], summonerEmotes_url, summonerIcons_local_default[19:], summonerIcons_url, tftdamageskins_local_default[19:], tftdamageskins_url, tftmapskins_local_default[19:], tftmapskins_url, wardSkins_local_default[19:], wardSkins_url))
-            offline_files_loaded = {"skin": False, "companion": False, "statstone": False, "summonerEmote": False, "summonerIcon": False, "tftdamageskin": False, "tftmapskin": False, "wardSkin": False}
-            offline_files = {"skin": {"file": championSkins_local_default, "URL": championSkins_url, "content": "皮肤"}, "companion": {"file": companions_local_default, "URL": companions_url, "content": "云顶之弈小小英雄"}, "statstone": {"file": statstones_local_default, "URL": statstones_url, "content": "永恒星碑"}, "summonerEmote": {"file": summonerEmotes_local_default, "URL": summonerEmotes_url, "content": "表情"}, "summonerIcon": {"file": summonerIcons_local_default, "URL": summonerIcons_url, "content": "召唤师图标"}, "tftdamageskin": {"file": tftdamageskins_local_default, "URL": tftdamageskins_url, "content": "云顶之弈进攻特效"}, "tftmapskin": {"file": tftmapskins_local_default, "URL": tftmapskins_url, "content": "云顶之弈棋盘皮肤"}, "wardSkin": {"file": wardSkins_local_default, "URL": wardSkins_url, "content": "守卫（眼）皮肤"}}
+            print('请在浏览器中打开以下网页，待加载完成后按Ctrl + S保存网页json文件至同目录的“离线数据（Offline Data）”文件夹下，并根据括号内的提示放置和命名文件。\nPlease open the following URLs in a browser, then press Ctrl + S to save the online json files into the folder "离线数据（Offline Data）" under the same directory after the website finishes loading and organize and rename the downloaded files according to the hints in the circle brackets.\n皮肤（%s）： %s\n云顶之弈小小英雄（%s）： %s\n终结特效（%s）： %s\n永恒星碑（%s）： %s\n表情（%s）： %s\n召唤师图标（%s）： %s\n云顶之弈进攻特效（%s）： %s\n云顶之弈棋盘皮肤（%s）： %s\n守卫（眼）皮肤（%s）： %s' %(championSkins_local_default[19:], championSkins_url, companions_local_default[19:], companions_url, nexusfinishers_local_default[19:], nexusfinishers_url, statstones_local_default[19:], statstones_url, summonerEmotes_local_default[19:], summonerEmotes_url, summonerIcons_local_default[19:], summonerIcons_url, tftdamageskins_local_default[19:], tftdamageskins_url, tftmapskins_local_default[19:], tftmapskins_url, wardSkins_local_default[19:], wardSkins_url))
+            offline_files_loaded = {"skin": False, "companion": False, "nexusfinisher": False, "statstone": False, "summonerEmote": False, "summonerIcon": False, "tftdamageskin": False, "tftmapskin": False, "wardSkin": False}
+            offline_files = {"skin": {"file": championSkins_local_default, "URL": championSkins_url, "content": "皮肤"}, "companion": {"file": companions_local_default, "URL": companions_url, "content": "云顶之弈小小英雄"}, "nexusfinisher": {"file": nexusfinishers_local_default, "URL": nexusfinishers_url, "content": "终结特效"}, "statstone": {"file": statstones_local_default, "URL": statstones_url, "content": "永恒星碑"}, "summonerEmote": {"file": summonerEmotes_local_default, "URL": summonerEmotes_url, "content": "表情"}, "summonerIcon": {"file": summonerIcons_local_default, "URL": summonerIcons_url, "content": "召唤师图标"}, "tftdamageskin": {"file": tftdamageskins_local_default, "URL": tftdamageskins_url, "content": "云顶之弈进攻特效"}, "tftmapskin": {"file": tftmapskins_local_default, "URL": tftmapskins_url, "content": "云顶之弈棋盘皮肤"}, "wardSkin": {"file": wardSkins_local_default, "URL": wardSkins_url, "content": "守卫（眼）皮肤"}}
             print('请按任意键以加载离线数据。输入“1”以转为在线模式。输入“0”以退出程序。\nPlease input anything to load offline data. Input "1" to switch to online mode. Submit "0" to exit.')
             while any(not i for i in offline_files_loaded.values()):
-                offline_files_notfound = {"skin": False, "companion": False, "statstone": False, "summonerEmote": False, "summonerIcon": False, "tftdamageskin": False, "tftmapskin": False, "wardSkin": False}
-                offline_files_formaterror = {"skin": False, "companion": False, "statstone": False, "summonerEmote": False, "summonerIcon": False, "tftdamageskin": False, "tftmapskin": False, "wardSkin": False}
+                offline_files_notfound = {"skin": False, "companion": False, "nexusfinisher": False, "statstone": False, "summonerEmote": False, "summonerIcon": False, "tftdamageskin": False, "tftmapskin": False, "wardSkin": False}
+                offline_files_formaterror = {"skin": False, "companion": False, "nexusfinisher": False, "statstone": False, "summonerEmote": False, "summonerIcon": False, "tftdamageskin": False, "tftmapskin": False, "wardSkin": False}
                 prepareMode = input()
                 if prepareMode != "" and prepareMode[0] == "1":
                     switch_prepare_mode = True
@@ -318,6 +330,12 @@ async def fetch_store(connection):
                     offline_files_loaded["companion"], offline_files_notfound["companion"], offline_files_formaterror["companion"] = companions_initial_dict["loaded"], companions_initial_dict["notfound"], companions_initial_dict["formaterror"]
                     if companions_initial_dict["loaded"]:
                         companions_initial = companions_initial_dict["data"]
+                #下面获取终结特效数据（The following code get nexus finisher data）
+                if not offline_files_loaded["nexusfinisher"]:
+                    nexusfinishers_initial_dict = load_data_offline(nexusfinishers_local_default, nexusfinishers_format)
+                    offline_files_loaded["nexusfinisher"], offline_files_notfound["nexusfinisher"], offline_files_formaterror["nexusfinisher"] = nexusfinishers_initial_dict["loaded"], nexusfinishers_initial_dict["notfound"], nexusfinishers_initial_dict["formaterror"]
+                    if nexusfinishers_initial_dict["loaded"]:
+                        nexusfinishers_initial = nexusfinishers_initial_dict["data"]
                 #下面获取永恒星碑数据（The following code get statstone data）
                 if not offline_files_loaded["statstone"]:
                     statstones_initial_dict = load_data_offline(statstones_local_default, statstones_format)
@@ -381,7 +399,7 @@ async def fetch_store(connection):
         print("数据资源加载完成。\nData resources loaded successfully.")
         break
     #下面准备数据资源（The following code prepare the data resource）
-    inventoryTypes = ["ACHIEVEMENT_TITLE", "AUGMENT", "AUGMENT_SLOT", "BOOST", "BUNDLES", "CHAMPION", "CHAMPION_SKIN", "COMPANION", "CURRENCY", "EMOTE", "EVENT_PASS", "GIFT", "HEXTECH_CRAFTING", "MODE_PROGRESSION_REWARD", "MYSTERY", "QUEUE_ENTRY", "REGALIA_BANNER", "REGALIA_CREST", "RP", "SKIN_AUGMENT", "SKIN_BORDER", "SPELL_BOOK_PAGE", "STATSTONE", "STRAWBERRY_BOON", "STRAWBERRY_LOADOUT_ITEM", "STRAWBERRY_MAP", "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON", "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN", "TFT_MAP_SKIN", "TFT_PLAYBOOK", "TOURNAMENT_FLAG", "TOURNAMENT_FRAME", "TOURNAMENT_LOGO", "TOURNAMENT_TROPHY", "TRANSFER", "WARD_SKIN"]
+    inventoryTypes = ["ACHIEVEMENT_TITLE", "AUGMENT", "AUGMENT_SLOT", "BOOST", "BUNDLES", "CHAMPION", "CHAMPION_SKIN", "COMPANION", "CURRENCY", "EMOTE", "EVENT_PASS", "GIFT", "HEXTECH_CRAFTING", "MODE_PROGRESSION_REWARD", "MYSTERY", "NEXUS_FINISHER", "QUEUE_ENTRY", "REGALIA_BANNER", "REGALIA_CREST", "RP", "SKIN_AUGMENT", "SKIN_BORDER", "SPELL_BOOK_PAGE", "STATSTONE", "STRAWBERRY_BOON", "STRAWBERRY_LOADOUT_ITEM", "STRAWBERRY_MAP", "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON", "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN", "TFT_MAP_SKIN", "TFT_PLAYBOOK", "TOURNAMENT_FLAG", "TOURNAMENT_FRAME", "TOURNAMENT_LOGO", "TOURNAMENT_TROPHY", "TRANSFER", "WARD_SKIN"]
     catalogDicts = {} #该变量并未投入使用，只是用于观察时分类（This variable isn't put to use. It's only intended for classifcation during inspection）
     catalogList = []
     for inventoryType in inventoryTypes:
@@ -400,7 +418,7 @@ async def fetch_store(connection):
     #with open(os.path.join(folder, txt1name), "w", encoding = "utf-8") as fp:
         #json.dump(catalogList, fp, indent = 4, ensure_ascii = False)
     print('商品信息已保存为“%s”。\nCatalog information is saved as "%s".\n' %(os.path.join(folder, txt1name), os.path.join(folder, txt1name)))
-    collection = await (await connection.request("GET", '/lol-inventory/v1/inventory?inventoryTypes=["ACHIEVEMENT_TITLE","AUGMENT","AUGMENT_SLOT","BOOST","BUNDLES","CHAMPION","CHAMPION_SKIN","COMPANION","CURRENCY","EMOTE","EVENT_PASS","GIFT","HEXTECH_CRAFTING","MODE_PROGRESSION_REWARD","MYSTERY","QUEUE_ENTRY","REGALIA_BANNER","REGALIA_CREST","RP","SKIN_AUGMENT","SKIN_BORDER","SPELL_BOOK_PAGE","STATSTONE","STRAWBERRY_BOON","STRAWBERRY_LOADOUT_ITEM","STRAWBERRY_MAP","SUMMONER_CUSTOMIZATION","SUMMONER_ICON","TEAM_SKIN_PURCHASE","TFT_DAMAGE_SKIN","TFT_MAP_SKIN","TFT_PLAYBOOK","TOURNAMENT_FLAG","TOURNAMENT_FRAME","TOURNAMENT_LOGO","TOURNAMENT_TROPHY","TRANSFER","WARD_SKIN"]')).json()
+    collection = await (await connection.request("GET", '/lol-inventory/v1/inventory?inventoryTypes=["ACHIEVEMENT_TITLE","AUGMENT","AUGMENT_SLOT","BOOST","BUNDLES","CHAMPION","CHAMPION_SKIN","COMPANION","CURRENCY","EMOTE","EVENT_PASS","GIFT","HEXTECH_CRAFTING","MODE_PROGRESSION_REWARD","MYSTERY","NEXUS_FINISHER","QUEUE_ENTRY","REGALIA_BANNER","REGALIA_CREST","RP","SKIN_AUGMENT","SKIN_BORDER","SPELL_BOOK_PAGE","STATSTONE","STRAWBERRY_BOON","STRAWBERRY_LOADOUT_ITEM","STRAWBERRY_MAP","SUMMONER_CUSTOMIZATION","SUMMONER_ICON","TEAM_SKIN_PURCHASE","TFT_DAMAGE_SKIN","TFT_MAP_SKIN","TFT_PLAYBOOK","TOURNAMENT_FLAG","TOURNAMENT_FRAME","TOURNAMENT_LOGO","TOURNAMENT_TROPHY","TRANSFER","WARD_SKIN"]')).json()
     txt2name = "Collection - %s.json" %(get_info_name(info))
     while True:
         try:
@@ -438,8 +456,13 @@ async def fetch_store(connection):
     companions_hashtable = {}
     for companion in companions_initial:
         companions_hashtable[companion["itemId"]] = {}
-        companions_hashtable[companion["itemId"]]["name"] = item["name"]
-        companions_hashtable[companion["itemId"]]["description"] = item["description"]
+        companions_hashtable[companion["itemId"]]["name"] = companion["name"]
+        companions_hashtable[companion["itemId"]]["description"] = companion["description"]
+    nexusfinishers_hashtable = {}
+    for nexusfinisher in nexusfinishers_initial:
+        nexusfinishers_hashtable[nexusfinisher["itemId"]] = {}
+        nexusfinishers_hashtable[nexusfinisher["itemId"]]["name"] = nexusfinisher["translatedName"]
+        nexusfinishers_hashtable[nexusfinisher["itemId"]]["description"] = nexusfinisher["translatedDescription"]
     statstones_hashtable = {}
     for statstone in statstones_initial["packData"]:
         statstones_hashtable[statstone["itemId"]] = {}
@@ -482,7 +505,7 @@ async def fetch_store(connection):
         titles_hashtable[title["itemId"]] = {}
         titles_hashtable[title["itemId"]]["name"] = title["name"]
     TFTTeamPlanner_dirty = await (await connection.request("GET", "/lol-tft-team-planner/v1/team/dirty")).json()
-    TFTSetName = TFTTeamPlanner_dirty["setName"]
+    TFTSetName = "TFT_Set13" if TFTTeamPlanner_dirty["setName"] == "" else TFTTeamPlanner_dirty["setName"] #这部分代码不需要随着赛季更新而变动（This piece of code doesn't need any change along with seasonal update）
     TFTPlaybooks = await (await connection.request("GET", f"/lol-cosmetics/v1/inventories/{TFTSetName}/playbooks")).json() #实际上，TFTSetName用任何不包含元字符的非空字符串代替，返回的结果都是一样的（As a matter of fact, No matter which non-empty string without metacharacters takes the place of TFTSetName, this function returns the same result）
     TFTPlaybooks_hashtable = {}
     for group in TFTPlaybooks["groups"]:
@@ -495,13 +518,13 @@ async def fetch_store(connection):
         regaliaBanners_hashtable[int(regaliaBanners[bannerId]["items"][0]["id"])] = {}
         regaliaBanners_hashtable[int(regaliaBanners[bannerId]["items"][0]["id"])]["name"] = regaliaBanners[bannerId]["items"][0]["localizedName"]
         regaliaBanners_hashtable[int(regaliaBanners[bannerId]["items"][0]["id"])]["description"] = regaliaBanners[bannerId]["items"][0]["localizedDescription"]
-    regaliaCrests = await (await connection.request("GET", "/lol-regalia/v3/inventory/REGALIA-CREST")).json()
+    regaliaCrests = await (await connection.request("GET", "/lol-regalia/v3/inventory/REGALIA_CREST")).json()
     hashtable_dicts = {"ACHIEVEMENT_TITLE": titles_hashtable, "CHAMPION_SKIN": championSkins_hashtable, "COMPANION": companions_hashtable, "STATSTONE": statstones_hashtable, "EMOTE": summonerEmotes_hashtable, "REGALIA_BANNER": regaliaBanners_hashtable, "SUMMONER_ICON": summonerIcons_hashtable, "TFT_DAMAGE_SKIN": tftdamageskins_hashtable, "TFT_MAP_SKIN": tftmapskins_hashtable, "TFT_PLAYBOOK": TFTPlaybooks_hashtable, "WARD_SKIN": wardSkins_hashtable}
     #定义商品数据结构（Define the store item data structure）
     catalog_header = {"active": "可用性", "description": "简介", "imagePath": "缩略图路径", "inactiveDate": "停止销售日期", "inventoryType": "道具类型", "itemId": "序号", "itemInstanceId": "识别码", "metadata": "元数据", "name": "名称", "offerId": "赠送代码", "owned": "已拥有", "ownershipType": "拥有权", "price_IP": "价格（蓝色精粹）", "price_RP": "价格（点券）", "purchaseDate": "购买日期", "questSkinInfo": "赠送皮肤信息", "releaseDate": "发布日期", "sale": "销售信息", "subInventoryType": "次级道具类型", "subTitle": "副标题", "tags": "搜索关键词"}
     catalog_data = {}
     catalog_header_keys = list(catalog_header.keys())
-    inventoryType_dict = {"ACHIEVEMENT_TITLE": "头衔", "AUGMENT": "AUGMENT", "AUGMENT_SLOT": "AUGMENT_SLOT", "BOOST": "加成道具", "BUNDLES": "道具包", "CHAMPION": "英雄", "CHAMPION_SKIN": "皮肤", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "表情", "EVENT_PASS": "事件通行证", "GIFT": "礼物", "HEXTECH_CRAFTING": "海克斯科技宝箱", "MODE_PROGRESSION_REWARD": "游戏模式进度奖励", "MYSTERY": "神秘道具", "QUEUE_ENTRY": "队列通行证", "REGALIA_BANNER": "旗帜", "REGALIA_CREST": "纹章", "RP": "点券", "SKIN_AUGMENT": "签名升级", "SKIN_BORDER": "边框", "SPELL_BOOK_PAGE": "符文页", "STATSTONE": "永恒星碑", "STRAWBERRY_BOON": "无尽狂潮增益效果", "STRAWBERRY_LOADOUT_ITEM": "无尽狂潮配置", "STRAWBERRY_MAP": "无尽狂潮地图", "SUMMONER_CUSTOMIZATION": "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON": "召唤师图标", "TEAM_SKIN_PURCHASE": "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN": "云顶之弈进攻特效", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TFT_PLAYBOOK": "云顶之弈指导手册", "TOURNAMENT_FLAG": "赛事旗帜", "TOURNAMENT_FRAME": "赛事镜头", "TOURNAMENT_LOGO": "赛事标志", "TOURNAMENT_TROPHY": "赛事纪念品", "TRANSFER": "转区项目", "WARD_SKIN": "守卫（眼）皮肤"}
+    inventoryType_dict = {"ACHIEVEMENT_TITLE": "头衔", "AUGMENT": "AUGMENT", "AUGMENT_SLOT": "AUGMENT_SLOT", "BOOST": "加成道具", "BUNDLES": "道具包", "CHAMPION": "英雄", "CHAMPION_SKIN": "皮肤", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "表情", "EVENT_PASS": "事件通行证", "GIFT": "礼物", "HEXTECH_CRAFTING": "海克斯科技宝箱", "MODE_PROGRESSION_REWARD": "游戏模式进度奖励", "MYSTERY": "神秘道具", "NEXUS_FINISHER": "终结特效", "QUEUE_ENTRY": "队列通行证", "REGALIA_BANNER": "旗帜", "REGALIA_CREST": "华冠", "RP": "点券", "SKIN_AUGMENT": "签名升级", "SKIN_BORDER": "边框", "SPELL_BOOK_PAGE": "符文页", "STATSTONE": "永恒星碑", "STRAWBERRY_BOON": "无尽狂潮增益效果", "STRAWBERRY_LOADOUT_ITEM": "无尽狂潮配置", "STRAWBERRY_MAP": "无尽狂潮地图", "SUMMONER_CUSTOMIZATION": "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON": "召唤师图标", "TEAM_SKIN_PURCHASE": "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN": "云顶之弈进攻特效", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TFT_PLAYBOOK": "云顶之弈指导手册", "TOURNAMENT_FLAG": "赛事旗帜", "TOURNAMENT_FRAME": "赛事镜头", "TOURNAMENT_LOGO": "赛事标志", "TOURNAMENT_TROPHY": "赛事纪念品", "TRANSFER": "转区项目", "WARD_SKIN": "守卫（眼）皮肤"}
     ownershipType_dict = {None: "未拥有", "F2P": "免费使用", "RENTED": "租借中", "OWNED": "已拥有"}
     subInventoryType_dict = {"": "", "lol_clash_premium_tickets": "冠军杯赛豪华版挑战券", "lol_clash_tickets": "冠军杯赛挑战券", "LOL_EVENT_PASS": "英雄联盟事件通行证", "RECOLOR": "炫彩", "TFT_PASS": "云顶之弈事件通行证", "tft_star_fragments": "星之碎片", "TFT_TREASURE_TROVE_TOKEN": "召唤商店宝藏代币"}
     for i in range(len(catalog_header)):
@@ -589,9 +612,9 @@ async def fetch_store(connection):
             else:
                 collection_data[key].append(item[key])
     #数据框列序整理（Dataframe column ordering）
-    catalog_statistics_display_order = [8, 19, 1, 5, 0, 4, 18, 7, 6, 16, 3, 12, 13, 10, 11, 14, 15, 9, 17, 20, 2]
+    catalog_statistics_output_order = [8, 19, 1, 5, 0, 4, 18, 7, 6, 16, 3, 12, 13, 10, 11, 14, 15, 9, 17, 20, 2]
     catalog_data_organized = {}
-    for i in catalog_statistics_display_order:
+    for i in catalog_statistics_output_order:
         key = catalog_header_keys[i]
         catalog_data_organized[key] = [catalog_header[key]] + catalog_data[key]
     catalog_df = pandas.DataFrame(data = catalog_data_organized)
@@ -601,9 +624,9 @@ async def fetch_store(connection):
                 catalog_df.iat[i, j] = "√"
             elif str(catalog_df.iat[i, j]) == "False":
                 catalog_df.iat[i, j] = ""
-    collection_statistics_display_order = [14, 9, 3, 2, 11, 6, 10, 1, 7, 8, 0, 13, 12]
+    collection_statistics_output_order = [14, 9, 3, 2, 11, 6, 10, 1, 7, 8, 0, 13, 12]
     collection_data_organized = {}
-    for i in collection_statistics_display_order:
+    for i in collection_statistics_output_order:
         key = collection_header_keys[i]
         collection_data_organized[key] = [collection_header[key]] + collection_data[key]
     collection_df = pandas.DataFrame(data = collection_data_organized)

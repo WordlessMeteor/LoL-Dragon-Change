@@ -163,7 +163,7 @@ The following explanations only apply to the current branch. For other details (
 		- 该脚本支持通过<ins>召唤师名称</ins>和<ins>玩家通用唯一识别码</ins>查询。
 		- 由于使用的是LCU API，在国服环境下，即使召唤师生涯**不可见**，仍然能够查询到该召唤师的全部对局记录和段位信息。
 		- 该脚本生成的文件位于主目录下的“召唤师信息（Summoner Information）”文件夹下。
-		- 该脚本所依赖的数据资源主要来自<ins>CommunityDragon数据库</ins>，支持**离线获取**。如果选择离线获取，<ins>请按照程序提示，在主目录下新建文件夹`离线数据（Offline Data）`，打开相应资源的网页，将相应的json文件下载到该文件夹下。</ins>
+		- 该脚本所依赖的数据资源主要来自<ins>CommunityDragon数据库</ins>，支持**离线获取**。发行版中已经包含所有自定义脚本依赖的最新数据资源文件。如果没有这些文件，在离线获取时，<ins>请按照程序提示，在主目录下新建文件夹`离线数据（Offline Data）`，打开相应资源的网页，将相应的json文件下载到该文件夹下。</ins>
 		- 从13.22版本开始，美测服采用**拳头ID**来替代召唤师名称。因此，如果通过召唤师名称无法查询一名召唤师的信息，**请尝试在玩家昵称后加上一个“#”，再加上昵称编号**。
 			- <b>提示：</b>在客户端中打开一个召唤师的生涯界面，**将鼠标悬停在玩家昵称上**，即可看到完整的带有昵称编号的拳头ID。单击即可复制。粘贴到生涯界面右上方的搜索栏即可搜索该玩家。
 		- 该脚本支持以下保存模式：
@@ -275,10 +275,8 @@ The following explanations only apply to the current branch. For other details (
             - https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/companions.json
             - https://raw.communitydragon.org/{版本}/plugins/rcp-be-lol-game-data/global/{语言}/v1/tfttraits.json
 		- 该程序需要依据实际遇到的报错来更新异常修复部分的代码。欢迎各位开发者分享爬取过程中遇到的报错问题👏
-	- 自定义脚本6用于**在美测服一键开启云顶之弈1V0模式，以获取3000点券**。双击即可。
-		- 对于非北美洲用户，即使使用了加速器，也要<ins>在游戏大厅的PLAY按钮高亮3秒之后，再双击本程序</ins>。否则会导致召唤师状态异常（实际为在线状态，却显示为正在排队，并有“正在匹配”的计时器）。这时只能通过<ins>重启客户端</ins>来解决。
-		- 从2023年8月27日开始，云顶之弈1V0模式不再可用。<ins>请自行进入匹配对局并秒退来获取3000点券。</ins>
-		- <font color=#ff0000>目前云顶之弈不可用于获取3000点券，请尝试通过其它游戏模式获取。</font>
+	- 自定义脚本6用于**在美测服一键开启云顶之弈发条鸟的试炼模式，以获取3000点券**。双击即可。
+		- 从2023年8月27日开始，云顶之弈1V0模式不再可用。
 	- 自定义脚本7用于**获取商店中上架的商品信息和主召唤师的藏品信息**。
 		- 该程序将商品和藏品信息输出到主召唤师文件夹下的`Store and Collections - {召唤师名称}.xlsx`中。
 		- 商品信息中的缩略图路径是与**LCU API**相关的网址，需要在**英雄联盟客户端启动**的情况下才能打开。初次打开网站需要输入用户名和密码，请在该脚本的输出的最开始部分找到<ins>带有“riot”的一行</ins>，用户名为<ins>“riot”</ins>，密码为<ins>“riot”后面的一串字符串</ins>。
@@ -300,25 +298,32 @@ The following explanations only apply to the current branch. For other details (
 		- 该脚本的大部分代码继承自自定义脚本5，包括扫描模式。但是该脚本只涉及结果的输出，不会修改自定义脚本5生成的任何中间文件（文本文档和json文件）。
 		- 该脚本设置了【生成模式】和【检测模式】。
 			- 【生成模式】用于将某召唤师最近若干场对局中遇到的玩家**保存到本地文件**。将保存到前缀为“Summoner Profile”的工作簿的“Recently Player Summoners”工作表中，并导出8张关于玩家的<ins>游戏时长</ins>和<ins>对局数</ins>的**柱状图**。
-			- 【检测模式】用于查询玩家是否在以前的对局中遇到过。该脚本考虑了4种检测场景。不同场景的主体代码**类似**。
-				1. 英雄选择阶段/游戏中
-					- 该场景返回<ins>用户在英雄选择阶段和游戏中遇到的召唤师</ins>在历史对局中的信息。格式参考了自定义脚本5生成的对局信息的每一条记录。
-					- 该场景**仅**支持查询**用户**在英雄选择阶段遇到的队友。不能查询其它召唤师在英雄选择阶段遇到的队友。
+			- 【检测模式】用于查询玩家是否在以前的对局中遇到过。该脚本考虑了6种检测场景。不同场景的主体代码**类似**。
+				1. 房间内/英雄选择阶段/游戏中
+					- 该场景返回<ins>**主召唤师**在房间内、英雄选择阶段和游戏中遇到的召唤师</ins>在历史对局中的信息。格式参考了自定义脚本5生成的对局信息的每一条记录。
+					- 该场景目前支持查询用户自己和英雄选择阶段、游戏中遇到的其它玩家的近期一起玩过的玩家。
 						- <b>注意：</b>云顶之弈对局也是有英雄选择阶段的！只不过持续时间太短了。
 					- 由于英雄选择阶段和游戏中具有临时性，因此在该模式下，程序只会在主目录生成一个临时文件。
-					- **需要注意**，在游戏中，程序要求用户手动输入召唤师名，这可能存在**召唤师与对局不匹配**的情况。但是，这也为程序的**调试**创造了可能。
-					- 该场景在主目录下产生临时文件“Recently Played Summoners in Match *.xlsx”，星号代表对局序号。
+					- 该场景在主目录下产生临时文件“Recently Played Summoners in Match {platformId}-{gameId}.xlsx”，{platformId}代表服务器代号，{gameId}代表对局序号。
 				2. 好友列表
 					- 该场景返回<ins>好友</ins>在历史对局中的信息。
-					- 该场景在主目录下产生临时文件“Recently Played Summoners in Friend List.xlsx”。 
+					- 该场景在主目录下产生临时文件“Recently Played Summoners in Friend List of {current_summonerName} - {platformId}.xlsx”，{current_summonerName}代表主召唤师名，{platformId}代表服务器代号。
 				3. 好友请求
 					- 该场景返回<ins>用户想要添加为好友的玩家和想要添加用户为好友的玩家</ins>在历史对局中的信息。
-					- 该场景在主目录下产生临时文件“Recently Played Summoners in Friend Requests.xlsx”。
+					- 该场景在主目录下产生临时文件“Recently Played Summoners in Friend Requests of {current_summonerName} - {platformId}.xlsx”，{current_summonerName}代表主召唤师名，{platformId}代表服务器代号。
 						- 相比其它场景，该场景的工作表名中包含了好友关系方向的信息。其中，in表示该玩家想要加用户为好友。out则相反。
-				4. 任意玩家列表
+				4. 组队邀请
+					- 该场景返回<ins>向用户发起组队邀请者和用户发起组队邀请的对象</ins>在历史对局中的信息。
+					- 该场景在主目录下产生临时文件“Recently Played Summoners in Invitations to and from {current_summonerName} - {platformId}.xlsx”，{current_summonerName}代表主召唤师名，{platformId}代表服务器代号。
+						- 相比其它场景，该场景的工作表名中包含了邀请方向的信息。其中，in表示该玩家向用户发起组队邀请。out则相反。
+				5. 聊天黑名单
+					- 该场景返回<ins>被用户拉黑的玩家</ins>在历史对局中的信息。
+					- 该场景在主目录下产生临时文件“Recently Played Summoners in Block List of {current_summonerName} - {platformId}.xlsx”，{current_summonerName}代表主召唤师名，{platformId}代表服务器代号。
+				6. 任意玩家列表
 					- 该场景返回<ins>用户输入的玩家列表中的所有玩家</ins>在历史对局中的信息。
 						- 玩家列表的每个元素可以是<ins>召唤师名</ins>或者<ins>玩家通用唯一识别码</ins>。
 					- 该场景在主目录下产生临时文件“Recently Played Summoners in Specified Player List.xlsx”。
+			- 在【检测模式】下，该脚本支持启用【小号模式】，允许用户添加同一个服务器上的其它账号。
 			- 和查战绩脚本相同，该脚本的扫描模式只适用于查询**英雄联盟**对局。
 			- 如果用户在英雄选择阶段因为某些原因（如命令行一闪而过、历史记录无法正常获取等）未能通过【检测模式】获取队友是否曾遇到过的信息，那么在游戏中还可以通过【单独查询】手动输入对局中的召唤师名称来检查曾经遇到过的玩家。
 				- 自美测服13.22版本，对于拳头代理的服务器上的玩家，只输入玩家昵称无法正常查询其信息。由于加载资源界面只呈现玩家昵称，这时可以**等待游戏开始**后在**计分板**中查看玩家昵称及其昵称编号。
@@ -345,6 +350,20 @@ The following explanations only apply to the current branch. For other details (
 						- 斗魂竞技场
 	- 自定义脚本14用于**秒进好友小队**。
 		- 程序已添加使用限制。<b>请勿滥用和篡改代码。</b>
+	- 自定义脚本15用于**玩家在自定义对局中选择相同的英雄**。该问题目前已被修复，因此你可以无视这个脚本。
+	- 自定义脚本16用于**模拟英雄联盟客户端中与聊天服务相关的行为**。
+		- 目前该脚本提供以下功能：
+			- 导出好友数据
+			- 管理好友分组
+			- 聊天
+			- 导出聊天记录
+			- 管理好友列表
+			- 发送组队邀请
+			- 管理组队邀请
+			- 观战
+			- 管理小队语音
+			- 管理黑名单
+				- 黑名单操作中植入了自定义无限火力专用模式，用于群成员管理。该模式作为隐藏功能。
 	- `清除临时文件.bat`用于**清除自定义脚本产生的临时文件**。目前可以清除自定义脚本03、05、10和11产生的临时文件。
 	- `召唤师信息文件格式转换.bat`用于**将自定义脚本5产生的数据文档在txt和json格式之间重命名**。
 		- 大量数据文档的重命名可能导致文件资源管理器卡顿，因此请谨慎使用本脚本。
@@ -356,22 +375,25 @@ The following explanations only apply to the current branch. For other details (
 		- 该脚本每次运行可以选择汇总和保存一种语言的翻译数据资源。多次运行可以形成多种语言的翻译数据资源。
 		- 由于该脚本仅用于校正术语，其涉及的数据资源仅用于开发程序，而不适用于发行版。因此建议用户在存储库，而不是由发行版压缩包解压得到的文件夹中运行该脚本。
 	- 为方便理解**自定义脚本中一些大型数据框的结构**，在主目录中添加了一个工作簿`Customized Program Main Dataframe Structure.xlsx`，以解释其生成过程。
-		- 下面对自定义脚本11中的`recent_LoLPlayers_df`的结构进行说明，以便说明一些设定。一些设定在后续解释中不再赘述。
-			- 工作表`11 - LoLGame_info_header`共有5列，其中前3列是**主要数据区域**。
+		- 下面对自定义脚本11和聊天脚本中的`recent_LoLPlayers_df`的结构进行说明，以便说明一些设定。一些设定在后续解释中不再赘述。
+			- 工作表`11 - LoLGame_info_header`共有6列，其中前3列是**主要数据区域**。
 				- `Index`代表`LoLGame_info_data`的键的索引。
 				- `Key`代表`LoLGame_info_data`的键。
 				- `Value`代表`LoLGame_info_data`的值。
 				- `DirectlyImport?`代表从LCU API中获取数据形成数据框时是否需要对数据进行加工。打勾表示直接引用。
 				- `OutputOrder`代表输出为工作表时各数据的排列顺序。
-			- 在该工作表中，主要数据区域设置了5种颜色。
-				- 绿色代表`Key`可以直接作为`LoLGame_info`的索引。
-				- 黄色代表`Key`作为`LoLGame_info["participantIdentities"][participantId]`的索引。
-				- 蓝色代表`Key`作为`LoLGame_info["participants"][participantId]`的索引。
+				- `DisplayOrder`代表在网页中显示时各数据的排列顺序。只有在网页中显示的表格对应的表头工作表才有这一列。
+			- 在该工作表中，主要数据区域设置了7种颜色。
+				- 浅绿色代表`Key`可以直接作为`LoLGame_info`的索引。
+				- 蓝色代表`Key`作为`LoLGame_info["participantIdentities"][participantId]`的索引。
+				- 绿色代表`Key`作为`LoLGame_info["participants"][participantId]`的索引。
 				- 橙色代表`Key`作为`LoLGame_info["participants"][participantId]["stats"]`的索引。
+				- 紫色代表`Key`来自`LoLGame_info["teams"][teamId]["bans"]`的索引。
+				- 黄色代表`Key`可以直接作为`LoLGame_info["participants"][participantId]["timeline"]`的索引。
 				- 粉红色代表`Key`不作为LCU API中任何变量的索引。
 					- 目前粉红色区域只包含`ally?`，表示查询的玩家是否是主玩家的队友。在导出的工作表中，打勾表示该玩家是主玩家的队友。
 			- 一些键被标记为白色。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`ornament`不曾出现在对局信息的json对象中，但是实际上来自`LoLGame_info["participants"][participantId]["stats"]`，对应的是索引`"item6"`。
-			- <b>要获取各个呈现顺序列表，只需要将表格以`OutputOrder`作升序排列，然后复制`Index`列的单元格内容即可。</b>
+			- <b>要获取各个呈现顺序列表，只需要将表格以`OutputOrder`或`DisplayOrder`作升序排列，然后复制`Index`列的单元格内容即可。</b>
 		- 下面对查英雄脚本中的`LoLChampions_df`的结构进行说明。
 			- 工作表`04 - LoLChampions_header (LCU)`的主要数据区域设置了6种颜色。
 				- 无填充代表`Key`可以直接作为`LoLChampions[championId]`的索引。
@@ -411,19 +433,28 @@ The following explanations only apply to the current branch. For other details (
 		- 下面对查战绩脚本中的`ranked_df`的结构进行说明。
 			- 工作表`05 - ranked_header`的`Key`都可作为`ranked["queues"][Id]`的索引。
 			- 注意到`OutputOrder`列存在重复数据。造成这个现象的根本原因是云顶之弈狂暴模式的段位和其它排位模式的段位被记录在两个变量中，但是输出表格时期望输出在一列中，所以有一些原键的输出顺序相同。
-		- 下面对查战绩脚本呢中的`ladders_df`的结构进行说明：
+		- 下面对查战绩脚本中的`ladders_df`的结构进行说明：
 			- 工作表`05 - ladders_header`的主要数据区域设置了4种颜色。
 				- 无填充代表`Key`可以直接作为`ladders[ladderId]`的索引。
 				- 浅蓝色代表`Key`可以作为`ladders[ladderId]["divisions"][divisionId]["standings"][standingId]`的索引。
 				- 浅绿色代表`Key`可以作为`/lol-summoner/v2/summoners/puuid/{puuid}`接口的索引。
 				- 橙色代表`Key`不作为LCU API中任何变量的索引。
+		- 下面对查战绩脚本和自定义脚本11中的`LoLHistory_df`的结构进行说明：
+			- 工作表`05 - LoLHistory_header`和`11 - LoLHistory_header`的主要数据区域设置了6种颜色。
+				- 无填充代表`Key`不作为LCU API中任何变量的索引。
+				- 浅蓝色代表`Key`可以作为`LoLHistory["games"]["games"]`的索引。
+				- 浅绿色代表`Key`可以直接作为`LoLHistory["games"]["games"]["participantIdentities"][0]["player"]`的索引。
+				- 橙色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]`的索引。
+				- 深绿色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]["stats"]`的索引。
+				- 紫色代表`Key`可以直接作为`LoLHistory["games"]["games"]["participants"][0]["timeline"]`的索引。
 		- 下面对查战绩脚本中的`LoLGame_info_df`的结构进行说明。
-			- 工作表`05 - LoLGame_info_header`的主要数据区域设置了5种颜色。
+			- 工作表`05 - LoLGame_info_header`的主要数据区域设置了6种颜色。
 				- 浅蓝色代表`Key`可以作为`LoLGame_info["participantIdentities"][participantId]`的索引。
 				- 深蓝色代表`Key`可以作为`LoLGame_info["participantIdentities"][participantId]["player"]`的索引。
 				- 绿色代表`Key`可以作为`LoLGame_info["participants"][participantId]`的索引。
 				- 橙色代表`Key`可以作为`LoLGame_info["participants"][participantId]["stats"]`的索引。
 				- 紫色代表`Key`可以作为`LoLGame_info["teams"][teamId]`的索引。
+				- 黄色代表`Key`可以直接作为`LoLGame_info["participants"][participantId]["timeline"]`的索引。
 		- 下面对查战绩脚本中的`LoLGame_timeline_df`的结构进行说明。
 			- 工作表`05 - LoLGame_timeline_header`的主要数据区域设置了4种颜色。
 				- 蓝色代表`Key`可以作为`frames[frameId]`的索引。
@@ -457,8 +488,8 @@ The following explanations only apply to the current branch. For other details (
 				- 橙色代表`Key`可以作为`queues[id]["gameTypeConfig"]`的索引。
 				- 蓝色代表`Key`可以作为`queues[id]["queueRewards"]`的索引。
 				- 白色代表`Key`曾经存在，但后来被删除了。
-		- 下面对自定义脚本11中的`recent_TFTPlayers_df`的结构进行说明。
-			- 工作表`11 - TFTHistory_header`的主要数据区域设置了5种颜色。
+		- 下面对自定义脚本11和聊天脚本中的`recent_TFTPlayers_df`的结构进行说明。
+			- 工作表`11 - TFTHistory_header`和`16 - recent_TFTPlayers_header`的主要数据区域设置了5种颜色。
 				- 无填充代表`Key`不作为LCU API中任何变量的索引。
 				- 天蓝色代表`Key`可以作为`TFTHistory[i]["json"]`的索引。
 				- 绿色代表`Key`可以作为`TFTHistory[i]["json"]["participants"][participantId]`的索引。
@@ -477,7 +508,7 @@ The following explanations only apply to the current branch. For other details (
 					- 注意到其中不包含任何可直接作为索引的键。
 		- 下面对查天梯脚本中的`rewardTrack_df`的结构进行说明。
 			- 工作表`13 - rewardTrack_header`的主要数据区域设置了3种颜色。
-				- 浅蓝色代表`Key`可直接作为`splitsConfig["splits"][splitId]`的索引。
+				- 浅蓝色代表`Key`可以直接作为`splitsConfig["splits"][splitId]`的索引。
 				- 橙色代表`Key`对应的值是自动生成的，不依赖于LCU API。
 				- 浅绿色代表`Key`可以作为`splitsConfig["splits"][splitId]["rewardTrack"][rewardTrackId]["rewards"][rewardId]`的索引。
 		- 下面对查天梯脚本中的`challenger_ladders_metadata_df`的结构进行说明。
@@ -492,6 +523,72 @@ The following explanations only apply to the current branch. For other details (
 			- 工作表`13 - topRated_ladders_header`的主要数据区域设置了2种颜色。
 				- 无填充代表`Key`可以直接作为`ladders["standings"][standingId]`的索引。
 				- 浅蓝色代表`Key`可以作为`/lol-summoner/v2/summoners/puuid/{puuid}`接口的索引。
+		- 下面对聊天脚本中的`friend_hovercard_df`的结构进行说明。
+			- 工作表`16 - friend_hovercard_header`的主要数据区域设置了4种颜色。`friend`是`friends`中的任意一个元素。
+				- 蓝色代表`Key`可以作为`friend`的索引。
+				- 浅绿色代表`Key`可以作为`friend["lol"]`的索引。
+				- 橙色代表`Key`的后半部分可以作为`eval(friend["lol"]["pty"])`的索引。
+				- 绿色代表`Key`的后半部分可以作为`eval(friend["lol"]["regalia"])`的索引。
+		- 下面对聊天脚本中的`friend_hovercard_df_simple`的结构进行说明。
+			- 工作表`16 - friend_hovercard_header_si`（`16 - friend_hovercard_header_simple`）的主要数据区域设置为白色。`friend`是`friends`中的任意一个元素。
+				- `Key`可以直接作为`friend`的索引。
+		- 下面对聊天脚本中的`friend_groups_df`的结构进行说明。
+			- 工作表`16 - friend_groups_header`的主要数据区域设置为白色。`group`是`friend_groups`中的任意一个元素。
+				- `Key`可以直接作为`group`的索引。
+		- 下面对聊天脚本中的`conversation_df`的结构进行说明。
+			- 工作表`16 - conversation_header`的主要数据区域设置为白色。`conversation`是`conversations`中的任意一个元素。
+				- `Key`可以直接作为`conversation`的索引。
+		- 下面对聊天脚本中的`message_df`的结构进行说明。
+			- 工作表`16 - message_header`的主要数据区域设置为白色。`message`是`messages`中的任意一个元素。
+				- `Key`可以作为`message`的索引。
+					- 9之前的键可以直接作为`message`的索引。
+					- 9及以后的键通过`get_info`函数得到。
+		- 下面对聊天脚本中的`friend_request_df`的结构进行说明。
+			- 工作表`16 - friend_request_header`的主要数据区域设置为白色。`friend_request`是`friend_requests`中的任意一个元素。
+				- `Key`可以作为`friend_request`的索引。
+					- 10之前的键可以直接作为`friend_request`的索引。
+					- 10号键的后半部分可以直接作为`summonerIcons[friend_request["icon"]]`的索引。
+		- 下面对聊天脚本中的`party_df`的结构进行说明。
+			- 工作表`16 - party_header`的主要数据区域设置为4种颜色。`party`是`parties`中的任意一个元素。
+				- 蓝色代表`Key`可以直接作为`party`的索引。
+				- 浅绿色代表`Key`的后半部分可以直接作为`queues[party["queueId"]]`的索引。
+				- 橙色代表`Key`来自`party`的索引。
+					- 注意到其中不包含任何可直接作为索引的键。
+				- 黄色代表`Key`不作为LCU API中任何变量的索引。
+					- 目前黄色区域只包含`full?`，表示小队是否满员。在导出的工作表中，打勾表示小队已经满员。
+		- 下面对聊天脚本中的`invid_df`的结构进行说明。
+			- 工作表`16 - invid_header`的主要数据区域设置为3种颜色。`invid`是`receivedInvitations`中的任意一个元素。
+				- 蓝色代表`Key`可以作为`invid`的索引。
+				- 浅绿色代表`Key`可以直接作为`invid["gameConfig"]`的索引。
+				- 橙色代表`Key`的后半部分来自`queues`的索引。
+		- 下面对聊天脚本中的`muted_player_df`的结构进行说明。
+			- 工作表`16 - player_mute_header`的主要数据区域设置为白色。`muted_player`是`muted_players`中的任意一个值。
+				- `Key`可以作为`muted_player`的索引。
+					- 5之前的键可以直接作为`muted_player`的索引。
+					- 5及以后的键通过`get_info`函数得到。
+		- 下面对聊天脚本中的`champSelect_team_df`的结构进行说明。
+			- 工作表`16 - champSelect_team_header`的主要数据区域设置为白色。`player`是`players`中的任意一个值。
+				- `Key`可以作为`player`的索引。
+					- 13之前的键可以直接作为`player`的索引。
+					- 14和15号键通过`get_info`函数得到。
+					- 16号键来自`team_colors`。
+					- 17及以后的键的后半部分可以作为键的前半部分所指数据资源的索引。
+		- 下面对聊天脚本中的`voiceSettings_df`的结构进行说明。
+			- 工作表`16 - voiceSettings_header`的主要数据区域设置为白色。
+				- `Key`可以作为`device`的索引。
+					- 12之前的键可以直接作为`device`的索引。
+					- 12号键通过`captureDevices`得到。
+			- 该数据框沿用了旧版数据框创建方式。见查战绩脚本的`info_data`定义。
+		- 下面对聊天脚本中的`participant_record_df`的结构进行说明。
+			- 工作表`16 - participant_record_header`的主要数据区域设置为白色。`participant`是`participant_records`中的任意一个元素。
+				- `Key`可以作为`participant`的索引。
+					- 8之前的键可以直接作为`participant`的索引。
+					- 9和10号键通过`get_info`函数得到。
+		- 下面对聊天脚本中的`blockList_df`的结构进行说明。
+			- 工作表`16 - blockList_header`的主要数据区域设置为白色。`player`是`blockList`中的任意一个元素。
+				- `Key`可以作为`player`的索引。
+					- 8之前的键可以直接作为`player`的索引。
+					- 8号键的后半部分可以作为键的前半部分所指数据资源的索引。
 6. 一般情况下，本程序集生成的包含json数据的文本文档都是带缩进的。如果需要根据这些文件复现python运行环境中的字典变量，只需要向json库中的load函数传入一个由open函数创建的文件指针即可。如`fp = open("{文件名}.txt", "r", encoding = "utf-8")`和`d = json.load(fp)`。
 	- 若要在运行环境中将dumps函数生成的带缩进的json字符串转换成不带缩进的json字符串，只需要将dumps函数生成的字符串传入loads函数即可。如`formatted = json.dumps({字典变量}, indent = 8, ensure_ascii = False)`和`d = json.loads(formatted)`。
 # 后记
@@ -662,7 +759,7 @@ For details about customized programs that is beyond the scope of creating a cus
 		- This program supports queries based on <ins>summonerName</ins> and <ins>puuid</ins>.
 		- Thanks to LCU API, even if a summoner sets its profile private, its whole match history and rank data can still be fetched.
 		- Files generated by this program are located under the "召唤师信息（Summoner Information）" folder.
-		- The data resources required in this program are mainly from <ins>CommunityDragon database</ins>, and it's allowed to obtain these data resources **offline**. If the user chooses to obtain the data resources offline, <ins>please create a folder named as `离线数据（Offline Data）` in the main directory, open the url of the corresponding data resources and then download them to this new folder.</ins>
+		- The data resources required in this program are mainly from <ins>CommunityDragon database</ins>, and it's allowed to obtain these data resources **offline**. The release zip includes all necessary data resources. If these files are lost, when the user chooses to obtain the data resources offline, <ins>please create a folder named as `离线数据（Offline Data）` in the main directory, open the url of the corresponding data resources and then download them to this new folder.</ins>
 		- Since Patch 13.22, **Riot ID** has taken the place of summoner name. Therefore, if a summoner's information can't be visited by its summonerName, **please add a "#" and the summoner's tagLine after the gameName.**
 			- **Note:** Open a summoner's profile page in the League Client. Keep the mouse cursor stay on his/her gameName. You should see a window with the complete Riot ID with the postfixxed tagLine. Click to copy it. Paste it into the search bar on the top-right corner of the page to search this summoner.
 		- This program supports the following saving modes:
@@ -774,10 +871,8 @@ For details about customized programs that is beyond the scope of creating a cus
             - https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/companions.json
             - https://raw.communitydragon.org/{version}/plugins/rcp-be-lol-game-data/global/{locale}/v1/tfttraits.json
 		- This program relies on any encountered errors to update the exception handling code. Welcome for any developer to share the http errors when crawling the data 👏
-	- Customized Program 06 is designed to **one-key start the TFT 1v0 mode on PBE to gain 3000 RP**. A simple double-click will work.
-		- For users not in North America (in terms of location), despite any accerelator used, please don't double-click this program until several seconds after the PLAY button highlights. Otherwise, the summoner status will come into an unexpected state (the client will show that the summoner is in queue and display the "Finding Match" timer, but actually it's online). A **restart** for client is the only way to solve this problem.
-		- Since Aug. 27th, 2023, TFT 1V0 mode has been unavailable. <ins>Please start a TFT normal game and quit the game as soon as you enter the game to acquite 3000 RP.</ins>
-		- <font color=#ff0000>Currently, the Riot 3000 RP Bonus mission doesn't support TFT games. Please complete this mission by other game modes.</font>
+	- Customized Program 06 is designed to **one-key start the TFT Tocker's Trial mode on PBE to gain 3000 RP**. A simple double-click will work.
+		- Since Aug. 27th, 2023, TFT 1V0 mode has been unavailable.
 	- Customized Program 07 is designed to **get information of items on sale in the store and collections of the main summoner**.
 		- This program exports the information of store items and collections to `Store and Collections - {召唤师名称}.xlsx` in the directory of the main summoner.
 		- The imagePath field of the store table refers to URLs related to **LCU API**, which can be accessed **only during when the League Client is running**. The first visit of these URLs requires a username and a password. Please look for <ins>a line that starts with "riot"</ins> at the beginning of this program's output. The username is <ins>"riot"</ins>, and the password is <ins>a string that follows "riot"</ins>.
@@ -799,24 +894,32 @@ For details about customized programs that is beyond the scope of creating a cus
 		- A large part of code in this program is inherited from Customized Program 05, including the scan mode. Nevertheless, this program only outputs the result and doesn't change any intermediate files (txt and json files) generated by Customized Program 05.
 		- This program allows [Generate Mode] and [Detect Mode].
 			- [Generate Mode] **saves information** of players that a specific player have played with in recent matches into the Sheet "Recently Played Summoners" **in the workbook** whose name is prefixxed with "Summoner Profile" and save 9 **bar charts** with regard to players' <ins>game time</ins> and <ins>match counts</ins>.
-			- [Detect Mode] checks whether some players have been encountered before. Four situations are considered in this program. The core code **resemble** among different situations.
-				1. During champ select / In-game
-					- Information of <ins>summoners that the user encounters during champ select or in-game</ins> in past matches will be returned in this situation. The format of output refers to that of each record in the match infrrmation table generated by Customized Program 05.
-					- This mode **only** supports checking allies of the **user** (current summoner) during champ select. The user may not use it to check allies of other summoners during champ select.
+			- [Detect Mode] checks whether some players have been encountered before. Six situations are considered in this program. The core code **resemble** among different situations.
+				1. In-lobby / During champ select / In-game
+					- Information of <ins>summoners that the **main summoner** encounters during champ select or in-game</ins> in past matches will be returned in this situation. The format of output refers to that of each record in the match infrrmation table generated by Customized Program 05.
+					- This mode supports checking rcently played summoners of the **user** (current summoner) and other players encountered during champ select stage or in game.
 						**Note:** TFT matches do have champ select stage. Unfortunately, this stage lasts too shortly.
 					- Considering temporariness of champ select, this mode will only generate a temporary file in the home directory.
-					- The program generates the temporary file "Recently Played Summoner in Match *.xlsx" in this situation, where * represents a matchID.
+					- The program generates the temporary file "Recently Played Summoner in Match {platformId}-{gameId}.xlsx" in this situation, where {platformId} represents the main summoner name and {gameId} represents a matchID.
 				2. Friend list
 					- Information of <ins>friends</ins> in past matches will be returned in this situation.
-					- The program generates the temporary file "Recently Played Summoners in Friend List.xlsx" in this situation.
+					- The program generates the temporary file "Recently Played Summoners in Friend List of {current_summonerName} - {platformId}.xlsx" in this situation, where {current_summonerName} represents the main summoner name and {platformId} represents the server.
 				3. Friend requests
 					- Information of <ins>players whom the user want to friend with and those who want to friend with the user</ins> in the past matches will be returned.
-					- The program generates the temporary file "Recently Played Summoners in Friend Requests.xlsx" in this situation.
+					- The program generates the temporary file "Recently Played Summoners in Friend Requests of {current_summonerName} - {platformId}.xlsx.xlsx" in this situation, where {current_summonerName} represents the main summoner name and {platformId} represents the server.
 						- Compared with other situaions, sheet names under this situation include the friend request direction. "in" represents a player that want to friend with the user, and *vice versa*.
-				4. Any player list
+				4. Invitations
+					- Information of <ins>players who invite or are invited by the user</ins> will be returned in this situation.
+					- This program generates the temporary file "Recently Played Summoners in Invitations to and from {current_summonerName} - {platformId}.xlsx.xlsx" in this situation, where {current_summonerName} represents the main summoner name and {platformId} represents the server.
+						- Compared with other situaions, sheet names under this situation include the invitation direction. "in" represents an inviter, and *vice versa*.
+				5. Block list
+					- Information of <ins>blocked players</ins> will be returned in this situation,
+					- This program generates the temporary file "Recently Played Summoners in Block List of {current_summonerName} - {platformId}.xlsx.xlsx" in this situation, where {current_summonerName} represents the main summoner name and {platformId} represents the server.
+				6. Any player list
 					- Information of <ins>players in a list input by user</ins> in the past matches will be returned.
 						- Each element of the input player list may be a <ins>summonerName</ins> or a <ins>puuid</ins>.
 					- The program generates the temporary file "Recently Played Summoners in Specified Player List.xlsx" in this situation.
+			- Under [Scan Mode], this program supports [Smurf Mode], which allows adding other accounts on the same server as smurf accounts.
 			- Similar to Customized Program 05, the [Scan Mode] in this program only applies for **LoL** matches.
 			- If for some reason (like the CMD window pops up and disappears immediately, or the match history fails to be fetched), the user fails to get whether the allies have been encountered before using [Detect Mode], the user can still [Single Check] whether there's any recently played summoner by inputting the in-game summoner name by hand.
 				- Since PBE Patch 13.22, players on Riot servers can't be searches with only gameName. Because the loading screen only displays the gameName, the user may wait **until the game starts** to check the gameName and slogan on the **scoreboard**.
@@ -843,6 +946,20 @@ For details about customized programs that is beyond the scope of creating a cus
 						- Arena
 	- Customized Program 14 is used to **instantly enter a friend's party**.
 		- Usage limits are added. <b>Please don't abuse the program and edit the code at will.</b>
+	- Customized Program 15 is used to **let the users pick a same champion in a custom game**. This BUG has been fixed, so you may ignore this program.
+	- Customized Program 16 is used to **simulate the behaviors related with chat service**.
+		- Currently this program has the following features:
+			- Export friend data
+			- Manage friend groups
+			- Chat
+			- Export chat history
+			- Manage friend list
+			- Send lobby invitations
+			- Manage received invitations
+			- Spectate a game
+			- Manage team voice
+			- Manage block list
+				- Custom URF special mode is planted into this feature for manaegement of group members. This mode is hidden
 	- `清除临时文件.bat` is used to **remove temporary files generated by customized programs**. At present it can delete temporary files from customized programs 03, 05, 10 and 11.
 	- `召唤师信息文件格式转换.bat` is used to **rename the format of data files generated by Customized Program 05 into ".txt" or ".json"**.
 		- Renaming a number of data files may results in the slow performance of Explorer, so please think twice to use this program.
@@ -854,22 +971,25 @@ For details about customized programs that is beyond the scope of creating a cus
 		- Each run of this program supports summarizing and saving the translation data resources of a language. Multiple runs can gather the translation of multiple languages into one file.
 		- Since this program is only intended to correct the terms, the involved data resources are only used for program development, instead of the release. So, it's highly recommended that users run this program in the cloned repository folder, instead of the folder extracted from compressed files in Release.
 	- To let user **understand the structure of the large dataframes**, a workbook `Customized Program Main Dataframe Structure.xlsx` is added in the home directory to illustrate how the dataframes are organized.
-		- The following is the illustration on the structure of `recent_LoLPlayers_df` in Customized Program 11, to explain some settings, which will not be repeated in the later explanation:
-			- There're 5 columns in the sheet `11 - recent_LoLPlayers_header`, and the first 3 columns are the **main data area**.
+		- The following is the illustration on the structure of `recent_LoLPlayers_df` in Customized Programs 11 and 16, to explain some settings, which will not be repeated in the later explanation:
+			- There're 6 columns in the sheet `11 - recent_LoLPlayers_header`, and the first 3 columns are the **main data area**.
 				- `Index` represents the index of the keys of the dictionary variable `LoLGame_info_data`.
 				- `Key` represents the keys of the dictionary variable `LoLGame_info_data`.
 				- `Value` represents the values of the dictionary variable `LoLGame_info_data`.
 				- `DirectlyImport?` represents whether to analyze the data to be transformed from LCU API into the dataframe. A tick means reference without any change.
 				- `OutputOrder` represents the order to arrange the data when they're output into a worksheet.
-			- 5 colors are used to divide the main data area in this sheet.
-				- Data in the green area mean `Key` is the direct index of the variable `LoLGame_info`.
-				- Data in the orange area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]`.
-				- Data in the blue area mean `Key` is the index of `LoLGame_info["participants"][participantId]`.
+				- `DisplayOrder` represents the order to arrange the data when they're displayed in a webpage. Only the header sheets whose corresponding tables are to be displayed in a webpage have this column.
+			- 7 colors are used to divide the main data area in this sheet.
+				- Data in the light green area mean `Key` is the direct index of the variable `LoLGame_info`.
+				- Data in the blue area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]`.
+				- Data in the green area mean `Key` is the index of `LoLGame_info["participants"][participantId]`.
+				- Data in the purple area mean `Key` comes from `LoLGame_info["teams"][teamId]["bans"]`.
+				- Data in the yellow area mean `Key` is the direct index of `LoLGame_info["participants"][participantId]["timeline"]`.
 				- Data in the yellow area mean `Key` is the index of `LoLGame_info["participants"][participantId]["stats"]`.
-				- Data in the purple area mean `Key` doesn't serve as the index of any variables of LCU API.
+				- Data in the pink area mean `Key` doesn't serve as the index of any variables of LCU API.
 					- Currently, the purple area only contains `ally?`, a judgement whether the queried player is an ally of the main player. In the exported sheet, a tick means the queried player is the ally of the main player.
 			- Some keys are colored white. These keys don't belong to the indices of any variable in LCU API, but actually come from them. For example, `ornament` never occurs in the json object of the game information, but actually originates from `LoLGame_info["participants"][participantId]["stats]` and corresponds to the key `"item6"`.
-			- <b>To obtain the statistics display order lists, all needed is to arrange the table acoording to the ascending order of `OutputOrder` and to copy the cells in `Index` column.</b>
+			- <b>To obtain the output/display order lists, users need only arrange the table according to the ascending order of `OutputOrder` or `DisplayOrder` and then copy the cells in `Index` column.</b>
 		- `LoLChampions_df` in Customized Program 04:
 			- 6 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (LCU)`:
 				- Data not filled with any color mean `Key` is the direct index of `LoLChampions[championId]`.
@@ -915,13 +1035,21 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the light bluea area mean `Key` is the index of `ladders[ladderId]["divisions"][divisionId]["standings"][standingId]`.
 				- Data in the light green area mean `Key` is the index of the endpoint `/lol-summoner/v2/summoners/puuid/{puuid}`.
 				- Data in the orange area mean `Key` doesn't serve as the index of any variables of LCU API.
+		- `LoLHistory_df` in Customized Programs 05 and 11:
+			- 5 colors are used to divide the main data area in the sheets `05 - LoLHistory_header` and `11 - LoLHistory_header`.
+				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
+				- Data in the light blue area mean `Key` is the index of `LoLHistory["games"]["games"]`.
+				- Data in the light green area mean `Key` is the direct index of `LoLHistory["games"]["games"]["participantIdentities"][0]["player"]`.
+				- Data in the orange area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]`.
+				- Data in the dark green area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]["stats"]`.
 		- `LoLGame_info_df` in Customized Program 05:
-			- 5 colors are used to divide the main data area in the sheet `05 - LoLGame_info_header`.
+			- 6 colors are used to divide the main data area in the sheet `05 - LoLGame_info_header`.
 				- Data in the light blue area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]`.
 				- Data in the dark blue area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]["player"]`.
 				- Data in the green area mean `Key` is the index of `LoLGame_info["participants"][participantId]`.
 				- Data in the orange area mean `Key` is the index of `LoLGame_info["participants"][participantId]["stats"]`.
 				- Data in the purple area mean `Key` is the index of `LoLGame_info["teams"][teamId]`.
+				- Data in the yellow area mean `Key` is the direct index of `LoLGame_info["participants"][participantId]["timeline"]`.
 		- `LoLGame_timeline_df` in Customized Program 05:
 			- 4 colors are used to divide the main data area in the sheet `05 - LoLGame_timeline_header`.
 				- Data in the blue area mean `Key` is the index of `frames[frameId]`.
@@ -955,8 +1083,8 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the orange area mean `Key` is the index of the variable `queues[id]["gameTypeConfig"]`.
 				- Data in the blue area mean `Key` is the index of the variable `queues[id]["queueRewards"]`.
 				- Data in the white area mean `Key` once existed but was deleted later.
-		- `recent_TFTPlayers_df` in Customized Program 11:
-			- 5 colors are used to divide the main data area in the sheet `11 - recent_TFTPlayers_header`.
+		- `recent_TFTPlayers_df` in Customized Programs 11 and 16:
+			- 5 colors are used to divide the main data area in the sheets `11 - recent_TFTPlayers_header` and `16 - recent_TFTPlayers_header`.
 				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
 				- Data in the sky blue area mean `Key` is the index of `TFTHistory[i]["json"]`.
 				- Data in the green area mea `Key` is the index of `TFTHistory[i]["json"]["participants"][participantId]`.
@@ -965,7 +1093,7 @@ For details about customized programs that is beyond the scope of creating a cus
 					- The second half of `Key` whose index is between 91 and 123 is the index of `TFTHistory[i]["json"]["particiants"][participantId]["units"][int(unit_iter[4:])]`.
 					- The second half of `Key` whose index is greater than 123 is the index of `TFTHistory[i]["json"]["participants"][participantId]["units"][int(unit_iter[4:])]["items"]`.
 		- `player_loot_df` in Customized Program 12:
-			- No color is used to divide the maun data area in the sheet `12 - player_loot_header`, because these keys are all indices of `player_loot[i]`.
+			- No color is used to divide the main data area in the sheet `12 - player_loot_header`, because these keys are all indices of `player_loot[i]`.
 		- `splits_info_df` in Customized Program 13:
 			- 4 colors are used to divide the main data area in the sheet `13 - splits_info_header`.
 				- Data in the blue green area mean `Key` comes from `splitsConfig["splits"][splitId]`.
@@ -990,6 +1118,72 @@ For details about customized programs that is beyond the scope of creating a cus
 			- 2 colors are used to divide the main data area in the sheet `13 - topRated_ladders_header`.
 				- Data not filled with any color mean `Key` is the direct index of `ladders["standings"][standingId]`.
 				- Data in the light blue area mean `Key` is the index of the endpoint `/lol-summoner/v2/summoners/puuid/{puuid}`.
+		- `friend_hovercard_df` in Customized Program 16:
+			- 4 colors are used to divide the main data area in the sheet `16 - friend_hovercard_header`. `friend` denodes any element in `friends`.
+				- Data in the blue area mean `Key` is the index of the variable `friend`.
+				- Data in the light green area mean `Key` is the index of `friend["lol"]`.
+				- Data in the orange area mean the second half of `Key` is the index of `eval(friend["lol"]["pty"])`.
+				- Data in the green area mean the second half of `Key` is the index of `eval(friend["lol"]["regalia"])`.
+		- `friend_hovercard_df_simple` in Customized Program 16:
+			- The main data area in the sheet `16 - friend_hovercard_header_si` (`16 - friend_hovercard_header_simple`) is colored white. `friend` denodes any element in `friends`.
+				- `Key` is the direct index of the variable `friend`.
+		- `friend_groups_df` in Customized Program 16:
+			- The main data area in the sheet `16 - friend_groups_header` is colored white. `group` denodes any element in `friend_groups`.
+				- `Key` is the direct index of the variable `group`.
+		- `conversation_df` in Customized Program 16:
+			- The main data area in the sheet `16 - conversation_header` is colored white. `conversation` denodes any element in `conversations`.
+				- `Key` is the direct index of the variable `conversation`.
+		- `message_df` in Customized Program 16:
+			- The main data area in the sheet `16 - message_header` is colored white. `message` denodes any element in `messages`.
+				- `Key` is the index of the variable `message`.
+					- `Key` whose index is less than 9 is the direct index of the variable `message`.
+					- The second half of `Key` whose index is greater than or equal to 9 comes from `get_info` function.
+		- `friend_request_df` in Customized Program 16:
+			- The main data area in the sheet `16 - friend_request_header` is colored white. `friend_request` denodes any element in `friend_requests`.
+				- `Key` is the index of the variable `friend_request`.
+					- `Key` whose index is less than 10 is the direct index of the variable `friend_request`.
+					- The second half of `Key` whose index is greater than or equal to 9 is the direct index of `summonerIcons[friend_request["icon"]]`.
+		- `party_df` in Customized Program 16:
+			- 4 colors are used to divide the main data area in the sheet `16 - party_header`. `party` denodes any element in `parties`.
+				- Data in the blue area mean `Key` is the direct index of the variable `party`.
+				- Data in the light green area mean the second half of `Key` is the direct index of `queues[party["queueId"]]`.
+				- Data in the orange area mean `Key` comes from `party`.
+					- Note that no key in this area exists to be the direct index.
+				- Data in the yellow area mean `Key` doesn't serve as the index of any variables of LCU API.
+					- Currently, the purple area only contains `full?`, a judgement whether the party is full. In the exported sheet, a tick means the party is full.
+		- `invid_df` in Customized Program 16:
+			- 3 colors are used to divide the main data area in the sheet `16 - invid_header`. `invid` denodes any element in `receivedInvitations`.
+				- Data in the blue area mean `Key` is the index of the variable `invid`.
+				- Data in the light green area mean `Key` is the direct index of `invid["gameConfig"]`.
+				- Data in the orange area mean the second half of `Key` comes from `queues`.
+		- `muted_player_df` in Customized Program 16:
+			- The main data area in the sheet `16 - player_mute_header` is colored white. `muted_player` denodes any element in `muted_players`.
+				- `Key` is the index of the variable `muted_player`.
+					- `Key` whose index is less than 5 is the direct index of the variable `muted_player`.
+					- `Key` whose index is greater than or equal to 5 comes from `get_info` function.
+		- `champSelect_team_df` in Customized Program 16:
+			- The main data area in the sheet `16 - champSelect_team_header` is colored white. `player` denodes any element in `players`.
+				- `Key` is the index of the variable `player`.
+					- `Key` whose index is less than 13 is the direct index of the variable `player`.
+					- `Key` 14 and 15 come from `get_info` function.
+					- `Key` 16 comes from `team_color`.
+					- The second half of `Key` whose index is greater than or equal to 17 is the index of the data resource that first half represents.
+		- `voiceSettings_df` in Customized Program 16:
+			- The main data area in the sheet `16 - voiceSettings_header` is colored white.
+				- `Key` is the index of the variable `device`.
+					- `Key` whose index is less than 12 is the direct index of the variable `device`.
+					- `Key` whose index is greater than or equal to 12 comes from `captureDevices`.
+			- This dataframe uses a legacy creation method. Refer to the definition of `info_data` in Customized Program 05.
+		- `participant_record_df` in Customized Program 16:
+			- The main data area in the sheet `16 - participant_record_header` is colored white. `participant` denodes any element in `participant_records`.
+				- `Key` is the index of the variable `participant`.
+					- `Key` whose index is less than 8 is the direct index of the variable `participant`.
+					- `Key` 9 and 10 come from `get_info` function.
+		- `blockList_df` in Customized Program 16:
+			- The main data area in the sheet `16 - blockList_header` is colored white. `player` denodes any element in `blockList`.
+				- `Key` is the index of the variable `player`.
+					- `Key` whose index is less than 8 is the direct index of the variable `player`.
+					- The second half `Key` is the index of the data resource that the first half represents.
 6. Normally, text files generated by this program set are organized with indents. If the original dictionary variable in python runtime environment is required to recur, then simply pass a file pointer created by `open` function to the `load` function in `json` library, such as `fp = open("{filename}.txt", "r", encoding = "utf-8")` and `d = json.load(fp)`.
 	- If the user wants to transform a json string with indents generated by `dumps` function into a json string without indents just in the runtime environment, he/she only needs to pass the string generated by `dumps` functin into `loads` function, such as `formatted = json.dumps({dictvariable}, indent = 8, ensure_ascii = False)` and `d = json.loads(formatted)`.
 # Afterword
