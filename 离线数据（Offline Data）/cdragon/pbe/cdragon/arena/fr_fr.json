@@ -941,7 +941,7 @@
             "id": 233,
             "name": "Roulette ultime",
             "rarity": 2,
-            "tooltip": "Vous remplacez Fuite par un ultime aléatoire. Après avoir lancé l'ultime, vous la remplacer par un nouvel ultime aléatoire."
+            "tooltip": "Cherry_UltimateRoulette_Tooltip"
         },
         {
             "apiName": "ClownCollege",
@@ -1314,40 +1314,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Lorsque vous infligez des dégâts à un champion d'assez loin, vous lui lancez <keywordMajor>automatiquement</keywordMajor> <abilityName>Arc térébrant</abilityName>.",
+            "desc": "Lorsque vous infligez des dégâts à un champion d'assez loin, vous lui tirez dessus avec <abilityName>Arc térébrant</abilityName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Sniper ultime",
             "rarity": 2,
-            "tooltip": "Lorsque vous infligez des dégâts à un champion depuis au moins @SnipeDistance@ unités de distance, vous lui lancez <keywordMajor>automatiquement</keywordMajor> <abilityName>Arc térébrant</abilityName>, infligeant <magicDamage>@Damage@ pts de dégâts magiques</magicDamage>. @Cooldown@ sec de récupération par cible.<br><br>Dégâts infligés lors de cette manche : @f1@.<br>Total des dégâts infligés : @f2@."
+            "tooltip": "Lorsque vous infligez des dégâts à un champion depuis au moins @SnipeDistance@ unités de distance, vous lancez <abilityName>Arc térébrant</abilityName>, infligeant <magicDamage>@Damage@ pts de dégâts magiques</magicDamage>. @Cooldown@ sec de récupération par cible.<br><br>Dégâts infligés lors de cette manche : @f1@.<br>Total des dégâts infligés : @f2@."
         },
         {
             "apiName": "Eureka",
@@ -1679,14 +1676,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "{1e85060f}": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1691,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "Votre <scaleMana>mana</scaleMana> coûte le double. Vos compétences infligent plus de dégâts en fonction de votre <scaleMana>mana max</scaleMana>.",
+            "desc": "Votre <scaleMana>mana</scaleMana> coûte le double. Votre compétence octroie des <healing>soins</healing> et des <shield>boucliers</shield>. Les dégâts augmentent en fonction de votre <scaleMana>mana max</scaleMana>.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Surcharge",
             "rarity": 0,
-            "tooltip": "Votre <scaleMana>mana</scaleMana> coûte le double. Vos compétences infligent <scaleMana>+@ManaCalc@</scaleMana> de dégâts."
+            "tooltip": "Votre <scaleMana>mana</scaleMana> coûte le double. Votre compétence octroie des <healing>soins</healing> et des <shield>boucliers</shield>. Les dégâts sont plus effectifs de <scaleMana>@ManaCalc@</scaleMana>."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1936,6 +1928,22 @@
             "name": "Conduit infernal",
             "rarity": 2,
             "tooltip": "Vos compétences appliquent <keywordMajor>brûlure</keywordMajor> (cumulable à l'infini), infligeant <magicDamage>@BleedDamageTooltip@ pts de dégâts magiques</magicDamage> par seconde pendant @BleedDuration@ sec.<br><br>Tous vos effets de <keywordMajor>brûlure</keywordMajor> réduisent le délai de récupération de vos compétences de base de @FlatCooldownRefundPerTick@ sec lorsqu'ils infligent des dégâts aux ennemis.<br><br>Dégâts infligés lors de cette manche : @f1@<br>Total des dégâts infligés : @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Convertit les <scaleAD>dégâts d'attaque bonus</scaleAD> en <scaleAP>puissance bonus</scaleAP>. Vous gagnez <scaleAP>+@APAmp*100@% de puissance</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Adaptation",
+            "rarity": 0,
+            "tooltip": "Convertit les <scaleAD>dégâts d'attaque bonus</scaleAD> en <scaleAP>puissance bonus</scaleAP>. Vous gagnez <scaleAP>+@APAmp*100@% de puissance</scaleAP>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2655,6 +2663,22 @@
             "name": "Cumulator",
             "rarity": 0,
             "tooltip": "Quand vous cumulez des <keywordMajor>effets</keywordMajor> permanents avec une compétence, vous en cumulez @StackModifier*100@% de plus !"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Convertit la <scaleAP>puissance</scaleAP> en <scaleAD>dégâts d'attaque bonus</scaleAD>. Vous gagnez <scaleAD>+@ADAmp*100@% de dégâts d'attaque</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Conversion physique",
+            "rarity": 0,
+            "tooltip": "Convertit la <scaleAP>puissance</scaleAP> en <scaleAD>dégâts d'attaque bonus</scaleAD>. Vous gagnez <scaleAD>+@ADAmp*100@% de dégâts d'attaque</scaleAD>."
         },
         {
             "apiName": "FeyMagic",
@@ -3766,7 +3790,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "Vous gagnez <attackSpeed>+@TotalASValue*100@% de vitesse d'attaque totale</attackSpeed>. À @Breakpoint1@ <attackSpeed>attaques</attackSpeed> par seconde, vous gagnez de nouveaux effets.",
+            "desc": "Vous gagnez <attackSpeed>+@TotalASValue*100@% de vitesse d'attaque totale</attackSpeed>. <br><br>À @Breakpoint1@ <attackSpeed>attaques par seconde</attackSpeed>, vous infligez <magicDamage>des dégâts magiques supplémentaires</magicDamage> {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3885,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3897,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

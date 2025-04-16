@@ -941,7 +941,7 @@
             "id": 233,
             "name": "궁극의 룰렛",
             "rarity": 2,
-            "tooltip": "소환사 질주를 무작위 궁극기로 교체합니다. 궁극기 사용 후 다른 무작위 궁극기로 교체합니다."
+            "tooltip": "Cherry_UltimateRoulette_Tooltip"
         },
         {
             "apiName": "ClownCollege",
@@ -1314,40 +1314,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "멀리 떨어진 챔피언에게 피해를 입히면 <abilityName>정조준 일격</abilityName>을 <keywordMajor>자동 사용</keywordMajor>합니다.",
+            "desc": "멀리 떨어진 챔피언에게 피해를 입히면 <abilityName>정조준 일격</abilityName>을 발사합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "정조준 일격 신동",
             "rarity": 2,
-            "tooltip": "@SnipeDistance@유닛 거리 이상 떨어진 대상에게 피해를 입히면 <abilityName>정조준 일격</abilityName>을 <keywordMajor>자동 사용</keywordMajor>해 <magicDamage>@Damage@의 마법 피해</magicDamage>를 입힙니다. 대상별로 @Cooldown@초의 재사용 대기시간이 적용됩니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
+            "tooltip": "@SnipeDistance@유닛 거리 이상 떨어진 대상에게 피해를 입히면 <abilityName>정조준 일격</abilityName>을 발사해 <magicDamage>@Damage@의 마법 피해</magicDamage>를 입힙니다. 대상별로 @Cooldown@초의 재사용 대기시간이 적용됩니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1679,14 +1676,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "{1e85060f}": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1691,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "<scaleMana>마나</scaleMana> 소모량이 2배가 됩니다. 스킬 사용 시 <scaleMana>최대 마나</scaleMana>에 비례하여 추가 피해를 입힙니다.",
+            "desc": "Cherry_Overflow_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "범람",
             "rarity": 0,
-            "tooltip": "<scaleMana>마나</scaleMana> 소모량이 2배가 됩니다. 스킬 사용 시 <scaleMana>@ManaCalc@</scaleMana>의 추가 피해를 입힙니다."
+            "tooltip": "Cherry_Overflow_Tooltip"
         },
         {
             "apiName": "FeeltheBurn",
@@ -1936,6 +1928,22 @@
             "name": "지옥의 전도체",
             "rarity": 2,
             "tooltip": "스킬 사용 시 무한히 중첩되는 <keywordMajor>화상</keywordMajor> 효과를 적용해 @BleedDuration@초 동안 매초 <magicDamage>@BleedDamageTooltip@의 마법 피해</magicDamage>를 입힙니다.<br><br>모든 <keywordMajor>화상</keywordMajor> 효과가 적에게 피해를 입힐 때마다 기본 스킬의 재사용 대기시간을 @FlatCooldownRefundPerTick@초 감소시킵니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "<scaleAD>추가 공격력</scaleAD>을 <scaleAP>주문력</scaleAP>으로 전환합니다. <scaleAP>주문력이 @APAmp*100@%</scaleAP> 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "적응형 능력치",
+            "rarity": 0,
+            "tooltip": "<scaleAD>추가 공격력</scaleAD>을 <scaleAP>주문력</scaleAP>으로 전환합니다. <scaleAP>주문력이 @APAmp*100@%</scaleAP> 증가합니다."
         },
         {
             "apiName": "BacktoBasics",
@@ -2655,6 +2663,22 @@
             "name": "다단 중첩",
             "rarity": 0,
             "tooltip": "스킬의 영구적 <keywordMajor>중첩</keywordMajor>을 얻을 때 @StackModifier*100@% 더 얻습니다!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "<scaleAP>주문력</scaleAP>을 <scaleAD>추가 공격력</scaleAD>으로 전환합니다. <scaleAD>공격력이 @ADAmp*100@%</scaleAD> 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "마법사 (물리)",
+            "rarity": 0,
+            "tooltip": "<scaleAP>주문력</scaleAP>을 <scaleAD>추가 공격력</scaleAD>으로 전환합니다. <scaleAD>공격력이 @ADAmp*100@%</scaleAD> 증가합니다."
         },
         {
             "apiName": "FeyMagic",
@@ -3766,7 +3790,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "<attackSpeed>총 공격 속도가 @TotalASValue*100@%</attackSpeed> 증가합니다. 초당 <attackSpeed>공격 횟수</attackSpeed> @Breakpoint1@에서 새로운 효과를 얻습니다.",
+            "desc": "Cherry_LightningStrikes_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3885,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3897,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

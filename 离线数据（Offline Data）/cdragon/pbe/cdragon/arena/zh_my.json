@@ -941,7 +941,7 @@
             "id": 233,
             "name": "终极轮盘",
             "rarity": 2,
-            "tooltip": "使用随机终极技能替换召唤师奔逃。每次施放终极技能后，随机替换为新的终极技能。"
+            "tooltip": "Cherry_UltimateRoulette_Tooltip"
         },
         {
             "apiName": "ClownCollege",
@@ -1314,40 +1314,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "从远处对英雄造成伤害时，可对其<keywordMajor>自动施放</keywordMajor>一道<abilityName>精准弹幕</abilityName>。",
+            "desc": "从远处对英雄造成伤害时，可对其发射一道<abilityName>精准弹幕</abilityName>。",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "狙击天才",
             "rarity": 2,
-            "tooltip": "从@SnipeDistance@距离之外对敌人造成伤害时，可对其<keywordMajor>自动施放</keywordMajor>一道<abilityName>精准弹幕</abilityName>，造成<magicDamage>@Damage@魔法伤害</magicDamage>。每个目标@Cooldown@秒冷却时间。<br><br>本回合造成伤害：@f1@<br>总计造成伤害：@f2@"
+            "tooltip": "从@SnipeDistance@距离之外对敌人造成伤害时，可对其发射一道<abilityName>精准弹幕</abilityName>，造成<magicDamage>@Damage@魔法伤害</magicDamage>。每个目标@Cooldown@秒冷却时间。<br><br>本回合造成的伤害：@f1@<br>总计造成伤害：@f2@"
         },
         {
             "apiName": "Eureka",
@@ -1679,14 +1676,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "{1e85060f}": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1691,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "你的<scaleMana>魔力</scaleMana>消耗翻倍。你的技能伤害会随着自身<scaleMana>最大魔力</scaleMana>而提升。",
+            "desc": "你的<scaleMana>魔力</scaleMana>消耗翻倍。根据你的最大<scaleMana>魔力值</scaleMana>，你的技能的<healing>治疗效果</healing>、<shield>护盾效果</shield>和伤害获得了提升。",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "溢流",
             "rarity": 0,
-            "tooltip": "你的<scaleMana>魔力</scaleMana>消耗翻倍。你的技能造成<scaleMana>@ManaCalc@</scaleMana>额外伤害。"
+            "tooltip": "你的<scaleMana>魔力</scaleMana>消耗翻倍。你的技能的<healing>治疗效果</healing>、<shield>护盾效果</shield>和伤害效能提升<scaleMana>@ManaCalc@</scaleMana>。"
         },
         {
             "apiName": "FeeltheBurn",
@@ -1936,6 +1928,22 @@
             "name": "狱火传导",
             "rarity": 2,
             "tooltip": "技能会施加一层可无限叠加的<keywordMajor>燃烧</keywordMajor>效果，每秒造成<magicDamage>@BleedDamageTooltip@魔法伤害</magicDamage>，持续@BleedDuration@秒。<br><br>你的全部<keywordMajor>燃烧</keywordMajor>效果对敌人造成伤害时，缩短自身基础技能@FlatCooldownRefundPerTick@%的冷却时间。<br><br>本回合造成伤害：@f1@<br>总计造成伤害：@f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "<scaleAD>额外物理攻击</scaleAD>转化为<scaleAP>魔法攻击</scaleAP>。获得<scaleAP>@APAmp*100@%魔法攻击</scaleAP>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "适应",
+            "rarity": 0,
+            "tooltip": "<scaleAD>额外物理攻击</scaleAD>转化为<scaleAP>魔法攻击</scaleAP>。获得<scaleAP>@APAmp*100@%魔法攻击</scaleAP>。"
         },
         {
             "apiName": "BacktoBasics",
@@ -2655,6 +2663,22 @@
             "name": "叠层霸王龙",
             "rarity": 0,
             "tooltip": "你获得一项技能的永久<keywordMajor>叠层</keywordMajor>时，获得的叠层数额外提升@StackModifier*100@%！"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "<scaleAP>魔法攻击</scaleAP>转化为<scaleAD>额外物理攻击</scaleAD>。获得<scaleAD>@ADAmp*100@%物理攻击</scaleAD>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "赴险如夷",
+            "rarity": 0,
+            "tooltip": "<scaleAP>魔法攻击</scaleAP>转化为<scaleAD>额外物理攻击</scaleAD>。获得<scaleAD>@ADAmp*100@%物理攻击</scaleAD>。"
         },
         {
             "apiName": "FeyMagic",
@@ -3766,7 +3790,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "获得<attackSpeed>@TotalASValue*100@%总攻击速度</attackSpeed>。每秒<attackSpeed>普攻次数</attackSpeed>达到@Breakpoint1@时，获得一个新效果。",
+            "desc": "获得<attackSpeed>@TotalASValue*100@%总攻速</attackSpeed>。<br><br><attackSpeed>每秒普攻次数</attackSpeed>达到@Breakpoint1@时，造成额外<magicDamage>魔法伤害</magicDamage>{{ Item_Keyword_OnHit }}。",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3885,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3897,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

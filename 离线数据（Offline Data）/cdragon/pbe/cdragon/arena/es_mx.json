@@ -941,7 +941,7 @@
             "id": 233,
             "name": "Ruleta Definitiva",
             "rarity": 2,
-            "tooltip": "Reemplaza Huida del Invocador con una definitiva aleatoria. Tras lanzarla, la reemplaza con una nueva definitiva aleatoria."
+            "tooltip": "Cherry_UltimateRoulette_Tooltip"
         },
         {
             "apiName": "ClownCollege",
@@ -1314,40 +1314,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Al dañar a un campeón lejano, le disparas de forma <keywordMajor>automática</keywordMajor> una <abilityName>Descarga de Tiros Certeros</abilityName>.",
+            "desc": "Al dañar a un campeón lejano, le disparas una <abilityName>Descarga de Tiros Certeros</abilityName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Prodigio de Tiros Certeros",
             "rarity": 2,
-            "tooltip": "Al dañar a alguien que esté a más de @SnipeDistance@ unidades de distancia, <keywordMajor>disparas de forma automática</keywordMajor> una <abilityName>Descarga de Tiros Certeros</abilityName> que inflige <magicDamage>@Damage@ de daño mágico</magicDamage>. Esto tiene @Cooldown@ seg de enfriamiento por objetivo.<br><br>Daño infligido esta ronda: @f1@<br>Daño infligido en total: @f2@"
+            "tooltip": "Al infligirle daño a un enemigo que esté a más de @SnipeDistance@ unidades de distancia, disparas una <abilityName>Descarga de Tiros Certeros</abilityName> que inflige <magicDamage>@Damage@ de daño mágico</magicDamage> (@Cooldown@ seg de enfriamiento por objetivo).<br><br>Daño infligido esta ronda: @f1@<br>Daño infligido en total: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1679,14 +1676,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "{1e85060f}": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1691,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "Tu <scaleMana>maná</scaleMana> cuesta el doble. Tus habilidades infligen más daño, que aumenta con tu <scaleMana>maná máximo</scaleMana>.",
+            "desc": "Cherry_Overflow_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Sobrecarga",
             "rarity": 0,
-            "tooltip": "Tu <scaleMana>maná</scaleMana> cuesta el doble. Tus habilidades infligen <scaleMana>@ManaCalc@</scaleMana> más de daño."
+            "tooltip": "Cherry_Overflow_Tooltip"
         },
         {
             "apiName": "FeeltheBurn",
@@ -1936,6 +1928,22 @@
             "name": "Conducto Infernal",
             "rarity": 2,
             "tooltip": "Tus habilidades aplican una <keywordMajor>Quemadura</keywordMajor> que se acumula infinitamente e inflige <magicDamage>@BleedDamageTooltip@ de daño mágico</magicDamage> por segundo durante @BleedDuration@ seg.<br><br>Los efectos de tu <keywordMajor>Quemadura</keywordMajor> reducen los enfriamientos de tus habilidades básicas en @FlatCooldownRefundPerTick@ seg cuando le infligen daño a los enemigos.<br><br>Daño infligido esta ronda: @f1@<br>Daño infligido en total: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Convierte el <scaleAD>daño de ataque adicional</scaleAD> en <scaleAP>poder de habilidad</scaleAP>. Obtienes un <scaleAP>@APAmp*100@% de Poder de Habilidad</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Daño Habilidoso",
+            "rarity": 0,
+            "tooltip": "Convierte el <scaleAD>daño de ataque adicional</scaleAD> en <scaleAP>poder de habilidad</scaleAP>. Obtienes un <scaleAP>@APAmp*100@% de Poder de Habilidad</scaleAP>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2655,6 +2663,22 @@
             "name": "Acumulasaurio Rex",
             "rarity": 0,
             "tooltip": "Cuando obtienes <keywordMajor>acumulaciones</keywordMajor> permanentes de una habilidad, ¡obtienes un @StackModifier*100@% más!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Convierte el <scaleAP>poder de habilidad</scaleAP> en <scaleAD>daño de ataque adicional</scaleAD>. Obtiene un <scaleAD>@ADAmp*100@% de Daño de Ataque</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "escaPHaDA",
+            "rarity": 0,
+            "tooltip": "Convierte el <scaleAP>poder de habilidad</scaleAP> en <scaleAD>daño de ataque adicional</scaleAD>. Obtiene un <scaleAD>@ADAmp*100@% de Daño de Ataque</scaleAD>."
         },
         {
             "apiName": "FeyMagic",
@@ -3766,7 +3790,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "Obtienes un <attackSpeed>@TotalASValue*100@% de Velocidad de Ataque</attackSpeed>. Obtienes nuevos efectos al llegar a @Breakpoint1@ <attackSpeed>ataques</attackSpeed> por seg.",
+            "desc": "Cherry_LightningStrikes_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3885,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3897,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

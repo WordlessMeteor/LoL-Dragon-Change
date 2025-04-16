@@ -746,7 +746,7 @@
 		<tr>
 			<td style="text-align:center;">2024-08-23 15-50-18</td>
 			<td style="text-align:center;">CDragon: 3</td>
-			<td>加斜杠后的英雄数据获取日志</td>Champion data capture log after adding the slash
+			<td>加斜杠后的英雄数据获取日志<br>Champion data capture log after adding the slash</td>
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-08-24 15-57-14</td>
@@ -4067,6 +4067,56 @@
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
 						<li>PBE: 15.8.672.4745 -> 15.8.673.3603</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-14 10-05-27</td>
+			<td style="text-align:center;">CDragon: 3</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-14 10-05-40</td>
+			<td style="text-align:center;">CDragon: 2</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-15 09-43-43</td>
+			<td style="text-align:center;">CDragon: 3</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-15 09-43-55</td>
+			<td style="text-align:center;">CDragon: 2</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-16 09-30-09</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>运算符错误导致所有未更新的数据资源被更新<br>Operation error caused unchanged data resources to be updated</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-16 09-33-52</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>运算符错误导致所有未更新的数据资源被更新<br>Operation error caused unchanged data resources to be updated</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-16 10-23-30</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.8.673.3603 -> 15.9.674.0918</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-16 10-23-45</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.8.673.3603 -> 15.9.674.0918</li>
 					</ul>
 			</td>
 		</tr>

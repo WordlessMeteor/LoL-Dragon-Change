@@ -941,7 +941,7 @@
             "id": 233,
             "name": "Ultimatives Roulette",
             "rarity": 2,
-            "tooltip": "Du ersetzt „Beschwörerflucht“ durch eine zufälliges Ult. Nachdem du die Ult gewirkt hast, wird sie durch eine neue zufällige Ult ersetzt."
+            "tooltip": "Cherry_UltimateRoulette_Tooltip"
         },
         {
             "apiName": "ClownCollege",
@@ -1314,40 +1314,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Wenn du einem Champion aus großer Entfernung Schaden zufügst, feuerst du <keywordMajor>automatisch</keywordMajor> ein <abilityName>Energietrommelfeuer</abilityName> auf ihn ab.",
+            "desc": "Wenn du einem Champion aus großer Entfernung Schaden zufügst, feuerst du <abilityName>Energietrommelfeuer</abilityName> auf ihn ab.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Energiewunderkind",
             "rarity": 2,
-            "tooltip": "Wenn du jemanden aus über @SnipeDistance@ Einheiten Entfernung Schaden zufügst, löst du <keywordMajor>automatisch</keywordMajor> <abilityName>Energietrommelfeuer</abilityName> aus und verursachst <magicDamage>@Damage@ magischen Schaden</magicDamage>. @Cooldown@ Sek. Abklingzeit pro Ziel.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
+            "tooltip": "Wenn du jemandem aus über @SnipeDistance@ Einheiten Entfernung Schaden zufügst, feuerst du <abilityName>Energietrommelfeuer</abilityName> ab und verursachst <magicDamage>@Damage@ magischen Schaden</magicDamage>. @Cooldown@&nbsp;Sek. Abklingzeit pro Ziel.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1679,14 +1676,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "{1e85060f}": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1691,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "Deine <scaleMana>Manakosten</scaleMana> werden verdoppelt. Der Schaden deiner Fähigkeiten skaliert stärker mit deinem <scaleMana>max. Mana</scaleMana>.",
+            "desc": "Deine <scaleMana>Manakosten</scaleMana> werden verdoppelt. Deine <healing>Heilung</healing>, deine <shield>Schilde</shield> und dein Schaden durch Fähigkeiten werden basierend auf deinem <scaleMana>max. Mana</scaleMana> erhöht.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Überfluss",
             "rarity": 0,
-            "tooltip": "Deine <scaleMana>Manakosten</scaleMana> werden verdoppelt. Deine Fähigkeiten verursachen <scaleMana>@ManaCalc@</scaleMana> mehr Schaden."
+            "tooltip": "Deine <scaleMana>Manakosten</scaleMana> werden verdoppelt. Deine <healing>Heilung</healing>, deine <shield>Schilde</shield> und dein Schaden durch Fähigkeiten sind <scaleMana>@ManaCalc@</scaleMana> effektiver."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1936,6 +1928,22 @@
             "name": "Infernalische Verbindung",
             "rarity": 2,
             "tooltip": "Deine Fähigkeiten belegen Gegner mit einer unendlich steigerbaren <keywordMajor>Verbrennung</keywordMajor>, die @BleedDuration@&nbsp;Sekunden lang <magicDamage>@BleedDamageTooltip@&nbsp;magischen Schaden</magicDamage> pro Sekunde verursacht.<br><br>Alle deine<keywordMajor>Verbrennungseffekte</keywordMajor> verringern die Abklingzeiten deiner Grundfähigkeiten um @FlatCooldownRefundPerTick@&nbsp;Sekunden, wenn sie Gegnern Schaden zufügen.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Wandelt <scaleAD>zusätzlichen Angriffsschaden</scaleAD> in <scaleAP>Fähigkeitsstärke</scaleAP> um. Du erhältst <scaleAP>@APAmp*100@&nbsp;% Fähigkeitsstärke</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "ADAPtieren",
+            "rarity": 0,
+            "tooltip": "Wandelt <scaleAD>zusätzlichen Angriffsschaden</scaleAD> in <scaleAP>Fähigkeitsstärke</scaleAP> um. Du erhältst <scaleAP>@APAmp*100@&nbsp;% Fähigkeitsstärke</scaleAP>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2655,6 +2663,22 @@
             "name": "Steigerosaurus Rex",
             "rarity": 0,
             "tooltip": "Wenn du für eine Fähigkeit permanente <keywordMajor>Steigerungen</keywordMajor> erhältst, erhältst du @StackModifier*100@&nbsp;% mehr!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Wandelt <scaleAP>Fähigkeitsstärke</scaleAP> in <scaleAD>zusätzlichen Angriffsschaden</scaleAD> um. Du erhältst <scaleAD>@ADAmp*100@&nbsp;% Angriffsschaden</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Im Wandel",
+            "rarity": 0,
+            "tooltip": "Wandelt <scaleAP>Fähigkeitsstärke</scaleAP> in <scaleAD>zusätzlichen Angriffsschaden</scaleAD> um. Du erhältst <scaleAD>@ADAmp*100@&nbsp;% Angriffsschaden</scaleAD>."
         },
         {
             "apiName": "FeyMagic",
@@ -3766,7 +3790,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "Du erhältst <attackSpeed>@TotalASValue*100@&nbsp;% Gesamtangriffstempo</attackSpeed>. Bei @Breakpoint1@&nbsp;<attackSpeed>Angriffen</attackSpeed> pro Sekunde erhältst du neue Effekte.",
+            "desc": "Du erhältst <attackSpeed>@TotalASValue*100@&nbsp;% Gesamtangriffstempo</attackSpeed>. <br><br>Bei @Breakpoint1@&nbsp;<attackSpeed>Angriffen pro Sekunde</attackSpeed> erhältst du <magicDamage>&nbsp;magischen Schaden zusätzlich</magicDamage> {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3885,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3897,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

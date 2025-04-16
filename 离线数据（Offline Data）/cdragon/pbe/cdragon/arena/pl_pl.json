@@ -941,7 +941,7 @@
             "id": 233,
             "name": "Ruletka nad Ruletki",
             "rarity": 2,
-            "tooltip": "Zastępuje Ucieczkę Przywoływacza losową superumiejętnością. Po rzuceniu tej superumiejętności zastępujesz ją nową losową superumiejętnością."
+            "tooltip": "Cherry_UltimateRoulette_Tooltip"
         },
         {
             "apiName": "ClownCollege",
@@ -1314,40 +1314,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Kiedy zadajesz obrażenia bohaterowi z daleka, <keywordMajor>automatycznie używasz</keywordMajor> <abilityName>Celnej Salwy</abilityName> i wystrzeliwujesz w niego.",
+            "desc": "Kiedy zadajesz obrażenia bohaterowi z daleka, wystrzeliwujesz w niego <abilityName>Celną Salwę</abilityName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Genialny Cel",
             "rarity": 2,
-            "tooltip": "Kiedy zadajesz bohaterowi obrażenia z zasięgu przynajmniej @SnipeDistance@ jedn., <keywordMajor>automatycznie</keywordMajor> wystrzeliwujesz w niego <abilityName>Celną Salwę</abilityName>, zadając <magicDamage>@Damage@ pkt. obrażeń magicznych</magicDamage>. @Cooldown@ sek. odnowienia na cel.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
+            "tooltip": "Kiedy zadajesz bohaterowi obrażenia z zasięgu przynajmniej @SnipeDistance@ jedn., wystrzeliwujesz w niego <abilityName>Celną Salwę</abilityName>, zadając <magicDamage>@Damage@ pkt. obrażeń magicznych</magicDamage>. @Cooldown@ sek. odnowienia na cel.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
             "apiName": "Eureka",
@@ -1679,14 +1676,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "{1e85060f}": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1691,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "Twoje koszty <scaleMana>many</scaleMana> zostają podwojone. Twoje umiejętności zadają więcej obrażeń zależnie od twojej <scaleMana>maksymalnej many</scaleMana>.",
+            "desc": "Twoje koszty <scaleMana>many</scaleMana> zostają podwojone. <healing>Leczenie</healing>, <shield>tarcze</shield> oraz obrażenia zadawane przez twoje umiejętności zwiększają się w zależności od twojej <scaleMana>maksymalnej many</scaleMana>.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Przesyt",
             "rarity": 0,
-            "tooltip": "Twoje koszty <scaleMana>many</scaleMana> zostają podwojone. Twoje umiejętności zadają o <scaleMana>@ManaCalc@</scaleMana> obrażeń więcej."
+            "tooltip": "Twoje koszty <scaleMana>many</scaleMana> zostają podwojone. <healing>Leczenie</healing>, <shield>tarcze</shield> oraz obrażenia zadawane przez twoje umiejętności są o <scaleMana>@ManaCalc@</scaleMana> skuteczniejsze."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1936,6 +1928,22 @@
             "name": "Piekielny Przewodnik",
             "rarity": 2,
             "tooltip": "Twoje umiejętności nakładają kumulujące się w nieskończoność <keywordMajor>podpalenie</keywordMajor>, zadające <magicDamage>@BleedDamageTooltip@ pkt. obrażeń magicznych</magicDamage> na sekundę przez @BleedDuration@ sek.<br><br>Wszystkie twoje efekty <keywordMajor>podpalenia</keywordMajor> skracają czas odnowienia twoich umiejętności podstawowych o @FlatCooldownRefundPerTick@ sek., gdy zadają obrażenia wrogom.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt.<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Zamienia <scaleAD>dodatkowe obrażenia od ataku</scaleAD> na <scaleAP>moc umiejętności</scaleAP>. Zyskujesz <scaleAP>@APAmp*100@% mocy umiejętności</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "AD-AP-tacja",
+            "rarity": 0,
+            "tooltip": "Zamienia <scaleAD>dodatkowe obrażenia od ataku</scaleAD> na <scaleAP>moc umiejętności</scaleAP>. Zyskujesz <scaleAP>@APAmp*100@% mocy umiejętności</scaleAP>."
         },
         {
             "apiName": "BacktoBasics",
@@ -2655,6 +2663,22 @@
             "name": "Ładunkozaurus Rex",
             "rarity": 0,
             "tooltip": "Gdy otrzymasz stałe <keywordMajor>ładunki</keywordMajor> umiejętności, zyskujesz @StackModifier*100@% więcej!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Zamienia <scaleAP>moc umiejętności</scaleAP> na <scaleAD>dodatkowe obrażenia od ataku</scaleAD>. Zyskujesz <scaleAD>@ADAmp*100@% obrażeń od ataku</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Eskapada",
+            "rarity": 0,
+            "tooltip": "Zamienia <scaleAP>moc umiejętności</scaleAP> na <scaleAD>dodatkowe obrażenia od ataku</scaleAD>. Zyskujesz <scaleAD>@ADAmp*100@% obrażeń od ataku</scaleAD>."
         },
         {
             "apiName": "FeyMagic",
@@ -3766,7 +3790,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "Zyskujesz <attackSpeed>@TotalASValue*100@% całkowitej prędkości ataku</attackSpeed>. Zyskujesz nowe efekty przy progu @Breakpoint1@ <attackSpeed>ataków</attackSpeed> na sekundę.",
+            "desc": "Zyskujesz <attackSpeed>@TotalASValue*100@% całkowitej prędkości ataku</attackSpeed>.<br><br>Przy @Breakpoint1@ <attackSpeed>atakach na sekundę</attackSpeed> zadajesz dodatkowe <magicDamage>obrażenia magiczne</magicDamage> {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3885,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3897,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

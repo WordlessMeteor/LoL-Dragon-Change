@@ -941,7 +941,7 @@
             "id": 233,
             "name": "アルティメットルーレット",
             "rarity": 2,
-            "tooltip": "サモナースペルの「逃亡」をランダムなアルティメットスキルに置き換える。そのアルティメットスキルを使用後、別の新たなランダムなアルティメットスキルに置き換わる。"
+            "tooltip": "Cherry_UltimateRoulette_Tooltip"
         },
         {
             "apiName": "ClownCollege",
@@ -1314,40 +1314,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "遠くからチャンピオンにダメージを与えると、対象に向けて<abilityName>「トゥルーショットバラージ」</abilityName>を<keywordMajor>自動発動</keywordMajor>する。",
+            "desc": "遠くからチャンピオンにダメージを与えると、対象に向けて<abilityName>「トゥルーショットバラージ」</abilityName>が発射される。",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "トゥルーショットプロディジー",
             "rarity": 2,
-            "tooltip": "@SnipeDistance@ユニット以上離れた敵にダメージを与えると、<abilityName>「トゥルーショットバラージ」</abilityName>を<keywordMajor>自動発動</keywordMajor>して、射程無限で<magicDamage>@Damage@の魔法ダメージ</magicDamage>を与える。この効果には対象ごとに@Cooldown@秒間のクールダウンがある。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
+            "tooltip": "@SnipeDistance@ユニット以上離れた敵にダメージを与えると、<abilityName>「トゥルーショットバラージ」</abilityName>を発射して、<magicDamage>@Damage@の魔法ダメージ</magicDamage>を与える。この効果には対象ごとに@Cooldown@秒間のクールダウンがある。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1679,14 +1676,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "{1e85060f}": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1691,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "自身の<scaleMana>マナ</scaleMana>コストが2倍になる。自身のスキルが与えるダメージが自身の<scaleMana>最大マナ</scaleMana>に応じて増加する。",
+            "desc": "自身の<scaleMana>マナ</scaleMana>コストが2倍になる。スキルの<healing>回復</healing>、<shield>シールド</shield>、およびダメージが<scaleMana>最大マナ</scaleMana>に基づいて増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "オーバーフロー",
             "rarity": 0,
-            "tooltip": "自身の<scaleMana>マナ</scaleMana>コストが2倍になる。スキルが与えるダメージが<scaleMana>@ManaCalc@</scaleMana>増加する。"
+            "tooltip": "自身の<scaleMana>マナ</scaleMana>コストが2倍になる。スキルの<healing>回復</healing>、<shield>シールド</shield>、およびダメージの効果が<scaleMana>@ManaCalc@</scaleMana>増加する。"
         },
         {
             "apiName": "FeeltheBurn",
@@ -1936,6 +1928,22 @@
             "name": "獄炎路",
             "rarity": 2,
             "tooltip": "スキルが無限にスタック可能な<keywordMajor>炎上</keywordMajor>を付与し、@BleedDuration@秒間、毎秒<magicDamage>@BleedDamageTooltip@の魔法ダメージ</magicDamage>を与える。<br><br>すべての<keywordMajor>炎上</keywordMajor>効果で敵にダメージを与えた時、自身の通常スキルのクールダウンが@FlatCooldownRefundPerTick@秒短縮される。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "<scaleAD>増加攻撃力</scaleAD>を<scaleAP>魔力</scaleAP>に変換する。<scaleAP>魔力が@APAmp*100@%</scaleAP>増加する。",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "変力装置",
+            "rarity": 0,
+            "tooltip": "<scaleAD>増加攻撃力</scaleAD>を<scaleAP>魔力</scaleAP>に変換する。<scaleAP>魔力が@APAmp*100@%</scaleAP>増加する。"
         },
         {
             "apiName": "BacktoBasics",
@@ -2655,6 +2663,22 @@
             "name": "スタックサウルス・レックス",
             "rarity": 0,
             "tooltip": "恒久的なスキルの<keywordMajor>スタック</keywordMajor>を獲得する際に、獲得量が@StackModifier*100@%増加する！"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "<scaleAP>魔力</scaleAP>を<scaleAD>増加攻撃力</scaleAD>に変換する。<scaleAD>攻撃力が@ADAmp*100@%</scaleAD>増加する。",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "魔攻のいたずら",
+            "rarity": 0,
+            "tooltip": "<scaleAP>魔力</scaleAP>を<scaleAD>増加攻撃力</scaleAD>に変換する。<scaleAD>攻撃力が@ADAmp*100@%</scaleAD>増加する。"
         },
         {
             "apiName": "FeyMagic",
@@ -3766,7 +3790,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "<attackSpeed>合計攻撃速度が@TotalASValue*100@%</attackSpeed>増加する。<attackSpeed>通常攻撃</attackSpeed>の回数が毎秒@Breakpoint1@回になると新しい効果を獲得する。",
+            "desc": "<attackSpeed>合計攻撃速度が@TotalASValue*100@%</attackSpeed>増加する。<br><br><attackSpeed>毎秒攻撃回数</attackSpeed>が@Breakpoint1@回になると、追加で<magicDamage>魔法ダメージ</magicDamage>{{ Item_Keyword_OnHit }}を与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3885,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3897,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

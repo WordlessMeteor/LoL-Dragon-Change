@@ -941,7 +941,7 @@
             "id": 233,
             "name": "Végső rulett",
             "rarity": 2,
-            "tooltip": "A Menekülj idézői varázslatot egy véletlenszerű végső képességre cseréli. A végső képesség elsütése után lecseréli azt egy új, véletlenszerű végső képességre."
+            "tooltip": "Cherry_UltimateRoulette_Tooltip"
         },
         {
             "apiName": "ClownCollege",
@@ -1314,40 +1314,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Amikor távolról megsebzel egy hőst, <keywordMajor>automatikusan elsütsz</keywordMajor> rá egy <abilityName>Végzetes hullámot</abilityName>.",
+            "desc": "Ha távolról sebzel meg egy hőst, elsüthetsz ellene egy <abilityName>Végzetes hullámot</abilityName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Végzetes tehetség",
             "rarity": 2,
-            "tooltip": "Ha több mint @SnipeDistance@ egység távolságról sebzel meg valakit, <keywordMajor>automatikusan elsütsz</keywordMajor> rá egy <abilityName>Végzetes hullámot</abilityName>, amellyel <magicDamage>@Damage@ varázssebzést</magicDamage> okozol. Célpontonként @Cooldown@ másodperc töltési idő.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
+            "tooltip": "Ha több mint @SnipeDistance@ egység távolságról sebzel meg valakit, elsütsz rá egy <abilityName>Végzetes hullámot</abilityName>, amellyel <magicDamage>@Damage@ varázssebzést</magicDamage> okozol. Célpontonként @Cooldown@ másodperc töltési idő.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1679,14 +1676,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "{1e85060f}": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1691,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "A <scaleMana>manaköltség</scaleMana> megkétszereződik. A képességeid a <scaleMana>maximális manáddal</scaleMana> arányosan nagyobb sebzést okoznak.",
+            "desc": "A <scaleMana>manaköltség</scaleMana> megkétszereződik. A képességek <healing>gyógyítása</healing>, <shield>pajzsereje</shield> és sebzése a <scaleMana>maximális manával</scaleMana> arányosan megnő.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Túlcsordulás",
             "rarity": 0,
-            "tooltip": "A <scaleMana>manaköltség</scaleMana> megkétszereződik. A képességeid <scaleMana>@ManaCalc@</scaleMana> értékkel nagyobb sebzést okoznak."
+            "tooltip": "A <scaleMana>manaköltség</scaleMana> megkétszereződik. A képességek <healing>gyógyítása</healing>, <shield>pajzsereje</shield> és sebzése <scaleMana>@ManaCalc@</scaleMana>-kal hatékonyabb."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1936,6 +1928,22 @@
             "name": "Pokoli csatorna",
             "rarity": 2,
             "tooltip": "A képességek végtelenül halmozódó <keywordMajor>Égés</keywordMajor> hatást alkalmaznak az áldozatra, amivel @BleedDuration@ másodpercig másodpercenként <magicDamage>@BleedDamageTooltip@ varázssebzést</magicDamage> okoznak.<br><br>Ellenfél megsebzése esetén az <keywordMajor>Égés</keywordMajor> összes hatása @FlatCooldownRefundPerTick@ másodperccel csökkenti az alapképességeid hátralévő töltési idejét.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {},
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "A <scaleAD>bónusz sebzést</scaleAD> <scaleAP>varázserővé</scaleAP> alakítja. <scaleAP>@APAmp*100@% varázserőre</scaleAP> tesz szert.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Alkalmazkodás",
+            "rarity": 0,
+            "tooltip": "A <scaleAD>bónusz sebzést</scaleAD> <scaleAP>varázserővé</scaleAP> alakítja. <scaleAP>@APAmp*100@% varázserőre</scaleAP> tesz szert."
         },
         {
             "apiName": "BacktoBasics",
@@ -2655,6 +2663,22 @@
             "name": "Jelzőszaurusz Rex",
             "rarity": 0,
             "tooltip": "Ha egy képességgel végleges <keywordMajor>jelzőket</keywordMajor> szereznél, @StackModifier*100@%-kal többet kapsz belőlük!"
+        },
+        {
+            "apiName": "escAPADe",
+            "calculations": {},
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "A <scaleAP>varázserőt</scaleAP> <scaleAD>bónusz sebzéssé</scaleAD> alakítja. <scaleAD>@ADAmp*100@% sebzést</scaleAD> biztosít.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Specializáció",
+            "rarity": 0,
+            "tooltip": "A <scaleAP>varázserőt</scaleAP> <scaleAD>bónusz sebzéssé</scaleAD> alakítja. <scaleAD>@ADAmp*100@% sebzést</scaleAD> biztosít."
         },
         {
             "apiName": "FeyMagic",
@@ -3766,7 +3790,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "<attackSpeed>@TotalASValue*100@% teljes támadási sebességet</attackSpeed> biztosít. Másodpercenként @Breakpoint1@ <attackSpeed>támadás</attackSpeed> elérésekor új hatásokra tesz szert.",
+            "desc": "<attackSpeed>@TotalASValue*100@% teljes támadási sebességet</attackSpeed> biztosít. <br><br>@Breakpoint1@ <attackSpeed>másodpercenkénti támadásnál</attackSpeed> további <magicDamage>varázssebzést</magicDamage> okoz {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3885,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3897,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
