@@ -426,7 +426,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-08-02 17-56-20</td>
-			<td style="text-align:center;">CDragon: 2<br>DDragon: 1</td>
+			<td style="text-align:center;">CDragon: 2<br>DDragon: 2</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -590,7 +590,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-08-14 14-04-44</td>
-			<td style="text-align:center;">CDragon: 2<br>DDragon: 1</td>
+			<td style="text-align:center;">CDragon: 2<br>DDragon: 2</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -602,7 +602,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-08-14 14-05-00</td>
-			<td style="text-align:center;">CDragon: 3<br>DDragon: 2</td>
+			<td style="text-align:center;">CDragon: 3<br>DDragon: 1</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -954,7 +954,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-09-11 13-15-44<br>2024-09-11 23-11-30</td>
-			<td style="text-align:center;">CDragon: 2<br>DDragon: 1</td>
+			<td style="text-align:center;">CDragon: 2<br>DDragon: 2</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -1525,7 +1525,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-10-24 09-32-40</td>
-			<td style="text-align:center;">CDragon: 2<br>DDragon: 1</td>
+			<td style="text-align:center;">CDragon: 2<br>DDragon: 2</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -1537,7 +1537,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-10-24 09-33-40</td>
-			<td style="text-align:center;">CDragon: 3<br>DDragon: 2</td>
+			<td style="text-align:center;">CDragon: 3<br>DDragon: 1</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -1703,7 +1703,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-11-06 19-24-13</td>
-			<td style="text-align:center;">CDragon: 2<br>DDragon: 1</td>
+			<td style="text-align:center;">CDragon: 2<br>DDragon: 2</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -1715,7 +1715,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-11-06 19-24-45</td>
-			<td style="text-align:center;">CDragon: 3<br>DDragon: 2</td>
+			<td style="text-align:center;">CDragon: 3<br>DDragon: 1</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -1911,7 +1911,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-11-21 10-19-36</td>
-			<td style="text-align:center;">CDragon: 2<br>DDragon: 1</td>
+			<td style="text-align:center;">CDragon: 2<br>DDragon: 2</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -1922,7 +1922,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-11-21 10-19-56</td>
-			<td style="text-align:center;">CDragon: 3<br>DDragon: 2</td>
+			<td style="text-align:center;">CDragon: 3<br>DDragon: 1</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -2224,7 +2224,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-12-12 08-20-47</td>
-			<td style="text-align:center;">CDragon: 2<br>DDragon: 1</td>
+			<td style="text-align:center;">CDragon: 2<br>DDragon: 2</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -2236,7 +2236,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2024-12-12 08-21-15</td>
-			<td style="text-align:center;">CDragon: 3<br>DDragon: 2</td>
+			<td style="text-align:center;">CDragon: 3<br>DDragon: 1</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -2786,7 +2786,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2025-01-24 09-34-01</td>
-			<td style="text-align:center;">CDragon: 3<br>DDragon: 2</td>
+			<td style="text-align:center;">CDragon: 3<br>DDragon: 1</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -2798,7 +2798,7 @@
 		</tr>
 		<tr>
 			<td style="text-align:center;">2025-01-24 09-34-19</td>
-			<td style="text-align:center;">CDragon: 2<br>DDragon: 1</td>
+			<td style="text-align:center;">CDragon: 2<br>DDragon: 2</td>
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
@@ -4118,6 +4118,30 @@
 					<ul style="list-style-type: disc; margin-left: 20px;">
 						<li>PBE: 15.8.673.3603 -> 15.9.674.0918</li>
 					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-17 09-36-11<br>2025-04-17 10-07-22</td>
+			<td style="text-align:center;">CDragon: 1/2/1<br>DDragon: 1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.7.672.4034 -> 15.8.637.8244</li>
+						<li>PBE: 15.9.674.0918 -> 15.9.674.5103</li>
+					</ul>
+				DDragon: 15.7.1 -> 15.8.1
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-16 10-23-45</td>
+			<td style="text-align:center;">CDragon: 4/2/1<br>DDragon: 2</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.7.672.4034 -> 15.8.637.8244</li>
+						<li>PBE: 15.9.674.0918 -> 15.9.674.5103</li>
+					</ul>
+				DDragon: 15.7.1 -> 15.8.1
 			</td>
 		</tr>
 	</tbody>

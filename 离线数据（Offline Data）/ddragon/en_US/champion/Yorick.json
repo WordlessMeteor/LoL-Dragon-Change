@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.7.1",
+    "version": "15.8.1",
     "data": {
         "Yorick": {
             "id": "Yorick",
@@ -407,19 +407,21 @@
                     "id": "YorickE",
                     "name": "Mourning Mist",
                     "description": "Yorick throws a globule of Black Mist that damages, slows and marks enemies. Summoned units gain move speed when moving towards marked targets. ",
-                    "tooltip": "Yorick throws a globule of Black Mist that deals <magicDamage>{{ calc_damage }} magic damage</magicDamage>, <status>Slows</status> by {{ calc_slow }} for {{ slowduration }} seconds, and marks champions and monsters for {{ markduration }} seconds. Marked enemies continuously <spellName>Awaken</spellName> nearby graves (but not exceeding the maximum of {{ spell.yorickpassive:yorickpassiveghoulmax }}), and suffer {{ armorshred*100 }}% reduced Armor.<br /><br />Yorick and his summoned units gain <speed>{{ hasteamount*100 }}% Move Speed</speed> toward the mark. <keywordMajor>Mist Walkers</keywordMajor> will leap once at marked enemies that get away from them.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Yorick throws a globule of Black Mist that deals <magicDamage>{{ calc_healthdamage }} max Health magic damage</magicDamage>, <status>Slows</status> by {{ calc_slow }} for {{ slowduration }} seconds and marks champions and monsters for {{ markduration }} seconds. Marked enemies continuously <spellName>Awaken</spellName> nearby graves (but not exceeding the maximum of {{ spell.yorickpassive:yorickpassiveghoulmax }}) and suffer <scaleArmor>{{ armorshred*100 }}% reduced Armor</scaleArmor>.<br /><br />Yorick and his summoned units gain <speed>{{ hasteamount*100 }}% Move Speed</speed> toward the mark. <keywordMajor>Mist Walkers</keywordMajor> will leap once at marked enemies that get away from them.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Damage",
                             "Armor Reduction %",
+                            "Move Speed",
                             "Cooldown",
-                            "@AbilityResourceName@ Cost"
+                            "@AbilityResourceName@ Cost",
+                            "Maximum Health Damage"
                         ],
                         "effect": [
-                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ armorshred*100.000000 }}% -> {{ armorshrednl*100.000000 }}%",
+                            "{{ hasteamount*100.000000 }}% -> {{ hasteamountnl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ cost }} -> {{ costNL }}"
+                            "{{ cost }} -> {{ costNL }}",
+                            "{{ healthdamage }} -> {{ healthdamageNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -552,7 +554,7 @@
                     "id": "YorickR",
                     "name": "Eulogy of the Isles",
                     "description": "Yorick summons the Maiden of the Mist that causes Yorick's attacks against the Maiden's target to deal bonus damage. The Maiden will also automatically raise Walkers from dead enemies.",
-                    "tooltip": "Yorick summons the <keywordMajor>Maiden of the Mist</keywordMajor> with <healing>{{ yorickbigghoulhealth }} Health</healing> and <magicDamage>{{ yorickbigghouldamage }} Magic Attack Damage</magicDamage> plus {{ rghoulnumbers }} <keywordMajor>Mist Walkers</keywordMajor>. The <keywordMajor>Maiden</keywordMajor> automatically raises <keywordMajor>Mist Walkers</keywordMajor> from nearby enemy deaths.<br /><br />When Yorick damages the <keywordMajor>Maiden's</keywordMajor> target, he deals <magicDamage>{{ rmarkdamagepercent }}% max Health magic damage</magicDamage>.<br /><br />After 10 seconds, Yorick can <recast>Recast</recast> this Ability to free the <keywordMajor>Maiden</keywordMajor>, sending her down the nearest lane.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Yorick summons the <keywordMajor>Maiden of the Mist</keywordMajor> with <healing>{{ yorickbigghoulhealth }} Health</healing> and <magicDamage>{{ yorickbigghouldamage }} Magic Attack Damage</magicDamage> plus {{ rghoulnumbers }} <keywordMajor>Mist Walkers</keywordMajor>. The <keywordMajor>Maiden</keywordMajor> automatically raises <keywordMajor>Mist Walkers</keywordMajor> from nearby enemy deaths and marks enemy Champions with her attacks. When Yorick damages the <keywordMajor>Maiden's</keywordMajor> target, he deals <magicDamage>{{ rmarkdamagepercent }}% max Health magic damage</magicDamage>.<br /><br />After 10 seconds, Yorick can <recast>Recast</recast> this Ability to free the <keywordMajor>Maiden</keywordMajor>, sending her down the nearest lane.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Attack Damage",
