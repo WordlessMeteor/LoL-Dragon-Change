@@ -4133,7 +4133,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align:center;">2025-04-16 10-23-45</td>
+			<td style="text-align:center;">2025-04-17 09-36-39</td>
 			<td style="text-align:center;">CDragon: 4/2/1<br>DDragon: 2</td>
 			<td>
 				CDragon: <br>
@@ -4142,6 +4142,28 @@
 						<li>PBE: 15.9.674.0918 -> 15.9.674.5103</li>
 					</ul>
 				DDragon: 15.7.1 -> 15.8.1
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-18 19-46-39</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.8.673.8244 -> 15.8.674.8619</li>
+						<li>PBE: 15.9.674.5103 -> 15.9.674.9300</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-18 19-46-51</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.8.673.8244 -> 15.8.674.8619</li>
+						<li>PBE: 15.9.674.5103 -> 15.9.674.9300</li>
+					</ul>
 			</td>
 		</tr>
 	</tbody>
