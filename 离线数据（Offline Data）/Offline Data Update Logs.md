@@ -4166,5 +4166,28 @@
 					</ul>
 			</td>
 		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-19 09-17-19</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.8.674.8619 -> 15.8.675.0010</li>
+						<li>PBE: 15.9.674.9300 -> 15.9.675.3566</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-19 09-19-20</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.8.674.8619 -> 15.8.675.0010</li>
+						<li>PBE: 15.9.674.9300 -> 15.9.675.3566</li>
+					</ul>
+				为更新后的商品藏品信息脚本添加了三个数据资源<br>Added three data resources for updated Customized Program 07
+			</td>
+		</tr>
 	</tbody>
 </table>

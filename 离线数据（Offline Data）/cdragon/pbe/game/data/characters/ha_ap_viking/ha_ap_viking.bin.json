@@ -16,10 +16,6 @@
                             "mAllyEventName": "Ambient3DGeneral",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "CooldownModifications": {
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
-                        },
                         "__type": "ContextualRule"
                     }
                 ],
@@ -38,11 +34,6 @@
                         "mAudioAction": {
                             "mAllyEventName": "Browsing2DGeneral",
                             "__type": "ContextualActionPlayVO"
-                        },
-                        "CooldownModifications": {
-                            "IgnoreTimer": true,
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
                     }
@@ -96,29 +87,73 @@
             "ShopOpen": {
                 "mRules": [
                     {
-                        "mRuleName": "Specific Faction/Race",
+                        "mRuleName": "First",
+                        "mAudioAction": {
+                            "mMaxOccurences": 1,
+                            "mAllyEventName": "Open2DFirst",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Game Timer",
                         "mConditions": [
                             {
-                                "mCharacterType": 1,
-                                "mChildConditions": [
-                                    {
-                                        "mCategory": "faction",
-                                        "mData": "piltover",
-                                        "__type": "ContextualConditionCharacterMetadata"
-                                    }
-                                ],
-                                "__type": "ContextualConditionCharacter"
+                                "mGameTimeInMinutes": 25.0,
+                                "__type": "ContextualConditionGameTimer"
                             }
                         ],
                         "mAudioAction": {
-                            "mMaxOccurences": 1,
-                            "mAllyEventName": "Open2DPiltover",
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Open2DGameTimerTwentyFive",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "CooldownModifications": {
-                            "IgnoreTimer": true,
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Nearby Enemy Count",
+                        "mConditions": [
+                            {
+                                "mTeamCompareOp": 1,
+                                "mCount": 2,
+                                "mCompareOp": 3,
+                                "__type": "ContextualConditionNearbyChampionCount"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Open2DNearbyEnemyCountTwo",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Gold",
+                        "mConditions": [
+                            {
+                                "mGold": 3000.0,
+                                "__type": "ContextualConditionHasGold"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Open2DGold3000",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Open Count",
+                        "mConditions": [
+                            {
+                                "mShopOpenCount": 10,
+                                "__type": "ContextualConditionShopOpenCount"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mMaxOccurences": 3,
+                            "mAllyEventName": "Open2DCountTen",
+                            "__type": "ContextualActionPlayVO"
                         },
                         "__type": "ContextualRule"
                     },
@@ -143,50 +178,27 @@
                             "mAllyEventName": "Open2DBlitzcrank",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "CooldownModifications": {
-                            "IgnoreTimer": true,
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
-                        },
                         "__type": "ContextualRule"
                     },
                     {
-                        "mRuleName": "Game Timer",
+                        "mRuleName": "Specific Faction/Race",
                         "mConditions": [
                             {
-                                "mGameTimeInMinutes": 25.0,
-                                "__type": "ContextualConditionGameTimer"
+                                "mCharacterType": 1,
+                                "mChildConditions": [
+                                    {
+                                        "mCategory": "faction",
+                                        "mData": "piltover",
+                                        "__type": "ContextualConditionCharacterMetadata"
+                                    }
+                                ],
+                                "__type": "ContextualConditionCharacter"
                             }
                         ],
                         "mAudioAction": {
-                            "mMaxOccurences": 3,
-                            "mAllyEventName": "Open2DGameTimerTwentyFive",
+                            "mMaxOccurences": 1,
+                            "mAllyEventName": "Open2DPiltover",
                             "__type": "ContextualActionPlayVO"
-                        },
-                        "CooldownModifications": {
-                            "IgnoreTimer": true,
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
-                        },
-                        "__type": "ContextualRule"
-                    },
-                    {
-                        "mRuleName": "Open Count",
-                        "mConditions": [
-                            {
-                                "mShopOpenCount": 10,
-                                "__type": "ContextualConditionShopOpenCount"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mMaxOccurences": 3,
-                            "mAllyEventName": "Open2DCount10",
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "CooldownModifications": {
-                            "IgnoreTimer": true,
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
                     },
@@ -204,53 +216,6 @@
                             "mAllyEventName": "Open2DNearbyAllyCountTwo",
                             "__type": "ContextualActionPlayVO"
                         },
-                        "CooldownModifications": {
-                            "IgnoreTimer": true,
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
-                        },
-                        "__type": "ContextualRule"
-                    },
-                    {
-                        "mRuleName": "Nearby Enemy Count",
-                        "mConditions": [
-                            {
-                                "mTeamCompareOp": 1,
-                                "mCount": 2,
-                                "mCompareOp": 3,
-                                "__type": "ContextualConditionNearbyChampionCount"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mMaxOccurences": 3,
-                            "mAllyEventName": "Open2DNearbyEnemyCountTwo",
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "CooldownModifications": {
-                            "IgnoreTimer": true,
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
-                        },
-                        "__type": "ContextualRule"
-                    },
-                    {
-                        "mRuleName": "Gold",
-                        "mConditions": [
-                            {
-                                "mGold": 3000.0,
-                                "__type": "ContextualConditionHasGold"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mMaxOccurences": 3,
-                            "mAllyEventName": "Open2DGold3000",
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "CooldownModifications": {
-                            "IgnoreTimer": true,
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
-                        },
                         "__type": "ContextualRule"
                     },
                     {
@@ -258,10 +223,6 @@
                         "mAudioAction": {
                             "mAllyEventName": "Open2DGeneral",
                             "__type": "ContextualActionPlayVO"
-                        },
-                        "CooldownModifications": {
-                            "DontResetTimer": true,
-                            "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
                     }
@@ -285,7 +246,6 @@
                         },
                         "CooldownModifications": {
                             "IgnoreTimer": true,
-                            "DontResetTimer": true,
                             "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
@@ -308,7 +268,6 @@
                         },
                         "CooldownModifications": {
                             "IgnoreTimer": true,
-                            "DontResetTimer": true,
                             "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
@@ -321,7 +280,6 @@
                         },
                         "CooldownModifications": {
                             "IgnoreTimer": true,
-                            "DontResetTimer": true,
                             "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
@@ -358,5 +316,6 @@
     },
     "Characters/HA_AP_Viking/Skins/Meta": {
         "__type": "SkinCharacterMetaDataProperties"
-    }
+    },
+    "__linked": []
 }
