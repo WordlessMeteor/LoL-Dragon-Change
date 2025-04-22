@@ -1918,7 +1918,17 @@
         },
         {
             "apiName": "ADAPt",
-            "calculations": {},
+            "calculations": {
+                "{9552da66}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "{61ced9e2}"
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "APAmp": 0.15000000596046448,
                 "ConversionRate": 1.666659951210022,
@@ -1930,7 +1940,7 @@
             "id": 205,
             "name": "ADAPt",
             "rarity": 0,
-            "tooltip": "{{ Cherry_ADAPt_Summary }}<br><br><rules>Converts at a rate of <scaleAP>@ConversionRate@ Ability Power</scaleAP> per point of <scaleAD>Attack Damage</scaleAD>.</rules><br><br>Current Conversion: @f1@"
+            "tooltip": "Convert <scaleAD>Bonus Attack Damage</scaleAD> to <scaleAP>Ability Power</scaleAP>, and gain <scaleAP>@APAmpCalcTooltip@ Ability Power</scaleAP>.<br><br>Current Conversion: @f1@<br><br><rules>Converts at a rate of <scaleAP>@ConversionRate@ Ability Power</scaleAP> per point of <scaleAD>Attack Damage</scaleAD>.</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2641,7 +2651,18 @@
         },
         {
             "apiName": "escAPADe",
-            "calculations": {},
+            "calculations": {
+                "{29afbb72}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADAmp",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "ADAmp": 0.10000000149011612,
                 "ConversionRate": 0.6000000238418579,
@@ -2653,7 +2674,7 @@
             "id": 206,
             "name": "escAPADe",
             "rarity": 0,
-            "tooltip": "{{ Cherry_EscAPADe_Summary }}<br><br><rules>Converts at a rate of <scaleAD>@ConversionRate@ Attack Damage</scaleAD> per point of <scaleAP>Ability Power</scaleAP>.</rules><br><br>Current Conversion: @f1@"
+            "tooltip": "Convert <scaleAP>Ability Power</scaleAP> to <scaleAD>Bonus Attack Damage</scaleAD> and gain <scaleAD>@ADAmpCalcTooltip@ Attack Damage</scaleAD>.<br><br>Current Conversion: @f1@<br><br><rules>Converts at a rate of <scaleAD>@ConversionRate@ Attack Damage</scaleAD> per point of <scaleAP>Ability Power</scaleAP>.</rules>"
         },
         {
             "apiName": "FeyMagic",
@@ -2847,7 +2868,7 @@
             "id": 310,
             "name": "Tank Engine",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>Takedowns: @f1@"
+            "tooltip": "Gain @SizeIncrement*100@% increase in size and <scaleHealth>@f2@ Bonus Health</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> per takedown).<br><br>Takedowns: @f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -3565,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "Gain <scaleBonus>@ItemHaste@ Item Haste</scaleBonus> (equivalent to @TooltipCDR@% Item CDR).<br><br><rules>Item Haste reduces the cooldown of all Item Abilities.</rules>",
+            "desc": "Gain <scaleBonus>@ItemHaste@ Item Haste</scaleBonus> (equivalent to @TooltipCDR@% Item CDR).<br><br><rules>Item Haste reduces the cooldown %i:cooldown% of all Item Abilities.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "Apex Inventor",
             "rarity": 1,
-            "tooltip": "Gain <scaleBonus>@ItemHaste@ Item Haste</scaleBonus> (equivalent to @TooltipCDR@% Item CDR).<br><br><rules>Item Haste reduces the cooldown of all Item Abilities.</rules>"
+            "tooltip": "Gain <scaleBonus>@ItemHaste@ Item Haste</scaleBonus> (equivalent to @TooltipCDR@% Item CDR).<br><br><rules>Item Haste reduces the cooldown %i:cooldown% of all Item Abilities.</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3915,28 +3936,17 @@
         },
         {
             "apiName": "BluntForce",
-            "calculations": {
-                "{d3ca3bca}": {
-                    "__type": "GameCalculation",
-                    "mFormulaParts": [
-                        {
-                            "__type": "StatByNamedDataValueCalculationPart",
-                            "mDataValue": "ADIncrease",
-                            "mStat": 2
-                        }
-                    ]
-                }
-            },
+            "calculations": {},
             "dataValues": {
-                "ADIncrease": 0.15000000596046448
+                "ADAmp": 0.15000000596046448
             },
-            "desc": "Gain <scaleAD>@ADIncrease*100@% Attack Damage</scaleAD>.",
+            "desc": "Gain <scaleAD>@ADAmp*100@% Attack Damage</scaleAD>.",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "Blunt Force",
             "rarity": 0,
-            "tooltip": "Gain <scaleAD>@ADIncreaseCalcTooltipOnly@ Attack Damage</scaleAD>."
+            "tooltip": "Gain <scaleAD>@ADAmp*100@% (@f1@) Attack Damage</scaleAD>."
         },
         {
             "apiName": "Oathsworn",
