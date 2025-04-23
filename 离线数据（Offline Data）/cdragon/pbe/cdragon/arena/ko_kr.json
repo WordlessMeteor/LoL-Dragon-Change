@@ -783,8 +783,8 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -1940,7 +1940,7 @@
             "id": 205,
             "name": "적응형 능력치",
             "rarity": 0,
-            "tooltip": "Cherry_ADAPt_Tooltip"
+            "tooltip": "<scaleAD>추가 공격력</scaleAD>을 <scaleAP>주문력</scaleAP>으로 전환합니다. 또한 <scaleAP>주문력이 @APAmpCalcTooltip@</scaleAP> 증가합니다.<br><br>현재 전환 수치: @f1@<br><br><rules>전환 비율은 <scaleAD>공격력</scaleAD> 1당 <scaleAP>주문력 @ConversionRate@</scaleAP>입니다.</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2338,13 +2338,13 @@
                 "OnHitDamageRatio": 0.30000001192092896,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Cherry_Deathtouch_Summary",
+            "desc": "적 챔피언 기본 공격 시 영구히 <keywordMajor>저주받은 힘</keywordMajor>을 얻으며 <keywordMajor>저주받은 힘</keywordMajor>에 따라 추가 <magicDamage>마법 피해</magicDamage>를 입힙니다.<br><br>라운드마다 얻을 수 있는 <keywordMajor>저주받은 힘</keywordMajor>의 최대치는 자신과 아군의 <keywordMajor>저주</keywordMajor> 총합에 비례합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "죽음의 손길",
             "rarity": 1,
-            "tooltip": "Cherry_Deathtouch_Tooltip"
+            "tooltip": "적 챔피언 기본 공격 시 @CurseCounter@의 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다.<br><br>기본 공격 시 <magicDamage>@f1@의 추가 마법 피해</magicDamage>를 입힙니다. (<keywordMajor>저주받은 힘</keywordMajor>의 @OnHitDamageRatio*100@%)<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2674,7 +2674,7 @@
             "id": 206,
             "name": "마법사 (물리)",
             "rarity": 0,
-            "tooltip": "Cherry_EscAPADe_Tooltip"
+            "tooltip": "<scaleAP>주문력</scaleAP>을 <scaleAD>추가 공격력</scaleAD>으로 전환합니다. 또한 <scaleAD>공격력이 @ADAmpCalcTooltip@</scaleAD> 증가합니다.<br><br>현재 전환 수치: @f1@<br><br><rules>전환 비율은 <scaleAP>주문력</scaleAP> 1당 <scaleAD>공격력 @ConversionRate@</scaleAD>입니다.</rules>"
         },
         {
             "apiName": "FeyMagic",
@@ -2717,13 +2717,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Cherry_Doomsayer_Summary",
+            "desc": "적 챔피언에게 스킬을 적중시키면 영구히 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다. <keywordMajor>저주받은 힘</keywordMajor>에 따라 <font color = '#8347ff'>적응형 능력치</font>를 얻습니다.<br><br>라운드마다 얻을 수 있는 <keywordMajor>저주받은 힘</keywordMajor>의 최대치는 자신과 아군의 <keywordMajor>저주</keywordMajor> 총합에 비례합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "파멸의 예언자",
             "rarity": 2,
-            "tooltip": "Cherry_Doomsayer_Tooltip"
+            "tooltip": "적 챔피언에게 스킬을 적중시키면 @CurseCounter@의 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다.<br><br>@f1@의 <font color = '#8347ff'>적응형 능력치</font>를 얻습니다. (<keywordMajor>저주받은 힘</keywordMajor>의 @AdaptiveForceRatio*100@%)<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2868,7 +2868,7 @@
             "id": 310,
             "name": "탱크 엔진",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>처치 관여: @f1@"
+            "tooltip": "크기가 @SizeIncrement*100@% 커지고 <scaleHealth>@f2@의 추가 체력</scaleHealth>을 얻습니다. (처치 관여당 <scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth>)<br><br>처치 관여: @f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -3586,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "<scaleBonus>아이템 가속이 @ItemHaste@</scaleBonus> 증가합니다. (@TooltipCDR@%의 아이템 재사용 대기시간 감소 효과와 동일)<br><br><rules>아이템 가속은 모든 아이템 스킬의 재사용 대기시간을 감소시킵니다.</rules>",
+            "desc": "<scaleBonus>아이템 가속이 @ItemHaste@</scaleBonus> 증가합니다. (@TooltipCDR@%의 아이템 재사용 대기시간 감소 효과와 동일)<br><br><rules>아이템 가속은 모든 아이템 스킬의 재사용 대기시간%i:cooldown%을 감소시킵니다.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "최첨단 발명가",
             "rarity": 1,
-            "tooltip": "<scaleBonus>아이템 가속이 @ItemHaste@</scaleBonus> 증가합니다. (@TooltipCDR@%의 아이템 재사용 대기시간 감소 효과와 동일)<br><br><rules>아이템 가속은 모든 아이템 스킬의 재사용 대기시간을 감소시킵니다.</rules>"
+            "tooltip": "<scaleBonus>아이템 가속이 @ItemHaste@</scaleBonus> 증가합니다. (@TooltipCDR@%의 아이템 재사용 대기시간 감소 효과와 동일)<br><br><rules>아이템 가속은 모든 아이템 스킬의 재사용 대기시간%i:cooldown%을 감소시킵니다.</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3940,13 +3940,13 @@
             "dataValues": {
                 "ADAmp": 0.15000000596046448
             },
-            "desc": "<scaleAD>공격력이 @ADIncrease*100@%</scaleAD> 증가합니다.",
+            "desc": "<scaleAD>공격력이 @ADAmp*100@%</scaleAD> 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "육중한 힘",
             "rarity": 0,
-            "tooltip": "<scaleAD>공격력이 @ADIncreaseCalcTooltipOnly@</scaleAD> 증가합니다."
+            "tooltip": "<scaleAD>공격력이 @ADAmp*100@% (@f1@)</scaleAD> 증가합니다."
         },
         {
             "apiName": "Oathsworn",
@@ -4221,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "체력을 회복하거나 보호막을 씌우면 영구히 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다. <keywordMajor>저주받은 힘</keywordMajor>에 따라 스킬 가속을 얻습니다.<br><br>라운드마다 얻을 수 있는 <keywordMajor>저주받은 힘</keywordMajor>의 최대치는 자신과 아군의 <keywordMajor>저주</keywordMajor> 총합에 비례합니다.",

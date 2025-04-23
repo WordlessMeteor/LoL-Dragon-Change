@@ -783,8 +783,8 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -1329,7 +1329,7 @@
             "id": 86,
             "name": "精准奇才",
             "rarity": 2,
-            "tooltip": "在你从@SnipeDistance@码外对一名敌人造成伤害时， 发射一道<abilityName>精准弹幕</abilityName>，造成<magicDamage>@Damage@魔法伤害</magicDamage>。@Cooldown@秒冷却时间。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+            "tooltip": "在你从@SnipeDistance@码外对一名敌人造成伤害时， 发射一道<abilityName>精准弹幕</abilityName>，造成<magicDamage>@Damage@魔法伤害</magicDamage>。每个目标@Cooldown@秒冷却时间。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
             "apiName": "Eureka",
@@ -1940,7 +1940,7 @@
             "id": 205,
             "name": "物理转魔法",
             "rarity": 0,
-            "tooltip": "Cherry_ADAPt_Tooltip"
+            "tooltip": "将<scaleAD>额外攻击力</scaleAD>转化为<scaleAP>法术强度</scaleAP>，并获得<scaleAP>@APAmpCalcTooltip@法术强度</scaleAP>。<br><br>当前转化：@f1@<br><br><rules>每点<scaleAD>攻击力</scaleAD>转化为<scaleAP>@ConversionRate@法术强度</scaleAP>。</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2674,7 +2674,7 @@
             "id": 206,
             "name": "魔法转物理",
             "rarity": 0,
-            "tooltip": "Cherry_EscAPADe_Tooltip"
+            "tooltip": "将<scaleAP>法术强度</scaleAP>转化为<scaleAD>额外攻击力</scaleAD>，并获得<scaleAD>@ADAmpCalcTooltip@攻击力</scaleAD>。<br><br>当前转化：@f1@<br><br><rules>每点<scaleAP>法术强度</scaleAP>转化为<scaleAD>@ConversionRate@攻击力</scaleAD>。</rules>"
         },
         {
             "apiName": "FeyMagic",
@@ -2868,7 +2868,7 @@
             "id": 310,
             "name": "坦克引擎",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>参与击杀：@f1@"
+            "tooltip": "获得@SizeIncrement*100@%体型提升和<scaleHealth>@f2@额外生命值</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth>x参与击杀数)。<br><br>参与击杀数：@f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -3586,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "提供<scaleBonus>@ItemHaste@装备急速</scaleBonus>(相当于@TooltipCDR@%装备冷却缩减)。<br><br><rules>装备急速可缩减所有装备技能的冷却时间。</rules>",
+            "desc": "获得<scaleBonus>@ItemHaste@装备急速</scaleBonus>(相当于@TooltipCDR@%装备冷却缩减)。<br><br><rules>装备急速可缩减所有装备技能的冷却时间%i:cooldown%。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "尖端发明家",
             "rarity": 1,
-            "tooltip": "提供<scaleBonus>@ItemHaste@装备急速</scaleBonus>(相当于@TooltipCDR@%装备冷却缩减)。<br><br><rules>装备急速可缩减所有装备技能的冷却时间。</rules>"
+            "tooltip": "获得<scaleBonus>@ItemHaste@装备急速</scaleBonus>(相当于@TooltipCDR@%装备冷却缩减)。<br><br><rules>装备急速可缩减所有装备技能的冷却时间%i:cooldown%。</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3940,13 +3940,13 @@
             "dataValues": {
                 "ADAmp": 0.15000000596046448
             },
-            "desc": "获得<scaleAD>@ADIncrease*100@%攻击力</scaleAD>。",
+            "desc": "获得<scaleAD>@ADAmp*100@%攻击力</scaleAD>。",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "大力",
             "rarity": 0,
-            "tooltip": "获得<scaleAD>@ADIncreaseCalcTooltipOnly@攻击力</scaleAD>。"
+            "tooltip": "获得<scaleAD>@ADAmp*100@% (@f1@) 攻击力</scaleAD>。"
         },
         {
             "apiName": "Oathsworn",
@@ -4221,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "治疗/护盾为你提供永久的<keywordMajor>诅咒能量</keywordMajor>。从每层<keywordMajor>诅咒能量</keywordMajor>中获得技能急速。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
