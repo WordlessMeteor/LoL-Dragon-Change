@@ -4320,6 +4320,7 @@
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: Within-patch change</li>
 						<li>PBE: 15.9.676.7530 -> 15.9.677.3888</li>
 					</ul>
 			</td>
@@ -4331,6 +4332,28 @@
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
 						<li>PBE: 15.9.676.7530 -> 15.9.677.3888</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-30 06-50-02</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: Within-patch change</li>
+						<li>PBE: 15.9.677.3888 -> 15.10.677.6592</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-04-30 06-51-12</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: Within-patch change</li>
+						<li>PBE: 15.9.677.3888 -> 15.10.677.6592</li>
 					</ul>
 			</td>
 		</tr>

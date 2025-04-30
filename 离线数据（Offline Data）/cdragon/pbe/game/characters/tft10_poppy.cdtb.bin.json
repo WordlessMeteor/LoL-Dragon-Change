@@ -1,0 +1,346 @@
+{
+    "{10d9c76f}": {
+        "mScriptName": "TFT10_PoppyCritAttack",
+        "mSpell": {
+            "mAnimationName": "crit",
+            "bHaveHitEffect": true,
+            "castFrame": 15.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CENTER_LOC",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{56bbcf37}": {
+        "mScriptName": "TFT10_PoppyBasicAttack",
+        "mSpell": {
+            "bHaveHitEffect": true,
+            "castFrame": 15.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CENTER_LOC",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{8ea6e4df}": {
+        "mScriptName": "TFT10_PoppyBasicAttack2",
+        "mSpell": {
+            "mAnimationName": "Attack2",
+            "bHaveHitEffect": true,
+            "castFrame": 15.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CENTER_LOC",
+            "SpellEventToAudioEventSuffix": {
+                "12": "Play_sfx_tft9_PoppyBasicAttack_OnCast",
+                "13": "Play_sfx_tft9_PoppyBasicAttack_OnHit"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT10_Poppy/Spells/TFT10_PoppySpell": {
+        "mScriptName": "TFT10_PoppySpell",
+        "mSpell": {
+            "flags": 4,
+            "mDataValues": [
+                {
+                    "mName": "PercentHealthAsAD",
+                    "mValues": [
+                        0.029999999329447746,
+                        0.029999999329447746,
+                        0.029999999329447746,
+                        0.029999999329447746,
+                        0.029999999329447746,
+                        0.029999999329447746,
+                        0.029999999329447746
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "TargetNumber",
+                    "mValues": [
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ArmorAndMR",
+                    "mValues": [
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ADRatio",
+                    "mValues": [
+                        2.25,
+                        2.5999999046325684,
+                        2.5999999046325684,
+                        5.25,
+                        7.5,
+                        7.5,
+                        7.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ExtraSlams",
+                    "mValues": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "Duration",
+                    "mValues": [
+                        6.0,
+                        6.0,
+                        6.0,
+                        6.0,
+                        6.0,
+                        6.0,
+                        6.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "PercentHealthHeal",
+                    "mValues": [
+                        0.05000000074505806,
+                        0.05000000074505806,
+                        0.05000000074505806,
+                        0.10000000149011612,
+                        0.20000000298023224,
+                        0.20000000298023224,
+                        0.20000000298023224
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HeadlinerHealth",
+                    "mValues": [
+                        200.0,
+                        200.0,
+                        200.0,
+                        200.0,
+                        200.0,
+                        200.0,
+                        200.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HeadlinerAttackDamage",
+                    "mValues": [
+                        0.15000000596046448,
+                        0.15000000596046448,
+                        0.15000000596046448,
+                        0.15000000596046448,
+                        0.15000000596046448,
+                        0.15000000596046448,
+                        0.15000000596046448
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "TotalDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mStat": 2,
+                            "mDataValue": "ADRatio",
+                            "__type": "StatByNamedDataValueCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "TotalBonusAD": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mStat": 12,
+                            "mStatFormula": 2,
+                            "mDataValue": "PercentHealthAsAD",
+                            "__type": "StatByNamedDataValueCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedPercentHealthHeal": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "PercentHealthHeal",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "mDisplayAsPercent": true,
+                    "__type": "GameCalculation"
+                },
+                "TotalHealing": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mPart1": {
+                                "mStat": 12,
+                                "mCoefficient": 1.0,
+                                "__type": "StatByCoefficientCalculationPart"
+                            },
+                            "mPart2": {
+                                "mSubpart": {
+                                    "mDataValue": "PercentHealthHeal",
+                                    "__type": "NamedDataValueCalculationPart"
+                                },
+                                "mRatio": 0.009999999776482582,
+                                "__type": "SubPartScaledProportionalToStat"
+                            },
+                            "__type": "ProductOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "canCastOrQueueWhileCasting": true,
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT10_PoppySpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT10_PoppyQ_Name",
+                        "keyTooltip": "Spell_TFT10_PoppyQ_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "elements": [
+                                {
+                                    "type": "ADRatio",
+                                    "multiplier": 100.0,
+                                    "nameOverride": "Spell_ListType_TFT10_PoppyQ_Damage",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "PercentHealthAsAD",
+                                    "nameOverride": "Spell_TFT10_PoppySpell_BonusAD",
+                                    "Style": 2,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "PercentHealthHeal",
+                                    "nameOverride": "Spell_TFT10_PoppySpell_TotalHealing",
+                                    "Style": 2,
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT10_Poppy/Skins/Meta": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "Characters/TFT10_Poppy/CharacterRecords/Root": {
+        "mCharacterName": "TFT10_Poppy",
+        "baseHP": 1000.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 122.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 60.0,
+        "baseArmor": 65.0,
+        "baseSpellBlock": 65.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.699999988079071,
+        "attackSpeedRatio": 0.699999988079071,
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT10_PoppySpell",
+            "",
+            "",
+            ""
+        ],
+        "passiveRange": 2.0,
+        "selectionHeight": 40.0,
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446664,
+        "tier": 4,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{eb75e32a}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{f318ea1c}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{d5823aeb}",
+        "mMoveInterval": -0.10000000149011612,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mInitialMana": 30.0,
+        "mShopData": "{d7623ae8}",
+        "__type": "TFTCharacterRecord"
+    },
+    "__linked": []
+}

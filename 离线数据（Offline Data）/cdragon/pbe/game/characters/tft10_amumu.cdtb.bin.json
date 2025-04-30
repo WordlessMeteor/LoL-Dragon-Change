@@ -1,0 +1,329 @@
+{
+    "Characters/TFT10_Amumu/Spells/TFT10_AmumuE": {
+        "mScriptName": "TFT10_AmumuE",
+        "mSpell": {
+            "mAffectsTypeFlags": 6154,
+            "mDataValues": [
+                {
+                    "mName": "ManaGain",
+                    "mValues": [
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ArmorGain",
+                    "mValues": [
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "StackCap",
+                    "mValues": [
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "MagicDamage",
+                    "mValues": [
+                        0.0,
+                        80.0,
+                        120.0,
+                        190.0,
+                        330.0,
+                        330.0,
+                        330.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ARRatio",
+                    "mValues": [
+                        1.0,
+                        1.5,
+                        1.75,
+                        2.0,
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "StunDuration",
+                    "mValues": [
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HeadlinerHealth",
+                    "mValues": [
+                        150.0,
+                        150.0,
+                        150.0,
+                        150.0,
+                        150.0,
+                        150.0,
+                        150.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedMagicDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "MagicDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "TotalDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSpellCalculationKey": "ModifiedMagicDamage",
+                                    "__type": "{f3cbe7b2}"
+                                },
+                                {
+                                    "mStat": 1,
+                                    "mDataValue": "ARRatio",
+                                    "__type": "StatByNamedDataValueCalculationPart"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "mTargetingTypeData": {
+                "__type": "SelfAoe"
+            },
+            "SpellEventToAudioEventSuffix": {
+                "12": "Play_sfx_tft10_AmumuSpell_OnCast",
+                "13": "Play_sfx_tft10_AmumuSpell_OnHit"
+            },
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT10_AmumuE",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT10_AmumuE_Name",
+                        "keyTooltip": "Spell_TFT10_AmumuE_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "elements": [
+                                {
+                                    "type": "ARRatio",
+                                    "multiplier": 100.0,
+                                    "nameOverride": "ListType_TFT10_AmumuE_DamageAR",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "MagicDamage",
+                                    "nameOverride": "ListType_TFT10_AmumuE_DamageAP",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Cooldown",
+                                    "nameOverride": "Spell_ListType_TFT10_AmumuE_Damage",
+                                    "Style": 2,
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{aaec41fd}": {
+        "mScriptName": "TFT10_AmumuBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 6095,
+            "mAnimationName": "Attack2",
+            "delayCastOffsetPercent": -0.29170000553131104,
+            "bHaveHitEffect": true,
+            "castConeDistance": 100.0,
+            "castFrame": 11.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BuffBone_Glb_Center_Loc",
+            "selectionPriority": 1,
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{ba4dacdd}": {
+        "mScriptName": "TFT10_AmumuCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 6095,
+            "mAnimationName": "Crit",
+            "delayCastOffsetPercent": -0.29170000553131104,
+            "bHaveHitEffect": true,
+            "castConeDistance": 100.0,
+            "castFrame": 11.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "selectionPriority": 1,
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{d5bf281d}": {
+        "mScriptName": "TFT10_AmumuBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 6095,
+            "delayCastOffsetPercent": -0.29170000553131104,
+            "bHaveHitEffect": true,
+            "castConeDistance": 100.0,
+            "castFrame": 11.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BuffBone_Glb_Center_Loc",
+            "selectionPriority": 1,
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT10_Amumu/Skins/Meta": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "Characters/TFT10_Amumu/CharacterRecords/Root": {
+        "mCharacterName": "TFT10_Amumu",
+        "baseHP": 900.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 115.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 45.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 45.0,
+        "baseArmor": 55.0,
+        "baseSpellBlock": 55.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.6499999761581421,
+        "attackSpeedRatio": 0.6499999761581421,
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT10_AmumuE",
+            "",
+            "",
+            ""
+        ],
+        "passiveRange": 3.0,
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446664,
+        "tier": 3,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{eb75e32a}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{1d0c4d94}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{2ccf900f}",
+        "mMoveInterval": -0.10000000149011612,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mShopData": "{6280513b}",
+        "MobileHealthBarHeightOverride": 90.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "__linked": []
+}
