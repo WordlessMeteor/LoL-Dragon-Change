@@ -364,9 +364,7 @@
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -383,8 +381,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.05999999865889549
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -426,9 +423,7 @@
                     "mSimpleTooltipCalculationDisplay": 6
                 },
                 "SingleFireDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -445,8 +440,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -587,11 +581,29 @@
             "id": 90,
             "name": "Возмездие",
             "rarity": 1,
-            "tooltip": "После смерти союзника вы начинаете наносить на @DamageAmp*100@% больше урона и получаете <lifeSteal>@Omnivamp*100@% всестороннего вытягивания жизни</lifeSteal>.<br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+            "tooltip": "После смерти союзника вы начинаете наносить на @DamageAmp*100@% больше урона и получаете <lifeSteal>@Omnivamp*100@% всестороннего вытягивания жизни</lifeSteal>.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
         },
         {
             "apiName": "Erosion",
-            "calculations": {},
+            "calculations": {
+                "MaxShredTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "Shred"
+                        },
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "MaxStacks"
+                        },
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 10.0
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 20.0,
                 "Shred": 0.014999999664723873,
@@ -603,7 +615,7 @@
             "id": 28,
             "name": "Эрозия",
             "rarity": 0,
-            "tooltip": "При нанесении урона врагам вы уменьшаете их <scaleArmor>броню</scaleArmor> и <scaleMR>сопротивление магии</scaleMR> на @Shred*100@% на @ShredDuration@ сек. <br><br>Суммируется до @MaxStacks@ раз."
+            "tooltip": "При нанесении урона врагам вы уменьшаете их <scaleArmor>броню</scaleArmor> и <scaleMR>сопротивление магии</scaleMR> на @Shred*100@% на @ShredDuration@ сек. Суммируется до @MaxShredTooltipOnly@% при @MaxStacks@ зар. "
         },
         {
             "apiName": "Stats",
@@ -623,30 +635,24 @@
             "apiName": "MasterofDuality",
             "calculations": {
                 "ADGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 9.0,
                             "mStartValue": 3.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "APGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 18.0,
                             "mStartValue": 6.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -662,9 +668,7 @@
             "apiName": "LightemUp",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -681,13 +685,10 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.1899999976158142
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "TOOLTIPONLYDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -704,8 +705,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.7599999904632568
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -721,17 +721,14 @@
             "apiName": "SearingDawn",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
                             "mStartValue": 40.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -782,14 +779,12 @@
             "apiName": "Spellwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -801,8 +796,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -825,9 +819,7 @@
             "apiName": "CenterOfTheUniverse",
             "calculations": {
                 "StarDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelBreakpointsCalculationPart",
@@ -844,8 +836,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -915,7 +906,7 @@
             "id": 92,
             "name": "Уязвимость",
             "rarity": 1,
-            "tooltip": "Ваши эффекты с периодическим уроном и эффекты предметов могут быть критическими, нанося @CritDamage*100@% дополнительного урона. Вы получаете @CritChance*100@% шанса критического удара.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+            "tooltip": "Ваши эффекты с периодическим уроном и эффекты предметов могут быть критическими, нанося @CritDamage*100@% дополнительного урона. Ваш шанс критического удара увеличивается на @CritChance*100@%.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
         },
         {
             "apiName": "CannonFodder",
@@ -941,15 +932,13 @@
             "id": 233,
             "name": "Рулетка абсолютных умений",
             "rarity": 2,
-            "tooltip": "Ваше заклинание призывателя Бегство заменяется случайным абсолютным умением. Когда вы его применяете, оно заменяется другим случайным абсолютным умением."
+            "tooltip": "Ваше заклинание призывателя Бегство заменяется случайным абсолютным умением. Когда вы его применяете, оно заменяется другим случайным абсолютным умением.<br><br><br><rules>Это заклинание считается абсолютным умением.</rules>"
         },
         {
             "apiName": "ClownCollege",
             "calculations": {
                 "BasicAttackDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -966,8 +955,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "QCritDamageMod": {
                     "__type": "GameCalculation",
@@ -991,9 +979,7 @@
                     ]
                 },
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
@@ -1009,8 +995,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.550000011920929
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1030,7 +1015,7 @@
             "id": 310,
             "name": "Цирковое искусство",
             "rarity": 2,
-            "tooltip": "<spellName>Удар в спину</spellName>: вы дополнительно наносите @BasicAttackDamage@ ед. <physicalDamage>физического урона</physicalDamage>, когда поражаете врагов со спины.<br><br><spellName>Обман</spellName>: вы телепортируетесь и получаете <keywordStealth>невидимость</keywordStealth> на @StealthDuration@ сек. Ваша следующая автоатака во время действия <keywordStealth>невидимости</keywordStealth> дополнительно наносит <physicalDamage>@TotalDamage@ ед. физического урона</physicalDamage>. Если цель развернута к вам спиной, эта автоатака становится критической и наносит @QCritDamageMod@ ед. урона.<br><br><spellName>Галлюцинация: смерть</spellName>: погибнув, вы наносите врагам поблизости <trueDamage>чистый урон</trueDamage> в размере @FearDamage*100@% от максимального запаса здоровья и пугаете их на @FearDuration@ сек."
+            "tooltip": "<spellName>Удар в спину</spellName>: вы дополнительно наносите @BasicAttackDamage@ ед. <physicalDamage>физического урона</physicalDamage>, когда поражаете врагов со спины.<br><br><spellName>Обман</spellName>: вы телепортируетесь и получаете <keywordStealth>невидимость</keywordStealth> на @StealthDuration@ сек. Ваша следующая автоатака во время действия <keywordStealth>невидимости</keywordStealth> дополнительно наносит <physicalDamage>@TotalDamage@ ед. физического урона</physicalDamage>. Если цель развернута к вам спиной, эта автоатака становится критической и наносит @QCritDamageMod@ ед. урона.<br><br><spellName>Галлюцинация: смерть</spellName>: погибнув, вы наносите врагам поблизости <trueDamage>чистый урон</trueDamage> в размере <trueDamage>@FearDamage*100@% от максимального запаса здоровья</trueDamage> и пугаете их на @FearDuration@ сек."
         },
         {
             "apiName": "NumbToPain",
@@ -1314,40 +1299,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Нанося урон чемпиону издалека, вы <keywordMajor>автоматически</keywordMajor> выпускаете в него <abilityName>Прицельный залп</abilityName>.",
+            "desc": "При нанесении урона чемпиону издалека вы выпускаете в него <abilityName>Прицельный залп</abilityName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Меткий стрелок",
             "rarity": 2,
-            "tooltip": "Нанося урон чемпиону на расстоянии более @SnipeDistance@ ед., вы <keywordMajor>автоматически</keywordMajor> выпускаете в него <abilityName>Прицельный залп</abilityName>, который наносит <magicDamage>@Damage@ ед. магического урона</magicDamage>. Перезарядка: @Cooldown@ сек.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+            "tooltip": "Нанося урон чемпиону на расстоянии более @SnipeDistance@ ед., вы автоматически выпускаете в него <abilityName>Прицельный залп</abilityName>, который наносит <magicDamage>@Damage@ ед. магического урона</magicDamage>. Перезарядка для каждой цели: @Cooldown@ сек.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1416,9 +1398,7 @@
             "apiName": "Earthwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1435,8 +1415,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1452,7 +1431,7 @@
             "id": 27,
             "name": "Борозда",
             "rarity": 2,
-            "tooltip": "Применяя умения с рывками, прыжками и телепортацией, вы оставляете за собой след, который взрывается через 1 сек., нанося @Damage@<physicalDamage> ед. физического урона</physicalDamage>.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+            "tooltip": "Применяя умения с рывками, прыжками и телепортацией, вы оставляете за собой след, который взрывается через 1 сек., нанося <physicalDamage>@Damage@ ед. физического урона</physicalDamage>.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
         },
         {
             "apiName": "ScopedWeapons",
@@ -1504,17 +1483,14 @@
             "apiName": "SonicBoom",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 150.0,
                             "mStartValue": 30.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1528,7 +1504,7 @@
             "id": 76,
             "name": "Звуковой удар",
             "rarity": 0,
-            "tooltip": "Когда вы усиливаете или <healing>лечите</healing> союзника либо накладываете на него <shield>щит</shield>, он наносит окружающим врагам <trueDamage>@Damage@ чистого урона</trueDamage> и <status>замедляет</status> их на @SlowAmount*-100@% на 2 сек.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+            "tooltip": "Когда вы усиливаете союзника, <healing>лечите</healing> его или накладываете на него <shield>щит</shield>, он наносит окружающим врагам <trueDamage>@Damage@ ед. чистого урона</trueDamage> и <status>замедляет</status> их на @SlowAmount*-100@% на 2 сек.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
         },
         {
             "apiName": "TwiceThrice",
@@ -1614,17 +1590,14 @@
             "apiName": "FallenAegis",
             "calculations": {
                 "ShieldAmount": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 350.0,
                             "mStartValue": 50.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1636,7 +1609,7 @@
             "id": 34,
             "name": "Эгида Падшей",
             "rarity": 0,
-            "tooltip": "Вы начинаете бой с <abilityName>Черным щитом</abilityName>, который блокирует до @ShieldAmount@ магического урона в течение @ShieldDuration@ сек.<br><br><rules><abilityName>Черный щит</abilityName> блокирует магический урон и эффекты <status>обездвиживания</status>.</rules><br><br>Общее количество щитов: @f1@<br>Общее количество заблокированных эффектов обездвиживания: @f2@"
+            "tooltip": "Вы начинаете бой с <abilityName>Черным щитом</abilityName>, который блокирует до <shield>@ShieldAmount@ ед. магического урона</shield> в течение @ShieldDuration@ сек. Этот щит блокирует эффекты <status>нейтрализации</status> и <status>обездвиживания</status>.<br><br>Общее количество щитов: @f1@<br>Общее количество заблокированных эффектов обездвиживания: @f2@"
         },
         {
             "apiName": "HolyFire",
@@ -1679,14 +1652,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "ManaCalc": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1667,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "Ваши затраты <scaleMana>маны</scaleMana> удваиваются. Урон от ваших умений повышается в соответствии с вашим <scaleMana>максимальным запасом маны</scaleMana>.",
+            "desc": "Ваши затраты <scaleMana>маны</scaleMana> удваиваются. Урон, <healing>лечение</healing> и <shield>прочность щитов</shield> от ваших умений повышаются в соответствии с вашим <scaleMana>максимальным запасом маны</scaleMana>.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Переполнение",
             "rarity": 0,
-            "tooltip": "Ваши затраты <scaleMana>маны</scaleMana> удваиваются. Ваши умения наносят на <scaleMana>@ManaCalc@</scaleMana> больше урона."
+            "tooltip": "Ваши затраты <scaleMana>маны</scaleMana> удваиваются. Урон, <healing>лечение</healing> и <shield>прочность щитов</shield> от ваших умений повышаются на <scaleMana>@ManaCalc@</scaleMana>."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1767,9 +1735,7 @@
             "apiName": "GuiltyPleasure",
             "calculations": {
                 "TotalHeal": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1781,8 +1747,7 @@
                             "mDataValue": "HealPercentage",
                             "mStat": 12
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1847,18 +1812,35 @@
         },
         {
             "apiName": "OutlawsGrit",
-            "calculations": {},
+            "calculations": {
+                "MaxResistTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ResistsPerStack"
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "MaxStacks"
+                            }
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "После применения умений с рывками, прыжками и телепортацией вы получаете <scaleArmor>@ResistsPerStack@ брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>.<br><br>Прибавки суммируются до @MaxStacks@ раз.",
+            "desc": "После применения умений с рывками, прыжками и телепортацией вы получаете <scaleArmor>@ResistsPerStack@ брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>. Максимум – @MaxResistTooltipOnly@ при @MaxStacks@ зар.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
             "name": "Стойкость бандита",
             "rarity": 1,
-            "tooltip": "После применения умений с рывками, прыжками и телепортацией вы получаете <scaleArmor>@ResistsPerStack@ брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>.<br><br>Прибавки суммируются до @MaxStacks@ раз."
+            "tooltip": "После применения умений с рывками, прыжками и телепортацией вы получаете <scaleArmor>@ResistsPerStack@ брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>. Максимум – @MaxResistTooltipOnly@ при @MaxStacks@ зар."
         },
         {
             "apiName": "DontBlink",
@@ -1872,7 +1854,7 @@
             "id": 26,
             "name": "Не моргай",
             "rarity": 0,
-            "tooltip": "Чем быстрее вы двигаетесь по сравнению с врагом, тем больше урона ему наносите: @BonusDamagePerMSDifference*1000@% дополнительного урона за каждые <moveSpeed>10</moveSpeed> разницы в скорости передвижения.<br><br>Дополнительный урон, нанесенный в этом раунде: @f1@<br>Общий дополнительный урон: @f2@"
+            "tooltip": "Чем быстрее вы двигаетесь по сравнению с врагом, тем больше урона ему наносите: @BonusDamagePerMSDifference*1000@% дополнительного урона за каждые <speed>10</speed> разницы в скорости передвижения.<br><br>Дополнительный урон, нанесенный в этом раунде: @f1@<br>Общий дополнительный урон: @f2@"
         },
         {
             "apiName": "ShadowRunner",
@@ -1893,15 +1875,12 @@
             "apiName": "InfernalConduit",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -1936,6 +1915,32 @@
             "name": "Огнепровод",
             "rarity": 2,
             "tooltip": "Ваши умения <keywordMajor>поджигают</keywordMajor> цель, нанося <magicDamage>@BleedDamageTooltip@ ед. магического урона</magicDamage> в секунду в течение @BleedDuration@ сек. Эффект суммируется бесконечно.<br><br>Все ваши эффекты <keywordMajor>горения</keywordMajor> сокращают оставшееся время перезарядку ваших базовых умений на @FlatCooldownRefundPerTick@ сек. при нанесении урона врагам.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {
+                "APAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APAmp"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Преобразует <scaleAD>дополнительную силу атаки</scaleAD> в <scaleAP>силу умений</scaleAP>. Вы получаете <scaleAP>@APAmp*100@% силы умений</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Адаптация",
+            "rarity": 0,
+            "tooltip": "Преобразует <scaleAD>дополнительную силу атаки</scaleAD> в <scaleAP>силу умений</scaleAP>. Вы получаете <scaleAP>@APAmpCalcTooltip@ силы умений</scaleAP>.<br><br>Текущее преобразование: @f1@<br><br><rules><scaleAP>@ConversionRate@ силы умений</scaleAP> за каждую единицу <scaleAD>силы атаки</scaleAD>.</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2000,15 +2005,12 @@
                     ]
                 },
                 "BurnDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "BurnDamage",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 4.0
                     },
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -2036,9 +2038,7 @@
                     "tooltipOnly": true
                 },
                 "DamagePerSecond": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2055,8 +2055,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -2214,15 +2213,12 @@
             "apiName": "SlowCooker",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -2330,7 +2326,7 @@
             "id": 78,
             "name": "Духовная связь",
             "rarity": 2,
-            "tooltip": "@DamageRedirectPercentage*100@% от урона, получаемого вашим союзником, перенаправляется на вас. Кроме того, @HealCopyPercentage*100@% от получаемого им лечения получаете и вы.<br><br>Общий перенаправленный урон: @f1@<br>Общая эффективность лечения: @f2@<br>"
+            "tooltip": "@DamageRedirectPercentage*100@% от урона, получаемого вашим союзником, перенаправляется на вас. Кроме того, <healing>@HealCopyPercentage*100@% от получаемого им лечения</healing> получаете и вы.<br><br>Общий перенаправленный урон: @f1@<br>Общая эффективность лечения: @f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2342,13 +2338,13 @@
                 "OnHitDamageRatio": 0.30000001192092896,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Автоатаки дают вам постоянную <keywordMajor>Проклятую силу</keywordMajor> и наносят дополнительный <magicDamage>магический урон</magicDamage>, зависящий от вашей <keywordMajor>Проклятой силы</keywordMajor>.<br><br>Максимальная <keywordMajor>Проклятая сила</keywordMajor>, которую можно получить за раунд, зависит от количества источников <keywordMajor>проклятия</keywordMajor> у вас и вашего союзника.",
+            "desc": "Автоатаки, поражающие вражеских чемпионов, дают вам постоянную <keywordMajor>Проклятую силу</keywordMajor> и наносят дополнительный <magicDamage>магический урон</magicDamage>, зависящий от вашей <keywordMajor>Проклятой силы</keywordMajor>.<br><br>Максимальная <keywordMajor>Проклятая сила</keywordMajor>, которую можно получить за раунд, зависит от количества источников <keywordMajor>проклятия</keywordMajor> у вас и вашего союзника.",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "Касание смерти",
             "rarity": 1,
-            "tooltip": "Ваши автоатаки дают @CurseCounter@ ед. <keywordMajor>Проклятой силы</keywordMajor>.<br><br>Ваши автоатаки дополнительно наносят <magicDamage>@f1@ ед. магического урона</magicDamage> (@OnHitDamageRatio*100@% от <keywordMajor>Проклятой силы</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Автоатаки, поражающие вражеских чемпионов, дают вам @CurseCounter@ ед. <keywordMajor>Проклятой силы</keywordMajor>.<br><br>Ваши автоатаки дополнительно наносят <magicDamage>@f1@ ед. магического урона</magicDamage> (@OnHitDamageRatio*100@% от <keywordMajor>Проклятой силы</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2482,9 +2478,7 @@
             "apiName": "OkBoomerang",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2501,20 +2495,19 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.15000000596046448
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "BaseCooldown": 7.0
             },
-            "desc": "<keywordMajor>Автоматически:</keywordMajor> каждые 7 сек. вы запускаете в ближайшего врага бумеранг.",
+            "desc": "<keywordMajor>Автоматически:</keywordMajor> каждые @BaseCooldown@ сек. вы запускаете в ближайшего врага бумеранг.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
             "id": 61,
             "name": "Окей, бумеранг",
             "rarity": 1,
-            "tooltip": "<keywordMajor>Автоматически:</keywordMajor> каждые 7 сек. вы запускаете в ближайшего врага бумеранг, нанося @Damage@ адаптивного урона всем пораженным бойцам.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
+            "tooltip": "<keywordMajor>Автоматически:</keywordMajor> каждые @BaseCooldown@ сек. вы запускаете в ближайшего врага бумеранг, нанося @Damage@ ед. адаптивного урона всем пораженным бойцам.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
         },
         {
             "apiName": "JuiceBox",
@@ -2657,6 +2650,33 @@
             "tooltip": "Количество постоянных <keywordMajor>зарядов</keywordMajor>, которые вы получаете при применении умений, увеличивается на @StackModifier*100@%!"
         },
         {
+            "apiName": "escAPADe",
+            "calculations": {
+                "ADAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADAmp",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Превращает <scaleAP>силу умений</scaleAP> в <scaleAD>дополнительную силу атаки</scaleAD>. Дает <scaleAD>@ADAmp*100@% силы атаки</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Трансмутация",
+            "rarity": 0,
+            "tooltip": "Преобразует <scaleAP>силу умений</scaleAP> в <scaleAD>дополнительную силу атаки</scaleAD>. Вы получаете <scaleAD>@ADAmpCalcTooltip@ силы атаки</scaleAD>.<br><br>Текущее преобразование: @f1@<br><br><rules><scaleAD>@ConversionRate@ силы атаки</scaleAD> за каждую единицу <scaleAP>силы умений</scaleAP>.</rules>"
+        },
+        {
             "apiName": "FeyMagic",
             "calculations": {},
             "dataValues": {
@@ -2697,13 +2717,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Попадание умениями дает вам постоянную <keywordMajor>Проклятую силу</keywordMajor>. Вы получаете адаптивную силу, которая зависит от вашей <keywordMajor>Проклятой силы</keywordMajor>.<br><br>Максимальная <keywordMajor>Проклятая сила</keywordMajor>, которую можно получить за раунд, зависит от количества источников <keywordMajor>проклятия</keywordMajor> у вас и вашего союзника.",
+            "desc": "Попадание умениями по вражеским чемпионам дает вам постоянную <keywordMajor>Проклятую силу</keywordMajor>. Вы получаете <font color = '#8347ff'>адаптивную силу</font>, которая зависит от вашей <keywordMajor>Проклятой силы</keywordMajor>.<br><br>Максимальная <keywordMajor>Проклятая сила</keywordMajor>, которую можно получить за раунд, зависит от количества источников <keywordMajor>проклятия</keywordMajor> у вас и вашего союзника.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Вестник рока",
             "rarity": 2,
-            "tooltip": "Умения дают вам @CurseCounter@ ед. <keywordMajor>Проклятой силы</keywordMajor>.<br><br>Вы получаете @f1@ адаптивной силы (@AdaptiveForceRatio*100@% от вашей <keywordMajor>Проклятой силы</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Попадание умениями по вражеским чемпионам дает вам @CurseCounter@ ед. <keywordMajor>Проклятой силы</keywordMajor>.<br><br>Вы получаете @f1@ <font color = '#8347ff'>адаптивной силы</font> (@AdaptiveForceRatio*100@% от вашей <keywordMajor>Проклятой силы</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2848,7 +2868,7 @@
             "id": 310,
             "name": "Танковый движок",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>Участия в убийствах: @f1@"
+            "tooltip": "Вы увеличиваетесь в размере на @SizeIncrement*100@% и получаете <scaleHealth>@f2@ дополнительного здоровья</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> за каждое участие в убийстве).<br><br>Участия в убийствах: @f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -2975,7 +2995,7 @@
             "id": 207,
             "name": "Стой смирно",
             "rarity": 0,
-            "tooltip": "Вы получаете <spellName>Партизанскую войну</spellName>.<br><br><rules>Не двигаясь в течение @HoldStillDuration@ сек., вы получаете <keywordStealth>невидимость</keywordStealth> до тех пор, пока не начнете передвигаться. После выхода из <keywordStealth>невидимости</keywordStealth> вы получаете <attackSpeed>@BonusAS@ скорости атаки</attackSpeed> на @ASDuration@ сек., а ваша <speed>скорость передвижения</speed> увеличивается на @BonusMS*100@% (ускорение постепенно ослабевает). Кроме того, ваша следующая атака дополнительно наносит @BonusHitDamage@ ед. магического урона.</rules>"
+            "tooltip": "Вы получаете <spellName>Партизанскую войну</spellName>.<br><br><rules>Не двигаясь в течение @HoldStillDuration@ сек., вы получаете <keywordStealth>невидимость</keywordStealth> до тех пор, пока не начнете передвигаться. После выхода из <keywordStealth>невидимости</keywordStealth> вы получаете <attackSpeed>@BonusAS@ скорости атаки</attackSpeed> на @ASDuration@ сек., а ваша скорость передвижения увеличивается на <speed>@BonusMS*100@%</speed> (ускорение постепенно ослабевает). Кроме того, ваша следующая атака дополнительно наносит <magicDamage>@BonusHitDamage@ ед. магического урона</magicDamage>.</rules>"
         },
         {
             "apiName": "FromBeginningToEnd",
@@ -3566,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "Дает <scaleBonus>@ItemHaste@ ускорения предметов</scaleBonus> (@TooltipCDR@% сокращения перезарядки предметов).<br><br><rules>Ускорение предметов сокращает перезарядку всех активных эффектов предметов.</rules>",
+            "desc": "Дает <scaleBonus>@ItemHaste@ ускорения предметов</scaleBonus> (@TooltipCDR@% сокращения перезарядки предметов).<br><br><rules>Ускорение предметов сокращает перезарядку %i:cooldown% всех активных эффектов предметов.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "Блестящий изобретатель",
             "rarity": 1,
-            "tooltip": "Дает <scaleBonus>@ItemHaste@ ускорения предметов</scaleBonus> (@TooltipCDR@% сокращения перезарядки предметов).<br><br><rules>Ускорение предметов сокращает перезарядку всех активных эффектов предметов.</rules>"
+            "tooltip": "Дает <scaleBonus>@ItemHaste@ ускорения предметов</scaleBonus> (@TooltipCDR@% сокращения перезарядки предметов).<br><br><rules>Ускорение предметов сокращает перезарядку %i:cooldown% всех активных эффектов предметов.</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3673,9 +3693,7 @@
                     ]
                 },
                 "LaserEyesTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3692,7 +3710,6 @@
                             "mStat": 2
                         }
                     ],
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -3766,7 +3783,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "Вы получаете <attackSpeed>@TotalASValue*100@% общей скорости атаки</attackSpeed>. Дает новые эффекты, когда количество <attackSpeed>автоатак</attackSpeed> в секунду равно @Breakpoint1@.",
+            "desc": "Вы получаете <attackSpeed>@TotalASValue*100@% общей скорости атаки</attackSpeed>.<br><br>Когда количество <attackSpeed>автоатак в секунду</attackSpeed> достигает @Breakpoint1@, вы дополнительно наносите <magicDamage>магический урон</magicDamage> {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3878,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3890,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -3924,15 +3938,15 @@
             "apiName": "BluntForce",
             "calculations": {},
             "dataValues": {
-                "ADIncrease": 0.15000000596046448
+                "ADAmp": 0.15000000596046448
             },
-            "desc": "Дает <scaleAD>@ADIncrease*100@% силы атаки</scaleAD>.",
+            "desc": "Дает <scaleAD>@ADAmp*100@% силы атаки</scaleAD>.",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "Грубая сила",
             "rarity": 0,
-            "tooltip": "Дает <scaleAD>@ADIncrease*100@% силы атаки</scaleAD>."
+            "tooltip": "Дает <scaleAD>@ADAmp*100@% (@f1@) силы атаки</scaleAD>."
         },
         {
             "apiName": "Oathsworn",
@@ -4207,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "Исцеление и наложение щитов дает вам постоянную <keywordMajor>Проклятую силу</keywordMajor>. Вы получаете прибавку к ускорению умений, которая зависит от вашей <keywordMajor>Проклятой силы</keywordMajor>.<br><br>Максимальная <keywordMajor>Проклятая сила</keywordMajor>, которую можно получить за раунд, зависит от количества источников <keywordMajor>проклятия</keywordMajor> у вас и вашего союзника.",
@@ -4220,17 +4234,25 @@
         },
         {
             "apiName": "MindtoMatter",
-            "calculations": {},
-            "dataValues": {
-                "ManaToHealthConversion": 0.5
+            "calculations": {
+                "ManaToHealthCalc": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                }
             },
-            "desc": "Ваш <healing>максимальный запас здоровья</healing> увеличивается на половину от <scaleMana>запаса маны</scaleMana>.",
+            "dataValues": {},
+            "desc": "Ваш <scaleHealth>максимальный запас здоровья</scaleHealth> увеличивается на половину от <scaleMana>запаса маны</scaleMana>.",
             "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
             "id": 56,
             "name": "Материализация энергии",
             "rarity": 0,
-            "tooltip": "Ваш <healing>максимальный запас здоровья</healing> увеличивается на половину от <scaleMana>запаса маны</scaleMana>."
+            "tooltip": "Вы получаете <scaleHealth>@ManaToHealthCalc@ здоровья</scaleHealth>."
         },
         {
             "apiName": "ItsKillingTime",
@@ -4338,9 +4360,7 @@
             "apiName": "AndMyAxe",
             "calculations": {
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4357,8 +4377,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.44999998807907104
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

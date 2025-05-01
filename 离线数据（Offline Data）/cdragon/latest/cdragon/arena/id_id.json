@@ -364,9 +364,7 @@
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -383,8 +381,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.05999999865889549
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -426,9 +423,7 @@
                     "mSimpleTooltipCalculationDisplay": 6
                 },
                 "SingleFireDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -445,8 +440,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -587,11 +581,29 @@
             "id": 90,
             "name": "Vengeance",
             "rarity": 1,
-            "tooltip": "Mendapatkan @DamageAmp*100@% peningkatan damage dan <lifeSteal>@Omnivamp*100@% Omnivamp</lifeSteal> setelah partnermu mati.<br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
+            "tooltip": "Mendapatkan @DamageAmp*100@% peningkatan damage dan <lifeSteal>@Omnivamp*100@% Omnivamp</lifeSteal> setelah partnermu mati.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
         },
         {
             "apiName": "Erosion",
-            "calculations": {},
+            "calculations": {
+                "MaxShredTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "Shred"
+                        },
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "MaxStacks"
+                        },
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 10.0
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 20.0,
                 "Shred": 0.014999999664723873,
@@ -603,7 +615,7 @@
             "id": 28,
             "name": "Erosion",
             "rarity": 0,
-            "tooltip": "Menghasilkan damage pada musuh akan shred @Shred*100@% <scaleArmor>Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR> selama @ShredDuration@ dtk. <br><br>Dapat di-stack hingga @MaxStacks@ kali."
+            "tooltip": "Menghasilkan damage pada musuh akan mengurangi @Shred*100@% <scaleArmor>Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR> selama @ShredDuration@ detik, hingga @MaxShredTooltipOnly@% pada @MaxStacks@ stack. "
         },
         {
             "apiName": "Stats",
@@ -623,30 +635,24 @@
             "apiName": "MasterofDuality",
             "calculations": {
                 "ADGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 9.0,
                             "mStartValue": 3.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "APGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 18.0,
                             "mStartValue": 6.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -662,9 +668,7 @@
             "apiName": "LightemUp",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -681,13 +685,10 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.1899999976158142
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "TOOLTIPONLYDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -704,8 +705,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.7599999904632568
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -721,17 +721,14 @@
             "apiName": "SearingDawn",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
                             "mStartValue": 40.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -782,14 +779,12 @@
             "apiName": "Spellwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -801,8 +796,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -825,9 +819,7 @@
             "apiName": "CenterOfTheUniverse",
             "calculations": {
                 "StarDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelBreakpointsCalculationPart",
@@ -844,8 +836,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -915,7 +906,7 @@
             "id": 92,
             "name": "Vulnerability",
             "rarity": 1,
-            "tooltip": "Itemmu dan efek damage berkelanjutan bisa memberikan Critical Strike sebesar @CritDamage*100@% damage ekstra. Mendapatkan @CritChance*100@% Crit chance.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
+            "tooltip": "Itemmu dan efek damage berkelanjutan bisa memberikan Critical Strike sebesar @CritDamage*100@% damage ekstra. Mendapatkan @CritChance*100@% Crit Chance.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
         },
         {
             "apiName": "CannonFodder",
@@ -941,15 +932,13 @@
             "id": 233,
             "name": "Ultimate Roulette",
             "rarity": 2,
-            "tooltip": "Menggantikan Summoner Flee dengan Ultima random. Setelah cast Ultima, menggantikannya dengan Ultima random baru."
+            "tooltip": "Ganti Summoner Flee dengan satu Ultima random. Setelah casting Ultima, ganti dengan Ultima random yang lain.<br><br><br><rules>Spell ini masih merupakan ultima.</rules>"
         },
         {
             "apiName": "ClownCollege",
             "calculations": {
                 "BasicAttackDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -966,8 +955,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "QCritDamageMod": {
                     "__type": "GameCalculation",
@@ -991,9 +979,7 @@
                     ]
                 },
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
@@ -1009,8 +995,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.550000011920929
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1030,7 +1015,7 @@
             "id": 310,
             "name": "Clown College",
             "rarity": 2,
-            "tooltip": "<spellName>Backstab</spellName>: Kamu menghasilkan @BasicAttackDamage@ <physicalDamage>physical damage bonus</physicalDamage> jika menyerang dari belakang.<br><br><spellName>Deceive</spellName>: Kamu berteleportasi dan menjadi <keywordStealth>Invisible</keywordStealth> selama @StealthDuration@ detik. Seranganmu berikutnya saat <keywordStealth>Invisible</keywordStealth> menghasilkan <physicalDamage>@TotalDamage@ physical damage</physicalDamage> tambahan. Jika menyerang dari belakang, Serangan ini akan menghasilkan critical strike sebesar @QCritDamageMod@ damage.<br><br><spellName>Hallucinate: Death</spellName>: Saat tewas, menghasilkan <trueDamage>true damage</trueDamage> sebesar @FearDamage*100@% Health maksimum dan menerapkan fear selama @FearDuration@ dtk di sekitarmu."
+            "tooltip": "<spellName>Backstab</spellName>: Kamu menghasilkan @BasicAttackDamage@ <physicalDamage>physical damage bonus</physicalDamage> jika menyerang dari belakang.<br><br><spellName>Deceive</spellName>: Kamu berteleportasi dan menjadi <keywordStealth>Invisible</keywordStealth> selama @StealthDuration@ detik. Seranganmu berikutnya saat <keywordStealth>Invisible</keywordStealth> menghasilkan <physicalDamage>@TotalDamage@ physical damage</physicalDamage> tambahan. Jika menyerang dari belakang, Serangan ini akan menghasilkan critical strike sebesar @QCritDamageMod@ damage.<br><br><spellName>Hallucinate: Death</spellName>: Saat tewas, menghasilkan <trueDamage>true damage sebesar @FearDamage*100@% Health maksimum</trueDamage> dan menerapkan fear selama @FearDuration@ detik di sekitarmu."
         },
         {
             "apiName": "NumbToPain",
@@ -1209,13 +1194,13 @@
                 "Radius": 450.0,
                 "RootDuration": 1.25
             },
-            "desc": "Tiap @Cooldown@ detik, <keywordMajor>Otomatis</keywordMajor> menerapkan <status>Root</status> pada musuh di sekitar selama @RootDuration@ detik.<br>",
+            "desc": "<keywordMajor>Autocast</keywordMajor> menerapkan <status>Root</status> pada musuh di sekitar selama @RootDuration@ detik setiap @Cooldown@ detik.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
             "id": 39,
             "name": "Frost Wraith",
             "rarity": 0,
-            "tooltip": "Tiap @Cooldown@ detik, <keywordMajor>Otomatis</keywordMajor> menerapkan <status>Root</status> pada musuh di sekitar selama @RootDuration@ detik.<br><br>Musuh yang Terkena Root Ronde Ini: @f1@<br>Total Musuh yang Terkena Root: @f2@"
+            "tooltip": "<keywordMajor>Autocast</keywordMajor> menerapkan <status>Root</status> pada musuh di sekitar selama @RootDuration@ detik setiap @Cooldown@ detik.<br><br>Musuh yang Terkena Root Ronde Ini: @f1@<br>Total Musuh yang Terkena Root: @f2@"
         },
         {
             "apiName": "SymphonyofWar",
@@ -1314,40 +1299,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Saat kamu menghasilkan damage ke champion dari jauh, akan <keywordMajor>Autocast</keywordMajor> <abilityName>Trueshot Barrage</abilityName> padanya.",
+            "desc": "Saat kamu menghasilkan damage ke champion dari jauh, akan menembakkan <abilityName>Trueshot Barrage</abilityName> padanya.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Trueshot Prodigy",
             "rarity": 2,
-            "tooltip": "Saat kamu menghasilkan damage ke musuh dari jarak lebih dari @SnipeDistance@ unit, akan <keywordMajor>Autocast</keywordMajor> <abilityName>Trueshot Barrage</abilityName>, menghasilkan <magicDamage>@Damage@ magic damage</magicDamage>. Cooldown @Cooldown@ detik per target.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
+            "tooltip": "Saat kamu menghasilkan damage ke musuh dari jarak lebih dari @SnipeDistance@ unit, akan menembakkan <abilityName>Trueshot Barrage</abilityName>, menghasilkan <magicDamage>@Damage@ magic damage</magicDamage>. Cooldown @Cooldown@ detik per target.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1416,9 +1398,7 @@
             "apiName": "Earthwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1435,8 +1415,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1452,7 +1431,7 @@
             "id": 27,
             "name": "Earthwake",
             "rarity": 2,
-            "tooltip": "Ability dash, leap, blink, atau teleport meninggalkan jejak yang meledak setelah 1 detik, menghasilkan @Damage@ <physicalDamage>physical damage</physicalDamage>.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
+            "tooltip": "Ability dash, leap, blink, atau teleport meninggalkan jejak yang meledak setelah 1 detik, menghasilkan <physicalDamage>@Damage@ physical damage</physicalDamage>.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
         },
         {
             "apiName": "ScopedWeapons",
@@ -1504,17 +1483,14 @@
             "apiName": "SonicBoom",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 150.0,
                             "mStartValue": 30.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1528,7 +1504,7 @@
             "id": 76,
             "name": "Sonic Boom",
             "rarity": 0,
-            "tooltip": "Memberi buff, <healing>Heal</healing>, atau <shield>Shield</shield> kepada sekutumu akan menghasilkan <trueDamage>@Damage@ true damage</trueDamage> dan menerapkan <status>Slow</status> ke musuh di sekitar mereka sebesar @SlowAmount*-100@% selama 2 detik.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
+            "tooltip": "Memberi buff, <healing>Heal</healing>, atau <shield>Shield</shield> kepada sekutumu akan menghasilkan <trueDamage>@Damage@ true damage</trueDamage> dan menerapkan <status>Slow ke musuh di sekitar mereka</status> sebesar @SlowAmount*-100@% selama 2 detik.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
         },
         {
             "apiName": "TwiceThrice",
@@ -1614,17 +1590,14 @@
             "apiName": "FallenAegis",
             "calculations": {
                 "ShieldAmount": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 350.0,
                             "mStartValue": 50.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1636,7 +1609,7 @@
             "id": 34,
             "name": "Fallen Aegis",
             "rarity": 0,
-            "tooltip": "Memulai pertempuran dengan <abilityName>Black Shield</abilityName> yang memblokir @ShieldAmount@ magic damage selama @ShieldDuration@ dtk.<br><br><rules><abilityName>Black Shield</abilityName> memblokir Magic Damage dan menerapkan efek <status>Immobilize</status>.</rules><br><br>Total Shield Dihasilkan: @f1@<br>Total Spell Efek Immobilize Diblokir: @f2@"
+            "tooltip": "Memulai combat dengan <abilityName>Black Shield</abilityName> yang memblokir <shield>@ShieldAmount@ magic damage</shield> selama @ShieldDuration@ detik. Shield tersebut mencegah efek <status>Disable</status> dan <status>Immobilize</status> sampai shield pecah.<br><br>Total Shield Dihasilkan: @f1@<br>Total Spell Immobilize Diblokir: @f2@"
         },
         {
             "apiName": "HolyFire",
@@ -1679,14 +1652,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "ManaCalc": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1667,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "Biaya <scaleMana>Mana</scaleMana>-mu digandakan. Ability-mu menghasilkan damage yang meningkat lebih banyak dengan <scaleMana>Mana maksimum</scaleMana>.",
+            "desc": "Biaya <scaleMana>Mana</scaleMana>-mu digandakan. <healing>Heal</healing>, <shield>Shield</shield>, dan damage Ability-mu meningkat berdasarkan <scaleMana>Mana maksimum</scaleMana>.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Overflow",
             "rarity": 0,
-            "tooltip": "Biaya <scaleMana>Mana</scaleMana>-mu digandakan. Ability-mu menghasilkan <scaleMana>@ManaCalc@</scaleMana> lebih banyak damage."
+            "tooltip": "Biaya <scaleMana>Mana</scaleMana>-mu digandakan. <healing>Heal</healing>, <shield>Shield</shield>, dan damage Ability-mu <scaleMana>@ManaCalc@</scaleMana> lebih efektif."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1767,9 +1735,7 @@
             "apiName": "GuiltyPleasure",
             "calculations": {
                 "TotalHeal": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1781,8 +1747,7 @@
                             "mDataValue": "HealPercentage",
                             "mStat": 12
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1847,18 +1812,35 @@
         },
         {
             "apiName": "OutlawsGrit",
-            "calculations": {},
+            "calculations": {
+                "MaxResistTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ResistsPerStack"
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "MaxStacks"
+                            }
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Setelah menggunakan Ability dash, leap, blink, atau teleport, kamu mendapatkan <scaleArmor>@ResistsPerStack@ Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR>.<br><br>Ini stack hingga @MaxStacks@ kali.",
+            "desc": "Setelah menggunakan Ability dash, leap, blink, atau teleport, kamu mendapatkan <scaleArmor>@ResistsPerStack@ Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR> hingga @MaxResistTooltipOnly@ pada @MaxStacks@ stack.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
             "name": "Outlaw's Grit",
             "rarity": 1,
-            "tooltip": "Setelah menggunakan Ability dash, leap, blink, atau teleport, kamu mendapatkan <scaleArmor>@ResistsPerStack@ Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR>.<br><br>Ini stack hingga @MaxStacks@ kali."
+            "tooltip": "Setelah menggunakan Ability dash, leap, blink, atau teleport, kamu mendapatkan <scaleArmor>@ResistsPerStack@ Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR> hingga @MaxResistTooltipOnly@ pada @MaxStacks@ stack."
         },
         {
             "apiName": "DontBlink",
@@ -1872,7 +1854,7 @@
             "id": 26,
             "name": "Don't Blink",
             "rarity": 0,
-            "tooltip": "Mendapatkan @BonusDamagePerMSDifference*1000@% damage bonus per <moveSpeed>10 Move Speed</moveSpeed> keunggulanmu dibandingkan dengan Move Speed target.<br><br>Damage Bonus Ronde Ini: @f1@<br>Total Damage Bonus: @f2@"
+            "tooltip": "Mendapatkan @BonusDamagePerMSDifference*1000@% damage bonus per <speed>10 Move Speed</speed> yang kamu miliki lebih dari target.<br><br>Damage Bonus Ronde Ini: @f1@<br>Total Damage Bonus: @f2@"
         },
         {
             "apiName": "ShadowRunner",
@@ -1893,15 +1875,12 @@
             "apiName": "InfernalConduit",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -1936,6 +1915,32 @@
             "name": "Infernal Conduit",
             "rarity": 2,
             "tooltip": "Ability-mu menerapkan stack <keywordMajor>Burn</keywordMajor> tanpa batas, menghasilkan <magicDamage>@BleedDamageTooltip@ Magic Damage</magicDamage> per detik sebanyak @BleedDuration@ detik.<br><br>Semua efek <keywordMajor>Burn</keywordMajor> mengurangi Cooldown Ability dasar sebanyak @FlatCooldownRefundPerTick@ detik saat menghasilkan damage pada musuh.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {
+                "APAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APAmp"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Mengonversi <scaleAD>Attack Damage Bonus</scaleAD> menjadi <scaleAP>Ability Power</scaleAP>. Mendapatkan <scaleAP>@APAmp*100@% Ability Power</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "ADAPt",
+            "rarity": 0,
+            "tooltip": "Mengonversi <scaleAD>Attack Damage Bonus</scaleAD> menjadi <scaleAP>Ability Power</scaleAP> dan mendapatkan <scaleAP>@APAmpCalcTooltip@ Ability Power</scaleAP>.<br><br>Konversi Saat Ini: @f1@<br><br><rules>Mengonversi pada tingkat <scaleAP>@ConversionRate@ Ability Power</scaleAP> per poin <scaleAD>Attack Damage</scaleAD>.</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2000,15 +2005,12 @@
                     ]
                 },
                 "BurnDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "BurnDamage",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 4.0
                     },
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -2036,9 +2038,7 @@
                     "tooltipOnly": true
                 },
                 "DamagePerSecond": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2055,8 +2055,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -2214,15 +2213,12 @@
             "apiName": "SlowCooker",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -2330,7 +2326,7 @@
             "id": 78,
             "name": "Spirit Link",
             "rarity": 2,
-            "tooltip": "@DamageRedirectPercentage*100@% dari damage yang dihasilkan pada sekutumu diarahkan kepadamu, dan @HealCopyPercentage*100@% dari heal yang mereka terima juga diberikan kepadamu.<br><br>Total Damage Dialihkan: @f1@<br>Total Heal Diberikan: @f2@<br>"
+            "tooltip": "@DamageRedirectPercentage*100@% dari damage yang dihasilkan pada sekutumu diarahkan kepadamu, dan <healing>@HealCopyPercentage*100@% dari heal yang mereka terima</healing> juga diberikan kepadamu.<br><br>Total Damage Dialihkan: @f1@<br>Total Heal Dilakukan: @f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2342,13 +2338,13 @@
                 "OnHitDamageRatio": 0.30000001192092896,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Seranganmu memberikan <keywordMajor>Cursed Power</keywordMajor> permanen dan menghasilkan <magicDamage>Magic Damage</magicDamage> tambahan berdasarkan <keywordMajor>Cursed Power</keywordMajor>-mu.<br><br><keywordMajor>Cursed Power</keywordMajor> maksimum yang kamu dapatkan per ronde meningkat sesuai dengan total sumber <keywordMajor>Curse</keywordMajor> di antara dirimu dan sekutumu.",
+            "desc": "Menyerang champion musuh memberikan <keywordMajor>Cursed Power</keywordMajor> permanen dan menghasilkan <magicDamage>magic damage</magicDamage> tambahan berdasarkan <keywordMajor>Cursed Power</keywordMajor>-mu.<br><br><keywordMajor>Cursed Power</keywordMajor> maksimum yang kamu dapatkan per ronde meningkat sesuai dengan total sumber <keywordMajor>Curse</keywordMajor> di antara dirimu dan sekutumu.",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "Deathtouch",
             "rarity": 1,
-            "tooltip": "Seranganmu memberikan @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Seranganmu menghasilkan <magicDamage>@f1@Magic Damage</magicDamage> tambahan (@OnHitDamageRatio*100@% dari <keywordMajor>Cursed Power</keywordMajor>-mu).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Menyerang champion musuh memberimu @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Seranganmu menghasilkan <magicDamage>@f1@ Magic Damage</magicDamage> tambahan (@OnHitDamageRatio*100@% dari <keywordMajor>Cursed Power</keywordMajor>-mu).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2389,13 +2385,13 @@
                 "RequirementAmount": 2500.0,
                 "Test": 100.0
             },
-            "desc": "Persyaratan: Memberikan <healing>heal</healing> atau mencegah @RequirementAmount@ damage untuk sekutu.<br><br>Hadiah: Mendapatkan <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>, dan Seranganmu menghasilkan <magicDamage>magic damage</magicDamage> tambahan setara dengan <healing>@HealPowerToDamageConversion*100@% Heal/Shield Power</healing>.",
+            "desc": "Persyaratan: Memberikan <healing>heal</healing> atau mencegah @RequirementAmount@ damage kepada sekutu.<br><br>Hadiah: Mendapatkan <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>, dan Seranganmu menghasilkan <magicDamage>magic damage</magicDamage> tambahan setara dengan <healing>@HealPowerToDamageConversion*100@% Heal/Shield Power</healing>.",
             "iconLarge": "assets/ux/cherry/augments/icons/quest_angelofretribution_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/quest_angelofretribution_small.png",
             "id": 192,
             "name": "Quest: Angel of Retribution",
             "rarity": 1,
-            "tooltip": "Persyaratan: Memberikan <healing>heal</healing> atau mencegah @RequirementAmount@ damage untuk sekutu.<br><br>Hadiah: Mendapatkan <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>, dan Seranganmu menghasilkan <magicDamage>@FinalDamageTooltip@ magic damage</magicDamage> tambahan setara dengan <healing>@HealPowerToDamageConversion*100@% Heal/Shield Power</healing>.<br><br>Damage Di-heal atau Ditahan: @f1@<br>Damage Dihasilkan: @f2@"
+            "tooltip": "Persyaratan: Memberikan <healing>heal</healing> atau mencegah @RequirementAmount@ damage kepada sekutu.<br><br>Hadiah: Mendapatkan <attackSpeed>@AttackSpeed*100@% Attack Speed</attackSpeed>, dan Seranganmu menghasilkan <magicDamage>@FinalDamageTooltip@ magic damage</magicDamage> tambahan setara dengan <healing>@HealPowerToDamageConversion*100@% Heal/Shield Power</healing>.<br><br>Damage Di-heal atau Ditahan: @f1@<br>Damage Dihasilkan: @f2@"
         },
         {
             "apiName": "ContractKiller",
@@ -2482,9 +2478,7 @@
             "apiName": "OkBoomerang",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2501,20 +2495,19 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.15000000596046448
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "BaseCooldown": 7.0
             },
-            "desc": "<keywordMajor>Autocast</keywordMajor> bumerang ke champion musuh di sekitar setiap 7 detik.",
+            "desc": "<keywordMajor>Autocast</keywordMajor> melemparkan bumerang ke musuh di sekitar setiap @BaseCooldown@ detik.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
             "id": 61,
             "name": "OK Boomerang",
             "rarity": 1,
-            "tooltip": "<keywordMajor>Autocast</keywordMajor> bumerang ke champion musuh di sekitar setiap 7 detik, menghasilkan @Damage@ adaptive damage ke musuh yang terkena.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
+            "tooltip": "<keywordMajor>Autocast</keywordMajor> melemparkan bumerang ke musuh di sekitar setiap @BaseCooldown@ detik, menghasilkan @Damage@ adaptive damage pada musuh yang terkena.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
         },
         {
             "apiName": "JuiceBox",
@@ -2657,6 +2650,33 @@
             "tooltip": "Saat kamu mendapatkan <keywordMajor>Stack</keywordMajor> Ability permanen, akan mendapatkan @StackModifier*100@% lebih banyak!"
         },
         {
+            "apiName": "escAPADe",
+            "calculations": {
+                "ADAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADAmp",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Mengonversi <scaleAP>Ability Power</scaleAP> menjadi <scaleAD>Attack Damage Bonus</scaleAD>. Mendapatkan <scaleAD>@ADAmp*100@% Attack Damage</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "escAPADe",
+            "rarity": 0,
+            "tooltip": "Mengonversi <scaleAP>Ability Power</scaleAP> menjadi <scaleAD>Attack Damage Bonus</scaleAD> dan mendapatkan <scaleAD>@ADAmpCalcTooltip@ Attack Damage</scaleAD>.<br><br>Konversi Saat Ini: @f1@<br><br><rules>Mengonversi dengan rasio <scaleAD>@ConversionRate@ Attack Damage</scaleAD> per poin <scaleAP>Ability Power</scaleAP>.</rules>"
+        },
+        {
             "apiName": "FeyMagic",
             "calculations": {},
             "dataValues": {
@@ -2697,13 +2717,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Ability yang mengenai musuh memberimu <keywordMajor>Cursed Power</keywordMajor> permanen. Mendapatkan Adaptive Force berdasarkan <keywordMajor>Cursed Power</keywordMajor>-mu<br><br><keywordMajor>Cursed Power</keywordMajor> maksimum yang kamu dapatkan per ronde meningkat sesuai dengan total sumber <keywordMajor>Curse</keywordMajor> di antara dirimu dan sekutumu.",
+            "desc": "Menyerang champion musuh dengan ability hit memberimu <keywordMajor>Cursed Power</keywordMajor> permanen. Mendapatkan <font color = '#8347ff'>Adaptive Force</font> berdasarkan <keywordMajor>Cursed Power</keywordMajor>-mu.<br><br><keywordMajor>Cursed Power</keywordMajor> maksimum yang kamu dapatkan per ronde meningkat sesuai dengan total sumber <keywordMajor>Curse</keywordMajor> di antara dirimu dan sekutumu.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Doomsayer",
             "rarity": 2,
-            "tooltip": "Ability-mu memberikan @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Mendapatkan @f1@ Adaptive Force (@AdaptiveForceRatio*100@% dari <keywordMajor>Cursed Power</keywordMajor>-mu).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Menyerang champion musuh dengan ability memberimu @CurseCounter@ <keywordMajor>Cursed Power</keywordMajor>.<br><br>Mendapatkan @f1@ <font color = '#8347ff'>Adaptive Force</font> (@AdaptiveForceRatio*100@% dari <keywordMajor>Cursed Power</keywordMajor>-mu).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2848,7 +2868,7 @@
             "id": 310,
             "name": "Tank Engine",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>Takedown: @f1@"
+            "tooltip": "Ukuran bertambah @SizeIncrement*100@% dan mendapatkan <scaleHealth>@f2@% Health Bonus</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> per takedown).<br><br>Takedown: @f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -2975,7 +2995,7 @@
             "id": 207,
             "name": "Hold Very Still",
             "rarity": 0,
-            "tooltip": "Mendapatkan <spellName>Guerrilla Warfare</spellName><br><br><rules>Setelah tidak bergerak selama @HoldStillDuration@ detik, menjadi <keywordStealth>Invisible</keywordStealth> sampai kamu bergerak. Saat kamu keluar dari <keywordStealth>Invisibility</keywordStealth> ini, mendapatkan <attackSpeed>@BonusAS@ Attack Speed</attackSpeed> selama @ASDuration@ detik dan @BonusMS*100@% <speed>Movement Speed</speed> yang berangsur berkurang, dan menghasilkan @BonusHitDamage@ magic damage pada seranganmu berikutnya.</rules>"
+            "tooltip": "Mendapatkan <spellName>Guerrilla Warfare</spellName><br><br><rules>Setelah tidak bergerak selama @HoldStillDuration@ detik, menjadi <keywordStealth>Invisible</keywordStealth> sampai kamu bergerak. Saat keluar dari <keywordStealth>Invisibility</keywordStealth> ini, kamu mendapatkan <attackSpeed>@BonusAS@ Attack Speed</attackSpeed> dan <speed>@BonusMS*100@% Movement Speed</speed> yang berangsur berkurang selama @ASDuration@ detik. Damage berikutnya yang dihasilkan pada musuh akan menghasilkan <magicDamage>@BonusHitDamage@ magic damage</magicDamage> tambahan.</rules>"
         },
         {
             "apiName": "FromBeginningToEnd",
@@ -3566,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "Mendapatkan <scaleBonus>@ItemHaste@ Item Haste</scaleBonus> (setara dengan @TooltipCDR@% Item CDR).<br><br><rules>Item Haste mengurangi cooldown semua Item Ability.</rules>",
+            "desc": "Mendapatkan <scaleBonus>@ItemHaste@ Item Haste</scaleBonus> (setara dengan @TooltipCDR@% Item CDR).<br><br><rules>Item Haste mengurangi cooldown %i:cooldown% dari semua Ability Item.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "Apex Inventor",
             "rarity": 1,
-            "tooltip": "Mendapatkan <scaleBonus>@ItemHaste@ Item Haste</scaleBonus> (setara dengan @TooltipCDR@% Item CDR).<br><br><rules>Item Haste mengurangi cooldown semua Item Ability.</rules>"
+            "tooltip": "Mendapatkan <scaleBonus>@ItemHaste@ Item Haste</scaleBonus> (setara dengan @TooltipCDR@% Item CDR).<br><br><rules>Item Haste mengurangi cooldown %i:cooldown% dari semua Ability Item.</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3673,9 +3693,7 @@
                     ]
                 },
                 "LaserEyesTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3692,7 +3710,6 @@
                             "mStat": 2
                         }
                     ],
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -3766,7 +3783,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "Mendapatkan <attackSpeed>@TotalASValue*100@% total Attack Speed</attackSpeed>. Mendapatkan efek baru pada @Breakpoint1@ <attackSpeed>Serangan</attackSpeed> per detik.",
+            "desc": "Mendapatkan <attackSpeed>@TotalASValue*100@% total Attack Speed</attackSpeed>. <br><br>Pada @Breakpoint1@ <attackSpeed>Serangan per detik</attackSpeed>, menghasilkan tambahan <magicDamage>magic damage</magicDamage> {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3878,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3890,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -3924,15 +3938,15 @@
             "apiName": "BluntForce",
             "calculations": {},
             "dataValues": {
-                "ADIncrease": 0.15000000596046448
+                "ADAmp": 0.15000000596046448
             },
-            "desc": "Mendapatkan <scaleAD>@ADIncrease*100@% Attack Damage</scaleAD>.",
+            "desc": "Mendapatkan <scaleAD>@ADAmp*100@% Attack Damage</scaleAD>.",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "Blunt Force",
             "rarity": 0,
-            "tooltip": "Mendapatkan <scaleAD>@ADIncrease*100@% Attack Damage</scaleAD>."
+            "tooltip": "Mendapatkan <scaleAD>@ADAmp*100@% (@f1@) Attack Damage</scaleAD>."
         },
         {
             "apiName": "Oathsworn",
@@ -4207,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "Heal/Shield memberimu <keywordMajor>Cursed Power</keywordMajor> permanen. Mendapatkan Ability Haste berdasarkan <keywordMajor>Cursed Power</keywordMajor>-mu.<br><br><keywordMajor>Cursed Power</keywordMajor> maksimum yang kamu dapatkan per ronde meningkat sesuai dengan total sumber <keywordMajor>Curse</keywordMajor> di antara dirimu dan sekutumu.",
@@ -4220,17 +4234,25 @@
         },
         {
             "apiName": "MindtoMatter",
-            "calculations": {},
-            "dataValues": {
-                "ManaToHealthConversion": 0.5
+            "calculations": {
+                "ManaToHealthCalc": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                }
             },
-            "desc": "Meningkatkan <healing>Health maksimum</healing> sebesar setengah dari <scaleMana>Mana</scaleMana>.",
+            "dataValues": {},
+            "desc": "Meningkatkan <scaleHealth>Health maksimum</scaleHealth> sebesar setengah dari <scaleMana>Mana</scaleMana>.",
             "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
             "id": 56,
             "name": "Mind to Matter",
             "rarity": 0,
-            "tooltip": "Meningkatkan <healing>Health maksimum</healing> sebesar setengah dari <scaleMana>Mana</scaleMana>."
+            "tooltip": "Mendapatkan <scaleHealth>@ManaToHealthCalc@ Health</scaleHealth>."
         },
         {
             "apiName": "ItsKillingTime",
@@ -4338,9 +4360,7 @@
             "apiName": "AndMyAxe",
             "calculations": {
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4357,8 +4377,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.44999998807907104
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

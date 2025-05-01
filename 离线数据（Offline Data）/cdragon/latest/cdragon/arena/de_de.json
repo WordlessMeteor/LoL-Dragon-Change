@@ -364,9 +364,7 @@
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -383,8 +381,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.05999999865889549
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -426,9 +423,7 @@
                     "mSimpleTooltipCalculationDisplay": 6
                 },
                 "SingleFireDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -445,8 +440,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -587,11 +581,29 @@
             "id": 90,
             "name": "Rache",
             "rarity": 1,
-            "tooltip": "Du erhältst @DamageAmp*100@&nbsp;% erhöhten Schaden und <lifeSteal>@Omnivamp*100@&nbsp;% Omnivampir</lifeSteal>, nachdem dein Partner gestorben ist.<br>Schaden in dieser Runde: @f1@<br>Verursachter Gesamtschaden: @f2@"
+            "tooltip": "Du erhältst @DamageAmp*100@&nbsp;% erhöhten Schaden und <lifeSteal>@Omnivamp*100@&nbsp;% Omnivampir</lifeSteal>, nachdem dein Partner gestorben ist.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
             "apiName": "Erosion",
-            "calculations": {},
+            "calculations": {
+                "MaxShredTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "Shred"
+                        },
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "MaxStacks"
+                        },
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 10.0
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 20.0,
                 "Shred": 0.014999999664723873,
@@ -603,7 +615,7 @@
             "id": 28,
             "name": "Erosion",
             "rarity": 0,
-            "tooltip": "Wenn du einem Gegner Schaden zufügst, dezimierst du @ShredDuration@&nbsp;Sekunden lang @Shred*100@&nbsp;% seiner <scaleArmor>Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>. <br><br>Maximal @MaxStacks@&nbsp;Steigerungen."
+            "tooltip": "Wenn du einem Gegner Schaden zufügst, dezimierst du @ShredDuration@&nbsp;Sekunden lang @Shred*100@&nbsp;% seiner <scaleArmor>Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>, bis zu @MaxShredTooltipOnly@&nbsp;% bei @MaxStacks@&nbsp;Steigerungen. "
         },
         {
             "apiName": "Stats",
@@ -623,30 +635,24 @@
             "apiName": "MasterofDuality",
             "calculations": {
                 "ADGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 9.0,
                             "mStartValue": 3.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "APGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 18.0,
                             "mStartValue": 6.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -662,9 +668,7 @@
             "apiName": "LightemUp",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -681,13 +685,10 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.1899999976158142
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "TOOLTIPONLYDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -704,8 +705,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.7599999904632568
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -721,17 +721,14 @@
             "apiName": "SearingDawn",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
                             "mStartValue": 40.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -782,14 +779,12 @@
             "apiName": "Spellwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -801,8 +796,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -825,9 +819,7 @@
             "apiName": "CenterOfTheUniverse",
             "calculations": {
                 "StarDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelBreakpointsCalculationPart",
@@ -844,8 +836,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -915,7 +906,7 @@
             "id": 92,
             "name": "Verwundbarkeit",
             "rarity": 1,
-            "tooltip": "Die Effekte deiner Gegenstände und deines Schadens über Zeit können kritisch treffen, um @CritDamage*100@&nbsp;% zusätzlichen Schaden zu verursachen. Du erhältst @CritChance*100@&nbsp;% Chance auf kritische Treffer.<br><br>Verursachter Schaden in dieser Runde: @f1@<br>Verursachter Gesamtschaden: @f2@"
+            "tooltip": "Die Effekte deiner Gegenstände und deines Schadens über Zeit können kritisch treffen, um @CritDamage*100@&nbsp;% zusätzlichen Schaden zu verursachen. Du erhältst @CritChance*100@&nbsp;% Chance auf kritische Treffer.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
             "apiName": "CannonFodder",
@@ -941,15 +932,13 @@
             "id": 233,
             "name": "Ultimatives Roulette",
             "rarity": 2,
-            "tooltip": "Du ersetzt „Beschwörerflucht“ durch eine zufälliges Ult. Nachdem du die Ult gewirkt hast, wird sie durch eine neue zufällige Ult ersetzt."
+            "tooltip": "Du ersetzt „Beschwörerflucht“ durch eine zufällige Ult. Nachdem du die Ult gewirkt hast, wird sie durch eine neue zufällige Ult ersetzt.<br><br><br><rules>Diese Fähigkeiten sind immer noch ultimative Fähigkeiten.</rules>"
         },
         {
             "apiName": "ClownCollege",
             "calculations": {
                 "BasicAttackDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -966,8 +955,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "QCritDamageMod": {
                     "__type": "GameCalculation",
@@ -991,9 +979,7 @@
                     ]
                 },
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
@@ -1009,8 +995,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.550000011920929
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1030,7 +1015,7 @@
             "id": 310,
             "name": "Clown-Hochschule",
             "rarity": 2,
-            "tooltip": "<spellName>Heimtücke</spellName>: Du verursachst @BasicAttackDamage@ <physicalDamage>zusätzlichen normalen Schaden</physicalDamage>, wenn du hinterrücks angreifst.<br><br><spellName>Täuschen</spellName>: Du teleportierst dich und wirst @StealthDuration@&nbsp;Sekunden lang <keywordStealth>unsichtbar</keywordStealth>. Während du <keywordStealth>unsichtbar</keywordStealth> bist, verursacht dein nächster Angriff zusätzlich <physicalDamage>@TotalDamage@&nbsp;normalen Schaden</physicalDamage>. Wird der Angriff hinterrücks ausgeführt, trifft er kritisch und verursacht @QCritDamageMod@&nbsp;Schaden.<br><br><spellName>Halluzination: Tod</spellName>: Bei deinem Tod verursachst du <trueDamage>absoluten Schaden</trueDamage> in Höhe von @FearDamage*100@&nbsp;% des maximalen Lebens und versetzt dein Umfeld @FearDuration@&nbsp;Sek. lang in Furcht."
+            "tooltip": "<spellName>Heimtücke</spellName>: Du verursachst @BasicAttackDamage@ <physicalDamage>zusätzlichen normalen Schaden</physicalDamage>, wenn du hinterrücks angreifst.<br><br><spellName>Täuschen</spellName>: Du teleportierst dich und wirst @StealthDuration@&nbsp;Sekunden lang <keywordStealth>unsichtbar</keywordStealth>. Während du <keywordStealth>unsichtbar</keywordStealth> bist, verursacht dein nächster Angriff zusätzlich <physicalDamage>@TotalDamage@&nbsp;normalen Schaden</physicalDamage>. Wird der Angriff hinterrücks ausgeführt, trifft er kritisch und verursacht @QCritDamageMod@&nbsp;Schaden.<br><br><spellName>Halluzination: Tod</spellName>: Bei deinem Tod verursachst du absoluten Schaden in Höhe von <trueDamage>@FearDamage*100@&nbsp;% des maximalen Lebens</trueDamage> und versetzt dein Umfeld @FearDuration@&nbsp;Sek. lang in Furcht."
         },
         {
             "apiName": "NumbToPain",
@@ -1209,13 +1194,13 @@
                 "Radius": 450.0,
                 "RootDuration": 1.25
             },
-            "desc": "Alle @Cooldown@&nbsp;Sekunden werden Gegner in der Nähe @RootDuration@&nbsp;Sekunde lang <keywordMajor>automatisch</keywordMajor> <status>festgehalten</status>.<br>",
+            "desc": "<keywordMajor>Automatisches Beschwören</keywordMajor> <status>hält</status> alle @Cooldown@&nbsp;Sekunde(n) Gegner in der Nähe für @RootDuration@&nbsp;Sekunde(n) fest.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
             "id": 39,
             "name": "Frostgeist",
             "rarity": 0,
-            "tooltip": "Alle @Cooldown@&nbsp;Sekunden werden Gegner in der Nähe @RootDuration@&nbsp;Sekunde lang <keywordMajor>automatisch</keywordMajor> <status>festgehalten</status>.<br><br>Festgehaltene Gegner in dieser Runde: @f1@<br>Festgehaltene Gegner insgesamt: @f2@"
+            "tooltip": "<keywordMajor>Automatisches Beschwören</keywordMajor> <status>hält</status> alle @Cooldown@&nbsp;Sekunde(n) Gegner in der Nähe für @RootDuration@&nbsp;Sekunde(n) fest.<br><br>In dieser Runde festgehaltene Gegner: @f1@<br>Insgesamt festgehaltene Gegner: @f2@"
         },
         {
             "apiName": "SymphonyofWar",
@@ -1314,40 +1299,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Wenn du einem Champion aus großer Entfernung Schaden zufügst, feuerst du <keywordMajor>automatisch</keywordMajor> ein <abilityName>Energietrommelfeuer</abilityName> auf ihn ab.",
+            "desc": "Wenn du einem Champion aus großer Entfernung Schaden zufügst, feuerst du <abilityName>Energietrommelfeuer</abilityName> auf ihn ab.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Energiewunderkind",
             "rarity": 2,
-            "tooltip": "Wenn du jemanden aus über @SnipeDistance@ Einheiten Entfernung Schaden zufügst, löst du <keywordMajor>automatisch</keywordMajor> <abilityName>Energietrommelfeuer</abilityName> aus und verursachst <magicDamage>@Damage@ magischen Schaden</magicDamage>. @Cooldown@ Sek. Abklingzeit pro Ziel.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
+            "tooltip": "Wenn du jemandem aus über @SnipeDistance@ Einheiten Entfernung Schaden zufügst, feuerst du <abilityName>Energietrommelfeuer</abilityName> ab und verursachst <magicDamage>@Damage@ magischen Schaden</magicDamage>. @Cooldown@&nbsp;Sek. Abklingzeit pro Ziel.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1416,9 +1398,7 @@
             "apiName": "Earthwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1435,8 +1415,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1452,7 +1431,7 @@
             "id": 27,
             "name": "Erdschneise",
             "rarity": 2,
-            "tooltip": "Deine Sprint-, Spring- und Teleportationsfähigkeiten hinterlassen eine Spur, die nach 1&nbsp;Sekunde explodiert und dabei @Damage@ <physicalDamage>normalen Schaden</physicalDamage> verursacht.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
+            "tooltip": "Deine Sprint-, Spring- und Teleportationsfähigkeiten hinterlassen eine Spur, die nach 1&nbsp;Sekunde explodiert und dabei <physicalDamage>@Damage@ normalen Schaden</physicalDamage> verursacht.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
             "apiName": "ScopedWeapons",
@@ -1504,17 +1483,14 @@
             "apiName": "SonicBoom",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 150.0,
                             "mStartValue": 30.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1528,7 +1504,7 @@
             "id": 76,
             "name": "Schallexplosion",
             "rarity": 0,
-            "tooltip": "Wenn du deinen Verbündeten verstärkst, <healing>heilst</healing> oder mit einem <shield>Schild</shield> beschützt, erleiden angrenzende Gegner <trueDamage>@Damage@&nbsp;absoluten Schaden</trueDamage> und werden 2&nbsp;Sekunden lang um @SlowAmount*-100@&nbsp;% <status>verlangsamt</status>.<br><br>Verursachter Schaden in dieser Runde: @f1@<br>Verursachter Gesamtschaden: @f2@"
+            "tooltip": "Wenn du deinen Verbündeten verstärkst, <healing>heilst</healing> oder mit einem <shield>Schild</shield> beschützt, erleiden angrenzende Gegner <trueDamage>@Damage@&nbsp;absoluten Schaden</trueDamage> und werden 2&nbsp;Sekunden lang um @SlowAmount*-100@&nbsp;% <status>verlangsamt</status>.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
             "apiName": "TwiceThrice",
@@ -1614,17 +1590,14 @@
             "apiName": "FallenAegis",
             "calculations": {
                 "ShieldAmount": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 350.0,
                             "mStartValue": 50.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1636,7 +1609,7 @@
             "id": 34,
             "name": "Gefallene Ägide",
             "rarity": 0,
-            "tooltip": "Du beginnst den Kampf mit einem <abilityName>Schwarzen Schild</abilityName>, der @ShieldDuration@&nbsp;Sekunden lang @ShieldAmount@&nbsp;magischen Schaden blockt.<br><br><rules>Der <abilityName>Schwarze Schild</abilityName> blockt magischen Schaden und <status>bewegungsunfähig</status> machende Effekte.</rules><br><br>Generierte Schilde insgesamt: @f1@<br>Geblockte bewegungsunfähig machende Fähigkeiten insgesamt: @f2@"
+            "tooltip": "Du beginnst den Kampf mit einem <abilityName>schwarzen Schild</abilityName>, der @ShieldDuration@&nbsp;Sekunde(n) lang <shield>@ShieldAmount@ magischen Schaden</shield> abwehrt. Der Schild verhindert <status>kampfunfähig</status> und <status>bewegungsunfähig</status> machende Effekte, bis er zerstört wird.<br><br>Insgesamt generierte Schilde: @f1@<br>Insgesamt geblockte bewegungsunfähig machende Fähigkeiten: @f2@"
         },
         {
             "apiName": "HolyFire",
@@ -1679,14 +1652,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "ManaCalc": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1667,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "Deine <scaleMana>Manakosten</scaleMana> werden verdoppelt. Der Schaden deiner Fähigkeiten skaliert stärker mit deinem <scaleMana>max. Mana</scaleMana>.",
+            "desc": "Deine <scaleMana>Manakosten</scaleMana> werden verdoppelt. Deine <healing>Heilung</healing>, deine <shield>Schilde</shield> und dein Schaden durch Fähigkeiten werden basierend auf deinem <scaleMana>max. Mana</scaleMana> erhöht.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Überfluss",
             "rarity": 0,
-            "tooltip": "Deine <scaleMana>Manakosten</scaleMana> werden verdoppelt. Deine Fähigkeiten verursachen <scaleMana>@ManaCalc@</scaleMana> mehr Schaden."
+            "tooltip": "Deine <scaleMana>Manakosten</scaleMana> werden verdoppelt. Deine <healing>Heilung</healing>, deine <shield>Schilde</shield> und dein Schaden durch Fähigkeiten sind <scaleMana>@ManaCalc@</scaleMana> effektiver."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1767,9 +1735,7 @@
             "apiName": "GuiltyPleasure",
             "calculations": {
                 "TotalHeal": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1781,8 +1747,7 @@
                             "mDataValue": "HealPercentage",
                             "mStat": 12
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1847,18 +1812,35 @@
         },
         {
             "apiName": "OutlawsGrit",
-            "calculations": {},
+            "calculations": {
+                "MaxResistTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ResistsPerStack"
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "MaxStacks"
+                            }
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Nachdem du eine Sprint-, Spring-, oder Teleportationsfähigkeit eingesetzt hast, erhältst du <scaleArmor>@ResistsPerStack@&nbsp;Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>.<br><br>Bis zu @MaxStacks@&nbsp;Steigerungen möglich.",
+            "desc": "Nachdem du eine Sprint-, Spring-, oder Teleportationsfähigkeit eingesetzt hast, erhältst du <scaleArmor>@ResistsPerStack@&nbsp;Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>, bis zu @MaxResistTooltipOnly@ bei @MaxStacks@&nbsp;Steigerungen.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
             "name": "Mut des Gesetzlosen",
             "rarity": 1,
-            "tooltip": "Nachdem du eine Sprint-, Spring-, oder Teleportationsfähigkeit eingesetzt hast, erhältst du <scaleArmor>@ResistsPerStack@&nbsp;Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>.<br><br>Bis zu @MaxStacks@&nbsp;Steigerungen möglich."
+            "tooltip": "Nachdem du eine Sprint-, Spring-, oder Teleportationsfähigkeit eingesetzt hast, erhältst du <scaleArmor>@ResistsPerStack@&nbsp;Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>, bis zu @MaxResistTooltipOnly@ bei @MaxStacks@&nbsp;Steigerungen."
         },
         {
             "apiName": "DontBlink",
@@ -1872,7 +1854,7 @@
             "id": 26,
             "name": "Nicht blinzeln",
             "rarity": 0,
-            "tooltip": "Du erhältst @BonusDamagePerMSDifference*1000@&nbsp;% zusätzlichen Schaden pro <moveSpeed>10&nbsp;Lauftempo</moveSpeed>, die du deinem Ziel voraushast.<br><br>Zusätzlicher Schaden in dieser Runde: @f1@<br>Zusätzlicher Gesamtschaden: @f2@"
+            "tooltip": "Du erhältst @BonusDamagePerMSDifference*1000@&nbsp;% zusätzlichen Schaden pro <speed>10 Lauftempo</speed>, das du mehr hast als dein Ziel.<br><br>Zusätzlicher Schaden in dieser Runde: @f1@<br>Gesamter zusätzlicher Schaden: @f2@"
         },
         {
             "apiName": "ShadowRunner",
@@ -1893,15 +1875,12 @@
             "apiName": "InfernalConduit",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -1936,6 +1915,32 @@
             "name": "Infernalische Verbindung",
             "rarity": 2,
             "tooltip": "Deine Fähigkeiten belegen Gegner mit einer unendlich steigerbaren <keywordMajor>Verbrennung</keywordMajor>, die @BleedDuration@&nbsp;Sekunden lang <magicDamage>@BleedDamageTooltip@&nbsp;magischen Schaden</magicDamage> pro Sekunde verursacht.<br><br>Alle deine<keywordMajor>Verbrennungseffekte</keywordMajor> verringern die Abklingzeiten deiner Grundfähigkeiten um @FlatCooldownRefundPerTick@&nbsp;Sekunden, wenn sie Gegnern Schaden zufügen.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {
+                "APAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APAmp"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Wandelt <scaleAD>zusätzlichen Angriffsschaden</scaleAD> in <scaleAP>Fähigkeitsstärke</scaleAP> um. Du erhältst <scaleAP>@APAmp*100@&nbsp;% Fähigkeitsstärke</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "ADAPtieren",
+            "rarity": 0,
+            "tooltip": "Wandelt <scaleAD>zusätzlichen Angriffsschaden</scaleAD> in <scaleAP>Fähigkeitsstärke</scaleAP> um. Außerdem erhältst du <scaleAP>@APAmpCalcTooltip@&nbsp;Fähigkeitsstärke</scaleAP>.<br><br>Aktuelle Umwandlung: @f1@<br><br><rules>Wird mit einem Wert von <scaleAP>@ConversionRate@&nbsp;Fähigkeitsstärke</scaleAP> pro Punkt <scaleAD>Angriffsschaden</scaleAD> umgewandelt.</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2000,15 +2005,12 @@
                     ]
                 },
                 "BurnDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "BurnDamage",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 4.0
                     },
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -2036,9 +2038,7 @@
                     "tooltipOnly": true
                 },
                 "DamagePerSecond": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2055,8 +2055,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -2214,15 +2213,12 @@
             "apiName": "SlowCooker",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -2330,7 +2326,7 @@
             "id": 78,
             "name": "Geistige Verbindung",
             "rarity": 2,
-            "tooltip": "@DamageRedirectPercentage*100@&nbsp;% des Schadens, den dein Verbündeter erleidet, wird auf dich umgeleitet, und du profitierst von @HealCopyPercentage*100@&nbsp;% der Heilung, die er erhält.<br><br>Insgesamt umgeleiteter Schaden: @f1@<br>Insgesamt gewirkte Heilung: @f2@<br>"
+            "tooltip": "@DamageRedirectPercentage*100@&nbsp;% des Schadens, den dein Verbündeter erleidet, wird auf dich umgeleitet, und du profitierst von <healing>@HealCopyPercentage*100@&nbsp;% der Heilung, die er erhält</healing>.<br><br>Insgesamt umgeleiteter Schaden: @f1@<br>Insgesamt gewirkte Heilung: @f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2342,13 +2338,13 @@
                 "OnHitDamageRatio": 0.30000001192092896,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Deine Angriffe gewähren dir dauerhafte <keywordMajor>Verfluchte Macht</keywordMajor> und verursachen abhängig von deiner <keywordMajor>Verfluchten Macht</keywordMajor> zusätzlichen <magicDamage>magischen Schaden</magicDamage>.<br><br>Die maximale Menge an <keywordMajor>Verfluchter Macht</keywordMajor>, die du pro Runde erhalten kannst, skaliert mit der Gesamtzahl aller <keywordMajor>Fluchquellen</keywordMajor>, die dein Team hat.",
+            "desc": "Wenn du gegnerische Champions angreifst, bekommst du dauerhaft <keywordMajor>Verfluchte Macht</keywordMajor> und verursachst zusätzlichen <magicDamage>magischen Schaden</magicDamage>, der von deiner <keywordMajor>Verfluchten Macht</keywordMajor> abhängt.<br><br>Die maximale Menge an <keywordMajor>Verfluchter Macht</keywordMajor>, die du pro Runde erhalten kannst, skaliert mit der Gesamtzahl aller <keywordMajor>Fluchquellen</keywordMajor>, die dein Team hat.",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "Berührung des Todes",
             "rarity": 1,
-            "tooltip": "Deine Angriffe gewähren dir @CurseCounter@&nbsp;<keywordMajor>Verfluchte Macht</keywordMajor>.<br><br>Deine Angriffe verursachen zusätzlich <magicDamage>@f1@&nbsp;magischen Schaden</magicDamage> (@OnHitDamageRatio*100@&nbsp;% deiner <keywordMajor>Verfluchten Macht</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Greifst du einen gegnerischen Champion an, erhältst du @CurseCounter@&nbsp;<keywordMajor>Verfluchte Macht</keywordMajor>.<br><br>Deine Angriffe verursachen zusätzlich <magicDamage>@f1@&nbsp;magischen Schaden</magicDamage> (@OnHitDamageRatio*100@&nbsp;% deiner <keywordMajor>Verfluchten Macht</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2482,9 +2478,7 @@
             "apiName": "OkBoomerang",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2501,20 +2495,19 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.15000000596046448
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "BaseCooldown": 7.0
             },
-            "desc": "Du feuerst alle 7&nbsp;Sekunden <keywordMajor>automatisch</keywordMajor> einen Bumerang auf einen Gegner in der Nähe.",
+            "desc": "Du feuerst alle @BaseCooldown@&nbsp;Sekunden <keywordMajor>automatisch</keywordMajor> einen Bumerang auf einen Gegner in der Nähe.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
             "id": 61,
             "name": "O.K.-Bumerang",
             "rarity": 1,
-            "tooltip": "Du feuerst alle 7&nbsp;Sekunden <keywordMajor>automatisch</keywordMajor> einen Bumerang auf einen Gegner in der Nähe, der getroffenen Gegnern @Damage@&nbsp;adaptiven Schaden zufügt.<br><br>Verursachter Schaden in dieser Runde: @f1@<br>Verursachter Gesamtschaden: @f2@"
+            "tooltip": "Du feuerst alle @BaseCooldown@&nbsp;Sekunden <keywordMajor>automatisch</keywordMajor> einen Bumerang auf einen Gegner in der Nähe. Dadurch erleiden getroffene Gegner @Damage@ adaptiven Schaden.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
             "apiName": "JuiceBox",
@@ -2657,6 +2650,33 @@
             "tooltip": "Wenn du für eine Fähigkeit permanente <keywordMajor>Steigerungen</keywordMajor> erhältst, erhältst du @StackModifier*100@&nbsp;% mehr!"
         },
         {
+            "apiName": "escAPADe",
+            "calculations": {
+                "ADAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADAmp",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Wandelt <scaleAP>Fähigkeitsstärke</scaleAP> in <scaleAD>zusätzlichen Angriffsschaden</scaleAD> um. Du erhältst <scaleAD>@ADAmp*100@&nbsp;% Angriffsschaden</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Im Wandel",
+            "rarity": 0,
+            "tooltip": "Wandelt <scaleAP>Fähigkeitsstärke</scaleAP> in <scaleAD>zusätzlichen Angriffsschaden</scaleAD> um. Außerdem erhältst du <scaleAD>@ADAmpCalcTooltip@&nbsp;Angriffsschaden</scaleAD>.<br><br>Aktuelle Umwandlung: @f1@<br><br><rules>Wird mit einem Wert von <scaleAD>@ConversionRate@&nbsp;Angriffsschaden</scaleAD> pro Punkt <scaleAP>Fähigkeitsstärke</scaleAP> umgewandelt.</rules>"
+        },
+        {
             "apiName": "FeyMagic",
             "calculations": {},
             "dataValues": {
@@ -2697,13 +2717,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Fähigkeitentreffer gewähren dir dauerhaft <keywordMajor>Verfluchte Macht</keywordMajor>. Du erhältst abhängig von deiner <keywordMajor>Verfluchten Macht</keywordMajor> adaptive Kraft.<br><br>Die maximale Menge an <keywordMajor>Verfluchter Macht</keywordMajor>, die du pro Runde erhalten kannst, skaliert mit der Gesamtzahl aller <keywordMajor>Fluchquellen</keywordMajor>, die dein Team hat.",
+            "desc": "Wenn du einen gegnerischen Champion mit einer Fähigkeit triffst, bekommst du dauerhaft <keywordMajor>Verfluchte Macht</keywordMajor>. Du erhältst abhängig von deiner <keywordMajor>Verfluchten Macht</keywordMajor> <font color = '#8347ff'>adaptive Kraft</font>.<br><br>Die maximale Menge an <keywordMajor>Verfluchter Macht</keywordMajor>, die du pro Runde erhalten kannst, skaliert mit der Gesamtzahl aller <keywordMajor>Fluchquellen</keywordMajor>, die dein Team hat.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Untergangsprophet",
             "rarity": 2,
-            "tooltip": "Deine Fähigkeiten gewähren dir @CurseCounter@&nbsp;<keywordMajor>Verfluchte Macht</keywordMajor>.<br><br>Du erhältst @f1@&nbsp;adaptive Kraft (@AdaptiveForceRatio*100@&nbsp;% deiner <keywordMajor>Verfluchten Macht</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Wenn du einen gegnerischen Champion mit einer Fähigkeit triffst, bekommst du @CurseCounter@&nbsp;<keywordMajor>Verfluchte Macht</keywordMajor>.<br><br>Du erhältst @f1@<font color = '#8347ff'>&nbsp;adaptive Kraft</font> (@AdaptiveForceRatio*100@&nbsp;% deiner <keywordMajor>Verfluchten Macht</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2848,7 +2868,7 @@
             "id": 310,
             "name": "Tank-Maschine",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>Kills/Unterstützungen: @f1@"
+            "tooltip": "Du erhältst @SizeIncrement*100@&nbsp;% mehr Größe und <scaleHealth>@f2@ zusätzliches Leben</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@&nbsp;% (@f1@) </scaleHealth> pro Kill/Unterstützung).<br><br>Kills/Unterstützungen: @f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -2975,7 +2995,7 @@
             "id": 207,
             "name": "Gut stillhalten",
             "rarity": 0,
-            "tooltip": "Du erhältst <spellName>Guerillakriegsführung</spellName>.<br><br><rules>Nachdem du dich @HoldStillDuration@&nbsp;Sekunden lang nicht bewegt hast, wirst du <keywordStealth>unsichtbar</keywordStealth>, bis du dich bewegst. Wenn du diese <keywordStealth>Unsichtbarkeit</keywordStealth> verlässt, erhältst du @ASDuration@&nbsp;Sekunden lang <attackSpeed>@BonusAS@&nbsp;Angriffstempo</attackSpeed> und @BonusMS*100@&nbsp;% abfallendes <speed>Lauftempo</speed>, während dein nächster Treffer @BonusHitDamage@&nbsp;magischen Schaden verursacht.</rules>"
+            "tooltip": "Du erhältst <spellName>Guerillakriegsführung</spellName>.<br><br><rules>Nachdem du dich @HoldStillDuration@&nbsp;Sekunden lang nicht bewegt hast, wirst du <keywordStealth>unsichtbar</keywordStealth>, bis du dich bewegst. Wenn du diese <keywordStealth>Unsichtbarkeit</keywordStealth> verlässt, erhältst du @ASDuration@&nbsp;Sekunden lang <attackSpeed>@BonusAS@&nbsp;Angriffstempo</attackSpeed> und <speed>@BonusMS*100@&nbsp;% abfallendes Lauftempo</speed>. Der nächste Angriff verursacht zusätzlich <magicDamage>@BonusHitDamage@ magischen Schaden</magicDamage>.</rules>"
         },
         {
             "apiName": "FromBeginningToEnd",
@@ -3566,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "Du erhältst <scaleBonus>@ItemHaste@&nbsp;Tempo für Gegenstände</scaleBonus> (entspricht @TooltipCDR@&nbsp;% Abklingzeitverringerung für Gegenstände).<br><br><rules>Tempo für Gegenstände verringert die Abklingzeit aller Fähigkeiten von Gegenständen.</rules>",
+            "desc": "Du erhältst <scaleBonus>@ItemHaste@&nbsp;Gegenstandstempo</scaleBonus> (entspricht @TooltipCDR@&nbsp;% Abklingzeitverringerung für Gegenstände).<br><br><rules>Gegenstandstempo reduziert die %i:cooldown% Abklingzeit aller Gegenstandsfähigkeiten</rules>.",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "Spitzenerfinder",
             "rarity": 1,
-            "tooltip": "Du erhältst <scaleBonus>@ItemHaste@&nbsp;Tempo für Gegenstände</scaleBonus> (entspricht @TooltipCDR@&nbsp;% Abklingzeitverringerung für Gegenstände).<br><br><rules>Tempo für Gegenstände verringert die Abklingzeit aller Fähigkeiten von Gegenständen.</rules>"
+            "tooltip": "Du erhältst <scaleBonus>@ItemHaste@&nbsp;Gegenstandstempo</scaleBonus> (entspricht @TooltipCDR@&nbsp;% Abklingzeitverringerung für Gegenstände).<br><br><rules>Gegenstandstempo reduziert die %i:cooldown% Abklingzeit aller Gegenstandsfähigkeiten</rules>."
         },
         {
             "apiName": "MirrorImage",
@@ -3673,9 +3693,7 @@
                     ]
                 },
                 "LaserEyesTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3692,7 +3710,6 @@
                             "mStat": 2
                         }
                     ],
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -3766,7 +3783,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "Du erhältst <attackSpeed>@TotalASValue*100@&nbsp;% Gesamtangriffstempo</attackSpeed>. Bei @Breakpoint1@&nbsp;<attackSpeed>Angriffen</attackSpeed> pro Sekunde erhältst du neue Effekte.",
+            "desc": "Du erhältst <attackSpeed>@TotalASValue*100@&nbsp;% Gesamtangriffstempo</attackSpeed>. <br><br>Bei @Breakpoint1@&nbsp;<attackSpeed>Angriffen pro Sekunde</attackSpeed> erhältst du <magicDamage>&nbsp;magischen Schaden zusätzlich</magicDamage> {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3878,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3890,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -3924,15 +3938,15 @@
             "apiName": "BluntForce",
             "calculations": {},
             "dataValues": {
-                "ADIncrease": 0.15000000596046448
+                "ADAmp": 0.15000000596046448
             },
-            "desc": "Du erhältst <scaleAD>@ADIncrease*100@&nbsp;% Angriffsschaden</scaleAD>.",
+            "desc": "Du erhältst <scaleAD>@ADAmp*100@&nbsp;% Angriffsschaden</scaleAD>.",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "Stumpfe Gewalt",
             "rarity": 0,
-            "tooltip": "Du erhältst <scaleAD>@ADIncrease*100@&nbsp;% Angriffsschaden</scaleAD>."
+            "tooltip": "Du erhältst <scaleAD>@ADAmp*100@&nbsp;% (@f1@) Angriffsschaden</scaleAD>."
         },
         {
             "apiName": "Oathsworn",
@@ -4207,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "Heilungen/Schilde gewähren dir dauerhaft <keywordMajor>Verfluchte Macht</keywordMajor>. Du erhältst abhängig von deiner <keywordMajor>Verfluchten Macht</keywordMajor> Fähigkeitstempo.<br><br>Die maximale Menge an <keywordMajor>Verfluchter Macht</keywordMajor>, die du pro Runde erhalten kannst, skaliert mit der Gesamtzahl aller <keywordMajor>Fluchquellen</keywordMajor>, die dein Team hat.",
@@ -4220,17 +4234,25 @@
         },
         {
             "apiName": "MindtoMatter",
-            "calculations": {},
-            "dataValues": {
-                "ManaToHealthConversion": 0.5
+            "calculations": {
+                "ManaToHealthCalc": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                }
             },
-            "desc": "Dein <healing>maximales Leben</healing> wird um die Hälfte deines <scaleMana>Manas</scaleMana> erhöht.",
+            "dataValues": {},
+            "desc": "Dein <scaleHealth>maximales Leben</scaleHealth> wird um die Hälfte deines <scaleMana>Manas</scaleMana> erhöht.",
             "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
             "id": 56,
             "name": "Geist zu Materie",
             "rarity": 0,
-            "tooltip": "Dein <healing>maximales Leben</healing> wird um die Hälfte deines <scaleMana>Manas</scaleMana> erhöht."
+            "tooltip": "Du erhältst <scaleHealth>@ManaToHealthCalc@&nbsp;Leben</scaleHealth>."
         },
         {
             "apiName": "ItsKillingTime",
@@ -4338,9 +4360,7 @@
             "apiName": "AndMyAxe",
             "calculations": {
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4357,8 +4377,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.44999998807907104
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

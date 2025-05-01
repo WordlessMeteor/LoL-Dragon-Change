@@ -364,9 +364,7 @@
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -383,8 +381,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.05999999865889549
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -411,7 +408,7 @@
             "id": 94,
             "name": "희생의 의지",
             "rarity": 1,
-            "tooltip": "아군의 <scaleHealth>체력이 @AllyHealthThreshold*100@%</scaleHealth> 이하로 떨어지면 <scaleHealth>현재 체력의 @CurrentHealthToDrain*100@%</scaleHealth>를 <shield>보호막</shield>으로 바꿔 아군에게 부여합니다.<br><br>이번 라운드에 생성한 보호막: @f1@<br>생성한 보호막: 총 @f2@"
+            "tooltip": "아군의 <scaleHealth>체력이 @AllyHealthThreshold*100@%</scaleHealth> 이하로 떨어지면 <scaleHealth>현재 체력의 @CurrentHealthToDrain*100@%</scaleHealth>를 <shield>보호막</shield>으로 바꿔 아군에게 부여합니다.<br><br>이번 라운드에 생성한 보호막: @f1@<br>생성한 총 보호막: @f2@"
         },
         {
             "apiName": "Firefox",
@@ -426,9 +423,7 @@
                     "mSimpleTooltipCalculationDisplay": 6
                 },
                 "SingleFireDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -445,8 +440,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -587,11 +581,29 @@
             "id": 90,
             "name": "복수",
             "rarity": 1,
-            "tooltip": "동료가 사망한 후 피해량이 @DamageAmp*100@% 증가하고 <lifeSteal>모든 피해 흡혈 효과가 @Omnivamp*100@%</lifeSteal> 증가합니다.<br>이 라운드에 입힌 피해량: @f1@<br>입힌 피해량: 총 @f2@"
+            "tooltip": "동료가 사망한 후 피해량이 @DamageAmp*100@% 증가하고 <lifeSteal>모든 피해 흡혈 효과가 @Omnivamp*100@%</lifeSteal> 증가합니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
             "apiName": "Erosion",
-            "calculations": {},
+            "calculations": {
+                "MaxShredTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "Shred"
+                        },
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "MaxStacks"
+                        },
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 10.0
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 20.0,
                 "Shred": 0.014999999664723873,
@@ -603,7 +615,7 @@
             "id": 28,
             "name": "부식",
             "rarity": 0,
-            "tooltip": "적에게 피해를 입히면 @ShredDuration@초 동안 <scaleArmor>방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 @Shred*100@% 감소시킵니다. <br><br>최대 @MaxStacks@번까지 중첩됩니다."
+            "tooltip": "적에게 피해를 입히면 @ShredDuration@초 동안 <scaleArmor>방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 @Shred*100@% 감소시킵니다. 최대 @MaxStacks@회 중첩되어 @MaxShredTooltipOnly@%까지 감소합니다. "
         },
         {
             "apiName": "Stats",
@@ -623,30 +635,24 @@
             "apiName": "MasterofDuality",
             "calculations": {
                 "ADGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 9.0,
                             "mStartValue": 3.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "APGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 18.0,
                             "mStartValue": 6.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -662,9 +668,7 @@
             "apiName": "LightemUp",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -681,13 +685,10 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.1899999976158142
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "TOOLTIPONLYDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -704,8 +705,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.7599999904632568
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -721,17 +721,14 @@
             "apiName": "SearingDawn",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
                             "mStartValue": 40.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -782,14 +779,12 @@
             "apiName": "Spellwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -801,8 +796,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -825,9 +819,7 @@
             "apiName": "CenterOfTheUniverse",
             "calculations": {
                 "StarDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelBreakpointsCalculationPart",
@@ -844,8 +836,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -941,15 +932,13 @@
             "id": 233,
             "name": "궁극의 룰렛",
             "rarity": 2,
-            "tooltip": "소환사 질주를 무작위 궁극기로 교체합니다. 궁극기 사용 후 다른 무작위 궁극기로 교체합니다."
+            "tooltip": "소환사 질주를 무작위 궁극기로 교체합니다. 궁극기 사용 후 다른 무작위 궁극기로 교체합니다.<br><br><br><rules>이 주문들은 궁극기로 취급합니다.</rules>"
         },
         {
             "apiName": "ClownCollege",
             "calculations": {
                 "BasicAttackDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -966,8 +955,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "QCritDamageMod": {
                     "__type": "GameCalculation",
@@ -991,9 +979,7 @@
                     ]
                 },
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
@@ -1009,8 +995,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.550000011920929
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1030,7 +1015,7 @@
             "id": 310,
             "name": "광대 대학",
             "rarity": 2,
-            "tooltip": "<spellName>암습</spellName>: 뒤에서 공격 시 @BasicAttackDamage@의 <physicalDamage>추가 물리 피해</physicalDamage>를 입힙니다.<br><br><spellName>속임수</spellName>: 근처로 순간이동해 @StealthDuration@초 동안 <keywordStealth>투명</keywordStealth> 상태가 됩니다. <keywordStealth>투명</keywordStealth> 상태에서 다음 기본 공격 시 <physicalDamage>@TotalDamage@의 물리 피해</physicalDamage>를 추가로 입힙니다. 뒤에서 기본 공격 시 치명타가 적용되어 @QCritDamageMod@의 피해를 입힙니다.<br><br><spellName>환각: 죽음</spellName>: 사망 시 최대 체력의 @FearDamage*100@%에 해당하는 <trueDamage>고정 피해</trueDamage>를 입히고 주변을 @FearDuration@초 동안 공포에 빠뜨립니다."
+            "tooltip": "<spellName>암습</spellName>: 뒤에서 공격 시 @BasicAttackDamage@의 <physicalDamage>추가 물리 피해</physicalDamage>를 입힙니다.<br><br><spellName>속임수</spellName>: 근처로 순간이동해 @StealthDuration@초 동안 <keywordStealth>투명</keywordStealth> 상태가 됩니다. <keywordStealth>투명</keywordStealth> 상태에서 다음 기본 공격 시 <physicalDamage>@TotalDamage@의 물리 피해</physicalDamage>를 추가로 입힙니다. 뒤에서 기본 공격 시 치명타가 적용되어 @QCritDamageMod@의 피해를 입힙니다.<br><br><spellName>환각: 죽음</spellName>: 사망 시 <trueDamage>최대 체력의 @FearDamage*100@%에 해당하는 고정 피해</trueDamage>를 입히고 주변을 @FearDuration@초 동안 공포에 빠뜨립니다."
         },
         {
             "apiName": "NumbToPain",
@@ -1209,13 +1194,13 @@
                 "Radius": 450.0,
                 "RootDuration": 1.25
             },
-            "desc": "@Cooldown@초마다 <keywordMajor>자동으로</keywordMajor> 주변 적을 @RootDuration@초 동안 <status>속박</status>합니다.<br>",
+            "desc": "<keywordMajor>자동 사용</keywordMajor> @Cooldown@초마다 주변 적을 @RootDuration@초 동안 <status>속박</status>합니다.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
             "id": 39,
             "name": "서리 망령",
             "rarity": 0,
-            "tooltip": "@Cooldown@초마다 <keywordMajor>자동으로</keywordMajor> 주변 적을 @RootDuration@초 동안 <status>속박</status>합니다.<br><br>이 라운드에 속박한 적: @f1@<br>총 속박한 적: @f2@"
+            "tooltip": "<keywordMajor>자동 사용</keywordMajor> @Cooldown@초마다 주변 적을 @RootDuration@초 동안 <status>속박</status>합니다.<br><br>이 라운드에 속박한 적: @f1@<br>총 속박한 적: @f2@"
         },
         {
             "apiName": "SymphonyofWar",
@@ -1314,40 +1299,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "멀리 떨어진 챔피언에게 피해를 입히면 <abilityName>정조준 일격</abilityName>을 <keywordMajor>자동 사용</keywordMajor>합니다.",
+            "desc": "멀리 떨어진 챔피언에게 피해를 입히면 <abilityName>정조준 일격</abilityName>을 발사합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "정조준 일격 신동",
             "rarity": 2,
-            "tooltip": "@SnipeDistance@유닛 거리 이상 떨어진 대상에게 피해를 입히면 <abilityName>정조준 일격</abilityName>을 <keywordMajor>자동 사용</keywordMajor>해 <magicDamage>@Damage@의 마법 피해</magicDamage>를 입힙니다. 대상별로 @Cooldown@초의 재사용 대기시간이 적용됩니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
+            "tooltip": "@SnipeDistance@유닛 거리 이상 떨어진 대상에게 피해를 입히면 <abilityName>정조준 일격</abilityName>을 발사해 <magicDamage>@Damage@의 마법 피해</magicDamage>를 입힙니다. 대상별로 @Cooldown@초의 재사용 대기시간이 적용됩니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1416,9 +1398,7 @@
             "apiName": "Earthwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1435,8 +1415,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1452,7 +1431,7 @@
             "id": 27,
             "name": "대지의 각성",
             "rarity": 2,
-            "tooltip": "돌진, 도약, 점멸, 순간이동 스킬이 1초 후에 폭발하는 흔적을 남기고 @Damage@의 <physicalDamage>물리 피해</physicalDamage>를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
+            "tooltip": "돌진, 도약, 점멸, 순간이동 스킬이 1초 후에 폭발하는 흔적을 남기고 <physicalDamage>@Damage@의 물리 피해</physicalDamage>를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
             "apiName": "ScopedWeapons",
@@ -1504,17 +1483,14 @@
             "apiName": "SonicBoom",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 150.0,
                             "mStartValue": 30.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1528,7 +1504,7 @@
             "id": 76,
             "name": "음속 폭발",
             "rarity": 0,
-            "tooltip": "아군에게 이로운 효과, <healing>회복</healing>, <shield>보호막</shield>을 부여하면 아군 주변 적들에게 <trueDamage>@Damage@의 고정 피해</trueDamage>를 입히고 2초 동안 @SlowAmount*-100@% <status>둔화</status>시킵니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
+            "tooltip": "아군에게 이로운 효과, <healing>체력 회복</healing>, <shield>보호막</shield>을 부여하면 아군 주변 적들에게 <trueDamage>@Damage@의 고정 피해</trueDamage>를 입히고 2초 동안 @SlowAmount*-100@% <status>둔화</status>시킵니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
             "apiName": "TwiceThrice",
@@ -1614,17 +1590,14 @@
             "apiName": "FallenAegis",
             "calculations": {
                 "ShieldAmount": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 350.0,
                             "mStartValue": 50.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1636,7 +1609,7 @@
             "id": 34,
             "name": "부패한 방패",
             "rarity": 0,
-            "tooltip": "@ShieldDuration@초 동안 @ShieldAmount@의 마법 피해를 흡수하는 <abilityName>검은 보호막</abilityName>을 가지고 전투를 시작합니다.<br><br><rules><abilityName>검은 보호막</abilityName>은 마법 피해와 <status>이동 불가</status> 효과를 막습니다.</rules><br><br>생성한 총 보호막: @f1@<br>방어한 총 이동 불가 주문: @f2@"
+            "tooltip": "@ShieldDuration@초 동안 <shield>@ShieldAmount@의 마법 피해</shield>를 흡수하는 <abilityName>검은 보호막</abilityName>을 가지고 전투를 시작합니다. 보호막이 유지되는 동안 <status>방해</status> 및 <status>이동 불가</status> 효과에 면역됩니다.<br><br>생성한 총 보호막: @f1@<br>방어한 총 이동 불가 주문: @f2@"
         },
         {
             "apiName": "HolyFire",
@@ -1679,14 +1652,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "ManaCalc": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1667,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "<scaleMana>마나</scaleMana> 소모량이 2배가 됩니다. 스킬 사용 시 <scaleMana>최대 마나</scaleMana>에 비례하여 추가 피해를 입힙니다.",
+            "desc": "<scaleMana>마나</scaleMana> 소모량이 2배가 됩니다. 스킬의 <healing>체력 회복량</healing>, <shield>보호막 흡수량</shield> 및 피해량이 <scaleMana>최대 마나</scaleMana>에 비례해 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "범람",
             "rarity": 0,
-            "tooltip": "<scaleMana>마나</scaleMana> 소모량이 2배가 됩니다. 스킬 사용 시 <scaleMana>@ManaCalc@</scaleMana>의 추가 피해를 입힙니다."
+            "tooltip": "<scaleMana>마나</scaleMana> 소모량이 2배가 됩니다. 스킬의 <healing>체력 회복량</healing>, <shield>보호막 흡수량</shield> 및 피해량이 <scaleMana>@ManaCalc@</scaleMana> 증가합니다."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1767,9 +1735,7 @@
             "apiName": "GuiltyPleasure",
             "calculations": {
                 "TotalHeal": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1781,8 +1747,7 @@
                             "mDataValue": "HealPercentage",
                             "mStat": 12
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1847,18 +1812,35 @@
         },
         {
             "apiName": "OutlawsGrit",
-            "calculations": {},
+            "calculations": {
+                "MaxResistTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ResistsPerStack"
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "MaxStacks"
+                            }
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "돌진, 도약, 점멸, 순간이동 스킬을 사용한 후 <scaleArmor>@ResistsPerStack@의 방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 얻습니다.<br><br>최대 @MaxStacks@번까지 중첩됩니다.",
+            "desc": "돌진, 도약, 점멸, 순간이동 스킬을 사용한 후 <scaleArmor>@ResistsPerStack@의 방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 얻습니다. 최대 @MaxStacks@회 중첩되어 @MaxResistTooltipOnly@까지 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
             "name": "무법자의 투지",
             "rarity": 1,
-            "tooltip": "돌진, 도약, 점멸, 순간이동 스킬을 사용한 후 <scaleArmor>@ResistsPerStack@의 방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 얻습니다.<br><br>최대 @MaxStacks@번까지 중첩됩니다."
+            "tooltip": "돌진, 도약, 점멸, 순간이동 스킬을 사용한 후 <scaleArmor>@ResistsPerStack@의 방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 얻습니다. 최대 @MaxStacks@회 중첩되어 @MaxResistTooltipOnly@까지 증가합니다."
         },
         {
             "apiName": "DontBlink",
@@ -1872,7 +1854,7 @@
             "id": 26,
             "name": "속전속결",
             "rarity": 0,
-            "tooltip": "대상보다 <moveSpeed>이동 속도가 10</moveSpeed> 높을 때마다 추가 피해량이 @BonusDamagePerMSDifference*1000@% 증가합니다.<br><br>이번 라운드에 입힌 추가 피해량: @f1@<br>총 추가 피해량: @f2@"
+            "tooltip": "대상보다 <speed>이동 속도가 10</speed> 높을 때마다 추가 피해량이 @BonusDamagePerMSDifference*1000@% 증가합니다.<br><br>이번 라운드에 입힌 추가 피해량: @f1@<br>총 추가 피해량: @f2@"
         },
         {
             "apiName": "ShadowRunner",
@@ -1893,15 +1875,12 @@
             "apiName": "InfernalConduit",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -1936,6 +1915,32 @@
             "name": "지옥의 전도체",
             "rarity": 2,
             "tooltip": "스킬 사용 시 무한히 중첩되는 <keywordMajor>화상</keywordMajor> 효과를 적용해 @BleedDuration@초 동안 매초 <magicDamage>@BleedDamageTooltip@의 마법 피해</magicDamage>를 입힙니다.<br><br>모든 <keywordMajor>화상</keywordMajor> 효과가 적에게 피해를 입힐 때마다 기본 스킬의 재사용 대기시간을 @FlatCooldownRefundPerTick@초 감소시킵니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {
+                "APAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APAmp"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "<scaleAD>추가 공격력</scaleAD>을 <scaleAP>주문력</scaleAP>으로 전환합니다. <scaleAP>주문력이 @APAmp*100@%</scaleAP> 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "적응형 능력치",
+            "rarity": 0,
+            "tooltip": "<scaleAD>추가 공격력</scaleAD>을 <scaleAP>주문력</scaleAP>으로 전환합니다. 또한 <scaleAP>주문력이 @APAmpCalcTooltip@</scaleAP> 증가합니다.<br><br>현재 전환 수치: @f1@<br><br><rules>전환 비율은 <scaleAD>공격력</scaleAD> 1당 <scaleAP>주문력 @ConversionRate@</scaleAP>입니다.</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2000,15 +2005,12 @@
                     ]
                 },
                 "BurnDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "BurnDamage",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 4.0
                     },
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -2036,9 +2038,7 @@
                     "tooltipOnly": true
                 },
                 "DamagePerSecond": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2055,8 +2055,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -2214,15 +2213,12 @@
             "apiName": "SlowCooker",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -2330,7 +2326,7 @@
             "id": 78,
             "name": "정신 결속",
             "rarity": 2,
-            "tooltip": "아군이 입는 피해를 @DamageRedirectPercentage*100@%만큼 대신 입고 아군이 받는 회복 효과도 @HealCopyPercentage*100@%만큼 받습니다.<br><br>대신 입은 총 피해량: @f1@<br>총 체력 회복량: @f2@<br>"
+            "tooltip": "아군이 입는 피해를 @DamageRedirectPercentage*100@%만큼 대신 입고 <healing>아군이 받는 회복 효과도 @HealCopyPercentage*100@%</healing>만큼 받습니다.<br><br>대신 입은 총 피해량: @f1@<br>총 체력 회복량: @f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2342,13 +2338,13 @@
                 "OnHitDamageRatio": 0.30000001192092896,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "기본 공격 시 영구히 <keywordMajor>저주받은 힘</keywordMajor>을 얻으며 <keywordMajor>저주받은 힘</keywordMajor>에 따라 추가 <magicDamage>마법 피해</magicDamage>를 입힙니다.<br><br>라운드마다 얻을 수 있는 <keywordMajor>저주받은 힘</keywordMajor>의 최대치는 자신과 아군의 <keywordMajor>저주</keywordMajor> 총합에 비례합니다.",
+            "desc": "적 챔피언 기본 공격 시 영구히 <keywordMajor>저주받은 힘</keywordMajor>을 얻으며 <keywordMajor>저주받은 힘</keywordMajor>에 따라 추가 <magicDamage>마법 피해</magicDamage>를 입힙니다.<br><br>라운드마다 얻을 수 있는 <keywordMajor>저주받은 힘</keywordMajor>의 최대치는 자신과 아군의 <keywordMajor>저주</keywordMajor> 총합에 비례합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "죽음의 손길",
             "rarity": 1,
-            "tooltip": "기본 공격 시 @CurseCounter@의 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다.<br><br>기본 공격 시 <magicDamage>@f1@의 추가 마법 피해</magicDamage>를 입힙니다. (<keywordMajor>저주받은 힘</keywordMajor>의 @OnHitDamageRatio*100@%)<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "적 챔피언 기본 공격 시 @CurseCounter@의 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다.<br><br>기본 공격 시 <magicDamage>@f1@의 추가 마법 피해</magicDamage>를 입힙니다. (<keywordMajor>저주받은 힘</keywordMajor>의 @OnHitDamageRatio*100@%)<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2482,9 +2478,7 @@
             "apiName": "OkBoomerang",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2501,20 +2495,19 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.15000000596046448
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "BaseCooldown": 7.0
             },
-            "desc": "<keywordMajor>자동 사용</keywordMajor>: 7초마다 근처 적에게 부메랑을 던집니다.",
+            "desc": "<keywordMajor>자동 사용</keywordMajor> @BaseCooldown@초마다 근처 적에게 부메랑을 던집니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
             "id": 61,
             "name": "부메랑 투척",
             "rarity": 1,
-            "tooltip": "<keywordMajor>자동 사용</keywordMajor>: 7초마다 근처 적에게 부메랑을 던져 적중한 적에게 @Damage@의 적응형 피해를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
+            "tooltip": "<keywordMajor>자동 사용</keywordMajor> @BaseCooldown@초마다 근처 적에게 부메랑을 던져 적중한 적에게 @Damage@의 적응형 피해를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
             "apiName": "JuiceBox",
@@ -2657,6 +2650,33 @@
             "tooltip": "스킬의 영구적 <keywordMajor>중첩</keywordMajor>을 얻을 때 @StackModifier*100@% 더 얻습니다!"
         },
         {
+            "apiName": "escAPADe",
+            "calculations": {
+                "ADAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADAmp",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "<scaleAP>주문력</scaleAP>을 <scaleAD>추가 공격력</scaleAD>으로 전환합니다. <scaleAD>공격력이 @ADAmp*100@%</scaleAD> 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "마법사 (물리)",
+            "rarity": 0,
+            "tooltip": "<scaleAP>주문력</scaleAP>을 <scaleAD>추가 공격력</scaleAD>으로 전환합니다. 또한 <scaleAD>공격력이 @ADAmpCalcTooltip@</scaleAD> 증가합니다.<br><br>현재 전환 수치: @f1@<br><br><rules>전환 비율은 <scaleAP>주문력</scaleAP> 1당 <scaleAD>공격력 @ConversionRate@</scaleAD>입니다.</rules>"
+        },
+        {
             "apiName": "FeyMagic",
             "calculations": {},
             "dataValues": {
@@ -2697,13 +2717,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "스킬이 적중하면 영구히 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다. <keywordMajor>저주받은 힘</keywordMajor>에 따라 적응형 능력치를 얻습니다.<br><br>라운드마다 얻을 수 있는 <keywordMajor>저주받은 힘</keywordMajor>의 최대치는 자신과 아군의 <keywordMajor>저주</keywordMajor> 총합에 비례합니다.",
+            "desc": "적 챔피언에게 스킬을 적중시키면 영구히 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다. <keywordMajor>저주받은 힘</keywordMajor>에 따라 <font color = '#8347ff'>적응형 능력치</font>를 얻습니다.<br><br>라운드마다 얻을 수 있는 <keywordMajor>저주받은 힘</keywordMajor>의 최대치는 자신과 아군의 <keywordMajor>저주</keywordMajor> 총합에 비례합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "파멸의 예언자",
             "rarity": 2,
-            "tooltip": "스킬 사용 시 @CurseCounter@의 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다.<br><br>@f1@의 적응형 능력치를 얻습니다. (<keywordMajor>저주받은 힘</keywordMajor>의 @AdaptiveForceRatio*100@%)<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "적 챔피언에게 스킬을 적중시키면 @CurseCounter@의 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다.<br><br>@f1@의 <font color = '#8347ff'>적응형 능력치</font>를 얻습니다. (<keywordMajor>저주받은 힘</keywordMajor>의 @AdaptiveForceRatio*100@%)<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2848,7 +2868,7 @@
             "id": 310,
             "name": "탱크 엔진",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>처치 관여: @f1@"
+            "tooltip": "크기가 @SizeIncrement*100@% 커지고 <scaleHealth>@f2@의 추가 체력</scaleHealth>을 얻습니다. (처치 관여당 <scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth>)<br><br>처치 관여: @f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -2975,7 +2995,7 @@
             "id": 207,
             "name": "미동 없이",
             "rarity": 0,
-            "tooltip": "<spellName>유격 전투</spellName> 효과를 얻습니다.<br><br><rules>@HoldStillDuration@초 동안 가만히 있으면 다시 이동할 때까지 <keywordStealth>투명</keywordStealth> 상태가 됩니다. <keywordStealth>투명</keywordStealth> 상태에서 벗어나면 @ASDuration@초 동안 <attackSpeed>공격 속도가 @BonusAS@ 증가</attackSpeed>하고 <speed>이동 속도</speed>가 @BonusMS*100@% 증가했다가 점차 감소하며 다음 적중 시 @BonusHitDamage@의 마법 피해를 입힙니다.</rules>"
+            "tooltip": "<spellName>유격 전투</spellName> 효과를 얻습니다.<br><br><rules>@HoldStillDuration@초 동안 가만히 있으면 다시 이동할 때까지 <keywordStealth>투명</keywordStealth> 상태가 됩니다. <keywordStealth>투명</keywordStealth> 상태에서 벗어나면 @ASDuration@초 동안 <attackSpeed>공격 속도가 @BonusAS@</attackSpeed> 증가하며, <speed>이동 속도가 @BonusMS*100@% 증가했다가 점차 감소</speed>합니다. 다음번에 적에게 피해를 입히면 추가로 <magicDamage>@BonusHitDamage@의 마법 피해</magicDamage>를 입힙니다.</rules>"
         },
         {
             "apiName": "FromBeginningToEnd",
@@ -3566,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "<scaleBonus>아이템 가속이 @ItemHaste@</scaleBonus> 증가합니다. (@TooltipCDR@%의 아이템 재사용 대기시간 감소 효과와 동일)<br><br><rules>아이템 가속은 모든 아이템 스킬의 재사용 대기시간을 감소시킵니다.</rules>",
+            "desc": "<scaleBonus>아이템 가속이 @ItemHaste@</scaleBonus> 증가합니다. (@TooltipCDR@%의 아이템 재사용 대기시간 감소 효과와 동일)<br><br><rules>아이템 가속은 모든 아이템 스킬의 재사용 대기시간%i:cooldown%을 감소시킵니다.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "최첨단 발명가",
             "rarity": 1,
-            "tooltip": "<scaleBonus>아이템 가속이 @ItemHaste@</scaleBonus> 증가합니다. (@TooltipCDR@%의 아이템 재사용 대기시간 감소 효과와 동일)<br><br><rules>아이템 가속은 모든 아이템 스킬의 재사용 대기시간을 감소시킵니다.</rules>"
+            "tooltip": "<scaleBonus>아이템 가속이 @ItemHaste@</scaleBonus> 증가합니다. (@TooltipCDR@%의 아이템 재사용 대기시간 감소 효과와 동일)<br><br><rules>아이템 가속은 모든 아이템 스킬의 재사용 대기시간%i:cooldown%을 감소시킵니다.</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3673,9 +3693,7 @@
                     ]
                 },
                 "LaserEyesTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3692,7 +3710,6 @@
                             "mStat": 2
                         }
                     ],
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -3766,7 +3783,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "<attackSpeed>총 공격 속도가 @TotalASValue*100@%</attackSpeed> 증가합니다. 초당 <attackSpeed>공격 횟수</attackSpeed> @Breakpoint1@에서 새로운 효과를 얻습니다.",
+            "desc": "<attackSpeed>총 공격 속도가 @TotalASValue*100@%</attackSpeed> 증가합니다. <br><br><attackSpeed>초당 공격 횟수</attackSpeed> @Breakpoint1@회에서 추가 <magicDamage>마법 피해</magicDamage>({{ Item_Keyword_OnHit }})를 입힙니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3878,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3890,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -3924,15 +3938,15 @@
             "apiName": "BluntForce",
             "calculations": {},
             "dataValues": {
-                "ADIncrease": 0.15000000596046448
+                "ADAmp": 0.15000000596046448
             },
-            "desc": "<scaleAD>공격력이 @ADIncrease*100@%</scaleAD> 증가합니다.",
+            "desc": "<scaleAD>공격력이 @ADAmp*100@%</scaleAD> 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "육중한 힘",
             "rarity": 0,
-            "tooltip": "<scaleAD>공격력이 @ADIncrease*100@%</scaleAD> 증가합니다."
+            "tooltip": "<scaleAD>공격력이 @ADAmp*100@% (@f1@)</scaleAD> 증가합니다."
         },
         {
             "apiName": "Oathsworn",
@@ -4207,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "체력을 회복하거나 보호막을 씌우면 영구히 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다. <keywordMajor>저주받은 힘</keywordMajor>에 따라 스킬 가속을 얻습니다.<br><br>라운드마다 얻을 수 있는 <keywordMajor>저주받은 힘</keywordMajor>의 최대치는 자신과 아군의 <keywordMajor>저주</keywordMajor> 총합에 비례합니다.",
@@ -4220,17 +4234,25 @@
         },
         {
             "apiName": "MindtoMatter",
-            "calculations": {},
-            "dataValues": {
-                "ManaToHealthConversion": 0.5
+            "calculations": {
+                "ManaToHealthCalc": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                }
             },
-            "desc": "<healing>최대 체력</healing>이 <scaleMana>마나</scaleMana>의 절반만큼 증가합니다.",
+            "dataValues": {},
+            "desc": "<scaleHealth>최대 체력</scaleHealth>이 <scaleMana>마나</scaleMana>의 절반만큼 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
             "id": 56,
             "name": "정신 변환",
             "rarity": 0,
-            "tooltip": "<healing>최대 체력</healing>이 <scaleMana>마나</scaleMana>의 절반만큼 증가합니다."
+            "tooltip": "<scaleHealth>체력이 @ManaToHealthCalc@</scaleHealth> 증가합니다."
         },
         {
             "apiName": "ItsKillingTime",
@@ -4338,9 +4360,7 @@
             "apiName": "AndMyAxe",
             "calculations": {
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4357,8 +4377,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.44999998807907104
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

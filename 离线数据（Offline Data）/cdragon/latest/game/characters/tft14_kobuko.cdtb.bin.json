@@ -95,8 +95,8 @@
                     "mName": "SlamPrimaryTargetBaseDamage",
                     "mValues": [
                         0.0,
-                        200.0,
                         300.0,
+                        450.0,
                         13370.0,
                         13370.0,
                         0.0,
@@ -105,28 +105,15 @@
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "SlamTargetHealthRatio",
+                    "mName": "SlamSecondaryTargetBaseDamage",
                     "mValues": [
                         0.0,
-                        0.029999999329447746,
-                        0.05000000074505806,
-                        1.0,
-                        3.0,
+                        150.0,
+                        225.0,
+                        1337.0,
+                        1337.0,
                         3.0,
                         3.0
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "SlamTargetHealthRatio_AP",
-                    "mValues": [
-                        0.0,
-                        0.05999999865889549,
-                        0.10000000149011612,
-                        1.0,
-                        3.0,
-                        0.0,
-                        0.0
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -134,8 +121,8 @@
                     "mName": "PassiveHealthThreshold",
                     "mValues": [
                         0.30000001192092896,
-                        0.3499999940395355,
-                        0.3499999940395355,
+                        0.5,
+                        0.5,
                         0.8999999761581421,
                         0.30000001192092896,
                         0.30000001192092896,
@@ -147,8 +134,8 @@
                     "mName": "PassiveShieldHealthRatio",
                     "mValues": [
                         0.0,
-                        0.699999988079071,
-                        0.699999988079071,
+                        1.0,
+                        1.0,
                         4.0,
                         5.0,
                         0.0,
@@ -157,7 +144,7 @@
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "ShieldDecayDuration",
+                    "mName": "ShieldDuration",
                     "mValues": [
                         4.0,
                         4.0,
@@ -172,13 +159,13 @@
                 {
                     "mName": "EnrageAS",
                     "mValues": [
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0,
-                        1.0
+                        1.25,
+                        1.25,
+                        1.25,
+                        1.25,
+                        1.25,
+                        1.25,
+                        1.25
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -186,8 +173,8 @@
                     "mName": "EnrageOmnivamp",
                     "mValues": [
                         0.20000000298023224,
-                        0.20000000298023224,
-                        0.20000000298023224,
+                        0.30000001192092896,
+                        0.30000001192092896,
                         1.0,
                         1.0,
                         0.20000000298023224,
@@ -199,51 +186,38 @@
                     "mName": "OnHitDamage",
                     "mValues": [
                         0.0,
-                        90.0,
-                        135.0,
-                        314.0,
-                        0.0,
+                        100.0,
+                        150.0,
+                        999.0,
+                        999.0,
                         0.0,
                         0.0
                     ],
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "DR",
+                    "mName": "EnrageOnHitBonus",
                     "mValues": [
-                        0.6000000238418579,
                         0.33000001311302185,
                         0.33000001311302185,
-                        0.9900000095367432,
-                        1.0,
-                        0.6000000238418579,
-                        0.6000000238418579
+                        0.33000001311302185,
+                        0.33000001311302185,
+                        0.33000001311302185,
+                        0.33000001311302185,
+                        0.33000001311302185
                     ],
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "CyberbossRatio",
+                    "mName": "CyberbossOnHitPercentDamage",
                     "mValues": [
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896
-                    ],
-                    "__type": "SpellDataValue"
-                },
-                {
-                    "mName": "EnrageMana",
-                    "mValues": [
-                        100.0,
-                        100.0,
-                        100.0,
-                        100.0,
-                        100.0,
-                        100.0,
-                        100.0
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5
                     ],
                     "__type": "SpellDataValue"
                 }
@@ -267,7 +241,7 @@
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "{b725eceb}",
+                                "mDataValue": "SlamPrimaryTargetBaseDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 0.009999999776482582,
@@ -292,7 +266,23 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{dd787028}": {
+                "ModifiedSecondaryTargetDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "SlamSecondaryTargetBaseDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "{47cf77b3}": {
                     "mSimpleTooltipCalculationDisplay": 5,
                     "mExpandedTooltipCalculationDisplay": 5,
                     "StaticTooltipCalculationDisplay": 5,
@@ -300,22 +290,24 @@
                         {
                             "mSubparts": [
                                 {
-                                    "mDataValue": "{dceb8942}",
-                                    "__type": "NamedDataValueCalculationPart"
+                                    "mSpellCalculationKey": "ModifiedOnHitDamage",
+                                    "__type": "{f3cbe7b2}"
                                 },
                                 {
-                                    "mSubpart": {
-                                        "mDataValue": "{4a3b5e66}",
+                                    "mPart1": {
+                                        "mSpellCalculationKey": "ModifiedOnHitDamage",
+                                        "__type": "{f3cbe7b2}"
+                                    },
+                                    "mPart2": {
+                                        "mDataValue": "EnrageOnHitBonus",
                                         "__type": "NamedDataValueCalculationPart"
                                     },
-                                    "mRatio": 0.009999999776482582,
-                                    "__type": "SubPartScaledProportionalToStat"
+                                    "__type": "ProductOfSubPartsCalculationPart"
                                 }
                             ],
                             "__type": "SumOfSubPartsCalculationPart"
                         }
                     ],
-                    "mDisplayAsPercent": true,
                     "__type": "GameCalculation"
                 }
             },
@@ -330,6 +322,9 @@
                 0.0,
                 0.0
             ],
+            "cannotBeSuppressed": true,
+            "canCastWhileDisabled": true,
+            "canCastOrQueueWhileCasting": true,
             "castRange": [
                 25000.0,
                 25000.0,
@@ -394,8 +389,7 @@
                                     "__type": "TooltipInstanceListElement"
                                 },
                                 {
-                                    "type": "SlamTargetHealthRatio",
-                                    "multiplier": 100.0,
+                                    "type": "SlamSecondaryTargetBaseDamage",
                                     "nameOverride": "Spell_TFT14_KobukoSpell_TargetHealthPercent",
                                     "Style": 1,
                                     "__type": "TooltipInstanceListElement"
@@ -454,10 +448,10 @@
         "healthBarHeight": 205.0,
         "healthBarFullParallax": true,
         "primaryAbilityResource": {
-            "arType": 0,
-            "arBase": 240.0,
+            "arBase": 0.0,
             "arBaseStaticRegen": 0.0,
             "arAllowMaxValueToBeOverridden": true,
+            "arIsShown": false,
             "__type": "AbilityResourceSlotInfo"
         },
         "baseDamage": 20.0,
@@ -467,7 +461,7 @@
         "critDamageMultiplier": 1.399999976158142,
         "baseMoveSpeed": 500.0,
         "attackRange": 180.0,
-        "attackSpeed": 0.800000011920929,
+        "attackSpeed": 1.0,
         "attackSpeedRatio": 0.5,
         "basicAttack": {
             "mAttackName": "TFT14_KobukoBasicAttack",

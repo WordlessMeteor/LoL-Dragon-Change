@@ -364,9 +364,7 @@
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -383,8 +381,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.05999999865889549
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -426,9 +423,7 @@
                     "mSimpleTooltipCalculationDisplay": 6
                 },
                 "SingleFireDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -445,8 +440,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -587,11 +581,29 @@
             "id": 90,
             "name": "Bosszú",
             "rarity": 1,
-            "tooltip": "@DamageAmp*100@%-kal nő a sebzésed, és <lifeSteal>@Omnivamp*100@% életvarázst</lifeSteal> kapsz, miután a partnered meghalt.<br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
+            "tooltip": "@DamageAmp*100@%-kal nő a sebzésed, és <lifeSteal>@Omnivamp*100@% életvarázst</lifeSteal> kapsz, miután a partnered meghalt.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
         },
         {
             "apiName": "Erosion",
-            "calculations": {},
+            "calculations": {
+                "MaxShredTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "Shred"
+                        },
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "MaxStacks"
+                        },
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 10.0
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 20.0,
                 "Shred": 0.014999999664723873,
@@ -603,7 +615,7 @@
             "id": 28,
             "name": "Erózió",
             "rarity": 0,
-            "tooltip": "Az ellenfelek megsebzése @ShredDuration@másodpercig @Shred*100@%-kal csökkenti a <scaleArmor>páncélt</scaleArmor> és a <scaleMR>varázsellenállást</scaleMR>. <br><br>Legfeljebb @MaxStacks@ alkalommal halmozódhat."
+            "tooltip": "Az ellenfelek megsebzése @ShredDuration@ másodpercig @Shred*100@%-kal csökkenti a <scaleArmor>páncélt</scaleArmor> és a <scaleMR>varázsellenállást</scaleMR>. A maximális érték @MaxShredTooltipOnly@% @MaxStacks@ jelzőnél."
         },
         {
             "apiName": "Stats",
@@ -623,30 +635,24 @@
             "apiName": "MasterofDuality",
             "calculations": {
                 "ADGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 9.0,
                             "mStartValue": 3.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "APGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 18.0,
                             "mStartValue": 6.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -662,9 +668,7 @@
             "apiName": "LightemUp",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -681,13 +685,10 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.1899999976158142
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "TOOLTIPONLYDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -704,8 +705,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.7599999904632568
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -721,17 +721,14 @@
             "apiName": "SearingDawn",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
                             "mStartValue": 40.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -782,14 +779,12 @@
             "apiName": "Spellwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -801,8 +796,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -825,9 +819,7 @@
             "apiName": "CenterOfTheUniverse",
             "calculations": {
                 "StarDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelBreakpointsCalculationPart",
@@ -844,8 +836,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -915,7 +906,7 @@
             "id": 92,
             "name": "Sebezhetőség",
             "rarity": 1,
-            "tooltip": "A tárgyaiddal és folyamatosan sebző hatásaiddal kritikus csapást mérhetsz, további @CritDamage*100@% sebzést okozva. @CritChance*100@% kritikus csapási esélyt kapsz.<br><br>A körben okozott sebzés: @f1@<br>Okozott sebzés összesen: @f2@"
+            "tooltip": "A tárgyaiddal és folyamatosan sebző hatásaiddal kritikus csapást mérhetsz, további @CritDamage*100@% sebzést okozva. @CritChance*100@% kritikus csapási esélyt kapsz.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
         },
         {
             "apiName": "CannonFodder",
@@ -941,15 +932,13 @@
             "id": 233,
             "name": "Végső rulett",
             "rarity": 2,
-            "tooltip": "A Menekülj idézői varázslatot egy véletlenszerű végső képességre cseréli. A végső képesség elsütése után lecseréli azt egy új, véletlenszerű végső képességre."
+            "tooltip": "A Menekülj idézői varázslatot egy véletlenszerű végső képességre cseréli. A végső képesség elsütése után lecseréli azt egy új, véletlenszerű végső képességre.<br><br><br><rules>Ezek a varázslatok továbbra is végső képességek.</rules>"
         },
         {
             "apiName": "ClownCollege",
             "calculations": {
                 "BasicAttackDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -966,8 +955,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "QCritDamageMod": {
                     "__type": "GameCalculation",
@@ -991,9 +979,7 @@
                     ]
                 },
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
@@ -1009,8 +995,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.550000011920929
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1030,7 +1015,7 @@
             "id": 310,
             "name": "Bohóciskola",
             "rarity": 2,
-            "tooltip": "<spellName>Hátbaszúrás</spellName>: @BasicAttackDamage@ <physicalDamage>bónusz fizikai sebzést</physicalDamage> okozol, amikor hátulról támadsz az ellenfelekre.<br><br><spellName>Megtévesztés</spellName>: Teleportálsz, és @StealthDuration@ másodpercig <keywordStealth>lopakodsz</keywordStealth>. A következő támadásod <keywordStealth>lopakodás</keywordStealth> közben további <physicalDamage>@TotalDamage@ fizikai sebzést</physicalDamage> okoz. Ha hátulról támadsz, a támadás kritikus csapás lesz, és @QCritDamageMod@ sebzést okoz.<br><br><spellName>Hallucináció: Halál</spellName>: halál esetén a maximális életerő @FearDamage*100@%-ával egyenlő <trueDamage>tényleges sebzést</trueDamage> okozol, valamint @FearDuration@ másodpercre megrémíted a körülötted lévő ellenfeleket."
+            "tooltip": "<spellName>Hátbaszúrás</spellName>: @BasicAttackDamage@ <physicalDamage>bónusz fizikai sebzést</physicalDamage> okozol, amikor hátulról támadsz az ellenfelekre.<br><br><spellName>Megtévesztés</spellName>: Teleportálsz, és @StealthDuration@ másodpercig <keywordStealth>lopakodsz</keywordStealth>. A következő támadásod <keywordStealth>lopakodás</keywordStealth> közben további <physicalDamage>@TotalDamage@ fizikai sebzést</physicalDamage> okoz. Ha hátulról támadsz, a támadás kritikus csapás lesz, és @QCritDamageMod@ sebzést okoz.<br><br><spellName>Hallucináció: Halál</spellName>: halál esetén a maximális életerő <trueDamage>@FearDamage*100@%-ával egyenlő tényleges sebzést</trueDamage> okozol, valamint @FearDuration@ másodpercre megrémíted a körülötted lévő ellenfeleket."
         },
         {
             "apiName": "NumbToPain",
@@ -1209,13 +1194,13 @@
                 "Radius": 450.0,
                 "RootDuration": 1.25
             },
-            "desc": "@Cooldown@ másodpercenként @RootDuration@ másodpercre <keywordMajor>automatikusan</keywordMajor> <status>mozgásképtelenné</status> teszi a közeli ellenfeleket.<br>",
+            "desc": "@Cooldown@ másodpercenként @RootDuration@ másodpercre <keywordMajor>automatikusan</keywordMajor> <status>földbe gyökerezteti</status> a közeli ellenfeleket.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
             "id": 39,
             "name": "Fagylidérc",
             "rarity": 0,
-            "tooltip": "@Cooldown@ másodpercenként @RootDuration@ másodpercre <keywordMajor>automatikusan</keywordMajor> <status>mozgásképtelenné</status> teszi a közeli ellenfeleket.<br><br>A körben mozgásképtelenné tett ellenfelek: @f1@<br>Mozgásképtelenné tett ellenfelek összesen: @f2@"
+            "tooltip": "@Cooldown@ másodpercenként @RootDuration@ másodpercre <keywordMajor>automatikusan</keywordMajor> <status>földbe gyökerezteti</status> a közeli ellenfeleket.<br><br>Földbe gyökereztetett ellenfelek ebben a körben: @f1@<br>Földbe gyökereztetett ellenfelek összesen: @f2@"
         },
         {
             "apiName": "SymphonyofWar",
@@ -1314,40 +1299,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Amikor távolról megsebzel egy hőst, <keywordMajor>automatikusan elsütsz</keywordMajor> rá egy <abilityName>Végzetes hullámot</abilityName>.",
+            "desc": "Ha távolról sebzel meg egy hőst, elsüthetsz ellene egy <abilityName>Végzetes hullámot</abilityName>.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Végzetes tehetség",
             "rarity": 2,
-            "tooltip": "Ha több mint @SnipeDistance@ egység távolságról sebzel meg valakit, <keywordMajor>automatikusan elsütsz</keywordMajor> rá egy <abilityName>Végzetes hullámot</abilityName>, amellyel <magicDamage>@Damage@ varázssebzést</magicDamage> okozol. Célpontonként @Cooldown@ másodperc töltési idő.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
+            "tooltip": "Ha több mint @SnipeDistance@ egység távolságról sebzel meg valakit, elsütsz rá egy <abilityName>Végzetes hullámot</abilityName>, amellyel <magicDamage>@Damage@ varázssebzést</magicDamage> okozol. Célpontonként @Cooldown@ másodperc töltési idő.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1416,9 +1398,7 @@
             "apiName": "Earthwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1435,8 +1415,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1452,7 +1431,7 @@
             "id": 27,
             "name": "Földmunka",
             "rarity": 2,
-            "tooltip": "A rohamozás, ugrás, átvillanás és teleportálás képességek egy nyomvonalat hagynak hátra, amely 1 másodperc után felrobban, és @Damage@ <physicalDamage>fizikai sebzést</physicalDamage> okoz.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
+            "tooltip": "A rohamozás, ugrás, átvillanás és teleportálás képességek egy nyomvonalat hagynak hátra, amely 1 másodperc után felrobban, és <physicalDamage>@Damage@ fizikai sebzést</physicalDamage> okoz.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
         },
         {
             "apiName": "ScopedWeapons",
@@ -1504,17 +1483,14 @@
             "apiName": "SonicBoom",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 150.0,
                             "mStartValue": 30.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1528,7 +1504,7 @@
             "id": 76,
             "name": "Hangrobbanás",
             "rarity": 0,
-            "tooltip": "A szövetséges erősítése, <healing>gyógyítása</healing> vagy <shield>pajzs általi védelme</shield> <trueDamage>@Damage@ tényleges sebzést</trueDamage> okoz, és 2 másodpercre @SlowAmount*-100@%-kal <status>lelassítja</status> az őt körülvevő ellenfeleket.<br><br>A körben okozott sebzés: @f1@<br>Okozott sebzés összesen: @f2@"
+            "tooltip": "A szövetséges erősítése, <healing>gyógyítása</healing> vagy <shield>pajzs általi védelme</shield> <trueDamage>@Damage@ tényleges sebzést</trueDamage> okoz, és 2 másodpercre @SlowAmount*-100@%-kal <status>lelassítja az őt körülvevő ellenfeleket</status>.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
         },
         {
             "apiName": "TwiceThrice",
@@ -1614,17 +1590,14 @@
             "apiName": "FallenAegis",
             "calculations": {
                 "ShieldAmount": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 350.0,
                             "mStartValue": 50.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1636,7 +1609,7 @@
             "id": 34,
             "name": "Bukott égisz",
             "rarity": 0,
-            "tooltip": "A harc elején egy <abilityName>Fekete pajzsot</abilityName> biztosít, amely @ShieldDuration@ másodpercig @ShieldAmount@ varázssebzést véd ki.<br><br><rules>A <abilityName>Fekete pajzs</abilityName> elhárítja a varázssebzést és a <status>mozgásképtelenné tevő</status> hatásokat.</rules><br><br>Létrehozott pajzs összesen: @f1@<br>Hárított mozgásképtelenné tevő varázslatok összesen: @f2@"
+            "tooltip": "@ShieldDuration@ másodpercre <abilityName>Fekete pajzsot</abilityName> biztosít a harc elején, ami <shield>@ShieldAmount@ varázssebzést</shield> véd ki. A pajzs kivédi a <status>bénító</status> és <status>mozgásképtelenséget</status> okozó hatásokat, amíg meg nem semmisül.<br><br>Létrehozott pajzs összesen: @f1@<br>Kivédett mozgásképtelenséget okozó hatások összesen: @f2@"
         },
         {
             "apiName": "HolyFire",
@@ -1679,14 +1652,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "ManaCalc": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1667,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "A <scaleMana>manaköltség</scaleMana> megkétszereződik. A képességeid a <scaleMana>maximális manáddal</scaleMana> arányosan nagyobb sebzést okoznak.",
+            "desc": "A <scaleMana>manaköltség</scaleMana> megkétszereződik. A képességek <healing>gyógyítása</healing>, <shield>pajzsereje</shield> és sebzése a <scaleMana>maximális manával</scaleMana> arányosan megnő.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Túlcsordulás",
             "rarity": 0,
-            "tooltip": "A <scaleMana>manaköltség</scaleMana> megkétszereződik. A képességeid <scaleMana>@ManaCalc@</scaleMana> értékkel nagyobb sebzést okoznak."
+            "tooltip": "A <scaleMana>manaköltség</scaleMana> megkétszereződik. A képességek <healing>gyógyítása</healing>, <shield>pajzsereje</shield> és sebzése <scaleMana>@ManaCalc@</scaleMana>-kal hatékonyabb."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1767,9 +1735,7 @@
             "apiName": "GuiltyPleasure",
             "calculations": {
                 "TotalHeal": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1781,8 +1747,7 @@
                             "mDataValue": "HealPercentage",
                             "mStat": 12
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1847,18 +1812,35 @@
         },
         {
             "apiName": "OutlawsGrit",
-            "calculations": {},
+            "calculations": {
+                "MaxResistTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ResistsPerStack"
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "MaxStacks"
+                            }
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "A rohamozás, ugrás, átvillanás vagy teleportálás képesség használata után <scaleArmor>@ResistsPerStack@ páncélt</scaleArmor> és <scaleMR>varázsellenállást</scaleMR> kapsz.<br><br>A hatás legfeljebb @MaxStacks@ alkalommal halmozódhat.",
+            "desc": "A rohamozás, ugrás, átvillanás vagy teleportálás képesség használata után <scaleArmor>@ResistsPerStack@ páncélt</scaleArmor> és <scaleMR>varázsellenállást</scaleMR> kapsz. A maximális érték @MaxResistTooltipOnly@% @MaxStacks@ jelzőnél.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
             "name": "Törvényen kívüli szívósság",
             "rarity": 1,
-            "tooltip": "A rohamozás, ugrás, átvillanás vagy teleportálás képesség használata után <scaleArmor>@ResistsPerStack@ páncélt</scaleArmor> és <scaleMR>varázsellenállást</scaleMR> kapsz.<br><br>A hatás legfeljebb @MaxStacks@ alkalommal halmozódhat."
+            "tooltip": "A rohamozás, ugrás, átvillanás vagy teleportálás képesség használata után <scaleArmor>@ResistsPerStack@ páncélt</scaleArmor> és <scaleMR>varázsellenállást</scaleMR> kapsz. A maximális érték @MaxResistTooltipOnly@% @MaxStacks@ jelzőnél."
         },
         {
             "apiName": "DontBlink",
@@ -1872,7 +1854,7 @@
             "id": 26,
             "name": "Ne pislants",
             "rarity": 0,
-            "tooltip": "@BonusDamagePerMSDifference*1000@% bónusz sebzést ad a célpont értékénél nagyobb <moveSpeed>mozgási sebesség minden 10. egysége</moveSpeed> után.<br><br>Bónusz sebzés a körben: @f1@<br>Bónusz sebzés összesen: @f2@"
+            "tooltip": "@BonusDamagePerMSDifference*1000@% bónusz sebzést ad a célpont értékénél nagyobb <speed>mozgási sebesség minden 10. egysége</speed> után.<br><br>Bónusz sebzés ebben a körben: @f1@<br>Bónusz sebzés összesen: @f2@"
         },
         {
             "apiName": "ShadowRunner",
@@ -1893,15 +1875,12 @@
             "apiName": "InfernalConduit",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -1936,6 +1915,32 @@
             "name": "Pokoli csatorna",
             "rarity": 2,
             "tooltip": "A képességek végtelenül halmozódó <keywordMajor>Égés</keywordMajor> hatást alkalmaznak az áldozatra, amivel @BleedDuration@ másodpercig másodpercenként <magicDamage>@BleedDamageTooltip@ varázssebzést</magicDamage> okoznak.<br><br>Ellenfél megsebzése esetén az <keywordMajor>Égés</keywordMajor> összes hatása @FlatCooldownRefundPerTick@ másodperccel csökkenti az alapképességeid hátralévő töltési idejét.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {
+                "APAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APAmp"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "A <scaleAD>bónusz sebzést</scaleAD> <scaleAP>varázserővé</scaleAP> alakítja. <scaleAP>@APAmp*100@% varázserőre</scaleAP> tesz szert.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Alkalmazkodás",
+            "rarity": 0,
+            "tooltip": "A <scaleAD>bónusz sebzést</scaleAD> <scaleAP>varázserővé</scaleAP> alakítja, és <scaleAP>@APAmpCalcTooltip@ varázserőt</scaleAP> biztosít.<br><br>Jelenlegi átalakított érték: @f1@<br><br><rules>Jelenleg egy pont <scaleAD>sebzésért</scaleAD> <scaleAP>@ConversionRate@ varázserőt</scaleAP> ad.</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2000,15 +2005,12 @@
                     ]
                 },
                 "BurnDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "BurnDamage",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 4.0
                     },
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -2036,9 +2038,7 @@
                     "tooltipOnly": true
                 },
                 "DamagePerSecond": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2055,8 +2055,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -2214,15 +2213,12 @@
             "apiName": "SlowCooker",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -2330,7 +2326,7 @@
             "id": 78,
             "name": "Lelki kapocs",
             "rarity": 2,
-            "tooltip": "A szövetségesnek okozott sebzés @DamageRedirectPercentage*100@%-át te kapod, akárcsak a rajtuk elvégzett gyógyítás @HealCopyPercentage*100@%-át.<br><br>Összes átirányított sebzés: @f1@<br>Összes elvégzett gyógyítás: @f2@<br>"
+            "tooltip": "A szövetségesnek okozott sebzés @DamageRedirectPercentage*100@%-át te kapod, akárcsak <healing>a rajtuk elvégzett gyógyítás @HealCopyPercentage*100@%-át</healing>.<br><br>Összes átirányított sebzés: @f1@<br>Összes elvégzett gyógyítás: @f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2342,13 +2338,13 @@
                 "OnHitDamageRatio": 0.30000001192092896,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "A támadásaid végleges <keywordMajor>Elátkozott erőt</keywordMajor> adnak, valamint az <keywordMajor>Elátkozott erőddel</keywordMajor> arányosan további <magicDamage>varázssebzést</magicDamage> okoznak.<br><br>A körönként szerezhető maximális <keywordMajor>Elátkozott erő</keywordMajor> a közted és a szövetségesed között lévő <keywordMajor>Átok</keywordMajor> források számával arányos.",
+            "desc": "Az ellenséges hősök elleni támadások végleges <keywordMajor>Elátkozott erőt</keywordMajor> adnak, valamint az <keywordMajor>Elátkozott erőddel</keywordMajor> arányosan további <magicDamage>varázssebzést</magicDamage> okoznak.<br><br>A körönként szerezhető maximális <keywordMajor>Elátkozott erő</keywordMajor> a közted és a szövetségesed között lévő <keywordMajor>Átok</keywordMajor> források számával arányos.",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "A halál jeges karma",
             "rarity": 1,
-            "tooltip": "A támadásaid @CurseCounter@ <keywordMajor>Elátkozott erőt</keywordMajor> adnak.<br><br>A támadásaid további <magicDamage>@f1@ varázssebzést</magicDamage> okoznak (az <keywordMajor>Elátkozott erőd</keywordMajor> @OnHitDamageRatio*100@%-a).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Az ellenséges hősök megtámadása @CurseCounter@ <keywordMajor>Elátkozott erőt</keywordMajor> ad.<br><br>A támadásaid további <magicDamage>@f1@ varázssebzést</magicDamage> okoznak (az <keywordMajor>Elátkozott erőd</keywordMajor> @OnHitDamageRatio*100@%-a).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2482,9 +2478,7 @@
             "apiName": "OkBoomerang",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2501,20 +2495,19 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.15000000596046448
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "BaseCooldown": 7.0
             },
-            "desc": "<keywordMajor>Automatikus elsütés</keywordMajor>: 7 másodpercenként kilő egy bumerángot egy közeli ellenfélre.",
+            "desc": "@BaseCooldown@ másodpercenként <keywordMajor>automatikusan</keywordMajor> kilő egy bumerángot egy közeli ellenfélre.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
             "id": 61,
             "name": "A jó öreg bumeráng",
             "rarity": 1,
-            "tooltip": "<keywordMajor>Automatikus elsütés</keywordMajor>: 7 másodpercenként kilő egy bumerángot egy közeli ellenfélre, amely @Damage@ adaptív sebzést okoz az eltalált ellenfeleknek.<br><br>A körben okozott sebzés: @f1@<br>Okozott sebzés összesen: @f2@"
+            "tooltip": "@BaseCooldown@ másodpercenként <keywordMajor>automatikusan</keywordMajor> kilő egy bumerángot egy közeli ellenfélre, ami @Damage@ adaptív sebzést okoz az eltalált ellenfeleknek.<br><br>A körben okozott sebzés: @f1@<br>Összes kiosztott sebzés: @f2@"
         },
         {
             "apiName": "JuiceBox",
@@ -2657,6 +2650,33 @@
             "tooltip": "Ha egy képességgel végleges <keywordMajor>jelzőket</keywordMajor> szereznél, @StackModifier*100@%-kal többet kapsz belőlük!"
         },
         {
+            "apiName": "escAPADe",
+            "calculations": {
+                "ADAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADAmp",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "A <scaleAP>varázserőt</scaleAP> <scaleAD>bónusz sebzéssé</scaleAD> alakítja. <scaleAD>@ADAmp*100@% sebzést</scaleAD> biztosít.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Specializáció",
+            "rarity": 0,
+            "tooltip": "A <scaleAP>varázserőt</scaleAP> <scaleAD>bónusz sebzéssé</scaleAD> alakítja, és <scaleAD>@ADAmpCalcTooltip@ sebzést</scaleAD> biztosít.<br><br>Jelenlegi átalakított érték: @f1@<br><br><rules>Jelenleg egy pont <scaleAP>varázserőért</scaleAP> <scaleAD>@ConversionRate@ sebzést</scaleAD> ad.</rules>"
+        },
+        {
             "apiName": "FeyMagic",
             "calculations": {},
             "dataValues": {
@@ -2697,13 +2717,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "A képességgel elért találatok végleges <keywordMajor>Elátkozott erőt</keywordMajor> adnak. Az <keywordMajor>Elátkozott erőddel</keywordMajor> arányos adaptív erőt kapsz.<br><br>A körönként szerezhető maximális <keywordMajor>Elátkozott erő</keywordMajor> a közted és a szövetségesed között lévő <keywordMajor>Átok</keywordMajor> források számával arányos.",
+            "desc": "A képességgel eltalált ellenséges hősökért végleges <keywordMajor>Elátkozott erő</keywordMajor> jár. Az <keywordMajor>Elátkozott erőddel</keywordMajor> arányos <font color = '#8347ff'>adaptív erőt</font> kapsz.<br><br>A körönként szerezhető maximális <keywordMajor>Elátkozott erő</keywordMajor> a közted és a szövetségesed között lévő <keywordMajor>Átok</keywordMajor> források számával arányos.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Vészmadár",
             "rarity": 2,
-            "tooltip": "A képességeid @CurseCounter@ <keywordMajor>Elátkozott erőt</keywordMajor> adnak.<br><br>@f1@ adaptív erőt kapsz (az <keywordMajor>Elátkozott erőd</keywordMajor> @AdaptiveForceRatio*100@%-a).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "A képességgel eltalált ellenséges hősökért @CurseCounter@ <keywordMajor>Elátkozott erő</keywordMajor> jár.<br><br>@f1@ <font color = '#8347ff'>adaptív erőt</font> kapsz (az <keywordMajor>Elátkozott erőd</keywordMajor> @AdaptiveForceRatio*100@%-a).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2848,7 +2868,7 @@
             "id": 310,
             "name": "Tankmotor",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>Kiiktatások: @f1@"
+            "tooltip": "Kiiktatásonként @SizeIncrement*100@%-kal megnő a méreted, és <scaleHealth>@f2@ értékkel a maximális életerőd</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth>.<br><br>Kiiktatások: @f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -2975,7 +2995,7 @@
             "id": 207,
             "name": "Most ne mozogj",
             "rarity": 0,
-            "tooltip": "Megkapod a <spellName>Gerilla-hadviselés</spellName> hatást<br><br><rules>Ha @HoldStillDuration@ másodpercig nem mozogsz, <keywordStealth>lopakodni</keywordStealth> kezdesz, amíg újra meg nem mozdulsz. Ennek a <keywordStealth>lopakodásnak</keywordStealth> a megtörésekor @ASDuration@ másodpercig <attackSpeed>@BonusAS@ támadási sebességet</attackSpeed> és @BonusMS*100@% <speed>fokozatosan csökkenő mozgási sebességet</speed> kapsz, és az első találatod @BonusHitDamage@ bónusz varázssebzést okoz.</rules>"
+            "tooltip": "Megkapod a <spellName>Gerilla-hadviselés</spellName> hatást<br><br><rules>Ha @HoldStillDuration@ másodpercig nem mozogsz, <keywordStealth>lopakodni</keywordStealth> kezdesz, amíg újra meg nem mozdulsz. Ennek a <keywordStealth>lopakodásnak</keywordStealth> a megtörésekor @ASDuration@ másodpercig <attackSpeed>@BonusAS@ támadási sebességet</attackSpeed> és <speed>@BonusMS*100@% fokozatosan csökkenő mozgási sebességet</speed> kapsz. A következő alkalommal, amikor megsebzel egy ellenfelet, további <magicDamage>@BonusHitDamage@ varázssebzést</magicDamage> okozol.</rules>"
         },
         {
             "apiName": "FromBeginningToEnd",
@@ -3566,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "<scaleBonus>@ItemHaste@ Tárgygyorsítást biztosít</scaleBonus> (@TooltipCDR@% tárgyakra vonatkozó töltésiidő-csökkentéssel egyenértékű).<br><br><rules>A tárgygyorsítás csökkenti az összes tárgyképesség töltési idejét.</rules>",
+            "desc": "<scaleBonus>@ItemHaste@ tárgygyorsítást biztosít</scaleBonus> (@TooltipCDR@% tárgyakra vonatkozó töltésiidő-csökkentéssel egyenértékű).<br><br><rules>A tárgygyorsítás csökkenti az összes tárgyképesség töltési idejét %i:cooldown%.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "Csúcsfeltaláló",
             "rarity": 1,
-            "tooltip": "<scaleBonus>@ItemHaste@ Tárgygyorsítást biztosít</scaleBonus> (@TooltipCDR@% tárgyakra vonatkozó töltésiidő-csökkentéssel egyenértékű).<br><br><rules>A tárgygyorsítás csökkenti az összes tárgyképesség töltési idejét.</rules>"
+            "tooltip": "<scaleBonus>@ItemHaste@ tárgygyorsítást biztosít</scaleBonus> (@TooltipCDR@% tárgyakra vonatkozó töltésiidő-csökkentéssel egyenértékű).<br><br><rules>A tárgygyorsítás csökkenti az összes tárgyképesség töltési idejét %i:cooldown%.</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3673,9 +3693,7 @@
                     ]
                 },
                 "LaserEyesTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3692,7 +3710,6 @@
                             "mStat": 2
                         }
                     ],
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -3766,7 +3783,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "<attackSpeed>@TotalASValue*100@% teljes támadási sebességet</attackSpeed> biztosít. Másodpercenként @Breakpoint1@ <attackSpeed>támadás</attackSpeed> elérésekor új hatásokra tesz szert.",
+            "desc": "<attackSpeed>@TotalASValue*100@% teljes támadási sebességet</attackSpeed> biztosít. <br><br>@Breakpoint1@ <attackSpeed>másodpercenkénti támadásnál</attackSpeed> további <magicDamage>varázssebzést</magicDamage> okoz {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3878,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3890,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -3924,15 +3938,15 @@
             "apiName": "BluntForce",
             "calculations": {},
             "dataValues": {
-                "ADIncrease": 0.15000000596046448
+                "ADAmp": 0.15000000596046448
             },
-            "desc": "<scaleAD>@ADIncrease*100@% sebzésre</scaleAD> tesz szert.",
+            "desc": "<scaleAD>@ADAmp*100@% sebzést</scaleAD> biztosít.",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "Tompa tárgy",
             "rarity": 0,
-            "tooltip": "<scaleAD>@ADIncrease*100@% sebzésre</scaleAD> tesz szert."
+            "tooltip": "<scaleAD>@ADAmp*100@% (@f1@) sebzést</scaleAD> biztosít."
         },
         {
             "apiName": "Oathsworn",
@@ -4207,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "A gyógyítás/páncél végleges <keywordMajor>Elátkozott erőt</keywordMajor> ad. Az <keywordMajor>Elátkozott erőddel</keywordMajor> arányos képességgyorsítást kapsz.<br><br>A körönként szerezhető maximális <keywordMajor>Elátkozott erő</keywordMajor> a közted és a szövetségesed között lévő <keywordMajor>Átok</keywordMajor> források számával arányos.",
@@ -4220,17 +4234,25 @@
         },
         {
             "apiName": "MindtoMatter",
-            "calculations": {},
-            "dataValues": {
-                "ManaToHealthConversion": 0.5
+            "calculations": {
+                "ManaToHealthCalc": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                }
             },
-            "desc": "A <scaleMana>mana</scaleMana> felével növeli a <healing>maximális életerőt</healing>.",
+            "dataValues": {},
+            "desc": "A <scaleMana>mana</scaleMana> felével növeli a <scaleHealth>maximális életerőt</scaleHealth>.",
             "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
             "id": 56,
             "name": "Az elmétől az anyagig",
             "rarity": 0,
-            "tooltip": "A <scaleMana>mana</scaleMana> felével növeli a <healing>maximális életerőt</healing>."
+            "tooltip": "Kapsz <scaleHealth>@ManaToHealthCalc@ életerőt</scaleHealth>."
         },
         {
             "apiName": "ItsKillingTime",
@@ -4338,9 +4360,7 @@
             "apiName": "AndMyAxe",
             "calculations": {
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4357,8 +4377,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.44999998807907104
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

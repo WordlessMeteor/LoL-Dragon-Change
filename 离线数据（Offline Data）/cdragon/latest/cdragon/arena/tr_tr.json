@@ -364,9 +364,7 @@
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -383,8 +381,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.05999999865889549
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -426,9 +423,7 @@
                     "mSimpleTooltipCalculationDisplay": 6
                 },
                 "SingleFireDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -445,8 +440,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -587,11 +581,29 @@
             "id": 90,
             "name": "İntikam",
             "rarity": 1,
-            "tooltip": "Takım arkadaşın katledildiğinde %@DamageAmp*100@ Hasar Artışı ve <lifeSteal>%@Omnivamp*100@ Mutlak Sömürü</lifeSteal> kazanırsın.<br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+            "tooltip": "Takım arkadaşın katledildiğinde %@DamageAmp*100@ Hasar Artışı ve <lifeSteal>%@Omnivamp*100@ Mutlak Sömürü</lifeSteal> kazanırsın.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
         },
         {
             "apiName": "Erosion",
-            "calculations": {},
+            "calculations": {
+                "MaxShredTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "Shred"
+                        },
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "MaxStacks"
+                        },
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 10.0
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 20.0,
                 "Shred": 0.014999999664723873,
@@ -603,7 +615,7 @@
             "id": 28,
             "name": "Erozyon",
             "rarity": 0,
-            "tooltip": "Hasar verdiğin rakiplerinin <scaleArmor>zırhını</scaleArmor> ve <scaleMR>büyü direncini</scaleMR> @ShredDuration@ saniyeliğine %@Shred*100@ eksiltirsin. <br><br>Bu etki en fazla @MaxStacks@ defa birikir."
+            "tooltip": "Hasar verdiğin rakiplerinin <scaleArmor>zırhını</scaleArmor> ve <scaleMR>büyü direncini</scaleMR> @ShredDuration@ saniyeliğine %@Shred*100@ eksiltirsin. Bu etki en fazla @MaxStacks@ defa birikerek %@MaxShredTooltipOnly@ eksiltme uygular. "
         },
         {
             "apiName": "Stats",
@@ -623,30 +635,24 @@
             "apiName": "MasterofDuality",
             "calculations": {
                 "ADGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 9.0,
                             "mStartValue": 3.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "APGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 18.0,
                             "mStartValue": 6.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -662,9 +668,7 @@
             "apiName": "LightemUp",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -681,13 +685,10 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.1899999976158142
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "TOOLTIPONLYDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -704,8 +705,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.7599999904632568
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -721,17 +721,14 @@
             "apiName": "SearingDawn",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
                             "mStartValue": 40.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -782,14 +779,12 @@
             "apiName": "Spellwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -801,8 +796,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -825,9 +819,7 @@
             "apiName": "CenterOfTheUniverse",
             "calculations": {
                 "StarDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelBreakpointsCalculationPart",
@@ -844,8 +836,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -941,15 +932,13 @@
             "id": 233,
             "name": "Ulti Ruleti",
             "rarity": 2,
-            "tooltip": "Kaç sihirdar büyüsünün yerini rasgele bir ulti alır. Kullanılan ultinin yerine farklı bir rasgele ulti gelir."
+            "tooltip": "Kaç sihirdar büyüsünün yerini rasgele bir ulti alır. Kullanılan ultinin yerine farklı bir rasgele ulti gelir.<br><br><br><rules>Bu büyüler ulti sayılır.</rules>"
         },
         {
             "apiName": "ClownCollege",
             "calculations": {
                 "BasicAttackDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -966,8 +955,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "QCritDamageMod": {
                     "__type": "GameCalculation",
@@ -991,9 +979,7 @@
                     ]
                 },
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
@@ -1009,8 +995,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.550000011920929
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1030,7 +1015,7 @@
             "id": 310,
             "name": "Palyaço Koleji",
             "rarity": 2,
-            "tooltip": "<spellName>Arkadan Vuruş</spellName>: Arkadan saldırmak @BasicAttackDamage@ <physicalDamage>İlave Fiziksel Hasar</physicalDamage> verir.<br><br><spellName>Kandırmaca</spellName>: Işınlanır ve @StealthDuration@ saniyeliğine <keywordStealth>görünmez</keywordStealth> olursun. <keywordStealth>Görünmez</keywordStealth> haldeyken gerçekleştirdiğin sonraki saldırı fazladan <physicalDamage>@TotalDamage@ Fiziksel Hasar</physicalDamage> verir. Rakibe arkadan saldırırsan bu saldırı kritik vuruş yaparak @QCritDamageMod@ Hasar verir.<br><br><spellName>Halüsinasyon: Ölüm</spellName>: Katledildiğinde etrafındaki rakiplere azami canın %@FearDamage*100@ kadarına eşdeğer miktarda <trueDamage>gerçek hasar</trueDamage> verir ve onları @FearDuration@ saniyeliğine korkutursun."
+            "tooltip": "<spellName>Arkadan Vuruş</spellName>: Arkadan saldırmak @BasicAttackDamage@ <physicalDamage>İlave Fiziksel Hasar</physicalDamage> verir.<br><br><spellName>Kandırmaca</spellName>: Işınlanır ve @StealthDuration@ saniyeliğine <keywordStealth>görünmez</keywordStealth> olursun. <keywordStealth>Görünmez</keywordStealth> haldeyken gerçekleştirdiğin sonraki saldırı fazladan <physicalDamage>@TotalDamage@ Fiziksel Hasar</physicalDamage> verir. Rakibe arkadan saldırırsan bu saldırı kritik vuruş yaparak @QCritDamageMod@ Hasar verir.<br><br><spellName>Halüsinasyon: Ölüm</spellName>: Katledildiğinde etrafındaki rakiplere <trueDamage>azami canın %@FearDamage*100@ kadarına eşdeğer miktarda gerçek hasar</trueDamage> verir ve onları @FearDuration@ saniyeliğine korkutursun."
         },
         {
             "apiName": "NumbToPain",
@@ -1314,40 +1299,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Uzaktan hasar verdiğin şampiyonlara <keywordMajor>otomatik olarak</keywordMajor> bir <abilityName>İsabet Dalgası</abilityName> gönderirsin.",
+            "desc": "Uzaktan hasar verdiğin şampiyonlara <abilityName>İsabet Dalgası</abilityName> gönderirsin.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "İsabet Dehası",
             "rarity": 2,
-            "tooltip": "Birine @SnipeDistance@ birim uzaktan hasar verdiğinde bir <abilityName>İsabet Dalgası</abilityName>'nı <keywordMajor>otomatik olarak</keywordMajor> göndererek <magicDamage>@Damage@ Büyü Hasarı</magicDamage> verirsin (hedef başına @Cooldown@ sn. bekleme süresi).<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+            "tooltip": "Birine @SnipeDistance@ birim uzaktan hasar verdiğinde bir <abilityName>İsabet Dalgası</abilityName> göndererek <magicDamage>@Damage@ Büyü Hasarı</magicDamage> verirsin (hedef başına @Cooldown@ sn. bekleme süresi).<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1416,9 +1398,7 @@
             "apiName": "Earthwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1435,8 +1415,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1452,7 +1431,7 @@
             "id": 27,
             "name": "Toprağın Uyanışı",
             "rarity": 2,
-            "tooltip": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerin arkalarında 1 saniye sonra patlayarak @Damage@ <physicalDamage>Fiziksel Hasar</physicalDamage> veren bir iz bırakır.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+            "tooltip": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerin arkalarında 1 saniye sonra patlayarak <physicalDamage>@Damage@ Fiziksel Hasar</physicalDamage> veren bir iz bırakır.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
         },
         {
             "apiName": "ScopedWeapons",
@@ -1504,17 +1483,14 @@
             "apiName": "SonicBoom",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 150.0,
                             "mStartValue": 30.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1614,17 +1590,14 @@
             "apiName": "FallenAegis",
             "calculations": {
                 "ShieldAmount": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 350.0,
                             "mStartValue": 50.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1636,7 +1609,7 @@
             "id": 34,
             "name": "Düşmüş Kalkan",
             "rarity": 0,
-            "tooltip": "Çatışmaya @ShieldDuration@ saniyeliğine varlığını koruyan ve @ShieldAmount@ Büyü Hasarı engelleyen bir <abilityName>Kara Kalkan</abilityName>'la başlarsın.<br><br><rules><abilityName>Kara Kalkan</abilityName> büyü hasarını ve <status>hareketsiz bırakma</status> etkilerini engeller.</rules><br><br>Oluşturulan Toplam Kalkan: @f1@<br>Engellenen Toplam Hareketsiz Bırakma Yeteneği: @f2@"
+            "tooltip": "Çatışmaya @ShieldDuration@ saniyeliğine <shield>@ShieldAmount@ Büyü Hasarı</shield> engelleyen bir <abilityName>Kara Kalkan</abilityName>'la başlarsın. Kalkan kırılana dek <status>engelleyici</status> ve <status>hareketsiz bırakan</status> etkileri önler.<br><br>Oluşturulan Toplam Kalkan: @f1@<br>Engellenen Toplam Hareketsiz Bırakma Yeteneği: @f2@"
         },
         {
             "apiName": "HolyFire",
@@ -1679,14 +1652,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "ManaCalc": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1667,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "<scaleMana>Mana</scaleMana> bedelleri iki katına çıkar. Yeteneklerin <scaleMana>azami manana</scaleMana> bağlı olarak daha fazla hasar verir.",
+            "desc": "<scaleMana>Mana</scaleMana> bedelleri iki katına çıkar. Yeteneklerle sağladığın <healing>iyileştirme</healing>, <shield>kalkan</shield> ve hasar etkileri <scaleMana>azami manana</scaleMana> bağlı olarak artar.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Taşkın",
             "rarity": 0,
-            "tooltip": "<scaleMana>Mana</scaleMana> bedelleri iki katına çıkar. Yeteneklerin <scaleMana>@ManaCalc@</scaleMana> daha fazla hasar verir."
+            "tooltip": "<scaleMana>Mana</scaleMana> bedelleri iki katına çıkar. Yeteneklerle sağladığın <healing>iyileştirme</healing>, <shield>kalkan</shield> ve hasar etkileri <scaleMana>@ManaCalc@</scaleMana> daha etkili hale gelir."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1767,9 +1735,7 @@
             "apiName": "GuiltyPleasure",
             "calculations": {
                 "TotalHeal": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1781,8 +1747,7 @@
                             "mDataValue": "HealPercentage",
                             "mStat": 12
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1847,18 +1812,35 @@
         },
         {
             "apiName": "OutlawsGrit",
-            "calculations": {},
+            "calculations": {
+                "MaxResistTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ResistsPerStack"
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "MaxStacks"
+                            }
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerini kullandıktan sonra <scaleArmor>@ResistsPerStack@ Zırh</scaleArmor> ve <scaleMR>Büyü Direnci</scaleMR> kazanırsın.<br><br>Bu etki en fazla @MaxStacks@ defa birikir.",
+            "desc": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerini kullandıktan sonra <scaleArmor>@ResistsPerStack@ Zırh</scaleArmor> ve <scaleMR>Büyü Direnci</scaleMR> kazanırsın. Bu etki en fazla @MaxStacks@ defa birikerek @MaxResistTooltipOnly@ Zırh ve Büyü Direnci sağlar.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
             "name": "Kanun Kaçağı Cesareti",
             "rarity": 1,
-            "tooltip": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerini kullandıktan sonra <scaleArmor>@ResistsPerStack@ Zırh</scaleArmor> ve <scaleMR>Büyü Direnci</scaleMR> kazanırsın.<br><br>Bu etki en fazla @MaxStacks@ defa birikir."
+            "tooltip": "Atılma, zıplama, yer değiştirme ve ışınlanma yeteneklerini kullandıktan sonra <scaleArmor>@ResistsPerStack@ Zırh</scaleArmor> ve <scaleMR>Büyü Direnci</scaleMR> kazanırsın. Bu etki en fazla @MaxStacks@ defa birikerek @MaxResistTooltipOnly@ Zırh ve Büyü Direnci sağlar."
         },
         {
             "apiName": "DontBlink",
@@ -1872,7 +1854,7 @@
             "id": 26,
             "name": "Gözünü Kırpma",
             "rarity": 0,
-            "tooltip": "Hedefine kıyasla sahip olduğun her fazladan <moveSpeed>10 Hareket Hızı</moveSpeed> başına %@BonusDamagePerMSDifference*1000@ İlave Hasar kazanırsın.<br><br>Bu Tur Verilen İlave Hasar: @f1@<br>Toplam İlave Hasar: @f2@"
+            "tooltip": "Hedefine kıyasla sahip olduğun her fazladan <speed>10 Hareket Hızı</speed> başına %@BonusDamagePerMSDifference*1000@ İlave Hasar kazanırsın.<br><br>Bu Tur Verilen İlave Hasar: @f1@<br>Toplam İlave Hasar: @f2@"
         },
         {
             "apiName": "ShadowRunner",
@@ -1893,15 +1875,12 @@
             "apiName": "InfernalConduit",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -1936,6 +1915,32 @@
             "name": "Alev Geçidi",
             "rarity": 2,
             "tooltip": "Yeteneklerin sınırsız kez birikebilen bir <keywordMajor>yakma</keywordMajor> etkisi uygular. Bu etki @BleedDuration@ saniye boyunca her saniye <magicDamage>@BleedDamageTooltip@ Büyü Hasarı</magicDamage> verir.<br><br>Rakiplere hasar veren tüm <keywordMajor>yakma</keywordMajor> etkilerin, temel yeteneklerinin bekleme sürelerini @FlatCooldownRefundPerTick@ saniye azaltır.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {
+                "APAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APAmp"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "<scaleAD>İlave saldırı gücün</scaleAD> <scaleAP>yetenek gücüne</scaleAP> dönüşür. <scaleAP>%@APAmp*100@ Yetenek Gücü</scaleAP> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "Yetenek Gücüne Güç Kat",
+            "rarity": 0,
+            "tooltip": "<scaleAD>İlave saldırı gücün</scaleAD> <scaleAP>yetenek gücüne</scaleAP> dönüşür ve <scaleAP>@APAmpCalcTooltip@ Yetenek Gücü</scaleAP> kazanırsın.<br><br>Mevcut Dönüşüm: @f1@<br><br><rules>Her bir <scaleAD>saldırı gücü</scaleAD> başına <scaleAP>@ConversionRate@ Yetenek Gücüne</scaleAP> dönüşür.</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2000,15 +2005,12 @@
                     ]
                 },
                 "BurnDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "BurnDamage",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 4.0
                     },
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -2036,9 +2038,7 @@
                     "tooltipOnly": true
                 },
                 "DamagePerSecond": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2055,8 +2055,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -2214,15 +2213,12 @@
             "apiName": "SlowCooker",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -2330,7 +2326,7 @@
             "id": 78,
             "name": "Ruh Bağı",
             "rarity": 2,
-            "tooltip": "Takım arkadaşına verilen hasarın %@DamageRedirectPercentage*100@ kadarı ve takım arkadaşının elde ettiği iyileştirmenin %@HealCopyPercentage*100@ kadarı sana yönlendirilir.<br><br>Yönlendirilen Toplam Hasar: @f1@<br>Yapılan Toplam İyileştirme: @f2@<br>"
+            "tooltip": "Takım arkadaşına verilen hasarın %@DamageRedirectPercentage*100@ kadarı ve takım arkadaşının elde ettiği <healing>iyileştirmenin %@HealCopyPercentage*100@ kadarı</healing> sana yönlendirilir.<br><br>Yönlendirilen Toplam Hasar: @f1@<br>Yapılan Toplam İyileştirme: @f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2342,13 +2338,13 @@
                 "OnHitDamageRatio": 0.30000001192092896,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Saldırıların kalıcı olarak <keywordMajor>lanetli güç</keywordMajor> kazandırır ve <keywordMajor>lanetli gücüne</keywordMajor> bağlı olarak fazladan <magicDamage>büyü hasarı</magicDamage> verir.<br><br>Tur başına kazanabileceğin azami <keywordMajor>lanetli güç</keywordMajor> senin ve takım arkadaşının sahip olduğunuz her <keywordMajor>lanet</keywordMajor> kaynağı başına artar.",
+            "desc": "Rakip şampiyonlara saldırmak sana kalıcı olarak <keywordMajor>lanetli güç</keywordMajor> kazandırır ve <keywordMajor>lanetli gücüne</keywordMajor> bağlı olarak fazladan <magicDamage>büyü hasarı</magicDamage> verir.<br><br>Tur başına kazanabileceğin azami <keywordMajor>lanetli güç</keywordMajor> senin ve takım arkadaşının sahip olduğunuz her <keywordMajor>lanet</keywordMajor> kaynağı başına artar.",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "Ölüm Dokunuşu",
             "rarity": 1,
-            "tooltip": "Saldırıların @CurseCounter@ <keywordMajor>lanetli güç</keywordMajor> kazandırır.<br><br>Saldırıların fazladan <magicDamage>@f1@ Büyü Hasarı</magicDamage> (<keywordMajor>lanetli gücünün</keywordMajor> %@OnHitDamageRatio*100@ kadarı) verir.<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Rakip şampiyonlara saldırmak sana kalıcı olarak @CurseCounter@ <keywordMajor>lanetli güç</keywordMajor> kazandırır.<br><br>Saldırıların fazladan <magicDamage>@f1@ Büyü Hasarı</magicDamage> (<keywordMajor>lanetli gücünün</keywordMajor> %@OnHitDamageRatio*100@ kadarı) verir.<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2482,9 +2478,7 @@
             "apiName": "OkBoomerang",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2501,20 +2495,19 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.15000000596046448
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "BaseCooldown": 7.0
             },
-            "desc": "Yakınındaki bir rakibe her 7 saniyede bir <keywordMajor>otomatik olarak</keywordMajor> bumerang gönderirsin.",
+            "desc": "Her @BaseCooldown@ saniyede bir yakınındaki bir rakibe <keywordMajor>otomatik olarak</keywordMajor> bumerang gönderirsin.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
             "id": 61,
             "name": "Dönerse Senindir",
             "rarity": 1,
-            "tooltip": "Yakınındaki bir rakibe her 7 saniyede bir <keywordMajor>otomatik olarak</keywordMajor> bir bumerang göndererek isabet halinde @Damage@ Değişken Hasar verirsin.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
+            "tooltip": "Her @BaseCooldown@ saniyede bir yakınındaki bir rakibe <keywordMajor>otomatik olarak</keywordMajor> bumerang göndererek isabet alan tüm rakiplere @Damage@ Değişken Hasar verirsin.<br><br>Bu Tur Verilen Hasar: @f1@<br>Verilen Toplam Hasar: @f2@"
         },
         {
             "apiName": "JuiceBox",
@@ -2657,6 +2650,33 @@
             "tooltip": "Yetenekler için kazandığın kalıcı <keywordMajor>yükler</keywordMajor> %@StackModifier*100@ artar!"
         },
         {
+            "apiName": "escAPADe",
+            "calculations": {
+                "ADAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADAmp",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "<scaleAP>Yetenek gücün</scaleAP> <scaleAD>ilave saldırı gücüne</scaleAD> dönüşür. <scaleAD>%@ADAmp*100@ Saldırı Gücü</scaleAD> kazanırsın.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Saldırı Gücüne Güç Kat",
+            "rarity": 0,
+            "tooltip": "<scaleAP>Yetenek gücün</scaleAP> <scaleAD>ilave saldırı gücüne</scaleAD> dönüşür ve <scaleAD>@ADAmpCalcTooltip@ Saldırı Gücü</scaleAD> kazanırsın.<br><br>Mevcut Dönüşüm: @f1@<br><br><rules>Her bir <scaleAP>yetenek gücü</scaleAP> başına <scaleAD>@ConversionRate@ Saldırı Gücüne</scaleAD> dönüşür.</rules>"
+        },
+        {
             "apiName": "FeyMagic",
             "calculations": {},
             "dataValues": {
@@ -2697,13 +2717,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Yetenek isabet ettirmek kalıcı <keywordMajor>lanetli güç</keywordMajor> kazandırır. <keywordMajor>Lanetli gücüne</keywordMajor> bağlı olarak değişken kuvvet kazanırsın.<br><br>Tur başına kazanabileceğin azami <keywordMajor>lanetli güç</keywordMajor> senin ve takım arkadaşının sahip olduğunuz her <keywordMajor>lanet</keywordMajor> kaynağı başına artar.",
+            "desc": "Bir rakip şampiyona yetenek isabet ettirmek kalıcı olarak <keywordMajor>lanetli güç</keywordMajor> kazandırır. <keywordMajor>Lanetli gücüne</keywordMajor> bağlı olarak <font color = '#8347ff'>değişken kuvvet</font> kazanırsın.<br><br>Tur başına kazanabileceğin azami <keywordMajor>lanetli güç</keywordMajor> senin ve takım arkadaşının sahip olduğunuz her <keywordMajor>lanet</keywordMajor> kaynağı başına artar.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Felaket Sözcüsü",
             "rarity": 2,
-            "tooltip": "Yeteneklerin @CurseCounter@ <keywordMajor>lanetli güç</keywordMajor> kazandırır.<br><br>@f1@ Değişken Kuvvet (<keywordMajor>lanetli gücünün</keywordMajor> %@AdaptiveForceRatio*100@ kadarı) kazanırsın.<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Bir rakip şampiyona yetenek isabet ettirmek sana @CurseCounter@ <keywordMajor>lanetli güç</keywordMajor> kazandırır.<br><br>@f1@ <font color = '#8347ff'>Değişken Kuvvet</font> (<keywordMajor>lanetli gücünün</keywordMajor> %@AdaptiveForceRatio*100@ kadarı) kazanırsın.<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2848,7 +2868,7 @@
             "id": 310,
             "name": "Lokomotif",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>Alt Etme: @f1@"
+            "tooltip": "%@SizeIncrement*100@ boyut ve <scaleHealth>@f2@ İlave Can</scaleHealth> (alt etme başına <scaleHealth>%@MaxHPIncrement*100@ (@f1@)</scaleHealth>) kazanırsın.<br><br>Alt Etme: @f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -2975,7 +2995,7 @@
             "id": 207,
             "name": "Kıpırdama",
             "rarity": 0,
-            "tooltip": "<spellName>Kaçak Dövüş</spellName> pasifini kazanırsın.<br><br><rules>@HoldStillDuration@ saniye hareketsiz kalırsan hareket edene dek <keywordStealth>görünmez</keywordStealth> olursun. Bu <keywordStealth>görünmezlik</keywordStealth> etkisinden çıktığında @ASDuration@ saniyeliğine <attackSpeed>@BonusAS@ Saldırı Hızı</attackSpeed> ve azalarak kaybolacak şekilde %@BonusMS*100@ <speed>Hareket Hızı</speed> kazanırsın. Ayrıca bir sonraki isabetli saldırın @BonusHitDamage@ Büyü Hasarı verir.</rules>"
+            "tooltip": "<spellName>Kaçak Dövüş</spellName> pasifini kazanırsın.<br><br><rules>@HoldStillDuration@ saniye hareketsiz kalırsan hareket edene dek <keywordStealth>görünmez</keywordStealth> olursun. Bu <keywordStealth>görünmezlik</keywordStealth> etkisinden çıktığında @ASDuration@ saniyeliğine <attackSpeed>@BonusAS@ Saldırı Hızı</attackSpeed> ve <speed>azalarak kaybolacak şekilde %@BonusMS*100@ Hareket Hızı</speed> kazanırsın. Bir rakibe verdiğin sonraki hasar fazladan <magicDamage>@BonusHitDamage@ Büyü Hasarı</magicDamage> verir.</rules>"
         },
         {
             "apiName": "FromBeginningToEnd",
@@ -3566,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "<scaleBonus>@ItemHaste@ Eşya Hızı</scaleBonus> (eşya bekleme süresinde %@TooltipCDR@ azalmaya eşdeğer) kazanırsın.<br><br><rules>Eşya hızı tüm eşya yeteneklerinin bekleme sürelerini azaltır.</rules>",
+            "desc": "<scaleBonus>@ItemHaste@ Eşya Hızı</scaleBonus> (eşya bekleme süresinde %@TooltipCDR@ azalmaya eşdeğer) kazanırsın.<br><br><rules>Eşya hızı tüm eşya etkilerinin bekleme sürelerini %i:cooldown% azaltır.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "Dâhi Mucit",
             "rarity": 1,
-            "tooltip": "<scaleBonus>@ItemHaste@ Eşya Hızı</scaleBonus> (eşya bekleme süresinde %@TooltipCDR@ azalmaya eşdeğer) kazanırsın.<br><br><rules>Eşya hızı tüm eşya yeteneklerinin bekleme sürelerini azaltır.</rules>"
+            "tooltip": "<scaleBonus>@ItemHaste@ Eşya Hızı</scaleBonus> (eşya bekleme süresinde %@TooltipCDR@ azalmaya eşdeğer) kazanırsın.<br><br><rules>Eşya hızı tüm eşya etkilerinin bekleme sürelerini %i:cooldown% azaltır.</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3673,9 +3693,7 @@
                     ]
                 },
                 "LaserEyesTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3692,7 +3710,6 @@
                             "mStat": 2
                         }
                     ],
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -3766,7 +3783,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "<attackSpeed>%@TotalASValue*100@ Toplam Saldırı Hızı</attackSpeed> kazanırsın. Saniye başına @Breakpoint1@ <attackSpeed>saldırıya</attackSpeed> ulaştığında yeni etkiler kazanırsın.",
+            "desc": "<attackSpeed>%@TotalASValue*100@ Toplam Saldırı Hızı</attackSpeed> kazanırsın.<br><br><attackSpeed>Saniye başına @Breakpoint1@ saldırıya</attackSpeed> ulaştığında {{ Item_Keyword_OnHit }} fazladan <magicDamage>büyü hasarı</magicDamage> verirsin.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3878,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3890,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -3924,15 +3938,15 @@
             "apiName": "BluntForce",
             "calculations": {},
             "dataValues": {
-                "ADIncrease": 0.15000000596046448
+                "ADAmp": 0.15000000596046448
             },
-            "desc": "<scaleAD>%@ADIncrease*100@ Saldırı Gücü</scaleAD> sağlar.",
+            "desc": "<scaleAD>%@ADAmp*100@ Saldırı Gücü</scaleAD> kazanırsın.",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "Kaba Kuvvet",
             "rarity": 0,
-            "tooltip": "<scaleAD>%@ADIncrease*100@ Saldırı Gücü</scaleAD> sağlar."
+            "tooltip": "<scaleAD>%@ADAmp*100@ (@f1@) Saldırı Gücü</scaleAD> kazanırsın."
         },
         {
             "apiName": "Oathsworn",
@@ -4207,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "İyileştirme yapmak veya kalkan sağlamak kalıcı olarak <keywordMajor>lanetli güç</keywordMajor> kazandırır. <keywordMajor>Lanetli gücüne</keywordMajor> bağlı olarak yetenek hızı kazanırsın.<br><br>Tur başına kazanabileceğin azami <keywordMajor>lanetli güç</keywordMajor> senin ve takım arkadaşının sahip olduğunuz her <keywordMajor>lanet</keywordMajor> kaynağı başına artar.",
@@ -4220,17 +4234,25 @@
         },
         {
             "apiName": "MindtoMatter",
-            "calculations": {},
-            "dataValues": {
-                "ManaToHealthConversion": 0.5
+            "calculations": {
+                "ManaToHealthCalc": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                }
             },
-            "desc": "<healing>Azami canın</healing> <scaleMana>mananın</scaleMana> yarısı kadar artar.",
+            "dataValues": {},
+            "desc": "<scaleHealth>Azami canın</scaleHealth> <scaleMana>mananın</scaleMana> yarısı kadar artar.",
             "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
             "id": 56,
             "name": "Zihinden Bedene",
             "rarity": 0,
-            "tooltip": "<healing>Azami canın</healing> <scaleMana>mananın</scaleMana> yarısı kadar artar."
+            "tooltip": "<scaleHealth>@ManaToHealthCalc@ Can</scaleHealth> kazandırır."
         },
         {
             "apiName": "ItsKillingTime",
@@ -4338,9 +4360,7 @@
             "apiName": "AndMyAxe",
             "calculations": {
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4357,8 +4377,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.44999998807907104
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

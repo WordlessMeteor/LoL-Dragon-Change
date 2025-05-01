@@ -364,9 +364,7 @@
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -383,8 +381,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.05999999865889549
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -426,9 +423,7 @@
                     "mSimpleTooltipCalculationDisplay": 6
                 },
                 "SingleFireDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -445,8 +440,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -587,11 +581,29 @@
             "id": 90,
             "name": "复仇",
             "rarity": 1,
-            "tooltip": "在你的搭档阵亡后，获得@DamageAmp*100@%提升伤害和<lifeSteal>@Omnivamp*100@%全能吸血</lifeSteal>。<br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+            "tooltip": "在你的搭档阵亡后，获得@DamageAmp*100@%提升伤害和<lifeSteal>@Omnivamp*100@%全能吸血</lifeSteal>。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
             "apiName": "Erosion",
-            "calculations": {},
+            "calculations": {
+                "MaxShredTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "Shred"
+                        },
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "MaxStacks"
+                        },
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 10.0
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 20.0,
                 "Shred": 0.014999999664723873,
@@ -603,7 +615,7 @@
             "id": 28,
             "name": "侵蚀",
             "rarity": 0,
-            "tooltip": "对敌人造成伤害时会施加一层持续@ShredDuration@秒的@Shred*100@%<scaleArmor>护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>击碎效果。<br><br>至多可叠加@MaxStacks@层。"
+            "tooltip": "对敌人造成伤害时会施加一层持续@ShredDuration@秒的@Shred*100@%<scaleArmor>护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>击碎效果，至多在@MaxStacks@层时击碎@MaxShredTooltipOnly@%。 "
         },
         {
             "apiName": "Stats",
@@ -623,30 +635,24 @@
             "apiName": "MasterofDuality",
             "calculations": {
                 "ADGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 9.0,
                             "mStartValue": 3.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "APGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 18.0,
                             "mStartValue": 6.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -662,9 +668,7 @@
             "apiName": "LightemUp",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -681,13 +685,10 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.1899999976158142
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "TOOLTIPONLYDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -704,8 +705,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.7599999904632568
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -721,17 +721,14 @@
             "apiName": "SearingDawn",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
                             "mStartValue": 40.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -782,14 +779,12 @@
             "apiName": "Spellwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -801,8 +796,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -825,9 +819,7 @@
             "apiName": "CenterOfTheUniverse",
             "calculations": {
                 "StarDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelBreakpointsCalculationPart",
@@ -844,8 +836,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -915,7 +906,7 @@
             "id": 92,
             "name": "易损",
             "rarity": 1,
-            "tooltip": "你的装备和持续伤害效果可以暴击来造成@CritDamage*100@%额外伤害。获得@CritChance*100@%暴击几率。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+            "tooltip": "你的装备效果和持续伤害效果可以暴击来造成@CritDamage*100@%额外伤害。获得@CritChance*100@%暴击几率。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
             "apiName": "CannonFodder",
@@ -941,15 +932,13 @@
             "id": 233,
             "name": "终极转盘",
             "rarity": 2,
-            "tooltip": "将召唤师技能【闪人】替换成一个随机英雄的终极技能。在施放这个技能后，会将它随机替换为另一个终极技能。"
+            "tooltip": "将召唤师技能【闪人】替换成一个随机英雄的终极技能。在施放这个技能后，会将它随机替换为另一个终极技能。<br><br><br><rules>这些技能依然是终极技能。</rules>"
         },
         {
             "apiName": "ClownCollege",
             "calculations": {
                 "BasicAttackDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -966,8 +955,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "QCritDamageMod": {
                     "__type": "GameCalculation",
@@ -991,9 +979,7 @@
                     ]
                 },
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
@@ -1009,8 +995,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.550000011920929
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1030,7 +1015,7 @@
             "id": 310,
             "name": "小丑学院",
             "rarity": 2,
-            "tooltip": "<spellName>背刺</spellName>：你从背后袭击敌人时，会造成@BasicAttackDamage@<physicalDamage>额外物理伤害</physicalDamage>。<br><br><spellName>欺诈魔术</spellName>：你传送并变为<keywordStealth>隐形</keywordStealth>，持续@StealthDuration@秒。你在<keywordStealth>隐形</keywordStealth>状态下的第一次攻击将造成额外的<physicalDamage>@TotalDamage@物理伤害</physicalDamage>。如果从背后进行打击，那么这个攻击会暴击，造成@QCritDamageMod@伤害。<br><br><spellName>幻像：阵亡</spellName>：在阵亡时，在你周围造成@FearDamage*100@%最大生命值的<trueDamage>真实伤害</trueDamage>以及@FearDuration@秒恐惧。"
+            "tooltip": "<spellName>背刺</spellName>：你从背后袭击敌人时，会造成@BasicAttackDamage@<physicalDamage>额外物理伤害</physicalDamage>。<br><br><spellName>欺诈魔术</spellName>：你传送并变为<keywordStealth>隐形</keywordStealth>，持续@StealthDuration@秒。你在<keywordStealth>隐形</keywordStealth>状态下的第一次攻击将造成额外的<physicalDamage>@TotalDamage@物理伤害</physicalDamage>。如果从背后进行打击，那么这个攻击会暴击，造成@QCritDamageMod@伤害。<br><br><spellName>幻像：阵亡</spellName>：在阵亡时，在你周围造成<trueDamage>@FearDamage*100@%最大生命值的真实伤害</trueDamage>以及@FearDuration@秒恐惧。"
         },
         {
             "apiName": "NumbToPain",
@@ -1209,13 +1194,13 @@
                 "Radius": 450.0,
                 "RootDuration": 1.25
             },
-            "desc": "每@Cooldown@秒，<keywordMajor>自动</keywordMajor><status>禁锢</status>附近的敌人们@RootDuration@秒。<br>",
+            "desc": "每@Cooldown@秒，<keywordMajor>自动施放</keywordMajor>@RootDuration@秒<status>禁锢</status>给附近的敌人们。<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
             "id": 39,
             "name": "冰霜 幽灵",
             "rarity": 0,
-            "tooltip": "每@Cooldown@秒，<keywordMajor>自动</keywordMajor><status>禁锢</status>附近的敌人们@RootDuration@秒。<br><br>这个回合已禁锢的敌人数量：@f1@<br>已禁锢的敌人数量总和：@f2@"
+            "tooltip": "每@Cooldown@秒，<keywordMajor>自动施放</keywordMajor>@RootDuration@秒<status>禁锢</status>给附近的敌人们。<br><br>这个回合已禁锢的敌人数量：@f1@<br>已禁锢敌人的总数：@f2@"
         },
         {
             "apiName": "SymphonyofWar",
@@ -1314,40 +1299,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "在你从远处对一名敌人造成伤害时，对其<keywordMajor>自动施放</keywordMajor>一道<abilityName>精准弹幕</abilityName>。",
+            "desc": "在你从远处对一名敌人造成伤害时，对其发射一道<abilityName>精准弹幕</abilityName>。",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "精准奇才",
             "rarity": 2,
-            "tooltip": "在你从@SnipeDistance@码外对一名敌人造成伤害时， <keywordMajor>自动施放</keywordMajor>一道<abilityName>精准弹幕</abilityName>，造成<magicDamage>@Damage@魔法伤害</magicDamage>。@Cooldown@秒冷却时间。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+            "tooltip": "在你从@SnipeDistance@码外对一名敌人造成伤害时， 发射一道<abilityName>精准弹幕</abilityName>，造成<magicDamage>@Damage@魔法伤害</magicDamage>。每个目标@Cooldown@秒冷却时间。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
             "apiName": "Eureka",
@@ -1416,9 +1398,7 @@
             "apiName": "Earthwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1435,8 +1415,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1452,7 +1431,7 @@
             "id": 27,
             "name": "大地苏醒",
             "rarity": 2,
-            "tooltip": "你的冲刺、跳跃、闪烁或传送类技能会留下一条在1秒后爆炸的轨迹，造成@Damage@<physicalDamage>物理伤害</physicalDamage>。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+            "tooltip": "你的冲刺、跳跃、闪烁或传送类技能会留下一条在1秒后爆炸的轨迹，造成<physicalDamage>@Damage@物理伤害</physicalDamage>。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
             "apiName": "ScopedWeapons",
@@ -1504,17 +1483,14 @@
             "apiName": "SonicBoom",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 150.0,
                             "mStartValue": 30.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1614,17 +1590,14 @@
             "apiName": "FallenAegis",
             "calculations": {
                 "ShieldAmount": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 350.0,
                             "mStartValue": 50.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1636,7 +1609,7 @@
             "id": 34,
             "name": "堕落圣盾",
             "rarity": 0,
-            "tooltip": "带着一个持续@ShieldDuration@秒且可吸收@ShieldAmount@魔法伤害的<abilityName>黑暗之盾</abilityName>开始战斗。<br><br><rules><abilityName>黑暗之盾</abilityName>会格挡魔法伤害和<status>定身</status>效果。</rules><br><br>已生成的护盾值总和：@f1@<br>已格挡的定身技能总和：@f2@"
+            "tooltip": "带着一个持续@ShieldDuration@秒且可吸收<shield>@ShieldAmount@魔法伤害</shield>的<abilityName>黑暗之盾</abilityName>开始战斗。黑暗之盾会阻挡<status>限制效果</status>和<status>定身效果</status>，直到它被打破。<br><br>已生成的护盾值总和：@f1@<br>已阻挡的定身类技能总数：@f2@"
         },
         {
             "apiName": "HolyFire",
@@ -1679,14 +1652,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "ManaCalc": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1667,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "你的<scaleMana>法力值</scaleMana>消耗翻倍。你的技能造成更多伤害，受益于你的<scaleMana>最大法力值</scaleMana>。",
+            "desc": "你的<scaleMana>法力值</scaleMana>消耗翻倍。你的技能的<healing>治疗效果</healing>、<shield>护盾效果</shield>和伤害获得提升，提升幅度基于你的<scaleMana>最大法力值</scaleMana>。",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "溢流",
             "rarity": 0,
-            "tooltip": "你的<scaleMana>法力值</scaleMana>消耗翻倍。你的技能造成的伤害提升<scaleMana>@ManaCalc@</scaleMana>。"
+            "tooltip": "你的<scaleMana>法力值</scaleMana>消耗翻倍。你的技能的<healing>治疗效果</healing>、<shield>护盾效果</shield>和伤害的效能提升<scaleMana>@ManaCalc@</scaleMana>。"
         },
         {
             "apiName": "FeeltheBurn",
@@ -1767,9 +1735,7 @@
             "apiName": "GuiltyPleasure",
             "calculations": {
                 "TotalHeal": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1781,8 +1747,7 @@
                             "mDataValue": "HealPercentage",
                             "mStat": 12
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1847,18 +1812,35 @@
         },
         {
             "apiName": "OutlawsGrit",
-            "calculations": {},
+            "calculations": {
+                "MaxResistTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ResistsPerStack"
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "MaxStacks"
+                            }
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "你的冲刺、跳跃、闪烁或传送类技能会为你提供<scaleArmor>@ResistsPerStack@护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>。<br><br>这个效果至多可叠加至@MaxStacks@层。",
+            "desc": "你的冲刺、跳跃、闪烁或传送类技能会为你提供<scaleArmor>@ResistsPerStack@护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>，至多在@MaxStacks@层时提供@MaxResistTooltipOnly@。",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
             "name": "狂徒豪气",
             "rarity": 1,
-            "tooltip": "你的冲刺、跳跃、闪烁或传送类技能会为你提供<scaleArmor>@ResistsPerStack@护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>。<br><br>这个效果至多可叠加至@MaxStacks@层。"
+            "tooltip": "你的冲刺、跳跃、闪烁或传送类技能会为你提供<scaleArmor>@ResistsPerStack@护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>，至多在@MaxStacks@层时提供@MaxResistTooltipOnly@。"
         },
         {
             "apiName": "DontBlink",
@@ -1872,7 +1854,7 @@
             "id": 26,
             "name": "唯快不破",
             "rarity": 0,
-            "tooltip": "你每比目标多<moveSpeed>10移动速度</moveSpeed>，则对其多造成@BonusDamagePerMSDifference*1000@%额外伤害。<br><br>这个回合的额外伤害：@f1@<br>额外伤害总和：@f2@"
+            "tooltip": "你每比目标多<speed>10移动速度</speed>，则对其多造成@BonusDamagePerMSDifference*1000@%额外伤害。<br><br>这个回合的额外伤害：@f1@<br>额外伤害总和：@f2@"
         },
         {
             "apiName": "ShadowRunner",
@@ -1893,15 +1875,12 @@
             "apiName": "InfernalConduit",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -1936,6 +1915,32 @@
             "name": "炼狱导管",
             "rarity": 2,
             "tooltip": "你的技能会施加一层可无限叠加的<keywordMajor>灼烧</keywordMajor>，在@BleedDuration@秒的持续时间里每秒造成<magicDamage>@BleedDamageTooltip@魔法伤害</magicDamage>。<br>你的所有<keywordMajor>灼烧</keywordMajor>效果会在对敌人们造成伤害时使你的各基础技能的冷却时间缩短@FlatCooldownRefundPerTick@秒。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {
+                "APAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APAmp"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "将<scaleAD>额外攻击力</scaleAD>转化为<scaleAP>法术强度</scaleAP>。获得<scaleAP>@APAmp*100@%法术强度</scaleAP>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "物理转魔法",
+            "rarity": 0,
+            "tooltip": "将<scaleAD>额外攻击力</scaleAD>转化为<scaleAP>法术强度</scaleAP>，并获得<scaleAP>@APAmpCalcTooltip@法术强度</scaleAP>。<br><br>当前转化：@f1@<br><br><rules>每点<scaleAD>攻击力</scaleAD>转化为<scaleAP>@ConversionRate@法术强度</scaleAP>。</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2000,15 +2005,12 @@
                     ]
                 },
                 "BurnDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "BurnDamage",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 4.0
                     },
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -2036,9 +2038,7 @@
                     "tooltipOnly": true
                 },
                 "DamagePerSecond": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2055,8 +2055,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -2214,15 +2213,12 @@
             "apiName": "SlowCooker",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -2330,7 +2326,7 @@
             "id": 78,
             "name": "灵魂连接",
             "rarity": 2,
-            "tooltip": "你的友军受到的@DamageRedirectPercentage*100@%实际伤害值将被转移给你，并且其所受的@HealCopyPercentage*100@%治疗效果也会转移给你。<br><br>已转移伤害的总和：@f1@<br>已造成治疗效果的总和：@f2@<br>"
+            "tooltip": "你的友军受到的@DamageRedirectPercentage*100@%实际伤害值将被转移给你，并且<healing>其所受的@HealCopyPercentage*100@%治疗效果</healing>也会转移给你。<br><br>已转移伤害的总和：@f1@<br>已造成治疗效果的总和：@f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2342,13 +2338,13 @@
                 "OnHitDamageRatio": 0.30000001192092896,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "你的攻击为你提供永久的<keywordMajor>诅咒能量</keywordMajor>并造成基于你<keywordMajor>诅咒能量的</keywordMajor>的额外<magicDamage>魔法伤害</magicDamage>。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
+            "desc": "攻击敌方英雄时提供永久的<keywordMajor>诅咒能量</keywordMajor>并造成基于你<keywordMajor>诅咒能量的</keywordMajor>的额外<magicDamage>魔法伤害</magicDamage>。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "死亡触摸",
             "rarity": 1,
-            "tooltip": "你的攻击为你提供@CurseCounter@<keywordMajor>诅咒能量</keywordMajor>。<br><br>你的攻击造成额外的<magicDamage>@f1@魔法伤害</magicDamage> (你的@OnHitDamageRatio*100@%<keywordMajor>诅咒能量</keywordMajor>)。<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "攻击敌方英雄时提供@CurseCounter@<keywordMajor>诅咒能量</keywordMajor>。<br><br>你的攻击造成额外的<magicDamage>@f1@魔法伤害</magicDamage> (你的@OnHitDamageRatio*100@%<keywordMajor>诅咒能量</keywordMajor>)。<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2482,9 +2478,7 @@
             "apiName": "OkBoomerang",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2501,20 +2495,19 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.15000000596046448
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "BaseCooldown": 7.0
             },
-            "desc": "每7秒朝着一个附近的敌人<keywordMajor>自动施放</keywordMajor>一个回力镖。",
+            "desc": "每@BaseCooldown@秒朝着一个附近的敌人<keywordMajor>自动施放</keywordMajor>投掷一个回力镖。",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
             "id": 61,
             "name": "回力OK镖",
             "rarity": 1,
-            "tooltip": "每7秒朝着一个附近的敌人<keywordMajor>自动施放</keywordMajor>一个回力镖，对命中的敌人们造成@Damage@自适应伤害。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
+            "tooltip": "每@BaseCooldown@秒朝着一个附近的敌人<keywordMajor>自动施放</keywordMajor>投掷一个回力镖，对命中的敌人们造成@Damage@自适应伤害。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
             "apiName": "JuiceBox",
@@ -2657,6 +2650,33 @@
             "tooltip": "在你获得一个技能的永久<keywordMajor>层数</keywordMajor>时，多获得@StackModifier*100@%！"
         },
         {
+            "apiName": "escAPADe",
+            "calculations": {
+                "ADAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADAmp",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "将<scaleAP>法术强度</scaleAP>转化为<scaleAD>额外攻击力</scaleAD>。获得<scaleAD>@ADAmp*100@%攻击力</scaleAD>。",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "魔法转物理",
+            "rarity": 0,
+            "tooltip": "将<scaleAP>法术强度</scaleAP>转化为<scaleAD>额外攻击力</scaleAD>，并获得<scaleAD>@ADAmpCalcTooltip@攻击力</scaleAD>。<br><br>当前转化：@f1@<br><br><rules>每点<scaleAP>法术强度</scaleAP>转化为<scaleAD>@ConversionRate@攻击力</scaleAD>。</rules>"
+        },
+        {
             "apiName": "FeyMagic",
             "calculations": {},
             "dataValues": {
@@ -2697,13 +2717,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "技能命中会为你提供永久的<keywordMajor>诅咒能量</keywordMajor>。获得基于你的<keywordMajor>诅咒能量</keywordMajor>的适应之力。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
+            "desc": " 用一个技能命中一个英雄，可为你提供永久的<keywordMajor>诅咒能量</keywordMajor>。获得基于你的<keywordMajor>诅咒能量</keywordMajor>的<font color = '#8347ff'>适应之力</font>。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "末日预言者",
             "rarity": 2,
-            "tooltip": "你的技能为你提供@CurseCounter@<keywordMajor>诅咒能量</keywordMajor>。<br><br>获得@f1@适应之力 (你的@AdaptiveForceRatio*100@%<keywordMajor>诅咒能量</keywordMajor>)。<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": " 用一个技能命中一个英雄，可为你提供永久的@CurseCounter@<keywordMajor>诅咒能量</keywordMajor>。<br><br>获得@f1@<font color = '#8347ff'>适应之力</font> (你的@AdaptiveForceRatio*100@%<keywordMajor>诅咒能量</keywordMajor>)。<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2848,7 +2868,7 @@
             "id": 310,
             "name": "坦克引擎",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>参与击杀：@f1@"
+            "tooltip": "获得@SizeIncrement*100@%体型提升和<scaleHealth>@f2@额外生命值</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth>x参与击杀数)。<br><br>参与击杀数：@f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -2975,7 +2995,7 @@
             "id": 207,
             "name": "纹丝不动",
             "rarity": 0,
-            "tooltip": "获得<spellName>游击队军备</spellName><br><br><rules>在原地不动@HoldStillDuration@秒后，获得<keywordStealth>隐形</keywordStealth>，持续到你移动为止。在你离开这个<keywordStealth>隐形</keywordStealth>状态时，获得持续@ASDuration@秒的<attackSpeed>@BonusAS@攻击速度</attackSpeed>和@BonusMS*100@%持续衰减的<speed>移动速度</speed>，并且你的下一次命中造成@BonusHitDamage@魔法伤害。</rules>"
+            "tooltip": "获得<spellName>游击队军备</spellName><br><br><rules>在原地不动@HoldStillDuration@秒后，获得<keywordStealth>隐形</keywordStealth>，持续到你移动为止。在你离开这个<keywordStealth>隐形</keywordStealth>状态时，获得持续@ASDuration@秒的<attackSpeed>@BonusAS@攻击速度</attackSpeed>和<speed>@BonusMS*100@%持续衰减的移动速度</speed>。你在下一次对敌人造成伤害时，会造成额外的<magicDamage>@BonusHitDamage@魔法伤害</magicDamage>。</rules>"
         },
         {
             "apiName": "FromBeginningToEnd",
@@ -3566,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "提供<scaleBonus>@ItemHaste@装备急速</scaleBonus>(相当于@TooltipCDR@%装备冷却缩减)。<br><br><rules>装备急速可缩减所有装备技能的冷却时间。</rules>",
+            "desc": "获得<scaleBonus>@ItemHaste@装备急速</scaleBonus>(相当于@TooltipCDR@%装备冷却缩减)。<br><br><rules>装备急速可缩减所有装备技能的冷却时间%i:cooldown%。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "尖端发明家",
             "rarity": 1,
-            "tooltip": "提供<scaleBonus>@ItemHaste@装备急速</scaleBonus>(相当于@TooltipCDR@%装备冷却缩减)。<br><br><rules>装备急速可缩减所有装备技能的冷却时间。</rules>"
+            "tooltip": "获得<scaleBonus>@ItemHaste@装备急速</scaleBonus>(相当于@TooltipCDR@%装备冷却缩减)。<br><br><rules>装备急速可缩减所有装备技能的冷却时间%i:cooldown%。</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3673,9 +3693,7 @@
                     ]
                 },
                 "LaserEyesTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3692,7 +3710,6 @@
                             "mStat": 2
                         }
                     ],
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -3766,7 +3783,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "获得<attackSpeed>@TotalASValue*100@%总攻击速度</attackSpeed>。在每秒@Breakpoint1@<attackSpeed>次攻击</attackSpeed>时获得新的效果。",
+            "desc": "获得<attackSpeed>@TotalASValue*100@%总攻击速度</attackSpeed>。<br><br>在@Breakpoint1@<attackSpeed>攻击次数/秒</attackSpeed>时，造成额外的<magicDamage>魔法伤害</magicDamage> {{ Item_Keyword_OnHit }}。",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3878,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3890,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -3924,15 +3938,15 @@
             "apiName": "BluntForce",
             "calculations": {},
             "dataValues": {
-                "ADIncrease": 0.15000000596046448
+                "ADAmp": 0.15000000596046448
             },
-            "desc": "获得<scaleAD>@ADIncrease*100@%攻击力</scaleAD>。",
+            "desc": "获得<scaleAD>@ADAmp*100@%攻击力</scaleAD>。",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "大力",
             "rarity": 0,
-            "tooltip": "获得<scaleAD>@ADIncrease*100@%攻击力</scaleAD>。"
+            "tooltip": "获得<scaleAD>@ADAmp*100@% (@f1@) 攻击力</scaleAD>。"
         },
         {
             "apiName": "Oathsworn",
@@ -4207,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "治疗/护盾为你提供永久的<keywordMajor>诅咒能量</keywordMajor>。从每层<keywordMajor>诅咒能量</keywordMajor>中获得技能急速。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
@@ -4220,17 +4234,25 @@
         },
         {
             "apiName": "MindtoMatter",
-            "calculations": {},
-            "dataValues": {
-                "ManaToHealthConversion": 0.5
+            "calculations": {
+                "ManaToHealthCalc": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                }
             },
-            "desc": "使你的<healing>最大生命值</healing>提升，数额相当于你一半的<scaleMana>法力值</scaleMana>。",
+            "dataValues": {},
+            "desc": "使你的<scaleHealth>最大生命值</scaleHealth>提升，数额相当于你一半的<scaleMana>法力值</scaleMana>。",
             "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
             "id": 56,
             "name": "由心及物",
             "rarity": 0,
-            "tooltip": "使你的<healing>最大生命值</healing>提升，数额相当于你一半的<scaleMana>法力值</scaleMana>。"
+            "tooltip": "获得<scaleHealth>@ManaToHealthCalc@生命值</scaleHealth>。"
         },
         {
             "apiName": "ItsKillingTime",
@@ -4338,9 +4360,7 @@
             "apiName": "AndMyAxe",
             "calculations": {
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4357,8 +4377,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.44999998807907104
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {

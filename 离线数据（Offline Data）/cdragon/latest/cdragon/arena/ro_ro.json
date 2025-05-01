@@ -364,9 +364,7 @@
             "apiName": "BladeWaltz",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -383,8 +381,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.05999999865889549
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -426,9 +423,7 @@
                     "mSimpleTooltipCalculationDisplay": 6
                 },
                 "SingleFireDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -445,8 +440,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -587,11 +581,29 @@
             "id": 90,
             "name": "Răzbunare",
             "rarity": 1,
-            "tooltip": "Provoci cu @DamageAmp*100@% mai multe daune și primești <lifeSteal>@Omnivamp*100@% omni-vampirism</lifeSteal> după moartea partenerului.<br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
+            "tooltip": "Provoci cu @DamageAmp*100@% mai multe daune și primești <lifeSteal>@Omnivamp*100@% omni-vampirism</lifeSteal> după moartea partenerului.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
             "apiName": "Erosion",
-            "calculations": {},
+            "calculations": {
+                "MaxShredTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "Shred"
+                        },
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "MaxStacks"
+                        },
+                        {
+                            "__type": "NumberCalculationPart",
+                            "mNumber": 10.0
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 20.0,
                 "Shred": 0.014999999664723873,
@@ -603,7 +615,7 @@
             "id": 28,
             "name": "Eroziune",
             "rarity": 0,
-            "tooltip": "Când le provoci daune inamicilor, le reduci cu @Shred*100@% <scaleArmor>armura</scaleArmor> și <scaleMR>rezistența la magie</scaleMR> timp de @ShredDuration@ sec. <br><br>Se cumulează de maximum @MaxStacks@ ori."
+            "tooltip": "Când le provoci daune inamicilor, le reduci cu @Shred*100@% <scaleArmor>armura</scaleArmor> și <scaleMR>rezistența la magie</scaleMR> timp de @ShredDuration@ sec., până la @MaxShredTooltipOnly@% la @MaxStacks@ cumuluri. "
         },
         {
             "apiName": "Stats",
@@ -623,30 +635,24 @@
             "apiName": "MasterofDuality",
             "calculations": {
                 "ADGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 9.0,
                             "mStartValue": 3.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "APGained": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 18.0,
                             "mStartValue": 6.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -662,9 +668,7 @@
             "apiName": "LightemUp",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -681,13 +685,10 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.1899999976158142
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "TOOLTIPONLYDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -704,8 +705,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.7599999904632568
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {},
@@ -721,17 +721,14 @@
             "apiName": "SearingDawn",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
                             "mStartValue": 40.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -782,14 +779,12 @@
             "apiName": "Spellwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 200.0,
-                            "mStartValue": 80.0
+                            "mEndValue": 250.0,
+                            "mStartValue": 100.0
                         },
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -801,8 +796,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -825,9 +819,7 @@
             "apiName": "CenterOfTheUniverse",
             "calculations": {
                 "StarDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelBreakpointsCalculationPart",
@@ -844,8 +836,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -941,15 +932,13 @@
             "id": 233,
             "name": "Ruletă supremă",
             "rarity": 2,
-            "tooltip": "''Fuga invocatorului'' este înlocuită cu o supremă aleatorie. După ce folosești suprema, o înlocuiești cu o supremă aleatorie nouă."
+            "tooltip": "''Fuga invocatorului'' este înlocuită cu o supremă aleatorie. După ce folosești suprema, o înlocuiești cu o supremă aleatorie nouă.<br><br><br><rules>Aceste vrăji sunt în continuare supreme.</rules>"
         },
         {
             "apiName": "ClownCollege",
             "calculations": {
                 "BasicAttackDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -966,8 +955,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 },
                 "QCritDamageMod": {
                     "__type": "GameCalculation",
@@ -991,9 +979,7 @@
                     ]
                 },
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
@@ -1009,8 +995,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.550000011920929
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1030,7 +1015,7 @@
             "id": 310,
             "name": "Universitatea clovnilor",
             "rarity": 2,
-            "tooltip": "<spellName>Lovitură pe la spate</spellName>: provoci @BasicAttackDamage@ <physicalDamage>daune fizice suplimentare</physicalDamage> când ataci inamicii din spate.<br><br><spellName>Amăgire</spellName>: Te teleportezi și primești <keywordStealth>invizibilitate</keywordStealth> timp de @StealthDuration@ secunde. Următorul tău atac cât timp beneficiezi de <keywordStealth>invizibilitate</keywordStealth> provoacă încă <physicalDamage>@TotalDamage@ daune fizice</physicalDamage>. Dacă lovești din spate, acest atac lovește critic, provocând @QCritDamageMod@ daune.<br><br><spellName>Halucinație – Moarte</spellName>: când mori, provoci <trueDamage>daune reale</trueDamage> în valoare de @FearDamage*100@% din viața maximă și terifiezi inamicii din jurul tău timp de @FearDuration@ sec."
+            "tooltip": "<spellName>Lovitură pe la spate</spellName>: provoci @BasicAttackDamage@ <physicalDamage>daune fizice suplimentare</physicalDamage> când ataci inamicii din spate.<br><br><spellName>Amăgire</spellName>: te teleportezi și primești <keywordStealth>invizibilitate</keywordStealth> timp de @StealthDuration@ secunde. Următorul tău atac cât timp beneficiezi de <keywordStealth>invizibilitate</keywordStealth> provoacă încă <physicalDamage>@TotalDamage@ daune fizice</physicalDamage>. Dacă lovești din spate, acest atac lovește critic, provocând @QCritDamageMod@ daune.<br><br><spellName>Halucinație – Moarte</spellName>: când mori, provoci <trueDamage>daune reale în valoare de @FearDamage*100@% din viața maximă</trueDamage> și terifiezi inamicii din jurul tău timp de @FearDuration@ sec."
         },
         {
             "apiName": "NumbToPain",
@@ -1209,13 +1194,13 @@
                 "Radius": 450.0,
                 "RootDuration": 1.25
             },
-            "desc": "La fiecare @Cooldown@ secunde, <status>țintuiește</status> <keywordMajor>automat</keywordMajor> inamicii din apropiere timp de @RootDuration@ secundă.<br>",
+            "desc": "<status>Țintuiește</status> <keywordMajor>automat</keywordMajor> inamicii din apropiere timp de @RootDuration@ secunde la fiecare @Cooldown@ secunde.<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/frostwraith_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/frostwraith_small.png",
             "id": 39,
             "name": "Spectru de gheață",
             "rarity": 0,
-            "tooltip": "La fiecare @Cooldown@ secunde, <status>țintuiește</status> <keywordMajor>automat</keywordMajor> inamicii din apropiere timp de @RootDuration@ secundă.<br><br>Inamici țintuiți în această rundă: @f1@<br>Inamici țintuiți în total: @f2@"
+            "tooltip": "<status>Țintuiește</status> <keywordMajor>automat</keywordMajor> inamicii din apropiere timp de @RootDuration@ secunde la fiecare @Cooldown@ secunde.<br><br>Inamici țintuiți în această rundă: @f1@<br>Inamici țintuiți în total: @f2@"
         },
         {
             "apiName": "SymphonyofWar",
@@ -1314,40 +1299,37 @@
             "apiName": "TrueshotProdigy",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 750.0,
-                            "mStartValue": 250.0
+                            "mEndValue": 525.0,
+                            "mStartValue": 175.0
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.399999976158142,
+                            "mCoefficient": 1.0,
                             "mStat": 2,
                             "mStatFormula": 2
                         },
                         {
                             "__type": "StatByCoefficientCalculationPart",
-                            "mCoefficient": 1.0
+                            "mCoefficient": 0.699999988079071
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "Cooldown": 5.0,
                 "SnipeDistance": 700.0
             },
-            "desc": "Când îi provoci daune unui campion de la distanță mare, lansezi <keywordMajor>automat</keywordMajor> o <abilityName>''Rafală de proiectile''</abilityName> spre el.",
+            "desc": "Când îi provoci daune unui campion de la distanță mare, lansezi o <abilityName>''Rafală de proiectile''</abilityName> spre el.",
             "iconLarge": "assets/ux/cherry/augments/icons/trueshotprodigy_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/trueshotprodigy_small.png",
             "id": 86,
             "name": "Lunetist înnăscut",
             "rarity": 2,
-            "tooltip": "Când îi provoci daune unui campion de la mai mult de @SnipeDistance@ unități distanță, lansezi <keywordMajor>automat</keywordMajor> o <abilityName>''Rafală de proiectile''</abilityName> spre el, care provoacă <magicDamage>@Damage@ daune magice</magicDamage>. Timp de reactivare: @Cooldown@ sec. per țintă.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
+            "tooltip": "Când îi provoci daune unui campion de la mai mult de @SnipeDistance@ unități distanță, lansezi o <abilityName>''Rafală de proiectile''</abilityName> spre el, care provoacă <magicDamage>@Damage@ daune magice</magicDamage>. Timp de reactivare: @Cooldown@ sec. per țintă.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
             "apiName": "Eureka",
@@ -1416,9 +1398,7 @@
             "apiName": "Earthwake",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1435,8 +1415,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1452,7 +1431,7 @@
             "id": 27,
             "name": "Cutremur",
             "rarity": 2,
-            "tooltip": "Năpustirile, săriturile, deplasările instantanee și teleportările lasă în urmă o dâră care se detonează după 1 secundă, provocând @Damage@ <physicalDamage>daune fizice</physicalDamage>.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
+            "tooltip": "Năpustirile, săriturile, deplasările instantanee și teleportările lasă în urmă o dâră care se detonează după 1 secundă, provocând <physicalDamage>@Damage@ daune fizice</physicalDamage>.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
             "apiName": "ScopedWeapons",
@@ -1504,17 +1483,14 @@
             "apiName": "SonicBoom",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 2,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 2,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 150.0,
                             "mStartValue": 30.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 2
+                    ]
                 }
             },
             "dataValues": {
@@ -1528,7 +1504,7 @@
             "id": 76,
             "name": "Explozie sonică",
             "rarity": 0,
-            "tooltip": "Aplicarea buff-urilor, <healing>vindecarea</healing> sau <shield>protejarea cu scuturi</shield> a aliatului provoacă <trueDamage>@Damage@ daune reale</trueDamage> și <status>încetinește</status> inamicii din jurul acestuia cu @SlowAmount*-100@% timp de 2 secunde.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
+            "tooltip": "Aplicarea buff-urilor, <healing>vindecarea</healing> sau <shield>protejarea cu scuturi</shield> a aliatului provoacă <trueDamage>@Damage@ daune reale</trueDamage> și <status>încetinește inamicii din jurul acestuia</status> cu @SlowAmount*-100@% timp de 2 secunde.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
             "apiName": "TwiceThrice",
@@ -1614,17 +1590,14 @@
             "apiName": "FallenAegis",
             "calculations": {
                 "ShieldAmount": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 350.0,
                             "mStartValue": 50.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1636,7 +1609,7 @@
             "id": 34,
             "name": "Scut decăzut",
             "rarity": 0,
-            "tooltip": "Începi lupta cu un <abilityName>''Scut negru''</abilityName> care blochează @ShieldAmount@ daunele magice timp de @ShieldDuration@ sec.<br><br><rules><abilityName>''Scutul negru''</abilityName> blochează daunele magice și efectele de <status>imobilizare</status>.</rules><br><br>Scuturi generate în total: @f1@<br>Vrăji de imobilizare blocate în total: @f2@"
+            "tooltip": "Începi lupta cu un <abilityName>''Scut negru''</abilityName> care blochează <shield>@ShieldAmount@ daune magice</shield> timp de @ShieldDuration@ sec. Scutul împiedică efectele de <status>neutralizare</status> și <status>imobilizare</status> până când este distrus.<br><br>Scuturi generate în total: @f1@<br>Vrăji de imobilizare blocate în total: @f2@"
         },
         {
             "apiName": "HolyFire",
@@ -1679,14 +1652,12 @@
             "apiName": "Overflow",
             "calculations": {
                 "ManaCalc": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
                     "mDisplayAsPercent": true,
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "NamedDataValueCalculationPart",
-                            "mDataValue": "{5cc662bd}"
+                            "mDataValue": "{89ba3820}"
                         },
                         {
                             "__type": "AbilityResourceByCoefficientCalculationPart",
@@ -1696,22 +1667,19 @@
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.009999999776482582
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 }
             },
             "dataValues": {
-                "InitialDamageAmpPercent": 10.0,
-                "ManaCoefficientCHANGEINCALC": 0.004999999888241291,
-                "ManaRatio": 200.0
+                "InitialAmpPercent": 10.0
             },
-            "desc": "Vrăjile tale care necesită <scaleMana>mană</scaleMana> costă dublu. Abilitățile tale care cresc în funcție de <scaleMana>mana maximă</scaleMana> provoacă mai multe daune.",
+            "desc": "Vrăjile tale care necesită <scaleMana>mană</scaleMana> costă dublu. <healing>Vindecările</healing>, <shield>scuturile</shield> și daunele abilității tale cresc în funcție de <scaleMana>mana ta maximă</scaleMana>.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Revărsare",
             "rarity": 0,
-            "tooltip": "Vrăjile tale care necesită <scaleMana>mană</scaleMana> costă dublu. Abilitățile tale provoacă cu <scaleMana>@ManaCalc@</scaleMana> mai multe daune."
+            "tooltip": "Vrăjile tale care necesită <scaleMana>mană</scaleMana> costă dublu. <healing>Vindecările</healing>, <shield>scuturile</shield> și daunele abilității tale sunt cu <scaleMana>@ManaCalc@</scaleMana> mai eficiente."
         },
         {
             "apiName": "FeeltheBurn",
@@ -1767,9 +1735,7 @@
             "apiName": "GuiltyPleasure",
             "calculations": {
                 "TotalHeal": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -1781,8 +1747,7 @@
                             "mDataValue": "HealPercentage",
                             "mStat": 12
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -1847,18 +1812,35 @@
         },
         {
             "apiName": "OutlawsGrit",
-            "calculations": {},
+            "calculations": {
+                "MaxResistTooltipOnly": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ProductOfSubPartsCalculationPart",
+                            "mPart1": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "ResistsPerStack"
+                            },
+                            "mPart2": {
+                                "__type": "NamedDataValueCalculationPart",
+                                "mDataValue": "MaxStacks"
+                            }
+                        }
+                    ]
+                }
+            },
             "dataValues": {
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "După folosirea năpustirilor, săriturilor, deplasărilor instantanee și teleportărilor, primești <scaleArmor>@ResistsPerStack@ armură</scaleArmor> și <scaleMR>rezistență la magie</scaleMR>.<br><br>Efectul se cumulează de maximum @MaxStacks@ ori.",
+            "desc": "După folosirea năpustirilor, săriturilor, deplasărilor instantanee și teleportărilor, primești <scaleArmor>@ResistsPerStack@ armură</scaleArmor> și <scaleMR>rezistență la magie</scaleMR>, până la @MaxResistTooltipOnly@ la @MaxStacks@ cumuluri.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
             "name": "Curajul haiducului",
             "rarity": 1,
-            "tooltip": "După folosirea năpustirilor, săriturilor, deplasărilor instantanee și teleportărilor, primești <scaleArmor>@ResistsPerStack@ armură</scaleArmor> și <scaleMR>rezistență la magie</scaleMR>.<br><br>Efectul se cumulează de maximum @MaxStacks@ ori."
+            "tooltip": "După folosirea năpustirilor, săriturilor, deplasărilor instantanee și teleportărilor, primești <scaleArmor>@ResistsPerStack@ armură</scaleArmor> și <scaleMR>rezistență la magie</scaleMR>, până la @MaxResistTooltipOnly@ la @MaxStacks@ cumuluri."
         },
         {
             "apiName": "DontBlink",
@@ -1872,7 +1854,7 @@
             "id": 26,
             "name": "Nu clipi",
             "rarity": 0,
-            "tooltip": "Primești @BonusDamagePerMSDifference*1000@% daune bonus per <moveSpeed>10 viteză de mișcare</moveSpeed> avută în plus față de țintă.<br><br>Daune bonus în această rundă: @f1@<br>Daune bonus în total: @f2@"
+            "tooltip": "Primești @BonusDamagePerMSDifference*1000@% daune bonus per <speed>10 viteză de mișcare</speed> avută în plus față de țintă.<br><br>Daune bonus în această rundă: @f1@<br>Daune bonus în total: @f2@"
         },
         {
             "apiName": "ShadowRunner",
@@ -1893,15 +1875,12 @@
             "apiName": "InfernalConduit",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -1936,6 +1915,32 @@
             "name": "Conduită infernală",
             "rarity": 2,
             "tooltip": "Abilitățile tale aplică un efect de <keywordMajor>ardere</keywordMajor> care se cumulează la infinit, provocând <magicDamage>@BleedDamageTooltip@ daune magice</magicDamage> pe secundă timp de @BleedDuration@ secunde.<br><br>Toate efectele tale de <keywordMajor>ardere</keywordMajor> reduc timpii de reactivare rămași ai abilităților tale de bază cu @FlatCooldownRefundPerTick@ secunde când le provoacă daune inamicilor.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@<br>"
+        },
+        {
+            "apiName": "ADAPt",
+            "calculations": {
+                "APAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APAmp"
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APAmp": 0.15000000596046448,
+                "ConversionRate": 1.666659951210022,
+                "InverseRate": 0.6000000238418579
+            },
+            "desc": "Transformă <scaleAD>daunele bonus din atac</scaleAD> în <scaleAP>puterea abilităților</scaleAP>. Primești <scaleAP>@APAmp*100@% puterea abilităților</scaleAP>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/adapt_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/adapt_small.png",
+            "id": 205,
+            "name": "ADAPtare",
+            "rarity": 0,
+            "tooltip": "Transformă <scaleAD>daunele bonus din atac</scaleAD> în <scaleAP>puterea abilităților</scaleAP> și primești <scaleAP>@APAmpCalcTooltip@ puterea abilităților</scaleAP>.<br><br>Transformare actuală: @f1@<br><br><rules>Transformă cu o rată de <scaleAP>@ConversionRate@ puterea abilităților</scaleAP> per punct de <scaleAD>daune din atac</scaleAD>.</rules>"
         },
         {
             "apiName": "BacktoBasics",
@@ -2000,15 +2005,12 @@
                     ]
                 },
                 "BurnDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "BurnDamage",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 4.0
                     },
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -2036,9 +2038,7 @@
                     "tooltipOnly": true
                 },
                 "DamagePerSecond": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2055,8 +2055,7 @@
                             "mStat": 2,
                             "mStatFormula": 2
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -2214,15 +2213,12 @@
             "apiName": "SlowCooker",
             "calculations": {
                 "BleedDamageTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculationModified",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mModifiedGameCalculation": "{0a242b94}",
                     "mMultiplier": {
                         "__type": "NumberCalculationPart",
                         "mNumber": 0.20000000298023224
-                    },
-                    "mSimpleTooltipCalculationDisplay": 4
+                    }
                 },
                 "{0a242b94}": {
                     "__type": "GameCalculation",
@@ -2330,7 +2326,7 @@
             "id": 78,
             "name": "Legătura spiritului",
             "rarity": 2,
-            "tooltip": "@DamageRedirectPercentage*100@% din daunele suferite de aliatul tău sunt redirecționate către tine, iar @HealCopyPercentage*100@% din vindecarea pe care o primește acesta îți este aplicată și ție.<br><br>Daune redirecționate în total: @f1@<br>Vindecare efectuată în total: @f2@<br>"
+            "tooltip": "@DamageRedirectPercentage*100@% din daunele suferite de aliatul tău sunt redirecționate către tine, iar <healing>@HealCopyPercentage*100@% din vindecarea pe care o primește acesta</healing> îți este aplicată și ție.<br><br>Daune redirecționate în total: @f1@<br>Vindecare efectuată în total: @f2@<br>"
         },
         {
             "apiName": "Deathtouch",
@@ -2342,13 +2338,13 @@
                 "OnHitDamageRatio": 0.30000001192092896,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Atacurile tale îți oferă <keywordMajor>putere blestemată</keywordMajor> permanentă și provoacă <magicDamage>daune magice</magicDamage> suplimentare în funcție de <keywordMajor>puterea blestemată</keywordMajor>.<br><br><keywordMajor>Puterea blestemată</keywordMajor> maximă pe care o poți primi per rundă crește în funcție de sursele totale de <keywordMajor>''Blestem''</keywordMajor> dintre tine și aliatul tău.",
+            "desc": "Atacurile împotriva campionilor inamici îți oferă <keywordMajor>putere blestemată</keywordMajor> permanentă și provoacă <magicDamage>daune magice</magicDamage> suplimentare în funcție de <keywordMajor>puterea blestemată</keywordMajor>.<br><br><keywordMajor>Puterea blestemată</keywordMajor> maximă pe care o poți primi per rundă crește în funcție de sursele totale de <keywordMajor>''Blestem''</keywordMajor> dintre tine și aliatul tău.",
             "iconLarge": "assets/ux/cherry/augments/icons/deathtouch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/deathtouch_small.png",
             "id": 217,
             "name": "Atingerea morții",
             "rarity": 1,
-            "tooltip": "Atacurile tale îți oferă @CurseCounter@ <keywordMajor>putere blestemată</keywordMajor>.<br><br>Atacurile tale provoacă încă <magicDamage>@f1@ daune magice</magicDamage> (@OnHitDamageRatio*100@% din <keywordMajor>puterea blestemată</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Atacurile împotriva campionilor inamici îți oferă @CurseCounter@ <keywordMajor>putere blestemată</keywordMajor>.<br><br>Atacurile tale provoacă încă <magicDamage>@f1@ daune magice</magicDamage> (@OnHitDamageRatio*100@% din <keywordMajor>puterea blestemată</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Quest_AngelofRetribution",
@@ -2482,9 +2478,7 @@
             "apiName": "OkBoomerang",
             "calculations": {
                 "Damage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -2501,20 +2495,19 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.15000000596046448
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
                 "BaseCooldown": 7.0
             },
-            "desc": "Lansezi <keywordMajor>automat</keywordMajor> un bumerang spre un inamic din apropiere la fiecare 7 sec.",
+            "desc": "Arunci <keywordMajor>automat</keywordMajor> un bumerang spre un inamic din apropiere la fiecare @BaseCooldown@ sec.",
             "iconLarge": "assets/ux/cherry/augments/icons/okboomerang_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/okboomerang_small.png",
             "id": 61,
             "name": "Bumerang OK",
             "rarity": 1,
-            "tooltip": "Lansezi <keywordMajor>automat</keywordMajor> un bumerang spre un inamic din apropiere la fiecare 7 sec., provocându-le @Damage@ daune adaptive inamicilor loviți.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
+            "tooltip": "Arunci <keywordMajor>automat</keywordMajor> un bumerang spre un inamic din apropiere la fiecare @BaseCooldown@ sec., provocându-le @Damage@ daune adaptive inamicilor loviți.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
             "apiName": "JuiceBox",
@@ -2657,6 +2650,33 @@
             "tooltip": "Când primești <keywordMajor>cumuluri</keywordMajor> permanente pentru o abilitate, primești încă @StackModifier*100@%!"
         },
         {
+            "apiName": "escAPADe",
+            "calculations": {
+                "ADAmpCalcTooltip": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "ADAmp",
+                            "mStat": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "ADAmp": 0.10000000149011612,
+                "ConversionRate": 0.6000000238418579,
+                "InverseRate": 1.666659951210022
+            },
+            "desc": "Transformă <scaleAP>puterea abilităților</scaleAP> în <scaleAD>daune bonus din atac</scaleAD>. Primești <scaleAD>@ADAmp*100@% daune din atac</scaleAD>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/escapade_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/escapade_small.png",
+            "id": 206,
+            "name": "Metamorfoză",
+            "rarity": 0,
+            "tooltip": "Transformă <scaleAP>puterea abilităților</scaleAP> în <scaleAD>daune bonus din atac</scaleAD> și primești <scaleAD>@ADAmpCalcTooltip@ daune din atac</scaleAD>.<br><br>Transformare actuală: @f1@<br><br><rules>Transformă cu o rată de <scaleAD>@ConversionRate@ daune din atac</scaleAD> per punct de <scaleAP>puterea abilităților</scaleAP>.</rules>"
+        },
+        {
             "apiName": "FeyMagic",
             "calculations": {},
             "dataValues": {
@@ -2697,13 +2717,13 @@
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Loviturile cu abilitatea îți oferă <keywordMajor>putere blestemată</keywordMajor> permanentă. Primești forță adaptivă în funcție de <keywordMajor>puterea blestemată</keywordMajor>.<br><br><keywordMajor>Puterea blestemată</keywordMajor> maximă pe care o poți primi per rundă crește în funcție de sursele totale de <keywordMajor>''Blestem''</keywordMajor> dintre tine și aliatul tău.",
+            "desc": "Dacă lovești un campion inamic cu o abilitate, primești <keywordMajor>putere blestemată</keywordMajor> permanentă. Primești <font color = '#8347ff'>forță adaptivă</font> în funcție de <keywordMajor>puterea blestemată</keywordMajor>.<br><br><keywordMajor>Puterea blestemată</keywordMajor> maximă pe care o poți primi per rundă crește în funcție de sursele totale de <keywordMajor>''Blestem''</keywordMajor> dintre tine și aliatul tău.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Previziune sumbră",
             "rarity": 2,
-            "tooltip": "Abilitățile tale îți oferă @CurseCounter@ <keywordMajor>putere blestemată</keywordMajor>.<br><br>Primești @f1@ forță adaptivă (@AdaptiveForceRatio*100@% din <keywordMajor>puterea blestemată</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Dacă lovești un campion inamic cu o abilitate, primești @CurseCounter@ <keywordMajor>putere blestemată</keywordMajor>.<br><br>Primești @f1@ <font color = '#8347ff'>forță adaptivă</font> (@AdaptiveForceRatio*100@% din <keywordMajor>puterea blestemată</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -2848,7 +2868,7 @@
             "id": 310,
             "name": "Motor de tanc",
             "rarity": 0,
-            "tooltip": "{{Cherry_TankEngine_Summary}}<br><br>Asasinate și participări: @f1@"
+            "tooltip": "Primești @SizeIncrement*100@% creștere în dimensiune și <scaleHealth>@f2@ viață bonus</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> per doborâre).<br><br>Doborâri: @f3@"
         },
         {
             "apiName": "EtherealWeapon",
@@ -2975,7 +2995,7 @@
             "id": 207,
             "name": "Stai pe loc",
             "rarity": 0,
-            "tooltip": "Primești <spellName>''Tactici de gherilă''</spellName>.<br><br><rules>Dacă nu te miști timp de @HoldStillDuration@ secunde, devii <keywordStealth>invizibil</keywordStealth> până te miști din nou. Când efectul de <keywordStealth>invizibilitate</keywordStealth> este întrerupt, primești <attackSpeed>@BonusAS@ viteză de atac</attackSpeed> timp de @ASDuration@ secunde și @BonusMS*100@% <speed>viteză de mișcare</speed> ce scade în timp și provoci @BonusHitDamage@ daune magice cu următoarea lovitură.</rules>"
+            "tooltip": "Primești <spellName>''Tactici de gherilă''</spellName>.<br><br><rules>Dacă nu te miști timp de @HoldStillDuration@ secunde, devii <keywordStealth>invizibil</keywordStealth> până te miști din nou. Când efectul de <keywordStealth>invizibilitate</keywordStealth> este întrerupt, primești <attackSpeed>@BonusAS@ viteză de atac</attackSpeed> și <speed>@BonusMS*100@% viteză de mișcare ce scade</speed> timp de @ASDuration@ secunde. Următoarele daune împotriva unui inamic provoacă încă <magicDamage>@BonusHitDamage@ daune magice</magicDamage>.</rules>"
         },
         {
             "apiName": "FromBeginningToEnd",
@@ -3566,13 +3586,13 @@
                 "ItemHaste": 300.0,
                 "TooltipCDR": 75.0
             },
-            "desc": "Oferă <scaleBonus>@ItemHaste@ rapiditatea obiectelor</scaleBonus> (echivalent cu @TooltipCDR@% reducerea timpilor de reactivare ai obiectelor).<br><br><rules>Rapiditatea obiectelor reduce timpul de reactivare al tuturor abilităților obiectelor.</rules>",
+            "desc": "Oferă <scaleBonus>@ItemHaste@ rapiditatea obiectelor</scaleBonus> (echivalent cu @TooltipCDR@% reducerea timpilor de reactivare ai obiectelor).<br><br><rules>Rapiditatea obiectelor reduce timpul de reactivare %i:cooldown% al tuturor abilităților obiectelor.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/apexinventor_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/apexinventor_small.png",
             "id": 2,
             "name": "Inventator suprem",
             "rarity": 1,
-            "tooltip": "Oferă <scaleBonus>@ItemHaste@ rapiditatea obiectelor</scaleBonus> (echivalent cu @TooltipCDR@% reducerea timpilor de reactivare ai obiectelor).<br><br><rules>Rapiditatea obiectelor reduce timpul de reactivare al tuturor abilităților obiectelor.</rules>"
+            "tooltip": "Oferă <scaleBonus>@ItemHaste@ rapiditatea obiectelor</scaleBonus> (echivalent cu @TooltipCDR@% reducerea timpilor de reactivare ai obiectelor).<br><br><rules>Rapiditatea obiectelor reduce timpul de reactivare %i:cooldown% al tuturor abilităților obiectelor.</rules>"
         },
         {
             "apiName": "MirrorImage",
@@ -3673,9 +3693,7 @@
                     ]
                 },
                 "LaserEyesTooltip": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -3692,7 +3710,6 @@
                             "mStat": 2
                         }
                     ],
-                    "mSimpleTooltipCalculationDisplay": 4,
                     "tooltipOnly": true
                 }
             },
@@ -3766,7 +3783,7 @@
                 "SlowResistValue": 1.0,
                 "TotalASValue": 0.25
             },
-            "desc": "Primești <attackSpeed>@TotalASValue*100@% viteză de atac totală</attackSpeed>. Primești efecte noi pentru @Breakpoint1@ <attackSpeed>atacuri</attackSpeed> pe secundă.",
+            "desc": "Primești <attackSpeed>@TotalASValue*100@% viteză de atac totală</attackSpeed>. <br><br>La @Breakpoint1@ <attackSpeed>atacuri pe secundă</attackSpeed>, provoci <magicDamage>daune magice</magicDamage> {{ Item_Keyword_OnHit }} suplimentare.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightningstrikes_small.png",
             "id": 52,
@@ -3861,9 +3878,7 @@
             "apiName": "RestlessRestoration",
             "calculations": {
                 "HealCalcPer1000Units": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "StatByNamedDataValueCalculationPart",
@@ -3875,8 +3890,7 @@
                             "mEndValue": 120.0,
                             "mStartValue": 20.0
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
@@ -3924,15 +3938,15 @@
             "apiName": "BluntForce",
             "calculations": {},
             "dataValues": {
-                "ADIncrease": 0.15000000596046448
+                "ADAmp": 0.15000000596046448
             },
-            "desc": "Primește <scaleAD>@ADIncrease*100@% daune din atac</scaleAD>.",
+            "desc": "Primești <scaleAD>@ADAmp*100@% daune din atac</scaleAD>.",
             "iconLarge": "assets/ux/cherry/augments/icons/bluntforce_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/bluntforce_small.png",
             "id": 7,
             "name": "Forță brută",
             "rarity": 0,
-            "tooltip": "Primește <scaleAD>@ADIncrease*100@% daune din atac</scaleAD>."
+            "tooltip": "Primești <scaleAD>@ADAmp*100@% (@f1@) daune din atac</scaleAD>."
         },
         {
             "apiName": "Oathsworn",
@@ -4207,7 +4221,7 @@
                 "AbilityHasteRatio": 0.33000001311302185,
                 "BleedDuration": 5.0,
                 "Cooldown": 1.5,
-                "CurseCounter": 4.0,
+                "CurseCounter": 5.0,
                 "Radius": 25000.0
             },
             "desc": "Vindecarea/scuturile îți oferă <keywordMajor>putere blestemată</keywordMajor> permanentă. Primești rapiditatea abilităților în funcție de <keywordMajor>puterea blestemată</keywordMajor>.<br><br><keywordMajor>Puterea blestemată</keywordMajor> maximă pe care o poți primi per rundă crește în funcție de sursele totale de <keywordMajor>''Blestem''</keywordMajor> dintre tine și aliatul tău.",
@@ -4220,17 +4234,25 @@
         },
         {
             "apiName": "MindtoMatter",
-            "calculations": {},
-            "dataValues": {
-                "ManaToHealthConversion": 0.5
+            "calculations": {
+                "ManaToHealthCalc": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "AbilityResourceByCoefficientCalculationPart",
+                            "mCoefficient": 0.5
+                        }
+                    ]
+                }
             },
-            "desc": "Îți crești <healing>viața maximă</healing> cu jumătate din valoarea <scaleMana>manei</scaleMana> tale.",
+            "dataValues": {},
+            "desc": "Îți crești <scaleHealth>viața maximă</scaleHealth> cu jumătate din valoarea <scaleMana>manei</scaleMana> tale.",
             "iconLarge": "assets/ux/cherry/augments/icons/mindtomatter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mindtomatter_small.png",
             "id": 56,
             "name": "Minte și materie",
             "rarity": 0,
-            "tooltip": "Îți crești <healing>viața maximă</healing> cu jumătate din valoarea <scaleMana>manei</scaleMana> tale."
+            "tooltip": "Primești <scaleHealth>@ManaToHealthCalc@ viață</scaleHealth>."
         },
         {
             "apiName": "ItsKillingTime",
@@ -4338,9 +4360,7 @@
             "apiName": "AndMyAxe",
             "calculations": {
                 "TotalDamage": {
-                    "StaticTooltipCalculationDisplay": 4,
                     "__type": "GameCalculation",
-                    "mExpandedTooltipCalculationDisplay": 4,
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
@@ -4357,8 +4377,7 @@
                             "__type": "StatByCoefficientCalculationPart",
                             "mCoefficient": 0.44999998807907104
                         }
-                    ],
-                    "mSimpleTooltipCalculationDisplay": 4
+                    ]
                 }
             },
             "dataValues": {
