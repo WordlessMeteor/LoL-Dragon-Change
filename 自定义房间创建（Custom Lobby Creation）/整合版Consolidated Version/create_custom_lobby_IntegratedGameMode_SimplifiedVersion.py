@@ -1,5 +1,5 @@
 from lcu_driver import Connector
-import os, pandas, random, time
+import os, pandas, random, time, uuid
 
 #=============================================================================
 # * 声明（Declaration）
@@ -103,7 +103,7 @@ async def create_custom_lobby(connection):
 #-----------------------------------------------------------------------------
 # 批量添加机器人（Add a batch of bots）
 #-----------------------------------------------------------------------------
-async def add_bots_team1(connection):
+async def add_bots_team(connection, teamId: str):
     lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
     maxTeamSize = lobby_information["gameConfig"]["maxTeamSize"]
     current_summonerId = (await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json())["summonerId"]
@@ -117,10 +117,10 @@ async def add_bots_team1(connection):
     botPositions = set()
     for champion in recommended_position_for_champion.values():
         botPositions |= set(champion["recommendedPositions"])
-    #将botPositions排序整理为["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
+    #将botPositions排序整理为["TOP", "MIDDLE", "BOTTOM", "UTILITY", "JUNGLE"]
     botPositions = list(botPositions)
     botPositions_tmp = []
-    for position in ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]:
+    for position in ["TOP", "MIDDLE", "BOTTOM", "UTILITY", "JUNGLE"]: #与电脑玩家添加脚本和整合版文件不同，在添加己方电脑玩家时，默认自己是打野位置（What's different from Bot Adding Program and the Consolidated File is that the user is regarded as a jungler in its team）
         if position in botPositions:
             botPositions.remove(position)
             botPositions_tmp.append(position)
@@ -138,73 +138,26 @@ async def add_bots_team1(connection):
     for position in botPositions:
         team += random.sample(recommended_champion_for_position[position], 1)
     
-    team1 = team[:]
+    botUuid_team = []
     botPosition_team = botPositions[:]
     for i in range(len(team)):
         Id = team[i]
-        bot = {"championId": Id, "botDifficulty": "RSINTERMEDIATE", "teamId": "100", "position": botPositions[i]}
+        botUuid = str(uuid.uuid4())
+        botUuid_team.append(botUuid)
+        bot = {"championId": Id, "botDifficulty": "RSINTERMEDIATE", "teamId": teamId, "position": botPositions[i], "botUuid": botUuid}
         response = await (await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)).json()
     
-    print("队伍1的电脑玩家：\nTeam 1 bots:\n*****************************************************************************")
-    for i in range(len(team1)):
-        print("{0:<14}".format(names[team1[i]]) + "\t" + "{0:<14}".format(aliases[team1[i]]) + "\tRSINTERMEDIATE\t" + botPosition_team[i])
-    print("*****************************************************************************\n")
-
-#-----------------------------------------------------------------------------
-# 批量添加机器人（Add a batch of bots）
-#-----------------------------------------------------------------------------
-async def add_bots_team2(connection):
-    lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
-    maxTeamSize = lobby_information["gameConfig"]["maxTeamSize"]
-    current_summonerId = (await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json())["summonerId"]
-    LoLChampions = await (await connection.request("GET", f"/lol-champions/v1/inventories/{current_summonerId}/champions")).json()
-    LoLChampions = {champion["id"]: champion for champion in LoLChampions}
-    recommended_position_for_champion = await (await connection.request("GET", "/lol-perks/v1/recommended-champion-positions")).json()
-    recommended_position_for_champion_keys = list(recommended_position_for_champion.keys())
-    for championId in recommended_position_for_champion_keys:
-        if not int(championId) in all_bots:
-            del recommended_position_for_champion[championId]
-    botPositions = set()
-    for champion in recommended_position_for_champion.values():
-        botPositions |= set(champion["recommendedPositions"])
-    #将botPositions排序整理为["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
-    botPositions = list(botPositions)
-    botPositions_tmp = []
-    for position in ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]:
-        if position in botPositions:
-            botPositions.remove(position)
-            botPositions_tmp.append(position)
-    botPositions = botPositions_tmp + botPositions
-    recommended_champion_for_position = {} #用于生成某条分路的随机英雄（Used to generate random champions of specific positions respectively）
-    for position in botPositions:
-        recommended_champion_for_position[position] = []
-    for championId in recommended_position_for_champion:
-        for position in recommended_position_for_champion[championId]["recommendedPositions"]:
-            recommended_champion_for_position[position].append(int(championId))
-    for position in recommended_champion_for_position:
-        recommended_champion_for_position[position].sort()
-    
-    team = []
-    for position in botPositions:
-        team += random.sample(recommended_champion_for_position[position], 1)
-    
-    team2 = team[:]
-    botPosition_team = botPositions[:]
+    print("队伍%s的电脑玩家：\nTeam %s bots:\n*****************************************************************************" %(teamId[0], teamId[0]))
     for i in range(len(team)):
-        Id = team[i]
-        bot = {"championId": Id, "botDifficulty": "RSINTERMEDIATE", "teamId": "200", "position": botPositions[i]}
-        response = await (await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)).json()
-    
-    print("队伍2的电脑玩家：\nTeam 2 bots:\n*****************************************************************************")
-    for i in range(len(team2)):
-        print("{0:<14}".format(names[team2[i]]) + "\t" + "{0:<14}".format(aliases[team2[i]]) + "\tRSINTERMEDIATE\t" + botPosition_team[i])
+        print("{0:<14}".format(names[team[i]]) + "\t" + "{0:<14}".format(aliases[team[i]]) + "\tRSINTERMEDIATE\t" + botPosition_team[i] + "\t" + botUuid_team[i])
     print("*****************************************************************************\n")
 
 #-----------------------------------------------------------------------------
 # 开始游戏（Start Game）
 #-----------------------------------------------------------------------------
 async def start_game(connection):
-    start = await connection.request("POST", "/lol-lobby/v1/lobby/custom/start-champ-select")
+    response = await (await connection.request("POST", "/lol-lobby/v1/lobby/custom/start-champ-select")).json()
+    #print(response)
 
 #-----------------------------------------------------------------------------
 # websocket
@@ -213,8 +166,9 @@ async def start_game(connection):
 async def connect(connection):
     await get_summoner_data(connection)
     await create_custom_lobby(connection)
-    await add_bots_team1(connection)
-    await add_bots_team2(connection)
+    await add_bots_team(connection, teamId = "100")
+    await add_bots_team(connection, teamId = "200")
+    time.sleep(0.1)
     await start_game(connection)
 
 #-----------------------------------------------------------------------------

@@ -115,6 +115,7 @@ async def seatVie(connection):
                 print('召唤师名称已变更为拳头ID。请以“{玩家昵称}#{昵称编号}”的格式输入。\nSummoner name has been replaced with Riot ID. Please input the name in this format: "{gameName}#{tagLine}", e.g. "%s#%s".' %(current_info["gameName"], current_info["tagLine"]))
             elif "accountId" in info:
                 current_puuid = info["puuid"]
+                current_summonerId = info["summonerId"]
                 current_gameName = info["gameName"]
                 current_tagLine = info["tagLine"]
                 
@@ -184,6 +185,7 @@ async def seatVie(connection):
                 #控制只输出一遍的提示（Control the hint to be displayed only once）
                 empty_party_hint_printed = False
                 lobby_remake_hint_printed = False
+                received_invitation_hint_printed = False
                 if hovercard["availability"] == "":
                     print(f"玩家{current_gameName}#{current_tagLine}不是您的好友。请添加该玩家为好友后重试。\nPlayer {current_gameName}#{current_tagLine} isn't your friend right now. Please add him/her as a friend and retry.")
                 elif hovercard["lol"] == {}: #对应的是离线和Riot手机端游戏状态（Corresponding to the offline and Riot Mobile status）
@@ -195,40 +197,90 @@ async def seatVie(connection):
                 elif hovercard["lol"]["gameStatus"] == "inGame":
                     print(f"玩家{current_gameName}#{current_tagLine}已在游戏中。请等待其结束游戏后重试。\nPlayer {current_gameName}#{current_tagLine} is already in a game. Please try again after the game ends.")
                 else:
+                    print("您可以通过加入公开小队或者接受小队拥有者邀请来加入一个小队。请选择加入小队的方式：\nYou may join a party by joining an open party or accepting a lobby invitation. Please choose a strategy of joining this party:\n1\t同时检查小队公开情况和邀请（Check both lobby publicity and lobby invitations）\n2\t只检查小队公开情况（Check only lobby publicity）\n3\t只检查小队邀请（Check only lobby invitations）\n4\t既不检查小队公开情况，也不检查小队邀请（Check neither lobby publicity nor lobby invitations）")
+                    join_open_party = accept_invid = False
+                    while True:
+                        join_strategy = input()
+                        if join_strategy == "":
+                            continue
+                        elif join_strategy[0] == "1":
+                            join_open_party = accept_invid = True
+                            break
+                        elif join_strategy[0] == "2":
+                            join_open_party, accept_invid = True, False
+                            break
+                        elif join_strategy[0] == "3":
+                            join_open_party, accept_invid = False, True
+                            break
+                        elif join_strategy[0] == "0" or join_strategy[0] == "4":
+                            join_open_party = accept_invid = False
+                            break
+                        else:
+                            print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                    
                     print("正在尝试加入该玩家的小队……\nTrying to join this player's party ...")
                     while True:
-                        hovercard = await (await connection.request("GET", f"/lol-hovercard/v1/friend-info/{current_puuid}")).json()
-                        if not "pty" in hovercard["lol"] or hovercard["lol"]["pty"] == "":
-                            if hovercard["lol"]["gameStatus"] == "inGame":
-                                print(f"玩家{current_gameName}#{current_tagLine}已在游戏中。请等待其结束游戏后重试。\nPlayer {current_gameName}#{current_tagLine} is already in a game. Please try again after the game ends.")
-                                break
-                            elif not empty_party_hint_printed:
-                                print(f"玩家{current_gameName}#{current_tagLine}尚未处于小队中。或者该玩家处于私密小队中。\nPlayer {current_gameName}#{current_tagLine} isn't in a party. Or this player is in a closed party.")
-                                empty_party_hint_printed, lobby_remake_hint_printed = True, False
-                        else:
-                            partyId = eval(hovercard["lol"]["pty"])["partyId"]
-                            if partyId == partyId_previous:
-                                if not lobby_remake_hint_printed:
-                                    print(f"您已经加入好友{current_gameName}#{current_tagLine}的小队！如果该好友重新创建了队列房间，请等待程序回应。\nYou've joined the party of the friend {current_gameName}#{current_tagLine}! If this friend has created another queue lobby, please wait for the program to respond.\n小队编号（PartyId）： {partyId}\n")
-                                    lobby_remake_hint_printed, empty_party_hint_printed = True, False
+                        if join_open_party:
+                            #尝试加入公开小队（Try to join an open party）
+                            hovercard = await (await connection.request("GET", f"/lol-hovercard/v1/friend-info/{current_puuid}")).json()
+                            if not "pty" in hovercard["lol"] or hovercard["lol"]["pty"] == "":
+                                if hovercard["lol"]["gameStatus"] == "inGame":
+                                    print(f"玩家{current_gameName}#{current_tagLine}已在游戏中。请等待其结束游戏后重试。\nPlayer {current_gameName}#{current_tagLine} is already in a game. Please try again after the game ends.")
+                                    break
+                                elif not empty_party_hint_printed:
+                                    print(f"玩家{current_gameName}#{current_tagLine}尚未处于小队中。或者该玩家处于私密小队中。\nPlayer {current_gameName}#{current_tagLine} isn't in a party. Or this player is in a closed party.")
+                                    empty_party_hint_printed, lobby_remake_hint_printed = True, False
                             else:
-                                response = await (await connection.request("POST", f"/lol-lobby/v2/party/{partyId}/join")).json()
-                                if response == None:
-                                    lobbyInfo = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
-                                    member_puuids = list(map(lambda x: x["puuid"], lobbyInfo["members"]))
-                                    if current_puuid in member_puuids: #有可能先前在某个主播的小队里，但是后来这个主播退出小队并迅速重新创了个房间，而这个主播的鼠标悬停卡片尚未更新（Chances are that the user might be in the party of a streamer previously, but then the streamer exited the lobby and immediately created a new lobby, while the hovercard hadn't updated）
-                                        print(f"您成功加入好友{current_gameName}#{current_tagLine}的队列房间！程序即将返回上层。\nYou've successfully joined the queue lobby of the friend {current_gameName}#{current_tagLine}! The program will return to the last step.\n小队编号（PartyId）： {partyId}\n")
-                                        partyId_previous = lobbyInfo["partyId"]
-                                        #time.sleep(3)
-                                        print('请输入您想要加入的小队的拥有者的玩家名称，退出请输入0。如果要中断程序运行，请按Ctrl-C结束程序。\nPlease enter the player name of the party leader that you want to play with. Submit "0" to exit. If you want to cancel the program later, please press Ctrl-C.')
-                                        break
+                                partyId = eval(hovercard["lol"]["pty"])["partyId"]
+                                if partyId == partyId_previous:
+                                    if not lobby_remake_hint_printed:
+                                        print(f"您已经加入好友{current_gameName}#{current_tagLine}的小队！如果该好友重新创建了队列房间，请等待程序回应。\nYou've joined the party of the friend {current_gameName}#{current_tagLine}! If this friend has created another queue lobby, please wait for the program to respond.\n小队编号（PartyId）： {partyId}\n")
+                                        lobby_remake_hint_printed, empty_party_hint_printed = True, False
                                 else:
-                                    #小队私密或被踢出小队的提示（The prompt of a closed or kicked party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'INVALID_ROLE_TRANSITION'}
-                                    #小队已满的提示（The prompt of a full party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'PARTY_SIZE_LIMIT'}
-                                    #小队排队中的提示（The prompt of a queuing party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'INVALID_WHILE_PARTY_IN_ACTION'}
-                                    if response != response_previous:
-                                        print(response)
-                                        response_previous = copy.deepcopy(response)
+                                    response = await (await connection.request("POST", f"/lol-lobby/v2/party/{partyId}/join")).json()
+                                    if response == None:
+                                        lobbyInfo = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+                                        member_puuids = list(map(lambda x: x["puuid"], lobbyInfo["members"]))
+                                        if current_puuid in member_puuids: #有可能先前在某个主播的小队里，但是后来这个主播退出小队并迅速重新创了个房间，而这个主播的鼠标悬停卡片尚未更新（Chances are that the user might be in the party of a streamer previously, but then the streamer exited the lobby and immediately created a new lobby, while the hovercard hadn't updated）
+                                            print(f"您成功加入好友{current_gameName}#{current_tagLine}的队列房间！程序即将返回上层。\nYou've successfully joined the queue lobby of the friend {current_gameName}#{current_tagLine}! The program will return to the last step.\n小队编号（PartyId）： {partyId}\n")
+                                            partyId_previous = lobbyInfo["partyId"]
+                                            #time.sleep(3)
+                                            print('请输入您想要加入的小队的拥有者的玩家名称，退出请输入0。如果要中断程序运行，请按Ctrl-C结束程序。\nPlease enter the player name of the party leader that you want to play with. Submit "0" to exit. If you want to cancel the program later, please press Ctrl-C.')
+                                            break
+                                    else:
+                                        #小队私密或被踢出小队的提示（The prompt of a closed or kicked party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'INVALID_ROLE_TRANSITION'}
+                                        #小队已满的提示（The prompt of a full party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'PARTY_SIZE_LIMIT'}
+                                        #小队排队中的提示（The prompt of a queuing party）：{'errorCode': 'RPC_ERROR', 'httpStatus': 400, 'implementationDetails': {}, 'message': 'INVALID_WHILE_PARTY_IN_ACTION'}
+                                        if response != response_previous:
+                                            print(response)
+                                            response_previous = copy.deepcopy(response)
+                        if accept_invid:
+                            #尝试接受组队邀请（Try accepting a lobby invitation）
+                            receivedInvitations = await (await connection.request("GET", "/lol-lobby/v2/received-invitations")).json()
+                            received_invitation = False
+                            for invid in receivedInvitations:
+                                if invid["fromSummonerId"] == current_summonerId:
+                                    received_invitation = True
+                                    if not received_invitation_hint_printed:
+                                        print(f"检测到来自玩家{current_gameName}#{current_tagLine}的组队邀请。尝试接受该邀请……\nThe program detected an invitation from player {current_gameName}#{current_tagLine}. Trying to accept this invitation ...")
+                                        received_invitation_hint_printed = True
+                                    invitationId = invid["invitationId"]
+                                    response = await (await connection.request("POST", f"/lol-lobby/v2/received-invitations/{invitationId}/accept")).json()
+                                    if response == None:
+                                        lobbyInfo = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+                                        member_puuids = list(map(lambda x: x["puuid"], lobbyInfo["members"]))
+                                        if current_puuid in member_puuids:
+                                            print(f"您成功加入好友{current_gameName}#{current_tagLine}的队列房间！程序即将返回上层。\nYou've successfully joined the queue lobby of the friend {current_gameName}#{current_tagLine}! The program will return to the last step.\n小队编号（PartyId）： %s\n" %(lobbyInfo["partyId"]))
+                                            partyId_previous = lobbyInfo["partyId"]
+                                            #time.sleep(3)
+                                            print('请输入您想要加入的小队的拥有者的玩家名称，退出请输入0。如果要中断程序运行，请按Ctrl-C结束程序。\nPlease enter the player name of the party leader that you want to play with. Submit "0" to exit. If you want to cancel the program later, please press Ctrl-C.')
+                                            break
+                                    else:
+                                        if response != response_previous:
+                                            print(response)
+                                            response_previous = copy.deepcopy(response)
+                            if not received_invitation:
+                                received_invitation_hint_printed = False
     
 #-----------------------------------------------------------------------------
 # websocket

@@ -564,14 +564,14 @@ async def sort_friend_hovercard(connection):
     friend_hovercard_data_organized = {}
     for i in friend_hovercard_statistics_output_order:
         key = friend_hovercard_header_keys[i]
-        friend_hovercard_data_organized[key] = [friend_hovercard_header[key]] + friend_hovercard_data[key]
+        friend_hovercard_data_organized[key] = friend_hovercard_data[key]
     friend_hovercard_df = pandas.DataFrame(data = friend_hovercard_data_organized)
-    for i in range(friend_hovercard_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-        for j in range(friend_hovercard_df.shape[1]):
-            if str(friend_hovercard_df.iat[i, j]) == "True":
-                friend_hovercard_df.iat[i, j] = "√"
-            elif str(friend_hovercard_df.iat[i, j]) == "False":
-                friend_hovercard_df.iat[i, j] = ""
+    for column in friend_hovercard_df:
+        if friend_hovercard_df[column].dtype == "bool":
+            friend_hovercard_df[column] = friend_hovercard_df[column].astype(str)
+            for i in range(len(friend_hovercard_df)):
+                friend_hovercard_df.loc[i, column] = "√" if friend_hovercard_df[column][i] == "True" else ""
+    friend_hovercard_df = pandas.concat([pandas.DataFrame([friend_hovercard_header])[friend_hovercard_df.columns], friend_hovercard_df], ignore_index = True)
     return friend_hovercard_df
 
 async def sort_friend_hovercard_simple(connection):
@@ -602,8 +602,9 @@ async def sort_friend_hovercard_simple(connection):
     friend_hovercard_data_organized_simple = {}
     for i in friend_hovercard_statistics_output_order_simple:
         key = friend_hovercard_header_keys_simple[i]
-        friend_hovercard_data_organized_simple[key] = [friend_hovercard_header_simple[key]] + friend_hovercard_data_simple[key]
+        friend_hovercard_data_organized_simple[key] = friend_hovercard_data_simple[key]
     friend_hovercard_df_simple = pandas.DataFrame(data = friend_hovercard_data_organized_simple)
+    friend_hovercard_df_simple = pandas.concat([pandas.DataFrame([friend_hovercard_header_simple])[friend_hovercard_df_simple.columns], friend_hovercard_df_simple], ignore_index = True)
     return friend_hovercard_df_simple
 
 def sort_friend_group(friend_groups: list | dict):
@@ -622,8 +623,14 @@ def sort_friend_group(friend_groups: list | dict):
         friend_groups_data_organized = {}
         for i in friend_groups_statistics_output_order:
             key = friend_groups_header_keys[i]
-            friend_groups_data_organized[key] = [friend_groups_header[key]] + friend_groups_data[key]
+            friend_groups_data_organized[key] = friend_groups_data[key]
         friend_groups_df = pandas.DataFrame(data = friend_groups_data_organized)
+        for column in friend_groups_df:
+            if friend_groups_df[column].dtype == "bool":
+                friend_groups_df[column] = friend_groups_df[column].astype(str)
+                for i in range(len(friend_groups_df)):
+                    friend_groups_df.loc[i, column] = "√" if friend_groups_df[column][i] == "True" else ""
+        friend_groups_df = pandas.concat([pandas.DataFrame([friend_groups_header])[friend_groups_df.columns], friend_groups_df], ignore_index = True)
     elif isinstance(friend_groups, dict) and all(i in friend_groups for i in ["errorCode", "httpStatus", "implementationDetails", "message"]):
         friend_groups_df = pandas.DataFrame(data = friend_groups_header, index = [0])
     else:
@@ -651,8 +658,9 @@ def sort_conversation_metadata(conversations: list | dict):
         conversation_metadata_organized = {}
         for i in conversation_statistics_output_order:
             key = conversation_header_keys[i]
-            conversation_metadata_organized[key] = [conversation_header[key]] + conversation_metadata[key]
+            conversation_metadata_organized[key] = conversation_metadata[key]
         conversation_df = pandas.DataFrame(data = conversation_metadata_organized)
+        conversation_df = pandas.concat([pandas.DataFrame([conversation_header])[conversation_df.columns], conversation_df], ignore_index = True)
     elif isinstance(conversations, dict) and all(i in conversations for i in ["errorCode", "httpStatus", "implementationDetails", "message"]):
         conversation_df = pandas.DataFrame(conversation_header, index = [0])
     else:
@@ -688,8 +696,14 @@ async def sort_message_data(connection, messages: list | dict):
         message_data_organized = {}
         for i in message_statistics_output_order:
             key = message_header_keys[i]
-            message_data_organized[key] = [message_header[key]] + message_data[key]
+            message_data_organized[key] = message_data[key]
         message_df = pandas.DataFrame(data = message_data_organized)
+        for column in message_df:
+            if message_df[column].dtype == "bool":
+                message_df[column] = message_df[column].astype(str)
+                for i in range(len(message_df)):
+                    message_df.loc[i, column] = "√" if message_df[column][i] == "True" else ""
+        message_df = pandas.concat([pandas.DataFrame([message_header])[message_df.columns], message_df], ignore_index = True)
     elif isinstance(messages, dict) and all(i in messages for i in ["errorCode", "httpStatus", "implementationDetails", "message"]):
         message_df = pandas.DataFrame(message_header, index = [0])
     else:
@@ -1117,8 +1131,9 @@ async def get_recent_players(connection, search_mode: int = 2):
     recent_LoLPlayers_data_organized = {}
     for i in range(len(recent_LoLPlayers_statistics_output_order)):
         key = LoLGame_info_header_keys[recent_LoLPlayers_statistics_output_order[i]]
-        recent_LoLPlayers_data_organized[key] = [LoLGame_info_header[key]] + LoLGame_info_data[key] if search_LoL and LoLHistory_get else [LoLGame_info_header[key]]
+        recent_LoLPlayers_data_organized[key] = LoLGame_info_data[key] if search_LoL and LoLHistory_get else []
     recent_LoLPlayers_df = pandas.DataFrame(data = recent_LoLPlayers_data_organized)
+    recent_LoLPlayers_df = pandas.concat([pandas.DataFrame([LoLGame_info_header])[recent_LoLPlayers_df.columns], recent_LoLPlayers_df], ignore_index = True)
     if search_TFT:
         TFTHistory_get = False
         #准备对局记录（Prepare match history）
@@ -1421,8 +1436,9 @@ async def get_recent_players(connection, search_mode: int = 2):
     recent_TFTPlayers_data_organized = {}
     for i in range(len(recent_TFTPlayers_statistics_output_order)):
         key = TFTHistory_header_keys[recent_TFTPlayers_statistics_output_order[i]]
-        recent_TFTPlayers_data_organized[key] = [TFTHistory_header[key]] + TFTHistory_data[key] if search_TFT and TFTHistory_get else [TFTHistory_header[key]]
+        recent_TFTPlayers_data_organized[key] = TFTHistory_data[key] if search_TFT and TFTHistory_get else []
     recent_TFTPlayers_df = pandas.DataFrame(data = recent_TFTPlayers_data_organized)
+    recent_TFTPlayers_df = pandas.concat([pandas.DataFrame([TFTHistory_header])[recent_TFTPlayers_df.columns], recent_TFTPlayers_df], ignore_index = True)
     return {"LoL": recent_LoLPlayers_df, "TFT": recent_TFTPlayers_df}
 
 async def sort_friend_request(connection):
@@ -1449,8 +1465,9 @@ async def sort_friend_request(connection):
     friend_request_data_organized = {}
     for i in friend_request_statistics_output_order:
         key = friend_request_header_keys[i]
-        friend_request_data_organized[key] = [friend_request_header[key]] + friend_request_data[key]
+        friend_request_data_organized[key] = friend_request_data[key]
     friend_request_df = pandas.DataFrame(data = friend_request_data_organized)
+    friend_request_df = pandas.concat([pandas.DataFrame([friend_request_header])[friend_request_df.columns], friend_request_df], ignore_index = True)
     return friend_request_df
 
 async def sort_party_data(connection, parties: list):
@@ -1494,8 +1511,9 @@ async def sort_party_data(connection, parties: list):
         party_data_organized = {}
         for i in party_statistics_output_order:
             key = party_header_keys[i]
-            party_data_organized[key] = [party_header[key]] + party_data[key]
+            party_data_organized[key] = party_data[key]
         party_df = pandas.DataFrame(data = party_data_organized)
+        party_df = pandas.concat([pandas.DataFrame([party_header])[party_df.columns], party_df], ignore_index = True)
     else:
         print("小队数据格式错误！函数只生成空表。\nParty data format ERROR! The function will only return an empty table.")
         party_df = pandas.DataFrame(party_header, index = [0])
@@ -1528,14 +1546,14 @@ async def sort_received_invitations(connection):
             key = invid_header_keys[i]
             if i <= 9:
                 if i == 2:
-                    invid_data[key].append("" if inviter_info["info_got"] else get_info_name(inviter_info["body"]))
+                    invid_data[key].append(get_info_name(inviter_info["body"]) if inviter_info["info_got"] else "")
                 elif i == 8:
-                    invid_data[key].append("" if inviter_info["info_got"] else inviter_info["body"]["puuid"])
+                    invid_data[key].append(inviter_info["body"]["puuid"] if inviter_info["info_got"] else "")
                 elif i == 9:
                     try:
                         invid_timestamp = int(invid["timestamp"])
                     except ValueError: #自定义对局邀请的时间戳是转换好的（Custom game invitation's timestamp has already been transformed）
-                        invid_data[key].append(invid_timestamp)
+                        invid_data[key].append(invid["timestamp"])
                     else:
                         invid_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(invid_timestamp // 1000)))
                 else:
@@ -1548,8 +1566,9 @@ async def sort_received_invitations(connection):
     invid_data_organized = {}
     for i in invid_statistics_output_order:
         key = invid_header_keys[i]
-        invid_data_organized[key] = [invid_header[key]] + invid_data[key]
+        invid_data_organized[key] = invid_data[key]
     invid_df = pandas.DataFrame(data = invid_data_organized)
+    invid_df = pandas.concat([pandas.DataFrame([invid_header])[invid_df.columns], invid_df], ignore_index = True)
     return invid_df
 
 async def sort_muted_players(connection):
@@ -1573,8 +1592,9 @@ async def sort_muted_players(connection):
     muted_player_data_organized = {}
     for i in muted_player_statistics_output_order:
         key = muted_player_header_keys[i]
-        muted_player_data_organized[key] = [muted_player_header[key]] + muted_player_data[key]
+        muted_player_data_organized[key] = muted_player_data[key]
     muted_player_df = pandas.DataFrame(data = muted_player_data_organized)
+    muted_player_df = pandas.concat([pandas.DataFrame([muted_player_header])[muted_player_df.columns], muted_player_df], ignore_index = True)
     return muted_player_df
 
 async def sort_champSelect_team(connection):
@@ -1687,8 +1707,9 @@ async def sort_champSelect_team(connection):
         champSelect_team_data_organized = {}
         for i in champSelect_team_statistics_output_order:
             key = champSelect_team_header_keys[i]
-            champSelect_team_data_organized[key] = [champSelect_team_header[key]] + champSelect_team_data[key]
+            champSelect_team_data_organized[key] = champSelect_team_data[key]
         champSelect_team_df = pandas.DataFrame(data = champSelect_team_data_organized)
+        champSelect_team_df = pandas.concat([pandas.DataFrame([champSelect_team_header])[champSelect_team_df.columns], champSelect_team_df], ignore_index = True)
     else:
         champSelect_team_df = pandas.DataFrame(data = champSelect_team_header, index = [0])
     return champSelect_team_df
@@ -1709,8 +1730,14 @@ async def sort_capture_devices(connection):
     captureDevices_data_organized = {}
     for i in captureDevices_statistics_output_order:
         key = captureDevices_header_keys[i]
-        captureDevices_data_organized[key] = [captureDevices_header[key]] + captureDevices_data[key]
+        captureDevices_data_organized[key] = captureDevices_data[key]
     captureDevices_df = pandas.DataFrame(data = captureDevices_data_organized)
+    for column in captureDevices_df:
+        if captureDevices_df[column].dtype == "bool":
+            captureDevices_df[column] = captureDevices_df[column].astype(str)
+            for i in range(len(captureDevices_df)):
+                captureDevices_df.loc[i, column] = "√" if captureDevices_df[column][i] == "True" else ""
+    captureDevices_df = pandas.concat([pandas.DataFrame([captureDevices_header])[captureDevices_df.columns], captureDevices_df], ignore_index = True)
     return captureDevices_df
 
 async def sort_voice_settings(connection):
@@ -1738,8 +1765,9 @@ async def sort_voice_participants(connection):
     participant_record_data_organized = {}
     for i in participant_record_statistics_output_order:
         key = participant_record_header_keys[i]
-        participant_record_data_organized[key] = [participant_record_header[key]] + participant_record_data[key]
+        participant_record_data_organized[key] = participant_record_data[key]
     participant_record_df = pandas.DataFrame(data = participant_record_data_organized)
+    participant_record_df = pandas.concat([pandas.DataFrame([participant_record_header])[participant_record_df.columns], participant_record_df], ignore_index = True)
     return participant_record_df
 
 async def friend_behavior_simulation(connection): #在本函数中可以看到一些查战绩脚本中涉及的数据资源。但是这里是通过LCU API来获取的，这是因为该脚本获取的数据一定是实时的，而查战绩脚本和自定义脚本11会涉及过时的数据（This function involves some data resources in Customized Program 05, except that they're obtained through LCU API in this program. This is because the data this program obtains must be real-time, while Customized Program 05 and 11 may get old data）
@@ -1754,8 +1782,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
             return 1
     #准备大区数据（Prepare server / platform data）
     platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
-    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "ME1": "中东服（Middle East）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
-    platform_GARENA = {"PH": "菲律宾服（Philippines）", "SG": "新加坡服（Singapore, Malaysia and Indonesia）", "TW": "台服（Taiwan, Hong Kong and Macau）", "VN": "越南服（Vietnam）", "TH": "泰服（Thailand）"}
+    platform_RIOT = {"ME1": "中东服（Middle East）", "BR1": "巴西服（Brazil）", "EUN1": "北欧和东欧服（Europe Nordic & East）", "EUW1": "西欧服（Europe West）", "JP1": "日服（Japan）", "KR": "韩服（Republic of Korea）", "LA1": "北拉美服（Latin America North）", "LA2": "南拉美服（Latin America South）", "NA1": "北美服（North America）", "OC1": "大洋洲服（Oceania）", "TR1": "土耳其服（Turkey）", "RU": "俄罗斯服（Russia）", "PH2": "菲律宾服（Philippines）", "SG2": "新加坡服（Singapore）", "TH2": "泰服（Thailand）", "TW2": "台服（Taiwan, Hong Kong and Macau）", "VN2": "越南服（Vietnam）", "PBE1": "测试服（Public Beta Environment）"}
+    platform_GARENA = {"PH1": "菲律宾服（Philippines）", "SG1": "新加坡服（Singapore, Malaysia and Indonesia）", "TW1": "台服（Taiwan, Hong Kong and Macau）", "VN1": "越南服（Vietnam）", "TH1": "泰服（Thailand）"}
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
     #下面设置输出文件的位置（The following code determines the output files' location）
     riot_client_info = await (await connection.request("GET", "/riotclient/command-line-args")).json()
@@ -1767,11 +1795,23 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
             pass
     region = client_info["--region"]
     if region == "TENCENT":
-        folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[client_info["--rso_platform_id"]] + "\\" + get_info_name(current_info, 2)
+        platform_folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[platformId]
+        folder = platform_folder + "\\" + get_info_name(current_info, 2)
     elif region == "GARENA":
-        folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[region] + "\\" + get_info_name(current_info, 2)
+        platform_folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[platformId]
+        folder = platform_folder + "\\" + get_info_name(current_info, 2)
     else: #拳头公司与竞舞娱乐公司的合同于2023年1月终止（In January 2023, Riot Games ended its contract with Garena）
-        folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[region] + "\\" + get_info_name(current_info, 3)
+        platform_folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[platformId]
+        folder = platform_folder + "\\" + get_info_name(current_info, 3)
+    platform_config_filepath = platform_folder + "\\" + "platform_config_namespaces.json"
+    while True:
+        try:
+            with open(platform_config_filepath, "w", encoding = "utf-8") as fp:
+                json.dump(platform_config, fp, indent = 4, ensure_ascii = False)
+        except FileNotFoundError: #这里需要注意是否具有创建文件夹的权限。下同（Pay attention to the authority to create the folder. So are the following）
+            os.makedirs(os.path.dirname(platform_config_filepath), exist_ok = True)
+        else:
+            break
     os.makedirs(folder, exist_ok = True)
     while True:
         print("请选择好友操作：\nPlease select an operation on friends:\n0\t返回上一层（Return to the last step）\n1\t查看好友列表（Check the friend list）\n2\t好友分组管理（Manage the friend groups）\n3\t统计好友信息（Count friend statistics）\n4\t导出对话（Export conversations）\n5\t聊天（Chat）\n6\t好友管理（Friend management）\n7\t邀请加入游戏（Invite to game）\n8\t加入游戏（Join a game）\n9\t观战（Spectate）\n10\t玩家静音（Player mute）")
@@ -1811,12 +1851,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
             friend_groupIds = list(map(lambda x: x["id"], friend_groups))
             print("您一共设置了%d个分组：\nYou have %d group(s):\n" %(len(friend_groups), len(friend_groups)))
             friend_groups_df = sort_friend_group(friend_groups)
-            for i in range(friend_groups_df.shape[0]):
-                for j in range(friend_groups_df.shape[1]):
-                    if str(friend_groups_df.iat[i, j]) == "True":
-                        friend_groups_df.iat[i, j] = "√"
-                    elif str(friend_groups_df.iat[i, j]) == "False":
-                        friend_groups_df.iat[i, j] = ""
             friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
             print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
             print("请选择好友分组操作：\nPlease select an operation on friend groups:\n0\t返回上一层（Return to the last step）\n1\t添加分组（Add folder）\n2\t折叠/展开分组（Collapse/Expand folder）\n3\t重命名分组（Rename folder）\n*4\t排列分组顺序（Arrange folder order）\n5\t删除分组（Delete folder）\n6\t刷新好友分组（Refresh folders）")
@@ -1846,12 +1880,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                                 print("您一共设置了%d个分组：\nYou have %d group(s):\n" %(len(friend_groups), len(friend_groups)))
                                 friend_groups_df = sort_friend_group(friend_groups)
-                                for i in range(friend_groups_df.shape[0]):
-                                    for j in range(friend_groups_df.shape[1]):
-                                        if str(friend_groups_df.iat[i, j]) == "True":
-                                            friend_groups_df.iat[i, j] = "√"
-                                        elif str(friend_groups_df.iat[i, j]) == "False":
-                                            friend_groups_df.iat[i, j] = ""
                                 friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                                 print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                                 print("请输入新分组名称：\nPlease enter the new group name:")
@@ -1907,12 +1935,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                         print("您一共设置了%d个分组：\nYou have %d group(s):\n" %(len(friend_groups), len(friend_groups)))
                         friend_groups_df = sort_friend_group(friend_groups)
-                        for i in range(friend_groups_df.shape[0]):
-                            for j in range(friend_groups_df.shape[1]):
-                                if str(friend_groups_df.iat[i, j]) == "True":
-                                    friend_groups_df.iat[i, j] = "√"
-                                elif str(friend_groups_df.iat[i, j]) == "False":
-                                    friend_groups_df.iat[i, j] = ""
                         friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                         print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                         print("请选择折叠/展开选项：\nPlease select a collapse/expand option:\n1\t全部展开（Expand all）\n2\t全部折叠（Collaspe all）\n3\t展开/折叠指定分组（Expand/Collapse specific folders）")
@@ -1951,12 +1973,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                         print("您一共设置了%d个分组：\nYou have %d group(s):\n" %(len(friend_groups), len(friend_groups)))
                         friend_groups_df = sort_friend_group(friend_groups)
-                        for i in range(friend_groups_df.shape[0]):
-                            for j in range(friend_groups_df.shape[1]):
-                                if str(friend_groups_df.iat[i, j]) == "True":
-                                    friend_groups_df.iat[i, j] = "√"
-                                elif str(friend_groups_df.iat[i, j]) == "False":
-                                    friend_groups_df.iat[i, j] = ""
                         friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                         print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                         print("请输入要重命名的分组序号：\nPlease input the group ids to rename:")
@@ -2026,12 +2042,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                             print("您一共设置了%d个分组：\nYou have %d folder(s):\n" %(len(friend_groups), len(friend_groups)))
                             friend_groups_df = sort_friend_group(friend_groups)
-                            for i in range(friend_groups_df.shape[0]):
-                                for j in range(friend_groups_df.shape[1]):
-                                    if str(friend_groups_df.iat[i, j]) == "True":
-                                        friend_groups_df.iat[i, j] = "√"
-                                    elif str(friend_groups_df.iat[i, j]) == "False":
-                                        friend_groups_df.iat[i, j] = ""
                             friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                             print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                             print("请输入您要删除的分组序号。输入-1以退出。\nPlease input the id of the group to remove. Submit -1 to exit.")
@@ -2039,12 +2049,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                 friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                 print("您一共设置了%d个分组：\nYou have %d folder(s):\n" %(len(friend_groups), len(friend_groups)))
                 friend_groups_df = sort_friend_group(friend_groups)
-                for i in range(friend_groups_df.shape[0]):
-                    for j in range(friend_groups_df.shape[1]):
-                        if str(friend_groups_df.iat[i, j]) == "True":
-                            friend_groups_df.iat[i, j] = "√"
-                        elif str(friend_groups_df.iat[i, j]) == "False":
-                            friend_groups_df.iat[i, j] = ""
                 friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                 print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                 print("请选择好友分组操作：\nPlease select an operation on friend groups:\n0\t返回上一层（Return to the last step）\n1\t添加分组（Add folder）\n2\t折叠/展开分组（Collapse/Expand folder）\n3\t重命名分组（Rename folder）\n*4\t排列分组顺序（Arrange folder order）\n5\t删除分组（Delete folder）\n6\t刷新好友分组（Refresh folders）")
@@ -2075,7 +2079,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         conversations_to_export = conversations
                     elif mode[0] == "2":
                         if len(conversations) > 0:
-                            print("目前已激活的对话如下：\nCurrently activated conversations:")
+                            print("目前已激活的对话如下：\nCurrently active conversations:")
                             conversation_df = sort_conversation_metadata(conversations)
                             print(format_df(conversation_df.iloc[1:], print_index = True, start_index = 1)[0])
                             print("请选择您想要导出的对话序号：\nPlease select a conversation to export messages:")
@@ -2083,6 +2087,12 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             while True:
                                 conversationIndex = input()
                                 if conversationIndex == "":
+                                    continue
+                                elif conversationIndex == "-1":
+                                    print("目前已激活的对话如下：\nCurrently active conversations:")
+                                    conversation_df = sort_conversation_metadata(conversations)
+                                    print(format_df(conversation_df.iloc[1:], print_index = True, start_index = 1)[0])
+                                    print("请选择您想要导出的对话序号：\nPlease select a conversation to export messages:")
                                     continue
                                 elif conversationIndex[0] == "0":
                                     back = True
@@ -2121,12 +2131,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             json.dump(conversation_json, fp, indent = 4, ensure_ascii = False)
                         message_df = await sort_message_data(connection, conversation_json[chatId])
                         message_df = pandas.concat([message_df.iloc[:1], message_df.iloc[1:].sort_values(by = "timestamp", ascending = True)], ignore_index = True)
-                        for i in range(message_df.shape[0]):
-                            for j in range(message_df.shape[1]):
-                                if str(message_df.iat[i, j]) == "True":
-                                    message_df.iat[i, j] = "√"
-                                elif str(message_df.iat[i, j]) == "False":
-                                    message_df.iat[i, j] = ""
                         excel_name = "Conversations - %s.xlsx" %(get_info_name(current_info))
                         sheet_name = conversation["gameName"] + "#" + conversation["gameTag"] if conversation["type"] == "chat" else conversation["id"].split("@")[0]
                         while True:
@@ -2148,11 +2152,11 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     if exported:
                         print('\n对话信息已保存为“%s”！\nConversation messages are saved as "%s"!\n' %(os.path.join(folder, excel_name), os.path.join(folder, excel_name)))
                     else: #有可能获取完对话元数据后，用户把对话关了，然后从对话获取消息就获取不到了（Chances are that the user closes the conversation after the program obtains the conversation metadata, so that the program can't get the messages）
-                        print("未检测到激活的对话。\nNo activated conversation detected.")
+                        print("未检测到激活的对话。\nNo active conversation detected.")
                     conversations = await (await connection.request("GET", "/lol-chat/v1/conversations")).json()
                     print("请选择导出对话的模式：\nPlease select a mode to export conversations:\n1\t全部导出（All）\n2\t单个导出（Single）")
             else:
-                print("未检测到激活的对话。\nNo activated conversation detected.")
+                print("未检测到激活的对话。\nNo active conversation detected.")
         elif option == "5":
             global message_hint_printed
             if not message_hint_printed:
@@ -2160,7 +2164,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                 message_hint_printed = True
             messageTypes = {"chat": "聊天", "groupchat": "队伍聊天", "system": "系统", "information": "通知", "celebration": "庆祝"}
             escape_sequences = {"\\n": ""} #这个变量本来是用于确定在聊天中怎么输入转义字符的。目前仅通过input()函数来输入换行符没有办法做到。参考链接：（This variable is originally intended to determine how to input an escape character in chat. It seems for now that there's no way of inputting a line feed character only using `input` function. Reference: ）https://www.educba.com/escape-sequence-in-c/
-            print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t小队聊天（Group chat）\n3\t指定社交代码（Specify pid）")
+            print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
             while True:
                 situation = input()
                 if situation == "":
@@ -2223,6 +2227,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 continue
                                             elif mType[0] == "0":
                                                 print("请选择一位好友：\nPlease select a friend:")
+                                                print(format_df(friend_hovercard_df.loc[1:, friend_hovercard_fields_to_print], print_index = True, start_index = 1)[0])
+                                                print("变量提示（Variable hints）：\nfriend_hovercard_df = await sort_friend_hovercard(connection)")
                                                 break
                                             elif mType[0] in mTypeDict:
                                                 messageType = mTypeDict[mType[0]]
@@ -2246,7 +2252,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                         if message["type"] == "chat" or message["type"] == "groupchat":
                                                             print("[%s]%s：\n%s\n" %(timestamp, from_summonerName, message["body"]))
                                                         elif message["type"] == "system":
-                                                            system_messages = {"connecting": "正在连接……", "disconnected": "您已从聊天服务器断开，正在尝试重新连接……", "dropped_message": "由于发言内容或账号环境存在异常，消息发送暂时被限制，请注意账号保护并24小时后再试。", "is_blocked": "{actor}正在你的聊天黑名单中。你将不会看到它们的聊天信息。".format(actor = from_summonerName), "joined_room": "{actor}加入了队伍聊天".format(actor = from_summonerName), "left_room": "{actor}离开了队伍聊天".format(actor = from_summonerName), "no_friends": "看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。", "no_online_friends": "一个小伙伴都没在线。你知道吗，你是可以给离线的玩家发送信息的哟~", "rich_content_replaced": "请查看《英雄联盟》移动端APP里的消息"}
+                                                            system_messages = {"connecting": "正在连接……", "disconnected": "您已从聊天服务器断开，正在尝试重新连接……", "dropped_message": "由于发言内容或账号环境存在异常，消息发送暂时被限制，请注意账号保护并24小时后再试。", "is_blocked": "{actor}正在你的聊天黑名单中。你将不会看到它们的聊天信息。".format(actor = from_summonerName), "joined_room": "{actor}加入了队伍聊天".format(actor = from_summonerName), "left_room": "{actor}离开了队伍聊天".format(actor = from_summonerName), "no_friends": "看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。", "no_online_friends": "一个小伙伴都没在线。你知道吗，你是可以给离线的玩家发送信息的哟~", "rich_content_replaced": "请查看《英雄联盟》移动端APP里的消息", "TEXT_CHAT_MUTED": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_RESTRICTION": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_MUTED_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。", "TEXT_CHAT_RESTRICTION_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。"}
                                                             print("[%s]%s\n" %(timestamp, system_messages.get(message["body"], message["body"])))
                                                         else:
                                                             print("[%s](%s)%s\n" %(timestamp, messageTypes.get(message["type"], message["type"]), message["body"]))
@@ -2265,29 +2271,25 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                             print("聊天服务响应失败！\nERROR response for chat service!")
                                     else:
                                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                    print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t小队聊天（Group chat）\n3\t指定社交代码（Specify pid）")
+                    print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
                 elif situation[0] == "2":
-                    friends = await (await connection.request("GET", "/lol-chat/v1/friends")).json()
-                    friend_pids = set(map(lambda x: x["pid"], friends))
                     conversations = await (await connection.request("GET", "/lol-chat/v1/conversations")).json()
                     conversation_df = sort_conversation_metadata(conversations)
-                    conversation_df_filtered = conversation_df[~conversation_df["id"].isin(friend_pids)] #筛选非好友私聊的对话序号（Exclude friend chats from the conversations）
-                    conversation_df_filtered = conversation_df_filtered.reset_index(drop = True)
-                    if len(conversation_df_filtered) == 1: #筛选后的数据框仍包含中文标题（The filtered dataframe still includes the Chinese header）
-                        print("未检测到激活的对话。\nNo activated conversation detected.")
-                        print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t小队聊天（Group chat）\n3\t指定社交代码（Specify pid）")
+                    if len(conversation_df) == 1: #筛选后的数据框仍包含中文标题（The filtered dataframe still includes the Chinese header）
+                        print("未检测到激活的对话。\nNo active conversation detected.")
+                        print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
                     else:
                         print("请选择对话：\nPlease select a conversation:")
                         while True:
-                            print(format_df(conversation_df_filtered.iloc[1:], print_index = True, start_index = 1)[0])
+                            print(format_df(conversation_df.iloc[1:], print_index = True, start_index = 1)[0])
                             conversation_index = input()
                             if conversation_index == "":
                                 continue
                             elif conversation_index == "0":
-                                print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t小队聊天（Group chat）\n3\t指定社交代码（Specify pid）")
+                                print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
                                 break
-                            elif conversation_index in map(str, range(len(conversation_df_filtered))):
-                                chatId = conversation_df_filtered.loc[int(conversation_index), "id"]
+                            elif conversation_index in map(str, range(len(conversation_df))):
+                                chatId = conversation_df.loc[int(conversation_index), "id"]
                                 messages = await (await connection.request("GET", f"/lol-chat/v1/conversations/{chatId}/messages")).json()
                                 if "errorCode" in messages and messages["httpStatus"] == 404:
                                     print("该对话尚未激活。请在客户端右边的好友列表中点击该好友，或者直接发送一条聊天类消息，以激活对话。\nThis conversation hasn't been activated yet. Please click this friend in the friend list at the right side of the client, or send a chat message directly to activate the conversation.")
@@ -2321,7 +2323,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 if message["type"] == "chat":
                                                     print("[%s]%s：\n%s\n" %(timestamp, from_summonerName, message["body"]))
                                                 elif message["type"] == "system":
-                                                    system_messages = {"connecting": "正在连接……", "disconnected": "您已从聊天服务器断开，正在尝试重新连接……", "dropped_message": "由于发言内容或账号环境存在异常，消息发送暂时被限制，请注意账号保护并24小时后再试。", "is_blocked": "{actor}正在你的聊天黑名单中。你将不会看到它们的聊天信息。".format(actor = from_summonerName), "joined_room": "{actor}加入了队伍聊天".format(actor = from_summonerName), "left_room": "{actor}离开了队伍聊天".format(actor = from_summonerName), "no_friends": "看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。", "no_online_friends": "一个小伙伴都没在线。你知道吗，你是可以给离线的玩家发送信息的哟~", "rich_content_replaced": "请查看《英雄联盟》移动端APP里的消息"}
+                                                    system_messages = {"connecting": "正在连接……", "disconnected": "您已从聊天服务器断开，正在尝试重新连接……", "dropped_message": "由于发言内容或账号环境存在异常，消息发送暂时被限制，请注意账号保护并24小时后再试。", "is_blocked": "{actor}正在你的聊天黑名单中。你将不会看到它们的聊天信息。".format(actor = from_summonerName), "joined_room": "{actor}加入了队伍聊天".format(actor = from_summonerName), "left_room": "{actor}离开了队伍聊天".format(actor = from_summonerName), "no_friends": "看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。", "no_online_friends": "一个小伙伴都没在线。你知道吗，你是可以给离线的玩家发送信息的哟~", "rich_content_replaced": "请查看《英雄联盟》移动端APP里的消息", "TEXT_CHAT_MUTED": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_RESTRICTION": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_MUTED_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。", "TEXT_CHAT_RESTRICTION_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。"}
                                                     print("[%s]%s\n" %(timestamp, system_messages.get(message["body"], message["body"])))
                                                 else:
                                                     print("[%s](%s)%s\n" %(timestamp, messageTypes.get(message["type"], message["type"]), message["body"]))
@@ -2338,15 +2340,11 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                     print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please active this conversation first.")
                                                 else:
                                                     print("聊天服务响应失败！\nERROR response for chat service!")
-                                friends = await (await connection.request("GET", "/lol-chat/v1/friends")).json()
-                                friend_pids = set(map(lambda x: x["pid"], friends))
                                 conversations = await (await connection.request("GET", "/lol-chat/v1/conversations")).json()
                                 conversation_df = sort_conversation_metadata(conversations)
-                                conversation_df_filtered = conversation_df[~conversation_df["id"].isin(friend_pids)]
-                                conversation_df_filtered = conversation_df_filtered.reset_index(drop = True)
-                                if len(conversation_df_filtered) == 1:
-                                    print("未检测到激活的对话。\nNo activated conversation detected.")
-                                    print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t小队聊天（Group chat）\n3\t指定社交代码（Specify pid）")
+                                if len(conversation_df) == 1:
+                                    print("未检测到激活的对话。\nNo active conversation detected.")
+                                    print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
                                     break
                                 else:
                                     print("请选择对话：\nPlease select a conversation:")
@@ -2359,7 +2357,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         if pid == "":
                             continue
                         elif pid == "0":
-                            print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t小队聊天（Group chat）\n3\t指定社交代码（Specify pid）")
+                            print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
                             break
                         else:
                             messages = await (await connection.request("GET", f"/lol-chat/v1/conversations/{pid}/messages")).json()
@@ -2396,7 +2394,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             if message["type"] == "chat":
                                                 print("[%s]%s：\n%s\n" %(timestamp, from_summonerName, message["body"]))
                                             elif message["type"] == "system":
-                                                system_messages = {"connecting": "正在连接……", "disconnected": "您已从聊天服务器断开，正在尝试重新连接……", "dropped_message": "由于发言内容或账号环境存在异常，消息发送暂时被限制，请注意账号保护并24小时后再试。", "is_blocked": "{actor}正在你的聊天黑名单中。你将不会看到它们的聊天信息。".format(actor = from_summonerName), "joined_room": "{actor}加入了队伍聊天".format(actor = from_summonerName), "left_room": "{actor}离开了队伍聊天".format(actor = from_summonerName), "no_friends": "看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。", "no_online_friends": "一个小伙伴都没在线。你知道吗，你是可以给离线的玩家发送信息的哟~", "rich_content_replaced": "请查看《英雄联盟》移动端APP里的消息"}
+                                                system_messages = {"connecting": "正在连接……", "disconnected": "您已从聊天服务器断开，正在尝试重新连接……", "dropped_message": "由于发言内容或账号环境存在异常，消息发送暂时被限制，请注意账号保护并24小时后再试。", "is_blocked": "{actor}正在你的聊天黑名单中。你将不会看到它们的聊天信息。".format(actor = from_summonerName), "joined_room": "{actor}加入了队伍聊天".format(actor = from_summonerName), "left_room": "{actor}离开了队伍聊天".format(actor = from_summonerName), "no_friends": "看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。", "no_online_friends": "一个小伙伴都没在线。你知道吗，你是可以给离线的玩家发送信息的哟~", "rich_content_replaced": "请查看《英雄联盟》移动端APP里的消息", "TEXT_CHAT_MUTED": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_RESTRICTION": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_MUTED_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。", "TEXT_CHAT_RESTRICTION_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。"}
                                                 print("[%s]%s\n" %(timestamp, system_messages.get(message["body"], message["body"])))
                                             else:
                                                 print("[%s](%s)%s\n" %(timestamp, messageTypes.get(message["type"], message["type"]), message["body"]))
@@ -2468,6 +2466,10 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         print("您在该玩家的聊天黑名单中。\nYou're blocked by this player.")
                                     elif response["httpStatus"] == 500:
                                         print("该玩家名字包含了无效字符，或者您发送的好友请求已满50个。\nThis player name contains invalid characters, or you can't sent more than 50 friend requests at the same time.")
+                                    elif response["httpStatus"] == 503:
+                                        print("发送好友请求的过程响应失败。\nError response for POST /chat/v6/friendrequests: ")
+                                    else:
+                                        print(response)
                 elif action[0] == "2":
                     friend_requests = await (await connection.request("GET", "/lol-chat/v2/friend-requests")).json()
                     if "errorCode" in friend_requests:
@@ -2560,6 +2562,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     index_got = True
                                 else:
                                     print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                print("您选择了以下%d个好友请求：\nYou selected the following %d friend request(s): " %(len(handle_indices), len(handle_indices)))
+                                print(format_df(friend_request_df.loc[handle_indices, friend_request_fields_to_print], print_header = True, print_index = True, reserve_index = True)[0])
                                 if index_got:
                                     print("请选择对好友请求的处理：\nPlease decide how to deal with this friend request:\n0\t返回上一层（Return to the last step）\n1\t接受（Accept）\n2\t拒绝/取消（Reject/Cancel）\n3\t拉入聊天黑名单（Block）")
                                     while True:
@@ -2767,16 +2771,12 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 move_indices = list(range(len(friends)))
                             else:
                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                            print("您选择了以下%d名好友：\nYou selected the following %d friend(s):" %(len(move_indices), len(move_indices)))
+                            print(format_df(friend_hovercard_df.loc[list(map(lambda x: x + 1, move_indices)), friend_hovercard_fields_to_print], print_index = True, reserve_index = True)[0])
                             if not back:
                                 print("请选择目标分组：\nPlease select a target group:")
                                 friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
                                 friend_groups_df = sort_friend_group(friend_groups)
-                                for i in range(friend_groups_df.shape[0]):
-                                    for j in range(friend_groups_df.shape[1]):
-                                        if str(friend_groups_df.iat[i, j]) == "True":
-                                            friend_groups_df.iat[i, j] = "√"
-                                        elif str(friend_groups_df.iat[i, j]) == "False":
-                                            friend_groups_df.iat[i, j] = ""
                                 friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                                 print(format_df(friend_groups_df_to_print)[0])
                                 while True:
@@ -3208,6 +3208,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 block_indices = list(range(len(friends)))
                             else:
                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                            print("您选择了以下%d名好友：\nYou selected the following %d friends:" %(len(block_indices), len(block_indices)))
+                            print(format_df(friend_hovercard_df.loc[list(map(lambda x: x + 1, block_indices)), friend_hovercard_fields_to_print], print_index = True, reserve_index = True)[0])
                             if not back:
                                 block_summonerNames = list(map(lambda x: friend_summonerNames[x], block_indices))
                                 print('将%s拉入聊天黑名单：\n- 将该玩家从你的好友列表中移除\n- 屏蔽来自该玩家的好友请求\n- 屏蔽任何未来的会话\n- 屏蔽该玩家的游戏邀请\nBlocking %s:\n- Removes them from your friends list\n- Blocks friend requests from them\n- Blocks any future conversations\n- Blocks game invites from them\n\n您确定要将该玩家拉入聊天黑名单吗？（输入“block”以确认，否则取消。）\nDo you really want to block this player? (Submit "block" to confirm, otherwise cancel blocking.' %("、".join(block_summonerNames), ", ".join(block_summonerNames)))
@@ -3554,6 +3556,13 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     else:
                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                         continue
+                    print("您邀请了以下%d名玩家：\nYou invited the following %d player(s):" %(len(invitee_summonerIds), len(invitee_summonerIds)))
+                    for invitee_summonerId in invitee_summonerIds:
+                        invitee_info = await get_info(connection, invitee_summonerId)
+                        if invitee_info["info_got"]:
+                            print(get_info_name(invitee_info["body"]))
+                        else:
+                            print(invitee_info["message"])
                     if invitee_obtained:
                         body = list(map(lambda x: {"toSummonerId": x}, invitee_summonerIds))
                         response = await (await connection.request("POST", "/lol-lobby/v2/lobby/invitations", data = body)).json()
@@ -3674,7 +3683,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     else:
                         print("您收到的邀请信息如下：\nYour received invitations:")
                         invid_df = await sort_received_invitations(connection)
-                        invid_fields_to_print = ["fromSummonerName", "time", "queue name", "queueId", "state"]
+                        invid_fields_to_print = ["fromSummonerName", "time", "gameMode", "mapId", "queue name", "queueId", "state"]
                         print(format_df(invid_df.loc[1:, invid_fields_to_print], print_index = True, start_index = 1)[0])
                         print("请选择邀请处理方式：\nPlease select a method of handling the invitation(s):\n0\t返回上一层（Return to the last step）\n1\t接受（Accept）\n2\t拒绝（Decline）")
                         while True:
@@ -3691,6 +3700,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     if invitationIndex == "":
                                         continue
                                     elif invitationIndex == "0":
+                                        print("请选择邀请处理方式：\nPlease select a method of handling the invitation(s):\n0\t返回上一层（Return to the last step）\n1\t接受（Accept）\n2\t拒绝（Decline）")
                                         break
                                     elif invitationIndex in map(str, range(1, len(invid_df))):
                                         invitationId = invid_df.loc[int(invitationIndex), "invitationId"] #注意到邀请序号和小队序号的获取方式有所不同。小队序号是从原始的小队数据中获取的，因为小队数据作为静态数据传入小队信息整理函数中，而邀请信息没有传入邀请信息整理函数中，在程序运行前后邀请信息会频繁更新，可能导致原始邀请信息和邀请信息数据框中的内容不符（邀请信息数据框整理过程中的邀请信息和这里的邀请信息不在同一个作用域中）【Note that it differs between getting invitationId and getting partyId. PartyId is obtained from the original party data, in that party data are passed into `sort_party_data` function as static data, while invitation data aren't passed into `sort_received_invitations` function. As a result, invitation information may be frequently updated, which causes the original invitation data not in accordance with data in the invitation dataframe (invitation data here don't belong to the same scope of those during sorting out the invitation dataframe)】
@@ -3717,7 +3727,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     else:
                                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                     invid_df = await sort_received_invitations(connection)
-                                    invid_fields_to_print = ["fromSummonerName", "time", "queue name", "queueId", "state"]
+                                    invid_fields_to_print = ["fromSummonerName", "time", "gameMode", "mapId", "queue name", "queueId", "state"]
                                     print("请选择要接受的邀请序号：\nPlease select the index of the invitation to accept:")
                                     print(format_df(invid_df.loc[1:, invid_fields_to_print], print_index = True, start_index = 1)[0])
                             elif method[0] == "2":
@@ -3739,7 +3749,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             elif decline_input == "0":
                                                 break
                                             elif decline_input in map(str, range(1, len(invid_df))):
-                                                decline_indices = [list(decline_input)]
+                                                decline_indices = [int(decline_input)]
                                                 index_got = True
                                                 break
                                             else:
@@ -3799,6 +3809,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         index_got = True
                                     else:
                                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                    print("您选择了以下%d个组队邀请：\nYou selected the following %d invitation(s):" %(len(decline_indices), len(decline_indices)))
+                                    print(format_df(invid_df.loc[decline_indices, invid_fields_to_print], print_index = True, reserve_index = True)[0])
                                     if index_got:
                                         for invitationIndex in decline_indices:
                                             invitationId = invid_df.loc[int(invitationIndex), "invitationId"]
@@ -3818,7 +3830,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             return_home = True
                                             break
                                         else:
-                                            invid_fields_to_print = ["fromSummonerName", "time", "queue name", "queueId", "state"]
+                                            invid_fields_to_print = ["fromSummonerName", "time", "gameMode", "mapId", "queue name", "queueId", "state"]
                                             print(format_df(invid_df.loc[1:, invid_fields_to_print], print_index = True, start_index = 1)[0])
                                     print("请选择拒绝模式：\nPlease select a decline mode:\n0\t返回上一层（Return to the last step）\n1\t单个拒绝（Single）\n2\t批量拒绝（In batches）\n3\t全部拒绝（All）")
                             else:
@@ -3845,6 +3857,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     friend_puuids = list(map(lambda x: x["puuid"], friends))
                     response = await (await connection.request("POST", "/lol-spectator/v3/buddy/spectate", data = [current_info["puuid"]] if len(friends) == 0 else friend_puuids)).json() #在国服，如果这个接口的请求主体不是空列表，那么返回的异常信息是“SpectatorPlugin_NOT_AVAILABLE”。问题在于，如果请求主体是空列表，那么这个接口仍能正常响应。这样看来，似乎下面程序逻辑本应先处理len(friends)是否为0的情形。但是有一个比较巧妙的解法，就是将这个接口的请求主体设置为自己。这样一来，在观战插件可用的时候，如果程序识别到自己不在游戏中，那么自己肯定是不可观战的；如果程序识别到自己在游戏中，那么程序压根就无法运行这里的代码【On Chinese servers, if the request body of this endpoint isn't an empty list, then the error message is "SpectatorPlugin_NOT_AVAILABLE". But the problem is, if the request body is an empty list, then it still responds as normal (Riot servers). In that case, it seems the following program logic should first deal with the case where `len(friends) == 0` or `len(friends) != 0`. But here I provide a relatively clever solution: assign a list containing only the user's puuid as the request body. In this way, when the spectator plugin is available, if the program identifies that the user isn't in game right now, then the user itself can't be observable; if the program identifies the user itself is in game, then the program won't run the code here and hereinafter at all】
                     pluginNA = False
+                    use_pluginNA = False #决定是否在观战可用性插件可用的情况下仍然运行观战可用性插件不可用的情况下的代码（Decides whether to run the code of the case where spectating availability endpoint isn't available when this endpoint is actually available）
                     spectate_ready = False
                     if "errorCode" in response: #传入空列表也会导致异常（Passing an empty list also causes an error）
                         if response["httpStatus"] == 400 and response["message"] == "SpectatorPlugin_NOT_AVAILABLE":
@@ -3869,9 +3882,10 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         back = False
                         if nonfriend_spectate:
                             print('请输入您要检测观战可用性的玩家的召唤师名。输入“-1”以结束输入。\nPlease input the summonerName of the player to detect observability. Submit "-1" to end the input.')
-                            spectate_summonerNames = set()
+                            spectate_summonerNames = []
                             spectate_puuids = []
                             spectate_infos = []
+                            spectate_availability = []
                             while True:
                                 spectate_summonerName = input()
                                 if spectate_summonerName == "":
@@ -3889,24 +3903,26 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         if spectate_info["info_got"]:
                                             if spectate_info["body"]["puuid"] == current_info["puuid"]:
                                                 print("你不能观战你自己。\nYou can't spectate yourself.")
-                                            if spectate_info["body"]["puuid"] in spectate_puuids:
+                                            elif spectate_info["body"]["puuid"] in spectate_puuids:
                                                 print("您已经输入过该玩家了。\nYou've alerady added this summoner.")
                                             else:
                                                 response = await (await connection.request("POST", "/lol-spectator/v3/buddy/spectate", data = [spectate_info["body"]["puuid"]])).json()
                                                 if len(response["availableForWatching"]) == 0:
+                                                    spectate_availability.append(False)
                                                     print("该玩家目前不可观战。\nThis player isn't observable currently.")
                                                 else:
+                                                    spectate_availability.append(True)
                                                     print(spectate_info["body"])
-                                                    spectate_summonerNames.add(spectate_summonerName)
-                                                    spectate_puuids.append(spectate_info["body"]["puuid"])
-                                                    spectate_infos.append(spectate_info["body"])
+                                                spectate_summonerNames.append(spectate_summonerName)
+                                                spectate_puuids.append(spectate_info["body"]["puuid"])
+                                                spectate_infos.append(spectate_info["body"]) #即使接口返回结果是该玩家目前不可观战，但是由于观战可用性检测接口存在问题，这里还是要保留一下意见（Even if the spectating availability endpoint returns the fact that this player isn't observable currently, because this endpoint may sometimes not work correctly, this player is still a candidate）
                                         else:
                                             print(spectate_info["message"])
                             if not back:
                                 if len(spectate_puuids) == 0:
-                                    print("您输入的玩家中没有可观战的玩家。\nThere isn't any observable player from your input.")
+                                    print("您尚未输入任何玩家。\nYou've not input any player.")
                                 else:
-                                    spectate_nonfriend_header = {"gameName": "玩家昵称", "tagLine": "昵称编号", "puuid": "玩家通用唯一识别码"}
+                                    spectate_nonfriend_header = {"gameName": "玩家昵称", "tagLine": "昵称编号", "puuid": "玩家通用唯一识别码", "availability": "观战可用性"}
                                     spectate_nonfriend_header_keys = list(spectate_nonfriend_header.keys())
                                     spectate_nonfriend_data = {}
                                     for i in range(len(spectate_nonfriend_header_keys)):
@@ -3914,14 +3930,20 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         spectate_nonfriend_data[key] = []
                                     for spectate_info in spectate_infos:
                                         for i in range(len(spectate_nonfriend_header_keys)):
-                                            key = spectate_nonfriend_header_keys[i]
-                                            spectate_nonfriend_data[key].append(spectate_info[key])
+                                            if i <= 2:
+                                                key = spectate_nonfriend_header_keys[i]
+                                                spectate_nonfriend_data[key].append(spectate_info[key])
+                                    spectate_nonfriend_data["availability"] = spectate_availability
                                     spectate_nonfriend_statistics_output_order = list(range(len(spectate_nonfriend_header_keys)))
                                     spectate_nonfriend_data_organized = {}
                                     for i in spectate_nonfriend_statistics_output_order:
                                         key = spectate_nonfriend_header_keys[i]
-                                        spectate_nonfriend_data_organized[key] = [spectate_nonfriend_header[key]] + spectate_nonfriend_data[key]
+                                        spectate_nonfriend_data_organized[key] = spectate_nonfriend_data[key]
                                     spectate_nonfriend_df = pandas.DataFrame(data = spectate_nonfriend_data_organized)
+                                    spectate_nonfriend_df["availability"] = spectate_nonfriend_df["availability"].astype(str)
+                                    for i in range(len(spectate_nonfriend_df)):
+                                        spectate_nonfriend_df.loc[i, "availability"] = "√" if spectate_nonfriend_df["availability"][i] == "True" else ""
+                                    spectate_nonfriend_df = pandas.concat([pandas.DataFrame([spectate_nonfriend_header])[spectate_nonfriend_df.columns], spectate_nonfriend_df], ignore_index = True)
                                     print("请选择一名玩家进行观战：\nPlease select a player to spectate:")
                                     print(format_df(spectate_nonfriend_df, print_index = True)[0])
                                     while True:
@@ -3975,7 +3997,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         else:
                                             print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                         print("请选择草稿选项：\nPlease select a draft option:\n0\t退出草稿（Quit drafting）\n1\t迭代式取子集（Take subsets iteratively）")
-                                print("请选择一名好友进行观战：\nPlease select a friend to spectate:")
+                                print("请选择一名好友，或者输入召唤师名进行观战：\nPlease select a friend or enter a summoner's name to spectate:")
                                 print(format_df(friend_hovercard_df_to_print.loc[:, friend_hovercard_fields_to_print], print_index = True)[0])
                                 while True:
                                     index_got = False
@@ -3988,10 +4010,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         try:
                                             friend_index = eval(spectate_str)
                                         except:
-                                            traceback_info = traceback.format_exc()
-                                            print(traceback_info)
-                                            print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                            continue
+                                            use_pluginNA = True
+                                            break
                                         else:
                                             if isinstance(friend_index, int) and friend_index > 0 and friend_index < len(friend_hovercard_df_to_print):
                                                 index_got = True
@@ -4003,10 +4023,12 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     dropInSpectateGameId, gameQueueType, allowObserveMode, spectate_puuid = friend_hovercard_df_to_print.loc[friend_index, ["gameId", "gameQueueType", "isObservable", "puuid"]]
                                     spectating_summonerName = friend_hovercard_df_to_print.loc[friend_index, "gameName"] + "#" + friend_hovercard_df_to_print.loc[friend_index, "gameTag"]
                                     spectate_ready = True
-                    if pluginNA:
+                            #这里对应的情况是nonfriend_spectate为假、好友数量是0且可观看玩家的数量也是0。既没有可观看的玩家，也不观战非好友，那就直接重新开始一个while循环，所以这里不写else语句（In this case, nonfriend_spectate = False, len(friends) = 0 and len(response["availableForWatching"]) = 0. That is, the user doesn't want to spectate the game of either a friend or a non-friend, so the next step should be returning to the start of the while-loop. Therefore, there's no need to write this else-statement）
+                    if pluginNA or use_pluginNA:
                         print("请输入您想要观看的玩家召唤师名：\nPlease input the summonerName of the player to spectate:")
                         while True:
-                            spectating_summonerName = input()
+                            spectating_summonerName = spectate_str if use_pluginNA else input()
+                            use_pluginNA = False #如果在转到这里之前输入的召唤师名有问题，在本While循环内需要允许用户重新输入召唤师名（If the summoner name input before running here has a problem, the user should be allowed to input the summoner name again in this while-loop）
                             if spectating_summonerName == "":
                                 continue
                             elif spectating_summonerName == "0":
@@ -4035,7 +4057,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 print("启动观战成功！您正在观看%s的对局。\nLaunched spectating successfully. You'll be spectating the game of %s soon." %(spectating_summonerName, spectating_summonerName))
                                 exit_loop = True
                             else:
-                                print("观战启动失败。请确认对方是否在游戏中。\nSpectate failed. Please confirm if the player is in game.")
+                                print("这场对局现在不可观战。它也许已经结束了。\nThe game isn't available for spectate now. It might have ended.")
                         else:
                             if response["httpStatus"] == 400 and response["message"] == "SpectatorPlugin_NOT_AVAILABLE":
                                 pluginNA = True
@@ -4045,6 +4067,21 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 print("观战服务不可用。\nSpectator service unavailable.")
                             else:
                                 print("观战失败。请通过客户端内右键点击一名好友，或者通过第三方工具来进行观战。\nSpectating failed. Please right click on a friend or use another third-party tool to spectate.")
+            elif gameflow_phase == "Reconnect":
+                gameflow_session = await (await connection.request("GET", "/lol-gameflow/v1/session")).json()
+                inGame_puuids = list(map(lambda x: x["puuid"], gameflow_session["gameData"]["playerChampionSelections"]))
+                isSpectating = not current_info["puuid"] in inGame_puuids
+                print("检测到您正在游戏中。是否重新连接？（输入任意键重新连接，否则不连接。）\nDetected you're currently in a game. Do you want to reconnect? (Submit any non-empty string to reconnect, or null to refuse reconnecting.)")
+                reconnect = bool(input())
+                if reconnect:
+                    response = await (await connection.request("POST", "/lol-gameflow/v1/reconnect")).json()
+                    if response == None:
+                        print("重新连接成功。\nReconnect succeeded.")
+                    else:
+                        if "errorCode" in response and response["message"] == "Reconnect is not available.":
+                            print("重新连接不可用。请重启客户端并重试。\nReconnect isn't available. Please restart the client and try again.")
+                        else:
+                            print("重新连接失败。\nReconnect failed.")
             else:
                 print("您目前的状态不可观战。请等待游戏结束或者退出房间来进行观战。\nYou're not allowed to spectate for now. Please wait for the current game to end or exit the party or lobby to spectate any game.")
         elif option == "10":
@@ -4080,18 +4117,11 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                     break
                                                 elif action[0] == "1":
                                                     captureDevices_df = await sort_capture_devices(connection)
-                                                    captureDevices_df_to_print = captureDevices_df.copy(deep = True)
-                                                    for i in range(captureDevices_df_to_print.shape[0]):
-                                                        for j in range(captureDevices_df_to_print.shape[1]):
-                                                            if str(captureDevices_df_to_print.iat[i, j]) == "True":
-                                                                captureDevices_df_to_print.iat[i, j] = "√"
-                                                            elif str(captureDevices_df_to_print.iat[i, j]) == "False":
-                                                                captureDevices_df_to_print.iat[i, j] = ""
                                                     if len(captureDevices_df) == 1:
                                                         print("未检测到输入设备。\nNo capture devices detected.")
                                                     else:
                                                         print("您的输入设备信息如下：\nYour capture devices:")
-                                                        print(format_df(captureDevices_df_to_print, print_index = True)[0])
+                                                        print(format_df(captureDevices_df, print_index = True)[0])
                                                         print("请选择您要使用的输入设备：\nPlease select an capture device to use:")
                                                         while True:
                                                             deviceIndex = input()
@@ -4379,6 +4409,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                             mute_indices.remove(selfIndex)
                                                         else:
                                                             print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                        print("您选择了以下%d名玩家：\nYou selected the following %d player(s):" %(len(mute_indices), len(mute_indices)))
+                                                        print(format_df(participant_record_df.loc[mute_indices, participant_record_fields_to_print], print_index = True, reserve_index = True)[0])
                                                         if index_got:
                                                             print("您想要将这些玩家静音，还是解除静音？（输入任意键以静音，否则解除静音。）\nDo you want to mute or unmute these participants? (Submit any non-empty string to mute, or null to unmute.)")
                                                             isMuted = bool(input())
@@ -4513,10 +4545,14 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                                         if player_index in range(1, len(participant_record_df)):
                                                                             index_got = True
                                                                             playerVolumes[player_index] = volume
+                                                                            print(format_df(pandas.concat([participant_record_df.loc[playerVolumes.keys(), participant_record_fields_to_print], pandas.DataFrame(data = {"energy_to_change": playerVolumes.values()}, index = playerVolumes.keys())], axis = 1), print_index = True, reserve_index = True)[0])
                                                                         else:
                                                                             print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                                         else:
                                                             print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                        if mode[0] in {"1", "2", "3"}:
+                                                            print("您选择了以下%d名玩家：\nYou selected the following %d player(s):" %(len(volumeChange_indices), len(volumeChange_indices)))
+                                                            print(format_df(participant_record_df.loc[volumeChange_indices, participant_record_fields_to_print], print_index = True, reserve_index = True)[0])
                                                         if index_got:
                                                             if volume_share:
                                                                 print("请输入一个不超过100的自然数以设置音量：\nPlease enter a nonnegative integer not greater than 100 to set the volume:")
@@ -4708,6 +4744,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             print("所有队友被已解除静音。\nYour allies are unmuted.")
                                     else:
                                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                    if action[0] in {"1", "2", "3"}:
+                                        print("您选择了以下%d名队友：\nYou selected the following %d ally/allies:" %(len(mute_indices), len(mute_indices)))
+                                        print(format_df(champSelect_myTeam_df.loc[mute_indices, champSelect_team_fields_to_print], print_index = True, reserve_index = True)[0])
                                     if index_got:
                                         mute_puuids = []
                                         for ally_index in mute_indices:
@@ -4803,8 +4842,9 @@ async def sort_blockList_data(connection, CustomURF_blockList_enabled: bool = Fa
     blockList_data_organized = {}
     for i in blockList_statistics_output_order:
         key = blockList_header_keys[i]
-        blockList_data_organized[key] = [blockList_header[key]] + blockList_data[key]
+        blockList_data_organized[key] = blockList_data[key]
     blockList_df = pandas.DataFrame(data = blockList_data_organized)
+    blockList_df = pandas.concat([pandas.DataFrame([blockList_header])[blockList_df.columns], blockList_df], ignore_index = True)
     return blockList_df
 
 async def blacklist_behavior_simulation(connection):

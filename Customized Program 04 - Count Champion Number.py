@@ -1,5 +1,5 @@
 from lcu_driver import Connector
-import time, requests, json, re, pandas
+import json, pandas, re, requests, time, uuid
 
 #=============================================================================
 # * 声明（Declaration）
@@ -212,7 +212,7 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
         LoLChampions = {}
         for champion in LoLChampion["data"].values():
             LoLChampions[int(champion["key"])] = champion
-        LoLChampions_header = {"version": "版本", "id": "英雄代码", "key": "英雄序号", "name": "称号", "title": "名称", "blurb": "背景介绍", "partype": "施法资源属性", "info: attack": "伤害属性得分", "info: defense": "强韧属性得分", "info: magic": "法术属性得分", "info: difficulty": "使用难度系数", "tag: Assassin": "角色定位：刺客", "tag: Fighter": "角色定位：战士", "tag: Mage": "角色定位：法师", "tag: Marksman": "角色定位：射手", "tag: Support": "角色定位：辅助", "tag: Tank": "角色定位：坦克", "hp": "基础生命值", "hpperlevel": "生命值成长", "mp": "基础法力/能量值", "mpperlevel": "法力/能量值成长", "movespeed": "移动速度", "armor": "护甲", "armorperlevel": "护甲成长", "spellblock": "魔法抗性", "spellblockperlevel": "魔法抗性成长", "attackrange": "攻击距离", "hpregen": "生命回复", "hpregenperlevel": "生命回复成长", "mpregen": "施法资源回复", "mpregenperlevel": "法力/能量回复成长", "crit": "暴击率", "critperlevel": "暴击率成长", "attackdamage": "攻击力", "attackdamageperlevel": "攻击力成长", "attackspeedperlevel": "攻击速度成长", "attackspeed": "攻击速度"}
+        LoLChampions_header = {"version": "版本", "id": "英雄代码", "key": "英雄序号", "name": "称号", "title": "名称", "blurb": "背景介绍", "partype": "施法资源属性", "info: attack": "伤害属性得分", "info: defense": "强韧属性得分", "info: magic": "法术属性得分", "info: difficulty": "使用难度系数", "tag: Assassin": "角色定位：刺客", "tag: Fighter": "角色定位：战士", "tag: Mage": "角色定位：法师", "tag: Marksman": "角色定位：射手", "tag: Support": "角色定位：辅助", "tag: Tank": "角色定位：坦克", "hp": "基础生命值", "hpperlevel": "生命值成长", "mp": "基础法力/能量值", "mpperlevel": "法力/能量值成长", "movespeed": "移动速度", "armor": "护甲", "armorperlevel": "护甲成长", "spellblock": "魔法抗性", "spellblockperlevel": "魔法抗性成长", "attackrange": "攻击距离", "hpregen": "生命回复", "hpregenperlevel": "生命回复成长", "mpregen": "施法资源回复", "mpregenperlevel": "法力/能量回复成长", "crit": "暴击率", "critperlevel": "暴击率成长", "attackdamage": "攻击力", "attackdamageperlevel": "攻击力成长", "attackspeedperlevel": "攻击速度成长", "attackspeed": "攻击速度", "lvl18hp": "18级生命值", "lvl30hp": "30级生命值", "lvl18mp": "18级法力/能量值", "lvl30mp": "30级法力/能量值", "lvl18attackdamage": "18级攻击力", "lvl30attackdamage": "30级攻击力", "lvl18armor": "18级护甲", "lvl30armor": "30级护甲", "lvl18spellblock": "18级魔法抗性", "lvl30spellblock": "30级魔法抗性", "lvl18attackspeed": "18级攻击速度", "lvl30attackspeed": "30级攻击速度", "lvl18hpregen": "18级生命回复", "lvl30hpregen": "30级生命回复", "lvl18mpregen": "18级施法资源回复", "lvl30mpregen": "30级施法资源回复"}
         LoLChampions_header_keys = list(LoLChampions_header.keys())
         LoLChampions_data = {}
         for i in range(len(LoLChampions_header_keys)):
@@ -239,14 +239,19 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
                         LoLChampions_data[key].append("√")
                     else:
                         LoLChampions_data[key].append("")
-                else:
+                elif j <= 36:
                     LoLChampions_data[key].append(champion["stats"][key])
-        LoLChampions_statistics_display_order = [2, 3, 4, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 33, 34, 22, 23, 24, 25, 36, 35, 31, 32, 21, 27, 28, 29, 30, 26]
+                else:
+                    level, subkey = int(key[3:5]), key[5:]
+                    result = champion["stats"][subkey] + (level - 1) * champion["stats"][subkey + "perlevel"] * (0.01 if subkey == "attackspeed" else 1) #攻击速度成长是百分比（`attackspeedperlevel` is a percentage）
+        LoLChampions_statistics_output_order = [2, 3, 4, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 33, 34, 22, 23, 24, 25, 36, 35, 31, 32, 21, 27, 28, 29, 30, 26]
+        #LoLChampions_statistics_output_order = [2, 3, 4, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 37, 38, 19, 20, 39, 40, 33, 34, 41, 42, 22, 23, 43, 44, 24, 25, 45, 46, 36, 35, 47, 48, 31, 32, 21, 27, 28, 49, 50, 29, 30, 51, 52, 26] #带成长数值（With leveling up stats）
         LoLChampions_data_organized = {}
-        for i in LoLChampions_statistics_display_order:
+        for i in LoLChampions_statistics_output_order:
             key = LoLChampions_header_keys[i]
-            LoLChampions_data_organized[key] = [LoLChampions_header[key]] + LoLChampions_data[key]
+            LoLChampions_data_organized[key] = LoLChampions_data[key]
         LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
+        LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
         while True:
             try:
                 with pandas.ExcelWriter(path = "available-bots.xlsx", mode = "a", if_sheet_exists = "replace") as writer:
@@ -406,12 +411,13 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
                         LoLChampions_data[key].append("√")
                     else:
                         LoLChampions_data[key].append("")
-        LoLChampions_statistics_display_order = [0, 1, 3, 2, 17, 18, 19, 20, 21, 22, 11, 9, 10, 12, 13, 14, 15, 16, 4, 5, 6, 7, 8]
+        LoLChampions_statistics_output_order = [0, 1, 3, 2, 17, 18, 19, 20, 21, 22, 11, 9, 10, 12, 13, 14, 15, 16, 4, 5, 6, 7, 8]
         LoLChampions_data_organized = {}
-        for i in LoLChampions_statistics_display_order:
+        for i in LoLChampions_statistics_output_order:
             key = LoLChampions_header_keys[i]
-            LoLChampions_data_organized[key] = [LoLChampions_header[key]] + LoLChampions_data[key]
+            LoLChampions_data_organized[key] = LoLChampions_data[key]
         LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
+        LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
         while True:
             try:
                 with pandas.ExcelWriter(path = "available-bots.xlsx", mode = "a", if_sheet_exists = "replace") as writer:
@@ -572,20 +578,20 @@ async def count_all_champions(connection):
                     LoLChampions_data[key].append(True)
                 else:
                     LoLChampions_data[key].append(False)
-    LoLChampions_statistics_display_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
+    LoLChampions_statistics_output_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
     LoLChampions_data_organized = {}
-    for i in LoLChampions_statistics_display_order:
+    for i in LoLChampions_statistics_output_order:
         key = LoLChampions_header_keys[i]
-        LoLChampions_data_organized[key] = [LoLChampions_header[key]] + LoLChampions_data[key]
+        LoLChampions_data_organized[key] = LoLChampions_data[key]
     LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
     print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
-    for i in range(LoLChampions_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-        for j in range(LoLChampions_df.shape[1]):
-            if str(LoLChampions_df.iat[i, j]) == "True":
-                LoLChampions_df.iat[i, j] = "√"
-            elif str(LoLChampions_df.iat[i, j]) == "False":
-                LoLChampions_df.iat[i, j] = ""
+    for column in LoLChampions_df:
+        if LoLChampions_df[column].dtype == "bool":
+            LoLChampions_df[column] = LoLChampions_df[column].astype(str)
+            for i in range(len(LoLChampions_df)):
+                LoLChampions_df.loc[i, column] = "√" if LoLChampions_df[column][i] == "True" else ""
     print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+    LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
     while True:
         try:
             with pandas.ExcelWriter(path = "available-bots.xlsx", mode = "a", if_sheet_exists = "replace") as writer:
@@ -613,18 +619,17 @@ async def count_all_bots(connection):
     print("championId\tname\ttitle\talias")
     count = 0
     for champion in LoLChampion:
-        bot = {"championId": champion["id"], "botDifficulty": "RSINTERMEDIATE", "teamId": "200", "position": "TOP"}
-        await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)
-        time.sleep(0.1) #由于服务器响应速度原因，从添加电脑到房间信息更新，需要0.1秒的缓冲时间（0.1s buffer time is needed between adding a bot and updating the lobby information due to the server response speed）
+        botUuid = str(uuid.uuid4())
+        bot = {"championId": champion["id"], "botDifficulty": "RSINTERMEDIATE", "teamId": "200", "position": "TOP", "botUuid": botUuid}
+        response = await (await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)).json()
+        time.sleep(0.2) #由于服务器响应速度原因，从添加电脑到房间信息更新，需要0.2秒的缓冲时间（0.2s buffer time is needed between adding a bot and updating the lobby information due to the server response speed）
         lobby = await(await connection.request("GET", "/lol-lobby/v2/lobby")).json()
         if len(lobby["gameConfig"]["customTeam200"]) == 1 and lobby["gameConfig"]["customTeam200"][0]["botChampionId"] == champion["id"]:
             LoLChampions[champion["id"]] = champion
             print("%d\t%s\t%s\t%s" %(champion["id"], champion["name"], champion["title"], champion["alias"]))
             if champion["id"] != -1: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
                 count += 1
-        #for player in lobby["gameConfig"]["customTeam200"]:
-            #await connection.request("DELETE", "/lol-lobby/v1/lobby/custom/bots/%s" %player["botId"])
-        await create_custom_lobby(connection)
+            response = await (await connection.request("DELETE", "/lol-lobby/v1/lobby/custom/bots/%s/%s/200" %(lobby["gameConfig"]["customTeam200"][0]["botId"], botUuid))).json()
     print("\n统计完毕，共%d名英雄。\nCount finished! There're %d champions in total." %(count, count))
     #下面按照程序需求对数据资源进行一定的整理（The following code sort out the data resource according to the program's need）
     print("正在整理数据……\nSorting out the data ...")
@@ -683,20 +688,20 @@ async def count_all_bots(connection):
                     LoLChampions_data[key].append(True)
                 else:
                     LoLChampions_data[key].append(False)
-    LoLChampions_statistics_display_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
+    LoLChampions_statistics_output_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
     LoLChampions_data_organized = {}
-    for i in LoLChampions_statistics_display_order:
+    for i in LoLChampions_statistics_output_order:
         key = LoLChampions_header_keys[i]
-        LoLChampions_data_organized[key] = [LoLChampions_header[key]] + LoLChampions_data[key]
+        LoLChampions_data_organized[key] = LoLChampions_data[key]
     LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
     print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
-    for i in range(LoLChampions_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-        for j in range(LoLChampions_df.shape[1]):
-            if str(LoLChampions_df.iat[i, j]) == "True":
-                LoLChampions_df.iat[i, j] = "√"
-            elif str(LoLChampions_df.iat[i, j]) == "False":
-                LoLChampions_df.iat[i, j] = ""
+    for column in LoLChampions_df:
+        if LoLChampions_df[column].dtype == "bool":
+            LoLChampions_df[column] = LoLChampions_df[column].astype(str)
+            for i in range(len(LoLChampions_df)):
+                LoLChampions_df.loc[i, column] = "√" if LoLChampions_df[column][i] == "True" else ""
     print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+    LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
     while True:
         try:
             with pandas.ExcelWriter(path = "available-bots.xlsx", mode = "a", if_sheet_exists = "replace") as writer:
@@ -795,20 +800,20 @@ async def count_available_bots(connection):
                     LoLChampions_data[key].append(True)
                 else:
                     LoLChampions_data[key].append(False)
-    LoLChampions_statistics_display_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
+    LoLChampions_statistics_output_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
     LoLChampions_data_organized = {}
-    for i in LoLChampions_statistics_display_order:
+    for i in LoLChampions_statistics_output_order:
         key = LoLChampions_header_keys[i]
-        LoLChampions_data_organized[key] = [LoLChampions_header[key]] + LoLChampions_data[key]
+        LoLChampions_data_organized[key] = LoLChampions_data[key]
     LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
     print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
-    for i in range(LoLChampions_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-        for j in range(LoLChampions_df.shape[1]):
-            if str(LoLChampions_df.iat[i, j]) == "True":
-                LoLChampions_df.iat[i, j] = "√"
-            elif str(LoLChampions_df.iat[i, j]) == "False":
-                LoLChampions_df.iat[i, j] = ""
+    for column in LoLChampions_df:
+        if LoLChampions_df[column].dtype == "bool":
+            LoLChampions_df[column] = LoLChampions_df[column].astype(str)
+            for i in range(len(LoLChampions_df)):
+                LoLChampions_df.loc[i, column] = "√" if LoLChampions_df[column][i] == "True" else ""
     print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+    LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
     while True:
         try:
             with pandas.ExcelWriter(path = "available-bots.xlsx", mode = "a", if_sheet_exists = "replace") as writer:

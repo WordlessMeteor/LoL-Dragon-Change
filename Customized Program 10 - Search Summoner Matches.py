@@ -1,5 +1,5 @@
 from lcu_driver import Connector
-import os, requests, time, pyperclip
+import json, os, requests, time, pyperclip
 from urllib.parse import quote, unquote
 
 #=============================================================================
@@ -175,9 +175,11 @@ def get_info_name(info: dict, mode = 1) -> str:
     return name
 
 async def search_summoner_online(connection):
+    platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
+    platformId = platform_config["LoginDataPacket"]["platformId"]
     platform_TENCENT = {"BGP1": {"zh_CN": "全网通区 男爵领域", "en_US": "Baron Zone"}, "BGP2": {"zh_CN": "峡谷之巅", "en_US": "Super Zone"}, "EDU1": {"zh_CN": "教育网专区", "en_US": "CRENET Server"}, "HN1": {"zh_CN": "电信一区 艾欧尼亚", "en_US": "Ionia"}, "HN2": {"zh_CN": "电信二区 祖安", "en_US": "Zaun"}, "HN3": {"zh_CN": "电信三区 诺克萨斯", "en_US": "Noxus 1"}, "HN4": {"zh_CN": "电信四区 班德尔城", "en_US": "Bandle City"}, "HN4_NEW": {"zh_CN": "电信四区 班德尔城", "en_US": "Bandle City"}, "HN5": {"zh_CN": "电信五区 皮尔特沃夫", "en_US": "Piltover"}, "HN6": {"zh_CN": "电信六区 战争学院", "en_US": "the Institute of War"}, "HN7": {"zh_CN": "电信七区 巨神峰", "en_US": "Mount Targon"}, "HN8": {"zh_CN": "电信八区 雷瑟守备", "en_US": "Noxus 2"}, "HN9": {"zh_CN": "电信九区 裁决之地", "en_US": "the Proving Grounds"}, "HN10": {"zh_CN": "电信十区 黑色玫瑰", "en_US": "the Black Rose"}, "HN11": {"zh_CN": "电信十一区 暗影岛", "en_US": "Shadow Isles"}, "HN12": {"zh_CN": "电信十二区 钢铁烈阳", "en_US": "the Iron Solari"}, "HN13": {"zh_CN": "电信十三区 水晶之痕", "en_US": "Crystal Scar"}, "HN14": {"zh_CN": "电信十四区 均衡教派", "en_US": "the Kinkou Order"}, "HN15": {"zh_CN": "电信十五区 影流", "en_US": "the Shadow Order"}, "HN16": {"zh_CN": "电信十六区 守望之海", "en_US": "Guardian's Sea"}, "HN17": {"zh_CN": "电信十七区 征服之海", "en_US": "Conqueror's Sea"}, "HN18": {"zh_CN": "电信十八区 卡拉曼达", "en_US": "Kalamanda"}, "HN19": {"zh_CN": "电信十九区 皮城警备", "en_US": "Piltover Wardens"}, "PBE": {"zh_CN": "体验服 试炼之地", "en_US": "Chinese PBE"}, "WT1": {"zh_CN": "网通一区 比尔吉沃特", "en_US": "Bilgewater"}, "WT1_NEW": {"zh_CN": "网通一区 比尔吉沃特", "en_US": "Bilgewater"}, "WT2": {"zh_CN": "网通二区 德玛西亚", "en_US": "Demacia"}, "WT2_NEW": {"zh_CN": "网通二区 德玛西亚", "en_US": "Demacia"}, "WT3": {"zh_CN": "网通三区 弗雷尔卓德", "en_US": "Freljord"}, "WT3_NEW": {"zh_CN": "网通三区 弗雷尔卓德", "en_US": "Freljord"}, "WT4": {"zh_CN": "网通四区 无畏先锋", "en_US": "House Crownguard"}, "WT4_NEW": {"zh_CN": "网通四区 无畏先锋", "en_US": "House Crownguard"}, "WT5": {"zh_CN": "网通五区 恕瑞玛", "en_US": "Shurima"}, "WT6": {"zh_CN": "网通六区 扭曲丛林", "en_US": "Twisted Treeline"}, "WT7": {"zh_CN": "网通七区 巨龙之巢", "en_US": "the Dragon Camp"}, "FORCES": {"zh_CN": "比赛服 艾欧尼亚", "en_US": "Tournament - Ionia"}, "NJ100": {"zh_CN": "联盟一区", "en_US": ""}, "GZ100": {"zh_CN": "联盟二区", "en_US": ""}, "CQ100": {"zh_CN": "联盟三区", "en_US": ""}, "TJ100": {"zh_CN": "联盟四区", "en_US": ""}, "TJ101": {"zh_CN": "联盟五区", "en_US": ""}}
-    platform_RIOT = {"BR": {"zh_CN": "巴西服", "en_US": "Brazil"}, "EUNE": {"zh_CN": "北欧和东欧服", "en_US": "Europe Nordic & East"}, "EUW": {"zh_CN": "西欧服", "en_US": "Europe West"}, "LAN": {"zh_CN": "北拉美服", "en_US": "Latin America North"}, "LAS": {"zh_CN": "南拉美服", "en_US": "Latin America South"}, "NA": {"zh_CN": "北美服", "en_US": "North America"}, "OCE": {"zh_CN": "大洋洲服", "en_US": "Oceania"}, "RU": {"zh_CN": "俄罗斯服", "en_US": "Russia"}, "TR": {"zh_CN": "土耳其服", "en_US": "Turkey"}, "ME1": {"zh_CN": "中东服", "en_US": "Middle East"}, "JP": {"zh_CN": "日服", "en_US": "Japan"}, "KR": {"zh_CN": "韩服", "en_US": "Republic of Korea"}, "PBE": {"zh_CN": "测试服", "en_US": "Public Beta Environment"}}
-    platform_GARENA = {"PH": {"zh_CN": "菲律宾服", "en_US": "Philippines"}, "SG": {"zh_CN": "新加坡服", "en_US": "Singapore, Malaysia and Indonesia"}, "TW": {"zh_CN": "台服", "en_US": "Taiwan, Hong Kong and Macau"}, "VN": {"zh_CN": "越南服", "en_US": "Vietnam"}, "TH": {"zh_CN": "泰服", "en_US": "Thailand"}}
+    platform_RIOT = {"ME1": {"zh_CN": "中东服", "en_US": "Middle East"}, "BR1": {"zh_CN": "巴西服", "en_US": "Brazil"}, "EUN1": {"zh_CN": "北欧和东欧服", "en_US": "Europe Nordic & East"}, "EUW1": {"zh_CN": "西欧服", "en_US": "Europe West"}, "JP1": {"zh_CN": "日服", "en_US": "Japan"}, "KR": {"zh_CN": "韩服", "en_US": "Republic of Korea"}, "LA1": {"zh_CN": "北拉美服", "en_US": "Latin America North"}, "LA2": {"zh_CN": "南拉美服", "en_US": "Latin America South"}, "NA1": {"zh_CN": "北美服", "en_US": "North America"}, "OC1": {"zh_CN": "大洋洲服", "en_US": "Oceania"}, "TR1": {"zh_CN": "土耳其服", "en_US": "Turkey"}, "RU": {"zh_CN": "俄罗斯服", "en_US": "Russia"}, "PH2": {"zh_CN": "菲律宾服", "en_US": "Philippines"}, "SG2": {"zh_CN": "新加坡服", "en_US": "Singapore"}, "TH2": {"zh_CN": "泰服", "en_US": "Thailand"}, "TW2": {"zh_CN": "台服", "en_US": "Taiwan, Hong Kong and Macau"}, "VN2": {"zh_CN": "越南服", "en_US": "Vietnam"}, "PBE1": {"zh_CN": "测试服", "en_US": "Public Beta Environment"}}
+    platform_GARENA = {"PH1": {"zh_CN": "菲律宾服", "en_US": "Philippines"}, "SG1": {"zh_CN": "新加坡服", "en_US": "Singapore, Malaysia and Indonesia"}, "TW1": {"zh_CN": "台服", "en_US": "Taiwan, Hong Kong and Macau"}, "VN1": {"zh_CN": "越南服", "en_US": "Vietnam"}, "TH1": {"zh_CN": "泰服", "en_US": "Thailand"}}
     current_info = await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json()
     while True:
         print('请输入您想要查询的召唤师名称。输入“0”以退出。\nPlease enter the name of the summoner you want to look up. Submit "0" to exit.')
@@ -211,14 +213,26 @@ async def search_summoner_online(connection):
                         pass
                 region = client_info["--region"]
                 if region == "TENCENT":
-                    platform = platform_TENCENT[client_info["--rso_platform_id"]]
-                    folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[client_info["--rso_platform_id"]]["zh_CN"] + "（" + platform_TENCENT[client_info["--rso_platform_id"]]["en_US"] + "）" + "\\" + get_info_name(info_body, 2)
+                    platform = platform_TENCENT[platformId]
+                    platform_folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[platformId]["zh_CN"] + "（" + platform_TENCENT[platformId]["en_US"] + "）"
+                    folder = platform_folder + "\\" + get_info_name(info_body, 2)
                 elif region == "GARENA":
-                    platform = platform_GARENA[region]
-                    folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[region]["zh_CN"] + "（" + platform_GARENA[region]["en_US"] + "）" + "\\" + get_info_name(info_body, 2)
+                    platform = platform_GARENA[platformId]
+                    platform_folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[platformId]["zh_CN"] + "（" + platform_GARENA[platformId]["en_US"] + "）"
+                    folder = platform_folder + "\\" + get_info_name(info_body, 2)
                 else:
-                    platform = (platform_RIOT | platform_GARENA)[region]
-                    folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[region]["zh_CN"] + "（" + (platform_RIOT | platform_GARENA)[region]["en_US"] + "）" + "\\" + get_info_name(info_body, 3)
+                    platform = (platform_RIOT | platform_GARENA)[platformId]
+                    platform_folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[platformId]["zh_CN"] + "（" + (platform_RIOT | platform_GARENA)[platformId]["en_US"]
+                    folder = platform_folder + "）" + "\\" + get_info_name(info_body, 3)
+                platform_config_filepath = platform_folder + "\\" + "platform_config_namespaces.json"
+                while True:
+                    try:
+                        with open(platform_config_filepath, "w", encoding = "utf-8") as fp:
+                            json.dump(platform_config, fp, indent = 4, ensure_ascii = False)
+                    except FileNotFoundError: #这里需要注意是否具有创建文件夹的权限。下同（Pay attention to the authority to create the folder. So are the following）
+                        os.makedirs(os.path.dirname(platform_config_filepath), exist_ok = True)
+                    else:
+                        break
                 message = "正在【在线】查询%s大区召唤师%s（玩家通用唯一识别码：%s）的对局……\n[Online] searching for matches of the summoner %s (puuid: %s) on %s server..." %(platform["zh_CN"], displayName, puuid, displayName, puuid, platform["en_US"]) #这里考虑到当程序异常中断时，再次运行该程序，文件中新行会紧跟上次运行的最后一行，不容易区分。所以在字符串最前面加了一个换行符。但是这样的话，在创建文件时，第一行也会变成空行。用户如果觉得不顺眼，可以直接双击日志文件去掉第一行，这样看着舒服一些（Considering when the program 
                 message_save(message, folder, displayName, "【参数设置】")
                 #从输入获取要查询的对局序号范围（Get matchID range from input）

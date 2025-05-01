@@ -364,7 +364,20 @@ The following explanations only apply to the current branch. For other details (
 			- 管理小队语音
 			- 管理黑名单
 				- 黑名单操作中植入了自定义无限火力专用模式，用于群成员管理。该模式作为隐藏功能。
-	- `清除临时文件.bat`用于**清除自定义脚本产生的临时文件**。目前可以清除自定义脚本03、05、10和11产生的临时文件。
+	- 自定义脚本17用于**整理所有游戏类型信息**。主要用于自定义房间创建请求的参数设置。
+	- 自定义脚本18用于**梳理所有任务信息**。
+		- 你可以用这个脚本来查看<ins>美测服点券任务</ins>。
+	- 自定义脚本19用于**模拟客户端中符文配置和符文页操作**。
+		- 目前该脚本提供以下功能：
+			- 查看所有符文信息
+			- 查看不同英雄、分路和地图的推荐符文
+			- 符文页管理
+				- 导出所有符文页
+				- 单符文页查看、编辑和导出
+				- 切换活动符文页
+				- 排序符文页
+				- 删除符文页
+	- `清除临时文件.bat`用于**清除自定义脚本产生的临时文件**。目前可以清除自定义脚本03、05、10、11、17和19产生的临时文件。
 	- `召唤师信息文件格式转换.bat`用于**将自定义脚本5产生的数据文档在txt和json格式之间重命名**。
 		- 大量数据文档的重命名可能导致文件资源管理器卡顿，因此请谨慎使用本脚本。
 		- 由于本脚本涉及中文字符，因此**请先在命令行中使用`chcp 65001`以切换代码活动页**，再运行本脚本。
@@ -372,7 +385,7 @@ The following explanations only apply to the current branch. For other details (
 			- 尝试在Everything的搜索框中输入`"{文件夹路径}" .txt`以查看某个文件夹下的txt文件列表，在窗口左下角即可看到符合条件的文件数量。
 				- “{文件夹地址}”示例：`C:\Users\19250\Desktop\英雄联盟自定义房间创建\召唤师信息（Summoner Information）`。
 	- 为方便**查阅英雄联盟中的官方术语**，在主目录中添加了一个翻译库脚本`trans.py`。
-		- 该脚本每次运行可以选择汇总和保存一种语言的翻译数据资源。多次运行可以形成多种语言的翻译数据资源。
+		- 该脚本每次运行可以选择汇总和保存一种语言的翻译数据资源，并允许同时下载所有语言的翻译数据资源。
 		- 由于该脚本仅用于校正术语，其涉及的数据资源仅用于开发程序，而不适用于发行版。因此建议用户在存储库，而不是由发行版压缩包解压得到的文件夹中运行该脚本。
 	- 为方便理解**自定义脚本中一些大型数据框的结构**，在主目录中添加了一个工作簿`Customized Program Main Dataframe Structure.xlsx`，以解释其生成过程。
 		- 下面对自定义脚本11和聊天脚本中的`recent_LoLPlayers_df`的结构进行说明，以便说明一些设定。一些设定在后续解释中不再赘述。
@@ -392,7 +405,7 @@ The following explanations only apply to the current branch. For other details (
 				- 黄色代表`Key`可以直接作为`LoLGame_info["participants"][participantId]["timeline"]`的索引。
 				- 粉红色代表`Key`不作为LCU API中任何变量的索引。
 					- 目前粉红色区域只包含`ally?`，表示查询的玩家是否是主玩家的队友。在导出的工作表中，打勾表示该玩家是主玩家的队友。
-			- 一些键被标记为白色。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`ornament`不曾出现在对局信息的json对象中，但是实际上来自`LoLGame_info["participants"][participantId]["stats"]`，对应的是索引`"item6"`。
+			- 一些键被标记为无填充。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`ornament`不曾出现在对局信息的json对象中，但是实际上来自`LoLGame_info["participants"][participantId]["stats"]`，对应的是索引`"item6"`。
 			- <b>要获取各个呈现顺序列表，只需要将表格以`OutputOrder`或`DisplayOrder`作升序排列，然后复制`Index`列的单元格内容即可。</b>
 		- 下面对查英雄脚本中的`LoLChampions_df`的结构进行说明。
 			- 工作表`04 - LoLChampions_header (LCU)`的主要数据区域设置了6种颜色。
@@ -447,6 +460,10 @@ The following explanations only apply to the current branch. For other details (
 				- 橙色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]`的索引。
 				- 深绿色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]["stats"]`的索引。
 				- 紫色代表`Key`可以直接作为`LoLHistory["games"]["games"]["participants"][0]["timeline"]`的索引。
+		- 下面对查战绩脚本中的`LoLGame_leaderboard_df`和`TFTGame_leaderboard_df`的结构进行说明。
+			- 工作表`05 - LoLGame_leaderboard_header`和`05 - TFTGame_leaderboard_header`的主要数据区域设置了2种颜色。
+				- 蓝色代表`Key`可以作为`participantInfo`的索引。
+				- 无填充代表`Key`可以作为`participant_leaderboard`的索引。
 		- 下面对查战绩脚本中的`LoLGame_info_df`的结构进行说明。
 			- 工作表`05 - LoLGame_info_header`的主要数据区域设置了6种颜色。
 				- 浅蓝色代表`Key`可以作为`LoLGame_info["participantIdentities"][participantId]`的索引。
@@ -462,9 +479,9 @@ The following explanations only apply to the current branch. For other details (
 				- 绿色代表`Key`来自`LoLGame_info`的一些信息。
 				- 橙色代表`Key`可以作为`frames[frameId]["participantFrames"][participantId]`的索引。
 		- 下面对查战绩脚本中的`LoLGame_event_df`的结构进行说明。
-			- 工作表`05 - LoLGame_event_header`的主要数据区域设置为白色。
+			- 工作表`05 - LoLGame_event_header`的主要数据区域设置为无填充。
 				- 暗红色字代表`Key`可以直接作为`events[timestamp]`的索引。
-				- 一些键被标记为白色。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`item`不曾出现在对局时间轴的json对象中，但是实际上来自`LoLGame_timeline["frames"]["events"][eventId]`，对应的是索引`"itemId"`。
+				- 一些键被标记为无填充。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`item`不曾出现在对局时间轴的json对象中，但是实际上来自`LoLGame_timeline["frames"]["events"][eventId]`，对应的是索引`"itemId"`。
 		- 下面对查战绩脚本中的`TFTHistory_df`的结构进行说明。
 			- 工作表`05 - TFTHistory_header`的主要数据区域设置了5种颜色。
 				- 无填充代表`Key`不作为LCU API中任何变量的索引。
@@ -475,10 +492,19 @@ The following explanations only apply to the current branch. For other details (
 				- 深蓝色代表`Key`来自`TFTHistory[gameIndex]["participants"][participantId]["units"][unitIndex]`的索引。
 					- 注意到其中不包含任何可直接作为索引的键。
 			- 相比之下，工作表`05 - TFTGame_info_header`和工作表`05 - TFTHistory_header`只差了前面9行内容。
-		- 下面对商品藏品信息整理脚本中的`catalog_header`的结构进行说明。
-			- 工作表`07 - catalog_header`的主要数据区域设置为白色。`item`是`catalogList`中的任意一个元素。
-				- `Key`可以直接作为`item`的索引。
-		- 下面对商品藏品信息整理脚本中的`collection_header`的结构进行说明。
+		- 下面对商品藏品信息整理脚本中的`catalog_df`的结构进行说明。
+			- 工作表`07 - catalog_header`的主要数据区域设置了3种颜色。`item`是`catalogList`中的任意一个元素。
+				- 无填充代表`Key`可以直接作为`item`的索引。
+				- 蓝色代表`Key`来自`item["prices"][priceId]`的索引。
+				- 绿色代表`Key`来自`item["prices"][priceId]["sale"]`的索引。
+		- 下面对商品藏品信息整理脚本中的`store_df`的结构进行说明。
+			- 工作表`07 - store_header`的主要数据区域设置了5种颜色。`item`是`store`中的任意一个元素。
+				- 无填充代表`Key`可以直接作为`item`的索引。
+				- 蓝色代表`Key`可以直接作为`item["localizations"][locale]`的索引。
+				- 绿色代表`Key`的后半部分可以作为`item["prices"][priceId]`的索引。
+				- 黄色代表`Key`的后半部分可以直接作为`item["sale"]`的索引。
+				- 紫色代表`Key`的后半部分来自`item["sales"]["prices"][priceId]`的索引。
+		- 下面对商品藏品信息整理脚本中的`collection_df`的结构进行说明。
 			- 工作表`07 - collection_header`的主要数据区域设置了2种颜色。`item`是`collection`中的任意一个元素。
 				- 无填充代表`Key`可以直接作为`item`的索引。
 				- 蓝色代表`Key`作为`item["payload"]`的索引。
@@ -487,7 +513,6 @@ The following explanations only apply to the current branch. For other details (
 				- 绿色代表`Key`可以直接作为`queues[id]`的索引。
 				- 橙色代表`Key`可以作为`queues[id]["gameTypeConfig"]`的索引。
 				- 蓝色代表`Key`可以作为`queues[id]["queueRewards"]`的索引。
-				- 白色代表`Key`曾经存在，但后来被删除了。
 		- 下面对自定义脚本11和聊天脚本中的`recent_TFTPlayers_df`的结构进行说明。
 			- 工作表`11 - TFTHistory_header`和`16 - recent_TFTPlayers_header`的主要数据区域设置了5种颜色。
 				- 无填充代表`Key`不作为LCU API中任何变量的索引。
@@ -530,21 +555,21 @@ The following explanations only apply to the current branch. For other details (
 				- 橙色代表`Key`的后半部分可以作为`eval(friend["lol"]["pty"])`的索引。
 				- 绿色代表`Key`的后半部分可以作为`eval(friend["lol"]["regalia"])`的索引。
 		- 下面对聊天脚本中的`friend_hovercard_df_simple`的结构进行说明。
-			- 工作表`16 - friend_hovercard_header_si`（`16 - friend_hovercard_header_simple`）的主要数据区域设置为白色。`friend`是`friends`中的任意一个元素。
+			- 工作表`16 - friend_hovercard_header_si`（`16 - friend_hovercard_header_simple`）的主要数据区域设置为无填充。`friend`是`friends`中的任意一个元素。
 				- `Key`可以直接作为`friend`的索引。
 		- 下面对聊天脚本中的`friend_groups_df`的结构进行说明。
-			- 工作表`16 - friend_groups_header`的主要数据区域设置为白色。`group`是`friend_groups`中的任意一个元素。
+			- 工作表`16 - friend_groups_header`的主要数据区域设置为无填充。`group`是`friend_groups`中的任意一个元素。
 				- `Key`可以直接作为`group`的索引。
 		- 下面对聊天脚本中的`conversation_df`的结构进行说明。
-			- 工作表`16 - conversation_header`的主要数据区域设置为白色。`conversation`是`conversations`中的任意一个元素。
+			- 工作表`16 - conversation_header`的主要数据区域设置为无填充。`conversation`是`conversations`中的任意一个元素。
 				- `Key`可以直接作为`conversation`的索引。
 		- 下面对聊天脚本中的`message_df`的结构进行说明。
-			- 工作表`16 - message_header`的主要数据区域设置为白色。`message`是`messages`中的任意一个元素。
+			- 工作表`16 - message_header`的主要数据区域设置为无填充。`message`是`messages`中的任意一个元素。
 				- `Key`可以作为`message`的索引。
 					- 9之前的键可以直接作为`message`的索引。
 					- 9及以后的键通过`get_info`函数得到。
 		- 下面对聊天脚本中的`friend_request_df`的结构进行说明。
-			- 工作表`16 - friend_request_header`的主要数据区域设置为白色。`friend_request`是`friend_requests`中的任意一个元素。
+			- 工作表`16 - friend_request_header`的主要数据区域设置为无填充。`friend_request`是`friend_requests`中的任意一个元素。
 				- `Key`可以作为`friend_request`的索引。
 					- 10之前的键可以直接作为`friend_request`的索引。
 					- 10号键的后半部分可以直接作为`summonerIcons[friend_request["icon"]]`的索引。
@@ -562,33 +587,65 @@ The following explanations only apply to the current branch. For other details (
 				- 浅绿色代表`Key`可以直接作为`invid["gameConfig"]`的索引。
 				- 橙色代表`Key`的后半部分来自`queues`的索引。
 		- 下面对聊天脚本中的`muted_player_df`的结构进行说明。
-			- 工作表`16 - player_mute_header`的主要数据区域设置为白色。`muted_player`是`muted_players`中的任意一个值。
+			- 工作表`16 - player_mute_header`的主要数据区域设置为无填充。`muted_player`是`muted_players`中的任意一个值。
 				- `Key`可以作为`muted_player`的索引。
 					- 5之前的键可以直接作为`muted_player`的索引。
 					- 5及以后的键通过`get_info`函数得到。
 		- 下面对聊天脚本中的`champSelect_team_df`的结构进行说明。
-			- 工作表`16 - champSelect_team_header`的主要数据区域设置为白色。`player`是`players`中的任意一个值。
+			- 工作表`16 - champSelect_team_header`的主要数据区域设置为无填充。`player`是`players`中的任意一个值。
 				- `Key`可以作为`player`的索引。
 					- 13之前的键可以直接作为`player`的索引。
 					- 14和15号键通过`get_info`函数得到。
 					- 16号键来自`team_colors`。
 					- 17及以后的键的后半部分可以作为键的前半部分所指数据资源的索引。
+		- 下面对聊天脚本中的`captureDevices_df`的结构进行说明。
+			- 工作表`16 - captureDevices_header`的主要数据区域设置为无填充。`device`是`captureDevices`中的任意一个值。
+				- `Key`可以直接作为`device`的索引。
 		- 下面对聊天脚本中的`voiceSettings_df`的结构进行说明。
-			- 工作表`16 - voiceSettings_header`的主要数据区域设置为白色。
+			- 工作表`16 - voiceSettings_header`的主要数据区域设置为无填充。
 				- `Key`可以作为`device`的索引。
 					- 12之前的键可以直接作为`device`的索引。
 					- 12号键通过`captureDevices`得到。
 			- 该数据框沿用了旧版数据框创建方式。见查战绩脚本的`info_data`定义。
 		- 下面对聊天脚本中的`participant_record_df`的结构进行说明。
-			- 工作表`16 - participant_record_header`的主要数据区域设置为白色。`participant`是`participant_records`中的任意一个元素。
+			- 工作表`16 - participant_record_header`的主要数据区域设置为无填充。`participant`是`participant_records`中的任意一个元素。
 				- `Key`可以作为`participant`的索引。
 					- 8之前的键可以直接作为`participant`的索引。
 					- 9和10号键通过`get_info`函数得到。
 		- 下面对聊天脚本中的`blockList_df`的结构进行说明。
-			- 工作表`16 - blockList_header`的主要数据区域设置为白色。`player`是`blockList`中的任意一个元素。
+			- 工作表`16 - blockList_header`的主要数据区域设置为无填充。`player`是`blockList`中的任意一个元素。
 				- `Key`可以作为`player`的索引。
 					- 8之前的键可以直接作为`player`的索引。
 					- 8号键的后半部分可以作为键的前半部分所指数据资源的索引。
+		- 下面对游戏类型检查脚本中的`gametype_config_df`的结构进行说明。
+			- 工作表`17 - gametype_config_header`的主要数据区域设置为无填充。`config`是`gametype_config`中的任意一个元素。
+				`Key`可以直接作为`config`的索引。
+		- 下面对任务脚本中的`mission_df`的结构进行说明。
+			- 工作表`18 - mission_header`的主要数据区域设置了6种颜色。`mission`是`missions`中的任意一个元素。
+				- 无填充代表`Key`可以作为`mission`的索引。
+				- 蓝色代表`Key`的后半部分可以直接作为`mission["display"]`的索引。
+				- 浅绿色代表`Key`来自`mission["metadata"]`的索引。
+				- 深绿色代表`Key`的后半部分可以直接作为`mission["rewardStrategy"]`的索引。
+				- 橙色代表`Key`来自`mission["objective"][objectiveId]`的索引。
+				- 紫色代表`Key`的后半部分来自`objective`的索引。
+				- 蓝色、浅绿色、深绿色和橙色部分采用同一套代码框架。
+		- 下面对任务脚本中的`objective_group_df`的结构进行说明。
+			- 工作表`18 - objective_group_header`的主要数据区域设置了2种颜色。`objective`是`objectives`中的任意一个元素。`objectiveGroup`是`objective["objectives"]`中的任意一个元素。
+				- 无填充代表`Key`可以作为`objective`的索引。
+				- 蓝色代表`Key`的后半部分可以作为`objectiveGroup`的索引。
+		- 下面对符文脚本中的`perk_df`的结构进行说明。
+			- 工作表`19 - perk_header`的主要数据区域设置为无填充。`perk`是`perks`中的任意一个元素。
+				- `Key`可以作为`perk`的索引。
+		- 下面对符文脚本中的`recommendedPage_df`的结构进行说明。
+			- 工作表`19 - recommendedPage_header`的主要数据区域设置了3种颜色。`page`是`recommendedPages`中的任意一个元素。
+				- 无填充代表`Key`可以作为`page`的索引。
+				- 蓝色代表`Key`的后半部分可以直接作为`page["keystyone"]`的索引。
+				- 绿色代表`Key`来自`page["perks"][perkId]`的索引。
+		- 下面对符文脚本中的`perkPage_df`的结构进行说明。
+			- 工作表`19 - perkPage_header`的主要数据区域设置了3种颜色。`page`是`perkPages`中的任意一个元素。
+				- 无填充代表`Key`可以作为`page`的索引。
+				- 蓝色代表`Key`的后半部分可以直接作为`page["pageKeystone"]`的索引。
+				- 绿色代表`Key`来自`page["uiPerks"][pageId]`的索引。
 6. 一般情况下，本程序集生成的包含json数据的文本文档都是带缩进的。如果需要根据这些文件复现python运行环境中的字典变量，只需要向json库中的load函数传入一个由open函数创建的文件指针即可。如`fp = open("{文件名}.txt", "r", encoding = "utf-8")`和`d = json.load(fp)`。
 	- 若要在运行环境中将dumps函数生成的带缩进的json字符串转换成不带缩进的json字符串，只需要将dumps函数生成的字符串传入loads函数即可。如`formatted = json.dumps({字典变量}, indent = 8, ensure_ascii = False)`和`d = json.loads(formatted)`。
 # 后记
@@ -959,8 +1016,21 @@ For details about customized programs that is beyond the scope of creating a cus
 			- Spectate a game
 			- Manage team voice
 			- Manage block list
-				- Custom URF special mode is planted into this feature for manaegement of group members. This mode is hidden
-	- `清除临时文件.bat` is used to **remove temporary files generated by customized programs**. At present it can delete temporary files from customized programs 03, 05, 10 and 11.
+				- Custom URF special mode is planted into this feature for manaegement of group members. This mode is hidden.
+	- Customized Program 17 is used to **sort out all game type config**. It's mainly used to configure the parameters of custom lobby creation request.
+	- Customized Program 18 is used to **sort out all missions**.
+		- You may check the <ins>PBE RP Bonus</ins> mission with this program.
+	- Customized Program 19 is used to **simulate perk configuration and perk page operations in the League Client**.
+		- Currently, this program provides the following functions:
+			- Check all perk information
+			- Check the recommended perk information of different champions, positions and maps
+			- Manage perk pages
+				- Export all pages
+				- Check, edit and export single page
+				- Toggle active page
+				- Sort pages
+				- Delete pages
+	- `清除临时文件.bat` is used to **remove temporary files generated by customized programs**. At present it can delete temporary files from customized programs 03, 05, 10, 11, 17 and 19.
 	- `召唤师信息文件格式转换.bat` is used to **rename the format of data files generated by Customized Program 05 into ".txt" or ".json"**.
 		- Renaming a number of data files may results in the slow performance of Explorer, so please think twice to use this program.
 		- Since the scripts of this program contain Chinese characters, **please run `chcp 65001` in Command Prompt** before running this program.
@@ -968,7 +1038,7 @@ For details about customized programs that is beyond the scope of creating a cus
 			- Try typing `"{folderPath}" .txt` in the search bar of Everything App to check the txt file list of a folder. You should see the number of the txt files at the bottom-left corner of the Everything window.
 				- An example of {folderPath}: `C:\Users\19250\Desktop\英雄联盟自定义房间创建\召唤师信息（Summoner Information）`.
 	- To make it convenient for users to **look up LoL official terms**, a translation program `trans.py` is added in the home directory.
-		- Each run of this program supports summarizing and saving the translation data resources of a language. Multiple runs can gather the translation of multiple languages into one file.
+		- Each run of this program supports summarizing and saving the translation data resources of a language. It also allows downloading data resources in all languages within one run.
 		- Since this program is only intended to correct the terms, the involved data resources are only used for program development, instead of the release. So, it's highly recommended that users run this program in the cloned repository folder, instead of the folder extracted from compressed files in Release.
 	- To let user **understand the structure of the large dataframes**, a workbook `Customized Program Main Dataframe Structure.xlsx` is added in the home directory to illustrate how the dataframes are organized.
 		- The following is the illustration on the structure of `recent_LoLPlayers_df` in Customized Programs 11 and 16, to explain some settings, which will not be repeated in the later explanation:
@@ -1042,6 +1112,10 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the light green area mean `Key` is the direct index of `LoLHistory["games"]["games"]["participantIdentities"][0]["player"]`.
 				- Data in the orange area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]`.
 				- Data in the dark green area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]["stats"]`.
+		- `LoLGame_leaderboard_df` and `TFTGame_leaderboard_df` in Customized Program 05:
+			- 2 colors are used to divide the main data area in both sheets `05 - LoLGame_leaderboard_header` and `05 - TFTGame_leaderboard_header`.
+				- Data in the blue area mean `Key` is the index of `participantInfo`.
+				- Data not filled with any color mean `Key` is the index of `participant_leaderboard`.
 		- `LoLGame_info_df` in Customized Program 05:
 			- 6 colors are used to divide the main data area in the sheet `05 - LoLGame_info_header`.
 				- Data in the light blue area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]`.
@@ -1057,7 +1131,7 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the green area mean `Key` comes from `LoLGame_info`.
 				- Data in the orange area mean `Key` is the index of `frames[frameId]["participantFrames"][participantId]`.
 		- `LoLGame_event_df` in Customized Program 05:
-			- The main data area in the sheet `05 - TFTHistory_header` is colored white.
+			- The main data area in the sheet `05 - TFTHistory_header` isn't filled with any color.
 				- Keys in dark red mean `Key` is the direct index of the variable `events[timestamp]`.
 				- Some keys are colored black. These keys don't belong to the indices of any variable in LCU API, but actually come from them. For example, `item` never occurs in the json object of the game information, but actually originates from `LoLGame_timeline["frames"]["events"][eventId]` and corresponds to the key `"itemId"`.
 		- `TFTHistory_df` in Customized Program 05:
@@ -1070,10 +1144,15 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the deep blue area mean `Key` is the index of `TFTHistory[gameIndex]["units"][unitIndex]`.
 					- Note that no key in this area exists to be the direct index.
 			- The only difference of the contents between the sheet `05 - TFTGame_info_header` and the sheet `05 - TFTHistory_header` is the first 9 lines.
-		- `catalog_header` in Customized Program 07:
-			- The main data area in the sheet `07 - catalog_header` is colored white. `Item` denodes any element in `catalogList`.
-				- `Key` is the direct index of the variable `item`.
-		- `collection_header` in Customized Program 07:
+		- `catalog_df` in Customized Program 07:
+			- 3 colors are used to divide the main data area in the sheet `07 - catalog_header`. `Item` denodes any element in `catalogList`.
+				- Data not filled with any color mean `Key` is the direct index of the variable `item`.
+				- Data in the blue area mean `Key` comes from the index of `item["prices"][priceId]`.
+				- Data in the green area mean `Key` comes from `item["prices"][priceId]["sale"]`.
+		- `store_df` in Customized Program 07:
+			- 5 colors are used to divide the main data area in the sheet `07 - store_header`. `item` denodes any element `store`.
+				- Data not filled with any color 
+		- `collection_df` in Customized Program 07:
 			- 2 colors are used to divide the main data area in the sheet `07 - collection_header`. `Item` denodes any element in `catalogList`.
 				- Data not filled with any color mean `Key` is the direct index of the variable `item`.
 				- Data in the blue area mean `Key` is the index of `item["payload"]`.
@@ -1082,7 +1161,6 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the blue area mean `Key` is the direct index of the variable `queues[id]`.
 				- Data in the orange area mean `Key` is the index of the variable `queues[id]["gameTypeConfig"]`.
 				- Data in the blue area mean `Key` is the index of the variable `queues[id]["queueRewards"]`.
-				- Data in the white area mean `Key` once existed but was deleted later.
 		- `recent_TFTPlayers_df` in Customized Programs 11 and 16:
 			- 5 colors are used to divide the main data area in the sheets `11 - recent_TFTPlayers_header` and `16 - recent_TFTPlayers_header`.
 				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
@@ -1125,21 +1203,21 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the orange area mean the second half of `Key` is the index of `eval(friend["lol"]["pty"])`.
 				- Data in the green area mean the second half of `Key` is the index of `eval(friend["lol"]["regalia"])`.
 		- `friend_hovercard_df_simple` in Customized Program 16:
-			- The main data area in the sheet `16 - friend_hovercard_header_si` (`16 - friend_hovercard_header_simple`) is colored white. `friend` denodes any element in `friends`.
+			- The main data area in the sheet `16 - friend_hovercard_header_si` (`16 - friend_hovercard_header_simple`) isn't filled with any color. `friend` denodes any element in `friends`.
 				- `Key` is the direct index of the variable `friend`.
 		- `friend_groups_df` in Customized Program 16:
-			- The main data area in the sheet `16 - friend_groups_header` is colored white. `group` denodes any element in `friend_groups`.
+			- The main data area in the sheet `16 - friend_groups_header` isn't filled with any color. `group` denodes any element in `friend_groups`.
 				- `Key` is the direct index of the variable `group`.
 		- `conversation_df` in Customized Program 16:
-			- The main data area in the sheet `16 - conversation_header` is colored white. `conversation` denodes any element in `conversations`.
+			- The main data area in the sheet `16 - conversation_header` isn't filled with any color. `conversation` denodes any element in `conversations`.
 				- `Key` is the direct index of the variable `conversation`.
 		- `message_df` in Customized Program 16:
-			- The main data area in the sheet `16 - message_header` is colored white. `message` denodes any element in `messages`.
+			- The main data area in the sheet `16 - message_header` isn't filled with any color. `message` denodes any element in `messages`.
 				- `Key` is the index of the variable `message`.
 					- `Key` whose index is less than 9 is the direct index of the variable `message`.
 					- The second half of `Key` whose index is greater than or equal to 9 comes from `get_info` function.
 		- `friend_request_df` in Customized Program 16:
-			- The main data area in the sheet `16 - friend_request_header` is colored white. `friend_request` denodes any element in `friend_requests`.
+			- The main data area in the sheet `16 - friend_request_header` isn't filled with any color. `friend_request` denodes any element in `friend_requests`.
 				- `Key` is the index of the variable `friend_request`.
 					- `Key` whose index is less than 10 is the direct index of the variable `friend_request`.
 					- The second half of `Key` whose index is greater than or equal to 9 is the direct index of `summonerIcons[friend_request["icon"]]`.
@@ -1157,33 +1235,65 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the light green area mean `Key` is the direct index of `invid["gameConfig"]`.
 				- Data in the orange area mean the second half of `Key` comes from `queues`.
 		- `muted_player_df` in Customized Program 16:
-			- The main data area in the sheet `16 - player_mute_header` is colored white. `muted_player` denodes any element in `muted_players`.
+			- The main data area in the sheet `16 - player_mute_header` isn't filled with any color. `muted_player` denodes any element in `muted_players`.
 				- `Key` is the index of the variable `muted_player`.
 					- `Key` whose index is less than 5 is the direct index of the variable `muted_player`.
 					- `Key` whose index is greater than or equal to 5 comes from `get_info` function.
 		- `champSelect_team_df` in Customized Program 16:
-			- The main data area in the sheet `16 - champSelect_team_header` is colored white. `player` denodes any element in `players`.
+			- The main data area in the sheet `16 - champSelect_team_header` isn't filled with any color. `player` denodes any element in `players`.
 				- `Key` is the index of the variable `player`.
 					- `Key` whose index is less than 13 is the direct index of the variable `player`.
 					- `Key` 14 and 15 come from `get_info` function.
 					- `Key` 16 comes from `team_color`.
 					- The second half of `Key` whose index is greater than or equal to 17 is the index of the data resource that first half represents.
+		- `captureDevices_df` in Customized Program 16:
+			- The main data area in the sheet `16 - captureDevices_header` isn't filled with any color. `device` denotes any value in `captureDevices`.
+				- `Key` is the direct index of the variable `device`.
 		- `voiceSettings_df` in Customized Program 16:
-			- The main data area in the sheet `16 - voiceSettings_header` is colored white.
+			- The main data area in the sheet `16 - voiceSettings_header` isn't filled with any color.
 				- `Key` is the index of the variable `device`.
 					- `Key` whose index is less than 12 is the direct index of the variable `device`.
 					- `Key` whose index is greater than or equal to 12 comes from `captureDevices`.
 			- This dataframe uses a legacy creation method. Refer to the definition of `info_data` in Customized Program 05.
 		- `participant_record_df` in Customized Program 16:
-			- The main data area in the sheet `16 - participant_record_header` is colored white. `participant` denodes any element in `participant_records`.
+			- The main data area in the sheet `16 - participant_record_header` isn't filled with any color. `participant` denodes any element in `participant_records`.
 				- `Key` is the index of the variable `participant`.
 					- `Key` whose index is less than 8 is the direct index of the variable `participant`.
 					- `Key` 9 and 10 come from `get_info` function.
 		- `blockList_df` in Customized Program 16:
-			- The main data area in the sheet `16 - blockList_header` is colored white. `player` denodes any element in `blockList`.
+			- The main data area in the sheet `16 - blockList_header` isn't filled with any color. `player` denodes any element in `blockList`.
 				- `Key` is the index of the variable `player`.
 					- `Key` whose index is less than 8 is the direct index of the variable `player`.
 					- The second half `Key` is the index of the data resource that the first half represents.
+		- `gametype_config_df` in Customized Program 17:
+			- The main data area in the sheet `17 - gametype_config_header` isn't filled with any color. `config` denotes any element in `gametype_config`.
+				- `Key` is the direct index of the variable `config`.
+		- `mission_df` in Customized Program 18:
+			- 6 colors are used to divide the main data area in the sheet `18 - mission_header`. `mission` denotes any element in `missions`.
+				- Data not filled with any color mean `Key` is the index of `mission`.
+				- Data in the blue area mean the second half of `Key` is the direct index of `mission["display"]`.
+				- Data in the light blue area mean `Key` comes from `mission["metadata"]`.
+				- Data in the deep blue area mean the second half of `Key` is the direct index of `mission["rewardStrategy"]`.
+				- Data in the organge area mean `Key` comes from `mission["objective"][objectiveId]`.
+				- Data in the purple area mean the second half of `Key` comes from `objective`.
+				- Data in the blue, light green, deep green and purple areas are handled by the same code frame.
+		- `objective_group_df` in Customized Program 18:
+			- 2 colors are used to divide the main data area in the sheet `18 - objective_group_header`. `objective` denotes any element in `objectives`. `objectiveGroup` denotes any element in `objective["objectives"]`.
+				- Data not filled with any color mean `Key` is the index of `objective`.
+				- Data in the blue area mean the second half of `Key` is the index of `objectiveGroup`.
+		- `perk_df` in Customized Program 19:
+			- The main data area in the sheet `19 - perk_header` isn't filled with any color. `perk` denotes any element inf `perks`.
+				- `Key` is the index of `perk`.
+		- `recommendedPage_df` in Customized Program 19:
+			- 3 colors are used to divide the main data area in the sheet `19 - recommendedPage_header`. `page` denotes any element in `recommendedPages`.
+				- Data not filled with any color mean `Key` is the index of `page`.
+				- Data in the blue area mean the second half of `Key` is the direct index of `page["keystone"]`.
+				- Data in the green area mean `Key` comes from `page["perks"][perkId]`.
+		- `perkPage_df` in Customized Program 19:
+			- 3 colors are used to divide the main data area in the sheet `19 - perkPage_header`. `page` denotes any element in `perkPages`.
+				- Data not filled with any color mean `Key` is the index of `page`.
+				- Data in the blue area mean the second half of `Key` is the direct index of `page["pageKeystone"]`.
+				- Data in the green area mean `Key` comes from `page["uiPerks"][pageId]`.
 6. Normally, text files generated by this program set are organized with indents. If the original dictionary variable in python runtime environment is required to recur, then simply pass a file pointer created by `open` function to the `load` function in `json` library, such as `fp = open("{filename}.txt", "r", encoding = "utf-8")` and `d = json.load(fp)`.
 	- If the user wants to transform a json string with indents generated by `dumps` function into a json string without indents just in the runtime environment, he/she only needs to pass the string generated by `dumps` functin into `loads` function, such as `formatted = json.dumps({dictvariable}, indent = 8, ensure_ascii = False)` and `d = json.loads(formatted)`.
 # Afterword

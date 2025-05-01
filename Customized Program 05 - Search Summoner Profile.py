@@ -400,13 +400,7 @@ async def search_profile(connection):
             language_cdragon[language_ddragon[i]["CODE"]] = "default" #在CommunityDragon数据库上，美服正式服的数据资源代码是default，而不是小写的en_US（The code for English (US) data resources on CommunityDragon database is "default" instead of the lowercase of "en_US"）
         else:
             language_cdragon[language_ddragon[i]["CODE"]] = language_ddragon[i]["CODE"].lower()
-    language_dict = {"No.": [], "CODE": [], "LANGUAGE": [], "语言": [], "Applicable CDragon Data Patches": []}
-    for i in language_ddragon:
-        language_dict["No."].append(i)
-        language_dict["CODE"].append(language_ddragon[i]["CODE"])
-        language_dict["LANGUAGE"].append(language_ddragon[i]["LANGUAGE (EN)"])
-        language_dict["语言"].append(language_ddragon[i]["LANGUAGE (ZH)"])
-        language_dict["Applicable CDragon Data Patches"].append(language_ddragon[i]["Applicable CDragon Data Patches"])
+    language_dict = {"No.": list(language_ddragon.keys()), "CODE": list(map(lambda x: x["CODE"], language_ddragon.values())), "LANGUAGE": list(map(lambda x: x["LANGUAGE (EN)"], language_ddragon.values())), "语言": list(map(lambda x: x["LANGUAGE (ZH)"], language_ddragon.values())), "Applicable CDragon Data Patches": list(map(lambda x: x["Applicable CDragon Data Patches"], language_ddragon.values()))}
     language_df = pandas.DataFrame(language_dict)
     print(format_df(language_df)[0])
     while True:
@@ -1345,8 +1339,8 @@ async def search_profile(connection):
     current_info = await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json()
     #准备大区数据（Prepare server / platform data）
     platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
-    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "ME1": "中东服（Middle East）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
-    platform_GARENA = {"PH": "菲律宾服（Philippines）", "SG": "新加坡服（Singapore, Malaysia and Indonesia）", "TW": "台服（Taiwan, Hong Kong and Macau）", "VN": "越南服（Vietnam）", "TH": "泰服（Thailand）"}
+    platform_RIOT = {"ME1": "中东服（Middle East）", "BR1": "巴西服（Brazil）", "EUN1": "北欧和东欧服（Europe Nordic & East）", "EUW1": "西欧服（Europe West）", "JP1": "日服（Japan）", "KR": "韩服（Republic of Korea）", "LA1": "北拉美服（Latin America North）", "LA2": "南拉美服（Latin America South）", "NA1": "北美服（North America）", "OC1": "大洋洲服（Oceania）", "TR1": "土耳其服（Turkey）", "RU": "俄罗斯服（Russia）", "PH2": "菲律宾服（Philippines）", "SG2": "新加坡服（Singapore）", "TH2": "泰服（Thailand）", "TW2": "台服（Taiwan, Hong Kong and Macau）", "VN2": "越南服（Vietnam）", "PBE1": "测试服（Public Beta Environment）"} #顺序采用参考开发者传送门网站的服务器路由（The order refers to Platform Routing Values on Riot Developer Portal website）
+    platform_GARENA = {"PH1": "菲律宾服（Philippines）", "SG1": "新加坡服（Singapore, Malaysia and Indonesia）", "TW1": "台服（Taiwan, Hong Kong and Macau）", "VN1": "越南服（Vietnam）", "TH1": "泰服（Thailand）"} #顺序采用英雄联盟维基百科的“Server”词条的竞舞代理的服务器（The order refers to Garena servers in "Server" entry of League Wiki）
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
     #控制只输出一遍的提示（Control the hint to be displayed only once）
     puuid_change_warning_printed = False
@@ -1388,7 +1382,6 @@ async def search_profile(connection):
                 info_body = info["body"]
                 displayName = get_info_name(info_body) #用于文件名命名（For use of file naming）
                 current_puuid = info_body["puuid"] #用于核验对局是否包含该召唤师。此外，还用于扫描模式从对局的所有玩家信息中定位到该玩家（For use of checking whether the searched matches include this summoner. In addition, it's used for localization of this player from all players in a match in "scan" mode）
-                current_displayName = info_body["displayName"] #作用同上，用于模糊定位，主要应用于玩家通用唯一识别码发生变动的大区的扫描模式查询（Acts as the same role as the above variable for a rough localization. It's mainly designed for Scan Mode on servers that changed the players' puuids）
                 current_summonerName = "" if info_body["gameName"] == "" and info_body["tagLine"] == "" else info_body["gameName"] + "#" + info_body["tagLine"] #作用同上，用于模糊定位，主要应用于玩家通用唯一识别码发生变动的大区且在昵称编号引入后注册的主召唤师的对局记录扫描模式（Acts as the same role as the above variable for a rough localization. It's mainly designed for Scan Mode on players that signed up after tagLine was introduced on servers that changed the players' puuids）
                 infos[current_puuid] = info_body
                 #下面准备一些数据资源（The following code prepare data resources）
@@ -1424,17 +1417,29 @@ async def search_profile(connection):
                         pass
                 region = client_info["--region"]
                 if region == "TENCENT":
-                    folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[client_info["--rso_platform_id"]] + "\\" + get_info_name(info_body, 2)
+                    platform_folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[platformId]
+                    folder = platform_folder + "\\" + get_info_name(info_body, 2)
                 elif region == "GARENA":
-                    folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[region] + "\\" + get_info_name(info_body, 2)
+                    platform_folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[platformId]
+                    folder = platform_folder + "\\" + get_info_name(info_body, 2)
                 else: #拳头公司与竞舞娱乐公司的合同于2023年1月终止（In January 2023, Riot Games ended its contract with Garena）
-                    folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[region] + "\\" + get_info_name(info_body, 3)
+                    platform_folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[platformId]
+                    folder = platform_folder + "\\" + get_info_name(info_body, 3)
+                platform_config_filepath = platform_folder + "\\" + "platform_config_namespaces.json"
+                while True:
+                    try:
+                        with open(platform_config_filepath, "w", encoding = "utf-8") as fp:
+                            json.dump(platform_config, fp, indent = 4, ensure_ascii = False)
+                    except FileNotFoundError: #这里需要注意是否具有创建文件夹的权限。下同（Pay attention to the authority to create the folder. So are the following）
+                        os.makedirs(os.path.dirname(platform_config_filepath), exist_ok = True)
+                    else:
+                        break
                 
                 json1name = "Summoner Profile - " + displayName + ".json"
                 while True:
                     try:
                         jsonfile1 = open(os.path.join(folder, json1name), "w", encoding = "utf-8")
-                    except FileNotFoundError: #这里需要注意是否具有创建文件夹的权限。下同（Pay attention to the authority to create the folder. So are the following）
+                    except FileNotFoundError:
                         os.makedirs(folder, exist_ok = True)
                     else:
                         break
@@ -1531,26 +1536,26 @@ async def search_profile(connection):
                 mastery_data_organized = {}
                 for i in mastery_statistics_output_order:
                     key = mastery_header_keys[i]
-                    mastery_data_organized[key] = [mastery_header[key]] + mastery_data[key]
+                    mastery_data_organized[key] = mastery_data[key]
                 mastery_df = pandas.DataFrame(data = mastery_data_organized)
-                for i in range(mastery_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-                    for j in range(mastery_df.shape[1]):
-                        if str(mastery_df.iat[i, j]) == "True":
-                            mastery_df.iat[i, j] = "√"
-                        elif str(mastery_df.iat[i, j]) == "False":
-                            mastery_df.iat[i, j] = ""
+                for column in mastery_df:
+                    if mastery_df[column].dtype == "bool":
+                        mastery_df[column] = mastery_df[column].astype(str)
+                        for i in range(len(mastery_df)):
+                            mastery_df.loc[i, column] = "√" if mastery_df[column][i] == "True" else ""
+                mastery_df = pandas.concat([pandas.DataFrame([mastery_header])[mastery_df.columns], mastery_df], ignore_index = True)
                 mastery_web_display_order = [15, 1, 2, 3, 4, 9, 12, 6, 7, 5, 16, 10, 17, 18, 19, 20, 8]
                 mastery_data_organized_web = {}
                 for i in mastery_web_display_order:
                     key = mastery_header_keys[i]
-                    mastery_data_organized_web[key] = [mastery_header[key]] + mastery_data[key]
+                    mastery_data_organized_web[key] = mastery_data[key]
                 mastery_df_web = pandas.DataFrame(data = mastery_data_organized_web)
-                for i in range(mastery_df_web.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-                    for j in range(mastery_df_web.shape[1]):
-                        if str(mastery_df_web.iat[i, j]) == "True":
-                            mastery_df_web.iat[i, j] = "√"
-                        elif str(mastery_df_web.iat[i, j]) == "False":
-                            mastery_df_web.iat[i, j] = ""
+                for column in mastery_df_web:
+                    if mastery_df_web[column].dtype == "bool":
+                        mastery_df_web[column] = mastery_df_web[column].astype(str)
+                        for i in range(len(mastery_df_web)):
+                            mastery_df_web.loc[i, column] = "√" if mastery_df_web[column][i] == "True" else ""
+                mastery_df_web = pandas.concat([pandas.DataFrame([mastery_header])[mastery_df_web.columns], mastery_df_web], ignore_index = True)
                 mastery_htmltable = mastery_df_web.to_html(escape = False)
 
                 if "errorCode" in ranked and ranked["httpStatus"] == 404: #从13.15版本开始，国服体验服的排位信息和对局记录可以正常查询（From Patch 13.15 on, rank data and match history can be searched on Chinese PBE server）
@@ -1594,71 +1599,46 @@ async def search_profile(connection):
                 pkl3name = "Intermediate Object - ranked (Rank) - %s (%s).pkl" %(displayName, currentTime)
                 #with open(os.path.join(folder, pkl3name), "wb") as IntObj3:
                     #pickle.dump(ranked, IntObj3)
-                ranked_header = {"division": "分级", "isProvisional": "定位中", "leaguePoints": "胜点", "losses": "负场", "miniSeriesProgress": "定位赛/晋级赛进展", "previousSeasonAchievedDivision": "过往赛季最高段位分级", "previousSeasonAchievedTier": "过往赛季最高段位", "previousSeasonEndDivision": "过往赛季结束段位分级", "previousSeasonEndTier": "过往赛季结束段位", "provisionalGameThreshold": "总定位场次", "provisionalGamesRemaining": "剩余定位场次", "queueType": "对局类型", "ratedRating": "排名分", "ratedTier": "段位", "tier": "段位", "warnings": "警告消息", "wins": "胜场"} #ratedRating也可译为战力积分（ratedRating can be expressed as GR）
-                #queueTypes = {"ARAM_BOT": "极地大乱斗 人机对战", "ARAM_CLASH": "极地大乱斗 冠军杯赛", "ARAM_UNRANKED_1x1": "极地大乱斗1v1", "ARAM_UNRANKED_5x5": "极地大乱斗5v5", "BOT": "人机对战", "CHERRY": "斗魂竞技场", "CHERRY_UNRANKED": "斗魂竞技场 匹配模式", "CHONCC_TREASURE_TFT": "云顶之弈（恭喜发财）", "CLASH": "冠军杯赛", "FIVE_YEAR_ANNIVERSARY_TFT": "云顶之弈 5周年时光机", "LNY23_TFT": "云顶之弈（恭喜发财）", "LNY24_TFT": "云顶之弈 （第3.5赛季回归：再战星海）", "NEXUSBLITZ": "极限闪击", "NORMAL": "匹配模式", "NORMAL_TFT": "云顶之弈 匹配模式", "ONEFORALL": "克隆大作战", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_SOLO_5x5": "单人/双人", "RANKED_TFT": "云顶之弈 排位赛", "RANKED_TFT_DOUBLE_UP": "双人作战 (BETA测试)", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_TURBO": "狂暴模式", "RIOTSCRIPT_BOT": "人机对战", "SF_TFT": "云顶之弈（斗魂锦标赛）", "STRAWBERRY": "无尽狂潮", "TURBO_TFT": "云顶之弈 狂暴模式 自定义", "TUTORIAL_MODULE_1": "新手教程 第一部分", "TUTORIAL_MODULE_2": "新手教程 第二部分", "TUTORIAL_MODULE_3": "新手教程 第三部分", "TUTORIAL_TFT": "云顶之弈 新手教程", "ULTBOOK": "终极魔典", "URF": "无限火力"}
-                queueTypes = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战 (BETA测试)", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
-                #queueTypes = {"RANKED_SOLO_5x5": "Ranked Solo/Duo", "RANKED_FLEX_SR": "Ranked Flex", "RANKED_TFT": "Ranked TFT", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "Double Up (Workshop)", "RANKED_TFT_TURBO": "Hyper Roll", "CHERRY": "Arena"}
+                #queueTypes = {"ARAM_BOT": "极地大乱斗 人机对战", "ARAM_CLASH": "极地大乱斗 冠军杯赛", "ARAM_UNRANKED_1x1": "极地大乱斗1v1", "ARAM_UNRANKED_5x5": "极地大乱斗5v5", "BOT": "人机对战", "CHERRY": "斗魂竞技场", "CHERRY_UNRANKED": "斗魂竞技场 匹配模式", "CHONCC_TREASURE_TFT": "云顶之弈（恭喜发财）", "CLASH": "冠军杯赛", "FIVE_YEAR_ANNIVERSARY_TFT": "云顶之弈 5周年时光机", "LNY23_TFT": "云顶之弈（恭喜发财）", "LNY24_TFT": "云顶之弈 （第3.5赛季回归：再战星海）", "NEXUSBLITZ": "极限闪击", "NORMAL": "匹配模式", "NORMAL_TFT": "云顶之弈 匹配模式", "ONEFORALL": "克隆大作战", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_SOLO_5x5": "单人/双人", "RANKED_TFT": "云顶之弈 排位赛", "RANKED_TFT_DOUBLE_UP": "双人作战", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_TURBO": "狂暴模式", "RIOTSCRIPT_BOT": "人机对战", "SF_TFT": "云顶之弈（斗魂锦标赛）", "STRAWBERRY": "无尽狂潮", "TURBO_TFT": "云顶之弈 狂暴模式 自定义", "TUTORIAL_MODULE_1": "新手教程 第一部分", "TUTORIAL_MODULE_2": "新手教程 第二部分", "TUTORIAL_MODULE_3": "新手教程 第三部分", "TUTORIAL_TFT": "云顶之弈 新手教程", "ULTBOOK": "终极魔典", "URF": "无限火力"}
+                queueTypes = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
+                #queueTypes = {"RANKED_SOLO_5x5": "Ranked Solo/Duo", "RANKED_FLEX_SR": "Ranked Flex", "RANKED_TFT": "Ranked TFT", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "Double Up", "RANKED_TFT_TURBO": "Hyper Roll", "CHERRY": "Arena"}
+                ranked_header = {"division": "分级", "highestDivision": "当前赛季最高段位分级", "highestTier": "当前赛季最高段位", "isProvisional": "定位中", "leaguePoints": "胜点", "losses": "负场", "miniSeriesProgress": "定位赛/晋级赛进展", "previousSeasonEndDivision": "过往赛季结束段位分级", "previousSeasonEndTier": "过往赛季结束段位", "previousSeasonHighestDivision": "过往赛季最高段位分级", "previousSeasonHighestTier": "过往赛季最高段位", "provisionalGameThreshold": "总定位场次", "provisionalGamesRemaining": "剩余定位场次", "queueType": "对局类型", "ratedRating": "排名分", "ratedTier": "段位", "tier": "段位", "warnings": "警告消息", "wins": "胜场", "tier / ratedTier": "段位", "leaguePoints / ratedRating": "胜点"} #ratedRating也可译为战力积分（ratedRating can be expressed as GR）
                 ranked_header_keys = list(ranked_header.keys())
                 ranked_data = {}
-                for i in range(len(ranked["queues"])):
-                    if ranked["queues"][i]["queueType"] == "RANKED_TFT_TURBO":
-                        turboNo = i + 1 #这里需要记录狂暴模式排位信息在ranked["queues"]的位置，方便后续的合并操作（Here the location of rank information of TFT_TURBO needs to be saved to make it easy to merge later）
-                        break
                 for i in range(len(ranked_header_keys)):
                     key = ranked_header_keys[i]
-                    ranked_data[key] = [ranked_header[key]]
-                    if i == 0 or i == 5 or i == 7:
-                        for j in range(len(ranked["queues"])):
-                            try:
-                                value = ranked["queues"][j][key]
-                            except KeyError: #在美测服14.2版本发现“previousSeasonAchievedDivision”这个键被删除了（The key `previousSeasonAchievedDivision` are found to be deleted in PBE Patch 14.2）
-                                value = "NA"
-                            if value == "NA":
-                                ranked_data[key].append("")
-                            else:
-                                ranked_data[key].append(value)
-                    elif i == 1:
-                        for j in range(len(ranked["queues"])):
-                            value = ranked["queues"][j][key]
-                            if value:
-                                ranked_data[key].append("√")
-                            else:
-                                ranked_data[key].append("")
-                    elif i == 6 or i == 8 or i == 14:
-                        for j in range(len(ranked["queues"])):
-                            try:
-                                ranked_data[key].append(tiers[ranked["queues"][j][key]])
-                            except KeyError: #在美测服14.2版本发现“previousSeasonAchievedTier”这个键被删除了（The key `previousSeasonAchievedTier` are found to be deleted in PBE Patch 14.2）
-                                ranked_data[key].append("")
-                    elif i == 11:
-                        for j in range(len(ranked["queues"])):
-                            ranked_data[key].append(queueTypes[ranked["queues"][j][key]])
-                    elif i == 13:
-                        for j in range(len(ranked["queues"])):
-                            ranked_data[key].append(ratedTiers[ranked["queues"][j][key]])
-                    else:
-                        for j in range(len(ranked["queues"])):
-                            ranked_data[key].append(ranked["queues"][j][key])
-                if not "previousSeasonAchievedDivision" in ranked["queues"][0] and not "previousSeasonAchievedTier" in ranked["queues"][0]:
-                    ranked_statistics_output_order = [11, 14, 0, 2, 13, 12, 16, 3, 1, 9, 10, 4, 8, 7, 15]
-                    ranked_web_display_order = [11, 14, 0, 2, 13, 12, 16, 3, 1, 9, 10, 4, 8, 7, 15] #由于排位数据没有对应的图标，所以这里定义的键网页呈现顺序列表实际上并没有采用（Because no icons are required for ranked data visualization, the key web display order list isn't used in fact）
-                else:
-                    ranked_statistics_output_order = [11, 14, 0, 2, 13, 12, 16, 3, 1, 9, 10, 4, 6, 5, 8, 7, 15]
-                    ranked_web_display_order = [11, 14, 0, 2, 13, 12, 16, 3, 1, 9, 10, 4, 6, 5, 8, 7, 15]
+                    ranked_data[key] = []
+                for i in range(len(ranked["queues"])):
+                    queue = ranked["queues"][i]
+                    for j in range(len(ranked_header_keys)):
+                        key = ranked_header_keys[j]
+                        if j in {0, 1, 7, 9}:
+                            ranked_data[key].append("" if queue[key] == "NA" else queue[key])
+                        elif j in {2, 8, 10, 16}:
+                            ranked_data[key].append(tiers[queue[key]])
+                        elif j == 13: #对局类型（`queueType`）
+                            ranked_data[key].append(queueTypes[queue[key]])
+                        elif j == 15: #云顶之弈狂暴模式段位（`ratedTier`）
+                            ranked_data[key].append(ratedTiers[queue[key]])
+                        elif j == 19 or j == 20:
+                            if j == 19: #综合段位（`tier / ratedTier`）
+                                ranked_data[key].append(ratedTiers[queue["ratedTier"]] if queue["queueType"] == "RANKED_TFT_TURBO" else tiers[queue["tier"]])
+                            else: #综合胜点（`leaguePoints / ratedRating`）
+                                ranked_data[key].append(queue["ratedRating"] if queue["queueType"] == "RANKED_TFT_TURBO" else queue["leaguePoints"])
+                        else:
+                            ranked_data[key].append(queue[key])
+                ranked_statistics_output_order = [13, 19, 0, 20, 18, 5, 3, 11, 12, 6, 2, 1, 8, 7, 10, 9, 17]
                 ranked_data_organized = {}
                 for i in ranked_statistics_output_order:
-                    if not i in [13, 14, 2, 12]: #这里要实现将两个段位参数和两个胜点各合并为一个参数，因此不能简单沿用ranked_data中相应的列表（Here I want to merge the two pairs of parameters - ratedTier and tier, leaguePoints and ratedRating - into two single parameters respectively, so I shouldn't simply inherit the two lists in ranked_data）
-                        key = ranked_header_keys[i]
-                        ranked_data_organized[key] = ranked_data[key]
-                    elif i == 14: #段位放在分级的前面，所以在i = 14时进行特殊处理（Since tier is designed to be in front of division, measures are taken specifically when i equals 14）
-                        key = "tier / ratedTier"
-                        ranked_data_organized[key] = ranked_data["tier"][:turboNo] + [ranked_data["ratedTier"][turboNo]] + ranked_data["tier"][turboNo + 1:]
-                    elif i == 2: #胜点放在排名分的前面，所以在i = 2时进行特殊处理（Since leaguePoints is designed to be in front of ratedRating, measures are taken specifically when i equals 2）
-                        key = "leaguePoints / ratedRating"
-                        ranked_data_organized[key] = ranked_data["leaguePoints"][:turboNo] + [ranked_data["ratedRating"][turboNo]] + ranked_data["leaguePoints"][turboNo + 1:]
-                    else: #i = 2或14时合并完成，所以i = 12和13可以舍弃（Merge is finished when i equals 2 or 14, so the case where i equals 12 or 13 can be abandoned）
-                        continue
+                    key = ranked_header_keys[i]
+                    ranked_data_organized[key] = ranked_data[key]
                 ranked_df = pandas.DataFrame(data = ranked_data_organized)
+                for column in ranked_df:
+                    if ranked_df[column].dtype == "bool":
+                        ranked_df[column] = ranked_df[column].astype(str)
+                        for i in range(len(ranked_df)):
+                            ranked_df.loc[i, column] = "√" if ranked_df[column][i] == "True" else ""
+                ranked_df = pandas.concat([pandas.DataFrame([ranked_header])[ranked_df.columns], ranked_df], ignore_index = True)
                 ranked_htmltable = ranked_df.to_html(escape = False)
                 
                 #print("召唤师所在赛段天梯数据如下：\nSummoner league ladders data are as follows:")
@@ -1688,47 +1668,58 @@ async def search_profile(connection):
                 for i in range(len(ladders_header_keys)):
                     key = ladders_header_keys[i]
                     ladders_data[key] = []
-                for i in range(len(ladders)):
-                    ladder = ladders[i]
-                    for j in range(len(ladder["divisions"])):
-                        division = ladder["divisions"][j]
-                        for k in range(len(division["standings"])):
-                            standing = division["standings"][k]
-                            standing_summoner = await get_info(connection, standing["puuid"])
-                            for l in range(len(ladders_header_keys)):
-                                key = ladders_header_keys[l]
-                                if l == 0:
-                                    ladders_data[key].append(queueTypes[ladder["queueType"]])
-                                elif l <= 20:
-                                    if l == 1 or l == 12:
-                                        ladders_data[key].append("") if standing[key] == "NA" else ladders_data[key].append(standing[key])
-                                    elif l == 13 or l == 19:
-                                        ladders_data[key].append(tiers[standing[key]])
+                standings_count = 0
+                for ladder in ladders:
+                    for division in ladder["divisions"]:
+                        standings_count += len(division["standings"])
+                if standings_count > 1000:
+                    print(f"即将整理{standings_count}名玩家的信息。是否继续？（输入任意键继续，否则不整理）\nInformation of {standings_count} player(s) is going to be sorted out. Do you want to continue? (Submit any non-empty string to continue or null to refuse)")
+                    ladder_sort = bool(input())
+                else:
+                    ladder_sort = True
+                if ladder_sort:
+                    for i in range(len(ladders)):
+                        ladder = ladders[i]
+                        for j in range(len(ladder["divisions"])):
+                            division = ladder["divisions"][j]
+                            for k in range(len(division["standings"])):
+                                standing = division["standings"][k]
+                                standing_summoner = await get_info(connection, standing["puuid"])
+                                for l in range(len(ladders_header_keys)):
+                                    key = ladders_header_keys[l]
+                                    if l == 0:
+                                        ladders_data[key].append(queueTypes[ladder["queueType"]])
+                                    elif l <= 20:
+                                        if l == 1 or l == 12:
+                                            ladders_data[key].append("") if standing[key] == "NA" else ladders_data[key].append(standing[key])
+                                        elif l == 13 or l == 19:
+                                            ladders_data[key].append(tiers[standing[key]])
+                                        else:
+                                            ladders_data[key].append(standing[key])
+                                    elif l <= 22:
+                                        if l == 21:
+                                            ladders_data[key].append(standing_summoner["body"]["gameName"])
+                                        else:
+                                            ladders_data[key].append(standing_summoner["body"]["tagLine"])
                                     else:
-                                        ladders_data[key].append(standing[key])
-                                elif l <= 22:
-                                    if l == 21:
-                                        ladders_data[key].append(standing_summoner["body"]["gameName"])
-                                    else:
-                                        ladders_data[key].append(standing_summoner["body"]["tagLine"])
-                                else:
-                                    ladders_data[key].append("☆") if standing_summoner["body"]["puuid"] == current_puuid else ladders_data[key].append("")
-                            print("顶级%s%s玩家信息整理进度（Top %s %s player information sorting process）：[%d/%d][%d/%d][%d/%d]" %(queueTypes[ladder["queueType"]], tiers_all[ladder["tier"]], ladder["queueType"], ladder["tier"], i + 1, len(ladders), j + 1, len(ladder["divisions"]), k + 1, len(division["standings"])))
+                                        ladders_data[key].append("☆") if standing_summoner["body"]["puuid"] == current_puuid else ladders_data[key].append("")
+                                print("顶级%s%s玩家信息整理进度（Top %s %s player information sorting process）：[%d/%d][%d/%d][%d/%d]" %(queueTypes[ladder["queueType"]], tiers_all[ladder["tier"]], ladder["queueType"], ladder["tier"], i + 1, len(ladders), j + 1, len(ladder["divisions"]), k + 1, len(division["standings"])))
                 ladders_statistics_output_order = [0, 9, 11, 10, 17, 15, 18, 21, 22, 19, 1, 4, 3, 14, 8, 7, 6, 20, 5, 13, 12, 2, 16, 23]
                 ladders_web_display_order = [0, 9, 11, 10, 17, 15, 18, 21, 22, 19, 1, 4, 3, 14, 8, 7, 6, 20, 5, 13, 12, 2, 16, 23]
                 ladders_data_organized = {}
                 for i in ladders_statistics_output_order:
                     key = ladders_header_keys[i]
-                    ladders_data_organized[key] = [ladders_header[key]] + ladders_data[key]
+                    ladders_data_organized[key] = ladders_data[key]
                 ladders_df = pandas.DataFrame(data = ladders_data_organized)
-                for i in range(ladders_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-                    for j in range(ladders_df.shape[1]):
-                        if str(ladders_df.iat[i, j]) == "True":
-                            ladders_df.iat[i, j] = "√"
-                        elif str(ladders_df.iat[i, j]) == "False":
-                            ladders_df.iat[i, j] = ""
+                for column in ladders_df:
+                    if ladders_df[column].dtype == "bool":
+                        ladders_df[column] = ladders_df[column].astype(str)
+                        for i in range(len(ladders_df)):
+                            ladders_df.loc[i, column] = "√" if ladders_df[column][i] == "True" else ""
+                ladders_df = pandas.concat([pandas.DataFrame([ladders_header])[ladders_df.columns], ladders_df], ignore_index = True)
                 ladders_htmltable = ladders_df.to_html(escape = False)
                 
+                # game_leaderboard_dfs = {}
                 game_info_dfs = {}
                 game_timeline_dfs = {}
                 game_event_dfs = {}
@@ -1803,7 +1794,7 @@ async def search_profile(connection):
                     if not LoLHistory_get:
                         continue
                     LoLGamePlayed = True #标记该玩家是否进行过英雄联盟对局（Mark whether this summoner has played any LoL game）
-                    LoLHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "对局创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "帐户序号", "currentAccountId": "当前帐户序号", "currentPlatformId": "当前服务器代码", "gameName": "玩家昵称", "matchHistoryUri": "对局记录网址", "platformId": "服务器代码", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "championId": "英雄序号", "highestAchievedSeasonTier": "最高段位", "participantId": "玩家序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "英雄", "champion_alias": "代号", "champion_squarePortraitPath": "方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "champLevel": "英雄等级", "deaths": "死亡", "goldEarned": "金币", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "kills": "击杀", "neutralMinionsKilled": "击杀野怪", "totalMinionsKilled": "击杀小兵", "win": "胜利", "KDA": "战损比", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标 路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "CS": "补刀", "result": "结果", "lane": "分路", "role": "角色定位"}
+                    LoLHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "对局创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "帐户序号", "currentAccountId": "当前帐户序号", "currentPlatformId": "当前服务器代码", "gameName": "玩家昵称", "matchHistoryUri": "对局记录网址", "platformId": "服务器代码", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "championId": "英雄序号", "highestAchievedSeasonTier": "最高段位", "participantId": "玩家序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "英雄", "champion_alias": "代号", "champion_squarePortraitPath": "方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "champLevel": "英雄等级", "deaths": "死亡", "goldEarned": "金币", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "kills": "击杀", "neutralMinionsKilled": "击杀野怪", "subteamPlacement": "队伍排名", "totalMinionsKilled": "击杀小兵", "win": "胜利", "KDA": "战损比", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标 路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "CS": "补刀", "result": "结果", "lane": "分路", "role": "角色定位"}
                     LoLHistory_header_keys = list(LoLHistory_header.keys())
                     LoLHistory_data = {}
                     gameTypes = {"MATCHED_GAME": "匹配对局", "CUSTOM_GAME": "自定义对局", "TUTORIAL_GAME": "新手教程"}
@@ -1981,11 +1972,11 @@ async def search_profile(connection):
                                         LoLHistory_data[key].append(spellId if j <= 33 else "")
                                 else:
                                     LoLHistory_data[key].append(game["participants"][0][key])
-                            elif j <= 67:
+                            elif j <= 68:
                                 stats = game["participants"][0]["stats"]
-                                if j == 51:
+                                if j == 52:
                                     LoLHistory_data[key].append("/".join([str(stats["kills"]), str(stats["deaths"]), str(stats["assists"])]))
-                                elif j >= 52 and j <= 65:
+                                elif j >= 53 and j <= 66:
                                     itemId = stats[key.split("_")[0]]
                                     if itemId == 0:
                                         LoLHistory_data[key].append("")
@@ -1997,35 +1988,37 @@ async def search_profile(connection):
                                         if not itemId in unmapped_keys["LoLItem"]:
                                             unmapped_keys["LoLItem"].add(itemId)
                                             print("【%d. %s】第%d/%d场对局（对局序号：%d，对局版本：%s）装备信息（%d）获取失败！将采用原始数据！\n[%d. %s] LoL item information (%d) of Match %d / %d (matchID: %d, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, i + 1, len(games), game["gameId"], version, itemId, j, key, itemId, i + 1, len(games), game["gameId"], version))
-                                        LoLHistory_data[key].append(itemId if j <= 58 else "")
-                                elif j == 66:
-                                    LoLHistory_data[key].append(stats["neutralMinionsKilled"] + stats["totalMinionsKilled"])
+                                        LoLHistory_data[key].append(itemId if j <= 59 else "")
                                 elif j == 67:
+                                    LoLHistory_data[key].append(stats["neutralMinionsKilled"] + stats["totalMinionsKilled"])
+                                elif j == 68:
                                     LoLHistory_data[key].append("胜利" if stats["win"] else "失败")
                                 else:
                                     LoLHistory_data[key].append(stats[key])
                             else:
                                 timeline = game["participants"][0]["timeline"]
-                                if j == 68:
+                                if j == 69:
                                     LoLHistory_data[key].append(lanes[timeline[key]])
                                 else:
                                     LoLHistory_data[key].append(roles[timeline[key]])
-                    LoLHistory_statistics_output_order = [0, 21, 5, 3, 4, 10, 6, 11, 9, 8, 29, 30, 37, 32, 33, 52, 53, 54, 55, 56, 57, 58, 51, 66, 39, 67]
+                    LoLHistory_statistics_output_order = [0, 21, 5, 3, 4, 10, 6, 11, 9, 8, 29, 30, 37, 32, 33, 53, 54, 55, 56, 57, 58, 59, 52, 67, 39, 68, 49]
                     LoLHistory_data_organized = {}
                     for i in LoLHistory_statistics_output_order:
                         key = LoLHistory_header_keys[i]
-                        LoLHistory_data_organized[key] = [LoLHistory_header[key]] + LoLHistory_data[key]
+                        LoLHistory_data_organized[key] = LoLHistory_data[key]
                     LoLHistory_df = pandas.DataFrame(data = LoLHistory_data_organized)
+                    LoLHistory_df = pandas.concat([pandas.DataFrame([LoLHistory_header])[LoLHistory_df.columns], LoLHistory_df], ignore_index = True)
                     #LoLHistory_df.apply(lambda x: pandas.Series([-3], index = ["K/D/A"]))
-                    LoLHistory_web_display_order = [0, 21, 5, 3, 4, 10, 6, 11, 9, 8, 29, 30, 31, 37, 34, 35, 59, 60, 61, 62, 63, 64, 65, 51, 66, 39, 67]
+                    LoLHistory_web_display_order = [0, 21, 5, 3, 4, 10, 6, 11, 9, 8, 29, 30, 31, 37, 34, 35, 60, 61, 62, 63, 64, 65, 66, 52, 67, 39, 68, 49]
                     LoLHistory_data_organized_web = {}
                     for i in LoLHistory_web_display_order:
                         key = LoLHistory_header_keys[i]
-                        if i in [31, 34, 35, 59, 60, 61, 62, 63, 64, 65]: #转换路径（Transform the paths）
-                            LoLHistory_data_organized_web[key] = [LoLHistory_header[key]] + list(map(lambda x: "" if x == "" else urljoin(connection.address, x), LoLHistory_data[key]))
+                        if i in [31, 34, 35, 60, 61, 62, 63, 64, 65, 66]: #转换路径（Transform the paths）
+                            LoLHistory_data_organized_web[key] = list(map(lambda x: "" if x == "" else urljoin(connection.address, x), LoLHistory_data[key]))
                         else:
-                            LoLHistory_data_organized_web[key] = [LoLHistory_header[key]] + LoLHistory_data[key]
+                            LoLHistory_data_organized_web[key] = LoLHistory_data[key]
                     LoLHistory_df_web = pandas.DataFrame(data = LoLHistory_data_organized_web)
+                    LoLHistory_df_web = pandas.concat([pandas.DataFrame([LoLHistory_header])[LoLHistory_df_web.columns], LoLHistory_df_web], ignore_index = True)
                     LoLHistory_htmltable = LoLHistory_df_web.to_html(escape = False)
                     if LoLGamePlayed:
                         print(LoLHistory_df[:min(21, len(LoLHistory_df) + 1)])
@@ -2093,7 +2086,7 @@ async def search_profile(connection):
                                     current_versions["LoLChampion"] = current_versions["spell"] = current_versions["LoLItem"] = URLPatch
                                     unmapped_keys["LoLChampion"], unmapped_keys["spell"], unmapped_keys["LoLItem"] = set(), set(), set()
                                     #官方的历史记录最多保留200场对局的个人信息。这里要实现将待保存对局全部整理成一个类似于历史记录的布局的功能（要查看历史记录的原来的布局，可以先不使用scan选项，生成Excel文件后查看“Match History”工作表的布局），所以不再使用前面的历史记录，而是从每一局中提取信息，整合成一张历史记录表。因此，大部分代码复制自前面一部分的代码（Official match history holds personal history of at most 200 matches. Here I want to implement a function to sort the information of all matches into a table like the original match history table. (To check this format for the first time, please don't choose the "scan" option and view the "Match History" sheet of the generated xlsx file.) Therefore, the previous history_df is abandoned. Instead, information in the match history is extracted from all matches to form the table subsequently）
-                                    LoLHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "对局创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "帐户序号", "currentAccountId": "当前帐户序号", "currentPlatformId": "当前服务器代码", "gameName": "玩家昵称", "matchHistoryUri": "对局记录网址", "platformId": "服务器代码", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "championId": "英雄序号", "highestAchievedSeasonTier": "最高段位", "participantId": "玩家序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "英雄", "champion_alias": "代号", "champion_squarePortraitPath": "方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "champLevel": "英雄等级", "deaths": "死亡", "goldEarned": "金币", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "kills": "击杀", "neutralMinionsKilled": "击杀野怪", "totalMinionsKilled": "击杀小兵", "win": "胜利", "KDA": "战损比", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标 路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "CS": "补刀", "result": "结果", "lane": "分路", "role": "角色定位"}
+                                    LoLHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "对局创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "帐户序号", "currentAccountId": "当前帐户序号", "currentPlatformId": "当前服务器代码", "gameName": "玩家昵称", "matchHistoryUri": "对局记录网址", "platformId": "服务器代码", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "championId": "英雄序号", "highestAchievedSeasonTier": "最高段位", "participantId": "玩家序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "英雄", "champion_alias": "代号", "champion_squarePortraitPath": "方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "champLevel": "英雄等级", "deaths": "死亡", "goldEarned": "金币", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "kills": "击杀", "neutralMinionsKilled": "击杀野怪", "subteamPlacement": "队伍排名", "totalMinionsKilled": "击杀小兵", "win": "胜利", "KDA": "战损比", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标 路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "CS": "补刀", "result": "结果", "lane": "分路", "role": "角色定位"}
                                     LoLHistory_header_keys = list(LoLHistory_header.keys())
                                     LoLHistory_data = {}
                                     versions = []
@@ -2148,7 +2141,7 @@ async def search_profile(connection):
                                             versions.append(patches_dict[bigVersion][0])
                                         #定位该召唤师（Find the index of this player in a match）
                                         for participantId in range(len(LoLGame_info["participantIdentities"])):
-                                            if LoLGame_info["participantIdentities"][participantId]["player"]["puuid"] == current_puuid or LoLGame_info["participantIdentities"][participantId]["player"]["summonerName"] == current_displayName or LoLGame_info["participantIdentities"][participantId]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][participantId]["player"]["tagLine"] == current_summonerName:
+                                            if LoLGame_info["participantIdentities"][participantId]["player"]["puuid"] == current_puuid or LoLGame_info["participantIdentities"][participantId]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][participantId]["player"]["tagLine"] == current_summonerName:
                                                 break
                                         #下面针对每场对局建立总的数据资源异常处理机制（Builds the summarized data resource exceptional handling mechanism for each match）
                                         ##英雄：包含选用英雄和禁用英雄（LoL champions, which contain picked and banned ones）
@@ -2294,11 +2287,11 @@ async def search_profile(connection):
                                                         LoLHistory_data[key].append(spellId if j <= 33 else "")
                                                 else:
                                                     LoLHistory_data[key].append(LoLGame_info["participants"][participantId][key])
-                                            elif j <= 67:
+                                            elif j <= 68:
                                                 stats = LoLGame_info["participants"][participantId]["stats"]
-                                                if j == 51:
+                                                if j == 52:
                                                     LoLHistory_data[key].append("/".join([str(stats["kills"]), str(stats["deaths"]), str(stats["assists"])]))
-                                                elif j >= 52 and j <= 65:
+                                                elif j >= 53 and j <= 66:
                                                     itemId = stats[key.split("_")[0]]
                                                     if itemId == 0:
                                                         LoLHistory_data[key].append("")
@@ -2310,27 +2303,28 @@ async def search_profile(connection):
                                                         if not itemId in unmapped_keys["LoLItem"]:
                                                             unmapped_keys["LoLItem"].add(itemId)
                                                             print("【%d. %s】第%d/%d场对局（对局序号：%d，对局版本：%s）装备信息（%d）获取失败！将采用原始数据！\n[%d. %s] LoL item information (%d) of Match %d / %d (matchID: %d, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, i + 1, len(LoLMatchIDs), matchID, version, itemId, j, key, itemId, i + 1, len(LoLMatchIDs), matchID, version))
-                                                        LoLHistory_data[key].append(itemId if j <= 58 else "")
-                                                elif j == 66:
-                                                    LoLHistory_data[key].append(stats["neutralMinionsKilled"] + stats["totalMinionsKilled"])
+                                                        LoLHistory_data[key].append(itemId if j <= 59 else "")
                                                 elif j == 67:
+                                                    LoLHistory_data[key].append(stats["neutralMinionsKilled"] + stats["totalMinionsKilled"])
+                                                elif j == 68:
                                                     LoLHistory_data[key].append("胜利" if stats["win"] else "失败")
                                                 else:
                                                     LoLHistory_data[key].append(stats[key])
                                             else:
                                                 timeline = game["participants"][0]["timeline"]
-                                                if j == 68:
+                                                if j == 69:
                                                     LoLHistory_data[key].append(lanes[timeline[key]])
                                                 else:
                                                     LoLHistory_data[key].append(roles[timeline[key]])
                                         print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                                         print('对局记录重查进度（Match history recheck process）：%d/%d\t对局序号（MatchID）： %s' %(i + 1, len(LoLMatchIDs), matchID))
-                                    LoLHistory_statistics_output_order = [0, 21, 5, 3, 4, 10, 6, 11, 9, 8, 29, 30, 37, 32, 33, 52, 53, 54, 55, 56, 57, 58, 51, 66, 39, 67]
+                                    LoLHistory_statistics_output_order = [0, 21, 5, 3, 4, 10, 6, 11, 9, 8, 29, 30, 37, 32, 33, 53, 54, 55, 56, 57, 58, 59, 52, 67, 39, 68, 49]
                                     LoLHistory_data_organized = {}
                                     for i in LoLHistory_statistics_output_order:
                                         key = LoLHistory_header_keys[i]
-                                        LoLHistory_data_organized[key] = [LoLHistory_header[key]] + LoLHistory_data[key]
+                                        LoLHistory_data_organized[key] = LoLHistory_data[key]
                                     LoLHistory_df = pandas.DataFrame(data = LoLHistory_data_organized)
+                                    LoLHistory_df = pandas.concat([pandas.DataFrame([LoLHistory_header])[LoLHistory_df.columns], LoLHistory_df], ignore_index = True)
                                     #LoLHistory_df.apply(lambda x: pandas.Series([-3], index = ["K/D/A"]))
                                     print("是否一同保存每场对局的信息？（输入任意键保存，否则将只导出对局记录）\nSave each match? (Input anything to save each match, or null to only save the scanned match history)")
                                     if input() == "":
@@ -2414,7 +2408,7 @@ async def search_profile(connection):
                                     if current_puuid in participant_puuid: #之所以使用玩家通用唯一识别码，而不是用召唤师名称来识别对局是否包含主玩家，是因为该玩家可能使用过改名卡。这里也没有选择帐户序号，这是因为保存在对局中的各玩家的帐户序号竟然是0！（The reason why the puuid instead of the displayName or summonerName is used to identify whether the matches contain the main player is that the player may have used name changing card. AccountId isn't chosen here, because all players' accountIds saved in the match fetched from 127 API is 0, to my surprise!）
                                         main_player_included[int(matchID)] = True
                                         match_reserve_strategy[int(matchID)] = True
-                                    elif current_displayName in participant_summonerName or current_summonerName in participant_gameName: #在玩家通用唯一识别码发生变动的大区，要识别变动之前的对局是否包含主玩家，最好的办法是依据显示名。因为在引入昵称编号后，显示名就固定下来，没有办法变动了，玩家只能通过改名卡修改玩家昵称和昵称编号。也就是说，显示名可视为玩家的另一种“身份识别码”。对于在引入昵称编号后注册的玩家，其显示名是空字符串，所以在模糊定位时用玩家昵称代替（On servers that changed the players' puuids once, to identify whether the matches before this change include this player, the best strategy is to refer to the displayName. This is because after tagLine is introduced, displayName is locked and there's no way of changing it. What the player can change through the Summmoner Name Change is gameName and tagLine. That is to say, displayName may be regarded as another ID of a player. For those who signed up after tagLine was introduced, their displayNames are empty strings. So gameName is taken for the rough localization）
+                                    elif current_summonerName in participant_gameName: #在玩家通用唯一识别码发生变动的大区，要识别变动之前的对局是否包含主玩家，最好的办法是依据显示名。因为在引入昵称编号后，显示名就固定下来，没有办法变动了，玩家只能通过改名卡修改玩家昵称和昵称编号。也就是说，显示名可视为玩家的另一种“身份识别码”。对于在引入昵称编号后注册的玩家，其显示名是空字符串，所以在模糊定位时用玩家昵称代替（On servers that changed the players' puuids once, to identify whether the matches before this change include this player, the best strategy is to refer to the displayName. This is because after tagLine is introduced, displayName is locked and there's no way of changing it. What the player can change through the Summmoner Name Change is gameName and tagLine. That is to say, displayName may be regarded as another ID of a player. For those who signed up after tagLine was introduced, their displayNames are empty strings. So gameName is taken for the rough localization）
                                         main_player_included[int(matchID)] = True
                                         match_reserve_strategy[int(matchID)] = True
                                         if not puuid_change_warning_printed:
@@ -2471,6 +2465,61 @@ async def search_profile(connection):
                                             print('保存进度（Saving process）：%d/%d\t对局序号（MatchID）： %s' %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
                                         else:
                                             print('加载进度（Loading process）：%d/%d\t对局序号（MatchID）： %s' %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
+                                    
+                                    # challenger_ladder_queueTypes = await (await connection.request("GET", "/lol-ranked/v1/challenger-ladders-enabled")).json()
+                                    # topRated_ladder_queueTypes = await (await connection.request("GET", "/lol-ranked/v1/top-rated-ladders-enabled")).json()
+                                    # ranked_queueTypes = challenger_ladder_queueTypes + topRated_ladder_queueTypes
+                                    # LoLGame_leaderboard_header = {"puuid": "玩家通用唯一识别码", "displayName": "显示名", "gameName": "玩家昵称", "tagLine": "昵称编号", "division": "分级", "isProvisional": "定位中", "leaguePoints": "胜点", "losses": "负场", "miniSeriesProgress": "定位赛/晋级赛进展", "provisionalGameThreshold": "总定位场次", "provisionalGamesRemaining": "剩余定位场次", "queueType": "战区", "ratedRating": "排名分", "ratedTier": "段位", "tier": "段位", "wins": "胜场", "tier / ratedTier": "段位", "leaguePoints / ratedRating": "胜点", "timestamp": "获取时间戳", "time": "获取时间"}
+                                    # LoLGame_leaderboard_header_keys = list(LoLGame_leaderboard_header.keys())
+                                    # LoLGame_leaderboard_data = {}
+                                    # for i in range(len(LoLGame_leaderboard_header_keys)):
+                                    #     key = LoLGame_leaderboard_header_keys[i]
+                                    #     LoLGame_leaderboard_data[key] = []
+                                    # for queueType in ranked_queueTypes:
+                                    #     LoLGame_leaderboard = await (await connection.request("GET", "/lol-ranked/v1/social-leaderboard-ranked-queue-stats-for-puuids?queueType=%s&puuids=%s" %(queueType, str(participant_puuid).replace(" ", "").replace("'", '"')))).json()
+                                    #     for participant_puuid_iter in LoLGame_leaderboard:
+                                    #         participant_leaderboard = LoLGame_leaderboard[participant_puuid_iter]
+                                    #         participantInfo = await get_info(connection, participant_puuid_iter)
+                                    #         if participantInfo["info_got"]:
+                                    #             participantInfo_body = participantInfo["body"]
+                                    #             for i in range(len(LoLGame_leaderboard_header_keys)):
+                                    #                 key = LoLGame_leaderboard_header_keys[i]
+                                    #                 if i <= 3:
+                                    #                     LoLGame_leaderboard_data[key].append(participantInfo_body[key])
+                                    #                 elif i <= 15:
+                                    #                     if i == 4: #分级（`division`）
+                                    #                         LoLGame_leaderboard_data[key].append("" if participant_leaderboard[key] == "NA" else participant_leaderboard[key])
+                                    #                     elif i == 11: #战区（`queueType`）
+                                    #                         LoLGame_leaderboard_data[key].append(queueTypes[participant_leaderboard[key]])
+                                    #                     elif i == 13: #段位（`ratedTier`）
+                                    #                         LoLGame_leaderboard_data[key].append(ratedTiers[participant_leaderboard[key]])
+                                    #                     elif i == 14: #段位（`tier`）
+                                    #                         LoLGame_leaderboard_data[key].append(tiers[participant_leaderboard[key]])
+                                    #                     else:
+                                    #                         LoLGame_leaderboard_data[key].append(participant_leaderboard[key])
+                                    #                 elif i == 16: #段位（`tier / ratedTier`）
+                                    #                     LoLGame_leaderboard_data[key].append(ratedTiers[participant_leaderboard["ratedTier"]] if queueType in topRated_ladder_queueTypes else tiers[participant_leaderboard["tier"]])
+                                    #                 elif i == 17: #胜点（`leaguePoints / ratedRating`）
+                                    #                     LoLGame_leaderboard_data[key].append(participant_leaderboard["ratedRating"] if queueType in topRated_ladder_queueTypes else participant_leaderboard["leaguePoints"])
+                                    #                 elif i == 18: #获取时间戳（`timestamp`）
+                                    #                     LoLGame_leaderboard_data[key].append(time.time())
+                                    #                 else: #获取时间（`time`）
+                                    #                     LoLGame_leaderboard_data[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime()))
+                                    #         else:
+                                    #             print(participantInfo["message"])
+                                    # LoLGame_leaderboard_statistics_output_order = [11, 1, 2, 3, 0, 16, 4, 17, 15, 7, 5, 9, 10, 8, 19]
+                                    # LoLGame_leaderboard_data_organized = {}
+                                    # for i in LoLGame_leaderboard_statistics_output_order:
+                                    #     key = LoLGame_leaderboard_header_keys[i]
+                                    #     LoLGame_leaderboard_data_organized[key] = LoLGame_leaderboard_data[key]
+                                    # LoLGame_leaderboard_df = pandas.DataFrame(data = LoLGame_leaderboard_data_organized)
+                                    # for column in LoLGame_leaderboard_df:
+                                    #     if LoLGame_leaderboard_df[column].dtype == "bool":
+                                    #         LoLGame_leaderboard_df[column] = LoLGame_leaderboard_df[column].astype(str)
+                                    #         for i in range(len(LoLGame_leaderboard_df)):
+                                    #             LoLGame_leaderboard_df.loc[i, column] = "√" if LoLGame_leaderboard_df[column][i] == "True" else ""
+                                    # LoLGame_leaderboard_df = pandas.concat([pandas.DataFrame([LoLGame_leaderboard_header])[LoLGame_leaderboard_df.columns], LoLGame_leaderboard_df], ignore_index = True)
+                                    
                                     version = LoLGame_info["gameVersion"]
                                     bigVersion = ".".join(version.split(".")[:2])
                                     LoLGame_info_header = {"participantId": "玩家序号", "accountId": "账户序号", "currentAccountId": "当前账户序号", "currentPlatformId": "当前大区", "gameName": "玩家昵称", "matchHistoryUri": "", "platformId": "原大区", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "profileIcon_title": "召唤师图标名称", "profileIcon_imagePath": "召唤师图标路径", "championId": "选用英雄序号", "highestAchievedSeasonTier": "最高段位", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "选用英雄", "champion_alias": "选用英雄代号", "champion_squarePortraitPath": "选用英雄方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "causedEarlySurrender": "发起提前投降", "champLevel": "英雄等级", "combatPlayerScore": "战斗得分", "damageDealtToObjectives": "对战略点的总伤害", "damageDealtToTurrets": "对防御塔的总伤害", "damageSelfMitigated": "自我缓和的伤害", "deaths": "死亡", "doubleKills": "双杀", "earlySurrenderAccomplice": "同意提前投降", "firstBloodAssist": "协助获得第一滴血", "firstBloodKill": "第一滴血", "firstInhibitorAssist": "协助摧毁第一座召唤水晶", "firstInhibitorKill": "摧毁第一座召唤水晶", "firstTowerAssist": "协助摧毁第一座塔", "firstTowerKill": "摧毁第一座塔", "gameEndedInEarlySurrender": "提前投降导致比赛结束", "gameEndedInSurrender": "投降导致比赛结束", "goldEarned": "金币获取", "goldSpent": "金币使用", "inhibitorKills": "摧毁召唤水晶", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "killingSprees": "大杀特杀", "kills": "击杀", "largestCriticalStrike": "最大暴击伤害", "largestKillingSpree": "最高连杀", "largestMultiKill": "最高多杀", "longestTimeSpentLiving": "最长生存时间", "magicDamageDealt": "造成的魔法伤害", "magicDamageDealtToChampions": "对英雄的魔法伤害", "magicalDamageTaken": "承受的魔法伤害", "neutralMinionsKilled": "击杀野怪", "neutralMinionsKilledEnemyJungle": "击杀敌方野区野怪", "neutralMinionsKilledTeamJungle": "击杀我方野区野怪", "objectivePlayerScore": "战略点玩家得分", "pentaKills": "五杀", "perk0": "符文1序号", "perk0Var1": "符文1：参数1", "perk0Var2": "符文1：参数2", "perk0Var3": "符文1：参数3", "perk1": "符文2序号", "perk1Var1": "符文2：参数1", "perk1Var2": "符文2：参数2", "perk1Var3": "符文2：参数3", "perk2": "符文3序号", "perk2Var1": "符文3：参数1", "perk2Var2": "符文3：参数2", "perk2Var3": "符文3：参数3", "perk3": "符文4序号", "perk3Var1": "符文4：参数1", "perk3Var2": "符文4：参数2", "perk3Var3": "符文4：参数3", "perk4": "符文5序号", "perk4Var1": "符文5：参数1", "perk4Var2": "符文5：参数2", "perk4Var3": "符文5：参数3", "perk5": "符文6序号", "perk5Var1": "符文6：参数1", "perk5Var2": "符文6：参数2", "perk5Var3": "符文6：参数3", "perkPrimaryStyle": "主系序号", "perkSubStyle": "副系序号", "physicalDamageDealt": "造成的物理伤害", "physicalDamageDealtToChampions": "对英雄的物理伤害", "physicalDamageTaken": "承受的物理伤害", "playerAugment1": "强化符文1", "playerAugment2": "强化符文2", "playerAugment3": "强化符文3", "playerAugment4": "强化符文4", "playerAugment5": "强化符文5", "playerAugment6": "强化符文6", "playerScore0": "玩家得分1", "playerScore1": "玩家得分2", "playerScore2": "玩家得分3", "playerScore3": "玩家得分4", "playerScore4": "玩家得分5", "playerScore5": "玩家得分6", "playerScore6": "玩家得分7", "playerScore7": "玩家得分8", "playerScore8": "玩家得分9", "playerScore9": "玩家得分10", "playerSubteamId": "子阵营序号", "quadraKills": "四杀", "sightWardsBoughtInGame": "购买洞察之石", "subteamPlacement": "队伍排名", "teamEarlySurrendered": "队伍提前投降", "timeCCingOthers": "控制得分", "totalDamageDealt": "造成的伤害总和", "totalDamageDealtToChampions": "对英雄的伤害总和", "totalDamageTaken": "承受伤害", "totalHeal": "治疗伤害", "totalMinionsKilled": "击杀小兵", "totalPlayerScore": "玩家总得分", "totalScoreRank": "总得分排名", "totalTimeCrowdControlDealt": "控制时间", "totalUnitsHealed": "治疗单位数", "tripleKills": "三杀", "trueDamageDealt": "造成真实伤害", "trueDamageDealtToChampions": "对英雄的真实伤害", "trueDamageTaken": "承受的真实伤害", "turretKills": "摧毁防御塔", "unrealKills": "六杀及以上", "visionScore": "视野得分", "visionWardsBoughtInGame": "购买控制守卫", "wardsKilled": "摧毁守卫", "wardsPlaced": "放置守卫", "win": "胜利", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "perk0EndOfGameStatDescs": "符文1游戏结算数据", "perk1EndOfGameStatDescs": "符文2游戏结算数据", "perk2EndOfGameStatDescs": "符文3游戏结算数据", "perk3EndOfGameStatDescs": "符文4游戏结算数据", "perk4EndOfGameStatDescs": "符文5游戏结算数据", "perk5EndOfGameStatDescs": "符文6游戏结算数据", "perk0_name": "符文1名称", "perk1_name": "符文2名称", "perk2_name": "符文3名称", "perk3_name": "符文4名称", "perk4_name": "符文5名称", "perk5_name": "符文6名称", "perk0_iconPath": "符文1图标路径", "perk1_iconPath": "符文2图标路径", "perk2_iconPath": "符文3图标路径", "perk3_iconPath": "符文4图标路径", "perk4_iconPath": "符文5图标路径", "perk5_iconPath": "符文6图标路径", "perkPrimaryStyle_name": "主系名称", "perkPrimaryStyle_iconPath": "主系图标路径", "perkSubStyle_name": "副系名称", "perkSubStyle_iconPath": "副系图标路径", "playerAugment1_nameTRA": "强化符文1名称", "playerAugment2_nameTRA": "强化符文2名称", "playerAugment3_nameTRA": "强化符文3名称", "playerAugment4_nameTRA": "强化符文4名称", "playerAugment5_nameTRA": "强化符文5名称", "playerAugment6_nameTRA": "强化符文6名称", "playerAugment1_augmentIconPath": "强化符文1图标路径", "playerAugment2_augmentIconPath": "强化符文2图标路径", "playerAugment3_augmentIconPath": "强化符文3图标路径", "playerAugment4_augmentIconPath": "强化符文4图标路径", "playerAugment5_augmentIconPath": "强化符文5图标路径", "playerAugment6_augmentIconPath": "强化符文6图标路径", "playerAugment1_rarity": "强化符文1等级", "playerAugment2_rarity": "强化符文2等级", "playerAugment3_rarity": "强化符文3等级", "playerAugment4_rarity": "强化符文4等级", "playerAugment5_rarity": "强化符文5等级", "playerAugment6_rarity": "强化符文6等级", "win/lose": "胜负", "bannedChampionId": "禁用英雄序号", "bannedChampion_name": "禁用英雄", "bannedChampion_alias": "禁用英雄代号", "bannedChampion_squarePortraitPath": "禁用英雄方块头像路径", "lane": "分路", "role": "角色定位"}
@@ -2970,14 +3019,14 @@ async def search_profile(connection):
                                     LoLGame_info_data_organized = {}
                                     for i in LoLGame_info_statistics_output_order:
                                         key = LoLGame_info_header_keys[i]
-                                        LoLGame_info_data_organized[key] = [LoLGame_info_header[key]] + LoLGame_info_data[key]
+                                        LoLGame_info_data_organized[key] = LoLGame_info_data[key]
                                     LoLGame_info_df = pandas.DataFrame(data = LoLGame_info_data_organized)
-                                    for i in range(LoLGame_info_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-                                        for j in range(LoLGame_info_df.shape[1]):
-                                            if str(LoLGame_info_df.iat[i, j]) == "True":
-                                                LoLGame_info_df.iat[i, j] = "√"
-                                            elif str(LoLGame_info_df.iat[i, j]) == "False":
-                                                LoLGame_info_df.iat[i, j] = ""
+                                    for column in LoLGame_info_df:
+                                        if LoLGame_info_df[column].dtype == "bool":
+                                            LoLGame_info_df[column] = LoLGame_info_df[column].astype(str)
+                                            for i in range(len(LoLGame_info_df)):
+                                                LoLGame_info_df.loc[i, column] = "√" if LoLGame_info_df[column][i] == "True" else ""
+                                    LoLGame_info_df = pandas.concat([pandas.DataFrame([LoLGame_info_header])[LoLGame_info_df.columns], LoLGame_info_df], ignore_index = True)
                                     LoLGame_info_df = LoLGame_info_df.stack().unstack(0) #实现对局信息的行列转置（Inverse the match information table）
                                     
                                 #尝试修复错误（Try to fix the error）
@@ -3083,8 +3132,9 @@ async def search_profile(connection):
                                     LoLGame_timeline_data_organized = {}
                                     for i in LoLGame_timeline_statistics_output_order:
                                         key = LoLGame_timeline_header_keys[i]
-                                        LoLGame_timeline_data_organized[key] = [LoLGame_timeline_header[key]] + LoLGame_timeline_data[key]
+                                        LoLGame_timeline_data_organized[key] = LoLGame_timeline_data[key]
                                     LoLGame_timeline_df = pandas.DataFrame(data = LoLGame_timeline_data_organized)
+                                    LoLGame_timeline_df = pandas.concat([pandas.DataFrame([LoLGame_timeline_header])[LoLGame_timeline_df.columns], LoLGame_timeline_df], ignore_index = True)
                                     
                                     LoLGame_event_header = {"assistingParticipantIds": "助攻者序号", "assistingChampion": "助攻者英雄", "assistingChampionAlias": "助攻者英雄名称", "assistingParticipantSummonerName": "助攻者召唤师名", "assistingParticipantGameName#TagLine": "助攻者游戏名", "buildingType": "被摧毁的建筑物类型", "itemId": "购买的装备序号", "item": "获得的装备", "killerId": "击杀者序号", "killerChampion": "击杀者英雄", "killerChampionAlias": "击杀者英雄名称", "killerParticipantSummonerName": "击杀者召唤师名", "killerParticipantGameName#TagLine": "击杀者游戏名", "laneType": "线路位置", "monsterSubType": "野区生物亚型", "monsterType": "野区生物类型", "participantId": "事件参与者序号", "champion": "参与者英雄", "championAlias": "参与者英雄名称", "participantSummonerName": "参与者召唤师名", "participantGameName#TagLine": "参与者游戏名", "position": "位置坐标", "skillSlot": "学习技能槽位", "teamId": "阵营", "timestamp": "时间戳", "time": "时间", "towerType": "防御塔类型", "type": "事件类型", "victimId": "被杀者序号", "victimChampion": "被杀者英雄", "victimChampionAlias": "被杀者英雄名称", "victimParticipantSummonerName": "被杀者召唤师名", "victimParticipantGameName#TagLine": "被杀者游戏名"}
                                     LoLGame_event_data = {}
@@ -3227,13 +3277,15 @@ async def search_profile(connection):
                                     LoLGame_event_data_organized = {}
                                     for i in LoLGame_event_statistics_output_order:
                                         key = LoLGame_event_header_keys[i]
-                                        LoLGame_event_data_organized[key] = [LoLGame_event_header[key]] + LoLGame_event_data[key]
+                                        LoLGame_event_data_organized[key] = LoLGame_event_data[key]
                                     LoLGame_event_df = pandas.DataFrame(data = LoLGame_event_data_organized)
+                                    LoLGame_event_df = pandas.concat([pandas.DataFrame([LoLGame_event_header])[LoLGame_event_df.columns], LoLGame_event_df], ignore_index = True)
                                 else: #当LoLGame_info正常获取而LoLGame_timeline获取异常时，上述程序将导致无法LoLGame_timeline_df未定义。但是最后导出数据时，是根据确定的对局序号列表来生成工作表名称的，因此一定要向game_timeline_dfs中追加某个数据框，即使该数据框没有任何含义。否则不追加的话，时间轴数据框列表的长度与对局记录中的对局数量不相等，会导致时间轴内容和对局序号乱套。考虑到追加的数据框期望呈现出该对局查询时出现问题，这里选择追加LoLGame_info_df（When LoLGame_info is captured as expected but LoLGame_timeline isn't captured, the program above will cause LoLGame_timeline_df not to be defined. But note that during data export, sheet names are specified based on matchIDs. Therefore, some dataframe must be appended to game_timeline_dfs, even if it doesn't have any meaning. Otherwise, the length of game_timeline_dfs will unequal the length of matchIDs, which results in the discordance between the timeline content and the timeline sheet name. Considering the expectation for the appended dataframe to reflect that the program encountered some problem when searching this match, here LoLGame_info_df is chosen to be appended）
                                     LoLGame_timeline_df = LoLGame_info_df.copy(deep = True)
                                     LoLGame_event_df = LoLGame_info_df.copy(deep = True)
                                     timeline_exist_error[int(matchID)] = True
 
+                                # game_leaderboard_dfs[int(matchID)] = LoLGame_leaderboard_df.copy(deep = True)
                                 game_info_dfs[int(matchID)] = LoLGame_info_df.copy(deep = True) #这里添加的LoLGame_info_df会在下一次循环中发生改变，这是数据框类型的特性。因此这里采用深复制，将原有内容克隆到另外一个地址，这样能保证每次添加的是不同的对局信息（The added LoLGame_info_df will be modified next time in the loop, which belongs to the characteristics of DataFrame data type. Therefore a deep copy is used here to clone the original contents to another address, so that each time the appended content is different）
                                 game_timeline_dfs[int(matchID)] = LoLGame_timeline_df.copy(deep = True)
                                 game_event_dfs[int(matchID)] = LoLGame_event_df.copy(deep = True)
@@ -3328,7 +3380,6 @@ async def search_profile(connection):
                     TFTGamePlayed = len(TFTHistory) != 0 #标记该玩家是否进行过云顶之弈对局（Mark whether this summoner has played any TFT game）
                     TFT_main_player_indices = [] #云顶之弈对局记录中记录了所有玩家的数据，但是在历史记录的工作表中只要显示主召唤师的数据，因此必须知道每场对局中主召唤师的索引（Each match in TFT history records all players' data, but only the main player's data are needed to display in the match history worksheet, so the index of the main player in each match is necessary）
                     version_re = re.compile(r"\d*\.\d*\.\d*\.\d*") #云顶之弈的对局版本信息是一串字符串，从中识别四位对局版本（TFT match version is a long string, from which the 4-number version is identified）
-                    TFTGamePatches = [] #这里设定小版本号，以便后续切换云顶之弈相关数据的版本。这个变量实际上还未投入使用（Here a shorter patch is extracted, in case TFT data version needs changing. Actually this variable hasn't been taken to use）
                     for game in TFTHistory:
                         TFT_main_player_found = False
                         try:
@@ -3392,7 +3443,6 @@ async def search_profile(connection):
                         if TFTHistoryJson != None: #该条件等价于（This condition is equivalent to）：`TFT_main_player_indices[i] == -1`
                             TFTGameVersion = version_re.search(TFTHistoryJson["game_version"]).group()
                             TFTGamePatch = ".".join(TFTGameVersion.split(".")[:2]) #由于需要通过这部分代码事先获取所有对局的版本，因此无论如何，这部分代码都要放在与从CommunityDragon重新获取云顶之弈数据相关的代码前面（Since game patches are captured here, by all means should this part of code be in front of the code relevant to regetting TFT data from CommunityDragon）
-                            TFTGamePatches.append(TFTGamePatch)
                             #下面针对每场对局建立总的数据资源异常处理机制（Builds the summarized data resource exceptional handling mechanism for each match）
                             ##云顶之弈强化符文（TFT augments）
                             TFTAugmentIds_match_list = sorted(set(augment for lst in list(map(lambda x: x["augments"] if "augments" in x else [], TFTHistoryJson["participants"])) for augment in lst)) #`if "augments" in x`的作用是防止早期云顶之弈对局无强化符文导致程序报错（`if "augments" in x` is used here because some early TFT matches don't contain augments and result in KeyErrors consequently）
@@ -3603,7 +3653,6 @@ async def search_profile(connection):
                                     break
                         #下面开始整理数据（Sorts out the data）
                         if TFT_main_player_indices[i] == -1: #对局数据记录存在异常时的处理（Exception of match data recording exception）
-                            TFTGamePatches.append("") #后面的代码中存在对TFTGamePatches的索引，因此为了保证索引的准确性，当对局记录出现异常时，应当追加一个空版本号到版本列表中（There're indices of `TFTGamePatches`. Therefore, to ensure the correctness of the indices, an empty patch should be appended to this patch list）
                             for j in range(len(TFTHistory_header)):
                                 key = TFTHistory_header_keys[j]
                                 if j == 0: #游戏序号（`gameIndex`）
@@ -3621,6 +3670,60 @@ async def search_profile(connection):
                                     if j >= 11:
                                         TFTGame_info_data[key].append("")
                         else:
+                            # challenger_ladder_queueTypes = await (await connection.request("GET", "/lol-ranked/v1/challenger-ladders-enabled")).json()
+                            # topRated_ladder_queueTypes = await (await connection.request("GET", "/lol-ranked/v1/top-rated-ladders-enabled")).json()
+                            # ranked_queueTypes = challenger_ladder_queueTypes + topRated_ladder_queueTypes
+                            # TFTGame_leaderboard_header = {"puuid": "玩家通用唯一识别码", "displayName": "显示名", "gameName": "玩家昵称", "tagLine": "昵称编号", "division": "分级", "isProvisional": "定位中", "leaguePoints": "胜点", "losses": "负场", "miniSeriesProgress": "定位赛/晋级赛进展", "provisionalGameThreshold": "总定位场次", "provisionalGamesRemaining": "剩余定位场次", "queueType": "战区", "ratedRating": "排名分", "ratedTier": "段位", "tier": "段位", "wins": "胜场", "tier / ratedTier": "段位", "leaguePoints / ratedRating": "胜点", "timestamp": "获取时间戳", "time": "获取时间"}
+                            # TFTGame_leaderboard_header_keys = list(TFTGame_leaderboard_header.keys())
+                            # TFTGame_leaderboard_data = {}
+                            # for j in range(len(TFTGame_leaderboard_header_keys)):
+                            #     key = TFTGame_leaderboard_header_keys[j]
+                            #     TFTGame_leaderboard_data[key] = []
+                            # for queueType in ranked_queueTypes:
+                            #     TFTGame_leaderboard = await (await connection.request("GET", "/lol-ranked/v1/social-leaderboard-ranked-queue-stats-for-puuids?queueType=%s&puuids=%s" %(queueType, str(TFTHistory[i]["metadata"]["participants"]).replace(" ", "").replace("'", '"')))).json()
+                            #     for participant_puuid_iter in TFTGame_leaderboard:
+                            #         participant_leaderboard = TFTGame_leaderboard[participant_puuid_iter]
+                            #         participantInfo = await get_info(connection, participant_puuid_iter)
+                            #         if participantInfo["info_got"]:
+                            #             participantInfo_body = participantInfo["body"]
+                            #             for j in range(len(TFTGame_leaderboard_header_keys)):
+                            #                 key = TFTGame_leaderboard_header_keys[j]
+                            #                 if j <= 3:
+                            #                     TFTGame_leaderboard_data[key].append(participantInfo_body[key])
+                            #                 elif j <= 15:
+                            #                     if j == 4: #分级（`division`）
+                            #                         TFTGame_leaderboard_data[key].append("" if participant_leaderboard[key] == "NA" else participant_leaderboard[key])
+                            #                     elif j == 11: #战区（`queueType`）
+                            #                         TFTGame_leaderboard_data[key].append(queueTypes[participant_leaderboard[key]])
+                            #                     elif j == 13: #段位（`ratedTier`）
+                            #                         TFTGame_leaderboard_data[key].append(ratedTiers[participant_leaderboard[key]])
+                            #                     elif j == 14: #段位（`tier`）
+                            #                         TFTGame_leaderboard_data[key].append(tiers[participant_leaderboard[key]])
+                            #                     else:
+                            #                         TFTGame_leaderboard_data[key].append(participant_leaderboard[key])
+                            #                 elif j == 16: #段位（`tier / ratedTier`）
+                            #                     TFTGame_leaderboard_data[key].append(ratedTiers[participant_leaderboard["ratedTier"]] if queueType in topRated_ladder_queueTypes else tiers[participant_leaderboard["tier"]])
+                            #                 elif j == 17: #胜点（`leaguePoints / ratedRating`）
+                            #                     TFTGame_leaderboard_data[key].append(participant_leaderboard["ratedRating"] if queueType in topRated_ladder_queueTypes else participant_leaderboard["leaguePoints"])
+                            #                 elif j == 18: #获取时间戳（`timestamp`）
+                            #                     TFTGame_leaderboard_data[key].append(time.time())
+                            #                 else: #获取时间（`time`）
+                            #                     TFTGame_leaderboard_data[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime()))
+                            #         else:
+                            #             print(participantInfo["message"])
+                            # TFTGame_leaderboard_statistics_output_order = [11, 1, 2, 3, 0, 16, 4, 17, 15, 7, 5, 9, 10, 8, 19]
+                            # TFTGame_leaderboard_data_organized = {}
+                            # for i in TFTGame_leaderboard_statistics_output_order:
+                            #     key = TFTGame_leaderboard_header_keys[i]
+                            #     TFTGame_leaderboard_data_organized[key] = TFTGame_leaderboard_data[key]
+                            # TFTGame_leaderboard_df = pandas.DataFrame(data = TFTGame_leaderboard_data_organized)
+                            # for column in TFTGame_leaderboard_df:
+                            #     if TFTGame_leaderboard_df[column].dtype == "bool":
+                            #         TFTGame_leaderboard_df[column] = TFTGame_leaderboard_df[column].astype(str)
+                            #         for i in range(len(TFTGame_leaderboard_df)):
+                            #             TFTGame_leaderboard_df.loc[i, column] = "√" if TFTGame_leaderboard_df[column][i] == "True" else ""
+                            # TFTGame_leaderboard_df = pandas.concat([pandas.DataFrame([TFTGame_leaderboard_header])[TFTGame_leaderboard_df.columns], TFTGame_leaderboard_df], ignore_index = True)
+                            
                             for j in range(len(TFTHistory_header)):
                                 key = TFTHistory_header_keys[j]
                                 if j == 0: #游戏序号（`gameIndex`）
@@ -3891,18 +3994,21 @@ async def search_profile(connection):
                         TFTGame_info_data_organized = {}
                         for j in TFTGame_info_statistics_output_order:
                             key = TFTHistory_header_keys[j + 11]
-                            TFTGame_info_data_organized[key] = [TFTHistory_header[key]] + TFTGame_info_data[key]
+                            TFTGame_info_data_organized[key] = TFTGame_info_data[key]
                         TFTGame_info_df = pandas.DataFrame(data = TFTGame_info_data_organized)
+                        TFTGame_info_df = pandas.concat([pandas.DataFrame([TFTHistory_header])[TFTGame_info_df.columns], TFTGame_info_df], ignore_index = True)
                         TFTGame_info_df = TFTGame_info_df.stack().unstack(0)
                         if not (update_unsaved_only and matchID in saved_TFTMatchIDs):
                             game_info_dfs[matchID] = TFTGame_info_df.copy(deep = True)
+                            # game_leaderboard_dfs[matchID] = TFTGame_leaderboard_df.copy(deep = True)
                         
                     TFTHistory_statistics_output_order = [0, 4, 2, 3, 5, 7, 8, 6, 10, 25, 26, 27, 30, 29, 34, 28, 35, 32, 31, 15, 16, 17, 134, 132, 133, 187, 190, 193, 139, 137, 138, 196, 199, 202, 144, 142, 143, 205, 208, 211, 149, 147, 148, 214, 217, 220, 154, 152, 153, 223, 226, 229, 159, 157, 158, 232, 235, 238, 164, 162, 163, 241, 244, 247, 169, 167, 168, 250, 253, 256, 174, 172, 173, 259, 262, 265, 179, 177, 178, 268, 271, 274, 184, 182, 183, 277, 280, 283, 45, 41, 42, 43, 44, 52, 48, 49, 50, 51, 59, 55, 56, 57, 58, 66, 62, 63, 64, 65, 73, 69, 70, 71, 72, 80, 76, 77, 78, 79, 87, 83, 84, 85, 86, 94, 90, 91, 92, 93, 101, 97, 98, 99, 100, 108, 104, 105, 106, 107, 115, 111, 112, 113, 114, 122, 118, 119, 120, 121, 129, 125, 126, 127, 128]
                     TFTHistory_data_organized = {}
                     for i in TFTHistory_statistics_output_order:
                         key = TFTHistory_header_keys[i]
-                        TFTHistory_data_organized[key] = [TFTHistory_header[key]] + TFTHistory_data[key]
+                        TFTHistory_data_organized[key] = TFTHistory_data[key]
                     TFTHistory_df = pandas.DataFrame(data = TFTHistory_data_organized)
+                    TFTHistory_df = pandas.concat([pandas.DataFrame([TFTHistory_header])[TFTHistory_df.columns], TFTHistory_df], ignore_index = True)
                     if TFTGamePlayed:
                         print(TFTHistory_df[:min(21, len(TFTHistory_df) + 1)])
                     else:
@@ -3917,20 +4023,14 @@ async def search_profile(connection):
                 for i in range(len(matchIDs)):
                     if not match_reserve_strategy[matchIDs[i]]:
                         sheetNumber[matchIDs[i]] = 0
-                    elif info_exist_error[matchIDs[i]] and not timeline_exist_error[matchIDs[i]]:
-                        sheetNumber[matchIDs[i]] = 2
-                    elif not info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
-                        sheetNumber[matchIDs[i]] = 1
-                    elif info_exist_error[matchIDs[i]] and timeline_exist_error[matchIDs[i]]:
-                        sheetNumber[matchIDs[i]] = 0
                     else:
-                        sheetNumber[matchIDs[i]] = 3
+                        sheetNumber[matchIDs[i]] = info_exist_error[matchIDs[i]] + 2 * timeline_exist_error[matchIDs[i]]
                 
-                recent_players_df = pandas.DataFrame() #起到占位作用，保证在使用自定义脚本11时生成的近期一起玩过的玩家数据一定是工作簿的第4和5张工作表（Act as a placeholder to ensure the recent played summoner data from Customized Program 11 are in the fourth and fifth sheets in the workbook)
+                recent_players_df = pandas.DataFrame() #起到占位作用，保证在使用自定义脚本11时生成的近期一起玩过的玩家数据一定是工作簿的第5和6张工作表（Act as a placeholder to ensure the recent played summoner data from Customized Program 11 are in the fifth and sixth sheets in the workbook)
                 if not LoLHistory_searched:
-                    LoLHistory_df = pandas.DataFrame() #起到占位作用，保证在使用本脚本时生成的英雄联盟对局记录一定是工作簿的第6或7张工作表（Act as a placeholder to ensure the LoL match history data from this program when running [One-Key Query] are in the sixth or seventh sheet in the workbook)
+                    LoLHistory_df = pandas.DataFrame() #起到占位作用，保证在使用本脚本时生成的英雄联盟对局记录一定是工作簿的第7张工作表（Act as a placeholder to ensure the LoL match history data from this program when running [One-Key Query] are in the seventh sheet in the workbook)
                 if not TFTHistory_searched:
-                    TFTHistory_df = pandas.DataFrame() #起到占位作用，保证在使用本脚本时生成的英雄联盟对局记录一定是工作簿的第8张工作表（Act as a placeholder to ensure the LoL match history data from this program when running [One-Key Query] are in the eighth sheet in the workbook)
+                    TFTHistory_df = pandas.DataFrame() #起到占位作用，保证在使用本脚本时生成的英雄联盟对局记录一定是工作簿的第8或9张工作表（Act as a placeholder to ensure the LoL match history data from this program when running [One-Key Query] are in the eighth or ninth sheet in the workbook)
 
                 #with open("infos.json", "w", encoding = "utf-8") as fp:
                     #json.dump(infos, fp, indent = 4, ensure_ascii = False)
@@ -3987,6 +4087,8 @@ async def search_profile(connection):
                                     if match_reserve_strategy[matchIDs[i]]:
                                         match_reserved += 1
                                         if not info_exist_error[matchIDs[i]]:
+                                            # game_leaderboard_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Leaderboard")
+                                            # print("对局段位排行榜导出完成。\nMatch leaderboard exported.")
                                             game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
                                             print("对局信息导出完成。\nMatch information exported.")
                                         if not timeline_exist_error[matchIDs[i]]:
@@ -4070,6 +4172,8 @@ async def search_profile(connection):
                                     if match_reserve_strategy[matchIDs[i]]:
                                         match_reserved += 1
                                         if not info_exist_error[matchIDs[i]]:
+                                            # game_leaderboard_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Leaderboard")
+                                            # print("对局段位排行榜导出完成。\nMatch leaderboard exported.")
                                             game_info_dfs[matchIDs[i]].to_excel(excel_writer = writer, sheet_name = "Match " + str(matchIDs[i]) + " - Information")
                                             print("对局信息导出完成。\nMatch information exported.")
                                         if not timeline_exist_error[matchIDs[i]]:
@@ -4129,6 +4233,8 @@ async def search_profile(connection):
                                     if sheet_iter in sheetnames:
                                         sheetnames_sorted.append(sheet_iter)
                                 for matchID in sorted(match_dict.keys()):
+                                    if "L" in match_dict[matchID]:
+                                        sheetnames_sorted.append(match_dict[matchID]["L"])
                                     if "I" in match_dict[matchID]:
                                         sheetnames_sorted.append(match_dict[matchID]["I"])
                                     if "T" in match_dict[matchID]:

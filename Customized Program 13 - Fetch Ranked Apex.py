@@ -142,12 +142,12 @@ async def get_info(connection, name: str, searchType: str | int = "riotId"):
     return result
 
 async def get_challenger_tier(connection):
-    platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
-    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "ME1": "中东服（Middle East）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
-    platform_GARENA = {"PH": "菲律宾服（Philippines）", "SG": "新加坡服（Singapore, Malaysia and Indonesia）", "TW": "台服（Taiwan, Hong Kong and Macau）", "VN": "越南服（Vietnam）", "TH": "泰服（Thailand）"}
-    platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
     platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     platformId = platform_config["LoginDataPacket"]["platformId"]
+    platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
+    platform_RIOT = {"ME1": "中东服（Middle East）", "BR1": "巴西服（Brazil）", "EUN1": "北欧和东欧服（Europe Nordic & East）", "EUW1": "西欧服（Europe West）", "JP1": "日服（Japan）", "KR": "韩服（Republic of Korea）", "LA1": "北拉美服（Latin America North）", "LA2": "南拉美服（Latin America South）", "NA1": "北美服（North America）", "OC1": "大洋洲服（Oceania）", "TR1": "土耳其服（Turkey）", "RU": "俄罗斯服（Russia）", "PH2": "菲律宾服（Philippines）", "SG2": "新加坡服（Singapore）", "TH2": "泰服（Thailand）", "TW2": "台服（Taiwan, Hong Kong and Macau）", "VN2": "越南服（Vietnam）", "PBE1": "测试服（Public Beta Environment）"}
+    platform_GARENA = {"PH1": "菲律宾服（Philippines）", "SG1": "新加坡服（Singapore, Malaysia and Indonesia）", "TW1": "台服（Taiwan, Hong Kong and Macau）", "VN1": "越南服（Vietnam）", "TH1": "泰服（Thailand）"}
+    platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
     #下面设置输出文件的位置（The following code determines the output files' location）
     riot_client_info = await (await connection.request("GET", "/riotclient/command-line-args")).json()
     client_info = {}
@@ -160,102 +160,104 @@ async def get_challenger_tier(connection):
     currentSeason = platform_config["ClientSystemStates"]["currentSeason"] #API中记录的赛季与平常所说的赛季有所不同（The season recorded in API is different from the often mentioned season）
     currentSplit = int(platform_config["LeagueConfig"]["CurrentSplit"]) + 1 #API中记录的赛段序号从0开始，平常所说的赛季序号从1开始，因此要加1（The split recorded in API counts from 0, while the split that people usually talk about counts from 1, so 1 should be added here）
     if region == "TENCENT":
-        folder = "顶尖排位玩家（Ranked Apex）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[client_info["--rso_platform_id"]] + "\\" + "第%d赛季 - 第%d赛段（SEASON %d - Split %d）" %(currentSeason, currentSplit, currentSeason, currentSplit)
+        folder = "顶尖排位玩家（Ranked Apex）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[platformId] + "\\" + "第%d赛季 - 第%d赛段（SEASON %d - Split %d）" %(currentSeason, currentSplit, currentSeason, currentSplit)
     elif region == "GARENA":
-        folder = "顶尖排位玩家（Ranked Apex）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[region] + "\\" + "第%d赛季 - 第%d赛段（SEASON %d - Split %d）" %(currentSeason, currentSplit, currentSeason, currentSplit)
+        folder = "顶尖排位玩家（Ranked Apex）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[platformId] + "\\" + "第%d赛季 - 第%d赛段（SEASON %d - Split %d）" %(currentSeason, currentSplit, currentSeason, currentSplit)
     else: #拳头公司与竞舞娱乐公司的合同于2023年1月终止（In January 2023, Riot Games ended its contract with Garena）
-        folder = "顶尖排位玩家（Ranked Apex）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[region] + "\\" + "第%d赛季 - 第%d赛段（SEASON %d - Split %d）" %(currentSeason, currentSplit, currentSeason, currentSplit)
+        folder = "顶尖排位玩家（Ranked Apex）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[platformId] + "\\" + "第%d赛季 - 第%d赛段（SEASON %d - Split %d）" %(currentSeason, currentSplit, currentSeason, currentSplit)
     
-    splitsConfig = await (await connection.request("GET", "/lol-ranked/v1/splits-config")).json()
-    json1name = "SplitsConfig (Season %d).json" %currentSeason
-    while True:
-        try:
-            with open(os.path.join(folder, json1name), "w", encoding = "utf-8") as jsonfile1:
-                json.dump(splitsConfig, jsonfile1, indent = 4, ensure_ascii = False)
-        except FileNotFoundError:
-            os.makedirs(folder, exist_ok = True)
-        except UnicodeEncodeError:
-            print("\n赛季信息文本文档生成失败！请检查内容是否包含不常用字符！\nSplit config text generation failure! Please check if the content includes any abnormal characters!\n")
-            break
-        else:
-            print('\n赛季信息已保存为“%s”。\nSplit config is saved as "%s".\n' %(os.path.join(folder, json1name), os.path.join(folder, json1name)))
-            break
-    splits_info_header = {"endTimeMillis": "赛段结束时间戳（毫秒）", "endTime": "赛段结束时间", "seasonId": "赛季序号", "splitId": "赛段序号", "startTimeMillis": "赛段开始时间戳（毫秒）", "startTime": "赛段开始时间", "victoriousSkinReward: itemInstanceId": "胜利系列皮肤奖励：物品识别码", "victoriousSkinRewardLevel: BRONZE": "英勇黄铜胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: CHALLENGER": "最强王者胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: DIAMOND": "璀璨钻石胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: EMERALD": "流光翡翠胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: GOLD": "荣耀黄金胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: GRANDMASTER": "傲世宗师胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: IRON": "坚韧黑铁胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: MASTER": "超凡大师胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: PLATINUM": "华贵铂金胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: SILVER": "不屈白银胜利系列皮肤所需赛段点数"}
-    splits_info_header_keys = list(splits_info_header.keys())
-    splits_info_data = {}
-    for i in range(len(splits_info_header_keys)):
-        key = splits_info_header_keys[i]
-        splits_info_data[key] = []
-    for i in range(len(splitsConfig["splits"])):
-        split = splitsConfig["splits"][i]
-        for j in range(len(splits_info_header_keys)):
-            key = splits_info_header_keys[j]
-            if j <= 5:
-                if j == 1 or j == 5:
-                    splits_info_data[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(split[key + "Millis"] // 1000)))
-                else:
-                    splits_info_data[key].append(split[key])
-            elif j == 6:
-                splits_info_data[key].append(split["victoriousSkinRewardGroup"]["itemInstanceId"])
-            else:
-                splits_info_data[key].append(split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"][key[27:]] if key[27:] in split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"] else 0)
-        print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-        print("赛季信息整理进度（Split config sorting process）：%d/%d" %(i + 1, len(splitsConfig["splits"])))
-    splits_info_statistics_output_order = [2, 3, 4, 5, 0, 1, 6, 13, 7, 16, 11, 15, 10, 9, 14, 12, 8]
-    splits_info_data_organized = {}
-    for i in splits_info_statistics_output_order:
-        key = splits_info_header_keys[i]
-        splits_info_data_organized[key] = [splits_info_header[key]] + splits_info_data[key]
-    splits_info_df = pandas.DataFrame(data = splits_info_data_organized)
+    # splitsConfig = await (await connection.request("GET", "/lol-ranked/v1/splits-config")).json()
+    # json1name = "SplitsConfig (Season %d).json" %currentSeason
+    # while True:
+    #     try:
+    #         with open(os.path.join(folder, json1name), "w", encoding = "utf-8") as jsonfile1:
+    #             json.dump(splitsConfig, jsonfile1, indent = 4, ensure_ascii = False)
+    #     except FileNotFoundError:
+    #         os.makedirs(folder, exist_ok = True)
+    #     except UnicodeEncodeError:
+    #         print("\n赛季信息文本文档生成失败！请检查内容是否包含不常用字符！\nSplit config text generation failure! Please check if the content includes any abnormal characters!\n")
+    #         break
+    #     else:
+    #         print('\n赛季信息已保存为“%s”。\nSplit config is saved as "%s".\n' %(os.path.join(folder, json1name), os.path.join(folder, json1name)))
+    #         break
+    # splits_info_header = {"endTimeMillis": "赛段结束时间戳（毫秒）", "endTime": "赛段结束时间", "seasonId": "赛季序号", "splitId": "赛段序号", "startTimeMillis": "赛段开始时间戳（毫秒）", "startTime": "赛段开始时间", "victoriousSkinReward: itemInstanceId": "胜利系列皮肤奖励：物品识别码", "victoriousSkinRewardLevel: BRONZE": "英勇黄铜胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: CHALLENGER": "最强王者胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: DIAMOND": "璀璨钻石胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: EMERALD": "流光翡翠胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: GOLD": "荣耀黄金胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: GRANDMASTER": "傲世宗师胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: IRON": "坚韧黑铁胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: MASTER": "超凡大师胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: PLATINUM": "华贵铂金胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: SILVER": "不屈白银胜利系列皮肤所需赛段点数"}
+    # splits_info_header_keys = list(splits_info_header.keys())
+    # splits_info_data = {}
+    # for i in range(len(splits_info_header_keys)):
+    #     key = splits_info_header_keys[i]
+    #     splits_info_data[key] = []
+    # for i in range(len(splitsConfig["splits"])):
+    #     split = splitsConfig["splits"][i]
+    #     for j in range(len(splits_info_header_keys)):
+    #         key = splits_info_header_keys[j]
+    #         if j <= 5:
+    #             if j == 1 or j == 5:
+    #                 splits_info_data[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(split[key + "Millis"] // 1000)))
+    #             else:
+    #                 splits_info_data[key].append(split[key])
+    #         elif j == 6:
+    #             splits_info_data[key].append(split["victoriousSkinRewardGroup"]["itemInstanceId"])
+    #         else:
+    #             splits_info_data[key].append(split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"][key[27:]] if key[27:] in split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"] else 0)
+    #     print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+    #     print("赛季信息整理进度（Split config sorting process）：%d/%d" %(i + 1, len(splitsConfig["splits"])))
+    # splits_info_statistics_output_order = [2, 3, 4, 5, 0, 1, 6, 13, 7, 16, 11, 15, 10, 9, 14, 12, 8]
+    # splits_info_data_organized = {}
+    # for i in splits_info_statistics_output_order:
+    #     key = splits_info_header_keys[i]
+    #     splits_info_data_organized[key] = splits_info_data[key]
+    # splits_info_df = pandas.DataFrame(data = splits_info_data_organized)
+    # splits_info_df = pandas.concat([pandas.DataFrame([splits_info_header])[splits_info_df.columns], splits_info_df], ignore_index = True)
     
-    rewardTrack_header = {"seasonId": "赛季序号", "rewardTrackId": "奖励顺序", "championId": "英雄序号", "description": "描述", "id": "奖励代码", "pointsRequired": "所需赛段点", "quantity": "数量", "regaliaLevel": "排位徽章等级", "rewardType": "奖品类型", "splitId": "发放赛段序号", "name": "奖品名称"}
-    rewardTrack_header_keys = list(rewardTrack_header.keys())
-    rewardTrack_data = {}
-    rewardTypes = {"CHAMPION_TOKEN": "成就代币", "EMOTE": "永久表情", "ETERNALS_CAPSULE": "永恒星碑魔法引擎", "HEXTECH_CHEST": "海克斯科技宝箱", "HEXTECH_KEY": "海克斯科技钥匙", "HEXTECH_KEY_FRAGMENT": "海克斯科技钥匙碎片", "MASTERWORK_CHEST": "杰作宝箱", "MYSTERY_EMOTE": "神秘表情", "ORANGE_ESSENCE": "橙色精萃", "SUMMONER_ICON": "召唤师图标", "WARD_SHARD": "守卫碎片"}
-    #下面整理奖品识别码和奖品名称的对应关系（The following code sorts out the relationship between the itemInstanceIds and the rewardNames）
-    rewardNames = {}
-    inventoryTypes = ["ACHIEVEMENT_TITLE", "AUGMENT", "AUGMENT_SLOT", "BOOST", "BUNDLES", "CHAMPION", "CHAMPION_SKIN", "COMPANION", "CURRENCY", "EMOTE", "EVENT_PASS", "GIFT", "HEXTECH_CRAFTING", "MODE_PROGRESSION_REWARD", "MYSTERY", "QUEUE_ENTRY", "REGALIA_BANNER", "REGALIA_CREST", "RP", "SKIN_AUGMENT", "SKIN_BORDER", "SPELL_BOOK_PAGE", "STATSTONE", "STRAWBERRY_BOON", "STRAWBERRY_LOADOUT_ITEM", "STRAWBERRY_MAP", "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON", "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN", "TFT_MAP_SKIN", "TFT_PLAYBOOK", "TOURNAMENT_FLAG", "TOURNAMENT_FRAME", "TOURNAMENT_LOGO", "TOURNAMENT_TROPHY", "TRANSFER", "WARD_SKIN"]
-    for inventoryType in inventoryTypes:
-        items = await (await connection.request("GET", "/lol-catalog/v1/items/" + inventoryType)).json()
-        rewardNames |= {item["itemInstanceId"]: item["name"] for item in items}
-    for i in range(len(rewardTrack_header_keys)):
-        key = rewardTrack_header_keys[i]
-        rewardTrack_data[key] = []
-    for i in range(len(splitsConfig["splits"])):
-        split = splitsConfig["splits"][i]
-        for j in range(len(split["rewardTrack"])):
-            rewards = split["rewardTrack"][j]["rewards"]
-            for k in range(len(rewards)):
-                reward = rewards[k]
-                for l in range(len(rewardTrack_header_keys)):
-                    key = rewardTrack_header_keys[l]
-                    if l == 0:
-                        rewardTrack_data[key].append(split["seasonId"])
-                    elif l == 1:
-                        rewardTrack_data[key].append(j)
-                    elif l <= 9:
-                        if l == 8:
-                            rewardTrack_data[key].append(rewardTypes[reward[key]])
-                        else:
-                            rewardTrack_data[key].append(reward[key])
-                    else:
-                        rewardTrack_data[key].append(rewardNames.get(reward["id"], ""))
-                print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-                print("奖励里程整理进度（Reward track sorting process）：[%d/%d][%d/%d][%d/%d]" %(i + 1, len(splitsConfig["splits"]), j + 1, len(split["rewardTrack"]), k + 1, len(rewards)))
-    rewardTrack_statistics_output_order = [0, 9, 1, 10, 4, 8, 2, 6, 3, 5, 7]
-    rewardTrack_data_organized = {}
-    for i in rewardTrack_statistics_output_order:
-        key = rewardTrack_header_keys[i]
-        rewardTrack_data_organized[key] = [rewardTrack_header[key]] + rewardTrack_data[key]
-    rewardTrack_df = pandas.DataFrame(data = rewardTrack_data_organized)
+    # rewardTrack_header = {"seasonId": "赛季序号", "rewardTrackId": "奖励顺序", "championId": "英雄序号", "description": "描述", "id": "奖励代码", "pointsRequired": "所需赛段点", "quantity": "数量", "regaliaLevel": "排位徽章等级", "rewardType": "奖品类型", "splitId": "发放赛段序号", "name": "奖品名称"}
+    # rewardTrack_header_keys = list(rewardTrack_header.keys())
+    # rewardTrack_data = {}
+    # rewardTypes = {"CHAMPION_TOKEN": "成就代币", "EMOTE": "永久表情", "ETERNALS_CAPSULE": "永恒星碑魔法引擎", "HEXTECH_CHEST": "海克斯科技宝箱", "HEXTECH_KEY": "海克斯科技钥匙", "HEXTECH_KEY_FRAGMENT": "海克斯科技钥匙碎片", "MASTERWORK_CHEST": "杰作宝箱", "MYSTERY_EMOTE": "神秘表情", "ORANGE_ESSENCE": "橙色精萃", "SUMMONER_ICON": "召唤师图标", "WARD_SHARD": "守卫碎片"}
+    # #下面整理奖品识别码和奖品名称的对应关系（The following code sorts out the relationship between the itemInstanceIds and the rewardNames）
+    # rewardNames = {}
+    # inventoryTypes = ["ACHIEVEMENT_BANNER_ACCENT", "ACHIEVEMENT_TITLE", "ANNOUNCER_PACK", "AUGMENT", "AUGMENT_SLOT", "BOOST", "BUNDLES", "CHAMPION", "CHAMPION_SKIN", "CHERRY_BOON", "COMPANION", "CURRENCY", "EMOTE", "EVENT_PASS", "FANPASS", "GIFT", "HEXTECH_CRAFTING", "MODE_PROGRESSION_REWARD", "MYSTERY", "NEXUS_FINISHER", "PREMIUM_CLUB_MEMBERSHIP", "PROVIEW_PASS", "PVE_RELIC", "PVE_SUMMONER_PACKAGE", "PVE_UPGRADE", "QUEUE_ENTRY", "REGALIA_BANNER", "REGALIA_BORDER", "REGALIA_CREST", "RP", "RUNE", "SKIN_AUGMENT", "SKIN_BORDER", "SKIN_UPGRADE_GEAR", "SKIN_UPGRADE_HOME_GUARD", "SKIN_UPGRADE_RECALL", "SKIN_UPGRADE_SPAWN", "SPELL_BOOK_PAGE", "STATSTONE", "STRAWBERRY_BOON", "STRAWBERRY_LOADOUT_ITEM", "STRAWBERRY_MAP", "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON", "TEAMPASS", "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN", "TFT_EVENT_SKILLS", "TFT_MAP_SKIN", "TFT_PLAYBOOK", "TFT_ZOOM_SKIN", "TOURNAMENT_FLAG", "TOURNAMENT_FRAME", "TOURNAMENT_LOGO", "TOURNAMENT_TROPHY", "TRANSFER", "WARD_SKIN"]
+    # for inventoryType in inventoryTypes:
+    #     items = await (await connection.request("GET", "/lol-catalog/v1/items/" + inventoryType)).json()
+    #     rewardNames |= {item["itemInstanceId"]: item["name"] for item in items}
+    # for i in range(len(rewardTrack_header_keys)):
+    #     key = rewardTrack_header_keys[i]
+    #     rewardTrack_data[key] = []
+    # for i in range(len(splitsConfig["splits"])):
+    #     split = splitsConfig["splits"][i]
+    #     for j in range(len(split["rewardTrack"])):
+    #         rewards = split["rewardTrack"][j]["rewards"]
+    #         for k in range(len(rewards)):
+    #             reward = rewards[k]
+    #             for l in range(len(rewardTrack_header_keys)):
+    #                 key = rewardTrack_header_keys[l]
+    #                 if l == 0:
+    #                     rewardTrack_data[key].append(split["seasonId"])
+    #                 elif l == 1:
+    #                     rewardTrack_data[key].append(j)
+    #                 elif l <= 9:
+    #                     if l == 8:
+    #                         rewardTrack_data[key].append(rewardTypes[reward[key]])
+    #                     else:
+    #                         rewardTrack_data[key].append(reward[key])
+    #                 else:
+    #                     rewardTrack_data[key].append(rewardNames.get(reward["id"], ""))
+    #             print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+    #             print("奖励里程整理进度（Reward track sorting process）：[%d/%d][%d/%d][%d/%d]" %(i + 1, len(splitsConfig["splits"]), j + 1, len(split["rewardTrack"]), k + 1, len(rewards)))
+    # rewardTrack_statistics_output_order = [0, 9, 1, 10, 4, 8, 2, 6, 3, 5, 7]
+    # rewardTrack_data_organized = {}
+    # for i in rewardTrack_statistics_output_order:
+    #     key = rewardTrack_header_keys[i]
+    #     rewardTrack_data_organized[key] = rewardTrack_data[key]
+    # rewardTrack_df = pandas.DataFrame(data = rewardTrack_data_organized)
+    # rewardTrack_df = pandas.concat([pandas.DataFrame([rewardTrack_header])[rewardTrack_df.columns], rewardTrack_df], ignore_index = True)
     
     tiers_zh = {"": "", "NONE": "没有段位", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
     tiers_en = {"": "", "NONE": "NONE", "IRON": "IRON", "BRONZE": "BRONZE", "SILVER": "SILVER", "GOLD": "GOLD", "PLATINUM": "PLATINUM", "EMERALD": "EMERALD", "DIAMOND": "DIAMOND", "MASTER": "MASTER", "GRANDMASTER": "GRANDMASTER", "CHALLENGER": "CHALLENGER"}
     ratedTiers_turbo = {"": "", "NONE": "没有段位", "GRAY": "灰白", "GREEN": "翠绿", "BLUE": "天蓝", "PURPLE": "绛紫", "ORANGE": "耀橙"}
     ratedTiers_cherry = {"": "", "NONE": "没有段位", "GRAY": "木木角斗士", "GREEN": "青铜角斗士", "BLUE": "白银角斗士", "PURPLE": "黄金角斗士", "ORANGE": "王者角斗士"}
     #ratedTiers = {"": "", "NONE": "NONE", "GRAY": "GRAY", "GREEN": "GREEN", "BLUE": "BLUE", "PURPLE": "PURPLE", "ORANGE": "ORANGE"}
-    queueTypes_zh = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战 (BETA测试)", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
-    queueTypes_en = {"RANKED_SOLO_5x5": "Ranked Solo/Duo", "RANKED_FLEX_SR": "Ranked Flex", "RANKED_TFT": "Ranked TFT", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "Double Up (Workshop)", "RANKED_TFT_TURBO": "Hyper Roll", "CHERRY": "Arena"}
+    queueTypes_zh = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
+    queueTypes_en = {"RANKED_SOLO_5x5": "Ranked Solo/Duo", "RANKED_FLEX_SR": "Ranked Flex", "RANKED_TFT": "Ranked TFT", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "Double Up", "RANKED_TFT_TURBO": "Hyper Roll", "CHERRY": "Arena"}
     challenger_ladder_queueTypes = await (await connection.request("GET", "/lol-ranked/v1/challenger-ladders-enabled")).json()
     challenger_ladders_metadata_header = {"nextApexUpdateMillis": "下次天梯更新时间戳（毫秒）", "nextApexUpdate": "下次天梯更新时间", "provisionalGameThreshold": "定位赛场次", "queueType": "队列类型", "requestedRankedEntry": "排位解锁条件", "apexUnlockTimeMillis": "天梯解锁时间戳（毫秒）", "apexUnlockTime": "天梯解锁时间", "division": "段位分级", "maxLeagueSize": "段位容量", "minLpForApexTier": "上榜所需胜点", "tier": "段位", "topNumberOfPlayers": "上榜所需名次"}
     challenger_ladders_metadata_header_keys = list(challenger_ladders_metadata_header.keys())
@@ -332,23 +334,24 @@ async def get_challenger_tier(connection):
         queue_ladder_data_organized = {}
         for i in challenger_ladders_statistics_output_order:
             key = challenger_ladders_header_keys[i]
-            queue_ladder_data_organized[key] = [challenger_ladders_header[key]] + queue_ladder_data[key]
+            queue_ladder_data_organized[key] = queue_ladder_data[key]
         ladders_data["challenger_ladder"][queueType] = queue_ladder_data_organized #注意字典赋值的原理。该语句其实无关紧要（Pay attention to the principle of assigning a dictionary. This statement is actually unnecessary）
         ladders_dfs["challenger_ladder"][queueType] = pandas.DataFrame(data = queue_ladder_data_organized)
         print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
-        for i in range(ladders_dfs["challenger_ladder"][queueType].shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-            for j in range(ladders_dfs["challenger_ladder"][queueType].shape[1]):
-                if str(ladders_dfs["challenger_ladder"][queueType].iat[i, j]) == "True":
-                    ladders_dfs["challenger_ladder"][queueType].iat[i, j] = "√"
-                elif str(ladders_dfs["challenger_ladder"][queueType].iat[i, j]) == "False":
-                    ladders_dfs["challenger_ladder"][queueType].iat[i, j] = ""
+        for column in ladders_dfs["challenger_ladder"][queueType]:
+            if ladders_dfs["challenger_ladder"][queueType][column].dtype == "bool":
+                ladders_dfs["challenger_ladder"][queueType][column] = ladders_dfs["challenger_ladder"][queueType][column].astype(str)
+                for i in range(len(ladders_dfs["challenger_ladder"][queueType])):
+                    ladders_dfs["challenger_ladder"][queueType].loc[i, column] = "√" if ladders_dfs["challenger_ladder"][queueType][column][i] == "True" else ""
         print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+        ladders_dfs["challenger_ladder"][queueType] = pandas.concat([pandas.DataFrame([challenger_ladders_header])[ladders_dfs["challenger_ladder"][queueType].columns], ladders_dfs["challenger_ladder"][queueType]], ignore_index = True)
     challenger_ladders_metadata_statistics_output_order = [3, 10, 7, 2, 8, 11, 9, 4, 0, 1, 5, 6]
     challenger_ladders_metadata_organized = {}
     for i in challenger_ladders_metadata_statistics_output_order:
         key = challenger_ladders_metadata_header_keys[i]
-        challenger_ladders_metadata_organized[key] = [challenger_ladders_metadata_header[key]] + challenger_ladders_metadata[key]
+        challenger_ladders_metadata_organized[key] = challenger_ladders_metadata[key]
     challenger_ladders_metadata_df = pandas.DataFrame(data = challenger_ladders_metadata_organized)
+    challenger_ladders_metadata_df = pandas.concat([pandas.DataFrame([challenger_ladders_metadata_header])[challenger_ladders_metadata_df.columns], challenger_ladders_metadata_df], ignore_index = True)
     
     topRated_ladder_queueTypes = await (await connection.request("GET", "/lol-ranked/v1/top-rated-ladders-enabled")).json()
     topRated_ladders_header = {"leaguePoints": "排名分", "position": "当前位次", "positionDelta": "位次变化", "previousPosition": "过往位次", "puuid": "玩家通用唯一识别码", "ratedTier": "段位", "summonerId": "召唤师序号", "summonerName": "召唤师名", "wins": "胜场", "gameName": "玩家昵称", "tagLine": "昵称编号"}
@@ -396,17 +399,17 @@ async def get_challenger_tier(connection):
         queue_ladder_data_organized = {}
         for i in topRated_ladders_statistics_output_order:
             key = topRated_ladders_header_keys[i]
-            queue_ladder_data_organized[key] = [topRated_ladders_header[key]] + queue_ladder_data[key]
+            queue_ladder_data_organized[key] = queue_ladder_data[key]
         ladders_data["topRated_ladder"][queueType] = queue_ladder_data_organized
         ladders_dfs["topRated_ladder"][queueType] = pandas.DataFrame(data = queue_ladder_data_organized)
         print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
-        for i in range(ladders_dfs["topRated_ladder"][queueType].shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-            for j in range(ladders_dfs["topRated_ladder"][queueType].shape[1]):
-                if str(ladders_dfs["topRated_ladder"][queueType].iat[i, j]) == "True":
-                    ladders_dfs["topRated_ladder"][queueType].iat[i, j] = "√"
-                elif str(ladders_dfs["topRated_ladder"][queueType].iat[i, j]) == "False":
-                    ladders_dfs["topRated_ladder"][queueType].iat[i, j] = ""
+        for column in ladders_dfs["topRated_ladder"][queueType]:
+            if ladders_dfs["topRated_ladder"][queueType][column].dtype == "bool":
+                ladders_dfs["topRated_ladder"][queueType][column] = ladders_dfs["topRated_ladder"][queueType][column].astype(str)
+                for i in range(len(ladders_dfs["topRated_ladder"][queueType])):
+                    ladders_dfs["topRated_ladder"][queueType].loc[i, column] = "√" if ladders_dfs["topRated_ladder"][queueType][column][i] == "True" else ""
         print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+        ladders_dfs["topRated_ladder"][queueType] = pandas.concat([pandas.DataFrame([topRated_ladders_header])[ladders_dfs["topRated_ladder"][queueType].columns], ladders_dfs["topRated_ladder"][queueType]], ignore_index = True)
     
     print("是否导出以上天梯数据至Excel中？（输入任意键导出，否则不导出）\nDo you want to export the above data into Excel? (Press any key to export or null to refuse exporting)")
     export = input()
@@ -419,10 +422,10 @@ async def get_challenger_tier(connection):
             while True:
                 try:
                     with pandas.ExcelWriter(path = os.path.join(folder, excel_name), mode = "a", if_sheet_exists = "replace") as writer:
-                        splits_info_df.to_excel(excel_writer = writer, sheet_name = "Split Config - Season %d" %currentSeason)
-                        print("赛季信息导出完成！\nSplit config exported!\n")
-                        rewardTrack_df.to_excel(excel_writer = writer, sheet_name = "Reward Track - Season %d" %currentSeason)
-                        print("奖励里程导出完成！\nReward milestones exported!\n")
+                        # splits_info_df.to_excel(excel_writer = writer, sheet_name = "Split Config - Season %d" %currentSeason)
+                        # print("赛季信息导出完成！\nSplit config exported!\n")
+                        # rewardTrack_df.to_excel(excel_writer = writer, sheet_name = "Reward Track - Season %d" %currentSeason)
+                        # print("奖励里程导出完成！\nReward milestones exported!\n")
                         challenger_ladders_metadata_df.to_excel(excel_writer = writer, sheet_name = "Tier Apex Metadata - Season %d" %currentSeason)
                         print("胜点系列段位天梯元数据导出完成！\nLP apex metadata exported!\n")
                         #topRated_ladders_metadata_df.to_excel(excel_writer = writer, sheet_name = "Rating Apex Metadata - Season %d" %currentSeason)
@@ -452,10 +455,10 @@ async def get_challenger_tier(connection):
                     workbook_exist = False
                     os.makedirs(folder, exist_ok = True)
                     with pandas.ExcelWriter(path = os.path.join(folder, excel_name)) as writer:
-                        splits_info_df.to_excel(excel_writer = writer, sheet_name = "Split Config - Season %d" %currentSeason)
-                        print("赛季信息导出完成！\nSplit config exported!\n")
-                        rewardTrack_df.to_excel(excel_writer = writer, sheet_name = "Reward Track - Season %d" %currentSeason)
-                        print("奖励里程导出完成！\nReward milestones exported!\n")
+                        # splits_info_df.to_excel(excel_writer = writer, sheet_name = "Split Config - Season %d" %currentSeason)
+                        # print("赛季信息导出完成！\nSplit config exported!\n")
+                        # rewardTrack_df.to_excel(excel_writer = writer, sheet_name = "Reward Track - Season %d" %currentSeason)
+                        # print("奖励里程导出完成！\nReward milestones exported!\n")
                         challenger_ladders_metadata_df.to_excel(excel_writer = writer, sheet_name = "Tier Apex Metadata - Season %d" %currentSeason)
                         print("胜点系列段位天梯元数据导出完成！\nLP apex metadata exported!\n")
                         runTimes = [] #记录保存每个队列的顶级玩家信息所花费的时间（Records the time spent in saving the top player information of each queue）

@@ -1,5 +1,5 @@
 from lcu_driver import Connector
-import copy, os, unicodedata, shutil, pandas, requests, time, json, re, pyperclip, traceback, pickle
+import copy, json, os, pandas, pickle, pyperclip, re, requests, shutil, time, traceback, unicodedata, uuid
 from urllib.parse import quote, unquote
 from wcwidth import wcswidth
 import matplotlib.pyplot as plt
@@ -331,6 +331,12 @@ def get_info_name(info: dict, mode = 1) -> str:
                 name = "0. New Player\\" + str(info["puuid"])
     return name
 
+def verify_uuid(s: str) -> bool:
+    try:
+        return s == str(uuid.UUID(s))
+    except ValueError:
+        return False
+
 async def search_recent_players(connection):
     platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     platformId = platform_config["LoginDataPacket"]["platformId"]
@@ -342,13 +348,7 @@ async def search_recent_players(connection):
             language_cdragon[language_ddragon[i]["CODE"]] = "default" #在CommunityDragon数据库上，美服正式服的数据资源代码是default，而不是小写的en_US（The code for English (US) data resources on CommunityDragon database is "default" instead of the lowercase of "en_US"）
         else:
             language_cdragon[language_ddragon[i]["CODE"]] = language_ddragon[i]["CODE"].lower()
-    language_dict = {"No.": [], "CODE": [], "LANGUAGE": [], "语言": [], "Applicable CDragon Data Patches": []}
-    for i in language_ddragon:
-        language_dict["No."].append(i)
-        language_dict["CODE"].append(language_ddragon[i]["CODE"])
-        language_dict["LANGUAGE"].append(language_ddragon[i]["LANGUAGE (EN)"])
-        language_dict["语言"].append(language_ddragon[i]["LANGUAGE (ZH)"])
-        language_dict["Applicable CDragon Data Patches"].append(language_ddragon[i]["Applicable CDragon Data Patches"])
+    language_dict = {"No.": list(language_ddragon.keys()), "CODE": list(map(lambda x: x["CODE"], language_ddragon.values())), "LANGUAGE": list(map(lambda x: x["LANGUAGE (EN)"], language_ddragon.values())), "语言": list(map(lambda x: x["LANGUAGE (ZH)"], language_ddragon.values())), "Applicable CDragon Data Patches": list(map(lambda x: x["Applicable CDragon Data Patches"], language_ddragon.values()))}
     language_df = pandas.DataFrame(language_dict)
     print(format_df(language_df)[0])
     while True:
@@ -1303,9 +1303,10 @@ async def search_recent_players(connection):
     unmapped_keys = {"summonerIcon": set(), "spell": set(), "LoLChampion": set(), "LoLItem": set(), "summonerIcon": set(), "perk": set(), "perkstyle": set(), "TFTAugment": set(), "TFTChampion": set(), "TFTItem": set(), "TFTCompanion": set(), "TFTTrait": set(), "CherryAugment": set()}
     ##准备大区数据（Prepare server / platform data）
     platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
-    platform_RIOT = {"BR": "巴西服（Brazil）", "EUNE": "北欧和东欧服（Europe Nordic & East）", "EUW": "西欧服（Europe West）", "LAN": "北拉美服（Latin America North）", "LAS": "南拉美服（Latin America South）", "NA": "北美服（North America）", "OCE": "大洋洲服（Oceania）", "RU": "俄罗斯服（Russia）", "TR": "土耳其服（Turkey）", "ME1": "中东服（Middle East）", "JP": "日服（Japan）", "KR": "韩服（Republic of Korea）", "PBE": "测试服（Public Beta Environment）"}
-    platform_GARENA = {"PH": "菲律宾服（Philippines）", "SG": "新加坡服（Singapore, Malaysia and Indonesia）", "TW": "台服（Taiwan, Hong Kong and Macau）", "VN": "越南服（Vietnam）", "TH": "泰服（Thailand）"}
+    platform_RIOT = {"ME1": "中东服（Middle East）", "BR1": "巴西服（Brazil）", "EUN1": "北欧和东欧服（Europe Nordic & East）", "EUW1": "西欧服（Europe West）", "JP1": "日服（Japan）", "KR": "韩服（Republic of Korea）", "LA1": "北拉美服（Latin America North）", "LA2": "南拉美服（Latin America South）", "NA1": "北美服（North America）", "OC1": "大洋洲服（Oceania）", "TR1": "土耳其服（Turkey）", "RU": "俄罗斯服（Russia）", "PH2": "菲律宾服（Philippines）", "SG2": "新加坡服（Singapore）", "TH2": "泰服（Thailand）", "TW2": "台服（Taiwan, Hong Kong and Macau）", "VN2": "越南服（Vietnam）", "PBE1": "测试服（Public Beta Environment）"}
+    platform_GARENA = {"PH1": "菲律宾服（Philippines）", "SG1": "新加坡服（Singapore, Malaysia and Indonesia）", "TW1": "台服（Taiwan, Hong Kong and Macau）", "VN1": "越南服（Vietnam）", "TH1": "泰服（Thailand）"}
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
+    platformIds = list((platform_TENCENT | platform_GARENA | platform_RIOT).keys())
     #控制只输出一遍的提示（Control the hint to be displayed only once）
     puuid_change_warning_printed = False
     Vanguard_warning_printed = False
@@ -1331,25 +1332,110 @@ async def search_recent_players(connection):
             smurfMode = bool(input())
             if smurfMode:
                 smurfs = []
-                print("请输入小号的召唤师名。输入-1以结束。\nPlease input the summoner names of the smurf accounts. Submit -1 to quit importion.")
-                while True:
-                    smurfName = input()
-                    if smurfName == "-1":
-                        break
-                    elif smurfName == "":
-                        continue
-                    elif smurfName in {get_info_name(current_info), current_info["puuid"], current_info["summonerId"]} and selfDetect:
-                        print("您不能把主账号作为小号！请添加其它账号。\nYou're not allowed to add your main account as a smurf account! Please try another account.")
-                        continue
-                    else:
-                        info = await get_info(connection, smurfName)
-                        if info["info_got"]:
-                            info_body = info["body"]
-                            print(info_body)
-                            smurfs.append(info_body)
-                            infos[info_body["puuid"]] = info_body
+                smurf_header = {"displayName": "显示名", "gameName": "玩家昵称", "tagLine": "昵称编号", "summonerId": "召唤师序号", "puuid": "玩家通用唯一识别码"}
+                smurf_df = pandas.DataFrame(data = smurf_header, index = [0])
+                print("请选择导入方式：\nPlease select an option to import:\n☆1\t读取文件（Read a file）\n2\t手动输入（Manually input）")
+                smurf_option = input()
+                if smurf_option != "" and smurf_option[0] == "2":
+                    smurf_option = "2"
+                else:
+                    smurf_option = "1"
+                #在下面的代码中，关键是列表`smurfs`中追加小号信息（The key point of the following code is to append smurf information into the list `smurfs`）
+                smurf_file_read = False #标记程序是否成功读取到含有小号信息的数据文件（Marks whether the smurf data file is read successfully）
+                smurf_file = "Smurf Accounts.json"
+                smurf_file_rename = "Smurf Accounts (Invalid).json"
+                if smurf_option == "1":
+                    while os.path.exists(smurf_file_rename): #确保下面的重命名操作不会引发报错（Ensure the following renaming operation won't cause an error）
+                        smurf_file_rename = "(1).".join(smurf_file_rename.split("."))
+                    if os.path.exists(smurf_file):
+                        try:
+                            with open(smurf_file, "r", encoding = "utf-8") as fp:
+                                smurf_local = json.load(fp)
+                        except json.decoder.JSONDecodeError:
+                            os.rename(smurf_file, smurf_file_rename) #上面的while循环保证这里重命名后的文件不可能存在（The above while-loop ensures the result file can't exist）
+                            print(f'''在同目录下发现了格式不正确的数据文件。该文件已重命名为“{smurf_file_rename}”。程序将转为手动输入。\nA smurf data file with invalid format is found under the same directory. This file has been renamed into "{smurf_file_rename}". You may need to input the smurfs' names manually.''')
+                            smurf_option = "2"
                         else:
-                            print(info["message"])
+                            if isinstance(smurf_local, dict) and all(map(lambda x: x in platformIds, smurf_local.keys())) and all(map(lambda x: isinstance(x, dict), smurf_local.values())) and all(len(smurf_local_iter) == 0 or all(map(lambda x: isinstance(x, str) and verify_uuid(x), smurf_local_iter.keys())) and all(map(lambda x: isinstance(x, list) and all(map(lambda y: isinstance(y, str) and verify_uuid(y), x)), smurf_local_iter.values())) for smurf_local_iter in smurf_local.values()): #格式的严格校验（A serious verification of the format）
+                                smurf_file_read = True
+                                if platformId in smurf_local:
+                                    if current_info["puuid"] in smurf_local[platformId]: #一定要注意，在本脚本中，`current_puuid`和`current_info["puuid"]`不是一回事（Pay attention that `current_puuid` and `current_info["puuid"]` aren't the same thing in this program）
+                                        count = 0 #标识小号的序号（Number the smurfs）
+                                        valid_puuid_count = 0 #记录能查询到玩家的玩家通用唯一识别码的数量（Record the number of puuids that can correspond to players）
+                                        for smurf_puuid in smurf_local[platformId][current_info["puuid"]]:
+                                            count += 1
+                                            print(f"{count}.\t{smurf_puuid}")
+                                            info = await get_info(connection, smurf_puuid)
+                                            if info["info_got"]:
+                                                info_body = info["body"]
+                                                if info_body["puuid"] in list(map(lambda x: x["puuid"], smurfs)):
+                                                    print("您已经输入过该玩家了。\nYou've entered this player.")
+                                                else:
+                                                    valid_puuid_count += 1
+                                                    print(info_body)
+                                                    smurfs.append(info_body)
+                                                    smurf_record = {key: info["body"][key] for key in smurf_header}
+                                                    smurf_df = pandas.concat([smurf_df, pandas.DataFrame([smurf_record])], ignore_index = True)
+                                                    print(format_df(smurf_df, width_exceed_ask = False, direct_print = True, print_index = True)[0], end = "\n\n")
+                                                    infos[info_body["puuid"]] = info_body
+                                            else:
+                                                print(info["message"])
+                                        print(f"从离线文件中读取到了{valid_puuid_count}个小号信息。是否继续输入更多小号？（输入任意键以继续添加小号，否则不添加。）\nThe program has detected {valid_puuid_count} smurf account(s) from the local file. Do you want to continue with more smurf accounts? (Submit any non-empty string to continue, or null to refuse adding.)")
+                                        smurf_option = "2" if bool(input()) else "1"
+                                    else:
+                                        print("在同目录下发现了含有小号信息的数据文件，但是没有找到您的小号信息。程序将转为手动输入。\nThe smurf data file is found under the same directory, but without yours. You may need to input the smurfs' names manually.")
+                                        smurf_option = "2"
+                                else:
+                                    print("在同目录下发现了含有小号信息的数据文件，但是没有找到您的大区信息。如果您确认您的本地文件没有问题，请向作者反馈该问题。\nThe smurf data file is found under the same directory, but without your server's. If you're sure that there's not any problem in your local data file, please file the feedback to the author.\n一个可用的反馈链接：\nAn available feedback link:\nhttps://github.com/WordlessMeteor/LoL-DIY-Programs/issues/new \n程序将转为手动输入。\nYou may need to input the smurfs' names manually.")
+                                    smurf_option = "2"
+                            else:
+                                os.rename(smurf_file, smurf_file_rename)
+                                print(f'''在同目录下发现了格式不正确的数据文件。该文件已重命名为“{smurf_file_rename}”。程序将转为手动输入。\nA smurf data file with invalid format is found under the same directory. This file has been renamed into "{smurf_file_rename}". You may need to input the smurfs' names manually.''')
+                                smurf_option = "2"
+                    else:
+                        print("没有找到含有小号信息的数据文件。程序将转为手动输入。\nSmurf data file not found. You may need to input the smurfs' names manually.")
+                        smurf_option = "2"
+                if smurf_option == "2":
+                    print('请输入小号的召唤师名。输入“0”以清空已经输入的小号。输入-1以结束。\nPlease input the summoner names of the smurf accounts. Submit "0" to clear the entered smurfs. Submit "-1" to finish the importation.')
+                    while True:
+                        smurfName = input()
+                        if smurfName == "-1":
+                            break
+                        elif smurfName == "0":
+                            smurfs = []
+                            smurf_df = pandas.DataFrame(data = smurf_header, index = [0])
+                            print("已清空小号。\nSmurfs cleared.")
+                        elif smurfName == "":
+                            continue
+                        elif smurfName in {"current-summoner", get_info_name(current_info), current_info["puuid"], str(current_info["summonerId"])} and selfDetect:
+                            print("您不能把主账号作为小号！请添加其它账号。\nYou're not allowed to add your main account as a smurf account! Please try another account.")
+                        else:
+                            info = await get_info(connection, smurfName)
+                            if info["info_got"]:
+                                info_body = info["body"]
+                                if info_body["puuid"] in list(map(lambda x: x["puuid"], smurfs)):
+                                    print("您已经输入过该玩家了。\nYou've entered this player.")
+                                else:
+                                    print(info_body)
+                                    smurfs.append(info_body)
+                                    smurf_record = {key: info["body"][key] for key in smurf_header}
+                                    smurf_df = pandas.concat([smurf_df, pandas.DataFrame([smurf_record])], ignore_index = True)
+                                    print(format_df(smurf_df, width_exceed_ask = False, direct_print = True, print_index = True)[0])
+                                    infos[info_body["puuid"]] = info_body
+                            else:
+                                print(info["message"])
+                print("是否需要将小号信息保存到本地，以便日后直接读取文件来添加小号？（输入任意键以确认，否则不保存。）\nDo you want to save the smurf information into a local data file, so that you may read this file directly to load the smurfs? (Submit any non-empty string to confirm, or null to refuse saving.)\n注意：程序会覆盖之前的小号信息，因此如果您不想丢失以前的小号信息，请在不输入任何字符的情况下直接按回车键不保存，然后将原来的小号信息做好备份。\nNote: The old smurf information will be overwritten, so if you expect the previous smurf information not to be lost, please directly press Enter without any other characters entered, and then make a backup of the original smurf information.")
+                if bool(input()):
+                    if smurf_file_read:
+                        if platformId in smurf_local:
+                            smurf_local[platformId][current_info["puuid"]] = list(map(lambda x: x["puuid"], smurfs)) #之所以考虑用玩家通用唯一识别码，而不用召唤师名或者召唤师序号作为小号信息存储介质的原因有两个方面的考量：从对人类友好的角度上，召唤师名的确更胜一筹，但是缺少唯一性。在调用get_info函数时，两个召唤师名如果只是差几个空格，就很有可能指向同一个召唤师。这样，上面和下面的代码在识别召唤师信息是否添加过时，就不太好实现；从存储格式的角度上来考虑，玩家通用唯一识别码服从通用唯一识别码的格式，相对比较统一，而且是全球统一的，这样在校验数据文件格式时比较方便。而召唤师序号只是整数，而且不同召唤师序号存在长短不一的情况，这样校验起来不够充分（The reason why I consider using puuid as the smurf data storing media, instead of the summoner name or summonerId, has two considerations. On the one hand, in terms of being human-friendly, a summoner name does far outweigh the puuid or summonerId. However, it lacks uniformity. When `get_info` function is called, if two parameters differ only in several spaces, the result might directs to a same summoner. In that case, it's not easy to implement the code to identify whether a summoner's information has been added to the list before, within the context. On the other hand, in terms of the format, a puuid obeys the format of uuids, so it's relatively general, let alone being "universally unqiue", which makes it convenient to verify the format of the smurf data file. Nevertheless, summonerId is just an integer, and different summonerIds may be of different lengths, so it's not sufficient to determine a summoner by summonerId）
+                        else:
+                            smurf_local[platformId] = {current_info["puuid"]: list(map(lambda x: x["puuid"], smurfs))}
+                    else:
+                        smurf_local = {platformId: {current_info["puuid"]: list(map(lambda x: x["puuid"], smurfs))}}
+                    with open(smurf_file, "w", encoding = "utf-8") as fp:
+                        json.dump(smurf_local, fp, indent = 4, ensure_ascii = False)
+                    print(f"小号信息已保存到“{smurf_file}”中。\nSmurf information has been saved into {smurf_file}.")
         #初始化所有数据资源（Initialize all data resources）
         print("\n正在初始化所有数据资源……\nInitializing all data resources ...\n")
         patches = copy.deepcopy(patches_initial)
@@ -1496,7 +1582,6 @@ async def search_recent_players(connection):
                 displayName = get_info_name(info_body) #用于扫描模式定位到某召唤师（Determines the directory which contains the summoner's data）
                 current_summonerId = info_body["summonerId"] #用于排除房间邀请信息中的自己（Defined to exclude the user itself from the lobby invitations）
                 current_puuid = info_body["puuid"] #用于核验对局是否包含该召唤师。此外，还用于扫描模式从对局的所有玩家信息中定位到该玩家（For use of checking whether the searched matches include this summoner. In addition, it's used for localization of this player from all players in a match in "scan" mode）
-                current_displayName = info_body["displayName"] #作用同上，用于模糊定位，主要应用于玩家通用唯一识别码发生变动的大区的扫描模式查询（Acts as the same role as the above variable for a rough localization. It's mainly designed for Scan Mode on servers that changed the players' puuids）
                 current_summonerName = "" if info_body["gameName"] == "" and info_body["tagLine"] == "" else info_body["gameName"] + "#" + info_body["tagLine"] #作用同上，用于模糊定位，主要应用于玩家通用唯一识别码发生变动的大区且在昵称编号引入后注册的主召唤师的对局记录扫描模式（Acts as the same role as the above variable for a rough localization. It's mainly designed for Scan Mode on players that signed up after tagLine was introduced on servers that changed the players' puuids）
                 infos[current_puuid] = info_body
                 #下面准备一些数据资源（The following code prepare data resources）
@@ -1515,15 +1600,26 @@ async def search_recent_players(connection):
                         pass
                 region = client_info["--region"]
                 if region == "TENCENT":
-                    folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[client_info["--rso_platform_id"]] + "\\" + get_info_name(info_body, 2)
+                    platform_folder = "召唤师信息（Summoner Information）\\" + "国服（TENCENT）" + "\\" + platform_TENCENT[platformId]
+                    folder = platform_folder + "\\" + get_info_name(info_body, 2)
                 elif region == "GARENA":
-                    folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[region] + "\\" + get_info_name(info_body, 2)
+                    platform_folder = "召唤师信息（Summoner Information）\\" + "竞舞（GARENA）" + "\\" + platform_GARENA[platformId]
+                    folder = platform_folder + "\\" + get_info_name(info_body, 2)
                 else: #拳头公司与竞舞娱乐公司的合同于2023年1月终止（In January 2023, Riot Games ended its contract with Garena）
-                    folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[region] + "\\" + get_info_name(info_body, 3)
+                    platform_folder = "召唤师信息（Summoner Information）\\" + "外服（RIOT）" + "\\" + (platform_RIOT | platform_GARENA)[platformId]
+                    folder = platform_folder + "\\" + get_info_name(info_body, 3)
+                platform_config_filepath = platform_folder + "\\" + "platform_config_namespaces.json"
+                while True:
+                    try:
+                        with open(platform_config_filepath, "w", encoding = "utf-8") as fp:
+                            json.dump(platform_config, fp, indent = 4, ensure_ascii = False)
+                    except FileNotFoundError: #这里需要注意是否具有创建文件夹的权限。下同（Pay attention to the authority to create the folder. So are the following）
+                        os.makedirs(os.path.dirname(platform_config_filepath), exist_ok = True)
+                    else:
+                        break
                 
                 AllAccounts = [info_body] + smurfs if selfDetect and smurfMode else [info_body]
                 current_puuid_list = list(map(lambda x: x["puuid"], AllAccounts))
-                current_displayName_list = list(map(lambda x: x["displayName"], AllAccounts))
                 current_summonerName_list = list(map(lambda x: "" if x["gameName"] == "" and x["tagLine"] == "" else x["gameName"] + "#" + x["tagLine"], AllAccounts))
                 LoLHistory_dfs = []
                 for info_body in AllAccounts:
@@ -1577,7 +1673,7 @@ async def search_recent_players(connection):
                     if not LoLHistory_get:
                         continue
                     LoLGamePlayed = True #标记该玩家是否进行过英雄联盟对局（Mark whether this summoner has played any LoL game）
-                    LoLHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "对局创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "帐户序号", "currentAccountId": "当前帐户序号", "currentPlatformId": "当前服务器代码", "gameName": "玩家昵称", "matchHistoryUri": "对局记录网址", "platformId": "服务器代码", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "championId": "英雄序号", "highestAchievedSeasonTier": "最高段位", "participantId": "玩家序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "英雄", "champion_alias": "代号", "champion_squarePortraitPath": "方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "champLevel": "英雄等级", "deaths": "死亡", "goldEarned": "金币", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "kills": "击杀", "neutralMinionsKilled": "击杀野怪", "totalMinionsKilled": "击杀小兵", "win": "胜利", "KDA": "战损比", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标 路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "CS": "补刀", "result": "结果", "lane": "分路", "role": "角色定位"}
+                    LoLHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "对局创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "帐户序号", "currentAccountId": "当前帐户序号", "currentPlatformId": "当前服务器代码", "gameName": "玩家昵称", "matchHistoryUri": "对局记录网址", "platformId": "服务器代码", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "championId": "英雄序号", "highestAchievedSeasonTier": "最高段位", "participantId": "玩家序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "英雄", "champion_alias": "代号", "champion_squarePortraitPath": "方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "champLevel": "英雄等级", "deaths": "死亡", "goldEarned": "金币", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "kills": "击杀", "neutralMinionsKilled": "击杀野怪", "subteamPlacement": "队伍排名", "totalMinionsKilled": "击杀小兵", "win": "胜利", "KDA": "战损比", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标 路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "CS": "补刀", "result": "结果", "lane": "分路", "role": "角色定位"}
                     LoLHistory_header_keys = list(LoLHistory_header.keys())
                     LoLHistory_data = {}
                     gameTypes = {"MATCHED_GAME": "匹配对局", "CUSTOM_GAME": "自定义对局", "TUTORIAL_GAME": "新手教程"}
@@ -1745,11 +1841,11 @@ async def search_recent_players(connection):
                                         LoLHistory_data[key].append(spellId if j <= 33 else "")
                                 else:
                                     LoLHistory_data[key].append(game["participants"][0][key])
-                            elif j <= 67:
+                            elif j <= 68:
                                 stats = game["participants"][0]["stats"]
-                                if j == 51:
+                                if j == 52:
                                     LoLHistory_data[key].append("/".join([str(stats["kills"]), str(stats["deaths"]), str(stats["assists"])]))
-                                elif j >= 52 and j <= 65:
+                                elif j >= 53 and j <= 66:
                                     itemId = stats[key.split("_")[0]]
                                     if itemId == 0:
                                         LoLHistory_data[key].append("")
@@ -1761,25 +1857,26 @@ async def search_recent_players(connection):
                                         if not itemId in unmapped_keys["LoLItem"]:
                                             unmapped_keys["LoLItem"].add(itemId)
                                             print("【%d. %s】第%d/%d场对局（对局序号：%d，对局版本：%s）装备信息（%d）获取失败！将采用原始数据！\n[%d. %s] LoL item information (%d) of Match %d / %d (matchID: %d, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, i + 1, len(games), game["gameId"], version, itemId, j, key, itemId, i + 1, len(games), game["gameId"], version))
-                                        LoLHistory_data[key].append(itemId if j <= 58 else "")
-                                elif j == 66:
-                                    LoLHistory_data[key].append(stats["neutralMinionsKilled"] + stats["totalMinionsKilled"])
+                                        LoLHistory_data[key].append(itemId if j <= 59 else "")
                                 elif j == 67:
+                                    LoLHistory_data[key].append(stats["neutralMinionsKilled"] + stats["totalMinionsKilled"])
+                                elif j == 68:
                                     LoLHistory_data[key].append("胜利" if stats["win"] else "失败")
                                 else:
                                     LoLHistory_data[key].append(stats[key])
                             else:
                                 timeline = game["participants"][0]["timeline"]
-                                if j == 68:
+                                if j == 69:
                                     LoLHistory_data[key].append(lanes[timeline[key]])
                                 else:
                                     LoLHistory_data[key].append(roles[timeline[key]])
-                    LoLHistory_statistics_output_order = [0, 21, 5, 3, 4, 10, 6, 11, 9, 8, 29, 30, 37, 32, 33, 52, 53, 54, 55, 56, 57, 58, 51, 66, 39, 67]
+                    LoLHistory_statistics_output_order = [0, 21, 5, 3, 4, 10, 6, 11, 9, 8, 29, 30, 37, 32, 33, 53, 54, 55, 56, 57, 58, 59, 52, 67, 39, 68, 49]
                     LoLHistory_data_organized = {}
                     for i in LoLHistory_statistics_output_order:
                         key = LoLHistory_header_keys[i]
-                        LoLHistory_data_organized[key] = [LoLHistory_header[key]] + LoLHistory_data[key]
+                        LoLHistory_data_organized[key] = LoLHistory_data[key]
                     LoLHistory_df = pandas.DataFrame(data = LoLHistory_data_organized)
+                    LoLHistory_df = pandas.concat([pandas.DataFrame([LoLHistory_header])[LoLHistory_df.columns], LoLHistory_df], ignore_index = True)
                     LoLHistory_dfs.append(LoLHistory_df)
                     #LoLHistory_df.apply(lambda x: pandas.Series([-3], index = ["K/D/A"]))
                     if LoLGamePlayed:
@@ -1956,7 +2053,7 @@ async def search_recent_players(connection):
                                     participant.append(i["player"]["puuid"])
                                 if any(puuid in participant for puuid in current_puuid_list): #之所以使用玩家通用唯一识别码，而不是用召唤师名称来识别对局是否包含主玩家，是因为该玩家可能使用过改名卡。这里也没有选择帐户序号，这是因为保存在对局中的各玩家的帐户序号竟然是0！（The reason why the puuid instead of the displayName or summonerName is used to identify whether the matches contain the main player is that the player may have used name changing card. AccountId isn't chosen here, because all players' accountIds saved in the match fetched from 127 API is 0, to my surprise!）
                                     for currentParticipantId in range(len(LoLGame_info["participantIdentities"])): #定位主召唤师（Find the index of the main player in a match）
-                                        if LoLGame_info["participantIdentities"][currentParticipantId]["player"]["puuid"] in current_puuid_list or LoLGame_info["participantIdentities"][currentParticipantId]["player"]["summonerName"] in current_displayName_list or LoLGame_info["participantIdentities"][currentParticipantId]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][currentParticipantId]["player"]["tagLine"] in current_summonerName_list:
+                                        if LoLGame_info["participantIdentities"][currentParticipantId]["player"]["puuid"] in current_puuid_list or LoLGame_info["participantIdentities"][currentParticipantId]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][currentParticipantId]["player"]["tagLine"] in current_summonerName_list:
                                             break
                                     #下面针对每场对局建立总的数据资源异常处理机制（Builds the summarized data resource exceptional handling mechanism for each match）
                                     ##召唤师图标（Summoner icon）
@@ -2442,19 +2539,19 @@ async def search_recent_players(connection):
                         recent_LoLPlayers_data_organized = {}
                         for i in range(len(recent_LoLPlayers_statistics_output_order)):
                             key = LoLGame_info_header_keys[recent_LoLPlayers_statistics_output_order[i]]
-                            recent_LoLPlayers_data_organized[key] = [LoLGame_info_header[key]] + LoLGame_info_data[key]
+                            recent_LoLPlayers_data_organized[key] = LoLGame_info_data[key]
                             #print("近期一起玩过的英雄联盟玩家数据重排进度（Rearranging process of recently played summoner (LoL) data）：%d/%d" %(i + 1, len(recent_LoLPlayers_statistics_output_order)))
                         #print("正在创建数据框……\nCreating the dataframe ...")
                         recent_LoLPlayers_df = pandas.DataFrame(data = recent_LoLPlayers_data_organized)
                         #print("数据框创建完成！\nDataframe creation finished!")
                         print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
-                        for i in range(recent_LoLPlayers_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-                            for j in range(recent_LoLPlayers_df.shape[1]):
-                                if str(recent_LoLPlayers_df.iat[i, j]) == "True":
-                                    recent_LoLPlayers_df.iat[i, j] = "√"
-                                elif str(recent_LoLPlayers_df.iat[i, j]) == "False":
-                                    recent_LoLPlayers_df.iat[i, j] = ""
+                        for column in recent_LoLPlayers_df:
+                            if recent_LoLPlayers_df[column].dtype == "bool":
+                                recent_LoLPlayers_df[column] = recent_LoLPlayers_df[column].astype(str)
+                                for i in range(len(recent_LoLPlayers_df)):
+                                    recent_LoLPlayers_df.loc[i, column] = "√" if recent_LoLPlayers_df[column][i] == "True" else ""
                         print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+                        recent_LoLPlayers_df = pandas.concat([pandas.DataFrame([LoLGame_info_header])[recent_LoLPlayers_df.columns], recent_LoLPlayers_df], ignore_index = True)
                         
                         #下面获取最近一起玩过的云顶之弈玩家的信息（The following code captures the recently played TFT players' information）
                         print("是否查询云顶之弈对局记录？（输入任意键查询，否则不查询）\nSearch TFT matches? (Input anything to search or null to export data or switch for another summoner)")
@@ -2537,7 +2634,6 @@ async def search_recent_players(connection):
                             TFTGamePlayed = len(TFTHistory) != 0 #标记该玩家是否进行过云顶之弈对局（Mark whether this summoner has played any TFT game）
                             TFT_main_player_indices = [] #云顶之弈对局记录中记录了所有玩家的数据，但是在历史记录的工作表中只要显示主召唤师的数据，因此必须知道每场对局中主召唤师的索引（Each match in TFT history records all players' data, but only the main player's data are needed to display in the match history worksheet, so the index of the main player in each match is necessary）
                             version_re = re.compile(r"\d*\.\d*\.\d*\.\d*") #云顶之弈的对局版本信息是一串字符串，从中识别四位对局版本（TFT match version is a long string, from which the 4-number version is identified）
-                            TFTGamePatches = [] #这里设定小版本号，以便后续切换云顶之弈相关数据的版本。这个变量实际上还未投入使用（Here a shorter patch is extracted, in case TFT data version needs changing. Actually this variable hasn't been taken to use）
                             TFTGameDuration_raw = []
                             for game in TFTHistory:
                                 TFT_main_player_found = False
@@ -2562,7 +2658,6 @@ async def search_recent_players(connection):
                                     TFTHistoryJson = TFTHistory[i]["json"]
                                     TFTGameVersion = version_re.search(TFTHistoryJson["game_version"]).group()
                                     TFTGamePatch = ".".join(TFTGameVersion.split(".")[:2])
-                                    TFTGamePatches.append(TFTGamePatch)
                                     #下面针对每场对局建立总的数据资源异常处理机制（Builds the summarized data resource exceptional handling mechanism for each match）
                                     ##云顶之弈强化符文（TFT augments）
                                     TFTAugmentIds_match_list = sorted(set(augment for lst in list(map(lambda x: x["augments"] if "augments" in x else [], TFTHistoryJson["participants"])) for augment in lst)) #`if "augments" in x`的作用是防止早期云顶之弈对局无强化符文导致程序报错（`if "augments" in x` is used here because some early TFT matches don't contain augments and result in KeyErrors consequently）
@@ -3039,13 +3134,14 @@ async def search_recent_players(connection):
                             recent_TFTPlayers_data_organized = {}
                             for i in range(len(recent_TFTPlayers_statistics_output_order)):
                                 key = TFTHistory_header_keys[recent_TFTPlayers_statistics_output_order[i]]
-                                recent_TFTPlayers_data_organized[key] = [TFTHistory_header[key]] + TFTHistory_data[key]
+                                recent_TFTPlayers_data_organized[key] = TFTHistory_data[key]
                                 #print("近期一起玩过的云顶之弈玩家数据重排进度（Rearranging process of recently played summoner (TFT) data）：%d/%d" %(i + 1, len(recent_TFTPlayers_statistics_output_order)))
                             #print("正在创建数据框……\nCreating the dataframe ...")
                             recent_TFTPlayers_df = pandas.DataFrame(data = recent_TFTPlayers_data_organized)
                             #print("数据框创建完成！\nDataframe creation finished!")
                             if not TFTGamePlayed:
                                 print("这位召唤师从5月1日起就没有进行过任何云顶之弈对局。\nThis summoner hasn't played any TFT game yet since May 1st.")
+                            recent_TFTPlayers_df = pandas.concat([pandas.DataFrame([TFTHistory_header])[recent_TFTPlayers_df.columns], recent_TFTPlayers_df], ignore_index = True)
                             # recent_TFTPlayers_df = pandas.concat([recent_TFTPlayers_dfs[0].iloc[:1]] + list(map(lambda x: x.iloc[1:], recent_TFTPlayers_dfs)), ignore_index = True)
                             # recent_TFTPlayers_df = pandas.concat([recent_TFTPlayers_df.iloc[:1], recent_TFTPlayers_df.iloc[1:].sort_values(by = "gameCreation")], ignore_index = True)
                         else:
@@ -3468,6 +3564,10 @@ async def search_recent_players(connection):
                                         if champ_select_session["isSpectating"]:
                                             print("您正在观战，无法显示玩家信息。请等待进入游戏后查看。\nYou're during the champ select of a spectated game, and the player information won't display. Please wait until you enter the game.")
                                         else:
+                                            lobby = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+                                            print("检测时是否忽略小队成员？（输入任意键忽略，否则不忽略。）\nNeglect lobby members when detecting? (Submit any non-empty string to neglect, or null to refust neglecting.)")
+                                            skip_lobby_member = bool(input())
+                                            lobby_member_puuids = list(map(lambda x: x["puuid"], lobby["members"]))
                                             for ally in champ_select_session["myTeam"]:
                                                 if ally["puuid"] != current_puuid:
                                                     if ally["nameVisibilityType"] == "VISIBLE" or ally["nameVisibilityType"] == "":
@@ -3489,10 +3589,10 @@ async def search_recent_players(connection):
                                                         LoLAlly_index = [0] #第0行是中文表头，所以一开始要包含在内（The 0th line is Chinese header, so it should be contained in the beginning）
                                                         TFTAlly_index = [0]
                                                         for i in range(len(recent_LoLPlayers_df.loc[:, "puuid"])):
-                                                            if recent_LoLPlayers_df.at[i, "puuid"] == ally["puuid"]:
+                                                            if recent_LoLPlayers_df.at[i, "puuid"] == ally["puuid"] and not (skip_lobby_member and recent_LoLPlayers_df.at[i, "puuid"] in lobby_member_puuids):
                                                                 LoLAlly_index.append(i)
                                                         if search_TFT != "":
-                                                            for i in range(len(recent_TFTPlayers_df.loc[:, "puuid"])):
+                                                            for i in range(len(recent_TFTPlayers_df.loc[:, "puuid"])) and not (skip_lobby_member and recent_TFTPlayers_df.at[i, "puuid"] in lobby_member_puuids):
                                                                 if recent_TFTPlayers_df.at[i, "puuid"] == ally["puuid"]:
                                                                     TFTAlly_index.append(i)
                                                         if len(LoLAlly_index) + len(TFTAlly_index) > 2: #这里不需要关于是否查询了云顶之弈对局记录分类讨论，因为不管有没有查询云顶之弈对局记录，TFTAlly_index都存在，且长度至少为1（Here it's not necessary to discuss whether TFT match history has been searched before, because no matter whether it's searched, TFTAlly_index is defined and its length is at least 1）
@@ -3545,10 +3645,10 @@ async def search_recent_players(connection):
                                                         LoLEnemy_index = [0]
                                                         TFTEnemy_index = [0]
                                                         for i in range(len(recent_LoLPlayers_df.loc[:, "puuid"])):
-                                                            if recent_LoLPlayers_df.at[i, "puuid"] == enemy["puuid"]:
+                                                            if recent_LoLPlayers_df.at[i, "puuid"] == enemy["puuid"] and not (skip_lobby_member and recent_LoLPlayers_df.at[i, "puuid"] in lobby_member_puuids):
                                                                 LoLEnemy_index.append(i)
                                                         if search_TFT != "":
-                                                            for i in range(len(recent_TFTPlayers_df.loc[:, "puuid"])):
+                                                            for i in range(len(recent_TFTPlayers_df.loc[:, "puuid"])) and not (skip_lobby_member and recent_TFTPlayers_df.at[i, "puuid"] in lobby_member_puuids):
                                                                 if recent_TFTPlayers_df.at[i, "puuid"] == enemy["puuid"]:
                                                                     TFTEnemy_index.append(i)
                                                         if len(LoLEnemy_index) + len(TFTEnemy_index) > 2:
@@ -3860,12 +3960,6 @@ async def search_recent_players(connection):
                                     recent_TFTFriend_df_to_print = pandas.DataFrame(data = recent_TFTPlayer_dict_to_print)
                                     friends = await (await connection.request("GET", "/lol-chat/v1/friends")).json()
                                     excel_name = "Recently Played Summoners in Friend List of %s - %s.xlsx" %(current_summonerName, platformId)
-                                    try:
-                                        os.remove(excel_name)
-                                    except FileNotFoundError:
-                                        pass
-                                    except PermissionError:
-                                        print("另一个程序正在使用此文件，进程无法访问。\nThe process cannot access the file because it is being used by another process.")
                                     for friend in friends:
                                         friend_summonerName = friend["name"] if friend["gameName"] == "" and friend["gameTag"] == "" else friend["gameName"] + "#" + friend["gameTag"]
                                         LoLFriend_index = [0]
@@ -3925,12 +4019,6 @@ async def search_recent_players(connection):
                                     recent_TFTPrefriend_df_to_print = pandas.DataFrame(data = recent_TFTPlayer_dict_to_print)
                                     friend_requests = await (await (connection.request("GET", "/lol-chat/v2/friend-requests"))).json()
                                     excel_name = "Recently Played Summoners in Friend Requests of %s - %s.xlsx" %(current_summonerName, platformId)
-                                    try:
-                                        os.remove(excel_name)
-                                    except FileNotFoundError:
-                                        pass
-                                    except PermissionError:
-                                        print("另一个程序正在使用此文件，进程无法访问。\nThe process cannot access the file because it is being used by another process.")
                                     for prefriend in friend_requests:
                                         prefriend_summonerName = prefriend["name"] if prefriend["gameName"] == "" and prefriend["tagLine"] == "" else prefriend["gameName"] + "#" + prefriend["tagLine"]
                                         LoLPrefriend_index = [0]
@@ -3990,12 +4078,6 @@ async def search_recent_players(connection):
                                     LoLInviter_df_to_print = pandas.DataFrame(data = recent_LoLPlayer_dict_to_print)
                                     TFTInviter_df_to_print = pandas.DataFrame(data = recent_TFTPlayer_dict_to_print)
                                     excel_name = "Recently Played Summoners in Invitations to and from %s - %s.xlsx" %(current_summonerName, platformId)
-                                    try:
-                                        os.remove(excel_name)
-                                    except FileNotFoundError:
-                                        pass
-                                    except PermissionError:
-                                        print("另一个程序正在使用此文件，进程无法访问。\nThe process cannot access the file because it is being used by another process.")
                                     lobby = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
                                     lobbyInvitations = await (await connection.request("GET", "/lol-lobby/v2/lobby/invitations")).json()
                                     if not "errorCode" in lobbyInvitations:
@@ -4140,12 +4222,6 @@ async def search_recent_players(connection):
                                     recent_TFTBlockedPlayer_df_to_print = pandas.DataFrame(data = recent_TFTPlayer_dict_to_print)
                                     blockList = await (await connection.request("GET", "/lol-chat/v1/blocked-players")).json()
                                     excel_name = "Recently Played Summoners in Block List of %s - %s.xlsx" %(current_summonerName, platformId)
-                                    try:
-                                        os.remove(excel_name)
-                                    except FileNotFoundError:
-                                        pass
-                                    except PermissionError:
-                                        print("另一个程序正在使用此文件，进程无法访问。\nThe process cannot access the file because it is being used by another process.")
                                     for blockedPlayer in blockList:
                                         blockedPlayer_summonerName = blockedPlayer["name"] if blockedPlayer["gameName"] == "" and blockedPlayer["gameTag"] == "" else blockedPlayer["gameName"] + "#" + blockedPlayer["gameTag"]
                                         LoLBlockedPlayer_index = [0]
@@ -4224,12 +4300,6 @@ async def search_recent_players(connection):
                                     recent_LoLPlayer_df_to_print = pandas.DataFrame(data = recent_LoLPlayer_dict_to_print)
                                     recent_TFTPlayer_df_to_print = pandas.DataFrame(data = recent_TFTPlayer_dict_to_print)
                                     excel_name = "Recently Played Summoners in Specified Player List - %s.xlsx" %platformId
-                                    try:
-                                        os.remove(excel_name)
-                                    except FileNotFoundError:
-                                        pass
-                                    except PermissionError:
-                                        print("另一个程序正在使用此文件，进程无法访问。\nThe process cannot access the file because it is being used by another process.")
                                     print("是否呈现非法召唤师名称警告？（输入任意键呈现，否则不呈现。）\nDo you want to display illegal summoner name warning? (Input anything to display the warnings, or null to stop displaying.)")
                                     illegal_name_warning = bool(input())
                                     legal_summoners = {}

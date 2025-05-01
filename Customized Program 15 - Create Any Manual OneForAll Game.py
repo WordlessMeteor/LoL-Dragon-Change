@@ -93,6 +93,8 @@ async def autoPick(connection):
         print("请选择行为类型。\nPlease select an action type.\n1\t禁（Ban）\n2\t选（Pick）") #自动禁用的一个有用的地方是斗魂竞技场：通过抢先选中要禁的英雄，用户可以查看是否这名英雄会被其它人禁用。如果被别人抢先禁用了，在用户视角下可能就看不出来有没有被禁用了（A useful case of autoban is Arena: by selecting a champion to ban, the user can know whether this champion is banned by another player. If someone bans this champion before this champion is selected to be banned by the user, then in the user's vision, it can't be inferred accurately whether this champion has been banned）
         s = input()
         ban = s != "" and s[0] == "1"
+        print("是否直接锁定选择？（输入任意键直接锁定，否则不锁定。）\nDo you want to lock in? (Submit any non-empty string to lock in, or null to refuse locking in.)")
+        complete = bool(input())
         #先确保用户进入英雄选择阶段（First, make sure the user is during champ select stage）
         if ban:
             print("等待进入英雄选择阶段的禁英雄阶段……\nWaiting for the banning stage of the champ select stage ...")
@@ -161,7 +163,7 @@ async def autoPick(connection):
         #下面通过LCU API选择英雄（Pick a champion through LCU API)
         if action_found:
             start3 = time.time()
-            body = {"id": pick_actionId, "actorCellId": current_cellId, "championId": championId, "type": "pick", "completed": False, "isAllyAction": True, "isInProgress": True, "pickTurn": 0}
+            body = {"id": pick_actionId, "actorCellId": current_cellId, "championId": championId, "type": "pick", "completed": complete, "isAllyAction": True, "isInProgress": True, "pickTurn": 0}
             response = await (await connection.request("PATCH", "/lol-champ-select/v1/session/actions/%d" %pick_actionId, data = body)).json()
             end3 = time.time()
             diff3 = end3 - start3

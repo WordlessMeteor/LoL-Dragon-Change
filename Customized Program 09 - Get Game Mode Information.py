@@ -187,62 +187,69 @@ def lcuTimestamp(timestamp): #根据队列开放和关闭时间戳返回对局�
 async def gamemode(connection):
     queues = await (await connection.request("GET", "/lol-game-queues/v1/queues")).json()
     # 以前含有"最大召唤师等级"参数（There was previously a parameter: maxLevel）
-    queues_header = {"allowablePremadeSizes": "可用预组队规模", "areFreeChampionsAllowed": "允许使用周免英雄", "category": "对局类型", "championsRequiredToPlay": "需要英雄数量", "description": "游戏模式描述", "detailedDescription": "补充描述", "gameMode": "游戏模式", "id": "队列序号", "isRanked": "排位赛", "isTeamBuilderManaged": "服从阵营式管理", "lastToggledOffTime": "上次关闭时间", "lastToggledOnTime": "上次开放时间", "mapId": "地图序号", "maxDivisionForPremadeSize2": "双排最高分级限制", "maxTierForPremadeSize2": "双排最高段位限制", "maximumParticipantListSize": "最大玩家数量", "minLevel": "最低召唤师等级", "minimumParticipantListSize": "最小玩家数量", "name": "游戏模式名称", "numPlayersPerTeam": "队伍规模", "queueAvailability": "队列可用性", "removalFromGameAllowed": "允许退出游戏", "removalFromGameDelayMinutes": "允许退出游戏时间（分钟）", "shortName": "游戏模式简称", "showPositionSelector": "呈现位置指示器", "showQuickPlaySlotSelection": "呈现快速匹配偏好英雄选择界面", "showPreferredChampions": "呈现推荐英雄", "spectatorEnabled": "允许观战", "type": "游戏类型", "advancedLearningQuests": "进阶教程", "allowTrades": "允许购物", "banMode": "禁用模式", "banTimerDuration": "禁用时间限制（秒）", "battleBoost": "战斗加成", "crossTeamChampionPool": "跨队伍英雄共享", "deathMatch": "团体竞赛", "doNotRemove": "禁止退出游戏", "duplicatePick": "克隆选择", "exclusivePick": "允许声明想玩的英雄", "gameModeOverride": "游戏类型重写来源", "typeId": "游戏类型序号", "learningQuests": "进阶教程", "mainPickTimerDuration": "盲选时间限制（秒）", "maxAllowableBans": "最大禁用数量", "typeName": "英雄选择策略", "numPlayersPerTeamOverride": "队伍规模重写历史", "onboardCoopBeginner": "初期电脑玩家延迟上线", "pickMode": "英雄选择模式", "postPickTimerDuration": "符文和皮肤选择时间限制（秒）", "reroll": "允许重随", "teamChampionPool": "队伍英雄共享", "isChampionPointsEnabled": "队列奖励：英雄成就点数", "isIpEnabled": "队列奖励：成就", "isXpEnabled": "队列奖励：经验点数", "partySizeIpRewards": "组队额外成就奖励"}
+    queues_header = {"allowablePremadeSizes": "可用预组队规模", "areFreeChampionsAllowed": "允许使用周免英雄", "assetMutator": "游戏模式配置", "category": "对局类型", "championsRequiredToPlay": "需要英雄数量", "description": "游戏模式描述", "detailedDescription": "补充描述", "gameMode": "游戏模式", "gameSelectCategory": "游戏选择类别", "gameSelectModeGroup": "游戏模式分组", "gameSelectPriority": "游戏选择优先级", "hidePlayerPosition": "隐藏玩家位置", "id": "队列序号", "isCustom": "自定义对局", "isRanked": "排位赛", "isSkillTreeQueue": "技巧加成队列", "isTeamBuilderManaged": "服从阵容匹配机制", "isVisible": "客户端可见性", "lastToggledOffTime": "上次关闭时间", "lastToggledOnTime": "上次开放时间", "mapId": "地图序号", "maxDivisionForPremadeSize2": "双排最高分级限制", "maxLobbySpectatorCount": "房间最大观战者数量", "maxTierForPremadeSize2": "双排最高段位限制", "maximumParticipantListSize": "最大玩家数量", "minLevel": "最低召唤师等级", "minimumParticipantListSize": "最小玩家数量", "name": "游戏模式名称", "numPlayersPerTeam": "队伍规模", "numberOfTeamsInLobby": "房间内队伍数量", "queueAvailability": "队列可用性", "removalFromGameAllowed": "允许退出游戏", "removalFromGameDelayMinutes": "允许退出游戏时间（分钟）", "shortName": "游戏模式简称", "showPositionSelector": "呈现位置指示器", "showQuickPlaySlotSelection": "呈现快速模式偏好英雄选择界面", "spectatorEnabled": "允许观战", "type": "游戏类型", "advancedLearningQuests": "进阶教程", "allowTrades": "允许交换", "banMode": "禁用模式", "banTimerDuration": "禁用时间限制（秒）", "battleBoost": "战斗加成", "crossTeamChampionPool": "跨队伍英雄共享", "deathMatch": "团体竞赛", "doNotRemove": "禁止退出游戏", "duplicatePick": "克隆选择", "exclusivePick": "唯一选择", "gameModeOverride": "游戏类型重写来源", "typeId": "游戏类型序号", "learningQuests": "新手教程", "mainPickTimerDuration": "盲选时间限制（秒）", "maxAllowableBans": "最大禁用数量", "typeName": "英雄选择策略", "numPlayersPerTeamOverride": "队伍规模重写历史", "onboardCoopBeginner": "人机对战引导模式", "pickMode": "英雄选择模式", "postPickTimerDuration": "符文和皮肤选择时间限制（秒）", "reroll": "允许重随", "teamChampionPool": "队伍英雄共享", "isChampionPointsEnabled": "队列奖励：英雄成就点数", "isIpEnabled": "队列奖励：成就", "isXpEnabled": "队列奖励：经验点数", "partySizeIpRewards": "组队额外成就奖励"}
     queues_data = {}
     queues_header_keys = list(queues_header.keys())
     # 下面定义的字典对导出的Excel结果进行优化（The following defined dictionaries optimizes the results in Excel）
-    category = {"PvP": "玩家对战", "VersusAi": "人机对战", "Custom": "自定义对局"}
-    queueAvailability = {"PlatformDisabled": "", "Available": "√"}
-    banMode = {"SkipBanStrategy": "无", "StandardBanStrategy": "经典策略", "": "待定"}
-    pickMode = {"AllRandomPickStrategy": "全随机模式", "SimulPickStrategy": "自选模式", "TeamBuilderDraftPickStrategy": "征召模式", "OneTeamVotePickStrategy": "投票", "TournamentPickStrategy": "竞技征召模式", "QuickplayPickStrategy": "快速匹配", "": "待定"}
-    maxTierForPremadeSize2 = {"": "", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
+    categories = {"Custom": "自定义对局", "PvP": "玩家对战", "VersusAi": "人机对战"}
+    gameSelectCategories = {"": "待定", "CreateCustom": "创建自定义房间", "kPvP": "玩家对战", "kVersusAI": "人机对战"}
+    gameSelectModeGroups = {"": "待定", "kARAM": "极地大乱斗", "kAlternativeLeagueGameModes": "轮换《英雄联盟》游戏模式", "kSummonersRift": "召唤师峡谷", "kTeamfightTactics": "云顶之弈"}
+    queueAvailability_dict = {"Available": "√", "PlatformDisabled": ""}
+    banModes = {"": "待定", "SkipBanStrategy": "无", "StandardBanStrategy": "经典策略", "TournamentBanStrategy": "竞技策略"}
+    #gameTypes = {"GAME_CFG_PICK_BLIND": "自选模式（自定义）", "GAME_CFG_DRAFT_STD": "征召模式（自定义）", "GAME_CFG_DRAFT_NOBAN": "轮选模式", "GAME_CFG_PICK_RANDOM": "全随机模式（自定义）", "GAME_CFG_PICK_SIMUL": "同选模式", "GAME_CFG_DRAFT_TOURNAMENT": "竞技征召模式（自定义）", "GAME_CFG_PICK_SIMUL_TD": "计时征召", "GAME_CFG_BASIC_TUTORIAL": "基础教程", "GAME_CFG_ADV_TUTORIAL": "进阶教程", "GAME_CFG_CAP": "无选模式", "GAME_CFG_BLIND_RANDOM": "盲选随机", "GAME_CFG_BLIND_DUPE": "克隆选择（自定义）", "GAME_CFG_CROSS_DUPE": "全队克隆", "GAME_CFG_BLIND_DRAFT_ST": "自选征召模式", "GAME_CFG_COUNTER_PICK": "互选模式", "GAME_CFG_TEAM_BUILDER_DRAFT": "征召模式", "GAME_CFG_TEAM_BUILDER_BLIND": "自选模式", "GAME_CFG_TEAM_BUILDER_BLIND_DRAFT": "自选征召", "GAME_CFG_TEAM_BUILDER_RANDOM": "全随机模式", "GAME_CFG_TEAM_BUILDER_BLIND_DUPE": "克隆选择", "GAME_CFG_TEAM_BUILDER_QUICKPLAY": "快速匹配"}
+    pickModes = {"": "待定", "AllRandomPickStrategy": "全随机模式", "AllTeamVotePickStrategy": "全队投票", "CounterDraftPickStrategy": "互选模式", "DraftModeSinglePickStrategy": "传统征召模式", "OneTeamVotePickStrategy": "单队投票", "QuickplayPickStrategy": "快速匹配", "SimulPickStrategy": "自选模式", "SkipPickStrategy": "跳过英雄选择", "TeamBuilderDraftPickStrategy": "征召模式", "TournamentPickStrategy": "竞技征召模式"}
+    tiers = {"": "", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
     for i in range(len(queues_header)):
         key = queues_header_keys[i]
         queues_data[key] = []
-        if i <= 28:
-            if i in {2, 14, 20}: #主要优化这三项的结果显示（These 3 results are mainly optimized）
-                for j in range(len(queues)):
-                    queues_data[key].append(eval(queues_header_keys[i])[queues[j][key]])
-            elif i == 10 or i == 11: #queues_header_keys[7] = "lastToggledOffTime"；header_keys[8] = "lastToggledOnTime"
-                for j in range(len(queues)):
-                    t = time.localtime(queues[j][key] / 1000)
+    for queue in queues:
+        for i in range(len(queues_header_keys)):
+            key = queues_header_keys[i]
+            if i <= 37:
+                if i == 3: #对局类型（`category`）
+                    queues_data[key].append(categories[queue[key]])
+                elif i == 8:
+                    queues_data[key].append(gameSelectCategories[queue[key]])
+                elif i == 9:
+                    queues_data[key].append(gameSelectModeGroups[queue[key]])
+                elif i == 18 or i == 19: #上次关闭时间和上次开放时间（`lastToggledOffTime` and `lastToggledOnTime`）
+                    t = time.localtime(queue[key] / 1000)
                     standard_time = time.strftime("%Y年%m月%d日%H:%M:%S", t)
                     queues_data[key].append(standard_time)
-            elif i != 26: #在一次更新中删除了showPreferredChampions接口（An update deletes the api for showPreferredChampions）
-                for j in range(len(queues)):
-                    queues_data[key].append(queues[j][key])
-        elif i <= 50:
-            if i in {31, 47}:
-                for j in range(len(queues)):
-                    queues_data[key].append(eval(queues_header_keys[i])[queues[j]["gameTypeConfig"][key]])
-            elif i == 40:
-                for j in range(len(queues)):
-                    queues_data[key].append(queues[j]["gameTypeConfig"]["id"])
-            elif i == 44:
-                for j in range(len(queues)):
-                    queues_data[key].append(queues[j]["gameTypeConfig"]["name"])
+                elif i == 23: #双排最高段位限制（`maxTierForPremadeSize2`）
+                    queues_data[key].append(tiers[queue[key]])
+                elif i == 30: #队列可用性（`queueAvailability`）
+                    queues_data[key].append(queueAvailability_dict[queue[key]])
+                else:
+                    queues_data[key].append(queue[key])
+            elif i <= 59:
+                if i == 40: #禁用模式（`banMode`）
+                    queues_data[key].append(banModes[queue["gameTypeConfig"][key]])
+                elif i == 49: #游戏类型序号（`typeId`）
+                    queues_data[key].append(queue["gameTypeConfig"]["id"])
+                elif i == 53: #英雄选择策略（`typeName`）
+                    queues_data[key].append(queue["gameTypeConfig"]["name"])
+                elif i == 56: #英雄选择模式（`pickMode`）
+                    queues_data[key].append(pickModes[queue["gameTypeConfig"][key]])
+                else:
+                    queues_data[key].append(queue["gameTypeConfig"][key])
             else:
-                for j in range(len(queues)):
-                    queues_data[key].append(queues[j]["gameTypeConfig"][key])
-        else:
-            for j in range(len(queues)):
-                queues_data[key].append(queues[j]["queueRewards"][key])
-    #queues_display_order = range(len(queues_header))
-    queues_display_order = [7, 20, 6, 18, 40, 12, 2, 28, 0, 8, 31, 44, 47, 11, 10, 19, 14, 13, 3, 17, 15, 16, 43, 24, 25, 38, 49, 33, 37, 1, 34, 50, 32, 42, 48, 21, 22, 27, 29, 41, 30, 36, 46, 51, 52, 53]
+                queues_data[key].append(queue["queueRewards"][key])
+    queues_output_order = [12, 30, 17, 7, 27, 5, 6, 20, 49, 3, 37, 2, 8, 9, 10, 0, 53, 13, 14, 15, 40, 56, 18, 19, 28, 23, 21, 25, 4, 29, 26, 24, 52, 36, 22, 34, 35, 16, 47, 58, 42, 46, 1, 59, 43, 11, 41, 51, 57, 31, 32, 45, 50, 38, 39, 55, 44, 60, 61, 62]
     queues_data_organized = {}
     sort_index = [i for i, v in sorted(enumerate(queues_data["id"]), key = lambda x: x[1])] # 此处指定按照队列序号排序（Here the DataFrame is sorted by queueId）
-    for i in queues_display_order:
+    for i in queues_output_order:
         key = queues_header_keys[i]
-        queues_data_organized[key] = [queues_header[key]]
+        queues_data_organized[key] = []
         for j in sort_index:
             queues_data_organized[key].append(queues_data[key][j])
     queues_df = pandas.DataFrame(data = queues_data_organized)
-    for i in range(queues_df.shape[0]): #这里直接使用replace函数会把整数类型的0和1当成逻辑值替换（Here function "replace" will unexpectedly take effects on 0s and 1s of integer type）
-        for j in range(queues_df.shape[1]):
-            if str(queues_df.iat[i, j]) == "True":
-                queues_df.iat[i, j] = "√"
-            elif str(queues_df.iat[i, j]) == "False":
-                queues_df.iat[i, j] = ""
+    for column in queues_df:
+        if queues_df[column].dtype == "bool":
+            queues_df[column] = queues_df[column].astype(str)
+            for i in range(len(queues_df)):
+                queues_df.loc[i, column] = "√" if queues_df[column][i] == "True" else ""
+    queues_df = pandas.concat([pandas.DataFrame([queues_header])[queues_df.columns], queues_df], ignore_index = True)
 
     #下面设置覆盖写时添加的Sheet名称（The code here sets the Sheet name to be appended into the xlsx file with the same name）
     riot_client_info = await (await connection.request("GET", "/riotclient/command-line-args")).json()
