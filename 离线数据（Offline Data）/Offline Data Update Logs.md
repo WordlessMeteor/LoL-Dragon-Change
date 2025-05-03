@@ -4387,7 +4387,7 @@
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
-						<li>Latest: 15.9.678.0398 -> 15.9.678.1456</li>
+						<li>Latest: 15.9.678.0398 -> 15.9.678.1456 (No changes)</li>
 						<li>PBE: 15.10.677.9841 -> 15.10.678.3933</li>
 					</ul>
 			</td>
@@ -4400,6 +4400,28 @@
 					<ul style="list-style-type: disc; margin-left: 20px;">
 						<li>Latest: 15.9.678.0398 -> 15.9.678.1456 (No changes)</li>
 						<li>PBE: 15.10.677.9841 -> 15.10.678.3933</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-05-03 08-57-28</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: Within-patch change</li>
+						<li>PBE: 15.10.678.3933 -> 15.10.678.5711</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-05-03 08-57-52</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: Within-patch change</li>
+						<li>PBE: 15.10.678.3933 -> 15.10.678.5711</li>
 					</ul>
 			</td>
 		</tr>
