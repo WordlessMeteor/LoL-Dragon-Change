@@ -790,7 +790,7 @@ async def get_recent_players(connection, search_mode: int = 2):
             except KeyError:
                 print(LoLHistory)
                 LoLHistory_url = "%s/lol-match-history/v1/products/lol/current-summoner/matches?begIndex=0&endIndex=200" %(connection.address)
-                print("请打开以下网址，输入如下所示的用户名和密码如下，打开后在命令行中按回车键继续（Please open the following website, type in the username and password accordingly and press Enter to continue）：\n网址（URL）：\t\t%s\n用户名（Username）：\triot\n密码（Password）：\t%s" %(LoLHistory_url, connection.auth_key))
+                print("请打开以下网址，输入如下所示的用户名和密码，打开后在命令行中按回车键继续（Please open the following website, type in the username and password accordingly and press Enter to continue）：\n网址（URL）：\t\t%s\n用户名（Username）：\triot\n密码（Password）：\t%s" %(LoLHistory_url, connection.auth_key))
                 cont = input()
                 if cont == "":
                     continue

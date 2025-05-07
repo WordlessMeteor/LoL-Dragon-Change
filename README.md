@@ -436,6 +436,39 @@ The following explanations only apply to the current branch. For other details (
 		- 如果正常运行，命令行中会不断提示“1 file(s) moved”。可以使用[Everything软件](https://www.voidtools.com/zh-cn/)以查看“召唤师信息（Summoner Information）”文件夹中的txt文件数量。
 			- 尝试在Everything的搜索框中输入`"{文件夹路径}" .txt`以查看某个文件夹下的txt文件列表，在窗口左下角即可看到符合条件的文件数量。
 				- “{文件夹地址}”示例：`C:\Users\19250\Desktop\英雄联盟自定义房间创建\召唤师信息（Summoner Information）`。
+	- 装备脚本用于**生成各版本的装备信息表**。
+		- 该脚本的数据来源是<ins>DataDragon数据库</ins>和<ins>CommunityDragon数据库</ins>。
+		- 该脚本支持**所有《英雄联盟》支持的语言**。
+		- 该脚本支持两个数据库收录的**所有版本**。
+		- 该脚本生成的表格主要分为4个部分：
+			- 元数据
+			- 装备分类
+			- 地图可用性（CommunityDragon收录的装备数据中无此类数据）
+			- 基础属性
+		- 如果想要批量冻结窗格，可以通过编写宏来一次性对所有表格固定表头。下面以Microsoft Excel为例进行示范。
+			1. 在Excel中，依次单击“文件”—“选项”—“自定义功能区”，在右侧的“自定义功能区”中勾选“开发工具”。单击“确定”。
+			2. 单击“开发工具”选项卡，再单击“Visual Basic”，打开VBA编辑器。
+			3. 在新窗口的“工程 - VBAProject”子窗口中，右键单击“VBAProject ({工作簿名称})”，依次单击“插入”—“模块”。
+			4. 在新的模块子窗口粘贴以下宏代码：\
+			```vba
+			Sub FreezeTopRowsAndSelectA1()
+				Dim ws As Worksheet
+				For Each ws In ThisWorkbook.Worksheets
+					ws.Activate
+					With ws
+						.Rows("2:2").Select
+						ActiveWindow.FreezePanes = False
+						ActiveWindow.SplitColumn = 0
+						ActiveWindow.SplitRow = 2
+						ActiveWindow.FreezePanes = True
+						.Range("A1").Select
+					End With
+				Next ws
+			End Sub
+			```
+			5. 关闭VBA编辑器，回到Excel窗口，单击“开发工具”选项卡中的“宏”。
+			6. 选择“FreezeTopRowsAndSelectA1”，然后点击“执行”。
+			7. 如果想要在保存更改的同时保存该宏，请另存为“.xlsm”格式。
 	- 为方便**查阅英雄联盟中的官方术语**，在主目录中添加了一个翻译库脚本`trans.py`。
 		- 该脚本每次运行可以选择汇总和保存一种语言的翻译数据资源，并允许同时下载所有语言的翻译数据资源。
 		- 由于该脚本仅用于校正术语，其涉及的数据资源仅用于开发程序，而不适用于发行版。因此建议用户在存储库，而不是由发行版压缩包解压得到的文件夹中运行该脚本。
@@ -1168,6 +1201,39 @@ For details about customized programs that is beyond the scope of creating a cus
 		- Within expectation, the prompt "1 files(s) moved" will constantly pop up in Command Prompt. [Everything App](https://www.voidtools.com/en-us/) is suggested for checking the number of txt files in the folder "召唤师信息（Summoner Information）".
 			- Try typing `"{folderPath}" .txt` in the search bar of Everything App to check the txt file list of a folder. You should see the number of the txt files at the bottom-left corner of the Everything window.
 				- An example of {folderPath}: `C:\Users\19250\Desktop\英雄联盟自定义房间创建\召唤师信息（Summoner Information）`.
+	- Item Program is used to **generate item information table of all versions**.
+		- Data resources are from <ins>DataDragon database> and <ins>CommunityDragon database</ins>.
+		- This program supports **all languages supported by League of Legends**.
+		- This program supports **all versions** archived by these two databases.
+		- Each generated table can be divided into 4 parts:
+			- Metadata
+			- Classification
+			- Map availability (not available in item data from CommunityDragon)
+			- Basic stats
+		- If you want to freeze cells in batch, you can write a Macro to fix the top rows of all sheets. The following is a demonstration, taking Microsoft Excel as an example.
+			1. In Microsoft Excel, click "File" - "Options" - "Customize Ribbon". Tick on "Developer" and click "OK".
+			2. Click "Developer" tab and then click "Visual Basic" to open the VBA editor.
+			3. In "Project - VBAProject" subwindow of the new window, right click "VBAProject ({Workbook Name})". Then click "Insert" - "Module".
+			4. Paste the following code into the new module subwindow:
+			```vba
+			Sub FreezeTopRowsAndSelectA1()
+				Dim ws As Worksheet
+				For Each ws In ThisWorkbook.Worksheets
+					ws.Activate
+					With ws
+						.Rows("2:2").Select
+						ActiveWindow.FreezePanes = False
+						ActiveWindow.SplitColumn = 0
+						ActiveWindow.SplitRow = 2
+						ActiveWindow.FreezePanes = True
+						.Range("A1").Select
+					End With
+				Next ws
+			End Sub
+			```
+			5. Close VBA editor and return to the Excel window. Click "Macro" in "Developer" tab.
+			6. Select "FreezeTopRowsAndSelectA1" and click "Run".
+			7. If you want to save the macro while saving the changes, please save this workbook as ".xlsm" format.
 	- To make it convenient for users to **look up LoL official terms**, a translation program `trans.py` is added in the home directory.
 		- Each run of this program supports summarizing and saving the translation data resources of a language. It also allows downloading data resources in all languages within one run.
 		- Since this program is only intended to correct the terms, the involved data resources are only used for program development, instead of the release. So, it's highly recommended that users run this program in the cloned repository folder, instead of the folder extracted from compressed files in Release.

@@ -680,7 +680,33 @@ async def search_player_match_stats_lol(connection, puuid: str, begIndex: int = 
         if info["info_got"]:
             #准备数据资源（Prepare data resources）
             ##英雄联盟对局记录（LoL match history）
-            LoLHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/lol/{puuid}/matches?begIndex={begIndex}&endIndex={endIndex}")).json()
+            while True:
+                LoLHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/lol/{puuid}/matches?begIndex={begIndex}&endIndex={endIndex}")).json()
+                count = 0
+                error_occurred = False
+                if "errorCode" in LoLHistory:
+                    if "500 Internal Server Error" in LoLHistory["message"]:
+                        if not error_occurred and print_detail:
+                            print("您所在大区的对局记录服务异常。尝试重新获取数据……\nThe match history service provided on your server isn't in place. Trying to recapture the history data ...")
+                            error_occurred = True
+                        while "errorCode" in LoLHistory and "500 Internal Server Error" in LoLHistory["message"] and count <= 3:
+                            count += 1
+                            if print_detail:
+                                print("正在进行第%d次尝试……\nTimes trying: No. %d ..." %(count, count))
+                            LoLHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/lol/{puuid}/matches?begIndex={begIndex}&endIndex={endIndex}")).json()
+                    elif "body was empty" in LoLHistory["message"]:
+                        print("这位召唤师从5月1日起就没有进行过任何英雄联盟对局。\nThis summoner hasn't played any LoL game yet since May 1st.")
+                        break
+                    elif "Error getting match list for summoner" in LoLHistory["message"]:
+                        LoLHistory_url = "%s/lol-match-history/v1/products/lol/%s/matches?begIndex=%d&endIndex=%d" %(connection.address, puuid, begIndex, endIndex)
+                        print("请打开以下网址，输入如下所示的用户名和密码，打开后在命令行中按回车键继续（Please open the following website, type in the username and password accordingly and press Enter to continue）：\n网址（URL）：\t\t%s\n用户名（Username）：\triot\n密码（Password）：\t%s" %(LoLHistory_url, connection.auth_key))
+                    if count > 3:
+                        print("英雄联盟对局记录获取失败！请等待官方修复对局记录服务！\nLoL match history capture failure! Please wait for Tencent to fix the match history service!")
+                        break
+                else:
+                    break
+            if "errorCode" in LoLHistory:
+                return pandas.DataFrame(data = LoLGame_stat_header, index = [0])
             #数据整理核心部分（Data sorting - core part）
             LoLGame_stat_data = {}
             for i in range(len(LoLGame_stat_header_keys)):
@@ -840,7 +866,33 @@ async def search_player_match_stats_tft(connection, puuid: str, begin: int = 0, 
         if info["info_got"]:
             #准备数据资源（Prepare data resources）
             ##云顶之弈对局记录（TFT match history）
-            TFTHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/tft/{puuid}/matches?begin={begin}&count={count}")).json()
+            while True:
+                TFTHistory = await (await connection.request("GET", f"/TFT-match-history/v1/products/tft/{puuid}/matches?begin={begin}&count={count}")).json()
+                count = 0
+                error_occurred = False
+                if "errorCode" in TFTHistory:
+                    if "500 Internal Server Error" in TFTHistory["message"]:
+                        if not error_occurred and print_detail:
+                            print("您所在大区的对局记录服务异常。尝试重新获取数据……\nThe match history service provided on your server isn't in place. Trying to recapture the history data ...")
+                            error_occurred = True
+                        while "errorCode" in TFTHistory and "500 Internal Server Error" in TFTHistory["message"] and count <= 3:
+                            count += 1
+                            if print_detail:
+                                print("正在进行第%d次尝试……\nTimes trying: No. %d ..." %(count, count))
+                            TFTHistory = await (await connection.request("GET", f"/TFT-match-history/v1/products/tft/{puuid}/matches?begin={begin}&count={count}")).json()
+                    elif "body was empty" in TFTHistory["message"]:
+                        print("这位召唤师从5月1日起就没有进行过任何云顶之弈对局。\nThis summoner hasn't played any TFT game yet since May 1st.")
+                        break
+                    elif "Error getting match list for summoner" in TFTHistory["message"]:
+                        TFTHistory_url = "%s/lol-match-history/v1/products/tft/%s/matches?begin={begin}&count={count}" %(connection.address, puuid, begin, count)
+                        print("请打开以下网址，输入如下所示的用户名和密码，打开后在命令行中按回车键继续（Please open the following website, type in the username and password accordingly and press Enter to continue）：\n网址（URL）：\t\t%s\n用户名（Username）：\triot\n密码（Password）：\t%s" %(TFTHistory_url, connection.auth_key))
+                    if count > 3:
+                        print("英雄联盟对局记录获取失败！请等待官方修复对局记录服务！\nTFT match history capture failure! Please wait for Tencent to fix the match history service!")
+                        break
+                else:
+                    break
+            if "errorCode" in TFTHistory:
+                return pandas.DataFrame(data = TFTGame_stat_header, index = [0])
             version_re = re.compile(r"\d*\.\d*\.\d*\.\d*")
             #数据整理核心部分（Data sorting - core part）
             TFTGame_stat_data = {}
