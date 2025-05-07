@@ -153,8 +153,8 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
 #-----------------------------------------------------------------------------
 async def check_available_queue(connection):
     queues = await (await connection.request("GET", "/lol-game-queues/v1/queues")).json()
-    map_CN = {8: "水晶之痕", 10: "扭曲丛林", 11: "召唤师峡谷", 12: "嚎哭深渊", 14: "屠夫之桥", 16: "星界废墟", 18: "瓦洛兰城市公园", 19: "第43区", 20: "飞船坠落点", 21: "百合与莲花的神庙", 22: "聚点危机", 30: "怒火角斗场", 33: "最终都市"}
-    map_EN = {8: "Crystal Scar", 10: "Twisted Treeline", 11: "Summoner's Rift", 12: "Howling Abyss", 14: "Butcher's Bridge", 16: "Cosmic Ruins", 18: "Valoran City Park", 19: "Substructure 43", 20: "Crash Site", 21: "Temple of Lily and Lotus", 22: "Convergence", 30: "Rings of Wrath", 33: "Final City"}
+    map_CN = {8: "水晶之痕", 10: "扭曲丛林", 11: "召唤师峡谷", 12: "嚎哭深渊", 14: "屠夫之桥", 16: "星界废墟", 18: "瓦洛兰城市公园", 19: "第43区", 20: "飞船坠落点", 21: "百合与莲花的神庙", 22: "聚点危机", 30: "怒火角斗场", 33: "最终都市", 35: "班德尔之森"}
+    map_EN = {8: "Crystal Scar", 10: "Twisted Treeline", 11: "Summoner's Rift", 12: "Howling Abyss", 14: "Butcher's Bridge", 16: "Cosmic Ruins", 18: "Valoran City Park", 19: "Substructure 43", 20: "Crash Site", 21: "Temple of Lily and Lotus", 22: "Convergence", 30: "Rings of Wrath", 33: "Final City", 35: "The Bandlewood"}
     pickmode_CN = {"AllRandomPickStrategy": "全随机模式", "SimulPickStrategy": "自选模式", "TeamBuilderDraftPickStrategy": "征召模式", "OneTeamVotePickStrategy": "投票", "TournamentPickStrategy": "竞技征召模式", "QuickplayPickStrategy": "快速匹配", "": "待定"}
     pickmode_EN = {"AllRandomPickStrategy": "All Random", "SimulPickStrategy": "Blind Pick", "TeamBuilderDraftPickStrategy": "Draft Mode", "OneTeamVotePickStrategy": "Vote", "TournamentPickStrategy": "Tournament Draft", "QuickplayPickStrategy": "Quickplay", "": "Pending"}
     available_queues = {}
@@ -192,7 +192,7 @@ async def gamemode(connection):
     queues_header_keys = list(queues_header.keys())
     # 下面定义的字典对导出的Excel结果进行优化（The following defined dictionaries optimizes the results in Excel）
     categories = {"Custom": "自定义对局", "PvP": "玩家对战", "VersusAi": "人机对战"}
-    gameSelectCategories = {"": "待定", "CreateCustom": "创建自定义房间", "kPvP": "玩家对战", "kVersusAI": "人机对战"}
+    gameSelectCategories = {"": "待定", "CreateCustom": "创建自定义对局", "JoinCustom": "加入自定义对局", "kPvP": "玩家对战", "kTraining": "训练", "kVersusAI": "人机对战"}
     gameSelectModeGroups = {"": "待定", "kARAM": "极地大乱斗", "kAlternativeLeagueGameModes": "轮换《英雄联盟》游戏模式", "kSummonersRift": "召唤师峡谷", "kTeamfightTactics": "云顶之弈"}
     queueAvailability_dict = {"Available": "√", "PlatformDisabled": ""}
     banModes = {"": "待定", "SkipBanStrategy": "无", "StandardBanStrategy": "经典策略", "TournamentBanStrategy": "竞技策略"}

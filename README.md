@@ -350,6 +350,7 @@ The following explanations only apply to the current branch. For other details (
 						- 斗魂竞技场
 	- 自定义脚本14用于**秒进好友小队**。
 		- 程序已添加使用限制。<b>请勿滥用和篡改代码。</b>
+		- 这个脚本可能并没有想象中那么好用。如果你实在想上车，建议运行脚本的同时鼠标也狂点“加入小队”按钮即将出现的地方。
 	- 自定义脚本15用于**玩家在自定义对局中选择相同的英雄**。该问题目前已被修复，因此你可以无视这个脚本。
 	- 自定义脚本16用于**模拟英雄联盟客户端中与聊天服务相关的行为**。
 		- 目前该脚本提供以下功能：
@@ -377,6 +378,57 @@ The following explanations only apply to the current branch. For other details (
 				- 切换活动符文页
 				- 排序符文页
 				- 删除符文页
+	- 自定义脚本20用于**批量汇总玩家战绩**。
+		- 该脚本综合了查战绩脚本的查询功能和自定义脚本11的游戏状态检测功能，汇总了以下场景的玩家战绩：
+			- 英雄选择阶段信息可见的队友
+			- 游戏内的所有玩家
+			- 已经结束的对局内的所有玩家
+		- 该脚本在输出基本数据的同时，也会输出一些统计指标，参考了以下内容：
+			- 掌上英雄联盟的雷达图指标
+			- 电子竞技常用指标（战损比、参团率、分均经济、分均补刀、伤害转化率等）
+		- 该脚本为特定格式的数据添加了条件格式，以提升直观性。
+			- 战损比按照一位小数格式输出。
+			- 部分电子竞技统计指标按照三位小数格式输出。
+			- 占比数据按照两位小数的百分比格式输出。
+			- 位次数据设置了三色刻度。
+			- 胜负结果通过公式确定着色。“胜利”设置为绿色，“失败”设置为红色。
+		- 为了简化使用步骤，该脚本设置了一些命令行参数。通过`python [文件名] -h`命令以查看这些参数。
+			<table>
+				<thead>
+					<tr>
+						<th style="text-align:center;">命令行参数</th>
+						<th style="text-align:center;">行为类型</th>
+						<th style="text-align:center;">描述</th>
+						<th style="text-align:center;">取值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align:center;">-l<br>--locale</td>
+						<td style="text-align:center;">存储变量</td>
+						<td>设置程序内定义的常量字典的语言。目前仅支持简体中文和美式英语</td>
+						<td>zh_CN（默认）<br>en_US</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">-os<br>--open_after_save</td>
+						<td style="text-align:center;">赋值为真</td>
+						<td>在成功保存文件后打开文件，不需要程序询问</td>
+						<td>无</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">--verbose</td>
+						<td style="text-align:center;">赋值为真</td>
+						<td>输出详细的对局加载进度和异常处理过程性提示</td>
+						<td>无</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">--nonverbose</td>
+						<td style="text-align:center;">赋值为真</td>
+						<td>只输出关键信息</td>
+						<td>无</td>
+					</tr>
+				</tbody>
+			</table>
 	- `清除临时文件.bat`用于**清除自定义脚本产生的临时文件**。目前可以清除自定义脚本03、05、10、11、17和19产生的临时文件。
 	- `召唤师信息文件格式转换.bat`用于**将自定义脚本5产生的数据文档在txt和json格式之间重命名**。
 		- 大量数据文档的重命名可能导致文件资源管理器卡顿，因此请谨慎使用本脚本。
@@ -646,6 +698,33 @@ The following explanations only apply to the current branch. For other details (
 				- 无填充代表`Key`可以作为`page`的索引。
 				- 蓝色代表`Key`的后半部分可以直接作为`page["pageKeystone"]`的索引。
 				- 绿色代表`Key`来自`page["uiPerks"][pageId]`的索引。
+		- 下面对自定义脚本20中的`social_leaderboard_df`的结构进行说明。
+			- 工作表`20 - social_leaderboard_header`完全复制于工作表`05 - LoLGame_leaderboard_header`或者`05 - TFTGame_leaderboard_header`。
+		- 下面对自定义脚本20中的`queues_df`的结构进行说明。
+			- 工作表`20 - queues_header`完全复制于工作表`09 - queues_header`。
+		- 下面对自定义脚本20中的`LoLGame_stat_df`的结构进行说明。
+			- 工作表`20 - LoLGame_stat_header`的主要数据区域设置了7种颜色。
+				- 无填充代表`Key`不作为LCU API中任何变量的索引。
+				- 蓝色代表`Key`可以作为`LoLHistory["games"]["games"]`的索引。
+				- 浅绿色代表`Key`可以作为`LoLHistory["games"]["games"]["participantIdentities"][0]["player"]`的索引。
+				- 黄色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]`的索引。
+				- 深绿色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]["stats"]`的索引。
+				- 紫色代表`Key`可以直接作为`LoLHistory["games"]["games"]["participants"][0]["timeline"]`的索引。
+				- 灰色代表`Key`来自`LoLGame_info["participants"][participantId]["stats"]`的索引。
+					- 该部分数据主要通过比较和计算得出。
+		- 下面对自定义脚本20中的`TFTGame_stat_df`的结构进行说明。
+			- 工作表`20 - TFTGame_stat_header`完全复制于工作表`05 - TFTHistory_header`。
+		- 下面对自定义脚本20中的`process_df`的结构进行说明。
+			- 工作表`20 - process_header`的主要数据区域设置了2种颜色。
+				- 无填充代表`Key`不作为任何变量的索引。
+				- 蓝色代表`Key`可以直接作为`parent`和`child`的索引。
+		- 下面对装备脚本中的`LoLItem_df`的元数据进行说明。
+			- 工作表`Item Program - base_header (ddr`的主要数据区域设置了3种颜色。`item`是`LoLItems_locale["data"]`的键为`i`的值。`item_default`是`LoLItems_default["data"]`的键为`i`的值。
+				- 无填充代表`Key`不作为装备数据中的任何索引。
+				- 蓝色代表`Key`可以作为`item`的索引。
+				- 绿色代表`Key`来自`item["gold"]`的索引。
+			- 工作表`Item Program - base_header (ddr`的主要数据区域设置为无填充。`item`是`LoLItems_locale`中的任意一个元素。`item_default`是`LoLItems_default`中的任意一个元素。
+				- `Key`可以作为`item`的索引。
 6. 一般情况下，本程序集生成的包含json数据的文本文档都是带缩进的。如果需要根据这些文件复现python运行环境中的字典变量，只需要向json库中的load函数传入一个由open函数创建的文件指针即可。如`fp = open("{文件名}.txt", "r", encoding = "utf-8")`和`d = json.load(fp)`。
 	- 若要在运行环境中将dumps函数生成的带缩进的json字符串转换成不带缩进的json字符串，只需要将dumps函数生成的字符串传入loads函数即可。如`formatted = json.dumps({字典变量}, indent = 8, ensure_ascii = False)`和`d = json.loads(formatted)`。
 # 后记
@@ -1003,6 +1082,7 @@ For details about customized programs that is beyond the scope of creating a cus
 						- Arena
 	- Customized Program 14 is used to **instantly enter a friend's party**.
 		- Usage limits are added. <b>Please don't abuse the program and edit the code at will.</b>
+		- This program might be as useful as how you think. If you're dying to be carried, I suggest you keep clicking where the "join party" will occur desperately while running this program.
 	- Customized Program 15 is used to **let the users pick a same champion in a custom game**. This BUG has been fixed, so you may ignore this program.
 	- Customized Program 16 is used to **simulate the behaviors related with chat service**.
 		- Currently this program has the following features:
@@ -1030,6 +1110,57 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Toggle active page
 				- Sort pages
 				- Delete pages
+	- Customized Program 20 is used to **summary multiple players' game stats at a time**.
+		- This program combines the search function in Customized Program 05 and the gameflow phase detection function in Customized Program 11 and summarizes player stats in the following situations:
+			- Allies with visible information during champ select stage
+			- All players in game
+			- All players in a previous match
+		- While basic stats are output, some other indices are also output, which refer to:
+			- Radar graph in LoL Helper Mobile
+			- Common statistics in LoL Esports (KDA, Kill Participant, Gold per Minute, CS per Minute, Damage per Gold Ratio, etc.)
+		- Data in certain format are added conditional formats in the exported workbook to improve intuitiveness.
+			- KDA is output as a one-digit float.
+			- Some LoL Esports statistics are output as three-digit floats.
+			- Percentages are output as two-digit percentages.
+			- Order cells are three-color scaled.
+			- Win and lose result cells are colored based on formula. "VICTORY" is colored green and "DEFEAT" is colored red.
+		- For convenience, this program sets up some command line arguments. Check these arguments through the command `python [filename] -h`.
+		<table>
+				<thead>
+					<tr>
+						<th style="text-align:center;">CMD arguments</th>
+						<th style="text-align:center;">Action</th>
+						<th style="text-align:center;">Help message</th>
+						<th style="text-align:center;">Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align:center;">-l<br>--locale</td>
+						<td style="text-align:center;">store</td>
+						<td>Set the language of constant dictionaries defined in the program. Only Simplified Chinese and English (US) are supported for now</td>
+						<td>zh_CN (default)<br>en_US</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">-os<br>--open_after_save</td>
+						<td style="text-align:center;">store_true</td>
+						<td>After saving a file, open it without program asking</td>
+						<td>None</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">--verbose</td>
+						<td style="text-align:center;">store_true</td>
+						<td>Print detailed match loading process and exception handling procedural hints</td>
+						<td>None</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">--nonverbose</td>
+						<td style="text-align:center;">store_true</td>
+						<td>Output key information only</td>
+						<td>None</td>
+					</tr>
+				</tbody>
+			</table>
 	- `清除临时文件.bat` is used to **remove temporary files generated by customized programs**. At present it can delete temporary files from customized programs 03, 05, 10, 11, 17 and 19.
 	- `召唤师信息文件格式转换.bat` is used to **rename the format of data files generated by Customized Program 05 into ".txt" or ".json"**.
 		- Renaming a number of data files may results in the slow performance of Explorer, so please think twice to use this program.
@@ -1106,12 +1237,13 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the light green area mean `Key` is the index of the endpoint `/lol-summoner/v2/summoners/puuid/{puuid}`.
 				- Data in the orange area mean `Key` doesn't serve as the index of any variables of LCU API.
 		- `LoLHistory_df` in Customized Programs 05 and 11:
-			- 5 colors are used to divide the main data area in the sheets `05 - LoLHistory_header` and `11 - LoLHistory_header`.
+			- 6 colors are used to divide the main data area in the sheets `05 - LoLHistory_header` and `11 - LoLHistory_header`.
 				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
 				- Data in the light blue area mean `Key` is the index of `LoLHistory["games"]["games"]`.
 				- Data in the light green area mean `Key` is the direct index of `LoLHistory["games"]["games"]["participantIdentities"][0]["player"]`.
 				- Data in the orange area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]`.
 				- Data in the dark green area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]["stats"]`.
+				- Data in the purple area mean `Key` is the direct index of `LoLHistory["games"]["games"]["participants"][0]["timeline"]`.
 		- `LoLGame_leaderboard_df` and `TFTGame_leaderboard_df` in Customized Program 05:
 			- 2 colors are used to divide the main data area in both sheets `05 - LoLGame_leaderboard_header` and `05 - TFTGame_leaderboard_header`.
 				- Data in the blue area mean `Key` is the index of `participantInfo`.
@@ -1294,6 +1426,33 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data not filled with any color mean `Key` is the index of `page`.
 				- Data in the blue area mean the second half of `Key` is the direct index of `page["pageKeystone"]`.
 				- Data in the green area mean `Key` comes from `page["uiPerks"][pageId]`.
+		- `social_leaderboard_df` in Customized Program 20:
+			- Sheet `20 - social_leaderboard_header` is totally copied from Sheet `05 - LoLGame_leaderboard_header` or `05 - TFTGame_leaderboard_header`.
+		- `queues_df` in Customized Program 20:
+			- Sheet `20 - queues_header` is totally copied from Sheet `09 - queues_header`.
+		- `LoLGame_stat_df` in Customized Program 20:
+			- 7 colors are used to divide the main data area in the sheet `20 - LoLGame_stat_header`.
+				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
+				- Data in the blue area mean `Key` is the index of `LoLHistory["games"]["games"]`.
+				- Data in the light green area mean `Key` is the direct index of `LoLHistory["games"]["games"]["participantIdentities"][0]["player"]`.
+				- Data in the yellow area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]`.
+				- Data in the dark green area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]["stats"]`.
+				- Data in the purple area mean `Key` is the direct index of `LoLHistory["games"]["games"]["participants"][0]["timeline"]`.
+				- Data in the grey area mean `Key` comes from `LoLGame_info["participants"][participantId]["stats"]`.
+					- Values of this part of keys are obtained by comparison and mathematical calculation.
+		- `TFTGame_stat_df` in Customized Program 20:
+			- Sheet `20 - TFTGame_stat_header` is totally copied from Sheet `05 - TFTHistory_header`.
+		- `process_df` in Customized Program 20:
+			- 2 colors are used to divide the main data area in the sheet `20 - process_header`.
+				- Data not filled with any color mean `Key` doesn't serve as the index of any variables.
+				- Data in the blue area mean `Key` is the direct index of `parent` and `child`.
+		- `LoLItem_df`'s metadata in Item Program:
+			- 3 colors are used to divide the main data area in the sheet `Item Program - base_header (ddr`. `item` denotes the value of key `i` in `LoLItems_locale["data"]`. `item_default` denotes the value of key `i` in `LoLItems_default["data"]`.
+				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of item data.
+				- Data in the blue area mean `Key` is the index of `item`.
+				- Data in the blue area mean `Key` comes from `item["gold"]`.
+			- The main data area in the sheet `Item Program - base_header (cdr` isn't filled with any color. `item` denotes any element in `LoLItems_locale`. `item_default` denotes any element in `LoLItems_default`.
+				- `Key` is the index of `item`.
 6. Normally, text files generated by this program set are organized with indents. If the original dictionary variable in python runtime environment is required to recur, then simply pass a file pointer created by `open` function to the `load` function in `json` library, such as `fp = open("{filename}.txt", "r", encoding = "utf-8")` and `d = json.load(fp)`.
 	- If the user wants to transform a json string with indents generated by `dumps` function into a json string without indents just in the runtime environment, he/she only needs to pass the string generated by `dumps` functin into `loads` function, such as `formatted = json.dumps({dictvariable}, indent = 8, ensure_ascii = False)` and `d = json.loads(formatted)`.
 # Afterword

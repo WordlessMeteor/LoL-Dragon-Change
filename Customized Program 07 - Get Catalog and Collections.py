@@ -877,8 +877,8 @@ async def fetch_store(connection):
                 if (item["inventoryType"], item["itemId"]) in collection_hashtable:
                     name = collection_hashtable[(item["inventoryType"], item["itemId"])]
                 elif item["inventoryType"] in hashtable_dicts: #商品中可能不包含藏品（A collection item may not be contained in the collection）
-                    if item["inventoryType"] in {"STRAWBERRY_BOON", "STRAWBERRY_LOADOUT_ITEM", "STRAWBERRY_MAP"} and item["itemInstanceId"] in hashtable_dicts[item["inventoryType"]]:
-                        name = hashtable_dicts[item["inventoryType"]][item["itemInstanceId"]]["name"]
+                    if item["inventoryType"] in {"STRAWBERRY_BOON", "STRAWBERRY_LOADOUT_ITEM", "STRAWBERRY_MAP"} and item["uuid"] in hashtable_dicts[item["inventoryType"]]:
+                        name = hashtable_dicts[item["inventoryType"]][item["uuid"]]["name"]
                     elif item["itemId"] in hashtable_dicts[item["inventoryType"]]:
                         name = hashtable_dicts[item["inventoryType"]][item["itemId"]]["name"]
                     else:

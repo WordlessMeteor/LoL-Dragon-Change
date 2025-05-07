@@ -117,8 +117,8 @@ def getUrl(url: str, log):
         except requests.exceptions.HTTPError as http_err:
             if retry > 5:
                 break
-            if http_err.response.status_code == 404:
-                return (source, 404)
+            if http_err.response.status_code in {403, 404}:
+                return (source, http_err.response.status_code)
         except requests.exceptions.SSLError as ssl_error:
             if retry > 5:
                 break

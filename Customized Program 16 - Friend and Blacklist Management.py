@@ -378,7 +378,7 @@ async def sort_friend_hovercard(connection):
     tiers = {"": "", "NONE": "没有段位", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
     ratedTiers = {"": "", "NONE": "没有段位", "GRAY": "灰白", "GREEN": "翠绿", "BLUE": "天蓝", "PURPLE": "绛紫", "ORANGE": "耀橙"}
     tiers_all = tiers | ratedTiers
-    rarities = {"Default": "默认", "Common": "常规", "Epic": "史诗", "Legacy": "限定", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极"} #来源（Reference）：plugins/rcp-fe-lol-loot/global/zh_cn、plugins/rcp-fe-lol-shared-components/global/zh_cn
+    rarities = {"Default": "默认", "Common": "常规", "Epic": "史诗", "Legacy": "限定", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极", "Exalted": "圣者至尊", "Transcendant": "超凡"} #来源（Reference）：plugins/rcp-fe-lol-loot/global/zh_cn、plugins/rcp-fe-lol-shared-components/global/zh_cn
     spectatorPolicies = {"ALL": "所有人", "FRIENDONLY": "只允许好友", "LOBBYONLY": "只允许房间内玩家", "NONE": "无"}
     titleAcquisitionTypes = {"DEFAULT": "默认", "CHALLENGE": "成就", "CHAMPION_MASTERY": "英雄成就", "EVENT": "事件"}
     krarities = {"kNoRarity": "其它", "kExalted": "圣堂级", "kEpic": "史诗", "kLegendary": "传说", "kMythic": "神话", "kRare": "稀有", "kUltimate": "终极", "kTranscendent": "卓越"}
@@ -390,7 +390,7 @@ async def sort_friend_hovercard(connection):
                 if i == 0: #可用性（`availability`）
                     friend_hovercard_data[key].append(availabilities[friend[key]])
                 elif i == 23 or i == 24: #非直接导入的召唤师图标相关键（Not directly imported `icon`-related keys）
-                    friend_hovercard_data[key].append(summonerIcons[friend["icon"]][key.split(" ")[1]] if friend["icon"] in summonerIcons else "")
+                    friend_hovercard_data[key].append(summonerIcons[friend["icon"]].get(key.split(" ")[1], "") if friend["icon"] in summonerIcons else "")
                 elif i == 25: #上次离线时间（`lastSeenOnlineTime`）
                     if friend["lastSeenOnlineTimestamp"] == None:
                         friend_hovercard_data[key].append("")
@@ -607,7 +607,8 @@ async def sort_friend_hovercard_simple(connection):
     friend_hovercard_df_simple = pandas.concat([pandas.DataFrame([friend_hovercard_header_simple])[friend_hovercard_df_simple.columns], friend_hovercard_df_simple], ignore_index = True)
     return friend_hovercard_df_simple
 
-def sort_friend_group(friend_groups: list | dict):
+async def sort_friend_group(connection):
+    friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
     friend_groups_header = {"collapsed": "已折叠", "id": "分组序号", "isLocalized": "分组名称已翻译", "isMetaGroup": "大组", "name": "分组名称", "priority": "优先级"}
     friend_groups_header_keys = list(friend_groups_header.keys())
     friend_groups_data = {}
@@ -638,34 +639,29 @@ def sort_friend_group(friend_groups: list | dict):
         friend_groups_df = pandas.DataFrame(data = friend_groups_header, index = [0])
     return friend_groups_df
 
-def sort_conversation_metadata(conversations: list | dict):
+async def sort_conversation_metadata(connection):
+    conversations = await (await connection.request("GET", "/lol-chat/v1/conversations")).json()
     conversationTypes = {"chat": "私聊", "customGame": "自定义对局", "championSelect": "英雄选择", "postGame": "结算界面"}
     conversation_header = {"gameName": "玩家昵称", "gameTag": "昵称编号", "id": "对话序号", "inviterId": "邀请人序号", "isMuted": "已静音", "name": "召唤师显示名", "password": "密码", "pid": "社交代码", "targetRegion": "目标服务器", "type": "对话类型", "unreadMessageCount": "未读消息数"}
     conversation_header_keys = list(conversation_header.keys())
-    if isinstance(conversations, list) and all(map(lambda x: isinstance(x, dict), conversations)) and all(i in conversation for i in ["gameName", "gameTag", "id", "inviterId", "isMuted", "name", "password", "pid", "targetRegion", "type", "unreadMessageCount"] for conversation in conversations):
-        conversation_metadata = {}
+    conversation_metadata = {}
+    for i in range(len(conversation_header_keys)):
+        key = conversation_header_keys[i]
+        conversation_metadata[key] = []
+    for conversation in conversations:
         for i in range(len(conversation_header_keys)):
             key = conversation_header_keys[i]
-            conversation_metadata[key] = []
-        for conversation in conversations:
-            for i in range(len(conversation_header_keys)):
-                key = conversation_header_keys[i]
-                if i == 9:
-                    conversation_metadata[key].append(conversationTypes[conversation[key]])
-                else:
-                    conversation_metadata[key].append(conversation[key])
-        conversation_statistics_output_order = [9, 0, 1, 2]
-        conversation_metadata_organized = {}
-        for i in conversation_statistics_output_order:
-            key = conversation_header_keys[i]
-            conversation_metadata_organized[key] = conversation_metadata[key]
-        conversation_df = pandas.DataFrame(data = conversation_metadata_organized)
-        conversation_df = pandas.concat([pandas.DataFrame([conversation_header])[conversation_df.columns], conversation_df], ignore_index = True)
-    elif isinstance(conversations, dict) and all(i in conversations for i in ["errorCode", "httpStatus", "implementationDetails", "message"]):
-        conversation_df = pandas.DataFrame(conversation_header, index = [0])
-    else:
-        print("对话数据格式错误！函数只生成空表。\nConversation data format ERROR! The function will only return an empty table.")
-        conversation_df = pandas.DataFrame(conversation_header, index = [0])
+            if i == 9:
+                conversation_metadata[key].append(conversationTypes[conversation[key]])
+            else:
+                conversation_metadata[key].append(conversation[key])
+    conversation_statistics_output_order = [9, 0, 1, 2]
+    conversation_metadata_organized = {}
+    for i in conversation_statistics_output_order:
+        key = conversation_header_keys[i]
+        conversation_metadata_organized[key] = conversation_metadata[key]
+    conversation_df = pandas.DataFrame(data = conversation_metadata_organized)
+    conversation_df = pandas.concat([pandas.DataFrame([conversation_header])[conversation_df.columns], conversation_df], ignore_index = True)
     return conversation_df
 
 async def sort_message_data(connection, messages: list | dict):
@@ -751,10 +747,10 @@ async def get_recent_players(connection, search_mode: int = 2):
     lanes = {"TOP": "上路", "JUNGLE": "打野", "MIDDLE": "中路", "BOTTOM": "下路", "NONE": ""}
     roles = {"CARRY": "C位", "DUO": "游走", "SOLO": "单人", "SUPPORT": "辅助", "NONE": ""}
     traitStyles = {0: "", 1: "青铜", 2: "白银", 3: "黄金", 4: "炫金", 5: "独行"}
-    rarities = {"Default": "经典", "NoRarity": "其它", "Epic": "史诗", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极"}
+    rarities = {"Default": "经典", "NoRarity": "其它", "Epic": "史诗", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极", "Exalted": "圣者至尊", "Transcendant": "超凡"}
     #定义玩家对局表现数据结构（Define the player match behavior data structure）
     ##英雄联盟（LoL）
-    LoLGame_info_header = {"endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "账户序号", "currentAccountId": "当前账户序号", "currentPlatformId": "当前大区", "gameName": "玩家昵称", "matchHistoryUri": "", "platformId": "原大区", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "profileIcon_title": "召唤师图标名称", "profileIcon_imagePath": "召唤师图标路径", "championId": "选用英雄序号", "highestAchievedSeasonTier": "最高段位", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "选用英雄", "champion_alias": "选用英雄代号", "champion_squarePortraitPath": "选用英雄方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "causedEarlySurrender": "发起提前投降", "champLevel": "英雄等级", "combatPlayerScore": "战斗得分", "damageDealtToObjectives": "对战略点的总伤害", "damageDealtToTurrets": "对防御塔的总伤害", "damageSelfMitigated": "自我缓和的伤害", "deaths": "死亡", "doubleKills": "双杀", "earlySurrenderAccomplice": "同意提前投降", "firstBloodAssist": "协助获得第一滴血", "firstBloodKill": "第一滴血", "firstInhibitorAssist": "协助摧毁第一座召唤水晶", "firstInhibitorKill": "摧毁第一座召唤水晶", "firstTowerAssist": "协助摧毁第一座塔", "firstTowerKill": "摧毁第一座塔", "gameEndedInEarlySurrender": "提前投降导致比赛结束", "gameEndedInSurrender": "投降导致比赛结束", "goldEarned": "金币获取", "goldSpent": "金币使用", "inhibitorKills": "摧毁召唤水晶", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "killingSprees": "大杀特杀", "kills": "击杀", "largestCriticalStrike": "最大暴击伤害", "largestKillingSpree": "最高连杀", "largestMultiKill": "最高多杀", "longestTimeSpentLiving": "最长生存时间", "magicDamageDealt": "造成的魔法伤害", "magicDamageDealtToChampions": "对英雄的魔法伤害", "magicalDamageTaken": "承受的魔法伤害", "neutralMinionsKilled": "击杀野怪", "neutralMinionsKilledEnemyJungle": "击杀敌方野区野怪", "neutralMinionsKilledTeamJungle": "击杀我方野区野怪", "objectivePlayerScore": "战略点玩家得分", "pentaKills": "五杀", "perk0": "符文1序号", "perk0Var1": "符文1：参数1", "perk0Var2": "符文1：参数2", "perk0Var3": "符文1：参数3", "perk1": "符文2序号", "perk1Var1": "符文2：参数1", "perk1Var2": "符文2：参数2", "perk1Var3": "符文2：参数3", "perk2": "符文3序号", "perk2Var1": "符文3：参数1", "perk2Var2": "符文3：参数2", "perk2Var3": "符文3：参数3", "perk3": "符文4序号", "perk3Var1": "符文4：参数1", "perk3Var2": "符文4：参数2", "perk3Var3": "符文4：参数3", "perk4": "符文5序号", "perk4Var1": "符文5：参数1", "perk4Var2": "符文5：参数2", "perk4Var3": "符文5：参数3", "perk5": "符文6序号", "perk5Var1": "符文6：参数1", "perk5Var2": "符文6：参数2", "perk5Var3": "符文6：参数3", "perkPrimaryStyle": "主系序号", "perkSubStyle": "副系序号", "physicalDamageDealt": "造成的物理伤害", "physicalDamageDealtToChampions": "对英雄的物理伤害", "physicalDamageTaken": "承受的物理伤害", "playerAugment1": "强化符文1", "playerAugment2": "强化符文2", "playerAugment3": "强化符文3", "playerAugment4": "强化符文4", "playerAugment5": "强化符文5", "playerAugment6": "强化符文6", "playerScore0": "玩家得分1", "playerScore1": "玩家得分2", "playerScore2": "玩家得分3", "playerScore3": "玩家得分4", "playerScore4": "玩家得分5", "playerScore5": "玩家得分6", "playerScore6": "玩家得分7", "playerScore7": "玩家得分8", "playerScore8": "玩家得分9", "playerScore9": "玩家得分10", "playerSubteamId": "子阵营序号", "quadraKills": "四杀", "sightWardsBoughtInGame": "购买洞察之石", "subteamPlacement": "队伍排名", "teamEarlySurrendered": "队伍提前投降", "timeCCingOthers": "控制得分", "totalDamageDealt": "造成的伤害总和", "totalDamageDealtToChampions": "对英雄的伤害总和", "totalDamageTaken": "承受伤害", "totalHeal": "治疗伤害", "totalMinionsKilled": "击杀小兵", "totalPlayerScore": "玩家总得分", "totalScoreRank": "总得分排名", "totalTimeCrowdControlDealt": "控制时间", "totalUnitsHealed": "治疗单位数", "tripleKills": "三杀", "trueDamageDealt": "造成真实伤害", "trueDamageDealtToChampions": "对英雄的真实伤害", "trueDamageTaken": "承受的真实伤害", "turretKills": "摧毁防御塔", "unrealKills": "六杀及以上", "visionScore": "视野得分", "visionWardsBoughtInGame": "购买控制守卫", "wardsKilled": "摧毁守卫", "wardsPlaced": "放置守卫", "win": "胜利", "KDA": "战损比", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "perk0EndOfGameStatDescs": "符文1游戏结算数据", "perk1EndOfGameStatDescs": "符文2游戏结算数据", "perk2EndOfGameStatDescs": "符文3游戏结算数据", "perk3EndOfGameStatDescs": "符文4游戏结算数据", "perk4EndOfGameStatDescs": "符文5游戏结算数据", "perk5EndOfGameStatDescs": "符文6游戏结算数据", "perk0_name": "符文1名称", "perk1_name": "符文2名称", "perk2_name": "符文3名称", "perk3_name": "符文4名称", "perk4_name": "符文5名称", "perk5_name": "符文6名称", "perk0_iconPath": "符文1图标路径", "perk1_iconPath": "符文2图标路径", "perk2_iconPath": "符文3图标路径", "perk3_iconPath": "符文4图标路径", "perk4_iconPath": "符文5图标路径", "perk5_iconPath": "符文6图标路径", "perkPrimaryStyle_name": "主系名称", "perkPrimaryStyle_iconPath": "主系图标路径", "perkSubStyle_name": "副系名称", "perkSubStyle_iconPath": "副系图标路径", "playerAugment1_nameTRA": "强化符文1名称", "playerAugment2_nameTRA": "强化符文2名称", "playerAugment3_nameTRA": "强化符文3名称", "playerAugment4_nameTRA": "强化符文4名称", "playerAugment5_nameTRA": "强化符文5名称", "playerAugment6_nameTRA": "强化符文6名称", "playerAugment1_augmentIconPath": "强化符文1图标路径", "playerAugment2_augmentIconPath": "强化符文2图标路径", "playerAugment3_augmentIconPath": "强化符文3图标路径", "playerAugment4_augmentIconPath": "强化符文4图标路径", "playerAugment5_augmentIconPath": "强化符文5图标路径", "playerAugment6_augmentIconPath": "强化符文6图标路径", "playerAugment1_rarity": "强化符文1等级", "playerAugment2_rarity": "强化符文2等级", "playerAugment3_rarity": "强化符文3等级", "playerAugment4_rarity": "强化符文4等级", "playerAugment5_rarity": "强化符文5等级", "playerAugment6_rarity": "强化符文6等级", "win/lose": "胜负", "bannedChampionId": "禁用英雄序号", "bannedChampion_name": "禁用英雄", "bannedChampion_alias": "禁用英雄代号", "bannedChampion_squarePortraitPath": "禁用英雄方块头像路径", "lane": "分路", "role": "角色定位", "ally?": "是否队友？"}
+    LoLGame_info_header = {"endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "账户序号", "currentAccountId": "当前账户序号", "currentPlatformId": "当前大区", "gameName": "玩家昵称", "matchHistoryUri": "", "platformId": "原大区", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "profileIcon_title": "召唤师图标名称", "profileIcon_imagePath": "召唤师图标路径", "championId": "选用英雄序号", "highestAchievedSeasonTier": "最高段位", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "选用英雄", "champion_alias": "选用英雄代号", "champion_squarePortraitPath": "选用英雄方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "causedEarlySurrender": "发起提前投降", "champLevel": "英雄等级", "combatPlayerScore": "战斗得分", "damageDealtToObjectives": "对战略点的总伤害", "damageDealtToTurrets": "对防御塔的总伤害", "damageSelfMitigated": "自我缓和的伤害", "deaths": "死亡", "doubleKills": "双杀", "earlySurrenderAccomplice": "同意提前投降", "firstBloodAssist": "协助获得第一滴血", "firstBloodKill": "第一滴血", "firstInhibitorAssist": "协助摧毁第一座召唤水晶", "firstInhibitorKill": "摧毁第一座召唤水晶", "firstTowerAssist": "协助摧毁第一座塔", "firstTowerKill": "摧毁第一座塔", "gameEndedInEarlySurrender": "提前投降导致比赛结束", "gameEndedInSurrender": "投降导致比赛结束", "goldEarned": "金币获取", "goldSpent": "金币使用", "inhibitorKills": "摧毁召唤水晶", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "killingSprees": "大杀特杀", "kills": "击杀", "largestCriticalStrike": "最大暴击伤害", "largestKillingSpree": "最高连杀", "largestMultiKill": "最高多杀", "longestTimeSpentLiving": "最长生存时间", "magicDamageDealt": "造成的魔法伤害", "magicDamageDealtToChampions": "对英雄的魔法伤害", "magicalDamageTaken": "承受的魔法伤害", "neutralMinionsKilled": "击杀野怪", "neutralMinionsKilledEnemyJungle": "击杀敌方野区野怪", "neutralMinionsKilledTeamJungle": "击杀我方野区野怪", "objectivePlayerScore": "战略点玩家得分", "pentaKills": "五杀", "perk0": "符文1序号", "perk0Var1": "符文1：参数1", "perk0Var2": "符文1：参数2", "perk0Var3": "符文1：参数3", "perk1": "符文2序号", "perk1Var1": "符文2：参数1", "perk1Var2": "符文2：参数2", "perk1Var3": "符文2：参数3", "perk2": "符文3序号", "perk2Var1": "符文3：参数1", "perk2Var2": "符文3：参数2", "perk2Var3": "符文3：参数3", "perk3": "符文4序号", "perk3Var1": "符文4：参数1", "perk3Var2": "符文4：参数2", "perk3Var3": "符文4：参数3", "perk4": "符文5序号", "perk4Var1": "符文5：参数1", "perk4Var2": "符文5：参数2", "perk4Var3": "符文5：参数3", "perk5": "符文6序号", "perk5Var1": "符文6：参数1", "perk5Var2": "符文6：参数2", "perk5Var3": "符文6：参数3", "perkPrimaryStyle": "主系序号", "perkSubStyle": "副系序号", "physicalDamageDealt": "造成的物理伤害", "physicalDamageDealtToChampions": "对英雄的物理伤害", "physicalDamageTaken": "承受的物理伤害", "playerAugment1": "强化符文1", "playerAugment2": "强化符文2", "playerAugment3": "强化符文3", "playerAugment4": "强化符文4", "playerAugment5": "强化符文5", "playerAugment6": "强化符文6", "playerScore0": "玩家得分1", "playerScore1": "玩家得分2", "playerScore2": "玩家得分3", "playerScore3": "玩家得分4", "playerScore4": "玩家得分5", "playerScore5": "玩家得分6", "playerScore6": "玩家得分7", "playerScore7": "玩家得分8", "playerScore8": "玩家得分9", "playerScore9": "玩家得分10", "playerSubteamId": "子阵营序号", "quadraKills": "四杀", "sightWardsBoughtInGame": "购买洞察之石", "subteamPlacement": "队伍排名", "teamEarlySurrendered": "队伍提前投降", "timeCCingOthers": "控制得分", "totalDamageDealt": "造成的伤害总和", "totalDamageDealtToChampions": "对英雄的伤害总和", "totalDamageTaken": "承受伤害", "totalHeal": "输出治疗效果", "totalMinionsKilled": "击杀小兵", "totalPlayerScore": "玩家总得分", "totalScoreRank": "总得分排名", "totalTimeCrowdControlDealt": "控制时间", "totalUnitsHealed": "治疗单位数", "tripleKills": "三杀", "trueDamageDealt": "造成真实伤害", "trueDamageDealtToChampions": "对英雄的真实伤害", "trueDamageTaken": "承受的真实伤害", "turretKills": "摧毁防御塔", "unrealKills": "六杀及以上", "visionScore": "视野得分", "visionWardsBoughtInGame": "购买控制守卫", "wardsKilled": "摧毁守卫", "wardsPlaced": "放置守卫", "win": "胜利", "KDA": "战损比", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "perk0EndOfGameStatDescs": "符文1游戏结算数据", "perk1EndOfGameStatDescs": "符文2游戏结算数据", "perk2EndOfGameStatDescs": "符文3游戏结算数据", "perk3EndOfGameStatDescs": "符文4游戏结算数据", "perk4EndOfGameStatDescs": "符文5游戏结算数据", "perk5EndOfGameStatDescs": "符文6游戏结算数据", "perk0_name": "符文1名称", "perk1_name": "符文2名称", "perk2_name": "符文3名称", "perk3_name": "符文4名称", "perk4_name": "符文5名称", "perk5_name": "符文6名称", "perk0_iconPath": "符文1图标路径", "perk1_iconPath": "符文2图标路径", "perk2_iconPath": "符文3图标路径", "perk3_iconPath": "符文4图标路径", "perk4_iconPath": "符文5图标路径", "perk5_iconPath": "符文6图标路径", "perkPrimaryStyle_name": "主系名称", "perkPrimaryStyle_iconPath": "主系图标路径", "perkSubStyle_name": "副系名称", "perkSubStyle_iconPath": "副系图标路径", "playerAugment1_nameTRA": "强化符文1名称", "playerAugment2_nameTRA": "强化符文2名称", "playerAugment3_nameTRA": "强化符文3名称", "playerAugment4_nameTRA": "强化符文4名称", "playerAugment5_nameTRA": "强化符文5名称", "playerAugment6_nameTRA": "强化符文6名称", "playerAugment1_augmentIconPath": "强化符文1图标路径", "playerAugment2_augmentIconPath": "强化符文2图标路径", "playerAugment3_augmentIconPath": "强化符文3图标路径", "playerAugment4_augmentIconPath": "强化符文4图标路径", "playerAugment5_augmentIconPath": "强化符文5图标路径", "playerAugment6_augmentIconPath": "强化符文6图标路径", "playerAugment1_rarity": "强化符文1等级", "playerAugment2_rarity": "强化符文2等级", "playerAugment3_rarity": "强化符文3等级", "playerAugment4_rarity": "强化符文4等级", "playerAugment5_rarity": "强化符文5等级", "playerAugment6_rarity": "强化符文6等级", "win/lose": "胜负", "bannedChampionId": "禁用英雄序号", "bannedChampion_name": "禁用英雄", "bannedChampion_alias": "禁用英雄代号", "bannedChampion_squarePortraitPath": "禁用英雄方块头像路径", "lane": "分路", "role": "角色定位", "ally?": "是否队友？"}
     LoLGame_info_data = {}
     LoLGame_info_header_keys = list(LoLGame_info_header.keys())
     for key in LoLGame_info_header_keys:
@@ -1630,7 +1626,7 @@ async def sort_champSelect_team(connection):
         wardSkins[skin["id"]] = skin
     #下面定义一些常量字典（Define some constant dictionaries）
     team_colors = {1: "蓝方", 2: "红方"}
-    rarities = {"Default": "默认", "Common": "常规", "Epic": "史诗", "Legacy": "限定", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极"}
+    rarities = {"Default": "默认", "Common": "常规", "Epic": "史诗", "Legacy": "限定", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极", "Exalted": "圣者至尊", "Transcendant": "超凡"}
     krarities = {"kNoRarity": "其它", "kExalted": "圣堂级", "kEpic": "史诗", "kLegendary": "传说", "kMythic": "神话", "kRare": "稀有", "kUltimate": "终极", "kTranscendent": "卓越"}
     #定义英雄选择玩家数据结构（Define the champ select player data structure）
     champSelect_team_header = {"assignedPosition": "分配路线", "cellId": "槽位序号", "championId": "选用英雄序号", "championPickIntent": "想玩的英雄序号", "nameVisibilityType": "信息可见性", "obfuscatedPuuid": "隐藏识别码", "obfuscatedSummonerId": "隐藏召唤师序号", "puuid": "玩家通用唯一识别码", "selectedSkinId": "选用皮肤序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "summonerId": "召唤师序号", "team": "阵营", "wardSkinId": "饰品序号", "gameName": "玩家昵称", "tagLine": "昵称编号", "team_color": "阵营名称", "champion name": "选用英雄名称", "champion alias": "选用英雄代号", "championPick name": "想玩的英雄名称", "championPick alias": "想玩的英雄代号", "selectedSkin contentId": "选用（炫彩）皮肤商品编号", "selectedSkin name": "选用（炫彩）皮肤名称", "selectedSkin splashPath": "选用（炫彩）皮肤插画", "selectedSkin uncenteredSplashPath": "选用（炫彩）皮肤原画", "selectedSkin tilePath": "选用（炫彩）皮肤方块图像", "selectedSkin loadScreenPath": "选用（炫彩）皮肤经典加载界面", "selectedSkin loadScreenVintagePath": "选用（炫彩）皮肤带边框加载界面", "selectedSkin rarity": "选用（炫彩）皮肤品质", "selectedSkin splashVideoPath": "选用（炫彩）皮肤视频", "selectedSkin chromaPath": "选用（炫彩）皮肤炫彩", "spell1 name": "召唤师技能1名称", "spell1 iconPath": "召唤师技能1图标", "spell2 name": "召唤师技能2名称", "spell2 iconPath": "召唤师技能2图标", "wardSkin name": "饰品名称", "wardSkin description": "饰品简介", "wardSkin wardImagePath": "饰品图标", "wardSkin wardShadowImagePath": "饰品阴影", "wardSkin isLegacy": "限定饰品", "wardSkin rarity": "饰品品质"}
@@ -1850,7 +1846,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
             friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
             friend_groupIds = list(map(lambda x: x["id"], friend_groups))
             print("您一共设置了%d个分组：\nYou have %d group(s):\n" %(len(friend_groups), len(friend_groups)))
-            friend_groups_df = sort_friend_group(friend_groups)
+            friend_groups_df = await sort_friend_group(connection)
             friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
             print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
             print("请选择好友分组操作：\nPlease select an operation on friend groups:\n0\t返回上一层（Return to the last step）\n1\t添加分组（Add folder）\n2\t折叠/展开分组（Collapse/Expand folder）\n3\t重命名分组（Rename folder）\n*4\t排列分组顺序（Arrange folder order）\n5\t删除分组（Delete folder）\n6\t刷新好友分组（Refresh folders）")
@@ -1879,7 +1875,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
                                 friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                                 print("您一共设置了%d个分组：\nYou have %d group(s):\n" %(len(friend_groups), len(friend_groups)))
-                                friend_groups_df = sort_friend_group(friend_groups)
+                                friend_groups_df = await sort_friend_group(connection)
                                 friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                                 print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                                 print("请输入新分组名称：\nPlease enter the new group name:")
@@ -1934,7 +1930,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
                         friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                         print("您一共设置了%d个分组：\nYou have %d group(s):\n" %(len(friend_groups), len(friend_groups)))
-                        friend_groups_df = sort_friend_group(friend_groups)
+                        friend_groups_df = await sort_friend_group(connection)
                         friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                         print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                         print("请选择折叠/展开选项：\nPlease select a collapse/expand option:\n1\t全部展开（Expand all）\n2\t全部折叠（Collaspe all）\n3\t展开/折叠指定分组（Expand/Collapse specific folders）")
@@ -1972,7 +1968,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
                         friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                         print("您一共设置了%d个分组：\nYou have %d group(s):\n" %(len(friend_groups), len(friend_groups)))
-                        friend_groups_df = sort_friend_group(friend_groups)
+                        friend_groups_df = await sort_friend_group(connection)
                         friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                         print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                         print("请输入要重命名的分组序号：\nPlease input the group ids to rename:")
@@ -2041,14 +2037,14 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
                             friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                             print("您一共设置了%d个分组：\nYou have %d folder(s):\n" %(len(friend_groups), len(friend_groups)))
-                            friend_groups_df = sort_friend_group(friend_groups)
+                            friend_groups_df = await sort_friend_group(connection)
                             friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                             print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                             print("请输入您要删除的分组序号。输入-1以退出。\nPlease input the id of the group to remove. Submit -1 to exit.")
                 friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json() #每次操作完成需要更新一下好友分组（Friend group data need an update once an action is done.）
                 friend_groupIds = list(map(lambda x: x["id"], friend_groups))
                 print("您一共设置了%d个分组：\nYou have %d folder(s):\n" %(len(friend_groups), len(friend_groups)))
-                friend_groups_df = sort_friend_group(friend_groups)
+                friend_groups_df = await sort_friend_group(connection)
                 friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                 print(format_df(friend_groups_df_to_print)[0], end = "\n\n")
                 print("请选择好友分组操作：\nPlease select an operation on friend groups:\n0\t返回上一层（Return to the last step）\n1\t添加分组（Add folder）\n2\t折叠/展开分组（Collapse/Expand folder）\n3\t重命名分组（Rename folder）\n*4\t排列分组顺序（Arrange folder order）\n5\t删除分组（Delete folder）\n6\t刷新好友分组（Refresh folders）")
@@ -2080,7 +2076,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     elif mode[0] == "2":
                         if len(conversations) > 0:
                             print("目前已激活的对话如下：\nCurrently active conversations:")
-                            conversation_df = sort_conversation_metadata(conversations)
+                            conversation_df = await sort_conversation_metadata(connection)
                             print(format_df(conversation_df.iloc[1:], print_index = True, start_index = 1)[0])
                             print("请选择您想要导出的对话序号：\nPlease select a conversation to export messages:")
                             back = False
@@ -2090,7 +2086,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     continue
                                 elif conversationIndex == "-1":
                                     print("目前已激活的对话如下：\nCurrently active conversations:")
-                                    conversation_df = sort_conversation_metadata(conversations)
+                                    conversation_df = await sort_conversation_metadata(connection)
                                     print(format_df(conversation_df.iloc[1:], print_index = True, start_index = 1)[0])
                                     print("请选择您想要导出的对话序号：\nPlease select a conversation to export messages:")
                                     continue
@@ -2274,7 +2270,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
                 elif situation[0] == "2":
                     conversations = await (await connection.request("GET", "/lol-chat/v1/conversations")).json()
-                    conversation_df = sort_conversation_metadata(conversations)
+                    conversation_df = await sort_conversation_metadata(connection)
                     if len(conversation_df) == 1: #筛选后的数据框仍包含中文标题（The filtered dataframe still includes the Chinese header）
                         print("未检测到激活的对话。\nNo active conversation detected.")
                         print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
@@ -2341,7 +2337,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 else:
                                                     print("聊天服务响应失败！\nERROR response for chat service!")
                                 conversations = await (await connection.request("GET", "/lol-chat/v1/conversations")).json()
-                                conversation_df = sort_conversation_metadata(conversations)
+                                conversation_df = await sort_conversation_metadata(connection)
                                 if len(conversation_df) == 1:
                                     print("未检测到激活的对话。\nNo active conversation detected.")
                                     print("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
@@ -2776,7 +2772,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             if not back:
                                 print("请选择目标分组：\nPlease select a target group:")
                                 friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
-                                friend_groups_df = sort_friend_group(friend_groups)
+                                friend_groups_df = await sort_friend_group(connection)
                                 friend_groups_df_to_print = friend_groups_df.iloc[1:].sort_values(by = "id", ascending = True, ignore_index = True)
                                 print(format_df(friend_groups_df_to_print)[0])
                                 while True:
@@ -3518,7 +3514,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             print("看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。\nLooks like you haven't added any friends yet. Invite friends to chat and play together.")
                         else:
                             friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
-                            friend_groups_df = sort_friend_group(friend_groups)
+                            friend_groups_df = await sort_friend_group(connection)
                             friend_group_fields_to_print = ["name", "id"]
                             friend_groups_df_to_print = friend_groups_df.loc[1:, friend_group_fields_to_print]
                             print("请选择您要邀请的好友分组（见下面的好友分组信息列）。一些允许的输入格式：\nPlease select a group or groups of friends to invite (You may refer to the index column of the friend group table below). Allowed input formats look these:\n1\n[1, 2, 3]\nall")
@@ -3845,14 +3841,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
             global spectatorPluginNA_hint_printed
             gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json()
             if gameflow_phase == "None":
-                spectating_request_sent = False #只有当发送过一次观战指令后，通过while循环回到最初才会询问是否退出循环（Only when at least one spectating request has been posted will the program ask the user whether to exit the while-loop when the program return to the front of the loop）
                 exit_loop = False #决定是否退出下面的循环（Determines whether to exit the following loop）
-                while True:
-                    if not exit_loop and spectating_request_sent: #如果观战成功，不用询问直接退出循环（If the user spectate someone successfully, the program will directly exit the loop without asking）
-                        print("是否返回上一层？（输入任意键以返回上一层，否则继续输入玩家信息。）\nDo you want to return to the last step? (Submit any non-empty string to return to the last step, or null to continue inputting player information.)")
-                        exit_loop = bool(input())
-                    if exit_loop:
-                        break
+                while not exit_loop:
                     friends = await (await connection.request("GET", "/lol-chat/v1/friends")).json()
                     friend_puuids = list(map(lambda x: x["puuid"], friends))
                     response = await (await connection.request("POST", "/lol-spectator/v3/buddy/spectate", data = [current_info["puuid"]] if len(friends) == 0 else friend_puuids)).json() #在国服，如果这个接口的请求主体不是空列表，那么返回的异常信息是“SpectatorPlugin_NOT_AVAILABLE”。问题在于，如果请求主体是空列表，那么这个接口仍能正常响应。这样看来，似乎下面程序逻辑本应先处理len(friends)是否为0的情形。但是有一个比较巧妙的解法，就是将这个接口的请求主体设置为自己。这样一来，在观战插件可用的时候，如果程序识别到自己不在游戏中，那么自己肯定是不可观战的；如果程序识别到自己在游戏中，那么程序压根就无法运行这里的代码【On Chinese servers, if the request body of this endpoint isn't an empty list, then the error message is "SpectatorPlugin_NOT_AVAILABLE". But the problem is, if the request body is an empty list, then it still responds as normal (Riot servers). In that case, it seems the following program logic should first deal with the case where `len(friends) == 0` or `len(friends) != 0`. But here I provide a relatively clever solution: assign a list containing only the user's puuid as the request body. In this way, when the spectator plugin is available, if the program identifies that the user isn't in game right now, then the user itself can't be observable; if the program identifies the user itself is in game, then the program won't run the code here and hereinafter at all】
@@ -3875,7 +3865,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         if len(friends) == 0 or len(response["availableForWatching"]) == 0: #如果len(friends)不是0，那么上面的response就不会是异常，从而导致后面一个条件不会引发键错误（If `len(friends)` isn't 0, then the above `response` isn't an error and thus the latter condition here won't cause a KeyError）
                             print("您尚无可观战的好友。是否观战其它玩家？（输入任意键以搜索其它玩家的观战可用性，否则返回上一层。）\nThere's not any friend available for watching. Do you want to spectate other players? (Submit any non-empty string to search for other players' observability, or null to return to the last step.)")
                             nonfriend_spectate = bool(input())
-                            exit_loop = not nonfriend_spectate
+                            if not nonfriend_spectate: #既不观战好友，也不观战其它玩家，那就是不观战（If neither friends nor players are to spectate, then don't spectate）
+                                break
                         else:
                             print("您有%d个好友允许观战。请选择观战好友还是其它玩家。（输入任意键以观战其它玩家，否则观战好友。）\nThere're %d friend(s) that allow watching. Please select whether you want to spectate a friend or another non-friend player. (Submit any non-empty string to try spectating another non-friend player, or null to spectate friend.)" %(len(response["availableForWatching"]), len(response["availableForWatching"])))
                             nonfriend_spectate = bool(input())
@@ -3997,7 +3988,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         else:
                                             print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                         print("请选择草稿选项：\nPlease select a draft option:\n0\t退出草稿（Quit drafting）\n1\t迭代式取子集（Take subsets iteratively）")
-                                print("请选择一名好友，或者输入召唤师名进行观战：\nPlease select a friend or enter a summoner's name to spectate:")
+                                print('''请选择一名好友，或者输入召唤师名进行观战。输入“0”以返回上一层。\nPlease select a friend or enter a summoner's name to spectate. Submit "0" to return to the last step.''')
                                 print(format_df(friend_hovercard_df_to_print.loc[:, friend_hovercard_fields_to_print], print_index = True)[0])
                                 while True:
                                     index_got = False
@@ -4005,6 +3996,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     if spectate_str == "":
                                         continue
                                     elif spectate_str == "0":
+                                        exit_loop = True
                                         break
                                     else:
                                         try:
@@ -4025,13 +4017,14 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     spectate_ready = True
                             #这里对应的情况是nonfriend_spectate为假、好友数量是0且可观看玩家的数量也是0。既没有可观看的玩家，也不观战非好友，那就直接重新开始一个while循环，所以这里不写else语句（In this case, nonfriend_spectate = False, len(friends) = 0 and len(response["availableForWatching"]) = 0. That is, the user doesn't want to spectate the game of either a friend or a non-friend, so the next step should be returning to the start of the while-loop. Therefore, there's no need to write this else-statement）
                     if pluginNA or use_pluginNA:
-                        print("请输入您想要观看的玩家召唤师名：\nPlease input the summonerName of the player to spectate:")
+                        print('请输入您想要观看的玩家召唤师名。输入“0”以返回上一层。\nPlease input the summonerName of the player to spectate. Submit "0" to return to the last step.')
                         while True:
                             spectating_summonerName = spectate_str if use_pluginNA else input()
                             use_pluginNA = False #如果在转到这里之前输入的召唤师名有问题，在本While循环内需要允许用户重新输入召唤师名（If the summoner name input before running here has a problem, the user should be allowed to input the summoner name again in this while-loop）
                             if spectating_summonerName == "":
                                 continue
                             elif spectating_summonerName == "0":
+                                exit_loop = True
                                 break
                             else:
                                 spectating_summoner_info = await get_info(connection, spectating_summonerName)
@@ -4049,13 +4042,11 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     if spectate_ready:
                         body = {"dropInSpectateGameId": str(dropInSpectateGameId), "gameQueueType": gameQueueType, "allowObserveMode": allowObserveMode, "puuid": spectate_puuid}
                         response = await (await connection.request("POST", "/lol-spectator/v1/spectate/launch", data = body)).json()
-                        spectating_request_sent = True
                         if response == None:
                             time.sleep(1) #发送指令后客户端不一定马上进入英雄选择或游戏中（The client won't immediately enter the champ select or in game stage after the program posts the spectating requests）
                             gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json()
                             if gameflow_phase == "ChampSelect" or gameflow_phase == "InProgress":
                                 print("启动观战成功！您正在观看%s的对局。\nLaunched spectating successfully. You'll be spectating the game of %s soon." %(spectating_summonerName, spectating_summonerName))
-                                exit_loop = True
                             else:
                                 print("这场对局现在不可观战。它也许已经结束了。\nThe game isn't available for spectate now. It might have ended.")
                         else:
@@ -4066,6 +4057,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             elif response["httpStatus"] == 500 and "Couldn't find service in service discovery using ServerLocationEndpointFilter" in response["message"]:
                                 print("观战服务不可用。\nSpectator service unavailable.")
                             else:
+                                print(response["message"])
                                 print("观战失败。请通过客户端内右键点击一名好友，或者通过第三方工具来进行观战。\nSpectating failed. Please right click on a friend or use another third-party tool to spectate.")
             elif gameflow_phase == "Reconnect":
                 gameflow_session = await (await connection.request("GET", "/lol-gameflow/v1/session")).json()
@@ -4659,7 +4651,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     if action == "":
                                         continue
                                     elif action[0] == "0":
-                                        print("请选择静音场景：\n0\t返回上一层（Return to the last step）\n1\t预组队语音（Premade voice）\n2\t英雄选择小队聊天（Group chat during champ select）")
                                         break
                                     elif action[0] == "1":
                                         print("请选择要静音的队友索引：\nPlease select an ally to mute:")
@@ -4803,7 +4794,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     print("请选择静音操作：\nPlease select a mute action:\n0\t返回上一层（Return to the last step）\n1\t单个静音（Single）\n2\t批量静音（In batches）\n3\t全部静音（All）\n4\t解除所有静音（Remove all）")
                     else:
                         print("提示：以下静音操作仅在英雄选择阶段生效。请确保您目前正在英雄选择阶段。\nHint: The following mute actions only apply in a champ select group chat. Please confirm that you're during champ select.")
-                        print("请选择静音场景：\n0\t返回上一层（Return to the last step）\n1\t预组队语音（Premade voice）\n2\t英雄选择小队聊天（Group chat during champ select）")
+                    print("请选择静音场景：\n0\t返回上一层（Return to the last step）\n1\t预组队语音（Premade voice）\n2\t英雄选择小队聊天（Group chat during champ select）")
                 else:
                     print("您的输入有误！请重新输入。\nERROR input! Please try again.")
         #time.sleep(2) #原意是通过2秒的延迟使得好友数据及时更新，但是好友数据用不着在这里更新，反倒是在各个选项下更深的地方需要更新。然而如果你要取消注释也有说法，因为第一层好友操作的输出很长，可能会瞬间覆盖上一次结果（Originally intended to let the friend data update in time, but it's not necessary for friend data to be updated here. Instead, it needs updating in some deeper hierachies of those if-statements above. It's rather reasonable if you want to uncomment this piece of code, however, because output of the first layer turns out to be too long, so that it may cover the last result）

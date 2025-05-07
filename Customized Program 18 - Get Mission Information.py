@@ -497,7 +497,7 @@ async def check_repeating_missions(connection):
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    print("是否导出所有任务信息？（输入任意键不导出，否则导出。）\nDo you want to export all missions 'information? (Submit any non-empty string to refuse exporting, or null to export.)")
+    print("是否导出所有任务信息？（输入任意键不导出，否则导出。）\nDo you want to export all missions' information? (Submit any non-empty string to refuse exporting, or null to export.)")
     if not bool(input()):
         await get_mission_info(connection)
     await check_repeating_missions(connection)
