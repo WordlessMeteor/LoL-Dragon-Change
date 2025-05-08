@@ -24,10 +24,62 @@
         "__type": "SkinCharacterDataProperties"
     },
     "Characters/HA_AP_Viking/CAC/HA_AP_Viking": {
-        "mCooldown": 1.0,
+        "mCooldown": 15.0,
         "mSituations": {
             "Purchase": {
                 "mRules": [
+                    {
+                        "mRuleName": "Seekers Armguard",
+                        "mConditions": [
+                            {
+                                "mItems": [
+                                    "Items/2420"
+                                ],
+                                "__type": "ContextualConditionItemID"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mAllyEventName": "Purchase2DSeekersArmguard",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Frozen Mallet (Deprecated) ",
+                        "mConditions": [
+                            {
+                                "mItems": [
+                                    "Items/2420"
+                                ],
+                                "__type": "ContextualConditionItemID"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mAllyEventName": "Purchase2DFrozenMallet",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "Frost Queens Claim (Deprecated) ",
+                        "mAudioAction": {
+                            "mAllyEventName": "Purchase2DFrostQueensClaim",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    },
                     {
                         "mRuleName": "Purchase",
                         "mConditions": [
@@ -39,6 +91,10 @@
                         "mAudioAction": {
                             "mAllyEventName": "Purchase2DGeneral",
                             "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
                     }
@@ -143,28 +199,6 @@
                         "__type": "ContextualRule"
                     },
                     {
-                        "mRuleName": "OpenOlaf",
-                        "mConditions": [
-                            {
-                                "mCharacterType": 1,
-                                "mChildConditions": [
-                                    {
-                                        "mCharacters": [
-                                            "Characters/Olaf/CharacterRecords/Root"
-                                        ],
-                                        "__type": "ContextualConditionCharacterName"
-                                    }
-                                ],
-                                "__type": "ContextualConditionCharacter"
-                            }
-                        ],
-                        "mAudioAction": {
-                            "mAllyEventName": "Open2DOlaf",
-                            "__type": "ContextualActionPlayVO"
-                        },
-                        "__type": "ContextualRule"
-                    },
-                    {
                         "mRuleName": "OpenBroOlaf",
                         "mConditions": [
                             {
@@ -182,6 +216,28 @@
                         ],
                         "mAudioAction": {
                             "mAllyEventName": "Open2DOlafSkin03",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "__type": "ContextualRule"
+                    },
+                    {
+                        "mRuleName": "OpenOlaf",
+                        "mConditions": [
+                            {
+                                "mCharacterType": 1,
+                                "mChildConditions": [
+                                    {
+                                        "mCharacters": [
+                                            "Characters/Olaf/CharacterRecords/Root"
+                                        ],
+                                        "__type": "ContextualConditionCharacterName"
+                                    }
+                                ],
+                                "__type": "ContextualConditionCharacter"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mAllyEventName": "Open2DOlaf",
                             "__type": "ContextualActionPlayVO"
                         },
                         "__type": "ContextualRule"
@@ -430,6 +486,11 @@
                             "mAllyEventName": "Close3DNoPurchase",
                             "__type": "ContextualActionPlayVO"
                         },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
@@ -437,6 +498,11 @@
                         "mAudioAction": {
                             "mAllyEventName": "Close3DGeneral",
                             "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
                     }
@@ -484,5 +550,9 @@
         },
         "mObjectPath": "Characters/HA_AP_Viking/CAC/HA_AP_Viking",
         "__type": "ContextualActionData"
-    }
+    },
+    "__linked": [
+        "DATA/Characters/HA_AP_Viking/Animations/Skin0.bin",
+        "DATA/Characters/HA_AP_Viking/HA_AP_Viking.bin"
+    ]
 }
