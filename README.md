@@ -75,7 +75,7 @@ The following explanations only apply to the current branch. For other details (
 			- 对于包含较多数据资源的更新的提交，本地加载仍然需要几分钟时间，请耐心等待。
 5. 本程序集起源于主目录下的`create_custom_lobby.py`。
 # 注意事项
-1. 本程序集全部为Python程序，需要从[Python官网中](www.python.org)下载最新版本的Python。（不是最新版本也可，但不要太古早～）
+1. 本程序集全部为Python程序，需要从[Python官网中](https://www.python.org/)下载最新版本的Python。（不是最新版本也可，但不要太古早～）
 	- 初次安装Python，切记勾选`Add Python to PATH`选项。
 	- 如果因为某些原因，系统环境变量PATH中没有Python的工作目录，可以按照如下步骤添加环境变量。
 		1. 在Windows搜索框中输入`path`，单击`编辑系统环境变量`，弹出`系统属性`窗口。
@@ -85,7 +85,7 @@ The following explanations only apply to the current branch. For other details (
 			`C:\Users\[用户名]\AppData\Local\Programs\Python\Launcher\`\
 			`C:\Users\[用户名]\AppData\Local\Programs\Python\Python[版本号]\`\
 			`C:\Users\[用户名]\AppData\Local\Programs\Python\Python[版本号]\Scripts`\
-			如我的用户名是`19250`，使用的Python版本是<ins>3.12.5</ins>，则PATH中包含：\
+			如我的用户名是`19250`，使用的Python版本是<ins>3.13.3</ins>，则PATH中包含：\
 			`C:\Users\19250\AppData\Local\Programs\Python\Launcher\`\
 			`C:\Users\19250\AppData\Local\Programs\Python\Python312\`\
 			`C:\Users\19250\AppData\Local\Programs\Python\Python312\Scripts\`
@@ -102,7 +102,7 @@ The following explanations only apply to the current branch. For other details (
 					- 不用担心解压完成之后会不会有一大堆文件分散在文件夹里面。从GitHub上下载的源代码应该已经放在了一个文件夹里面。
 				4. 打开Python存储库的目录。
 					- 一般位于`C:\Users\[用户名]\AppData\Local\Programs\Python\Python[版本号]\Lib\site-packages`。
-						- 如我的用户名是`19250`，使用的Python版本是<ins>3.12.5</ins>，则应打开\
+						- 如我的用户名是`19250`，使用的Python版本是<ins>3.13.3</ins>，则应打开\
 						`C:\Users\19250\AppData\Local\Programs\Python\Python312\Lib\site-packages`。
 					- 如果上一条方法行不通，请先在命令行中输入`pip install lcu_driver`以安装`lcu_driver`库，再使用[Everything软件](https://www.voidtools.com/zh-cn/)搜索<ins>lcu_driver</ins>关键字，从而定位到Python存储库的位置。
 				5. 在解压好的文件中找到`lcu_driver`文件夹，将其复制到上面的目录中。如果提示文件已存在，请选择覆盖。
@@ -840,7 +840,7 @@ For details about customized programs that is beyond the scope of creating a cus
 				- For those commits that involve a number of data resources, it still takes several minutes to load the diff locally. Please wait in patience.
 5. The program set is adapted from `create_custom_lobby.py` in the home directory.
 # Notes on Instructions
-1. The whole program set is made of Python programs. Users are highly suggested to download the latest version of Python from [Python official website](www.python.org). (A version that isn't latest is also OK, but please make sure it's not too early, either [xD])
+1. The whole program set is made of Python programs. Users are highly suggested to download the latest version of Python from [Python official website](https://www.python.org/). (A version that isn't latest is also OK, but please make sure it's not too early, either [xD])
 	- For this first time of installation of Python, please tick on `Add Python to PATH` option.
 	- If the working directories of Python aren't present in the environment variable Path, the following steps can be adopted to add Python to Path.
 		1. Type in `path` in Windows search bar and click `编辑系统环境变量`. `系统属性` window will pop up.
@@ -850,7 +850,7 @@ For details about customized programs that is beyond the scope of creating a cus
 			`C:\Users\[Username]\AppData\Local\Programs\Python\Launcher\`\
 			`C:\Users\[Username]\AppData\Local\Programs\Python\Python[Version]\`\
 			`C:\Users\[Username]\AppData\Local\Programs\Python\Python[Version]\Scripts`\
-			For example, my username is `19250`, and my Python version is <ins>3.12.5</ins>. Then the updated PATH should include \
+			For example, my username is `19250`, and my Python version is <ins>3.13.3</ins>. Then the updated PATH should include \
 			`C:\Users\19250\AppData\Local\Programs\Python\Launcher\`\
 			`C:\Users\19250\AppData\Local\Programs\Python\Python312\`\
 			`C:\Users\19250\AppData\Local\Programs\Python\Python312\Scripts\`
@@ -867,7 +867,7 @@ For details about customized programs that is beyond the scope of creating a cus
 					- Don't worry about the chaos after the extraction! The files should have been put in a subfolder.
 				4. Open the directory where Python stores libraries.
 					- Basically, the directory is at `C:\Users\[Username]\AppData\Local\Programs\Python\Python[Version]\Lib\site-packages`.
-						- For example, my username is `19250`, and my Python version is <ins>3.12.5</ins>. Then the library directory should be \
+						- For example, my username is `19250`, and my Python version is <ins>3.13.3</ins>. Then the library directory should be \
 						`C:\Users\19250\AppData\Local\Programs\Python\Python312\Lib\site-packages`
 					- If the last approach doesn't work, please enter the command `pip install lcu_driver` in CMD to install the original `lcu_driver` library and then search for <ins>lcu_driver</ins> in [Everything App](https://www.voidtools.com/en-us/) to locate to the Python library directory.
 				5. Select `lcu_driver` folder in the extracted files. Copy it to the Python library directory. If files already exist, please select `Replace the files in the destination`.
@@ -880,7 +880,7 @@ For details about customized programs that is beyond the scope of creating a cus
 		- urllib
 		- wcwidth
 		- bs4
-2. To improve the speed of reponses, please open any program in this program set by Command Prompt or Terminal, instead of Python IDLE.
+2. To improve the response speed, please open any program in this program set by Command Prompt or Terminal, instead of Python IDLE.
 	- To prevent the window from flashing quickly, it's suggested that users first open Command Prompt (or Terminal), switch to the directory of the program set using `cd` command and then open some program by `python [Filename]` or `python -W ignore [Filename]`. In this way, it's easy check the returned information.
 3. All programs must run after the user logs in the LoL client. 
 4. All opened .py files can be aborted by Ctrl + C while running. (Press for any times you want, until the program exits.)

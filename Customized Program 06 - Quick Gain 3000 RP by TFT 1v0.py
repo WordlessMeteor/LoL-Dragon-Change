@@ -85,6 +85,9 @@ async def RP_generator(connection):
             print("请求超时！请检查网络连接和秒退计时器。\nRequest timeout! Please check the network and queue dodge timer.")
             time.sleep(5)
             os._exit(0)
+        if start_game["message"] == "QUEUE_NOT_ENABLED":
+            create_lobby = await (await connection.request("POST", "/lol-lobby/v2/lobby", data = queue)).json()
+            print("create-lobby = %s" %(create_lobby))
         count += 1
     #对局已找到（Match found）
     count = 1

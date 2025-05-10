@@ -412,7 +412,8 @@ while True:
             if table.empty:
                 logPrint(table, log)
             else:
-                logPrint(format_df(table, log, False, True)[0], log)
+                print(format_df(table, log, width_exceed_ask = False, direct_print = True)[0])
+                log.write(format_df(table, log, width_exceed_ask = False, direct_print = False)[0] + "\n")
             os.makedirs(dir, exist_ok = True)
             for i in range(len(table)):
                 cnt2 += 1
