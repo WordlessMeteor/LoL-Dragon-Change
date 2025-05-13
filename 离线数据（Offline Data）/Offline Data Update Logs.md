@@ -4455,7 +4455,7 @@
 						<li>PBE: 15.10.678.5711 -> 15.10.678.8835</li>
 					</ul>
 			</td>
-		<tr>
+		</tr>
 		<tr>
 			<td style="text-align:center;">2025-05-07 10-30-28</td>
 			<td style="text-align:center;">CDragon: 1/2/1</td>
@@ -4475,7 +4475,7 @@
 						<li>PBE: 15.10.678.5711 -> 15.10.679.2946</li>
 					</ul>
 			</td>
-		<tr>
+		</tr>
 		<tr>
 			<td style="text-align:center;">2025-05-08 13-40-47</td>
 			<td style="text-align:center;">CDragon: 1/2/1</td>
@@ -4496,7 +4496,7 @@
 						<li>PBE: 15.10.679.2946 -> 15.10.679.5437</li>
 					</ul>
 			</td>
-		<tr>
+		</tr>
 		<tr>
 			<td style="text-align:center;">2025-05-09 12-45-56</td>
 			<td style="text-align:center;">CDragon: 1/2/1</td>
@@ -4516,7 +4516,7 @@
 						<li>PBE: 15.10.679.5437 -> 15.10.679.7563</li>
 					</ul>
 			</td>
-		<tr>
+		</tr>
 		<tr>
 			<td style="text-align:center;">2025-05-10 14-08-06</td>
 			<td style="text-align:center;">CDragon: 1/2/1</td>
@@ -4536,6 +4536,41 @@
 						<li>PBE: 15.10.679.7563 -> 15.10.680.1029</li>
 					</ul>
 			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-05-11 13-42-54</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-05-11 13-43-16</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>No changes</td>
+		<tr>
+		<tr>
+			<td style="text-align:center;">2025-05-12 15-35-34</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-05-12 15-35-50</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>No changes</td>
+		<tr>
+		<tr>
+			<td style="text-align:center;">2025-05-13 10-25-11</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: Within-patch change</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-05-13 10-25-15</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>No changes</td>
 		<tr>
 	</tbody>
 </table>
