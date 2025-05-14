@@ -81,10 +81,11 @@
                         "Play_vo_AniviaSkin05_FirstEncounter3DSejuani",
                         "Play_vo_AniviaSkin05_FlashFrost_cast3D",
                         "Play_vo_AniviaSkin05_Frostbite_cast3D",
-                        "Play_vo_AniviaSkin05_GlacialStorm_cast3D",
                         "Play_vo_AniviaSkin05_Joke3DGeneral",
+                        "Play_vo_AniviaSkin05_Joke3DGeneralEnd",
                         "Play_vo_AniviaSkin05_Laugh3DGeneral",
                         "Play_vo_AniviaSkin05_Move2DStandard",
+                        "Play_vo_AniviaSkin05_Spell3DRCast",
                         "Play_vo_AniviaSkin05_Taunt3DGeneral"
                     ],
                     "voiceOver": true,
@@ -49877,7 +49878,6 @@
                             }
                         ],
                         "mAudioAction": {
-                            "mSelfEventName": "cast3D",
                             "mAllyEventName": "cast3D",
                             "mEnemyEventName": "cast3D",
                             "mSpectatorEventName": "cast3D",
@@ -50110,9 +50110,67 @@
                     }
                 ],
                 "__type": "ContextualSituation"
+            },
+            "{ca9da4b3}": {
+                "mRules": [
+                    {
+                        "mRuleName": "Joke",
+                        "mConditions": [
+                            {
+                                "animationName": "Joke",
+                                "__type": "{2363fb10}"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "Joke3DGeneralEnd",
+                            "mAllyEventName": "Joke3DGeneralEnd",
+                            "mEnemyEventName": "Joke3DGeneralEnd",
+                            "mSpectatorEventName": "Joke3DGeneralEnd",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{20749c51}": false,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "SpellBuffCast": {
+                "mRules": [
+                    {
+                        "mRuleName": "R Turn On",
+                        "mConditions": [
+                            {
+                                "SpellBuff": "Characters/Anivia/Spells/GlacialStormAbility/GlacialStorm",
+                                "__type": "ContextualConditionSpellBuffName"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "Spell3DRCast",
+                            "mAllyEventName": "Spell3DRCast",
+                            "mEnemyEventName": "Spell3DRCast",
+                            "mSpectatorEventName": "Spell3DRCast",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
             }
         },
         "mObjectPath": "Characters/Anivia/CAC/Anivia_Skin05",
         "__type": "ContextualActionData"
-    }
+    },
+    "__linked": [
+        "DATA/Characters/Anivia/Anivia.bin",
+        "DATA/Characters/Anivia/Animations/Skin5.bin",
+        "DATA/Anivia_Skins_Skin0_Skins_Skin1_Skins_Skin10_Skins_Skin11_Skins_Skin12_Skins_Skin13_Skins_Skin14_Skins_Skin15_Skins_Skin16_Skins_Skin17_Skins_Skin18_Skins_Skin19_Skins_Skin2_Skins_Skin20_Skins_Skin21_Skins_Skin22_Skins_Skin23_Skins_Skin24_Skins_Skin25_Skins_Skin26_Skins_Skin27_Skins_Skin28_Skins_Skin29_Skins_Skin3_Skins_Skin30_Skins_Skin31_Skins_Skin32_Skins_Skin33_Skins_Skin34_Skins_Skin35_Skins_Skin36_Skins_Skin4_Skins_Skin46_Skins_Skin47_Skins_Skin48_Skins_Skin49_Skins_Skin5_Skins_Skin50_Skins_Skin51_Skins_Skin52_Skins_Skin53_Skins_Skin54_Skins_Skin6_Skins_Skin7_Skins_Skin8_Skins_Skin9.bin",
+        "DATA/Anivia_Skins_Skin0_Skins_Skin1_Skins_Skin17_Skins_Skin18_Skins_Skin19_Skins_Skin2_Skins_Skin20_Skins_Skin21_Skins_Skin22_Skins_Skin23_Skins_Skin24_Skins_Skin25_Skins_Skin26_Skins_Skin27_Skins_Skin28_Skins_Skin29_Skins_Skin3_Skins_Skin30_Skins_Skin31_Skins_Skin32_Skins_Skin33_Skins_Skin34_Skins_Skin35_Skins_Skin36_Skins_Skin4_Skins_Skin46_Skins_Skin47_Skins_Skin48_Skins_Skin49_Skins_Skin5_Skins_Skin50_Skins_Skin51_Skins_Skin52_Skins_Skin53_Skins_Skin54_Skins_Skin6_Skins_Skin7.bin",
+        "DATA/Anivia_Skins_Skin0_Skins_Skin1_Skins_Skin2_Skins_Skin3_Skins_Skin4_Skins_Skin5_Skins_Skin6.bin",
+        "DATA/Anivia_Skins_Skin0_Skins_Skin1_Skins_Skin10_Skins_Skin11_Skins_Skin12_Skins_Skin13_Skins_Skin14_Skins_Skin15_Skins_Skin16_Skins_Skin17_Skins_Skin18_Skins_Skin19_Skins_Skin2_Skins_Skin20_Skins_Skin21_Skins_Skin22_Skins_Skin23_Skins_Skin24_Skins_Skin25_Skins_Skin26_Skins_Skin3_Skins_Skin4_Skins_Skin46_Skins_Skin47_Skins_Skin48_Skins_Skin49_Skins_Skin5_Skins_Skin50_Skins_Skin51_Skins_Skin52_Skins_Skin53_Skins_Skin54_Skins_Skin6_Skins_Skin8_Skins_Skin9.bin",
+        "DATA/Anivia_Skins_Skin0_Skins_Skin1_Skins_Skin2_Skins_Skin3_Skins_Skin4_Skins_Skin5_Skins_Skin6_Skins_Skin7.bin"
+    ]
 }
