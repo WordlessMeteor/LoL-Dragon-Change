@@ -1,0 +1,478 @@
+{
+    "{11f5eb21}": {
+        "mScriptName": "TFT10_Akali_TrueDamageCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 4234,
+            "mAlternateName": "AkaliBasicAttack",
+            "mAnimationName": "Crit",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3506999909877777,
+            "mPostCastLockoutDeltaTime": 0.10000000149011612,
+            "bHaveHitEffect": true,
+            "castRange": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 10.0,
+            "missileSpeed": 467.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BuffBone_Glb_Center_Loc",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT10_Akali_TrueDamage/Spells/TFT10_Akali_TrueDamageSpell": {
+        "mScriptName": "TFT10_Akali_TrueDamageSpell",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 8192,
+            "mAffectsStatusFlags": 32,
+            "mDataValues": [
+                {
+                    "mName": "BASE_DAMAGE",
+                    "mValues": [
+                        0.0,
+                        2.9000000953674316,
+                        2.9000000953674316,
+                        5.800000190734863,
+                        8.699999809265137,
+                        10.0,
+                        10.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "KUNAI_BASE_COUNT",
+                    "mValues": [
+                        18.0,
+                        18.0,
+                        18.0,
+                        27.0,
+                        27.0,
+                        27.0,
+                        27.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BLING_HEAL_PERCENT",
+                    "mValues": [
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0,
+                        20.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BLING_HEAL_PERCENT_EMPOWERED",
+                    "mValues": [
+                        40.0,
+                        40.0,
+                        40.0,
+                        40.0,
+                        40.0,
+                        40.0,
+                        40.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HeadlinerHealth",
+                    "mValues": [
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0,
+                        100.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HeadlinerAttackSpeed",
+                    "mValues": [
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "MANA_REFUND",
+                    "mValues": [
+                        5.0,
+                        12.0,
+                        12.0,
+                        20.0,
+                        40.0,
+                        40.0,
+                        40.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "TOTAL_DAMAGE": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mStat": 2,
+                            "mDataValue": "BASE_DAMAGE",
+                            "__type": "StatByNamedDataValueCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "TOTAL_MANA_REFUND": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "MANA_REFUND",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "SpellEventToAudioEventSuffix": {
+                "12": "Play_sfx_tft10_Akali_TrueDamageSpell_OnCast",
+                "13": "Play_sfx_tft10_Akali_TrueDamageSpell_OnHit"
+            },
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT10_Akali_TrueDamageSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT10_AkaliW_Name",
+                        "keyTooltip": "Spell_TFT10_AkaliW_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "elements": [
+                                {
+                                    "type": "BASE_DAMAGE",
+                                    "multiplier": 100.0,
+                                    "nameOverride": "Spell_TFT10_Akali_TrueDamageW_Damage",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "MANA_REFUND",
+                                    "nameOverride": "Spell_TFT10_Akali_TrueDamageSpell_ManaRefund",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{e9952579}": {
+        "mScriptName": "TFT10_Akali_TrueDamageBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 4234,
+            "mAlternateName": "AkaliBasicAttack",
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3500000238418579,
+            "mPostCastLockoutDeltaTime": 0.10000000149011612,
+            "bHaveHitEffect": true,
+            "castRange": [
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 9.600000381469727,
+            "missileSpeed": 0.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BuffBone_Glb_Center_Loc",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{edfdd471}": {
+        "mScriptName": "TFT10_Akali_TrueDamageBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 4234,
+            "mAlternateName": "AkaliBasicAttack",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3500000238418579,
+            "delayTotalTimePercent": -1.0,
+            "mPostCastLockoutDeltaTime": 0.10000000149011612,
+            "bHaveHitEffect": true,
+            "castRange": [
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 9.600000381469727,
+            "missileSpeed": 0.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BuffBone_Glb_Center_Loc",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{f3826468}": {
+        "mScriptName": "TFT10_Akali_TrueDamageSpellMis",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 6154,
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "mCantCancelWhileWindingUp": true,
+            "mProjectTargetToCastRange": true,
+            "useAnimatorFramerate": true,
+            "castRange": [
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0
+            ],
+            "castRangeDisplayOverride": [
+                1175.0,
+                1175.0,
+                1175.0,
+                1175.0,
+                1175.0,
+                1175.0,
+                1175.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "luaOnMissileUpdateDistanceInterval": 51.0,
+            "mMissileSpec": {
+                "mMissileWidth": 60.0,
+                "movementComponent": {
+                    "mUseHeightOffsetAtEnd": true,
+                    "mTracksTarget": false,
+                    "mStartBoneName": "L_Hand",
+                    "mSpeed": 3200.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "heightSolver": {
+                    "__type": "BlendedLinearHeightSolver"
+                },
+                "verticalFacing": {
+                    "__type": "VerticalFacingFaceTarget"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnHit"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 3,
+            "castFrame": 7.53000020980835,
+            "missileSpeed": 3200.0,
+            "mMissileEffectKey": "TFT10_Akali_TrueDamage_Q_Mis",
+            "mLineWidth": 60.0,
+            "selectionPriority": 2,
+            "mTargetingTypeData": {
+                "__type": "Location"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT10_Akali_TrueDamage/CharacterRecords/Root": {
+        "mCharacterName": "TFT10_Akali_TrueDamage",
+        "baseHP": 1050.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 200.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 60.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 70.0,
+        "baseArmor": 65.0,
+        "baseSpellBlock": 65.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.8999999761581421,
+        "attackSpeedRatio": 0.8999999761581421,
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT10_Akali_TrueDamageSpell",
+            "",
+            "",
+            ""
+        ],
+        "passiveRange": 3.0,
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446664,
+        "tier": 4,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{990f764a}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{82f9a7d4}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{588f1d5e}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{14a36a9c}",
+        "mMoveInterval": -0.10000000149011612,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mShopData": "{3470dd20}",
+        "__type": "TFTCharacterRecord"
+    },
+    "Characters/TFT10_Akali_TrueDamage/Skins/Meta": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "__linked": []
+}

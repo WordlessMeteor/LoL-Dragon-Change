@@ -130,7 +130,7 @@
         "__type": "ResourceResolver"
     },
     "Characters/HA_AP_Hermit/CAC/HA_AP_Hermit": {
-        "mCooldown": 1.0,
+        "mCooldown": 15.0,
         "mSituations": {
             "Purchase": {
                 "mRules": [
@@ -145,6 +145,10 @@
                         "mAudioAction": {
                             "mAllyEventName": "Purchase2DGeneral",
                             "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
                     }
@@ -471,13 +475,23 @@
                             "mAllyEventName": "Close3DNoPurchase",
                             "__type": "ContextualActionPlayVO"
                         },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
                         "__type": "ContextualRule"
                     },
                     {
                         "mRuleName": "ShopClose",
                         "mAudioAction": {
-                            "mAllyEventName": "Close3D",
+                            "mAllyEventName": "Close3DGeneral",
                             "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "DontResetTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
                         },
                         "__type": "ContextualRule"
                     }
@@ -525,5 +539,9 @@
         },
         "mObjectPath": "Characters/HA_AP_Hermit/CAC/HA_AP_Hermit",
         "__type": "ContextualActionData"
-    }
+    },
+    "__linked": [
+        "DATA/Characters/HA_AP_Hermit/HA_AP_Hermit.bin",
+        "DATA/Characters/HA_AP_Hermit/Animations/Skin0.bin"
+    ]
 }
