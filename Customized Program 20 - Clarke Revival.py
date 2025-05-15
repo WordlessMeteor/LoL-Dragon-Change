@@ -178,13 +178,17 @@ def patch_compare(patch1, patch2): #比较两个版本号的先后顺序。当pa
     try:
         lst1 = list(map(int, lst1))
     except ValueError:
-        print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+        return False
     try:
         lst2 = list(map(int, lst2))
     except ValueError:
-        print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+            return False
+        else:
+            return True
     for i in range(min(len(lst1), len(lst2))):
         if lst1[i] < lst2[i]:
             return True
@@ -867,7 +871,7 @@ async def search_player_match_stats_tft(connection, puuid: str, begin: int = 0, 
             #准备数据资源（Prepare data resources）
             ##云顶之弈对局记录（TFT match history）
             while True:
-                TFTHistory = await (await connection.request("GET", f"/TFT-match-history/v1/products/tft/{puuid}/matches?begin={begin}&count={count}")).json()
+                TFTHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/tft/{puuid}/matches?begin={begin}&count={count}")).json()
                 count = 0
                 error_occurred = False
                 if "errorCode" in TFTHistory:
@@ -879,7 +883,7 @@ async def search_player_match_stats_tft(connection, puuid: str, begin: int = 0, 
                             count += 1
                             if print_detail:
                                 print("正在进行第%d次尝试……\nTimes trying: No. %d ..." %(count, count))
-                            TFTHistory = await (await connection.request("GET", f"/TFT-match-history/v1/products/tft/{puuid}/matches?begin={begin}&count={count}")).json()
+                            TFTHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/tft/{puuid}/matches?begin={begin}&count={count}")).json()
                     elif "body was empty" in TFTHistory["message"]:
                         print("这位召唤师从5月1日起就没有进行过任何云顶之弈对局。\nThis summoner hasn't played any TFT game yet since May 1st.")
                         break

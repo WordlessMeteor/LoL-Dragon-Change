@@ -192,13 +192,17 @@ def patch_compare(patch1, patch2): #比较两个版本号的先后顺序。当pa
     try:
         lst1 = list(map(int, lst1))
     except ValueError:
-        print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+        return False
     try:
         lst2 = list(map(int, lst2))
     except ValueError:
-        print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+            return False
+        else:
+            return True
     for i in range(min(len(lst1), len(lst2))):
         if lst1[i] < lst2[i]:
             return True
@@ -785,7 +789,7 @@ async def search_profile(connection):
                             try:
                                 with open(TFT_local, "r", encoding = "utf-8") as fp:
                                     TFT_initial = json.load(fp)
-                                if isinstance(TFT_initial, dict) and all(i in TFT_initial for i in ["items", "setData", "sets"]):
+                                if isinstance(TFT_initial, dict) and all(i in TFT_initial for i in ["items", "setData", "sets"]) and all(isinstance(TFT_initial[i], list) for i in ["items", "setData"]) and all(isinstance(TFT_initial[i], dict) for i in ["sets"]) and all(j in TFT_initial["items"][i] for i in range(len(TFT_initial["items"])) for j in ["apiName", "associatedTraits", "composition", "desc", "effects", "from", "icon", "id", "incompatibleTraits", "name", "tags", "unique"]) and all(isinstance(TFT_initial["items"][i][j], str) or TFT_initial["items"][i][j] == None for i in range(len(TFT_initial["items"])) for j in ["apiName", "desc", "icon", "name"]) and all(isinstance(TFT_initial["items"][i][j], list) for i in range(len(TFT_initial["items"])) for j in ["associatedTraits", "composition", "tags"]) and all(isinstance(TFT_initial["items"][i][j], dict) for i in range(len(TFT_initial["items"])) for j in ["effects"]) and all(isinstance(TFT_initial["items"][i][j], bool) for i in range(len(TFT_initial["items"])) for j in ["unique"]) and all(j in TFT_initial["setData"][i] for i in range(len(TFT_initial["setData"])) for j in ["augments", "champions", "items", "mutator", "name", "number", "traits"]) and all(isinstance(TFT_initial["setData"][i][j], list) for i in range(len(TFT_initial["setData"])) for j in ["augments", "champions", "items", "traits"]) and all(isinstance(TFT_initial["setData"][i][j], str) for i in range(len(TFT_initial["setData"])) for j in ["mutator", "name"]) and all(isinstance(TFT_initial["setData"][i][j], int) for i in range(len(TFT_initial["setData"])) for j in ["number"]) and all(map(lambda x: isinstance(x, str), TFT_initial["setData"][i][j]) for i in range(len(TFT_initial["setData"])) for j in ["augments", "items"]) and all(map(lambda x: isinstance(x, dict), TFT_initial["setData"][i]["champions"]) for i in range(len(TFT_initial["setData"]))) and all(k in TFT_initial["setData"][i]["champions"][j] for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in ["ability", "apiName", "characterName", "cost", "icon", "name", "role", "squareIcon", "stats", "tileIcon", "traits"]) and all(isinstance(TFT_initial["setData"][i]["champions"][j][k], dict) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in ["ability", "stats"]) and all(isinstance(TFT_initial["setData"][i]["champions"][j][k], str) or TFT_initial["setData"][i]["champions"][j][k] == None for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in ["apiName", "characterName", "icon", "name", "squareIcon", "tileIcon"]) and all(isinstance(TFT_initial["setData"][i]["champions"][j][k], int) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in ["cost"]) and all(k in TFT_initial["setData"][i]["champions"][j]["ability"] for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in ["desc", "icon", "name", "variables"]) and all(isinstance(TFT_initial["setData"][i]["champions"][j]["ability"][k], str) or TFT_initial["setData"][i]["champions"][j]["ability"][k] == None for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in ["desc", "icon", "name"]) and all(isinstance(TFT_initial["setData"][i]["champions"][j]["ability"][k], list) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in ["variables"]) and all(map(lambda x: isinstance(x, dict), TFT_initial["setData"][i]["champions"][j]["ability"]["variables"]) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"]))) and all(l in TFT_initial["setData"][i]["champions"][j]["ability"]["variables"][k] for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in range(len(TFT_initial["setData"][i]["champions"][j]["ability"]["variables"])) for l in ["name", "value"]) and all(isinstance(TFT_initial["setData"][i]["champions"][j]["ability"]["variables"][k][l], str) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in range(len(TFT_initial["setData"][i]["champions"][j]["ability"]["variables"])) for l in ["name"]) and all(isinstance(TFT_initial["setData"][i]["champions"][j]["ability"]["variables"][k][l], list) or TFT_initial["setData"][i]["champions"][j]["ability"]["variables"][k][l] == None for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["champions"])) for k in range(len(TFT_initial["setData"][i]["champions"][j]["ability"]["variables"])) for l in ["value"]) and all(k in TFT_initial["setData"][i]["traits"][j] for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["traits"])) for k in ["apiName", "desc", "effects", "icon", "name"]) and all(isinstance(TFT_initial["setData"][i]["traits"][j][k], str) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["traits"])) for k in ["apiName", "desc", "icon", "name"]) and all(isinstance(TFT_initial["setData"][i]["traits"][j][k], list) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["traits"])) for k in ["effects"]) and all(map(lambda x: isinstance(x, dict), TFT_initial["setData"][i]["traits"][j]["effects"]) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["traits"]))) and all(l in TFT_initial["setData"][i]["traits"][j]["effects"][k] for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["traits"])) for k in range(len(TFT_initial["setData"][i]["traits"][j]["effects"])) for l in ["maxUnits", "minUnits", "style", "variables"]) and all(isinstance(TFT_initial["setData"][i]["traits"][j]["effects"][k][l], int) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["traits"])) for k in range(len(TFT_initial["setData"][i]["traits"][j]["effects"])) for l in ["maxUnits", "minUnits", "style"]) and all(isinstance(TFT_initial["setData"][i]["traits"][j]["effects"][k][l], dict) for i in range(len(TFT_initial["setData"])) for j in range(len(TFT_initial["setData"][i]["traits"])) for k in range(len(TFT_initial["setData"][i]["traits"][j]["effects"])) for l in ["variables"]) and all(j in TFT_initial["sets"][i] for i in TFT_initial["sets"] for j in ["champions", "name", "traits"]) and all(isinstance(TFT_initial["sets"][i][j], list) for i in TFT_initial["sets"] for j in ["champions", "traits"]) and all(isinstance(TFT_initial["sets"][i][j], str) for i in TFT_initial["sets"] for j in ["name"]) and all(k in TFT_initial["sets"][i]["champions"][j] for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in ["ability", "apiName", "characterName", "cost", "icon", "name", "role", "squareIcon", "stats", "tileIcon", "traits"]) and all(isinstance(TFT_initial["sets"][i]["champions"][j][k], dict) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in ["ability", "stats"]) and all(isinstance(TFT_initial["sets"][i]["champions"][j][k], str) or TFT_initial["sets"][i]["champions"][j][k] == None for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in ["apiName", "characterName", "icon", "name", "squareIcon", "tileIcon"]) and all(isinstance(TFT_initial["sets"][i]["champions"][j][k], int) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in ["cost"]) and all(k in TFT_initial["sets"][i]["champions"][j]["ability"] for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in ["desc", "icon", "name", "variables"]) and all(isinstance(TFT_initial["sets"][i]["champions"][j]["ability"][k], str) or TFT_initial["sets"][i]["champions"][j]["ability"][k] == None for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in ["desc", "icon", "name"]) and all(isinstance(TFT_initial["sets"][i]["champions"][j]["ability"][k], list) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in ["variables"]) and all(map(lambda x: isinstance(x, dict), TFT_initial["sets"][i]["champions"][j]["ability"]["variables"]) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"]))) and all(l in TFT_initial["sets"][i]["champions"][j]["ability"]["variables"][k] for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in range(len(TFT_initial["sets"][i]["champions"][j]["ability"]["variables"])) for l in ["name", "value"]) and all(isinstance(TFT_initial["sets"][i]["champions"][j]["ability"]["variables"][k][l], str) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in range(len(TFT_initial["sets"][i]["champions"][j]["ability"]["variables"])) for l in ["name"]) and all(isinstance(TFT_initial["sets"][i]["champions"][j]["ability"]["variables"][k][l], list) or TFT_initial["sets"][i]["champions"][j]["ability"]["variables"][k][l] == None for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["champions"])) for k in range(len(TFT_initial["sets"][i]["champions"][j]["ability"]["variables"])) for l in ["value"]) and all(k in TFT_initial["sets"][i]["traits"][j] for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["traits"])) for k in ["apiName", "desc", "effects", "icon", "name"]) and all(isinstance(TFT_initial["sets"][i]["traits"][j][k], str) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["traits"])) for k in ["apiName", "desc", "icon", "name"]) and all(isinstance(TFT_initial["sets"][i]["traits"][j][k], list) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["traits"])) for k in ["effects"]) and all(map(lambda x: isinstance(x, dict), TFT_initial["sets"][i]["traits"][j]["effects"]) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["traits"]))) and all(l in TFT_initial["sets"][i]["traits"][j]["effects"][k] for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["traits"])) for k in range(len(TFT_initial["sets"][i]["traits"][j]["effects"])) for l in ["maxUnits", "minUnits", "style", "variables"]) and all(isinstance(TFT_initial["sets"][i]["traits"][j]["effects"][k][l], int) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["traits"])) for k in range(len(TFT_initial["sets"][i]["traits"][j]["effects"])) for l in ["maxUnits", "minUnits", "style"]) and all(isinstance(TFT_initial["sets"][i]["traits"][j]["effects"][k][l], dict) for i in TFT_initial["sets"] for j in range(len(TFT_initial["sets"][i]["traits"])) for k in range(len(TFT_initial["sets"][i]["traits"][j]["effects"])) for l in ["variables"]):
                                     break
                                 else:
                                     print("数据格式错误！请选择一个符合CommunityDragon数据库中记录的云顶之弈基础数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the TFT basic data archived in CommunityDragon database (%s)!" %(TFT_url, TFT_url))
@@ -3015,7 +3019,7 @@ async def search_profile(connection):
                                                 else:
                                                     LoLGame_info_data[key].append(roles[LoLGame_info["participants"][i]["timeline"][key]])
                                     #数据框列排序（Dataframe column sorting）
-                                    LoLGame_info_statistics_output_order = [18, 113, 0, 10, 4, 11, 9, 6, 3, 15, 19, 20, 195, 196, 198, 199, 28, 22, 23, 139, 140, 141, 142, 143, 144, 145, 175, 187, 176, 188, 177, 189, 178, 190, 179, 191, 180, 192, 55, 33, 26, 29, 124, 125, 57, 54, 58, 37, 36, 41, 40, 39, 38, 34, 128, 114, 67, 133, 118, 126, 120, 95, 61, 130, 119, 94, 60, 129, 56, 31, 30, 122, 127, 121, 96, 62, 131, 32, 134, 137, 136, 115, 135, 44, 45, 123, 63, 65, 64, 132, 46, 59, 171, 173, 159, 153, 160, 154, 161, 155, 162, 156, 163, 157, 164, 158, 27, 35, 117, 42, 43, 193, 116]
+                                    LoLGame_info_statistics_output_order = [18, 113, 0, 10, 4, 11, 9, 8, 6, 3, 15, 19, 20, 195, 196, 198, 199, 28, 22, 23, 139, 140, 141, 142, 143, 144, 145, 175, 187, 176, 188, 177, 189, 178, 190, 179, 191, 180, 192, 55, 33, 26, 29, 124, 125, 57, 54, 58, 37, 36, 41, 40, 39, 38, 34, 128, 114, 67, 133, 118, 126, 120, 95, 61, 130, 119, 94, 60, 129, 56, 31, 30, 122, 127, 121, 96, 62, 131, 32, 134, 137, 136, 115, 135, 44, 45, 123, 63, 65, 64, 132, 46, 59, 171, 173, 159, 153, 160, 154, 161, 155, 162, 156, 163, 157, 164, 158, 27, 35, 117, 42, 43, 193, 116]
                                     LoLGame_info_data_organized = {}
                                     for i in LoLGame_info_statistics_output_order:
                                         key = LoLGame_info_header_keys[i]
@@ -3571,7 +3575,7 @@ async def search_profile(connection):
                                         else:
                                             print("已改用%s版本的棋子信息。\nTFT champion information changed to Patch %s." %(TFTChampionPatch_adopted, TFTChampionPatch_adopted))
                                             TFTChampions = {}
-                                            if patch_compare(TFTChampionPatch_adopted, "13.17"): #从13.17版本开始，CommunityDragon数据库中关于云顶之弈小小英雄的数据格式发生微调（Since Patch 13.17, the format of TFT Champion data in CommunityDragon database has been modified）
+                                            if patch_compare(TFTChampionPatch_adopted, "13.17"): #从13.17版本开始，CommunityDragon数据库中关于云顶之弈棋子的数据格式发生微调（Since Patch 13.17, the format of TFT Champion data in CommunityDragon database has been modified）
                                                 for TFTChampion_iter in TFTChampion:
                                                     champion_name = TFTChampion_iter["character_id"]
                                                     TFTChampions[champion_name] = TFTChampion_iter
@@ -3595,61 +3599,63 @@ async def search_profile(connection):
                                         s |= set()
                             TFTItemIds_match_list = sorted(s)
                             for j in TFTItemIds_match_list:
-                                if not j in TFTItems and current_versions["TFTItem"] != TFTGamePatch:
-                                    TFTItemPatch_adopted = TFTGamePatch
-                                    TFTItem_recapture = 1
-                                    print("第%d/%d场对局（对局序号：%d）装备信息（%s）获取失败！正在第%d次尝试改用%s版本的云顶之弈装备信息……\nTFT item information (%s) of Match %d / %d (matchID: %d) capture failed! Changing to TFT items of Patch %s ... Times tried: %d." %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], j, TFTItem_recapture, TFTItemPatch_adopted, j, i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTItemPatch_adopted, TFTItem_recapture))
-                                    while True:
-                                        try:
-                                            TFTItem = requests.get("https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/tftitems.json" %(TFTItemPatch_adopted, language_cdragon[language_code])).json()
-                                        except requests.exceptions.JSONDecodeError:
-                                            TFTItemPatch_deserted = TFTItemPatch_adopted
-                                            TFTItemPatch_adopted = FindPostPatch(TFTItemPatch_adopted, bigPatches)
-                                            TFTItemPatch_recapture = 1
-                                            print("%s版本文件不存在！正在第%s次尝试转至%s版本……\n%s patch file doesn't exist! Changing to TFT items of Patch %s ... Times tried: %d." %(TFTItemPatch_deserted, TFTItem_recapture, TFTItemPatch_adopted, TFTItemPatch_deserted, TFTItemPatch_adopted, TFTItem_recapture))
-                                        except requests.exceptions.RequestException:
-                                            if TFTItem_recapture < 3:
-                                                TFTItem_recapture += 1
-                                                print("网络环境异常！正在第%d次尝试改用%s版本的云顶之弈装备信息……\nYour network environment is abnormal! Changing to TFT items of Patch %s ... Times tried: %d." %(TFTItem_recapture, TFTItemPatch_adopted, TFTItemPatch_adopted, TFTItem_recapture))
+                                if not j in TFTItems and not j in TFTAugments:
+                                    if current_versions["TFTItem"] != TFTGamePatch:
+                                        TFTItemPatch_adopted = TFTGamePatch
+                                        TFTItem_recapture = 1
+                                        print("第%d/%d场对局（对局序号：%d）装备信息（%s）获取失败！正在第%d次尝试改用%s版本的云顶之弈装备信息……\nTFT item information (%s) of Match %d / %d (matchID: %d) capture failed! Changing to TFT items of Patch %s ... Times tried: %d." %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], j, TFTItem_recapture, TFTItemPatch_adopted, j, i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTItemPatch_adopted, TFTItem_recapture))
+                                        while True:
+                                            try:
+                                                TFTItem = requests.get("https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/tftitems.json" %(TFTItemPatch_adopted, language_cdragon[language_code])).json()
+                                            except requests.exceptions.JSONDecodeError:
+                                                TFTItemPatch_deserted = TFTItemPatch_adopted
+                                                TFTItemPatch_adopted = FindPostPatch(TFTItemPatch_adopted, bigPatches)
+                                                TFTItemPatch_recapture = 1
+                                                print("%s版本文件不存在！正在第%s次尝试转至%s版本……\n%s patch file doesn't exist! Changing to TFT items of Patch %s ... Times tried: %d." %(TFTItemPatch_deserted, TFTItem_recapture, TFTItemPatch_adopted, TFTItemPatch_deserted, TFTItemPatch_adopted, TFTItem_recapture))
+                                            except requests.exceptions.RequestException:
+                                                if TFTItem_recapture < 3:
+                                                    TFTItem_recapture += 1
+                                                    print("网络环境异常！正在第%d次尝试改用%s版本的云顶之弈装备信息……\nYour network environment is abnormal! Changing to TFT items of Patch %s ... Times tried: %d." %(TFTItem_recapture, TFTItemPatch_adopted, TFTItemPatch_adopted, TFTItem_recapture))
+                                                else:
+                                                    print("网络环境异常！第%d/%d场对局（对局序号：%d）的装备信息（%d）将采用原始数据！\nNetwork error! The original data will be used for the item (%d) of Match %d / %d (matchID: %d)!" %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], j, j, i + 1, len(TFTHistory), TFTHistoryJson["game_id"]))
+                                                    break
                                             else:
-                                                print("网络环境异常！第%d/%d场对局（对局序号：%d）的装备信息（%d）将采用原始数据！\nNetwork error! The original data will be used for the item (%d) of Match %d / %d (matchID: %d)!" %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], j, j, i + 1, len(TFTHistory), TFTHistoryJson["game_id"]))
+                                                print("已改用%s版本的云顶之弈装备信息。\nTFT item information changed to Patch %s." %(TFTItemPatch_adopted, TFTItemPatch_adopted))
+                                                TFTItems = {}
+                                                for TFTItem_iter in TFTItem:
+                                                    item_id = TFTItem_iter["id"]
+                                                    TFTItems[item_id] = TFTItem_iter
+                                                current_versions["TFTItem"] = TFTItemPatch_adopted
+                                                unmapped_keys["TFTItem"].clear()
                                                 break
-                                        else:
-                                            print("已改用%s版本的云顶之弈装备信息。\nTFT item information changed to Patch %s." %(TFTItemPatch_adopted, TFTItemPatch_adopted))
-                                            TFTItems = {}
-                                            for TFTItem_iter in TFTItem:
-                                                item_id = TFTItem_iter["id"]
-                                                TFTItems[item_id] = TFTItem_iter
-                                            current_versions["TFTItem"] = TFTItemPatch_adopted
-                                            unmapped_keys["TFTItem"].clear()
-                                            break
                                     #由于云顶之弈基础数据中也包含装备信息，这里将重新获取对局版本的云顶之弈基础数据（Because TFT basic data contain item data, here the program recaptures TFT basic data of the match version）
-                                    TFTAugmentPatch_adopted = TFTGamePatch
-                                    TFTAugment_recapture = 1
-                                    while True:
-                                        try:
-                                            TFT = requests.get("https://raw.communitydragon.org/%s/cdragon/tft/%s.json" %(TFTAugmentPatch_adopted, language_cdragon[language_code])).json()
-                                        except requests.exceptions.JSONDecodeError:
-                                            TFTAugmentPatch_deserted = TFTAugmentPatch_adopted
-                                            TFTAugmentPatch_adopted = FindPostPatch(TFTAugmentPatch_adopted, bigPatches)
-                                            TFTAugment_recapture = 1
-                                            print("%s版本文件不存在！正在第%s次尝试转至%s版本……\n%s patch file doesn't exist! Changing to TFT augments of Patch %s ... Times tried: %d." %(TFTAugmentPatch_deserted, TFTAugment_recapture, TFTAugmentPatch_adopted, TFTAugmentPatch_deserted, TFTAugmentPatch_adopted, TFTAugment_recapture))
-                                        except requests.exceptions.RequestException: #如果重新获取数据的过程中出现网络异常，那么暂时先将原始数据导入工作表中（If a network error occurs when recapturing the data, then temporarily export the initial data into the worksheet）
-                                            if TFTAugment_recapture < 3:
-                                                TFTAugment_recapture += 1
-                                                print("网络环境异常！正在第%d次尝试改用%s版本的云顶之弈强化符文信息……\nYour network environment is abnormal! Changing to TFT augments of Patch %s ... Times tried: %d." %(TFTAugment_recapture, TFTAugmentPatch_adopted, TFTAugmentPatch_adopted, TFTAugment_recapture))
+                                    if current_versions["TFTAugment"] != TFTGamePatch:
+                                        TFTAugmentPatch_adopted = TFTGamePatch
+                                        TFTAugment_recapture = 1
+                                        while True:
+                                            try:
+                                                TFT = requests.get("https://raw.communitydragon.org/%s/cdragon/tft/%s.json" %(TFTAugmentPatch_adopted, language_cdragon[language_code])).json()
+                                            except requests.exceptions.JSONDecodeError:
+                                                TFTAugmentPatch_deserted = TFTAugmentPatch_adopted
+                                                TFTAugmentPatch_adopted = FindPostPatch(TFTAugmentPatch_adopted, bigPatches)
+                                                TFTAugment_recapture = 1
+                                                print("%s版本文件不存在！正在第%s次尝试转至%s版本……\n%s patch file doesn't exist! Changing to TFT augments of Patch %s ... Times tried: %d." %(TFTAugmentPatch_deserted, TFTAugment_recapture, TFTAugmentPatch_adopted, TFTAugmentPatch_deserted, TFTAugmentPatch_adopted, TFTAugment_recapture))
+                                            except requests.exceptions.RequestException: #如果重新获取数据的过程中出现网络异常，那么暂时先将原始数据导入工作表中（If a network error occurs when recapturing the data, then temporarily export the initial data into the worksheet）
+                                                if TFTAugment_recapture < 3:
+                                                    TFTAugment_recapture += 1
+                                                    print("网络环境异常！正在第%d次尝试改用%s版本的云顶之弈强化符文信息……\nYour network environment is abnormal! Changing to TFT augments of Patch %s ... Times tried: %d." %(TFTAugment_recapture, TFTAugmentPatch_adopted, TFTAugmentPatch_adopted, TFTAugment_recapture))
+                                                else:
+                                                    print("网络环境异常！第%d/%d场对局（对局序号：%d）的强化符文信息（%s）将采用原始数据！\nNetwork error! The original data will be used for the augment (%s) of Match %d / %d (matchID: %d)!" %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], j, j, i + 1, len(TFTHistory), TFTHistoryJson["game_id"]))
+                                                    break
                                             else:
-                                                print("网络环境异常！第%d/%d场对局（对局序号：%d）的强化符文信息（%s）将采用原始数据！\nNetwork error! The original data will be used for the augment (%s) of Match %d / %d (matchID: %d)!" %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], j, j, i + 1, len(TFTHistory), TFTHistoryJson["game_id"]))
+                                                print("已改用%s版本的云顶之弈强化符文信息。\nTFT augment information changed to Patch %s." %(TFTAugmentPatch_adopted, TFTAugmentPatch_adopted))
+                                                TFTAugments = {}
+                                                for item in TFT["items"]:
+                                                    item_apiName = item["apiName"]
+                                                    TFTAugments[item_apiName] = item
+                                                current_versions["TFTAugment"] = TFTAugmentPatch_adopted
+                                                unmapped_keys["TFTAugment"].clear()
                                                 break
-                                        else:
-                                            print("已改用%s版本的云顶之弈强化符文信息。\nTFT augment information changed to Patch %s." %(TFTAugmentPatch_adopted, TFTAugmentPatch_adopted))
-                                            TFTAugments = {}
-                                            for item in TFT["items"]:
-                                                item_apiName = item["apiName"]
-                                                TFTAugments[item_apiName] = item
-                                            current_versions["TFTAugment"] = TFTAugmentPatch_adopted
-                                            unmapped_keys["TFTAugment"].clear()
-                                            break
                                     break
                         #下面开始整理数据（Sorts out the data）
                         if TFT_main_player_indices[i] == -1: #对局数据记录存在异常时的处理（Exception of match data recording exception）
@@ -4024,7 +4030,7 @@ async def search_profile(connection):
                     if not match_reserve_strategy[matchIDs[i]]:
                         sheetNumber[matchIDs[i]] = 0
                     else:
-                        sheetNumber[matchIDs[i]] = info_exist_error[matchIDs[i]] + 2 * timeline_exist_error[matchIDs[i]]
+                        sheetNumber[matchIDs[i]] = (1 - info_exist_error[matchIDs[i]]) + 2 * (1 - timeline_exist_error[matchIDs[i]])
                 
                 recent_players_df = pandas.DataFrame() #起到占位作用，保证在使用自定义脚本11时生成的近期一起玩过的玩家数据一定是工作簿的第5和6张工作表（Act as a placeholder to ensure the recent played summoner data from Customized Program 11 are in the fifth and sixth sheets in the workbook)
                 if not LoLHistory_searched:

@@ -169,7 +169,7 @@ async def add_bots_team(connection, teamId: str):
         for role in LoLChampions[championId]["roles"]:
             recommended_champion_for_role[role].append(championId)
     #可用的电脑玩家难度（Available bot difficulty）
-    botDifficulty = ["EASY", "MEDIUM", "RSINTRO", "RSBEGINNER", "RSINTERMEDIATE"]
+    botDifficulty = ["EASY", "HARD", "MEDIUM", "RSINTRO", "RSBEGINNER", "RSINTERMEDIATE", "RSWARMINTRO"]
     print("队伍%s：请选择自选电脑玩家或者随机生成电脑玩家：\nTeam %s: Please select the option to generate bot players:\n0\t跳过该队伍（Skip this team）\n1\t完全随机生成（Completely Randomly）\n2\t按照分路随机生成（Randomly according to Positions）\n3\t自选（By Picking）" %(teamId[0], teamId[0]))
     while True:
         o = input()

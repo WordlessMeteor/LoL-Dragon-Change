@@ -256,13 +256,17 @@ def patch_compare(patch1, patch2): #比较两个版本号的先后顺序。当pa
     try:
         lst1 = list(map(int, lst1))
     except ValueError:
-        print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+        return False
     try:
         lst2 = list(map(int, lst2))
     except ValueError:
-        print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+            return False
+        else:
+            return True
     for i in range(min(len(lst1), len(lst2))):
         if lst1[i] < lst2[i]:
             return True
@@ -2156,7 +2160,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
         elif option == "5":
             global message_hint_printed
             if not message_hint_printed:
-                print("（提示：编辑好内容后，在终端中按Ctrl-D以插入结束字符，再按回车键发送消息。插入两个Ctrl-D以取消对话。如果终端不支持插入Ctrl-D字符，新建一个Python工作台，引入pyperclip库后使用pyperclip.copy(chr(4))以复制Ctrl-D实际代表的字符，再粘贴在聊天终端中，按回车键发送消息。）\n(Hint: If you finished editing the message, you must press Ctrl-D to insert the ending character and then press Enter to send the message. Append double Ctrl-D to cancel chatting. If the current terminal doesn't support inserting Ctrl-D character, please create a Python console, import pyperclip library and then use `pyperclip.copy(chr(4))` to copy the character that Ctrl-D actually represents. Finally, paste it into the current terminal and press Enter to send the message.)")
+                print("（提示：编辑好内容后，在终端中按Ctrl-D以插入结束字符，再按回车键发送消息。插入两个Ctrl-D以取消对话。插入三个Ctrl-D以刷新消息。如果终端不支持插入Ctrl-D字符，新建一个Python工作台，引入pyperclip库后使用pyperclip.copy(chr(4))以复制Ctrl-D实际代表的字符，再粘贴在聊天终端中，按回车键发送消息。）\n(Hint: If you finished editing the message, you must press Ctrl-D to insert the ending character and then press Enter to send the message. Append double Ctrl-D to cancel chatting. Append triple Ctrl-D to refresh messages. If the current terminal doesn't support inserting Ctrl-D character, please create a Python console, import pyperclip library and then use `pyperclip.copy(chr(4))` to copy the character that Ctrl-D actually represents. Finally, paste it into the current terminal and press Enter to send the message.)")
                 message_hint_printed = True
             messageTypes = {"chat": "聊天", "groupchat": "队伍聊天", "system": "系统", "information": "通知", "celebration": "庆祝"}
             escape_sequences = {"\\n": ""} #这个变量本来是用于确定在聊天中怎么输入转义字符的。目前仅通过input()函数来输入换行符没有办法做到。参考链接：（This variable is originally intended to determine how to input an escape character in chat. It seems for now that there's no way of inputting a line feed character only using `input` function. Reference: ）https://www.educba.com/escape-sequence-in-c/
@@ -2254,7 +2258,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                             print("[%s](%s)%s\n" %(timestamp, messageTypes.get(message["type"], message["type"]), message["body"]))
                                                 print("▶ ", end = "")
                                                 text = aInput()
-                                                if text == "" or text.endswith(chr(4)): #后者用于以下场景：①终端中已经敲下回车的语句已经无法编辑，而事后又不想发送出去；②用户想要退出聊天。在这种情况下，用两个Ctrl-D结尾即可（The latter condition is used in the following situations: ②The entered words can't be edited in Terminal, but then the user doesn't want to send it out; ②The user wants to quit chatting. Under these circumstances, end the chat with double Ctrl-D will work）
+                                                if text.endswith(chr(4) * 2):
+                                                    continue
+                                                elif text == "" or text.endswith(chr(4)): #后者用于以下场景：①终端中已经敲下回车的语句已经无法编辑，而事后又不想发送出去；②用户想要退出聊天。在这种情况下，用两个Ctrl-D结尾即可（The latter condition is used in the following situations: ②The entered words can't be edited in Terminal, but then the user doesn't want to send it out; ②The user wants to quit chatting. Under these circumstances, end the chat with double Ctrl-D will work）
                                                     print("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Chat）\n2\t系统（System）\n3\t通知（Information）\n4\t庆祝语（Celebration）\n5\t自定义（custom）")
                                                     break
                                                 else:
@@ -2262,7 +2268,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                     response = await (await connection.request("POST", f"/lol-chat/v1/conversations/{chatId}/messages", data = body)).json()
                                                     if "errorCode" in response:
                                                         if response["httpStatus"] == 404:
-                                                            print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please active this conversation first.")
+                                                            print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please activate this conversation first.")
                                                         else:
                                                             print("聊天服务响应失败！\nERROR response for chat service!")
                                     else:
@@ -2316,7 +2322,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 timestamp = message["timestamp"][:10] + " " + message["timestamp"][11:23]
                                                 fromInfo = await get_info(connection, message["fromSummonerId"])
                                                 from_summonerName = get_info_name(fromInfo["body"]) if fromInfo["info_got"] else ""
-                                                if message["type"] == "chat":
+                                                if message["type"] == "chat" or message["type"] == "groupchat":
                                                     print("[%s]%s：\n%s\n" %(timestamp, from_summonerName, message["body"]))
                                                 elif message["type"] == "system":
                                                     system_messages = {"connecting": "正在连接……", "disconnected": "您已从聊天服务器断开，正在尝试重新连接……", "dropped_message": "由于发言内容或账号环境存在异常，消息发送暂时被限制，请注意账号保护并24小时后再试。", "is_blocked": "{actor}正在你的聊天黑名单中。你将不会看到它们的聊天信息。".format(actor = from_summonerName), "joined_room": "{actor}加入了队伍聊天".format(actor = from_summonerName), "left_room": "{actor}离开了队伍聊天".format(actor = from_summonerName), "no_friends": "看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。", "no_online_friends": "一个小伙伴都没在线。你知道吗，你是可以给离线的玩家发送信息的哟~", "rich_content_replaced": "请查看《英雄联盟》移动端APP里的消息", "TEXT_CHAT_MUTED": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_RESTRICTION": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_MUTED_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。", "TEXT_CHAT_RESTRICTION_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。"}
@@ -2325,7 +2331,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                     print("[%s](%s)%s\n" %(timestamp, messageTypes.get(message["type"], message["type"]), message["body"]))
                                         print("▶ ", end = "")
                                         text = aInput()
-                                        if text == "" or text.endswith(chr(4)):
+                                        if text.endswith(chr(4) * 2):
+                                            continue
+                                        elif text == "" or text.endswith(chr(4)):
                                             print("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Groupchat）\n2\t系统（System）\n3\t通知（Information）\n4\t庆祝语（Celebration）\n5\t自定义（custom）")
                                             break
                                         else:
@@ -2333,7 +2341,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             response = await (await connection.request("POST", f"/lol-chat/v1/conversations/{chatId}/messages", data = body)).json()
                                             if "errorCode" in response:
                                                 if response["httpStatus"] == 404:
-                                                    print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please active this conversation first.")
+                                                    print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please activate this conversation first.")
                                                 else:
                                                     print("聊天服务响应失败！\nERROR response for chat service!")
                                 conversations = await (await connection.request("GET", "/lol-chat/v1/conversations")).json()
@@ -2387,7 +2395,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             timestamp = message["timestamp"][:10] + " " + message["timestamp"][11:23]
                                             fromInfo = await get_info(connection, message["fromSummonerId"])
                                             from_summonerName = get_info_name(fromInfo["body"]) if fromInfo["info_got"] else ""
-                                            if message["type"] == "chat":
+                                            if message["type"] == "chat" or message["type"] == "groupchat":
                                                 print("[%s]%s：\n%s\n" %(timestamp, from_summonerName, message["body"]))
                                             elif message["type"] == "system":
                                                 system_messages = {"connecting": "正在连接……", "disconnected": "您已从聊天服务器断开，正在尝试重新连接……", "dropped_message": "由于发言内容或账号环境存在异常，消息发送暂时被限制，请注意账号保护并24小时后再试。", "is_blocked": "{actor}正在你的聊天黑名单中。你将不会看到它们的聊天信息。".format(actor = from_summonerName), "joined_room": "{actor}加入了队伍聊天".format(actor = from_summonerName), "left_room": "{actor}离开了队伍聊天".format(actor = from_summonerName), "no_friends": "看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。", "no_online_friends": "一个小伙伴都没在线。你知道吗，你是可以给离线的玩家发送信息的哟~", "rich_content_replaced": "请查看《英雄联盟》移动端APP里的消息", "TEXT_CHAT_MUTED": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_RESTRICTION": "由于为其他玩家带来了负面游戏体验，你的聊天功能已受到限制。", "TEXT_CHAT_MUTED_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。", "TEXT_CHAT_RESTRICTION_LIFTED": "你的聊天功能限制已解除。记住，清晰且有礼貌的发言是一支队伍一起获胜的关键。"}
@@ -2396,7 +2404,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 print("[%s](%s)%s\n" %(timestamp, messageTypes.get(message["type"], message["type"]), message["body"]))
                                     print("▶ ", end = "")
                                     text = aInput()
-                                    if text == "" or text.endswith(chr(4)):
+                                    if text.endswith(chr(4) * 2):
+                                        continue
+                                    elif text == "" or text.endswith(chr(4)):
                                         print("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Chat）\n2\t小队聊天（Groupchat）\n3\t系统（System）\n4\t通知（Information）\n5\t庆祝语（Celebration）\n6\t自定义（custom）")
                                         break
                                     else:
@@ -2404,7 +2414,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         response = await (await connection.request("POST", f"/lol-chat/v1/conversations/{pid}/messages", data = body)).json()
                                         if "errorCode" in response:
                                             if response["httpStatus"] == 404:
-                                                print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please active this conversation first.")
+                                                print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please activate this conversation first.")
                                             else:
                                                 print("聊天服务响应失败！\nERROR response for chat service!")
                 else:
@@ -2497,6 +2507,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         handle_input = input()
                                         if handle_input == "":
                                             continue
+                                        elif handle_input == "0":
+                                            break
                                         elif handle_input in map(str, range(1, len(friend_request_df))):
                                             handle_indices = [int(handle_input)]
                                             index_got = True
@@ -2558,9 +2570,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     index_got = True
                                 else:
                                     print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                print("您选择了以下%d个好友请求：\nYou selected the following %d friend request(s): " %(len(handle_indices), len(handle_indices)))
-                                print(format_df(friend_request_df.loc[handle_indices, friend_request_fields_to_print], print_header = True, print_index = True, reserve_index = True)[0])
                                 if index_got:
+                                    print("您选择了以下%d个好友请求：\nYou selected the following %d friend request(s): " %(len(handle_indices), len(handle_indices)))
+                                    print(format_df(friend_request_df.loc[handle_indices, friend_request_fields_to_print], print_header = True, print_index = True, reserve_index = True)[0])
                                     print("请选择对好友请求的处理：\nPlease decide how to deal with this friend request:\n0\t返回上一层（Return to the last step）\n1\t接受（Accept）\n2\t拒绝/取消（Reject/Cancel）\n3\t拉入聊天黑名单（Block）")
                                     while True:
                                         method = input()
@@ -2635,7 +2647,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         print(format_df(friend_hovercard_df.loc[1:, friend_hovercard_fields_to_print], print_index = True, start_index = 1)[0])
                         print("请选择移动模式：\nPlease select a moving mode:\n0\t返回上一层（Return to the last step）\n1\t单个移动（Single）\n2\t批量移动（In batches）\n3\t全部移动（All）")
                         while True:
-                            back = False
+                            index_got = False
                             mode = input()
                             if mode == "":
                                 continue
@@ -2664,22 +2676,20 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 continue
                                         else:
                                             if friend_index == -1: #输入“0”以返回上一层（Submit "0" to return to the last step）
-                                                back = True
                                                 break
                                             elif not friend_index in range(len(friends)):
                                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                                 continue
                                     move_indices = [friend_index]
+                                    index_got = True
                                     break
                             elif mode == "2":
                                 print("请选择您输入要移动的好友信息的方式：\nPlease select a method of inputting the information of your friends to be moved to other groups:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                                 while True:
-                                    index_got = False
                                     method = input()
                                     if method == "":
                                         continue
                                     elif method[0] == "0":
-                                        back = True
                                         break
                                     elif method[0] == "1":
                                         print("是否需要对好友取子集？（输入任意键以开始打草稿，否则直接开始输入好友索引。）\nDo you want to get a subset of the current friend data? (Submit any non-empty string to make a draft, or null to input the friend index directly.)")
@@ -2765,11 +2775,12 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         break
                             elif mode == "3":
                                 move_indices = list(range(len(friends)))
+                                index_got = True
                             else:
                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                            print("您选择了以下%d名好友：\nYou selected the following %d friend(s):" %(len(move_indices), len(move_indices)))
-                            print(format_df(friend_hovercard_df.loc[list(map(lambda x: x + 1, move_indices)), friend_hovercard_fields_to_print], print_index = True, reserve_index = True)[0])
-                            if not back:
+                            if index_got:
+                                print("您选择了以下%d名好友：\nYou selected the following %d friend(s):" %(len(move_indices), len(move_indices)))
+                                print(format_df(friend_hovercard_df.loc[list(map(lambda x: x + 1, move_indices)), friend_hovercard_fields_to_print], print_index = True, reserve_index = True)[0])
                                 print("请选择目标分组：\nPlease select a target group:")
                                 friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
                                 friend_groups_df = await sort_friend_group(connection)
@@ -2894,7 +2905,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         print(format_df(friend_hovercard_df.loc[1:, friend_hovercard_fields_to_print], print_index = True, start_index = 1)[0])
                         print("请选择删除模式：\nPlease select an unfriending mode:\n0\t返回上一层（Return to the last step）\n1\t单个删除（Single）\n2\t批量删除（In batches）\n3\t全部删除（All）")
                         while True:
-                            back = False
+                            index_got = False
                             mode = input()
                             if mode == "":
                                 continue
@@ -2922,22 +2933,20 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 continue
                                         else:
                                             if friend_index == -1: #输入“0”以返回上一层（Submit "0" to return to the last step）
-                                                back = True
                                                 break
                                             elif not friend_index in range(len(friends)):
                                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                                 continue
                                     unfriend_indices = [friend_index]
+                                    index_got = True
                                     break
                             elif mode == "2":
                                 print("请选择您输入要删除的好友信息的方式：\nPlease select a method of inputting the information of your friends to be removed:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                                 while True:
-                                    index_got = False
                                     method = input()
                                     if method == "":
                                         continue
                                     elif method[0] == "0":
-                                        back = True
                                         break
                                     elif method[0] == "1":
                                         print("是否需要对好友取子集？（输入任意键以开始打草稿，否则直接开始输入好友索引。）\nDo you want to get a subset of the current friend data? (Submit any non-empty string to make a draft, or null to input the friend index directly.)")
@@ -3023,9 +3032,10 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         break
                             elif mode == "3":
                                 unfriend_indices = list(range(len(friends)))
+                                index_got = True
                             else:
                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                            if not back:
+                            if index_got:
                                 unfriend_summonerNames = list(map(lambda x: friend_summonerNames[x], unfriend_indices))
                                 print('与%s解除好友关系：\n- 将该玩家从你的好友列表移除\n- 清除和该玩家的任何现存的会话\nUnfriending %s: \n- Removes them from your friends list\n- Clears any existing conversations with them\n\n您确定要与该玩家解除好友关系吗？（输入“remove”以确认，否则取消。）\nDo you really want to unfriend this player? (Submit "remove" to confirm, otherwise cancel unfriending.)' %("、".join(unfriend_summonerNames), ", ".join(unfriend_summonerNames)))
                                 unfriend_confirm = input() == "remove"
@@ -3073,7 +3083,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         print(format_df(friend_hovercard_df.loc[1:, friend_hovercard_fields_to_print], print_index = True, start_index = 1)[0])
                         print("请选择拉黑模式：\nPlease select a blocking mode:\n0\t返回上一层（Return to the last step）\n1\t单个拉黑（Single）\n2\t批量拉黑（In batches）\n3\t全部拉黑（All）")
                         while True:
-                            back = False
+                            index_got = False
                             mode = input()
                             if mode == "":
                                 continue
@@ -3101,22 +3111,20 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 continue
                                         else:
                                             if friend_index == -1: #输入“0”以返回上一层（Submit "0" to return to the last step）
-                                                back = True
                                                 break
                                             elif not friend_index in range(len(friends)):
                                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                                 continue
                                     block_indices = [friend_index]
+                                    index_got = True
                                     break
                             elif mode == "2":
                                 print("请选择您输入要拉黑的好友信息的方式：\nPlease select a method of inputting the information of your friends to be blocked:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                                 while True:
-                                    index_got = False
                                     method = input()
                                     if method == "":
                                         continue
                                     elif method[0] == "0":
-                                        back = True
                                         break
                                     elif method[0] == "1":
                                         print("是否需要对好友取子集？（输入任意键以开始打草稿，否则直接开始输入好友索引。）\nDo you want to get a subset of the current friend data? (Submit any non-empty string to make a draft, or null to input the friend index directly.)")
@@ -3202,11 +3210,12 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         break
                             elif mode == "3":
                                 block_indices = list(range(len(friends)))
+                                index_got = True
                             else:
                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                            print("您选择了以下%d名好友：\nYou selected the following %d friends:" %(len(block_indices), len(block_indices)))
-                            print(format_df(friend_hovercard_df.loc[list(map(lambda x: x + 1, block_indices)), friend_hovercard_fields_to_print], print_index = True, reserve_index = True)[0])
-                            if not back:
+                            if index_got:
+                                print("您选择了以下%d名好友：\nYou selected the following %d friends:" %(len(block_indices), len(block_indices)))
+                                print(format_df(friend_hovercard_df.loc[list(map(lambda x: x + 1, block_indices)), friend_hovercard_fields_to_print], print_index = True, reserve_index = True)[0])
                                 block_summonerNames = list(map(lambda x: friend_summonerNames[x], block_indices))
                                 print('将%s拉入聊天黑名单：\n- 将该玩家从你的好友列表中移除\n- 屏蔽来自该玩家的好友请求\n- 屏蔽任何未来的会话\n- 屏蔽该玩家的游戏邀请\nBlocking %s:\n- Removes them from your friends list\n- Blocks friend requests from them\n- Blocks any future conversations\n- Blocks game invites from them\n\n您确定要将该玩家拉入聊天黑名单吗？（输入“block”以确认，否则取消。）\nDo you really want to block this player? (Submit "block" to confirm, otherwise cancel blocking.' %("、".join(block_summonerNames), ", ".join(block_summonerNames)))
                                 block_confirm = input() == "block"
@@ -3275,6 +3284,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         if invitee_info["selfInfo"]:
                                             print("您已经在房间内了。\nYou're already in the lobby.")
                                         else:
+                                            invitee_obtained = True
                                             invitee_summonerIds = [invitee_info["body"]["summonerId"]]
                                             print(invitee_info["body"])
                                             break
@@ -3552,14 +3562,14 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     else:
                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                         continue
-                    print("您邀请了以下%d名玩家：\nYou invited the following %d player(s):" %(len(invitee_summonerIds), len(invitee_summonerIds)))
-                    for invitee_summonerId in invitee_summonerIds:
-                        invitee_info = await get_info(connection, invitee_summonerId)
-                        if invitee_info["info_got"]:
-                            print(get_info_name(invitee_info["body"]))
-                        else:
-                            print(invitee_info["message"])
                     if invitee_obtained:
+                        print("您邀请了以下%d名玩家：\nYou invited the following %d player(s):" %(len(invitee_summonerIds), len(invitee_summonerIds)))
+                        for invitee_summonerId in invitee_summonerIds:
+                            invitee_info = await get_info(connection, invitee_summonerId)
+                            if invitee_info["info_got"]:
+                                print(get_info_name(invitee_info["body"]))
+                            else:
+                                print(invitee_info["message"])
                         body = list(map(lambda x: {"toSummonerId": x}, invitee_summonerIds))
                         response = await (await connection.request("POST", "/lol-lobby/v2/lobby/invitations", data = body)).json()
                         lobby_invitations = await (await connection.request("GET", "/lol-lobby/v2/lobby/invitations")).json()
@@ -4401,9 +4411,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                             mute_indices.remove(selfIndex)
                                                         else:
                                                             print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                                        print("您选择了以下%d名玩家：\nYou selected the following %d player(s):" %(len(mute_indices), len(mute_indices)))
-                                                        print(format_df(participant_record_df.loc[mute_indices, participant_record_fields_to_print], print_index = True, reserve_index = True)[0])
                                                         if index_got:
+                                                            print("您选择了以下%d名玩家：\nYou selected the following %d player(s):" %(len(mute_indices), len(mute_indices)))
+                                                            print(format_df(participant_record_df.loc[mute_indices, participant_record_fields_to_print], print_index = True, reserve_index = True)[0])
                                                             print("您想要将这些玩家静音，还是解除静音？（输入任意键以静音，否则解除静音。）\nDo you want to mute or unmute these participants? (Submit any non-empty string to mute, or null to unmute.)")
                                                             isMuted = bool(input())
                                                             for player_index in mute_indices:
@@ -4542,10 +4552,10 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                                             print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                                         else:
                                                             print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                                        if mode[0] in {"1", "2", "3"}:
-                                                            print("您选择了以下%d名玩家：\nYou selected the following %d player(s):" %(len(volumeChange_indices), len(volumeChange_indices)))
-                                                            print(format_df(participant_record_df.loc[volumeChange_indices, participant_record_fields_to_print], print_index = True, reserve_index = True)[0])
                                                         if index_got:
+                                                            if mode[0] in {"1", "2", "3"}:
+                                                                print("您选择了以下%d名玩家：\nYou selected the following %d player(s):" %(len(volumeChange_indices), len(volumeChange_indices)))
+                                                                print(format_df(participant_record_df.loc[volumeChange_indices, participant_record_fields_to_print], print_index = True, reserve_index = True)[0])
                                                             if volume_share:
                                                                 print("请输入一个不超过100的自然数以设置音量：\nPlease enter a nonnegative integer not greater than 100 to set the volume:")
                                                                 while True:
@@ -4735,10 +4745,10 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             print("所有队友被已解除静音。\nYour allies are unmuted.")
                                     else:
                                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                    if action[0] in {"1", "2", "3"}:
-                                        print("您选择了以下%d名队友：\nYou selected the following %d ally/allies:" %(len(mute_indices), len(mute_indices)))
-                                        print(format_df(champSelect_myTeam_df.loc[mute_indices, champSelect_team_fields_to_print], print_index = True, reserve_index = True)[0])
                                     if index_got:
+                                        if action[0] in {"1", "2", "3"}:
+                                            print("您选择了以下%d名队友：\nYou selected the following %d ally/allies:" %(len(mute_indices), len(mute_indices)))
+                                            print(format_df(champSelect_myTeam_df.loc[mute_indices, champSelect_team_fields_to_print], print_index = True, reserve_index = True)[0])
                                         mute_puuids = []
                                         for ally_index in mute_indices:
                                             ally_nameVisibilityType = champSelect_myTeam_df.loc[ally_index, "nameVisibilityType"]
@@ -5110,11 +5120,11 @@ async def blacklist_behavior_simulation(connection):
                                         if kick_str == "":
                                             continue
                                         elif kick_str == "0":
-                                            info_got = False
+                                            index_got = False
                                             break
                                         elif kick_str == "all":
                                             kick_indices = list(range(1, len(blockList_df_filtered_lobby)))
-                                            info_got = True
+                                            index_got = True
                                             break
                                         else:
                                             try:
@@ -5264,7 +5274,6 @@ async def blacklist_behavior_simulation(connection):
                         elif mode == "2":
                             print("请选择您输入要移出聊天黑名单的玩家信息的方式：\nPlease select a method of inputting the information of the blocked players to be unblocked:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                             while True:
-                                index_got = False
                                 method = input()
                                 if method == "":
                                     continue

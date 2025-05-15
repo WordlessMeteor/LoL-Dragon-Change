@@ -310,7 +310,7 @@ async def create_queue_lobby(connection):
 ##                print("{0:<7}".format(str(localdata["QueueID"][j])) + "\t" + "{0:<5}".format(str(localdata["mapID"][j])) + "\t" + "{0:<14}".format(localdata["map_CN"][j]) + "\t" + "{0:<30}".format(localdata["Gamemode_CN"][j]) + "\t" + "{0:<11}".format(localdata["PickType_CN"][j]) + "\t" + "{0:<24}".format(localdata["map_EN"][j]) + "\t" + "{0:<34}".format(localdata["Gamemode_EN"][j]) + "\t" + "{0:<15}".format(localdata["PickType_EN"][j]))
 ##                break
 ##    print("*****************************************************************************")
-    print("请输入队列房间序号：（输入负数以退出创建）\nPlease enter the queueID: (Enter any negative number to exit the creation)")
+    print('请输入队列房间序号：（输入“0”以刷新可用队列信息。输入负数以退出创建。）\nPlease enter the queueID: (Enter "0" to refresh available queue information. Enter any negative number to exit creation.)')
     while True:
         try:
             lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
@@ -324,13 +324,23 @@ async def create_queue_lobby(connection):
             queueId = int(queueId)
             if queueId < 0:
                 break
+            elif queueId == 0:
+                await check_available_queue(connection)
+                print("(" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\t" + platformId + "\t" + game_version + ")")
+                print('请输入队列房间序号：（输入“0”以刷新可用队列信息。输入负数以退出创建。）\nPlease enter the queueID: (Enter "0" to refresh available queue information. Enter any negative number to exit creation.)')
+                continue
             lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
             if "gameConfig" in lobby_information and not lobby_information["gameConfig"]["isCustom"]:
                 response = await (await connection.request("PUT", "/lol-lobby/v1/parties/queue", data = str(queueId))).json()
                 if response == None:
                     print(lobby_information)
-                elif "errorCode" in response and response["message"] == "UNHANDLED_SERVER_SIDE_ERROR":
-                    print("服务器错误。请换一个队列序号并重试。\nUnhandled server side error. Please switch to another queueId and try again.")
+                elif "errorCode" in response:
+                    if response["message"] == "UNHANDLED_SERVER_SIDE_ERROR":
+                        print("服务器错误。请换一个队列序号并重试。\nUnhandled server side error. Please switch to another queueId and try again.")
+                    elif response["message"] == "INVALID_REQUEST":
+                        print("请求无效。\nInvalid request.")
+                    else:
+                        print(response)
             else:
                 queue = {"queueId": queueId}
                 response = await (await connection.request("DELETE", "/lol-lobby/v2/lobby")).json()
@@ -407,7 +417,7 @@ async def add_bots_team(connection, teamId: str):
         for role in LoLChampions[championId]["roles"]:
             recommended_champion_for_role[role].append(championId)
     #可用的电脑玩家难度（Available bot difficulty）
-    botDifficulty = ["EASY", "MEDIUM", "RSINTRO", "RSBEGINNER", "RSINTERMEDIATE"]
+    botDifficulty = ["EASY", "HARD", "MEDIUM", "RSINTRO", "RSBEGINNER", "RSINTERMEDIATE", "RSWARMINTRO"]
     print("队伍%s：请选择自选电脑玩家或者随机生成电脑玩家：\nTeam %s: Please select the option to generate bot players:\n0\t跳过该队伍（Skip this team）\n1\t完全随机生成（Completely Randomly）\n2\t按照分路随机生成（Randomly according to Positions）\n3\t自选（By Picking）" %(teamId[0], teamId[0]))
     while True:
         o = input()

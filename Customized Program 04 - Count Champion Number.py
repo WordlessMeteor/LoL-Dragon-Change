@@ -25,13 +25,17 @@ def patch_compare(patch1, patch2): #比较两个版本号的先后顺序。当pa
     try:
         lst1 = list(map(int, lst1))
     except ValueError:
-        print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+        return False
     try:
         lst2 = list(map(int, lst2))
     except ValueError:
-        print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+            return False
+        else:
+            return True
     for i in range(min(len(lst1), len(lst2))):
         if lst1[i] < lst2[i]:
             return True
@@ -346,9 +350,9 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
         else:
             champion_files_ready = True #任何一个文件获取失败都会导致程序进入离线加载模式（Any file that failed to be loaded will cause to program to load all data again offline）
         if not champion_files_ready:
-            LoLChampion = []
             print('英雄信息获取超时！正在尝试离线加载数据……\nChampion information capture timeout! Trying loading offline data ...\n请输入英雄Json数据文件夹路径。输入空字符以使用默认相对引用路径“%s”。输入“0”以退出程序。\nPlease enter the champion Json data folder path. Enter an empty string to use the default relative path: "%s". Submit "0" to exit.' %(champion_local_default, champion_local_default))
             while True:
+                LoLChampion = []
                 champion_local = input()
                 if champion_local == "":
                     champion_local = champion_local_default
