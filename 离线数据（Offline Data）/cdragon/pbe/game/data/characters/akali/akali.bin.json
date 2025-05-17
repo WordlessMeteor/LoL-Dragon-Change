@@ -13938,6 +13938,50 @@
                 "Trait_Ultimate",
                 "PositiveEffect_MoveBlock"
             ],
+            "mDataValues": [
+                {
+                    "mName": "R2BaseDamage",
+                    "mValues": [
+                        0.0,
+                        70.0,
+                        140.0,
+                        210.0,
+                        280.0,
+                        350.0,
+                        420.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "R2APRatio",
+                    "mValues": [
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896,
+                        0.30000001192092896
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "Cast2DamageMin": {
+                    "mSimpleTooltipCalculationDisplay": 6,
+                    "mFormulaParts": [
+                        {
+                            "mDataValue": "R2BaseDamage",
+                            "__type": "NamedDataValueCalculationPart"
+                        },
+                        {
+                            "mDataValue": "R2APRatio",
+                            "__type": "StatByNamedDataValueCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
             "mAnimationName": "None",
             "mImgIconName": [
                 "ASSETS/Characters/Akali/HUD/Icons2D/Akali_R2.dds"
@@ -14076,6 +14120,12 @@
         "BotData": {
             "DamageTag": 1,
             "{6d548702}": {
+                "mFormulaParts": [
+                    {
+                        "mSpellCalculationKey": "Cast2DamageMin",
+                        "__type": "{f3cbe7b2}"
+                    }
+                ],
                 "__type": "GameCalculation"
             },
             "{ec17e271}": [
@@ -15872,12 +15922,6 @@
                     "{b75b2ab8}": true,
                     "{b66d0e47}": true,
                     "{6175bb7b}": true,
-                    "__type": "ToolAiPresence"
-                },
-                "1": {
-                    "__type": "ToolAiPresence"
-                },
-                "2": {
                     "__type": "ToolAiPresence"
                 },
                 "3": {
