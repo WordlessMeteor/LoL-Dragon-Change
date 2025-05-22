@@ -4,6 +4,9 @@ from urllib.parse import quote, unquote, urljoin
 from wcwidth import wcswidth
 from collections import OrderedDict
 from openpyxl import load_workbook
+from openpyxl.styles import PatternFill
+from openpyxl.formatting.rule import FormulaRule
+from openpyxl.utils import get_column_letter
 #from flask import Flask, render_template
 
 #=============================================================================
@@ -1371,7 +1374,7 @@ async def search_profile(connection):
         print('请输入要查询的召唤师名称，退出请输入“0”：\nPlease input the summoner name to be searched. Submit "0" to exit.')
         summoner_name = input()
         if summoner_name == "0":
-            os._exit(0)
+            break
         elif summoner_name == "":
             print("请输入非空字符串！\nPlease input a string instead of null!")
             continue
@@ -3373,7 +3376,7 @@ async def search_profile(connection):
                         latest_TFTMatchID_index = TFTHistory_gameIDs.index(latest_TFTMatchID) if latest_TFTMatchID in TFTHistory_gameIDs else 500
                         print("检测到您以前曾经查询过该召唤师的云顶之弈对局记录。是否只保存该召唤师信息文件夹中不包含的云顶之弈对局？（输入空字符串以只保存尚未保存过文本文档的对局，否则将全部重新保存一遍）\nThe program detected that you've searched for this summoner's TFT match history before. Do you want to only fetch the TFT matches not present in the current summoner folder? (Enter an empty string to only save the matches whose json files haven't been saved, or any non-empty string to save all the TFT matches' information)\n已保存的最大对局序号的对局在最新对局列表中的下标（The index of the saved match with the greatest matchID in the latest match list recorded in API）：0 %d" %latest_TFTMatchID_index)
                         update_unsaved_only = input() == ""
-                    TFTHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间", "game_datetime": "对局结算时间", "game_id": "对局序号", "game_length": "持续时长", "game_version": "对局版本", "queue_id": "队列序号", "tft_game_type": "游戏类型", "tft_set_core_name": "数据版本名称", "tft_set_number": "赛季", "participantId": "玩家序号", "augment1 apiName": "强化符文1接口名称", "augment2 apiName": "强化符文2接口名称", "augment3 apiName": "强化符文3接口名称", "augment1 name": "强化符文1名称", "augment2 name": "强化符文2名称", "augment3 name": "强化符文3名称", "augment1 icon": "强化符文1图标", "augment2 icon": "强化符文2图标", "augment3 icon": "强化符文3图标", "companion content_ID": "小小英雄商品编号", "companion item_ID": "小小英雄序号", "companion skin_ID": "小小英雄皮肤序号", "companion species": "小小英雄物种", "companion name": "小小英雄名称", "companion level": "小小英雄星级", "companion rarity": "小小英雄稀有度", "gold_left": "剩余金币", "last_round": "存活回合", "level": "等级", "placement": "名次", "players_eliminated": "淘汰玩家数", "puuid": "玩家通用唯一识别码", "time_eliminated": "存活时长", "total_damage_to_players": "造成玩家伤害", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "gameName": "玩家昵称", "tagLine": "昵称编号", "trait0 name": "羁绊1", "trait0 num_units": "羁绊1单位数", "trait0 style": "羁绊1羁绊框颜色", "trait0 tier_current": "羁绊1当前等级", "trait0 tier_total": "羁绊1最高等级", "trait0 display_name": "羁绊1显示名", "trait0 icon_path": "羁绊1图标路径", "trait1 name": "羁绊2", "trait1 num_units": "羁绊2单位数", "trait1 style": "羁绊2羁绊框颜色", "trait1 tier_current": "羁绊2当前等级", "trait1 tier_total": "羁绊2最高等级", "trait1 display_name": "羁绊2显示名", "trait1 icon_path": "羁绊2图标路径", "trait2 name": "羁绊3", "trait2 num_units": "羁绊3单位数", "trait2 style": "羁绊3羁绊框颜色", "trait2 tier_current": "羁绊3当前等级", "trait2 tier_total": "羁绊3最高等级", "trait2 display_name": "羁绊3显示名", "trait2 icon_path": "羁绊3图标路径", "trait3 name": "羁绊4", "trait3 num_units": "羁绊4单位数", "trait3 style": "羁绊4羁绊框颜色", "trait3 tier_current": "羁绊4当前等级", "trait3 tier_total": "羁绊4最高等级", "trait3 display_name": "羁绊4显示名", "trait3 icon_path": "羁绊4图标路径", "trait4 name": "羁绊5", "trait4 num_units": "羁绊5单位数", "trait4 style": "羁绊5羁绊框颜色", "trait4 tier_current": "羁绊5当前等级", "trait4 tier_total": "羁绊5最高等级", "trait4 display_name": "羁绊5显示名", "trait4 icon_path": "羁绊5图标路径", "trait5 name": "羁绊6", "trait5 num_units": "羁绊6单位数", "trait5 style": "羁绊6羁绊框颜色", "trait5 tier_current": "羁绊6当前等级", "trait5 tier_total": "羁绊6最高等级", "trait5 display_name": "羁绊6显示名", "trait5 icon_path": "羁绊6图标路径", "trait6 name": "羁绊7", "trait6 num_units": "羁绊7单位数", "trait6 style": "羁绊7羁绊框颜色", "trait6 tier_current": "羁绊7当前等级", "trait6 tier_total": "羁绊7最高等级", "trait6 display_name": "羁绊7显示名", "trait6 icon_path": "羁绊7图标路径", "trait7 name": "羁绊8", "trait7 num_units": "羁绊8单位数", "trait7 style": "羁绊8羁绊框颜色", "trait7 tier_current": "羁绊8当前等级", "trait7 tier_total": "羁绊8最高等级", "trait7 display_name": "羁绊8显示名", "trait7 icon_path": "羁绊8图标路径", "trait8 name": "羁绊9", "trait8 num_units": "羁绊9单位数", "trait8 style": "羁绊9羁绊框颜色", "trait8 tier_current": "羁绊9当前等级", "trait8 tier_total": "羁绊9最高等级", "trait8 display_name": "羁绊9显示名", "trait8 icon_path": "羁绊9图标路径", "trait9 name": "羁绊10", "trait9 num_units": "羁绊10单位数", "trait9 style": "羁绊10羁绊框颜色", "trait9 tier_current": "羁绊10当前等级", "trait9 tier_total": "羁绊10最高等级", "trait9 display_name": "羁绊10显示名", "trait9 icon_path": "羁绊10图标路径", "trait10 name": "羁绊11", "trait10 num_units": "羁绊11单位数", "trait10 style": "羁绊11羁绊框颜色", "trait10 tier_current": "羁绊11当前等级", "trait10 tier_total": "羁绊11最高等级", "trait10 display_name": "羁绊11显示名", "trait10 icon_path": "羁绊11图标路径", "trait11 name": "羁绊12", "trait11 num_units": "羁绊12单位数", "trait11 style": "羁绊12羁绊框颜色", "trait11 tier_current": "羁绊12当前等级", "trait11 tier_total": "羁绊12最高等级", "trait11 display_name": "羁绊12显示名", "trait11 icon_path": "羁绊12图标路径", "trait12 name": "羁绊13", "trait12 num_units": "羁绊13单位数", "trait12 style": "羁绊13羁绊框颜色", "trait12 tier_current": "羁绊13当前等级", "trait12 tier_total": "羁绊13最高等级", "trait12 display_name": "羁绊13显示名", "trait12 icon_path": "羁绊13图标路径", "unit0 character_id": "英雄1：角色编号", "unit0 rarity": "英雄1：卡费", "unit0 tier": "英雄1：星级", "unit0 display_name": "英雄1：显示名", "unit0 squareIconPath": "英雄1：方块图标路径", "unit1 character_id": "英雄2：角色编号", "unit1 rarity": "英雄2：卡费", "unit1 tier": "英雄2：星级", "unit1 display_name": "英雄2：显示名", "unit1 squareIconPath": "英雄2：方块图标路径", "unit2 character_id": "英雄3：角色编号", "unit2 rarity": "英雄3：卡费", "unit2 tier": "英雄3：星级", "unit2 display_name": "英雄3：显示名", "unit2 squareIconPath": "英雄3：方块图标路径", "unit3 character_id": "英雄4：角色编号", "unit3 rarity": "英雄4：卡费", "unit3 tier": "英雄4：星级", "unit3 display_name": "英雄4：显示名", "unit3 squareIconPath": "英雄4：方块图标路径", "unit4 character_id": "英雄5：角色编号", "unit4 rarity": "英雄5：卡费", "unit4 tier": "英雄5：星级", "unit4 display_name": "英雄5：显示名", "unit4 squareIconPath": "英雄5：方块图标路径", "unit5 character_id": "英雄6：角色编号", "unit5 rarity": "英雄6：卡费", "unit5 tier": "英雄6：星级", "unit5 display_name": "英雄6：显示名", "unit5 squareIconPath": "英雄6：方块图标路径", "unit6 character_id": "英雄7：角色编号", "unit6 rarity": "英雄7：卡费", "unit6 tier": "英雄7：星级", "unit6 display_name": "英雄7：显示名", "unit6 squareIconPath": "英雄7：方块图标路径", "unit7 character_id": "英雄8：角色编号", "unit7 rarity": "英雄8：卡费", "unit7 tier": "英雄8：星级", "unit7 display_name": "英雄8：显示名", "unit7 squareIconPath": "英雄8：方块图标路径", "unit8 character_id": "英雄9：角色编号", "unit8 rarity": "英雄9：卡费", "unit8 tier": "英雄9：星级", "unit8 display_name": "英雄9：显示名", "unit8 squareIconPath": "英雄9：方块图标路径", "unit9 character_id": "英雄10：角色编号", "unit9 rarity": "英雄10：卡费", "unit9 tier": "英雄10：星级", "unit9 display_name": "英雄10：显示名", "unit9 squareIconPath": "英雄10：方块图标路径", "unit10 character_id": "英雄11：角色编号", "unit10 rarity": "英雄11：卡费", "unit10 tier": "英雄11：星级", "unit10 display_name": "英雄11：显示名", "unit10 squareIconPath": "英雄11：方块图标路径", "unit0 item0 nameId": "英雄1：装备1序号", "unit0 item0 name": "英雄1：装备1名称", "unit0 item0 squareIconPath": "英雄1：装备1方块图像路径", "unit0 item1 nameId": "英雄1：装备2序号", "unit0 item1 name": "英雄1：装备2名称", "unit0 item1 squareIconPath": "英雄1：装备2方块图像路径", "unit0 item2 nameId": "英雄1：装备3序号", "unit0 item2 name": "英雄1：装备3名称", "unit0 item2 squareIconPath": "英雄1：装备3方块图像路径", "unit1 item0 nameId": "英雄2：装备1序号", "unit1 item0 name": "英雄2：装备1名称", "unit1 item0 squareIconPath": "英雄2：装备1方块图像路径", "unit1 item1 nameId": "英雄2：装备2序号", "unit1 item1 name": "英雄2：装备2名称", "unit1 item1 squareIconPath": "英雄2：装备2方块图像路径", "unit1 item2 nameId": "英雄2：装备3序号", "unit1 item2 name": "英雄2：装备3名称", "unit1 item2 squareIconPath": "英雄2：装备3方块图像路径", "unit2 item0 nameId": "英雄3：装备1序号", "unit2 item0 name": "英雄3：装备1名称", "unit2 item0 squareIconPath": "英雄3：装备1方块图像路径", "unit2 item1 nameId": "英雄3：装备2序号", "unit2 item1 name": "英雄3：装备2名称", "unit2 item1 squareIconPath": "英雄3：装备2方块图像路径", "unit2 item2 nameId": "英雄3：装备3序号", "unit2 item2 name": "英雄3：装备3名称", "unit2 item2 squareIconPath": "英雄3：装备3方块图像路径", "unit3 item0 nameId": "英雄4：装备1序号", "unit3 item0 name": "英雄4：装备1名称", "unit3 item0 squareIconPath": "英雄4：装备1方块图像路径", "unit3 item1 nameId": "英雄4：装备2序号", "unit3 item1 name": "英雄4：装备2名称", "unit3 item1 squareIconPath": "英雄4：装备2方块图像路径", "unit3 item2 nameId": "英雄4：装备3序号", "unit3 item2 name": "英雄4：装备3名称", "unit3 item2 squareIconPath": "英雄4：装备3方块图像路径", "unit4 item0 nameId": "英雄5：装备1序号", "unit4 item0 name": "英雄5：装备1名称", "unit4 item0 squareIconPath": "英雄5：装备1方块图像路径", "unit4 item1 nameId": "英雄5：装备2序号", "unit4 item1 name": "英雄5：装备2名称", "unit4 item1 squareIconPath": "英雄5：装备2方块图像路径", "unit4 item2 nameId": "英雄5：装备3序号", "unit4 item2 name": "英雄5：装备3名称", "unit4 item2 squareIconPath": "英雄5：装备3方块图像路径", "unit5 item0 nameId": "英雄6：装备1序号", "unit5 item0 name": "英雄6：装备1名称", "unit5 item0 squareIconPath": "英雄6：装备1方块图像路径", "unit5 item1 nameId": "英雄6：装备2序号", "unit5 item1 name": "英雄6：装备2名称", "unit5 item1 squareIconPath": "英雄6：装备2方块图像路径", "unit5 item2 nameId": "英雄6：装备3序号", "unit5 item2 name": "英雄6：装备3名称", "unit5 item2 squareIconPath": "英雄6：装备3方块图像路径", "unit6 item0 nameId": "英雄7：装备1序号", "unit6 item0 name": "英雄7：装备1名称", "unit6 item0 squareIconPath": "英雄7：装备1方块图像路径", "unit6 item1 nameId": "英雄7：装备2序号", "unit6 item1 name": "英雄7：装备2名称", "unit6 item1 squareIconPath": "英雄7：装备2方块图像路径", "unit6 item2 nameId": "英雄7：装备3序号", "unit6 item2 name": "英雄7：装备3名称", "unit6 item2 squareIconPath": "英雄7：装备3方块图像路径", "unit7 item0 nameId": "英雄8：装备1序号", "unit7 item0 name": "英雄8：装备1名称", "unit7 item0 squareIconPath": "英雄8：装备1方块图像路径", "unit7 item1 nameId": "英雄8：装备2序号", "unit7 item1 name": "英雄8：装备2名称", "unit7 item1 squareIconPath": "英雄8：装备2方块图像路径", "unit7 item2 nameId": "英雄8：装备3序号", "unit7 item2 name": "英雄8：装备3名称", "unit7 item2 squareIconPath": "英雄8：装备3方块图像路径", "unit8 item0 nameId": "英雄9：装备1序号", "unit8 item0 name": "英雄9：装备1名称", "unit8 item0 squareIconPath": "英雄9：装备1方块图像路径", "unit8 item1 nameId": "英雄9：装备2序号", "unit8 item1 name": "英雄9：装备2名称", "unit8 item1 squareIconPath": "英雄9：装备2方块图像路径", "unit8 item2 nameId": "英雄9：装备3序号", "unit8 item2 name": "英雄9：装备3名称", "unit8 item2 squareIconPath": "英雄9：装备3方块图像路径", "unit9 item0 nameId": "英雄10：装备1序号", "unit9 item0 name": "英雄10：装备1名称", "unit9 item0 squareIconPath": "英雄10：装备1方块图像路径", "unit9 item1 nameId": "英雄10：装备2序号", "unit9 item1 name": "英雄10：装备2名称", "unit9 item1 squareIconPath": "英雄10：装备2方块图像路径", "unit9 item2 nameId": "英雄10：装备3序号", "unit9 item2 name": "英雄10：装备3名称", "unit9 item2 squareIconPath": "英雄10：装备3方块图像路径", "unit10 item0 nameId": "英雄11：装备1序号", "unit10 item0 name": "英雄11：装备1名称", "unit10 item0 squareIconPath": "英雄11：装备1方块图像路径", "unit10 item1 nameId": "英雄11：装备2序号", "unit10 item1 name": "英雄11：装备2名称", "unit10 item1 squareIconPath": "英雄11：装备2方块图像路径", "unit10 item2 nameId": "英雄11：装备3序号", "unit10 item2 name": "英雄11：装备3名称", "unit10 item2 squareIconPath": "英雄11：装备3方块图像路径"}
+                    TFTHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间", "game_datetime": "对局结算时间", "game_id": "对局序号", "game_length": "持续时长", "game_version": "对局版本", "queue_id": "队列序号", "tft_game_type": "游戏类型", "tft_set_core_name": "数据版本名称", "tft_set_number": "赛季", "participantId": "玩家序号", "augment1 apiName": "强化符文1接口名称", "augment2 apiName": "强化符文2接口名称", "augment3 apiName": "强化符文3接口名称", "augment1 name": "强化符文1名称", "augment2 name": "强化符文2名称", "augment3 name": "强化符文3名称", "augment1 icon": "强化符文1图标", "augment2 icon": "强化符文2图标", "augment3 icon": "强化符文3图标", "companion content_ID": "小小英雄商品编号", "companion item_ID": "小小英雄序号", "companion skin_ID": "小小英雄皮肤序号", "companion species": "小小英雄物种", "companion name": "小小英雄名称", "companion level": "小小英雄星级", "companion rarity": "小小英雄稀有度", "gold_left": "剩余金币", "last_round": "存活回合", "level": "等级", "placement": "名次", "players_eliminated": "淘汰玩家数", "puuid": "玩家通用唯一识别码", "riotIdGameName": "玩家昵称", "riotIdTagline": "昵称编号", "time_eliminated": "存活时长", "total_damage_to_players": "造成玩家伤害", "trait0 name": "羁绊1", "trait0 num_units": "羁绊1单位数", "trait0 style": "羁绊1羁绊框颜色", "trait0 tier_current": "羁绊1当前等级", "trait0 tier_total": "羁绊1最高等级", "trait0 display_name": "羁绊1显示名", "trait0 icon_path": "羁绊1图标路径", "trait1 name": "羁绊2", "trait1 num_units": "羁绊2单位数", "trait1 style": "羁绊2羁绊框颜色", "trait1 tier_current": "羁绊2当前等级", "trait1 tier_total": "羁绊2最高等级", "trait1 display_name": "羁绊2显示名", "trait1 icon_path": "羁绊2图标路径", "trait2 name": "羁绊3", "trait2 num_units": "羁绊3单位数", "trait2 style": "羁绊3羁绊框颜色", "trait2 tier_current": "羁绊3当前等级", "trait2 tier_total": "羁绊3最高等级", "trait2 display_name": "羁绊3显示名", "trait2 icon_path": "羁绊3图标路径", "trait3 name": "羁绊4", "trait3 num_units": "羁绊4单位数", "trait3 style": "羁绊4羁绊框颜色", "trait3 tier_current": "羁绊4当前等级", "trait3 tier_total": "羁绊4最高等级", "trait3 display_name": "羁绊4显示名", "trait3 icon_path": "羁绊4图标路径", "trait4 name": "羁绊5", "trait4 num_units": "羁绊5单位数", "trait4 style": "羁绊5羁绊框颜色", "trait4 tier_current": "羁绊5当前等级", "trait4 tier_total": "羁绊5最高等级", "trait4 display_name": "羁绊5显示名", "trait4 icon_path": "羁绊5图标路径", "trait5 name": "羁绊6", "trait5 num_units": "羁绊6单位数", "trait5 style": "羁绊6羁绊框颜色", "trait5 tier_current": "羁绊6当前等级", "trait5 tier_total": "羁绊6最高等级", "trait5 display_name": "羁绊6显示名", "trait5 icon_path": "羁绊6图标路径", "trait6 name": "羁绊7", "trait6 num_units": "羁绊7单位数", "trait6 style": "羁绊7羁绊框颜色", "trait6 tier_current": "羁绊7当前等级", "trait6 tier_total": "羁绊7最高等级", "trait6 display_name": "羁绊7显示名", "trait6 icon_path": "羁绊7图标路径", "trait7 name": "羁绊8", "trait7 num_units": "羁绊8单位数", "trait7 style": "羁绊8羁绊框颜色", "trait7 tier_current": "羁绊8当前等级", "trait7 tier_total": "羁绊8最高等级", "trait7 display_name": "羁绊8显示名", "trait7 icon_path": "羁绊8图标路径", "trait8 name": "羁绊9", "trait8 num_units": "羁绊9单位数", "trait8 style": "羁绊9羁绊框颜色", "trait8 tier_current": "羁绊9当前等级", "trait8 tier_total": "羁绊9最高等级", "trait8 display_name": "羁绊9显示名", "trait8 icon_path": "羁绊9图标路径", "trait9 name": "羁绊10", "trait9 num_units": "羁绊10单位数", "trait9 style": "羁绊10羁绊框颜色", "trait9 tier_current": "羁绊10当前等级", "trait9 tier_total": "羁绊10最高等级", "trait9 display_name": "羁绊10显示名", "trait9 icon_path": "羁绊10图标路径", "trait10 name": "羁绊11", "trait10 num_units": "羁绊11单位数", "trait10 style": "羁绊11羁绊框颜色", "trait10 tier_current": "羁绊11当前等级", "trait10 tier_total": "羁绊11最高等级", "trait10 display_name": "羁绊11显示名", "trait10 icon_path": "羁绊11图标路径", "trait11 name": "羁绊12", "trait11 num_units": "羁绊12单位数", "trait11 style": "羁绊12羁绊框颜色", "trait11 tier_current": "羁绊12当前等级", "trait11 tier_total": "羁绊12最高等级", "trait11 display_name": "羁绊12显示名", "trait11 icon_path": "羁绊12图标路径", "trait12 name": "羁绊13", "trait12 num_units": "羁绊13单位数", "trait12 style": "羁绊13羁绊框颜色", "trait12 tier_current": "羁绊13当前等级", "trait12 tier_total": "羁绊13最高等级", "trait12 display_name": "羁绊13显示名", "trait12 icon_path": "羁绊13图标路径", "unit0 character_id": "英雄1：角色编号", "unit0 rarity": "英雄1：卡费", "unit0 tier": "英雄1：星级", "unit0 display_name": "英雄1：显示名", "unit0 squareIconPath": "英雄1：方块图标路径", "unit1 character_id": "英雄2：角色编号", "unit1 rarity": "英雄2：卡费", "unit1 tier": "英雄2：星级", "unit1 display_name": "英雄2：显示名", "unit1 squareIconPath": "英雄2：方块图标路径", "unit2 character_id": "英雄3：角色编号", "unit2 rarity": "英雄3：卡费", "unit2 tier": "英雄3：星级", "unit2 display_name": "英雄3：显示名", "unit2 squareIconPath": "英雄3：方块图标路径", "unit3 character_id": "英雄4：角色编号", "unit3 rarity": "英雄4：卡费", "unit3 tier": "英雄4：星级", "unit3 display_name": "英雄4：显示名", "unit3 squareIconPath": "英雄4：方块图标路径", "unit4 character_id": "英雄5：角色编号", "unit4 rarity": "英雄5：卡费", "unit4 tier": "英雄5：星级", "unit4 display_name": "英雄5：显示名", "unit4 squareIconPath": "英雄5：方块图标路径", "unit5 character_id": "英雄6：角色编号", "unit5 rarity": "英雄6：卡费", "unit5 tier": "英雄6：星级", "unit5 display_name": "英雄6：显示名", "unit5 squareIconPath": "英雄6：方块图标路径", "unit6 character_id": "英雄7：角色编号", "unit6 rarity": "英雄7：卡费", "unit6 tier": "英雄7：星级", "unit6 display_name": "英雄7：显示名", "unit6 squareIconPath": "英雄7：方块图标路径", "unit7 character_id": "英雄8：角色编号", "unit7 rarity": "英雄8：卡费", "unit7 tier": "英雄8：星级", "unit7 display_name": "英雄8：显示名", "unit7 squareIconPath": "英雄8：方块图标路径", "unit8 character_id": "英雄9：角色编号", "unit8 rarity": "英雄9：卡费", "unit8 tier": "英雄9：星级", "unit8 display_name": "英雄9：显示名", "unit8 squareIconPath": "英雄9：方块图标路径", "unit9 character_id": "英雄10：角色编号", "unit9 rarity": "英雄10：卡费", "unit9 tier": "英雄10：星级", "unit9 display_name": "英雄10：显示名", "unit9 squareIconPath": "英雄10：方块图标路径", "unit10 character_id": "英雄11：角色编号", "unit10 rarity": "英雄11：卡费", "unit10 tier": "英雄11：星级", "unit10 display_name": "英雄11：显示名", "unit10 squareIconPath": "英雄11：方块图标路径", "unit0 item0 nameId": "英雄1：装备1序号", "unit0 item0 name": "英雄1：装备1名称", "unit0 item0 squareIconPath": "英雄1：装备1方块图像路径", "unit0 item1 nameId": "英雄1：装备2序号", "unit0 item1 name": "英雄1：装备2名称", "unit0 item1 squareIconPath": "英雄1：装备2方块图像路径", "unit0 item2 nameId": "英雄1：装备3序号", "unit0 item2 name": "英雄1：装备3名称", "unit0 item2 squareIconPath": "英雄1：装备3方块图像路径", "unit1 item0 nameId": "英雄2：装备1序号", "unit1 item0 name": "英雄2：装备1名称", "unit1 item0 squareIconPath": "英雄2：装备1方块图像路径", "unit1 item1 nameId": "英雄2：装备2序号", "unit1 item1 name": "英雄2：装备2名称", "unit1 item1 squareIconPath": "英雄2：装备2方块图像路径", "unit1 item2 nameId": "英雄2：装备3序号", "unit1 item2 name": "英雄2：装备3名称", "unit1 item2 squareIconPath": "英雄2：装备3方块图像路径", "unit2 item0 nameId": "英雄3：装备1序号", "unit2 item0 name": "英雄3：装备1名称", "unit2 item0 squareIconPath": "英雄3：装备1方块图像路径", "unit2 item1 nameId": "英雄3：装备2序号", "unit2 item1 name": "英雄3：装备2名称", "unit2 item1 squareIconPath": "英雄3：装备2方块图像路径", "unit2 item2 nameId": "英雄3：装备3序号", "unit2 item2 name": "英雄3：装备3名称", "unit2 item2 squareIconPath": "英雄3：装备3方块图像路径", "unit3 item0 nameId": "英雄4：装备1序号", "unit3 item0 name": "英雄4：装备1名称", "unit3 item0 squareIconPath": "英雄4：装备1方块图像路径", "unit3 item1 nameId": "英雄4：装备2序号", "unit3 item1 name": "英雄4：装备2名称", "unit3 item1 squareIconPath": "英雄4：装备2方块图像路径", "unit3 item2 nameId": "英雄4：装备3序号", "unit3 item2 name": "英雄4：装备3名称", "unit3 item2 squareIconPath": "英雄4：装备3方块图像路径", "unit4 item0 nameId": "英雄5：装备1序号", "unit4 item0 name": "英雄5：装备1名称", "unit4 item0 squareIconPath": "英雄5：装备1方块图像路径", "unit4 item1 nameId": "英雄5：装备2序号", "unit4 item1 name": "英雄5：装备2名称", "unit4 item1 squareIconPath": "英雄5：装备2方块图像路径", "unit4 item2 nameId": "英雄5：装备3序号", "unit4 item2 name": "英雄5：装备3名称", "unit4 item2 squareIconPath": "英雄5：装备3方块图像路径", "unit5 item0 nameId": "英雄6：装备1序号", "unit5 item0 name": "英雄6：装备1名称", "unit5 item0 squareIconPath": "英雄6：装备1方块图像路径", "unit5 item1 nameId": "英雄6：装备2序号", "unit5 item1 name": "英雄6：装备2名称", "unit5 item1 squareIconPath": "英雄6：装备2方块图像路径", "unit5 item2 nameId": "英雄6：装备3序号", "unit5 item2 name": "英雄6：装备3名称", "unit5 item2 squareIconPath": "英雄6：装备3方块图像路径", "unit6 item0 nameId": "英雄7：装备1序号", "unit6 item0 name": "英雄7：装备1名称", "unit6 item0 squareIconPath": "英雄7：装备1方块图像路径", "unit6 item1 nameId": "英雄7：装备2序号", "unit6 item1 name": "英雄7：装备2名称", "unit6 item1 squareIconPath": "英雄7：装备2方块图像路径", "unit6 item2 nameId": "英雄7：装备3序号", "unit6 item2 name": "英雄7：装备3名称", "unit6 item2 squareIconPath": "英雄7：装备3方块图像路径", "unit7 item0 nameId": "英雄8：装备1序号", "unit7 item0 name": "英雄8：装备1名称", "unit7 item0 squareIconPath": "英雄8：装备1方块图像路径", "unit7 item1 nameId": "英雄8：装备2序号", "unit7 item1 name": "英雄8：装备2名称", "unit7 item1 squareIconPath": "英雄8：装备2方块图像路径", "unit7 item2 nameId": "英雄8：装备3序号", "unit7 item2 name": "英雄8：装备3名称", "unit7 item2 squareIconPath": "英雄8：装备3方块图像路径", "unit8 item0 nameId": "英雄9：装备1序号", "unit8 item0 name": "英雄9：装备1名称", "unit8 item0 squareIconPath": "英雄9：装备1方块图像路径", "unit8 item1 nameId": "英雄9：装备2序号", "unit8 item1 name": "英雄9：装备2名称", "unit8 item1 squareIconPath": "英雄9：装备2方块图像路径", "unit8 item2 nameId": "英雄9：装备3序号", "unit8 item2 name": "英雄9：装备3名称", "unit8 item2 squareIconPath": "英雄9：装备3方块图像路径", "unit9 item0 nameId": "英雄10：装备1序号", "unit9 item0 name": "英雄10：装备1名称", "unit9 item0 squareIconPath": "英雄10：装备1方块图像路径", "unit9 item1 nameId": "英雄10：装备2序号", "unit9 item1 name": "英雄10：装备2名称", "unit9 item1 squareIconPath": "英雄10：装备2方块图像路径", "unit9 item2 nameId": "英雄10：装备3序号", "unit9 item2 name": "英雄10：装备3名称", "unit9 item2 squareIconPath": "英雄10：装备3方块图像路径", "unit10 item0 nameId": "英雄11：装备1序号", "unit10 item0 name": "英雄11：装备1名称", "unit10 item0 squareIconPath": "英雄11：装备1方块图像路径", "unit10 item1 nameId": "英雄11：装备2序号", "unit10 item1 name": "英雄11：装备2名称", "unit10 item1 squareIconPath": "英雄11：装备2方块图像路径", "unit10 item2 nameId": "英雄11：装备3序号", "unit10 item2 name": "英雄11：装备3名称", "unit10 item2 squareIconPath": "英雄11：装备3方块图像路径"}
                     TFTHistory_header_keys = list(TFTHistory_header.keys())
                     TFTHistory_data = {}
                     #traitStyles = {"kThreat": "威慑", "kBronze": "青铜", "kSilver": "白银", "kGold": "黄金", "kChromatic": "炫金"}
@@ -3770,7 +3773,7 @@ async def search_profile(connection):
                                             TFTHistory_data[key].append("")
                                     else:
                                         TFTHistory_data[key].append(TFTHistoryJson[key])
-                                elif j <= 39: #对于一些容易产生争议和报错的情况，引入to_append变量以简化代码。下同（Variable `to_append` is introduced to simplify the code in case of some controversy that produces errors easily. So does the following）
+                                elif j <= 37: #对于一些容易产生争议和报错的情况，引入to_append变量以简化代码。下同（Variable `to_append` is introduced to simplify the code in case of some controversy that produces errors easily. So does the following）
                                     #TFTMainPlayer = TFTHistoryJson["participants"][TFT_main_player_indices[i]]
                                     for k in range(len(TFTHistoryJson["participants"])): #这里没有遵循迭代器命名原则，因为云顶之弈对局记录的赋值代码中包含了云顶之弈对局信息的赋值代码（Here the iterator naming principle isn't followed, because assignment code of TFT game information are included in those of TFT match information）
                                         TFTPlayer = TFTHistoryJson["participants"][k]
@@ -3830,31 +3833,34 @@ async def search_profile(connection):
                                             TFTGame_info_data[key].append(to_append)
                                             if TFTPlayer["puuid"] == current_puuid:
                                                 TFTHistory_data[key].append(to_append)
-                                        elif j == 34: #存活时长（`time_eliminated`）
-                                            to_append = "%d:%02d" %(int(TFTPlayer[key]) // 60, int(TFTPlayer[key]) % 60)
+                                        elif j == 34 or j == 35: #玩家昵称和昵称编号（`riotIdGameName` and `riotIdTagline`）
+                                            if key in TFTPlayer:
+                                                to_append = TFTPlayer[key]
+                                            else:
+                                                if TFTPlayer["puuid"] in infos:
+                                                    TFTPlayer_info_body = infos[TFTPlayer["puuid"]]
+                                                    to_append = TFTPlayer_info_body["gameName"] if j == 34 else TFTPlayer_info_body["tagLine"]
+                                                else:
+                                                    if TFTPlayer["puuid"] == "00000000-0000-0000-0000-000000000000": #在云顶之弈（新手教程）中，无法通过电脑玩家的玩家通用唯一识别码（00000000-0000-0000-0000-000000000000）来查询其召唤师名称和序号（Summoner names and IDs of bot players in TFT (Tutorial) can't be searched for according to their puuid: 00000000-0000-0000-0000-000000000000）
+                                                        to_append = ""
+                                                    else:
+                                                        TFTPlayer_info_recapture = 0
+                                                        TFTPlayer_info = await get_info(connection, TFTPlayer["puuid"])
+                                                        while TFTPlayer_info["network_error"] and TFTPlayer_info_recapture < 3:
+                                                            TFTPlayer_info_recapture += 1
+                                                            print("第%d/%d场对局（对局序号：%d）玩家信息（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\nInformation of Player (puuid: %s) in Match %d / %d (matchID: %d) capture failed! Recapturing this player's information ... Times tried: %d." %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTPlayer["puuid"], TFTPlayer_info_recapture, TFTPlayer["puuid"], i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTPlayer_info_recapture))
+                                                            TFTPlayer_info = await get_info(connection, TFTPlayer["puuid"])
+                                                        if TFTPlayer_info["network_error"]:
+                                                            to_append = ""
+                                                        else:
+                                                            TFTPlayer_info_body = TFTPlayer_info["body"]
+                                                            infos[TFTPlayer["puuid"]] = TFTPlayer_info_body #虽然即使infos中已经存在该召唤师信息时也会执行这一步，但不会影响数据的准确性（Despite the this summoner's existence in `infos`, running this statement won't influence data accuracy）
+                                                            to_append = TFTPlayer_info_body["gameName"] if j == 34 else TFTPlayer_info_body["tagLine"]
                                             TFTGame_info_data[key].append(to_append)
                                             if TFTPlayer["puuid"] == current_puuid:
                                                 TFTHistory_data[key].append(to_append)
-                                        elif j >= 36 and j <= 39: #召唤师身份相关键（Summoner information-related keys）
-                                            if TFTPlayer["puuid"] in infos:
-                                                TFTPlayer_info_body = infos[TFTPlayer["puuid"]]
-                                                to_append = TFTPlayer_info_body["summonerId"] if j == 36 else TFTPlayer_info_body["displayName"] if j == 37 else TFTPlayer_info_body["gameName"] if j == 38 else TFTPlayer_info_body["tagLine"]
-                                            else:
-                                                if TFTPlayer["puuid"] == "00000000-0000-0000-0000-000000000000": #在云顶之弈（新手教程）中，无法通过电脑玩家的玩家通用唯一识别码（00000000-0000-0000-0000-000000000000）来查询其召唤师名称和序号（Summoner names and IDs of bot players in TFT (Tutorial) can't be searched for according to their puuid: 00000000-0000-0000-0000-000000000000）
-                                                    to_append = ""
-                                                else:
-                                                    TFTPlayer_info_recapture = 0
-                                                    TFTPlayer_info = await get_info(connection, TFTPlayer["puuid"])
-                                                    while TFTPlayer_info["network_error"] and TFTPlayer_info_recapture < 3:
-                                                        TFTPlayer_info_recapture += 1
-                                                        print("第%d/%d场对局（对局序号：%d）玩家信息（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\nInformation of Player (puuid: %s) in Match %d / %d (matchID: %d) capture failed! Recapturing this player's information ... Times tried: %d." %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTPlayer["puuid"], TFTPlayer_info_recapture, TFTPlayer["puuid"], i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTPlayer_info_recapture))
-                                                        TFTPlayer_info = await get_info(connection, TFTPlayer["puuid"])
-                                                    if TFTPlayer_info["network_error"]:
-                                                        to_append = ""
-                                                    else:
-                                                        TFTPlayer_info_body = TFTPlayer_info["body"]
-                                                        infos[TFTPlayer["puuid"]] = TFTPlayer_info_body #虽然即使infos中已经存在该召唤师信息时也会执行这一步，但不会影响数据的准确性（Despite the this summoner's existence in `infos`, running this statement won't influence data accuracy）
-                                                        to_append = TFTPlayer_info_body["summonerId"] if j == 36 else TFTPlayer_info_body["displayName"] if j == 37 else TFTPlayer_info_body["gameName"] if j == 38 else TFTPlayer_info_body["tagLine"]
+                                        elif j == 36: #存活时长（`time_eliminated`）
+                                            to_append = "%d:%02d" %(int(TFTPlayer[key]) // 60, int(TFTPlayer[key]) % 60)
                                             TFTGame_info_data[key].append(to_append)
                                             if TFTPlayer["puuid"] == current_puuid:
                                                 TFTHistory_data[key].append(to_append)
@@ -3863,10 +3869,10 @@ async def search_profile(connection):
                                             TFTGame_info_data[key].append(to_append)
                                             if TFTPlayer["puuid"] == current_puuid:
                                                 TFTHistory_data[key].append(to_append)
-                                elif j >= 40 and j <= 130: #云顶之弈羁绊相关键（TFT trait-related keys）
+                                elif j <= 128: #云顶之弈羁绊相关键（TFT trait-related keys）
                                     #TFTMainPlayer_Traits = TFTHistoryJson["participants"][TFT_main_player_indices[i]]["traits"]
-                                    trait_index = (j - 40) // 7
-                                    subkey_index = (j - 40) % 7
+                                    trait_index = (j - 38) // 7
+                                    subkey_index = (j - 38) % 7
                                     for k in range(len(TFTHistoryJson["participants"])):
                                         TFTPlayer = TFTHistoryJson["participants"][k]
                                         TFTPlayer_Traits = TFTPlayer["traits"]
@@ -3915,9 +3921,9 @@ async def search_profile(connection):
                                     #TFTMainPlayer_Units = TFTHistoryJson["participants"][TFT_main_player_indices[i]]["units"]
                                     for k in range(len(TFTHistoryJson["participants"])):
                                         TFTPlayer_Units = TFTHistoryJson["participants"][k]["units"]
-                                        if j <= 185: #云顶之弈英雄相关键（TFT champion-related keys）
-                                            unit_index = (j - 131) // 5
-                                            subkey_index = (j - 131) % 5
+                                        if j <= 183: #云顶之弈英雄相关键（TFT champion-related keys）
+                                            unit_index = (j - 129) // 5
+                                            subkey_index = (j - 129) % 5
                                             if unit_index < len(TFTPlayer_Units):
                                                 TFTChampion_iter = TFTPlayer_Units[unit_index]
                                                 TFTChampionId = TFTChampion_iter["character_id"]
@@ -3947,9 +3953,9 @@ async def search_profile(connection):
                                             if TFTHistoryJson["participants"][k]["puuid"] == current_puuid:
                                                 TFTHistory_data[key].append(to_append)
                                         else:
-                                            unit_index = (j - 186) // 9
-                                            item_index = (j - 186) // 3 % 3
-                                            subkey_index = (j - 186) % 3
+                                            unit_index = (j - 184) // 9
+                                            item_index = (j - 184) // 3 % 3
+                                            subkey_index = (j - 184) % 3
                                             if unit_index < len(TFTPlayer_Units): #很少有英雄单位可以有3个装备（Merely do champion units have full items）
                                                 if "itemNames" in TFTPlayer_Units[unit_index] and item_index < len(TFTPlayer_Units[unit_index]["itemNames"]):
                                                     TFTItemId = TFTPlayer_Units[unit_index]["itemNames"][item_index]
@@ -3996,7 +4002,7 @@ async def search_profile(connection):
                                             TFTGame_info_data[key].append(to_append)
                                             if TFTHistoryJson["participants"][k]["puuid"] == current_puuid:
                                                 TFTHistory_data[key].append(to_append)
-                        TFTGame_info_statistics_output_order = [0, 26, 27, 28, 25, 22, 14, 15, 16, 19, 18, 23, 17, 24, 21, 20, 4, 5, 6, 123, 121, 122, 176, 179, 182, 128, 126, 127, 185, 188, 191, 133, 131, 132, 194, 197, 200, 138, 136, 137, 203, 206, 209, 143, 141, 142, 212, 215, 218, 148, 146, 147, 221, 224, 227, 153, 151, 152, 230, 233, 236, 158, 156, 157, 239, 242, 245, 163, 161, 162, 248, 251, 254, 168, 166, 167, 257, 260, 263, 173, 171, 172, 266, 269, 272, 34, 30, 31, 32, 33, 41, 37, 38, 39, 40, 48, 44, 45, 46, 47, 55, 51, 52, 53, 54, 62, 58, 59, 60, 61, 69, 65, 66, 67, 68, 76, 72, 73, 74, 75, 83, 79, 80, 81, 82, 90, 86, 87, 88, 89, 97, 93, 94, 95, 96, 104, 100, 101, 102, 103, 111, 107, 108, 109, 110, 118, 114, 115, 116, 117]
+                        TFTGame_info_statistics_output_order = [0, 23, 24, 22, 14, 15, 16, 19, 18, 25, 17, 26, 21, 20, 4, 5, 6, 121, 119, 120, 174, 177, 180, 126, 124, 125, 183, 186, 189, 131, 129, 130, 192, 195, 198, 136, 134, 135, 201, 204, 207, 141, 139, 140, 210, 213, 216, 146, 144, 145, 219, 222, 225, 151, 149, 150, 228, 231, 234, 156, 154, 155, 237, 240, 243, 161, 159, 160, 246, 249, 252, 166, 164, 165, 255, 258, 261, 171, 169, 170, 264, 267, 270, 32, 28, 29, 30, 31, 39, 35, 36, 37, 38, 46, 42, 43, 44, 45, 53, 49, 50, 51, 52, 60, 56, 57, 58, 59, 67, 63, 64, 65, 66, 74, 70, 71, 72, 73, 81, 77, 78, 79, 80, 88, 84, 85, 86, 87, 95, 91, 92, 93, 94, 102, 98, 99, 100, 101, 109, 105, 106, 107, 108, 116, 112, 113, 114, 115]
                         TFTGame_info_data_organized = {}
                         for j in TFTGame_info_statistics_output_order:
                             key = TFTHistory_header_keys[j + 11]
@@ -4008,7 +4014,7 @@ async def search_profile(connection):
                             game_info_dfs[matchID] = TFTGame_info_df.copy(deep = True)
                             # game_leaderboard_dfs[matchID] = TFTGame_leaderboard_df.copy(deep = True)
                         
-                    TFTHistory_statistics_output_order = [0, 4, 2, 3, 5, 7, 8, 6, 10, 25, 26, 27, 30, 29, 34, 28, 35, 32, 31, 15, 16, 17, 134, 132, 133, 187, 190, 193, 139, 137, 138, 196, 199, 202, 144, 142, 143, 205, 208, 211, 149, 147, 148, 214, 217, 220, 154, 152, 153, 223, 226, 229, 159, 157, 158, 232, 235, 238, 164, 162, 163, 241, 244, 247, 169, 167, 168, 250, 253, 256, 174, 172, 173, 259, 262, 265, 179, 177, 178, 268, 271, 274, 184, 182, 183, 277, 280, 283, 45, 41, 42, 43, 44, 52, 48, 49, 50, 51, 59, 55, 56, 57, 58, 66, 62, 63, 64, 65, 73, 69, 70, 71, 72, 80, 76, 77, 78, 79, 87, 83, 84, 85, 86, 94, 90, 91, 92, 93, 101, 97, 98, 99, 100, 108, 104, 105, 106, 107, 115, 111, 112, 113, 114, 122, 118, 119, 120, 121, 129, 125, 126, 127, 128]
+                    TFTHistory_statistics_output_order = [0, 4, 2, 3, 5, 7, 8, 6, 10, 25, 26, 27, 30, 29, 36, 28, 37, 32, 31, 15, 16, 17, 132, 130, 131, 185, 188, 191, 137, 135, 136, 194, 197, 200, 142, 140, 141, 203, 206, 209, 147, 145, 146, 212, 215, 218, 152, 150, 151, 221, 224, 227, 157, 155, 156, 230, 233, 236, 162, 160, 161, 239, 242, 245, 167, 165, 166, 248, 251, 254, 172, 170, 171, 257, 260, 263, 177, 175, 176, 266, 269, 272, 182, 180, 181, 275, 278, 281, 43, 39, 40, 41, 42, 50, 46, 47, 48, 49, 57, 53, 54, 55, 56, 64, 60, 61, 62, 63, 71, 67, 68, 69, 70, 78, 74, 75, 76, 77, 85, 81, 82, 83, 84, 92, 88, 89, 90, 91, 99, 95, 96, 97, 98, 106, 102, 103, 104, 105, 113, 109, 110, 111, 112, 120, 116, 117, 118, 119, 127, 123, 124, 125, 126]
                     TFTHistory_data_organized = {}
                     for i in TFTHistory_statistics_output_order:
                         key = TFTHistory_header_keys[i]
@@ -4049,7 +4055,7 @@ async def search_profile(connection):
                     workbook_exist = True
                     while True:
                         try:
-                            with pandas.ExcelWriter(path = os.path.join(folder, excel_name), mode = "a", if_sheet_exists = "replace") as writer:
+                            with pandas.ExcelWriter(path = os.path.join(folder, excel_name), engine = "openpyxl", mode = "a", if_sheet_exists = "replace") as writer:
                                 info_df.to_excel(excel_writer = writer, sheet_name = "Profile")
                                 print("召唤师生涯导出完成！\nSummoner profile exported!\n")
                                 ranked_df.to_excel(excel_writer = writer, sheet_name = "Rank")
@@ -4061,8 +4067,25 @@ async def search_profile(connection):
                                 if LoLHistory_searched:
                                     if scan:
                                         LoLHistory_df.to_excel(excel_writer = writer, sheet_name = "LoL Match History - Scan")
+                                        worksheet = writer.sheets["LoL Match History - Scan"]
                                     else:
                                         LoLHistory_df.to_excel(excel_writer = writer, sheet_name = "LoL Match History")
+                                        worksheet = writer.sheets["LoL Match History"]
+                                    worksheet.conditional_formatting.rules = [] #读取时清空原规则（Clear original rules when reading）
+                                    #胜负颜色（Win/Lose color）
+                                    col_idx = LoLHistory_df.columns.get_loc("result") + 2
+                                    col_letter = get_column_letter(col_idx)
+                                    rangeStr = "%s3:%s%d" %(col_letter, col_letter, len(LoLHistory_df) + 2)
+                                    win_formulaRule_lol = FormulaRule(formula = ['$%s3="%s"' %(col_letter, "胜利")], stopIfTrue = True, fill = PatternFill(start_color = "63BE7B", end_color = "63BE7B", fill_type = "solid"))
+                                    lose_formulaRule_lol = FormulaRule(formula = ['$%s3="%s"' %(col_letter, "失败")], stopIfTrue = True, fill = PatternFill(start_color = "FF6B6B", end_color = "FF6B6B", fill_type = "solid"))
+                                    worksheet.conditional_formatting.add(rangeStr, win_formulaRule_lol)
+                                    worksheet.conditional_formatting.add(rangeStr, lose_formulaRule_lol)
+                                    #斗魂竞技场队伍排名颜色设置（Arena subteamPlacement color）
+                                    col_idx = LoLHistory_df.columns.get_loc("subteamPlacement") + 2
+                                    col_letter = get_column_letter(col_idx)
+                                    rangeStr = "%s3:%s%d" %(col_letter, col_letter, len(LoLHistory_df) + 2)
+                                    firstPlace_formulaRule_lol = FormulaRule(formula = ['$%s3=1' %(col_letter)], stopIfTrue = False, fill = PatternFill(start_color = "FFC000", end_color = "FFC000", fill_type = "solid"))
+                                    worksheet.conditional_formatting.add(rangeStr, firstPlace_formulaRule_lol)
                                     print("召唤师英雄联盟对局记录导出完成！\nSummoner LoL match history exported!\n")
                                 if TFTHistory_searched:
                                     TFTHistory_df.to_excel(excel_writer = writer, sheet_name = "TFT Match History")
@@ -4118,7 +4141,7 @@ async def search_profile(connection):
                         except FileNotFoundError:
                             workbook_exist = False
                             os.makedirs(folder, exist_ok = True)
-                            with pandas.ExcelWriter(path = os.path.join(folder, excel_name)) as writer:
+                            with pandas.ExcelWriter(path = os.path.join(folder, excel_name), engine = "openpyxl") as writer:
                                 info_df.to_excel(excel_writer = writer, sheet_name = "Profile")
                                 print("召唤师生涯导出完成！\nSummoner profile exported!\n")
                                 ranked_df.to_excel(excel_writer = writer, sheet_name = "Rank")
@@ -4135,10 +4158,27 @@ async def search_profile(connection):
                                         pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "LoL Match History")
                                         LoLHistory_df.to_excel(excel_writer = writer, sheet_name = "LoL Match History - Scan")
                                         pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "LoL Match History - Manual")
+                                        worksheet = writer.sheets["LoL Match History - Scan"]
                                     else:
                                         LoLHistory_df.to_excel(excel_writer = writer, sheet_name = "LoL Match History")
                                         pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "LoL Match History - Scan")
                                         pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "LoL Match History - Manual")
+                                        worksheet = writer.sheets["LoL Match History"]
+                                    worksheet.conditional_formatting.rules = [] #读取时清空原规则（Clear original rules when reading）
+                                    #胜负颜色（Win/Lose color）
+                                    col_idx = LoLHistory_df.columns.get_loc("result") + 2
+                                    col_letter = get_column_letter(col_idx)
+                                    rangeStr = "%s3:%s%d" %(col_letter, col_letter, len(LoLHistory_df) + 2)
+                                    win_formulaRule_lol = FormulaRule(formula = ['$%s3="%s"' %(col_letter, "胜利")], stopIfTrue = True, fill = PatternFill(start_color = "63BE7B", end_color = "63BE7B", fill_type = "solid"))
+                                    lose_formulaRule_lol = FormulaRule(formula = ['$%s3="%s"' %(col_letter, "失败")], stopIfTrue = True, fill = PatternFill(start_color = "FF6B6B", end_color = "FF6B6B", fill_type = "solid"))
+                                    worksheet.conditional_formatting.add(rangeStr, win_formulaRule_lol)
+                                    worksheet.conditional_formatting.add(rangeStr, lose_formulaRule_lol)
+                                    #斗魂竞技场队伍排名颜色设置（Arena subteamPlacement color）
+                                    col_idx = LoLHistory_df.columns.get_loc("subteamPlacement") + 2
+                                    col_letter = get_column_letter(col_idx)
+                                    rangeStr = "%s3:%s%d" %(col_letter, col_letter, len(LoLHistory_df) + 2)
+                                    firstPlace_formulaRule_lol = FormulaRule(formula = ['$%s3=1' %(col_letter)], stopIfTrue = False, fill = PatternFill(start_color = "FFC000", end_color = "FFC000", fill_type = "solid"))
+                                    worksheet.conditional_formatting.add(rangeStr, firstPlace_formulaRule_lol)
                                     print("召唤师英雄联盟对局记录导出完成！\nSummoner LoL match history exported!\n")
                                 else:
                                     pandas.DataFrame().to_excel(excel_writer = writer, sheet_name = "LoL Match History")

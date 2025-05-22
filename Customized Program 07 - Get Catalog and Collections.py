@@ -722,7 +722,7 @@ async def fetch_store(connection):
     catalog_data = {}
     inventoryType_dict = {"ACHIEVEMENT_BANNER_ACCENT": "旗帜装饰", "ACHIEVEMENT_TITLE": "头衔", "ANNOUNCER_PACK": "播报员语音包", "AUGMENT": "AUGMENT", "AUGMENT_SLOT": "AUGMENT_SLOT", "BOOST": "加成道具", "BUNDLES": "道具包", "CHAMPION": "英雄", "CHAMPION_SKIN": "皮肤", "CHERRY_BOON": "斗魂竞技场赛季旅程奖励", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "表情", "EVENT_PASS": "事件通行证", "FANPASS": "粉丝通行证", "GIFT": "礼物", "HEXTECH_CRAFTING": "海克斯科技宝箱", "MODE_PROGRESSION_REWARD": "游戏模式进度奖励", "MYSTERY": "神秘道具", "NEXUS_FINISHER": "终结特效", "PREMIUM_CLUB_MEMBERSHIP": "高级俱乐部会员身份", "PROGRESSION": "通行证升级", "PROVIEW_PASS": "Pro View许可", "PVE_RELIC": "PVE_RELIC", "PVE_SUMMONER_PACKAGE": "PVE_SUMMONER_PACKAGE", "PVE_UPGRADE": "PVE模式战略目标属性增益", "QUEUE_ENTRY": "队列通行证", "REGALIA_BANNER": "旗帜", "REGALIA_BORDER": "排位边框", "REGALIA_CREST": "华冠", "RP": "点券", "RUNE": "符文", "SKIN_AUGMENT": "签名升级", "SKIN_BORDER": "皮肤边框", "SKIN_UPGRADE_GEAR": "皮肤自带服装升级", "SKIN_UPGRADE_HOME_GUARD": "皮肤自带家园卫士特效", "SKIN_UPGRADE_RECALL": "皮肤自带回城特效", "SKIN_UPGRADE_SPAWN": "皮肤自带重生特效", "SPELL_BOOK_PAGE": "符文页", "STATSTONE": "永恒星碑", "STRAWBERRY_BOON": "无尽狂潮增益效果", "STRAWBERRY_LOADOUT_ITEM": "无尽狂潮配置", "STRAWBERRY_MAP": "无尽狂潮地图", "SUMMONER_CUSTOMIZATION": "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON": "召唤师图标", "TEAMPASS": "战队通行证", "TEAM_SKIN_PURCHASE": "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN": "云顶之弈进攻特效", "TFT_EVENT_SKILLS": "云顶之弈技巧加成", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TFT_PLAYBOOK": "云顶之弈指导手册", "TFT_ZOOM_SKIN": "云顶之弈传送门", "TOURNAMENT_FLAG": "冠军杯赛旗帜", "TOURNAMENT_FRAME": "冠军杯赛旗帜框架", "TOURNAMENT_LOGO": "冠军杯赛标志", "TOURNAMENT_TROPHY": "冠军杯赛奖杯", "TRANSFER": "转区项目", "WARD_SKIN": "守卫（眼）皮肤"}
     ownershipType_dict = {None: "未拥有", "F2P": "免费使用", "RENTED": "租借中", "OWNED": "已拥有"}
-    subInventoryType_dict = {None: "", "": "", "CHEST": "海克斯科技宝箱", "CHROMA_BUNDLE": "炫彩道具包", "EMOTE_BUNDLE": "表情道具包", "HEXTECH_BUNDLE": "海克斯科技宝箱道具包", "LOL_EVENT_PASS": "英雄联盟事件通行证", "MATERIAL": "材料", "RECOLOR": "炫彩", "RUNE_PAGE_BUNDLE": "符文页道具包", "SKIN_BUNDLE": "皮肤道具包", "SKIN_VARIANT_BUNDLE": "皮肤形态道具包", "TFT_PASS": "云顶之弈事件通行证", "TFT_TREASURE_TROVE_TOKEN": "云顶之弈召唤商店代币", "lol_clash_premium_tickets": "冠军杯赛豪华版挑战券", "lol_clash_tickets": "冠军杯赛挑战券", "lol_mythic_essence": "神话精萃", "tft_star_fragments": "星之碎片"}
+    subInventoryType_dict = {None: "", "": "", "CHEST": "海克斯科技宝箱", "CHROMA_BUNDLE": "炫彩道具包", "EMOTE_BUNDLE": "表情道具包", "HEXTECH_BUNDLE": "海克斯科技宝箱道具包", "LOL_EVENT_PASS": "英雄联盟事件通行证", "MATERIAL": "材料", "RECOLOR": "炫彩", "RUNE_PAGE_BUNDLE": "符文页道具包", "SKIN_BUNDLE": "皮肤道具包", "SKIN_VARIANT_BUNDLE": "皮肤套装", "TFT_PASS": "云顶之弈事件通行证", "TFT_TREASURE_TROVE_TOKEN": "云顶之弈召唤商店代币", "lol_clash_premium_tickets": "冠军杯赛豪华版挑战券", "lol_clash_tickets": "冠军杯赛挑战券", "lol_blessing_token": "圣堂花火", "lol_blue_essence": "蓝色精萃", "lol_mythic_essence": "神话精萃", "lol_orange_essence": "橙色精萃", "tft_star_fragments": "星之碎片"}
     for i in range(len(catalog_header)):
         key = catalog_header_keys[i]
         catalog_data[key] = []
@@ -734,7 +734,7 @@ async def fetch_store(connection):
         key = store_header_keys[i]
         store_data[key] = []
     #定义藏品数据结构（Define the collection item data structure）
-    collection_header = {"expirationDate": "租赁到期时间", "f2p": "免费使用", "inventoryType": "道具类型", "itemId": "序号", "loyalty": "", "loyaltySources": "", "owned": "已拥有", "ownershipType": "拥有权", "purchaseDate": "购买时间", "quantity": "数量", "rental": "租借中", "uuid": "唯一识别码", "wins": "使用该道具可获得增益的胜场数", "isVintage": "典藏皮肤", "name": "名称"}
+    collection_header = {"expirationDate": "租赁到期时间", "f2p": "免费使用", "inventoryType": "道具类型", "itemId": "序号", "loyalty": "", "loyaltySources": "", "owned": "已拥有", "ownershipType": "拥有权", "purchaseDate": "购买时间", "quantity": "数量", "rental": "租借中", "usedInGameDate": "上次使用时间", "uuid": "唯一识别码", "wins": "使用该道具可获得增益的胜场数", "isVintage": "典藏皮肤", "name": "名称"}
     collection_header_keys = list(collection_header.keys())
     collection_data = {}
     for i in range(len(collection_header)):
@@ -865,15 +865,15 @@ async def fetch_store(connection):
     for item in collection:
         for i in range(len(collection_header)):
             key = collection_header_keys[i]
-            if i == 0 or i == 8:
-                collection_data[key].append("") if item[key] == "" else collection_data[key].append("%s-%s-%s %s-%s-%s" %(item[key][:4], item[key][4:6], item[key][6:8], item[key][9:11], item[key][11:13], item[key][13:15]))
+            if i in {0, 8, 11}:
+                collection_data[key].append("") if item[key] == "" else collection_data[key].append("%s-%s-%s %s-%s-%s" %(item[key][:4], item[key][5:7], item[key][8:10], item[key][11:13], item[key][14:16], item[key][17:19])) if "-" in item[key] and ":" in item[key] else collection_data[key].append("%s-%s-%s %s-%s-%s" %(item[key][:4], item[key][4:6], item[key][6:8], item[key][9:11], item[key][11:13], item[key][13:15]))
             elif i == 2:
                 collection_data[key].append(inventoryType_dict[item[key]])
             elif i == 7:
                 collection_data[key].append(ownershipType_dict[item[key]])
-            elif i == 13:
-                collection_data[key].append(item["payload"]["isVintage"]) if item["payload"] and "isVintage" in item["payload"] else collection_data[key].append(False) #没有“是否典藏”选项的默认不是典藏（An item without the "isVintage" key can't be vintage）
             elif i == 14:
+                collection_data[key].append(item["payload"]["isVintage"]) if item["payload"] and "isVintage" in item["payload"] else collection_data[key].append(False) #没有“是否典藏”选项的默认不是典藏（An item without the "isVintage" key can't be vintage）
+            elif i == 15:
                 if (item["inventoryType"], item["itemId"]) in collection_hashtable:
                     name = collection_hashtable[(item["inventoryType"], item["itemId"])]
                 elif item["inventoryType"] in hashtable_dicts: #商品中可能不包含藏品（A collection item may not be contained in the collection）
@@ -913,7 +913,7 @@ async def fetch_store(connection):
             for i in range(len(store_df)):
                 store_df.loc[i, column] = "√" if store_df[column][i] == "True" else ""
     store_df = pandas.concat([pandas.DataFrame([store_header])[store_df.columns], store_df], ignore_index = True)
-    collection_statistics_output_order = [14, 9, 3, 2, 11, 6, 10, 1, 7, 8, 0, 13, 12]
+    collection_statistics_output_order = [15, 9, 3, 2, 12, 6, 10, 1, 7, 8, 0, 14, 13, 11]
     collection_data_organized = {}
     for i in collection_statistics_output_order:
         key = collection_header_keys[i]
@@ -925,6 +925,8 @@ async def fetch_store(connection):
             for i in range(len(collection_df)):
                 collection_df.loc[i, column] = "√" if collection_df[column][i] == "True" else ""
     collection_df = pandas.concat([pandas.DataFrame([collection_header])[collection_df.columns], collection_df], ignore_index = True)
+    version = await (await connection.request("GET", "/lol-patch/v1/game-version")).json()
+    version_df = pandas.DataFrame({"Patch": [version]})
     #保存文件（Save file）
     excel_name = f"Store - {platformId}.xlsx"
     while True:
@@ -932,6 +934,8 @@ async def fetch_store(connection):
             with pandas.ExcelWriter(path = os.path.join(platform_folder, excel_name), mode = "a", if_sheet_exists = "replace") as writer:
                 currentTime = time.strftime("%Y-%m-%d", time.localtime(time.time()))
                 store_df.to_excel(excel_writer = writer, sheet_name = "Store - " + currentTime + "_" + platformId + "_" + locale)
+            with pandas.ExcelWriter(path = os.path.join(platform_folder, excel_name), mode = "a", if_sheet_exists = "overlay") as writer:
+                version_df.to_excel(excel_writer = writer, sheet_name = "Store - " + currentTime + "_" + platformId + "_" + locale, header = None, index = False, startcol = 0, startrow = 0)
             print('商店数据已保存为“%s”！\nStore data are saved as "%s"!' %(os.path.join(platform_folder, excel_name), os.path.join(platform_folder, excel_name)))
         except PermissionError:
             print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
@@ -942,6 +946,7 @@ async def fetch_store(connection):
             with pandas.ExcelWriter(path = os.path.join(platform_folder, excel_name)) as writer:
                 currentTime = time.strftime("%Y-%m-%d", time.localtime(time.time()))
                 store_df.to_excel(excel_writer = writer, sheet_name = "Store - " + currentTime + "_" + platformId + "_" + locale)
+                version_df.to_excel(excel_writer = writer, sheet_name = "Store - " + currentTime + "_" + platformId + "_" + locale, header = None, index = False, startcol = 0, startrow = 0)
             print('商店数据已保存为“%s”！\nStore data are saved as "%s"!' %(os.path.join(platform_folder, excel_name), os.path.join(platform_folder, excel_name)))
             break
         else:

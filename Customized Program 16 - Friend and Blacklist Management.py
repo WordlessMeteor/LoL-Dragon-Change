@@ -1,5 +1,5 @@
 from lcu_driver import Connector
-import copy, json, os, pandas, re, shutil, time, traceback, unicodedata
+import copy, json, os, pandas, re, shutil, time, traceback, unicodedata, uuid
 from urllib.parse import quote, unquote, urljoin
 from wcwidth import wcswidth
 
@@ -314,6 +314,12 @@ def subscope(scope: dict = {}):
                 traceback_info = traceback.format_exc()
                 print(traceback_info)
     return 0
+
+def verify_uuid(s: str) -> bool:
+    try:
+        return s == str(uuid.UUID(s))
+    except ValueError:
+        return False
 
 async def sort_friend_hovercard(connection):
     #下面准备一些数据资源（Prepare some data resources）
@@ -760,7 +766,7 @@ async def get_recent_players(connection, search_mode: int = 2):
     for key in LoLGame_info_header_keys:
         LoLGame_info_data[key] = []
     ##云顶之弈（TFT）
-    TFTHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间", "game_datetime": "对局结算时间", "game_id": "对局序号", "game_length": "持续时长", "game_version": "对局版本", "queue_id": "队列序号", "tft_game_type": "游戏类型", "tft_set_core_name": "数据版本名称", "tft_set_number": "赛季", "participantId": "玩家序号", "augment1 apiName": "强化符文1接口名称", "augment2 apiName": "强化符文2接口名称", "augment3 apiName": "强化符文3接口名称", "augment1 name": "强化符文1名称", "augment2 name": "强化符文2名称", "augment3 name": "强化符文3名称", "augment1 icon": "强化符文1图标", "augment2 icon": "强化符文2图标", "augment3 icon": "强化符文3图标", "companion content_ID": "小小英雄商品编号", "companion item_ID": "小小英雄序号", "companion skin_ID": "小小英雄皮肤序号", "companion species": "小小英雄物种", "companion name": "小小英雄名称", "companion level": "小小英雄星级", "companion rarity": "小小英雄稀有度", "gold_left": "剩余金币", "last_round": "存活回合", "level": "等级", "placement": "名次", "players_eliminated": "淘汰玩家数", "puuid": "玩家通用唯一识别码", "time_eliminated": "存活时长", "total_damage_to_players": "造成玩家伤害", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "gameName": "玩家昵称", "tagLine": "昵称编号", "trait0 name": "羁绊1", "trait0 num_units": "羁绊1单位数", "trait0 style": "羁绊1羁绊框颜色", "trait0 tier_current": "羁绊1当前等级", "trait0 tier_total": "羁绊1最高等级", "trait0 display_name": "羁绊1显示名", "trait0 icon_path": "羁绊1图标路径", "trait1 name": "羁绊2", "trait1 num_units": "羁绊2单位数", "trait1 style": "羁绊2羁绊框颜色", "trait1 tier_current": "羁绊2当前等级", "trait1 tier_total": "羁绊2最高等级", "trait1 display_name": "羁绊2显示名", "trait1 icon_path": "羁绊2图标路径", "trait2 name": "羁绊3", "trait2 num_units": "羁绊3单位数", "trait2 style": "羁绊3羁绊框颜色", "trait2 tier_current": "羁绊3当前等级", "trait2 tier_total": "羁绊3最高等级", "trait2 display_name": "羁绊3显示名", "trait2 icon_path": "羁绊3图标路径", "trait3 name": "羁绊4", "trait3 num_units": "羁绊4单位数", "trait3 style": "羁绊4羁绊框颜色", "trait3 tier_current": "羁绊4当前等级", "trait3 tier_total": "羁绊4最高等级", "trait3 display_name": "羁绊4显示名", "trait3 icon_path": "羁绊4图标路径", "trait4 name": "羁绊5", "trait4 num_units": "羁绊5单位数", "trait4 style": "羁绊5羁绊框颜色", "trait4 tier_current": "羁绊5当前等级", "trait4 tier_total": "羁绊5最高等级", "trait4 display_name": "羁绊5显示名", "trait4 icon_path": "羁绊5图标路径", "trait5 name": "羁绊6", "trait5 num_units": "羁绊6单位数", "trait5 style": "羁绊6羁绊框颜色", "trait5 tier_current": "羁绊6当前等级", "trait5 tier_total": "羁绊6最高等级", "trait5 display_name": "羁绊6显示名", "trait5 icon_path": "羁绊6图标路径", "trait6 name": "羁绊7", "trait6 num_units": "羁绊7单位数", "trait6 style": "羁绊7羁绊框颜色", "trait6 tier_current": "羁绊7当前等级", "trait6 tier_total": "羁绊7最高等级", "trait6 display_name": "羁绊7显示名", "trait6 icon_path": "羁绊7图标路径", "trait7 name": "羁绊8", "trait7 num_units": "羁绊8单位数", "trait7 style": "羁绊8羁绊框颜色", "trait7 tier_current": "羁绊8当前等级", "trait7 tier_total": "羁绊8最高等级", "trait7 display_name": "羁绊8显示名", "trait7 icon_path": "羁绊8图标路径", "trait8 name": "羁绊9", "trait8 num_units": "羁绊9单位数", "trait8 style": "羁绊9羁绊框颜色", "trait8 tier_current": "羁绊9当前等级", "trait8 tier_total": "羁绊9最高等级", "trait8 display_name": "羁绊9显示名", "trait8 icon_path": "羁绊9图标路径", "trait9 name": "羁绊10", "trait9 num_units": "羁绊10单位数", "trait9 style": "羁绊10羁绊框颜色", "trait9 tier_current": "羁绊10当前等级", "trait9 tier_total": "羁绊10最高等级", "trait9 display_name": "羁绊10显示名", "trait9 icon_path": "羁绊10图标路径", "trait10 name": "羁绊11", "trait10 num_units": "羁绊11单位数", "trait10 style": "羁绊11羁绊框颜色", "trait10 tier_current": "羁绊11当前等级", "trait10 tier_total": "羁绊11最高等级", "trait10 display_name": "羁绊11显示名", "trait10 icon_path": "羁绊11图标路径", "trait11 name": "羁绊12", "trait11 num_units": "羁绊12单位数", "trait11 style": "羁绊12羁绊框颜色", "trait11 tier_current": "羁绊12当前等级", "trait11 tier_total": "羁绊12最高等级", "trait11 display_name": "羁绊12显示名", "trait11 icon_path": "羁绊12图标路径", "trait12 name": "羁绊13", "trait12 num_units": "羁绊13单位数", "trait12 style": "羁绊13羁绊框颜色", "trait12 tier_current": "羁绊13当前等级", "trait12 tier_total": "羁绊13最高等级", "trait12 display_name": "羁绊13显示名", "trait12 icon_path": "羁绊13图标路径", "unit0 character_id": "英雄1：角色编号", "unit0 rarity": "英雄1：卡费", "unit0 tier": "英雄1：星级", "unit0 display_name": "英雄1：显示名", "unit0 squareIconPath": "英雄1：方块图标路径", "unit1 character_id": "英雄2：角色编号", "unit1 rarity": "英雄2：卡费", "unit1 tier": "英雄2：星级", "unit1 display_name": "英雄2：显示名", "unit1 squareIconPath": "英雄2：方块图标路径", "unit2 character_id": "英雄3：角色编号", "unit2 rarity": "英雄3：卡费", "unit2 tier": "英雄3：星级", "unit2 display_name": "英雄3：显示名", "unit2 squareIconPath": "英雄3：方块图标路径", "unit3 character_id": "英雄4：角色编号", "unit3 rarity": "英雄4：卡费", "unit3 tier": "英雄4：星级", "unit3 display_name": "英雄4：显示名", "unit3 squareIconPath": "英雄4：方块图标路径", "unit4 character_id": "英雄5：角色编号", "unit4 rarity": "英雄5：卡费", "unit4 tier": "英雄5：星级", "unit4 display_name": "英雄5：显示名", "unit4 squareIconPath": "英雄5：方块图标路径", "unit5 character_id": "英雄6：角色编号", "unit5 rarity": "英雄6：卡费", "unit5 tier": "英雄6：星级", "unit5 display_name": "英雄6：显示名", "unit5 squareIconPath": "英雄6：方块图标路径", "unit6 character_id": "英雄7：角色编号", "unit6 rarity": "英雄7：卡费", "unit6 tier": "英雄7：星级", "unit6 display_name": "英雄7：显示名", "unit6 squareIconPath": "英雄7：方块图标路径", "unit7 character_id": "英雄8：角色编号", "unit7 rarity": "英雄8：卡费", "unit7 tier": "英雄8：星级", "unit7 display_name": "英雄8：显示名", "unit7 squareIconPath": "英雄8：方块图标路径", "unit8 character_id": "英雄9：角色编号", "unit8 rarity": "英雄9：卡费", "unit8 tier": "英雄9：星级", "unit8 display_name": "英雄9：显示名", "unit8 squareIconPath": "英雄9：方块图标路径", "unit9 character_id": "英雄10：角色编号", "unit9 rarity": "英雄10：卡费", "unit9 tier": "英雄10：星级", "unit9 display_name": "英雄10：显示名", "unit9 squareIconPath": "英雄10：方块图标路径", "unit10 character_id": "英雄11：角色编号", "unit10 rarity": "英雄11：卡费", "unit10 tier": "英雄11：星级", "unit10 display_name": "英雄11：显示名", "unit10 squareIconPath": "英雄11：方块图标路径", "unit0 item0 nameId": "英雄1：装备1序号", "unit0 item0 name": "英雄1：装备1名称", "unit0 item0 squareIconPath": "英雄1：装备1方块图像路径", "unit0 item1 nameId": "英雄1：装备2序号", "unit0 item1 name": "英雄1：装备2名称", "unit0 item1 squareIconPath": "英雄1：装备2方块图像路径", "unit0 item2 nameId": "英雄1：装备3序号", "unit0 item2 name": "英雄1：装备3名称", "unit0 item2 squareIconPath": "英雄1：装备3方块图像路径", "unit1 item0 nameId": "英雄2：装备1序号", "unit1 item0 name": "英雄2：装备1名称", "unit1 item0 squareIconPath": "英雄2：装备1方块图像路径", "unit1 item1 nameId": "英雄2：装备2序号", "unit1 item1 name": "英雄2：装备2名称", "unit1 item1 squareIconPath": "英雄2：装备2方块图像路径", "unit1 item2 nameId": "英雄2：装备3序号", "unit1 item2 name": "英雄2：装备3名称", "unit1 item2 squareIconPath": "英雄2：装备3方块图像路径", "unit2 item0 nameId": "英雄3：装备1序号", "unit2 item0 name": "英雄3：装备1名称", "unit2 item0 squareIconPath": "英雄3：装备1方块图像路径", "unit2 item1 nameId": "英雄3：装备2序号", "unit2 item1 name": "英雄3：装备2名称", "unit2 item1 squareIconPath": "英雄3：装备2方块图像路径", "unit2 item2 nameId": "英雄3：装备3序号", "unit2 item2 name": "英雄3：装备3名称", "unit2 item2 squareIconPath": "英雄3：装备3方块图像路径", "unit3 item0 nameId": "英雄4：装备1序号", "unit3 item0 name": "英雄4：装备1名称", "unit3 item0 squareIconPath": "英雄4：装备1方块图像路径", "unit3 item1 nameId": "英雄4：装备2序号", "unit3 item1 name": "英雄4：装备2名称", "unit3 item1 squareIconPath": "英雄4：装备2方块图像路径", "unit3 item2 nameId": "英雄4：装备3序号", "unit3 item2 name": "英雄4：装备3名称", "unit3 item2 squareIconPath": "英雄4：装备3方块图像路径", "unit4 item0 nameId": "英雄5：装备1序号", "unit4 item0 name": "英雄5：装备1名称", "unit4 item0 squareIconPath": "英雄5：装备1方块图像路径", "unit4 item1 nameId": "英雄5：装备2序号", "unit4 item1 name": "英雄5：装备2名称", "unit4 item1 squareIconPath": "英雄5：装备2方块图像路径", "unit4 item2 nameId": "英雄5：装备3序号", "unit4 item2 name": "英雄5：装备3名称", "unit4 item2 squareIconPath": "英雄5：装备3方块图像路径", "unit5 item0 nameId": "英雄6：装备1序号", "unit5 item0 name": "英雄6：装备1名称", "unit5 item0 squareIconPath": "英雄6：装备1方块图像路径", "unit5 item1 nameId": "英雄6：装备2序号", "unit5 item1 name": "英雄6：装备2名称", "unit5 item1 squareIconPath": "英雄6：装备2方块图像路径", "unit5 item2 nameId": "英雄6：装备3序号", "unit5 item2 name": "英雄6：装备3名称", "unit5 item2 squareIconPath": "英雄6：装备3方块图像路径", "unit6 item0 nameId": "英雄7：装备1序号", "unit6 item0 name": "英雄7：装备1名称", "unit6 item0 squareIconPath": "英雄7：装备1方块图像路径", "unit6 item1 nameId": "英雄7：装备2序号", "unit6 item1 name": "英雄7：装备2名称", "unit6 item1 squareIconPath": "英雄7：装备2方块图像路径", "unit6 item2 nameId": "英雄7：装备3序号", "unit6 item2 name": "英雄7：装备3名称", "unit6 item2 squareIconPath": "英雄7：装备3方块图像路径", "unit7 item0 nameId": "英雄8：装备1序号", "unit7 item0 name": "英雄8：装备1名称", "unit7 item0 squareIconPath": "英雄8：装备1方块图像路径", "unit7 item1 nameId": "英雄8：装备2序号", "unit7 item1 name": "英雄8：装备2名称", "unit7 item1 squareIconPath": "英雄8：装备2方块图像路径", "unit7 item2 nameId": "英雄8：装备3序号", "unit7 item2 name": "英雄8：装备3名称", "unit7 item2 squareIconPath": "英雄8：装备3方块图像路径", "unit8 item0 nameId": "英雄9：装备1序号", "unit8 item0 name": "英雄9：装备1名称", "unit8 item0 squareIconPath": "英雄9：装备1方块图像路径", "unit8 item1 nameId": "英雄9：装备2序号", "unit8 item1 name": "英雄9：装备2名称", "unit8 item1 squareIconPath": "英雄9：装备2方块图像路径", "unit8 item2 nameId": "英雄9：装备3序号", "unit8 item2 name": "英雄9：装备3名称", "unit8 item2 squareIconPath": "英雄9：装备3方块图像路径", "unit9 item0 nameId": "英雄10：装备1序号", "unit9 item0 name": "英雄10：装备1名称", "unit9 item0 squareIconPath": "英雄10：装备1方块图像路径", "unit9 item1 nameId": "英雄10：装备2序号", "unit9 item1 name": "英雄10：装备2名称", "unit9 item1 squareIconPath": "英雄10：装备2方块图像路径", "unit9 item2 nameId": "英雄10：装备3序号", "unit9 item2 name": "英雄10：装备3名称", "unit9 item2 squareIconPath": "英雄10：装备3方块图像路径", "unit10 item0 nameId": "英雄11：装备1序号", "unit10 item0 name": "英雄11：装备1名称", "unit10 item0 squareIconPath": "英雄11：装备1方块图像路径", "unit10 item1 nameId": "英雄11：装备2序号", "unit10 item1 name": "英雄11：装备2名称", "unit10 item1 squareIconPath": "英雄11：装备2方块图像路径", "unit10 item2 nameId": "英雄11：装备3序号", "unit10 item2 name": "英雄11：装备3名称", "unit10 item2 squareIconPath": "英雄11：装备3方块图像路径"}
+    TFTHistory_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间", "game_datetime": "对局结算时间", "game_id": "对局序号", "game_length": "持续时长", "game_version": "对局版本", "queue_id": "队列序号", "tft_game_type": "游戏类型", "tft_set_core_name": "数据版本名称", "tft_set_number": "赛季", "participantId": "玩家序号", "augment1 apiName": "强化符文1接口名称", "augment2 apiName": "强化符文2接口名称", "augment3 apiName": "强化符文3接口名称", "augment1 name": "强化符文1名称", "augment2 name": "强化符文2名称", "augment3 name": "强化符文3名称", "augment1 icon": "强化符文1图标", "augment2 icon": "强化符文2图标", "augment3 icon": "强化符文3图标", "companion content_ID": "小小英雄商品编号", "companion item_ID": "小小英雄序号", "companion skin_ID": "小小英雄皮肤序号", "companion species": "小小英雄物种", "companion name": "小小英雄名称", "companion level": "小小英雄星级", "companion rarity": "小小英雄稀有度", "gold_left": "剩余金币", "last_round": "存活回合", "level": "等级", "placement": "名次", "players_eliminated": "淘汰玩家数", "puuid": "玩家通用唯一识别码", "riotIdGameName": "玩家昵称", "riotIdTagline": "昵称编号", "time_eliminated": "存活时长", "total_damage_to_players": "造成玩家伤害", "trait0 name": "羁绊1", "trait0 num_units": "羁绊1单位数", "trait0 style": "羁绊1羁绊框颜色", "trait0 tier_current": "羁绊1当前等级", "trait0 tier_total": "羁绊1最高等级", "trait0 display_name": "羁绊1显示名", "trait0 icon_path": "羁绊1图标路径", "trait1 name": "羁绊2", "trait1 num_units": "羁绊2单位数", "trait1 style": "羁绊2羁绊框颜色", "trait1 tier_current": "羁绊2当前等级", "trait1 tier_total": "羁绊2最高等级", "trait1 display_name": "羁绊2显示名", "trait1 icon_path": "羁绊2图标路径", "trait2 name": "羁绊3", "trait2 num_units": "羁绊3单位数", "trait2 style": "羁绊3羁绊框颜色", "trait2 tier_current": "羁绊3当前等级", "trait2 tier_total": "羁绊3最高等级", "trait2 display_name": "羁绊3显示名", "trait2 icon_path": "羁绊3图标路径", "trait3 name": "羁绊4", "trait3 num_units": "羁绊4单位数", "trait3 style": "羁绊4羁绊框颜色", "trait3 tier_current": "羁绊4当前等级", "trait3 tier_total": "羁绊4最高等级", "trait3 display_name": "羁绊4显示名", "trait3 icon_path": "羁绊4图标路径", "trait4 name": "羁绊5", "trait4 num_units": "羁绊5单位数", "trait4 style": "羁绊5羁绊框颜色", "trait4 tier_current": "羁绊5当前等级", "trait4 tier_total": "羁绊5最高等级", "trait4 display_name": "羁绊5显示名", "trait4 icon_path": "羁绊5图标路径", "trait5 name": "羁绊6", "trait5 num_units": "羁绊6单位数", "trait5 style": "羁绊6羁绊框颜色", "trait5 tier_current": "羁绊6当前等级", "trait5 tier_total": "羁绊6最高等级", "trait5 display_name": "羁绊6显示名", "trait5 icon_path": "羁绊6图标路径", "trait6 name": "羁绊7", "trait6 num_units": "羁绊7单位数", "trait6 style": "羁绊7羁绊框颜色", "trait6 tier_current": "羁绊7当前等级", "trait6 tier_total": "羁绊7最高等级", "trait6 display_name": "羁绊7显示名", "trait6 icon_path": "羁绊7图标路径", "trait7 name": "羁绊8", "trait7 num_units": "羁绊8单位数", "trait7 style": "羁绊8羁绊框颜色", "trait7 tier_current": "羁绊8当前等级", "trait7 tier_total": "羁绊8最高等级", "trait7 display_name": "羁绊8显示名", "trait7 icon_path": "羁绊8图标路径", "trait8 name": "羁绊9", "trait8 num_units": "羁绊9单位数", "trait8 style": "羁绊9羁绊框颜色", "trait8 tier_current": "羁绊9当前等级", "trait8 tier_total": "羁绊9最高等级", "trait8 display_name": "羁绊9显示名", "trait8 icon_path": "羁绊9图标路径", "trait9 name": "羁绊10", "trait9 num_units": "羁绊10单位数", "trait9 style": "羁绊10羁绊框颜色", "trait9 tier_current": "羁绊10当前等级", "trait9 tier_total": "羁绊10最高等级", "trait9 display_name": "羁绊10显示名", "trait9 icon_path": "羁绊10图标路径", "trait10 name": "羁绊11", "trait10 num_units": "羁绊11单位数", "trait10 style": "羁绊11羁绊框颜色", "trait10 tier_current": "羁绊11当前等级", "trait10 tier_total": "羁绊11最高等级", "trait10 display_name": "羁绊11显示名", "trait10 icon_path": "羁绊11图标路径", "trait11 name": "羁绊12", "trait11 num_units": "羁绊12单位数", "trait11 style": "羁绊12羁绊框颜色", "trait11 tier_current": "羁绊12当前等级", "trait11 tier_total": "羁绊12最高等级", "trait11 display_name": "羁绊12显示名", "trait11 icon_path": "羁绊12图标路径", "trait12 name": "羁绊13", "trait12 num_units": "羁绊13单位数", "trait12 style": "羁绊13羁绊框颜色", "trait12 tier_current": "羁绊13当前等级", "trait12 tier_total": "羁绊13最高等级", "trait12 display_name": "羁绊13显示名", "trait12 icon_path": "羁绊13图标路径", "unit0 character_id": "英雄1：角色编号", "unit0 rarity": "英雄1：卡费", "unit0 tier": "英雄1：星级", "unit0 display_name": "英雄1：显示名", "unit0 squareIconPath": "英雄1：方块图标路径", "unit1 character_id": "英雄2：角色编号", "unit1 rarity": "英雄2：卡费", "unit1 tier": "英雄2：星级", "unit1 display_name": "英雄2：显示名", "unit1 squareIconPath": "英雄2：方块图标路径", "unit2 character_id": "英雄3：角色编号", "unit2 rarity": "英雄3：卡费", "unit2 tier": "英雄3：星级", "unit2 display_name": "英雄3：显示名", "unit2 squareIconPath": "英雄3：方块图标路径", "unit3 character_id": "英雄4：角色编号", "unit3 rarity": "英雄4：卡费", "unit3 tier": "英雄4：星级", "unit3 display_name": "英雄4：显示名", "unit3 squareIconPath": "英雄4：方块图标路径", "unit4 character_id": "英雄5：角色编号", "unit4 rarity": "英雄5：卡费", "unit4 tier": "英雄5：星级", "unit4 display_name": "英雄5：显示名", "unit4 squareIconPath": "英雄5：方块图标路径", "unit5 character_id": "英雄6：角色编号", "unit5 rarity": "英雄6：卡费", "unit5 tier": "英雄6：星级", "unit5 display_name": "英雄6：显示名", "unit5 squareIconPath": "英雄6：方块图标路径", "unit6 character_id": "英雄7：角色编号", "unit6 rarity": "英雄7：卡费", "unit6 tier": "英雄7：星级", "unit6 display_name": "英雄7：显示名", "unit6 squareIconPath": "英雄7：方块图标路径", "unit7 character_id": "英雄8：角色编号", "unit7 rarity": "英雄8：卡费", "unit7 tier": "英雄8：星级", "unit7 display_name": "英雄8：显示名", "unit7 squareIconPath": "英雄8：方块图标路径", "unit8 character_id": "英雄9：角色编号", "unit8 rarity": "英雄9：卡费", "unit8 tier": "英雄9：星级", "unit8 display_name": "英雄9：显示名", "unit8 squareIconPath": "英雄9：方块图标路径", "unit9 character_id": "英雄10：角色编号", "unit9 rarity": "英雄10：卡费", "unit9 tier": "英雄10：星级", "unit9 display_name": "英雄10：显示名", "unit9 squareIconPath": "英雄10：方块图标路径", "unit10 character_id": "英雄11：角色编号", "unit10 rarity": "英雄11：卡费", "unit10 tier": "英雄11：星级", "unit10 display_name": "英雄11：显示名", "unit10 squareIconPath": "英雄11：方块图标路径", "unit0 item0 nameId": "英雄1：装备1序号", "unit0 item0 name": "英雄1：装备1名称", "unit0 item0 squareIconPath": "英雄1：装备1方块图像路径", "unit0 item1 nameId": "英雄1：装备2序号", "unit0 item1 name": "英雄1：装备2名称", "unit0 item1 squareIconPath": "英雄1：装备2方块图像路径", "unit0 item2 nameId": "英雄1：装备3序号", "unit0 item2 name": "英雄1：装备3名称", "unit0 item2 squareIconPath": "英雄1：装备3方块图像路径", "unit1 item0 nameId": "英雄2：装备1序号", "unit1 item0 name": "英雄2：装备1名称", "unit1 item0 squareIconPath": "英雄2：装备1方块图像路径", "unit1 item1 nameId": "英雄2：装备2序号", "unit1 item1 name": "英雄2：装备2名称", "unit1 item1 squareIconPath": "英雄2：装备2方块图像路径", "unit1 item2 nameId": "英雄2：装备3序号", "unit1 item2 name": "英雄2：装备3名称", "unit1 item2 squareIconPath": "英雄2：装备3方块图像路径", "unit2 item0 nameId": "英雄3：装备1序号", "unit2 item0 name": "英雄3：装备1名称", "unit2 item0 squareIconPath": "英雄3：装备1方块图像路径", "unit2 item1 nameId": "英雄3：装备2序号", "unit2 item1 name": "英雄3：装备2名称", "unit2 item1 squareIconPath": "英雄3：装备2方块图像路径", "unit2 item2 nameId": "英雄3：装备3序号", "unit2 item2 name": "英雄3：装备3名称", "unit2 item2 squareIconPath": "英雄3：装备3方块图像路径", "unit3 item0 nameId": "英雄4：装备1序号", "unit3 item0 name": "英雄4：装备1名称", "unit3 item0 squareIconPath": "英雄4：装备1方块图像路径", "unit3 item1 nameId": "英雄4：装备2序号", "unit3 item1 name": "英雄4：装备2名称", "unit3 item1 squareIconPath": "英雄4：装备2方块图像路径", "unit3 item2 nameId": "英雄4：装备3序号", "unit3 item2 name": "英雄4：装备3名称", "unit3 item2 squareIconPath": "英雄4：装备3方块图像路径", "unit4 item0 nameId": "英雄5：装备1序号", "unit4 item0 name": "英雄5：装备1名称", "unit4 item0 squareIconPath": "英雄5：装备1方块图像路径", "unit4 item1 nameId": "英雄5：装备2序号", "unit4 item1 name": "英雄5：装备2名称", "unit4 item1 squareIconPath": "英雄5：装备2方块图像路径", "unit4 item2 nameId": "英雄5：装备3序号", "unit4 item2 name": "英雄5：装备3名称", "unit4 item2 squareIconPath": "英雄5：装备3方块图像路径", "unit5 item0 nameId": "英雄6：装备1序号", "unit5 item0 name": "英雄6：装备1名称", "unit5 item0 squareIconPath": "英雄6：装备1方块图像路径", "unit5 item1 nameId": "英雄6：装备2序号", "unit5 item1 name": "英雄6：装备2名称", "unit5 item1 squareIconPath": "英雄6：装备2方块图像路径", "unit5 item2 nameId": "英雄6：装备3序号", "unit5 item2 name": "英雄6：装备3名称", "unit5 item2 squareIconPath": "英雄6：装备3方块图像路径", "unit6 item0 nameId": "英雄7：装备1序号", "unit6 item0 name": "英雄7：装备1名称", "unit6 item0 squareIconPath": "英雄7：装备1方块图像路径", "unit6 item1 nameId": "英雄7：装备2序号", "unit6 item1 name": "英雄7：装备2名称", "unit6 item1 squareIconPath": "英雄7：装备2方块图像路径", "unit6 item2 nameId": "英雄7：装备3序号", "unit6 item2 name": "英雄7：装备3名称", "unit6 item2 squareIconPath": "英雄7：装备3方块图像路径", "unit7 item0 nameId": "英雄8：装备1序号", "unit7 item0 name": "英雄8：装备1名称", "unit7 item0 squareIconPath": "英雄8：装备1方块图像路径", "unit7 item1 nameId": "英雄8：装备2序号", "unit7 item1 name": "英雄8：装备2名称", "unit7 item1 squareIconPath": "英雄8：装备2方块图像路径", "unit7 item2 nameId": "英雄8：装备3序号", "unit7 item2 name": "英雄8：装备3名称", "unit7 item2 squareIconPath": "英雄8：装备3方块图像路径", "unit8 item0 nameId": "英雄9：装备1序号", "unit8 item0 name": "英雄9：装备1名称", "unit8 item0 squareIconPath": "英雄9：装备1方块图像路径", "unit8 item1 nameId": "英雄9：装备2序号", "unit8 item1 name": "英雄9：装备2名称", "unit8 item1 squareIconPath": "英雄9：装备2方块图像路径", "unit8 item2 nameId": "英雄9：装备3序号", "unit8 item2 name": "英雄9：装备3名称", "unit8 item2 squareIconPath": "英雄9：装备3方块图像路径", "unit9 item0 nameId": "英雄10：装备1序号", "unit9 item0 name": "英雄10：装备1名称", "unit9 item0 squareIconPath": "英雄10：装备1方块图像路径", "unit9 item1 nameId": "英雄10：装备2序号", "unit9 item1 name": "英雄10：装备2名称", "unit9 item1 squareIconPath": "英雄10：装备2方块图像路径", "unit9 item2 nameId": "英雄10：装备3序号", "unit9 item2 name": "英雄10：装备3名称", "unit9 item2 squareIconPath": "英雄10：装备3方块图像路径", "unit10 item0 nameId": "英雄11：装备1序号", "unit10 item0 name": "英雄11：装备1名称", "unit10 item0 squareIconPath": "英雄11：装备1方块图像路径", "unit10 item1 nameId": "英雄11：装备2序号", "unit10 item1 name": "英雄11：装备2名称", "unit10 item1 squareIconPath": "英雄11：装备2方块图像路径", "unit10 item2 nameId": "英雄11：装备3序号", "unit10 item2 name": "英雄11：装备3名称", "unit10 item2 squareIconPath": "英雄11：装备3方块图像路径"}
     TFTHistory_data = {}
     TFTHistory_header_keys = list(TFTHistory_header.keys())
     for i in range(len(TFTHistory_header)): #各项目初始化（Initialize every feature / column）
@@ -1253,7 +1259,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                         TFTHistory_data[key].append("")
                                 else:
                                     TFTHistory_data[key].append(TFTHistoryJson[key])
-                    elif j <= 39: #对于一些容易产生争议和报错的情况，引入to_append变量以简化代码。下同（Variable `to_append` is introduced to simplify the code in case of some controversy that produces errors easily. So does the following）
+                    elif j <= 37: #对于一些容易产生争议和报错的情况，引入to_append变量以简化代码。下同（Variable `to_append` is introduced to simplify the code in case of some controversy that produces errors easily. So does the following）
                         #TFTMainPlayer = TFTHistoryJson["participants"][TFT_main_player_indices[i]]
                         for k in range(len(TFTHistory[i]["metadata"]["participants"])): #这里没有遵循迭代器命名原则，因为云顶之弈对局记录的赋值代码中包含了云顶之弈对局信息的赋值代码（Here the iterator naming principle isn't followed, because assignment code of TFT game information are included in those of TFT match information）
                             TFTPlayer = TFTHistoryJson["participants"][k]
@@ -1300,35 +1306,38 @@ async def get_recent_players(connection, search_mode: int = 2):
                                 to_append = "%d-%d" %(bigRound, smallRound)
                                 if True or not TFTPlayer["puuid"] == current_puuid:
                                     TFTHistory_data[key].append(to_append)
-                            elif j == 34: #存活时长（`time_eliminated`）
-                                to_append = "%d:%02d" %(int(TFTPlayer[key]) // 60, int(TFTPlayer[key]) % 60)
-                                if True or not TFTPlayer["puuid"] == current_puuid:
-                                    TFTHistory_data[key].append(to_append)
-                            elif j >= 36 and j <= 39: #召唤师身份相关键（Summoner information-related keys）
-                                if TFTPlayer["puuid"] == "00000000-0000-0000-0000-000000000000": #在云顶之弈（新手教程）中，无法通过电脑玩家的玩家通用唯一识别码（00000000-0000-0000-0000-000000000000）来查询其召唤师名称和序号（Summoner names and IDs of bot players in TFT (Tutorial) can't be searched for according to their puuid: 00000000-0000-0000-0000-000000000000）
-                                    to_append = ""
+                            elif j == 34 or j == 35: #玩家昵称和昵称编号（`riotIdGameName` and `riotIdTagline`）
+                                if key in TFTPlayer:
+                                    to_append = TFTPlayer[key]
                                 else:
-                                    TFTPlayer_info_recapture = 0
-                                    TFTPlayer_info = await get_info(connection, TFTPlayer["puuid"])
-                                    while TFTPlayer_info["network_error"] and TFTPlayer_info_recapture < 3:
-                                        TFTPlayer_info_recapture += 1
-                                        print("第%d/%d场对局（对局序号：%d）玩家信息（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\nInformation of Player (puuid: %s) in Match %d / %d (matchID: %d) capture failed! Recapturing this player's information ... Times tried: %d." %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTPlayer["puuid"], TFTPlayer_info_recapture, TFTPlayer["puuid"], i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTPlayer_info_recapture))
-                                        TFTPlayer_info = await get_info(connection, TFTPlayer["puuid"])
-                                    if TFTPlayer_info["network_error"]:
+                                    if TFTPlayer["puuid"] == "00000000-0000-0000-0000-000000000000": #在云顶之弈（新手教程）中，无法通过电脑玩家的玩家通用唯一识别码（00000000-0000-0000-0000-000000000000）来查询其召唤师名称和序号（Summoner names and IDs of bot players in TFT (Tutorial) can't be searched for according to their puuid: 00000000-0000-0000-0000-000000000000）
                                         to_append = ""
                                     else:
-                                        TFTPlayer_info_body = TFTPlayer_info["body"]
-                                        to_append = TFTPlayer_info_body["summonerId"] if j == 36 else TFTPlayer_info_body["displayName"] if j == 37 else TFTPlayer_info_body["gameName"] if j == 38 else TFTPlayer_info_body["tagLine"]
+                                        TFTPlayer_info_recapture = 0
+                                        TFTPlayer_info = await get_info(connection, TFTPlayer["puuid"])
+                                        while TFTPlayer_info["network_error"] and TFTPlayer_info_recapture < 3:
+                                            TFTPlayer_info_recapture += 1
+                                            print("第%d/%d场对局（对局序号：%d）玩家信息（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\nInformation of Player (puuid: %s) in Match %d / %d (matchID: %d) capture failed! Recapturing this player's information ... Times tried: %d." %(i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTPlayer["puuid"], TFTPlayer_info_recapture, TFTPlayer["puuid"], i + 1, len(TFTHistory), TFTHistoryJson["game_id"], TFTPlayer_info_recapture))
+                                            TFTPlayer_info = await get_info(connection, TFTPlayer["puuid"])
+                                        if TFTPlayer_info["network_error"]:
+                                            to_append = ""
+                                        else:
+                                            TFTPlayer_info_body = TFTPlayer_info["body"]
+                                            to_append = TFTPlayer_info_body["gameName"] if j == 34 else TFTPlayer_info_body["tagLine"]
+                                if True or not TFTPlayer["puuid"] == current_puuid:
+                                    TFTHistory_data[key].append(to_append)
+                            elif j == 36: #存活时长（`time_eliminated`）
+                                to_append = "%d:%02d" %(int(TFTPlayer[key]) // 60, int(TFTPlayer[key]) % 60)
                                 if True or not TFTPlayer["puuid"] == current_puuid:
                                     TFTHistory_data[key].append(to_append)
                             else:
                                 to_append = TFTPlayer[key]
                                 if True or not TFTPlayer["puuid"] == current_puuid:
                                     TFTHistory_data[key].append(to_append)
-                    elif j >= 40 and j <= 130: #云顶之弈羁绊相关键（TFT trait-related keys）
+                    elif j <= 128: #云顶之弈羁绊相关键（TFT trait-related keys）
                         #TFTMainPlayer_Traits = TFTHistoryJson["participants"][TFT_main_player_indices[i]]["traits"]
-                        trait_index = (j - 40) // 7
-                        subkey_index = (j - 40) % 7
+                        trait_index = (j - 38) // 7
+                        subkey_index = (j - 38) % 7
                         for k in range(len(TFTHistory[i]["metadata"]["participants"])):
                             TFTPlayer = TFTHistoryJson["participants"][k]
                             TFTPlayer_Traits = TFTPlayer["traits"]
@@ -1371,9 +1380,9 @@ async def get_recent_players(connection, search_mode: int = 2):
                         #TFTMainPlayer_Units = TFTHistoryJson["participants"][TFT_main_player_indices[i]]["units"]
                         for k in range(len(TFTHistory[i]["metadata"]["participants"])):
                             TFTPlayer_Units = TFTHistoryJson["participants"][k]["units"]
-                            if j <= 185: #云顶之弈英雄相关键（TFT champion-related keys）
-                                unit_index = (j - 131) // 5
-                                subkey_index = (j - 131) % 5
+                            if j <= 183: #云顶之弈英雄相关键（TFT champion-related keys）
+                                unit_index = (j - 129) // 5
+                                subkey_index = (j - 129) % 5
                                 if unit_index < len(TFTPlayer_Units):
                                     TFTChampion_iter = TFTPlayer_Units[unit_index]
                                     TFTChampionId = TFTChampion_iter["character_id"]
@@ -1397,9 +1406,9 @@ async def get_recent_players(connection, search_mode: int = 2):
                                 if True or not TFTHistoryJson["participants"][k]["puuid"] == current_puuid:
                                     TFTHistory_data[key].append(to_append)
                             else:
-                                unit_index = (j - 186) // 9
-                                item_index = (j - 186) // 3 % 3
-                                subkey_index = (j - 186) % 3
+                                unit_index = (j - 184) // 9
+                                item_index = (j - 184) // 3 % 3
+                                subkey_index = (j - 184) % 3
                                 if unit_index < len(TFTPlayer_Units): #很少有英雄单位可以有3个装备（Merely do champion units have full items）
                                     if "itemNames" in TFTPlayer_Units[unit_index] and item_index < len(TFTPlayer_Units[unit_index]["itemNames"]):
                                         TFTItemId = TFTPlayer_Units[unit_index]["itemNames"][item_index]
@@ -1432,7 +1441,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                 print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                 print("加载进度（Loading process）：%d/%d\t对局序号（MatchID）： %d" %(i + 1, len(TFTHistory), TFTHistory[i]["json"]["game_id"]))
     #数据框列序整理（Dataframe column ordering）
-    recent_TFTPlayers_statistics_output_order = [37, 38, 39, 36, 33, 4, 2, 3, 6, 5, 7, 8, 25, 26, 27, 30, 29, 34, 28, 35, 32, 31, 15, 16, 17, 134, 132, 133, 187, 190, 193, 139, 137, 138, 196, 199, 202, 144, 142, 143, 205, 208, 211, 149, 147, 148, 214, 217, 220, 154, 152, 153, 223, 226, 229, 159, 157, 158, 232, 235, 238, 164, 162, 163, 241, 244, 247, 169, 167, 168, 250, 253, 256, 174, 172, 173, 259, 262, 265, 179, 177, 178, 268, 271, 274, 184, 182, 183, 277, 280, 283, 45, 41, 42, 43, 44, 52, 48, 49, 50, 51, 59, 55, 56, 57, 58, 66, 62, 63, 64, 65, 73, 69, 70, 71, 72, 80, 76, 77, 78, 79, 87, 83, 84, 85, 86, 94, 90, 91, 92, 93, 101, 97, 98, 99, 100, 108, 104, 105, 106, 107, 115, 111, 112, 113, 114, 122, 118, 119, 120, 121, 129, 125, 126, 127, 128]
+    recent_TFTPlayers_statistics_output_order = [34, 35, 33, 4, 2, 3, 6, 5, 7, 8, 25, 26, 27, 30, 29, 36, 28, 37, 32, 31, 15, 16, 17, 132, 130, 131, 185, 188, 191, 137, 135, 136, 194, 197, 200, 142, 140, 141, 203, 206, 209, 147, 145, 146, 212, 215, 218, 152, 150, 151, 221, 224, 227, 157, 155, 156, 230, 233, 236, 162, 160, 161, 239, 242, 245, 167, 165, 166, 248, 251, 254, 172, 170, 171, 257, 260, 263, 177, 175, 176, 266, 269, 272, 182, 180, 181, 275, 278, 281, 43, 39, 40, 41, 42, 50, 46, 47, 48, 49, 57, 53, 54, 55, 56, 64, 60, 61, 62, 63, 71, 67, 68, 69, 70, 78, 74, 75, 76, 77, 85, 81, 82, 83, 84, 92, 88, 89, 90, 91, 99, 95, 96, 97, 98, 106, 102, 103, 104, 105, 113, 109, 110, 111, 112, 120, 116, 117, 118, 119, 127, 123, 124, 125, 126]
     recent_TFTPlayers_data_organized = {}
     for i in range(len(recent_TFTPlayers_statistics_output_order)):
         key = TFTHistory_header_keys[recent_TFTPlayers_statistics_output_order[i]]
@@ -2127,8 +2136,10 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         for message in messages_sorted:
                             if not message in conversation_json[chatId]:
                                 conversation_json[chatId].append(message)
-                        with open(os.path.join(folder, json1name), "w", encoding = "utf-8") as fp:
-                            json.dump(conversation_json, fp, indent = 4, ensure_ascii = False)
+                    with open(os.path.join(folder, json1name), "w", encoding = "utf-8") as fp:
+                        json.dump(conversation_json, fp, indent = 4, ensure_ascii = False)
+                    for conversation in conversations_to_export:
+                        chatId = conversation["id"]
                         message_df = await sort_message_data(connection, conversation_json[chatId])
                         message_df = pandas.concat([message_df.iloc[:1], message_df.iloc[1:].sort_values(by = "timestamp", ascending = True)], ignore_index = True)
                         excel_name = "Conversations - %s.xlsx" %(get_info_name(current_info))
@@ -2471,7 +2482,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     elif response["httpStatus"] == 409:
                                         print("您在该玩家的聊天黑名单中。\nYou're blocked by this player.")
                                     elif response["httpStatus"] == 500:
-                                        print("该玩家名字包含了无效字符，或者您发送的好友请求已满50个。\nThis player name contains invalid characters, or you can't sent more than 50 friend requests at the same time.")
+                                        print("内部服务器错误。可能原因如下：\n1. 该玩家名字包含了无效字符。\n2. 您发送和接收的好友请求数量总和已满50个。\n3. 您的好友数量和发送和接受的好友请求数量总和的和已满375个。\n4. 你的账号受限，无法发送好友请求。请稍后再试或联系客服寻求帮助。\nInternal server error. A possible reason may be:\n1. This player name contains invalid characters.\n2. You can't sent and receive more than 50 friend requests at the same time.\n3. The sum of your friend count and the total number of friend requests sent and received has reached 375.\n4. Your account is restricted from sending friend requests. Please try again later or contact customer service for help.")
                                     elif response["httpStatus"] == 503:
                                         print("发送好友请求的过程响应失败。\nError response for POST /chat/v6/friendrequests: ")
                                     else:
@@ -2717,7 +2728,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             if move_str == "":
                                                 continue
                                             elif move_str[0] == "0":
-                                                print("请选择您输入要移动的好友信息的方式：\nPlease select a method of inputting the information of your friends to be moved to other groups:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                                                 break
                                             elif move_str == "all":
                                                 move_indices = list(range(len(friends)))
@@ -2744,7 +2754,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             else:
                                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                     elif method[0] == "2":
-                                        print('''请输入要移动的好友的召唤师名。每个好友的召唤师名格式为{玩家昵称}#{昵称编号}。输入“-1”以结束输入。\nPlease submit the names of the friends to be moveed. Each friend's name should accord to the format {gameName}#{gameTag}. Submit "-1" to end the input.''')
+                                        print('''请输入要移动的好友的召唤师名。每个好友的召唤师名格式为{玩家昵称}#{昵称编号}。输入“-1”以结束输入。\nPlease submit the names of the friends to be moved. Each friend's name should accord to the format {gameName}#{gameTag}. Submit "-1" to end the input.\n变量提示（Variable hints）：\nfriends = await (await connection.request("GET", "/lol-chat/v1/friends")).json()\nfriend_hovercard_df = await sort_friend_hovercard_simple(connection)''')
                                         move_indices = []
                                         while True:
                                             friend_summonerName = input()
@@ -2752,27 +2762,41 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 continue
                                             elif friend_summonerName == "0":
                                                 index_got = False
-                                                print("请选择您输入要移动的好友信息的方式：\nPlease select a method of inputting the information of your friends to be moved to other groups:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                                                 break
                                             elif friend_summonerName == "-1":
                                                 break
                                             else:
-                                                if friend_summonerName in friend_summonerNames:
-                                                    friend_index = friend_summonerNames.index(friend_summonerName)
-                                                elif friend_summonerName in map(str, friend_summonerIds):
-                                                    friend_index = friend_summonerIds.index(int(friend_summonerName))
-                                                elif friend_summonerName in friend_puuids:
-                                                    friend_index = friend_puuids.index(friend_summonerName)
+                                                try:
+                                                    friend_summonerName_list = eval(friend_summonerName)
+                                                except:
+                                                    friend_summonerName_list = [friend_summonerName]
                                                 else:
-                                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                                    continue
-                                                if not friend_index in move_indices:
-                                                    move_indices.append(friend_index)
-                                                    index_got = True
+                                                    if isinstance(friend_summonerName_list, list) and all(map(lambda x: isinstance(x, (str, int)), friend_summonerName_list)):
+                                                        pass
+                                                    else:    
+                                                        print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                        continue
+                                                for friend_summonerName in friend_summonerName_list:
+                                                    if friend_summonerName in friend_summonerNames:
+                                                        friend_index = friend_summonerNames.index(friend_summonerName)
+                                                    elif friend_summonerName in friend_summonerIds:
+                                                        friend_index = friend_summonerIds.index(friend_summonerName)
+                                                    elif friend_summonerName in map(str, friend_summonerIds):
+                                                        friend_index = friend_summonerIds.index(int(friend_summonerName))
+                                                    elif friend_summonerName in friend_puuids:
+                                                        friend_index = friend_puuids.index(friend_summonerName)
+                                                    else:
+                                                        print("%s不是一个合法的召唤师名、召唤师序号或者玩家通用唯一识别码。\n%s isn't a legal summoner name, summonerId or puuid." %(friend_summonerName, friend_summonerName))
+                                                        continue
+                                                    if not friend_index in move_indices:
+                                                        move_indices.append(friend_index)
+                                                        index_got = True
                                     else:
                                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                        continue
                                     if index_got:
                                         break
+                                    print("请选择您输入要移动的好友信息的方式：\nPlease select a method of inputting the information of your friends to be moved to other groups:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                             elif mode == "3":
                                 move_indices = list(range(len(friends)))
                                 index_got = True
@@ -2974,7 +2998,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             if remove_str == "":
                                                 continue
                                             elif remove_str[0] == "0":
-                                                print("请选择您输入要删除的好友信息的方式：\nPlease select a method of inputting the information of your friends to be removed to other groups:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                                                 break
                                             elif remove_str == "all":
                                                 unfriend_indices = list(range(len(friends)))
@@ -3001,7 +3024,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             else:
                                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                     elif method[0] == "2":
-                                        print('''请输入要删除的好友的召唤师名。每个好友的召唤师名格式为{玩家昵称}#{昵称编号}。输入“-1”以结束输入。\nPlease submit the names of the friends to be unfriended. Each friend's name should accord to the format {gameName}#{gameTag}. Submit "-1" to end the input.''')
+                                        print('''请输入要删除的好友的召唤师名。每个好友的召唤师名格式为{玩家昵称}#{昵称编号}。输入“-1”以结束输入。\nPlease submit the names of the friends to be unfriended. Each friend's name should accord to the format {gameName}#{gameTag}. Submit "-1" to end the input.\n变量提示（Variable hints）：\nfriends = await (await connection.request("GET", "/lol-chat/v1/friends")).json()\nfriend_hovercard_df = await sort_friend_hovercard_simple(connection)''')
                                         unfriend_indices = []
                                         while True:
                                             friend_summonerName = input()
@@ -3009,27 +3032,41 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 continue
                                             elif friend_summonerName == "0":
                                                 index_got = False
-                                                print("请选择您输入要删除的好友信息的方式：\nPlease select a method of inputting the information of your friends to be removed to other groups:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                                                 break
                                             elif friend_summonerName == "-1":
                                                 break
                                             else:
-                                                if friend_summonerName in friend_summonerNames:
-                                                    friend_index = friend_summonerNames.index(friend_summonerName)
-                                                elif friend_summonerName in map(str, friend_summonerIds):
-                                                    friend_index = friend_summonerIds.index(int(friend_summonerName))
-                                                elif friend_summonerName in friend_puuids:
-                                                    friend_index = friend_puuids.index(friend_summonerName)
+                                                try:
+                                                    friend_summonerName_list = eval(friend_summonerName)
+                                                except:
+                                                    friend_summonerName_list = [friend_summonerName]
                                                 else:
-                                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                                    continue
-                                                if not friend_index in unfriend_indices:
-                                                    unfriend_indices.append(friend_index)
-                                                    index_got = True
+                                                    if isinstance(friend_summonerName_list, list) and all(map(lambda x: isinstance(x, (str, int)), friend_summonerName_list)):
+                                                        pass
+                                                    else:    
+                                                        print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                        continue
+                                                for friend_summonerName in friend_summonerName_list:
+                                                    if friend_summonerName in friend_summonerNames:
+                                                        friend_index = friend_summonerNames.index(friend_summonerName)
+                                                    elif friend_summonerName in friend_summonerIds:
+                                                        friend_index = friend_summonerIds.index(friend_summonerName)
+                                                    elif friend_summonerName in map(str, friend_summonerIds):
+                                                        friend_index = friend_summonerIds.index(int(friend_summonerName))
+                                                    elif friend_summonerName in friend_puuids:
+                                                        friend_index = friend_puuids.index(friend_summonerName)
+                                                    else:
+                                                        print("%s不是一个合法的召唤师名、召唤师序号或者玩家通用唯一识别码。\n%s isn't a legal summoner name, summonerId or puuid." %(friend_summonerName, friend_summonerName))
+                                                        continue
+                                                    if not friend_index in unfriend_indices:
+                                                        unfriend_indices.append(friend_index)
+                                                        index_got = True
                                     else:
                                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                        continue
                                     if index_got:
                                         break
+                                    print("请选择您输入要删除的好友信息的方式：\nPlease select a method of inputting the information of your friends to be removed:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                             elif mode == "3":
                                 unfriend_indices = list(range(len(friends)))
                                 index_got = True
@@ -3152,7 +3189,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             if block_str == "":
                                                 continue
                                             elif block_str[0] == "0":
-                                                print("请选择您输入要拉黑的好友信息的方式：\nPlease select a method of inputting the information of your friends to be blocked to other groups:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                                                 break
                                             elif block_str == "all":
                                                 block_indices = list(range(len(friends)))
@@ -3179,7 +3215,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             else:
                                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                     elif method[0] == "2":
-                                        print('''请输入要拉黑的好友的召唤师名。每个好友的召唤师名格式为{玩家昵称}#{昵称编号}。输入“-1”以结束输入。\nPlease submit the names of the friends to be blocked. Each friend's name should accord to the format {gameName}#{gameTag}. Submit "-1" to end the input.''')
+                                        print('''请输入要拉黑的好友的召唤师名。每个好友的召唤师名格式为{玩家昵称}#{昵称编号}。输入“-1”以结束输入。\nPlease submit the names of the friends to be blocked. Each friend's name should accord to the format {gameName}#{gameTag}. Submit "-1" to end the input.\n变量提示（Variable hints）：\nfriends = await (await connection.request("GET", "/lol-chat/v1/friends")).json()\nfriend_hovercard_df = await sort_friend_hovercard_simple(connection)''')
                                         block_indices = []
                                         while True:
                                             friend_summonerName = input()
@@ -3187,27 +3223,41 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 continue
                                             elif friend_summonerName == "0":
                                                 index_got = False
-                                                print("请选择您输入要拉黑的好友信息的方式：\nPlease select a method of inputting the information of your friends to be blocked to other groups:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                                                 break
                                             elif friend_summonerName == "-1":
                                                 break
                                             else:
-                                                if friend_summonerName in friend_summonerNames:
-                                                    friend_index = friend_summonerNames.index(friend_summonerName)
-                                                elif friend_summonerName in map(str, friend_summonerIds):
-                                                    friend_index = friend_summonerIds.index(int(friend_summonerName))
-                                                elif friend_summonerName in friend_puuids:
-                                                    friend_index = friend_puuids.index(friend_summonerName)
+                                                try:
+                                                    friend_summonerName_list = eval(friend_summonerName)
+                                                except:
+                                                    friend_summonerName_list = [friend_summonerName]
                                                 else:
-                                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                                    continue
-                                                if not friend_index in block_indices:
-                                                    block_indices.append(friend_index)
-                                                    index_got = True
+                                                    if isinstance(friend_summonerName_list, list) and all(map(lambda x: isinstance(x, (str, int)), friend_summonerName_list)):
+                                                        pass
+                                                    else:    
+                                                        print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                        continue
+                                                for friend_summonerName in friend_summonerName_list:
+                                                    if friend_summonerName in friend_summonerNames:
+                                                        friend_index = friend_summonerNames.index(friend_summonerName)
+                                                    elif friend_summonerName in friend_summonerIds:
+                                                        friend_index = friend_summonerIds.index(friend_summonerName)
+                                                    elif friend_summonerName in map(str, friend_summonerIds):
+                                                        friend_index = friend_summonerIds.index(int(friend_summonerName))
+                                                    elif friend_summonerName in friend_puuids:
+                                                        friend_index = friend_puuids.index(friend_summonerName)
+                                                    else:
+                                                        print("%s不是一个合法的召唤师名、召唤师序号或者玩家通用唯一识别码。\n%s isn't a legal summoner name, summonerId or puuid." %(friend_summonerName, friend_summonerName))
+                                                        continue
+                                                    if not friend_index in block_indices:
+                                                        block_indices.append(friend_index)
+                                                        index_got = True
                                     else:
                                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                        continue
                                     if index_got:
                                         break
+                                    print("请选择您输入要拉黑的好友信息的方式：\nPlease select a method of inputting the information of your friends to be blocked to other groups:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
                             elif mode == "3":
                                 block_indices = list(range(len(friends)))
                                 index_got = True
@@ -3301,7 +3351,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         break
                     elif mode == "2":
                         invitee_summonerIds = []
-                        print("请选择您输入要邀请的玩家信息的方式：\nPlease select a method of inputting the information of invitees:\n0\t返回上一层（Return to the last step）\n1\t好友索引（By friend index）\n2\t近期一起玩过的玩家索引（By recently played summoner index）\n3\t玩家召唤师名（By player summonerName）")
+                        print("请选择您输入要邀请的玩家信息的方式：\nPlease select a method of inputting the information of invitees:\n0\t返回上一层（Return to the last step）\n1\t好友索引（By friend index）\n2\t近期一起玩过的玩家索引（By recently played summoner index）\n3\t好友请求索引（By friend request index）\n4\t玩家召唤师名（By player summonerName）")
                         while True:
                             method = input()
                             if method == "":
@@ -3338,7 +3388,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         if invite_str == "":
                                             continue
                                         elif invite_str[0] == "0":
-                                            print("请选择您输入要邀请的玩家信息的方式：\nPlease select a method of inputting the information of invitees:\n0\t返回上一层（Return to the last step）\n1\t好友索引（By friend index）\n2\t近期一起玩过的玩家索引（By recently played summoner index）\n3\t玩家召唤师名（By player summonerName）")
                                             break
                                         elif invite_str == "all":
                                             invitee_obtained = True
@@ -3374,7 +3423,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 recent_LoLPlayers_df.reset_index(drop = True, inplace = True)
                                 recent_TFTPlayers_df.reset_index(drop = True, inplace = True)
                                 recent_LoLPlayers_fields_to_print = ["gameName", "tagLine", "gameModeName", "queueId", "champion_name", "champion_alias", "KDA", "ally?"]
-                                recent_TFTPlayers_fields_to_print = ["gameName", "tagLine", "tft_game_type", "queue_id", "last_round", "time_eliminated", "placement"]
+                                recent_TFTPlayers_fields_to_print = ["riotIdGameName", "riotIdTagline", "tft_game_type", "queue_id", "last_round", "time_eliminated", "placement"]
                                 print("是否需要对近期一起玩过的玩家取子集？（输入任意键以开始打草稿，否则直接开始输入好友索引。）\nDo you want to get a subset of the current recently played summoner data? (Submit any non-empty string to make a draft, or null to input the recently played summoner index directly.)")
                                 draft = bool(input())
                                 if draft:
@@ -3398,7 +3447,6 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     if product_option == "":
                                         continue
                                     elif product_option[0] == "0":
-                                        print("请选择您输入要邀请的玩家信息的方式：\nPlease select a method of inputting the information of invitees:\n0\t返回上一层（Return to the last step）\n1\t好友索引（By friend index）\n2\t近期一起玩过的玩家索引（By recently played summoner index）\n3\t玩家召唤师名（By player summonerName）")
                                         break
                                     elif product_option[0] in {"1", "2", "3"}:
                                         invitee_summonerIds = []
@@ -3411,7 +3459,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 if invite_str == "":
                                                     continue
                                                 elif invite_str[0] == "0":
-                                                    print("请选择您要邀请的近期一起玩过的玩家类型：\nPlease select a type of players:\n0\t返回上一层（Return to the last step）\n1\t英雄联盟（LoL）\n2\t云顶之弈（TFT）\n3\t英雄联盟和云顶之弈（LoL and TFT）")
+                                                    invitee_obtained = False
+                                                    if product_option[0] != "3":
+                                                        print("请选择您要邀请的近期一起玩过的玩家类型：\nPlease select a type of players:\n0\t返回上一层（Return to the last step）\n1\t英雄联盟（LoL）\n2\t云顶之弈（TFT）\n3\t英雄联盟和云顶之弈（LoL and TFT）")
                                                     break
                                                 elif invite_str == "all":
                                                     invitee_obtained = True
@@ -3437,20 +3487,22 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                     break
                                                 else:
                                                     print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                        elif product_option[0] == "2" or product_option[0] == "3":
+                                        if product_option[0] == "2" or product_option[0] == "3":
                                             print('请输入要邀请的云顶之弈玩家的索引（见下面近期一起玩过的玩家信息表的索引列）。一些允许的输入格式：\nPlease submit the indices of recently played TFT summoners to invite (you may refer to the index column of the recently played summoner table below). Allowed input formats look like these:\n1\n[1, 2, 3]\nall\n[i + 1 for i in range(len(recent_LoLPlayers_df)) if recent_LoLPlayers_df.loc[i, "gameName"] == "WordlessMeteor"]')
                                             print(format_df(recent_TFTPlayers_df.loc[1:20, recent_TFTPlayers_fields_to_print], print_index = True, start_index = 1)[0])
                                             print('变量提示（Variable hints）：\nrecent_players_dfs = await get_recent_players(connection, search_mode = 1)\nrecent_TFTPlayers_df = recent_players_dfs["TFT"]')
+                                            invitee_puuids = []
                                             while True:
                                                 invite_str = input()
                                                 if invite_str == "":
                                                     continue
                                                 elif invite_str[0] == "0":
+                                                    invitee_obtained = False
                                                     print("请选择您要邀请的近期一起玩过的玩家类型：\nPlease select a type of players:\n0\t返回上一层（Return to the last step）\n1\t英雄联盟（LoL）\n2\t云顶之弈（TFT）\n3\t英雄联盟和云顶之弈（LoL and TFT）")
                                                     break
                                                 elif invite_str == "all":
                                                     invitee_obtained = True
-                                                    invitee_summonerIds += list(recent_TFTPlayers_df.loc[1:, "summonerId"])
+                                                    invitee_puuids += list(recent_TFTPlayers_df.loc[1:, "puuid"])
                                                     break
                                                 else:
                                                     try:
@@ -3468,10 +3520,16 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                             continue
                                                 if all(map(lambda x: isinstance(x, int) and x > 0 and x < len(recent_TFTPlayers_df), player_indices)) and len(player_indices) == len(set(player_indices)):
                                                     invitee_obtained = True
-                                                    invitee_summonerIds += list(recent_TFTPlayers_df.loc[player_indices, "summonerId"])
+                                                    invitee_puuids += list(recent_TFTPlayers_df.loc[player_indices, "puuid"])
                                                     break
                                                 else:
                                                     print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                            for invitee_puuid in invitee_puuids:
+                                                invitee_info = await get_info(connection, invitee_puuid)
+                                                if invitee_info["info_got"]:
+                                                    invitee_summonerIds.append(invitee_info["body"]["summonerId"])
+                                                else:
+                                                    print(invitee_info["message"])
                                     else:
                                         print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                     if invitee_obtained: #对输入的召唤师去重（Remove the redundancy in the input summoners）
@@ -3483,7 +3541,75 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 tmp_list.append(invitee_summonerId)
                                         invitee_summonerIds = tmp_list[:]
                                         break
-                            elif method[0] == "3":
+                            elif method[0] == "3": #部分主播短时间内（48小时）添加好友过于频繁导致操作受限，即可使用该方法，但是需要告知观众取消勾选“只接受好友游戏邀请”（Some hosts may be restricted to add any summoner as friend because they add too many friends with a short time period (48 hours, exactly). In that case they can use this method to invite them to lobby, but they need to inform the audience that they should tick off "Allow game invites only from friends"）
+                                friend_requests = await (await connection.request("GET", "/lol-chat/v2/friend-requests")).json()
+                                if len(friend_requests) == 0:
+                                    print("您尚未发送或收到任何好友请求。\nYou haven't sent or received any friend request.")
+                                else:
+                                    print("您的好友请求如下：\nYour friend requests:")
+                                    friend_request_df = await sort_friend_request(connection)
+                                    friend_request_fields_to_print = ["gameName", "tagLine", "direction", "icon title"]
+                                    print(format_df(friend_request_df.loc[1:, friend_request_fields_to_print], print_header = True, print_index = True, start_index = 1)[0])
+                                    print("是否需要对好友请求取子集？（输入任意键以开始打草稿，否则直接开始输入玩家索引。）\nDo you want to get a subset of the current friend request data? (Submit any non-empty string to make a draft, or null to input the player index directly.)")
+                                    draft = bool(input())
+                                    if draft:
+                                        print("请选择草稿选项：\nPlease select a draft option:\n0\t退出草稿（Quit drafting）\n1\t迭代式取子集（Take subsets iteratively）")
+                                        while True:
+                                            draft_option = input()
+                                            if draft_option == "":
+                                                continue
+                                            elif draft_option[0] == "0":
+                                                break
+                                            elif draft_option[0] == "1":
+                                                scope = {"format_df": format_df, "df": friend_request_df.copy(deep = True), "fields": friend_request_fields_to_print}
+                                                print('示例（Examples）：\nprint(dir())\nprint(format_df(df[(df["gameName"] == "WordlessMeteor") & (df["tagLine"] == "5071")].loc[1:, fields])[0])\n输入“-1”以退出取子集。\nSubmit "-1" to quit taking subsets.')
+                                                subscope(scope)
+                                            else:
+                                                print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                            print("请选择草稿选项：\nPlease select a draft option:\n0\t退出草稿（Quit drafting）\n1\t迭代式取子集（Take subsets iteratively）")
+                                    print('请输入要邀请的玩家的索引（见下面好友请求信息表的索引列）。一些允许的输入格式：\nPlease submit the indices of players to invite (you may refer to the index column of the friend request table below). Allowed input formats look like these:\n1\n[1, 2, 3]\nall\n[i + 1 for i in range(len(friend_requests)) if friend_requests[i]["gameName"] == "WordlessMeteor"]')
+                                    print(format_df(friend_request_df.loc[1:, friend_request_fields_to_print], print_index = True, start_index = 1)[0])
+                                    print('变量提示（Variable hints）：\nfriend_requests = await (await connection.request("GET", "/lol-chat/v2/friend-requests")).json()\nfriend_request_df = await sort_friend_request(connection)')
+                                    while True:
+                                        invite_str = input()
+                                        if invite_str == "":
+                                            continue
+                                        elif invite_str[0] == "0":
+                                            break
+                                        elif invite_str == "all":
+                                            invitee_obtained = True
+                                            invitee_puuids = list(map(lambda x: x["puuid"], friend_requests)) #好友请求中的召唤师序号都是0（All summonerIds in the friend request list are 0s）
+                                            break
+                                        else:
+                                            try:
+                                                player_indices = eval(invite_str)
+                                            except:
+                                                traceback_info = traceback.format_exc()
+                                                print(traceback_info)
+                                                print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                continue
+                                            else:
+                                                if isinstance(player_indices, int):
+                                                    player_indices = [player_indices]
+                                                elif not isinstance(player_indices, list):
+                                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                    continue
+                                        if all(map(lambda x: isinstance(x, int) and x > 0 and x < len(friend_request_df), player_indices)) and len(player_indices) == len(set(player_indices)):
+                                            player_indices = list(map(lambda x: x - 1, player_indices))
+                                            invitee_obtained = True
+                                            invitee_puuids = list(map(lambda x: friend_requests[x]["summonerId"], player_indices))
+                                            break
+                                        else:
+                                            print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                    if invitee_obtained:
+                                        invitee_summonerIds = []
+                                        for invitee_puuid in invitee_puuids:
+                                            invitee_info = await get_info(connection, invitee_puuid)
+                                            if invitee_info["info_got"]:
+                                                invitee_summonerIds.append(invitee_info["body"]["summonerId"])
+                                            else:
+                                                print(invitee_info["message"])
+                            elif method[0] == "4":
                                 print('''请输入要邀请的玩家的召唤师名。每个玩家的召唤师名格式为{玩家昵称}#{昵称编号}。输入“-1”以结束输入。\nPlease submit the invitees' names. Each invitee's name should accord to the format {gameName}#{gameTag}. Submit "-1" to end the input.''')
                                 invitee_summonerIds = []
                                 while True:
@@ -3491,28 +3617,40 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     if invitee_summonerName == "":
                                         continue
                                     elif invitee_summonerName == "0":
-                                        print("请选择您输入要邀请的玩家信息的方式：\nPlease select a method of inputting the information of invitees:\n0\t返回上一层（Return to the last step）\n1\t好友索引（By friend index）\n2\t近期一起玩过的玩家索引（By recently played summoner index）\n3\t玩家召唤师名（By player summonerName）")
+                                        invitee_obtained = False
                                         break
-                                    elif invitee_summonerName == "-1" and invitee_obtained:
+                                    elif invitee_summonerName == "-1":
                                         break
                                     else:
-                                        invitee_info = await get_info(connection, invitee_summonerName)
-                                        if invitee_info["info_got"]:
-                                            if invitee_info["body"]["puuid"] == current_info["puuid"]:
-                                                print("您已经在房间内了。\nYou're already in the lobby.")
-                                            else:
-                                                if invitee_info["body"]["summonerId"] in invitee_summonerIds:
-                                                    print("您已经邀请过该玩家了。\nYou've already invited this player.")
-                                                else:
-                                                    invitee_obtained = True
-                                                    invitee_summonerIds.append(invitee_info["body"]["summonerId"])
-                                                    print(invitee_info["body"])
+                                        try:
+                                            invitee_summonerName_list = eval(invitee_summonerName)
+                                        except:
+                                            invitee_summonerName_list = [invitee_summonerName]
                                         else:
-                                            print(invitee_info["message"])
+                                            if isinstance(invitee_summonerName_list, list) and all(map(lambda x: isinstance(x, (int, str)), invitee_summonerName_list)):
+                                                pass
+                                            else:
+                                                print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                continue
+                                        for invitee_summonerName in invitee_summonerName_list:
+                                            invitee_info = await get_info(connection, invitee_summonerName)
+                                            if invitee_info["info_got"]:
+                                                if invitee_info["body"]["puuid"] == current_info["puuid"]:
+                                                    print("您已经在房间内了。\nYou're already in the lobby.")
+                                                else:
+                                                    if invitee_info["body"]["summonerId"] in invitee_summonerIds: #如果已经邀请过该玩家且该玩家拒绝邀请，或同意后退出房间，那么用户需要先返回上一层，再进入才能再次邀请该玩家（If the user has invited a summoner but he/she rejects it, or he/she accepts it but exit the lobby afterwards, then the user need to first return to the last step and then select this method to invite this summoner again）
+                                                        print("您已经邀请过该玩家了。\nYou've already invited this player.")
+                                                    else:
+                                                        invitee_obtained = True
+                                                        invitee_summonerIds.append(invitee_info["body"]["summonerId"])
+                                                        print(invitee_info["body"])
+                                            else:
+                                                print("[%s]" %(invitee_summonerName), invitee_info["message"])
                             else:
                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                             if invitee_obtained:
                                 break
+                            print("请选择您输入要邀请的玩家信息的方式：\nPlease select a method of inputting the information of invitees:\n0\t返回上一层（Return to the last step）\n1\t好友索引（By friend index）\n2\t近期一起玩过的玩家索引（By recently played summoner index）\n3\t好友请求索引（By friend request index）\n4\t玩家召唤师名（By player summonerName）")
                     elif mode == "3":
                         if len(friends) == 0:
                             print("看起来你现在还没有添加任何好友。邀请好友来聊天并一起玩游戏。\nLooks like you haven't added any friends yet. Invite friends to chat and play together.")
@@ -3527,7 +3665,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             friend_groups_df = await sort_friend_group(connection)
                             friend_group_fields_to_print = ["name", "id"]
                             friend_groups_df_to_print = friend_groups_df.loc[1:, friend_group_fields_to_print]
-                            print("请选择您要邀请的好友分组（见下面的好友分组信息列）。一些允许的输入格式：\nPlease select a group or groups of friends to invite (You may refer to the index column of the friend group table below). Allowed input formats look these:\n1\n[1, 2, 3]\nall")
+                            print("请选择您要邀请的好友分组（见下面的好友分组信息列）。一些允许的输入格式：\nPlease select a group or groups of friends to invite (You may refer to the index column of the friend group table below). Allowed input formats look like these:\n1\n[1, 2, 3]\nall")
                             print(format_df(friend_groups_df_to_print, print_index = True, start_index = 1)[0])
                             while True:
                                 invite_str = input()
@@ -4922,20 +5060,31 @@ async def blacklist_behavior_simulation(connection):
                             elif blockName == "-1":
                                 break
                             else:
-                                block_info = await get_info(connection, blockName)
-                                if block_info["info_got"]:
-                                    block_puuid = block_info["body"]["puuid"]
-                                    block_summonerName = get_info_name(block_info["body"])
-                                    if block_puuid == current_info["puuid"]:
-                                        print("你无法把自己拉入聊天黑名单。\nYou cannot block yourself, silly.")
-                                    elif block_puuid in blocked_puuids:
-                                        print("你已经将%s拉入聊天黑名单。\nYou have already blocked %s." %(get_info_name(block_info["body"]), get_info_name(block_info["body"])))
-                                    elif not block_puuid in block_puuids:
-                                        block_puuids.append(block_puuid)
-                                        block_summonerNames.append(block_summonerName)
-                                        info_got = True
+                                try:
+                                    blockName_list = eval(blockName)
+                                except:
+                                    blockName_list = [blockName]
                                 else:
-                                    print(block_info["message"])
+                                    if isinstance(blockName_list, list) and all(map(lambda x: isinstance(x, (str, int)), blockName_list)):
+                                        pass
+                                    else:    
+                                        print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                        continue
+                                for blockName in blockName_list:
+                                    block_info = await get_info(connection, blockName)
+                                    if block_info["info_got"]:
+                                        block_puuid = block_info["body"]["puuid"]
+                                        block_summonerName = get_info_name(block_info["body"])
+                                        if block_puuid == current_info["puuid"]:
+                                            print("你无法把自己拉入聊天黑名单。\nYou cannot block yourself, silly.")
+                                        elif block_puuid in blocked_puuids:
+                                            print("你已经将%s拉入聊天黑名单。\nYou have already blocked %s." %(get_info_name(block_info["body"]), get_info_name(block_info["body"])))
+                                        elif not block_puuid in block_puuids:
+                                            block_puuids.append(block_puuid)
+                                            block_summonerNames.append(block_summonerName)
+                                            info_got = True
+                                    else:
+                                        print(block_info["message"])
                     elif mode == "3":
                         print("是否需要测试玩家信息的获取？（输入任意键以开始打草稿，否则直接开始输入要拉入聊天黑名单的玩家信息。）\nDo you want to test obtaining player information? (Submit any non-empty string to make a draft, or null to input the index of the players to block directly.)")
                         draft = bool(input())
@@ -5331,7 +5480,7 @@ async def blacklist_behavior_simulation(connection):
                                         else:
                                             print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                 elif method[0] == "2":
-                                    print('''请输入要移出聊天黑名单的玩家的召唤师名。每个玩家的召唤师名格式为{玩家昵称}#{昵称编号}。输入“-1”以结束输入。\nPlease submit the names of the blocked players to be unblocked. Each player's name should accord to the format {gameName}#{gameTag}. Submit "-1" to end the input.''')
+                                    print('''请输入要移出聊天黑名单的玩家的召唤师名。每个玩家的召唤师名格式为{玩家昵称}#{昵称编号}。输入“-1”以结束输入。\nPlease submit the names of the blocked players to be unblocked. Each player's name should accord to the format {gameName}#{gameTag}. Submit "-1" to end the input.\n变量提示（Variable hints）：\nblockList = await (await connection.request("GET", "/lol-chat/v1/blocked-players")).json()\nblockList_df = await sort_blockList_data(connection)''')
                                     unblock_indices = []
                                     while True:
                                         player_summonerName = input()
@@ -5343,20 +5492,32 @@ async def blacklist_behavior_simulation(connection):
                                         elif player_summonerName == "-1":
                                             break
                                         else:
-                                            if player_summonerName in player_summonerNames:
-                                                player_index = player_summonerNames.index(player_summonerName)
-                                            elif player_summonerName in map(str, player_summonerIds):
-                                                player_index = player_summonerIds.index(int(player_summonerName))
-                                            elif player_summonerName in player_puuids:
-                                                player_index = player_puuids.index(player_summonerName)
+                                            try:
+                                                player_summonerName_list = eval(player_summonerName)
+                                            except:
+                                                player_summonerName_list = [player_summonerName]
                                             else:
-                                                print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                                continue
-                                            if not player_index in unblock_indices:
-                                                unblock_indices.append(player_index)
-                                                index_got = True
+                                                if isinstance(player_summonerName_list, list) and all(map(lambda x: isinstance(x, (str, int)), player_summonerName_list)):
+                                                    pass
+                                                else:
+                                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                    continue
+                                            for player_summonerName in player_summonerName_list:
+                                                if player_summonerName in player_summonerNames:
+                                                    player_index = player_summonerNames.index(player_summonerName)
+                                                elif player_summonerName in map(str, player_summonerIds):
+                                                    player_index = player_summonerIds.index(int(player_summonerName))
+                                                elif player_summonerName in player_puuids:
+                                                    player_index = player_puuids.index(player_summonerName)
+                                                else:
+                                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                    continue
+                                                if not player_index in unblock_indices:
+                                                    unblock_indices.append(player_index)
+                                                    index_got = True
                                 else:
                                     print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                    continue
                                 if index_got:
                                     break
                                 print("请选择您输入要移出聊天黑名单的玩家信息的方式：\nPlease select a method of inputting the information of the blocked players to be unblocked:\n0\t返回上一层（Return to the last step）\n1\t索引（By index）\n2\t召唤师名（By summoner name）")
