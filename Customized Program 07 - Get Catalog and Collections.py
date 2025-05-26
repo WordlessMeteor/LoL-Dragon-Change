@@ -978,8 +978,8 @@ async def fetch_store(connection):
     #工作表排序（Worksheet ordering）
     if workbook_exist:
         print("警告：由于该文件已存在，本次导出已追加新工作表到工作簿的末尾。这可能导致工作表顺序的错乱。是否需要对工作表进行排序？（输入任意键排序，否则不排序）\nWarning: Because the excel workbook has existed, new sheets are appended to the last of the original sheet list. This may result in the disarrangement of worksheet order. Do you want to sort the sheets? (Input anything to sort the sheets, or null to skip sorting)")
-        sort = input()
-        if sort != "":
+        sort = bool(input())
+        if sort:
             store_loaded = True
             print("正在读取刚刚创建的工作表……\nLoading the workbook just created ...")
             while True:

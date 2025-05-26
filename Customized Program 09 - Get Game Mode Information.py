@@ -284,14 +284,14 @@ async def print_available_queue(connection):
     platformId = platform_config["LoginDataPacket"]["platformId"]
     game_version = await (await connection.request("GET", "/lol-patch/v1/game-version")).json()
     print("是否检查可用队列？（输入任意键检查，否则退出程序）\nDo you want to check available queues? (Submit anything to check, or null to exit the program)")
-    check = input()
-    if check != "":
+    check = bool(input())
+    if check:
         while True:
             await check_available_queue(connection)
             print("(" + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\t" + platformId + "\t" + game_version + ")")
             print("是否刷新可用队列信息？（输入任意键不刷新，否则刷新）\nRefresh available queue information? (Submit anything to quit refreshing, or null to continue refreshing)")
-            refresh = input()
-            if refresh != "":
+            refresh = bool(input())
+            if refresh:
                 break
 
 #-----------------------------------------------------------------------------

@@ -760,7 +760,7 @@ async def get_recent_players(connection, search_mode: int = 2):
     rarities = {"Default": "经典", "NoRarity": "其它", "Epic": "史诗", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极", "Exalted": "圣者至尊", "Transcendant": "超凡"}
     #定义玩家对局表现数据结构（Define the player match behavior data structure）
     ##英雄联盟（LoL）
-    LoLGame_info_header = {"endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "账户序号", "currentAccountId": "当前账户序号", "currentPlatformId": "当前大区", "gameName": "玩家昵称", "matchHistoryUri": "", "platformId": "原大区", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "profileIcon_title": "召唤师图标名称", "profileIcon_imagePath": "召唤师图标路径", "championId": "选用英雄序号", "highestAchievedSeasonTier": "最高段位", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "选用英雄", "champion_alias": "选用英雄代号", "champion_squarePortraitPath": "选用英雄方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "causedEarlySurrender": "发起提前投降", "champLevel": "英雄等级", "combatPlayerScore": "战斗得分", "damageDealtToObjectives": "对战略点的总伤害", "damageDealtToTurrets": "对防御塔的总伤害", "damageSelfMitigated": "自我缓和的伤害", "deaths": "死亡", "doubleKills": "双杀", "earlySurrenderAccomplice": "同意提前投降", "firstBloodAssist": "协助获得第一滴血", "firstBloodKill": "第一滴血", "firstInhibitorAssist": "协助摧毁第一座召唤水晶", "firstInhibitorKill": "摧毁第一座召唤水晶", "firstTowerAssist": "协助摧毁第一座塔", "firstTowerKill": "摧毁第一座塔", "gameEndedInEarlySurrender": "提前投降导致比赛结束", "gameEndedInSurrender": "投降导致比赛结束", "goldEarned": "金币获取", "goldSpent": "金币使用", "inhibitorKills": "摧毁召唤水晶", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "killingSprees": "大杀特杀", "kills": "击杀", "largestCriticalStrike": "最大暴击伤害", "largestKillingSpree": "最高连杀", "largestMultiKill": "最高多杀", "longestTimeSpentLiving": "最长生存时间", "magicDamageDealt": "造成的魔法伤害", "magicDamageDealtToChampions": "对英雄的魔法伤害", "magicalDamageTaken": "承受的魔法伤害", "neutralMinionsKilled": "击杀野怪", "neutralMinionsKilledEnemyJungle": "击杀敌方野区野怪", "neutralMinionsKilledTeamJungle": "击杀我方野区野怪", "objectivePlayerScore": "战略点玩家得分", "pentaKills": "五杀", "perk0": "符文1序号", "perk0Var1": "符文1：参数1", "perk0Var2": "符文1：参数2", "perk0Var3": "符文1：参数3", "perk1": "符文2序号", "perk1Var1": "符文2：参数1", "perk1Var2": "符文2：参数2", "perk1Var3": "符文2：参数3", "perk2": "符文3序号", "perk2Var1": "符文3：参数1", "perk2Var2": "符文3：参数2", "perk2Var3": "符文3：参数3", "perk3": "符文4序号", "perk3Var1": "符文4：参数1", "perk3Var2": "符文4：参数2", "perk3Var3": "符文4：参数3", "perk4": "符文5序号", "perk4Var1": "符文5：参数1", "perk4Var2": "符文5：参数2", "perk4Var3": "符文5：参数3", "perk5": "符文6序号", "perk5Var1": "符文6：参数1", "perk5Var2": "符文6：参数2", "perk5Var3": "符文6：参数3", "perkPrimaryStyle": "主系序号", "perkSubStyle": "副系序号", "physicalDamageDealt": "造成的物理伤害", "physicalDamageDealtToChampions": "对英雄的物理伤害", "physicalDamageTaken": "承受的物理伤害", "playerAugment1": "强化符文1", "playerAugment2": "强化符文2", "playerAugment3": "强化符文3", "playerAugment4": "强化符文4", "playerAugment5": "强化符文5", "playerAugment6": "强化符文6", "playerScore0": "玩家得分1", "playerScore1": "玩家得分2", "playerScore2": "玩家得分3", "playerScore3": "玩家得分4", "playerScore4": "玩家得分5", "playerScore5": "玩家得分6", "playerScore6": "玩家得分7", "playerScore7": "玩家得分8", "playerScore8": "玩家得分9", "playerScore9": "玩家得分10", "playerSubteamId": "子阵营序号", "quadraKills": "四杀", "sightWardsBoughtInGame": "购买洞察之石", "subteamPlacement": "队伍排名", "teamEarlySurrendered": "队伍提前投降", "timeCCingOthers": "控制得分", "totalDamageDealt": "造成的伤害总和", "totalDamageDealtToChampions": "对英雄的伤害总和", "totalDamageTaken": "承受伤害", "totalHeal": "输出治疗效果", "totalMinionsKilled": "击杀小兵", "totalPlayerScore": "玩家总得分", "totalScoreRank": "总得分排名", "totalTimeCrowdControlDealt": "控制时间", "totalUnitsHealed": "治疗单位数", "tripleKills": "三杀", "trueDamageDealt": "造成真实伤害", "trueDamageDealtToChampions": "对英雄的真实伤害", "trueDamageTaken": "承受的真实伤害", "turretKills": "摧毁防御塔", "unrealKills": "六杀及以上", "visionScore": "视野得分", "visionWardsBoughtInGame": "购买控制守卫", "wardsKilled": "摧毁守卫", "wardsPlaced": "放置守卫", "win": "胜利", "KDA": "战损比", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "perk0EndOfGameStatDescs": "符文1游戏结算数据", "perk1EndOfGameStatDescs": "符文2游戏结算数据", "perk2EndOfGameStatDescs": "符文3游戏结算数据", "perk3EndOfGameStatDescs": "符文4游戏结算数据", "perk4EndOfGameStatDescs": "符文5游戏结算数据", "perk5EndOfGameStatDescs": "符文6游戏结算数据", "perk0_name": "符文1名称", "perk1_name": "符文2名称", "perk2_name": "符文3名称", "perk3_name": "符文4名称", "perk4_name": "符文5名称", "perk5_name": "符文6名称", "perk0_iconPath": "符文1图标路径", "perk1_iconPath": "符文2图标路径", "perk2_iconPath": "符文3图标路径", "perk3_iconPath": "符文4图标路径", "perk4_iconPath": "符文5图标路径", "perk5_iconPath": "符文6图标路径", "perkPrimaryStyle_name": "主系名称", "perkPrimaryStyle_iconPath": "主系图标路径", "perkSubStyle_name": "副系名称", "perkSubStyle_iconPath": "副系图标路径", "playerAugment1_nameTRA": "强化符文1名称", "playerAugment2_nameTRA": "强化符文2名称", "playerAugment3_nameTRA": "强化符文3名称", "playerAugment4_nameTRA": "强化符文4名称", "playerAugment5_nameTRA": "强化符文5名称", "playerAugment6_nameTRA": "强化符文6名称", "playerAugment1_augmentIconPath": "强化符文1图标路径", "playerAugment2_augmentIconPath": "强化符文2图标路径", "playerAugment3_augmentIconPath": "强化符文3图标路径", "playerAugment4_augmentIconPath": "强化符文4图标路径", "playerAugment5_augmentIconPath": "强化符文5图标路径", "playerAugment6_augmentIconPath": "强化符文6图标路径", "playerAugment1_rarity": "强化符文1等级", "playerAugment2_rarity": "强化符文2等级", "playerAugment3_rarity": "强化符文3等级", "playerAugment4_rarity": "强化符文4等级", "playerAugment5_rarity": "强化符文5等级", "playerAugment6_rarity": "强化符文6等级", "win/lose": "胜负", "bannedChampionId": "禁用英雄序号", "bannedChampion_name": "禁用英雄", "bannedChampion_alias": "禁用英雄代号", "bannedChampion_squarePortraitPath": "禁用英雄方块头像路径", "lane": "分路", "role": "角色定位", "ally?": "是否队友？"}
+    LoLGame_info_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "participantId": "玩家序号", "accountId": "账户序号", "currentAccountId": "当前账户序号", "currentPlatformId": "当前大区", "gameName": "玩家昵称", "matchHistoryUri": "", "platformId": "原大区", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "profileIcon_title": "召唤师图标名称", "profileIcon_imagePath": "召唤师图标路径", "championId": "选用英雄序号", "highestAchievedSeasonTier": "最高段位", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "选用英雄", "champion_alias": "选用英雄代号", "champion_squarePortraitPath": "选用英雄方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "causedEarlySurrender": "发起提前投降", "champLevel": "英雄等级", "combatPlayerScore": "战斗得分", "damageDealtToObjectives": "对战略点的总伤害", "damageDealtToTurrets": "对防御塔的总伤害", "damageSelfMitigated": "自我缓和的伤害", "deaths": "死亡", "doubleKills": "双杀", "earlySurrenderAccomplice": "同意提前投降", "firstBloodAssist": "协助获得第一滴血", "firstBloodKill": "第一滴血", "firstInhibitorAssist": "协助摧毁第一座召唤水晶", "firstInhibitorKill": "摧毁第一座召唤水晶", "firstTowerAssist": "协助摧毁第一座塔", "firstTowerKill": "摧毁第一座塔", "gameEndedInEarlySurrender": "提前投降导致比赛结束", "gameEndedInSurrender": "投降导致比赛结束", "goldEarned": "金币获取", "goldSpent": "金币使用", "inhibitorKills": "摧毁召唤水晶", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "killingSprees": "大杀特杀", "kills": "击杀", "largestCriticalStrike": "最大暴击伤害", "largestKillingSpree": "最高连杀", "largestMultiKill": "最高多杀", "longestTimeSpentLiving": "最长生存时间", "magicDamageDealt": "造成的魔法伤害", "magicDamageDealtToChampions": "对英雄的魔法伤害", "magicalDamageTaken": "承受的魔法伤害", "neutralMinionsKilled": "击杀野怪", "neutralMinionsKilledEnemyJungle": "击杀敌方野区野怪", "neutralMinionsKilledTeamJungle": "击杀我方野区野怪", "objectivePlayerScore": "战略点玩家得分", "pentaKills": "五杀", "perk0": "符文1序号", "perk0Var1": "符文1：参数1", "perk0Var2": "符文1：参数2", "perk0Var3": "符文1：参数3", "perk1": "符文2序号", "perk1Var1": "符文2：参数1", "perk1Var2": "符文2：参数2", "perk1Var3": "符文2：参数3", "perk2": "符文3序号", "perk2Var1": "符文3：参数1", "perk2Var2": "符文3：参数2", "perk2Var3": "符文3：参数3", "perk3": "符文4序号", "perk3Var1": "符文4：参数1", "perk3Var2": "符文4：参数2", "perk3Var3": "符文4：参数3", "perk4": "符文5序号", "perk4Var1": "符文5：参数1", "perk4Var2": "符文5：参数2", "perk4Var3": "符文5：参数3", "perk5": "符文6序号", "perk5Var1": "符文6：参数1", "perk5Var2": "符文6：参数2", "perk5Var3": "符文6：参数3", "perkPrimaryStyle": "主系序号", "perkSubStyle": "副系序号", "physicalDamageDealt": "造成的物理伤害", "physicalDamageDealtToChampions": "对英雄的物理伤害", "physicalDamageTaken": "承受的物理伤害", "playerAugment1": "强化符文1", "playerAugment2": "强化符文2", "playerAugment3": "强化符文3", "playerAugment4": "强化符文4", "playerAugment5": "强化符文5", "playerAugment6": "强化符文6", "playerScore0": "玩家得分1", "playerScore1": "玩家得分2", "playerScore2": "玩家得分3", "playerScore3": "玩家得分4", "playerScore4": "玩家得分5", "playerScore5": "玩家得分6", "playerScore6": "玩家得分7", "playerScore7": "玩家得分8", "playerScore8": "玩家得分9", "playerScore9": "玩家得分10", "playerSubteamId": "子阵营序号", "quadraKills": "四杀", "sightWardsBoughtInGame": "购买洞察之石", "subteamPlacement": "队伍排名", "teamEarlySurrendered": "队伍提前投降", "timeCCingOthers": "控制得分", "totalDamageDealt": "造成的伤害总和", "totalDamageDealtToChampions": "对英雄的伤害总和", "totalDamageTaken": "承受伤害", "totalHeal": "输出治疗效果", "totalMinionsKilled": "击杀小兵", "totalPlayerScore": "玩家总得分", "totalScoreRank": "总得分排名", "totalTimeCrowdControlDealt": "控制时间", "totalUnitsHealed": "治疗单位数", "tripleKills": "三杀", "trueDamageDealt": "造成真实伤害", "trueDamageDealtToChampions": "对英雄的真实伤害", "trueDamageTaken": "承受的真实伤害", "turretKills": "摧毁防御塔", "unrealKills": "六杀及以上", "visionScore": "视野得分", "visionWardsBoughtInGame": "购买控制守卫", "wardsKilled": "摧毁守卫", "wardsPlaced": "放置守卫", "win": "胜利", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "perk0EndOfGameStatDescs": "符文1游戏结算数据", "perk1EndOfGameStatDescs": "符文2游戏结算数据", "perk2EndOfGameStatDescs": "符文3游戏结算数据", "perk3EndOfGameStatDescs": "符文4游戏结算数据", "perk4EndOfGameStatDescs": "符文5游戏结算数据", "perk5EndOfGameStatDescs": "符文6游戏结算数据", "perk0_name": "符文1名称", "perk1_name": "符文2名称", "perk2_name": "符文3名称", "perk3_name": "符文4名称", "perk4_name": "符文5名称", "perk5_name": "符文6名称", "perk0_iconPath": "符文1图标路径", "perk1_iconPath": "符文2图标路径", "perk2_iconPath": "符文3图标路径", "perk3_iconPath": "符文4图标路径", "perk4_iconPath": "符文5图标路径", "perk5_iconPath": "符文6图标路径", "perkPrimaryStyle_name": "主系名称", "perkPrimaryStyle_iconPath": "主系图标路径", "perkSubStyle_name": "副系名称", "perkSubStyle_iconPath": "副系图标路径", "playerAugment1_nameTRA": "强化符文1名称", "playerAugment2_nameTRA": "强化符文2名称", "playerAugment3_nameTRA": "强化符文3名称", "playerAugment4_nameTRA": "强化符文4名称", "playerAugment5_nameTRA": "强化符文5名称", "playerAugment6_nameTRA": "强化符文6名称", "playerAugment1_augmentIconPath": "强化符文1图标路径", "playerAugment2_augmentIconPath": "强化符文2图标路径", "playerAugment3_augmentIconPath": "强化符文3图标路径", "playerAugment4_augmentIconPath": "强化符文4图标路径", "playerAugment5_augmentIconPath": "强化符文5图标路径", "playerAugment6_augmentIconPath": "强化符文6图标路径", "playerAugment1_rarity": "强化符文1等级", "playerAugment2_rarity": "强化符文2等级", "playerAugment3_rarity": "强化符文3等级", "playerAugment4_rarity": "强化符文4等级", "playerAugment5_rarity": "强化符文5等级", "playerAugment6_rarity": "强化符文6等级", "K/D/A": "击杀/死亡/助攻", "KDA": "战损比", "CS": "补刀", "GPM": "分均经济", "GUE": "金币利用率", "CSPM": "分均补刀", "D/G": "伤害转化率", "win/lose": "胜负", "bannedChampionId": "禁用英雄序号", "bannedChampion_name": "禁用英雄", "bannedChampion_alias": "禁用英雄代号", "bannedChampion_squarePortraitPath": "禁用英雄方块头像路径", "lane": "分路", "role": "角色定位", "ally?": "是否队友？", "assists_percent": "助攻次数占比", "combatPlayerScore_percent": "战斗得分占比", "damageDealtToObjectives_percent": "对战略点的总伤害占比", "damageDealtToTurrets_percent": "对防御塔的总伤害占比", "damageSelfMitigated_percent": "自我缓和的伤害占比", "deaths_percent": "死亡次数占比", "doubleKills_percent": "双杀次数占比", "goldEarned_percent": "金币获取占比", "goldSpent_percent": "金币使用占比", "inhibitorKills_percent": "摧毁召唤水晶数量占比", "killingSprees_percent": "大杀特杀次数占比", "kills_percent": "击杀数量占比", "largestCriticalStrike_percent": "最大暴击伤害占比", "largestKillingSpree_percent": "最高连杀占比", "largestMultiKill_percent": "最高多杀占比", "longestTimeSpentLiving_percent": "最长生存时间占比", "magicDamageDealt_percent": "造成的魔法伤害占比", "magicDamageDealtToChampions_percent": "对英雄的魔法伤害占比", "magicalDamageTaken_percent": "承受的魔法伤害占比", "neutralMinionsKilled_percent": "击杀野怪数量占比", "neutralMinionsKilledEnemyJungle_percent": "击杀敌方野区野怪数量占比", "neutralMinionsKilledTeamJungle_percent": "击杀我方野区野怪数量占比", "objectivePlayerScore_percent": "战略点玩家得分占比", "pentaKills_percent": "五杀次数占比", "physicalDamageDealt_percent": "造成的物理伤害占比", "physicalDamageDealtToChampions_percent": "对英雄的物理伤害占比", "physicalDamageTaken_percent": "承受的物理伤害占比", "playerScore0_percent": "玩家得分1占比", "playerScore1_percent": "玩家得分2占比", "playerScore2_percent": "玩家得分3占比", "playerScore3_percent": "玩家得分4占比", "playerScore4_percent": "玩家得分5占比", "playerScore5_percent": "玩家得分6占比", "playerScore6_percent": "玩家得分7占比", "playerScore7_percent": "玩家得分8占比", "playerScore8_percent": "玩家得分9占比", "playerScore9_percent": "玩家得分10占比", "quadraKills_percent": "四杀次数占比", "sightWardsBoughtInGame_percent": "购买洞察之石数量占比", "timeCCingOthers_percent": "控制得分占比", "totalDamageDealt_percent": "造成的伤害总和占比", "totalDamageDealtToChampions_percent": "对英雄的伤害总和占比", "totalDamageTaken_percent": "承受伤害占比", "totalHeal_percent": "输出治疗效果占比", "totalMinionsKilled_percent": "击杀小兵数量占比", "totalPlayerScore_percent": "玩家总得分占比", "totalTimeCrowdControlDealt_percent": "控制时间占比", "totalUnitsHealed_percent": "治疗单位数占比", "tripleKills_percent": "三杀次数占比", "trueDamageDealt_percent": "造成真实伤害占比", "trueDamageDealtToChampions_percent": "对英雄的真实伤害占比", "trueDamageTaken_percent": "承受的真实伤害占比", "turretKills_percent": "摧毁防御塔数量占比", "unrealKills_percent": "六杀及以上连杀次数占比", "visionScore_percent": "视野得分占比", "visionWardsBoughtInGame_percent": "购买控制守卫数量占比", "wardsKilled_percent": "摧毁守卫数量占比", "wardsPlaced_percent": "放置守卫数量占比", "KP_percent": "参团率", "CS_percent": "补刀数占比", "assists_order": "助攻次数位次", "champLevel_order": "英雄等级位次", "combatPlayerScore_order": "战斗得分位次", "damageDealtToObjectives_order": "对战略点的总伤害位次", "damageDealtToTurrets_order": "对防御塔的总伤害位次", "damageSelfMitigated_order": "自我缓和的伤害位次", "deaths_order": "死亡次数位次", "doubleKills_order": "双杀次数位次", "goldEarned_order": "金币获取位次", "goldSpent_order": "金币使用位次", "inhibitorKills_order": "摧毁召唤水晶数量位次", "killingSprees_order": "大杀特杀次数位次", "kills_order": "击杀数量位次", "largestCriticalStrike_order": "最大暴击伤害位次", "largestKillingSpree_order": "最高连杀位次", "largestMultiKill_order": "最高多杀位次", "longestTimeSpentLiving_order": "最长生存时间位次", "magicDamageDealt_order": "造成的魔法伤害位次", "magicDamageDealtToChampions_order": "对英雄的魔法伤害位次", "magicalDamageTaken_order": "承受的魔法伤害位次", "neutralMinionsKilled_order": "击杀野怪数量位次", "neutralMinionsKilledEnemyJungle_order": "击杀敌方野区野怪数量位次", "neutralMinionsKilledTeamJungle_order": "击杀我方野区野怪数量位次", "objectivePlayerScore_order": "战略点玩家得分位次", "pentaKills_order": "五杀次数位次", "physicalDamageDealt_order": "造成的物理伤害位次", "physicalDamageDealtToChampions_order": "对英雄的物理伤害位次", "physicalDamageTaken_order": "承受的物理伤害位次", "playerScore0_order": "玩家得分1位次", "playerScore1_order": "玩家得分2位次", "playerScore2_order": "玩家得分3位次", "playerScore3_order": "玩家得分4位次", "playerScore4_order": "玩家得分5位次", "playerScore5_order": "玩家得分6位次", "playerScore6_order": "玩家得分7位次", "playerScore7_order": "玩家得分8位次", "playerScore8_order": "玩家得分9位次", "playerScore9_order": "玩家得分10位次", "quadraKills_order": "四杀次数位次", "sightWardsBoughtInGame_order": "购买洞察之石数量位次", "timeCCingOthers_order": "控制得分位次", "totalDamageDealt_order": "造成的伤害总和位次", "totalDamageDealtToChampions_order": "对英雄的伤害总和位次", "totalDamageTaken_order": "承受伤害位次", "totalHeal_order": "输出治疗效果位次", "totalMinionsKilled_order": "击杀小兵数量位次", "totalPlayerScore_order": "玩家总得分位次", "totalTimeCrowdControlDealt_order": "控制时间位次", "totalUnitsHealed_order": "治疗单位数位次", "tripleKills_order": "三杀次数位次", "trueDamageDealt_order": "造成真实伤害位次", "trueDamageDealtToChampions_order": "对英雄的真实伤害位次", "trueDamageTaken_order": "承受的真实伤害位次", "turretKills_order": "摧毁防御塔数量位次", "unrealKills_order": "六杀及以上连杀次数位次", "visionScore_order": "视野得分位次", "visionWardsBoughtInGame_order": "购买控制守卫数量位次", "wardsKilled_order": "摧毁守卫数量位次", "wardsPlaced_order": "放置守卫数量位次", "KDA_order": "战损比位次", "KP_order": "参团率位次", "CS_order": "补刀数位次", "D/G_order": "伤害转化率位次", "GUE_order": "金币利用率位次"}
     LoLGame_info_data = {}
     LoLGame_info_header_keys = list(LoLGame_info_header.keys())
     for key in LoLGame_info_header_keys:
@@ -925,23 +925,30 @@ async def get_recent_players(connection, search_mode: int = 2):
                     #数据整理核心部分（Data assignment - core part）
                     for i in range(len(LoLGame_info["participants"])):
                         #if LoLGame_info["participantIdentities"][i]["player"]["puuid"] != "00000000-0000-0000-0000-000000000000" and not LoLGame_info["participantIdentities"][i]["player"]["puuid"] == current_puuid: #统计玩家，当然指的是不包括自己的人类玩家（Of course, the players counted are human players but not himself / herself）
+                            stats = LoLGame_info["participants"][i]["stats"]
+                            timeline = LoLGame_info["participants"][i]["timeline"]
+                            team_participants = [participant for participant in LoLGame_info["participants"] if LoLGame_info["gameMode"] == "CHERRY" and participant["stats"]["playerSubteamId"] == stats["playerSubteamId"] or LoLGame_info["gameMode"] != "CHERRY" and participant["teamId"] == LoLGame_info["participants"][i]["teamId"]] #存储对局信息中同一队伍的玩家。斗魂竞技场对局应该使用子阵营（Store the participants of the same team from the game information. Subteam should be used to evaluate a player）
                             for j in range(len(LoLGame_info_header)):
                                 key = LoLGame_info_header_keys[j]
-                                if j <= 10:
-                                    if j == 0:
+                                if j == 0: #游戏序号（`gameIndex`）
+                                    LoLGame_info_data[key].append(LoLMatchIDs.index(matchID) + 1)
+                                elif j <= 11:
+                                    if j == 1: #对局终止情况（`endOfGameResults`）
                                         LoLGame_info_data[key].append(endOfGameResults[LoLGame_info[key]])
-                                    if j == 2:
+                                    if j == 3: #创建日期（`gameCreationDate`）
                                         LoLGame_info_data[key].append(LoLGame_info["gameCreationDate"][:10] + " " + LoLGame_info["gameCreationDate"][11:23])
-                                    elif j == 3:
+                                    elif j == 4: #持续时长（`gameDuration`）
                                         LoLGame_info_data[key].append(str(LoLGame_info["gameDuration"] // 60) + ":" + "%02d" %(LoLGame_info["gameDuration"] % 60))
-                                    elif j == 6:
+                                    elif j == 7: #游戏类型（`gameType`）
                                         LoLGame_info_data[key].append(gameTypes[LoLGame_info[key]])
-                                    elif j == 10:
+                                    elif j == 11: #游戏模式名称（`gameModeName`）
                                         LoLGame_info_data[key].append("自定义" if LoLGame_info["queueId"] == 0 else gamemodes[LoLGame_info["queueId"]]["name"])
                                     else:
                                         LoLGame_info_data[key].append(LoLGame_info[key])
-                                elif j <= 23:
-                                    if j >= 22:
+                                elif j == 12: #玩家序号（`participantId`）
+                                    LoLGame_info_data[key].append(LoLGame_info["participantIdentities"][i][key])
+                                elif j <= 25:
+                                    if j >= 24:
                                         profileIconId = LoLGame_info["participantIdentities"][i]["player"]["profileIcon"]
                                         if profileIconId in summonerIcons:
                                             try:
@@ -954,15 +961,15 @@ async def get_recent_players(connection, search_mode: int = 2):
                                             if not profileIconId in unmapped_keys["summonerIcon"]:
                                                 unmapped_keys["summonerIcon"].add(profileIconId)
                                                 print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）召唤师图标信息（%d）获取失败！将采用原始数据！\n[%d. %s] Summoner icon information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, profileIconId, j, key, profileIconId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                            LoLGame_info_data[key].append(profileIconId if j == 12 else "")
+                                            LoLGame_info_data[key].append(profileIconId if j == 24 else "")
                                     else:
                                         LoLGame_info_data[key].append(LoLGame_info["participantIdentities"][i]["player"][key])
-                                elif j <= 35:
-                                    if j == 25: #最高段位（`highestAchievedSeasonTier`）
+                                elif j <= 37:
+                                    if j == 27: #最高段位（`highestAchievedSeasonTier`）
                                         LoLGame_info_data[key].append(tiers[LoLGame_info["participants"][i][key]])
-                                    elif j == 28: #阵营（`teamId`）
+                                    elif j == 30: #阵营（`teamId`）
                                         LoLGame_info_data[key].append(team_color[LoLGame_info["participants"][i][key]])
-                                    elif j >= 29 and j <= 31: #选用英雄序号相关键（`championId`-related keys）
+                                    elif j >= 31 and j <= 33: #选用英雄序号相关键（`championId`-related keys）
                                         championId = LoLGame_info["participants"][i][key.split("_")[0] + "Id"]
                                         if championId in LoLChampions:
                                             LoLGame_info_data[key].append(LoLChampions[championId][key.split("_")[-1]])
@@ -970,8 +977,8 @@ async def get_recent_players(connection, search_mode: int = 2):
                                             if not championId in unmapped_keys["LoLChampion"]:
                                                 unmapped_keys["LoLChampion"].add(championId)
                                                 print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）英雄信息（%d）获取失败！将采用原始数据！\n[%d. %s] Champion information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, championId, j, key, championId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                            LoLGame_info_data[key].append(championId if j == 19 else "")
-                                    elif j >= 32 and j <= 35: #召唤师技能序号相关键（SpellIds-related keys）
+                                            LoLGame_info_data[key].append(championId if j == 31 else "")
+                                    elif j >= 34 and j <= 37: #召唤师技能序号相关键（SpellIds-related keys）
                                         spellId = LoLGame_info["participants"][i][key.split("_")[0] + "Id"]
                                         if spellId in spells:
                                             LoLGame_info_data[key].append(spells[spellId][key.split("_")[-1]])
@@ -979,16 +986,14 @@ async def get_recent_players(connection, search_mode: int = 2):
                                             if not spellId in unmapped_keys["spell"]:
                                                 unmapped_keys["spell"].add(spellId)
                                                 print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）召唤师技能信息（%d）获取失败！将采用原始数据！\n[%d. %s] Spell information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, spellId, j, key, spellId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                            LoLGame_info_data[key].append(spellId if j <= 33 else "")
+                                            LoLGame_info_data[key].append(spellId if j <= 35 else "")
                                     else:
                                         LoLGame_info_data[key].append(LoLGame_info["participants"][i][key])
-                                elif j <= 204:
-                                    if j == 123: #子阵营序号（`playerSubteamId`）
-                                        LoLGame_info_data[key].append(subteam_color[LoLGame_info["participants"][i]["stats"][key]])
-                                    elif j == 149: #战损比（`KDA`）
-                                        LoLGame_info_data[key].append("%d/%d/%d" %(LoLGame_info["participants"][i]["stats"]["kills"], LoLGame_info["participants"][i]["stats"]["deaths"], LoLGame_info["participants"][i]["stats"]["assists"]))
-                                    elif j >= 150 and j <= 163: #英雄联盟装备相关键（LoLItems-related keys）
-                                        itemId = LoLGame_info["participants"][i]["stats"][key.split("_")[0]]
+                                elif j <= 212:
+                                    if j == 125: #子阵营序号（`playerSubteamId`）
+                                        LoLGame_info_data[key].append(subteam_color[stats[key]])
+                                    elif j >= 151 and j <= 164: #英雄联盟装备相关键（LoLItems-related keys）
+                                        itemId = stats[key.split("_")[0]]
                                         if itemId == 0:
                                             LoLGame_info_data[key].append("")
                                         elif itemId in LoLItems:
@@ -997,17 +1002,17 @@ async def get_recent_players(connection, search_mode: int = 2):
                                             if not itemId in unmapped_keys["LoLItem"]:
                                                 unmapped_keys["LoLItem"].add(itemId)
                                                 print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）装备信息（%d）获取失败！将采用原始数据！\n[%d. %s] LoL item information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, itemId, j, key, itemId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                            LoLGame_info_data[key].append(itemId if j <= 156 else "")
-                                    elif j >= 164 and j <= 181: #符文相关键（Perks-related keys）
-                                        if j <= 169:
-                                            perkId = LoLGame_info["participants"][i]["stats"][key[:5]]
+                                            LoLGame_info_data[key].append(itemId if j <= 157 else "")
+                                    elif j >= 165 and j <= 182: #符文相关键（Perks-related keys）
+                                        if j <= 170:
+                                            perkId = stats[key[:5]]
                                             if perkId == 0:
                                                 LoLGame_info_data[key].append("")
                                             elif perkId in perks:
                                                 perk_EndOfGameStatDescs = "".join(list(map(lambda x: x + "。", perks[perkId]["endOfGameStatDescs"])))
-                                                perk_EndOfGameStatDescs = perk_EndOfGameStatDescs.replace("@eogvar1@", str(LoLGame_info["participants"][i]["stats"][key[:5] + "Var1"]))
-                                                perk_EndOfGameStatDescs = perk_EndOfGameStatDescs.replace("@eogvar2@", str(LoLGame_info["participants"][i]["stats"][key[:5] + "Var2"]))
-                                                perk_EndOfGameStatDescs = perk_EndOfGameStatDescs.replace("@eogvar3@", str(LoLGame_info["participants"][i]["stats"][key[:5] + "Var3"]))
+                                                perk_EndOfGameStatDescs = perk_EndOfGameStatDescs.replace("@eogvar1@", str(stats[key[:5] + "Var1"]))
+                                                perk_EndOfGameStatDescs = perk_EndOfGameStatDescs.replace("@eogvar2@", str(stats[key[:5] + "Var2"]))
+                                                perk_EndOfGameStatDescs = perk_EndOfGameStatDescs.replace("@eogvar3@", str(stats[key[:5] + "Var3"]))
                                                 LoLGame_info_data[key].append(perk_EndOfGameStatDescs)
                                             else:
                                                 if not perkId in unmapped_keys["perk"]:
@@ -1015,7 +1020,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                                     print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）符文信息（%d）获取失败！将采用原始数据！\n[%d. %s] Runes information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, perkId, j, key, perkId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
                                                 LoLGame_info_data[key].append("")
                                         else:
-                                            perkId = LoLGame_info["participants"][i]["stats"][key.split("_")[0]]
+                                            perkId = stats[key.split("_")[0]]
                                             if perkId == 0:
                                                 LoLGame_info_data[key].append("")
                                             elif perkId in perks:
@@ -1024,9 +1029,9 @@ async def get_recent_players(connection, search_mode: int = 2):
                                                 if not perkId in unmapped_keys["perk"]:
                                                     unmapped_keys["perk"].add(perkId)
                                                     print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）符文信息（%d）获取失败！将采用原始数据！\n[%d. %s] Runes information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, perkId, j, key, perkId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                                LoLGame_info_data[key].append(perkId if j <= 175 else "")
-                                    elif j >= 182 and j <= 185: #符文系相关键（Perkstyles-related keys）
-                                        perkstyleId = LoLGame_info["participants"][i]["stats"][key.split("_")[0]]
+                                                LoLGame_info_data[key].append(perkId if j <= 176 else "")
+                                    elif j >= 183 and j <= 186: #符文系相关键（Perkstyles-related keys）
+                                        perkstyleId = stats[key.split("_")[0]]
                                         if perkstyleId == 0:
                                             LoLGame_info_data[key].append("")
                                         elif perkstyleId in perkstyles:
@@ -1035,15 +1040,15 @@ async def get_recent_players(connection, search_mode: int = 2):
                                             if not perkstyleId in unmapped_keys["perkstyle"]:
                                                 unmapped_keys["perkstyle"].add(perkstyleId)
                                                 print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）符文系信息（%d）获取失败！将采用原始数据！\n[%d. %s] Perkstyle information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, perkstyleId, j, key, perkstyleId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                            LoLGame_info_data[key].append(perkstyleId if (j - 182) % 2 == 0 else "")
-                                    elif j >= 186 and j <= 203: #强化符文相关键（Augment-related keys）
-                                        CherryAugmentId = LoLGame_info["participants"][i]["stats"][key.split("_")[0]]
+                                            LoLGame_info_data[key].append(perkstyleId if (j - 183) % 2 == 0 else "")
+                                    elif j >= 187 and j <= 204: #强化符文相关键（Augment-related keys）
+                                        CherryAugmentId = stats[key.split("_")[0]]
                                         if CherryAugmentId == 0:
                                             LoLGame_info_data[key].append("")
                                         elif CherryAugmentId in CherryAugments:
-                                            if j <= 191: #强化符文名称（`nameTRA`）
+                                            if j <= 192: #强化符文名称（`nameTRA`）
                                                 LoLGame_info_data[key].append(CherryAugments[CherryAugmentId][key.split("_")[-1]])
-                                            elif j <= 197: #强化符文图标路径（`augmentIconPath`）
+                                            elif j <= 198: #强化符文图标路径（`augmentIconPath`）
                                                 LoLGame_info_data[key].append(CherryAugments[CherryAugmentId]["augmentSmallIconPath"].replace("_small.png", "_large.png"))
                                             else: #强化符文等级（`rarity`）
                                                 LoLGame_info_data[key].append(augment_rarity[CherryAugments[CherryAugmentId][key.split("_")[-1]]])
@@ -1051,12 +1056,26 @@ async def get_recent_players(connection, search_mode: int = 2):
                                             if not CherryAugmentId in unmapped_keys["CherryAugment"]:
                                                 unmapped_keys["CherryAugment"].add(CherryAugmentId)
                                                 print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）强化符文信息（%d）获取失败！将采用原始数据！\n[%d. %s] Cherry augment information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, CherryAugmentId, j, key, CherryAugmentId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                            LoLGame_info_data[key].append(CherryAugmentId if j <= 191 else "")
-                                    elif j == 204: #胜负（`win/lose`）
-                                        LoLGame_info_data[key].append("胜利" if LoLGame_info["participants"][i]["stats"]["win"] else "失败")
+                                            LoLGame_info_data[key].append(CherryAugmentId if j <= 192 else "")
+                                    elif j == 205: #击杀/死亡/助攻（`K/D/A`）
+                                        LoLGame_info_data[key].append("/".join([str(stats["kills"]), str(stats["deaths"]), str(stats["assists"])]))
+                                    elif j == 206: #战损比（`KDA`）
+                                        LoLGame_info_data[key].append((stats["kills"] + stats["assists"]) / max(1, stats["deaths"]))
+                                    elif j == 207: #补刀（`CS`）
+                                        LoLGame_info_data[key].append(stats["neutralMinionsKilled"] + stats["totalMinionsKilled"])
+                                    elif j == 208: #分均经济（`GPM`）
+                                        LoLGame_info_data[key].append(0 if LoLGame_info["gameDuration"] == 0 else stats["goldEarned"] * 60 / LoLGame_info["gameDuration"])
+                                    elif j == 209: #金币利用率（`GUE` - Gold Utilization Efficiency）
+                                        LoLGame_info_data[key].append(0 if stats["goldEarned"] == 0 else stats["goldSpent"] / stats["goldEarned"])
+                                    elif j == 210: #分均补刀（`CSPM`）
+                                        LoLGame_info_data[key].append(0 if LoLGame_info["gameDuration"] == 0 else (stats["neutralMinionsKilled"] + stats["totalMinionsKilled"]) * 60 / LoLGame_info["gameDuration"])
+                                    elif j == 211: #伤害转化率（`D/G`）
+                                        LoLGame_info_data[key].append(0 if stats["goldEarned"] == 0 else stats["totalDamageDealtToChampions"] / stats["goldEarned"])
+                                    elif j == 212: #胜负（`win/lose`）
+                                        LoLGame_info_data[key].append("胜利" if stats["win"] else "失败")
                                     else:
-                                        LoLGame_info_data[key].append(LoLGame_info["participants"][i]["stats"][key])
-                                elif j <= 208:
+                                        LoLGame_info_data[key].append(stats[key])
+                                elif j <= 216:
                                     if bans == []: #修改说明：以前判断禁用数据是否为空是通过禁用模式进行的，如果禁用模式是经典策略就记录禁用信息，否则直接追加空值到列表中。但是在终极魔典中，先前版本记录禁用信息，后来却不记录了。因此，这里判断禁用数据是否为空，直接通过判断bans是否为空【Modification note: To judge whether the ban information of a match is empty, banMode (teams\bans) is used: if banMode is StandardBanStrategy, record the ban information; otherwise, append empty values to the list (by player_count times). But in Ultbook, ban information is recorded in previous versions but not anymore recorded later. Therefore, to judge whether the ban information is empty, whether the variable bans is empty is directly checked】
                                         LoLGame_info_data[key].append("")
                                     else:
@@ -1067,7 +1086,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                                 elif legacy_banData_team100_last_i != i:
                                                     legacy_banData_team100_appended = True
                                                 if not legacy_banData_team100_appended:
-                                                    if j == 205:
+                                                    if j == 213:
                                                         LoLGame_info_data[key].append(list(map(lambda x: x["championId"], bans_team100)))
                                                     else:
                                                         championIds = list(map(lambda x: x["championId"], bans_team100))
@@ -1079,7 +1098,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                                                 if not championId in unmapped_keys["LoLChampion"]:
                                                                     unmapped_keys["LoLChampion"].add(championId)
                                                                     print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）英雄信息（%d）获取失败！将采用原始数据！\n[%d. %s] Champion information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, championId, j, key, championId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                                                to_append.append(championId)
+                                                                to_append.append(championId if j == 214 else "")
                                                         LoLGame_info_data[key].append(to_append)
                                                 else:
                                                     LoLGame_info_data[key].append("")
@@ -1089,7 +1108,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                                 elif legacy_banData_team200_last_i != i:
                                                     legacy_banData_team200_appended = True
                                                 if not legacy_banData_team200_appended:
-                                                    if j == 205:
+                                                    if j == 213:
                                                         LoLGame_info_data[key].append(list(map(lambda x: x["championId"], bans_team200)))
                                                     else:
                                                         championIds = list(map(lambda x: x["championId"], bans_team200))
@@ -1101,7 +1120,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                                                 if not championId in unmapped_keys["LoLChampion"]:
                                                                     unmapped_keys["LoLChampion"].add(championId)
                                                                     print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）英雄信息（%d）获取失败！将采用原始数据！\n[%d. %s] Champion information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, championId, j, key, championId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                                                to_append.append(championId)
+                                                                to_append.append(championId if j == 214 else "")
                                                         LoLGame_info_data[key].append(to_append)
                                                 else:
                                                     LoLGame_info_data[key].append("")
@@ -1109,7 +1128,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                             if bans[i]["championId"] == -1:
                                                 LoLGame_info_data[key].append("")
                                             else:
-                                                if j == 205:
+                                                if j == 213:
                                                     LoLGame_info_data[key].append(bans[i]["championId"])
                                                 else:
                                                     championId = bans[i]["championId"]
@@ -1119,21 +1138,52 @@ async def get_recent_players(connection, search_mode: int = 2):
                                                         if not championId in unmapped_keys["LoLChampion"]:
                                                             unmapped_keys["LoLChampion"].add(championId)
                                                             print("【%d. %s】第%d/%d场对局（对局序号：%s，对局版本：%s）英雄信息（%d）获取失败！将采用原始数据！\n[%d. %s] Champion information (%d) of Match %d / %d (matchID: %s, gameVersion: %s) capture failed! The original data will be used for this match!" %(j, key, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version, championId, j, key, championId, LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID, version))
-                                                        LoLGame_info_data[key].append(championId)
-                                elif j <= 210:
-                                    if j == 209:
-                                        LoLGame_info_data[key].append(lanes[LoLGame_info["participants"][i]["timeline"][key]])
-                                    else:
-                                        LoLGame_info_data[key].append(roles[LoLGame_info["participants"][i]["timeline"][key]])
-                                else:
-                                    if LoLGame_info["participants"][i]["teamId"] == LoLGame_info["participants"][currentParticipantId]["teamId"] and LoLGame_info["participants"][i]["stats"]["playerSubteamId"] == LoLGame_info["participants"][currentParticipantId]["stats"]["playerSubteamId"]: #如果小号出现在大号对面的阵营，以大号为主要参考（If a smurf account is against the main account, the main account is referred in priority）
+                                                        LoLGame_info_data[key].append(championId if j == 214 else "")
+                                elif j <= 218: #时间轴相关键（Timeline-related keys）
+                                    LoLGame_info_data[key].append(lanes[timeline[key]] if j == 217 else roles[timeline[key]])
+                                elif j == 219: #是否队友？（`ally?`）
+                                    if LoLGame_info["participants"][i]["teamId"] == LoLGame_info["participants"][currentParticipantId]["teamId"] and stats["playerSubteamId"] == LoLGame_info["participants"][currentParticipantId]["stats"]["playerSubteamId"]: #如果小号出现在大号对面的阵营，以大号为主要参考（If a smurf account is against the main account, the main account is referred in priority）
                                         LoLGame_info_data[key].append(True)
                                     else:
                                         LoLGame_info_data[key].append(False)
+                                else: #对局信息转换键（Keys transformed according to game information）
+                                    subkey = key.split("_")[0]
+                                    if key.endswith("_percent"): #团队占比键（Team percentage keys）
+                                        if j == 278: #参团率（`KP_percent`）
+                                            self_stat = stats["kills"] + stats["assists"]
+                                            total_stat = sum(map(lambda x: x["stats"]["kills"], team_participants))
+                                        elif j == 279: #补刀数占比（`CS_percent`）
+                                            self_stat = stats["totalMinionsKilled"] + stats["neutralMinionsKilled"]
+                                            total_stat = sum(map(lambda x: x["stats"]["totalMinionsKilled"] + x["stats"]["neutralMinionsKilled"], team_participants))
+                                        else:
+                                            self_stat = stats[subkey]
+                                            total_stat = sum(map(lambda x: x["stats"][subkey], team_participants))
+                                        value = 0 if total_stat == 0 else self_stat / total_stat
+                                        LoLGame_info_data[key].append(value)
+                                    else: #位次键（Order keys）
+                                        if j == 339: #战损比位次（`KDA_order`）
+                                            self_stat = (stats["kills"] + stats["assists"]) / max(1, stats["deaths"])
+                                            stat_list = sorted(map(lambda x: (x["stats"]["kills"] + x["stats"]["assists"]) / max(1, x["stats"]["deaths"]), team_participants), reverse = True)
+                                        elif j == 340: #参团率位次（`KP_order`）
+                                            self_stat = stats["kills"] + stats["assists"]
+                                            stat_list = sorted(map(lambda x: x["stats"]["kills"] + x["stats"]["assists"], team_participants), reverse = True)
+                                        elif j == 341: #补刀数位次（`CS_order`）
+                                            self_stat = stats["totalMinionsKilled"] + stats["neutralMinionsKilled"]
+                                            stat_list = sorted(map(lambda x: x["stats"]["totalMinionsKilled"] + x["stats"]["neutralMinionsKilled"], team_participants), reverse = True)
+                                        elif j == 342: #伤害转化率位次（`D/G_order`）
+                                            self_stat = 0 if stats["goldEarned"] == 0 else stats["totalDamageDealtToChampions"] / stats["goldEarned"]
+                                            stat_list = sorted(map(lambda x: 0 if x["stats"]["goldEarned"] == 0 else x["stats"]["totalDamageDealtToChampions"] / x["stats"]["goldEarned"], team_participants), reverse = True)
+                                        elif j == 343: #金币利用率位次（`GUE_order`）
+                                            self_stat = 0 if stats["goldEarned"] == 0 else stats["goldSpent"] / stats["goldEarned"]
+                                            stat_list = sorted(map(lambda x: 0 if x["stats"]["goldEarned"] == 0 else x["stats"]["goldSpent"] / x["stats"]["goldEarned"], team_participants), reverse = True)
+                                        else:
+                                            self_stat = stats[subkey]
+                                            stat_list = sorted(map(lambda x: x["stats"][subkey], team_participants), reverse = True)
+                                        LoLGame_info_data[key].append(0 if len(set(stat_list)) == 1 else stat_list.index(self_stat) + 1) #当所有人的数据一样时，则不用比较位次（When some stat of every player is the same, there's no need to compare it）
                     print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
                     print("加载进度（Loading process）：%d/%d\t对局序号（MatchID）： %s" %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID))
     #数据框列序整理（Dataframe column ordering）
-    recent_LoLPlayers_statistics_output_order = [20, 14, 21, 19, 18, 25, 4, 2, 3, 9, 5, 10, 8, 7, 211, 29, 30, 209, 210, 38, 32, 33, 150, 151, 152, 153, 154, 155, 156, 186, 198, 187, 199, 188, 200, 189, 201, 190, 202, 191, 203, 149, 39, 134, 135, 67, 64, 68, 47, 46, 51, 50, 49, 48, 44, 138, 124, 77, 143, 128, 136, 130, 105, 71, 140, 129, 104, 70, 139, 66, 41, 40, 132, 137, 131, 106, 72, 141, 42, 144, 147, 146, 125, 145, 54, 55, 133, 73, 75, 74, 142, 56, 69, 182, 184, 170, 164, 171, 165, 172, 166, 173, 167, 174, 168, 175, 169, 37, 45, 127, 52, 53, 204, 126]
+    recent_LoLPlayers_statistics_output_order = [0, 12, 22, 16, 23, 21, 20, 27, 5, 3, 4, 10, 6, 11, 9, 8, 219, 31, 32, 214, 215, 217, 218, 40, 34, 35, 151, 152, 153, 154, 155, 156, 157, 187, 199, 188, 200, 189, 201, 190, 202, 191, 203, 192, 204, 205, 206, 207, 210, 211, 41, 136, 137, 69, 66, 70, 49, 48, 53, 52, 51, 50, 46, 140, 126, 79, 145, 130, 138, 132, 107, 73, 142, 131, 106, 72, 141, 68, 43, 42, 134, 139, 133, 108, 74, 143, 44, 146, 149, 148, 127, 147, 56, 208, 57, 209, 135, 75, 77, 76, 144, 58, 71, 183, 185, 171, 165, 172, 166, 173, 167, 174, 168, 175, 169, 176, 170, 39, 47, 129, 54, 55, 212, 128, 231, 225, 220, 278, 221, 265, 233, 230, 234, 226, 268, 257, 243, 273, 259, 266, 261, 245, 237, 270, 260, 244, 236, 269, 232, 223, 222, 263, 267, 262, 246, 238, 271, 224, 274, 277, 276, 258, 275, 227, 228, 264, 239, 241, 240, 279, 272, 229, 235, 281, 292, 286, 280, 339, 340, 342, 282, 326, 294, 291, 295, 287, 329, 318, 304, 334, 320, 327, 322, 306, 298, 331, 321, 305, 297, 330, 293, 284, 283, 324, 328, 323, 307, 299, 332, 285, 335, 338, 337, 319, 336, 288, 289, 343, 325, 300, 301, 302, 341, 333, 290, 296]
     recent_LoLPlayers_data_organized = {}
     for i in range(len(recent_LoLPlayers_statistics_output_order)):
         key = LoLGame_info_header_keys[recent_LoLPlayers_statistics_output_order[i]]
@@ -1836,8 +1886,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
             print(format_df(friend_hovercard_df.loc[1:, friend_hovercard_fields_to_print])[0], end = "\n\n")
             #保存文件（Save file）
             print("是否导出以上好友数据至Excel中？（输入任意键导出，否则不导出）\nDo you want to export the above data into Excel? (Press any key to export or null to refuse exporting)")
-            export = input()
-            if export != "":
+            export = bool(input())
+            if export:
                 excel_name = "Friend List - %s.xlsx" %(get_info_name(current_info))
                 sheet_name = platformId + "-" + get_info_name(current_info)
                 while True:
@@ -3435,7 +3485,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         elif draft_option[0] == "0":
                                             break
                                         elif draft_option[0] == "1":
-                                            scope = {"format_df": format_df, "df": recent_players_dfs.copy(deep = True), "fields": {"LoL": recent_LoLPlayers_fields_to_print, "TFT": recent_TFTPlayers_fields_to_print}}
+                                            scope = {"format_df": format_df, "df": recent_players_dfs.copy(), "fields": {"LoL": recent_LoLPlayers_fields_to_print, "TFT": recent_TFTPlayers_fields_to_print}}
                                             print('示例（Examples）：\nprint(dir())\nprint(format_df(df["LoL"][(df["LoL"]["gameName"] == "WordlessMeteor") & (df["LoL"]["gameTag"] == "5071")].loc[1:, fields["LoL"]])[0])\nprint(format_df(df["LoL"].loc[[i for i in range(len(df["LoL"])) if df["LoL"]["totalDamageDealtToChampions"] / sum(df["LoL"][(df["LoL"]["gameId"] == df["LoL"].loc[i, "gameId"]) & (df["LoL"]["ally?"] == df["LoL"].loc[i, "ally?"])]["totalDamageDealtToChampions"] > 1 / 3)], fields["LoL"]])[0])\nprint(format_df(df["LoL"].loc[[i for i in range(len(df)) if df["visionScore"] / (int(df["gameDuration"].split(":")[0]) + int(df["gameDuration"].split(":")[1]) / 6) > 2.5], fields["LoL"]])[0])\nprint(format_df(df["TFT"][(df["TFT"]["gameName"] == "WordlessMeteor") & (df["TFT"]["gameTag"] == "5071")].loc[1:, fields["TFT"]])[0])\nprint(format_df(df["TFT"][df["TFT"]["placement"] == 1].loc[1:, fields["TFT"]])[0])\n输入“-1”以退出取子集。\nSubmit "-1" to quit taking subsets.')
                                             subscope(scope)
                                         else:

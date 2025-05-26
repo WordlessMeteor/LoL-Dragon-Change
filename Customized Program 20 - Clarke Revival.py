@@ -566,7 +566,7 @@ async def define_global_variables(connection) -> None:
     wd = os.getcwd()
     bot_puuid = "00000000-0000-0000-0000-000000000000"
     queueId_options = {"#1": {"description": "所有玩家对战（All PvP games）", "expression": '[queue["id"] for queue in queues_initial if queue["category"] == "PvP"]'}, "#2": {"description": "所有英雄联盟玩家对战（All LoL PvP games）", "expression": '[queue["id"] for queue in queues_initial if queue["category"] == "PvP" and queue["mapId"] != 22]'}, "#3": {"description": "所有云顶之弈玩家对战（All TFT PvP games）", "expression": '[queue["id"] for queue in queues_initial if queue["category"] == "PvP" and queue["mapId"] == 22]'}, "#4": {"description": "所有召唤师峡谷排位队列（All Summoner's Rift ranked queues）", "expression": '[queue["id"] for queue in queues_initial if queue["isRanked"] and queue["mapId"] == 11]'}, "#5": {"description": "所有云顶之弈排位队列（All TFT ranked queues）", "expression": '[queue["id"] for queue in queues_initial if queue["isRanked"] and queue["mapId"] == 22]'}}
-    LoLGame_stat_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "对局创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "accountId": "帐户序号", "currentAccountId": "当前帐户序号", "currentPlatformId": "当前服务器代码", "gameName": "玩家昵称", "matchHistoryUri": "对局记录网址", "platformId": "服务器代码", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "profileIcon_title": "召唤师图标名称", "profileIcon_imagePath": "召唤师图标路径", "championId": "英雄序号", "highestAchievedSeasonTier": "最高段位", "participantId": "玩家序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "英雄", "champion_alias": "代号", "champion_squarePortraitPath": "方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "causedEarlySurrender": "发起提前投降", "champLevel": "英雄等级", "combatPlayerScore": "战斗得分", "damageDealtToObjectives": "对战略点的总伤害", "damageDealtToTurrets": "对防御塔的总伤害", "damageSelfMitigated": "自我缓和的伤害", "deaths": "死亡", "doubleKills": "双杀", "earlySurrenderAccomplice": "同意提前投降", "firstBloodAssist": "协助获得第一滴血", "firstBloodKill": "第一滴血", "firstInhibitorAssist": "协助摧毁第一座召唤水晶", "firstInhibitorKill": "摧毁第一座召唤水晶", "firstTowerAssist": "协助摧毁第一座塔", "firstTowerKill": "摧毁第一座塔", "gameEndedInEarlySurrender": "提前投降导致比赛结束", "gameEndedInSurrender": "投降导致比赛结束", "goldEarned": "金币获取", "goldSpent": "金币使用", "inhibitorKills": "摧毁召唤水晶", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "killingSprees": "大杀特杀", "kills": "击杀", "largestCriticalStrike": "最大暴击伤害", "largestKillingSpree": "最高连杀", "largestMultiKill": "最高多杀", "longestTimeSpentLiving": "最长生存时间", "magicDamageDealt": "造成的魔法伤害", "magicDamageDealtToChampions": "对英雄的魔法伤害", "magicalDamageTaken": "承受的魔法伤害", "neutralMinionsKilled": "击杀野怪", "neutralMinionsKilledEnemyJungle": "击杀敌方野区野怪", "neutralMinionsKilledTeamJungle": "击杀我方野区野怪", "objectivePlayerScore": "战略点玩家得分", "pentaKills": "五杀", "perk0": "符文1序号", "perk0Var1": "符文1：参数1", "perk0Var2": "符文1：参数2", "perk0Var3": "符文1：参数3", "perk1": "符文2序号", "perk1Var1": "符文2：参数1", "perk1Var2": "符文2：参数2", "perk1Var3": "符文2：参数3", "perk2": "符文3序号", "perk2Var1": "符文3：参数1", "perk2Var2": "符文3：参数2", "perk2Var3": "符文3：参数3", "perk3": "符文4序号", "perk3Var1": "符文4：参数1", "perk3Var2": "符文4：参数2", "perk3Var3": "符文4：参数3", "perk4": "符文5序号", "perk4Var1": "符文5：参数1", "perk4Var2": "符文5：参数2", "perk4Var3": "符文5：参数3", "perk5": "符文6序号", "perk5Var1": "符文6：参数1", "perk5Var2": "符文6：参数2", "perk5Var3": "符文6：参数3", "perkPrimaryStyle": "主系序号", "perkSubStyle": "副系序号", "physicalDamageDealt": "造成的物理伤害", "physicalDamageDealtToChampions": "对英雄的物理伤害", "physicalDamageTaken": "承受的物理伤害", "playerAugment1": "强化符文1", "playerAugment2": "强化符文2", "playerAugment3": "强化符文3", "playerAugment4": "强化符文4", "playerAugment5": "强化符文5", "playerAugment6": "强化符文6", "playerScore0": "玩家得分1", "playerScore1": "玩家得分2", "playerScore2": "玩家得分3", "playerScore3": "玩家得分4", "playerScore4": "玩家得分5", "playerScore5": "玩家得分6", "playerScore6": "玩家得分7", "playerScore7": "玩家得分8", "playerScore8": "玩家得分9", "playerScore9": "玩家得分10", "playerSubteamId": "子阵营序号", "quadraKills": "四杀", "sightWardsBoughtInGame": "购买洞察之石", "subteamPlacement": "队伍排名", "teamEarlySurrendered": "队伍提前投降", "timeCCingOthers": "控制得分", "totalDamageDealt": "造成的伤害总和", "totalDamageDealtToChampions": "对英雄的伤害总和", "totalDamageTaken": "承受伤害", "totalHeal": "输出治疗效果", "totalMinionsKilled": "击杀小兵", "totalPlayerScore": "玩家总得分", "totalScoreRank": "总得分排名", "totalTimeCrowdControlDealt": "控制时间", "totalUnitsHealed": "治疗单位数", "tripleKills": "三杀", "trueDamageDealt": "造成真实伤害", "trueDamageDealtToChampions": "对英雄的真实伤害", "trueDamageTaken": "承受的真实伤害", "turretKills": "摧毁防御塔", "unrealKills": "六杀及以上", "visionScore": "视野得分", "visionWardsBoughtInGame": "购买控制守卫", "wardsKilled": "摧毁守卫", "wardsPlaced": "放置守卫", "win": "胜利", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "perk0EndOfGameStatDescs": "符文1游戏结算数据", "perk1EndOfGameStatDescs": "符文2游戏结算数据", "perk2EndOfGameStatDescs": "符文3游戏结算数据", "perk3EndOfGameStatDescs": "符文4游戏结算数据", "perk4EndOfGameStatDescs": "符文5游戏结算数据", "perk5EndOfGameStatDescs": "符文6游戏结算数据", "perk0_name": "符文1名称", "perk1_name": "符文2名称", "perk2_name": "符文3名称", "perk3_name": "符文4名称", "perk4_name": "符文5名称", "perk5_name": "符文6名称", "perk0_iconPath": "符文1图标路径", "perk1_iconPath": "符文2图标路径", "perk2_iconPath": "符文3图标路径", "perk3_iconPath": "符文4图标路径", "perk4_iconPath": "符文5图标路径", "perk5_iconPath": "符文6图标路径", "perkPrimaryStyle_name": "主系名称", "perkPrimaryStyle_iconPath": "主系图标路径", "perkSubStyle_name": "副系名称", "perkSubStyle_iconPath": "副系图标路径", "playerAugment1_nameTRA": "强化符文1名称", "playerAugment2_nameTRA": "强化符文2名称", "playerAugment3_nameTRA": "强化符文3名称", "playerAugment4_nameTRA": "强化符文4名称", "playerAugment5_nameTRA": "强化符文5名称", "playerAugment6_nameTRA": "强化符文6名称", "playerAugment1_augmentIconPath": "强化符文1图标路径", "playerAugment2_augmentIconPath": "强化符文2图标路径", "playerAugment3_augmentIconPath": "强化符文3图标路径", "playerAugment4_augmentIconPath": "强化符文4图标路径", "playerAugment5_augmentIconPath": "强化符文5图标路径", "playerAugment6_augmentIconPath": "强化符文6图标路径", "playerAugment1_rarity": "强化符文1等级", "playerAugment2_rarity": "强化符文2等级", "playerAugment3_rarity": "强化符文3等级", "playerAugment4_rarity": "强化符文4等级", "playerAugment5_rarity": "强化符文5等级", "playerAugment6_rarity": "强化符文6等级", "K/D/A": "击杀/死亡/助攻", "KDA": "战损比", "CS": "补刀", "GPM": "分均经济", "GUE": "金币利用率", "CSPM": "分均补刀", "D/G": "伤害转化率", "win/lose": "胜负", "lane": "分路", "role": "角色定位", "assists_percent": "助攻次数占比", "combatPlayerScore_percent": "战斗得分占比", "damageDealtToObjectives_percent": "对战略点的总伤害占比", "damageDealtToTurrets_percent": "对防御塔的总伤害占比", "damageSelfMitigated_percent": "自我缓和的伤害占比", "deaths_percent": "死亡次数占比", "doubleKills_percent": "双杀次数占比", "goldEarned_percent": "金币获取占比", "goldSpent_percent": "金币使用占比", "inhibitorKills_percent": "摧毁召唤水晶数量占比", "killingSprees_percent": "大杀特杀次数占比", "kills_percent": "击杀数量占比", "largestCriticalStrike_percent": "最大暴击伤害占比", "largestKillingSpree_percent": "最高连杀占比", "largestMultiKill_percent": "最高多杀占比", "longestTimeSpentLiving_percent": "最长生存时间占比", "magicDamageDealt_percent": "造成的魔法伤害占比", "magicDamageDealtToChampions_percent": "对英雄的魔法伤害占比", "magicalDamageTaken_percent": "承受的魔法伤害占比", "neutralMinionsKilled_percent": "击杀野怪数量占比", "neutralMinionsKilledEnemyJungle_percent": "击杀敌方野区野怪数量占比", "neutralMinionsKilledTeamJungle_percent": "击杀我方野区野怪数量占比", "objectivePlayerScore_percent": "战略点玩家得分占比", "pentaKills_percent": "五杀次数占比", "physicalDamageDealt_percent": "造成的物理伤害占比", "physicalDamageDealtToChampions_percent": "对英雄的物理伤害占比", "physicalDamageTaken_percent": "承受的物理伤害占比", "playerScore0_percent": "玩家得分1占比", "playerScore1_percent": "玩家得分2占比", "playerScore2_percent": "玩家得分3占比", "playerScore3_percent": "玩家得分4占比", "playerScore4_percent": "玩家得分5占比", "playerScore5_percent": "玩家得分6占比", "playerScore6_percent": "玩家得分7占比", "playerScore7_percent": "玩家得分8占比", "playerScore8_percent": "玩家得分9占比", "playerScore9_percent": "玩家得分10占比", "quadraKills_percent": "四杀次数占比", "sightWardsBoughtInGame_percent": "购买洞察之石数量占比", "timeCCingOthers_percent": "控制得分占比", "totalDamageDealt_percent": "造成的伤害总和占比", "totalDamageDealtToChampions_percent": "对英雄的伤害总和占比", "totalDamageTaken_percent": "承受伤害占比", "totalHeal_percent": "输出治疗效果占比", "totalMinionsKilled_percent": "击杀小兵数量占比", "totalPlayerScore_percent": "玩家总得分占比", "totalTimeCrowdControlDealt_percent": "控制时间占比", "totalUnitsHealed_percent": "治疗单位数占比", "tripleKills_percent": "三杀次数占比", "trueDamageDealt_percent": "造成真实伤害占比", "trueDamageDealtToChampions_percent": "对英雄的真实伤害占比", "trueDamageTaken_percent": "承受的真实伤害占比", "turretKills_percent": "摧毁防御塔数量占比", "unrealKills_percent": "六杀及以上连杀次数占比", "visionScore_percent": "视野得分占比", "visionWardsBoughtInGame_percent": "购买控制守卫数量占比", "wardsKilled_percent": "摧毁守卫数量占比", "wardsPlaced_percent": "放置守卫数量占比", "KP_percent": "参团率", "CS_percent": "补刀数占比", "assists_order": "助攻次数位次", "champLevel_order": "英雄等级位次", "combatPlayerScore_order": "战斗得分位次", "damageDealtToObjectives_order": "对战略点的总伤害位次", "damageDealtToTurrets_order": "对防御塔的总伤害位次", "damageSelfMitigated_order": "自我缓和的伤害位次", "deaths_order": "死亡次数位次", "doubleKills_order": "双杀次数位次", "goldEarned_order": "金币获取位次", "goldSpent_order": "金币使用位次", "inhibitorKills_order": "摧毁召唤水晶数量位次", "killingSprees_order": "大杀特杀次数位次", "kills_order": "击杀数量位次", "largestCriticalStrike_order": "最大暴击伤害位次", "largestKillingSpree_order": "最高连杀位次", "largestMultiKill_order": "最高多杀位次", "longestTimeSpentLiving_order": "最长生存时间位次", "magicDamageDealt_order": "造成的魔法伤害位次", "magicDamageDealtToChampions_order": "对英雄的魔法伤害位次", "magicalDamageTaken_order": "承受的魔法伤害位次", "neutralMinionsKilled_order": "击杀野怪数量位次", "neutralMinionsKilledEnemyJungle_order": "击杀敌方野区野怪数量位次", "neutralMinionsKilledTeamJungle_order": "击杀我方野区野怪数量位次", "objectivePlayerScore_order": "战略点玩家得分位次", "pentaKills_order": "五杀次数位次", "physicalDamageDealt_order": "造成的物理伤害位次", "physicalDamageDealtToChampions_order": "对英雄的物理伤害位次", "physicalDamageTaken_order": "承受的物理伤害位次", "playerScore0_order": "玩家得分1位次", "playerScore1_order": "玩家得分2位次", "playerScore2_order": "玩家得分3位次", "playerScore3_order": "玩家得分4位次", "playerScore4_order": "玩家得分5位次", "playerScore5_order": "玩家得分6位次", "playerScore6_order": "玩家得分7位次", "playerScore7_order": "玩家得分8位次", "playerScore8_order": "玩家得分9位次", "playerScore9_order": "玩家得分10位次", "quadraKills_order": "四杀次数位次", "sightWardsBoughtInGame_order": "购买洞察之石数量位次", "timeCCingOthers_order": "控制得分位次", "totalDamageDealt_order": "造成的伤害总和位次", "totalDamageDealtToChampions_order": "对英雄的伤害总和位次", "totalDamageTaken_order": "承受伤害位次", "totalHeal_order": "输出治疗效果位次", "totalMinionsKilled_order": "击杀小兵数量位次", "totalPlayerScore_order": "玩家总得分位次", "totalTimeCrowdControlDealt_order": "控制时间位次", "totalUnitsHealed_order": "治疗单位数位次", "tripleKills_order": "三杀次数位次", "trueDamageDealt_order": "造成真实伤害位次", "trueDamageDealtToChampions_order": "对英雄的真实伤害位次", "trueDamageTaken_order": "承受的真实伤害位次", "turretKills_order": "摧毁防御塔数量位次", "unrealKills_order": "六杀及以上连杀次数位次", "visionScore_order": "视野得分位次", "visionWardsBoughtInGame_order": "购买控制守卫数量位次", "wardsKilled_order": "摧毁守卫数量位次", "wardsPlaced_order": "放置守卫数量位次", "KDA_order": "战损比位次", "KP_order": "参团率位次", "CS_order": "补刀数位次", "D/G_order": "伤害转化率位次", "GUE_order": "金币利用率位次"}
+    LoLGame_stat_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间戳", "gameCreationDate": "对局创建日期", "gameDuration": "持续时长", "gameId": "对局序号", "gameMode": "游戏模式", "gameType": "游戏类型", "gameVersion": "对局版本", "mapId": "地图序号", "queueId": "队列序号", "gameModeName": "游戏模式名称", "participantId": "玩家序号", "accountId": "帐户序号", "currentAccountId": "当前帐户序号", "currentPlatformId": "当前服务器代码", "gameName": "玩家昵称", "matchHistoryUri": "对局记录网址", "platformId": "服务器代码", "profileIcon": "召唤师图标序号", "puuid": "玩家通用唯一识别码", "summonerId": "召唤师序号", "summonerName": "召唤师名称", "tagLine": "昵称编号", "profileIcon_title": "召唤师图标名称", "profileIcon_imagePath": "召唤师图标路径", "championId": "选用英雄序号", "highestAchievedSeasonTier": "最高段位", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "teamId": "阵营", "champion_name": "选用英雄", "champion_alias": "选用英雄代号", "champion_squarePortraitPath": "方块头像路径", "spell1_name": "召唤师技能1", "spell2_name": "召唤师技能2", "spell1_iconPath": "召唤师技能1图标", "spell2_iconPath": "召唤师技能2图标", "assists": "助攻", "causedEarlySurrender": "发起提前投降", "champLevel": "英雄等级", "combatPlayerScore": "战斗得分", "damageDealtToObjectives": "对战略点的总伤害", "damageDealtToTurrets": "对防御塔的总伤害", "damageSelfMitigated": "自我缓和的伤害", "deaths": "死亡", "doubleKills": "双杀", "earlySurrenderAccomplice": "同意提前投降", "firstBloodAssist": "协助获得第一滴血", "firstBloodKill": "第一滴血", "firstInhibitorAssist": "协助摧毁第一座召唤水晶", "firstInhibitorKill": "摧毁第一座召唤水晶", "firstTowerAssist": "协助摧毁第一座塔", "firstTowerKill": "摧毁第一座塔", "gameEndedInEarlySurrender": "提前投降导致比赛结束", "gameEndedInSurrender": "投降导致比赛结束", "goldEarned": "金币获取", "goldSpent": "金币使用", "inhibitorKills": "摧毁召唤水晶", "item0": "装备1序号", "item1": "装备2序号", "item2": "装备3序号", "item3": "装备4序号", "item4": "装备5序号", "item5": "装备6序号", "item6": "饰品序号", "killingSprees": "大杀特杀", "kills": "击杀", "largestCriticalStrike": "最大暴击伤害", "largestKillingSpree": "最高连杀", "largestMultiKill": "最高多杀", "longestTimeSpentLiving": "最长生存时间", "magicDamageDealt": "造成的魔法伤害", "magicDamageDealtToChampions": "对英雄的魔法伤害", "magicalDamageTaken": "承受的魔法伤害", "neutralMinionsKilled": "击杀野怪", "neutralMinionsKilledEnemyJungle": "击杀敌方野区野怪", "neutralMinionsKilledTeamJungle": "击杀我方野区野怪", "objectivePlayerScore": "战略点玩家得分", "pentaKills": "五杀", "perk0": "符文1序号", "perk0Var1": "符文1：参数1", "perk0Var2": "符文1：参数2", "perk0Var3": "符文1：参数3", "perk1": "符文2序号", "perk1Var1": "符文2：参数1", "perk1Var2": "符文2：参数2", "perk1Var3": "符文2：参数3", "perk2": "符文3序号", "perk2Var1": "符文3：参数1", "perk2Var2": "符文3：参数2", "perk2Var3": "符文3：参数3", "perk3": "符文4序号", "perk3Var1": "符文4：参数1", "perk3Var2": "符文4：参数2", "perk3Var3": "符文4：参数3", "perk4": "符文5序号", "perk4Var1": "符文5：参数1", "perk4Var2": "符文5：参数2", "perk4Var3": "符文5：参数3", "perk5": "符文6序号", "perk5Var1": "符文6：参数1", "perk5Var2": "符文6：参数2", "perk5Var3": "符文6：参数3", "perkPrimaryStyle": "主系序号", "perkSubStyle": "副系序号", "physicalDamageDealt": "造成的物理伤害", "physicalDamageDealtToChampions": "对英雄的物理伤害", "physicalDamageTaken": "承受的物理伤害", "playerAugment1": "强化符文1", "playerAugment2": "强化符文2", "playerAugment3": "强化符文3", "playerAugment4": "强化符文4", "playerAugment5": "强化符文5", "playerAugment6": "强化符文6", "playerScore0": "玩家得分1", "playerScore1": "玩家得分2", "playerScore2": "玩家得分3", "playerScore3": "玩家得分4", "playerScore4": "玩家得分5", "playerScore5": "玩家得分6", "playerScore6": "玩家得分7", "playerScore7": "玩家得分8", "playerScore8": "玩家得分9", "playerScore9": "玩家得分10", "playerSubteamId": "子阵营序号", "quadraKills": "四杀", "sightWardsBoughtInGame": "购买洞察之石", "subteamPlacement": "队伍排名", "teamEarlySurrendered": "队伍提前投降", "timeCCingOthers": "控制得分", "totalDamageDealt": "造成的伤害总和", "totalDamageDealtToChampions": "对英雄的伤害总和", "totalDamageTaken": "承受伤害", "totalHeal": "输出治疗效果", "totalMinionsKilled": "击杀小兵", "totalPlayerScore": "玩家总得分", "totalScoreRank": "总得分排名", "totalTimeCrowdControlDealt": "控制时间", "totalUnitsHealed": "治疗单位数", "tripleKills": "三杀", "trueDamageDealt": "造成真实伤害", "trueDamageDealtToChampions": "对英雄的真实伤害", "trueDamageTaken": "承受的真实伤害", "turretKills": "摧毁防御塔", "unrealKills": "六杀及以上", "visionScore": "视野得分", "visionWardsBoughtInGame": "购买控制守卫", "wardsKilled": "摧毁守卫", "wardsPlaced": "放置守卫", "win": "胜利", "item0_name": "装备1", "item1_name": "装备2", "item2_name": "装备3", "item3_name": "装备4", "item4_name": "装备5", "item5_name": "装备6", "item6_name": "饰品", "item0_iconPath": "装备1图标路径", "item1_iconPath": "装备2图标路径", "item2_iconPath": "装备3图标路径", "item3_iconPath": "装备4图标路径", "item4_iconPath": "装备5图标路径", "item5_iconPath": "装备6图标路径", "item6_iconPath": "饰品图标路径", "perk0EndOfGameStatDescs": "符文1游戏结算数据", "perk1EndOfGameStatDescs": "符文2游戏结算数据", "perk2EndOfGameStatDescs": "符文3游戏结算数据", "perk3EndOfGameStatDescs": "符文4游戏结算数据", "perk4EndOfGameStatDescs": "符文5游戏结算数据", "perk5EndOfGameStatDescs": "符文6游戏结算数据", "perk0_name": "符文1名称", "perk1_name": "符文2名称", "perk2_name": "符文3名称", "perk3_name": "符文4名称", "perk4_name": "符文5名称", "perk5_name": "符文6名称", "perk0_iconPath": "符文1图标路径", "perk1_iconPath": "符文2图标路径", "perk2_iconPath": "符文3图标路径", "perk3_iconPath": "符文4图标路径", "perk4_iconPath": "符文5图标路径", "perk5_iconPath": "符文6图标路径", "perkPrimaryStyle_name": "主系名称", "perkPrimaryStyle_iconPath": "主系图标路径", "perkSubStyle_name": "副系名称", "perkSubStyle_iconPath": "副系图标路径", "playerAugment1_nameTRA": "强化符文1名称", "playerAugment2_nameTRA": "强化符文2名称", "playerAugment3_nameTRA": "强化符文3名称", "playerAugment4_nameTRA": "强化符文4名称", "playerAugment5_nameTRA": "强化符文5名称", "playerAugment6_nameTRA": "强化符文6名称", "playerAugment1_augmentIconPath": "强化符文1图标路径", "playerAugment2_augmentIconPath": "强化符文2图标路径", "playerAugment3_augmentIconPath": "强化符文3图标路径", "playerAugment4_augmentIconPath": "强化符文4图标路径", "playerAugment5_augmentIconPath": "强化符文5图标路径", "playerAugment6_augmentIconPath": "强化符文6图标路径", "playerAugment1_rarity": "强化符文1等级", "playerAugment2_rarity": "强化符文2等级", "playerAugment3_rarity": "强化符文3等级", "playerAugment4_rarity": "强化符文4等级", "playerAugment5_rarity": "强化符文5等级", "playerAugment6_rarity": "强化符文6等级", "K/D/A": "击杀/死亡/助攻", "KDA": "战损比", "CS": "补刀", "GPM": "分均经济", "GUE": "金币利用率", "CSPM": "分均补刀", "D/G": "伤害转化率", "win/lose": "胜负", "bannedChampionId": "禁用英雄序号", "bannedChampion_name": "禁用英雄", "bannedChampion_alias": "禁用英雄代号", "bannedChampion_squarePortraitPath": "禁用英雄方块头像路径", "lane": "分路", "role": "角色定位", "assists_percent": "助攻次数占比", "combatPlayerScore_percent": "战斗得分占比", "damageDealtToObjectives_percent": "对战略点的总伤害占比", "damageDealtToTurrets_percent": "对防御塔的总伤害占比", "damageSelfMitigated_percent": "自我缓和的伤害占比", "deaths_percent": "死亡次数占比", "doubleKills_percent": "双杀次数占比", "goldEarned_percent": "金币获取占比", "goldSpent_percent": "金币使用占比", "inhibitorKills_percent": "摧毁召唤水晶数量占比", "killingSprees_percent": "大杀特杀次数占比", "kills_percent": "击杀数量占比", "largestCriticalStrike_percent": "最大暴击伤害占比", "largestKillingSpree_percent": "最高连杀占比", "largestMultiKill_percent": "最高多杀占比", "longestTimeSpentLiving_percent": "最长生存时间占比", "magicDamageDealt_percent": "造成的魔法伤害占比", "magicDamageDealtToChampions_percent": "对英雄的魔法伤害占比", "magicalDamageTaken_percent": "承受的魔法伤害占比", "neutralMinionsKilled_percent": "击杀野怪数量占比", "neutralMinionsKilledEnemyJungle_percent": "击杀敌方野区野怪数量占比", "neutralMinionsKilledTeamJungle_percent": "击杀我方野区野怪数量占比", "objectivePlayerScore_percent": "战略点玩家得分占比", "pentaKills_percent": "五杀次数占比", "physicalDamageDealt_percent": "造成的物理伤害占比", "physicalDamageDealtToChampions_percent": "对英雄的物理伤害占比", "physicalDamageTaken_percent": "承受的物理伤害占比", "playerScore0_percent": "玩家得分1占比", "playerScore1_percent": "玩家得分2占比", "playerScore2_percent": "玩家得分3占比", "playerScore3_percent": "玩家得分4占比", "playerScore4_percent": "玩家得分5占比", "playerScore5_percent": "玩家得分6占比", "playerScore6_percent": "玩家得分7占比", "playerScore7_percent": "玩家得分8占比", "playerScore8_percent": "玩家得分9占比", "playerScore9_percent": "玩家得分10占比", "quadraKills_percent": "四杀次数占比", "sightWardsBoughtInGame_percent": "购买洞察之石数量占比", "timeCCingOthers_percent": "控制得分占比", "totalDamageDealt_percent": "造成的伤害总和占比", "totalDamageDealtToChampions_percent": "对英雄的伤害总和占比", "totalDamageTaken_percent": "承受伤害占比", "totalHeal_percent": "输出治疗效果占比", "totalMinionsKilled_percent": "击杀小兵数量占比", "totalPlayerScore_percent": "玩家总得分占比", "totalTimeCrowdControlDealt_percent": "控制时间占比", "totalUnitsHealed_percent": "治疗单位数占比", "tripleKills_percent": "三杀次数占比", "trueDamageDealt_percent": "造成真实伤害占比", "trueDamageDealtToChampions_percent": "对英雄的真实伤害占比", "trueDamageTaken_percent": "承受的真实伤害占比", "turretKills_percent": "摧毁防御塔数量占比", "unrealKills_percent": "六杀及以上连杀次数占比", "visionScore_percent": "视野得分占比", "visionWardsBoughtInGame_percent": "购买控制守卫数量占比", "wardsKilled_percent": "摧毁守卫数量占比", "wardsPlaced_percent": "放置守卫数量占比", "KP_percent": "参团率", "CS_percent": "补刀数占比", "assists_order": "助攻次数位次", "champLevel_order": "英雄等级位次", "combatPlayerScore_order": "战斗得分位次", "damageDealtToObjectives_order": "对战略点的总伤害位次", "damageDealtToTurrets_order": "对防御塔的总伤害位次", "damageSelfMitigated_order": "自我缓和的伤害位次", "deaths_order": "死亡次数位次", "doubleKills_order": "双杀次数位次", "goldEarned_order": "金币获取位次", "goldSpent_order": "金币使用位次", "inhibitorKills_order": "摧毁召唤水晶数量位次", "killingSprees_order": "大杀特杀次数位次", "kills_order": "击杀数量位次", "largestCriticalStrike_order": "最大暴击伤害位次", "largestKillingSpree_order": "最高连杀位次", "largestMultiKill_order": "最高多杀位次", "longestTimeSpentLiving_order": "最长生存时间位次", "magicDamageDealt_order": "造成的魔法伤害位次", "magicDamageDealtToChampions_order": "对英雄的魔法伤害位次", "magicalDamageTaken_order": "承受的魔法伤害位次", "neutralMinionsKilled_order": "击杀野怪数量位次", "neutralMinionsKilledEnemyJungle_order": "击杀敌方野区野怪数量位次", "neutralMinionsKilledTeamJungle_order": "击杀我方野区野怪数量位次", "objectivePlayerScore_order": "战略点玩家得分位次", "pentaKills_order": "五杀次数位次", "physicalDamageDealt_order": "造成的物理伤害位次", "physicalDamageDealtToChampions_order": "对英雄的物理伤害位次", "physicalDamageTaken_order": "承受的物理伤害位次", "playerScore0_order": "玩家得分1位次", "playerScore1_order": "玩家得分2位次", "playerScore2_order": "玩家得分3位次", "playerScore3_order": "玩家得分4位次", "playerScore4_order": "玩家得分5位次", "playerScore5_order": "玩家得分6位次", "playerScore6_order": "玩家得分7位次", "playerScore7_order": "玩家得分8位次", "playerScore8_order": "玩家得分9位次", "playerScore9_order": "玩家得分10位次", "quadraKills_order": "四杀次数位次", "sightWardsBoughtInGame_order": "购买洞察之石数量位次", "timeCCingOthers_order": "控制得分位次", "totalDamageDealt_order": "造成的伤害总和位次", "totalDamageDealtToChampions_order": "对英雄的伤害总和位次", "totalDamageTaken_order": "承受伤害位次", "totalHeal_order": "输出治疗效果位次", "totalMinionsKilled_order": "击杀小兵数量位次", "totalPlayerScore_order": "玩家总得分位次", "totalTimeCrowdControlDealt_order": "控制时间位次", "totalUnitsHealed_order": "治疗单位数位次", "tripleKills_order": "三杀次数位次", "trueDamageDealt_order": "造成真实伤害位次", "trueDamageDealtToChampions_order": "对英雄的真实伤害位次", "trueDamageTaken_order": "承受的真实伤害位次", "turretKills_order": "摧毁防御塔数量位次", "unrealKills_order": "六杀及以上连杀次数位次", "visionScore_order": "视野得分位次", "visionWardsBoughtInGame_order": "购买控制守卫数量位次", "wardsKilled_order": "摧毁守卫数量位次", "wardsPlaced_order": "放置守卫数量位次", "KDA_order": "战损比位次", "KP_order": "参团率位次", "CS_order": "补刀数位次", "D/G_order": "伤害转化率位次", "GUE_order": "金币利用率位次"}
     LoLGame_stat_header_keys = list(LoLGame_stat_header.keys())
     TFTGame_stat_header = {"gameIndex": "游戏序号", "endOfGameResult": "对局终止情况", "gameCreation": "对局创建时间", "game_datetime": "对局结算时间", "game_id": "对局序号", "game_length": "持续时长", "game_version": "对局版本", "queue_id": "队列序号", "tft_game_type": "游戏类型", "tft_set_core_name": "数据版本名称", "tft_set_number": "赛季", "participantId": "玩家序号", "augment1 apiName": "强化符文1接口名称", "augment2 apiName": "强化符文2接口名称", "augment3 apiName": "强化符文3接口名称", "augment1 name": "强化符文1名称", "augment2 name": "强化符文2名称", "augment3 name": "强化符文3名称", "augment1 icon": "强化符文1图标", "augment2 icon": "强化符文2图标", "augment3 icon": "强化符文3图标", "companion content_ID": "小小英雄商品编号", "companion item_ID": "小小英雄序号", "companion skin_ID": "小小英雄皮肤序号", "companion species": "小小英雄物种", "companion name": "小小英雄名称", "companion level": "小小英雄星级", "companion rarity": "小小英雄稀有度", "gold_left": "剩余金币", "last_round": "存活回合", "level": "等级", "placement": "名次", "players_eliminated": "淘汰玩家数", "puuid": "玩家通用唯一识别码", "riotIdGameName": "玩家昵称", "riotIdTagline": "昵称编号", "time_eliminated": "存活时长", "total_damage_to_players": "造成玩家伤害", "trait0 name": "羁绊1", "trait0 num_units": "羁绊1单位数", "trait0 style": "羁绊1羁绊框颜色", "trait0 tier_current": "羁绊1当前等级", "trait0 tier_total": "羁绊1最高等级", "trait0 display_name": "羁绊1显示名", "trait0 icon_path": "羁绊1图标路径", "trait1 name": "羁绊2", "trait1 num_units": "羁绊2单位数", "trait1 style": "羁绊2羁绊框颜色", "trait1 tier_current": "羁绊2当前等级", "trait1 tier_total": "羁绊2最高等级", "trait1 display_name": "羁绊2显示名", "trait1 icon_path": "羁绊2图标路径", "trait2 name": "羁绊3", "trait2 num_units": "羁绊3单位数", "trait2 style": "羁绊3羁绊框颜色", "trait2 tier_current": "羁绊3当前等级", "trait2 tier_total": "羁绊3最高等级", "trait2 display_name": "羁绊3显示名", "trait2 icon_path": "羁绊3图标路径", "trait3 name": "羁绊4", "trait3 num_units": "羁绊4单位数", "trait3 style": "羁绊4羁绊框颜色", "trait3 tier_current": "羁绊4当前等级", "trait3 tier_total": "羁绊4最高等级", "trait3 display_name": "羁绊4显示名", "trait3 icon_path": "羁绊4图标路径", "trait4 name": "羁绊5", "trait4 num_units": "羁绊5单位数", "trait4 style": "羁绊5羁绊框颜色", "trait4 tier_current": "羁绊5当前等级", "trait4 tier_total": "羁绊5最高等级", "trait4 display_name": "羁绊5显示名", "trait4 icon_path": "羁绊5图标路径", "trait5 name": "羁绊6", "trait5 num_units": "羁绊6单位数", "trait5 style": "羁绊6羁绊框颜色", "trait5 tier_current": "羁绊6当前等级", "trait5 tier_total": "羁绊6最高等级", "trait5 display_name": "羁绊6显示名", "trait5 icon_path": "羁绊6图标路径", "trait6 name": "羁绊7", "trait6 num_units": "羁绊7单位数", "trait6 style": "羁绊7羁绊框颜色", "trait6 tier_current": "羁绊7当前等级", "trait6 tier_total": "羁绊7最高等级", "trait6 display_name": "羁绊7显示名", "trait6 icon_path": "羁绊7图标路径", "trait7 name": "羁绊8", "trait7 num_units": "羁绊8单位数", "trait7 style": "羁绊8羁绊框颜色", "trait7 tier_current": "羁绊8当前等级", "trait7 tier_total": "羁绊8最高等级", "trait7 display_name": "羁绊8显示名", "trait7 icon_path": "羁绊8图标路径", "trait8 name": "羁绊9", "trait8 num_units": "羁绊9单位数", "trait8 style": "羁绊9羁绊框颜色", "trait8 tier_current": "羁绊9当前等级", "trait8 tier_total": "羁绊9最高等级", "trait8 display_name": "羁绊9显示名", "trait8 icon_path": "羁绊9图标路径", "trait9 name": "羁绊10", "trait9 num_units": "羁绊10单位数", "trait9 style": "羁绊10羁绊框颜色", "trait9 tier_current": "羁绊10当前等级", "trait9 tier_total": "羁绊10最高等级", "trait9 display_name": "羁绊10显示名", "trait9 icon_path": "羁绊10图标路径", "trait10 name": "羁绊11", "trait10 num_units": "羁绊11单位数", "trait10 style": "羁绊11羁绊框颜色", "trait10 tier_current": "羁绊11当前等级", "trait10 tier_total": "羁绊11最高等级", "trait10 display_name": "羁绊11显示名", "trait10 icon_path": "羁绊11图标路径", "trait11 name": "羁绊12", "trait11 num_units": "羁绊12单位数", "trait11 style": "羁绊12羁绊框颜色", "trait11 tier_current": "羁绊12当前等级", "trait11 tier_total": "羁绊12最高等级", "trait11 display_name": "羁绊12显示名", "trait11 icon_path": "羁绊12图标路径", "trait12 name": "羁绊13", "trait12 num_units": "羁绊13单位数", "trait12 style": "羁绊13羁绊框颜色", "trait12 tier_current": "羁绊13当前等级", "trait12 tier_total": "羁绊13最高等级", "trait12 display_name": "羁绊13显示名", "trait12 icon_path": "羁绊13图标路径", "unit0 character_id": "英雄1：角色编号", "unit0 rarity": "英雄1：卡费", "unit0 tier": "英雄1：星级", "unit0 display_name": "英雄1：显示名", "unit0 squareIconPath": "英雄1：方块图标路径", "unit1 character_id": "英雄2：角色编号", "unit1 rarity": "英雄2：卡费", "unit1 tier": "英雄2：星级", "unit1 display_name": "英雄2：显示名", "unit1 squareIconPath": "英雄2：方块图标路径", "unit2 character_id": "英雄3：角色编号", "unit2 rarity": "英雄3：卡费", "unit2 tier": "英雄3：星级", "unit2 display_name": "英雄3：显示名", "unit2 squareIconPath": "英雄3：方块图标路径", "unit3 character_id": "英雄4：角色编号", "unit3 rarity": "英雄4：卡费", "unit3 tier": "英雄4：星级", "unit3 display_name": "英雄4：显示名", "unit3 squareIconPath": "英雄4：方块图标路径", "unit4 character_id": "英雄5：角色编号", "unit4 rarity": "英雄5：卡费", "unit4 tier": "英雄5：星级", "unit4 display_name": "英雄5：显示名", "unit4 squareIconPath": "英雄5：方块图标路径", "unit5 character_id": "英雄6：角色编号", "unit5 rarity": "英雄6：卡费", "unit5 tier": "英雄6：星级", "unit5 display_name": "英雄6：显示名", "unit5 squareIconPath": "英雄6：方块图标路径", "unit6 character_id": "英雄7：角色编号", "unit6 rarity": "英雄7：卡费", "unit6 tier": "英雄7：星级", "unit6 display_name": "英雄7：显示名", "unit6 squareIconPath": "英雄7：方块图标路径", "unit7 character_id": "英雄8：角色编号", "unit7 rarity": "英雄8：卡费", "unit7 tier": "英雄8：星级", "unit7 display_name": "英雄8：显示名", "unit7 squareIconPath": "英雄8：方块图标路径", "unit8 character_id": "英雄9：角色编号", "unit8 rarity": "英雄9：卡费", "unit8 tier": "英雄9：星级", "unit8 display_name": "英雄9：显示名", "unit8 squareIconPath": "英雄9：方块图标路径", "unit9 character_id": "英雄10：角色编号", "unit9 rarity": "英雄10：卡费", "unit9 tier": "英雄10：星级", "unit9 display_name": "英雄10：显示名", "unit9 squareIconPath": "英雄10：方块图标路径", "unit10 character_id": "英雄11：角色编号", "unit10 rarity": "英雄11：卡费", "unit10 tier": "英雄11：星级", "unit10 display_name": "英雄11：显示名", "unit10 squareIconPath": "英雄11：方块图标路径", "unit0 item0 nameId": "英雄1：装备1序号", "unit0 item0 name": "英雄1：装备1名称", "unit0 item0 squareIconPath": "英雄1：装备1方块图像路径", "unit0 item1 nameId": "英雄1：装备2序号", "unit0 item1 name": "英雄1：装备2名称", "unit0 item1 squareIconPath": "英雄1：装备2方块图像路径", "unit0 item2 nameId": "英雄1：装备3序号", "unit0 item2 name": "英雄1：装备3名称", "unit0 item2 squareIconPath": "英雄1：装备3方块图像路径", "unit1 item0 nameId": "英雄2：装备1序号", "unit1 item0 name": "英雄2：装备1名称", "unit1 item0 squareIconPath": "英雄2：装备1方块图像路径", "unit1 item1 nameId": "英雄2：装备2序号", "unit1 item1 name": "英雄2：装备2名称", "unit1 item1 squareIconPath": "英雄2：装备2方块图像路径", "unit1 item2 nameId": "英雄2：装备3序号", "unit1 item2 name": "英雄2：装备3名称", "unit1 item2 squareIconPath": "英雄2：装备3方块图像路径", "unit2 item0 nameId": "英雄3：装备1序号", "unit2 item0 name": "英雄3：装备1名称", "unit2 item0 squareIconPath": "英雄3：装备1方块图像路径", "unit2 item1 nameId": "英雄3：装备2序号", "unit2 item1 name": "英雄3：装备2名称", "unit2 item1 squareIconPath": "英雄3：装备2方块图像路径", "unit2 item2 nameId": "英雄3：装备3序号", "unit2 item2 name": "英雄3：装备3名称", "unit2 item2 squareIconPath": "英雄3：装备3方块图像路径", "unit3 item0 nameId": "英雄4：装备1序号", "unit3 item0 name": "英雄4：装备1名称", "unit3 item0 squareIconPath": "英雄4：装备1方块图像路径", "unit3 item1 nameId": "英雄4：装备2序号", "unit3 item1 name": "英雄4：装备2名称", "unit3 item1 squareIconPath": "英雄4：装备2方块图像路径", "unit3 item2 nameId": "英雄4：装备3序号", "unit3 item2 name": "英雄4：装备3名称", "unit3 item2 squareIconPath": "英雄4：装备3方块图像路径", "unit4 item0 nameId": "英雄5：装备1序号", "unit4 item0 name": "英雄5：装备1名称", "unit4 item0 squareIconPath": "英雄5：装备1方块图像路径", "unit4 item1 nameId": "英雄5：装备2序号", "unit4 item1 name": "英雄5：装备2名称", "unit4 item1 squareIconPath": "英雄5：装备2方块图像路径", "unit4 item2 nameId": "英雄5：装备3序号", "unit4 item2 name": "英雄5：装备3名称", "unit4 item2 squareIconPath": "英雄5：装备3方块图像路径", "unit5 item0 nameId": "英雄6：装备1序号", "unit5 item0 name": "英雄6：装备1名称", "unit5 item0 squareIconPath": "英雄6：装备1方块图像路径", "unit5 item1 nameId": "英雄6：装备2序号", "unit5 item1 name": "英雄6：装备2名称", "unit5 item1 squareIconPath": "英雄6：装备2方块图像路径", "unit5 item2 nameId": "英雄6：装备3序号", "unit5 item2 name": "英雄6：装备3名称", "unit5 item2 squareIconPath": "英雄6：装备3方块图像路径", "unit6 item0 nameId": "英雄7：装备1序号", "unit6 item0 name": "英雄7：装备1名称", "unit6 item0 squareIconPath": "英雄7：装备1方块图像路径", "unit6 item1 nameId": "英雄7：装备2序号", "unit6 item1 name": "英雄7：装备2名称", "unit6 item1 squareIconPath": "英雄7：装备2方块图像路径", "unit6 item2 nameId": "英雄7：装备3序号", "unit6 item2 name": "英雄7：装备3名称", "unit6 item2 squareIconPath": "英雄7：装备3方块图像路径", "unit7 item0 nameId": "英雄8：装备1序号", "unit7 item0 name": "英雄8：装备1名称", "unit7 item0 squareIconPath": "英雄8：装备1方块图像路径", "unit7 item1 nameId": "英雄8：装备2序号", "unit7 item1 name": "英雄8：装备2名称", "unit7 item1 squareIconPath": "英雄8：装备2方块图像路径", "unit7 item2 nameId": "英雄8：装备3序号", "unit7 item2 name": "英雄8：装备3名称", "unit7 item2 squareIconPath": "英雄8：装备3方块图像路径", "unit8 item0 nameId": "英雄9：装备1序号", "unit8 item0 name": "英雄9：装备1名称", "unit8 item0 squareIconPath": "英雄9：装备1方块图像路径", "unit8 item1 nameId": "英雄9：装备2序号", "unit8 item1 name": "英雄9：装备2名称", "unit8 item1 squareIconPath": "英雄9：装备2方块图像路径", "unit8 item2 nameId": "英雄9：装备3序号", "unit8 item2 name": "英雄9：装备3名称", "unit8 item2 squareIconPath": "英雄9：装备3方块图像路径", "unit9 item0 nameId": "英雄10：装备1序号", "unit9 item0 name": "英雄10：装备1名称", "unit9 item0 squareIconPath": "英雄10：装备1方块图像路径", "unit9 item1 nameId": "英雄10：装备2序号", "unit9 item1 name": "英雄10：装备2名称", "unit9 item1 squareIconPath": "英雄10：装备2方块图像路径", "unit9 item2 nameId": "英雄10：装备3序号", "unit9 item2 name": "英雄10：装备3名称", "unit9 item2 squareIconPath": "英雄10：装备3方块图像路径", "unit10 item0 nameId": "英雄11：装备1序号", "unit10 item0 name": "英雄11：装备1名称", "unit10 item0 squareIconPath": "英雄11：装备1方块图像路径", "unit10 item1 nameId": "英雄11：装备2序号", "unit10 item1 name": "英雄11：装备2名称", "unit10 item1 squareIconPath": "英雄11：装备2方块图像路径", "unit10 item2 nameId": "英雄11：装备3序号", "unit10 item2 name": "英雄11：装备3名称", "unit10 item2 squareIconPath": "英雄11：装备3方块图像路径"}
     TFTGame_stat_header_keys = list(TFTGame_stat_header.keys())
@@ -720,9 +720,40 @@ async def search_player_match_stats_lol(connection, puuid: str, begIndex: int = 
                 game = LoLHistory["games"]["games"][gameIndex]
                 stats = game["participants"][0]["stats"]
                 LoLGame_info = await (await connection.request("GET", "/lol-match-history/v1/games/%s" %(game["gameId"]))).json() #这里默认对局记录中的对局一定有相应的对局信息，因此不需要考虑其异常（Here the principle is, a match recorded in the match history must have the corresponding information, so the program doesn't need to handle any possible exception）
+                version = LoLGame_info["gameVersion"]
+                #整理对局禁用信息（Sort out the team ban information）
+                bans_team100 = LoLGame_info["teams"][0]["bans"]
+                try:
+                    bans_team200 = LoLGame_info["teams"][1]["bans"]
+                except IndexError:
+                    bans = bans_team100 #空对局也会进入历史记录。空对局定义为完成选英雄但是无法正常进入游戏，而后游戏不存在的对局。而训练模式的空对局只有一方，因此LoLGame_info["teams"]中只有一个元素（Empty matches are included in the match history. An empty match is defined as the matches which can't be launched after the ChmpSlct period. Since an empty match of Practice Tool has only one team, there's only 1 element in LoLGame_info["teams"]）
+                else:
+                    bans = bans_team100 + bans_team200
+                if LoLGame_info["gameMode"] == "CHERRY" and patch_compare("14.8", version):
+                    bans_tmp = bans[:]
+                    bans = []
+                    emptyBan = {"championId": -1, "pickTurn": 0} #定义一个初始化禁用字典，用于后续数据框填充空值（Define an initialized banning dictionary so that empty values are appended to the dataframe at certain times subsequently）
+                    playerSubteam = {} #存储不同子阵营的玩家，键是子阵营序号，值是该子阵营中的玩家的API序号列表（Stores different subteams' players. Keys are playerSubteamIds, and values are index lists from API for players in the subteams）
+                    for i in range(len(LoLGame_info["participants"])):
+                        bans.append(emptyBan.copy())
+                        playerSubteamId = LoLGame_info["participants"][i]["stats"]["playerSubteamId"]
+                        if not playerSubteamId in playerSubteam:
+                            playerSubteam[playerSubteamId] = []
+                        playerSubteam[playerSubteamId].append(i)
+                    if patch_compare("14.12", version):
+                        participantBanIds = []
+                        for i in sorted(playerSubteam.keys()):
+                            participantBanIds += [playerSubteam[i][0], playerSubteam[i][1]] #这里默认采用某个子阵营在API中记录的第一名玩家作为该子阵营的先选者。这可能与实际选用顺序有出入（Here the first player of a subteam recorded in API is considered as the player that picks a champion first. This player may not be the real first player.）
+                    else:
+                        participantBanIds = [playerSubteam[i][0] for i in sorted(playerSubteam.keys())] #这里默认采用某个子阵营在API中记录的第一名玩家作为禁用英雄的玩家。这可能与实际禁用英雄的玩家有出入（Here the first player of a subteam recorded in API is considered as the player that banned some champion. This player may not be the real player that banned it）
+                    for i in range(len(participantBanIds)):
+                        bans[participantBanIds[i]] = bans_tmp[i]
+                legacy_banData_team100_appended = legacy_banData_team200_appended = False #自定义对局中的征召模式是由每个阵营的1号选手禁用3个英雄，所以当禁用信息添加到一个阵营的第一名玩家后，后续玩家不需要再添加禁用信息。这两个逻辑变量就是用来判断这一点的（Draft mode in custom matches is performed by the first player of each team banning 3 champions, so if the ban information is added into the first player, the subsequent player in the same team doesn't need to add this information. That's what these two boolean variables are used for）
+                legacy_banData_team100_last_i = legacy_banData_team200_last_i = -1 #上面两个逻辑变量需要在切换i时才转变为真。i从0开始遍历，如果这两者在程序进行到判断禁用信息是否已添加的阶段时仍然等于-1，说明还没添加过，将它们赋值为i；一旦i发生变化，则把上面两个逻辑变量转变为真（The above two boolean variables become True only when the loop traverses the next `i`. `i` traverses from 0. When the program is going to judge whether the ban information has been added, if these two variables are still -1, then the ban information hasn't been added, and they're assigned `i`. Once `i` changes, the above two boolean variables are assigned True）
                 team_participants = [participant for participant in LoLGame_info["participants"] if game["gameMode"] == "CHERRY" and participant["stats"]["playerSubteamId"] == stats["playerSubteamId"] or game["gameMode"] != "CHERRY" and participant["teamId"] == game["participants"][0]["teamId"]] #存储对局信息中同一队伍的玩家。斗魂竞技场对局应该使用子阵营（Store the participants of the same team from the game information. Subteam should be used to evaluate a player）
                 for i in range(len(LoLGame_stat_header_keys)):
                     key = LoLGame_stat_header_keys[i]
+                    current_participantIndex = game["participantIdentities"][0]["participantId"] - 1 #前提是对局信息中的玩家数据是按照玩家序号正序排列的（The principle is, player data are sorted in the ascending order of participantIds）
                     if i == 0: #游戏序号（`gameIndex`）
                         LoLGame_stat_data[key].append(begIndex + 1 + gameIndex)
                     elif i <= 11:
@@ -738,22 +769,25 @@ async def search_player_match_stats_lol(connection, puuid: str, begIndex: int = 
                             LoLGame_stat_data[key].append("自定义" if game["queueId"] == 0 else gamemodes[game["queueId"]]["name"])
                         else:
                             LoLGame_stat_data[key].append(game[key])
-                    elif i <= 24:
-                        if i >= 23: #召唤师图标相关键（Summoner icon-related keys）
+                    elif i == 12: #玩家序号（`participantId`）
+                        LoLGame_stat_data[key].append(game["participantIdentities"][0][key])
+                    elif i <= 25:
+                        if i >= 24: #召唤师图标相关键（Summoner icon-related keys）
                             profileIconId = game["participantIdentities"][0]["player"]["profileIcon"]
-                            LoLGame_stat_data[key].append(summonerIcons[profileIconId].get(key.split("_")[1], "") if profileIconId in summonerIcons else "")
+                            LoLGame_stat_data[key].append(summonerIcons[profileIconId].get(key.split("_")[1], "") if profileIconId in summonerIcons else profileIconId if i == 24 else "")
                         else:
                             LoLGame_stat_data[key].append(game["participantIdentities"][0]["player"][key])
                     elif i <= 37:
-                        if i == 26: #最高段位（`highestAchievedSeasonTier`）
+                        if i == 27: #最高段位（`highestAchievedSeasonTier`）
                             LoLGame_stat_data[key].append(tiers[game["participants"][0][key]])
                         elif i == 30: #阵营（`teamId`）
                             LoLGame_stat_data[key].append(team_color[game["participants"][0][key]])
                         elif i >= 31 and i <= 33: #英雄相关键（Champion-related keys）
-                            LoLGame_stat_data[key].append(LoLChampions[game["participants"][0]["championId"]][key.split("_")[1]] if game["participants"][0]["championId"] in LoLChampions else "")
+                            championId = game["participants"][0]["championId"]
+                            LoLGame_stat_data[key].append(LoLChampions[championId][key.split("_")[1]] if championId in LoLChampions else championId if i == 31 else "")
                         elif i >= 34: #召唤师技能相关键（Summoner spell-related keys）
                             spellId = game["participants"][0][key.split("_")[0] + "Id"]
-                            LoLGame_stat_data[key].append(spells[spellId][key.split("_")[1]] if spellId in spells else "")
+                            LoLGame_stat_data[key].append(spells[spellId][key.split("_")[1]] if spellId in spells else spellId if i <= 35 else "")
                         else:
                             LoLGame_stat_data[key].append(game["participants"][0][key])
                     elif i <= 212:
@@ -761,7 +795,7 @@ async def search_player_match_stats_lol(connection, puuid: str, begIndex: int = 
                             LoLGame_stat_data[key].append(subteam_color[stats[key]])
                         elif i >= 151 and i <= 164: #英雄联盟装备相关键（LoLItem-related keys）
                             itemId = stats[key.split("_")[0]]
-                            LoLGame_stat_data[key].append(LoLItems[itemId][key.split("_")[1]] if itemId in LoLItems else "")
+                            LoLGame_stat_data[key].append(LoLItems[itemId][key.split("_")[1]] if itemId in LoLItems else itemId if i <= 157 else "")
                         elif i >= 165 and i <= 182: #符文相关键（Perk-related keys）
                             if i <= 170:
                                 perkId = stats[key[:5]]
@@ -777,7 +811,7 @@ async def search_player_match_stats_lol(connection, puuid: str, begIndex: int = 
                                     LoLGame_stat_data[key].append("")
                             else:
                                 perkId = stats[key.split("_")[0]]
-                                LoLGame_stat_data[key].append(perks[perkId][key.split("_")[1]] if perkId in perks else "")
+                                LoLGame_stat_data[key].append(perks[perkId][key.split("_")[1]] if perkId in perks else perkId if i <= 176 else "")
                         elif i >= 183 and i <= 186: #符文系相关键（Perkstyles-related keys）
                             perkstyleId = stats[key.split("_")[0]]
                             LoLGame_stat_data[key].append(perkstyles[perkstyleId][key.split("_")[1]] if perkstyleId in perkstyles else "")
@@ -793,7 +827,7 @@ async def search_player_match_stats_lol(connection, puuid: str, begIndex: int = 
                                 else: #强化符文等级（`rarity`）
                                     LoLGame_stat_data[key].append(augment_rarity[CherryAugments[CherryAugmentId][key.split("_")[1]]])
                             else:
-                                LoLGame_stat_data[key].append("")
+                                LoLGame_stat_data[key].append(CherryAugmentId if i <= 192 else "")
                         elif i == 205: #击杀/死亡/助攻（`K/D/A`）
                             LoLGame_stat_data[key].append("/".join([str(stats["kills"]), str(stats["deaths"]), str(stats["assists"])]))
                         elif i == 206: #战损比（`KDA`）
@@ -812,15 +846,70 @@ async def search_player_match_stats_lol(connection, puuid: str, begIndex: int = 
                             LoLGame_stat_data[key].append(win_dict[stats["win"]])
                         else:
                             LoLGame_stat_data[key].append(stats[key])
-                    elif i <= 214: #时间轴相关键（Timeline-related keys）
-                        LoLGame_stat_data[key].append(lanes[game["participants"][0]["timeline"][key]] if i == 213 else roles[game["participants"][0]["timeline"][key]])
+                    elif i <= 216:
+                        if bans == []: #修改说明：以前判断禁用数据是否为空是通过禁用模式进行的，如果禁用模式是经典策略就记录禁用信息，否则直接追加空值到列表中。但是在终极魔典中，先前版本记录禁用信息，后来却不记录了。因此，这里判断禁用数据是否为空，直接通过判断bans是否为空【Modification note: To judge whether the ban information of a match is empty, banMode (teams\bans) is used: if banMode is StandardBanStrategy, record the ban information; otherwise, append empty values to the list (by player_count times). But in Ultbook, ban information is recorded in previous versions but not anymore recorded later. Therefore, to judge whether the ban information is empty, whether the variable bans is empty is directly checked】
+                            LoLGame_stat_data[key].append("")
+                        else:
+                            if LoLGame_info["queueId"] == 0:
+                                if LoLGame_info["participants"][current_participantIndex]["teamId"] == 100:
+                                    if legacy_banData_team100_last_i == -1:
+                                        legacy_banData_team100_last_i = current_participantIndex
+                                    elif legacy_banData_team100_last_i != current_participantIndex:
+                                        legacy_banData_team100_appended = True
+                                    if not legacy_banData_team100_appended:
+                                        if i == 213:
+                                            LoLGame_stat_data[key].append(list(map(lambda x: x["championId"], bans_team100)))
+                                        else:
+                                            championIds = list(map(lambda x: x["championId"], bans_team100))
+                                            to_append = []
+                                            for championId in championIds:
+                                                if championId in LoLChampions:
+                                                    to_append.append(LoLChampions[championId][key.split("_")[-1]])
+                                                else:
+                                                    to_append.append(championId if i == 214 else "")
+                                            LoLGame_stat_data[key].append(to_append)
+                                    else:
+                                        LoLGame_stat_data[key].append("")
+                                if LoLGame_info["participants"][current_participantIndex]["teamId"] == 200:
+                                    if legacy_banData_team200_last_i == -1:
+                                        legacy_banData_team200_last_i = current_participantIndex
+                                    elif legacy_banData_team200_last_i != current_participantIndex:
+                                        legacy_banData_team200_appended = True
+                                    if not legacy_banData_team200_appended:
+                                        if i == 213:
+                                            LoLGame_stat_data[key].append(list(map(lambda x: x["championId"], bans_team200)))
+                                        else:
+                                            championIds = list(map(lambda x: x["championId"], bans_team200))
+                                            to_append = []
+                                            for championId in championIds:
+                                                if championId in LoLChampions:
+                                                    to_append.append(LoLChampions[championId][key.split("_")[-1]])
+                                                else:
+                                                    to_append.append(championId if i == 214 else "")
+                                            LoLGame_stat_data[key].append(to_append)
+                                    else:
+                                        LoLGame_stat_data[key].append("")
+                            else:
+                                if bans[current_participantIndex]["championId"] == -1:
+                                    LoLGame_stat_data[key].append("")
+                                else:
+                                    if i == 213:
+                                        LoLGame_stat_data[key].append(bans[current_participantIndex]["championId"])
+                                    else:
+                                        championId = bans[current_participantIndex]["championId"]
+                                        if championId in LoLChampions:
+                                            LoLGame_stat_data[key].append(LoLChampions[championId][key.split("_")[-1]])
+                                        else:
+                                            LoLGame_stat_data[key].append(championId if i == 214 else "")
+                    elif i <= 218: #时间轴相关键（Timeline-related keys）
+                        LoLGame_stat_data[key].append(lanes[game["participants"][0]["timeline"][key]] if i == 217 else roles[game["participants"][0]["timeline"][key]])
                     else: #对局信息转换键（Keys transformed according to game information）
                         subkey = key.split("_")[0]
                         if key.endswith("_percent"): #团队占比键（Team percentage keys）
-                            if i == 273: #参团率（`KP_percent`）
+                            if i == 277: #参团率（`KP_percent`）
                                 self_stat = stats["kills"] + stats["assists"]
                                 total_stat = sum(map(lambda x: x["stats"]["kills"], team_participants))
-                            elif i == 274: #补刀数占比（`CS_percent`）
+                            elif i == 278: #补刀数占比（`CS_percent`）
                                 self_stat = stats["totalMinionsKilled"] + stats["neutralMinionsKilled"]
                                 total_stat = sum(map(lambda x: x["stats"]["totalMinionsKilled"] + x["stats"]["neutralMinionsKilled"], team_participants))
                             else:
@@ -829,19 +918,19 @@ async def search_player_match_stats_lol(connection, puuid: str, begIndex: int = 
                             value = 0 if total_stat == 0 else self_stat / total_stat
                             LoLGame_stat_data[key].append(value)
                         else: #位次键（Order keys）
-                            if i == 334: #战损比位次（`KDA_order`）
+                            if i == 338: #战损比位次（`KDA_order`）
                                 self_stat = (stats["kills"] + stats["assists"]) / max(1, stats["deaths"])
                                 stat_list = sorted(map(lambda x: (x["stats"]["kills"] + x["stats"]["assists"]) / max(1, x["stats"]["deaths"]), team_participants), reverse = True)
-                            elif i == 335: #参团率位次（`KP_order`）
+                            elif i == 339: #参团率位次（`KP_order`）
                                 self_stat = stats["kills"] + stats["assists"]
                                 stat_list = sorted(map(lambda x: x["stats"]["kills"] + x["stats"]["assists"], team_participants), reverse = True)
-                            elif i == 336: #补刀数位次（`CS_order`）
+                            elif i == 340: #补刀数位次（`CS_order`）
                                 self_stat = stats["totalMinionsKilled"] + stats["neutralMinionsKilled"]
                                 stat_list = sorted(map(lambda x: x["stats"]["totalMinionsKilled"] + x["stats"]["neutralMinionsKilled"], team_participants), reverse = True)
-                            elif i == 337: #伤害转化率位次（`D/G_order`）
+                            elif i == 341: #伤害转化率位次（`D/G_order`）
                                 self_stat = 0 if stats["goldEarned"] == 0 else stats["totalDamageDealtToChampions"] / stats["goldEarned"]
                                 stat_list = sorted(map(lambda x: 0 if x["stats"]["goldEarned"] == 0 else x["stats"]["totalDamageDealtToChampions"] / x["stats"]["goldEarned"], team_participants), reverse = True)
-                            elif i == 338: #金币利用率位次（`GUE_order`）
+                            elif i == 342: #金币利用率位次（`GUE_order`）
                                 self_stat = 0 if stats["goldEarned"] == 0 else stats["goldSpent"] / stats["goldEarned"]
                                 stat_list = sorted(map(lambda x: 0 if x["stats"]["goldEarned"] == 0 else x["stats"]["goldSpent"] / x["stats"]["goldEarned"], team_participants), reverse = True)
                             else:
@@ -1365,7 +1454,7 @@ async def Clarke_revival(connection):
             search_LoL = search_TFT = True
         LoLGame_stat_fields_summary = ["gameModeName", "champion_name", "K/D/A", "CS", "gameDuration", "win/lose", "KP_percent", "goldEarned", "KDA", "totalDamageDealtToChampions", "totalDamageTaken", "totalHeal", "KP_order", "goldEarned_order", "KDA_order", "totalDamageDealtToChampions_order", "totalDamageTaken_order", "totalHeal_order"]
         LoLPlayer_stat_summary_dfs.append(pandas.concat([pandas.DataFrame(data = {"summonerName": "召唤师名"}, index = [0]), pandas.DataFrame(data = LoLGame_stat_header, index = [0]).loc[:, LoLGame_stat_fields_summary]], axis = 1))
-        LoLGame_stat_statistics_output_order = [0, 5, 3, 4, 10, 6, 11, 9, 8, 27, 30, 125, 31, 32, 34, 35, 40, 213, 214, 151, 152, 153, 154, 155, 156, 157, 187, 199, 188, 200, 189, 201, 190, 202, 191, 203, 192, 204, 67, 45, 38, 205, 206, 207, 210, 211, 41, 136, 137, 69, 66, 70, 49, 48, 53, 52, 51, 50, 46, 140, 126, 79, 145, 130, 138, 132, 107, 73, 142, 131, 106, 72, 141, 68, 43, 42, 134, 139, 133, 108, 74, 143, 44, 146, 149, 148, 127, 147, 56, 208, 57, 209, 135, 75, 77, 76, 144, 58, 71, 183, 185, 171, 165, 172, 166, 173, 167, 174, 168, 175, 169, 176, 170, 39, 47, 129, 54, 55, 212, 128, 226, 220, 215, 273, 216, 260, 228, 225, 229, 221, 263, 252, 238, 268, 254, 261, 256, 240, 232, 265, 255, 239, 231, 264, 227, 218, 217, 258, 262, 257, 241, 233, 266, 219, 269, 272, 271, 253, 270, 222, 223, 259, 234, 236, 235, 274, 267, 224, 230, 276, 287, 281, 275, 334, 335, 337, 277, 321, 289, 286, 290, 282, 324, 313, 299, 329, 315, 322, 317, 301, 293, 326, 316, 300, 292, 325, 288, 279, 278, 319, 323, 318, 302, 294, 327, 280, 330, 333, 332, 314, 331, 283, 284, 338, 320, 295, 296, 297, 336, 328, 285, 291]
+        LoLGame_stat_statistics_output_order = [0, 5, 3, 4, 10, 6, 11, 9, 8, 12, 30, 125, 31, 32, 214, 215, 34, 35, 40, 217, 218, 151, 152, 153, 154, 155, 156, 157, 187, 199, 188, 200, 189, 201, 190, 202, 191, 203, 192, 204, 67, 45, 38, 205, 206, 207, 210, 211, 41, 136, 137, 69, 66, 70, 49, 48, 53, 52, 51, 50, 46, 140, 126, 79, 145, 130, 138, 132, 107, 73, 142, 131, 106, 72, 141, 68, 43, 42, 134, 139, 133, 108, 74, 143, 44, 146, 149, 148, 127, 147, 56, 208, 57, 209, 135, 75, 77, 76, 144, 58, 71, 183, 185, 171, 165, 172, 166, 173, 167, 174, 168, 175, 169, 176, 170, 39, 47, 129, 54, 55, 212, 128, 230, 224, 219, 277, 220, 264, 232, 229, 233, 225, 267, 256, 242, 272, 258, 265, 260, 244, 236, 269, 259, 243, 235, 268, 231, 222, 221, 262, 266, 261, 245, 237, 270, 223, 273, 276, 275, 257, 274, 226, 227, 263, 238, 240, 239, 278, 271, 228, 234, 280, 291, 285, 279, 338, 339, 341, 281, 325, 293, 290, 294, 286, 328, 317, 303, 333, 319, 326, 321, 305, 297, 330, 320, 304, 296, 329, 292, 283, 282, 323, 327, 322, 306, 298, 331, 284, 334, 337, 336, 318, 335, 287, 288, 342, 324, 299, 300, 301, 340, 332, 289, 295]
         LoLGame_stat_fields_details = list(map(lambda x: LoLGame_stat_header_keys[x], LoLGame_stat_statistics_output_order))
         #LoLGame_stat_fields_details_to_print = ["gameIndex", "gameCreationDate", "gameModeName", "champion_name", "champion_alias", "K/D/A", "KDA", "win/lose"]
         TFTGame_stat_fields_summary = ["tft_game_type", "last_round", "total_damage_to_players", "players_eliminated", "placement"]
@@ -1435,17 +1524,17 @@ async def Clarke_revival(connection):
                         #套用保留两位小数的百分比格式（Two-digit percentage）
                         for column in twoDigitPercentage_columns_lol_summary:
                             col_idx = LoLPlayers_summary_df.columns.get_loc(column) + 2 #Excel中的第一列（A列）的索引是1，且又是数据框的索引列【The index of the first column (Column A) in Excel is 1, and this column is the index of column of the dataframe）
-                            for row in range(3, len(LoLPlayers_summary_df) + 2):
+                            for row in range(3, len(LoLPlayers_summary_df) + 1):
                                 worksheet.cell(row = row, column = col_idx).number_format = numbers.FORMAT_PERCENTAGE_00
                         #套用一位小数（One-digit float）
                         for column in oneDigitFloat_columns_lol_summary:
                             col_idx = LoLPlayers_summary_df.columns.get_loc(column) + 2
-                            for row in range(3, len(LoLPlayers_summary_df) + 2):
+                            for row in range(3, len(LoLPlayers_summary_df) + 1):
                                 worksheet.cell(row = row, column = col_idx).number_format = "0.0"
                         #胜负颜色（Win/Lose color）
                         col_idx = LoLPlayers_summary_df.columns.get_loc("win/lose") + 2
                         col_letter = get_column_letter(col_idx)
-                        rangeStr = "%s3:%s%d" %(col_letter, col_letter, len(LoLPlayers_summary_df) + 2)
+                        rangeStr = "%s3:%s%d" %(col_letter, col_letter, len(LoLPlayers_summary_df) + 1)
                         win_formulaRule_lol = FormulaRule(formula = ['$%s3="%s"' %(col_letter, win_dict[True])], stopIfTrue = True, fill = PatternFill(start_color = "63BE7B", end_color = "63BE7B", fill_type = "solid"))
                         lose_formulaRule_lol = FormulaRule(formula = ['$%s3="%s"' %(col_letter, win_dict[False])], stopIfTrue = True, fill = PatternFill(start_color = "FF6B6B", end_color = "FF6B6B", fill_type = "solid"))
                         worksheet.conditional_formatting.add(rangeStr, win_formulaRule_lol)
@@ -1463,13 +1552,13 @@ async def Clarke_revival(connection):
                                 else: #如果两列不相邻，则提取得到上一个连贯的区域（If these two columns aren't continuous, then get the previous continuous area）
                                     startCol_letter = get_column_letter(startCol_idx)
                                     endCol_letter = get_column_letter(endCol_idx)
-                                    rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayers_summary_df) + 2)
+                                    rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayers_summary_df) + 1)
                                     rangeStrs.append(rangeStr)
                                     startCol_idx = endCol_idx = col_idx #将区域的起始列和终止列设置为当前列（Set the starting and ending columns as the current column）
                         else: #执行完成后，把最后一个连贯区域也加上（After the for-loop finishes, add the last continuous area）
                             startCol_letter = get_column_letter(startCol_idx)
                             endCol_letter = get_column_letter(endCol_idx)
-                            rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayers_summary_df) + 2)
+                            rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayers_summary_df) + 1)
                             rangeStrs.append(rangeStr)
                         for rangeStr in rangeStrs:
                             worksheet.conditional_formatting.add(rangeStr, percent_dataBarRule_lol)
@@ -1487,14 +1576,14 @@ async def Clarke_revival(connection):
                                 else:
                                     startCol_letter = get_column_letter(startCol_idx)
                                     endCol_letter = get_column_letter(endCol_idx)
-                                    rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayers_summary_df) + 2)
+                                    rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayers_summary_df) + 1)
                                     rangeStrs.append(rangeStr)
                                     rangeTuples.append((startCol_letter, endCol_letter))
                                     startCol_idx = endCol_idx = col_idx
                         else:
                             startCol_letter = get_column_letter(startCol_idx)
                             endCol_letter = get_column_letter(endCol_idx)
-                            rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayers_summary_df) + 2)
+                            rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayers_summary_df) + 1)
                             rangeStrs.append(rangeStr)
                             rangeTuples.append((startCol_letter, endCol_letter))
                         for i in range(len(rangeStrs)):
@@ -1519,22 +1608,22 @@ async def Clarke_revival(connection):
                                 #套用保留两位小数的百分比格式（Two-digit percentage）
                                 for column in twoDigitPercentage_columns_lol_details:
                                     col_idx = LoLPlayer_stat_details_df.columns.get_loc(column) + 2
-                                    for row in range(3, len(LoLPlayer_stat_details_df) + 2):
+                                    for row in range(3, len(LoLPlayer_stat_details_df) + 1):
                                         worksheet.cell(row = row, column = col_idx).number_format = numbers.FORMAT_PERCENTAGE_00
                                 #套用一位小数（One-digit float）
                                 for column in oneDigitFloat_columns_lol_details:
                                     col_idx = LoLPlayer_stat_details_df.columns.get_loc(column) + 2
-                                    for row in range(3, len(LoLPlayer_stat_details_df) + 2):
+                                    for row in range(3, len(LoLPlayer_stat_details_df) + 1):
                                         worksheet.cell(row = row, column = col_idx).number_format = "0.0"
-                                #套用三位小数（One-digit float）
+                                #套用三位小数（Three-digit float）
                                 for column in threeDigitFloat_columns_lol_details:
                                     col_idx = LoLPlayer_stat_details_df.columns.get_loc(column) + 2
-                                    for row in range(3, len(LoLPlayer_stat_details_df) + 2):
+                                    for row in range(3, len(LoLPlayer_stat_details_df) + 1):
                                         worksheet.cell(row = row, column = col_idx).number_format = "0.000"
                                 #胜负颜色（Win/Lose color）
                                 col_idx = LoLPlayer_stat_details_df.columns.get_loc("win/lose") + 2
                                 col_letter = get_column_letter(col_idx)
-                                rangeStr = "%s3:%s%d" %(col_letter, col_letter, len(LoLPlayer_stat_details_df) + 2)
+                                rangeStr = "%s3:%s%d" %(col_letter, col_letter, len(LoLPlayer_stat_details_df) + 1)
                                 win_formulaRule_lol = FormulaRule(formula = ['$%s3="%s"' %(col_letter, win_dict[True])], stopIfTrue = True, fill = PatternFill(start_color = "63BE7B", end_color = "63BE7B", fill_type = "solid"))
                                 lose_formulaRule_lol = FormulaRule(formula = ['$%s3="%s"' %(col_letter, win_dict[False])], stopIfTrue = True, fill = PatternFill(start_color = "FF6B6B", end_color = "FF6B6B", fill_type = "solid"))
                                 worksheet.conditional_formatting.add(rangeStr, win_formulaRule_lol)
@@ -1552,13 +1641,13 @@ async def Clarke_revival(connection):
                                         else: #如果两列不相邻，则提取得到上一个连贯的区域（If these two columns aren't continuous, then get the previous continuous area）
                                             startCol_letter = get_column_letter(startCol_idx)
                                             endCol_letter = get_column_letter(endCol_idx)
-                                            rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayer_stat_details_df) + 2)
+                                            rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayer_stat_details_df) + 1)
                                             rangeStrs.append(rangeStr)
                                             startCol_idx = endCol_idx = col_idx #将区域的起始列和终止列设置为当前列（Set the starting and ending columns as the current column）
                                 else: #执行完成后，把最后一个连贯区域也加上（After the for-loop finishes, add the last continuous area）
                                     startCol_letter = get_column_letter(startCol_idx)
                                     endCol_letter = get_column_letter(endCol_idx)
-                                    rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayer_stat_details_df) + 2)
+                                    rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayer_stat_details_df) + 1)
                                     rangeStrs.append(rangeStr)
                                 for rangeStr in rangeStrs:
                                     worksheet.conditional_formatting.add(rangeStr, percent_dataBarRule_lol)
@@ -1576,14 +1665,14 @@ async def Clarke_revival(connection):
                                         else: #如果两列不相邻，则提取得到上一个连贯的区域（If these two columns aren't continuous, then get the previous continuous area）
                                             startCol_letter = get_column_letter(startCol_idx)
                                             endCol_letter = get_column_letter(endCol_idx)
-                                            rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayer_stat_details_df) + 2)
+                                            rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayer_stat_details_df) + 1)
                                             rangeStrs.append(rangeStr)
                                             rangeTuples.append((startCol_letter, endCol_letter))
                                             startCol_idx = endCol_idx = col_idx #将区域的起始列和终止列设置为当前列（Set the starting and ending columns as the current column）
                                 else: #执行完成后，把最后一个连贯区域也加上（After the for-loop finishes, add the last continuous area）
                                     startCol_letter = get_column_letter(startCol_idx)
                                     endCol_letter = get_column_letter(endCol_idx)
-                                    rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayer_stat_details_df) + 2)
+                                    rangeStr = "%s3:%s%d" %(startCol_letter, endCol_letter, len(LoLPlayer_stat_details_df) + 1)
                                     rangeStrs.append(rangeStr)
                                     rangeTuples.append((startCol_letter, endCol_letter))
                                 for i in range(len(rangeStrs)):
@@ -1645,7 +1734,7 @@ async def connect(connection):
         print_detail = bool(input())
     while True:
         print('按回车键以继续，或者输入任意非空字符串以退出程序。\nPress Enter to continue, or submit any non-empty string to exit the program.')
-        if input() != "":
+        if bool(input()):
             break
         await Clarke_revival(connection)
     # process_df = check_proc_trees(created_processes)

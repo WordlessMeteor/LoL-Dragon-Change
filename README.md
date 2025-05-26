@@ -445,24 +445,28 @@ The following explanations only apply to the current branch. For other details (
 			- 装备分类
 			- 地图可用性（CommunityDragon收录的装备数据中无此类数据）
 			- 基础属性
-		- 如果想要批量冻结窗格，可以通过编写宏来一次性对所有表格固定表头。下面以Microsoft Excel为例进行示范。
+		- 如果想要批量冻结窗格和启用筛选，可以通过编写宏来一次性对所有表格固定表头。下面以Microsoft Excel为例进行示范。
 			1. 在Excel中，依次单击“文件”—“选项”—“自定义功能区”，在右侧的“自定义功能区”中勾选“开发工具”。单击“确定”。
 			2. 单击“开发工具”选项卡，再单击“Visual Basic”，打开VBA编辑器。
 			3. 在新窗口的“工程 - VBAProject”子窗口中，右键单击“VBAProject ({工作簿名称})”，依次单击“插入”—“模块”。
 			4. 在新的模块子窗口粘贴以下宏代码：\
 			```vba
-			Sub FreezeTopRowsAndSelectA1()
+			Sub FreezeAndFilterTopRowsAndColumns()
 				Dim ws As Worksheet
+				Dim lastCol As Long
 				For Each ws In ThisWorkbook.Worksheets
-					ws.Activate
-					With ws
-						.Rows("2:2").Select
-						ActiveWindow.FreezePanes = False
-						ActiveWindow.SplitColumn = 0
-						ActiveWindow.SplitRow = 2
-						ActiveWindow.FreezePanes = True
-						.Range("A1").Select
-					End With
+					ws.Activate ' 选中该工作表
+					If ws.AutoFilterMode Then ws.AutoFilterMode = False ' 取消已经存在的筛选
+					ActiveWindow.FreezePanes = False ' 取消当前冻结窗格效果
+					ActiveWindow.SplitColumn = 0 ' 取消任何可能的列拆分
+					ActiveWindow.SplitRow = 0 ' 取消任何可能的行拆分
+					ws.Range("E3").Select ' 冻结前两行和前四列
+					ActiveWindow.FreezePanes = True ' 冻结窗格
+					ws.Range("A2").Select ' 移动光标到A2
+					lastCol = ws.Cells(2, ws.Columns.Count).End(xlToLeft).Column ' 确定第二行最后一个有内容的单元格的列数
+					ws.Range(ws.Cells(2, 1), ws.Cells(2, lastCol)).Select ' 选中从A2到最后一个有内容的单元格
+					Selection.AutoFilter ' 对选中范围应用筛选
+					ws.Range("A1").Select ' 光标初始化——选中A1单元格
 				Next ws
 			End Sub
 			```
@@ -473,24 +477,28 @@ The following explanations only apply to the current branch. For other details (
 		- 该脚本每次运行可以选择汇总和保存一种语言的翻译数据资源，并允许同时下载所有语言的翻译数据资源。
 		- 由于该脚本仅用于校正术语，其涉及的数据资源仅用于开发程序，而不适用于发行版。因此建议用户在存储库，而不是由发行版压缩包解压得到的文件夹中运行该脚本。
 	- 为方便理解**自定义脚本中一些大型数据框的结构**，在主目录中添加了一个工作簿`Customized Program Main Dataframe Structure.xlsx`，以解释其生成过程。
-		- 下面对自定义脚本11和聊天脚本中的`recent_LoLPlayers_df`的结构进行说明，以便说明一些设定。一些设定在后续解释中不再赘述。
-			- 工作表`11 - LoLGame_info_header`共有6列，其中前3列是**主要数据区域**。
+		- 下面对查战绩脚本中的`LoLGame_info_df`、自定义脚本11和聊天服务脚本中的`recent_LoLPlayers_df`和自定义脚本20中的`LoLGame_stat_header`的结构进行说明，以便说明一些设定。一些设定在后续解释中不再赘述。
+			- 工作表`05 - LoLGame_info_header`、`11 - LoLGame_info_header`、`16 - LoLGame_info_header`和`20 - LoLGame_stat_header`共有6列，其中前3列是**主要数据区域**。
 				- `Index`代表`LoLGame_info_data`的键的索引。
 				- `Key`代表`LoLGame_info_data`的键。
 				- `Value`代表`LoLGame_info_data`的值。
 				- `DirectlyImport?`代表从LCU API中获取数据形成数据框时是否需要对数据进行加工。打勾表示直接引用。
 				- `OutputOrder`代表输出为工作表时各数据的排列顺序。
 				- `DisplayOrder`代表在网页中显示时各数据的排列顺序。只有在网页中显示的表格对应的表头工作表才有这一列。
-			- 在该工作表中，主要数据区域设置了7种颜色。
-				- 浅绿色代表`Key`可以直接作为`LoLGame_info`的索引。
-				- 蓝色代表`Key`作为`LoLGame_info["participantIdentities"][participantId]`的索引。
-				- 绿色代表`Key`作为`LoLGame_info["participants"][participantId]`的索引。
-				- 橙色代表`Key`作为`LoLGame_info["participants"][participantId]["stats"]`的索引。
+			- 在该工作表中，主要数据区域设置了9～10种颜色。
+				- 无填充代表`Key`不作为LCU API中任何变量的索引。
+				- 浅绿色代表`Key`可以作为`LoLGame_info`的索引。
+				- 浅蓝色代表`Key`可以作为`LoLGame_info["participantIdentities"][participantId]`的索引。
+				- 深蓝色代表`Key`可以作为`LoLGame_info["participantIdentities"][participantId]["player"]`的索引。
+				- 深绿色代表`Key`可以作为`LoLGame_info["participants"][participantId]`的索引。
+				- 橙色代表`Key`可以作为`LoLGame_info["participants"][participantId]["stats"]`的索引。
 				- 紫色代表`Key`来自`LoLGame_info["teams"][teamId]["bans"]`的索引。
 				- 黄色代表`Key`可以直接作为`LoLGame_info["participants"][participantId]["timeline"]`的索引。
-				- 粉红色代表`Key`不作为LCU API中任何变量的索引。
+				- 粉色代表`Key`不作为LCU API中任何变量的索引。
 					- 目前粉红色区域只包含`ally?`，表示查询的玩家是否是主玩家的队友。在导出的工作表中，打勾表示该玩家是主玩家的队友。
-			- 一些键被标记为无填充。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`ornament`不曾出现在对局信息的json对象中，但是实际上来自`LoLGame_info["participants"][participantId]["stats"]`，对应的是索引`"item6"`。
+				- 灰色代表`Key`来自`LoLGame_info["participants"][participantId]["stats"]`的索引。
+					- 该部分数据主要通过比较和计算得出。
+			- 一些键被标记为无填充。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`gameModeName`不曾出现在对局信息的json对象中，但是实际上来自`LoLGame_info`，对应的是键`"gameMode"`。
 			- <b>要获取各个呈现顺序列表，只需要将表格以`OutputOrder`或`DisplayOrder`作升序排列，然后复制`Index`列的单元格内容即可。</b>
 		- 下面对查英雄脚本中的`LoLChampions_df`的结构进行说明。
 			- 工作表`04 - LoLChampions_header (LCU)`的主要数据区域设置了6种颜色。
@@ -545,18 +553,10 @@ The following explanations only apply to the current branch. For other details (
 				- 橙色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]`的索引。
 				- 深绿色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]["stats"]`的索引。
 				- 紫色代表`Key`可以直接作为`LoLHistory["games"]["games"]["participants"][0]["timeline"]`的索引。
-		- 下面对查战绩脚本中的`LoLGame_leaderboard_df`和`TFTGame_leaderboard_df`的结构进行说明。
-			- 工作表`05 - LoLGame_leaderboard_header`和`05 - TFTGame_leaderboard_header`的主要数据区域设置了2种颜色。
+		- 下面对查战绩脚本中的`LoLGame_leaderboard_df`和`TFTGame_leaderboard_df`和自定义脚本20中的`social_leaderboard_df`的结构进行说明。
+			- 工作表`05 - LoLGame_leaderboard_header`、`05 - TFTGame_leaderboard_header`和`20 - social_leaderboard_header`的主要数据区域设置了2种颜色。
 				- 蓝色代表`Key`可以作为`participantInfo`的索引。
 				- 无填充代表`Key`可以作为`participant_leaderboard`的索引。
-		- 下面对查战绩脚本中的`LoLGame_info_df`的结构进行说明。
-			- 工作表`05 - LoLGame_info_header`的主要数据区域设置了6种颜色。
-				- 浅蓝色代表`Key`可以作为`LoLGame_info["participantIdentities"][participantId]`的索引。
-				- 深蓝色代表`Key`可以作为`LoLGame_info["participantIdentities"][participantId]["player"]`的索引。
-				- 绿色代表`Key`可以作为`LoLGame_info["participants"][participantId]`的索引。
-				- 橙色代表`Key`可以作为`LoLGame_info["participants"][participantId]["stats"]`的索引。
-				- 紫色代表`Key`可以作为`LoLGame_info["teams"][teamId]`的索引。
-				- 黄色代表`Key`可以直接作为`LoLGame_info["participants"][participantId]["timeline"]`的索引。
 		- 下面对查战绩脚本中的`LoLGame_timeline_df`的结构进行说明。
 			- 工作表`05 - LoLGame_timeline_header`的主要数据区域设置了4种颜色。
 				- 蓝色代表`Key`可以作为`frames[frameId]`的索引。
@@ -567,15 +567,15 @@ The following explanations only apply to the current branch. For other details (
 			- 工作表`05 - LoLGame_event_header`的主要数据区域设置为无填充。
 				- 暗红色字代表`Key`可以直接作为`events[timestamp]`的索引。
 				- 一些键被标记为无填充。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`item`不曾出现在对局时间轴的json对象中，但是实际上来自`LoLGame_timeline["frames"]["events"][eventId]`，对应的是索引`"itemId"`。
-		- 下面对查战绩脚本中的`TFTHistory_df`的结构进行说明。
-			- 工作表`05 - TFTHistory_header`的主要数据区域设置了5种颜色。
+		- 下面对查战绩脚本中的`TFTHistory_df`、自定义脚本11和聊天服务脚本中的`recent_TFTPlayers_df`和自定义脚本20中的`TFTGame_stat_header`的结构进行说明。
+			- 工作表`05 - TFTHistory_header`、`11 - TFTHistory_header`、`16 - TFTHistory_header`和`20 - TFTGame_stat_header`的主要数据区域设置了5种颜色。
 				- 无填充代表`Key`不作为LCU API中任何变量的索引。
-				- 天蓝色代表`Key`可以作为`TFTHistory[gameIndex]`的索引。
-				- 绿色代表`Key`可以作为`TFTHistory[gameIndex]["participants"]`的索引。
-				- 粉红色代表`Key`来自`TFTHistory[gameIndex]["participants"][participantId]["traits"][traitIndex]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
-				- 深蓝色代表`Key`来自`TFTHistory[gameIndex]["participants"][participantId]["units"][unitIndex]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
+				- 天蓝色代表`Key`可以作为`TFTHistory[gameIndex]["json"]`的索引。
+				- 绿色代表`Key`可以作为`TFTHistory[gameIndex]["json"]["participants"]`的索引。
+				- 粉红色代表`Key`的前半部分来自`TFTHistory[gameIndex]["json"]["participants"][participantId]["traits"]`的索引，后半部分可以直接作为`TFTHistory[gameIndex]["json"]["participants"][participantId]["traits"][trait_index]`的索引。
+				- 深蓝色代表`Key`的第一部分来自`TFTHistory[gameIndex]["json"]["participants"][participantId]["units"]`的索引。
+					- 129～183之间的键的第二部分可以直接作为`TFTHistory[gameIndex]["json"]["participants"][participantId]["units"][unit_index]`的索引。
+					- 184及以后的键第二部分来自`TFTHistory[gameIndex]["json"]["participants"][participantId]["units"][unit_index]["items"]`的索引，第三部分可以直接作为`TFTHistory[gameIndex]["json"]["participants"][participantId]["units"][unit_index]["items"][item_index]`的索引。
 			- 相比之下，工作表`05 - TFTGame_info_header`和工作表`05 - TFTHistory_header`只差了前面9行内容。
 		- 下面对商品藏品信息整理脚本中的`catalog_df`的结构进行说明。
 			- 工作表`07 - catalog_header`的主要数据区域设置了3种颜色。`item`是`catalogList`中的任意一个元素。
@@ -593,20 +593,11 @@ The following explanations only apply to the current branch. For other details (
 			- 工作表`07 - collection_header`的主要数据区域设置了2种颜色。`item`是`collection`中的任意一个元素。
 				- 无填充代表`Key`可以直接作为`item`的索引。
 				- 蓝色代表`Key`作为`item["payload"]`的索引。
-		- 下面对查模式脚本中的`queues_df`的结构进行说明。
-			- 工作表`09 - queues_header`的主要数据区域设置了4种颜色。
+		- 下面对队列查询脚本和自定义脚本20中的`queues_df`的结构进行说明。
+			- 工作表`09 - queues_header`和`20 - queues_header`的主要数据区域设置了4种颜色。
 				- 绿色代表`Key`可以直接作为`queues[id]`的索引。
 				- 橙色代表`Key`可以作为`queues[id]["gameTypeConfig"]`的索引。
 				- 蓝色代表`Key`可以作为`queues[id]["queueRewards"]`的索引。
-		- 下面对自定义脚本11和聊天脚本中的`recent_TFTPlayers_df`的结构进行说明。
-			- 工作表`11 - TFTHistory_header`和`16 - recent_TFTPlayers_header`的主要数据区域设置了5种颜色。
-				- 无填充代表`Key`不作为LCU API中任何变量的索引。
-				- 天蓝色代表`Key`可以作为`TFTHistory[i]["json"]`的索引。
-				- 绿色代表`Key`可以作为`TFTHistory[i]["json"]["participants"][participantId]`的索引。
-				- 粉色代表`Key`的前半部分可以作为`TFTHistory[i]["json"]["participants"][participantId]["traits"]`的索引，后半部分可以作为`TFTHistory[i]["json"]["participants"][participantId]["traits"][int(TFTTrait_iter[5:])]`的索引。
-				- 深蓝色代表`Key`的前半部分可以作为`TFTHistory[i]["json"]["participants"][participantId]["units"]`的索引。
-					- 91～123之间的键的后半部分可以作为`TFTHistory[i]["json"]["participants"][participantId]["units"][int(unit_iter[4:])]`的索引。
-					- 124及以后的键的后半部分可以作为`TFTHistory[i]["json"]["participants"][participantId]["units"][int(unit_iter[4:])]["items"]`的索引。
 		- 下面对整理战利品脚本中的`player_loot_df`的结构进行说明。
 			- 工作表`12 - player_loot_header`的主要数据区域未设置颜色，因为这些键都可作为`player_loot[i]`的索引。
 		- 下面对查天梯脚本中的`splits_info_df`的结构进行说明。
@@ -731,22 +722,6 @@ The following explanations only apply to the current branch. For other details (
 				- 无填充代表`Key`可以作为`page`的索引。
 				- 蓝色代表`Key`的后半部分可以直接作为`page["pageKeystone"]`的索引。
 				- 绿色代表`Key`来自`page["uiPerks"][pageId]`的索引。
-		- 下面对自定义脚本20中的`social_leaderboard_df`的结构进行说明。
-			- 工作表`20 - social_leaderboard_header`完全复制于工作表`05 - LoLGame_leaderboard_header`或者`05 - TFTGame_leaderboard_header`。
-		- 下面对自定义脚本20中的`queues_df`的结构进行说明。
-			- 工作表`20 - queues_header`完全复制于工作表`09 - queues_header`。
-		- 下面对自定义脚本20中的`LoLGame_stat_df`的结构进行说明。
-			- 工作表`20 - LoLGame_stat_header`的主要数据区域设置了7种颜色。
-				- 无填充代表`Key`不作为LCU API中任何变量的索引。
-				- 蓝色代表`Key`可以作为`LoLHistory["games"]["games"]`的索引。
-				- 浅绿色代表`Key`可以作为`LoLHistory["games"]["games"]["participantIdentities"][0]["player"]`的索引。
-				- 黄色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]`的索引。
-				- 深绿色代表`Key`可以作为`LoLHistory["games"]["games"]["participants"][0]["stats"]`的索引。
-				- 紫色代表`Key`可以直接作为`LoLHistory["games"]["games"]["participants"][0]["timeline"]`的索引。
-				- 灰色代表`Key`来自`LoLGame_info["participants"][participantId]["stats"]`的索引。
-					- 该部分数据主要通过比较和计算得出。
-		- 下面对自定义脚本20中的`TFTGame_stat_df`的结构进行说明。
-			- 工作表`20 - TFTGame_stat_header`完全复制于工作表`05 - TFTHistory_header`。
 		- 下面对自定义脚本20中的`process_df`的结构进行说明。
 			- 工作表`20 - process_header`的主要数据区域设置了2种颜色。
 				- 无填充代表`Key`不作为任何变量的索引。
@@ -1210,24 +1185,28 @@ For details about customized programs that is beyond the scope of creating a cus
 			- Classification
 			- Map availability (not available in item data from CommunityDragon)
 			- Basic stats
-		- If you want to freeze cells in batch, you can write a Macro to fix the top rows of all sheets. The following is a demonstration, taking Microsoft Excel as an example.
+		- If you want to freeze cells and enable autofilter in batch, you can write a Macro to fix the top rows of all sheets. The following is a demonstration, taking Microsoft Excel as an example.
 			1. In Microsoft Excel, click "File" - "Options" - "Customize Ribbon". Tick on "Developer" and click "OK".
 			2. Click "Developer" tab and then click "Visual Basic" to open the VBA editor.
 			3. In "Project - VBAProject" subwindow of the new window, right click "VBAProject ({Workbook Name})". Then click "Insert" - "Module".
 			4. Paste the following code into the new module subwindow:
 			```vba
-			Sub FreezeTopRowsAndSelectA1()
+			Sub FreezeAndFilterTopRowsAndColumns()
 				Dim ws As Worksheet
+				Dim lastCol As Long
 				For Each ws In ThisWorkbook.Worksheets
-					ws.Activate
-					With ws
-						.Rows("2:2").Select
-						ActiveWindow.FreezePanes = False
-						ActiveWindow.SplitColumn = 0
-						ActiveWindow.SplitRow = 2
-						ActiveWindow.FreezePanes = True
-						.Range("A1").Select
-					End With
+					ws.Activate ' Select this sheet
+					If ws.AutoFilterMode Then ws.AutoFilterMode = False ' Remove any existing autofilter
+					ActiveWindow.FreezePanes = False ' Disable the current pane freezing
+					ActiveWindow.SplitColumn = 0 ' Remove any existing column split
+					ActiveWindow.SplitRow = 0 ' Remove any existing row split
+					ws.Range("E3").Select ' Freeze the first two rows and four columns
+					ActiveWindow.FreezePanes = True ' Freeze the panes
+					ws.Range("A2").Select ' Select A2 cell
+					lastCol = ws.Cells(2, ws.Columns.Count).End(xlToLeft).Column ' Determine the last column that has content in Line Two
+					ws.Range(ws.Cells(2, 1), ws.Cells(2, lastCol)).Select ' Select the range from A2 to the last cell that has content in the same row
+					Selection.AutoFilter ' Apply autofilter to the selected range
+					ws.Range("A1").Select ' Cursor initialization - Select A1 cell
 				Next ws
 			End Sub
 			```
@@ -1238,24 +1217,28 @@ For details about customized programs that is beyond the scope of creating a cus
 		- Each run of this program supports summarizing and saving the translation data resources of a language. It also allows downloading data resources in all languages within one run.
 		- Since this program is only intended to correct the terms, the involved data resources are only used for program development, instead of the release. So, it's highly recommended that users run this program in the cloned repository folder, instead of the folder extracted from compressed files in Release.
 	- To let user **understand the structure of the large dataframes**, a workbook `Customized Program Main Dataframe Structure.xlsx` is added in the home directory to illustrate how the dataframes are organized.
-		- The following is the illustration on the structure of `recent_LoLPlayers_df` in Customized Programs 11 and 16, to explain some settings, which will not be repeated in the later explanation:
-			- There're 6 columns in the sheet `11 - recent_LoLPlayers_header`, and the first 3 columns are the **main data area**.
+		- The following is the illustration on the structure of `LoLGame_info_df` in Customized Program 05, `recent_LoLPlayers_df` in Customized Programs 11 and 16 and `LoLGame_stat_header` in Customized Program 20, to explain some settings, which won't be repeated in the following context:
+			- There're 6 columns in the sheets `05 - LoLGame_info_header`, `11 - LoLGame_info_header`, `16 - LoLGame_info_header` and `20 - LoLGame_stat_header`, and the first 3 columns are the **main data area**.
 				- `Index` represents the index of the keys of the dictionary variable `LoLGame_info_data`.
 				- `Key` represents the keys of the dictionary variable `LoLGame_info_data`.
 				- `Value` represents the values of the dictionary variable `LoLGame_info_data`.
 				- `DirectlyImport?` represents whether to analyze the data to be transformed from LCU API into the dataframe. A tick means reference without any change.
 				- `OutputOrder` represents the order to arrange the data when they're output into a worksheet.
 				- `DisplayOrder` represents the order to arrange the data when they're displayed in a webpage. Only the header sheets whose corresponding tables are to be displayed in a webpage have this column.
-			- 7 colors are used to divide the main data area in this sheet.
-				- Data in the light green area mean `Key` is the direct index of the variable `LoLGame_info`.
-				- Data in the blue area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]`.
-				- Data in the green area mean `Key` is the index of `LoLGame_info["participants"][participantId]`.
+			- 9～10 colors are used to divide the main data area in these sheets.
+				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
+				- Data in the light green area mean `Key` is the index of the variable `LoLGame_info`.
+				- Data in the light blue area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]`.
+				- Data in the dark blue area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]["player"]`.
+				- Data in the dark green area mean `Key` is the index of `LoLGame_info["participants"][participantId]`.
+				- Data in the orange area mean `Key` is the index of `LoLGame_info["participants"][participantId]["stats"]`.
 				- Data in the purple area mean `Key` comes from `LoLGame_info["teams"][teamId]["bans"]`.
 				- Data in the yellow area mean `Key` is the direct index of `LoLGame_info["participants"][participantId]["timeline"]`.
-				- Data in the yellow area mean `Key` is the index of `LoLGame_info["participants"][participantId]["stats"]`.
 				- Data in the pink area mean `Key` doesn't serve as the index of any variables of LCU API.
 					- Currently, the purple area only contains `ally?`, a judgement whether the queried player is an ally of the main player. In the exported sheet, a tick means the queried player is the ally of the main player.
-			- Some keys are colored white. These keys don't belong to the indices of any variable in LCU API, but actually come from them. For example, `ornament` never occurs in the json object of the game information, but actually originates from `LoLGame_info["participants"][participantId]["stats]` and corresponds to the key `"item6"`.
+				- Data in the grey area mean `Key` comes from `LoLGame_info["participants"][participantId]["stats"]`.
+					- Values of this part of keys are obtained by comparison and mathematical calculation.
+			- Some keys are colored white. These keys don't belong to the indices of any variable in LCU API, but actually come from them. For example, `gameModeName` never occurs in the json object of the game information, but actually originates from `LoLGame_info` and corresponds to the key `"gameMode"`.
 			- <b>To obtain the output/display order lists, users need only arrange the table according to the ascending order of `OutputOrder` or `DisplayOrder` and then copy the cells in `Index` column.</b>
 		- `LoLChampions_df` in Customized Program 04:
 			- 6 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (LCU)`:
@@ -1310,18 +1293,10 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the orange area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]`.
 				- Data in the dark green area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]["stats"]`.
 				- Data in the purple area mean `Key` is the direct index of `LoLHistory["games"]["games"]["participants"][0]["timeline"]`.
-		- `LoLGame_leaderboard_df` and `TFTGame_leaderboard_df` in Customized Program 05:
-			- 2 colors are used to divide the main data area in both sheets `05 - LoLGame_leaderboard_header` and `05 - TFTGame_leaderboard_header`.
+		- `LoLGame_leaderboard_df` and `TFTGame_leaderboard_df` in Customized Program 05 and `social_leaderboard_df` in Customized Program 20:
+			- 2 colors are used to divide the main data area in sheets `05 - LoLGame_leaderboard_header`, `05 - TFTGame_leaderboard_header` and `20 - social_leaderboard_header`.
 				- Data in the blue area mean `Key` is the index of `participantInfo`.
 				- Data not filled with any color mean `Key` is the index of `participant_leaderboard`.
-		- `LoLGame_info_df` in Customized Program 05:
-			- 6 colors are used to divide the main data area in the sheet `05 - LoLGame_info_header`.
-				- Data in the light blue area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]`.
-				- Data in the dark blue area mean `Key` is the index of `LoLGame_info["participantIdentities"][participantId]["player"]`.
-				- Data in the green area mean `Key` is the index of `LoLGame_info["participants"][participantId]`.
-				- Data in the orange area mean `Key` is the index of `LoLGame_info["participants"][participantId]["stats"]`.
-				- Data in the purple area mean `Key` is the index of `LoLGame_info["teams"][teamId]`.
-				- Data in the yellow area mean `Key` is the direct index of `LoLGame_info["participants"][participantId]["timeline"]`.
 		- `LoLGame_timeline_df` in Customized Program 05:
 			- 4 colors are used to divide the main data area in the sheet `05 - LoLGame_timeline_header`.
 				- Data in the blue area mean `Key` is the index of `frames[frameId]`.
@@ -1332,15 +1307,15 @@ For details about customized programs that is beyond the scope of creating a cus
 			- The main data area in the sheet `05 - TFTHistory_header` isn't filled with any color.
 				- Keys in dark red mean `Key` is the direct index of the variable `events[timestamp]`.
 				- Some keys are colored black. These keys don't belong to the indices of any variable in LCU API, but actually come from them. For example, `item` never occurs in the json object of the game information, but actually originates from `LoLGame_timeline["frames"]["events"][eventId]` and corresponds to the key `"itemId"`.
-		- `TFTHistory_df` in Customized Program 05:
-			- 5 colors are used to divide the main data area in the sheet `05 - TFTHistory_df`.
+		- `TFTHistory_df` in Customized Program 05, "recent_TFTPlayers_df` in Customized Programs 11 and 16 and `TFTGame_stat_df` in Customized Program 20:
+			- 5 colors are used to divide the main data area in the sheets `05 - TFTHistory_header`, `11 - TFTHistory_header` and `16 - TFTGame_stat_header`.
 				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
-				- Data in the sky blue area mean `Key` is the index of `TFTHistory[gameIndex]`.
-				- Data in the green area mean `Key` is the index of `TFTHistory[gameIndex]["participants"]`.
-				- Data in the purple area mean `Key` is the index of `TFTHistory[gameIndex]["traits"][traitIndex]`.
-					- Note that no key in this area exists to be the direct index.
-				- Data in the deep blue area mean `Key` is the index of `TFTHistory[gameIndex]["units"][unitIndex]`.
-					- Note that no key in this area exists to be the direct index.
+				- Data in the sky blue area mean `Key` is the index of `TFTHistory[gameIndex]["json"]`.
+				- Data in the green area mean `Key` is the index of `TFTHistory[gameIndex]["json"]["participants"]`.
+				- Data in the pink area mean the first half of `Key` is the index of `TFTHistory[gameIndex]["json"]["participants"][participantId]["traits"]`, while the second half is the index of `TFTHistory[gameIndex]["json"]["participants"][participantId]["traits"][trait_index]`.
+				- Data in the dark blue area mean the first part of `Key` is the index of `TFTHistory[gameIndex]["json"]["participants"][participantId]["units"]`.
+					- For `Key` whose index is between 129～183, the second part is the direct index of `TFTHistory[gameIndex]["json"]["participants"][participantId]["units"][unit_index]`.
+					- For `Key` whose index is greater than or equal to 184, the second part comes from `TFTHistory[gameIndex]["json"]["participants"][participantId]["units"][unit_index]["items"]`, and the third part is the direct index of `TFTHistory[gameIndex]["json"]["participants"][participantId]["units"][unit_index]["items"][item_index]`.
 			- The only difference of the contents between the sheet `05 - TFTGame_info_header` and the sheet `05 - TFTHistory_header` is the first 9 lines.
 		- `catalog_df` in Customized Program 07:
 			- 3 colors are used to divide the main data area in the sheet `07 - catalog_header`. `Item` denodes any element in `catalogList`.
@@ -1354,20 +1329,11 @@ For details about customized programs that is beyond the scope of creating a cus
 			- 2 colors are used to divide the main data area in the sheet `07 - collection_header`. `Item` denodes any element in `catalogList`.
 				- Data not filled with any color mean `Key` is the direct index of the variable `item`.
 				- Data in the blue area mean `Key` is the index of `item["payload"]`.
-		- `queues_df` in Customized Program 09:
-			- 4 colors are used to divide the main data area in the sheet `09 - queues_header`.
+		- `queues_df` in Customized Programs 09 and 20:
+			- 4 colors are used to divide the main data area in the sheets `09 - queues_header` and `20 - queues_header`.
 				- Data in the blue area mean `Key` is the direct index of the variable `queues[id]`.
 				- Data in the orange area mean `Key` is the index of the variable `queues[id]["gameTypeConfig"]`.
 				- Data in the blue area mean `Key` is the index of the variable `queues[id]["queueRewards"]`.
-		- `recent_TFTPlayers_df` in Customized Programs 11 and 16:
-			- 5 colors are used to divide the main data area in the sheets `11 - recent_TFTPlayers_header` and `16 - recent_TFTPlayers_header`.
-				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
-				- Data in the sky blue area mean `Key` is the index of `TFTHistory[i]["json"]`.
-				- Data in the green area mea `Key` is the index of `TFTHistory[i]["json"]["participants"][participantId]`.
-				- Data in the pink area mean the first half of `Key` is the index of `TFTHistory[i]["json"]["participants"][participantId]['traits"]`, while the second half is the index of `TFTHistory[i]["json"]["participants"][participantId]["traits"][int(TFTTrait_iter[5:])]`.
-				- Data in the dark blue area mean the first half of `Key` is the index of `TFTHistory[i]["json"]["participants"][participantId]["units"]`.
-					- The second half of `Key` whose index is between 91 and 123 is the index of `TFTHistory[i]["json"]["particiants"][participantId]["units"][int(unit_iter[4:])]`.
-					- The second half of `Key` whose index is greater than 123 is the index of `TFTHistory[i]["json"]["participants"][participantId]["units"][int(unit_iter[4:])]["items"]`.
 		- `player_loot_df` in Customized Program 12:
 			- No color is used to divide the main data area in the sheet `12 - player_loot_header`, because these keys are all indices of `player_loot[i]`.
 		- `splits_info_df` in Customized Program 13:
@@ -1492,22 +1458,6 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data not filled with any color mean `Key` is the index of `page`.
 				- Data in the blue area mean the second half of `Key` is the direct index of `page["pageKeystone"]`.
 				- Data in the green area mean `Key` comes from `page["uiPerks"][pageId]`.
-		- `social_leaderboard_df` in Customized Program 20:
-			- Sheet `20 - social_leaderboard_header` is totally copied from Sheet `05 - LoLGame_leaderboard_header` or `05 - TFTGame_leaderboard_header`.
-		- `queues_df` in Customized Program 20:
-			- Sheet `20 - queues_header` is totally copied from Sheet `09 - queues_header`.
-		- `LoLGame_stat_df` in Customized Program 20:
-			- 7 colors are used to divide the main data area in the sheet `20 - LoLGame_stat_header`.
-				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of LCU API.
-				- Data in the blue area mean `Key` is the index of `LoLHistory["games"]["games"]`.
-				- Data in the light green area mean `Key` is the direct index of `LoLHistory["games"]["games"]["participantIdentities"][0]["player"]`.
-				- Data in the yellow area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]`.
-				- Data in the dark green area mean `Key` is the index of `LoLHistory["games"]["games"]["participants"][0]["stats"]`.
-				- Data in the purple area mean `Key` is the direct index of `LoLHistory["games"]["games"]["participants"][0]["timeline"]`.
-				- Data in the grey area mean `Key` comes from `LoLGame_info["participants"][participantId]["stats"]`.
-					- Values of this part of keys are obtained by comparison and mathematical calculation.
-		- `TFTGame_stat_df` in Customized Program 20:
-			- Sheet `20 - TFTGame_stat_header` is totally copied from Sheet `05 - TFTHistory_header`.
 		- `process_df` in Customized Program 20:
 			- 2 colors are used to divide the main data area in the sheet `20 - process_header`.
 				- Data not filled with any color mean `Key` doesn't serve as the index of any variables.

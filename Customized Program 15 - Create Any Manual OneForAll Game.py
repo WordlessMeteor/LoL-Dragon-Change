@@ -167,6 +167,7 @@ async def autoPick(connection):
             response = await (await connection.request("PATCH", "/lol-champ-select/v1/session/actions/%d" %pick_actionId, data = body)).json()
             end3 = time.time()
             diff3 = end3 - start3
+            print(body)
             print(response)
             #校验用户是否成功选择想要选择的英雄（Verify whether the user has successfully picked the expected champion）
             #time.sleep(1) #从选英雄到英雄会话数据更新有一定延迟，特别是在外国服务器（There's some lag between picking a champion and updating the session data, especially in a foreign server）
