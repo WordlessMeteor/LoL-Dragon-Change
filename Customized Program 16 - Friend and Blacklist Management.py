@@ -383,7 +383,7 @@ async def sort_friend_hovercard(connection):
         key = friend_hovercard_header_keys[i]
         friend_hovercard_data[key] = []
     #下面定义一些常量字典（Define some constant dictionaries）
-    availabilities = {"available": "可用", "away": "离开", "championSelect": "英雄选择", "chat": "在线", "dnd": "游戏中", "hostingCoopVsAIGame": "正创建人机对战", "hostingFeaturedGame": "正创建特殊模式", "hostingNormalGame": "正创建匹配模式", "hostingPracticeGame": "正创建自定义游戏", "hostingRankedGame": "创建排位赛", "hosting_ARAM_UNRANKED_5x5": "正创建匹配模式", "hosting_BOT": "正创建人机对战", "hosting_BOT_3x3": "正创建人机对战", "hosting_CHERRY": "正创建斗魂竞技场", "hosting_RIOTSCRIPT_BOT": "正创建人机对战", "hosting_Custom": "正创建自定义游戏", "hosting_NEXUSBLITZ": "正创建极限闪击", "hosting_NORMAL": "正创建匹配模式", "hosting_NORMAL_3x3": "正创建匹配模式", "hosting_NORMAL_TFT": "正创建云顶之弈对局", "hosting_PRACTICETOOL": "正创建训练模式", "hosting_RANKED_FLEX_SR": "正创建排位对局", "hosting_RANKED_FLEX_TT": "正创建排位对局", "hosting_RANKED_SOLO_5x5": "正创建排位对局", "hosting_RANKED_TEAM_5x5": "正创建排位对局", "hosting_RANKED_TFT": "正创建云顶之弈对局", "hosting_RANKED_TFT_TURBO": "正创建云顶之弈对局", "hosting_RANKED_TFT_PAIRS": "正创建双人作战对局", "hosting_RANKED_TFT_DOUBLE_UP": "正创建双人作战", "hosting_STRAWBERRY": "正创建【无尽狂潮】对局", "hosting_CHONCC_TREASURE_TFT": "正创建云顶之弈对局", "hosting_LNY23_TFT": "正创建云顶之弈对局", "hosting_LNY24_TFT": "正创建云顶之弈对局", "hosting_LNY25_TFT": "正在创建云顶之弈对局", "hosting_SET_REVIVAL_5_5_TFT": "正在创建云顶之弈对局", "hosting_FIVE_YEAR_ANNIVERSARY_TFT": "正在创建云顶之弈对局", "hosting_SF_TFT": "正创建云顶之弈对局", "hosting_featured": "正创建特殊模式", "inGame": "游戏中", "inQueue": "队列中", "inTeamBuilder": "阵容匹配中", "map_hosting_ARAM_UNRANKED_5x5": "正创建匹配模式（进步之桥）", "map_hosting_NORMAL": "正创建匹配模式（召唤师峡谷）", "map_hosting_NORMAL_3x3": "正创建匹配模式（扭曲丛林）", "map_hosting_RANKED_FLEX_SR": "正创建灵活排位（召唤师峡谷）", "map_hosting_RANKED_FLEX_TT": "正创建灵活排位（扭曲丛林）", "mobile": "在线分组", "offline": "离线", "online": "在线", "spectating": "正在观战中", "teamSelect": "正在选择队伍", "tutorial": "正在新手教程中", "undefined": "待定……", "watchingReplay": "正在观看回放", "outOfGame": "在线"} #来源（Source）：plugins/rcp-fe-lol-social/global/zh_cn
+    availabilities = {"available": "可用", "away": "离开", "championSelect": "英雄选择", "chat": "在线", "dnd": "游戏中", "hostingCoopVsAIGame": "正创建人机对战", "hostingFeaturedGame": "正创建特殊模式", "hostingNormalGame": "正创建匹配模式", "hostingPracticeGame": "正创建自定义游戏", "hostingRankedGame": "创建排位赛", "hosting_ARAM_UNRANKED_5x5": "正创建匹配模式", "hosting_BOT": "正创建人机对战", "hosting_BOT_3x3": "正创建人机对战", "hosting_CHERRY": "正创建斗魂竞技场", "hosting_RIOTSCRIPT_BOT": "正创建人机对战", "hosting_Custom": "正创建自定义游戏", "hosting_NEXUSBLITZ": "正创建极限闪击", "hosting_NORMAL": "正创建匹配模式", "hosting_NORMAL_3x3": "正创建匹配模式", "hosting_NORMAL_TFT": "正创建云顶之弈对局", "hosting_PRACTICETOOL": "正创建训练模式", "hosting_RANKED_FLEX_SR": "正创建排位对局", "hosting_RANKED_FLEX_TT": "正创建排位对局", "hosting_RANKED_SOLO_5x5": "正创建排位对局", "hosting_RANKED_TEAM_5x5": "正创建排位对局", "hosting_RANKED_TFT": "正创建云顶之弈对局", "hosting_RANKED_TFT_TURBO": "正创建云顶之弈对局", "hosting_RANKED_TFT_PAIRS": "正创建双人作战对局", "hosting_RANKED_TFT_DOUBLE_UP": "正创建双人作战", "hosting_STRAWBERRY": "正创建【无尽狂潮】对局", "hosting_CHONCC_TREASURE_TFT": "正创建云顶之弈对局", "hosting_LNY23_TFT": "正创建云顶之弈对局", "hosting_LNY24_TFT": "正创建云顶之弈对局", "hosting_LNY25_TFT": "正在创建云顶之弈对局", "hosting_SET_REVIVAL_5_5_TFT": "正在创建云顶之弈对局", "hosting_FIVE_YEAR_ANNIVERSARY_TFT": "正在创建云顶之弈对局", "hosting_SF_TFT": "正创建云顶之弈对局", "hosting_PVE_PUZZLE_TFT": "正创建云顶之弈对局", "hosting_featured": "正创建特殊模式", "inGame": "游戏中", "inQueue": "队列中", "inTeamBuilder": "阵容匹配中", "map_hosting_ARAM_UNRANKED_5x5": "正创建匹配模式（进步之桥）", "map_hosting_NORMAL": "正创建匹配模式（召唤师峡谷）", "map_hosting_NORMAL_3x3": "正创建匹配模式（扭曲丛林）", "map_hosting_RANKED_FLEX_SR": "正创建灵活排位（召唤师峡谷）", "map_hosting_RANKED_FLEX_TT": "正创建灵活排位（扭曲丛林）", "mobile": "在线分组", "offline": "离线", "online": "在线", "spectating": "正在观战中", "teamSelect": "正在选择队伍", "tutorial": "正在新手教程中", "undefined": "待定……", "watchingReplay": "正在观看回放", "outOfGame": "在线"} #来源（Source）：plugins/rcp-fe-lol-social/global/zh_cn
     challengeCrystalLevels = {"": "", "IRON": "黑铁阶", "BRONZE": "黄铜阶", "SILVER": "白银阶", "GOLD": "黄金阶", "PLATINUM": "铂金阶", "EMERALD": "翡翠阶", "DIAMOND": "钻石阶", "MASTER": "大师阶", "GRANDMASTER": "宗师阶", "CHALLENGER": "王者阶"}
     tiers = {"": "", "NONE": "没有段位", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
     ratedTiers = {"": "", "NONE": "没有段位", "GRAY": "灰白", "GREEN": "翠绿", "BLUE": "天蓝", "PURPLE": "绛紫", "ORANGE": "耀橙"}
@@ -1840,7 +1840,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
             print("客户端尚未连接到聊天服务。如果这个问题持续存在，请重新登录客户端后再重新运行此脚本。\nNot connected to RC client yet. If this problem persists, please relog in and then rerun this program.")
             return 1
     #准备大区数据（Prepare server / platform data）
-    platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
+    platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区", "PREPBE": "试炼之地 临时过渡服务器（Chinese PBE Temporary）"}
     platform_RIOT = {"ME1": "中东服（Middle East）", "BR1": "巴西服（Brazil）", "EUN1": "北欧和东欧服（Europe Nordic & East）", "EUW1": "西欧服（Europe West）", "JP1": "日服（Japan）", "KR": "韩服（Republic of Korea）", "LA1": "北拉美服（Latin America North）", "LA2": "南拉美服（Latin America South）", "NA1": "北美服（North America）", "OC1": "大洋洲服（Oceania）", "TR1": "土耳其服（Turkey）", "RU": "俄罗斯服（Russia）", "PH2": "菲律宾服（Philippines）", "SG2": "新加坡服（Singapore）", "TH2": "泰服（Thailand）", "TW2": "台服（Taiwan, Hong Kong and Macau）", "VN2": "越南服（Vietnam）", "PBE1": "测试服（Public Beta Environment）"}
     platform_GARENA = {"PH1": "菲律宾服（Philippines）", "SG1": "新加坡服（Singapore, Malaysia and Indonesia）", "TW1": "台服（Taiwan, Hong Kong and Macau）", "VN1": "越南服（Vietnam）", "TH1": "泰服（Thailand）"}
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
@@ -1933,6 +1933,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         else:
                             body = {"name": newGroupName}
                             response = await (await connection.request("POST", "/lol-chat/v1/friend-groups", data = body)).json()
+                            print(response)
                             if response == None:
                                 print("已创建新的分组：%s。\nCreated a new folder: %s" %(newGroupName, newGroupName))
                                 friend_groups = await (await connection.request("GET", "/lol-chat/v1/friend-groups")).json()
@@ -1954,8 +1955,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             break
                         elif strategy[0] == "1" or strategy[0] == "2":
                             for group in friend_groups:
-                                body = {"collapsed": strategy[0] == "2", "name": group["name"]} #展开/折叠分组时，只要在链接中指定分组序号即可，即使这里没有name键（To expand / collapse a folder, specifiying the following folder id should be enough. It doesn't matter whether the key "name" exists here）
+                                body = {"collapsed": strategy[0] == "2", "name": group["name"], "priority": group["priority"]} #展开/折叠分组时，只要在链接中指定分组序号即可，即使这里没有name键（To expand / collapse a folder, specifiying the following folder id should be enough. It doesn't matter whether the key "name" exists here）
                                 response = await (await connection.request("PUT", "/lol-chat/v1/friend-groups/%d" %(group["id"]), data = body)).json()
+                                print(response)
                                 if response == None or "errorCode" in response and response["httpStatus"] == 500:
                                     if strategy[0] == "1":
                                         print("已展开%s分组。\nFolder %s expanded." %(group["name"], group["name"]))
@@ -1976,8 +1978,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     if "errorCode" in group and group["httpStatus"] == 404:
                                         print("操作失败！请检查分组是否存在。\nAction failed! Please check if the folder is still there.")
                                     else:
-                                        body = {"collapsed": not(group["collapsed"]), "name": group["name"]}
+                                        body = {"collapsed": not(group["collapsed"]), "name": group["name"], "priority": group["priority"]}
                                         response = await (await connection.request("PUT", "/lol-chat/v1/friend-groups/%d" %(group["id"]), data = body)).json()
+                                        print(response)
                                         if response == None or "errorCode" in response and response["httpStatus"] == 500:
                                             if body["collapsed"]:
                                                 print("已折叠%s分组。\nFolder %s collapsed." %(group["name"], group["name"]))
@@ -2016,8 +2019,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     print("请输入要重命名的分组序号：\nPlease input the group ids to rename:")
                                     continue
                                 else:
-                                    body = {"name": name}
+                                    body = {"collapsed": group["collapsed"], "name": name, "priority": group["priority"]}
                                     response = await (await connection.request("PUT", "/lol-chat/v1/friend-groups/%d" %(group["id"]), data = body)).json()
+                                    print(response)
                                     if response == None:
                                         print("已重命名分组。\nRenamed the group.\n原名称（Old name）：%s新名称（New name）：%s" %(group["name"], name))
                                     else:
@@ -2058,8 +2062,9 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     error_occurred_groupArrange = False
                                     for groupId in group_order:
                                         group = await (await connection.request("GET", f"/lol-chat/v1/friend-groups/{groupId}")).json()
-                                        body = {"name": group["name"], "priority": priority} #请求主体中没有name键时，不仅请求速度降低，而且还会返回一个500异常信息（If the key "name" isn't in the request body, not only does the request speed slows, but the request also returns an error with a 500 httpStatus）
+                                        body = {"collapsed": group["collapsed"], "name": group["name"], "priority": priority} #请求主体中没有name键时，不仅请求速度降低，而且还会返回一个500异常信息（If the key "name" isn't in the request body, not only does the request speed slows, but the request also returns an error with a 500 httpStatus）
                                         response = await (await connection.request("PUT", f"/lol-chat/v1/friend-groups/{groupId}", data = body)).json()
+                                        print(response)
                                         if response == None:
                                             print("已将%s分组的优先级设置为%d。\nSet the priority of Group %s as %d." %(group["name"], priority, group["name"], priority))
                                         else:
@@ -2090,6 +2095,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     print("无法删除默认分组。\nYou can't remove the default folder.")
                                 else:
                                     response = await (await connection.request("DELETE", f"/lol-chat/v1/friend-groups/{groupId}")).json()
+                                    print(response)
                                     if response == None:
                                         print("已删除分组%s。\nRemoved folder %s." %(group["name"], group["name"]))
                                     else:
@@ -2327,6 +2333,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 else:
                                                     body = {"type": messageType, "body": text}
                                                     response = await (await connection.request("POST", f"/lol-chat/v1/conversations/{chatId}/messages", data = body)).json()
+                                                    print(response)
                                                     if "errorCode" in response:
                                                         if response["httpStatus"] == 404:
                                                             print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please activate this conversation first.")
@@ -2400,6 +2407,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         else:
                                             body = {"type": messageType, "body": text}
                                             response = await (await connection.request("POST", f"/lol-chat/v1/conversations/{chatId}/messages", data = body)).json()
+                                            print(response)
                                             if "errorCode" in response:
                                                 if response["httpStatus"] == 404:
                                                     print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please activate this conversation first.")
@@ -2473,6 +2481,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     else:
                                         body = {"type": messageType, "body": text}
                                         response = await (await connection.request("POST", f"/lol-chat/v1/conversations/{pid}/messages", data = body)).json()
+                                        print(response)
                                         if "errorCode" in response:
                                             if response["httpStatus"] == 404:
                                                 print("聊天服务响应失败！请先激活对话。\nERROR response for chat service! Please activate this conversation first.")
@@ -2517,6 +2526,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         prefriend_gameName, prefriend_tagLine = prefriend_name.split("#")
                                         body = {"gameName": prefriend_gameName, "tagLine": prefriend_tagLine}
                                     response = await (await connection.request("POST", "/lol-chat/v2/friend-requests", data = body)).json() #由于该接口的报错信息过于单一，这里只能自己设置报错机制。来源：rcp-fe-lol-social/global/zh_cn/trans.json（Because the error information from endpoint turns out to be too simple, here the error feedback is set manually. Reference: rcp-fe-lol-social/global/zh_cn/trans.json）
+                                    print(response)
                             else:
                                 print(prefriend_info["message"])
                             if prefriend_info["info_got"]:
@@ -2650,6 +2660,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                     if friend_request_direction == "in":
                                                         body = {"puuid": prefriend_puuid} #选用玩家通用唯一识别码作为请求主体，是考虑到它的不变性（Puuid is chosen as the request body, considering its invariability）
                                                         response = await (await connection.request("POST", "/lol-chat/v2/friend-requests", data = body)).json() #两个人成为好友，等价于两个人互相承认对方为自己的好友。这话说着有点文绉绉的……说白了就是双方都向对方发起好友申请（If two guys become friends, that means they admit the other to be their friends. This may sound obscure ... In brief, that means the two guys both send friend requests to each other）
+                                                        print(response)
                                                         if response == None:
                                                             print("您同意了%s的好友请求。\nYou accepted the friend request from %s." %(prefriend_summonerName, prefriend_summonerName))
                                                         else:
@@ -2658,6 +2669,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                         print("该操作不适用于当前好友请求。\nThis operation doesn't apply to the current friend request.")
                                                 elif method[0] == "2":
                                                     response = await (await connection.request("DELETE", "/lol-chat/v2/friend-requests/%s" %(prefriend_puuid))).json()
+                                                    print(response)
                                                     if response == None:
                                                         if friend_request_direction == "in":
                                                             print("您拒绝了%s的好友请求。\nYou rejected the friend request from %s." %(prefriend_summonerName, prefriend_summonerName))
@@ -2674,6 +2686,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                     if block_confirm:
                                                         body = {"puuid": prefriend_puuid}
                                                         response = await (await connection.request("POST", "/lol-chat/v1/blocked-players", data = body)).json()
+                                                        print(response)
                                                         if response == None:
                                                             print("您已将%s拉入聊天黑名单。\nYou've blocked %s." %(prefriend_summonerName, prefriend_summonerName))
                                                         else:
@@ -2875,6 +2888,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             note = friends[friend_index]["note"]
                                             body = {"groupId": group["id"], "note": note}
                                             response = await (await connection.request("PUT", f"/lol-chat/v1/friends/{pid}", data = body)).json()
+                                            print(response)
                                             target_groupName = group["name"]
                                             if response == None:
                                                 print("您的好友%s已移动到%s分组中。\nYour friend %s has been moved to the group %s." %(move_summonerName, target_groupName, move_summonerName, target_groupName))
@@ -2946,6 +2960,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 note = input()
                                 body = {"groupId": groupId, "note": note}
                                 response = await (await connection.request("PUT", f"/lol-chat/v1/friends/{pid}", data = body)).json()
+                                print(response)
                                 if response == None:
                                     print("为%s添加/修改备注成功。\nAdd/Edit note for %s successfully.\n旧备注（Old note）：%s\n新备注（New note）：%s\n" %(friend_summonerNames[friend_index], friend_summonerNames[friend_index], friends[friend_index]["note"], note))
                                 else:
@@ -3131,6 +3146,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     unfriend_summonerName = friend_summonerNames[friend_index]
                                     if unfriend_confirm:
                                         response = await (await connection.request("DELETE", f"/lol-chat/v1/friends/{pid}")).json()
+                                        print(response)
                                         if response == None:
                                             print("您已与%s解除好友关系。\nYou've unfriended %s successfully." %(unfriend_summonerName, unfriend_summonerName))
                                         else:
@@ -3325,6 +3341,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     if block_confirm:
                                         body = {"puuid": friend_puuids[friend_index]}
                                         response = await (await connection.request("POST", f"/lol-chat/v1/blocked-players", data = body)).json()
+                                        print(response)
                                         if response == None:
                                             print("%s已被拉入聊天黑名单。你再也不会看到TA的在线状态或是收到来自TA的信息了。\n%s has been blocked. You will no longer see them online or receive their messages." %(block_summonerName, block_summonerName))
                                         else:
@@ -3760,6 +3777,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 print(invitee_info["message"])
                         body = list(map(lambda x: {"toSummonerId": x}, invitee_summonerIds))
                         response = await (await connection.request("POST", "/lol-lobby/v2/lobby/invitations", data = body)).json()
+                        print(response)
                         lobby_invitations = await (await connection.request("GET", "/lol-lobby/v2/lobby/invitations")).json()
                         if "errorCode" in lobby_invitations:
                             if lobby_invitations["httpStatus"] == 404 and lobby_invitations["message"] == "LOBBY_NOT_FOUND":
@@ -3798,6 +3816,15 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
             else:
                 print("您目前无法邀请玩家。\nYou can't invite any player currently.")
         elif option == "8":
+            lol_notifications = await (await connection.request("GET", "/lol-settings/v2/account/LCUPreferences/lol-notifications")).json()
+            settings_changed = False
+            if lol_notifications["data"]["blockNonFriendGameInvites"]:
+                body = {"data": {"blockNonFriendGameInvites": False}, "schemaVersion": lol_notifications["schemaVersion"]} #注意：schemaVersion一旦增加就不可减少（Warning: Once schemaVersion increases, it can't be decreased）
+                response = await (await connection.request("PATCH", "/lol-settings/v2/account/LCUPreferences/lol-notifications", data = body)).json()
+                print(response)
+                if response == None:
+                    print('已经关闭“只接受好友游戏邀请”选项。\nDisabled "Allow game invites only from friends" option.')
+                    settings_changed = True
             while True:
                 print("您是要加入好友的公开小队，还是接受邀请？\nDo you want to join a friend's open party or accept an invitation?\n1\t加入公开小队（Join party）\n2\t接受邀请（Accept an invitation）")
                 action = input()
@@ -3833,6 +3860,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             elif partyIndex in map(str, range(1, len(parties) + 1)):
                                 partyId = parties[int(partyIndex) - 1]["partyId"]
                                 response = await (await connection.request("POST", f"/lol-lobby/v2/party/{partyId}/join")).json()
+                                print(response)
                                 if response == None:
                                     print("您加入了%s的小队。\nYou joined the party of %s." %(party_owners[partyId], party_owners[partyId]))
                                     return_home = True
@@ -3900,6 +3928,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         invitationId = invid_df.loc[int(invitationIndex), "invitationId"] #注意到邀请序号和小队序号的获取方式有所不同。小队序号是从原始的小队数据中获取的，因为小队数据作为静态数据传入小队信息整理函数中，而邀请信息没有传入邀请信息整理函数中，在程序运行前后邀请信息会频繁更新，可能导致原始邀请信息和邀请信息数据框中的内容不符（邀请信息数据框整理过程中的邀请信息和这里的邀请信息不在同一个作用域中）【Note that it differs between getting invitationId and getting partyId. PartyId is obtained from the original party data, in that party data are passed into `sort_party_data` function as static data, while invitation data aren't passed into `sort_received_invitations` function. As a result, invitation information may be frequently updated, which causes the original invitation data not in accordance with data in the invitation dataframe (invitation data here don't belong to the same scope of those during sorting out the invitation dataframe)】
                                         invid_owner = invid_df.loc[int(invitationIndex), "fromSummonerName"]
                                         response = await (await connection.request("POST", f"/lol-lobby/v2/received-invitations/{invitationId}/accept")).json()
+                                        print(response)
                                         if response == None:
                                             print("您接受了%s的邀请。\nYou accepted the invitation of %s." %(invid_owner, invid_owner))
                                             return_home = True
@@ -4010,6 +4039,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             invitationId = invid_df.loc[int(invitationIndex), "invitationId"]
                                             invid_owner = invid_df.loc[int(invitationIndex), "fromSummonerName"]
                                             response = await (await connection.request("POST", f"/lol-lobby/v2/received-invitations/{invitationId}/decline")).json()
+                                            print(response)
                                             if response == None:
                                                 print("您拒绝了%s的邀请。\nYou accepted the invitation of %s." %(invid_owner, invid_owner))
                                             else:
@@ -4035,6 +4065,12 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                 if return_home:
                     break
+            if settings_changed:
+                body = {"data": {"blockNonFriendGameInvites": True}, "schemaVersion": lol_notifications["schemaVersion"]}
+                response = await (await connection.request("PATCH", "/lol-settings/v2/account/LCUPreferences/lol-notifications", data = body)).json()
+                print(response)
+                if response == None:
+                    print('恢复了“只接受好友游戏邀请”选项。\nRecovered "Allow game invites only from friends" option.')
         elif option == "9":
             global spectatorPluginNA_hint_printed
             gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json()
@@ -4044,6 +4080,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     friends = await (await connection.request("GET", "/lol-chat/v1/friends")).json()
                     friend_puuids = list(map(lambda x: x["puuid"], friends))
                     response = await (await connection.request("POST", "/lol-spectator/v3/buddy/spectate", data = [current_info["puuid"]] if len(friends) == 0 else friend_puuids)).json() #在国服，如果这个接口的请求主体不是空列表，那么返回的异常信息是“SpectatorPlugin_NOT_AVAILABLE”。问题在于，如果请求主体是空列表，那么这个接口仍能正常响应。这样看来，似乎下面程序逻辑本应先处理len(friends)是否为0的情形。但是有一个比较巧妙的解法，就是将这个接口的请求主体设置为自己。这样一来，在观战插件可用的时候，如果程序识别到自己不在游戏中，那么自己肯定是不可观战的；如果程序识别到自己在游戏中，那么程序压根就无法运行这里的代码【On Chinese servers, if the request body of this endpoint isn't an empty list, then the error message is "SpectatorPlugin_NOT_AVAILABLE". But the problem is, if the request body is an empty list, then it still responds as normal (Riot servers). In that case, it seems the following program logic should first deal with the case where `len(friends) == 0` or `len(friends) != 0`. But here I provide a relatively clever solution: assign a list containing only the user's puuid as the request body. In this way, when the spectator plugin is available, if the program identifies that the user isn't in game right now, then the user itself can't be observable; if the program identifies the user itself is in game, then the program won't run the code here and hereinafter at all】
+                    print(response)
                     pluginNA = False
                     use_pluginNA = False #决定是否在观战可用性插件可用的情况下仍然运行观战可用性插件不可用的情况下的代码（Decides whether to run the code of the case where spectating availability endpoint isn't available when this endpoint is actually available）
                     spectate_ready = False
@@ -4096,6 +4133,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 print("您已经输入过该玩家了。\nYou've alerady added this summoner.")
                                             else:
                                                 response = await (await connection.request("POST", "/lol-spectator/v3/buddy/spectate", data = [spectate_info["body"]["puuid"]])).json()
+                                                print(response)
                                                 if len(response["availableForWatching"]) == 0:
                                                     spectate_availability.append(False)
                                                     print("该玩家目前不可观战。\nThis player isn't observable currently.")
@@ -4240,6 +4278,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                     if spectate_ready:
                         body = {"dropInSpectateGameId": str(dropInSpectateGameId), "gameQueueType": gameQueueType, "allowObserveMode": allowObserveMode, "puuid": spectate_puuid}
                         response = await (await connection.request("POST", "/lol-spectator/v1/spectate/launch", data = body)).json()
+                        print(response)
                         if response == None:
                             time.sleep(1) #发送指令后客户端不一定马上进入英雄选择或游戏中（The client won't immediately enter the champ select or in game stage after the program posts the spectating requests）
                             gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json()
@@ -4255,8 +4294,14 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             elif response["httpStatus"] == 500 and "Couldn't find service in service discovery using ServerLocationEndpointFilter" in response["message"]:
                                 print("观战服务不可用。\nSpectator service unavailable.")
                             else:
-                                print(response["message"])
-                                print("观战失败。请通过客户端内右键点击一名好友，或者通过第三方工具来进行观战。\nSpectating failed. Please right click on a friend or use another third-party tool to spectate.")
+                                if "Game is not able to be spectated" in response["message"]:
+                                    print("现在还不能观战这个游戏类型，或者这个自定义对局未对观战者开放。\nThis game type cannot be spectated right now, or this custom game is not open to spectators.")
+                                elif "Player was not found" in response["message"]:
+                                    print("该玩家未在游戏中。\nThis player isn't in a game currently.")
+                                elif "Already in gameflow" in response["message"]:
+                                    print("您目前的状态不可观战。请等待游戏结束或者退出房间来进行观战。\nYou're not allowed to spectate for now. Please wait for the current game to end or exit the party or lobby to spectate any game.")
+                                else:
+                                    print("观战失败。请通过客户端内右键点击一名好友，或者通过第三方工具来进行观战。\nSpectating failed. Please right click on a friend or use another third-party tool to spectate.")
             elif gameflow_phase == "Reconnect":
                 gameflow_session = await (await connection.request("GET", "/lol-gameflow/v1/session")).json()
                 inGame_puuids = list(map(lambda x: x["puuid"], gameflow_session["gameData"]["playerChampionSelections"]))
@@ -4265,6 +4310,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                 reconnect = bool(input())
                 if reconnect:
                     response = await (await connection.request("POST", "/lol-gameflow/v1/reconnect")).json()
+                    print(response)
                     if response == None:
                         print("重新连接成功。\nReconnect succeeded.")
                     else:
@@ -4332,6 +4378,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                                             if True or captureDevices_df.loc[deviceIndex, "usable"]: #有时用户的确有切换到不可用输入设备的需要（Sometimes the user does get the demand of switching to a capture device that isn't usable）
                                                                                 deviceName = captureDevices_df.loc[deviceIndex, "name"]
                                                                                 response = await (await connection.request("PUT", "/lol-premade-voice/v1/capturedevices", data = deviceName)).json() #这里的设备名称改成句柄也是可以的（Here the device handle works, too）
+                                                                                print(response)
                                                                                 if response == None:
                                                                                     captureDevices = await (await connection.request("GET", "/lol-premade-voice/v1/capturedevices")).json()
                                                                                     captureDevices_transformed = {}
@@ -4363,9 +4410,11 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                         micTest = bool(input())
                                                         if micTest:
                                                             response = await (await connection.request("POST", "/lol-premade-voice/v1/mic-test")).json()
+                                                            print(response)
                                                             print("按回车键以结束测试。\nPress Enter to end the test.")
                                                             input()
                                                             response = await (await connection.request("DELETE", "/lol-premade-voice/v1/mic-test")).json()
+                                                            print(response)
                                                             continue
                                                         else:
                                                             break
@@ -4379,6 +4428,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                             break
                                                         elif mode[0] == "1":
                                                             response = await (await connection.request("PUT", "/lol-premade-voice/v1/self/inputMode", data = "voiceActivity")).json()
+                                                            print(response)
                                                             if response == None:
                                                                 print("输入模式已改为语音活跃度。\nInput mode has switched to Voice Activity.")
                                                             else:
@@ -4413,6 +4463,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                                             else:
                                                                 response = await (await connection.request("PUT", "/lol-premade-voice/v1/self/activationSensitivity", data = sensitivity)).json()
+                                                                print(response)
                                                                 if response == None:
                                                                     voiceSettings = await (await connection.request("GET", "/lol-premade-voice/v1/settings")).json()
                                                                     print("语音激活阈值已设置为%d%%。\nVoice activation threshold is set as %d%%." %(voiceSettings["vadSensitivity"], voiceSettings["vadSensitivity"]))
@@ -4431,6 +4482,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                             if keyStr == "0":
                                                                 break
                                                             response = await (await connection.request("POST", "/lol-premade-voice/v1/gameClientUpdatedPTTKey", data = keyStr)).json()
+                                                            print(response)
                                                             if response == None:
                                                                 voiceSettings = await (await connection.request("GET", "/lol-premade-voice/v1/settings")).json()
                                                                 print("【按键发言】热键已设置为%s。\nPush to Talk hotkey is set as %s." %(voiceSettings["pttKey"], voiceSettings["pttKey"]))
@@ -4454,6 +4506,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                                 print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                                             else:
                                                                 response = await (await connection.request("PUT", "/lol-premade-voice/v1/self/micLevel", data = micLevel)).json()
+                                                                print(response)
                                                                 if response == None:
                                                                     voiceSettings = await (await connection.request("GET", "/lol-premade-voice/v1/settings")).json()
                                                                     print(f"输入音量（增强）已设置为%d%%。\nInput Volume (Gain) is set as %d%%." %(voiceSettings["micLevel"], voiceSettings["micLevel"]))
@@ -4467,12 +4520,14 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                     voiceSettings = await (await connection.request("GET", "/lol-premade-voice/v1/settings")).json()
                                                     if voiceSettings["localMicMuted"]:
                                                         response = await (await connection.request("PUT", "/lol-premade-voice/v1/self/mute", data = "0")).json()
+                                                        print(response)
                                                         if response == None:
                                                             print("自我静音已解除。\nSelf unmuted.")
                                                         else:
                                                             print("自我静音解除失败。\nSelf unmute failed.")
                                                     else:
                                                         response = await (await connection.request("PUT", "/lol-premade-voice/v1/self/mute", data = "1")).json()
+                                                        print(response)
                                                         if response == None:
                                                             print("已自我静音。\nSelf muted.")
                                                         else:
@@ -4608,6 +4663,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                                 player_puuid = participant_record_df.loc[player_index, "puuid"]
                                                                 player_summonerName = participant_record_df.loc[player_index, "gameName"] + "#" + participant_record_df.loc[player_index, "tagLine"]
                                                                 response = await (await connection.request("PUT", f"/lol-premade-voice/v1/participants/{player_puuid}/mute", data = str(int(isMuted)))).json()
+                                                                print(response)
                                                                 if response == None:
                                                                     if isMuted:
                                                                         print(f"您已将玩家{player_summonerName}静音。\nYou muted the participant {player_summonerName}.")
@@ -4762,6 +4818,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                                                 player_puuid = participant_record_df.loc[player_index, "puuid"]
                                                                                 player_summonerName = participant_record_df.loc[player_index, "gameName"] + "#" + participant_record_df.loc[player_index, "tagLine"]
                                                                                 response = await (await connection.request("PUT", f"/lol-premade-voice/v1/participants/{player_puuid}/volume", data = str(volume))).json()
+                                                                                print(response)
                                                                                 if response == None:
                                                                                     participant_records = await (await connection.request("GET", "/lol-premade-voice/v1/participant-records")).json()
                                                                                     participant_records_transformed = {}
@@ -4778,6 +4835,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                                     player_summonerName = participant_record_df.loc[player_index, "gameName"] + "#" + participant_record_df.loc[player_index, "tagLine"]
                                                                     volume = playerVolumes[player_index]
                                                                     response = await (await connection.request("PUT", f"/lol-premade-voice/v1/participants/{player_puuid}/volume", data = str(volume))).json()
+                                                                    print(response)
                                                                     if response == None:
                                                                         participant_records = await (await connection.request("GET", "/lol-premade-voice/v1/participant-records")).json()
                                                                         participant_records_transformed = {}
@@ -4797,6 +4855,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 print("请选择设置方法：\nPlease select a voice setting:\n0\t返回上一层（Return to the last step）\n1\t静音/解除静音（Mute/Unmute）\n2\t修改音量（Change volume）")
                                     elif setting[0] == "3":
                                         response = await (await connection.request("POST", "/lol-premade-voice/v1/first-experience/reset")).json()
+                                        print(response)
                                         if response == None:
                                             print("小队语音提示已启用。您将在客户端和游戏内看到相关提示。注意，重置提示在一个客户端进程进行时只能生效一次。\nLeague Voice hint enabled. You'll see tooltips both in League Client and in game. Note that tooltip reset can only come into effect once during each process living.")
                                         else:
@@ -4929,6 +4988,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     elif action[0] == "4":
                                         index_got = False
                                         response = await (await connection.request("DELETE", "/lol-chat/v1/player-mutes")).json()
+                                        print(response)
                                         if response == None:
                                             print("所有队友被已解除静音。\nYour allies are unmuted.")
                                     else:
@@ -4955,6 +5015,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 break
                                             elif mode[0] == "1":
                                                 response = await (await connection.request("POST", "/lol-chat/v1/player-mutes", data = body)).json()
+                                                print(response)
                                                 if response == None:
                                                     if isMuted:
                                                         print("您已将以下队友静音。\nYou muted the following allies.")
@@ -4969,6 +5030,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                         print("解除静音失败。\nUnmute failed.")
                                             elif mode[0] == "2":
                                                 response = await (await connection.request("POST", "/lol-chat/v1/system-mutes", data = body)).json()
+                                                print(response)
                                                 if response == None:
                                                     if isMuted:
                                                         print("您已将以下队友静音。\nYou muted the following allies.")
@@ -5198,6 +5260,7 @@ async def blacklist_behavior_simulation(connection):
                                 body = {"puuid": block_puuids[i]}
                                 block_summonerName = block_summonerNames[i]
                                 response = await (await connection.request("POST", f"/lol-chat/v1/blocked-players", data = body)).json()
+                                print(response)
                                 if response == None:
                                     print("%s已被拉入聊天黑名单。你再也不会看到TA的在线状态或是收到来自TA的信息了。\n%s has been blocked. You will no longer see them online or receive their messages." %(block_summonerName, block_summonerName))
                                 else:
@@ -5354,6 +5417,7 @@ async def blacklist_behavior_simulation(connection):
                                         blocked_summonerId = blockList_df_filtered_lobby.loc[blocked_index, "summonerId"]
                                         blocked_summonerName = blockList_df_filtered_lobby.loc[blocked_index, "gameName"] + "#" + blockList_df_filtered_lobby.loc[blocked_index, "gameTag"]
                                         response = await (await connection.request("POST", f"/lol-lobby/v2/lobby/members/{blocked_summonerId}/kick")).json()
+                                        print(response)
                                         if response == blocked_summonerId:
                                             print(f"已将{blocked_summonerName}移出小队/房间。\nKicked {blocked_summonerName} from the party / lobby.")
                                         else:
@@ -5642,6 +5706,7 @@ async def blacklist_behavior_simulation(connection):
                                     unblock_summonerName = player_summonerNames[player_index]
                                     unblock_puuid = player_puuids[player_index]
                                     response = await (await connection.request("DELETE", f"/lol-chat/v1/blocked-players/{unblock_puuid}")).json()
+                                    print(response)
                                     if response == None:
                                         print("%s已被移出聊天黑名单。\n%s has been unblocked." %(unblock_summonerName, unblock_summonerName))
                                     else:
@@ -5738,6 +5803,7 @@ async def blacklist_behavior_simulation(connection):
                     #                 if not puuid_to_block in blocked_puuids:
                     #                     body = {"puuid": puuids_to_block[i]}
                     #                     response = await (await connection.request("POST", "/lol-chat/v1/blocked-players", data = body)).json()
+                    #                     print(response)
                     #                     if response == None:
                     #                         print("%s已被拉入聊天黑名单。你再也不会看到TA的在线状态或是收到来自TA的信息了。\n%s has been blocked. You will no longer see them online or receive their messages." %(summonerName_to_block, summonerName_to_block))
                     #                     else:
@@ -5759,6 +5825,7 @@ async def blacklist_behavior_simulation(connection):
                     #                 summonerName_to_unblock = summonerNames_to_unblock[i]
                     #                 body = {"puuid": puuids_to_unblock[i]}
                     #                 response = await (await connection.request("DELETE", f"/lol-chat/v1/blocked-players/{puuid_to_unblock}")).json()
+                    #                 print(response)
                     #                 if response == None:
                     #                     print("%s已被移出聊天黑名单。\n%s has been unblocked." %(summonerName_to_unblock, summonerName_to_unblock))
                     #                 else:

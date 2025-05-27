@@ -57,6 +57,7 @@ async def get_gametype_config(connection):
     gametype_config = []
     for i in range(100):
         response = await (await connection.request("GET", f"/lol-game-queues/v1/game-type-config/{i}")).json()
+        print(response)
         if "errorCode" in response:
             if response["message"] == f'No game type config found with id {i}':
                 #print(f"没有找到序号为{i}的游戏类型信息。\nNo game type config found with id {i}.")

@@ -416,7 +416,7 @@ async def configure_perks(connection):
     displayName = get_info_name(info)
     platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     platformId = platform_config["LoginDataPacket"]["platformId"]
-    platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区"}
+    platform_TENCENT = {"BGP1": "全网通区 男爵领域（Baron Zone）", "BGP2": "峡谷之巅（Super Zone）", "EDU1": "教育网专区（CRENET Server）", "HN1": "电信一区 艾欧尼亚（Ionia）", "HN2": "电信二区 祖安（Zaun）", "HN3": "电信三区 诺克萨斯（Noxus 1）", "HN4": "电信四区 班德尔城（Bandle City）", "HN4_NEW": "电信四区 班德尔城（Bandle City）", "HN5": "电信五区 皮尔特沃夫（Piltover）", "HN6": "电信六区 战争学院（the Institute of War）", "HN7": "电信七区 巨神峰（Mount Targon）", "HN8": "电信八区 雷瑟守备（Noxus 2）", "HN9": "电信九区 裁决之地（the Proving Grounds）", "HN10": "电信十区 黑色玫瑰（the Black Rose）", "HN11": "电信十一区 暗影岛（Shadow Isles）", "HN12": "电信十二区 钢铁烈阳（the Iron Solari）", "HN13": "电信十三区 水晶之痕（Crystal Scar）", "HN14": "电信十四区 均衡教派（the Kinkou Order）", "HN15": "电信十五区 影流（the Shadow Order）", "HN16": "电信十六区 守望之海（Guardian's Sea）", "HN17": "电信十七区 征服之海（Conqueror's Sea）", "HN18": "电信十八区 卡拉曼达（Kalamanda）", "HN19": "电信十九区 皮城警备（Piltover Wardens）", "PBE": "体验服 试炼之地（Chinese PBE）", "WT1": "网通一区 比尔吉沃特（Bilgewater）", "WT1_NEW": "网通一区 比尔吉沃特（Bilgewater）", "WT2": "网通二区 德玛西亚（Demacia）", "WT2_NEW": "网通二区 德玛西亚（Demacia）", "WT3": "网通三区 弗雷尔卓德（Freljord）", "WT3_NEW": "网通三区 弗雷尔卓德（Freljord）", "WT4": "网通四区 无畏先锋（House Crownguard）", "WT4_NEW": "网通四区 无畏先锋（House Crownguard）", "WT5": "网通五区 恕瑞玛（Shurima）", "WT6": "网通六区 扭曲丛林（Twisted Treeline）", "WT7": "网通七区 巨龙之巢（the Dragon Camp）", "FORCES": "比赛服 艾欧尼亚（Tournament - Ionia）", "NJ100": "联盟一区", "GZ100": "联盟二区", "CQ100": "联盟三区", "TJ100": "联盟四区", "TJ101": "联盟五区", "PREPBE": "试炼之地 临时过渡服务器（Chinese PBE Temporary）"}
     platform_RIOT = {"ME1": "中东服（Middle East）", "BR1": "巴西服（Brazil）", "EUN1": "北欧和东欧服（Europe Nordic & East）", "EUW1": "西欧服（Europe West）", "JP1": "日服（Japan）", "KR": "韩服（Republic of Korea）", "LA1": "北拉美服（Latin America North）", "LA2": "南拉美服（Latin America South）", "NA1": "北美服（North America）", "OC1": "大洋洲服（Oceania）", "TR1": "土耳其服（Turkey）", "RU": "俄罗斯服（Russia）", "PH2": "菲律宾服（Philippines）", "SG2": "新加坡服（Singapore）", "TH2": "泰服（Thailand）", "TW2": "台服（Taiwan, Hong Kong and Macau）", "VN2": "越南服（Vietnam）", "PBE1": "测试服（Public Beta Environment）"}
     platform_GARENA = {"PH1": "菲律宾服（Philippines）", "SG1": "新加坡服（Singapore, Malaysia and Indonesia）", "TW1": "台服（Taiwan, Hong Kong and Macau）", "VN1": "越南服（Vietnam）", "TH1": "泰服（Thailand）"}
     platform = {"TENCENT": "国服（TENCENT）", "RIOT": "外服（RIOT）", "GARENA": "竞舞（GARENA）"}
@@ -966,6 +966,7 @@ async def configure_perks(connection):
                                                                     if len(perkPages) == 0: #如果用户没有符文页，则创建一个占位符文页。目的只是为了拿到一个具体的符文页序号（If the user doesn't have any perk page, create one. The aim is only to get a perk page id）
                                                                         dummy_page_body = {"name": "占位符文页", "isTemporary": isTemporary, "primaryStyleId": -1, "subStyleId": -1, "selectedPerkIds": [-1, -1, -1, -1, -1, -1, -1, -1, -1]}
                                                                         response = await (await connection.request("POST", "/lol-perks/v1/pages", data = dummy_page_body)).json()
+                                                                        print(response)
                                                                         if "errorCode" in response:
                                                                             print(response)
                                                                             print("符文页名称有效性验证失败。将不再验证符文页名称有效性。\nPerk page name validation failed. This name won't be validated this time.")
@@ -977,6 +978,7 @@ async def configure_perks(connection):
                                                                     else: #如果用户有符文页，则使用第一个符文页的序号。这不会对第一个符文页产生影响（If the user has a perk page, use the id of the first page. This won't cause any change to it）
                                                                         validate_body = {"id": perkPages[0]["id"], "name": pageName}
                                                                     response = await (await connection.request("PUT", "/lol-perks/v1/pages/validate", data = validate_body)).json()
+                                                                    print(response)
                                                                     if "errorCode" in response:
                                                                         print(response)
                                                                         print("符文页名称有效性验证失败。将不再验证符文页名称有效性。\nPerk page name validation failed. This name won't be validated this time.")
@@ -986,6 +988,7 @@ async def configure_perks(connection):
                                                                             print("符文页名称通过验证。\nNew page name passed validation.")
                                                                             if dummy_page_created:
                                                                                 response = await (await connection.request("DELETE", f"/lol-perks/v1/pages/{dummy_pageId}")).json()
+                                                                                print(response)
                                                                                 if response != None:
                                                                                     print(response)
                                                                                     print("占位符文页删除失败。请自行在客户端内删除。\nDummy perk page failed to be deleted. Please delete it by yourself.")
@@ -1075,6 +1078,7 @@ async def configure_perks(connection):
                                 if page_edit:
                                     if page_exist:
                                         response = await (await connection.request("PUT", f"/lol-perks/v1/pages/{pageId}", data = page_body)).json()
+                                        print(response)
                                         if "errorCode" in response:
                                             print(response)
                                             print("符文页编辑失败。\nFailed to edit this perk page.")
@@ -1082,6 +1086,7 @@ async def configure_perks(connection):
                                             print("符文页编辑成功。\nPerk page is edit successfully.")
                                     else:
                                         response = await (await connection.request("POST", "/lol-perks/v1/pages", data = page_body)).json()
+                                        print(response)
                                         if "errorCode" in response:
                                             print(response)
                                             print("符文页创建失败。\nFailed to add this perk page.")
@@ -1160,6 +1165,7 @@ async def configure_perks(connection):
                                         perkNames = perkPage_df.loc[pageIndex, "uiPerksNames"]
                                         page_body = {"name": pageName, "isTemporary": isTemporary, "primaryStyleId": primaryPerkStyleId, "subStyleId": secondaryPerkStyleId, "selectedPerkIds": perkIds}
                                         response = await (await connection.request("PUT", f"/lol-perks/v1/pages/{pageId}", data = page_body)).json()
+                                        print(response)
                                         if "errorCode" in response:
                                             print(response)
                                             print("符文页活动性设置失败。\nFailed to set the selected page active.")
@@ -1203,6 +1209,7 @@ async def configure_perks(connection):
                                         for page in perkPages:
                                             body = {"targetPageId": page["id"], "destinationPageId": page["id"], "offset": len(perkPages) + abs(perkPages[-1]["order"])} #为了避免可能的位次冲突，在准备阶段，尽可能保证所有符文页的偏移量是定值。考虑到有些符文页的位次可能是负数，这里的偏移量带上了符文页最小位次的绝对值，这样能保证所有符文页经过这个for循环之后位次的值大于总符文页数量的整数，且保持原有顺序（To avoid possible order conflicts, the offset of each move should be constant during preparation. Considering some orders may be negative, here the offset is added the absolute value of the smallest order. In this way, orders of all pages will be greater than the total number of perk pages after this for-loop and obey the original order）
                                             response = await (await connection.request("POST", "/lol-perks/v1/update-page-order", data = body)).json()
+                                            print(response)
                                             if response != None:
                                                 print('准备阶段移动“%s”（%d）的过程出现了问题。\nAn error occurred when the program was moving "%s" (%d) during preparation.' %(page["name"], page["id"], page["name"], page["id"]))
                                                 print(response)
@@ -1213,6 +1220,7 @@ async def configure_perks(connection):
                                         #首先把排在第一的符文页的位次置为1（First, set the order of the first perk page as 1）
                                         body = {"targetPageId": page_order[0], "destinationPageId": page_order[0], "offset": 1 - perkPages_dict[page["id"]]["order"]} #在准备阶段，如果是排在第一的符文页移动出现问题，那么在这里移动后位次一定是1；如果是排在第二的符文页移动出现了问题，导致经过准备阶段排在第二的符文页的位次是1，那么经过这次操作，排在第二的符文页的位次变成`2 - perkPages_dict[page["id"]]["order"]`（During preparation, if an error occurred when the program was moving the first page, then after this move, its order must be 1; otherwise, if an error occurred when the program was moving the second page, and therefore after the preparation, the second page's order became 1, then after this move, the second page's order becomes `2 - perkPages_dict[page["id"]]["order"]`）
                                         response = await (await connection.request("POST", "/lol-perks/v1/update-page-order", data = body)).json()
+                                        print(response)
                                         if response == None:
                                             print('符文页“%s”（%d）的位次已置为1。\nPage "%s" (%d) order set to 1.' %(perkPages_dict[page_order[0]]["name"], page_order[0], perkPages_dict[page_order[0]]["name"], page_order[0]))
                                         else:
@@ -1275,6 +1283,7 @@ async def configure_perks(connection):
                                 pageId = perkPage_df.loc[delete_index, "id"]
                                 pageName = perkPage_df.loc[delete_index, "name"]
                                 response = await (await connection.request("DELETE", f"/lol-perks/v1/pages/{pageId}")).json()
+                                print(response)
                                 if response == None:
                                     print(f"已删除的符文页（Deleted page）：{pageName}（{pageId}）")
                                 else:
