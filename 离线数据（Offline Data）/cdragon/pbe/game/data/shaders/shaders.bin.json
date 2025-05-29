@@ -9665,40 +9665,6 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "ColorFresnelSize",
-                "data": [
-                    3.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "ColorFresnelSize",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Color_Fresnel_color",
-                "data": [
-                    0.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Color_Fresnel_color",
-                        "fields": 15,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
                 "name": "PanningNoiseScale",
                 "data": [
                     1.0,
@@ -9761,6 +9727,40 @@
                     {
                         "name": "Panning_FresnelSize",
                         "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "ColorFresnelSize",
+                "data": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "ColorFresnelSize",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Color_Fresnel_color",
+                "data": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Color_Fresnel_color",
+                        "fields": 15,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
@@ -9831,13 +9831,17 @@
         ],
         "staticSwitches": [
             {
+                "name": "INVERT_NOISE_FRESNEL",
+                "onByDefault": true,
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "INVERT_COLOR_FRESNEL",
                 "onByDefault": true,
                 "__type": "ShaderStaticSwitch"
             },
             {
-                "name": "INVERT_NOISE_FRESNEL",
-                "onByDefault": true,
+                "name": "USE_ADD_FRESNEL",
                 "__type": "ShaderStaticSwitch"
             },
             {
@@ -12001,6 +12005,17 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
+                "name": "PitchFactor",
+                "logicalParameters": [
+                    {
+                        "name": "PitchFactor",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
                 "name": "Bend_XYZ_Offset",
                 "data": [
                     50.0,
@@ -12104,6 +12119,14 @@
             }
         ],
         "staticSwitches": [
+            {
+                "name": "ENABLE_MESH_PIVOT",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "ENABLE_BILLBOARD",
+                "__type": "ShaderStaticSwitch"
+            },
             {
                 "name": "DEBUG_VIEW_MASK",
                 "__type": "ShaderStaticSwitch"
@@ -19139,156 +19162,6 @@
         },
         "featureMask": 1,
         "objectPath": "Shaders/StaticMesh/Hologram_Rotate",
-        "__type": "CustomShaderDef"
-    },
-    "Shaders/SkinnedMesh/MultiMask_Panner_Bloom": {
-        "ShadingModel": "{baebc346}",
-        "parameters": [
-            {
-                "name": "Panning_Noise_Color",
-                "logicalParameters": [
-                    {
-                        "name": "Panning_Noise_Color",
-                        "fields": 15,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Texture_UV_Scale01",
-                "data": [
-                    1.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Texture_UV_Scale01",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "ScrollTexture_Control01",
-                "data": [
-                    0.10000000149011612,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "ScrollTexture_Control01",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Texture_UV_Scale02",
-                "data": [
-                    1.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Texture_UV_Scale02",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "ScrollTexture_Control02",
-                "logicalParameters": [
-                    {
-                        "name": "ScrollTexture_Control02",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Texture_UV_Scale03",
-                "data": [
-                    1.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Texture_UV_Scale03",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "ScrollTexture_Control03",
-                "logicalParameters": [
-                    {
-                        "name": "ScrollTexture_Control03",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "BloomIntensity",
-                "logicalParameters": [
-                    {
-                        "name": "BloomIntensity",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            }
-        ],
-        "textures": [
-            {
-                "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Materials/white.dds",
-                "__type": "ShaderTexture"
-            },
-            {
-                "name": "Scroll_01",
-                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
-                "__type": "ShaderTexture"
-            },
-            {
-                "name": "Mask",
-                "defaultTexturePath": "ASSETS/Shared/Materials/white.dds",
-                "__type": "ShaderTexture"
-            },
-            {
-                "name": "Scroll_02",
-                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
-                "__type": "ShaderTexture"
-            },
-            {
-                "name": "Scroll_03",
-                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
-                "__type": "ShaderTexture"
-            }
-        ],
-        "featureDefines": {
-            "FEATURE_BLOOM": "1"
-        },
-        "featureMask": 1,
-        "objectPath": "Shaders/SkinnedMesh/MultiMask_Panner_Bloom",
         "__type": "CustomShaderDef"
     },
     "Shaders/StaticMesh/TFT_VertexWave": {
@@ -28063,6 +27936,79 @@
         "ShadingModel": "{baebc346}",
         "parameters": [
             {
+                "name": "Gradient_Color_1",
+                "logicalParameters": [
+                    {
+                        "name": "Gradient_Color_1",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Gradient_Color_2",
+                "data": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Gradient_Color_2",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Diffuse_Scale",
+                "data": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Diffuse_Scale",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Diffuse_Offset",
+                "logicalParameters": [
+                    {
+                        "name": "Diffuse_Offset",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Gradient_Contrast",
+                "data": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Gradient_Contrast",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
                 "name": "Panning_Scale",
                 "data": [
                     1.0,
@@ -28109,12 +28055,6 @@
             },
             {
                 "name": "Bloom_Intensity",
-                "data": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
                 "logicalParameters": [
                     {
                         "name": "Bloom_Intensity",
@@ -28123,6 +28063,16 @@
                     }
                 ],
                 "__type": "ShaderPhysicalParameter"
+            }
+        ],
+        "staticSwitches": [
+            {
+                "name": "USE_DIFFUSE_AS_GRADIENT_MAP",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "USE_R_CHANNEL",
+                "__type": "ShaderStaticSwitch"
             }
         ],
         "textures": [
@@ -34481,6 +34431,158 @@
     "Shaders/StaticMesh/SRX_DynamicEffect": {
         "parameters": [
             {
+                "name": "WS_RotatePivotPoint",
+                "logicalParameters": [
+                    {
+                        "name": "WS_RotatePivotPoint",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "RotateVector",
+                "data": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RotateVector",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "RotationSpeed",
+                "data": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RotationSpeed",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "RotationDistance",
+                "data": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RotationDistance",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "RotationTimingOffset",
+                "logicalParameters": [
+                    {
+                        "name": "RotationTimingOffset",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "RotationMult",
+                "data": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "RotationMult",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "TranslationVector",
+                "data": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "TranslationVector",
+                        "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "TranslationSpeed",
+                "data": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "TranslationSpeed",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "TranslationDistance",
+                "data": [
+                    25.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "TranslationDistance",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "TranslationTimingOffset",
+                "logicalParameters": [
+                    {
+                        "name": "TranslationTimingOffset",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
                 "name": "DeformWaveController",
                 "data": [
                     10.0,
@@ -34902,11 +35004,29 @@
         ],
         "staticSwitches": [
             {
+                "name": "USE_WORLD_OFFSET",
+                "onByDefault": true,
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "USE_ROTATION",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "USE_TRANSLATION",
+                "onByDefault": true,
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "TWO_D_DEFORM_ON",
                 "__type": "ShaderStaticSwitch"
             },
             {
                 "name": "FLAG_ANIMATION_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "USE_SINUSOIDAL_MOVEMENT",
                 "__type": "ShaderStaticSwitch"
             },
             {

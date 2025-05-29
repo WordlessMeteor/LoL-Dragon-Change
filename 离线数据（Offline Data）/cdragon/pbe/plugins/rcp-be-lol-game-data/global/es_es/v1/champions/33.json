@@ -819,7 +819,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Rammus/HUD/Icons2D/Armordillo_ScavengeArmor.png",
         "abilityVideoPath": "",
         "abilityVideoImagePath": "",
-        "description": "Los ataques básicos de Rammus infligen daño mágico adicional que progresa con su armadura."
+        "description": "Rammus obtiene daño de ataque adicional que progresa en función de su armadura y resistencia mágica."
     },
     "spells": [
         {
@@ -831,7 +831,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ s %i:cooldown%",
             "description": "Rammus se lanza como una bola a gran velocidad contra sus enemigos, infligiéndoles daño y ralentizando a los afectados por el impacto.",
-            "dynamicDescription": "Rammus se hace una bola y consigue un <speed>@MinimumMoveSpeed@ de velocidad de movimiento</speed> que va aumentando hasta un <speed>@MaximumMoveSpeed@ de velocidad de movimiento</speed> durante @Effect4Amount@ s. Rammus se detiene tras chocar contra un enemigo, le inflige <magicDamage>@PowerBallDamage@ de daño mágico</magicDamage>, lo <status>empuja hacia atrás</status> y <status>ralentiza</status> a los enemigos cercanos un @Effect2Amount@% durante @Effect3Amount@ s.<br><br><recast>Reactivación</recast>: Rammus termina esta habilidad antes de tiempo.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Rammus se hace una bola y va consiguiendo <speed>@MinimumMoveSpeed@ de velocidad de movimiento</speed> hasta <speed>@MaximumMoveSpeed@ de velocidad de movimiento</speed> durante @RollDuration@ s. Rammus se detiene tras chocar contra un enemigo, le inflige <magicDamage>@PowerBallDamage@ de daño mágico</magicDamage>, lo <status>empuja hacia atrás</status> y <status>ralentiza</status> a los enemigos cercanos un @SlowPercent@% durante @SlowDuration@ s.<br><br><recast>Reactivar</recast>: Rammus pone fin a esta habilidad antes de tiempo.@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -857,7 +857,7 @@
                 6.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -871,76 +871,76 @@
                     0.0
                 ],
                 "Effect2Amount": [
-                    40.0,
-                    40.0,
-                    50.0,
-                    60.0,
-                    70.0,
-                    80.0,
-                    90.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect10Amount": [
                     1000.0,
@@ -980,8 +980,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ s %i:cooldown%",
-            "description": "Rammus se sitúa en posición defensiva, lo que aumenta drásticamente su armadura y su resistencia mágica, así como el poder de Armazón de pinchos; además, devuelve el daño a los enemigos que lo golpean con ataques básicos.",
-            "dynamicDescription": "Rammus entra en posición defensiva durante @BuffDuration@ s y obtiene <scaleArmor>@F1@ de armadura (%i:scaleArmor%)</scaleArmor> y <scaleMR>@F2@ de resistencia mágica (%i:scaleMR%)</scaleMR>. Mientras tanto, el daño de <spellName>Armazón de pinchos</spellName> aumenta en un @PassiveDamageAmpCalc@ y también daña a los enemigos que ataquen a Rammus.<br><br>Los ataques de Rammus aumentan la duración en @BonusDurationPerAuto@ s (máx.: @MaxBonusDuration@).<br><br><recast>Reactivación</recast>: Rammus termina esta habilidad antes de tiempo.<br>@SpellModifierDescriptionAppend@",
+            "description": "Rammus adopta una posición defensiva, lo que aumenta en gran medida su armadura y su resistencia mágica. Además, devuelve el daño a los enemigos que lo atacan.",
+            "dynamicDescription": "Rammus entra en posición defensiva durante @BuffDuration@ s, obtiene <scaleArmor>@BonusArmorTooltip@ de armadura</scaleArmor> y <scaleMR>@BonusMRTooltip@ de resistencia mágica</scaleMR>, e inflige <magicDamage>@ReturnDamageCalc@ de daño mágico</magicDamage> a los enemigos que lo atacan.<br><br><recast>Reactivar</recast>: Rammus pone fin a esta habilidad antes de tiempo.@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -1007,7 +1007,7 @@
                 7.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -1130,8 +1130,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ s %i:cooldown%",
-            "description": "Rammus provoca a un monstruo o a un campeón enemigo para que se lance a lo loco contra él. Además, obtiene velocidad de ataque durante un periodo corto, pero esta bonificación se ve prolongada al tener activo cualquiera de sus otros hechizos.",
-            "dynamicDescription": "Rammus <status>provoca</status> a un monstruo o campeón enemigo durante @Effect1Amount@ s y obtiene un <attackSpeed>@Effect2Amount@% de velocidad de ataque</attackSpeed> durante @Effect1Amount@ s.@SpellModifierDescriptionAppend@",
+            "description": "Rammus provoca a un monstruo o a un campeón enemigo para que se lance a lo loco contra él.",
+            "dynamicDescription": "Rammus <status>provoca</status> a un campeón o monstruo enemigo durante @Duration@ s. Los monstruos reciben <magicDamage>@MonsterDamageCalc@ de daño mágico</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 325.0,
                 325.0,
@@ -1157,27 +1157,27 @@
                 12.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    1.2,
-                    1.2,
-                    1.4,
-                    1.6,
-                    1.8,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    20.0,
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1281,7 +1281,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ s %i:cooldown%",
             "description": "Rammus salta y golpea una ubicación objetivo, lo que inflige daño mágico y ralentiza a los enemigos. Si se lanza mientras Rammus usa Bola de poder, Rammus también lanza por los aires a los enemigos que se encuentren cerca del centro.",
-            "dynamicDescription": "Rammus salta y golpea una ubicación objetivo, lo que inflige <magicDamage>@InitialDamageCalc@ de daño mágico</magicDamage> y <status>ralentiza</status> a los enemigos un @SlowAmount*100@% durante @SlowDuration@ s. Los enemigos en el centro reciben daño adicional según la distancia recorrida de Rammus (máx.: <magicDamage>@TooltipMaxDamageCalc@ de daño mágico</magicDamage>). Si se usa durante <spellName>Bola de poder</spellName>, también <status>lanza por los aires</status> a los enemigos que se encuentren en el centro durante @KnockupDuration@ s.<br><br>Después, Rammus crea @NumberOfPulses@ efectos de réplica en la zona durante @BuffDuration@ s. Cada uno inflige <magicDamage>@PulseDamageCalc@ de daño mágico</magicDamage> y la <status>ralentización</status> se acumula (máx.: @MaxSlow@%).<br><br>El alcance de esta habilidad aumenta según la <speed>velocidad de movimiento</speed> de Rammus.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Rammus salta y golpea una ubicación objetivo, lo que inflige <magicDamage>@InitialDamageCalc@ de daño mágico</magicDamage> y <status>ralentiza</status> a los enemigos un @SlowAmount*100@% durante @SlowDuration@ s. Si se usa durante <spellName>Bola de poder</spellName>, los enemigos que estén en el centro reciben <magicDamage>@spell.PowerBall:PowerBallDamage@ de daño mágico</magicDamage> adicional y se ven <status>lanzados por los aires</status> durante @KnockupDuration@ s.<br><br>Después, Rammus genera @NumberOfPulses@ réplicas en la zona durante @BuffDuration@ s que aplican de nuevo la <status>ralentización</status>.<br><br>La <speed>velocidad de movimiento</speed> de Rammus determina el alcance de esta habilidad.@SpellModifierDescriptionAppend@",
             "range": [
                 25000.0,
                 25000.0,
@@ -1299,12 +1299,12 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                90.0,
-                90.0,
-                90.0,
-                90.0,
-                90.0,
-                90.0
+                120.0,
+                100.0,
+                80.0,
+                80.0,
+                80.0,
+                80.0
             ],
             "coefficients": {
                 "coefficient1": 0.0,

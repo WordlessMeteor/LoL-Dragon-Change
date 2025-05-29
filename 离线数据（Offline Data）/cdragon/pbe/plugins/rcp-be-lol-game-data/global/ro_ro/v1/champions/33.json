@@ -819,7 +819,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Rammus/HUD/Icons2D/Armordillo_ScavengeArmor.png",
         "abilityVideoPath": "",
         "abilityVideoImagePath": "",
-        "description": "Atacurile de bază ale lui Rammus provoacă daune magice bonus în funcție de armura pe care a acumulat-o."
+        "description": "Rammus primește daune bonus din atac, valoare ce crește în funcție de armura și rezistența sa la magie."
     },
     "spells": [
         {
@@ -831,7 +831,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Rammus se năpustește asupra inamicilor sub forma unei mingi, provocând daune și încetinind țintele afectate de impact.",
-            "dynamicDescription": "Rammus se transformă într-o minge, primind <speed>@MinimumMoveSpeed@ viteză de mișcare</speed> și accelerând până la <speed>@MaximumMoveSpeed@ viteză de mișcare</speed> de-a lungul a @Effect4Amount@ secunde. Rammus se oprește după ce se lovește de un inamic, provocând <magicDamage>@PowerBallDamage@ daune magice</magicDamage>, <status>aruncând în spate</status> și <status>încetinind</status> inamicii din apropiere cu @Effect2Amount@% timp de @Effect3Amount@ secundă.<br><br><recast>Refolosire</recast>: Rammus încheie abilitatea mai devreme.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Rammus se transformă într-o minge, primind <speed>@MinimumMoveSpeed@ viteză de mișcare</speed> și accelerând până la <speed>@MaximumMoveSpeed@ viteză de mișcare</speed> de-a lungul a @RollDuration@ secunde. Rammus se oprește după ce se lovește de un inamic, provocând <magicDamage>@PowerBallDamage@ daune magice</magicDamage>, <status>aruncând în spate</status> și <status>încetinind</status> inamicii din apropiere cu @SlowPercent@% timp de @SlowDuration@ secundă.<br><br><recast>Refolosire</recast>: Rammus încheie această abilitate mai devreme.@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -857,7 +857,7 @@
                 6.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -871,76 +871,76 @@
                     0.0
                 ],
                 "Effect2Amount": [
-                    40.0,
-                    40.0,
-                    50.0,
-                    60.0,
-                    70.0,
-                    80.0,
-                    90.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect10Amount": [
                     1000.0,
@@ -980,8 +980,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
-            "description": "Rammus adoptă o formă defensivă care îi amplifică atât armura și rezistența la magie, precum și daunele provocate de ''Carapacea cu țepi''. În plus, dacă e lovit de un atac de bază în acest timp, atacatorul suferă și el o parte din daune.",
-            "dynamicDescription": "Rammus intră într-o formă defensivă pentru @BuffDuration@ secunde, primind <scaleArmor>@F1@ armură (%i:scaleArmor%)</scaleArmor> și <scaleMR>@F2@ rezistență la magie (%i:scaleMR%)</scaleMR>. Cât timp efectul este activ, daunele <spellName>''Carapacei cu țepi''</spellName> cresc cu @PassiveDamageAmpCalc@ și abilitatea le provoacă daune și inamicilor care îl atacă pe Rammus.<br><br>Atacurile lui Rammus cresc durata cu @BonusDurationPerAuto@ secunde (maximum @MaxBonusDuration@).<br><br><recast>Refolosire</recast>: Rammus încheie această abilitate mai devreme.<br>@SpellModifierDescriptionAppend@",
+            "description": "Rammus adoptă o formă defensivă care îi amplifică armura și rezistența la magie. În plus, dacă e lovit de un atac în acest timp, atacatorul suferă și el o parte din daune.",
+            "dynamicDescription": "Rammus intră într-o formă defensivă pentru @BuffDuration@ secunde, primind <scaleArmor>@BonusArmorTooltip@ armură</scaleArmor> și <scaleMR>@BonusMRTooltip@ rezistență la magie</scaleMR>. În plus, le provoacă <magicDamage>@ReturnDamageCalc@ daune magice</magicDamage> inamicilor care îl atacă.<br><br><recast>Refolosire</recast>: Rammus încheie această abilitate mai devreme.@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -1007,7 +1007,7 @@
                 7.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -1130,8 +1130,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
-            "description": "Rammus provoacă un campion inamic sau un monstru să-l atace. În plus, primește pentru scurt timp un bonus la viteza de atac, ce poate fi prelungit activând o altă abilitate.",
-            "dynamicDescription": "Rammus <status>provoacă</status> un campion inamic sau un monstru din junglă timp de @Effect1Amount@ secunde și primește <attackSpeed>@Effect2Amount@% viteză de atac</attackSpeed> timp de @Effect1Amount@ secunde.@SpellModifierDescriptionAppend@",
+            "description": "Rammus provoacă un campion inamic sau un monstru să-l atace.",
+            "dynamicDescription": "Rammus <status>provoacă</status> un campion inamic sau un monstru timp de @Duration@ secunde. Monștrii suferă <magicDamage>@MonsterDamageCalc@ daune magice</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 325.0,
                 325.0,
@@ -1157,27 +1157,27 @@
                 12.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    1.2,
-                    1.2,
-                    1.4,
-                    1.6,
-                    1.8,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    20.0,
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1281,7 +1281,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown%: @Cooldown@ sec",
             "description": "Rammus se propulsează în aer și aterizează într-o zonă țintă, provocând daune magice și încetinind inamicii. Dacă abilitatea este folosită în timp ce Rammus este în ''Mingea puterii'', inamicii din apropierea centrului sunt și aruncați în sus.",
-            "dynamicDescription": "Rammus se propulsează în aer și aterizează într-o zonă, provocând <magicDamage>@InitialDamageCalc@ daune magice</magicDamage> și <status>încetinind</status> inamicii cu @SlowAmount*100@% timp de @SlowDuration@ secunde. Inamicii din centru suferă daune suplimentare în funcție de distanța parcursă de Rammus (maximum <magicDamage>@TooltipMaxDamageCalc@ daune magice</magicDamage>). Dacă folosește abilitatea în timpul <spellName>''Mingii puterii''</spellName>, inamicii din centru sunt și <status>aruncați în sus</status> timp de @KnockupDuration@ secunde.<br><br>Apoi, Rammus creează @NumberOfPulses@ replici într-o zonă de-a lungul a @BuffDuration@ secunde, fiecare provocând <magicDamage>@PulseDamageCalc@ daune magice</magicDamage> și cumulând <status>încetinirea</status> (maximum @MaxSlow@%).<br><br>Raza acestei abilități crește în funcție de <speed>viteza de mișcare</speed> a lui Rammus.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Rammus se propulsează în aer și aterizează într-o zonă, provocând <magicDamage>@InitialDamageCalc@ daune magice</magicDamage> și <status>încetinind</status> inamicii cu @SlowAmount*100@% timp de @SlowDuration@ secunde. Dacă folosește abilitatea în timpul <spellName>''Mingii puterii''</spellName>, inamicii din centru suferă încă <magicDamage>@spell.PowerBall:PowerBallDamage@ daune magice</magicDamage> și sunt <status>aruncați în sus</status> timp de @KnockupDuration@ secunde.<br><br>Apoi, Rammus creează @NumberOfPulses@ replici în zonă de-a lungul a @BuffDuration@ secunde, reaplicând <status>încetinirea</status>.<br><br>Raza acestei abilități crește în funcție de <speed>viteza de mișcare</speed> a lui Rammus.@SpellModifierDescriptionAppend@",
             "range": [
                 25000.0,
                 25000.0,
@@ -1299,12 +1299,12 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                90.0,
-                90.0,
-                90.0,
-                90.0,
-                90.0,
-                90.0
+                120.0,
+                100.0,
+                80.0,
+                80.0,
+                80.0,
+                80.0
             ],
             "coefficients": {
                 "coefficient1": 0.0,

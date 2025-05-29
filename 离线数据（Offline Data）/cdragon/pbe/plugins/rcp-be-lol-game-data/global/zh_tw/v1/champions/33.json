@@ -819,7 +819,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Rammus/HUD/Icons2D/Armordillo_ScavengeArmor.png",
         "abilityVideoPath": "",
         "abilityVideoImagePath": "",
-        "description": "拉姆斯的普攻會造成額外魔法傷害，此傷害會隨著他的物理防禦而提升。"
+        "description": "拉姆斯的物攻會隨著物防與魔防提升而增加。"
     },
     "spells": [
         {
@@ -831,7 +831,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "拉姆斯縮成球狀衝擊目標，造成傷害並減速目標。",
-            "dynamicDescription": "拉姆斯蜷縮成球狀，獲得 <speed>@MinimumMoveSpeed@ 跑速</speed>，並會在 @Effect4Amount@ 秒內提升至 <speed>@MaximumMoveSpeed@ 跑速</speed>。拉姆斯撞擊到敵人便會停下，對附近所有敵人造成 <magicDamage>@PowerBallDamage@</magicDamage> 魔法傷害，<status>擊退</status>他們，並<status>緩速</status> @Effect2Amount@% ，持續 @Effect3Amount@ 秒。<br><br><recast>重新施放</recast>：拉姆斯提早結束此技能。<br>@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "拉姆斯蜷縮成球狀，獲得<speed>@MinimumMoveSpeed@跑速</speed>，並在@RollDuration@秒內增加至<speed>@MaximumMoveSpeed@跑速</speed>。拉姆斯在碰到敵軍後停下，對鄰近敵軍造成<magicDamage>@PowerBallDamage@魔法傷害</magicDamage>、<status>擊退</status>，以及持續@SlowDuration@秒的@SlowPercent@%<status>緩速</status>。<br><br><recast>重施技能</recast>：拉姆斯提前結束此技能。@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -857,7 +857,7 @@
                 6.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -871,76 +871,76 @@
                     0.0
                 ],
                 "Effect2Amount": [
-                    40.0,
-                    40.0,
-                    50.0,
-                    60.0,
-                    70.0,
-                    80.0,
-                    90.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect10Amount": [
                     1000.0,
@@ -980,8 +980,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
-            "description": "拉姆斯進入防禦架式，大幅提升他的物理防禦及魔法防禦，強化錐刺甲殼的傷害，並對普攻他的敵人反彈傷害。",
-            "dynamicDescription": "拉姆斯進入防禦狀態，增加<scaleArmor>@F1@物理防禦(%i:scaleArmor%)</scaleArmor>與<scaleMR>@F2@魔法防禦(%i:scaleMR%)</scaleMR>，持續@BuffDuration@秒。發動期間，<spellName>錐刺甲殼</spellName>的傷害將提升@PassiveDamageAmpCalc@，同時也會傷害對拉姆斯普攻的敵人。<br><br>拉姆斯的普攻可提升持續時間@BonusDurationPerAuto@秒(上限：@MaxBonusDuration@秒)。<br><br><recast>重新施放：</recast>拉姆斯提早結束此技能。<br>@SpellModifierDescriptionAppend@",
+            "description": "拉姆斯進入防禦狀態，大幅提升物防及魔防，並對普攻他的敵軍反彈傷害。",
+            "dynamicDescription": "拉姆斯進入持續@BuffDuration@秒的防禦狀態，增加<scaleArmor>@BonusArmorTooltip@物防</scaleArmor>與<scaleMR>@BonusMRTooltip@魔防</scaleMR>，並對普攻他的敵軍造成<magicDamage>@ReturnDamageCalc@魔法傷害</magicDamage>。<br><br><recast>重施技能</recast>：拉姆斯提前結束此技能。@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -1007,7 +1007,7 @@
                 7.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -1130,8 +1130,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
-            "description": "拉姆斯嘲諷一名敵方英雄或野怪，強制其攻擊自己。此外他會獲得額外攻速，持續一小段時間。拉姆斯發動其它技能時攻速加成的持續時間會被延長。",
-            "dynamicDescription": "拉姆斯<status>嘲諷</status>一名敵方英雄或一隻野怪，持續 @Effect1Amount@ 秒，並獲得 <attackSpeed>@Effect2Amount@% 攻速</attackSpeed>，持續 @Effect1Amount@ 秒。@SpellModifierDescriptionAppend@",
+            "description": "拉姆斯嘲諷敵方英雄或野怪，強制其攻擊自己。",
+            "dynamicDescription": "拉姆斯<status>嘲諷</status>敵方英雄或野怪，持續@Duration@秒。野怪受到<magicDamage>@MonsterDamageCalc@魔法傷害</magicDamage>。@SpellModifierDescriptionAppend@",
             "range": [
                 325.0,
                 325.0,
@@ -1157,27 +1157,27 @@
                 12.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    1.2,
-                    1.2,
-                    1.4,
-                    1.6,
-                    1.8,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    20.0,
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1281,7 +1281,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "拉姆斯跳向空中並猛烈撞向目標地點，造成魔法傷害並緩速敵人。如果拉姆斯在動力衝刺啟動期間施放此技能，則拉姆斯也會擊飛靠近中心點的敵人。",
-            "dynamicDescription": "拉姆斯跳向空中並猛烈撞向一塊區域，造成 <magicDamage>@InitialDamageCalc@</magicDamage> 魔法傷害並<status>緩速</status>敵人 @SlowAmount*100@%，持續 @SlowDuration@ 秒。位在中心點的敵人會根據拉姆斯的跳躍距離受到額外傷害（最大傷害：<magicDamage>@TooltipMaxDamageCalc@ 魔法傷害</magicDamage>）。如果在<spellName>動力衝刺</spellName>的啟動期間施放，位在中心點的敵人將被<status>擊飛</status> @KnockupDuration@ 秒。<br><br>拉姆斯接著會在落地的 @BuffDuration@ 秒內於該區域產生 @NumberOfPulses@ 次震盪波，每次造成 <magicDamage>@PulseDamageCalc@</magicDamage> 魔法傷害，並可堆積<status>緩速</status>效果（最多：@MaxSlow@%）。<br><br>此技能的距離將根據拉姆斯的<speed>跑速</speed>而提升。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "拉姆斯跳到空中後向地面重擊，造成<magicDamage>@InitialDamageCalc@魔法傷害</magicDamage>和持續@SlowDuration@秒的@SlowAmount*100@%<status>緩速</status>。若在施放「<spellName>動力衝刺</spellName>」期間使用，位於中心的敵軍會額外受到<magicDamage>@spell.PowerBall:PowerBallDamage@魔法傷害</magicDamage>，並且被<status>擊飛</status>@KnockupDuration@秒。<br><br>拉姆斯接著在該區域引發@NumberOfPulses@波餘震，持續@BuffDuration@秒，並重複造成<status>緩速</status>效果。<br><br>此技能的範圍會隨著拉姆斯的<speed>跑速</speed>提升而擴大。@SpellModifierDescriptionAppend@",
             "range": [
                 25000.0,
                 25000.0,
@@ -1299,12 +1299,12 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                90.0,
-                90.0,
-                90.0,
-                90.0,
-                90.0,
-                90.0
+                120.0,
+                100.0,
+                80.0,
+                80.0,
+                80.0,
+                80.0
             ],
             "coefficients": {
                 "coefficient1": 0.0,

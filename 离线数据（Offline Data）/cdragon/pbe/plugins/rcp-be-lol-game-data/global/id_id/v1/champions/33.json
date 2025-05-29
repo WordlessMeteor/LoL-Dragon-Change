@@ -819,7 +819,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Rammus/HUD/Icons2D/Armordillo_ScavengeArmor.png",
         "abilityVideoPath": "",
         "abilityVideoImagePath": "",
-        "description": "Basic attack Rammus menghasilkan magic damage bonus, yang meningkat berdasarkan Armor-nya."
+        "description": "Rammus mendapatkan Attack Damage bonus yang meningkat sesuai Armor dan Magic Resistance-nya."
     },
     "spells": [
         {
@@ -831,7 +831,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown% @Cooldown@ dtk",
             "description": "Rammus berakselerasi dalam bentuk bola ke arah musuhnya, memberikan damage dan slow ke target yang terkena tubrukan.",
-            "dynamicDescription": "Rammus meringkuk menjadi bola, mendapatkan <speed>@MinimumMoveSpeed@ Move Speed</speed>, yang berakselerasi hingga <speed>@MaximumMoveSpeed@ Move Speed</speed> selama @Effect4Amount@ detik. Rammus berhenti setelah bertabrakan dengan musuh, menghasilkan <magicDamage>@PowerBallDamage@ magic damage</magicDamage>, memberi efek <status>Knock Back</status>, dan menerapkan <status>Slow</status> pada musuh di sekitar sebesar @Effect2Amount@% selama @Effect3Amount@ detik.<br><br><recast>Recast</recast>: Rammus mengakhiri Ability ini lebih awal.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Rammus meringkuk menjadi bola, mendapatkan <speed>@MinimumMoveSpeed@ Move Speed</speed>, yang berakselerasi hingga <speed>@MaximumMoveSpeed@ Move Speed</speed> selama @RollDuration@ detik. Rammus berhenti setelah bertabrakan dengan musuh, menghasilkan <magicDamage>@PowerBallDamage@ magic damage</magicDamage>, melakukan <status>Knock Back</status>, dan menerapkan <status>Slow</status> pada musuh di sekitar sebesar @SlowPercent@% selama @SlowDuration@ detik.<br><br><recast>Recast</recast>: Rammus mengakhiri Ability ini lebih awal.@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -857,7 +857,7 @@
                 6.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -871,76 +871,76 @@
                     0.0
                 ],
                 "Effect2Amount": [
-                    40.0,
-                    40.0,
-                    50.0,
-                    60.0,
-                    70.0,
-                    80.0,
-                    90.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect10Amount": [
                     1000.0,
@@ -980,8 +980,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown% @Cooldown@ dtk",
-            "description": "Rammus beralih ke formasi bertahan, meningkatkan Armor dan Magic Resistance miliknya secara drastis, meningkatkan damage Spiked Shell, serta mengembalikan damage pada musuh yang menyerangnya dengan basic attack.",
-            "dynamicDescription": "Rammus memasuki formasi bertahan selama @BuffDuration@ detik, mendapatkan <scaleArmor>@F1@ Armor (%i:scaleArmor%)</scaleArmor> dan <scaleMR>@F2@ Magic Resist (%i:scaleMR%)</scaleMR>. Saat aktif, damage <spellName>Spiked Shell</spellName> meningkat sebanyak @PassiveDamageAmpCalc@ dan juga memberi damage ke musuh yang menyerang Rammus.<br><br>Serangan Rammus meningkatkan durasi sebanyak @BonusDurationPerAuto@ detik (maksimum: @MaxBonusDuration@).<br><br><recast>Recast</recast>: Rammus mengakhiri Ability ini lebih awal.<br>@SpellModifierDescriptionAppend@",
+            "description": "Rammus beralih ke formasi bertahan, meningkatkan Armor dan Magic Resistance-nya secara drastis serta mengembalikan damage ke musuh yang menyerangnya.",
+            "dynamicDescription": "Rammus memasuki formasi bertahan selama @BuffDuration@ detik, mendapatkan <scaleArmor>@BonusArmorTooltip@ Armor</scaleArmor> serta <scaleMR>@BonusMRTooltip@ Magic Resist</scaleMR> dan menghasilkan <magicDamage>@ReturnDamageCalc@ magic damage</magicDamage> pada musuh yang menyerangnya.<br><br><recast>Recast</recast>: Rammus mengakhiri Ability ini lebih awal.@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -1007,7 +1007,7 @@
                 7.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -1130,8 +1130,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown% @Cooldown@ dtk",
-            "description": "Rammus melakukan taunt ke champion musuh atau monster agar melakukan serangan nekat terhadapnya. Selain itu, dia mendapatkan peningkatan Attack Speed dalam waktu singkat, tetapi bonus ini diperpanjang jika dia mengaktifkan spell lainnya.",
-            "dynamicDescription": "Rammus melakukan <status>Taunt</status> ke champion musuh atau monster jungle selama @Effect1Amount@ detik dan mendapatkan <attackSpeed>@Effect2Amount@% Attack Speed</attackSpeed> selama @Effect1Amount@ detik.@SpellModifierDescriptionAppend@",
+            "description": "Rammus melakukan taunt ke champion musuh atau monster agar melakukan serangan nekat terhadapnya.",
+            "dynamicDescription": "Rammus menerapkan <status>Taunt</status> ke champion musuh atau monster selama @Duration@ detik. Monster akan menerima <magicDamage>@MonsterDamageCalc@ magic damage</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 325.0,
                 325.0,
@@ -1157,27 +1157,27 @@
                 12.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    1.2,
-                    1.2,
-                    1.4,
-                    1.6,
-                    1.8,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    20.0,
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1281,7 +1281,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "%i:cooldown% @Cooldown@ dtk",
             "description": "Rammus melompat ke udara dan mengempaskan diri ke tanah di area target, menghasilkan magic damage dan menerapkan slow pada musuh. Jika cast saat Rammus berada dalam Powerball, Rammus juga knock up musuh di dekat pusatnya.",
-            "dynamicDescription": "Rammus melompat ke udara dan mengempaskan diri ke tanah dalam 1 area, menghasilkan <magicDamage>@InitialDamageCalc@ magic damage</magicDamage> dan menerapkan <status>Slow</status> sebesar @SlowAmount*100@% selama @SlowDuration@ detik. Musuh di tengah akan menerima damage tambahan berdasarkan jarak lompatan Rammus (maksimum: <magicDamage>@TooltipMaxDamageCalc@ magic damage</magicDamage>). Jika digunakan selama <spellName>Powerball</spellName>, musuh di tengah juga <status>Terkena Knock Up</status> selama @KnockupDuration@ detik.<br><br>Rammus kemudian menciptakan @NumberOfPulses@ gempa susulan di area tersebut selama @BuffDuration@ detik, masing-masing menghasilkan <magicDamage>@PulseDamageCalc@ magic damage</magicDamage> dan menambah stack <status>Slow</status> (maksimum: @MaxSlow@%).<br><br>Jangkauan Ability ditingkatkan oleh <speed>Move Speed</speed> Rammus.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Rammus melompat ke udara dan mengempaskan diri ke tanah dalam 1 area, menghasilkan <magicDamage>@InitialDamageCalc@ magic damage</magicDamage> dan menerapkan <status>Slow</status> sebesar @SlowAmount*100@% selama @SlowDuration@ detik. Jika digunakan selama <spellName>Powerball</spellName>, musuh di pusat area akan menerima <magicDamage>@spell.PowerBall:PowerBallDamage@ magic damage</magicDamage> tambahan dan terkena <status>Knock Up</status> selama @KnockupDuration@ detik.<br><br>Rammus kemudian menghasilkan @NumberOfPulses@ aftershock di area tersebut selama @BuffDuration@ detik, mengulangi efek <status>Slow</status>.<br><br>Jangkauan Ability ini meningkat berdasarkan <speed>Move Speed</speed> Rammus.@SpellModifierDescriptionAppend@",
             "range": [
                 25000.0,
                 25000.0,
@@ -1299,12 +1299,12 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                90.0,
-                90.0,
-                90.0,
-                90.0,
-                90.0,
-                90.0
+                120.0,
+                100.0,
+                80.0,
+                80.0,
+                80.0,
+                80.0
             ],
             "coefficients": {
                 "coefficient1": 0.0,
