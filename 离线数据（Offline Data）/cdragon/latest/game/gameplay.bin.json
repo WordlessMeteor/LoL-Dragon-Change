@@ -313,6 +313,10 @@
                 {
                     "TFTSetData": "Maps/Shipping/Map22/Sets/TFTSet14_TURBO",
                     "__type": "{349845d9}"
+                },
+                {
+                    "TFTSetData": "Maps/Shipping/Map22/Sets/TFTSetEventCT",
+                    "__type": "{349845d9}"
                 }
             ],
             "__type": "ViewControllerFilter_Or"
@@ -742,7 +746,9 @@
             "ClientStates/Gameplay/UX/TFT/TFTCustomAnnouncement",
             "ClientStates/Gameplay/UX/TFT/TFTPlainTextAnnouncement",
             "ClientStates/Gameplay/UX/TFT/TFTArmory_Cost",
-            "ClientStates/Gameplay/UX/TFT/TFTUnitInfo"
+            "ClientStates/Gameplay/UX/TFT/TFTUnitInfo",
+            "ClientStates/Gameplay/UX/TFT/TFTReplayCameraControls",
+            "ClientStates/Gameplay/UX/TFT/TFTReplayVisibilityMenu"
         ],
         "__type": "ViewControllerList"
     },
@@ -1672,7 +1678,8 @@
             "{eff8fc00}",
             "{b931afa5}",
             "{050f9bfb}",
-            "{13d3ad51}"
+            "{13d3ad51}",
+            "{6e8e0534}"
         ],
         "__type": "ViewControllerSet"
     },
@@ -2458,6 +2465,62 @@
         ],
         "__type": "StaticMaterialDef"
     },
+    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_KrakenSlayerRadiant": {
+        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_KrakenSlayerRadiant",
+        "type": 3,
+        "samplerValues": [
+            {
+                "textureName": "MainItemTexture",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_KrakenSlayer.TFT_TFT14_5.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "FrameTexture",
+                "texturePath": "ASSETS/UX/TFT/DynamicUI/Items/Radiant_Border.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "TextureScale",
+                "value": [
+                    1.100000023841858,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TextureOffset",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/UI/TFT/UI_BorderItem",
+                        "depthEnable": false,
+                        "blendEnable": true,
+                        "cullEnable": false,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
+    },
     "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_ZekesHerald": {
         "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_ZekesHerald",
         "type": 3,
@@ -3044,6 +3107,62 @@
                 "name": "TextureScale",
                 "value": [
                     1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TextureOffset",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/UI/TFT/UI_BorderItem",
+                        "depthEnable": false,
+                        "blendEnable": true,
+                        "cullEnable": false,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
+    },
+    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Artifact_StatikkShiv": {
+        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Artifact_StatikkShiv",
+        "type": 3,
+        "samplerValues": [
+            {
+                "textureName": "MainItemTexture",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Artifact_StattikShiv.TFT_TFT14_5.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "FrameTexture",
+                "texturePath": "ASSETS/UX/TFT/DynamicUI/Items/Ornn_Border.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "TextureScale",
+                "value": [
+                    1.0499999523162842,
                     0.0,
                     0.0,
                     0.0
@@ -3697,62 +3816,6 @@
             {
                 "textureName": "MainItemTexture",
                 "texturePath": "ASSETS/Maps/Particles/TFT/Item_Icons/Standard/Adaptive_Helm.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "textureName": "FrameTexture",
-                "texturePath": "ASSETS/UX/TFT/DynamicUI/Alpha-Mask.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            }
-        ],
-        "paramValues": [
-            {
-                "name": "TextureScale",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "TextureOffset",
-                "__type": "StaticMaterialShaderParamDef"
-            }
-        ],
-        "techniques": [
-            {
-                "name": "normal",
-                "passes": [
-                    {
-                        "shader": "Shaders/UI/TFT/UI_BorderItem",
-                        "depthEnable": false,
-                        "blendEnable": true,
-                        "cullEnable": false,
-                        "dstColorBlendFactor": 7,
-                        "dstAlphaBlendFactor": 7,
-                        "__type": "StaticMaterialPassDef"
-                    }
-                ],
-                "__type": "StaticMaterialTechniqueDef"
-            }
-        ],
-        "__type": "StaticMaterialDef"
-    },
-    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_RunaansHurricane": {
-        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_RunaansHurricane",
-        "type": 3,
-        "samplerValues": [
-            {
-                "textureName": "MainItemTexture",
-                "texturePath": "ASSETS/Maps/Particles/TFT/Item_Icons/Standard/Runaans_Hurricane.tex",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,
@@ -6434,6 +6497,62 @@
         ],
         "__type": "StaticMaterialDef"
     },
+    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Artifact_TitanicHydra": {
+        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Artifact_TitanicHydra",
+        "type": 3,
+        "samplerValues": [
+            {
+                "textureName": "MainItemTexture",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Artifact_TitanicHydra.TFT_TFT14_5.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "FrameTexture",
+                "texturePath": "ASSETS/UX/TFT/DynamicUI/Items/Ornn_Border.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "TextureScale",
+                "value": [
+                    1.0499999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TextureOffset",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/UI/TFT/UI_BorderItem",
+                        "depthEnable": false,
+                        "blendEnable": true,
+                        "cullEnable": false,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
+    },
     "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Consumable_ChampionDuplicator_I": {
         "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Consumable_ChampionDuplicator_I",
         "type": 3,
@@ -6441,6 +6560,62 @@
             {
                 "textureName": "MainItemTexture",
                 "texturePath": "ASSETS/Maps/Particles/TFT/Item_Icons/Consumables/ChampionDuplicator_I.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "FrameTexture",
+                "texturePath": "ASSETS/UX/TFT/DynamicUI/Alpha-Mask.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "TextureScale",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TextureOffset",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/UI/TFT/UI_BorderItem",
+                        "depthEnable": false,
+                        "blendEnable": true,
+                        "cullEnable": false,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
+    },
+    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_KrakenSlayer": {
+        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_KrakenSlayer",
+        "type": 3,
+        "samplerValues": [
+            {
+                "textureName": "MainItemTexture",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_KrakenSlayer.TFT_TFT14_5.tex",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,
@@ -7056,6 +7231,62 @@
         ],
         "__type": "StaticMaterialDef"
     },
+    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_SpiritVisageRadiant": {
+        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_SpiritVisageRadiant",
+        "type": 3,
+        "samplerValues": [
+            {
+                "textureName": "MainItemTexture",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_SpiritVisageRR.TFT_TFT14_5.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "FrameTexture",
+                "texturePath": "ASSETS/UX/TFT/DynamicUI/Items/Radiant_Border.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "TextureScale",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TextureOffset",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/UI/TFT/UI_BorderItem",
+                        "depthEnable": false,
+                        "blendEnable": true,
+                        "cullEnable": false,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
+    },
     "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_RabadonsDeathcap": {
         "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_RabadonsDeathcap",
         "type": 3,
@@ -7224,62 +7455,6 @@
         ],
         "__type": "StaticMaterialDef"
     },
-    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT5_Item_RedemptionRadiant": {
-        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT5_Item_RedemptionRadiant",
-        "type": 3,
-        "samplerValues": [
-            {
-                "textureName": "MainItemTexture",
-                "texturePath": "ASSETS/Maps/Particles/TFT/Item_Icons/Standard/Redemption_XL.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "textureName": "FrameTexture",
-                "texturePath": "ASSETS/UX/TFT/DynamicUI/Items/Radiant_Border.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            }
-        ],
-        "paramValues": [
-            {
-                "name": "TextureScale",
-                "value": [
-                    1.100000023841858,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "TextureOffset",
-                "__type": "StaticMaterialShaderParamDef"
-            }
-        ],
-        "techniques": [
-            {
-                "name": "normal",
-                "passes": [
-                    {
-                        "shader": "Shaders/UI/TFT/UI_BorderItem",
-                        "depthEnable": false,
-                        "blendEnable": true,
-                        "cullEnable": false,
-                        "dstColorBlendFactor": 7,
-                        "dstAlphaBlendFactor": 7,
-                        "__type": "StaticMaterialPassDef"
-                    }
-                ],
-                "__type": "StaticMaterialTechniqueDef"
-            }
-        ],
-        "__type": "StaticMaterialDef"
-    },
     "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_SentinelSwarm": {
         "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_SentinelSwarm",
         "type": 3,
@@ -7342,7 +7517,7 @@
         "samplerValues": [
             {
                 "textureName": "MainItemTexture",
-                "texturePath": "ASSETS/Maps/Particles/TFT/Item_Icons/Standard/Statikk_Shiv.tex",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_VoidStaff.TFT_TFT14_5.tex",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,
@@ -7840,6 +8015,62 @@
         ],
         "__type": "StaticMaterialDef"
     },
+    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Artifact_NavoriFlickerblades": {
+        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Artifact_NavoriFlickerblades",
+        "type": 3,
+        "samplerValues": [
+            {
+                "textureName": "MainItemTexture",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Artifact_NavoriFlickerplade.TFT_TFT14_5.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "FrameTexture",
+                "texturePath": "ASSETS/UX/TFT/DynamicUI/Items/Ornn_Border.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "TextureScale",
+                "value": [
+                    1.0499999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TextureOffset",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/UI/TFT/UI_BorderItem",
+                        "depthEnable": false,
+                        "blendEnable": true,
+                        "cullEnable": false,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
+    },
     "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_DebugBase": {
         "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_DebugBase",
         "type": 3,
@@ -8258,62 +8489,6 @@
                 "name": "TextureScale",
                 "value": [
                     1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "TextureOffset",
-                "__type": "StaticMaterialShaderParamDef"
-            }
-        ],
-        "techniques": [
-            {
-                "name": "normal",
-                "passes": [
-                    {
-                        "shader": "Shaders/UI/TFT/UI_BorderItem",
-                        "depthEnable": false,
-                        "blendEnable": true,
-                        "cullEnable": false,
-                        "dstColorBlendFactor": 7,
-                        "dstAlphaBlendFactor": 7,
-                        "__type": "StaticMaterialPassDef"
-                    }
-                ],
-                "__type": "StaticMaterialTechniqueDef"
-            }
-        ],
-        "__type": "StaticMaterialDef"
-    },
-    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT5_Item_RunaansHurricaneRadiant": {
-        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT5_Item_RunaansHurricaneRadiant",
-        "type": 3,
-        "samplerValues": [
-            {
-                "textureName": "MainItemTexture",
-                "texturePath": "ASSETS/Maps/Particles/TFT/Item_Icons/Standard/Runaans_Hurricane.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "textureName": "FrameTexture",
-                "texturePath": "ASSETS/UX/TFT/DynamicUI/Items/Radiant_Border.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            }
-        ],
-        "paramValues": [
-            {
-                "name": "TextureScale",
-                "value": [
-                    1.100000023841858,
                     0.0,
                     0.0,
                     0.0
@@ -10360,13 +10535,13 @@
         ],
         "__type": "StaticMaterialDef"
     },
-    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Redemption": {
-        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Redemption",
+    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Artifact_TheIndomitable": {
+        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_Artifact_TheIndomitable",
         "type": 3,
         "samplerValues": [
             {
                 "textureName": "MainItemTexture",
-                "texturePath": "ASSETS/Maps/Particles/TFT/Item_Icons/Standard/Redemption_XL.tex",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_Artifact_TheIndomitable.TFT_TFT14_5.tex",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,
@@ -10374,7 +10549,7 @@
             },
             {
                 "textureName": "FrameTexture",
-                "texturePath": "ASSETS/UX/TFT/DynamicUI/Alpha-Mask.tex",
+                "texturePath": "ASSETS/UX/TFT/DynamicUI/Items/Ornn_Border.tex",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,
@@ -10385,7 +10560,7 @@
             {
                 "name": "TextureScale",
                 "value": [
-                    1.0,
+                    1.0499999523162842,
                     0.0,
                     0.0,
                     0.0
@@ -10543,6 +10718,62 @@
             {
                 "textureName": "FrameTexture",
                 "texturePath": "ASSETS/UX/TFT/DynamicUI/Items/Artifact_Border.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "TextureScale",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TextureOffset",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/UI/TFT/UI_BorderItem",
+                        "depthEnable": false,
+                        "blendEnable": true,
+                        "cullEnable": false,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "__type": "StaticMaterialDef"
+    },
+    "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_SpiritVisage": {
+        "name": "ClientStates/Gameplay/UX/TFT/UiMaterials/Common/HexCore/TFT_Item_SpiritVisage",
+        "type": 3,
+        "samplerValues": [
+            {
+                "textureName": "MainItemTexture",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_SpiritVisageRR.TFT_TFT14_5.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "FrameTexture",
+                "texturePath": "ASSETS/UX/TFT/DynamicUI/Alpha-Mask.tex",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,
@@ -11430,7 +11661,7 @@
         "samplerValues": [
             {
                 "textureName": "MainItemTexture",
-                "texturePath": "ASSETS/Maps/Particles/TFT/Item_Icons/Standard/Statikk_Shiv.tex",
+                "texturePath": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_VoidStaff.TFT_TFT14_5.tex",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,

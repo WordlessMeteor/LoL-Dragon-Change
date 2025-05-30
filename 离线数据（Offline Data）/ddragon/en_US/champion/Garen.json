@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.10.1",
+    "version": "15.11.1",
     "data": {
         "Garen": {
             "id": "Garen",
@@ -312,27 +312,29 @@
                 {
                     "id": "GarenW",
                     "name": "Courage",
-                    "description": "Garen passively increases his armor and magic resist by killing enemies. He may also activate this ability to give him a shield and tenacity for a brief moment followed by a lesser amount of damage reduction for a longer duration.",
-                    "tooltip": "<spellPassive>Passive:</spellPassive> Killing units permanently grants <scaleArmor>{{ resistgainonkill }} Armor</scaleArmor> and <scaleMR>{{ resistgainonkill }} Magic Resist</scaleMR>, up to a max of {{ resistmax }}. At max stacks, Garen gains <scaleArmor>{{ percentarmor }} Armor</scaleArmor> and <scaleMR>{{ percentmr }} Magic Resist</scaleMR>.<br /><br /><spellActive>Active:</spellActive> Garen steels his courage for {{ drduration }} seconds, reducing incoming damage by {{ drpercent*100 }}%. He also gains <shield>{{ totalshield }} Shield</shield> and {{ upfronttenacity*100 }}% Tenacity for {{ upfrontduration }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "description": "Garen passively increases his Armor and Magic Resist by killing enemies. He may also activate this ability to give him a shield and tenacity for a brief moment followed by a lesser amount of damage reduction for a longer duration.",
+                    "tooltip": "<spellPassive>Passive:</spellPassive> Garen has <scaleArmor>{{ resistsfortooltip }} bonus Armor</scaleArmor> and <scaleMR>{{ resistsfortooltip }} bonus Magic Resist</scaleMR>. Killing units permanently grants <attention>{{ resistgainonkilltooltip }} resists</attention>, up to a max of <attention>{{ resistmax }}</attention>.<br /><br /><spellActive>Active:</spellActive> Garen steels his courage for {{ drduration }} seconds, reducing incoming damage by {{ drpercent*100 }}%. He also gains <shield>{{ totalshield }} Shield</shield> and <slow>{{ upfronttenacity*100 }}% Tenacity</slow> for {{ upfrontduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Shield Amount",
+                            "Damage Reduction",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ shieldbase }} -> {{ shieldbaseNL }}",
+                            "{{ baseshield }} -> {{ baseshieldNL }}",
+                            "{{ drpercent*100.000000 }}% -> {{ drpercentnl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        23,
-                        21,
-                        19,
+                        22,
+                        19.5,
                         17,
-                        15
+                        14.5,
+                        12
                     ],
-                    "cooldownBurn": "23/21/19/17/15",
+                    "cooldownBurn": "22/19.5/17/14.5/12",
                     "cost": [
                         0,
                         0,
@@ -454,26 +456,28 @@
                     "id": "GarenE",
                     "name": "Judgment",
                     "description": "Garen rapidly spins his sword around his body, dealing physical damage to nearby enemies.",
-                    "tooltip": "Garen rapidly spins his sword for {{ duration }} seconds, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> {{ f1 }} times over the duration. The nearest enemy takes <physicalDamage>{{ totaldamagenearest }} physical damage</physicalDamage> per strike instead.<br /><br />Champions hit by {{ stackstoshred }} strikes lose <scaleArmor>{{ shredamount*100 }}% Armor</scaleArmor> for {{ shredduration }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Garen rapidly spins his sword for {{ duration }} seconds, dealing <physicalDamage>{{ totaldamage }} physical damage</physicalDamage> {{ f1 }} times over the duration. The nearest enemy takes <physicalDamage>{{ nearestenemybonus*100 }}% increased damage</physicalDamage>. Champions hit by {{ stackstoshred }} strikes lose <scaleArmor>{{ shredamount*100 }}% Armor</scaleArmor> for {{ shredduration }} seconds.<br /><br /><recast>Recast</recast>: Garen ends this Ability early.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Damage Per Spin",
-                            "Attack Damage Scaling Per Spin"
+                            "Base Damage Per Spin",
+                            "Attack Damage Scaling Per Spin",
+                            "Cooldown"
                         ],
                         "effect": [
                             "{{ basedamagepertick }} -> {{ basedamagepertickNL }}",
-                            "{{ adratiopertick*100.000000 }}% -> {{ adratioperticknl*100.000000 }}%"
+                            "{{ adratiopertick*100.000000 }}% -> {{ adratioperticknl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
                         9,
-                        9,
-                        9,
-                        9,
-                        9
+                        8.25,
+                        7.5,
+                        6.75,
+                        6
                     ],
-                    "cooldownBurn": "9",
+                    "cooldownBurn": "9/8.25/7.5/6.75/6",
                     "cost": [
                         0,
                         0,

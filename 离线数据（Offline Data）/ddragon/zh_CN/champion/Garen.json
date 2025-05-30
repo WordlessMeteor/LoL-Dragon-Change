@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.10.1",
+    "version": "15.11.1",
     "data": {
         "Garen": {
             "id": "Garen",
@@ -313,26 +313,28 @@
                     "id": "GarenW",
                     "name": "勇气",
                     "description": "盖伦被动地通过击杀敌人来提升护甲和魔法抗性。他也可以激活这个技能来暂时获得一层护盾和韧性，并在接下来的较长持续时间里获得较弱的伤害减免效果。",
-                    "tooltip": "<spellPassive>被动：</spellPassive>击杀一个单位会永久提供<scaleArmor>{{ resistgainonkill }}护甲</scaleArmor>和<scaleMR>{{ resistgainonkill }}魔法抗性</scaleMR>，最多可达{{ resistmax }}。满层时，盖伦获得<scaleArmor>{{ percentarmor }}护甲</scaleArmor>和<scaleMR>{{ percentmr }}魔法抗性</scaleMR>。<br /><br /><spellActive>主动：</spellActive>盖伦加固他的勇气{{ drduration }}秒，使即将到来的伤害减少{{ drpercent*100 }}%。他还会获得<shield>{{ totalshield }}护盾值</shield>和{{ upfronttenacity*100 }}%韧性，持续{{ upfrontduration }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>被动：</spellPassive>盖伦获得<scaleArmor>{{ resistsfortooltip }}额外护甲</scaleArmor>和<scaleMR>{{ resistsfortooltip }}额外魔法抗性</scaleMR>。击杀单位时会永久提供<attention>{{ resistgainonkilltooltip }}双抗</attention>，至多至最大值<attention>{{ resistmax }}</attention>。<br /><br /><spellActive>主动：</spellActive>盖伦加固他的勇气{{ drduration }}秒，使即将到来的伤害降低{{ drpercent*100 }}%。他还会获得持续{{ upfrontduration }}秒的<shield>{{ totalshield }}护盾值</shield>和<slow>{{ upfronttenacity*100 }}%韧性</slow>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "护盾值",
+                            "伤害减免",
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ shieldbase }} -> {{ shieldbaseNL }}",
+                            "{{ baseshield }} -> {{ baseshieldNL }}",
+                            "{{ drpercent*100.000000 }}% -> {{ drpercentnl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        23,
-                        21,
-                        19,
+                        22,
+                        19.5,
                         17,
-                        15
+                        14.5,
+                        12
                     ],
-                    "cooldownBurn": "23/21/19/17/15",
+                    "cooldownBurn": "22/19.5/17/14.5/12",
                     "cost": [
                         0,
                         0,
@@ -454,26 +456,28 @@
                     "id": "GarenE",
                     "name": "审判",
                     "description": "盖伦快速地旋转身体挥舞大剑，并对邻近敌人造成物理伤害。",
-                    "tooltip": "盖伦快速地旋舞大剑，持续{{ duration }}秒，每旋转一圈造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>，共旋转{{ f1 }}圈。相距最近的敌人每圈转而受到<physicalDamage>{{ totaldamagenearest }}物理伤害</physicalDamage>。<br /><br />被{{ stackstoshred }}圈旋转命中的敌方英雄会损失<scaleArmor>{{ shredamount*100 }}%护甲</scaleArmor>，持续{{ shredduration }}秒。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "盖伦快速地旋舞大剑，持续{{ duration }}秒，每旋转一圈造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>，共旋转{{ f1 }}圈。相距最近的敌人受到<physicalDamage>{{ nearestenemybonus*100 }}%提升伤害</physicalDamage>。被{{ stackstoshred }}圈旋转命中的敌方英雄会损失<scaleArmor>{{ shredamount*100 }}%护甲</scaleArmor>，持续{{ shredduration }}秒。<br /><br /><recast>再次施放</recast>：盖伦提前结束这个技能。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "每一圈的伤害",
-                            "每一圈的攻击力收益"
+                            "每圈旋转的基础伤害",
+                            "每一圈的攻击力收益",
+                            "冷却时间"
                         ],
                         "effect": [
                             "{{ basedamagepertick }} -> {{ basedamagepertickNL }}",
-                            "{{ adratiopertick*100.000000 }}% -> {{ adratioperticknl*100.000000 }}%"
+                            "{{ adratiopertick*100.000000 }}% -> {{ adratioperticknl*100.000000 }}%",
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
                         9,
-                        9,
-                        9,
-                        9,
-                        9
+                        8.25,
+                        7.5,
+                        6.75,
+                        6
                     ],
-                    "cooldownBurn": "9",
+                    "cooldownBurn": "9/8.25/7.5/6.75/6",
                     "cost": [
                         0,
                         0,

@@ -81,10 +81,11 @@
                         "Play_vo_AniviaSkin05_FirstEncounter3DSejuani",
                         "Play_vo_AniviaSkin05_FlashFrost_cast3D",
                         "Play_vo_AniviaSkin05_Frostbite_cast3D",
-                        "Play_vo_AniviaSkin05_GlacialStorm_cast3D",
                         "Play_vo_AniviaSkin05_Joke3DGeneral",
+                        "Play_vo_AniviaSkin05_Joke3DGeneralEnd",
                         "Play_vo_AniviaSkin05_Laugh3DGeneral",
                         "Play_vo_AniviaSkin05_Move2DStandard",
+                        "Play_vo_AniviaSkin05_Spell3DRCast",
                         "Play_vo_AniviaSkin05_Taunt3DGeneral"
                     ],
                     "voiceOver": true,
@@ -49877,7 +49878,6 @@
                             }
                         ],
                         "mAudioAction": {
-                            "mSelfEventName": "cast3D",
                             "mAllyEventName": "cast3D",
                             "mEnemyEventName": "cast3D",
                             "mSpectatorEventName": "cast3D",
@@ -50100,6 +50100,55 @@
                         "mAudioAction": {
                             "mMaxOccurences": 1,
                             "mSelfEventName": "FirstEncounter3DSejuani",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "CooldownModifications": {
+                            "IgnoreTimer": true,
+                            "__type": "ContextualActionCooldownModifications"
+                        },
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "{ca9da4b3}": {
+                "mRules": [
+                    {
+                        "mRuleName": "Joke",
+                        "mConditions": [
+                            {
+                                "animationName": "Joke",
+                                "__type": "{2363fb10}"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "Joke3DGeneralEnd",
+                            "mAllyEventName": "Joke3DGeneralEnd",
+                            "mEnemyEventName": "Joke3DGeneralEnd",
+                            "mSpectatorEventName": "Joke3DGeneralEnd",
+                            "__type": "ContextualActionPlayVO"
+                        },
+                        "{20749c51}": false,
+                        "__type": "ContextualRule"
+                    }
+                ],
+                "__type": "ContextualSituation"
+            },
+            "SpellBuffCast": {
+                "mRules": [
+                    {
+                        "mRuleName": "R Turn On",
+                        "mConditions": [
+                            {
+                                "SpellBuff": "Characters/Anivia/Spells/GlacialStormAbility/GlacialStorm",
+                                "__type": "ContextualConditionSpellBuffName"
+                            }
+                        ],
+                        "mAudioAction": {
+                            "mSelfEventName": "Spell3DRCast",
+                            "mAllyEventName": "Spell3DRCast",
+                            "mEnemyEventName": "Spell3DRCast",
+                            "mSpectatorEventName": "Spell3DRCast",
                             "__type": "ContextualActionPlayVO"
                         },
                         "CooldownModifications": {
