@@ -4865,5 +4865,27 @@
 				DDragon: 15.10.1 -> 15.11.1
 			</td>
 		</tr>
+		<tr>
+			<td style="text-align:center;">2025-05-31 08-27-06</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.12.685.3794 -> 15.12.685.7372</li>
+					</ul>
+				A rollback to 15.11.685.5259 was performed
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-05-31 08-27-18</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.12.685.3794 -> 15.12.685.7372</li>
+					</ul>
+				A rollback to 15.11.685.5259 was performed
+			</td>
+		</tr>
 	</tbody>
 </table>
