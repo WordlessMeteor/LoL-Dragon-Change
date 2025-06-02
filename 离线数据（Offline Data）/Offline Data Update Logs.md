@@ -4887,5 +4887,27 @@
 				A rollback to 15.11.685.5259 was performed
 			</td>
 		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-02 12-46-30</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.11.684.1658 -> 15.11.685.5259</li>
+						<li>PBE: Within-patch change</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-02 12-46-37</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.11.684.1658 -> 15.11.685.5259</li>
+						<li>PBE: Within-patch change</li>
+					</ul>
+			</td>
+		</tr>
 	</tbody>
 </table>
