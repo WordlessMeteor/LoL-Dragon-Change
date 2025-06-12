@@ -819,7 +819,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Rammus/HUD/Icons2D/Armordillo_ScavengeArmor.png",
         "abilityVideoPath": "",
         "abilityVideoImagePath": "",
-        "description": "Les attaques de base de Rammus infligent des dégâts magiques supplémentaires qui augmentent avec son armure."
+        "description": "Rammus gagne des dégâts d'attaque bonus en fonction de son armure et de sa résistance magique."
     },
     "spells": [
         {
@@ -831,7 +831,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Rammus fonce comme une balle vers les ennemis, infligeant des dégâts et ralentissant les cibles touchées.",
-            "dynamicDescription": "Rammus se roule en boule, gagnant un bonus de <speed>+@MinimumMoveSpeed@ vitesse de déplacement</speed> qui augmente jusqu'à <speed>+@MaximumMoveSpeed@ vitesse de déplacement</speed> en @Effect4Amount@ sec. Rammus s'arrête après avoir percuté un ennemi, infligeant <magicDamage>@PowerBallDamage@ pts de dégâts magiques</magicDamage> aux ennemis proches, les <status>repoussant</status> et les <status>ralentissant</status> de @Effect2Amount@% pendant @Effect3Amount@ sec.<br><br><recast>Réactivation</recast> : Rammus met fin prématurément à cette compétence.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Rammus se roule en boule, gagnant un bonus de <speed>+@MinimumMoveSpeed@ vitesse de déplacement</speed> qui augmente jusqu'à +<speed>@MaximumMoveSpeed@ vitesse de déplacement</speed> en @RollDuration@ sec. Rammus s'arrête après avoir percuté un ennemi, infligeant <magicDamage>@PowerBallDamage@ pts de dégâts magiques</magicDamage> aux ennemis proches, les <status>repoussant</status> et les <status>ralentissant</status> de @SlowPercent@% pendant @SlowDuration@ sec.<br><br><recast>Réactivation</recast> : Rammus met fin à cette compétence prématurément.@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -857,7 +857,7 @@
                 6.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -871,76 +871,76 @@
                     0.0
                 ],
                 "Effect2Amount": [
-                    40.0,
-                    40.0,
-                    50.0,
-                    60.0,
-                    70.0,
-                    80.0,
-                    90.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect10Amount": [
                     1000.0,
@@ -980,8 +980,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_W1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
-            "description": "Rammus prend une posture défensive. Son armure et sa résistance magique sont grandement augmentées, les dégâts de Carapace cloutée sont augmentés et Rammus renvoie des dégâts aux ennemis qui lui lancent des attaques de base.",
-            "dynamicDescription": "Rammus prend une posture défensive pendant @BuffDuration@ sec, gagnant <scaleArmor>+@F1@ armure (%i:scaleArmor%)</scaleArmor> et <scaleMR>+@F2@ résistance magique (%i:scaleMR%)</scaleMR>. Pendant cette durée, <spellName>Carapace cloutée</spellName> inflige @PassiveDamageAmpCalc@ de dégâts supplémentaires et blesse aussi les ennemis qui attaquent Rammus.<br><br>Les attaques de Rammus augmentent la durée de @BonusDurationPerAuto@ sec (max : @MaxBonusDuration@).<br><br><recast>Réactivation</recast> : Rammus met fin prématurément à cette compétence.<br>@SpellModifierDescriptionAppend@",
+            "description": "Rammus prend une posture défensive. Son armure et sa résistance magique sont grandement augmentées et il renvoie des dégâts aux ennemis qui l'attaquent.",
+            "dynamicDescription": "Rammus prend une posture défensive pendant @BuffDuration@ sec, gagnant <scaleArmor>+@BonusArmorTooltip@ armure</scaleArmor> et <scaleMR>+@BonusMRTooltip@ résistance magique</scaleMR> et inflige <magicDamage>@ReturnDamageCalc@ pts de dégâts magiques</magicDamage> aux ennemis qui l'attaquent.<br><br><recast>Réactivation</recast> : Rammus met fin à cette compétence prématurément.@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -1007,7 +1007,7 @@
                 7.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -1130,8 +1130,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_E1.jpg",
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
-            "description": "Rammus provoque un champion ennemi ou un monstre, l'obligeant à s'acharner contre sa carapace. Il augmente aussi sa vitesse d'attaque pendant un court instant, mais ce bonus est prolongé quand n'importe quel autre de ses sorts est actif.",
-            "dynamicDescription": "Rammus <status>provoque</status> un champion ennemi ou un monstre de la jungle pendant @Effect1Amount@ sec et gagne <attackSpeed>+@Effect2Amount@% de vitesse d'attaque</attackSpeed> pendant @Effect1Amount@ sec.@SpellModifierDescriptionAppend@",
+            "description": "Rammus provoque un champion ennemi ou un monstre, l'obligeant à s'acharner contre lui.",
+            "dynamicDescription": "Rammus <status>provoque</status> un champion ennemi ou un monstre pendant @Duration@ sec. Les monstres subissent <magicDamage>@MonsterDamageCalc@ pts de dégâts magiques</magicDamage>.@SpellModifierDescriptionAppend@",
             "range": [
                 325.0,
                 325.0,
@@ -1157,27 +1157,27 @@
                 12.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    1.2,
-                    1.2,
-                    1.4,
-                    1.6,
-                    1.8,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    20.0,
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1281,7 +1281,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sec %i:cooldown%",
             "description": "Rammus bondit dans les airs et retombe violemment à l'endroit ciblé, ce qui inflige des dégâts magiques et ralentit les ennemis. Si Frappe ascendante est lancée alors que Démolisseur est actif, les ennemis près du centre de la zone sont également projetés dans les airs.",
-            "dynamicDescription": "Rammus bondit dans les airs et retombe violemment dans une zone, ce qui inflige <magicDamage>@InitialDamageCalc@ pts de dégâts magiques</magicDamage> et <status>ralentit</status> les ennemis de @SlowAmount*100@% pendant @SlowDuration@ sec. Les ennemis au centre de la zone subissent des dégâts supplémentaires selon la distance du bond de Rammus (max : <magicDamage>@TooltipMaxDamageCalc@ pts de dégâts magiques</magicDamage>). Si cette compétence est utilisée pendant <spellName>Démolisseur</spellName>, les ennemis au centre de la zone sont également <status>projetés dans les airs</status> pendant @KnockupDuration@ sec.<br><br>Rammus crée ensuite @NumberOfPulses@ ondes de choc dans la zone en @BuffDuration@ sec, chacune infligeant <magicDamage>@PulseDamageCalc@ pts de dégâts magiques</magicDamage> et cumulant le <status>ralentissement</status> (max : @MaxSlow@%).<br><br>La portée de cette compétence est augmentée par la <speed>vitesse de déplacement</speed> de Rammus.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Rammus bondit dans les airs et retombe violemment dans une zone, ce qui inflige <magicDamage>@InitialDamageCalc@ pts de dégâts magiques</magicDamage> et <status>ralentit</status> les ennemis de @SlowAmount*100@% pendant @SlowDuration@ sec. S'il l'utilise pendant <spellName>Démolisseur</spellName>, les ennemis au centre subissent <magicDamage>@spell.PowerBall:PowerBallDamage@ pts de dégâts magiques</magicDamage> bonus et sont <status>projetés en l'air</status> pendant @KnockupDuration@ sec.<br><br>Rammus crée ensuite @NumberOfPulses@ répliques sismiques dans la zone pendant @BuffDuration@ sec, qui répètent le <status>ralentissement</status>.<br><br>La portée de cette compétence est augmentée de la <speed>vitesse de déplacement</speed> de Rammus.@SpellModifierDescriptionAppend@",
             "range": [
                 25000.0,
                 25000.0,
@@ -1299,8 +1299,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                90.0,
-                90.0,
+                120.0,
+                105.0,
                 90.0,
                 90.0,
                 90.0,

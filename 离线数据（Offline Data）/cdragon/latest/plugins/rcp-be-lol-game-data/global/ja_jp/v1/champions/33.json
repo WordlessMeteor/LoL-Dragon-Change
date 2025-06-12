@@ -819,7 +819,7 @@
         "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Rammus/HUD/Icons2D/Armordillo_ScavengeArmor.png",
         "abilityVideoPath": "",
         "abilityVideoImagePath": "",
-        "description": "通常攻撃が追加魔法ダメージを与える。このダメージは物理防御に応じて増加する。"
+        "description": "自身の物理防御と魔法防御に応じて攻撃力が増加する。"
     },
     "spells": [
         {
@@ -831,7 +831,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "体を丸めて高速回転し、移動速度が増加する。衝突した敵に突進してダメージを与え、スロウ効果を付与する。",
-            "dynamicDescription": "丸くなって<speed>移動速度が@MinimumMoveSpeed@</speed>増加し、さらに@Effect4Amount@秒かけて最大<speed>@MaximumMoveSpeed@</speed>まで増加する。敵にぶつかると停止し、<magicDamage>@PowerBallDamage@の魔法ダメージ</magicDamage>を与えて<status>ノックバック</status>させ、周囲の敵に@Effect3Amount@秒間、@Effect2Amount@%の<status>スロウ効果</status>を付与する。<br><br><recast>再発動</recast>: このスキルを早めに終了する。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "丸くなって<speed>移動速度が@MinimumMoveSpeed@</speed>増加し、さらに@RollDuration@秒かけて<speed>移動速度が最大@MaximumMoveSpeed@</speed>まで増加する。敵にぶつかると停止し、<magicDamage>@PowerBallDamage@の魔法ダメージ</magicDamage>を与えて<status>ノックバック</status>させ、周囲の敵に@SlowDuration@秒間、@SlowPercent@%の<status>スロウ効果</status>を付与する。<br><br><recast>再発動</recast>: このスキルを早めに終了する。@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -857,7 +857,7 @@
                 6.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -871,76 +871,76 @@
                     0.0
                 ],
                 "Effect2Amount": [
-                    40.0,
-                    40.0,
-                    50.0,
-                    60.0,
-                    70.0,
-                    80.0,
-                    90.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0,
-                    1.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0,
-                    6.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0,
-                    125.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0,
-                    25.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect8Amount": [
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25,
-                    0.25
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect10Amount": [
                     1000.0,
@@ -980,8 +980,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_W1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
-            "description": "防御体勢を取って物理防御と魔法防御を大幅にアップさせる。さらに、「トゲトゲ」のダメージを増加させて、通常攻撃を行ってきた相手にダメージを跳ね返す。",
-            "dynamicDescription": "@BuffDuration@秒間、防御態勢を取り、<scaleArmor>物理防御が@F1@(%i:scaleArmor%)</scaleArmor>、<scaleMR>魔法防御が@F2@(%i:scaleMR%)</scaleMR>増加する。発動中は<spellName>「トゲトゲ」</spellName>のダメージが@PassiveDamageAmpCalc@増加し、自身に通常攻撃を行った敵にダメージを与える。<br><br>通常攻撃を行うことで効果時間が@BonusDurationPerAuto@秒増加する(最大: @MaxBonusDuration@)。<br><br><recast>再発動</recast>: このスキルを早めに終了する。<br>@SpellModifierDescriptionAppend@",
+            "description": "防御体勢を取って物理防御と魔法防御を大幅に増加させ、通常攻撃を行ってきた相手にダメージを跳ね返す。",
+            "dynamicDescription": "@BuffDuration@秒間、防御体勢を取り、<scaleArmor>物理防御が@BonusArmorTooltip@</scaleArmor>、<scaleMR>魔法防御が@BonusMRTooltip@</scaleMR>増加し、通常攻撃を行ってきた相手に<magicDamage>@ReturnDamageCalc@の魔法ダメージ</magicDamage>を跳ね返す。<br><br><recast>再発動</recast>: このスキルを早めに終了する。@SpellModifierDescriptionAppend@",
             "range": [
                 300.0,
                 300.0,
@@ -1007,7 +1007,7 @@
                 7.0
             ],
             "coefficients": {
-                "coefficient1": 0.1,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
@@ -1130,8 +1130,8 @@
             "abilityVideoImagePath": "champion-abilities/0033/ability_0033_E1.jpg",
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
-            "description": "敵チャンピオンまたは中立モンスターをタウントし、固い甲羅に無謀な攻撃をさせる。さらに、短時間だけ攻撃速度が増加する。この時間は他のスキルを発動中に延長される。",
-            "dynamicDescription": "敵チャンピオンまたはジャングルモンスターに@Effect1Amount@秒間<status>タウント効果</status>を付与し、@Effect1Amount@秒間、<attackSpeed>攻撃速度が@Effect2Amount@%</attackSpeed>増加する。@SpellModifierDescriptionAppend@",
+            "description": "敵チャンピオンまたは中立モンスターをタウントし、固い甲羅に無謀な攻撃をさせる。",
+            "dynamicDescription": "敵チャンピオンまたはモンスターを@Duration@秒間<status>タウント</status>する。モンスターには<magicDamage>@MonsterDamageCalc@の魔法ダメージ</magicDamage>を与える。@SpellModifierDescriptionAppend@",
             "range": [
                 325.0,
                 325.0,
@@ -1157,27 +1157,27 @@
                 12.0
             ],
             "coefficients": {
-                "coefficient1": 1.0,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    1.2,
-                    1.2,
-                    1.4,
-                    1.6,
-                    1.8,
-                    2.0,
-                    2.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    20.0,
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1281,7 +1281,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "ジャンプしてから指定地点に勢いよく着地し、敵に魔法ダメージとスロウ効果を与える。「ころころ」発動中に使用した場合、範囲の中心付近にいる敵にはノックアップも与える。",
-            "dynamicDescription": "宙に飛び上がってから激しく落下し、一定範囲内に<magicDamage>@InitialDamageCalc@の魔法ダメージ</magicDamage>を与えて、@SlowDuration@秒間、@SlowAmount*100@%の<status>スロウ効果</status>を付与する。中心部にいた敵には、ジャンプ時の移動距離に応じて追加ダメージを与える(最大: <magicDamage>@TooltipMaxDamageCalc@の魔法ダメージ</magicDamage>)。<spellName>「ころころ」</spellName>中に使用すると、中心部にいた敵を@KnockupDuration@秒間、<status>ノックアップ</status>させる。<br><br>その後、範囲内に@BuffDuration@秒かけて@NumberOfPulses@回の余震が発生する。余震はそれぞれ<magicDamage>@PulseDamageCalc@の魔法ダメージ</magicDamage>を与え、<status>スロウ効果</status>をスタックさせる(最大: @MaxSlow@%)。<br><br>このスキルの射程は自身の<speed>移動速度</speed>に応じて増加する。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "ジャンプしてから勢いよく着地して、一定範囲に<magicDamage>@InitialDamageCalc@の魔法ダメージ</magicDamage>を与え、@SlowDuration@秒間、@SlowAmount*100@%の<status>スロウ</status>効果を与える。<spellName>「ころころ」</spellName>中に使用すると、範囲の中心にいた敵に追加で<magicDamage>@spell.PowerBall:PowerBallDamage@の魔法ダメージ</magicDamage>を与え、@KnockupDuration@秒間、<status>ノックアップ</status>する。<br><br>その後、@BuffDuration@秒かけてその範囲に@NumberOfPulses@回余震を発生させ、繰り返し<status>スロウ効果</status>を与える。<br><br>このスキルの射程は自身の<speed>移動速度</speed>に応じて増加する。@SpellModifierDescriptionAppend@",
             "range": [
                 25000.0,
                 25000.0,
@@ -1299,8 +1299,8 @@
                 100.0
             ],
             "cooldownCoefficients": [
-                90.0,
-                90.0,
+                120.0,
+                105.0,
                 90.0,
                 90.0,
                 90.0,
