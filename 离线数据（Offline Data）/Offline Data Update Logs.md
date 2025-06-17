@@ -5109,7 +5109,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align:center;">2025-06-14 13-24-16</td>
+			<td style="text-align:center;">2025-06-14 13-24-16<br>2025-06-14 16-33-56</td>
 			<td style="text-align:center;">CDragon: 1/2/1</td>
 			<td>
 				CDragon: <br>
@@ -5127,6 +5127,46 @@
 					<ul style="list-style-type: disc; margin-left: 20px;">
 						<li>Latest: Within-patch change</li>
 						<li>PBE: 15.13.689.1960 -> 15.13.689.5429</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-15 17-12-17</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-15 17-12-47</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-16 14-03-15</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-16 14-03-42</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>No changes</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-17 09-15-25</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.13.689.5429 -> 15.13.690.0843</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-17 09-15-33</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.13.689.5429 -> 15.13.690.0843</li>
 					</ul>
 			</td>
 		</tr>
