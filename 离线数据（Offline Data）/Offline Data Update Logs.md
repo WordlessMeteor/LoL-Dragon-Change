@@ -5331,7 +5331,28 @@
 			<td>
 				CDragon: <br>
 					<ul style="list-style-type: disc; margin-left: 20px;">
-						<li>PBE: 15.14.692.3467 -> 15.14.692.6968</li>
+						<li>PBE: 15.14.692.6968 -> 15.14.693.0629</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-28 16-05-33</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.13.693.1306 -> 15.13.693.4876</li>
+						<li>PBE: 15.14.693.0629 -> 15.14.693.3762</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-06-28 16-05-54</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.14.693.0629 -> 15.14.693.3762</li>
 					</ul>
 			</td>
 		</tr>
