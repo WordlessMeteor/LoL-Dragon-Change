@@ -1,7 +1,11 @@
 #准备必要的库（Import necessary libraries）
-import pandas, re, requests, traceback, shutil, time, unicodedata
+import argparse, pandas, re, requests, traceback, shutil, time, unicodedata
 from openpyxl import load_workbook
 from wcwidth import wcswidth
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-t", "--transform", help = "将从CommunityDragon获取的装备详细信息中的变量转换成二进制装备json数据中的实际值（Transform variables in tooltips of items obtained from CommunityDragon database into the representing values）", action = "store_true")
+args = parser.parse_args()
 
 def count_nonASCII(s: str): #统计一个字符串中占用命令行2个宽度单位的字符个数（Count the number of characters that take up 2 width unit in CMD）
     return sum([unicodedata.east_asian_width(character) in ("F", "W") for character in list(str(s))])
@@ -54,13 +58,17 @@ def patch_compare(patch1, patch2): #比较两个版本号的先后顺序。当pa
     try:
         lst1 = list(map(int, lst1))
     except ValueError:
-        print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第1个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe first patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+        return False
     try:
         lst2 = list(map(int, lst2))
     except ValueError:
-        print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
-        return 1
+        if lst1[0] != "pbe":
+            print("第2个版本字符串不合法！请输入用半角句号连接的正整数，如13.15.1、10.10.3216176。\nThe second patch variable is illegal! Please pass the integers concatenated by dot, such as 13.15.1 and 10.10.3216176.")
+            return False
+        else:
+            return True
     for i in range(min(len(lst1), len(lst2))):
         if lst1[i] < lst2[i]:
             return True
@@ -71,7 +79,7 @@ def patch_compare(patch1, patch2): #比较两个版本号的先后顺序。当pa
     if len(lst1) < len(lst2):
         return True
     else:
-        return False
+        return False #这里将两个版本相同视为假，暗示了在本程序用得到的地方，两个版本不可能相同（Here the case where the two patches are the same is regarded as False, which indicates that the two patches can't be same within its use in this program）
 
 def patch_sort(patchList: list): #利用插入排序算法，根据patch_compare函数对版本列表进行升序排列（Sorts a patch list according to the principle of `patch_compare` function through the insertion sort algorithm）
     patch_re = re.compile("([0-9]+.[0-9]+.[0-9]+)|([0-9]+.[0-9]+)")
@@ -223,31 +231,31 @@ while True:
                 print(f"正在获取{version}版本的目标语言装备信息……\nFetching LoL item information of version {version} in target language ...")
                 src, status = getUrl(LoLItems_locale_url)
                 if status != 0:
-                    failed_count += 1
                     if status == 1:
                         print("目标语言装备信息获取失败！\nLoL item information in target language capture failed!")
                     elif status == 403:
                         print("目标语言装备信息文件不存在！\nLoL item file in target language not found!")
+                    failed_count += 1
                     continue
                 LoLItems_locale = src.json()
                 print(f"正在获取{version}版本的英文装备信息……\nFetching LoL item information of version {version} in English ...")
                 src, status = getUrl(LoLItems_default_url)
                 if status != 0:
-                    failed_count += 1
                     if status == 1:
                         print("英文装备信息获取失败！\nLoL item information in English capture failed!")
                     elif status == 403:
                         print("英文装备信息文件不存在！\nLoL item file in English not found!")
+                    failed_count += 1
                     continue
                 LoLItems_default = src.json()
                 print(f"正在获取{version}版本的目标语言英雄信息……\nFetching champion information of version {version} in target language ...")
                 src, status = getUrl(champions_locale_url)
                 if status != 0:
-                    failed_count += 1
                     if status == 1:
                         print("目标语言英雄信息获取失败！\nChampion information in target language capture failed!")
                     elif status == 403:
                         print("目标语言英雄信息文件不存在！\nChampion file in target language not found!")
+                    failed_count += 1
                     continue
                 champions_locale = src.json()
 
@@ -285,7 +293,7 @@ while True:
                 print("开始整理数据……\nSorting data ...")
                 LoLItem_data = {}
                 pStats = re.compile(r"<stats>.*</stats>")
-                pFormat = re.compile(r"<[/\sA-Za-z0-9=#\'_]*>")
+                pFormat = re.compile(r"<[/\sA-Za-z0-9=#\'_@]*>")
                 champions = {}
                 for champion in champions_locale["data"]:
                     champions[champion.lower()] = champions_locale["data"][champion]["name"] + " " + champions_locale["data"][champion]["title"] #装备数据中记录的英雄代号和英雄数据中的英雄代号有大小写上的差异（Case difference exists in the alias between item and champion data）
@@ -486,41 +494,81 @@ while True:
                 LoLItems_locale_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/items.json" %(version, language_cdragon[language_code])
                 LoLItems_default_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/default/v1/items.json" %version
                 champions_locale_url = "https://raw.communitydragon.org/%s/plugins/rcp-be-lol-game-data/global/%s/v1/champion-summary.json" %(version, language_cdragon[language_code])
+                fontconfig_locale_url = "https://raw.communitydragon.org/%s/game/data/menu/fontconfig_%s.txt.json" %(version, language_code.lower())
+                strtable_locale_url1 = "https://raw.communitydragon.org/%s/game/data/menu/main_%s.stringtable.json" %(version, language_code.lower())
+                strtable_locale_url2 = "https://raw.communitydragon.org/%s/game/%s/data/menu/en_us/main.stringtable.json" %(version, language_code.lower())
+                strtable_locale_url3 = "https://raw.communitydragon.org/%s/game/%s/data/menu/en_us/lol.stringtable.json" %(version, language_code.lower())
+                LoLItems_binary_url1 = "https://raw.communitydragon.org/%s/game/global/items/items.bin.json" %(version)
+                LoLItems_binary_url2 = "https://raw.communitydragon.org/%s/game/items.cdtb.bin.json" %(version)
                 print(f"正在获取{version}版本的目标语言装备信息……\nFetching LoL item information of version {version} in target language ...")
                 src, status = getUrl(LoLItems_locale_url)
                 if status != 0:
-                    failed_count += 1
                     if status == 1:
                         print("目标语言装备信息获取失败！\nLoL item information in target language capture failed!")
                     elif status == 404:
                         print("目标语言装备信息文件不存在！\nLoL item file in target language not found!")
+                    failed_count += 1
                     continue
                 LoLItems_locale = src.json()
                 print(f"正在获取{version}版本的英文装备信息……\nFetching LoL item information of version {version} in English ...")
                 src, status = getUrl(LoLItems_default_url)
                 if status != 0:
-                    failed_count += 1
                     if status == 1:
                         print("英文装备信息获取失败！\nLoL item information in English capture failed!")
                     elif status == 404:
                         print("英文装备信息文件不存在！\nLoL item file in English not found!")
+                    failed_count += 1
                     continue
                 LoLItems_default = src.json()
                 print(f"正在获取{version}版本的目标语言英雄信息……\nFetching champion information of version {version} in target language ...")
                 src, status = getUrl(champions_locale_url)
                 if status != 0:
-                    failed_count += 1
                     if status == 1:
                         print("目标语言英雄信息获取失败！\nChampion information in target language capture failed!")
                     elif status == 404:
                         print("目标语言英雄信息文件不存在！\nChampion file in target language not found!")
+                    failed_count += 1
                     continue
                 champions_locale = src.json()
+                print(f"正在获取{version}版本的目标语言字符串常量池（英雄联盟）……\nFetching stringtable (LoL) of version {version} in target language ...")
+                src, status = getUrl(fontconfig_locale_url if patch_compare(version, "12.23") else strtable_locale_url1 if patch_compare(version, "14.4") else strtable_locale_url2 if patch_compare(version, "14.15") else strtable_locale_url3) #翻译数据在12.23、14.4和14.15版本发生了路径迁移（Path transfer occurred to the localization data in Patches 12.23, 14.4 and 14.15）
+                status_strtable_locale = status
+                if status != 0:
+                    if status == 1:
+                        print("目标语言字符串常量池（英雄联盟）获取失败！\nStringtable (LoL) in target language capture failed!")
+                    elif status == 404:
+                        print("目标语言字符串常量池（英雄联盟）文件不存在！\nStringtable (LoL) file in target language not found!")
+                if status_strtable_locale == 0:
+                    strtable_locale = src.json()
+                elif status_strtable_locale == 404:
+                    strtable_locale = {}
+                else:
+                    failed_count += 1
+                    continue
+                print(f"正在获取{version}版本的二进制装备信息……\nFetching binary LoL item of version {version} ...")
+                src, status = getUrl(LoLItems_binary_url1 if patch_compare(version, "13.15") else LoLItems_binary_url2) #二进制装备信息在13.15版本发生了路径迁移（Path transfer occurred to the binary item information in Patch 13.15）
+                status_item_binary = status
+                if status != 0:
+                    if status == 1:
+                        print("目标语言二进制装备信息获取失败！\nBinary LoL item information capture failed!")
+                    elif status == 404:
+                        print("目标语言二进制装备信息文件不存在！\nBinary LoL item file not found!")
+                if status_item_binary == 0:
+                    LoLItems_binary = src.json()
+                elif status_item_binary == 404:
+                    LoLItems_binary = {}
+                else:
+                    failed_count += 1
+                    continue
                 
                 #下面设置装备表头的元数据部分（Set the metadata part of the item headers）
-                base_header = {"id": "装备序号", "active": "主动使用", "description": "详细信息", "inStore": "游戏内可见性", "from": "合成材料序号", "to": "合成装备序号", "maxStacks": "最大持有数量", "requiredChampion": "装备持有者", "requiredAlly": "所需队友", "requiredBuffCurrencyName": "其它货币类型", "requiredBuffCurrencyCost": "其它费用", "specialRecipe": "特殊合成材料", "isEnchantment": "附魔装备", "price": "合成费用", "priceTotal": "总费用", "displayInItemSets": "装备图册可见性", "iconPath": "缩略图路径", "localizedName": "装备名称", "name": "英文名称", "fromName": "合成材料名称", "toName": "合成装备名称", "requiredChampionName": "装备持有者名称", "requiredAllyName": "所需队友名称", "specialRecipeName": "特殊合成材料名称"}
+                base_header = {"id": "装备序号", "active": "主动使用", "description": "描述", "inStore": "游戏内可见性", "from": "合成材料序号", "to": "合成装备序号", "maxStacks": "最大持有数量", "requiredChampion": "装备持有者", "requiredAlly": "所需队友", "requiredBuffCurrencyName": "其它货币类型", "requiredBuffCurrencyCost": "其它费用", "specialRecipe": "特殊合成材料", "isEnchantment": "附魔装备", "price": "合成费用", "priceTotal": "总费用", "displayInItemSets": "装备图册可见性", "iconPath": "缩略图路径", "localizedName": "装备名称", "name": "英文名称", "fromName": "合成材料名称", "toName": "合成装备名称", "requiredChampionName": "装备持有者名称", "requiredAllyName": "所需队友名称", "specialRecipeName": "特殊合成材料名称"}
                 base_header_keys = list(base_header.keys())
                 base_header_values = list(base_header.values())
+                #下面设置装备表头的详细信息部分（Set the tooltip part of the item headers）
+                tooltip_header = {"tooltip": "游戏内详细信息"}
+                tooltip_header_keys = list(tooltip_header.keys())
+                tooltip_header_values = list(tooltip_header.values())
                 #下面设置装备表头的分类（标签）部分（Set the category / tag part of the item headers）
                 categories_initial = set()
                 for item in LoLItems_locale:
@@ -534,12 +582,16 @@ while True:
                     categories.append(category)
                 categories += categories_initial
                 categories_dict = {"AbilityHaste": "技能急速", "Active": "主动", "Armor": "护甲", "ArmorPenetration": "护甲穿透", "AttackSpeed": "攻击速度", "Aura": "光环", "Bilgewater": "比尔吉沃特", "Boots": "鞋子", "Consumable": "消耗品", "CooldownReduction": "冷却缩减", "CriticalStrike": "暴击", "Damage": "攻击力", "GoldPer": "工资装", "Health": "生命值", "HealthRegen": "生命回复", "Jungle": "打野-起始", "Lane": "对线-起始", "LifeSteal": "生命偷取", "MagicPenetration": "法术穿透", "MagicResist": "魔法抗性", "Mana": "法力值", "ManaRegen": "法力回复", "Movement": "移动速度", "NonbootsMovement": "其它移动速度物品", "OnHit": "攻击特效", "Slow": "减速", "SpellBlock": "魔法抗性", "SpellDamage": "法术强度", "SpellVamp": "法术吸血", "Stealth": "潜行/隐身", "Tenacity": "韧性", "Trinket": "饰品", "Vision": "视野"}
-                #下面设置装备表头的基础属性部分。这一部分需要按照实际情况随时更新。只需要增添新的，不需要删除旧的（Set the stat part of the item headers. This part needs update with the latest knowledge. Only need to add new keys, but not delete old keys）
+                #下面设置装备表头的基础属性部分。这一部分需要按照实际情况随时更新。只需要增添新的，不需要删除旧的（Set the basic stat part of the item headers. This part needs update with the latest knowledge. Only need to add new keys, but not delete old keys）
                 attributes = {"Health": "生命值", "Bonus Health": "额外生命值", "Mana": "法力值", "Attack Damage": "攻击力", "Ability Power": "法术强度", "Adaptive Force": "适应之力", "Armor": "护甲", "Magic Resist": "魔法抗性", "Attack Speed": "攻击速度", "Ability Haste": "技能急速", "Cooldown Reduction": "冷却缩减", "Critical Strike Chance": "暴击几率", "Critical Strike Damage": "暴击伤害", "Move Speed": "移动速度", "Base Health Regen": "基础生命回复", "Base Mana Regen": "基础法力回复", "Heal and Shield Power": "治疗和护盾强度", "Increased Healing from Potions": "来自药水的治疗效果", "Mana per level": "每级法力", "Mana regen per 5 seconds": "法力回复/5秒", "Lethality": "穿甲", "Armor Penetration": "护甲穿透", "Magic Penetration": "法术穿透", "Life Steal": "生命偷取", "Omnivamp": "全能吸血", "Life Steal vs. Monsters": "对野怪的生命偷取", "Life on Hit": "攻击时回复生命值", "Tenacity": "韧性", "Gold Per 10 Seconds": "金币/10秒", "Ability Power per level": "每级法术强度"}
                 attribute_correct_map = {"Base Health Regeneration": "Base Health Regen", "Mana per 5 seconds": "Mana regen per 5 seconds", "Movement Speed": "Move Speed"} #早期的装备数据中存在一些不规范的数值属性称呼，这里将其规范成以上字典中包含的属性（The early item data contain some irregular calling of attributes, and this dictionary is designed to standardize them to be included in the above `attributes` dictionary）
+                #下面设置装备表头的所有数值部分。这一部分需要按照实际情况随时更新。只需要增添新的，不需要删除旧的（Set the detailed stat part of the item headers. This part needs update with the latest knowledge. Only need to add new keys, but not delete old keys）
+                allStats_header = {}
+                allStats_header_keys = list(allStats_header.keys())
+                allStats_header_values = list(allStats_header.values())
                 #下面设置装备表头（Set the item headers）
-                LoLItem_header_en = base_header_keys + ["Class: " + category for category in categories] + list(attributes.keys())
-                LoLItem_header_zh = base_header_values + ["类别：" + categories_dict[category] for category in categories] + list(attributes.values())
+                LoLItem_header_en = base_header_keys + tooltip_header_keys + ["Class: " + category for category in categories] + list(attributes.keys()) + (allStats_header_keys if status_item_binary == 0 else [])
+                LoLItem_header_zh = base_header_values + tooltip_header_values + ["类别：" + categories_dict[category] for category in categories] + list(attributes.values()) + (allStats_header_values if status_item_binary == 0 else [])
                 LoLItem_header = {LoLItem_header_en[i]: LoLItem_header_zh[i] for i in range(len(LoLItem_header_en))}
                 LoLItem_header_keys = list(LoLItem_header.keys())
                 #print(LoLItem_header_keys)
@@ -548,7 +600,12 @@ while True:
                 print("开始整理数据……\nSorting data ...")
                 LoLItem_data = {}
                 pStats = re.compile(r"<stats>.*</stats>")
-                pFormat = re.compile(r"<[/\sA-Za-z0-9=#\'_]*>")
+                pFormat = re.compile(r"<[/\sA-Za-z0-9=#\'_@]*>")
+                pIcon = re.compile(r"{{[/\sA-Za-z0-9=#\'_@]*}}|%i:\w*%")
+                pSection = re.compile(r"<section>.*?</section>") #在星号后添加问号以启用贪婪模式（Enable greedy match by adding a question mark after the asterisk）
+                pAttributes = re.compile(r"@.*?@")
+                pAlphaNumeric = re.compile(r"\w+")
+                pAlphabetic = re.compile(r"[A-Za-z_]+")
                 champions = {}
                 for champion in champions_locale:
                     champions[champion["alias"]] = champion["name"] + " " + (champion["description"] if "description" in champion else champion["alias"]) #15.9版本以前，“champion-summary.json”中没有“description”键（Before Patch 15.9, "description" key isn't present in "champion-summary.json"）
@@ -558,6 +615,7 @@ while True:
                 for i in range(len(LoLItems_locale)):
                     item = LoLItems_locale[i]
                     item_default = LoLItems_default[i]
+                    item_binary = LoLItems_binary.get("Items/%d" %(item["id"]), {}) #确定该装备在二进制json文件中的数据。在15.12.685.0388版本，神木之门引入的三个饮品没有出现在二进制json文件中（Determine item data in the binary json file. In Patch 15.12.685.0388, 3 juices introduced into Brawl don't exist in the binary json file）
                     #首先处理共有部分（First, deal with the common part）
                     ##下面填充装备的基本数据。这里参考的是英语描述（The following code fills the items' basic stats. Here the code refer to English descriptions）
                     statDict = {}
@@ -577,6 +635,12 @@ while True:
                                     statDict[figure_attr] = figure.replace("+", "")
                                 except AttributeError:
                                     pass
+                    ##下面确定该装备在二进制json文件中存储的属性及其值（The following code determine attributes and corresponding values of this item stored in the binary json file）
+                    mDataValues = {}
+                    if "mDataValues" in item_binary:
+                        for itemDataValue_iter in item_binary["mDataValues"]:
+                            if all(j in itemDataValue_iter for j in ["mName", "mValue", "__type"]):
+                                mDataValues[itemDataValue_iter["mName"]] = itemDataValue_iter["mValue"]
                     #然后分类讨论（Then discuss about `j`)
                     for j in range(len(LoLItem_header_keys)):
                         key = LoLItem_header_keys[j]
@@ -604,16 +668,142 @@ while True:
                                 LoLItem_data[key].append(item.get(key, item.get(key.lower(), False))) #在14.15版本以前，装备数据中无“displayInItemSets”键（Before Patch 14.15, "displayInItemSets" key isn't in item data）
                             else:
                                 LoLItem_data[key].append(item.get(key, item.get(key.lower(), ""))) #在7.10版本以前，部分键是小写形式；在7.8版本以前，装备数据中无大多数键（Before Patch 7.10, some keys are in lower case. Before Patch 7.8, most keys aren't present in item data）
-                        elif j < len(base_header_keys) + len(categories): #分类部分（Category part）
-                            LoLItem_data[key].append(categories[j - len(base_header_keys)] in item["categories"] if "categories" in item else False) #在7.8版本以前，装备数据中无“categories”键（Before Patch 7.8, "categories" key isn't present in item data）
-                        else: #基础属性部分（Stat part）
+                        elif j < len(base_header_keys) + len(tooltip_header_keys): #游戏内详细信息部分（In-game tooltip part）
+                            if status_strtable_locale == 0:
+                                entry_key = "generatedtip_item_%d_tooltipinventoryextended" %(item["id"])
+                                if entry_key in strtable_locale["entries"]:
+                                    tooltip = strtable_locale["entries"][entry_key]
+                                else: #早期版本中没有按Shift查看详细信息的说法（In early versions, pressing Shift won't provide the detailed description）
+                                    entry_key = "generatedtip_item_%d_tooltipinventory" %(item["id"])
+                                    if entry_key in strtable_locale["entries"]:
+                                        tooltip = strtable_locale["entries"][entry_key]
+                                    else:
+                                        tooltip = "" #空字符串仍然适用于下面的格式替换（The following format transformation applies to an empty string）
+                            else:
+                                tooltip = ""
+                            if args.transform:
+                                tooltip_tmp = tooltip
+                                tooltip_layers = {} #将详细信息按照第一层级分为几个部分。一般包括titleLeft、titleRight、subtitleLeft、subtitleRight、mainText和postScriptTitle等几个部分（Divide the details into several parts according to the first layer, basically including titleLeft, titleRight, subtitleLeft, subtitleRight, mainText, postScriptTitle, etc.）
+                                while len(tooltip_tmp) > 0:
+                                    first_layer_tag_start = pFormat.search(tooltip_tmp).group()
+                                    first_layer_tag_end = first_layer_tag_start[0] + "/" + first_layer_tag_start[1:]
+                                    first_layer_tag_start_indices = []
+                                    first_layer_tag_end_indices = []
+                                    for match in re.finditer(first_layer_tag_start, tooltip_tmp):
+                                        first_layer_tag_start_indices.append(match.start())
+                                    for match in re.finditer(first_layer_tag_end, tooltip_tmp):
+                                        first_layer_tag_end_indices.append(match.start())
+                                    tag_index_dict = {}
+                                    for k in first_layer_tag_start_indices:
+                                        tag_index_dict[k] = 1 #1代表新一层级的开始（1 represents the start of a new layer）
+                                    for k in first_layer_tag_end_indices:
+                                        tag_index_dict[k] = -1 #-1代表当前层级的结束（-1 represents the end of the current layer）
+                                    layer_tag_stack = 1 #通过堆栈来判断是否达到第一层级的结束开关（Judge by a stack whether the closing tag of the first layer is reached）
+                                    for k in sorted(tag_index_dict.keys())[1:]:
+                                        layer_tag_stack += tag_index_dict[k]
+                                        if layer_tag_stack == 0:
+                                            break
+                                    tooltip_layer = tooltip_tmp[:k + len(first_layer_tag_end)]
+                                    tooltip_layers[first_layer_tag_start.replace("<", "").replace(">", "")] = tooltip_layer
+                                    tooltip_tmp = tooltip_tmp[k + len(first_layer_tag_end):]
+                                tooltip_layers_text = {}
+                                for tag in tooltip_layers:
+                                    tooltip_layer = tooltip_layers[tag]
+                                    if pSection.search(tooltip_layer) == None:
+                                        sections = [tooltip_layer] #神话版本的装备数据中没有<section>和</section>标签。这里的处理方法是将整个层视为一节。由于列表长度是1，所以后续在合并成字符串时也不会出现节与节之间的分隔符（In mythic item versions, <section> and </section> tags weren't present. In that case, that whole layer is regarded as a section. Since the list size is 1, no delimiters will be added when this list is going to concatenate into a string）
+                                    else:
+                                        sections = pSection.findall(tooltip_layer)
+                                    for i in range(len(sections)):
+                                        section = sections[i].replace("<br>", "\n").replace("<li>", "\n-\n")
+                                        while pFormat.search(section):
+                                            section = section.replace(pFormat.search(section).group(), "")
+                                        while pIcon.search(section):
+                                            section = section.replace(pIcon.search(section).group(), "")
+                                        section = section.strip()
+                                        while section.startswith("<br>"):
+                                            section = section.lstrip("<br")
+                                        while section.endswith("<br>"):
+                                            section = section.rstrip("<br")
+                                        mNames = pAttributes.findall(section)
+                                        for mName in mNames:
+                                            mName_literal = mName.replace("@", "") #这里默认不存在“@@”（Suppose "@@" doesn't exist here）
+                                            mName_literal_decapitalize = mName_literal[0].lower() + mName_literal[1:]
+                                            if mName_literal in mDataValues:
+                                                section = section.replace(mName, str(round(mDataValues[mName_literal])))
+                                            elif mName_literal in item_binary:
+                                                section = section.replace(mName, str(round(item_binary[mName_literal])))
+                                            elif mName_literal_decapitalize in item_binary: #二进制装备数据中，部分键的首字母被设为小写（In the binary item data, the capital letter of some keys is in lower case）
+                                                section = section.replace(mName, str(round(item_binary[mName_literal_decapitalize])))
+                                            elif f"m{mName_literal}" in item_binary:
+                                                section = section.replace(mName, str(round(item_binary[f"m{mName_literal}"])))
+                                            else: #这部分处理被双@围起来的公式（This part handles the formula surrounded by two @s）
+                                                mName_literal_names = pAlphaNumeric.findall(mName)
+                                                for mName_literal_name in mName_literal_names:
+                                                    mName_literal_name_decapitalize = mName_literal_name[0].lower() + mName_literal_name[1:]
+                                                    if mName_literal_name in mDataValues:
+                                                        mName_literal = mName_literal.replace(mName_literal_name, str(mDataValues[mName_literal_name]))
+                                                    elif mName_literal_name in item_binary:
+                                                        mName_literal = mName_literal.replace(mName_literal_name, str(item_binary[mName_literal_name]))
+                                                    elif mName_literal_name_decapitalize in item_binary: #二进制装备数据中，部分键的首字母被设为小写（In the binary item data, the capital letter of some keys is in lower case）
+                                                        mName_literal = mName_literal.replace(mName_literal_name, str(item_binary[mName_literal_name_decapitalize]))
+                                                    elif f"m{mName_literal_name}" in item_binary:
+                                                        mName_literal = mName_literal.replace(mName_literal_name, str(item_binary[f"m{mName_literal_name}"]))
+                                                if pAlphabetic.search(mName_literal) == None:
+                                                    try:
+                                                        section = section.replace(mName, str(round(eval(mName_literal)))) #所有装备的数值都显示为整数（All item stats are displayed as integers）
+                                                    except SyntaxError: #在13.14版本中，月石再生器和降星者的描述出现格式错误，导致一个百分号被放在了双@内（In Patch 13.14, there was a format mistake in Moonstone Renewer's and Starcaster's tooltips, where a percent sign is put within two @s）
+                                                        traceback_info = traceback.format_exc()
+                                                        print(traceback_info)
+                                                        pass
+                                                else:
+                                                    section = section.replace(mName, f"@{mName_literal}@")
+                                        sections[i] = section
+                                    while "" in sections:
+                                        sections.remove("")
+                                    if tag in {"titleLeft", "titleRight", "subtitleLeft", "subtitleRight"}:
+                                        tooltip_layer_text = " - ".join(sections)
+                                    else:
+                                        tooltip_layer_text = "\n----\n".join(sections)
+                                    tooltip_layers_text[tag] = tooltip_layer_text
+                                tooltip_text = ""
+                                if len(tooltip_layers_text) > 2:
+                                    for i in range(len(tooltip_layers_text) - 1):
+                                        tag = list(tooltip_layers_text.keys())[i]
+                                        tag_next = list(tooltip_layers_text.keys())[i + 1]
+                                        tooltip_layer_text = tooltip_layers_text[tag]
+                                        if tag == "titleLeft" and tag_next == "titleRight" or tag == "subtitleLeft" and tag_next == "subtitleRight":
+                                            tooltip_text += tooltip_layer_text + " | "
+                                        elif tag == "subtitleRight" and tag_next == "mainText" or tag == "mainText" and tag_next in {"postScriptTitle", "postScriptLeft"}:
+                                            tooltip_text += tooltip_layer_text + "\n--------\n"
+                                        else:
+                                            tooltip_text += tooltip_layer_text + "\n"
+                                    tooltip_text += tooltip_layers_text[tag_next]
+                                LoLItem_data[key].append(tooltip_text)
+                            else:
+                                LoLItem_data[key].append(tooltip)
+                        elif j < len(base_header_keys) + len(tooltip_header_keys) + len(categories): #分类部分（Category part）
+                            LoLItem_data[key].append(categories[j - len(base_header_keys) - len(tooltip_header_keys)] in item["categories"] if "categories" in item else False) #在7.8版本以前，装备数据中无“categories”键（Before Patch 7.8, "categories" key isn't present in item data）
+                        elif j < len(base_header_keys) + len(tooltip_header_keys) + len(categories) + len(attributes): #基础属性部分（Stat part）
                             if "description" in item_default:
-                                key_default = list(attributes.keys())[j - len(base_header_keys) - len(categories)]
+                                key_default = list(attributes.keys())[j - len(base_header_keys) - len(tooltip_header_keys) - len(categories)]
                                 LoLItem_data[key].append(statDict.get(key_default, ""))
                             else:
                                 LoLItem_data[key].append("")
+                        else:
+                            key_decapitalized = key[0].lower() + key[1:]
+                            if key in mDataValues:
+                                attributeValue = mDataValues[key]
+                            elif key in item_binary:
+                                attributeValue = item_binary[key]
+                            elif key_decapitalized in item_binary:
+                                attributeValue = item_binary[key_decapitalized]
+                            elif f"m{key}" in item_binary:
+                                attributeValue = item_binary[f"m{key}"]
+                            else:
+                                attributeValue = ""
+                            LoLItem_data[key].append(attributeValue)
                 base_statistics_display_order = [0, 17, 18, 1, 3, 19, 20, 6, 13, 14, 21, 22, 9, 10, 23, 12, 15, 16, 2]
-                LoLItem_statistics_display_order = base_statistics_display_order + list(range(len(base_statistics_display_order), len(LoLItem_header)))
+                LoLItem_statistics_display_order = base_statistics_display_order + list(range(len(base_header_keys), len(LoLItem_header)))
                 LoLItem_data_organized = {}
                 for i in LoLItem_statistics_display_order:
                     key = LoLItem_header_keys[i]
@@ -639,64 +829,67 @@ while True:
                 print("剩余时间（Time remaining）                                          ：", format_runtime(total_remaining))
                 print("预计总时间（Expected total time）                                   ：", format_runtime(total_used + total_remaining), end = "\n\n")
     if item_df_formed:
-        versions_sort = list(LoLItem_dfs.keys())
-        print("正在保存中……\nSaving the data ...")
-        workbook_exist = True
-        excel_name = "英雄联盟装备信息.xlsx"
-        excel_name_sorted = "英雄联盟装备信息(sorted).xlsx"
-        while True:
-            try:
-                with pandas.ExcelWriter(path = excel_name, mode = "a", if_sheet_exists = "replace") as writer:
-                    runTimes = [] #记录保存一个版本的装备数据所花费的时间（Records the time spent in saving item data of one version）
-                    total_used = 0
-                    for i in range(len(versions_sort)):
-                        start = time.time()
-                        version = versions_sort[i]
-                        print("装备信息导出进度（Item data export process）：%d/%d\t版本（Version）：%s" %(i + 1, len(versions_sort), version))
-                        if version == "latest" or version == "pbe":
-                            LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version)
-                        elif source != "" and source[0] == "1":
-                            LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version + " (ddragon)")
-                        else:
-                            LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version + " (cdragon)")
-                        end = time.time()
-                        unit = end - start
-                        total_used += unit
-                        runTimes.append(unit)
-                        total_remaining = sum(runTimes) / (i + 1) * (len(versions_sort) - i - 1)
-                        print("保存该版本数据所花费的时间（Time spent in saving this version）：", format_runtime(unit))
-                        print("已花费的总时间（Total time used）                              ：", format_runtime(total_used))
-                        print("剩余时间（Time remaining）                                     ：", format_runtime(total_remaining))
-                        print("预计总时间（Expected total time）                              ：", format_runtime(total_used + total_remaining), end = "\n\n")
-            except FileNotFoundError:
-                workbook_exist = False
-                with pandas.ExcelWriter(path = excel_name) as writer:
-                    runTimes = [] #记录保存一个版本的装备数据所花费的时间（Records the time spent in saving item data of one version）
-                    total_used = 0
-                    for i in range(len(versions_sort)):
-                        start = time.time()
-                        version = versions_sort[i]
-                        print("装备信息导出进度（Item data export process）：%d/%d\t版本（Version）：%s" %(i + 1, len(versions_sort), version))
-                        if version == "latest" or version == "pbe":
-                            LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version)
-                        elif source != "" and source[0] == "1":
-                            LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version + " (ddragon)")
-                        else:
-                            LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version + " (cdragon)")
-                        end = time.time()
-                        unit = end - start
-                        total_used += unit
-                        runTimes.append(unit)
-                        total_remaining = sum(runTimes) / (i + 1) * (len(versions_sort) - i - 1)
-                        print("保存该版本数据所花费的时间（Time spent in saving this match）：", format_runtime(unit))
-                        print("已花费的总时间（Total time used）                            ：", format_runtime(total_used))
-                        print("剩余时间（Time remaining）                                   ：", format_runtime(total_remaining))
-                        print("预计总时间（Expected total time）                            ：", format_runtime(total_used + total_remaining), end = "\n\n")
-            except PermissionError:
-                print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
-                input()
-            else:
-                break
+        print("是否导出以上装备数据至Excel中？（输入任意键导出，否则不导出。）\nDo you want to export the above data into Excel? (Submit any non-empty string to export, or null to refuse exporting.)")
+        export = bool(input())
+        if export:
+            versions_sort = list(LoLItem_dfs.keys())
+            print("正在保存中……\nSaving the data ...")
+            excel_name = "英雄联盟装备信息.xlsx"
+            excel_name_sorted = "英雄联盟装备信息(sorted).xlsx"
+            while True:
+                try:
+                    with pandas.ExcelWriter(path = excel_name, mode = "a", if_sheet_exists = "replace") as writer:
+                        runTimes = [] #记录保存一个版本的装备数据所花费的时间（Records the time spent in saving item data of one version）
+                        total_used = 0
+                        for i in range(len(versions_sort)):
+                            start = time.time()
+                            version = versions_sort[i]
+                            print("装备信息导出进度（Item data export process）：%d/%d\t版本（Version）：%s" %(i + 1, len(versions_sort), version))
+                            if version == "latest" or version == "pbe":
+                                LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version)
+                            elif source != "" and source[0] == "1":
+                                LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version + " (ddragon)")
+                            else:
+                                LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version + " (cdragon)")
+                            end = time.time()
+                            unit = end - start
+                            total_used += unit
+                            runTimes.append(unit)
+                            total_remaining = sum(runTimes) / (i + 1) * (len(versions_sort) - i - 1)
+                            print("保存该版本数据所花费的时间（Time spent in saving this version）：", format_runtime(unit))
+                            print("已花费的总时间（Total time used）                              ：", format_runtime(total_used))
+                            print("剩余时间（Time remaining）                                     ：", format_runtime(total_remaining))
+                            print("预计总时间（Expected total time）                              ：", format_runtime(total_used + total_remaining), end = "\n\n")
+                    workbook_exist = True
+                except FileNotFoundError:
+                    with pandas.ExcelWriter(path = excel_name) as writer:
+                        runTimes = [] #记录保存一个版本的装备数据所花费的时间（Records the time spent in saving item data of one version）
+                        total_used = 0
+                        for i in range(len(versions_sort)):
+                            start = time.time()
+                            version = versions_sort[i]
+                            print("装备信息导出进度（Item data export process）：%d/%d\t版本（Version）：%s" %(i + 1, len(versions_sort), version))
+                            if version == "latest" or version == "pbe":
+                                LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version)
+                            elif source != "" and source[0] == "1":
+                                LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version + " (ddragon)")
+                            else:
+                                LoLItem_dfs[version].to_excel(excel_writer = writer, sheet_name = version + " (cdragon)")
+                            end = time.time()
+                            unit = end - start
+                            total_used += unit
+                            runTimes.append(unit)
+                            total_remaining = sum(runTimes) / (i + 1) * (len(versions_sort) - i - 1)
+                            print("保存该版本数据所花费的时间（Time spent in saving this match）：", format_runtime(unit))
+                            print("已花费的总时间（Total time used）                            ：", format_runtime(total_used))
+                            print("剩余时间（Time remaining）                                   ：", format_runtime(total_remaining))
+                            print("预计总时间（Expected total time）                            ：", format_runtime(total_used + total_remaining), end = "\n\n")
+                    break
+                except PermissionError:
+                    print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
+                    input()
+                else:
+                    break
                 
 if workbook_exist:
     print("警告：由于该文件已存在，本次导出已追加新工作表到工作簿的末尾。这可能导致版本号顺序的错乱。是否需要对工作表进行排序？（输入任意键排序，否则不排序）\nWarning: Because the excel workbook has existed, new sheets are appended to the last of the original sheet list. This may result in the disarrangement of version order. Do you want to sort the sheets? (Input anything to sort the sheets, or null to skip sorting)")

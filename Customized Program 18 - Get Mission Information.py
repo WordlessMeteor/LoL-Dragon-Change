@@ -6,9 +6,10 @@ from openpyxl import load_workbook
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/06/21
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -58,6 +59,9 @@ async def get_lockfile(connection):
 def count_nonASCII(s: str): #统计一个字符串中占用命令行2个宽度单位的字符个数（Count the number of characters that take up 2 width unit in CMD）
     return sum([unicodedata.east_asian_width(character) in ("F", "W") for character in list(str(s))])
 
+def rm_ctrl_char(s: str): #移除一个字符串中的所有C0和C1字符（Remove all C0 and C1 characters from a string）
+    return "".join(ch for ch in s if unicodedata.category(ch) != "Cc")
+
 def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
     old_index = df.index
     df.index = range(start_index, len(df) + start_index)
@@ -65,21 +69,21 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
     maxWidth = shutil.get_terminal_size()[0]
     fields = df.columns.tolist()
     for field in fields:
-        maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(str(x)), df[field])), wcswidth(str(field))) + 2
-    index_len = max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+        maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(rm_ctrl_char(str(x))), df[field])), wcswidth(rm_ctrl_char(field))) + 2
+    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
-            if input() == "":
+            if not bool(input()):
                 #print(df)
                 result = str(df)
                 return (result, maxLens)
         elif direct_print:
-            print("单行数据字符串输出宽度超过当前终端窗口宽度！将直接打印该数据框！\nThe output width of each record string exceeds the current width of the terminal window! The program is going to directly print this dataframe!")
+            # print("单行数据字符串输出宽度超过当前终端窗口宽度！将直接打印该数据框！\nThe output width of each record string exceeds the current width of the terminal window! The program is going to directly print this dataframe!")
             result = str(df)
             return (result, maxLens)
-        else:
-            print("单行数据字符串输出宽度超过当前终端窗口宽度！将继续格式化输出！\nThe output width of each record string exceeds the current width of the terminal window! The program is going on formatted printing!")
+        # else:
+        #     print("单行数据字符串输出宽度超过当前终端窗口宽度！将继续格式化输出！\nThe output width of each record string exceeds the current width of the terminal window! The program is going on formatted printing!")
     result = ""
     #确定各列的排列方向（Determine the alignments of all columns）
     if isinstance(header_align, str) and isinstance(align, str):
@@ -120,7 +124,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
                 result += " " * (index_len + 2)
             for i in range(df.shape[1]):
                 field = fields[i]
-                tmp = "{0:{align}{w}}".format(field, align = header_alignments[i], w = maxLens[str(field)] - count_nonASCII(str(field)))
+                tmp = "{0:{align}{w}}".format(rm_ctrl_char(field), align = header_alignments[i], w = maxLens[field] - count_nonASCII(field))
                 result += tmp
                 #print(tmp, end = "")
                 if i != df.shape[1] - 1:
@@ -135,7 +139,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
             for j in range(df.shape[1]):
                 field = fields[j]
                 cell = str(list(df[field])[i])
-                tmp = "{0:{align}{w}}".format(cell, align = alignments[j], w = maxLens[field] - count_nonASCII(cell))
+                tmp = "{0:{align}{w}}".format(rm_ctrl_char(cell), align = alignments[j], w = maxLens[field] - count_nonASCII(cell))
                 result += tmp
                 #print(tmp, end = "")
                 if j != df.shape[1] - 1:
@@ -153,7 +157,6 @@ def get_info_name(info: dict, mode = 1) -> str:
     if not isinstance(info, dict) or not all(i in info for i in ["displayName", "gameName", "tagLine"]):
         print("您的召唤师信息格式有误！\nERROR format of summoner information!")
         name = ""
-        exit()
     else:
         if info["displayName"] or info["gameName"]:
             if info["gameName"] and info["tagLine"]:

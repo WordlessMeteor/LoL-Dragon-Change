@@ -4,9 +4,10 @@ import pandas, random, time, uuid
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/06/09
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -191,7 +192,7 @@ async def add_bots_team(connection, teamId: str):
                         for j in team:
                             print("{0:<14}".format(names[j]) + "\t" + "{0:<14}".format(aliases[j]) + "\t" + str(recommended_position_for_champion[str(j)]["recommendedPositions"]))
                         print("*****************************************************************************\n是否重新随机英雄？（输入任意键以重新随机，否则进行下一步）\nDo you want to regenerate the champions? (Input anything to reroll, or null to enter the next step)")
-                        if input() == "":
+                        if not bool(input()):
                             break
                     break
                 else:
@@ -327,7 +328,7 @@ async def add_bots_team(connection, teamId: str):
 
     botUuid_team = []
     print("是否设定电脑玩家难度一致？（输入任意键设定为不一致，否则一致）\nSet all botDifficulties identical? (Any keys for N, or null for Y)")
-    botDifficulty_consistency = input() == ""
+    botDifficulty_consistency = not bool(input())
     if botDifficulty_consistency:
         print(f"请输入电脑玩家的难度：\nPlease enter the botDifficulty: (among {botDifficulty})")
         while True:

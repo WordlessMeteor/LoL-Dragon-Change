@@ -6,7 +6,7 @@ The following explanations only apply to the current branch. For other details (
 **本程序集仅供学习和个人娱乐，不得用于其它盈利用途！**
 # 程序集功能简述
 本程序集支持<ins>创建自定义房间（包括5v5训练模式）</ins>、<ins>检查可用电脑玩家和游戏模式</ins>以及其它探索性功能的开发。\
-**克隆本存储库**，需要本地至少有<ins>25 GB</ins>的存储空间。如果**仅使用发行版中的压缩包**，请保证本地至少有<ins>2 GB</ins>的存储空间。\
+**克隆本存储库**，需要本地至少有<ins>37 GB</ins>的存储空间。如果**仅使用发行版中的压缩包**，请保证本地至少有<ins>2 GB</ins>的存储空间。\
 关于自定义房间创建之外的脚本，请参阅第6点注意事项。
 1. 本程序集提供所有模式与电脑玩家难度设置和路线选择的整合版。
 	- 整合版采用的电脑玩家数据为主目录下的`available-bots.xlsx`文件。因此**请勿移动任何离线版文件和该xlsx文件**。
@@ -51,16 +51,12 @@ The following explanations only apply to the current branch. For other details (
 	- 离线数据文件夹下的`自动更新离线数据`脚本可简化离线数据资源更新过程。
 		- 该脚本仅供开发者用于更新离线数据资源，感兴趣的用户可自行下载体验。
 		- 该脚本可用于更新CommunityDragon和DataDragon数据库的数据资源。
-			- 在更新CommunityDragon数据库的资源时，程序提供了4种模式。
-				- 【全局扫描】可将在线数据资源与本地数据资源进行**全面对比**，实现数据资源的同步。
-					- 在一台设备上**第一次运行此脚本时，建议首先执行全局扫描**，即使用户已经从该存储库下载了数据资源。
+			- 在更新CommunityDragon数据库的资源时，程序提供了2种模式。
 				- 【按修改时间更新】用于反映本地数据资源和在线数据资源的**变化**。
 					- 如果本地数据资源文件的**修改时间晚于**在线数据资源文件，而本地数据资源文件的**内容实际上早于**在线数据资源文件，那么这些数据资源文件**不会更新**。
 					- 该模式在<ins>存储库</ins>中被设置为默认模式。输入空字符串即采用默认模式。
 				- 【按程序需求更新】用于**快速**更新为程序所需要的数据资源。
 					- 该模式在<ins>发行版</ins>中被设置为默认模式。输入空字符串即采用默认模式。
-				- 【更新指定文件夹】允许用户传入一个**自定义文件夹列表**，程序将只更新用户指定的文件夹中的数据资源。
-					- 该模式主要用于重新比对前三个模式由于网络原因**比对失败**的文件夹。
 			- 在更新DataDragon数据库的资源时，用户需要**按照程序提示**，先下载DataDragon数据库的最新压缩包，然后解压，并提供解压的目录。
 			- 在更新DataDragon数据库的资源时，程序提供了2种模式。
 				- 【全局扫描】可将本地存储库中的数据资源与下载到本地的最新DataDragon存档压缩包中的数据资源进行**全面对比**，实现数据资源的同步。
@@ -71,7 +67,7 @@ The following explanations only apply to the current branch. For other details (
 	- 由于每次更新可能涉及的数据资源较多，GitHub无法加载变化内容。以下推荐两种查看变化内容的方式：
 		1. 访问[英雄联盟版本更新存储库](https://github.com/WordlessMeteor/LoL-Patch-Change)以*在线*查看**主要**更新内容。
 		2. 将[本仓库](https://github.com/WordlessMeteor/LoL-DIY-Programs)克隆到本地，并查看标题为“<ins>离线数据资源更新</ins>”的提交，以*离线*查看**完整**更新内容。
-			- 克隆该存储库需要占用大约<ins>20 GB</ins>的本地空间。请保证您的磁盘有足够的空间。
+			- 克隆该存储库需要占用大约<ins>37 GB</ins>的本地空间。请保证您的磁盘有足够的空间。
 			- 对于包含较多数据资源的更新的提交，本地加载仍然需要几分钟时间，请耐心等待。
 5. 本程序集起源于主目录下的`create_custom_lobby.py`。
 # 注意事项
@@ -162,6 +158,31 @@ The following explanations only apply to the current branch. For other details (
 	- 自定义脚本5（☆）用于**查询和导出召唤师战绩**。
 		- 该脚本支持通过<ins>召唤师名称</ins>和<ins>玩家通用唯一识别码</ins>查询。
 		- 由于使用的是LCU API，在国服环境下，即使召唤师生涯**不可见**，仍然能够查询到该召唤师的全部对局记录和段位信息。
+		- 该脚本设置了一些命令行参数。通过`python [文件名] -h`命令以查看这些参数。
+			<table>
+				<thead>
+					<tr>
+						<th style="text-align:center;">命令行参数</th>
+						<th style="text-align:center;">行为类型</th>
+						<th style="text-align:center;">描述</th>
+						<th style="text-align:center;">取值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align:center;">-r<br>--reserve</td>
+						<td style="text-align:center;">赋值为真</td>
+						<td>在对局不包含主玩家的情况下仍然加载该对局</td>
+						<td>无</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">-rt<br>--reserve_text</td>
+						<td style="text-align:center;">赋值为真</td>
+						<td>在对局不包含主玩家的情况下仍然保存该对局</td>
+						<td>无</td>
+					</tr>
+				</tbody>
+			</table>
 		- 该脚本生成的文件位于主目录下的“召唤师信息（Summoner Information）”文件夹下。
 		- 该脚本所依赖的数据资源主要来自<ins>CommunityDragon数据库</ins>，支持**离线获取**。发行版中已经包含所有自定义脚本依赖的最新数据资源文件。如果没有这些文件，在离线获取时，<ins>请按照程序提示，在主目录下新建文件夹`离线数据（Offline Data）`，打开相应资源的网页，将相应的json文件下载到该文件夹下。</ins>
 		- 从13.22版本开始，美测服采用**拳头ID**来替代召唤师名称。因此，如果通过召唤师名称无法查询一名召唤师的信息，**请尝试在玩家昵称后加上一个“#”，再加上昵称编号**。
@@ -296,6 +317,31 @@ The following explanations only apply to the current branch. For other details (
 	- 自定义脚本10用于**搜索指定召唤师进行过的对局**。可以与自定义脚本5联动。
 	- 自定义脚本11用于**查询与指定召唤师最近玩过的召唤师**。
 		- 该脚本的大部分代码继承自自定义脚本5，包括扫描模式。但是该脚本只涉及结果的输出，不会修改自定义脚本5生成的任何中间文件（文本文档和json文件）。
+		- 该脚本设置了一些命令行参数。通过`python [文件名] -h`命令以查看这些参数。
+			<table>
+				<thead>
+					<tr>
+						<th style="text-align:center;">命令行参数</th>
+						<th style="text-align:center;">行为类型</th>
+						<th style="text-align:center;">描述</th>
+						<th style="text-align:center;">取值</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align:center;">-r<br>--reserve</td>
+						<td style="text-align:center;">赋值为真</td>
+						<td>在对局不包含主玩家的情况下仍然加载该对局</td>
+						<td>无</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">-ss<br>--save_self</td>
+						<td style="text-align:center;">赋值为真</td>
+						<td>在对局包含主玩家的情况下仍然保存其数据</td>
+						<td>无</td>
+					</tr>
+				</tbody>
+			</table>
 		- 该脚本设置了【生成模式】和【检测模式】。
 			- 【生成模式】用于将某召唤师最近若干场对局中遇到的玩家**保存到本地文件**。将保存到前缀为“Summoner Profile”的工作簿的“Recently Player Summoners”工作表中，并导出8张关于玩家的<ins>游戏时长</ins>和<ins>对局数</ins>的**柱状图**。
 			- 【检测模式】用于查询玩家是否在以前的对局中遇到过。该脚本考虑了6种检测场景。不同场景的主体代码**类似**。
@@ -404,6 +450,12 @@ The following explanations only apply to the current branch. For other details (
 				</thead>
 				<tbody>
 					<tr>
+						<td style="text-align:center;">-e<br>--save_early</td>
+						<td style="text-align:center;">赋值为真</td>
+						<td>只导出早于查询对局的对局</td>
+						<td>无</td>
+					</tr>
+					<tr>
 						<td style="text-align:center;">-l<br>--locale</td>
 						<td style="text-align:center;">存储变量</td>
 						<td>设置程序内定义的常量字典的语言。目前仅支持简体中文和美式英语</td>
@@ -429,7 +481,159 @@ The following explanations only apply to the current branch. For other details (
 					</tr>
 				</tbody>
 			</table>
-	- `清除临时文件.bat`用于**清除自定义脚本产生的临时文件**。目前可以清除自定义脚本03、05、10、11、17和19产生的临时文件。
+	- 自定义脚本21用于**模拟客户端中各个游戏状态下的操作**。旨在解决客户端无法正常响应时的燃眉之急。
+		- <b>声明：该脚本不涉及任何自动化操作。</b>
+		- 该脚本融合了前20个脚本的部分核心行为。如果想要体验完整功能，请确保<ins>自定义脚本19</ins>也在同目录下。
+		- 该脚本支持<ins>未登录、无状态、房间内、队列中、就位确认、英雄选择阶段、游戏内、重连状态、等待数据、赛后预结算和赛后结算阶段</ins>等状态的行为模拟。调试功能以外的所有支持的操作如下：（多次出现的操作只在第一次出现时展开其下级操作。）
+			- 未登录
+				- 调试客户端接口
+				- 客户端任务管理
+					- 窗口管理
+						- 显示窗口
+						- 最小化窗口
+						- 显示高亮通知
+						- 设置窗口尺寸
+					- 进程管理
+						- 启动用户体验界面
+						- 暂时关闭窗口
+						- 重新加载窗口
+						- 结束进程（！）
+			- 无状态
+				- 调试客户端接口
+				- 创建房间
+					- 创建小队
+					- 创建自定义房间
+					- 通过json创建
+				- 处理邀请
+				- 加入小队或自定义房间
+					- 小队
+					- 自定义房间
+					- 冠军杯赛
+				- 观战
+				- 聊天
+				- 客户端任务管理
+			- 房间内
+				- 调试客户端接口
+				- 管理小队
+					- 入队准备
+						- 选择位置（仅排位赛和极限闪击）
+						- 设置快速模式英雄选择（仅快速模式）
+						- 设置子阵营（仅斗魂竞技场）
+						- 切换就绪状态
+						- 云顶之弈赛前配置（仅云顶之弈）
+					- 查看社交排行榜
+					- 改变小队公开性
+						- 让小队仅能通过邀请来进入
+						- 将小队公开给好友
+					- 更换模式
+						- 创建小队
+						- 创建自定义房间
+						- 通过json创建
+					- 寻找对局
+				- 管理自定义房间
+					- 添加电脑玩家
+					- 移除电脑玩家
+					- 交换队伍
+					- 切换观战状态（！）
+					- 更换模式
+					- 开始游戏
+				- 邀请玩家
+				- 聊天
+				- 成员管理
+					- 晋升为小队拥有者
+					- 将玩家移出小队
+					- 更改邀请权限
+						- 提供邀请权限
+						- 撤回邀请权限
+				- 输出房间信息
+				- 处理邀请
+				- 加入小队或自定义房间
+				- 退出房间
+				- 客户端任务管理
+			- 队列中
+				- 调试客户端接口
+				- 输出寻找对局信息
+				- 聊天
+				- 处理邀请
+				- 加入小队或自定义房间
+				- 退出队列
+				- 客户端任务管理
+			- 就位确认
+				- 接受
+				- 拒绝
+				- 输出就位确认阶段信息
+				- 客户端任务管理
+			- 英雄选择阶段
+				- 调试客户端接口
+				- 交换
+					- 选用顺序
+						- 查看
+						- 发送
+					- 分路
+						- 查看
+						- 发送
+					- 队友英雄
+						- 查看
+						- 发送
+					- 可用英雄池（替补席）
+						- 查看
+						- 发送
+				- 英雄选择
+					- 声明（不可用）
+					- 禁用
+					- 选择
+					- 重随
+				- 准备赛前配置
+					- 符文（需要自定义脚本19支持）
+					- 召唤师技能
+					- 皮肤
+					- 守卫（眼）皮肤
+					- 表情
+					- 召唤师图标
+					- 水晶枢纽终结特效
+					- 旗帜
+					- 徽章
+					- 冠军杯赛奖杯
+				- 静音玩家
+				- 聊天
+				- 其它
+					- 解锁全员战斗加成
+					- 设置最爱的分路英雄
+					- 清空静音玩家
+					- 退出英雄选择阶段
+				- 输出英雄选择会话
+				- 客户端任务管理
+			- 游戏中
+				- 聊天
+				- 客户端任务管理
+			- 重连
+			- 等待数据结算
+			- 赛后预结算阶段
+				- 调试客户端接口
+				- 赞誉其他玩家
+				- 查看票数
+				- 这次不行
+				- 输出荣誉投票信息
+				- 输出当前事件
+				- 聊天
+				- 客户端任务管理
+			- 赛后结算阶段
+				- 调试客户端接口
+				- 查看英雄成就点数更新情况
+				- 查看计分板数据
+					- 英雄联盟
+					- 云顶之弈
+				- 聊天
+				- 再来一局
+				- 离开
+				- 唤起荣誉投票界面
+				- 客户端任务管理
+			- 其它
+		- 该脚本会在“cache”文件夹下**创建缓存**，以加快数据资源加载速度。
+			- 本地缓存有<ins>24小时</ins>的有效期。
+			- 用户可以重新加载数据资源以手动更新本地缓存。
+			- 读取缓存预计能节省10～30秒数据资源加载时间。
+	- `清除临时文件.bat`用于**清除自定义脚本产生的临时文件**。目前可以清除自定义脚本03、05、10、11、17、19、20和21产生的临时文件。
 	- `召唤师信息文件格式转换.bat`用于**将自定义脚本5产生的数据文档在txt和json格式之间重命名**。
 		- 大量数据文档的重命名可能导致文件资源管理器卡顿，因此请谨慎使用本脚本。
 		- 由于本脚本涉及中文字符，因此**请先在命令行中使用`chcp 65001`以切换代码活动页**，再运行本脚本。
@@ -440,16 +644,17 @@ The following explanations only apply to the current branch. For other details (
 		- 该脚本的数据来源是<ins>DataDragon数据库</ins>和<ins>CommunityDragon数据库</ins>。
 		- 该脚本支持**所有《英雄联盟》支持的语言**。
 		- 该脚本支持两个数据库收录的**所有版本**。
-		- 该脚本生成的表格主要分为4个部分：
+		- 该脚本生成的表格主要分为5个部分：
 			- 元数据
 			- 装备分类
+			- 游戏内详细信息
 			- 地图可用性（CommunityDragon收录的装备数据中无此类数据）
 			- 基础属性
 		- 如果想要批量冻结窗格和启用筛选，可以通过编写宏来一次性对所有表格固定表头。下面以Microsoft Excel为例进行示范。
 			1. 在Excel中，依次单击“文件”—“选项”—“自定义功能区”，在右侧的“自定义功能区”中勾选“开发工具”。单击“确定”。
 			2. 单击“开发工具”选项卡，再单击“Visual Basic”，打开VBA编辑器。
 			3. 在新窗口的“工程 - VBAProject”子窗口中，右键单击“VBAProject ({工作簿名称})”，依次单击“插入”—“模块”。
-			4. 在新的模块子窗口粘贴以下宏代码：\
+			4. 在新的模块子窗口粘贴以下宏代码：
 			```vba
 			Sub FreezeAndFilterTopRowsAndColumns()
 				Dim ws As Worksheet
@@ -470,12 +675,32 @@ The following explanations only apply to the current branch. For other details (
 				Next ws
 			End Sub
 			```
+			注：上面的宏对所有工作表都生效。如果只想对部分工作表生效，需要**在for语句下方**添加对工作表属性的<ins>判断语句</ins>，并将后续操作代码的缩进后移一层。
 			5. 关闭VBA编辑器，回到Excel窗口，单击“开发工具”选项卡中的“宏”。
 			6. 选择“FreezeTopRowsAndSelectA1”，然后点击“执行”。
 			7. 如果想要在保存更改的同时保存该宏，请另存为“.xlsm”格式。
+		- 下面另外提供一些宏代码。
+			- 清除格式
+			```vba
+			Sub ClearFormat()
+				Dim ws As Worksheet
+				Dim lastCol As Long
+				For Each ws In ThisWorkbook.Worksheets
+					If InStr(ws.Name, "cdragon") > 0 Or ws.Name = "pbe" Or ws.Name = "latest" Then ' 筛选所有由CommunityDragon数据库产生的工作表
+						ws.Activate
+						If ws.AutoFilterMode Then ws.AutoFilterMode = False
+						ActiveWindow.FreezePanes = False
+						ActiveWindow.SplitColumn = 0
+						ActiveWindow.SplitRow = 0
+						ws.Range("A1").Select
+					End If
+				Next ws
+			End Sub
+			```
 	- 为方便**查阅英雄联盟中的官方术语**，在主目录中添加了一个翻译库脚本`trans.py`。
 		- 该脚本每次运行可以选择汇总和保存一种语言的翻译数据资源，并允许同时下载所有语言的翻译数据资源。
 		- 由于该脚本仅用于校正术语，其涉及的数据资源仅用于开发程序，而不适用于发行版。因此建议用户在存储库，而不是由发行版压缩包解压得到的文件夹中运行该脚本。
+	- 自定义脚本<ins>05、11、13、16、19、20和21</ins>在运行过程中可以**将终端呈现的内容保存到本地日志中**。见主目录下的“<ins>日志（Logs）</ins>”文件夹。
 	- 为方便理解**自定义脚本中一些大型数据框的结构**，在主目录中添加了一个工作簿`Customized Program Main Dataframe Structure.xlsx`，以解释其生成过程。
 		- 下面对查战绩脚本中的`LoLGame_info_df`、自定义脚本11和聊天服务脚本中的`recent_LoLPlayers_df`和自定义脚本20中的`LoLGame_stat_header`的结构进行说明，以便说明一些设定。一些设定在后续解释中不再赘述。
 			- 工作表`05 - LoLGame_info_header`、`11 - LoLGame_info_header`、`16 - LoLGame_info_header`和`20 - LoLGame_stat_header`共有6列，其中前3列是**主要数据区域**。
@@ -500,8 +725,8 @@ The following explanations only apply to the current branch. For other details (
 					- 该部分数据主要通过比较和计算得出。
 			- 一些键被标记为无填充。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`gameModeName`不曾出现在对局信息的json对象中，但是实际上来自`LoLGame_info`，对应的是键`"gameMode"`。
 			- <b>要获取各个呈现顺序列表，只需要将表格以`OutputOrder`或`DisplayOrder`作升序排列，然后复制`Index`列的单元格内容即可。</b>
-		- 下面对查英雄脚本中的`LoLChampions_df`的结构进行说明。
-			- 工作表`04 - LoLChampions_header (LCU)`的主要数据区域设置了6种颜色。
+		- 下面对查英雄脚本和游戏状态管理脚本中的`LoLChampions_df`的结构进行说明。
+			- 工作表`04 - LoLChampions_header (LCU)`和`21 - LoLChampions_header`的主要数据区域设置了6种颜色。
 				- 无填充代表`Key`可以直接作为`LoLChampions[championId]`的索引。
 				- 浅蓝色代表`Key`来自`LoLChampions[championId]["ownership"]`的索引。
 					- 注意到其中不包含任何可直接作为索引的键。
@@ -589,8 +814,8 @@ The following explanations only apply to the current branch. For other details (
 				- 绿色代表`Key`的后半部分可以作为`item["prices"][priceId]`的索引。
 				- 黄色代表`Key`的后半部分可以直接作为`item["sale"]`的索引。
 				- 紫色代表`Key`的后半部分来自`item["sales"]["prices"][priceId]`的索引。
-		- 下面对商品藏品信息整理脚本中的`collection_df`的结构进行说明。
-			- 工作表`07 - collection_header`的主要数据区域设置了2种颜色。`item`是`collection`中的任意一个元素。
+		- 下面对商品藏品信息整理脚本和游戏状态管理脚本中的`collection_df`的结构进行说明。
+			- 工作表`07 - collection_header`和`21 - collection_header`的主要数据区域设置了2种颜色。`item`是`collection`中的任意一个元素。
 				- 无填充代表`Key`可以直接作为`item`的索引。
 				- 蓝色代表`Key`作为`item["payload"]`的索引。
 		- 下面对队列查询脚本和自定义脚本20中的`queues_df`的结构进行说明。
@@ -636,8 +861,8 @@ The following explanations only apply to the current branch. For other details (
 		- 下面对聊天脚本中的`friend_groups_df`的结构进行说明。
 			- 工作表`16 - friend_groups_header`的主要数据区域设置为无填充。`group`是`friend_groups`中的任意一个元素。
 				- `Key`可以直接作为`group`的索引。
-		- 下面对聊天脚本中的`conversation_df`的结构进行说明。
-			- 工作表`16 - conversation_header`的主要数据区域设置为无填充。`conversation`是`conversations`中的任意一个元素。
+		- 下面对聊天脚本和游戏状态管理脚本中的`conversation_df`的结构进行说明。
+			- 工作表`16 - conversation_header`和`21 - conversation_header`的主要数据区域设置为无填充。`conversation`是`conversations`中的任意一个元素。
 				- `Key`可以直接作为`conversation`的索引。
 		- 下面对聊天脚本中的`message_df`的结构进行说明。
 			- 工作表`16 - message_header`的主要数据区域设置为无填充。`message`是`messages`中的任意一个元素。
@@ -657,8 +882,8 @@ The following explanations only apply to the current branch. For other details (
 					- 注意到其中不包含任何可直接作为索引的键。
 				- 黄色代表`Key`不作为LCU API中任何变量的索引。
 					- 目前黄色区域只包含`full?`，表示小队是否满员。在导出的工作表中，打勾表示小队已经满员。
-		- 下面对聊天脚本中的`invid_df`的结构进行说明。
-			- 工作表`16 - invid_header`的主要数据区域设置为3种颜色。`invid`是`receivedInvitations`中的任意一个元素。
+		- 下面对聊天脚本和游戏状态管理脚本中的`invid_df`的结构进行说明。
+			- 工作表`16 - invid_header`和`21 - invid_header`的主要数据区域设置为3种颜色。`invid`是`receivedInvitations`中的任意一个元素。
 				- 蓝色代表`Key`可以作为`invid`的索引。
 				- 浅绿色代表`Key`可以直接作为`invid["gameConfig"]`的索引。
 				- 橙色代表`Key`的后半部分来自`queues`的索引。
@@ -667,13 +892,9 @@ The following explanations only apply to the current branch. For other details (
 				- `Key`可以作为`muted_player`的索引。
 					- 5之前的键可以直接作为`muted_player`的索引。
 					- 5及以后的键通过`get_info`函数得到。
-		- 下面对聊天脚本中的`champSelect_team_df`的结构进行说明。
-			- 工作表`16 - champSelect_team_header`的主要数据区域设置为无填充。`player`是`players`中的任意一个值。
+		- 下面对聊天脚本中的`champSelect_team_df`和游戏状态管理脚本中的`players_df`的结构进行说明。
+			- 工作表`16 - champSelect_team_header`和`21 - players_header`的主要数据区域设置为无填充。`player`是`players`中的任意一个值。
 				- `Key`可以作为`player`的索引。
-					- 13之前的键可以直接作为`player`的索引。
-					- 14和15号键通过`get_info`函数得到。
-					- 16号键来自`team_colors`。
-					- 17及以后的键的后半部分可以作为键的前半部分所指数据资源的索引。
 		- 下面对聊天脚本中的`captureDevices_df`的结构进行说明。
 			- 工作表`16 - captureDevices_header`的主要数据区域设置为无填充。`device`是`captureDevices`中的任意一个值。
 				- `Key`可以直接作为`device`的索引。
@@ -717,8 +938,8 @@ The following explanations only apply to the current branch. For other details (
 				- 无填充代表`Key`可以作为`page`的索引。
 				- 蓝色代表`Key`的后半部分可以直接作为`page["keystyone"]`的索引。
 				- 绿色代表`Key`来自`page["perks"][perkId]`的索引。
-		- 下面对符文脚本中的`perkPage_df`的结构进行说明。
-			- 工作表`19 - perkPage_header`的主要数据区域设置了3种颜色。`page`是`perkPages`中的任意一个元素。
+		- 下面对符文脚本和游戏状态管理脚本中的`perkPage_df`的结构进行说明。
+			- 工作表`19 - perkPage_header`和`21 - perkPage_header`的主要数据区域设置了3种颜色。`page`是`perkPages`中的任意一个元素。
 				- 无填充代表`Key`可以作为`page`的索引。
 				- 蓝色代表`Key`的后半部分可以直接作为`page["pageKeystone"]`的索引。
 				- 绿色代表`Key`来自`page["uiPerks"][pageId]`的索引。
@@ -726,6 +947,84 @@ The following explanations only apply to the current branch. For other details (
 			- 工作表`20 - process_header`的主要数据区域设置了2种颜色。
 				- 无填充代表`Key`不作为任何变量的索引。
 				- 蓝色代表`Key`可以直接作为`parent`和`child`的索引。
+		- 下面对自定义脚本21中的`swaps_df`的结构进行说明。
+			- 工作表`21 - swaps_header`的主要数据区域设置为无填充。
+				- `Key`可以直接作为`swap`的索引。
+		- 下面对自定义脚本21中的`custom_game_df`的结构进行说明。
+			- 工作表`21 - custom_game_header`的主要数据区域设置为无填充。`lobby`是`custom_lobbies`中的任意一个元素。
+				- `Key`可以作为`lobby`的索引。
+		- 下面对自定义脚本21中的`skins_df`的结构进行说明。
+			- 工作表`21 - skins_header`的主要数据区域设置了6种颜色。`skin`是`championSkins.values()`中的任意一个元素。`skin_flat`是`skins_flat.values()`中的任意一个元素。
+				- 无填充代表`Key`可以直接作为`skin`的索引。
+				- 浅绿色代表`Key`来自`skin["emblems"]`。
+					- 29和30号键的后半部分可以直接作为`skin["emblems"]`的索引。
+					- 31和32号键的后半部分可以直接作为`skin["emblems"][emblemIndex]["emblemPath"]`的索引。
+				- 深绿色代表`Key`的后半部分可以直接作为`skin["questSkinInfo"]`的索引。
+				- 黄色代表`Key`来自`skin_flat`。
+					- 41～44号键可以直接作为`skin_flat`的索引。
+					- 45～47号键的后半部分可以直接作为`LoLChampions[skin_flat["championId"]]`的索引。
+				- 浅蓝色代表`Key`的后半部分可以直接作为`skin_flat["ownership"]`的索引。
+				- 深蓝色代表`Key`的第三部分可以作为`skin_flat["ownership"]["rental"]`的索引。
+		- 下面对自定义脚本21中的`grid_champion_df`的结构进行说明。
+			- 工作表`21 - grid_champion_header`的主要数据区域设置了2种颜色。`champion`是`grid_champions`中的任意一个元素。
+				- 无填充代表`Key`可以作为`champion`的索引。
+				- 蓝色代表`Key`可以直接作为`champion["selectionStatus"]`的索引。
+		- 下面对自定义脚本21中的`muted_player_df`的结构进行说明。
+			- 工作表`21 - muted_player_header`的主要数据区域设置为无填充。`player`是`muted_players`中的任意一个元素。
+				- `Key`可以作为`player`的索引。
+					- 0～3号键可以直接作为`player`的索引。
+					- 4和5号键可以直接作为`player_info["body"]`的索引。
+		- 下面对自定义脚本21中的`social_leaderboard_df`的结构进行说明。
+			- 工作表`21 - social_leaderboard_header`的主要数据区域设置为无填充。`player`是`social_leaderboard["rowData"]`中的任意一个元素。
+				- `Key`可以作为`player`的索引。
+					- 0～15号键可以直接作为`player`的索引。
+					- 16和17号键的后半部分可以直接作为`summonerIcons[player["profileIconId"]]`的索引。
+		- 下面对自定义脚本21中的`availableBot_df`的结构进行说明。
+			- 工作表`21 - availableBot_header`的主要数据区域设置了2种颜色。`bot`是`available_bots`中的任意一个元素。
+				- 无填充代表`Key`可以直接作为`bot`的索引。
+				- 蓝色代表`Key`可以直接作为`LoLChampions[bot["id"]]`的索引。
+		- 下面对自定义脚本21中的`member_df`的结构进行说明。
+			- 工作表`21 - member_header`的主要数据区域设置为无填充。`member`是`members`中的任意一个元素。
+				- `Key`可以作为`member`的索引。
+		- 下面对自定义脚本21中的`ballot_player_df`的结构进行说明。
+			- 工作表`21 - ballot_player_header`的主要数据区域设置为无填充。`player`是`honor_ballot["eligibleAllies"] + honor_ballot["eligibleOpponents"]`中的任意一个元素。
+				- `Key`可以作为`player`的索引。
+		- 下面对自定义脚本21中的`eog_mastery_update_df`的结构进行说明。
+			- 工作表`21 - eog_mastery_update_header`的主要数据区域设置为无填充。
+				- `Key`可以作为`mastery_updates`的索引。
+					- 0～18号键可以直接作为`mastery_updates`的索引。
+					- 19～21号键的后半部分可以直接作为`LoLChampions[mastery_updates["championId"]]`的索引。
+					- 22和23号键的后半部分可以直接作为`player_info["body"]`的索引。
+		- 下面对自定义脚本21中的`eog_stat_metaDf_lol`的结构进行说明。
+			- 工作表`21 - eog_stat_metadata_lol_head`（`21 - eog_stat_metadata_lol_header`）的的主要数据区域设置了4种颜色。
+				- 无填充代表`Key`可以作为`eog_stats_block`的索引。
+				- 蓝色代表`Key`的后半部分可以直接作为`eog_stats_block["mucJwtDto"]`的索引。
+				- 绿色代表`Key`的后半部分可以直接作为`eog_stats_block["rerollData"]`的索引。
+				- 橙色代表`Key`的后半部分可以作为`eog_stats_block["teamBoost"]`的索引。
+				- 蓝色、绿色和橙色部分采用同一套代码框架。
+		- 下面对自定义脚本21中的`eog_teamstat_df_lol`的结构进行说明。
+			- 工作表`21 - eog_teamstat_data_lol_head`（`21 - eog_teamstat_data_lol_header`）的主要数据区域设置了2种颜色。`team`是`eog_stats_block["teams"]`中的任意一个元素。
+				- 无填充代表`Key`可以作为`team`的索引。
+				- 蓝色代表`Key`的后半部分可以作为`team["stats"]`的索引。
+		- 下面对自定义脚本21中的`eog_playerstat_df_lol`的结构进行说明。
+			- 工作表`21 - eog_playerstat_data_lol_he`（`21 - eog_playerstat_data_lol_header`）的主要数据区域设置了2种颜色。`team`是`eog_stats_block["teams"]`中的任意一个元素。`player`是`team["players"]`中的任意一个元素。
+				- 无填充代表`Key`可以作为`player`的索引。
+				- 蓝色代表`Key`的后半部分可以作为`player["stats"]`的索引。
+		- 下面对自定义脚本21中的`eog_stat_metaDf_tft`的结构进行说明。
+			- 工作表`21 - eog_stat_metadata_tft_head`（`21 - eog_stat_metadata_tft_header`）的主要数据区域设置为无填充。
+				- `Key`可以作为`tft_eog_stats`的索引。
+		- 下面对自定义脚本21中的`eog_stat_df_tft`的结构进行说明。
+			- 工作表`21 - eog_playerstat_data_tft_he`（`21 - eog_playerstat_data_tft_header`）的主要数据区域设置了7种颜色。`player`是`tft_eog_stats["players"]`中的任意一个元素。
+				- 无填充代表`Key`可以作为`player`的索引。
+					- 0～14号键可以直接作为`player`的索引。
+					- 15和16号键的后半部分可以直接作为`summonerIcons[player["iconId"]]`的索引。
+				- 绿色代表`Key`的后半部分可以直接作为`player["augments"][augmentIndex]`的索引。
+				- 橙色代表`Key`的后半部分可以直接作为`player["boardPieces"][unit_index]`的索引。
+				- 蓝色代表`Key`的第三部分可以直接作为`player["boardPieces"][unit_index]["items"][item_index]`的索引。
+				- 紫色代表`Key`的后半部分可以直接作为`player["companion"]`的索引。
+				- 黄色代表`Key`的后半部分可以直接作为`player["customAugmentContainer"]`的索引。
+				- 粉色代表`Key`的后半部分可以直接作为`player["playbook"]`的索引。
+				- 紫色、黄色和粉色部分采用同一套代码框架。
 		- 下面对装备脚本中的`LoLItem_df`的元数据进行说明。
 			- 工作表`Item Program - base_header (ddr`的主要数据区域设置了3种颜色。`item`是`LoLItems_locale["data"]`的键为`i`的值。`item_default`是`LoLItems_default["data"]`的键为`i`的值。
 				- 无填充代表`Key`不作为装备数据中的任何索引。
@@ -746,7 +1045,7 @@ The following explanations only apply to the current branch. For other details (
 **This program set only supports study use or personal entertainment. Any commercial use is forbidden!**
 # Program Set Functionality
 This program set allows <ins>creating custom lobbies (including 5V5 Practice Tool)</ins>, <ins>checking available bot players and game modes</ins> and development of other exploratory functions.\
-**Cloning this repository** requires about <ins>25 GiB</ins> local storage. **The compressed file in release** takes up about <ins>2 GiB</ins> local storage.\
+**Cloning this repository** requires about <ins>37 GiB</ins> local storage. **The compressed file in release** takes up about <ins>2 GiB</ins> local storage.\
 For details about customized programs that is beyond the scope of creating a custom lobby, please check the sixth instruction.
 1. This program set provides the consolidated version for all game modes and all levels and positions of bot difficulity.
 	- The consolidated version takes `available-bots.xlsx` in the home directory as the bot player data. For its sake, **please don't move any offline files (this file included)**.
@@ -792,15 +1091,11 @@ For details about customized programs that is beyond the scope of creating a cus
 		- This program is designed only for the developer to update offline data, but anyone interested is welcome to download and experience it.
 		- This program can be used to update data resources from both CommunityDragon and DataDragon databases.
 			- While updating CommunityDragon data resources, the program provides 4 updating modes.
-				- [Global Scanning] performs an **entire comparison** between the local and online data resources to achieve the syncronization.
-					- It's highly recommended that **the user perform [Global Scanning] at first when the user is running this program for the first time**, even if he/she has downloaded the data resources from this repository.
 				- [Updating According to Modification Time] is meant to reflect the **changes** between online and local data resources.
 					- In a case where the **modification times** of some local data resources are **later** than those of the corresponding online data resources, whereas the **actual content** of these local data resources is **earlier** than that of their corresponding online data resources, running this mode *won't update* these local data resources.
 					- This mode is set as the default mode in the <ins>repository</ins>. Submit an empty string to adopt the default mode.
 				- [Updating According to Program Demands] is meant to **quickly** update the data resources only necessary for customized programs.
 					- This mode is set as the default mode in the <ins>releases</ins>. Submit an empty string to adopt the default mode.
-				- [Updating Specified Folders] allows users to pass **a custom folder list** into the program. The program will only check the data resource files under these folders.
-					- This mode is mainly meant to make up for the folders that **fail to be checked** because of network condition by the previous three modes.
 			- While updating DataDragon data resources, users need to **follow the hint of the program**: first download the latest compressed tarball of DataDragon database, then decompress it, and finally provide the decompression directory.
 			- While updating DataDragon data resources, the program provides 2 updating modes.
 				- [Global Scanning] performs an **entire comparison** on the data resources between the local  repository and the latest DataDragon archive compressed file that has already been downloaded to local.
@@ -811,7 +1106,7 @@ For details about customized programs that is beyond the scope of creating a cus
 		- Because a number of data resources might be involved in a commit, GitHub can't load the diff. Here two methods of checking the diff are recommended:
 			1. Visit [LoL-Patch-Change repository](https://github.com/WordlessMeteor/LoL-Patch-Change) to look over the **main** update content *online*.
 			2. Clone [this repository](https://github.com/WordlessMeteor/LoL-DIY-Programs) to local and check the commit with header "<ins>Offline Data Resource Update</ins>" to look through the **complete** update content *offline*.
-				- Cloning this repository takes up approximately <ins>20 GiB</ins> local space. Please ensure your disk has sufficient space for it.
+				- Cloning this repository takes up approximately <ins>37 GiB</ins> local space. Please ensure your disk has sufficient space for it.
 				- For those commits that involve a number of data resources, it still takes several minutes to load the diff locally. Please wait in patience.
 5. The program set is adapted from `create_custom_lobby.py` in the home directory.
 # Notes on Instructions
@@ -902,6 +1197,31 @@ For details about customized programs that is beyond the scope of creating a cus
 	- Customized Program 05 (☆) is designed to **search and export summoners' profile**.
 		- This program supports queries based on <ins>summonerName</ins> and <ins>puuid</ins>.
 		- Thanks to LCU API, even if a summoner sets its profile private, its whole match history and rank data can still be fetched.
+		- This program supports command line arguments. Check these arguments through the command `python [filename] -h`.
+			<table>
+				<thead>
+					<tr>
+						<th style="text-align:center;">CMD arguments</th>
+						<th style="text-align:center;">Action</th>
+						<th style="text-align:center;">Help message</th>
+						<th style="text-align:center;">Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align:center;">-r<br>--reserve</td>
+						<td style="text-align:center;">store_true</td>
+						<td>Load a match even if it doesn't contain the main player</td>
+						<td>None</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">-rt<br>--reserve_text</td>
+						<td style="text-align:center;">store_true</td>
+						<td>Save a match even if it doesn't contain the main player</td>
+						<td>None</td>
+					</tr>
+				</tbody>
+			</table>
 		- Files generated by this program are located under the "召唤师信息（Summoner Information）" folder.
 		- The data resources required in this program are mainly from <ins>CommunityDragon database</ins>, and it's allowed to obtain these data resources **offline**. The release zip includes all necessary data resources. If these files are lost, when the user chooses to obtain the data resources offline, <ins>please create a folder named as `离线数据（Offline Data）` in the main directory, open the url of the corresponding data resources and then download them to this new folder.</ins>
 		- Since Patch 13.22, **Riot ID** has taken the place of summoner name. Therefore, if a summoner's information can't be visited by its summonerName, **please add a "#" and the summoner's tagLine after the gameName.**
@@ -1036,6 +1356,31 @@ For details about customized programs that is beyond the scope of creating a cus
 	- Customized Program 10 is designed to **search for matches a specified summoner has played**. The user may combine its use with Customized Program 05.
 	- Customized Program 11 is designed to **search summoners that have recently played with the specific summoner**.
 		- A large part of code in this program is inherited from Customized Program 05, including the scan mode. Nevertheless, this program only outputs the result and doesn't change any intermediate files (txt and json files) generated by Customized Program 05.
+		- This program supports command line arguments. Check these arguments through the command `python [filename] -h`.
+			<table>
+				<thead>
+					<tr>
+						<th style="text-align:center;">CMD arguments</th>
+						<th style="text-align:center;">Action</th>
+						<th style="text-align:center;">Help message</th>
+						<th style="text-align:center;">Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td style="text-align:center;">-r<br>--reserve</td>
+						<td style="text-align:center;">store_true</td>
+						<td>Load a match even if it doesn't contain the main player</td>
+						<td>None</td>
+					</tr>
+					<tr>
+						<td style="text-align:center;">-ss<br>--save_self</td>
+						<td style="text-align:center;">store_true</td>
+						<td>Save the main summoner's data even if they're contained in a match</td>
+						<td>None</td>
+					</tr>
+				</tbody>
+			</table>
 		- This program allows [Generate Mode] and [Detect Mode].
 			- [Generate Mode] **saves information** of players that a specific player have played with in recent matches into the Sheet "Recently Played Summoners" **in the workbook** whose name is prefixxed with "Summoner Profile" and save 9 **bar charts** with regard to players' <ins>game time</ins> and <ins>match counts</ins>.
 			- [Detect Mode] checks whether some players have been encountered before. Six situations are considered in this program. The core code **resemble** among different situations.
@@ -1132,8 +1477,8 @@ For details about customized programs that is beyond the scope of creating a cus
 			- Percentages are output as two-digit percentages.
 			- Order cells are three-color scaled.
 			- Win and lose result cells are colored based on formula. "VICTORY" is colored green and "DEFEAT" is colored red.
-		- For convenience, this program sets up some command line arguments. Check these arguments through the command `python [filename] -h`.
-		<table>
+		- For convenience, this program supports command line arguments. Check these arguments through the command `python [filename] -h`.
+			<table>
 				<thead>
 					<tr>
 						<th style="text-align:center;">CMD arguments</th>
@@ -1143,6 +1488,12 @@ For details about customized programs that is beyond the scope of creating a cus
 					</tr>
 				</thead>
 				<tbody>
+					<tr>
+						<td style="text-align:center;">-e<br>--save_early</td>
+						<td style="text-align:center;">store</td>
+						<td>Export only the matches whose creation is earlier than the current queried match</td>
+						<td>None</td>
+					</tr>
 					<tr>
 						<td style="text-align:center;">-l<br>--locale</td>
 						<td style="text-align:center;">store</td>
@@ -1169,7 +1520,159 @@ For details about customized programs that is beyond the scope of creating a cus
 					</tr>
 				</tbody>
 			</table>
-	- `清除临时文件.bat` is used to **remove temporary files generated by customized programs**. At present it can delete temporary files from customized programs 03, 05, 10, 11, 17 and 19.
+	- Customized Program 21 is used to **simulate client operations at all gameflow phases**. It's aimed at handle urgent situations when the League Client isn't well performed.
+		- <b>Declaration: This program doesn't involve any automatized operations.</b>
+		- This program combines core functions of the previous 20 customized programs. To experience the whole feature, please make sure <ins>Customized Program 19</b> is under the same directory.
+		- This program supports simulation at gameflow phases like <ins>unlogged, None, Lobby, Matchmaking, ReadyCheck, ChampSelect, InProgress, Reconnect, WaitingForStats, PreEndOfGame and EndOfGame</ins>. All supported operations are listed below, excluding the debugging function: (Suboperations of the same operation is only expanded at the first occurrence.)
+			- Unlogged
+				- Debug League Client endpoints
+				- Manage the League Client task
+					- Window management
+						- Show the window
+							- Minimize the window
+							- Enable taskbar flashing
+							- Resize the window
+					- Process management
+						- Launch ux
+						- Temporarily close ux
+						- Reload ux
+						- Terminate ux (!)
+			- None
+				- Debug League Client endpoints
+				- Create a lobby
+					- Create a party
+					- Create a custom lobby
+					- Create through json
+				- Handle invitations
+				- Join party/lobby
+					- Party
+					- Custom lobby
+					- Clash
+				- Spectate a game
+				- Chat
+				- Manage the League Client task
+			- Lobby
+				- Debug League Client endpoints
+				- Manage a party
+					- Prepare before in queue
+						- Select positions (Ranked and Nexus Blitz only)
+						- Configure quickplay slot (Swiftplay only)
+						- Configure subteam data (Arena only)
+						- Toggle ready
+						- TFT loadouts (TFT only)
+					- Check friends leaderboard
+					- Toggle party open/closed
+						- Make party invite-only
+						- Open party to friends
+					- Change mode
+						- Create a party
+						- Create a custom lobby
+						- Create through json
+					- Find match
+				- Manage a custom lobby
+					- Add a bot
+					- Remove a bot
+					- Switch team
+					- Switch spectate status (!)
+					- Change mode
+					- Start game
+				- Invite to game
+				- Chat
+				- Manage members
+					- Promote to party owner
+					- Kick player from party
+					- Change invite priviledge
+						- Grant invites
+						- Revoke invites
+				- Print lobby information
+				- Handle invitations
+				- Join party/lobby
+				- Exit the party/lobby
+				- Manage the League Client task
+			- MatchMaking
+				- Debug League Client endpoints
+				- Print matchmaking information
+				- Chat
+				- Handle invitations
+				- Join party/lobby
+				- Quit the queue
+				- Manage the League Client task
+			- ReadyCheck
+				- Accept
+				- Decline
+				- Print the ready check information
+				- Manage the League Client task
+			- ChampSelect
+				- Debug League Client endpoints
+				- Swap
+					- Pick order
+						- Check
+						- Send
+					- Position
+						- Check
+						- Send
+					- Ally champions
+						- Check
+						- Send
+					- Available champion pool (Bench)
+						- Check
+						- Send
+				- Select a champion
+					- Decalre intent (unavailable)
+					- Ban
+					- Pick
+					- Reroll
+				- Prepare loadouts
+					- Perks (Need support from Customized Program 19)
+					- Summoner spells
+					- Skin
+					- Ward skin
+					- Emote
+					- Summoner icon
+					- Nexus finisher
+					- Banner
+					- Crest
+					- Tournament trophy
+				- Mute players
+				- Chat
+				- Others
+					- Unlock battle boost
+					- Toggle favorite champions on different positions
+					- Clear muted players
+					- Exit the champ select stage
+				- Output the champ select session
+				- Manage the League Client task
+			- InProgress
+				- Chat with friends
+				- Manage the League Client task
+			- Reconnect
+			- WaitingForStats
+			- PreEndOfGame
+				- Debug League Client endpoints
+				- Honor players
+				- Check the number of votes
+				- Not this time
+				- Print honor ballot information
+				- Print current sequence event
+				- Chat
+				- Manage the League Client task
+			- EndOfGame
+				- Debug League Client endpoints
+				- Check champion mastery updates
+				- Check stats block
+					- LoL
+					- TFT
+				- Chat
+				- Play again
+				- Dismiss
+				- Recall honor vote phase (!)
+				- Manage the League Client task
+			- Other phases
+		- This program **creates cache** under the "cache" folder to speed up data resource loading.
+			- The local cache expires after <ins>24 hours</ins>.
+			- Users may reload data resources to refresh local cache.
+			- Reading cache is expected to save 10 to 30 seconds of data resource loading.
+	- `清除临时文件.bat` is used to **remove temporary files generated by customized programs**. At present it can delete temporary files from customized programs 03, 05, 10, 11, 17, 19, 20 and 21.
 	- `召唤师信息文件格式转换.bat` is used to **rename the format of data files generated by Customized Program 05 into ".txt" or ".json"**.
 		- Renaming a number of data files may results in the slow performance of Explorer, so please think twice to use this program.
 		- Since the scripts of this program contain Chinese characters, **please run `chcp 65001` in Command Prompt** before running this program.
@@ -1180,9 +1683,10 @@ For details about customized programs that is beyond the scope of creating a cus
 		- Data resources are from <ins>DataDragon database> and <ins>CommunityDragon database</ins>.
 		- This program supports **all languages supported by League of Legends**.
 		- This program supports **all versions** archived by these two databases.
-		- Each generated table can be divided into 4 parts:
+		- Each generated table can be divided into 5 parts:
 			- Metadata
 			- Classification
+			- In-game tooltip
 			- Map availability (not available in item data from CommunityDragon)
 			- Basic stats
 		- If you want to freeze cells and enable autofilter in batch, you can write a Macro to fix the top rows of all sheets. The following is a demonstration, taking Microsoft Excel as an example.
@@ -1210,12 +1714,32 @@ For details about customized programs that is beyond the scope of creating a cus
 				Next ws
 			End Sub
 			```
+			Note: The above macro applies to all sheets. If you want it to only apply to certain sheets, you need to add a <ins>condition statement</ins> on the sheet attributes **right below the for-statement** and indent the subsequent code that do operations backward by one layer.
 			5. Close VBA editor and return to the Excel window. Click "Macro" in "Developer" tab.
 			6. Select "FreezeTopRowsAndSelectA1" and click "Run".
 			7. If you want to save the macro while saving the changes, please save this workbook as ".xlsm" format.
+		- Here're some other macros that might be useful.
+			- Clear format
+			```vba
+			Sub ClearFormat()
+				Dim ws As Worksheet
+				Dim lastCol As Long
+				For Each ws In ThisWorkbook.Worksheets
+					If InStr(ws.Name, "cdragon") > 0 Or ws.Name = "pbe" Or ws.Name = "latest" Then ' Select sheets produced when fetching CommunityDragon database
+						ws.Activate
+						If ws.AutoFilterMode Then ws.AutoFilterMode = False
+						ActiveWindow.FreezePanes = False
+						ActiveWindow.SplitColumn = 0
+						ActiveWindow.SplitRow = 0
+						ws.Range("A1").Select
+					End If
+				Next ws
+			End Sub
+			```
 	- To make it convenient for users to **look up LoL official terms**, a translation program `trans.py` is added in the home directory.
 		- Each run of this program supports summarizing and saving the translation data resources of a language. It also allows downloading data resources in all languages within one run.
 		- Since this program is only intended to correct the terms, the involved data resources are only used for program development, instead of the release. So, it's highly recommended that users run this program in the cloned repository folder, instead of the folder extracted from compressed files in Release.
+	- Customized Programs <ins>05, 11, 13, 16, 19, 20 and 21</ins> **save content displayed in terminal into local logs** while running. You can check them under the "<ins>日志（Logs）</ins>" folder.
 	- To let user **understand the structure of the large dataframes**, a workbook `Customized Program Main Dataframe Structure.xlsx` is added in the home directory to illustrate how the dataframes are organized.
 		- The following is the illustration on the structure of `LoLGame_info_df` in Customized Program 05, `recent_LoLPlayers_df` in Customized Programs 11 and 16 and `LoLGame_stat_header` in Customized Program 20, to explain some settings, which won't be repeated in the following context:
 			- There're 6 columns in the sheets `05 - LoLGame_info_header`, `11 - LoLGame_info_header`, `16 - LoLGame_info_header` and `20 - LoLGame_stat_header`, and the first 3 columns are the **main data area**.
@@ -1240,8 +1764,8 @@ For details about customized programs that is beyond the scope of creating a cus
 					- Values of this part of keys are obtained by comparison and mathematical calculation.
 			- Some keys are colored white. These keys don't belong to the indices of any variable in LCU API, but actually come from them. For example, `gameModeName` never occurs in the json object of the game information, but actually originates from `LoLGame_info` and corresponds to the key `"gameMode"`.
 			- <b>To obtain the output/display order lists, users need only arrange the table according to the ascending order of `OutputOrder` or `DisplayOrder` and then copy the cells in `Index` column.</b>
-		- `LoLChampions_df` in Customized Program 04:
-			- 6 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (LCU)`:
+		- `LoLChampions_df` in Customized Programs 04 and 21:
+			- 6 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (LCU)` and `21 - LoLChampions_header`:
 				- Data not filled with any color mean `Key` is the direct index of `LoLChampions[championId]`.
 				- Data in the light blue area mean `Key` comes from `LoLChampions[championId]["ownership"]`.
 					- Note that no key in this area exists to be the direct index.
@@ -1323,10 +1847,10 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the blue area mean `Key` comes from the index of `item["prices"][priceId]`.
 				- Data in the green area mean `Key` comes from `item["prices"][priceId]["sale"]`.
 		- `store_df` in Customized Program 07:
-			- 5 colors are used to divide the main data area in the sheet `07 - store_header`. `item` denodes any element `store`.
+			- 5 colors are used to divide the main data area in the sheet `07 - store_header`. `item` denodes any element in `store`.
 				- Data not filled with any color 
-		- `collection_df` in Customized Program 07:
-			- 2 colors are used to divide the main data area in the sheet `07 - collection_header`. `Item` denodes any element in `catalogList`.
+		- `collection_df` in Customized Programs 07 and 21:
+			- 2 colors are used to divide the main data area in the sheets `07 - collection_header` and `21 - collection_header`. `Item` denodes any element in `catalogList`.
 				- Data not filled with any color mean `Key` is the direct index of the variable `item`.
 				- Data in the blue area mean `Key` is the index of `item["payload"]`.
 		- `queues_df` in Customized Programs 09 and 20:
@@ -1372,8 +1896,8 @@ For details about customized programs that is beyond the scope of creating a cus
 		- `friend_groups_df` in Customized Program 16:
 			- The main data area in the sheet `16 - friend_groups_header` isn't filled with any color. `group` denodes any element in `friend_groups`.
 				- `Key` is the direct index of the variable `group`.
-		- `conversation_df` in Customized Program 16:
-			- The main data area in the sheet `16 - conversation_header` isn't filled with any color. `conversation` denodes any element in `conversations`.
+		- `conversation_df` in Customized Programs 16 and 21:
+			- The main data area in the sheets `16 - conversation_header` and `21 - conversation_header` isn't filled with any color. `conversation` denodes any element in `conversations`.
 				- `Key` is the direct index of the variable `conversation`.
 		- `message_df` in Customized Program 16:
 			- The main data area in the sheet `16 - message_header` isn't filled with any color. `message` denodes any element in `messages`.
@@ -1393,8 +1917,8 @@ For details about customized programs that is beyond the scope of creating a cus
 					- Note that no key in this area exists to be the direct index.
 				- Data in the yellow area mean `Key` doesn't serve as the index of any variables of LCU API.
 					- Currently, the purple area only contains `full?`, a judgement whether the party is full. In the exported sheet, a tick means the party is full.
-		- `invid_df` in Customized Program 16:
-			- 3 colors are used to divide the main data area in the sheet `16 - invid_header`. `invid` denodes any element in `receivedInvitations`.
+		- `invid_df` in Customized Programs 16 and 21:
+			- 3 colors are used to divide the main data area in the sheets `16 - invid_header` and `21 - invid_header`. `invid` denodes any element in `receivedInvitations`.
 				- Data in the blue area mean `Key` is the index of the variable `invid`.
 				- Data in the light green area mean `Key` is the direct index of `invid["gameConfig"]`.
 				- Data in the orange area mean the second half of `Key` comes from `queues`.
@@ -1403,13 +1927,9 @@ For details about customized programs that is beyond the scope of creating a cus
 				- `Key` is the index of the variable `muted_player`.
 					- `Key` whose index is less than 5 is the direct index of the variable `muted_player`.
 					- `Key` whose index is greater than or equal to 5 comes from `get_info` function.
-		- `champSelect_team_df` in Customized Program 16:
-			- The main data area in the sheet `16 - champSelect_team_header` isn't filled with any color. `player` denodes any element in `players`.
+		- `champSelect_team_df` in Customized Program 16 and `players_df` in Customized Program 21:
+			- The main data area in the sheets `16 - champSelect_team_header` and `21 - players_header` isn't filled with any color. `player` denodes any element in `players`.
 				- `Key` is the index of the variable `player`.
-					- `Key` whose index is less than 13 is the direct index of the variable `player`.
-					- `Key` 14 and 15 come from `get_info` function.
-					- `Key` 16 comes from `team_color`.
-					- The second half of `Key` whose index is greater than or equal to 17 is the index of the data resource that first half represents.
 		- `captureDevices_df` in Customized Program 16:
 			- The main data area in the sheet `16 - captureDevices_header` isn't filled with any color. `device` denotes any value in `captureDevices`.
 				- `Key` is the direct index of the variable `device`.
@@ -1453,8 +1973,8 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data not filled with any color mean `Key` is the index of `page`.
 				- Data in the blue area mean the second half of `Key` is the direct index of `page["keystone"]`.
 				- Data in the green area mean `Key` comes from `page["perks"][perkId]`.
-		- `perkPage_df` in Customized Program 19:
-			- 3 colors are used to divide the main data area in the sheet `19 - perkPage_header`. `page` denotes any element in `perkPages`.
+		- `perkPage_df` in Customized Programs 19 and 21:
+			- 3 colors are used to divide the main data area in the sheets `19 - perkPage_header` and `21 - perkPage_header`. `page` denotes any element in `perkPages`.
 				- Data not filled with any color mean `Key` is the index of `page`.
 				- Data in the blue area mean the second half of `Key` is the direct index of `page["pageKeystone"]`.
 				- Data in the green area mean `Key` comes from `page["uiPerks"][pageId]`.
@@ -1462,6 +1982,84 @@ For details about customized programs that is beyond the scope of creating a cus
 			- 2 colors are used to divide the main data area in the sheet `20 - process_header`.
 				- Data not filled with any color mean `Key` doesn't serve as the index of any variables.
 				- Data in the blue area mean `Key` is the direct index of `parent` and `child`.
+		- `swaps_df` in Customized Program 21:
+			- The main data area in the sheet `21 - swaps_header` isn't filled with any color.
+				- `Key` is the direct index of the variable `swap`.
+		- `custom_game_df` in Customized Program 21:
+			- The main data area in the sheet `21 - custom_game_header` isn't filled with any color. `lobby` denotes any element in `custom_lobbies`.
+				- `Key` is the index of `lobby`.
+		- `skins_df` in Customized Program 21:
+			- 6 colors are used to divide the main data area in the sheet `21 - skins_header`. `skin` denotes any element in `championSkins.values()`. `skin_flat` denotes any element in `skins_flat.values()`.
+				- Data not filled with any color mean `Key` is the direct index of `skin["emblems"]`.
+				- Data in the light green area mean `Key` comes from `skin["emblems"]`.
+					- The latter half of `Key` No. 29 and 30 is the direct index of `skin["emblems"]`.
+					- The latter half of `Key` No. 31 and 32 is the direct index of `skin["emblems"]["emblemPath"]`.
+				- Data in the deep green area mean the latter half of `Key` is the direct index of `skin["questSkinInfo"]`.
+				- Data in the yellow area mean `Key` comes from `skin_flat`.
+					- `Key` No. 41～44 is the direct index of `skin_flat`.
+					- The latter half of `Key` No. 45～47 is the direct index of `LoLChampions[skin_flat["championId"]]`.
+				- Data in the light blue area mean the latter half of `Key` is the direct index of `skin_flat["ownership"]`.
+				- Data in the deep blue area mean the third part of `Key` is the index of `skin_flat["ownership"]["rental"]`.
+		- `grid_champion_df` in Customized Program 21:
+			- 2 colors are used to divide the main data area in the sheet `21 - grid_champion_header`. `champion` denotes any element in `grid_champions`.
+				- Data not filled with any color mean `Key` is the index of `champion`.
+				- Data in the blue area mean `Key` is the direct index of `champion["selectionStatus"]`.
+		- `grid_champion_df` in Customized Program 21:
+			- The main data area in the sheet `21 - grid_champion_header` isn't filled with any color. `player` denotes any element in `muted_players`.
+				- `Key` is the index of `player`.
+					- `Key` No. 0～3 is the direct index of the variable `player`.
+					- `Key` No. 4 and 5 is the direct index of `player_info["body"]`.
+		- `social_leaderboard_df` in Customized Program 21:
+			- The main data area in the sheet `21 - social_leaderboard_header` isn't filled with any color. `player` denotes any element in `social_leaderboard["rowData"]`.
+				- `Key` is the index of `player`.
+					- `Key` No. 0～15 is the direct index of the variable `player`.
+					- `Key` No. 16 and 17 is the direct index of `summonerIcons[player["profileIconId"]]`.
+		- `availableBot_df` in Customized Program 21:
+			- 2 colors are used to divide the main data area in the sheet `21 - availableBot_header`.
+				- Data not filled with any color mean `Key` is the direct index of the variable `bot`.
+				- Data in the blue area mean `Key` is the direct index `LoLChampions[bot["id"]]`.
+		- `member_df` in Customized Program 21:
+			- The main data area in the sheet `21 - member_header` isn't filled with any color. `member` denotes any element in `members`.
+				- `Key` is the index of `members`.
+		- `ballot_player_df` in Customized Program 21:
+			- The main data area in the sheet `21 - ballot_player_header` isn't filled with any color. `player` denotes any element in `honor_ballot["eligibleAllies"] + honor_ballot["eligibleOpponents"]`.
+				- `Key` is the index of `player`.
+		- `eog_mastery_update_df` in Customized Program 21:
+			- The main data area in the sheet `21 - eog_mastery_update_header` isn't filled with any color.
+				- `Key` is the index of `mastery_updates`.
+					- `Key` No. 0～18 is the direct index of `mastery_updates`.
+					- The latter half of `Key` No. 19～21 is the direct index of `LoLChampions[mastery_updates["championId"]]`.
+					- The latter half of `Key` No. 22 and 23 is the direct index of `player_info["body"]`.
+		- `eog_stat_metaDf_lol` in Customized Program 21:
+			- 4 colors are used to divide the main data area in the sheet `21 - eog_stat_metadata_lol_head` (`21 - eog_stat_metadata_lol_header`).
+				- Data not filled with any color mean `Key` is the index of `eog_stats_block`.
+				- Data in the blue area mean the latter half of `Key` is the direct index of `eog_stats_block["mucJwtDto"]`.
+				- Data in the green area mean the latter half of `Key` is the direct index of `eog_stats_block["rerollData"]`.
+				- Data in the orange area mean the latter half of `Key` is the index of `eog_stats_block["teamBoost"]`.
+				- Data in the blue, green and orange areas are handled by the same code frame.
+		- `eog_teamstat_df_lol` in Customized Program 21:
+			- 2 colors are used to divide the main data area in the sheet `21 - eog_stat_metadata_lol_head` (`21 - eog_stat_metadata_lol_header`). `team` denotes any element in `eog_stats_block["teams"]`.
+				- Data not filled with any color mean `Key` is the index of `team`.
+				- Data in the blue area mean the latter half of `Key` is the index of `team["stats"]`.
+		- `eog_playerstat_df_lol` in Customized Program 21:
+			- 2 colors are used to divide the main data area in the sheet `21 - eog_player_stat_lol_he` (`21 - eog_player_stat_lol_header`). `team` denotes any element in `eog_stats_block["teams"]`. `player` denotes any element in `team["players"]`.
+				- Data not filled with any color mean `Key` is the index of `player`.
+				- Data in the blue area mean the latter half of `Key` is the index of `player["stats"]`.
+		- `eog_stat_metaDf_tft` in Customized Program 21:
+			- The main data area in the sheet `21 - eog_stat_metadata_lol_he` (`21 - eog_playerstat_data_lol_header`) isn't filled with any color.
+				- `Key` is the index of `tft_eog_stats`.
+		- `eog_stat_df_tft` in Customized Program 21:
+			- 7 colors are used to divide the main data area in the sheet `21 - eog_playerstat_data_tft_he` (`21 - eog_playerstat_data_tft_header`). `player` denotes any element in `tft_eog_stats["players"]`.
+				- Data not filled with any color mean `Key` is the index of `player`.
+					- `Key` No. 0～14 is the direct index of `player`.
+					- The latter half of `Key` No. 15 and 16 is the direct index of `summonerIcons[player["iconId"]]`.
+				- Data in the green area mean the latter half of `Key` is the direct index of `player["augments"][augmentIndex]`.
+				- Data in the orange area mean the latter half of `Key` is the direct index of `player["boardPieces"][unit_index]`.
+				- Data in the blue area mean the third part of `Key` is the direct index of `player["boardPieces"][unit_index]["items"][item_index]`.
+				- Data in the purple area mean the latter half of `Key` is the direct index of `player["companion"]`.
+				- Data in the yellow area mean the latter half of `Key` is the direct index of `player["customAugmentContainer"]`.
+				- Data in the purple area mean the latter half of `Key` is the direct index of `player["playbook"]`.
+				- Data in the purple, yellow and pink areas are handled by the same code frame.
 		- `LoLItem_df`'s metadata in Item Program:
 			- 3 colors are used to divide the main data area in the sheet `Item Program - base_header (ddr`. `item` denotes the value of key `i` in `LoLItems_locale["data"]`. `item_default` denotes the value of key `i` in `LoLItems_default["data"]`.
 				- Data not filled with any color mean `Key` doesn't serve as the index of any variables of item data.

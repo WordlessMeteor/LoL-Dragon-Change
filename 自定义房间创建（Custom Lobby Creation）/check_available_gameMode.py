@@ -4,9 +4,10 @@ import os, time
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/05/07
 #=============================================================================
 
 #-----------------------------------------------------------------------------

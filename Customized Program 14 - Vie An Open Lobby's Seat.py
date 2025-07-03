@@ -5,9 +5,10 @@ import ctypes, copy, os, pickle, time
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/06/14
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -127,7 +128,7 @@ async def seatVie(connection):
                 count = 0
                 if "errorCode" in LoLHistory:
                     if "500 Internal Server Error" in LoLHistory["message"]:
-                        if error_occurred == False:
+                        if not error_occurred:
                             print("您所在大区的对局记录服务异常。尝试重新获取数据……\nThe match history service provided on your server isn't in place. Trying to recapture the history data ...")
                             occurred = True
                         while "errorCode" in LoLHistory and "500 Internal Server Error" in LoLHistory["message"] and count <= 3:
@@ -149,7 +150,7 @@ async def seatVie(connection):
                         if LoLGame_info["httpStatus"] == 404:
                             print("未找到序号为" + matchID + "的回放文件！将忽略该序号。\nMatch file with matchID " + matchID + " not found! The program will ignore this matchID.")
                         if "500 Internal Server Error" in LoLGame_info["message"]:
-                            if error_occurred == False:
+                            if not error_occurred:
                                 print("您所在大区的对局记录服务异常。尝试重新获取数据……\nThe match history service provided on your server isn't in place. Trying to recapture the history data ...")
                                 error_occurred = True
                             while "errorCode" in LoLGame_info and "500 Internal Server Error" in LoLGame_info["message"] and count <= 3:
@@ -160,7 +161,7 @@ async def seatVie(connection):
                             fetched_info = False
                             print("对局信息获取超时！请检查网速状况！\nGame information fetching operation timed out after 20000 milliseconds with 0 bytes received! Please check the netspeed!")
                         elif "Service Unavailable - Connection retries limit exceeded. Response timed out" in LoLGame_info["message"]:
-                            if error_occurred == False:
+                            if not error_occurred:
                                 print("访问频繁。尝试重新获取数据……\nConnection retries limit exceeded! Trying to recapture the match data ...")
                                 error_occurred = True
                             while "errorCode" in LoLGame_info and "Service Unavailable - Connection retries limit exceeded. Response timed out" in LoLGame_info["message"] and count <= 3:

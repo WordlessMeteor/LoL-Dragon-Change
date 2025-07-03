@@ -1,14 +1,15 @@
 from lcu_driver import Connector
-import json, numpy, os, pandas, platform, pyperclip, re, shutil, time, traceback, unicodedata
+import json, numpy, os, pandas, platform, pyperclip, re, shutil, time, traceback, unicodedata, _io
 from wcwidth import wcswidth
 from openpyxl import load_workbook
 
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/07/01
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -17,6 +18,11 @@ from openpyxl import load_workbook
 #  - lcu-driver 
 #    https://github.com/sousa-andre/lcu-driver
 #-----------------------------------------------------------------------------
+
+log_folder = "日志（Logs）/Customized Program 19 - Configure Perks"
+os.makedirs(log_folder, exist_ok = True)
+currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+log = open(os.path.join(log_folder, currentTime + ".log"), "a+", encoding = "utf-8")
 
 connector = Connector()
 
@@ -58,8 +64,33 @@ async def get_lockfile(connection):
 #声明适用于所有符文数据的常量字典（Declare constant dictionaries which apply to all perk data）
 slotTypes = {"": "待定", "kKeyStone": "基石", "kMixedRegularSplashable": "符文", "kStatMod": "属性"}
 
+def logInput(prompt: str = "", log: _io.TextIOWrapper = log, write_time: bool = True):
+    s = input(prompt)
+    if isinstance(log, _io.TextIOWrapper):
+        if write_time:
+            currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+            log.write("[%s]%s\n" %(currentTime, prompt + s))
+        else:
+            log.write(prompt + s + "\n")
+    return s
+
+def logPrint(s: str = "", log: _io.TextIOWrapper = log, end: str = "\n", print_time: bool = False, write_time: bool = True):
+    currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+    if print_time:
+        print("[%s]%s" %(currentTime, s), end = end, flush = end == "\r")
+    else:
+        print(s, end = end, flush = end == "\r")
+    if isinstance(log, _io.TextIOWrapper):
+        if write_time:
+            log.write("[%s]%s%s" %(currentTime, str(s), "\n" if end == "\r" else end))
+        else:
+            log.write("%s%s" %(str(s), "\n" if end == "\r" else end))
+
 def count_nonASCII(s: str): #统计一个字符串中占用命令行2个宽度单位的字符个数（Count the number of characters that take up 2 width unit in CMD）
     return sum([unicodedata.east_asian_width(character) in ("F", "W") for character in list(str(s))])
+
+def rm_ctrl_char(s: str): #移除一个字符串中的所有C0和C1字符（Remove all C0 and C1 characters from a string）
+    return "".join(ch for ch in s if unicodedata.category(ch) != "Cc")
 
 def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
     old_index = df.index
@@ -68,21 +99,21 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
     maxWidth = shutil.get_terminal_size()[0]
     fields = df.columns.tolist()
     for field in fields:
-        maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(str(x)), df[field])), wcswidth(str(field))) + 2
-    index_len = max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+        maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(rm_ctrl_char(str(x))), df[field])), wcswidth(rm_ctrl_char(field))) + 2
+    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
-            if input() == "":
+            if not bool(input()):
                 #print(df)
                 result = str(df)
                 return (result, maxLens)
         elif direct_print:
-            print("单行数据字符串输出宽度超过当前终端窗口宽度！将直接打印该数据框！\nThe output width of each record string exceeds the current width of the terminal window! The program is going to directly print this dataframe!")
+            # print("单行数据字符串输出宽度超过当前终端窗口宽度！将直接打印该数据框！\nThe output width of each record string exceeds the current width of the terminal window! The program is going to directly print this dataframe!")
             result = str(df)
             return (result, maxLens)
-        else:
-            print("单行数据字符串输出宽度超过当前终端窗口宽度！将继续格式化输出！\nThe output width of each record string exceeds the current width of the terminal window! The program is going on formatted printing!")
+        # else:
+        #     print("单行数据字符串输出宽度超过当前终端窗口宽度！将继续格式化输出！\nThe output width of each record string exceeds the current width of the terminal window! The program is going on formatted printing!")
     result = ""
     #确定各列的排列方向（Determine the alignments of all columns）
     if isinstance(header_align, str) and isinstance(align, str):
@@ -123,7 +154,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
                 result += " " * (index_len + 2)
             for i in range(df.shape[1]):
                 field = fields[i]
-                tmp = "{0:{align}{w}}".format(field, align = header_alignments[i], w = maxLens[str(field)] - count_nonASCII(str(field)))
+                tmp = "{0:{align}{w}}".format(rm_ctrl_char(field), align = header_alignments[i], w = maxLens[field] - count_nonASCII(field))
                 result += tmp
                 #print(tmp, end = "")
                 if i != df.shape[1] - 1:
@@ -138,7 +169,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
             for j in range(df.shape[1]):
                 field = fields[j]
                 cell = str(list(df[field])[i])
-                tmp = "{0:{align}{w}}".format(cell, align = alignments[j], w = maxLens[field] - count_nonASCII(cell))
+                tmp = "{0:{align}{w}}".format(rm_ctrl_char(cell), align = alignments[j], w = maxLens[field] - count_nonASCII(cell))
                 result += tmp
                 #print(tmp, end = "")
                 if j != df.shape[1] - 1:
@@ -156,7 +187,6 @@ def get_info_name(info: dict, mode = 1) -> str:
     if not isinstance(info, dict) or not all(i in info for i in ["displayName", "gameName", "tagLine"]):
         print("您的召唤师信息格式有误！\nERROR format of summoner information!")
         name = ""
-        exit()
     else:
         if info["displayName"] or info["gameName"]:
             if info["gameName"] and info["tagLine"]:
@@ -373,7 +403,7 @@ async def get_perk_page(connection):
     for champion in LoLChampions_initial:
         LoLChampions[champion["id"]] = champion
     perkPages = await (await connection.request("GET", "/lol-perks/v1/pages")).json()
-    perkPage_header = {"autoModifiedSelections": "自动调整选择", "current": "正在使用", "id": "符文页序号", "isActive": "活动中", "isDeletable": "可删除", "isEditable": "可编辑", "isRecommendationOverride": "覆盖系统推荐符文", "isTemporary": "临时创建", "isValid": "可用性", "lastModified": "上次修改时间戳", "name": "符文页名称", "order": "符文页位次", "primaryStyleIconPath": "主系图标路径", "primaryStyleId": "主系序号", "primaryStyleName": "主系名称", "quickPlayChampionIds": "快速模式英雄序号列表", "recommendationChampionId": "推荐英雄序号", "recommendationIndex": "推荐序号", "runeRecommendationId": "推荐号", "secondaryStyleIconPath": "副系图标路径", "secondaryStyleName": "副系名称", "selectedPerkIds": "已选择的符文序号列表", "subStyleId": "副系序号", "tooltipBgPath": "已配置的符文背景图片路径", "quickPlayChampionNames": "快速模式英雄名称列表", "recommendationChampionName": "推荐英雄名称", "pageKeystone iconPath": "基石图标路径", "pageKeystone id": "基石序号", "pageKeystone name": "基石名称", "pageKeystone slotType": "基石槽位类型", "pageKeystone styleId": "基石所属符文系序号", "uiPerksNames": "已选择的符文"}
+    perkPage_header = {"autoModifiedSelections": "自动调整选择", "current": "正在使用", "id": "符文页序号", "isActive": "活动中", "isDeletable": "可删除", "isEditable": "可编辑", "isRecommendationOverride": "覆盖系统推荐符文", "isTemporary": "临时创建", "isValid": "可用性", "lastModified": "上次修改时间戳", "name": "符文页名称", "order": "符文页位次", "primaryStyleIconPath": "主系图标路径", "primaryStyleId": "主系序号", "primaryStyleName": "主系名称", "quickPlayChampionIds": "快速模式英雄序号列表", "recommendationChampionId": "推荐英雄序号", "recommendationIndex": "推荐序号", "runeRecommendationId": "推荐号", "secondaryStyleIconPath": "副系图标路径", "secondaryStyleName": "副系名称", "selectedPerkIds": "已选择的符文序号列表", "subStyleId": "副系序号", "tooltipBgPath": "已配置的符文背景图片路径", "lastModifiedTime": "上次修改时间", "quickPlayChampionNames": "快速模式英雄名称列表", "recommendationChampionName": "推荐英雄名称", "pageKeystone iconPath": "基石图标路径", "pageKeystone id": "基石序号", "pageKeystone name": "基石名称", "pageKeystone slotType": "基石槽位类型", "pageKeystone styleId": "基石所属符文系序号", "uiPerksNames": "已选择的符文"}
     perkPage_header_keys = list(perkPage_header.keys())
     perkPage_data = {}
     for i in range(len(perkPage_header_keys)):
@@ -382,21 +412,23 @@ async def get_perk_page(connection):
     for page in perkPages:
         for i in range(len(perkPage_header_keys)):
             key = perkPage_header_keys[i]
-            if i <= 25:
-                if i == 24: #快速模式英雄名称列表（`quickPlayChampionNames`）
+            if i <= 26:
+                if i == 24: #上次修改时间（`lastModifiedTime`）
+                    perkPage_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(page["lastModified"] // 1000)))
+                elif i == 25: #快速模式英雄名称列表（`quickPlayChampionNames`）
                     perkPage_data[key].append(list(map(lambda x: LoLChampions[x]["name"], page["quickPlayChampionIds"])))
-                elif i == 25: #推荐英雄名称（`recommendationChampionName`）
+                elif i == 26: #推荐英雄名称（`recommendationChampionName`）
                     perkPage_data[key].append("" if page["recommendationChampionId"] == 0 else LoLChampions[page["recommendationChampionId"]]["name"])
                 else:
                     perkPage_data[key].append(page[key])
-            elif i <= 30:
-                if i == 29: #基石槽位类型（`pageKeystone slotType`）
+            elif i <= 31:
+                if i == 30: #基石槽位类型（`pageKeystone slotType`）
                     perkPage_data[key].append(slotTypes[page[key.split()[0]][key.split()[1]]])
                 else:
                     perkPage_data[key].append(page[key.split()[0]][key.split()[1]])
             else: #已选择的符文（`uiPerksNames`）
                 perkPage_data[key].append(list(map(lambda x: x["name"], page["uiPerks"])))
-    perkPage_statistics_output_order = [2, 10, 11, 1, 3, 7, 5, 4, 8, 6, 13, 14, 12, 22, 20, 19, 27, 28, 29, 30, 26, 31, 21, 23, 9, 15, 24, 16, 25, 18]
+    perkPage_statistics_output_order = [2, 10, 11, 1, 3, 7, 5, 4, 8, 6, 13, 14, 12, 22, 20, 19, 28, 29, 30, 31, 27, 32, 21, 23, 24, 15, 25, 16, 26, 18]
     perkPage_data_organized = {}
     for i in perkPage_statistics_output_order:
         key = perkPage_header_keys[i]
@@ -447,14 +479,14 @@ async def configure_perks(connection):
         else:
             break
     while True:
-        print("请选择您想要执行的操作：\nPlease select an operation to perform:\n0\t退出程序（Exit the program）\n1\t查看所有符文（Check all perks）\n2\t查看推荐符文（Check recommended pages）\n3\t管理符文页（Manage perk pages）")
-        option = input()
+        logPrint("请选择您想要执行的操作：\nPlease select an operation to perform:\n0\t退出程序（Exit the program）\n1\t查看所有符文（Check all perks）\n2\t查看推荐符文（Check recommended pages）\n3\t管理符文页（Manage perk pages）")
+        option = logInput()
         if option == "0":
             break
         elif option == "1":
-            print("请选择输出形式：\nPlease select a form to output:\n0\t返回上一层（Return to the last step）\n1\t分类（Classified）\n2\t表格（Tabified）\n3\t文件（File）")
+            logPrint("请选择输出形式：\nPlease select a form to output:\n0\t返回上一层（Return to the last step）\n1\t分类（Classified）\n2\t表格（Tabified）\n3\t文件（File）")
             while True:
-                form = input()
+                form = logInput()
                 if form == "":
                     continue
                 elif form[0] == "0":
@@ -476,12 +508,12 @@ async def configure_perks(connection):
                         splashableSeries = 0
                         for j in range(len(slots)):
                             slot = slots[j]
-                            print("%d - %s: %s\n" %(style["id"], style["name"], style["tooltip"]))
+                            logPrint("%d - %s: %s\n" %(style["id"], style["name"], style["tooltip"]))
                             if slot["type"] == "kKeyStone":
-                                print("%s（%s）：" %(slotTypes[slot["type"]], slot["type"]))
+                                logPrint("%s（%s）：" %(slotTypes[slot["type"]], slot["type"]))
                             else:
                                 splashableSeries += 1
-                                print("%s第%d系列 - %s（%s Series %d - %s）：" %(slotTypes[slot["type"]], splashableSeries, slot["slotLabel"], slot["type"], splashableSeries, slot["slotLabel"]))
+                                logPrint("%s第%d系列 - %s（%s Series %d - %s）：" %(slotTypes[slot["type"]], splashableSeries, slot["slotLabel"], slot["type"], splashableSeries, slot["slotLabel"]))
                             for perkId in slot["perks"]:
                                 perkIds_unprinted.remove(perkId)
                                 perk = perks[perkId]
@@ -493,24 +525,24 @@ async def configure_perks(connection):
                                     longDesc = longDesc.replace(HTML_tag_re.search(longDesc).group(), "")
                                 shortDesc = shortDesc.replace("\n", "<br>")
                                 longDesc = longDesc.replace("\n", "<br>")
-                                print("%d - %s: %s\n简略描述（ShortDesc）：%s\n详细描述（LongDesc）：%s\n" %(perk["id"], perk["name"], perk["recommendationDescriptor"], shortDesc, longDesc))
+                                logPrint("%d - %s: %s\n简略描述（ShortDesc）：%s\n详细描述（LongDesc）：%s\n" %(perk["id"], perk["name"], perk["recommendationDescriptor"], shortDesc, longDesc))
                             if j < len(slots) - 1:
-                                print("按回车键以显示下一行符文。\nPress Enter to display the next line of perks.")
-                                input()
-                                print()
+                                logPrint("按回车键以显示下一行符文。\nPress Enter to display the next line of perks.")
+                                logInput()
+                                logPrint()
                                 clear_screen()
                         if i < len(perkstyles) - 1:
-                            print("按回车键以显示下一个符文系。\nPress Enter to display the next perkstyle.")
-                            input()
-                            print("\n")
+                            logPrint("按回车键以显示下一个符文系。\nPress Enter to display the next perkstyle.")
+                            logInput()
+                            logPrint("\n")
                             clear_screen()
                         else:
-                            print("按回车键以显示属性。\nPress Enter to display the stat modes.")
-                            input()
-                            print("\n")
+                            logPrint("按回车键以显示属性。\nPress Enter to display the stat modes.")
+                            logInput()
+                            logPrint("\n")
                             clear_screen()
                     #然后打印属性符文（Second, print stat mods）
-                    print("属性（kStatMod）：")
+                    logPrint("属性（kStatMod）：")
                     for perk in perks_initial:
                         if perk["slotType"] == "kStatMod":
                             perkIds_unprinted.remove(perk["id"])
@@ -518,13 +550,13 @@ async def configure_perks(connection):
                             while HTML_tag_re.search(shortDesc):
                                 shortDesc = shortDesc.replace(HTML_tag_re.search(shortDesc).group(), "")
                             shortDesc = shortDesc.replace("\n", "<br>")
-                            print("%d - %s: %s" %(perk["id"], perk["name"], shortDesc)) #属性符文的简略描述和详细描述是相同的，所以只需要输出一个即可（LongDesc and shortDesc of all stat mods are the same, respectively, so only one of each is enough to output）
-                    print("\n按回车键以显示其它符文。\nPress Enter to display other perks.")
-                    input()
-                    print("\n")
+                            logPrint("%d - %s: %s" %(perk["id"], perk["name"], shortDesc)) #属性符文的简略描述和详细描述是相同的，所以只需要输出一个即可（LongDesc and shortDesc of all stat mods are the same, respectively, so only one of each is enough to output）
+                    logPrint("\n按回车键以显示其它符文。\nPress Enter to display other perks.")
+                    logInput()
+                    logPrint("\n")
                     clear_screen()
                     #最后打印其它符文（At last, print other perks）
-                    print("其它（Others）：")
+                    logPrint("其它（Others）：")
                     for perkId in sorted(perkIds_unprinted):
                         perk = perks[perkId]
                         shortDesc = perk["shortDesc"].replace("<br>", "\n")
@@ -535,10 +567,10 @@ async def configure_perks(connection):
                             longDesc = longDesc.replace(HTML_tag_re.search(longDesc).group(), "")
                         shortDesc = shortDesc.replace("\n", "<br>")
                         longDesc = longDesc.replace("\n", "<br>")
-                        print("%d - %s: %s\n简略描述（ShortDesc）：%s\n详细描述（LongDesc）：%s\n" %(perk["id"], perk["name"], perk["recommendationDescriptor"], shortDesc, longDesc))
-                    print("按回车键以返回上一层。\nPress Enter to return to the last step.")
-                    input()
-                    print("\n")
+                        logPrint("%d - %s: %s\n简略描述（ShortDesc）：%s\n详细描述（LongDesc）：%s\n" %(perk["id"], perk["name"], perk["recommendationDescriptor"], shortDesc, longDesc))
+                    logPrint("按回车键以返回上一层。\nPress Enter to return to the last step.")
+                    logInput()
+                    logPrint("\n")
                     clear_screen()
                     break
                 elif form[0] == "2":
@@ -551,6 +583,7 @@ async def configure_perks(connection):
                         perk_df.loc[i, "shortDesc"] = shortDesc
                     perk_df_fields_to_print = ["styleName", "id", "name", "slotType", "slotLabel"]
                     print(format_df(perk_df.loc[:, perk_df_fields_to_print])[0])
+                    log.write(format_df(perk_df.loc[:, perk_df_fields_to_print], width_exceed_ask = False, direct_print = False)[0] + "\n")
                     break
                 elif form[0] == "3":
                     perk_df = await sort_perk_data(connection)
@@ -560,25 +593,26 @@ async def configure_perks(connection):
                             with pandas.ExcelWriter(path = excel_name) as writer:
                                 perk_df.to_excel(excel_writer = writer, sheet_name = "Perks") #数据框在导出到Excel中时保留最原始的数据（When the dataframe is exported to Excel, the most original information is reserved）
                         except PermissionError:
-                            print("无写入权限！请确保文件未被打开且非只读状态！按回车键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press Enter to try again.")
-                            input()
+                            logPrint("无写入权限！请确保文件未被打开且非只读状态！按回车键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press Enter to try again.")
+                            logInput()
                         else:
                             break
-                    print(f'符文信息已导出到同目录下的“{excel_name}”中。\nPerk information has been exported into {excel_name} under the same folder.')
+                    logPrint(f'符文信息已导出到同目录下的“{excel_name}”中。\nPerk information has been exported into {excel_name} under the same folder.')
                     break
                 else:
-                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
         elif option == "2":
-            print("请输入英雄序号：\nPlease enter a champion id:")
+            logPrint("请输入英雄序号：\nPlease enter a champion id:")
             LoLChampions_df = await get_LoLChampions(connection)
             LoLChampions_fields_to_print = ["id", "name", "title", "alias"]
             LoLChampions_df_query = LoLChampions_df.loc[:, LoLChampions_fields_to_print]
             LoLChampions_df_query["id"] = LoLChampions_df["id"].astype(str) #方便检索（For convenience of retrieval）
-            LoLChampions_df_query = LoLChampions_df_query.applymap(lambda x: x.lower() if isinstance(x, str) else x)
+            LoLChampions_df_query = LoLChampions_df_query.map(lambda x: x.lower() if isinstance(x, str) else x)
             print(format_df(LoLChampions_df.loc[:, LoLChampions_fields_to_print])[0])
+            log.write(format_df(LoLChampions_df.loc[:, LoLChampions_fields_to_print], width_exceed_ask = False, direct_print = False)[0] + "\n")
             back = False
             while True:
-                champion_queryStr = input()
+                champion_queryStr = logInput()
                 if champion_queryStr == "":
                     continue
                 elif champion_queryStr == "0":
@@ -587,28 +621,29 @@ async def configure_perks(connection):
                 else:
                     query_positions = numpy.where(LoLChampions_df_query == champion_queryStr.lower()) #使用numpy.where检索的前提是数据框中每个单元格的值都不一样（The premise of query by `numpy.where` is that no two cells are the same）
                     if len(query_positions[0]) == 0:
-                        print("没有找到该英雄。请重新输入。\nChampion not found. Please try again.")
+                        logPrint("没有找到该英雄。请重新输入。\nChampion not found. Please try again.")
                     else:
                         resultRow = query_positions[0]
                         result_champion_df = LoLChampions_df.loc[resultRow, LoLChampions_fields_to_print].reset_index(drop = True)
                         championId = LoLChampions_df.loc[resultRow[0], "id"]
                         championName = LoLChampions_df.loc[resultRow[0], "name"]
                         championAlias = LoLChampions_df.loc[resultRow[0], "alias"]
-                        print("您选择了以下英雄：\nYou selected the following champion:")
+                        logPrint("您选择了以下英雄：\nYou selected the following champion:")
                         print(format_df(result_champion_df)[0])
+                        log.write(format_df(result_champion_df, width_exceed_ask = False, direct_print = False)[0] + "\n")
                         break
             if back:
                 continue
             positionDict = {"TOP": "上路", "JUNGLE": "打野", "MIDDLE": "中路", "BOTTOM": "下路", "UTILITY": "辅助（补位）"}
             recommended_champion_positions = await (await connection.request("GET", "/lol-perks/v1/recommended-champion-positions")).json()
             recommendedPositions = recommended_champion_positions[str(championId)]["recommendedPositions"] if str(championId) in recommended_champion_positions else ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY"]
-            print("请选择一条推荐路线：\nPlease select a recommended position:")
+            logPrint("请选择一条推荐路线：\nPlease select a recommended position:")
             position_count = 0
             for position in recommendedPositions:
                 position_count += 1
-                print("%d\t%s\t%s" %(position_count, position, positionDict[position]))
+                logPrint("%d\t%s\t%s" %(position_count, position, positionDict[position]))
             while True:
-                position_str = input()
+                position_str = logInput()
                 if position_str == "0":
                     back = True
                     break
@@ -619,17 +654,18 @@ async def configure_perks(connection):
                     championPosition = recommendedPositions[int(position_str) - 1]
                     break
                 elif position_str.upper() in positionDict:
-                    print("%s的推荐路线中没有%s。请重新输入。\n%s isn't a recommended position of %s. Please try again." %(result_champion_df.loc[0, "name"], position_str.upper(), position_str.upper(), result_champion_df.loc[0, "alias"]))
+                    logPrint("%s的推荐路线中没有%s。请重新输入。\n%s isn't a recommended position of %s. Please try again." %(result_champion_df.loc[0, "name"], position_str.upper(), position_str.upper(), result_champion_df.loc[0, "alias"]))
                 else:
-                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
             if back:
                 continue
-            print("请输入地图序号：\nPlease enter the mapId:")
+            logPrint("请输入地图序号：\nPlease enter the mapId:")
             gamemaps = {8: {"zh_CN": "水晶之痕", "en_US": "Crystal Scar"}, 10: {"zh_CN": "扭曲丛林", "en_US": "Twisted Treeline"}, 11: {"zh_CN": "召唤师峡谷", "en_US": "Summoner's Rift"}, 12: {"zh_CN": "嚎哭深渊", "en_US": "Howling Abyss"}, 14: {"zh_CN": "屠夫之桥", "en_US": "Butcher's Bridge"}, 16: {"zh_CN": "星界废墟", "en_US": "Cosmic Ruins"}, 18: {"zh_CN": "瓦洛兰城市公园", "en_US": "Valoran City Park"}, 19: {"zh_CN": "第43区", "en_US": "Substructure 43"}, 20: {"zh_CN": "飞船坠落点", "en_US": "Crash Site"}, 21: {"zh_CN": "百合与莲花的神庙", "en_US": "Temple of Lily and Lotus"}, 22: {"zh_CN": "聚点危机", "en_US": "Convergence"}, 30: {"zh_CN": "怒火角斗场", "en_US": "Rings of Wrath"}, 33: {"zh_CN": "最终都市", "en_US": "Final City"}, 35: {"zh_CN": "班德尔之森", "en_US": "The Bandlewood"}}
             gamemap_df = pandas.DataFrame(data = {"mapId": list(gamemaps.keys()), "zh_CN": list(map(lambda x: x["zh_CN"], gamemaps.values())), "en_US": list(map(lambda x: x["en_US"], gamemaps.values()))})
             print(format_df(gamemap_df)[0])
+            log.write(format_df(gamemap_df, width_exceed_ask = False, direct_print = False)[0])
             while True:
-                mapStr = input()
+                mapStr = logInput()
                 if mapStr == "0":
                     back = True
                     break
@@ -637,18 +673,19 @@ async def configure_perks(connection):
                     mapId = int(mapStr)
                     break
                 else:
-                    print("您的输入有误！请重新输入。\nERROR input. Please try again.")
+                    logPrint("您的输入有误！请重新输入。\nERROR input. Please try again.")
             if back:
                 continue
             recommendedPage_df = await get_recommended_perk(connection, championId, championPosition, mapId)
             if len(recommendedPage_df) == 1: #一般情况下接口数据是正常获取的（The endpoint should work in normal cases）
-                print("%s中的%s%s推荐符文信息不可用。\nRecommended perk information of %s %s on %s isn't available." %(gamemaps[mapId]["zh_CN"], positionDict[championPosition], result_champion_df.loc[0, "name"], championPosition, result_champion_df.loc[0, "alias"], gamemaps[mapId]["en_US"]))
+                logPrint("%s中的%s%s推荐符文信息不可用。\nRecommended perk information of %s %s on %s isn't available." %(gamemaps[mapId]["zh_CN"], positionDict[championPosition], result_champion_df.loc[0, "name"], championPosition, result_champion_df.loc[0, "alias"], gamemaps[mapId]["en_US"]))
             else:
-                print('选择下方的一个方案以查看详细信息。输入“0”以返回上一层。\nSelect a page to check the details. Submit "0" to return to the last step.')
+                logPrint('选择下方的一个方案以查看详细信息。输入“0”以返回上一层。\nSelect a page to check the details. Submit "0" to return to the last step.')
                 recommendedPage_df_fields_to_print = ["primaryPerkStyleName", "secondaryPerkStyleName", "keystone name", "summonerSpellNames"]
                 print(format_df(recommendedPage_df.loc[:, recommendedPage_df_fields_to_print], print_index = True)[0])
+                log.write(format_df(recommendedPage_df.loc[:, recommendedPage_df_fields_to_print], width_exceed_ask = False, direct_print = False, print_index = True)[0] + "\n")
                 while True:
-                    pageIndex = input()
+                    pageIndex = logInput()
                     if pageIndex == "":
                         continue
                     elif pageIndex == "0":
@@ -665,13 +702,15 @@ async def configure_perks(connection):
                         keystoneName = recommendedPage_df.loc[pageIndex, "keystone name"]
                         perkIds = recommendedPage_df.loc[pageIndex, "perkIds"]
                         perkNames = recommendedPage_df.loc[pageIndex, "perkNames"]
-                        print("主系（Style）：%s (%d)\t%s\n副系（Substyle）：%s (%d)\t%s\n基石符文（Keystone）：%s (%d)\n符文序号列表（Perk id list）： %s\n符文名称列表（Perk name list）： %s\n" %(primaryPerkStyleName, primaryPerkStyleId, primaryRecommendationAttribute, secondaryPerkStyleName, secondaryPerkStyleId, secondaryRecommendationAttribute, keystoneName, keystoneId, perkIds, perkNames))
-                        print("是否导出推荐符文信息？（输入任意键导出，否则不导出。）\nExport recommended page information? (Submit any non-empty string to export, or null to refuse exporting.)")
-                        if bool(input()):
+                        logPrint("主系（Style）：%s (%d)\t%s\n副系（Substyle）：%s (%d)\t%s\n基石符文（Keystone）：%s (%d)\n符文序号列表（Perk id list）： %s\n符文名称列表（Perk name list）： %s\n" %(primaryPerkStyleName, primaryPerkStyleId, primaryRecommendationAttribute, secondaryPerkStyleName, secondaryPerkStyleId, secondaryRecommendationAttribute, keystoneName, keystoneId, perkIds, perkNames))
+                        logPrint("是否导出推荐符文信息？（输入任意键导出，否则不导出。）\nExport recommended page information? (Submit any non-empty string to export, or null to refuse exporting.)")
+                        page_export_str = logInput()
+                        page_export = bool(page_export_str)
+                        if page_export:
                             recommendedPage_json = {"name": "%s - %s" %(championName, keystoneName), "isTemporary": True, "primaryStyleId": primaryPerkStyleId, "secondaryStyleId": secondaryPerkStyleId, "selectedPerkIds": perkIds}
-                            print("请选择导出方式：\nPlease select a way to export:\n1\t写入文件（Write into a file）\n2\t复制到剪贴板（Copy to clipboard）")
+                            logPrint("请选择导出方式：\nPlease select a way to export:\n1\t写入文件（Write into a file）\n2\t复制到剪贴板（Copy to clipboard）")
                             while True:
-                                export_method = input()
+                                export_method = logInput()
                                 if export_method == "":
                                     continue
                                 elif export_method[0] == "0":
@@ -680,26 +719,28 @@ async def configure_perks(connection):
                                     json1name = "Recommended Page.json"
                                     with open(json1name, "w", encoding = "utf-8") as fp:
                                         json.dump(recommendedPage_json, fp, ensure_ascii = False)
-                                    print('%s的推荐符文信息已导出到同目录下的“%s”中。\nRecommended perk page of %s has been exported into "%s" under the same folder.' %(championName, json1name, championAlias, json1name))
+                                    logPrint('%s的推荐符文信息已导出到同目录下的“%s”中。\nRecommended perk page of %s has been exported into "%s" under the same folder.' %(championName, json1name, championAlias, json1name))
                                     break
                                 elif export_method[0] == "2":
                                     pyperclip.copy(recommendedPage_json)
-                                    print('%s的推荐符文信息已复制到剪贴板中。\nRecommended perk page of %s has been copied to clipboard.' %(championName, championAlias))
+                                    logPrint('%s的推荐符文信息已复制到剪贴板中。\nRecommended perk page of %s has been copied to clipboard.' %(championName, championAlias))
                                     break
                                 else:
-                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                        print('选择下方的一个方案以查看详细信息。输入“0”以返回上一层。\nSelect a page to check the details. Submit "0" to return to the last step.')
+                                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                        logPrint('选择下方的一个方案以查看详细信息。输入“0”以返回上一层。\nSelect a page to check the details. Submit "0" to return to the last step.')
                         print(format_df(recommendedPage_df.loc[:, recommendedPage_df_fields_to_print], print_index = True)[0])
+                        log.write(format_df(recommendedPage_df.loc[:, recommendedPage_df_fields_to_print], width_exceed_ask = False, direct_print = False, print_index = True)[0] + "\n")
                     else:
-                        print("您的输入有误！请重新输入。\nERROR input. Please try again.")
+                        logPrint("您的输入有误！请重新输入。\nERROR input. Please try again.")
         elif option == "3":
-            print("您的符文页信息如下：\nYour perk pages are listed below:")
+            logPrint("您的符文页信息如下：\nYour perk pages are listed below:")
             perkPage_df = await get_perk_page(connection)
             perkPage_df_fields_to_print = ["id", "name", "isTemporary", "primaryStyleName", "secondaryStyleName", "pageKeystone name"]
             print(format_df(perkPage_df.loc[:, perkPage_df_fields_to_print], print_index = True)[0])
-            print("请选择一个操作：\nPlease select an action:\n0\t返回上一层（Return to the last step）\n1\t导出所有符文页（Export all pages）\n2\t查看、编辑和导出一个符文页（Check, edit and export a page）\n3\t切换活动符文页（Toggle active perk page）\n4\t排序符文页（Order perk pages）\n5\t删除符文页（Delete perk pages）")
+            log.write(format_df(perkPage_df.loc[:, perkPage_df_fields_to_print], width_exceed_ask = False, direct_print = False, print_index = True)[0] + "\n")
+            logPrint("请选择一个操作：\nPlease select an action:\n0\t返回上一层（Return to the last step）\n1\t导出所有符文页（Export all pages）\n2\t查看、编辑和导出一个符文页（Check, edit and export a page）\n3\t切换活动符文页（Toggle active perk page）\n4\t排序符文页（Order perk pages）\n5\t删除符文页（Delete perk pages）")
             while True:
-                action = input()
+                action = logInput()
                 if action == "":
                     continue
                 elif action[0] == "0":
@@ -711,16 +752,16 @@ async def configure_perks(connection):
                             with pandas.ExcelWriter(path = os.path.join(folder, excel_name), mode = "a", if_sheet_exists = "replace") as writer:
                                 currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(time.time()))
                                 perkPage_df.to_excel(excel_writer = writer, sheet_name = f"Perk Page - {currentTime}")
-                            print('玩家符文页信息已保存为“%s”。\nPlayer perk page information is saved as "%s".' %(os.path.join(folder, excel_name), os.path.join(folder, excel_name)))
+                            logPrint('玩家符文页信息已保存为“%s”。\nPlayer perk page information is saved as "%s".' %(os.path.join(folder, excel_name), os.path.join(folder, excel_name)))
                         except PermissionError:
-                            print("无写入权限！请确保文件未被打开且非只读状态！按回车键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press Enter to try again.")
-                            input()
+                            logPrint("无写入权限！请确保文件未被打开且非只读状态！按回车键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press Enter to try again.")
+                            logInput()
                         except FileNotFoundError:
                             os.makedirs(folder, exist_ok = True)
                             with pandas.ExcelWriter(path = os.path.join(folder, excel_name), mode = "w") as writer:
                                 currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(time.time()))
                                 perkPage_df.to_excel(excel_writer = writer, sheet_name = f"Perk Page - {currentTime}")
-                            print('玩家符文页信息已保存为“%s”。\nPlayer perk page information is saved as "%s".' %(os.path.join(folder, excel_name), os.path.join(folder, excel_name)))
+                            logPrint('玩家符文页信息已保存为“%s”。\nPlayer perk page information is saved as "%s".' %(os.path.join(folder, excel_name), os.path.join(folder, excel_name)))
                             break
                         else:
                             break
@@ -729,10 +770,11 @@ async def configure_perks(connection):
                     perks = {perk["id"]: perk for perk in perks_initial}
                     perkstyles_initial = await (await connection.request("GET", "/lol-game-data/assets/v1/perkstyles.json")).json()
                     perkstyles = {style["id"]: style for style in perkstyles_initial["styles"]}
-                    print('请选择一个符文页：（输入索引范围之外的整数则创建一个新的符文页。）\nPlease select a page: (Enter an integer beyong the index range to create a new page.)')
+                    logPrint('请选择一个符文页：（输入索引范围之外的整数则创建一个新的符文页。）\nPlease select a page: (Enter an integer beyong the index range to create a new page.)')
                     print(format_df(perkPage_df.loc[:, perkPage_df_fields_to_print], print_index = True)[0])
+                    log.write(format_df(perkPage_df.loc[:, perkPage_df_fields_to_print], width_exceed_ask = False, direct_print = False, print_index = True)[0] + "\n")
                     while True:
-                        pageIndex = input()
+                        pageIndex = logInput()
                         if pageIndex == "":
                             continue
                         elif pageIndex == "0":
@@ -741,7 +783,7 @@ async def configure_perks(connection):
                             try:
                                 pageIndex = int(pageIndex)
                             except ValueError:
-                                print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                             else:
                                 page_exist = pageIndex >= 1 and pageIndex < len(perkPage_df)
                         if page_exist:
@@ -756,22 +798,23 @@ async def configure_perks(connection):
                             keystoneName = perkPage_df.loc[pageIndex, "pageKeystone name"]
                             perkIds = perkPage_df.loc[pageIndex, "selectedPerkIds"]
                             perkNames = perkPage_df.loc[pageIndex, "uiPerksNames"]
-                            print("主系（Style）：%s (%d)\n副系（Substyle）：%s (%d)\n基石符文（Keystone）：%s (%d)\n符文序号列表（Perk id list）： %s\n符文名称列表（Perk name list）： %s\n" %(primaryPerkStyleName, primaryPerkStyleId, secondaryPerkStyleName, secondaryPerkStyleId, keystoneName, keystoneId, perkIds, perkNames))
-                            print("是否编辑该符文页？（输入任意键以确认，否则放弃编辑。）\nDo you want to edit this perk page? (Submit any non-empty string to confirm, or null to decline editing.)")
-                            page_edit = bool(input())
+                            logPrint("主系（Style）：%s (%d)\n副系（Substyle）：%s (%d)\n基石符文（Keystone）：%s (%d)\n符文序号列表（Perk id list）： %s\n符文名称列表（Perk name list）： %s\n" %(primaryPerkStyleName, primaryPerkStyleId, secondaryPerkStyleName, secondaryPerkStyleId, keystoneName, keystoneId, perkIds, perkNames))
+                            logPrint("是否编辑该符文页？（输入任意键以确认，否则放弃编辑。）\nDo you want to edit this perk page? (Submit any non-empty string to confirm, or null to decline editing.)")
+                            page_edit_str = logInput()
+                            page_edit = bool(page_edit_str)
                         else:
                             page_edit = True
                             perkInventory = await (await connection.request("GET", "/lol-perks/v1/inventory")).json() #这个接口返回的信息中，自定义符文页可解锁似乎是一直是可用的（In the result returned by this endpoint, the "isCustomPageCreationUnlocked" seems always to be True）
                             if not perkInventory["canAddCustomPage"]:
-                                print("符文页栏位已满。删除或拥有更多符文页以创建新的符文页。程序将创建临时符文页。\nInventory full. Delete or obtain more pages to create more. The program is going to create a temporary perk page.")
+                                logPrint("符文页栏位已满。删除或拥有更多符文页以创建新的符文页。程序将创建临时符文页。\nInventory full. Delete or obtain more pages to create more. The program is going to create a temporary perk page.")
                                 isTemporary = True
                             else:
                                 isTemporary = False
                         if page_edit:
-                            back = False #决定是否在编辑的过程中放弃修改（Determines whether to quit edting while the user is editing）
-                            print("请选择编辑方式：\nPlease select a method of:\n0\t放弃修改（Quit editing）\n1\t逐个修改（Successively）\n2\t批量修改（In batch）\n3\t仅重命名（Rename only）\n4\t读取Json数据（From json data）\n5\t读取文件（From a file）")
+                            logPrint("请选择编辑方式：\nPlease select a method of:\n0\t放弃修改（Quit editing）\n1\t逐个修改（Successively）\n2\t批量修改（In batch）\n3\t仅重命名（Rename only）\n4\t读取Json数据（From json data）\n5\t读取文件（From a file）")
                             while True:
-                                method = input()
+                                back = False #决定是否切换编辑方式（Determines whether to switch to another method of editing）
+                                method = logInput()
                                 if method == "":
                                     continue
                                 elif method[0] == "0":
@@ -779,31 +822,38 @@ async def configure_perks(connection):
                                     break
                                 elif method[0] == "1": #保持与客户端符文配置步骤相同（Keep synchronized with the latest perk configuration steps in the League Client）
                                     page_body = {"name": "", "isTemporary": isTemporary, "primaryStyleId": -1, "subStyleId": -1, "selectedPerkIds": [-1, -1, -1, -1, -1, -1, -1, -1, -1]} #请求主体初始化（Initialize the request body）
-                                    print('在下面的步骤中，请确保输入的是正整数类型的符文系序号和符文序号。输入“0”以撤回最近一次输入。\nDuring the following steps, please make sure you submit the perkStyleId and perkId of integer type. Submit "0" to revert the latest input.')
+                                    logPrint('在下面的步骤中，请确保输入的是正整数类型的符文系序号和符文序号。输入“0”以撤回最近一次输入。\nDuring the following steps, please make sure you submit the perkStyleId and perkId of integer type. Submit "0" to revert the latest input.')
                                     step = 1
                                     while step <= 11: #客户端内配置符文页需要11个步骤（Setting a perk page in the League Client needs 11 steps）
                                         recall = False #决定是否撤回最近一次操作（Determines whether to recall the latest operation）
+                                        parameter_dict = {} #将用户输入的序号映射到符文系序号和符文序号。用户也可以直接输入原始序号（Map user input to the perkstyleIds and perkIds. The user may input the raw ids）
                                         #设置输出提示（Set up the output hint）
                                         if step == 1:
                                             tooltip = f"第{step}步：请选择主系。\nStep {step}: Please select a primary perkstyle."
                                             primaryStyleIds = sorted(perkstyles.keys())
                                             perkTableStr = ""
-                                            for styleId in primaryStyleIds:
-                                                perkTableStr += "\n%d\t%s" %(styleId, perkstyles[styleId]["name"])
+                                            for i in range(len(primaryStyleIds)):
+                                                styleId = primaryStyleIds[i]
+                                                parameter_dict[i + 1] = styleId
+                                                perkTableStr += "\n#%d\t%d\t%s" %(i + 1, styleId, perkstyles[styleId]["name"])
                                         elif step == 2:
                                             tooltip = f"第{step}步：请选择基石。\nStep {step}: Please select a keystone."
                                             perkTableStr = ""
                                             if page_body["primaryStyleId"] in perkstyles:
                                                 slotPerks = perkstyles[page_body["primaryStyleId"]]["slots"][step - 2]["perks"]
-                                                for perkId in slotPerks:
-                                                    perkTableStr += "\n%d\t%s" %(perkId, perks[perkId]["name"])
+                                                for i in range(len(slotPerks)):
+                                                    perkId = slotPerks[i]
+                                                    parameter_dict[i + 1] = perkId
+                                                    perkTableStr += "\n#%d\t%d\t%s" %(i + 1, perkId, perks[perkId]["name"])
                                         elif step <= 5:
                                             perkTableStr = ""
                                             if page_body["primaryStyleId"] in perkstyles:
                                                 slotLabel = perkstyles[page_body["primaryStyleId"]]["slots"][step - 2]["slotLabel"]
                                                 slotPerks = perkstyles[page_body["primaryStyleId"]]["slots"][step - 2]["perks"]
-                                                for perkId in slotPerks:
-                                                    perkTableStr += "\n%d\t%s" %(perkId, perks[perkId]["name"])
+                                                for i in range(len(slotPerks)):
+                                                    perkId = slotPerks[i]
+                                                    parameter_dict[i + 1] = perkId
+                                                    perkTableStr += "\n#%d\t%d\t%s" %(i + 1, perkId, perks[perkId]["name"])
                                             else:
                                                 slotLabel = "主系第%d行符文" %(step - 2)
                                             tooltip = f"第{step}步：请选择{slotLabel}符文。\nStep {step}: Please select a {slotLabel} perk."
@@ -812,30 +862,37 @@ async def configure_perks(connection):
                                             perkTableStr = ""
                                             if page_body["primaryStyleId"] in perkstyles:
                                                 allowedSubStyles = perkstyles[page_body["primaryStyleId"]]["allowedSubStyles"]
-                                                for styleId in allowedSubStyles:
-                                                    perkTableStr += "\n%d\t%s" %(styleId, perkstyles[styleId]["name"])
+                                                for i in range(len(allowedSubStyles)):
+                                                    styleId = allowedSubStyles[i]
+                                                    parameter_dict[i + 1] = styleId
+                                                    perkTableStr += "\n#%d\t%d\t%s" %(i + 1, styleId, perkstyles[styleId]["name"])
                                         elif step <= 8:
                                             substyle = perkstyles[page_body["subStyleId"]]["name"] if page_body["subStyleId"] in perkstyles else "副系"
                                             tooltip = f"第{step}步：请选择一个{substyle}符文。\nStep {step}: Please select a {substyle} perk."
                                             perkTableStr = ""
                                             if page_body["primaryStyleId"] in perkstyles and page_body["subStyleId"] in allowedSubStyles:
+                                                j = 0
                                                 for i in range(1, 4):
                                                     slotLabel = perkstyles[page_body["subStyleId"]]["slots"][i]["slotLabel"]
                                                     perkTableStr += "\n%s:" %(slotLabel)
                                                     slotPerks = perkstyles[page_body["subStyleId"]]["slots"][i]["perks"]
                                                     for perkId in slotPerks:
-                                                        perkTableStr += "\n%d\t%s" %(perkId, perks[perkId]["name"])
+                                                        j += 1
+                                                        parameter_dict[j] = perkId
+                                                        perkTableStr += "\n#%d\t%d\t%s" %(j, perkId, perks[perkId]["name"])
                                         else:
                                             slotLabel = perkstyles_initial["styles"][0]["slots"][step - 5]["slotLabel"] #这里的“0”可以换成1～4之间的任意正整数，因为所有符文系的后三个小符文信息都是一样的（Here the "0" can be replaced by any integer between 1 and 4, for the last three stat mods in all perkstyles are the same）
                                             slotPerks = perkstyles_initial["styles"][0]["slots"][step - 5]["perks"]
                                             tooltip = f"第{step}步：请选择{slotLabel}属性。\nStep {step}: Please select a {slotLabel} stat mod."
                                             perkTableStr = ""
-                                            for perkId in slotPerks:
-                                                perkTableStr += "\n%d\t%s" %(perkId, perks[perkId]["name"])
-                                        print(tooltip + perkTableStr)
+                                            for i in range(len(slotPerks)):
+                                                perkId = slotPerks[i]
+                                                parameter_dict[i + 1] = perkId
+                                                perkTableStr += "\n#%d\t%d\t%s" %(i + 1, perkId, perks[perkId]["name"])
+                                        logPrint(tooltip + perkTableStr)
                                         #输入参数（Input the parameter）
                                         while True:
-                                            parameter = input()
+                                            parameter = logInput()
                                             if parameter == "":
                                                 continue
                                             elif parameter == "0":
@@ -845,8 +902,10 @@ async def configure_perks(connection):
                                                 try:
                                                     parameter = int(parameter) #这里除了要求输入是整数外，没有其它要求。这也就意味着，逐个修改允许配置不可用的符文页（There's not any other restraints besides the input is an integer, which means successive input allows invalid perk pages）
                                                 except ValueError:
-                                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                                 else:
+                                                    if parameter in parameter_dict:
+                                                        parameter = parameter_dict[parameter]
                                                     break
                                         #处理输入（Handle the input）
                                         if recall:
@@ -866,16 +925,29 @@ async def configure_perks(connection):
                                             step += 1
                                     if back:
                                         page_edit = False
-                                        break
-                                    if page_exist:
-                                        print("是否需要修改符文页名称？（输入任意键修改，否则不修改。）\nDo you want to change the page name? (Submit any non-empty string to change, or null to stop changing.)")
-                                        if bool(input()):
-                                            print("请输入符文页的新名称：\nPlease enter the new name of this perk page:")
-                                            pageName = input()
                                     else:
-                                        print("请输入新符文页的名称：\nPlease enter the name of the new perk page:")
-                                        pageName = input()
-                                    page_body["name"] = pageName
+                                        page_edit = True
+                                        if page_exist:
+                                            old_pageName = pageName
+                                            logPrint("是否需要修改符文页名称？（输入任意键修改，否则不修改。）\nDo you want to change the page name? (Submit any non-empty string to change, or null to stop changing.)")
+                                            pageNameChange_str = logInput()
+                                            pageName_change = bool(pageNameChange_str)
+                                            if pageName_change:
+                                                logPrint("请输入符文页的新名称：\nPlease enter the new name of this perk page:")
+                                                new_pageName = logInput()
+                                            else:
+                                                new_pageName = old_pageName
+                                            if old_pageName != new_pageName:
+                                                logPrint("输入任意非空字符串以确认修改，否则取消修改。\nSubmit any non-empty string to confirm changing, or null to cancel.\n旧名称（Old）：%s\n新名称（New）：%s" %(old_pageName, new_pageName))
+                                                pageName_change_confirm_str = logInput()
+                                                pageName_change_confirm = bool(pageName_change_confirm_str)
+                                            else:
+                                                pageName_change_confirm = False
+                                            page_body["name"] = new_pageName if pageName_change_confirm else old_pageName
+                                        else:
+                                            logPrint("请输入新符文页的名称：\nPlease enter the name of the new perk page:")
+                                            new_pageName = logInput()
+                                            page_body["name"] = new_pageName
                                 elif method[0] == "2":
                                     keystoneIds = [perk["id"] for perk in perks_initial if perk["slotType"] == "kKeyStone"] #提取基石序号列表，用于判断基石的正确性（Extract the list of keystone ids to judge the keystone's correctness）
                                     statmodIds = [perk["id"] for perk in perks_initial if perk["slotType"] == "kStatMod"] #提取属性符文序号列表，用于判断基石的正确性（Extract the list of stat mod ids to judge the keystone's correctness）
@@ -884,9 +956,9 @@ async def configure_perks(connection):
                                         for slot in style["slots"]:
                                             for perkId in slot["perks"]:
                                                 perkMap[perkId] = {"styleId": perks[perkId]["styleId"], "slotType": slot["type"], "slotLabel": slot["slotLabel"]}
-                                    print("请输入一个由符文序号组成的列表。\nPlease input a list composed of perkIds.\n例如（Example）：[8008, 9111, 9104, 8014, 8347, 8304, 5005, 5008, 5001]")
+                                    logPrint("请输入一个由符文序号组成的列表。\nPlease input a list composed of perkIds.\n例如（Example）：[8008, 9111, 9104, 8014, 8347, 8304, 5005, 5008, 5001]")
                                     while True:
-                                        uiPerksStr = input()
+                                        uiPerksStr = logInput()
                                         if uiPerksStr == "":
                                             continue
                                         elif uiPerksStr[0] == "0":
@@ -896,7 +968,7 @@ async def configure_perks(connection):
                                             try:
                                                 uiPerksIds = eval(uiPerksStr)
                                             except:
-                                                print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                             else:
                                                 #下面对uiPerksIds展开重重检验，确保生成的是有效的符文页（The following code perform continuous tests on `uiPerksIds` to ensure that a valid perk page will be generated）
                                                 if isinstance(uiPerksIds, list) and all(map(lambda x: isinstance(x, int) and x in perks.keys(), uiPerksIds)):
@@ -909,121 +981,138 @@ async def configure_perks(connection):
                                                                 slot = perkstyles[primaryStyle["id"]]["slots"][i]
                                                                 if not uiPerksIds[i] in slot["perks"]:
                                                                     perkIds_valid = False
-                                                                    print("%s系的%s符文中不包含%s（%d）。\n%s (%d) doesn't exist in the %s slot of %s style." %(primaryStyle["name"], slot["slotLabel"], perks[uiPerksIds[i]], uiPerksIds[i], perks[uiPerksIds[i]], uiPerksIds[i], slot["slotLabel"], primaryStyle["name"]))
+                                                                    logPrint("%s系的%s符文中不包含%s（%d）。\n%s (%d) doesn't exist in the %s slot of %s style." %(primaryStyle["name"], slot["slotLabel"], perks[uiPerksIds[i]]["name"], uiPerksIds[i], perks[uiPerksIds[i]]["name"], uiPerksIds[i], slot["slotLabel"], primaryStyle["name"]))
                                                             #下面检验副系的两个符文。副系的检验依赖于主系的确定，因为涉及到主系的合法副系的判断，因此这一段代码置于基石正确性判断的if条件语句块内（Second, check the correctness of two perks in the substyle. Check on the substyle depends on the confirmation of the primary style, for it involves the allowed substyle of a primary style. Therefore, the following code are under the if-statement that check the keystone correctness）
                                                             ##首先针对其所属符文系展开检验（First, perform tests on their belonging perkstyles）
                                                             if not perkMap[uiPerksIds[4]]["styleId"] in perkstyles[primaryStyle["id"]]["allowedSubStyles"]: #检验副系第一个符文所属符文系是否是主系的合法副系（Check whether the first perk of substyle is a legal substyle of the primary style）
                                                                 perkIds_valid = False
-                                                                print("%s（%d）所属符文系（%d）不是主系%s（%d）的合法副系。\nThe belonging style (%d) of %s (%d) isn't an allowed substyle for primary style %s (%d)." %(perks[uiPerksIds[4]]["name"], uiPerksIds[4], perkMap[uiPerksIds[4]]["styleId"], primaryStyle["name"], perks[uiPerksIds[0]]["styleId"], perkMap[uiPerksIds[4]]["styleId"], perks[uiPerksIds[4]]["name"], uiPerksIds[4], primaryStyle["name"], perks[uiPerksIds[0]]["styleId"]))
+                                                                logPrint("%s（%d）所属符文系（%d）不是主系%s（%d）的合法副系。\nThe belonging style (%d) of %s (%d) isn't an allowed substyle for primary style %s (%d)." %(perks[uiPerksIds[4]]["name"], uiPerksIds[4], perkMap[uiPerksIds[4]]["styleId"], primaryStyle["name"], perks[uiPerksIds[0]]["styleId"], perkMap[uiPerksIds[4]]["styleId"], perks[uiPerksIds[4]]["name"], uiPerksIds[4], primaryStyle["name"], perks[uiPerksIds[0]]["styleId"]))
                                                             if not perkMap[uiPerksIds[5]]["styleId"] in perkstyles[primaryStyle["id"]]["allowedSubStyles"]: #检验副系第二个符文所属符文系是否是主系的合法副系（Check whether the second perk of substyle is a legal substyle of the primary style）
                                                                 perkIds_valid = False
-                                                                print("%s（%d）所属符文系（%d）不是主系%s（%d）的合法副系。\nThe belonging style (%d) of %s (%d) isn't an allowed substyle for primary style %s (%d)." %(perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[5]]["styleId"], primaryStyle["name"], perks[uiPerksIds[0]]["styleId"], perkMap[uiPerksIds[5]]["styleId"], perks[uiPerksIds[5]]["name"], uiPerksIds[5], primaryStyle["name"], perks[uiPerksIds[0]]["styleId"]))
+                                                                logPrint("%s（%d）所属符文系（%d）不是主系%s（%d）的合法副系。\nThe belonging style (%d) of %s (%d) isn't an allowed substyle for primary style %s (%d)." %(perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[5]]["styleId"], primaryStyle["name"], perks[uiPerksIds[0]]["styleId"], perkMap[uiPerksIds[5]]["styleId"], perks[uiPerksIds[5]]["name"], uiPerksIds[5], primaryStyle["name"], perks[uiPerksIds[0]]["styleId"]))
                                                             if perkMap[uiPerksIds[4]]["styleId"] != perkMap[uiPerksIds[5]]["styleId"]:
                                                                 perkIds_valid = False
-                                                                print("%s（%d）所属符文系（%d）和%s（%d）所属符文系（%d）不相同。\n%s (%d) and %s (%d) have different belonging perkstyles (%d and %d)." %(perks[uiPerksIds[4]]["name"], uiPerksIds[4], perkMap[uiPerksIds[4]]["styleId"], perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[5]]["styleId"], perks[uiPerksIds[4]]["name"], uiPerksIds[4], perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[4]]["styleId"], perkMap[uiPerksIds[5]]["styleId"]))
+                                                                logPrint("%s（%d）所属符文系（%d）和%s（%d）所属符文系（%d）不相同。\n%s (%d) and %s (%d) have different belonging perkstyles (%d and %d)." %(perks[uiPerksIds[4]]["name"], uiPerksIds[4], perkMap[uiPerksIds[4]]["styleId"], perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[5]]["styleId"], perks[uiPerksIds[4]]["name"], uiPerksIds[4], perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[4]]["styleId"], perkMap[uiPerksIds[5]]["styleId"]))
                                                             ##在迄今为止副系的两个符文所属符文系合法——两个符文所属符文系相同，且是主系的合法副系——的情况下，接下来对其槽位展开检验（When the belonging perkstyles of the two substyle perks are legal, that is, these two perks belong to one style and this style is an allowed substyle of the primary style, perform tests on these two perks' slots）
                                                             if perkIds_valid: #该条件等价于（This condition is equivalent to）`perkMap[uiPerksIds[4]]["styleId"] == perkMap[uiPerksIds[5]]["styleId"] and perkMap[uiPerksIds[4]]["styleId"] in perkstyles[primaryStyle["id"]]["allowedSubStyles"]`
                                                                 ##注意：在上面的符文对应关系字典中，属性符文也被包含在内。虽然会有多个符文系包含同一套属性符文的问题，但是这里只对副系的两个符文进行检验，所以该字典中关于属性符文的问题在这里是无关紧要的（Note: In the `perkMap` dictionary, stat mods are included. Despite the fact that multiple perkstyles contain a same set of stat mods, here the test is performed only on the two perks of the substyle, so the stat mod issue here is insignificant）
                                                                 if perkMap[uiPerksIds[4]]["slotType"] != "kMixedRegularSplashable": #检验副系第一个符文是不是基石和属性之外的符文（Check whether the first perk of the substyle is of "kMixedRegularSplashable" type）
                                                                     perkIds_valid = False
-                                                                    print('''%s（%d）所属槽位类型不是符文。\nThe slot type of %s (%d) isn't "kMixedRegularSplashable".''' %(perks[uiPerksIds[4]]["name"], uiPerksIds[4], perks[uiPerksIds[4]]["name"], uiPerksIds[4]))
+                                                                    logPrint('''%s（%d）所属槽位类型不是符文。\nThe slot type of %s (%d) isn't "kMixedRegularSplashable".''' %(perks[uiPerksIds[4]]["name"], uiPerksIds[4], perks[uiPerksIds[4]]["name"], uiPerksIds[4]))
                                                                 if perkMap[uiPerksIds[5]]["slotType"] != "kMixedRegularSplashable": #检验副系第二个符文是不是基石和属性之外的符文（Check whether the second perk of the substyle is of "kMixedRegularSplashable" type）
                                                                     perkIds_valid = False
-                                                                    print('''%s（%d）所属槽位类型不是符文。\nThe slot type of %s (%d) isn't "kMixedRegularSplashable".''' %(perks[uiPerksIds[5]]["name"], uiPerksIds[5], perks[uiPerksIds[5]]["name"], uiPerksIds[5]))
+                                                                    logPrint('''%s（%d）所属槽位类型不是符文。\nThe slot type of %s (%d) isn't "kMixedRegularSplashable".''' %(perks[uiPerksIds[5]]["name"], uiPerksIds[5], perks[uiPerksIds[5]]["name"], uiPerksIds[5]))
                                                                 if perkMap[uiPerksIds[4]]["slotLabel"] == perkMap[uiPerksIds[5]]["slotLabel"]: #检验副系的两个符文的槽位是否相同（Check whether two slot labels of the two perks of the substyle are the same）
                                                                     perkIds_valid = False
-                                                                    print("%s（%d）和%s（%d）具有相同的槽位（%s）。\n%s (%d) and %s (%d) has the same slot label (%s)." %(perks[uiPerksIds[4]]["name"], uiPerksIds[4], perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[4]]["slotLabel"], perks[uiPerksIds[4]]["name"], uiPerksIds[4], perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[4]]["slotLabel"]))
+                                                                    logPrint("%s（%d）和%s（%d）具有相同的槽位（%s）。\n%s (%d) and %s (%d) has the same slot label (%s)." %(perks[uiPerksIds[4]]["name"], uiPerksIds[4], perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[4]]["slotLabel"], perks[uiPerksIds[4]]["name"], uiPerksIds[4], perks[uiPerksIds[5]]["name"], uiPerksIds[5], perkMap[uiPerksIds[4]]["slotLabel"]))
                                                         else:
                                                             perkIds_valid = False
-                                                            print("%s（%d）不是基石符文。\n%s (%d) isn't a keystone." %(perks[uiPerksIds[0]], uiPerksIds[0], perks[uiPerksIds[0]], uiPerksIds[0]))
+                                                            logPrint("%s（%d）不是基石符文。\n%s (%d) isn't a keystone." %(perks[uiPerksIds[0]]["name"], uiPerksIds[0], perks[uiPerksIds[0]]["name"], uiPerksIds[0]))
                                                         #最后检验属性符文。属性符文和主系和副系都是独立的，因此其缩进回调一个单位（Finally, check the stat mods. Stat mods are indenpendent from both primary style and substyle, so the indentation is decreased by one unit）
                                                         ##回到上面的符文对应关系字典。它具体存在的问题是，由于多个符文系都存在这些属性符文，而每个属性符文的符文系序号、槽位名称和槽位类型是由遍历符文系产生的，因此每个属性符文的这些信息都会是最后一个被遍历的符文系的这些信息。实际上，这对于后续判断也没有影响。首先，属性符文和主系和副系都是独立的，压根儿就不会用上其符文系序号这个信息。其次，虽然多个符文系包含这些属性符文，但是这些属性符文的槽位名称和槽位类型在这些符文系中是相同的，所以无论采用哪个符文系的信息都无所谓（Back to previous `perkMap` dictionary. The detailed issue is, multiple perkstyles contain these stat mods, so given that the perkstyleId, slot label and slot type of each stat mod is obtained by traversing the perkstyles, these information is actually from the perkstyle traversed. But in fact, this issue shouldn't affact the subsequent judgments. On the one hand, stat mods are indenpendent from both primary style and substyle, and their styleIds will never be regarded as useful. On the other hand, although these statmods are contained in multiple perkstyles, their slot labels and slot types recorded in the perkstyles are same, so it doesn't matter which perkstyle is used）
                                                         for i in range(6, 9):
                                                             if not uiPerksIds[i] in statmodIds: #首先判断第7～9个符文是不是属性符文（First, judge whether the 7th to 9th perks are stat mods）
                                                                 perkIds_valid = False
-                                                                print("%s（%d）不是属性符文。\n%s (%d) isn't a stat mod." %(perks[uiPerksIds[i]]["name"], uiPerksIds[i], perks[uiPerksIds[i]]["name"], uiPerksIds[i]))
+                                                                logPrint("%s（%d）不是属性符文。\n%s (%d) isn't a stat mod." %(perks[uiPerksIds[i]]["name"], uiPerksIds[i], perks[uiPerksIds[i]]["name"], uiPerksIds[i]))
                                                             elif perkMap[uiPerksIds[i]]["slotLabel"] != perkstyles_initial["styles"][0]["slots"][i - 2]["slotLabel"]: #然后判断这些属性符文是不是对应行的。这里有两点：第一，之所以用elif不是if，是因为上面的perkMap的数据来源是符文系，而符文系相比符文少了一些符文信息，上面的判断过程也没有排除这些少的符文信息，所以如果直接用if的话，当用户输入的是这部分少的符文的序号时，会引发perkMap的键错误；第二，既然前面提到属性符文的槽位名称和槽位类型在符文系中都是相同的，所以这里直接默认使用了第一个符文系（Next, judge whether the stat mods have the corresponding slot labels. Here're two points worth mentioning. First, the reason why "elif" instead of "if" is used here is that data in the previous `perkMap` dictionary are (traversed) from perkstyles, which don't collect all perks. These extra perks aren't excluded during the previous steps, so if an "if" is used here, when the user inputs these extra perks' ids, a KeyError will occurred to `perkMap`. Second, now that slot names and slot types of stat mods in different perkstyles are the same, here the first perkstyle is used by default）
                                                                 perkIds_valid = False
-                                                                print("%s（%d）不是%s类属性符文。\n%s (%d) isn't a stat mod of %s type." %(perks[uiPerksIds[i]]["name"], uiPerksIds[i], perkMap[uiPerksIds[i]]["slotLabel"], perks[uiPerksIds[i]]["name"], uiPerksIds[i], perkMap[uiPerksIds[i]]["slotLabel"]))
+                                                                logPrint("%s（%d）不是%s类属性符文。\n%s (%d) isn't a stat mod of %s type." %(perks[uiPerksIds[i]]["name"], uiPerksIds[i], perkMap[uiPerksIds[i]]["slotLabel"], perks[uiPerksIds[i]]["name"], uiPerksIds[i], perkMap[uiPerksIds[i]]["slotLabel"]))
                                                         if perkIds_valid: #前面的检验都通过，则用户输入的符文序号列表是合法的（If all the previous tests are passed, then the perkId list is valid）
                                                             page_body = {"name": "", "isTemporary": isTemporary, "primaryStyleId": primaryStyle["id"], "subStyleId": perkMap[uiPerksIds[4]]["styleId"], "selectedPerkIds": uiPerksIds} #第4个和第5个符文的所属符文系是相同的，这里默认使用了第4个（The 4th and 5th perks have the same belonging perkstyles. Here the 4th's is used）
                                                             #设置符文页的名称（Set the perk page name）
                                                             pageNameChange = False
                                                             if page_exist:
-                                                                print("是否需要修改符文页名称？（输入任意键修改，否则不修改。）\nDo you want to change the page name? (Submit any non-empty string to change, or null to stop changing.)")
-                                                                pageNameChange = bool(input())
+                                                                old_pageName = pageName
+                                                                logPrint("是否需要修改符文页名称？（输入任意键修改，否则不修改。）\nDo you want to change the page name? (Submit any non-empty string to change, or null to stop changing.)")
+                                                                pageNameChange_str = logInput()
+                                                                pageNameChange = bool(pageNameChange_str)
                                                                 if pageNameChange:
-                                                                    print("请输入符文页的新名称：\nPlease enter the new name of this perk page:")
+                                                                    logPrint("请输入符文页的新名称：\nPlease enter the new name of this perk page:")
                                                             else:
                                                                 pageNameChange = True
-                                                                print("请输入新符文页的名称：\nPlease enter the name of the new perk page:")
+                                                                logPrint("请输入新符文页的名称：\nPlease enter the name of the new perk page:")
                                                             if pageNameChange:
                                                                 while True:
-                                                                    pageName = input()
+                                                                    new_pageName = logInput()
                                                                     #检验符文页名称有效性的接口依赖于一个具体的符文页。这需要针对用户是否有符文页进行讨论（The endpoint to validate the page name depends on a specific perk page. This introduces the discussion about whether the user has one perk page）
                                                                     perkPages = await (await connection.request("GET", "/lol-perks/v1/pages")).json()
                                                                     dummy_page_created = False
                                                                     if len(perkPages) == 0: #如果用户没有符文页，则创建一个占位符文页。目的只是为了拿到一个具体的符文页序号（If the user doesn't have any perk page, create one. The aim is only to get a perk page id）
                                                                         dummy_page_body = {"name": "占位符文页", "isTemporary": isTemporary, "primaryStyleId": -1, "subStyleId": -1, "selectedPerkIds": [-1, -1, -1, -1, -1, -1, -1, -1, -1]}
                                                                         response = await (await connection.request("POST", "/lol-perks/v1/pages", data = dummy_page_body)).json()
-                                                                        print(response)
+                                                                        logPrint(response)
                                                                         if "errorCode" in response:
-                                                                            print(response)
-                                                                            print("符文页名称有效性验证失败。将不再验证符文页名称有效性。\nPerk page name validation failed. This name won't be validated this time.")
+                                                                            logPrint(response)
+                                                                            logPrint("符文页名称有效性验证失败。将不再验证符文页名称有效性。\nPerk page name validation failed. This name won't be validated this time.")
                                                                             break
                                                                         else:
                                                                             dummy_page_created = True
                                                                             dummy_pageId = response["id"]
-                                                                            validate_body = {"id": response["id"], "name": pageName}
+                                                                            validate_body = {"id": response["id"], "name": new_pageName}
                                                                     else: #如果用户有符文页，则使用第一个符文页的序号。这不会对第一个符文页产生影响（If the user has a perk page, use the id of the first page. This won't cause any change to it）
-                                                                        validate_body = {"id": perkPages[0]["id"], "name": pageName}
+                                                                        validate_body = {"id": perkPages[0]["id"], "name": new_pageName}
                                                                     response = await (await connection.request("PUT", "/lol-perks/v1/pages/validate", data = validate_body)).json()
-                                                                    print(response)
+                                                                    logPrint(response)
                                                                     if "errorCode" in response:
-                                                                        print(response)
-                                                                        print("符文页名称有效性验证失败。将不再验证符文页名称有效性。\nPerk page name validation failed. This name won't be validated this time.")
+                                                                        logPrint(response)
+                                                                        logPrint("符文页名称有效性验证失败。将不再验证符文页名称有效性。\nPerk page name validation failed. This name won't be validated this time.")
                                                                         break
                                                                     else:
                                                                         if response["success"]:
-                                                                            print("符文页名称通过验证。\nNew page name passed validation.")
+                                                                            logPrint("符文页名称通过验证。\nNew page name passed validation.")
                                                                             if dummy_page_created:
                                                                                 response = await (await connection.request("DELETE", f"/lol-perks/v1/pages/{dummy_pageId}")).json()
-                                                                                print(response)
+                                                                                logPrint(response)
                                                                                 if response != None:
-                                                                                    print(response)
-                                                                                    print("占位符文页删除失败。请自行在客户端内删除。\nDummy perk page failed to be deleted. Please delete it by yourself.")
+                                                                                    logPrint(response)
+                                                                                    logPrint("占位符文页删除失败。请自行在客户端内删除。\nDummy perk page failed to be deleted. Please delete it by yourself.")
                                                                             break
                                                                         else:
                                                                             if "DISABLED" in response["nameCheckResponse"]["errors"]:
-                                                                                print("不能更改。\nPage can't be renamed.")
+                                                                                logPrint("不能更改。\nPage can't be renamed.")
                                                                             if "INAPPROPRIATE" in response["nameCheckResponse"]["errors"]:
-                                                                                print("名字不适当。\nName is inappropriate.")
+                                                                                logPrint("名字不适当。\nName is inappropriate.")
                                                                             if "INVALID_CHAR" in response["nameCheckResponse"]["errors"]:
-                                                                                print("名字有无效字符。\nName has invalid characters.")
-                                                            page_body["name"] = pageName #pageName在前面定义为已经存在的符文页的名称，所以这里统一代表已经存在的符文页的名称或者用户输入的新名称（`pageName` is previously defined as the name of a perk page that already exists, so it represents that name or the new name the user inputs）
+                                                                                logPrint("名字有无效字符。\nName has invalid characters.")
+                                                            if page_exist:
+                                                                if old_pageName != new_pageName:
+                                                                    logPrint("输入任意非空字符串以确认修改，否则取消修改。\nSubmit any non-empty string to confirm changing, or null to cancel.\n旧名称（Old）：%s\n新名称（New）：%s" %(old_pageName, new_pageName))
+                                                                    pageName_change_confirm_str = logInput()
+                                                                    pageName_change_confirm = bool(pageName_change_confirm_str)
+                                                                else:
+                                                                    pageName_change_confirm = False
+                                                                page_body["name"] = new_pageName if pageName_change_confirm else old_pageName
+                                                            else:
+                                                                page_body["name"] = new_pageName
                                                             break
                                                         else:
-                                                            print("您输入的符文序号列表有误！请检查您输入的符文序号列表并再试一次。\nERROR occurred in the perkId list! Please check your perkId list and try again.")
+                                                            logPrint("您输入的符文序号列表有误！请检查您输入的符文序号列表并再试一次。\nERROR occurred in the perkId list! Please check your perkId list and try again.")
                                                     else:
-                                                        print("您输入的符文数量过少！请输入由9个符文序号组成的列表。\nPerk number not enough! Please submit a list composed of 9 perkIds.")
+                                                        logPrint("您输入的符文数量过少！请输入由9个符文序号组成的列表。\nPerk number not enough! Please submit a list composed of 9 perkIds.")
                                                 else:
-                                                    print("您的输入格式有误！请输入一个由符文序号正整数组成的列表。\nERROR format! Please submit a list composed of perkIds of integer type.")
-                                    if back:
-                                        page_edit = False
-                                        break
+                                                    logPrint("您的输入格式有误！请输入一个由符文序号正整数组成的列表。\nERROR format! Please submit a list composed of perkIds of integer type.")
+                                    page_edit = not back
                                 elif method[0] == "3":
                                     if page_exist:
-                                        print("请输入符文页的新名称：\nPlease enter the new name of this perk page:")
-                                        pageName = input()
-                                        page_body = {"name": pageName, "isTemporary": isTemporary, "primaryStyleId": primaryPerkStyleId, "subStyleId": secondaryPerkStyleId, "selectedPerkIds": perkIds}
+                                        old_pageName = pageName
+                                        logPrint("请输入符文页的新名称：\nPlease enter the new name of this perk page:")
+                                        new_pageName = logInput()
+                                        if old_pageName != new_pageName:
+                                            logPrint("输入任意非空字符串以确认修改，否则取消修改。\nSubmit any non-empty string to confirm changing, or null to cancel.\n旧名称（Old）：%s\n新名称（New）：%s" %(old_pageName, new_pageName))
+                                            pageName_change_confirm_str = logInput()
+                                            pageName_change_confirm = bool(pageName_change_confirm_str)
+                                        else:
+                                            pageName_change_confirm = False
+                                        page_edit = pageName_change_confirm
+                                        page_body = {"name": new_pageName if pageName_change_confirm else old_pageName, "isTemporary": isTemporary, "primaryStyleId": primaryPerkStyleId, "subStyleId": secondaryPerkStyleId, "selectedPerkIds": perkIds}
                                     else:
-                                        print("未创建的符文页不支持该操作。\nA perk page that hasn't been created doesn't support this method.")
+                                        logPrint("未创建的符文页不支持该操作。\nA perk page that hasn't been created doesn't support this method.")
                                         continue
                                 elif method[0] == "4":
-                                    print('请在单行内输入包含新符文页信息的字典或Json代码：\nPlease input a Python dictionary or a piece of Json code that represents the new perk page information in a single line:\n示例（Examples）：\nPython字典（Python dictionary）：\n{"name": "无极剑圣 - 致命节奏", "isActive": False, "isTemporary": True, "primaryStyleId": 8000, "secondaryStyleId": 8300, "selectedPerkIds": [8008, 9111, 9104, 8014, 8347, 8304, 5005, 5008, 5001]}\nJson：\n{"name": "无极剑圣 - 致命节奏", "isActive": false, "isTemporary": true, "primaryStyleId": 8000, "secondaryStyleId": 8300, "selectedPerkIds": [8008, 9111, 9104, 8014, 8347, 8304, 5005, 5008, 5001]}')
+                                    logPrint('请在单行内输入包含新符文页信息的字典或Json代码：\nPlease input a Python dictionary or a piece of Json code that represents the new perk page information in a single line:\n示例（Examples）：\nPython字典（Python dictionary）：\n{"name": "无极剑圣 - 致命节奏", "isActive": False, "isTemporary": True, "primaryStyleId": 8000, "secondaryStyleId": 8300, "selectedPerkIds": [8008, 9111, 9104, 8014, 8347, 8304, 5005, 5008, 5001]}\nJson：\n{"name": "无极剑圣 - 致命节奏", "isActive": false, "isTemporary": true, "primaryStyleId": 8000, "secondaryStyleId": 8300, "selectedPerkIds": [8008, 9111, 9104, 8014, 8347, 8304, 5005, 5008, 5001]}')
                                     while True:
                                         json_decoded = False
-                                        page_body_str = input()
+                                        page_body_str = logInput()
                                         if page_body_str == "":
                                             continue
                                         elif page_body_str[0] == "0":
@@ -1034,24 +1123,22 @@ async def configure_perks(connection):
                                                 page_body = json.loads(page_body_str)
                                             except json.decoder.JSONDecodeError:
                                                 traceback_info = traceback.format_exc()
-                                                print(traceback_info)
+                                                logPrint(traceback_info)
                                                 try:
                                                     page_body = eval(page_body_str)
                                                 except:
                                                     traceback_info = traceback.format_exc()
-                                                    print(traceback_info)
-                                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                                    logPrint(traceback_info)
+                                                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                                 else:
                                                     break
                                             else:
                                                 break
-                                    if back:
-                                        page_edit = False
-                                        break
+                                    page_edit = not back
                                 elif method[0] == "5":
-                                    print('请输入以Json格式存储新符文页信息的文件路径。输入“0”以返回上一层。\nPlease submit the path of the file that stores the new perk page information in Json format. Submit "0" to return to the last step.')
+                                    logPrint('请输入以Json格式存储新符文页信息的文件路径。输入“0”以返回上一层。\nPlease submit the path of the file that stores the new perk page information in Json format. Submit "0" to return to the last step.')
                                     while True:
-                                        page_body_path = input()
+                                        page_body_path = logInput()
                                         if page_body_path == "":
                                             continue
                                         elif page_body_path == "0":
@@ -1059,58 +1146,58 @@ async def configure_perks(connection):
                                             break
                                         else:
                                             if os.path.exists(page_body_path):
-                                                print("您输入的路径不存在！请重新输入。\nFile not found! Please try again.")
+                                                logPrint("您输入的路径不存在！请重新输入。\nFile not found! Please try again.")
                                             else:
                                                 try:
                                                     with open(page_body_path, "r", encoding = "utf-8") as fp:
                                                         page_body = json.load(fp)
                                                 except json.decoder.JSONDecodeError:
                                                     traceback_info = traceback.format_exc()
-                                                    print(traceback_info)
-                                                    print("文件格式错误！请检查文件格式或使用其它文件。\nERROR format! Please check the file format or use another file.")
+                                                    logPrint(traceback_info)
+                                                    logPrint("文件格式错误！请检查文件格式或使用其它文件。\nERROR format! Please check the file format or use another file.")
                                                 else:
                                                     break
-                                    if back:
-                                        page_edit = False
-                                        break
+                                    page_edit = not back
                                 else:
-                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                 if page_edit:
                                     if page_exist:
                                         response = await (await connection.request("PUT", f"/lol-perks/v1/pages/{pageId}", data = page_body)).json()
-                                        print(response)
+                                        logPrint(response)
                                         if "errorCode" in response:
-                                            print(response)
-                                            print("符文页编辑失败。\nFailed to edit this perk page.")
+                                            logPrint("符文页编辑失败。\nFailed to edit this perk page.")
                                         else:
-                                            print("符文页编辑成功。\nPerk page is edit successfully.")
+                                            logPrint("符文页编辑成功。\nPerk page is edited successfully.")
                                     else:
                                         response = await (await connection.request("POST", "/lol-perks/v1/pages", data = page_body)).json()
-                                        print(response)
+                                        logPrint(response)
                                         if "errorCode" in response:
-                                            print(response)
-                                            print("符文页创建失败。\nFailed to add this perk page.")
+                                            logPrint("符文页创建失败。\nFailed to add this perk page.")
                                         else:
-                                            print("符文页创建成功。\nPerk page is added successfully.")
-                                            pageId = response["id"]
-                                            pageName = response["name"]
-                                            primaryPerkStyleName = response["primaryStyleName"]
-                                            primaryPerkStyleId = response["primaryStyleId"]
-                                            secondaryPerkStyleName = response["secondaryStyleName"]
-                                            secondaryPerkStyleId = response["subStyleId"]
-                                            keystoneId = response["pageKeystone"]["id"]
-                                            keystoneName = response["pageKeystone"]["name"]
-                                            perkIds = response["selectedPerkIds"]
-                                            perkNames = list(map(lambda x: x["name"], response["uiPerks"]))
-                                            print("主系（Style）：%s (%d)\n副系（Substyle）：%s (%d)\n基石符文（Keystone）：%s (%d)\n符文序号列表（Perk id list）： %s\n符文名称列表（Perk name list）： %s\n" %(primaryPerkStyleName, primaryPerkStyleId, secondaryPerkStyleName, secondaryPerkStyleId, keystoneName, keystoneId, perkIds, perkNames))
-                                break
+                                            logPrint("符文页创建成功。\nPerk page is added successfully.")
+                                    if not "errorCode" in response:
+                                        pageId = response["id"]
+                                        pageName = response["name"]
+                                        primaryPerkStyleName = response["primaryStyleName"]
+                                        primaryPerkStyleId = response["primaryStyleId"]
+                                        secondaryPerkStyleName = response["secondaryStyleName"]
+                                        secondaryPerkStyleId = response["subStyleId"]
+                                        keystoneId = response["pageKeystone"]["id"]
+                                        keystoneName = response["pageKeystone"]["name"]
+                                        perkIds = response["selectedPerkIds"]
+                                        perkNames = list(map(lambda x: x["name"], response["uiPerks"]))
+                                        logPrint("主系（Style）：%s (%d)\n副系（Substyle）：%s (%d)\n基石符文（Keystone）：%s (%d)\n符文序号列表（Perk id list）： %s\n符文名称列表（Perk name list）： %s\n" %(primaryPerkStyleName, primaryPerkStyleId, secondaryPerkStyleName, secondaryPerkStyleId, keystoneName, keystoneId, perkIds, perkNames))
+                                    break
+                                logPrint("请选择编辑方式：\nPlease select a method of:\n0\t放弃修改（Quit editing）\n1\t逐个修改（Successively）\n2\t批量修改（In batch）\n3\t仅重命名（Rename only）\n4\t读取Json数据（From json data）\n5\t读取文件（From a file）")
                         if page_exist or page_edit and not "errorCode" in response:
-                            print("是否导出该符文页？（输入任意键以确认，否则放弃导出。）\nDo you want to export this perk page? (Submit any non-empty string to confirm, or null to decline exporting.)")
-                            if bool(input()):
+                            logPrint("是否导出该符文页？（输入任意键以确认，否则放弃导出。）\nDo you want to export this perk page? (Submit any non-empty string to confirm, or null to decline exporting.)")
+                            page_export_str = logInput()
+                            page_export = bool(page_export_str)
+                            if page_export:
                                 perkPage_json = {"name": pageName, "isTemporary": isTemporary, "primaryStyleId": primaryPerkStyleId, "secondaryStyleId": secondaryPerkStyleId, "selectedPerkIds": perkIds}
-                                print("请选择导出方式：\nPlease select a way to export:\n1\t写入文件（Write into a file）\n2\t复制到剪贴板（Copy to clipboard）")
+                                logPrint("请选择导出方式：\nPlease select a way to export:\n1\t写入文件（Write into a file）\n2\t复制到剪贴板（Copy to clipboard）")
                                 while True:
-                                    export_method = input()
+                                    export_method = logInput()
                                     if export_method == "":
                                         continue
                                     elif export_method[0] == "0":
@@ -1119,28 +1206,29 @@ async def configure_perks(connection):
                                         json2name = "MyPage.json"
                                         with open(json2name, "w", encoding = "utf-8") as fp:
                                             json.dump(perkPage_json, fp, ensure_ascii = False)
-                                        print('符文页“%s”（%d）已导出到同目录下的“%s”中。\nPage "%s" (%d) has been exported into "%s" under the same folder.\n' %(pageName, pageId, json2name, pageName, pageId, json2name))
+                                        logPrint('符文页“%s”（%d）已导出到同目录下的“%s”中。\nPage "%s" (%d) has been exported into "%s" under the same folder.\n' %(pageName, pageId, json2name, pageName, pageId, json2name))
                                         break
                                     elif export_method[0] == "2":
                                         pyperclip.copy(perkPage_json)
-                                        print('符文页“%s”（%d）已复制到剪贴板中。\nPage "%s" (%d) has been copied to clipboard.\n' %(pageName, pageId, pageName, pageId))
+                                        logPrint('符文页“%s”（%d）已复制到剪贴板中。\nPage "%s" (%d) has been copied to clipboard.\n' %(pageName, pageId, pageName, pageId))
                                         break
                                     else:
-                                        print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                        logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                         break
                 elif action[0] == "3":
                     perkPages = await (await connection.request("GET", "/lol-perks/v1/pages")).json()
                     if len(perkPages) == 0:
-                        print("您还未创建任何符文页！请先创建一个符文页再选择此操作。\nYou don't have any page currently. Please select this action after creating a page.")
+                        logPrint("您还未创建任何符文页！请先创建一个符文页再选择此操作。\nYou don't have any page currently. Please select this action after creating a page.")
                     else:
                         if not any(map(lambda x: x["isActive"], perkPages)):
-                            print("符文页活动性无法正常显示。请确保您目前处于涉及符文配置的游戏模式的英雄选择阶段。\nPerk page activity doesn't display right now. Please make sure you're during the champ select stage of a game mode that involves perk configuration.")
-                        print("您的符文页活动性信息如下：\nPerk page activity is as follows:")
+                            logPrint("符文页活动性无法正常显示。请确保您目前处于涉及符文配置的游戏模式的英雄选择阶段。\nPerk page activity doesn't display right now. Please make sure you're during the champ select stage of a game mode that involves perk configuration.")
+                        logPrint("您的符文页活动性信息如下：\nPerk page activity is as follows:")
                         perkPage_df = await get_perk_page(connection)
                         print(format_df(perkPage_df.loc[:, ["name", "isActive", "isValid", "primaryStyleName", "secondaryStyleName", "pageKeystone name"]], print_index = True)[0])
-                        print("请选择您想要使用的符文页：\nPlease select a perk page to use:")
+                        log.write(format_df(perkPage_df.loc[:, ["name", "isActive", "isValid", "primaryStyleName", "secondaryStyleName", "pageKeystone name"]], width_exceed_ask = False, direct_print = False, print_index = True)[0] + "\n")
+                        logPrint("请选择您想要使用的符文页：\nPlease select a perk page to use:")
                         while True:
-                            pageIndex = input()
+                            pageIndex = logInput()
                             if pageIndex == "":
                                 continue
                             elif pageIndex == "0":
@@ -1149,7 +1237,7 @@ async def configure_perks(connection):
                                 try:
                                     pageIndex = int(pageIndex)
                                 except ValueError:
-                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                 else:
                                     if pageIndex >= 1 and pageIndex < len(perkPage_df):
                                         pageId = perkPage_df.loc[pageIndex, "id"]
@@ -1165,28 +1253,28 @@ async def configure_perks(connection):
                                         perkNames = perkPage_df.loc[pageIndex, "uiPerksNames"]
                                         page_body = {"name": pageName, "isTemporary": isTemporary, "primaryStyleId": primaryPerkStyleId, "subStyleId": secondaryPerkStyleId, "selectedPerkIds": perkIds}
                                         response = await (await connection.request("PUT", f"/lol-perks/v1/pages/{pageId}", data = page_body)).json()
-                                        print(response)
+                                        logPrint(response)
                                         if "errorCode" in response:
-                                            print(response)
-                                            print("符文页活动性设置失败。\nFailed to set the selected page active.")
+                                            logPrint("符文页活动性设置失败。\nFailed to set the selected page active.")
                                         else:
-                                            print("已选择的符文页：%s（%d）\nSelected perk page: %s (%d)" %(pageName, pageId, pageName, pageId))
-                                            print("主系（Style）：%s (%d)\n副系（Substyle）：%s (%d)\n基石符文（Keystone）：%s (%d)\n符文序号列表（Perk id list）： %s\n符文名称列表（Perk name list）： %s\n" %(primaryPerkStyleName, primaryPerkStyleId, secondaryPerkStyleName, secondaryPerkStyleId, keystoneName, keystoneId, perkIds, perkNames))
+                                            logPrint("已选择的符文页：%s（%d）\nSelected perk page: %s (%d)" %(pageName, pageId, pageName, pageId))
+                                            logPrint("主系（Style）：%s (%d)\n副系（Substyle）：%s (%d)\n基石符文（Keystone）：%s (%d)\n符文序号列表（Perk id list）： %s\n符文名称列表（Perk name list）： %s\n" %(primaryPerkStyleName, primaryPerkStyleId, secondaryPerkStyleName, secondaryPerkStyleId, keystoneName, keystoneId, perkIds, perkNames))
                                         break
                                     else:
-                                        print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                        logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                 elif action[0] == "4":
                     perkPages = await (await connection.request("GET", "/lol-perks/v1/pages")).json() #排序过程容易牵一发而动全身地出现问题，因此尽可能还是保证符文页信息是最新的（One problem may bring about cascade effects during ordering, so the program had better keep the perk page information latest）
                     if len(perkPages) == 0:
-                        print("您还未创建任何符文页！请先创建一个符文页再选择此操作。\nYou don't have any page currently. Please select this action after creating a page.")
+                        logPrint("您还未创建任何符文页！请先创建一个符文页再选择此操作。\nYou don't have any page currently. Please select this action after creating a page.")
                     else:
                         perkPage_df = await get_perk_page(connection)
                         pageIds = list(map(lambda x: x["id"], perkPages))
                         current_pageOrder_list = list(perkPage_df.loc[1:].sort_values(by = "order", ascending = True)["id"])
-                        print('''请输入一个您期望的符文页序号排列顺序列表，排在前面的代表显示在前，排在后面的代表显示在后。例如，如果想恢复您当前的排序，您可以输入“%s”。\nPlease input a perk page id order list, where the page whose pageId is in the front of pageId list will be moved in the front of the page list, and vice versa. For example, if you'd like to recover the current page order, you may input "%s".''' %(current_pageOrder_list, current_pageOrder_list))
+                        logPrint('''请输入一个您期望的符文页序号排列顺序列表，排在前面的代表显示在前，排在后面的代表显示在后。例如，如果想恢复您当前的排序，您可以输入“%s”。\nPlease input a perk page id order list, where the page whose pageId is in the front of pageId list will be moved in the front of the page list, and vice versa. For example, if you'd like to recover the current page order, you may input "%s".''' %(current_pageOrder_list, current_pageOrder_list))
                         print(format_df(perkPage_df.loc[:, ["id", "name", "order", "primaryStyleName", "secondaryStyleName"]])[0])
+                        log.write(format_df(perkPage_df.loc[:, ["id", "name", "order", "primaryStyleName", "secondaryStyleName"]], width_exceed_ask = False, direct_print = False)[0] + "\n")
                         while True:
-                            page_order = input()
+                            page_order = logInput()
                             if page_order == "":
                                 continue
                             elif page_order[0] == "0":
@@ -1196,8 +1284,8 @@ async def configure_perks(connection):
                                     page_order = eval(page_order)
                                 except:
                                     traceback_info = traceback.format_exc()
-                                    print(traceback_info)
-                                    print("您的输入格式有误！请重新输入。\nERROR format of input! Please try again.")
+                                    logPrint(traceback_info)
+                                    logPrint("您的输入格式有误！请重新输入。\nERROR format of input! Please try again.")
                                 else:
                                     if isinstance(page_order, list) and all(map(lambda x: isinstance(x, int) and x in pageIds, page_order)) and len(page_order) == len(set(page_order)): #这里需要严格控制输入格式：①输入的是一个列表；②列表的元素全是整型，且都是分组序号；③列表元素无重复（Here the input format are strictly controlled: ①the input is a list; ②each element in the list is of integer type and represents a group id; ③the elements are unique）
                                         for pageId in page_order:
@@ -1209,10 +1297,9 @@ async def configure_perks(connection):
                                         for page in perkPages:
                                             body = {"targetPageId": page["id"], "destinationPageId": page["id"], "offset": len(perkPages) + abs(perkPages[-1]["order"])} #为了避免可能的位次冲突，在准备阶段，尽可能保证所有符文页的偏移量是定值。考虑到有些符文页的位次可能是负数，这里的偏移量带上了符文页最小位次的绝对值，这样能保证所有符文页经过这个for循环之后位次的值大于总符文页数量的整数，且保持原有顺序（To avoid possible order conflicts, the offset of each move should be constant during preparation. Considering some orders may be negative, here the offset is added the absolute value of the smallest order. In this way, orders of all pages will be greater than the total number of perk pages after this for-loop and obey the original order）
                                             response = await (await connection.request("POST", "/lol-perks/v1/update-page-order", data = body)).json()
-                                            print(response)
+                                            logPrint(response)
                                             if response != None:
-                                                print('准备阶段移动“%s”（%d）的过程出现了问题。\nAn error occurred when the program was moving "%s" (%d) during preparation.' %(page["name"], page["id"], page["name"], page["id"]))
-                                                print(response)
+                                                logPrint('准备阶段移动“%s”（%d）的过程出现了问题。\nAn error occurred when the program was moving "%s" (%d) during preparation.' %(page["name"], page["id"], page["name"], page["id"]))
                                         #即使准备阶段出现了问题，实际排序时也不会发生错误。下面的注释会证明这一点（Although errors may occur during preparation, this doesn't make any difference to the actual ordering process. The following comments prove it）
                                         perkPages = await (await connection.request("GET", "/lol-perks/v1/pages")).json()
                                         perkPages_dict = {page["id"]: page for page in perkPages} #虽然其实可以从上面的公式中推导出下面的偏移量，但如果上面移动的过程出现了问题，这个办法就行不通了（Although the following offset can be inferred from the above calculation, if an error occurs, this solution won't work）
@@ -1220,38 +1307,37 @@ async def configure_perks(connection):
                                         #首先把排在第一的符文页的位次置为1（First, set the order of the first perk page as 1）
                                         body = {"targetPageId": page_order[0], "destinationPageId": page_order[0], "offset": 1 - perkPages_dict[page["id"]]["order"]} #在准备阶段，如果是排在第一的符文页移动出现问题，那么在这里移动后位次一定是1；如果是排在第二的符文页移动出现了问题，导致经过准备阶段排在第二的符文页的位次是1，那么经过这次操作，排在第二的符文页的位次变成`2 - perkPages_dict[page["id"]]["order"]`（During preparation, if an error occurred when the program was moving the first page, then after this move, its order must be 1; otherwise, if an error occurred when the program was moving the second page, and therefore after the preparation, the second page's order became 1, then after this move, the second page's order becomes `2 - perkPages_dict[page["id"]]["order"]`）
                                         response = await (await connection.request("POST", "/lol-perks/v1/update-page-order", data = body)).json()
-                                        print(response)
+                                        logPrint(response)
                                         if response == None:
-                                            print('符文页“%s”（%d）的位次已置为1。\nPage "%s" (%d) order set to 1.' %(perkPages_dict[page_order[0]]["name"], page_order[0], perkPages_dict[page_order[0]]["name"], page_order[0]))
+                                            logPrint('符文页“%s”（%d）的位次已置为1。\nPage "%s" (%d) order set to 1.' %(perkPages_dict[page_order[0]]["name"], page_order[0], perkPages_dict[page_order[0]]["name"], page_order[0]))
                                         else:
                                             error_occurred_perkPageArrange = True
-                                            print(response)
                                         #排在后面的符文页关于排在第一的符文页作递增偏移量的移动（The successor pages move by an incrementing offset to the first page）
                                         for i in range(1, len(page_order)):
                                             body = {"targetPageId": page_order[i], "destinationPageId": page_order[0], "offset": i} #在准备阶段，如果是排在第i + 1的符文页移动出现问题，那么在这里移动后位次一定是i + 1；如果是排在第i + 2的符文页移动出现了问题，导致经过准备阶段排在第i + 2的符文页的位次位于1和i + 1之间，那么经过这次操作，排在第i + 2的符文页的位次应当位于i + 1和2i + 1之间，这样就不会对前面i - 1个符文页的顺序产生影响（During preparation, if an error occurred when the program was moving the (i + 1)th page, then after this move, its order must be (i + 1); otherwise, if an error occurred when the program was moving the (i + 2)th page, and therefore the after the preparation, the (i + 2)th page's order is between 1 and i + 1, then after this move, the (i + 2)th page's order should be within (i + 1) and (2i + 1), which makes no difference to the order of the first (i - 1) pages）
                                             response = await (await connection.request("POST", "/lol-perks/v1/update-page-order", data = body)).json()
+                                            logPrint(response)
                                             if response == None:
-                                                print('符文页“%s”（%d）的位次已置为%d。\nPage "%s" (%d) order set to %d.' %(perkPages_dict[page_order[i]]["name"], page_order[i], i + 1, perkPages_dict[page_order[i]]["name"], page_order[i], i + 1))
+                                                logPrint('符文页“%s”（%d）的位次已置为%d。\nPage "%s" (%d) order set to %d.' %(perkPages_dict[page_order[i]]["name"], page_order[i], i + 1, perkPages_dict[page_order[i]]["name"], page_order[i], i + 1))
                                             else:
                                                 error_occurred_perkPageArrange = True
-                                                print(response)
                                         #这样一看，你是不是发现前面的准备阶段完全没有必要（Above all, do you realize that the preparation is totally unnecessary）
                                         if error_occurred_perkPageArrange:
-                                            print("排序过程发生了异常。请等待客户端符文页顺序稳定后手动排序。\nAn error occurred during ordering. Please order manually after the order of the perk pages becomes stable.")
+                                            logPrint("排序过程发生了异常。请等待客户端符文页顺序稳定后手动排序。\nAn error occurred during ordering. Please order manually after the order of the perk pages becomes stable.")
                                         else:
-                                            print("排序完成。\nOrder success.")
+                                            logPrint("排序完成。\nOrder success.")
                                         break
                                     else:
-                                        print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                        logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                 elif action[0] == "5":
                     perkPages = await (await connection.request("GET", "/lol-perks/v1/pages")).json()
                     if len(perkPages) == 0:
-                        print("您还未创建任何符文页！请先创建一个符文页再选择此操作。\nYou don't have any page currently. Please select this action after creating a page.")
+                        logPrint("您还未创建任何符文页！请先创建一个符文页再选择此操作。\nYou don't have any page currently. Please select this action after creating a page.")
                     else:
-                        print('请输入要删除的符文页的索引：\nPlease submit the index of the page(s) to delete:\n变量提示（Variable hint）：\nperkPage_df = await get_perk_page(connection)\n示例（Examples）：\n1 #删除数据框索引为1的符文页（Delete the page whose index in the dataframe is 1）\n[1, 2, 3] #删除数据框索引为1、2和3的符文页（Delete the pages whose indices in the dataframe are 1, 2 and 3, respectively）\nall #删除所有符文页（Delete all pages）\n[i for i in range(1, len(perkPage_df)) if perkPage_df.loc[i, "isTemporary"]] #删除所有临时符文页（Delete all temporary pages）\nlist(perkPage_df[perkPage_df["pageKeystone id"] == 8010].index) #删除所有基石序号是8010的符文页（Delete all pages whose keystone id is 8010）\nlist(perkPage_df.iloc[1:, :][(~(perkPage_df.iloc[1:, :]["pageKeystone name"].isin["征服者", "致命节奏"]) | (perkPage_df.iloc[1:, :]["recommendationChampionId"] == 11)) & (perkPage_df.iloc[1:, :]["secondaryStyleName"] == "启迪")].index) #删除所有基石不是征服者也不是致命节奏，或者推荐英雄序号是11，且副系是启迪系的符文页（Delete all pages whose keystone is neither Conqueror nor Lethal Tempo, or recommended champion id is 11, and the secondary perkstyle is Inspiration）')
+                        logPrint('请输入要删除的符文页的索引：\nPlease submit the index of the page(s) to delete:\n变量提示（Variable hint）：\nperkPage_df = await get_perk_page(connection)\n示例（Examples）：\n1 #删除数据框索引为1的符文页（Delete the page whose index in the dataframe is 1）\n[1, 2, 3] #删除数据框索引为1、2和3的符文页（Delete the pages whose indices in the dataframe are 1, 2 and 3, respectively）\nall #删除所有符文页（Delete all pages）\n[i for i in range(1, len(perkPage_df)) if perkPage_df.loc[i, "isTemporary"]] #删除所有临时符文页（Delete all temporary pages）\nlist(perkPage_df[perkPage_df["pageKeystone id"] == 8010].index) #删除所有基石序号是8010的符文页（Delete all pages whose keystone id is 8010）\nlist(perkPage_df.iloc[1:, :][(~(perkPage_df.iloc[1:, :]["pageKeystone name"].isin["征服者", "致命节奏"]) | (perkPage_df.iloc[1:, :]["recommendationChampionId"] == 11)) & (perkPage_df.iloc[1:, :]["secondaryStyleName"] == "启迪")].index) #删除所有基石不是征服者也不是致命节奏，或者推荐英雄序号是11，且副系是启迪系的符文页（Delete all pages whose keystone is neither Conqueror nor Lethal Tempo, or recommended champion id is 11, and the secondary perkstyle is Inspiration）')
                         while True:
                             index_got = False
-                            delete_str = input()
+                            delete_str = logInput()
                             if delete_str == "":
                                 continue
                             elif delete_str == "0":
@@ -1262,41 +1348,46 @@ async def configure_perks(connection):
                                 try:
                                     delete_indices = eval(delete_str)
                                 except:
-                                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                     traceback_info = traceback.format_exc()
-                                    print(traceback_info)
+                                    logPrint(traceback_info)
+                                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                 else:
                                     if isinstance(delete_indices, int):
                                         delete_indices = [delete_indices]
                                     elif not isinstance(delete_indices, list):
-                                        print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                                        logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                                         continue
                             if all(map(lambda x: isinstance(x, int) and x > 0 and x < len(perkPage_df), delete_indices)) and len(delete_indices) == len(set(delete_indices)):
                                 index_got = True
                                 break
                             else:
-                                print("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                        print("您选择删除以下%d个符文页。请按回车键继续删除，或者输入任意非空字符串取消删除。\nYou selected the following %d perk page(s). Please press Enter to continue deleting, or submit any non-empty string to cancel." %(len(delete_indices), len(delete_indices)))
-                        print(format_df(perkPage_df.loc[delete_indices, perkPage_df_fields_to_print], print_index = True, reserve_index = True)[0])
-                        if index_got and not bool(input()):
-                            for delete_index in delete_indices:
-                                pageId = perkPage_df.loc[delete_index, "id"]
-                                pageName = perkPage_df.loc[delete_index, "name"]
-                                response = await (await connection.request("DELETE", f"/lol-perks/v1/pages/{pageId}")).json()
-                                print(response)
-                                if response == None:
-                                    print(f"已删除的符文页（Deleted page）：{pageName}（{pageId}）")
-                                else:
-                                    print(response)
-                                    print(f'符文页“{pageName}”（{pageId}）删除失败。\nPage "{pageName}" ({pageId}) failed to be deleted.')
+                                logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                        if index_got:
+                            logPrint("您选择删除以下%d个符文页。\nYou selected the following %d perk page(s)." %(len(delete_indices), len(delete_indices)))
+                            print(format_df(perkPage_df.loc[delete_indices, perkPage_df_fields_to_print], print_index = True, reserve_index = True)[0])
+                            log.write(format_df(perkPage_df.loc[delete_indices, perkPage_df_fields_to_print], width_exceed_ask = False, direct_print = False, print_index = True, reserve_index = True)[0] + "\n")
+                            logPrint("请输入任意非空字符串以继续删除，否则取消删除。\nPlease submit any non-empty string to continue deleting, or null to cancel.")
+                            delete_confirm_str = logInput()
+                            delete_confirm = bool(delete_confirm_str)
+                            if delete_confirm:
+                                for delete_index in delete_indices:
+                                    pageId = perkPage_df.loc[delete_index, "id"]
+                                    pageName = perkPage_df.loc[delete_index, "name"]
+                                    response = await (await connection.request("DELETE", f"/lol-perks/v1/pages/{pageId}")).json()
+                                    logPrint(response)
+                                    if response == None:
+                                        logPrint(f"已删除的符文页（Deleted page）：{pageName}（{pageId}）")
+                                    else:
+                                        logPrint(f'符文页“{pageName}”（{pageId}）删除失败。\nPage "{pageName}" ({pageId}) failed to be deleted.')
                 else:
-                    print("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                     continue
-                print("您的符文页信息如下：\nYour perk pages are listed below:")
+                logPrint("您的符文页信息如下：\nYour perk pages are listed below:")
                 perkPage_df = await get_perk_page(connection)
                 perkPage_df_fields_to_print = ["id", "name", "isTemporary", "primaryStyleName", "secondaryStyleName", "pageKeystone name"]
                 print(format_df(perkPage_df.loc[:, perkPage_df_fields_to_print], print_index = True)[0])
-                print("请选择一个操作：\nPlease select an action:\n0\t返回上一层（Return to the last step）\n1\t导出所有符文页（Export all pages）\n2\t查看、编辑和导出一个符文页（Check, edit and export a page）\n3\t切换活动符文页（Toggle active perk page）\n4\t排序符文页（Order perk pages）\n5\t删除符文页（Delete perk pages）")
+                log.write(format_df(perkPage_df.loc[:, perkPage_df_fields_to_print], width_exceed_ask = False, direct_print = False, print_index = True)[0] + "\n")
+                logPrint("请选择一个操作：\nPlease select an action:\n0\t返回上一层（Return to the last step）\n1\t导出所有符文页（Export all pages）\n2\t查看、编辑和导出一个符文页（Check, edit and export a page）\n3\t切换活动符文页（Toggle active perk page）\n4\t排序符文页（Order perk pages）\n5\t删除符文页（Delete perk pages）")
 
 #-----------------------------------------------------------------------------
 # websocket
@@ -1305,6 +1396,8 @@ async def configure_perks(connection):
 async def connect(connection):
     await get_summoner_data(connection)
     await configure_perks(connection)
+    log.write("\n[Program terminated and returned status 0.]\n")
+    log.close()
 
 #-----------------------------------------------------------------------------
 # Main

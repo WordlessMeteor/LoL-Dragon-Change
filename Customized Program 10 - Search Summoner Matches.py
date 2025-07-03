@@ -5,9 +5,10 @@ from urllib.parse import quote, unquote
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/06/12
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -63,8 +64,8 @@ def message_save(message, folder, summonerName, header = ""):
         log = open(os.path.join(folder, "Matches of Summoners - %s.log" %summonerName), "a+", encoding = "utf-8")
     except FileNotFoundError:
         print("请先使用一次查战绩脚本查询该玩家信息，再使用本脚本！程序即将退出。\nPlease use Customized Program 5 to search for this summoner's information and then use this program! The program will exit now.")
-        os._exit(0)
-    if opened == False:
+        exit()
+    if not opened:
         log.write("\n")
         opened = True
     log.write("%s[%s]%s\n" %(header, time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()), message))
@@ -141,9 +142,9 @@ async def get_info(connection, name: str, searchType: str | int = "riotId"):
                 if info["message"] == "Value %d for 'id' of type uint64 is out of range":
                     result["message"] = "您输入的召唤师序号格式有误！请重新输入！\nValue for 'id' of type uint64 is out of range! Please try again!"
                 else:
-                    result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with puuid %s was not found; verify the summonerId and try again." %(name, name)
+                    result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with summonerId %s was not found; verify the summonerId and try again." %(name, name)
             elif info["httpStatus"] == 404:
-                result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with puuid %s was not found; verify the summonerId and try again." %(name, name)
+                result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with summonerId %s was not found; verify the summonerId and try again." %(name, name)
             else:
                 result["network_error"] = True
                 result["message"] = "网络异常。\nNetwork Error."
@@ -156,7 +157,6 @@ def get_info_name(info: dict, mode = 1) -> str:
     if not isinstance(info, dict) or not all(i in info for i in ["displayName", "gameName", "tagLine"]):
         print("您的召唤师信息格式有误！\nERROR format of summoner information!")
         name = ""
-        exit()
     else:
         if info["displayName"] or info["gameName"]:
             if info["gameName"] and info["tagLine"]:
@@ -278,7 +278,7 @@ async def search_summoner_online(connection):
                             message_save(message, folder, displayName, "【异常信息】")
                             continue
                         if "500 Internal Server Error" in game_info["message"]:
-                            if error_occurred == False:
+                            if not error_occurred:
                                 error_occurred = True
                                 message = "（%d/%d）" %(currentProcess, gameCount) + "您所在大区的对局记录服务异常。尝试重新获取数据……\nThe match history service provided on your server isn't in place. Trying to recapture the history data ..."
                                 print(message)
@@ -295,7 +295,7 @@ async def search_summoner_online(connection):
                             print(message)
                             message_save(message, folder, displayName, "【异常信息】")
                         elif "Service Unavailable - Connection retries limit exceeded. Response timed out" in game_info["message"]:
-                            if error_occurred == False:
+                            if not error_occurred:
                                 error_occurred = True
                                 message = "（%d/%d）" %(currentProcess, gameCount) + "访问频繁。尝试重新获取数据……\nConnection retries limit exceeded! Trying to recapture the match data ..."
                                 print(message)

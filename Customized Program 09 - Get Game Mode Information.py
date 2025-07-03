@@ -5,9 +5,10 @@ import os, pandas, time, unicodedata, shutil
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/06/29
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -57,6 +58,9 @@ async def get_lockfile(connection):
 def count_nonASCII(s: str): #统计一个字符串中占用命令行2个宽度单位的字符个数（Count the number of characters that take up 2 width unit in CMD）
     return sum([unicodedata.east_asian_width(character) in ("F", "W") for character in list(str(s))])
 
+def rm_ctrl_char(s: str): #移除一个字符串中的所有C0和C1字符（Remove all C0 and C1 characters from a string）
+    return "".join(ch for ch in s if unicodedata.category(ch) != "Cc")
+
 def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
     old_index = df.index
     df.index = range(start_index, len(df) + start_index)
@@ -64,12 +68,12 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
     maxWidth = shutil.get_terminal_size()[0]
     fields = df.columns.tolist()
     for field in fields:
-        maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(str(x)), df[field])), wcswidth(str(field))) + 2
-    index_len = max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+        maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(rm_ctrl_char(str(x))), df[field])), wcswidth(rm_ctrl_char(field))) + 2
+    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
-            if input() == "":
+            if not bool(input()):
                 #print(df)
                 result = str(df)
                 return (result, maxLens)
@@ -119,7 +123,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
                 result += " " * (index_len + 2)
             for i in range(df.shape[1]):
                 field = fields[i]
-                tmp = "{0:{align}{w}}".format(field, align = header_alignments[i], w = maxLens[str(field)] - count_nonASCII(str(field)))
+                tmp = "{0:{align}{w}}".format(rm_ctrl_char(field), align = header_alignments[i], w = maxLens[field] - count_nonASCII(field))
                 result += tmp
                 #print(tmp, end = "")
                 if i != df.shape[1] - 1:
@@ -134,7 +138,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
             for j in range(df.shape[1]):
                 field = fields[j]
                 cell = str(list(df[field])[i])
-                tmp = "{0:{align}{w}}".format(cell, align = alignments[j], w = maxLens[field] - count_nonASCII(cell))
+                tmp = "{0:{align}{w}}".format(rm_ctrl_char(cell), align = alignments[j], w = maxLens[field] - count_nonASCII(cell))
                 result += tmp
                 #print(tmp, end = "")
                 if j != df.shape[1] - 1:
@@ -153,13 +157,14 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
 #-----------------------------------------------------------------------------
 async def check_available_queue(connection):
     queues = await (await connection.request("GET", "/lol-game-queues/v1/queues")).json()
+    platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     map_CN = {8: "水晶之痕", 10: "扭曲丛林", 11: "召唤师峡谷", 12: "嚎哭深渊", 14: "屠夫之桥", 16: "星界废墟", 18: "瓦洛兰城市公园", 19: "第43区", 20: "飞船坠落点", 21: "百合与莲花的神庙", 22: "聚点危机", 30: "怒火角斗场", 33: "最终都市", 35: "班德尔之森"}
     map_EN = {8: "Crystal Scar", 10: "Twisted Treeline", 11: "Summoner's Rift", 12: "Howling Abyss", 14: "Butcher's Bridge", 16: "Cosmic Ruins", 18: "Valoran City Park", 19: "Substructure 43", 20: "Crash Site", 21: "Temple of Lily and Lotus", 22: "Convergence", 30: "Rings of Wrath", 33: "Final City", 35: "The Bandlewood"}
     pickmode_CN = {"AllRandomPickStrategy": "全随机模式", "SimulPickStrategy": "自选模式", "TeamBuilderDraftPickStrategy": "征召模式", "OneTeamVotePickStrategy": "投票", "TournamentPickStrategy": "竞技征召模式", "QuickplayPickStrategy": "快速匹配", "": "待定"}
     pickmode_EN = {"AllRandomPickStrategy": "All Random", "SimulPickStrategy": "Blind Pick", "TeamBuilderDraftPickStrategy": "Draft Mode", "OneTeamVotePickStrategy": "Vote", "TournamentPickStrategy": "Tournament Draft", "QuickplayPickStrategy": "Quickplay", "": "Pending"}
     available_queues = {}
     for queue in queues:
-        if queue["queueAvailability"] == "Available":
+        if queue["queueAvailability"] == "Available" or queue["id"] in platform_config["ClientSystemStates"]["enabledQueueIdsList"]:
             available_queues[queue["id"]] = queue
     queue_dict = {"queueID": [], "mapID": [], "map_CN": [], "map_EN": [], "gameMode": [], "pickType_CN": [], "pickType_EN": []}
     for queue in available_queues.values():
@@ -187,16 +192,15 @@ def lcuTimestamp(timestamp): #根据队列开放和关闭时间戳返回对局�
 async def gamemode(connection):
     queues = await (await connection.request("GET", "/lol-game-queues/v1/queues")).json()
     # 以前含有"最大召唤师等级"参数（There was previously a parameter: maxLevel）
-    queues_header = {"allowablePremadeSizes": "可用预组队规模", "areFreeChampionsAllowed": "允许使用周免英雄", "assetMutator": "游戏模式配置", "category": "对局类型", "championsRequiredToPlay": "需要英雄数量", "description": "游戏模式描述", "detailedDescription": "补充描述", "gameMode": "游戏模式", "gameSelectCategory": "游戏选择类别", "gameSelectModeGroup": "游戏模式分组", "gameSelectPriority": "游戏选择优先级", "hidePlayerPosition": "隐藏玩家位置", "id": "队列序号", "isCustom": "自定义对局", "isRanked": "排位赛", "isSkillTreeQueue": "技巧加成队列", "isTeamBuilderManaged": "服从阵容匹配机制", "isVisible": "客户端可见性", "lastToggledOffTime": "上次关闭时间", "lastToggledOnTime": "上次开放时间", "mapId": "地图序号", "maxDivisionForPremadeSize2": "双排最高分级限制", "maxLobbySpectatorCount": "房间最大观战者数量", "maxTierForPremadeSize2": "双排最高段位限制", "maximumParticipantListSize": "最大玩家数量", "minLevel": "最低召唤师等级", "minimumParticipantListSize": "最小玩家数量", "name": "游戏模式名称", "numPlayersPerTeam": "队伍规模", "numberOfTeamsInLobby": "房间内队伍数量", "queueAvailability": "队列可用性", "removalFromGameAllowed": "允许退出游戏", "removalFromGameDelayMinutes": "允许退出游戏时间（分钟）", "shortName": "游戏模式简称", "showPositionSelector": "呈现位置指示器", "showQuickPlaySlotSelection": "呈现快速模式偏好英雄选择界面", "spectatorEnabled": "允许观战", "type": "游戏类型", "advancedLearningQuests": "进阶教程", "allowTrades": "允许交换", "banMode": "禁用模式", "banTimerDuration": "禁用时间限制（秒）", "battleBoost": "战斗加成", "crossTeamChampionPool": "跨队伍英雄共享", "deathMatch": "团体竞赛", "doNotRemove": "禁止退出游戏", "duplicatePick": "克隆选择", "exclusivePick": "唯一选择", "gameModeOverride": "游戏类型重写来源", "typeId": "游戏类型序号", "learningQuests": "新手教程", "mainPickTimerDuration": "盲选时间限制（秒）", "maxAllowableBans": "最大禁用数量", "typeName": "英雄选择策略", "numPlayersPerTeamOverride": "队伍规模重写历史", "onboardCoopBeginner": "人机对战引导模式", "pickMode": "英雄选择模式", "postPickTimerDuration": "符文和皮肤选择时间限制（秒）", "reroll": "允许重随", "teamChampionPool": "队伍英雄共享", "isChampionPointsEnabled": "队列奖励：英雄成就点数", "isIpEnabled": "队列奖励：成就", "isXpEnabled": "队列奖励：经验点数", "partySizeIpRewards": "组队额外成就奖励"}
+    queues_header = {"allowablePremadeSizes": "可用预组队规模", "areFreeChampionsAllowed": "允许使用周免英雄", "assetMutator": "游戏模式配置", "category": "对局类型", "championsRequiredToPlay": "需要英雄数量", "description": "游戏模式描述", "detailedDescription": "补充描述", "gameMode": "游戏模式", "gameSelectCategory": "游戏选择类别", "gameSelectModeGroup": "游戏模式分组", "gameSelectPriority": "游戏选择优先级", "hidePlayerPosition": "隐藏玩家位置", "id": "队列序号", "isCustom": "自定义对局", "isRanked": "排位赛", "isSkillTreeQueue": "技巧加成队列", "isTeamBuilderManaged": "服从阵容匹配机制", "isVisible": "客户端可见性", "lastToggledOffTime": "上次关闭时间戳", "lastToggledOnTime": "上次开放时间戳", "mapId": "地图序号", "maxDivisionForPremadeSize2": "双排最高分级限制", "maxLobbySpectatorCount": "房间最大观战者数量", "maxTierForPremadeSize2": "双排最高段位限制", "maximumParticipantListSize": "最大玩家数量", "minLevel": "最低召唤师等级", "minimumParticipantListSize": "最小玩家数量", "name": "游戏模式名称", "numPlayersPerTeam": "队伍规模", "numberOfTeamsInLobby": "房间内队伍数量", "queueAvailability": "队列可用性", "removalFromGameAllowed": "允许退出游戏", "removalFromGameDelayMinutes": "允许退出游戏时间（分钟）", "shortName": "游戏模式简称", "showPositionSelector": "呈现位置指示器", "showQuickPlaySlotSelection": "呈现快速模式偏好英雄选择界面", "spectatorEnabled": "允许观战", "type": "游戏类型", "lastToggledOffDate": "上次关闭时间", "lastToggledOnDate": "上次开放时间", "advancedLearningQuests": "进阶教程", "allowTrades": "允许交换", "banMode": "禁用模式", "banTimerDuration": "禁用时间限制（秒）", "battleBoost": "战斗加成", "crossTeamChampionPool": "跨队伍英雄共享", "deathMatch": "团体竞赛", "doNotRemove": "禁止退出游戏", "duplicatePick": "克隆选择", "exclusivePick": "唯一选择", "gameModeOverride": "游戏类型重写来源", "typeId": "游戏类型序号", "learningQuests": "新手教程", "mainPickTimerDuration": "盲选时间限制（秒）", "maxAllowableBans": "最大禁用数量", "typeName": "英雄选择策略", "numPlayersPerTeamOverride": "队伍规模重写历史", "onboardCoopBeginner": "人机对战引导模式", "pickMode": "英雄选择模式", "postPickTimerDuration": "符文和皮肤选择时间限制（秒）", "reroll": "允许重随", "teamChampionPool": "队伍英雄共享", "isChampionPointsEnabled": "队列奖励：英雄成就点数", "isIpEnabled": "队列奖励：成就", "isXpEnabled": "队列奖励：经验点数", "partySizeIpRewards": "组队额外成就奖励"}
     queues_data = {}
     queues_header_keys = list(queues_header.keys())
     # 下面定义的字典对导出的Excel结果进行优化（The following defined dictionaries optimizes the results in Excel）
     categories = {"Custom": "自定义对局", "PvP": "玩家对战", "VersusAi": "人机对战"}
     gameSelectCategories = {"": "待定", "CreateCustom": "创建自定义对局", "JoinCustom": "加入自定义对局", "kPvP": "玩家对战", "kTraining": "训练", "kVersusAI": "人机对战"}
-    gameSelectModeGroups = {"": "待定", "kARAM": "极地大乱斗", "kAlternativeLeagueGameModes": "轮换《英雄联盟》游戏模式", "kSummonersRift": "召唤师峡谷", "kTeamfightTactics": "云顶之弈"}
+    gameSelectModeGroups = {"": "待定", "kARAM": "极地大乱斗", "kAlternativeLeagueGameModes": "轮换模式", "kSummonersRift": "召唤师峡谷", "kTeamfightTactics": "云顶之弈"}
     queueAvailability_dict = {"Available": "√", "PlatformDisabled": ""}
     banModes = {"": "待定", "SkipBanStrategy": "无", "StandardBanStrategy": "经典策略", "TournamentBanStrategy": "竞技策略"}
-    #gameTypes = {"GAME_CFG_PICK_BLIND": "自选模式（自定义）", "GAME_CFG_DRAFT_STD": "征召模式（自定义）", "GAME_CFG_DRAFT_NOBAN": "轮选模式", "GAME_CFG_PICK_RANDOM": "全随机模式（自定义）", "GAME_CFG_PICK_SIMUL": "同选模式", "GAME_CFG_DRAFT_TOURNAMENT": "竞技征召模式（自定义）", "GAME_CFG_PICK_SIMUL_TD": "计时征召", "GAME_CFG_BASIC_TUTORIAL": "基础教程", "GAME_CFG_ADV_TUTORIAL": "进阶教程", "GAME_CFG_CAP": "无选模式", "GAME_CFG_BLIND_RANDOM": "盲选随机", "GAME_CFG_BLIND_DUPE": "克隆选择（自定义）", "GAME_CFG_CROSS_DUPE": "全队克隆", "GAME_CFG_BLIND_DRAFT_ST": "自选征召模式", "GAME_CFG_COUNTER_PICK": "互选模式", "GAME_CFG_TEAM_BUILDER_DRAFT": "征召模式", "GAME_CFG_TEAM_BUILDER_BLIND": "自选模式", "GAME_CFG_TEAM_BUILDER_BLIND_DRAFT": "自选征召", "GAME_CFG_TEAM_BUILDER_RANDOM": "全随机模式", "GAME_CFG_TEAM_BUILDER_BLIND_DUPE": "克隆选择", "GAME_CFG_TEAM_BUILDER_QUICKPLAY": "快速匹配"}
     pickModes = {"": "待定", "AllRandomPickStrategy": "全随机模式", "AllTeamVotePickStrategy": "全队投票", "CounterDraftPickStrategy": "互选模式", "DraftModeSinglePickStrategy": "传统征召模式", "OneTeamVotePickStrategy": "单队投票", "QuickplayPickStrategy": "快速匹配", "SimulPickStrategy": "自选模式", "SkipPickStrategy": "跳过英雄选择", "TeamBuilderDraftPickStrategy": "征召模式", "TournamentPickStrategy": "竞技征召模式"}
     tiers = {"": "", "IRON": "坚韧黑铁", "BRONZE": "英勇黄铜", "SILVER": "不屈白银", "GOLD": "荣耀黄金", "PLATINUM": "华贵铂金", "EMERALD": "流光翡翠", "DIAMOND": "璀璨钻石", "MASTER": "超凡大师", "GRANDMASTER": "傲世宗师", "CHALLENGER": "最强王者"}
     for i in range(len(queues_header)):
@@ -205,37 +209,37 @@ async def gamemode(connection):
     for queue in queues:
         for i in range(len(queues_header_keys)):
             key = queues_header_keys[i]
-            if i <= 37:
+            if i <= 39:
                 if i == 3: #对局类型（`category`）
                     queues_data[key].append(categories[queue[key]])
-                elif i == 8:
+                elif i == 8: #游戏选择类别（`gameSelectCategory`）
                     queues_data[key].append(gameSelectCategories[queue[key]])
-                elif i == 9:
+                elif i == 9: #游戏模式分组（`gameSelectModeGroup`）
                     queues_data[key].append(gameSelectModeGroups[queue[key]])
-                elif i == 18 or i == 19: #上次关闭时间和上次开放时间（`lastToggledOffTime` and `lastToggledOnTime`）
-                    t = time.localtime(queue[key] / 1000)
-                    standard_time = time.strftime("%Y年%m月%d日%H:%M:%S", t)
-                    queues_data[key].append(standard_time)
                 elif i == 23: #双排最高段位限制（`maxTierForPremadeSize2`）
                     queues_data[key].append(tiers[queue[key]])
                 elif i == 30: #队列可用性（`queueAvailability`）
                     queues_data[key].append(queueAvailability_dict[queue[key]])
+                elif i == 38 or i == 39: #上次关闭时间和上次开放时间（`lastToggledOffDate` and `lastToggledOnDate`）
+                    subkey = "lastToggledOffTime" if i == 38 else "lastToggledOnTime"
+                    standard_time = time.strftime("%Y年%m月%d日%H:%M:%S", time.localtime(queue[subkey] / 1000))
+                    queues_data[key].append(standard_time)
                 else:
                     queues_data[key].append(queue[key])
-            elif i <= 59:
-                if i == 40: #禁用模式（`banMode`）
+            elif i <= 61:
+                if i == 42: #禁用模式（`banMode`）
                     queues_data[key].append(banModes[queue["gameTypeConfig"][key]])
-                elif i == 49: #游戏类型序号（`typeId`）
+                elif i == 51: #游戏类型序号（`typeId`）
                     queues_data[key].append(queue["gameTypeConfig"]["id"])
-                elif i == 53: #英雄选择策略（`typeName`）
+                elif i == 55: #英雄选择策略（`typeName`）
                     queues_data[key].append(queue["gameTypeConfig"]["name"])
-                elif i == 56: #英雄选择模式（`pickMode`）
+                elif i == 58: #英雄选择模式（`pickMode`）
                     queues_data[key].append(pickModes[queue["gameTypeConfig"][key]])
                 else:
                     queues_data[key].append(queue["gameTypeConfig"][key])
             else:
                 queues_data[key].append(queue["queueRewards"][key])
-    queues_output_order = [12, 30, 17, 7, 27, 5, 6, 20, 49, 3, 37, 2, 8, 9, 10, 0, 53, 13, 14, 15, 40, 56, 18, 19, 28, 23, 21, 25, 4, 29, 26, 24, 52, 36, 22, 34, 35, 16, 47, 58, 42, 46, 1, 59, 43, 11, 41, 51, 57, 31, 32, 45, 50, 38, 39, 55, 44, 60, 61, 62]
+    queues_output_order = [12, 30, 17, 7, 27, 5, 6, 20, 51, 3, 37, 2, 8, 9, 10, 0, 55, 13, 14, 15, 42, 58, 38, 39, 28, 23, 21, 25, 4, 29, 26, 24, 54, 36, 22, 34, 35, 16, 49, 60, 44, 48, 1, 61, 45, 11, 43, 53, 59, 31, 32, 47, 52, 40, 41, 57, 46, 62, 63, 64]
     queues_data_organized = {}
     sort_index = [i for i, v in sorted(enumerate(queues_data["id"]), key = lambda x: x[1])] # 此处指定按照队列序号排序（Here the DataFrame is sorted by queueId）
     for i in queues_output_order:
@@ -262,7 +266,7 @@ async def gamemode(connection):
     region = client_info["--region"]
     platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     platformId = platform_config["LoginDataPacket"]["platformId"]
-    #locale = await (await connection.request("GET", "/riotclient/get_region_locale")).json()
+    #locale = await (await connection.request("GET", "/riotclient/region-locale")).json()
     locale = client_info["--locale"]
     version = await (await connection.request("GET", "/lol-patch/v1/game-version")).json()
     version_df = pandas.DataFrame({"Patch": [version]})

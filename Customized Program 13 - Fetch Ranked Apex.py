@@ -1,14 +1,15 @@
 from lcu_driver import Connector
 from openpyxl import load_workbook
-import os, pandas, json, time
+import json, os, pandas, time, _io
 from urllib.parse import quote, unquote
 
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/07/01
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -17,6 +18,11 @@ from urllib.parse import quote, unquote
 #  - lcu-driver 
 #    https://github.com/sousa-andre/lcu-driver
 #-----------------------------------------------------------------------------
+
+log_folder = "日志（Logs）/Customized Program 13 - Fetch Ranked Apex"
+os.makedirs(log_folder, exist_ok = True)
+currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+log = open(os.path.join(log_folder, currentTime + ".log"), "a+", encoding = "utf-8")
 
 connector = Connector()
 
@@ -55,6 +61,28 @@ async def get_lockfile(connection):
 #-----------------------------------------------------------------------------
 #  获取最强王者段位信息（Get challenger tier league information）
 #-----------------------------------------------------------------------------
+def logInput(prompt: str = "", log: _io.TextIOWrapper = log, write_time: bool = True):
+    s = input(prompt)
+    if isinstance(log, _io.TextIOWrapper):
+        if write_time:
+            currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+            log.write("[%s]%s\n" %(currentTime, prompt + s))
+        else:
+            log.write(prompt + s + "\n")
+    return s
+
+def logPrint(s: str = "", log: _io.TextIOWrapper = log, end: str = "\n", print_time: bool = False, write_time: bool = True):
+    currentTime = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
+    if print_time:
+        print("[%s]%s" %(currentTime, s), end = end, flush = end == "\r")
+    else:
+        print(s, end = end, flush = end == "\r")
+    if isinstance(log, _io.TextIOWrapper):
+        if write_time:
+            log.write("[%s]%s%s" %(currentTime, str(s), "\n" if end == "\r" else end))
+        else:
+            log.write("%s%s" %(str(s), "\n" if end == "\r" else end))
+
 def format_runtime(seconds: int):
     units = [(" d", 86400), (" h", 3600), (" m", 60), (" s", 1)]
     result = []
@@ -130,9 +158,9 @@ async def get_info(connection, name: str, searchType: str | int = "riotId"):
                 if info["message"] == "Value %d for 'id' of type uint64 is out of range":
                     result["message"] = "您输入的召唤师序号格式有误！请重新输入！\nValue for 'id' of type uint64 is out of range! Please try again!"
                 else:
-                    result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with puuid %s was not found; verify the summonerId and try again." %(name, name)
+                    result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with summonerId %s was not found; verify the summonerId and try again." %(name, name)
             elif info["httpStatus"] == 404:
-                result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with puuid %s was not found; verify the summonerId and try again." %(name, name)
+                result["message"] = "未找到召唤师序号为%s的玩家；请核对召唤师序号并稍后再试。\nA player with summonerId %s was not found; verify the summonerId and try again." %(name, name)
             else:
                 result["network_error"] = True
                 result["message"] = "网络异常。\nNetwork Error."
@@ -175,12 +203,12 @@ async def get_challenger_tier(connection):
     #     except FileNotFoundError:
     #         os.makedirs(folder, exist_ok = True)
     #     except UnicodeEncodeError:
-    #         print("\n赛季信息文本文档生成失败！请检查内容是否包含不常用字符！\nSplit config text generation failure! Please check if the content includes any abnormal characters!\n")
+    #         logPrint("\n赛季信息文本文档生成失败！请检查内容是否包含不常用字符！\nSplit config text generation failure! Please check if the content includes any abnormal characters!\n")
     #         break
     #     else:
-    #         print('\n赛季信息已保存为“%s”。\nSplit config is saved as "%s".\n' %(os.path.join(folder, json1name), os.path.join(folder, json1name)))
+    #         logPrint('\n赛季信息已保存为“%s”。\nSplit config is saved as "%s".\n' %(os.path.join(folder, json1name), os.path.join(folder, json1name)))
     #         break
-    # splits_info_header = {"endTimeMillis": "赛段结束时间戳（毫秒）", "endTime": "赛段结束时间", "seasonId": "赛季序号", "splitId": "赛段序号", "startTimeMillis": "赛段开始时间戳（毫秒）", "startTime": "赛段开始时间", "victoriousSkinReward: itemInstanceId": "胜利系列皮肤奖励：物品识别码", "victoriousSkinRewardLevel: BRONZE": "英勇黄铜胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: CHALLENGER": "最强王者胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: DIAMOND": "璀璨钻石胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: EMERALD": "流光翡翠胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: GOLD": "荣耀黄金胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: GRANDMASTER": "傲世宗师胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: IRON": "坚韧黑铁胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: MASTER": "超凡大师胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: PLATINUM": "华贵铂金胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: SILVER": "不屈白银胜利系列皮肤所需赛段点数"}
+    # splits_info_header = {"endTimeMillis": "赛段结束时间戳（毫秒）", "seasonId": "赛季序号", "splitId": "赛段序号", "startTimeMillis": "赛段开始时间戳（毫秒）", "endTime": "赛段结束时间", "startTime": "赛段开始时间", "victoriousSkinReward: itemInstanceId": "胜利系列皮肤奖励：物品识别码", "victoriousSkinRewardLevel: BRONZE": "英勇黄铜胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: CHALLENGER": "最强王者胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: DIAMOND": "璀璨钻石胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: EMERALD": "流光翡翠胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: GOLD": "荣耀黄金胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: GRANDMASTER": "傲世宗师胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: IRON": "坚韧黑铁胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: MASTER": "超凡大师胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: PLATINUM": "华贵铂金胜利系列皮肤所需赛段点数", "victoriousSkinRewardLevel: SILVER": "不屈白银胜利系列皮肤所需赛段点数"}
     # splits_info_header_keys = list(splits_info_header.keys())
     # splits_info_data = {}
     # for i in range(len(splits_info_header_keys)):
@@ -191,17 +219,16 @@ async def get_challenger_tier(connection):
     #     for j in range(len(splits_info_header_keys)):
     #         key = splits_info_header_keys[j]
     #         if j <= 5:
-    #             if j == 1 or j == 5:
+    #             if j >= 4: #时间相关键（Time-related keys）
     #                 splits_info_data[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(split[key + "Millis"] // 1000)))
     #             else:
     #                 splits_info_data[key].append(split[key])
-    #         elif j == 6:
+    #         elif j == 6: #胜利系列皮肤奖励：物品识别码（`victoriousSkinReward: itemInstanceId`）
     #             splits_info_data[key].append(split["victoriousSkinRewardGroup"]["itemInstanceId"])
     #         else:
     #             splits_info_data[key].append(split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"][key[27:]] if key[27:] in split["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonEndTier"] else 0)
-    #     print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-    #     print("赛季信息整理进度（Split config sorting process）：%d/%d" %(i + 1, len(splitsConfig["splits"])))
-    # splits_info_statistics_output_order = [2, 3, 4, 5, 0, 1, 6, 13, 7, 16, 11, 15, 10, 9, 14, 12, 8]
+    #     logPrint("赛季信息整理进度（Split config sorting process）：%d/%d" %(i + 1, len(splitsConfig["splits"])), end = "\r", print_time = True)
+    # splits_info_statistics_output_order = [1, 2, 3, 5, 0, 4, 6, 13, 7, 16, 11, 15, 10, 9, 14, 12, 8]
     # splits_info_data_organized = {}
     # for i in splits_info_statistics_output_order:
     #     key = splits_info_header_keys[i]
@@ -230,19 +257,18 @@ async def get_challenger_tier(connection):
     #             reward = rewards[k]
     #             for l in range(len(rewardTrack_header_keys)):
     #                 key = rewardTrack_header_keys[l]
-    #                 if l == 0:
+    #                 if l == 0: #赛季序号（`seasonId`）
     #                     rewardTrack_data[key].append(split["seasonId"])
-    #                 elif l == 1:
+    #                 elif l == 1: #奖励顺序（`rewardTrackId`）
     #                     rewardTrack_data[key].append(j)
-    #                 elif l <= 9:
-    #                     if l == 8:
-    #                         rewardTrack_data[key].append(rewardTypes[reward[key]])
+    #                 else:
+    #                     if l == 8: 奖品类型（`rewardType`）
+    #                         rewardTrack_data[key].append(rewardTypes[reward["rewardType"]])
+    #                     elif l == 10: #奖品名称（`name`）
+    #                         rewardTrack_data[key].append(rewardNames.get(reward["id"], ""))
     #                     else:
     #                         rewardTrack_data[key].append(reward[key])
-    #                 else:
-    #                     rewardTrack_data[key].append(rewardNames.get(reward["id"], ""))
-    #             print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-    #             print("奖励里程整理进度（Reward track sorting process）：[%d/%d][%d/%d][%d/%d]" %(i + 1, len(splitsConfig["splits"]), j + 1, len(split["rewardTrack"]), k + 1, len(rewards)))
+    #             logPrint("奖励里程整理进度（Reward track sorting process）：[%d/%d][%d/%d][%d/%d]" %(i + 1, len(splitsConfig["splits"]), j + 1, len(split["rewardTrack"]), k + 1, len(rewards)), end = "\r", print_time = True)
     # rewardTrack_statistics_output_order = [0, 9, 1, 10, 4, 8, 2, 6, 3, 5, 7]
     # rewardTrack_data_organized = {}
     # for i in rewardTrack_statistics_output_order:
@@ -259,7 +285,7 @@ async def get_challenger_tier(connection):
     queueTypes_zh = {"RANKED_SOLO_5x5": "单人/双人", "RANKED_FLEX_SR": "灵活 5V5", "RANKED_TFT": "云顶之弈", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "双人作战", "RANKED_TFT_TURBO": "狂暴模式", "CHERRY": "斗魂竞技场"} #2V0模式仅美测服可用（RANKED_TFT_PAIRS is only available on PBE）
     queueTypes_en = {"RANKED_SOLO_5x5": "Ranked Solo/Duo", "RANKED_FLEX_SR": "Ranked Flex", "RANKED_TFT": "Ranked TFT", "RANKED_TFT_PAIRS": "2V0", "RANKED_TFT_DOUBLE_UP": "Double Up", "RANKED_TFT_TURBO": "Hyper Roll", "CHERRY": "Arena"}
     challenger_ladder_queueTypes = await (await connection.request("GET", "/lol-ranked/v1/challenger-ladders-enabled")).json()
-    challenger_ladders_metadata_header = {"nextApexUpdateMillis": "下次天梯更新时间戳（毫秒）", "nextApexUpdate": "下次天梯更新时间", "provisionalGameThreshold": "定位赛场次", "queueType": "队列类型", "requestedRankedEntry": "排位解锁条件", "apexUnlockTimeMillis": "天梯解锁时间戳（毫秒）", "apexUnlockTime": "天梯解锁时间", "division": "段位分级", "maxLeagueSize": "段位容量", "minLpForApexTier": "上榜所需胜点", "tier": "段位", "topNumberOfPlayers": "上榜所需名次"}
+    challenger_ladders_metadata_header = {"nextApexUpdateMillis": "下次天梯更新时间戳（毫秒）", "provisionalGameThreshold": "定位赛场次", "queueType": "队列类型", "requestedRankedEntry": "排位解锁条件", "nextApexUpdateTime": "下次天梯更新时间", "apexUnlockTimeMillis": "天梯解锁时间戳（毫秒）", "division": "段位分级", "maxLeagueSize": "段位容量", "minLpForApexTier": "上榜所需胜点", "tier": "段位", "topNumberOfPlayers": "上榜所需名次", "apexUnlockTime": "天梯解锁时间"}
     challenger_ladders_metadata_header_keys = list(challenger_ladders_metadata_header.keys())
     challenger_ladders_metadata = {}
     for i in range(len(challenger_ladders_metadata_header_keys)):
@@ -285,39 +311,43 @@ async def get_challenger_tier(connection):
                 except FileNotFoundError:
                     os.makedirs(folder, exist_ok = True)
                 except UnicodeEncodeError:
-                    print("\n顶级%s%s玩家信息文本文档生成失败！请检查内容是否包含不常用字符！\nTop %s %s player information generation failure! Please check if the content includes any abnormal characters!\n" %(queueTypes_zh[queueType], tiers_zh[tier], queueTypes_en[queueType], tiers_en[tier]))
+                    logPrint("\n顶级%s%s玩家信息文本文档生成失败！请检查内容是否包含不常用字符！\nTop %s %s player information generation failure! Please check if the content includes any abnormal characters!\n" %(queueTypes_zh[queueType], tiers_zh[tier], queueTypes_en[queueType], tiers_en[tier]))
                     break
                 else:
-                    print('\n顶级%s%s玩家信息已保存为“%s”。\nTop %s %s player information is saved as "%s".\n' %(queueTypes_zh[queueType], tiers_zh[tier], os.path.join(folder, json2name), queueTypes_en[queueType], tiers_en[tier], os.path.join(folder, json2name)))
+                    logPrint('\n顶级%s%s玩家信息已保存为“%s”。\nTop %s %s player information is saved as "%s".\n' %(queueTypes_zh[queueType], tiers_zh[tier], os.path.join(folder, json2name), queueTypes_en[queueType], tiers_en[tier], os.path.join(folder, json2name)))
                     break
             for i in range(len(ladders["divisions"])):
                 division = ladders["divisions"][i]
                 for j in range(len(challenger_ladders_metadata_header_keys)):
                     key = challenger_ladders_metadata_header_keys[j]
                     if j <= 4:
-                        if j == 1:
-                            challenger_ladders_metadata[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(ladders[key + "Millis"] // 1000)))
-                        elif j == 3:
+                        if j == 2: #队列类型（`queueType`）
                             challenger_ladders_metadata[key].append(queueTypes_zh[ladders[key]])
+                        elif j == 4: #下次天梯更新时间（`nextApexUpdateTime`）
+                            challenger_ladders_metadata[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(ladders["nextApexUpdateMillis"] // 1000)))
                         else:
                             challenger_ladders_metadata[key].append(ladders[key])
                     else:
-                        if j == 6:
-                            challenger_ladders_metadata[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(division[key + "Millis"] // 1000)))
-                        elif j == 7:
+                        if j == 6: #段位分级（`division`）
                             challenger_ladders_metadata[key].append("") if division[key] == "" else challenger_ladders_metadata[key].append(division[key])
-                        elif j == 10:
+                        elif j == 9: #段位（`tier`）
                             challenger_ladders_metadata[key].append(tiers_zh[division[key]])
+                        elif j == 11: #天梯解锁时间（`apexUnlockTime`）
+                            challenger_ladders_metadata[key].append(time.strftime("%Y年%m月%d日%H时%M分%S秒", time.localtime(division["apexUnlockTimeMillis"] // 1000)))
                         else:
                             challenger_ladders_metadata[key].append(division[key])
                 for j in range(len(division["standings"])):
                     standing = division["standings"][j]
                     standing_summoner_recapture = 0
                     standing_summoner = await get_info(connection, standing["puuid"])
-                    while standing_summoner["network_error"] and standing_summoner_recapture < 3:
+                    while not standing_summoner["info_got"] and standing_summoner["body"]["httpStatus"] != 404 and standing_summoner_recapture < 3:
+                        logPrint(standing_summoner["message"])
                         standing_summoner_recapture += 1
-                        print("第%d/%d名顶级%s%s%s玩家（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\n[%d/%d] Information of Player (Puuid: %s) in the %s %s %s apex capture failed! Recapturing this player's information ... Times tried: %d" %(j + 1, len(division["standings"]), queueTypes_zh[queueType], tiers_zh[tier], division["division"], standing["puuid"], standing_summoner_recapture, j + 1, len(division["standings"]), standing["puuid"], queueTypes_zh[queueType], tiers_zh[tier], division["division"], standing_summoner_recapture))
+                        logPrint("第%d/%d名顶级%s%s%s玩家（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\n[%d/%d] Information of Player (Puuid: %s) in the %s %s %s apex capture failed! Recapturing this player's information ... Times tried: %d" %(j + 1, len(division["standings"]), queueTypes_zh[queueType], tiers_zh[tier], division["division"], standing["puuid"], standing_summoner_recapture, j + 1, len(division["standings"]), standing["puuid"], queueTypes_zh[queueType], tiers_zh[tier], division["division"], standing_summoner_recapture))
                         standing_summoner = await get_info(connection, standing["puuid"])
+                    if not standing_summoner["info_got"]:
+                        logPrint(standing_summoner["message"])
+                        logPrint("第%d/%d名顶级%s%s%s玩家（玩家通用唯一识别码：%s）获取失败！\n[%d/%d] Information of Player (Puuid: %s) in the %s %s %s apex capture failed!" %(j + 1, len(division["standings"]), queueTypes_zh[queueType], tiers_zh[tier], division["division"], standing["puuid"], j + 1, len(division["standings"]), standing["puuid"], queueTypes_zh[queueType], tiers_zh[tier], division["division"]))
                     for k in range(len(challenger_ladders_header_keys)):
                         key = challenger_ladders_header_keys[k]
                         if k == 0 or k == 11:
@@ -328,8 +358,7 @@ async def get_challenger_tier(connection):
                             queue_ladder_data[key].append(standing[key])
                         else:
                             queue_ladder_data[key].append(standing_summoner["body"][key] if standing_summoner["info_got"] else "")
-                    print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-                    print("顶级%s%s玩家信息整理进度（Top %s %s player information sorting process）：[%d/%d][%d/%d]" %(queueTypes_zh[queueType], tiers_zh[tier], queueTypes_en[queueType], tiers_en[tier], i + 1, len(ladders["divisions"]), j + 1, len(division["standings"])))
+                    logPrint("顶级%s%s玩家信息整理进度（Top %s %s player information sorting process）：[%d/%d][%d/%d]" %(queueTypes_zh[queueType], tiers_zh[tier], queueTypes_en[queueType], tiers_en[tier], i + 1, len(ladders["divisions"]), j + 1, len(division["standings"])), end = "\r", print_time = True)
         challenger_ladders_statistics_output_order = [8, 10, 9, 16, 14, 17, 20, 21, 18, 0, 3, 2, 13, 7, 6, 5, 19, 4, 12, 11, 1, 15]
         queue_ladder_data_organized = {}
         for i in challenger_ladders_statistics_output_order:
@@ -337,15 +366,15 @@ async def get_challenger_tier(connection):
             queue_ladder_data_organized[key] = queue_ladder_data[key]
         ladders_data["challenger_ladder"][queueType] = queue_ladder_data_organized #注意字典赋值的原理。该语句其实无关紧要（Pay attention to the principle of assigning a dictionary. This statement is actually unnecessary）
         ladders_dfs["challenger_ladder"][queueType] = pandas.DataFrame(data = queue_ladder_data_organized)
-        print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
+        logPrint("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
         for column in ladders_dfs["challenger_ladder"][queueType]:
             if ladders_dfs["challenger_ladder"][queueType][column].dtype == "bool":
                 ladders_dfs["challenger_ladder"][queueType][column] = ladders_dfs["challenger_ladder"][queueType][column].astype(str)
                 for i in range(len(ladders_dfs["challenger_ladder"][queueType])):
                     ladders_dfs["challenger_ladder"][queueType].loc[i, column] = "√" if ladders_dfs["challenger_ladder"][queueType][column][i] == "True" else ""
-        print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+        logPrint("逻辑值显示优化完成！\nBoolean value display optimization finished!")
         ladders_dfs["challenger_ladder"][queueType] = pandas.concat([pandas.DataFrame([challenger_ladders_header])[ladders_dfs["challenger_ladder"][queueType].columns], ladders_dfs["challenger_ladder"][queueType]], ignore_index = True)
-    challenger_ladders_metadata_statistics_output_order = [3, 10, 7, 2, 8, 11, 9, 4, 0, 1, 5, 6]
+    challenger_ladders_metadata_statistics_output_order = [2, 9, 6, 1, 7, 10, 8, 3, 0, 4, 5, 11]
     challenger_ladders_metadata_organized = {}
     for i in challenger_ladders_metadata_statistics_output_order:
         key = challenger_ladders_metadata_header_keys[i]
@@ -366,10 +395,10 @@ async def get_challenger_tier(connection):
             except FileNotFoundError:
                 os.makedirs(folder, exist_ok = True)
             except UnicodeEncodeError:
-                print("\n顶级%s玩家信息文本文档生成失败！请检查内容是否包含不常用字符！\nTop %s player information generation failure! Please check if the content includes any abnormal characters!\n" %(queueTypes_zh[queueType], queueTypes_en[queueType]))
+                logPrint("\n顶级%s玩家信息文本文档生成失败！请检查内容是否包含不常用字符！\nTop %s player information generation failure! Please check if the content includes any abnormal characters!\n" %(queueTypes_zh[queueType], queueTypes_en[queueType]))
                 break
             else:
-                print('\n顶级%s玩家信息已保存为“%s”。\nTop %s player information is saved as "%s".\n' %(queueTypes_zh[queueType], os.path.join(folder, json3name), queueTypes_en[queueType], os.path.join(folder, json3name)))
+                logPrint('\n顶级%s玩家信息已保存为“%s”。\nTop %s player information is saved as "%s".\n' %(queueTypes_zh[queueType], os.path.join(folder, json3name), queueTypes_en[queueType], os.path.join(folder, json3name)))
                 break
         ladders_data["topRated_ladder"][queueType] = {}
         queue_ladder_data = ladders_data["topRated_ladder"][queueType]
@@ -380,10 +409,14 @@ async def get_challenger_tier(connection):
             standing = ladders["standings"][i]
             standing_summoner_recapture = 0
             standing_summoner = await get_info(connection, standing["puuid"])
-            while standing_summoner["network_error"] and standing_summoner_recapture < 3:
+            while not standing_summoner["info_got"] and standing_summoner["body"]["httpStatus"] != 404 and standing_summoner_recapture < 3:
+                logPrint(standing_summoner["message"])
                 standing_summoner_recapture += 1
-                print("第%d/%d名顶级%s玩家（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\n[%d/%d] Information of Player (Puuid: %s) in the %s apex capture failed! Recapturing this player's information ... Times tried: %d" %(j + 1, len(division["standings"]), queueTypes_zh[queueType], standing["puuid"], standing_summoner_recapture, j + 1, len(division["standings"]), standing["puuid"], queueTypes_zh[queueType], standing_summoner_recapture))
+                logPrint("第%d/%d名顶级%s玩家（玩家通用唯一识别码：%s）获取失败！正在第%d次尝试重新获取该玩家信息……\n[%d/%d] Information of Player (Puuid: %s) in the %s apex capture failed! Recapturing this player's information ... Times tried: %d" %(j + 1, len(division["standings"]), queueTypes_zh[queueType], standing["puuid"], standing_summoner_recapture, j + 1, len(division["standings"]), standing["puuid"], queueTypes_zh[queueType], standing_summoner_recapture))
                 standing_summoner = await get_info(connection, standing["puuid"])
+            if not standing_summoner["info_got"]:
+                logPrint(standing_summoner["message"])
+                logPrint("第%d/%d名顶级%s玩家（玩家通用唯一识别码：%s）获取失败！\n[%d/%d] Information of Player (Puuid: %s) in the %s apex capture failed!" %(j + 1, len(division["standings"]), queueTypes_zh[queueType], standing["puuid"], j + 1, len(division["standings"]), standing["puuid"], queueTypes_zh[queueType]))
             for j in range(len(topRated_ladders_header_keys)):
                 key = topRated_ladders_header_keys[j]
                 if j <= 8:
@@ -393,8 +426,7 @@ async def get_challenger_tier(connection):
                         queue_ladder_data[key].append(standing[key])
                 else:
                     queue_ladder_data[key].append(standing_summoner["body"][key] if standing_summoner["info_got"] else "")
-            print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
-            print("顶级%s玩家信息整理进度（Top %s player information sorting process）：%d/%d" %(queueTypes_zh[queueType], queueTypes_en[queueType], i + 1, len(ladders["standings"])))
+            logPrint("顶级%s玩家信息整理进度（Top %s player information sorting process）：%d/%d" %(queueTypes_zh[queueType], queueTypes_en[queueType], i + 1, len(ladders["standings"])), end = "\r", print_time = True)
         topRated_ladders_statistics_output_order = [1, 3, 2, 6, 4, 7, 9, 10, 5, 0, 8]
         queue_ladder_data_organized = {}
         for i in topRated_ladders_statistics_output_order:
@@ -402,17 +434,18 @@ async def get_challenger_tier(connection):
             queue_ladder_data_organized[key] = queue_ladder_data[key]
         ladders_data["topRated_ladder"][queueType] = queue_ladder_data_organized
         ladders_dfs["topRated_ladder"][queueType] = pandas.DataFrame(data = queue_ladder_data_organized)
-        print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
+        logPrint("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
         for column in ladders_dfs["topRated_ladder"][queueType]:
             if ladders_dfs["topRated_ladder"][queueType][column].dtype == "bool":
                 ladders_dfs["topRated_ladder"][queueType][column] = ladders_dfs["topRated_ladder"][queueType][column].astype(str)
                 for i in range(len(ladders_dfs["topRated_ladder"][queueType])):
                     ladders_dfs["topRated_ladder"][queueType].loc[i, column] = "√" if ladders_dfs["topRated_ladder"][queueType][column][i] == "True" else ""
-        print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+        logPrint("逻辑值显示优化完成！\nBoolean value display optimization finished!")
         ladders_dfs["topRated_ladder"][queueType] = pandas.concat([pandas.DataFrame([topRated_ladders_header])[ladders_dfs["topRated_ladder"][queueType].columns], ladders_dfs["topRated_ladder"][queueType]], ignore_index = True)
     
-    print("是否导出以上天梯数据至Excel中？（输入任意键导出，否则不导出）\nDo you want to export the above data into Excel? (Press any key to export or null to refuse exporting)")
-    export = bool(input())
+    logPrint("是否导出以上天梯数据至Excel中？（输入任意键导出，否则不导出）\nDo you want to export the above data into Excel? (Press any key to export or null to refuse exporting)")
+    export_str = logInput()
+    export = bool(export_str)
     if export:
         workbook_regenerate = True
         while workbook_regenerate:
@@ -423,20 +456,20 @@ async def get_challenger_tier(connection):
                 try:
                     with pandas.ExcelWriter(path = os.path.join(folder, excel_name), mode = "a", if_sheet_exists = "replace") as writer:
                         # splits_info_df.to_excel(excel_writer = writer, sheet_name = "Split Config - Season %d" %currentSeason)
-                        # print("赛季信息导出完成！\nSplit config exported!\n")
+                        # logPrint("赛季信息导出完成！\nSplit config exported!\n")
                         # rewardTrack_df.to_excel(excel_writer = writer, sheet_name = "Reward Track - Season %d" %currentSeason)
-                        # print("奖励里程导出完成！\nReward milestones exported!\n")
+                        # logPrint("奖励里程导出完成！\nReward milestones exported!\n")
                         challenger_ladders_metadata_df.to_excel(excel_writer = writer, sheet_name = "Tier Apex Metadata - Season %d" %currentSeason)
-                        print("胜点系列段位天梯元数据导出完成！\nLP apex metadata exported!\n")
+                        logPrint("胜点系列段位天梯元数据导出完成！\nLP apex metadata exported!\n")
                         #topRated_ladders_metadata_df.to_excel(excel_writer = writer, sheet_name = "Rating Apex Metadata - Season %d" %currentSeason)
-                        #print("排名分系列段位天梯元数据导出完成！\nRating apex metadata exported!\n")
+                        #logPrint("排名分系列段位天梯元数据导出完成！\nRating apex metadata exported!\n")
                         runTimes = [] #记录保存每个队列的顶级玩家信息所花费的时间（Records the time spent in saving the top player information of each queue）
                         total_used = 0
                         ladders_reserved = 0
                         for ladderType in ladders_dfs:
                             for queueType in ladders_dfs[ladderType]:
                                 start = time.time()
-                                print("正在导出顶级%s玩家信息……\nExporting top %s player information ..." %(queueTypes_zh[queueType], queueTypes_en[queueType]))
+                                logPrint("正在导出顶级%s玩家信息……\nExporting top %s player information ..." %(queueTypes_zh[queueType], queueTypes_en[queueType]))
                                 ladders_dfs[ladderType][queueType].to_excel(excel_writer = writer, sheet_name = queueType + " " + (runTime_day if ladderType == "challenger_ladder" else runTime_hour))
                                 ladders_reserved += 1
                                 end = time.time()
@@ -444,30 +477,30 @@ async def get_challenger_tier(connection):
                                 total_used += unit
                                 runTimes.append(unit)
                                 total_remaining = 0 if sum([i for i in runTimes[:ladders_reserved + 1]]) == 0 else sum([i for i in runTimes[:ladders_reserved + 1]]) / ladders_reserved * (len(ladders_dfs["challenger_ladder"]) + len(ladders_dfs["topRated_ladder"]) - ladders_reserved)
-                                print("保存该段位排位天梯所花费的时间（Time spent in saving this match）：", format_runtime(unit))
-                                print("已花费的总时间（Total time used）                                ：", format_runtime(total_used))
-                                print("剩余时间（Time remaining）                                       ：", format_runtime(total_remaining))
-                                print("预计总时间（Expected total time）                                ：", format_runtime(total_used + total_remaining), end = "\n\n")
+                                logPrint("保存该段位排位天梯所花费的时间（Time spent in saving this match）： %s" %(format_runtime(unit)))
+                                logPrint("已花费的总时间（Total time used）                                ： %s" %(format_runtime(total_used)))
+                                logPrint("剩余时间（Time remaining）                                       ： %s" %(format_runtime(total_remaining)))
+                                logPrint("预计总时间（Expected total time）                                ： %s" %(format_runtime(total_used + total_remaining)), end = "\n\n")
                 except PermissionError:
-                    print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
-                    input()
+                    logPrint("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
+                    logInput()
                 except FileNotFoundError:
                     workbook_exist = False
                     os.makedirs(folder, exist_ok = True)
                     with pandas.ExcelWriter(path = os.path.join(folder, excel_name)) as writer:
                         # splits_info_df.to_excel(excel_writer = writer, sheet_name = "Split Config - Season %d" %currentSeason)
-                        # print("赛季信息导出完成！\nSplit config exported!\n")
+                        # logPrint("赛季信息导出完成！\nSplit config exported!\n")
                         # rewardTrack_df.to_excel(excel_writer = writer, sheet_name = "Reward Track - Season %d" %currentSeason)
-                        # print("奖励里程导出完成！\nReward milestones exported!\n")
+                        # logPrint("奖励里程导出完成！\nReward milestones exported!\n")
                         challenger_ladders_metadata_df.to_excel(excel_writer = writer, sheet_name = "Tier Apex Metadata - Season %d" %currentSeason)
-                        print("胜点系列段位天梯元数据导出完成！\nLP apex metadata exported!\n")
+                        logPrint("胜点系列段位天梯元数据导出完成！\nLP apex metadata exported!\n")
                         runTimes = [] #记录保存每个队列的顶级玩家信息所花费的时间（Records the time spent in saving the top player information of each queue）
                         total_used = 0
                         ladders_reserved = 0
                         for ladderType in ladders_dfs:
                             for queueType in ladders_dfs[ladderType]:
                                 start = time.time()
-                                print("正在导出顶级%s玩家信息……\nExporting top %s player information ..." %(queueTypes_zh[queueType], queueTypes_en[queueType]))
+                                logPrint("正在导出顶级%s玩家信息……\nExporting top %s player information ..." %(queueTypes_zh[queueType], queueTypes_en[queueType]))
                                 ladders_dfs[ladderType][queueType].to_excel(excel_writer = writer, sheet_name = queueType + " " + (runTime_day if ladderType == "challenger_ladder" else runTime_hour))
                                 ladders_reserved += 1
                                 end = time.time()
@@ -475,29 +508,30 @@ async def get_challenger_tier(connection):
                                 total_used += unit
                                 runTimes.append(unit)
                                 total_remaining = 0 if sum([i for i in runTimes[:ladders_reserved + 1]]) == 0 else sum([i for i in runTimes[:ladders_reserved + 1]]) / ladders_reserved * (len(ladders_dfs["challenger_ladder"]) + len(ladders_dfs["topRated_ladder"]) - ladders_reserved)
-                                print("保存该段位排位天梯所花费的时间（Time spent in saving this match）：", format_runtime(unit))
-                                print("已花费的总时间（Total time used）                                ：", format_runtime(total_used))
-                                print("剩余时间（Time remaining）                                       ：", format_runtime(total_remaining))
-                                print("预计总时间（Expected total time）                                ：", format_runtime(total_used + total_remaining), end = "\n\n")
-                    print("各队列顶级玩家信息导出完成！\nTop player information of all queues exported!\n")
+                                logPrint("保存该段位排位天梯所花费的时间（Time spent in saving this match）： %s" %(format_runtime(unit)))
+                                logPrint("已花费的总时间（Total time used）                                ： %s" %(format_runtime(total_used)))
+                                logPrint("剩余时间（Time remaining）                                       ： %s" %(format_runtime(total_remaining)))
+                                logPrint("预计总时间（Expected total time）                                ： %s" %(format_runtime(total_used + total_remaining)), end = "\n\n")
+                    logPrint("各队列顶级玩家信息导出完成！\nTop player information of all queues exported!\n")
                     workbook_regenerate = False
                     break
                 else:
-                    print("各队列顶级玩家信息导出完成！\nTop player information of all queues exported!\n")
+                    logPrint("各队列顶级玩家信息导出完成！\nTop player information of all queues exported!\n")
                     workbook_regenerate = False
                     break
             if workbook_exist:
-                print("警告：由于该文件已存在，本次导出已追加新工作表到工作簿的末尾。这可能导致队列和时间顺序的错乱。是否需要对工作表进行排序？（输入任意键排序，否则不排序）\nWarning: Because the excel workbook has existed, new sheets are appended to the last of the original sheet list. This may result in the disarrangement of queue and time orders. Do you want to sort the sheets? (Input anything to sort the sheets, or null to skip sorting)")
-                sort = bool(input())
+                logPrint("警告：由于该文件已存在，本次导出已追加新工作表到工作簿的末尾。这可能导致队列和时间顺序的错乱。是否需要对工作表进行排序？（输入任意键排序，否则不排序）\nWarning: Because the excel workbook has existed, new sheets are appended to the last of the original sheet list. This may result in the disarrangement of queue and time orders. Do you want to sort the sheets? (Input anything to sort the sheets, or null to skip sorting)")
+                sort_str = logInput()
+                sort = bool(sort_str)
                 if sort:
                     apex_loaded = True
-                    print("正在读取刚刚创建的工作表……\nLoading the workbook just created ...")
+                    logPrint("正在读取刚刚创建的工作表……\nLoading the workbook just created ...")
                     while True:
                         try:
                             wb = load_workbook(os.path.join(folder, excel_name))
                         except FileNotFoundError:
-                            print('排位天梯工作簿读取失败！请确保“%s”文件夹内含有名为“%s”的工作簿。如果需要重新生成该工作簿，请输入“0”。\nERROR reading the ranked apex workbook! Please make sure the workbook "%s" is in the folder "%s". If you want to regenerate this workbook, please submit "0".' %(folder, excel_name, excel_name, folder))
-                            apex_reload = input()
+                            logPrint('排位天梯工作簿读取失败！请确保“%s”文件夹内含有名为“%s”的工作簿。如果需要重新生成该工作簿，请输入“0”。\nERROR reading the ranked apex workbook! Please make sure the workbook "%s" is in the folder "%s". If you want to regenerate this workbook, please submit "0".' %(folder, excel_name, excel_name, folder))
+                            apex_reload = logInput()
                             if apex_reload == "0":
                                 apex_loaded = False
                                 workbook_regenerate = True
@@ -507,7 +541,7 @@ async def get_challenger_tier(connection):
                     if apex_loaded:
                         sheetnames = wb.sheetnames #第一次获取原工作簿的工作表名称列表（The first time to get the sheet name list of the original workbook）
                         #下面锁定工作表顺序（The following code determine the sheet order）
-                        print("正在创建顺序工作表列表……\nCreating the ordered sheet list ...")
+                        logPrint("正在创建顺序工作表列表……\nCreating the ordered sheet list ...")
                         ##第一部分：赛季信息类工作表（Part 1: Split config sheets）
                         split_config_dict = {int(sheet_iter.split()[-1]): sheet_iter for sheet_iter in sheetnames if sheet_iter.startswith("Split Config")}
                         reward_track_dict = {int(sheet_iter.split()[-1]): sheet_iter for sheet_iter in sheetnames if sheet_iter.startswith("Reward Track")}
@@ -546,17 +580,17 @@ async def get_challenger_tier(connection):
                                 for time_iter in sorted(topRated_ladders_dict[queueType_iter].keys()):
                                     sheetnames_sorted.append(topRated_ladders_dict[queueType_iter][time_iter])
                         #下面排列所有工作表（The following code arrange all sheets）
-                        print("正在排序……\nOrdering ...")
+                        logPrint("正在排序……\nOrdering ...")
                         for i in range(len(sheetnames_sorted)): #排序的思路是每次将一个工作表根据其在原工作表列表中的索引和在顺序工作表列表中的索引的差值进行移动（The main idea of sheets' sorting is to move each sheet according to the difference of the indices between in the original sheet list and in the ordered sheet list）
                             sheetnames = wb.sheetnames #因为一次移动可能导致很多其它工作表的位置发生变化，所以必须每次都重新获取工作表列表（Because a moving event may result in location change of many other sheets, the sheet list must be obtained each time）
                             sheetname_iter = sheetnames_sorted[i] #这里以顺序工作表为迭代器进行遍历，因为顺序工作表是固定不变的（Here the ordered sheet list acts as the iterator to be traversed, for the ordered sheet list is fixed）
                             if sheetnames[i] != sheetname_iter:
                                 preIndex = sheetnames.index(sheetname_iter)
                                 wb.move_sheet(sheetname_iter, i - preIndex) #注意移动距离数应当是排序后的索引减去排序前的索引（Note that the moving offset should be the index in the ordered list subtracted by that in the original list）
-                            #print("排序进度（Ordering process）：%d/%d\t工作表名称（Sheet name）： %s" %(i + 1, len(sheetnames_sorted), sheetname_iter))
-                        print('正在保存中……\nSaving the ordered workbook ...')
+                            #logPrint("排序进度（Ordering process）：%d/%d\t工作表名称（Sheet name）： %s" %(i + 1, len(sheetnames_sorted), sheetname_iter), end = "\r")
+                        logPrint('正在保存中……\nSaving the ordered workbook ...')
                         wb.save(os.path.join(folder, excel_name_sorted))
-                        print('排序完成！排好序的工作簿已保存为“%s”。\nOrdering finished! The ordered workbook is saved as "%s".\n' %(excel_name_sorted, excel_name_sorted))
+                        logPrint('排序完成！排好序的工作簿已保存为“%s”。\nOrdering finished! The ordered workbook is saved as "%s".\n' %(excel_name_sorted, excel_name_sorted))
                         workbook_regenerate = False
 
 #-----------------------------------------------------------------------------
@@ -566,6 +600,8 @@ async def get_challenger_tier(connection):
 async def connect(connection):
     await get_summoner_data(connection)
     await get_challenger_tier(connection)
+    log.write("\n[Program terminated and returned status 0.]\n")
+    log.close()
 
 #-----------------------------------------------------------------------------
 # Main

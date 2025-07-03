@@ -5,9 +5,10 @@ from openpyxl import load_workbook
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/06/25
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -142,7 +143,6 @@ def get_info_name(info: dict, mode = 1) -> str:
     if not isinstance(info, dict) or not all(i in info for i in ["displayName", "gameName", "tagLine"]):
         print("您的召唤师信息格式有误！\nERROR format of summoner information!")
         name = ""
-        exit()
     else:
         if info["displayName"] or info["gameName"]:
             if info["gameName"] and info["tagLine"]:
@@ -717,10 +717,10 @@ async def fetch_store(connection):
     regaliaCrests = await (await connection.request("GET", "/lol-regalia/v3/inventory/REGALIA_CREST")).json()
     hashtable_dicts = {"CHAMPION_SKIN": championSkins_hashtable, "COMPANION": companions_hashtable, "NEXUS_FINISHER": nexusfinishers_hashtable, "STATSTONE": statstones_hashtable, "STRAWBERRY_BOON": strawberryBoons_hashtable, "STRAWBERRY_LOADOUT_ITEM": strawberryLoadoutItems_hashtable, "STRAWBERRY_MAP": strawberryMaps_hashtable, "EMOTE": summonerEmotes_hashtable, "SUMMONER_ICON": summonerIcons_hashtable, "TFT_DAMAGE_SKIN": tftdamageskins_hashtable, "TFT_MAP_SKIN": tftmapskins_hashtable, "TFT_PLAYBOOK": tftplaybooks_hashtable, "TFT_ZOOM_SKIN": tftzoomskins_hashtable, "WARD_SKIN": wardSkins_hashtable, "ACHIEVEMENT_TITLE": titles_hashtable, "REGALIA_BANNER": regaliaBanners_hashtable}
     #定义商品数据结构（Define the store item data structure）
-    catalog_header = {"active": "可用性", "description": "简介", "imagePath": "缩略图路径", "inactiveDate": "停止销售日期", "inventoryType": "道具类型", "itemId": "序号", "itemInstanceId": "识别码", "metadata": "元数据", "name": "名称", "offerId": "交易代码", "owned": "已拥有", "ownershipType": "拥有状态", "purchaseDate": "购买日期", "questSkinInfo": "任务皮肤信息", "releaseDate": "发布日期", "sale": "销售信息", "subInventoryType": "次级道具类型", "subTitle": "副标题", "tags": "搜索关键词", "IP_cost": "原价（蓝色精萃）", "IP_costType": "支付类型（蓝色精萃）", "RP_cost": "原价（点券）", "RP_costType": "支付类型（点券）", "sale IP_cost": "售价（蓝色精萃）", "sale IP_discount": "销售折扣（蓝色精萃）", "sale IP_endDate": "停止售卖时间（蓝色精萃）", "sale IP_startDate": "开放售卖时间（蓝色精萃）", "sale RP_cost": "售价（点券）", "sale RP_discount": "销售折扣（点券）", "sale RP_endDate": "停止售卖时间（点券）", "sale RP_startDate": "开放售卖时间（点券）"}
+    catalog_header = {"active": "可用性", "description": "简介", "imagePath": "缩略图路径", "inactiveDate": "停止销售时间戳", "inventoryType": "道具类型", "itemId": "序号", "itemInstanceId": "识别码", "metadata": "元数据", "name": "名称", "offerId": "交易代码", "owned": "已拥有", "ownershipType": "拥有状态", "purchaseDate": "购买时间戳", "questSkinInfo": "任务皮肤信息", "releaseDate": "发布时间戳", "sale": "销售信息", "subInventoryType": "次级道具类型", "subTitle": "副标题", "tags": "搜索关键词", "inactiveTime": "停止销售时间", "purchaseTime": "购买时间", "releaseTime": "发布时间", "IP_cost": "原价（蓝色精萃）", "IP_costType": "支付类型（蓝色精萃）", "RP_cost": "原价（点券）", "RP_costType": "支付类型（点券）", "sale IP_cost": "售价（蓝色精萃）", "sale IP_discount": "销售折扣（蓝色精萃）", "sale IP_endDate": "停止售卖时间（蓝色精萃）", "sale IP_startDate": "开放售卖时间（蓝色精萃）", "sale RP_cost": "售价（点券）", "sale RP_discount": "销售折扣（点券）", "sale RP_endDate": "停止售卖时间（点券）", "sale RP_startDate": "开放售卖时间（点券）"}
     catalog_header_keys = list(catalog_header.keys())
     catalog_data = {}
-    inventoryType_dict = {"ACHIEVEMENT_BANNER_ACCENT": "旗帜装饰", "ACHIEVEMENT_TITLE": "头衔", "ANNOUNCER_PACK": "播报员语音包", "AUGMENT": "AUGMENT", "AUGMENT_SLOT": "AUGMENT_SLOT", "BOOST": "加成道具", "BUNDLES": "道具包", "CHAMPION": "英雄", "CHAMPION_SKIN": "皮肤", "CHERRY_BOON": "斗魂竞技场赛季旅程奖励", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "表情", "EVENT_PASS": "事件通行证", "FANPASS": "粉丝通行证", "GIFT": "礼物", "HEXTECH_CRAFTING": "海克斯科技宝箱", "MODE_PROGRESSION_REWARD": "游戏模式进度奖励", "MYSTERY": "神秘道具", "NEXUS_FINISHER": "终结特效", "PREMIUM_CLUB_MEMBERSHIP": "高级俱乐部会员身份", "PROGRESSION": "通行证升级", "PROVIEW_PASS": "Pro View许可", "PVE_RELIC": "PVE_RELIC", "PVE_SUMMONER_PACKAGE": "PVE_SUMMONER_PACKAGE", "PVE_UPGRADE": "PVE模式战略目标属性增益", "QUEUE_ENTRY": "队列通行证", "REGALIA_BANNER": "旗帜", "REGALIA_BORDER": "排位边框", "REGALIA_CREST": "华冠", "RP": "点券", "RUNE": "符文", "SKIN_AUGMENT": "签名升级", "SKIN_BORDER": "皮肤边框", "SKIN_UPGRADE_GEAR": "皮肤自带服装升级", "SKIN_UPGRADE_HOME_GUARD": "皮肤自带家园卫士特效", "SKIN_UPGRADE_RECALL": "皮肤自带回城特效", "SKIN_UPGRADE_SPAWN": "皮肤自带重生特效", "SPELL_BOOK_PAGE": "符文页", "STATSTONE": "永恒星碑", "STRAWBERRY_BOON": "无尽狂潮增益效果", "STRAWBERRY_LOADOUT_ITEM": "无尽狂潮配置", "STRAWBERRY_MAP": "无尽狂潮地图", "SUMMONER_CUSTOMIZATION": "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON": "召唤师图标", "TEAMPASS": "战队通行证", "TEAM_SKIN_PURCHASE": "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN": "云顶之弈进攻特效", "TFT_EVENT_SKILLS": "云顶之弈技巧加成", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TFT_PLAYBOOK": "云顶之弈指导手册", "TFT_ZOOM_SKIN": "云顶之弈传送门", "TOURNAMENT_FLAG": "冠军杯赛旗帜", "TOURNAMENT_FRAME": "冠军杯赛旗帜框架", "TOURNAMENT_LOGO": "冠军杯赛标志", "TOURNAMENT_TROPHY": "冠军杯赛奖杯", "TRANSFER": "转区项目", "WARD_SKIN": "守卫（眼）皮肤"}
+    inventoryType_dict = {"ACHIEVEMENT_BANNER_ACCENT": "旗帜装饰", "ACHIEVEMENT_TITLE": "头衔", "ANNOUNCER_PACK": "播报员语音包", "AUGMENT": "AUGMENT", "AUGMENT_SLOT": "AUGMENT_SLOT", "BOOST": "加成道具", "BUNDLES": "道具包", "CHAMPION": "英雄", "CHAMPION_SKIN": "皮肤", "CHERRY_BOON": "斗魂竞技场赛季旅程奖励", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "表情", "EVENT_PASS": "事件通行证", "FANPASS": "粉丝通行证", "GIFT": "礼物", "HEXTECH_CRAFTING": "海克斯科技宝箱", "MODE_PROGRESSION_REWARD": "游戏模式进度奖励", "MYSTERY": "神秘道具", "NEXUS_FINISHER": "终结特效", "PREMIUM_CLUB_MEMBERSHIP": "高级俱乐部会员身份", "PROGRESSION": "通行证升级", "PROVIEW_PASS": "Pro View许可", "PVE_RELIC": "PVE_RELIC", "PVE_SUMMONER_PACKAGE": "PVE_SUMMONER_PACKAGE", "PVE_UPGRADE": "PVE模式战略目标属性增益", "QUEUE_ENTRY": "队列通行证", "REGALIA_BANNER": "旗帜", "REGALIA_BORDER": "排位边框", "REGALIA_CREST": "徽章", "RP": "点券", "RUNE": "符文", "SKIN_AUGMENT": "签名升级", "SKIN_BORDER": "皮肤边框", "SKIN_UPGRADE_GEAR": "皮肤自带服装升级", "SKIN_UPGRADE_HOME_GUARD": "皮肤自带家园卫士特效", "SKIN_UPGRADE_RECALL": "皮肤自带回城特效", "SKIN_UPGRADE_SPAWN": "皮肤自带重生特效", "SPELL_BOOK_PAGE": "符文页", "STATSTONE": "永恒星碑", "STRAWBERRY_BOON": "无尽狂潮增益效果", "STRAWBERRY_LOADOUT_ITEM": "无尽狂潮配置", "STRAWBERRY_MAP": "无尽狂潮地图", "SUMMONER_CUSTOMIZATION": "SUMMONER_CUSTOMIZATION", "SUMMONER_ICON": "召唤师图标", "TEAMPASS": "战队通行证", "TEAM_SKIN_PURCHASE": "TEAM_SKIN_PURCHASE", "TFT_DAMAGE_SKIN": "云顶之弈进攻特效", "TFT_EVENT_SKILLS": "云顶之弈技巧加成", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TFT_PLAYBOOK": "云顶之弈指导手册", "TFT_ZOOM_SKIN": "云顶之弈传送门", "TOURNAMENT_FLAG": "冠军杯赛旗帜", "TOURNAMENT_FRAME": "冠军杯赛旗帜框架", "TOURNAMENT_LOGO": "冠军杯赛标志", "TOURNAMENT_TROPHY": "冠军杯赛奖杯", "TRANSFER": "转区项目", "WARD_SKIN": "守卫（眼）皮肤"}
     ownershipType_dict = {None: "未拥有", "F2P": "免费使用", "RENTED": "租借中", "OWNED": "已拥有"}
     subInventoryType_dict = {None: "", "": "", "CHEST": "海克斯科技宝箱", "CHROMA_BUNDLE": "炫彩道具包", "EMOTE_BUNDLE": "表情道具包", "HEXTECH_BUNDLE": "海克斯科技宝箱道具包", "LOL_EVENT_PASS": "英雄联盟事件通行证", "MATERIAL": "材料", "RECOLOR": "炫彩", "RUNE_PAGE_BUNDLE": "符文页道具包", "SKIN_BUNDLE": "皮肤道具包", "SKIN_VARIANT_BUNDLE": "皮肤套装", "TFT_PASS": "云顶之弈事件通行证", "TFT_TREASURE_TROVE_TOKEN": "云顶之弈召唤商店代币", "lol_clash_premium_tickets": "冠军杯赛豪华版挑战券", "lol_clash_tickets": "冠军杯赛挑战券", "lol_blessing_token": "圣堂花火", "lol_blue_essence": "蓝色精萃", "lol_mythic_essence": "神话精萃", "lol_orange_essence": "橙色精萃", "tft_star_fragments": "星之碎片"}
     for i in range(len(catalog_header)):
@@ -751,20 +751,20 @@ async def fetch_store(connection):
                 sale_priceDict[price["currency"]] = price["sale"]
         for i in range(len(catalog_header)):
             key = catalog_header_keys[i]
-            if i <= 18:
-                if i == 1:
+            if i <= 21:
+                if i == 1: #简介（`description`）
                     if item[key] != "" and (len(set(list(item[key]))) != 1 or item[key][0] != " "):
                         catalog_data[key].append(item[key])
                     elif item["inventoryType"] in hashtable_dicts:
                         if item["inventoryType"] in {"STRAWBERRY_BOON", "STRAWBERRY_LOADOUT_ITEM", "STRAWBERRY_MAP"} and item["itemInstanceId"] in hashtable_dicts[item["inventoryType"]]: #PVE模式相关的索引是识别码（PVE mode hashtable index is itemInstanceId）
-                            catalog_data[key].append(hashtable_dicts[item["inventoryType"]][item["itemInstanceId"]]["description"]) #为了简化这里的代码，上面所有索引字典的描述键必须是“description”（To simplify the code here, name keys of all of above hashtable dictionaries must be "description"）
+                            catalog_data[key].append(hashtable_dicts[item["inventoryType"]][item["itemInstanceId"]]["description"]) #为了简化这里的代码，上面所有索引字典的描述键必须是“description”（To simplify the code here, name keys of all above hashtable dictionaries must be "description"）
                         elif item["itemId"] in hashtable_dicts[item["inventoryType"]]: #道具序号为111007的炫彩皮肤没有收录在CommunityDragon数据库中（The skin chroma with the itemId 111007 isn't archived in CommunityDragon database）
                             catalog_data[key].append(hashtable_dicts[item["inventoryType"]][item["itemId"]]["description"])
                         else:
                             catalog_data[key].append("")
                     else:
                         catalog_data[key].append("")
-                elif i == 2:
+                elif i == 2: #缩略图路径（`imagePath`）
                     if item[key].startswith("//"):
                         imagePath = "https:" + item[key]
                     elif item[key].startswith("/"):
@@ -774,34 +774,30 @@ async def fetch_store(connection):
                     else:
                         imagePath = connection.address + "/" + item[key]
                     catalog_data[key].append(imagePath)
-                elif i in {3, 12, 14}:
-                    if item[key] == 0:
-                        catalog_data[key].append("")
-                    elif item[key] == 18446744073709551615:
-                        catalog_data[key].append("∞")
-                    else:
-                        catalog_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(item[key])))
-                elif i == 4:
+                elif i == 4: #道具类型（`inventoryType`）
                     catalog_data[key].append(inventoryType_dict[item[key]])
-                elif i == 8:
+                elif i == 8: #名称（`name`）
                     if item[key] != "":
                         catalog_data[key].append(item[key])
                     elif item["inventoryType"] in hashtable_dicts:
                         if item["inventoryType"] in {"STRAWBERRY_BOON", "STRAWBERRY_LOADOUT_ITEM", "STRAWBERRY_MAP"} and item["itemInstanceId"] in hashtable_dicts[item["inventoryType"]]:
-                            catalog_data[key].append(hashtable_dicts[item["inventoryType"]][item["itemInstanceId"]]["name"]) #为了简化这里的代码，上面所有索引字典的名称键必须是“name”（To simplify the code here, name keys of all of above hashtable dictionaries must be "name"）
+                            catalog_data[key].append(hashtable_dicts[item["inventoryType"]][item["itemInstanceId"]]["name"]) #为了简化这里的代码，上面所有索引字典的名称键必须是“name”（To simplify the code here, name keys of all above hashtable dictionaries must be "name"）
                         elif item["itemId"] in hashtable_dicts[item["inventoryType"]]:
                             catalog_data[key].append(hashtable_dicts[item["inventoryType"]][item["itemId"]]["name"])
                         else:
                             catalog_data[key].append("")
                     else:
                         catalog_data[key].append("")
-                elif i == 11:
+                elif i == 11: #拥有状态（`ownershipType`）
                     catalog_data[key].append(ownershipType_dict[item[key]])
-                elif i == 16:
+                elif i == 16: #次级道具类型（`subInventoryType`）
                     catalog_data[key].append(subInventoryType_dict[item[key]])
+                elif i >= 19: #时间戳相关键（Timestamp-related keys）
+                    subkey = "inactiveDate" if i == 19 else "purchaseDate" if i == 20 else "releaseDate"
+                    catalog_data[key].append("" if item[subkey] == 0 else "∞" if item[subkey] == 18446744073709551615 else time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(item[subkey])))
                 else:
                     catalog_data[key].append(item[key])
-            elif i <= 22:
+            elif i <= 25:
                 currency, subkey = key.split("_")
                 if currency in priceDict and subkey in priceDict[currency]:
                     catalog_data[key].append(priceDict[currency][subkey])
@@ -814,26 +810,26 @@ async def fetch_store(connection):
                 else:
                     catalog_data[key].append("")
     for item in store:
-        priceDict = {} #应用于“i <= 19”的场景（Applies to when "i <= 19"）
+        priceDict = {} #应用于“i <= 19”的场景（Applies when "i <= 19"）
         for price in item["prices"]:
             priceDict[price["currency"]] = price
-        sale_priceDict = {} #应用与“i >= 22”的场景（Applies to when "i >= 22"）
+        sale_priceDict = {} #应用与“i >= 22”的场景（Applies when "i >= 22"）
         if item["sale"] != None:
             for price in item["sale"]["prices"]:
                 sale_priceDict[price["currency"]] = price
         for i in range(len(store_header)):
             key = store_header_keys[i]
             if i <= 13:
-                if i == 4:
+                if i == 4: #道具类型（`inventoryType`）
                     store_data[key].append(inventoryType_dict[item[key]])
-                elif i == 7:
+                elif i == 7: #购买要求（`itemRequirements`）
                     itemRequirements = []
                     if item[key] != None:
                         for requirement in item[key]:
                             requirement["name"] = collection_hashtable.get((requirement["inventoryType"], requirement["itemId"]), "")
                             itemRequirements.append(requirement)
                     store_data[key].append(itemRequirements)
-                elif i == 12:
+                elif i == 12: #次级道具类型（`subInventoryType`）
                     store_data[key].append(subInventoryType_dict[item[key]])
                 else:
                     store_data[key].append(item[key])
@@ -865,15 +861,15 @@ async def fetch_store(connection):
     for item in collection:
         for i in range(len(collection_header)):
             key = collection_header_keys[i]
-            if i in {0, 8, 11}:
+            if i in {0, 8, 11}: #时间字符串相关键（Time string-related keys）
                 collection_data[key].append("") if item[key] == "" else collection_data[key].append("%s-%s-%s %s-%s-%s" %(item[key][:4], item[key][5:7], item[key][8:10], item[key][11:13], item[key][14:16], item[key][17:19])) if "-" in item[key] and ":" in item[key] else collection_data[key].append("%s-%s-%s %s-%s-%s" %(item[key][:4], item[key][4:6], item[key][6:8], item[key][9:11], item[key][11:13], item[key][13:15]))
-            elif i == 2:
+            elif i == 2: #道具类型（`inventoryType`）
                 collection_data[key].append(inventoryType_dict[item[key]])
-            elif i == 7:
+            elif i == 7: #拥有权（`ownershipType`）
                 collection_data[key].append(ownershipType_dict[item[key]])
-            elif i == 14:
+            elif i == 14: #典藏皮肤（带边框）（`isVintage`）
                 collection_data[key].append(item["payload"]["isVintage"]) if item["payload"] and "isVintage" in item["payload"] else collection_data[key].append(False) #没有“是否典藏”选项的默认不是典藏（An item without the "isVintage" key can't be vintage）
-            elif i == 15:
+            elif i == 15: #名称（`name`）
                 if (item["inventoryType"], item["itemId"]) in collection_hashtable:
                     name = collection_hashtable[(item["inventoryType"], item["itemId"])]
                 elif item["inventoryType"] in hashtable_dicts: #商品中可能不包含藏品（A collection item may not be contained in the collection）
@@ -889,7 +885,7 @@ async def fetch_store(connection):
             else:
                 collection_data[key].append(item[key])
     #数据框列序整理（Dataframe column ordering）
-    catalog_statistics_output_order = [8, 17, 1, 5, 0, 4, 16, 7, 6, 14, 3, 19, 20, 21, 22, 15, 23, 24, 26, 25, 27, 28, 30, 29, 10, 11, 12, 13, 9, 18, 2]
+    catalog_statistics_output_order = [8, 17, 1, 5, 0, 4, 16, 7, 6, 21, 19, 22, 23, 24, 25, 15, 26, 27, 29, 28, 30, 31, 33, 32, 10, 11, 20, 13, 9, 18, 2]
     catalog_data_organized = {}
     for i in catalog_statistics_output_order:
         key = catalog_header_keys[i]

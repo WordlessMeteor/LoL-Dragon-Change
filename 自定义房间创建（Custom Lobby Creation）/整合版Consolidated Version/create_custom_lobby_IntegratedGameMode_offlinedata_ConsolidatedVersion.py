@@ -5,9 +5,10 @@ from wcwidth import wcswidth
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/06/29
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -47,11 +48,11 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
     fields = df.columns.tolist()
     for field in fields:
         maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(str(x)), df[field])), wcswidth(str(field))) + 2
-    index_len = max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
-            if input() == "":
+            if not bool(input()):
                 #print(df)
                 result = str(df)
                 return (result, maxLens)
@@ -163,13 +164,14 @@ async def get_lockfile(connection):
 #-----------------------------------------------------------------------------
 async def check_available_queue(connection):
     queues = await (await connection.request("GET", "/lol-game-queues/v1/queues")).json()
+    platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     map_CN = {8: "水晶之痕", 10: "扭曲丛林", 11: "召唤师峡谷", 12: "嚎哭深渊", 14: "屠夫之桥", 16: "星界废墟", 18: "瓦洛兰城市公园", 19: "第43区", 20: "飞船坠落点", 21: "百合与莲花的神庙", 22: "聚点危机", 30: "怒火角斗场", 33: "最终都市", 35: "班德尔之森"}
     map_EN = {8: "Crystal Scar", 10: "Twisted Treeline", 11: "Summoner's Rift", 12: "Howling Abyss", 14: "Butcher's Bridge", 16: "Cosmic Ruins", 18: "Valoran City Park", 19: "Substructure 43", 20: "Crash Site", 21: "Temple of Lily and Lotus", 22: "Convergence", 30: "Rings of Wrath", 33: "Final City", 35: "The Bandlewood"}
     pickmode_CN = {"AllRandomPickStrategy": "全随机模式", "SimulPickStrategy": "自选模式", "TeamBuilderDraftPickStrategy": "征召模式", "OneTeamVotePickStrategy": "投票", "TournamentPickStrategy": "竞技征召模式", "QuickplayPickStrategy": "快速匹配", "": "待定"}
     pickmode_EN = {"AllRandomPickStrategy": "All Random", "SimulPickStrategy": "Blind Pick", "TeamBuilderDraftPickStrategy": "Draft Mode", "OneTeamVotePickStrategy": "Vote", "TournamentPickStrategy": "Tournament Draft", "QuickplayPickStrategy": "Quickplay", "": "Pending"}
     available_queues = {}
     for queue in queues:
-        if queue["queueAvailability"] == "Available":
+        if queue["queueAvailability"] == "Available" or queue["id"] in platform_config["ClientSystemStates"]["enabledQueueIdsList"]:
             available_queues[queue["id"]] = queue
     queue_dict = {"queueID": [], "mapID": [], "map_CN": [], "map_EN": [], "gameMode": [], "pickType_CN": [], "pickType_EN": []}
     for queue in available_queues.values():
@@ -191,8 +193,14 @@ async def check_available_queue(connection):
 #-----------------------------------------------------------------------------
 async def create_custom_lobby(connection):
     summoner = await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json()
+    practiceGameTypeConfigIds = await (await connection.request("GET", "/lol-platform-config/v1/namespaces/ClientSystemStates/practiceGameTypeConfigIdList")).json()
+    practiceGameTypeConfigIds = sorted(map(int, practiceGameTypeConfigIds))
+    gameTypeConfigs = await (await connection.request("GET", "/lol-platform-config/v1/namespaces/LoginDataPacket/gameTypeConfigs")).json()
+    gameTypeConfigs = {int(config["id"]): config for config in gameTypeConfigs}
     gamemodes = ["CLASSIC", "ARAM", "PRACTICETOOL", "NEXUSBLITZ", "GAMEMODEX", "TUTORIAL"]
     gamemaps = {8: "水晶之痕（Crystal Scar）", 10: "扭曲丛林（Twisted Treeline）", 11: "召唤师峡谷（Summoner's Rift）", 12: "嚎哭深渊（Howling Abyss）", 14: "屠夫之桥（Butcher's Bridge）", 16: "星界废墟（Cosmic Ruins）", 18: "瓦洛兰城市公园（Valoran City Park）", 19: "第43区（Substructure 43）", 20: "飞船坠落点（Crash Site）", 21: "百合与莲花的神庙（Temple of Lily and Lotus）", 22: "聚点危机（Convergence）", 30: "怒火角斗场（Rings of Wrath）", 33: "最终都市（Final City）", 35: "班德尔之森（The Bandlewood）"}
+    gameTypes_zh = {"GAME_CFG_PICK_BLIND": "自选模式（自定义）", "GAME_CFG_DRAFT_STD": "征召模式（自定义）", "GAME_CFG_DRAFT_NOBAN": "轮选模式", "GAME_CFG_PICK_RANDOM": "全随机模式（自定义）", "GAME_CFG_PICK_SIMUL": "同选模式", "GAME_CFG_DRAFT_TOURNAMENT": "竞技征召模式（自定义）", "GAME_CFG_PICK_SIMUL_TD": "计时征召", "GAME_CFG_BASIC_TUTORIAL": "基础教程", "GAME_CFG_ADV_TUTORIAL": "进阶教程", "GAME_CFG_CAP": "最终教程", "GAME_CFG_BLIND_RANDOM": "盲选随机", "GAME_CFG_BLIND_DUPE": "克隆选择（自定义）", "GAME_CFG_CROSS_DUPE": "全队克隆", "GAME_CFG_BLIND_DRAFT_ST": "自选征召模式（自定义）", "GAME_CFG_COUNTER_PICK": "互选模式（自定义）", "GAME_CFG_TEAM_BUILDER_DRAFT": "征召模式", "GAME_CFG_TEAM_BUILDER_BLIND": "自选模式", "GAME_CFG_TEAM_BUILDER_BLIND_DRAFT": "自选征召", "GAME_CFG_TEAM_BUILDER_RANDOM": "全随机模式", "GAME_CFG_TEAM_BUILDER_BLIND_DUPE": "克隆选择", "GAME_CFG_TEAM_BUILDER_QUICKPLAY": "快速匹配"}
+    gameTypes_en = {"GAME_CFG_PICK_BLIND": "Blind Pick (custom)", "GAME_CFG_DRAFT_STD": "Draft Mode (custom)", "GAME_CFG_DRAFT_NOBAN": "Draft Noban (custom)", "GAME_CFG_PICK_RANDOM": "All Random (custom)", "GAME_CFG_PICK_SIMUL": "Simultaneous Pick (custom)", "GAME_CFG_DRAFT_TOURNAMENT": "Tournament Draft (custom)", "GAME_CFG_PICK_SIMUL_TD": "Timed Draft (custom)", "GAME_CFG_BASIC_TUTORIAL": "Basic Tutorial", "GAME_CFG_ADV_TUTORIAL": "Advanced Tutorial", "GAME_CFG_CAP": "Capstone Tutorial", "GAME_CFG_BLIND_RANDOM": "Blind Random (custom)", "GAME_CFG_BLIND_DUPE": "All for one (custom)", "GAME_CFG_CROSS_DUPE": "All for one (cross-team)", "GAME_CFG_BLIND_DRAFT_ST": "Blind Draft Pick (custom)", "GAME_CFG_COUNTER_PICK": "Nemesis Draft (custom)", "GAME_CFG_TEAM_BUILDER_DRAFT": "Draft Pick", "GAME_CFG_TEAM_BUILDER_BLIND": "Blind Pick", "GAME_CFG_TEAM_BUILDER_BLIND_DRAFT": "Blind Draft Pick", "GAME_CFG_TEAM_BUILDER_RANDOM": "All Random", "GAME_CFG_TEAM_BUILDER_BLIND_DUPE": "All for one", "GAME_CFG_TEAM_BUILDER_QUICKPLAY": "Quickplay"}
     spectatorPolicy = ["LobbyAllowed", "FriendsAllowed", "AllAllowed", "NotAllowed"]
     defaultMapId = {"CLASSIC": 11, "ARAM": 12, "PRACTICETOOL": 11, "NEXUSBLITZ": 21, "GAMEMODEX": 21}
     print("请选择自定义房间的游戏模式：\nPlease select a game mode of the lobby:\n1\t召唤师峡谷（Summoner's Rift）\n2\t嚎哭深渊（Howling Abyss）\n3\t训练模式（Practice Tool）\n4\t极限闪击（不可用）【Nexus Blitz (Unavailable)】\n5\t极限闪击（Nexus Blitz）")
@@ -221,12 +229,15 @@ async def create_custom_lobby(connection):
             break
         else:
             print("地图序号输入错误！请重新输入：\nError input of mapID! Please try again:")
-    print("请选择自定义房间的游戏类型：\nPlease select a game type of the lobby:\n1\t自选模式（Blind Pick）\n2\t征召模式（Draft Mode）\n4\t全随机模式（All Random）\n6\t竞技征召模式（Tournament Draft）\n16\t自选征召（仅测试服）【Blind Draft (Available only on PBE）】")
+    print("请选择自定义房间的游戏类型：\nPlease select a game type of the lobby:")
+    for i in practiceGameTypeConfigIds:
+        config = gameTypeConfigs[i]
+        print("%d\t%s%s%s%s" %(i, gameTypes_zh[config["name"]], "【" if "(" in gameTypes_en[config["name"]] else "（", gameTypes_en[config["name"]], "】" if "(" in gameTypes_en[config["name"]] else "）"))
     while True:
         mutatorId = input()
         if mutatorId == "":
             continue
-        elif mutatorId in {"1", "2", "4", "6", "16"}:
+        elif mutatorId in list(map(str, practiceGameTypeConfigIds)):
             mutatorId = int(mutatorId)
             break
         else:
@@ -261,6 +272,8 @@ async def create_custom_lobby(connection):
             print("队伍规模输入错误！请重新输入：\nError input of team size! Please try again:")
     print("密码（Password）：", end = "")
     lobbyPassword = input()
+    print("是否添加观战延迟？（输入任意键以添加，否则不添加。）\nAdd spectating delay? (Submit any non-empty string to add delay, or null to refuse addition.)")
+    spectatorDelayEnabled = bool(input())
     custom = {
         "customGameLobby": {
             "configuration": {
@@ -271,8 +284,9 @@ async def create_custom_lobby(connection):
                 "mutators": {
                     "id": mutatorId
                 },
-            "spectatorPolicy": spectatorPolicy[customSpectatorPolicyTypeNumber - 1],
-            "teamSize": teamsize
+                "spectatorPolicy": spectatorPolicy[customSpectatorPolicyTypeNumber - 1],
+                "spectatorDelayEnabled": spectatorDelayEnabled,
+                "teamSize": teamsize
             },
             "lobbyName": lobbyName,
             "lobbyPassword": lobbyPassword
@@ -285,15 +299,13 @@ async def create_custom_lobby(connection):
 # 创建队列房间（Create a queue lobby）
 #-----------------------------------------------------------------------------
 async def create_queue_lobby(connection):
-    Client_System_States = await (await connection.request("GET", "/lol-platform-config/v1/namespaces/ClientSystemStates")).json()
-    #print(Client_System_States)
-    enabled_QueueId = Client_System_States["enabledQueueIdsList"]
+    enabled_queueIds = await (await connection.request("GET", "/lol-platform-config/v1/namespaces/ClientSystemStates/enabledQueueIdsList")).json()
     game_version = await (await connection.request("GET", "/lol-patch/v1/game-version")).json()
     platform_config = await (await connection.request("GET", "/lol-platform-config/v1/namespaces")).json()
     platformId = platform_config["LoginDataPacket"]["platformId"]
-    for i in enabled_QueueId:
-        i = int(i)
-    enabled_QueueId.sort()
+    for i in range(len(enabled_queueIds)):
+        enabled_queueIds[i] = int(enabled_queueIds[i])
+    enabled_queueIds.sort()
     print("当前可用队列房间序号：\nCurrently enabled QueueIds:")
     while True:
         await check_available_queue(connection)
@@ -302,14 +314,14 @@ async def create_queue_lobby(connection):
         refresh = input()
         if refresh != "":
             break
-##    print("*****************************************************************************")
-##    print("QueueID\tmapID\t" + "{0:^14}".format("map_CN") + "\t" + "{0:^30}".format("Gamemode_CN") + "\t" + "{0:^11}".format("PickType_CN") + "\t" + "{0:^24}".format("map_EN") + "\t" + "{0:^34}".format("Gamemode_EN") + "\t" + "{0:^15}".format("PickType_EN"))
-##    for i in enabled_QueueId:
-##        for j in range(len(localdata)):
-##            if i == localdata["QueueID"][j]:
-##                print("{0:<7}".format(str(localdata["QueueID"][j])) + "\t" + "{0:<5}".format(str(localdata["mapID"][j])) + "\t" + "{0:<14}".format(localdata["map_CN"][j]) + "\t" + "{0:<30}".format(localdata["Gamemode_CN"][j]) + "\t" + "{0:<11}".format(localdata["PickType_CN"][j]) + "\t" + "{0:<24}".format(localdata["map_EN"][j]) + "\t" + "{0:<34}".format(localdata["Gamemode_EN"][j]) + "\t" + "{0:<15}".format(localdata["PickType_EN"][j]))
-##                break
-##    print("*****************************************************************************")
+    # print("*****************************************************************************")
+    # print("QueueID\tmapID\t" + "{0:^14}".format("map_CN") + "\t" + "{0:^30}".format("Gamemode_CN") + "\t" + "{0:^11}".format("PickType_CN") + "\t" + "{0:^24}".format("map_EN") + "\t" + "{0:^34}".format("Gamemode_EN") + "\t" + "{0:^15}".format("PickType_EN"))
+    # for i in enabled_queueIds:
+    #     for j in range(len(localdata)):
+    #         if i == localdata["QueueID"][j]:
+    #             print("{0:<7}".format(str(localdata["QueueID"][j])) + "\t" + "{0:<5}".format(str(localdata["mapID"][j])) + "\t" + "{0:<14}".format(localdata["map_CN"][j]) + "\t" + "{0:<30}".format(localdata["Gamemode_CN"][j]) + "\t" + "{0:<11}".format(localdata["PickType_CN"][j]) + "\t" + "{0:<24}".format(localdata["map_EN"][j]) + "\t" + "{0:<34}".format(localdata["Gamemode_EN"][j]) + "\t" + "{0:<15}".format(localdata["PickType_EN"][j]))
+    #             break
+    # print("*****************************************************************************")
     print('请输入队列房间序号：（输入“0”以刷新可用队列信息。输入负数以退出创建。）\nPlease enter the queueID: (Enter "0" to refresh available queue information. Enter any negative number to exit creation.)')
     while True:
         try:
@@ -339,6 +351,23 @@ async def create_queue_lobby(connection):
                         print("服务器错误。请换一个队列序号并重试。\nUnhandled server side error. Please switch to another queueId and try again.")
                     elif response["message"] == "INVALID_REQUEST":
                         print("请求无效。\nInvalid request.")
+                    elif response["message"] == "INVALID_PERMISSIONS":
+                        print("必须是小队拥有者才能更改模式。是否单独创建小队？（输入任意键以离开该小队并创建一个新小队，否则留在该小队。）\nMust be party owner to change mode. Do you want to create another party? (Submit any non-empty string to leave this party and create another party, or null to stay in the current party.)")
+                        if bool(input()):
+                            queue = {"queueId": queueId}
+                            response = await (await connection.request("DELETE", "/lol-lobby/v2/lobby")).json()
+                            response = await (await connection.request("POST", "/lol-lobby/v2/lobby", data = queue)).json()
+                            lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+                            if "gameConfig" in lobby_information:
+                                postqueueId = lobby_information["gameConfig"]["queueId"]
+                                if prequeueId == postqueueId:
+                                    continue
+                                else:
+                                    print(lobby_information)
+                            else:
+                                print("此房间序号尚不可用。请选择其它序号。\nThis queueId isn't available yet. Please select another ID.")
+                        else:
+                            print("已取消本次操作。\nCancelled this operation.")
                     else:
                         print(response)
             else:
@@ -417,7 +446,7 @@ async def add_bots_team(connection, teamId: str):
         for role in LoLChampions[championId]["roles"]:
             recommended_champion_for_role[role].append(championId)
     #可用的电脑玩家难度（Available bot difficulty）
-    botDifficulty = ["EASY", "HARD", "MEDIUM", "RSINTRO", "RSBEGINNER", "RSINTERMEDIATE", "RSWARMINTRO"]
+    botDifficulty = ["EASY", "MEDIUM", "HARD", "RSWARMINTRO", "RSINTRO", "RSBEGINNER", "RSINTERMEDIATE"]
     print("队伍%s：请选择自选电脑玩家或者随机生成电脑玩家：\nTeam %s: Please select the option to generate bot players:\n0\t跳过该队伍（Skip this team）\n1\t完全随机生成（Completely Randomly）\n2\t按照分路随机生成（Randomly according to Positions）\n3\t自选（By Picking）" %(teamId[0], teamId[0]))
     while True:
         o = input()
@@ -439,7 +468,7 @@ async def add_bots_team(connection, teamId: str):
                         for j in team:
                             print("{0:<14}".format(names[j]) + "\t" + "{0:<14}".format(aliases[j]) + "\t" + str(recommended_position_for_champion[str(j)]["recommendedPositions"]))
                         print("*****************************************************************************\n是否重新随机英雄？（输入任意键以重新随机，否则进行下一步）\nDo you want to regenerate the champions? (Input anything to reroll, or null to enter the next step)")
-                        if input() == "":
+                        if not bool(input()):
                             break
                     break
                 else:
@@ -575,7 +604,7 @@ async def add_bots_team(connection, teamId: str):
 
     botUuid_team = []
     print("是否设定电脑玩家难度一致？（输入任意键设定为不一致，否则一致）\nSet all botDifficulties identical? (Any keys for N, or null for Y)")
-    botDifficulty_consistency = input() == ""
+    botDifficulty_consistency = not bool(input())
     if botDifficulty_consistency:
         print(f"请输入电脑玩家的难度：\nPlease enter the botDifficulty: (among {botDifficulty})")
         while True:
@@ -679,7 +708,7 @@ async def get_lobby_information(connection):
     lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
     print(lobby_information)
     print("创建完成！输入任意键开始游戏，否则继续获取房间信息。\nLobby created successfully! Please press any key to start the game, or null to continue getting lobby information:")
-    while input() == "":
+    while not bool(input()):
         lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
         print(lobby_information)
 
@@ -797,7 +826,7 @@ async def start_game(connection):
                     penalty_time_remaining_text_en += str(penalty_minute) + " m "
                 penalty_time_remaining_text_zh += str(penalty_second) + "秒"
                 penalty_time_remaining_text_en += str(penalty_second) + " s"
-                print("低优先级队列：放弃比赛或是挂机，会导致你的队友进行一场不公平的对局，并且会被系统视为应受惩罚的恶劣行为。你的队伍已被放置在一条低优先级队列中。离开该队列、拒绝或未能接受对局将重置这个倒计时。剩余时间：" + penalty_time_remaining_text_zh + ".\nLow Priority Queue: Abandoning a match or being AFK results in a negarive experience for your teammates, and is a punishable offense in League of Legends. You've been placed in a lower priority queue. Leaving the queue, declining or failing to accept a match will reset the timer. Time Remaining: " + penalty_time_remaining_text_en + ".")
+                print("低优先级队列：放弃比赛或是挂机，会导致你的队友进行一场不公平的对局，并且会被系统视为应受惩罚的恶劣行为。你的队伍已被放置在一条低优先级队列中。离开该队列、拒绝或未能接受对局将重置这个倒计时。剩余时间：" + penalty_time_remaining_text_zh + "。\nLow Priority Queue: Abandoning a match or being AFK results in a negative experience for your teammates, and is a punishable offense in League of Legends. You've been placed in a lower priority queue. Leaving the queue, declining or failing to accept a match will reset the timer. Time Remaining: " + penalty_time_remaining_text_en + ".")
                 input()
                 search_state = await (await connection.request("GET", "/lol-lobby/v2/lobby/matchmaking/search-state")).json()
             while gameflow_phase == "Lobby":

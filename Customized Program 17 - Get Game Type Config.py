@@ -4,9 +4,10 @@ import pandas, os, json
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/06/29
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -72,7 +73,9 @@ async def get_gametype_config(connection):
     jsonname = "GameTypeConfig.json"
     with open(jsonname, "w", encoding = "utf-8") as fp:
         json.dump(gametype_config, fp, indent = 4, ensure_ascii = False)
-    gametype_config_header = {"advancedLearningQuests": "进阶教程", "allowTrades": "允许交换", "banMode": "禁用模式", "banTimerDuration": "禁用时间限制（秒）", "battleBoost": "战斗加成", "crossTeamChampionPool": "跨队伍英雄共享", "deathMatch": "团体竞赛", "doNotRemove": "禁止退出游戏", "duplicatePick": "克隆选择", "exclusivePick": "唯一选择", "gameModeOverride": "游戏模式重载设置", "id": "序号", "learningQuests": "新手教程", "mainPickTimerDuration": "盲选时间限制（秒）", "maxAllowableBans": "最大禁用数量", "name": "代码", "numPlayersPerTeamOverride": "队伍规模重载设置", "onboardCoopBeginner": "人机对战引导模式", "pickMode": "英雄选择模式", "postPickTimerDuration": "符文和皮肤选择时间限制（秒）", "reroll": "允许重随", "teamChampionPool": "队伍英雄共享"}
+    gameTypes_zh = {"GAME_CFG_PICK_BLIND": "自选模式（自定义）", "GAME_CFG_DRAFT_STD": "征召模式（自定义）", "GAME_CFG_DRAFT_NOBAN": "轮选模式", "GAME_CFG_PICK_RANDOM": "全随机模式（自定义）", "GAME_CFG_PICK_SIMUL": "同选模式", "GAME_CFG_DRAFT_TOURNAMENT": "竞技征召模式（自定义）", "GAME_CFG_PICK_SIMUL_TD": "计时征召", "GAME_CFG_BASIC_TUTORIAL": "基础教程", "GAME_CFG_ADV_TUTORIAL": "进阶教程", "GAME_CFG_CAP": "最终教程", "GAME_CFG_BLIND_RANDOM": "盲选随机", "GAME_CFG_BLIND_DUPE": "克隆选择（自定义）", "GAME_CFG_CROSS_DUPE": "全队克隆", "GAME_CFG_BLIND_DRAFT_ST": "自选征召模式（自定义）", "GAME_CFG_COUNTER_PICK": "互选模式（自定义）", "GAME_CFG_TEAM_BUILDER_DRAFT": "征召模式", "GAME_CFG_TEAM_BUILDER_BLIND": "自选模式", "GAME_CFG_TEAM_BUILDER_BLIND_DRAFT": "自选征召", "GAME_CFG_TEAM_BUILDER_RANDOM": "全随机模式", "GAME_CFG_TEAM_BUILDER_BLIND_DUPE": "克隆选择", "GAME_CFG_TEAM_BUILDER_QUICKPLAY": "快速匹配"}
+    gameTypes_en = {"GAME_CFG_PICK_BLIND": "Blind Pick (custom)", "GAME_CFG_DRAFT_STD": "Draft Mode (custom)", "GAME_CFG_DRAFT_NOBAN": "Draft Noban (custom)", "GAME_CFG_PICK_RANDOM": "All Random (custom)", "GAME_CFG_PICK_SIMUL": "Simultaneous Pick (custom)", "GAME_CFG_DRAFT_TOURNAMENT": "Tournament Draft (custom)", "GAME_CFG_PICK_SIMUL_TD": "Timed Draft (custom)", "GAME_CFG_BASIC_TUTORIAL": "Basic Tutorial", "GAME_CFG_ADV_TUTORIAL": "Advanced Tutorial", "GAME_CFG_CAP": "Capstone Tutorial", "GAME_CFG_BLIND_RANDOM": "Blind Random (custom)", "GAME_CFG_BLIND_DUPE": "All for one (custom)", "GAME_CFG_CROSS_DUPE": "All for one (cross-team)", "GAME_CFG_BLIND_DRAFT_ST": "Blind Draft Pick (custom)", "GAME_CFG_COUNTER_PICK": "Nemesis Draft (custom)", "GAME_CFG_TEAM_BUILDER_DRAFT": "Draft Pick", "GAME_CFG_TEAM_BUILDER_BLIND": "Blind Pick", "GAME_CFG_TEAM_BUILDER_BLIND_DRAFT": "Blind Draft Pick", "GAME_CFG_TEAM_BUILDER_RANDOM": "All Random", "GAME_CFG_TEAM_BUILDER_BLIND_DUPE": "All for one", "GAME_CFG_TEAM_BUILDER_QUICKPLAY": "Quickplay"}
+    gametype_config_header = {"advancedLearningQuests": "进阶教程", "allowTrades": "允许交换", "banMode": "禁用模式", "banTimerDuration": "禁用时间限制（秒）", "battleBoost": "战斗加成", "crossTeamChampionPool": "跨队伍英雄共享", "deathMatch": "团体竞赛", "doNotRemove": "禁止退出游戏", "duplicatePick": "克隆选择", "exclusivePick": "唯一选择", "gameModeOverride": "游戏模式重载设置", "id": "序号", "learningQuests": "新手教程", "mainPickTimerDuration": "盲选时间限制（秒）", "maxAllowableBans": "最大禁用数量", "name": "代码", "numPlayersPerTeamOverride": "队伍规模重载设置", "onboardCoopBeginner": "人机对战引导模式", "pickMode": "英雄选择模式", "postPickTimerDuration": "符文和皮肤选择时间限制（秒）", "reroll": "允许重随", "teamChampionPool": "队伍英雄共享", "localizedName_zh": "中文名称", "localizedName_en": "英文名称"}
     gametype_config_header_keys = list(gametype_config_header.keys())
     gametype_config_data = {}
     for i in range(len(gametype_config_header_keys)):
@@ -81,8 +84,14 @@ async def get_gametype_config(connection):
     for config in gametype_config:
         for i in range(len(gametype_config_header_keys)):
             key = gametype_config_header_keys[i]
-            gametype_config_data[key].append(config[key])
-    gametype_config_statistics_output_order = [11, 15, 18, 2, 1, 14, 3, 13, 19, 20, 21, 5, 9, 8, 4, 12, 0, 17, 6, 7, 10, 16]
+            if i <= 21:
+                gametype_config_data[key].append(config[key])
+            else:
+                if i == 22: #中文名称（`localizedName_zh`）
+                    gametype_config_data[key].append(gameTypes_zh.get(config["name"]))
+                else: #英文名称（`localizedName_en`）
+                    gametype_config_data[key].append(gameTypes_en.get(config["name"]))
+    gametype_config_statistics_output_order = [11, 15, 22, 23, 18, 2, 1, 14, 3, 13, 19, 20, 21, 5, 9, 8, 4, 12, 0, 17, 6, 7, 10, 16]
     gametype_config_data_organized = {}
     for i in gametype_config_statistics_output_order:
         key = gametype_config_header_keys[i]

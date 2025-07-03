@@ -4,9 +4,10 @@ import os, time
 #=============================================================================
 # * 声明（Declaration）
 #=============================================================================
-# 作者（Author）：       XHXIAIEIN
-# 更新（Last update）：  2021/01/08
-# 主页（Home page）：    https://github.com/XHXIAIEIN/LeagueCustomLobby/
+# 作者（Author）：          WordlessMeteor
+# 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
+# 鸣谢（Acknowledgement）： XHXIAIEIN
+# 更新（Last update）：     2025/06/09
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -114,21 +115,14 @@ async def autoPick(connection):
                     break
         #下面获取用户的槽位序号（Then, get the user's cellId）
         start1 = time.time()
-        cellIds = {}
-        for member in champ_select_session["myTeam"]:
-            cellIds[member["puuid"]] = member["cellId"]
-        current_cellId = cellIds[current_puuid]
-        # for member in champ_select_session["myTeam"]:
-        #     if member["puuid"] == current_puuid:
-        #         current_cellId = member["cellId"]
-        #         break
+        localPlayerCellId = champ_select_session["localPlayerCellId"]
         end1 = time.time()
         diff1 = end1 - start1
         #下面获取用户选英雄时的行为序号（Get the user's actionId when he/she's picking a champion）
         start2 = time.time()
         action_found = False
-        selfKey_pick = str(current_cellId) + " pick" #只选择类型为“选英雄”的行为（Only do operations on a pick action）
-        selfKey_ban = str(current_cellId) + " ban" #只选择类型为“禁英雄”的行为（Only do operations on a ban action）
+        selfKey_pick = str(localPlayerCellId) + " pick" #只选择类型为“选英雄”的行为（Only do operations on a pick action）
+        selfKey_ban = str(localPlayerCellId) + " ban" #只选择类型为“禁英雄”的行为（Only do operations on a ban action）
         selfKey = selfKey_ban if ban else selfKey_pick
         while not action_found:
             gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json()
@@ -151,7 +145,7 @@ async def autoPick(connection):
                     # for stage in champ_select_session["actions"]:
                     #     actions += stage
                     # for action in actions:
-                    #     if action["actorCellId"] == current_cellId and action["type"] == "pick":
+                    #     if action["actorCellId"] == localPlayerCellId and action["type"] == "pick":
                     #         print(action)
                     #         action_found = True
                     #         pick_actionId = action["id"]
@@ -163,7 +157,7 @@ async def autoPick(connection):
         #下面通过LCU API选择英雄（Pick a champion through LCU API)
         if action_found:
             start3 = time.time()
-            body = {"id": pick_actionId, "actorCellId": current_cellId, "championId": championId, "type": "pick", "completed": complete, "isAllyAction": True, "isInProgress": True, "pickTurn": 0}
+            body = {"id": pick_actionId, "actorCellId": localPlayerCellId, "championId": championId, "type": "pick", "completed": complete, "isAllyAction": True, "isInProgress": True, "pickTurn": 0}
             response = await (await connection.request("PATCH", "/lol-champ-select/v1/session/actions/%d" %pick_actionId, data = body)).json()
             end3 = time.time()
             diff3 = end3 - start3
