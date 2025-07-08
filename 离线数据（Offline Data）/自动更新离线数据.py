@@ -457,10 +457,10 @@ while True:
                             fp.write(src)
                 if update:
                     if added:
-                        logPrint("已添加文件（Added file）：%s" %(os.path.join(dir, name)), write_time = False)
+                        logPrint("已添加文件（Added file）：%s" %(os.path.join(dir, name)), print_time = True)
                         added_files.append(urljoin(url, name))
                     else:
-                        logPrint("已更新文件（Updated file）：%s" %(os.path.join(dir, name)), write_time = False)
+                        logPrint("已更新文件（Updated file）：%s" %(os.path.join(dir, name)), print_time = True)
                         updated_files.append(urljoin(url, name))
         if updated_files:
             logPrint("已更新以下%d个文件：\nUpdated the following %d file(s):" %(len(updated_files), len(updated_files)), write_time = False)

@@ -123,26 +123,8 @@ The following explanations only apply to the current branch. For other details (
 	- 自定义脚本3为**探索LCU API**提供了一个基础工具，将**格式化的**返回结果输出到同目录下的`temporary data.txt`，并将变量以**二进制**的形式保存到同目录下的`temporary data.pkl`中。该程序中列出了一些参考的网络请求命令。所有可用API来自[LCU Explorer](https://github.com/HextechDocs/lcu-explorer/releases/tag/1.2.0)。
 		- 请参考示例输入。<font color=#ff0000><b>不合法的输入会导致程序直接退出。</b></font>合法的输入格式有以下要求：
 			- 包含<ins>一或两个</ins>空格。
+				- 包含两个空格时，用户可以传入请求主体。
 			- 地址（输入字符串以空格作为分隔符分隔而成的列表的第二个字符串元素）以<ins>斜杠</ins>开头。
-		- 该程序无法发送带有请求主体的请求。请尝试通过其它工具或自行编写Python脚本来发送稍复杂的请求。
-			- 如果尝试自行编写Python脚本来发送请求，这里提供一个代码模板。
-				```python
-				import json
-				from lcu_driver import Connector
-
-				connector = Connector()
-
-				async def DIY(connection):
-					body = ... #请求主体，一般是列表或者字典
-					response = await (await connection.request({请求方法}, {接口}, data = body)).json() #请求方法包括但不限于{"GET", "POST", "PUT", "PATCH"}。接口须以斜杠开头
-					print(json.dumps(response, indent = 4, ensure_ascii = False))
-				
-				@connection.ready
-				async def connect(connection):
-					await DIY(connection)
-
-				connector.start()
-				```
 		- 要在网页端而不是软件端查看所有LCU API，请访问[Swagger](https://www.mingweisamuel.com/lcu-schema/tool/)或[LCU Swagger UI](https://swagger.dysolix.dev/lcu/)。（如在浏览器中使用Ctrl + F以搜索API。）
 	- 自定义脚本4用于**更新主目录下的`available-bots.xlsx`文件**。
 		- 该工作簿包含3个工作表：
@@ -629,6 +611,7 @@ The following explanations only apply to the current branch. For other details (
 				- 唤起荣誉投票界面
 				- 客户端任务管理
 			- 其它
+		- 在没有明确说明的情况下，输入“0”以返回上一层。
 		- 该脚本会在“cache”文件夹下**创建缓存**，以加快数据资源加载速度。
 			- 本地缓存有<ins>24小时</ins>的有效期。
 			- 用户可以重新加载数据资源以手动更新本地缓存。
@@ -1162,26 +1145,8 @@ For details about customized programs that is beyond the scope of creating a cus
 	- Customized Program 03 provides a basic tool for **exploration into LCU API**, which saves **formatted** returned result into `temporary data.txt` in the same directory, and also saves the variable into `temporary data.pkl` in the **binary** form in the same directory. Some reference requests are listed in this program. All available APIs are from [LCU Explorer](https://github.com/HextechDocs/lcu-explorer/releases/tag/1.2.0).
 		- Please input according to the examples. <font color=#ff0000><b>Illegal input will cause the program to exit.</b></font> A legal input requires: 
 			- Containing <ins>one or two</ins> spaces.
-			- Endpoint (The second string element of the list from the input string split by space) to start with a <ins>slash</ins>.
-		- This program isn't designed to send any request with a request body. Please use other tools or write a Python program by yourself to try sending complex requests.
-			- If you'd like to send requests by writing a Python program on your own, here's a code template.
-				```python
-				import json
-				from lcu_driver import Connector
-
-				connector = Connector()
-
-				async def DIY(connection):
-					body = ... #Request body, usually a list or a dict
-					response = await (await connection.request({method}, {endpoint}, data = body)).json() #Methods contain but are not limited to {"GET", "POST", "PUT", "PATCH"}. Any endpoint must starts with a slash
-					print(json.dumps(response, indent = 4, ensure_ascii = False))
-				
-				@connection.ready
-				async def connect(connection):
-					await DIY(connection)
-
-				connector.start()
-				```
+				- If there're two spaces, users may pass a request body subsequently.
+			- Endpoint (The second string element of the list from the input string split by space) starting with a <ins>slash</ins>.
 		- To view all LCU APIs in a web instead of in an APP, please visit [swagger](https://www.mingweisamuel.com/lcu-schema/tool/) or [LCU Swagger UI](https://swagger.dysolix.dev/lcu/). (For example, you may use Ctrl + F to search for certain API.)
 	- Customized Program 04 is designed to **update `available-bots.xlsx` in the home directory**.
 		- This workbook contains 3 sheets:
@@ -1668,6 +1633,7 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Recall honor vote phase (!)
 				- Manage the League Client task
 			- Other phases
+		- Without specific explanation, submit "0" to return to the last step.
 		- This program **creates cache** under the "cache" folder to speed up data resource loading.
 			- The local cache expires after <ins>24 hours</ins>.
 			- Users may reload data resources to refresh local cache.

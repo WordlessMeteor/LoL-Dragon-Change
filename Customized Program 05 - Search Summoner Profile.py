@@ -20,7 +20,7 @@ args = parser.parse_args()
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/07/01
+# 更新（Last update）：     2025/07/08
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -2157,6 +2157,7 @@ async def search_profile(connection):
                         matchID = logInput()
                         fetched_info = True #是否正常存储对局信息（Whether the match information is captured as expected）
                         fetched_timeline = True #是否正常存储对局时间轴（Whether the match timeline is captured as expected）
+                        old_match_detected = False #是否检测到旧对局（Whether any old match is detected）
                         if matchID == "":
                             continue
                         elif matchID == "0":
@@ -2165,14 +2166,15 @@ async def search_profile(connection):
                         else:
                             if matchID == "3":
                                 saved_LoLMatchIDs = [int(name.split(".")[0].split("-")[-1]) for name in os.listdir(folder) if name.startswith("Match Information (LoL) - ")]
-                                if saved_LoLMatchIDs:
+                                old_match_detected = len(saved_LoLMatchIDs) > 0
+                                if old_match_detected:
                                     latest_LoLMatchID = max(saved_LoLMatchIDs) #需要注意，对局序号最大的对局未必是最近进行的对局。而这种情况并不会引起数据的丢失。相反，最近进行的对局会被重新保存一次，从数据完整性的角度上讲无关紧要（Note that the match with the greatest matchID doesn't mean it's the latest match. Nevertheless, when this situation happens, there won't be any data loss. Conversely, the latest match will be saved again, which doesn't matter in terms of data integrity）
                                     latest_LoLMatchID_index = gameIds.index(latest_LoLMatchID) if latest_LoLMatchID in gameIds else 500
-                                    logPrint("检测到您以前曾经查询过该召唤师的英雄联盟对局记录。是否只查询该召唤师信息文件夹中不包含的英雄联盟对局？（输入空字符串以只查询未保存过文本文档的对局，否则自行指定对局索引上下限）\nThe program detected that you've searched for this summoner's LoL match history before. Do you want to only fetch the LoL matches not present in the current summoner folder? (Enter an empty string to search for only the matches whose json files haven't been saved, or any non-empty string to specify the begIndex and endIndex of the matches by yourself)\n即将使用的对局索引下界和上界（The match begIndex and endIndex to be used）：0 %d" %latest_LoLMatchID_index)
+                                    logPrint("检测到您以前曾经查询过该召唤师的英雄联盟对局记录。是否只保存该召唤师信息文件夹中不包含的英雄联盟对局？（输入空字符串以只保存未保存过文本文档的对局，否则自行指定对局索引上下限）\nThe program detected that you've searched for this summoner's LoL match history before. Do you want to only save the LoL matches not present in the current summoner folder? (Enter an empty string to saved only the matches whose json files haven't been saved, or any non-empty string to specify the begIndex and endIndex of the matches by yourself)\n即将使用的对局索引下界和上界（The match begIndex and endIndex to be used）：0 %d" %latest_LoLMatchID_index)
                                     update_unsaved_only_str = logInput()
                                     update_unsaved_only = not bool(update_unsaved_only_str)
-                                if saved_LoLMatchIDs and update_unsaved_only:
-                                    LoLMatchIDs = list(map(str, gameIds[0:latest_LoLMatchID_index]))
+                                if old_match_detected and update_unsaved_only:
+                                    LoLMatchIDs = list(map(str, gameIds))
                                 else:
                                     logPrint("请设置需要查询的对局索引下界和上界，以空格为分隔符（输入空字符以默认查询近200场对局）：\nPlease set the begIndex and endIndex of the matches to be searched, split by space (Enter an empty string to search for the recent 200 matches):") #在13.13版本以前，腾讯代理的服务器只支持近20场对局查询（Before Patch 13.13, Tencent servers only provide search of the latest 20 matches）
                                     while True:
@@ -2272,7 +2274,7 @@ async def search_profile(connection):
                                             if LoLGame_info["participantIdentities"][participantId]["player"]["puuid"] == current_puuid or LoLGame_info["participantIdentities"][participantId]["player"]["gameName"] + "#" + LoLGame_info["participantIdentities"][participantId]["player"]["tagLine"] == current_summonerName:
                                                 break
                                         stats = LoLGame_info["participants"][participantId]["stats"]
-                                        timeline = game["participants"][participantId]["timeline"]
+                                        timeline = LoLGame_info["participants"][participantId]["timeline"]
                                         #下面针对每场对局建立总的数据资源异常处理机制（Builds the summarized data resource exceptional handling mechanism for each match）
                                         ##召唤师图标（Summoner icon）
                                         summonerIconIds_match_list = [LoLGame_info["participantIdentities"][participantId]["player"]["profileIcon"]]
@@ -2444,7 +2446,7 @@ async def search_profile(connection):
                                                         LoLHistory_data[key].append(profileIconId if j == 24 else "")
                                                 else:
                                                     LoLHistory_data[key].append(LoLGame_info["participantIdentities"][participantId]["player"][key])
-                                            elif j <= 35:
+                                            elif j <= 39:
                                                 if j == 27: #最高段位（`highestAchievedSeasonTier`）
                                                     LoLHistory_data[key].append(tiers[LoLGame_info["participants"][participantId]["highestAchievedSeasonTier"]])
                                                 elif j >= 32 and j <= 34: #英雄相关键（Champion-related keys）
@@ -2510,6 +2512,7 @@ async def search_profile(connection):
                                     sort_gameInfo_sync_str = logInput()
                                     sort_gameInfo_sync = bool(sort_gameInfo_sync_str)
                                     if not sort_gameInfo_sync:
+                                        LoLGame_stat_df = pandas.DataFrame()
                                         break
                             else:
                                 try:
@@ -2542,6 +2545,10 @@ async def search_profile(connection):
                                 key = LoLGame_info_header_keys[i]
                                 LoLGame_stat_data[key] = []
                             for matchID in LoLMatchIDs:
+                                LoLGame_info_export = not (old_match_detected and update_unsaved_only and int(matchID) in saved_LoLMatchIDs) #标记是否导出对局详细信息。如果是在批量查询全部对局的情况下仅保存本地没有的对局，且该对局已在本地，则不保存本场对局（Marks whether to export the match information. If the user submits "3" to search matches in batch and selected to update the matches that don't exist locally, while the current match already exists, then the program won't export this match）
+                                #LoLGame_leaderboard_export = False #标记是否导出对局排行榜。这一块目前待定，未来考虑设计识别成只有那些要保存的匹配对局才导出（Marks whether to export the match leaderboard. This is currently undicided, and in the future it should export matched games to be saved as planned）
+                                LoLGame_timeline_export = LoLGame_info_export #标记是否导出对局时间轴。时间轴的整理依赖于详细信息，因此目前认为这两者的值相同（Marks whether to export the match timeline. Timeline data sorting is based on the match information, so its value is set the same as the above）
+                                #LoLGame_event_export = LoLGame_timeline_export #标记是否导出对局事件信息。由于事件信息源于时间轴，因此这两者的值在任何情形下是相同的（Marks whether to export the match events. Because events are extracted from the timeline, these two values should be the same under any circumstance）
                                 LoLGame_info = await (await connection.request("GET", "/lol-match-history/v1/games/" + matchID)).json()
                                 #logPrint(LoLGame_info)
                                 LoLGame_timeline = await (await connection.request("GET", "/lol-match-history/v1/game-timelines/" + matchID)).json()
@@ -2587,7 +2594,7 @@ async def search_profile(connection):
                                         LoLGame_info_error = {"项目": list(error_header.values()), "items": list(error_header.keys()), "值": [LoLGame_info[j] for j in error_header_keys]}
                                         LoLGame_info_df = pandas.DataFrame(data = LoLGame_info_error)
                                 else:
-                                    reserve = True #决定是否保存对局的文本文档。match_reserve_strategy变量决定的是是否将不包含主召唤师的对局记录导出到Excel中（Decides whether to save the matches into json files. The variable match_reserve_strategy decides whether to export the matches which don't include the main summoner into Excel）
+                                    reserve = LoLGame_info_export #决定是否保存对局的文本文档。match_reserve_strategy变量决定的是是否将不包含主召唤师的对局记录导出到Excel中（Decides whether to save the matches into json files. The variable match_reserve_strategy decides whether to export the matches which don't include the main summoner into Excel）
                                     participant_puuid = []
                                     participant_summonerName = []
                                     participant_gameName = []
@@ -3268,7 +3275,7 @@ async def search_profile(connection):
                                                         stat_list = sorted(map(lambda x: 0 if x["stats"]["goldEarned"] == 0 else x["stats"]["goldSpent"] / x["stats"]["goldEarned"], team_participants), reverse = True)
                                                     else:
                                                         self_stat = stats[subkey]
-                                                        stat_list = sorted(map(lambda x: x["stats"][subkey], team_participants), reverse = True)
+                                                        stat_list = sorted(map(lambda x: x["stats"][subkey], team_participants), reverse = j != 288) #死亡次数越低，死亡位次越小（For deaths, the lower the number of deaths is, the smaller the death order is）
                                                     LoLGame_info_data[key].append(0 if len(set(stat_list)) == 1 else stat_list.index(self_stat) + 1) #当所有人的数据一样时，则不用比较位次（When some stat of every player is the same, there's no need to compare it）
                                             if LoLGame_info["participantIdentities"][i]["player"]["puuid"] == current_puuid:
                                                 LoLGame_stat_data[key].append(LoLGame_info_data[key][-1]) #直接添加最近一次追加的数据，以简化代码（Directly append the recently appended data to simplify the code） 
@@ -3526,10 +3533,13 @@ async def search_profile(connection):
                                     LoLGame_event_df = LoLGame_info_df.copy(deep = True)
                                     timeline_exist_error[int(matchID)] = True
 
-                                # game_leaderboard_dfs[int(matchID)] = LoLGame_leaderboard_df.copy(deep = True)
-                                game_info_dfs[int(matchID)] = LoLGame_info_df.copy(deep = True) #这里添加的LoLGame_info_df会在下一次循环中发生改变，这是数据框类型的特性。因此这里采用深复制，将原有内容克隆到另外一个地址，这样能保证每次添加的是不同的对局信息（The added LoLGame_info_df will be modified next time in the loop, which belongs to the characteristics of DataFrame data type. Therefore a deep copy is used here to clone the original contents to another address, so that each time the appended content is different）
-                                game_timeline_dfs[int(matchID)] = LoLGame_timeline_df.copy(deep = True)
-                                game_event_dfs[int(matchID)] = LoLGame_event_df.copy(deep = True)
+                                # if LoLGame_leaderboard_export:
+                                #     game_leaderboard_dfs[int(matchID)] = LoLGame_leaderboard_df.copy(deep = True)
+                                if LoLGame_info_export:
+                                    game_info_dfs[int(matchID)] = LoLGame_info_df.copy(deep = True) #这里添加的LoLGame_info_df会在下一次循环中发生改变，这是数据框类型的特性。因此这里采用深复制，将原有内容克隆到另外一个地址，这样能保证每次添加的是不同的对局信息（The added LoLGame_info_df will be modified next time in the loop, which belongs to the characteristics of DataFrame data type. Therefore a deep copy is used here to clone the original contents to another address, so that each time the appended content is different）
+                                if LoLGame_timeline_export:
+                                    game_timeline_dfs[int(matchID)] = LoLGame_timeline_df.copy(deep = True)
+                                    game_event_dfs[int(matchID)] = LoLGame_event_df.copy(deep = True)
                                 
                             if len(matches_not_found) > 0:
                                 logPrint("警告：以下%d场对局不存在。\nWarning: The following %d match(es) aren't found." %(len(matches_not_found), len(matches_not_found)))
@@ -3538,7 +3548,6 @@ async def search_profile(connection):
                                 logPrint("警告：以下%d场对局获取失败。\nWarning: The following %d match(es) fail to be fetched." %(len(error_LoLMatchIDs), len(error_LoLMatchIDs)))
                                 logPrint(error_LoLMatchIDs)
                             LoLGame_stat_statistics_output_order = [0, 13, 23, 5, 3, 11, 10, 6, 12, 9, 8, 39, 207, 32, 33, 217, 218, 220, 221, 42, 35, 36, 153, 154, 155, 156, 157, 158, 159, 189, 201, 190, 202, 191, 203, 192, 204, 193, 205, 194, 206, 69, 47, 40, 209, 210, 213, 214, 43, 138, 139, 71, 68, 72, 51, 50, 55, 54, 53, 52, 48, 142, 128, 81, 147, 132, 140, 134, 109, 75, 144, 133, 108, 74, 143, 70, 45, 44, 136, 141, 135, 110, 76, 145, 46, 148, 151, 150, 129, 149, 58, 211, 59, 212, 137, 77, 79, 78, 146, 60, 73, 185, 187, 173, 167, 174, 168, 175, 169, 176, 170, 177, 171, 178, 172, 41, 49, 131, 56, 57, 215, 130, 233, 227, 222, 280, 223, 267, 235, 232, 236, 228, 270, 259, 245, 275, 261, 268, 263, 247, 239, 272, 262, 246, 238, 271, 234, 225, 224, 265, 269, 264, 248, 240, 273, 226, 276, 279, 278, 260, 277, 229, 230, 266, 241, 243, 242, 281, 274, 231, 237, 283, 294, 288, 282, 341, 342, 344, 284, 328, 296, 293, 297, 289, 331, 320, 306, 336, 322, 329, 324, 308, 300, 333, 323, 307, 299, 332, 295, 286, 285, 326, 330, 325, 309, 301, 334, 287, 337, 340, 339, 321, 338, 290, 291, 345, 327, 302, 303, 304, 343, 335, 292, 298]
-                            LoLGame_stat_data_organized = {}
                             LoLGame_stat_data_organized = {}
                             for i in LoLGame_stat_statistics_output_order:
                                 key = LoLGame_info_header_keys[i]
@@ -4372,17 +4381,17 @@ async def search_profile(connection):
                                             #套用保留两位小数的百分比格式（Two-digit percentage）
                                             for column in twoDigitPercentage_columns_lol:
                                                 col_idx = LoLGame_stat_df.columns.get_loc(column) + 2
-                                                for row in range(3, len(LoLGame_stat_df) + 1):
+                                                for row in range(3, len(LoLGame_stat_df) + 2):
                                                     worksheet.cell(row = row, column = col_idx).number_format = numbers.FORMAT_PERCENTAGE_00
                                             #套用一位小数（One-digit float）
                                             for column in oneDigitFloat_columns_lol:
                                                 col_idx = LoLGame_stat_df.columns.get_loc(column) + 2
-                                                for row in range(3, len(LoLGame_stat_df) + 1):
+                                                for row in range(3, len(LoLGame_stat_df) + 2):
                                                     worksheet.cell(row = row, column = col_idx).number_format = "0.0"
                                             #套用三位小数（Three-digit float）
                                             for column in threeDigitFloat_columns_lol:
                                                 col_idx = LoLGame_stat_df.columns.get_loc(column) + 2
-                                                for row in range(3, len(LoLGame_stat_df) + 1):
+                                                for row in range(3, len(LoLGame_stat_df) + 2):
                                                     worksheet.cell(row = row, column = col_idx).number_format = "0.000"
                                             #胜负颜色（Win/Lose color）
                                             col_idx = LoLGame_stat_df.columns.get_loc("win/lose") + 2
@@ -4557,17 +4566,17 @@ async def search_profile(connection):
                                     #套用保留两位小数的百分比格式（Two-digit percentage）
                                     for column in twoDigitPercentage_columns_lol:
                                         col_idx = LoLGame_stat_df.columns.get_loc(column) + 2
-                                        for row in range(3, len(LoLGame_stat_df) + 1):
+                                        for row in range(3, len(LoLGame_stat_df) + 2):
                                             worksheet.cell(row = row, column = col_idx).number_format = numbers.FORMAT_PERCENTAGE_00
                                     #套用一位小数（One-digit float）
                                     for column in oneDigitFloat_columns_lol:
                                         col_idx = LoLGame_stat_df.columns.get_loc(column) + 2
-                                        for row in range(3, len(LoLGame_stat_df) + 1):
+                                        for row in range(3, len(LoLGame_stat_df) + 2):
                                             worksheet.cell(row = row, column = col_idx).number_format = "0.0"
                                     #套用三位小数（Three-digit float）
                                     for column in threeDigitFloat_columns_lol:
                                         col_idx = LoLGame_stat_df.columns.get_loc(column) + 2
-                                        for row in range(3, len(LoLGame_stat_df) + 1):
+                                        for row in range(3, len(LoLGame_stat_df) + 2):
                                             worksheet.cell(row = row, column = col_idx).number_format = "0.000"
                                     #胜负颜色（Win/Lose color）
                                     col_idx = LoLGame_stat_df.columns.get_loc("win/lose") + 2

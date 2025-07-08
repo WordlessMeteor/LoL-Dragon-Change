@@ -9,7 +9,7 @@ from wcwidth import wcswidth
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/07/01
+# 更新（Last update）：     2025/07/06
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -1212,7 +1212,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                             stat_list = sorted(map(lambda x: 0 if x["stats"]["goldEarned"] == 0 else x["stats"]["goldSpent"] / x["stats"]["goldEarned"], team_participants), reverse = True)
                                         else:
                                             self_stat = stats[subkey]
-                                            stat_list = sorted(map(lambda x: x["stats"][subkey], team_participants), reverse = True)
+                                            stat_list = sorted(map(lambda x: x["stats"][subkey], team_participants), reverse = j != 289) #死亡次数越低，死亡位次越小（For deaths, the lower the number of deaths is, the smaller the death order is）
                                         LoLGame_info_data[key].append(0 if len(set(stat_list)) == 1 else stat_list.index(self_stat) + 1) #当所有人的数据一样时，则不用比较位次（When some stat of every player is the same, there's no need to compare it）
                     logPrint("加载进度（Loading process）：%d/%d\t对局序号（MatchID）： %s" %(LoLMatchIDs.index(matchID) + 1, len(LoLMatchIDs), matchID), end = "\r", print_time = True)
     #数据框列序整理（Dataframe column ordering）

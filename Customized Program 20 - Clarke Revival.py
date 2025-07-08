@@ -24,7 +24,7 @@ else:
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/07/01
+# 更新（Last update）：     2025/07/07
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -965,7 +965,7 @@ async def search_player_match_stats_lol(connection, puuid: str, begIndex: int = 
                                 stat_list = sorted(map(lambda x: 0 if x["stats"]["goldEarned"] == 0 else x["stats"]["goldSpent"] / x["stats"]["goldEarned"], team_participants), reverse = True)
                             else:
                                 self_stat = stats[subkey]
-                                stat_list = sorted(map(lambda x: x["stats"][subkey], team_participants), reverse = True)
+                                stat_list = sorted(map(lambda x: x["stats"][subkey], team_participants), reverse = i != 288) #死亡次数越低，死亡位次越小（For deaths, the lower the number of deaths is, the smaller the death order is）
                             LoLGame_stat_data[key].append(0 if len(set(stat_list)) == 1 else stat_list.index(self_stat) + 1) #当所有人的数据一样时，则不用比较位次（When some stat of every player is the same, there's no need to compare it）
                 if print_detail:
                     logPrint("对局加载进度（Match loading process）：%d/%d\t对局序号（matchID）： %d" %(gameIndex + 1, len(LoLHistory["games"]["games"]), game["gameId"]), end = "\r")
@@ -1579,12 +1579,12 @@ async def Clarke_revival(connection):
                             #套用保留两位小数的百分比格式（Two-digit percentage）
                             for column in twoDigitPercentage_columns_lol_summary:
                                 col_idx = LoLPlayers_summary_df.columns.get_loc(column) + 2 #Excel中的第一列（A列）的索引是1，且又是数据框的索引列【The index of the first column (Column A) in Excel is 1, and this column is the index of column of the dataframe）
-                                for row in range(3, len(LoLPlayers_summary_df) + 1):
+                                for row in range(3, len(LoLPlayers_summary_df) + 2):
                                     worksheet.cell(row = row, column = col_idx).number_format = numbers.FORMAT_PERCENTAGE_00
                             #套用一位小数（One-digit float）
                             for column in oneDigitFloat_columns_lol_summary:
                                 col_idx = LoLPlayers_summary_df.columns.get_loc(column) + 2
-                                for row in range(3, len(LoLPlayers_summary_df) + 1):
+                                for row in range(3, len(LoLPlayers_summary_df) + 2):
                                     worksheet.cell(row = row, column = col_idx).number_format = "0.0"
                             #胜负颜色（Win/Lose color）
                             col_idx = LoLPlayers_summary_df.columns.get_loc("win/lose") + 2
@@ -1663,17 +1663,17 @@ async def Clarke_revival(connection):
                                 #套用保留两位小数的百分比格式（Two-digit percentage）
                                 for column in twoDigitPercentage_columns_lol_details:
                                     col_idx = LoLPlayer_stat_details_df.columns.get_loc(column) + 2
-                                    for row in range(3, len(LoLPlayer_stat_details_df) + 1):
+                                    for row in range(3, len(LoLPlayer_stat_details_df) + 2):
                                         worksheet.cell(row = row, column = col_idx).number_format = numbers.FORMAT_PERCENTAGE_00
                                 #套用一位小数（One-digit float）
                                 for column in oneDigitFloat_columns_lol_details:
                                     col_idx = LoLPlayer_stat_details_df.columns.get_loc(column) + 2
-                                    for row in range(3, len(LoLPlayer_stat_details_df) + 1):
+                                    for row in range(3, len(LoLPlayer_stat_details_df) + 2):
                                         worksheet.cell(row = row, column = col_idx).number_format = "0.0"
                                 #套用三位小数（Three-digit float）
                                 for column in threeDigitFloat_columns_lol_details:
                                     col_idx = LoLPlayer_stat_details_df.columns.get_loc(column) + 2
-                                    for row in range(3, len(LoLPlayer_stat_details_df) + 1):
+                                    for row in range(3, len(LoLPlayer_stat_details_df) + 2):
                                         worksheet.cell(row = row, column = col_idx).number_format = "0.000"
                                 #胜负颜色（Win/Lose color）
                                 col_idx = LoLPlayer_stat_details_df.columns.get_loc("win/lose") + 2
