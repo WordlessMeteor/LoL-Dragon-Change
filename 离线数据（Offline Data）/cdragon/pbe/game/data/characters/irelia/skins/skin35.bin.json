@@ -3919,19 +3919,19 @@
             },
             {
                 "textureName": "Diffuse_Texture",
-                "texturePath": "ASSETS/Characters/Caitlyn/Skins/Skin22/Caitlyn_Skin22_Hair_ScrollTex.tex",
+                "texturePath": "ASSETS/Characters/Irelia/Skins/Skin26/Irelia_Skin26_ScrollTex.tex",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
                 "textureName": "Main_Texture",
-                "texturePath": "ASSETS/Characters/Caitlyn/Skins/Skin22/Caitlyn_Skin22_TX_CM.tex",
+                "texturePath": "ASSETS/Characters/Irelia/Skins/Skin35/Irelia_Skin35_TX_CM.tex",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
                 "textureName": "OutlineMask_Texture",
-                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.dds",
+                "texturePath": "ASSETS/Shared/Materials/white.dds",
                 "addressU": 2,
                 "addressV": 2,
                 "addressW": 2,
@@ -3982,7 +3982,7 @@
             {
                 "name": "MatCap_Control",
                 "value": [
-                    1.0,
+                    0.0,
                     1.0,
                     0.0,
                     0.0
@@ -4011,12 +4011,6 @@
             },
             {
                 "name": "ScrollSpeedBlend",
-                "value": [
-                    0.0,
-                    -0.02500000037252903,
-                    0.0,
-                    0.0
-                ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -4032,8 +4026,8 @@
             {
                 "name": "Base_Tile",
                 "value": [
-                    5.0,
-                    2.0,
+                    1.0,
+                    1.0,
                     0.0,
                     0.0
                 ],
@@ -4042,8 +4036,8 @@
             {
                 "name": "Blend_Tile",
                 "value": [
-                    5.0,
-                    2.0,
+                    1.0,
+                    1.0,
                     0.0,
                     0.0
                 ],
@@ -4053,8 +4047,8 @@
                 "name": "BaseMat_Tint",
                 "value": [
                     1.0,
-                    0.20000000298023224,
-                    0.6000000238418579,
+                    0.7832151055335999,
+                    0.3175555169582367,
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
@@ -4062,10 +4056,10 @@
             {
                 "name": "BlendMat_Tint",
                 "value": [
-                    0.20000000298023224,
                     0.0,
-                    0.10000000149011612,
-                    0.0
+                    0.0,
+                    0.0,
+                    1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
@@ -4082,7 +4076,7 @@
             {
                 "name": "BloomValue",
                 "value": [
-                    1.0,
+                    1.2000000476837158,
                     0.0,
                     0.0,
                     0.0
@@ -4092,9 +4086,9 @@
             {
                 "name": "OutlineColor",
                 "value": [
-                    0.0,
-                    0.0,
-                    0.0,
+                    1.0,
+                    0.850202202796936,
+                    0.5537499189376831,
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
@@ -4111,6 +4105,12 @@
             },
             {
                 "name": "OutlineControl",
+                "value": [
+                    0.009999999776482582,
+                    0.699999988079071,
+                    0.0,
+                    0.0
+                ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -4143,8 +4143,8 @@
                 "name": "Bloom_TintColor",
                 "value": [
                     1.0,
-                    0.25,
-                    0.6499999761581421,
+                    0.8218966722488403,
+                    0.539803147315979,
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
@@ -4224,12 +4224,10 @@
             },
             {
                 "name": "OUTLINE_ON",
-                "on": false,
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "OUTLINE_MASK_ON",
-                "on": false,
                 "__type": "StaticMaterialSwitchDef"
             },
             {
@@ -4302,6 +4300,121 @@
                 "__type": "StaticMaterialChildTechniqueDef"
             }
         ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "OutlineMask_Strength",
+                    "driver": {
+                        "mDriver": {
+                            "mScriptName": "IreliaPassiveStacks",
+                            "__type": "BuffCounterDynamicMaterialFloatDriver"
+                        },
+                        "mMaxValue": 5.0,
+                        "__type": "RemapFloatMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "BaseMat_Tint",
+                    "driver": {
+                        "driver": {
+                            "mDriver": {
+                                "mScriptName": "IreliaPassiveStacks",
+                                "__type": "BuffCounterDynamicMaterialFloatDriver"
+                            },
+                            "mMaxValue": 4.0,
+                            "__type": "RemapFloatMaterialDriver"
+                        },
+                        "colors": {
+                            "times": [
+                                0.0,
+                                0.3432652950286865,
+                                1.0
+                            ],
+                            "values": [
+                                [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    1.0
+                                ],
+                                [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    1.0
+                                ],
+                                [
+                                    1.0,
+                                    0.7568627595901489,
+                                    0.4745098054409027,
+                                    1.0
+                                ]
+                            ],
+                            "__type": "VfxAnimatedColorVariableData"
+                        },
+                        "__type": "ColorGraphMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Bloom_TintColor",
+                    "driver": {
+                        "driver": {
+                            "mDriver": {
+                                "mScriptName": "IreliaPassiveStacks",
+                                "__type": "BuffCounterDynamicMaterialFloatDriver"
+                            },
+                            "mMaxValue": 4.0,
+                            "__type": "RemapFloatMaterialDriver"
+                        },
+                        "colors": {
+                            "times": [
+                                0.0,
+                                0.27723580598831177,
+                                1.0
+                            ],
+                            "values": [
+                                [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    1.0
+                                ],
+                                [
+                                    0.0,
+                                    0.0,
+                                    0.0,
+                                    1.0
+                                ],
+                                [
+                                    1.0,
+                                    0.7568627595901489,
+                                    0.4745098054409027,
+                                    1.0
+                                ]
+                            ],
+                            "__type": "VfxAnimatedColorVariableData"
+                        },
+                        "__type": "ColorGraphMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "BloomValue",
+                    "driver": {
+                        "mDriver": {
+                            "mScriptName": "IreliaPassiveStacks",
+                            "__type": "BuffCounterDynamicMaterialFloatDriver"
+                        },
+                        "mMaxValue": 3.0,
+                        "__type": "RemapFloatMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
         "__type": "StaticMaterialDef"
     },
     "Characters/Irelia/Skins/Skin35/Materials/Irelia_Blades_Passive_inst": {
