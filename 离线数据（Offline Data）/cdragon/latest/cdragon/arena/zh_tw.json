@@ -2510,6 +2510,38 @@
             "tooltip": "每@BaseCooldown@秒<keywordMajor>自動施放</keywordMajor>，對鄰近敵軍發射回力鏢，對命中的敵軍造成@Damage@適性傷害。<br><br>本回合造成的傷害：@f1@<br>造成傷害總計：@f2@"
         },
         {
+            "apiName": "Quest_ThreeSacredTreasures",
+            "calculations": {
+                "Calc_Magic_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "Calc_Physical_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.75
+                        }
+                    ]
+                }
+            },
+            "dataValues": {},
+            "desc": "資格：擁有無盡之刃、困惑，以及海克斯科技槍刃。<br><br>獎勵：尤娜拉的普攻改為雷射，造成混合傷害。",
+            "iconLarge": "assets/ux/cherry/augments/icons/threesacredtreasures_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threesacredtreasures_small.png",
+            "id": 319,
+            "name": "任務：三神器",
+            "rarity": 1,
+            "tooltip": "資格：擁有無盡之刃、困惑，以及海克斯科技槍刃。<br><br>獎勵：尤娜拉的普攻改為雷射，造成<physicalDamage>@Calc_Physical_Damage@物理傷害</physicalDamage> + <magicDamage>@Calc_Magic_Damage@魔法傷害</magicDamage>，並附加2次<OnHit>%i:OnHit%命中</OnHit>效果。"
+        },
+        {
             "apiName": "JuiceBox",
             "calculations": {},
             "dataValues": {},
@@ -2664,7 +2696,7 @@
                 }
             },
             "dataValues": {
-                "ADAmp": 0.10000000149011612,
+                "ADAmp": 0.15000000596046448,
                 "ConversionRate": 0.6000000238418579,
                 "InverseRate": 1.666659951210022
             },
@@ -2711,13 +2743,13 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.5,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "技能命中敵方英雄時，賦予你永久<keywordMajor>詛咒之力</keywordMajor>。根據你的<keywordMajor>詛咒之力</keywordMajor>增加<font color = '#8347ff'>適性之力</font>。<br><br>可獲得的<keywordMajor>詛咒之力</keywordMajor>上限每回合根據自身與友方英雄之間的<keywordMajor>詛咒</keywordMajor>來源總數增加。",
+            "desc": "技能命中敵方英雄時，賦予你永久<keywordMajor>詛咒之力</keywordMajor>。根據你的<keywordMajor>詛咒之力</keywordMajor>增加<font color = '#8347ff'>適性之力</font>。<br><br>每回合可獲得的<keywordMajor>詛咒之力</keywordMajor>上限，是根據自身與友方英雄之間的<keywordMajor>詛咒</keywordMajor>來源總數增加。",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
@@ -3778,10 +3810,10 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "Breakpoint1": 5.0,
+                "Breakpoint1": 4.0,
                 "OnHitDamage": 40.0,
                 "SlowResistValue": 1.0,
-                "TotalASValue": 0.25
+                "TotalASValue": 0.20000000298023224
             },
             "desc": "增加<attackSpeed>@TotalASValue*100@%總攻速</attackSpeed>。<br><br><attackSpeed>每秒普攻次數</attackSpeed>達@Breakpoint1@次時，造成額外<magicDamage>魔法傷害</magicDamage>{{ Item_Keyword_OnHit }}。",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",

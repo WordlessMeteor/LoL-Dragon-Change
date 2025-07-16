@@ -2510,6 +2510,38 @@
             "tooltip": "Du feuerst alle @BaseCooldown@&nbsp;Sekunden <keywordMajor>automatisch</keywordMajor> einen Bumerang auf einen Gegner in der Nähe. Dadurch erleiden getroffene Gegner @Damage@ adaptiven Schaden.<br><br>In dieser Runde verursachter Schaden: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
+            "apiName": "Quest_ThreeSacredTreasures",
+            "calculations": {
+                "Calc_Magic_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "Calc_Physical_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.75
+                        }
+                    ]
+                }
+            },
+            "dataValues": {},
+            "desc": "Voraussetzung: Besitze Klinge der Unendlichkeit, Verwirrung und Hextech-Gunblade.<br><br>Belohnung: Yunaras Angriffe werden durch Laser ersetzt, die gemischten Schaden verursachen.",
+            "iconLarge": "assets/ux/cherry/augments/icons/threesacredtreasures_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threesacredtreasures_small.png",
+            "id": 319,
+            "name": "Quest: Drei heilige Schätze",
+            "rarity": 1,
+            "tooltip": "Voraussetzung: Besitze Klinge der Unendlichkeit, Verwirrung und Hextech-Gunblade.<br><br>Belohnung: Yunaras Angriffe werden durch Laser ersetzt, die <physicalDamage>@Calc_Physical_Damage@&nbsp;normalen Schaden</physicalDamage> + <magicDamage>@Calc_Magic_Damage@&nbsp;magischen Schaden</magicDamage> verursachen und <OnHit>%i:OnHit% Treffereffekte</OnHit> doppelt auslösen."
+        },
+        {
             "apiName": "JuiceBox",
             "calculations": {},
             "dataValues": {},
@@ -2664,7 +2696,7 @@
                 }
             },
             "dataValues": {
-                "ADAmp": 0.10000000149011612,
+                "ADAmp": 0.15000000596046448,
                 "ConversionRate": 0.6000000238418579,
                 "InverseRate": 1.666659951210022
             },
@@ -2711,19 +2743,19 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.5,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Wenn du einen gegnerischen Champion mit einer Fähigkeit triffst, bekommst du dauerhaft <keywordMajor>Verfluchte Macht</keywordMajor>. Du erhältst abhängig von deiner <keywordMajor>Verfluchten Macht</keywordMajor> <font color = '#8347ff'>adaptive Kraft</font>.<br><br>Die maximale Menge an <keywordMajor>Verfluchter Macht</keywordMajor>, die du pro Runde erhalten kannst, skaliert mit der Gesamtzahl aller <keywordMajor>Fluchquellen</keywordMajor>, die dein Team hat.",
+            "desc": "Triffst du gegnerische Champions mit Fähigkeiten, erhältst du dauerhaft <keywordMajor>Verfluchte Macht</keywordMajor>. Du erhältst abhängig von deiner <keywordMajor>Verfluchten Macht</keywordMajor> <font color = '#8347ff'>adaptive Kraft</font>.<br><br>Die maximale Menge an <keywordMajor>Verfluchter Macht</keywordMajor>, die du pro Runde erhalten kannst, skaliert mit der Gesamtzahl aller <keywordMajor>Fluchquellen</keywordMajor>, die dein Team hat.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Untergangsprophet",
             "rarity": 2,
-            "tooltip": "Wenn du einen gegnerischen Champion mit einer Fähigkeit triffst, bekommst du @CurseCounter@&nbsp;<keywordMajor>Verfluchte Macht</keywordMajor>.<br><br>Du erhältst @f1@<font color = '#8347ff'>&nbsp;adaptive Kraft</font> (@AdaptiveForceRatio*100@&nbsp;% deiner <keywordMajor>Verfluchten Macht</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Triffst du gegnerische Champions mit Fähigkeiten, erhältst du @CurseCounter@ <keywordMajor>Verfluchte Macht</keywordMajor>.<br><br>Du erhältst @f1@<font color = '#8347ff'>&nbsp;adaptive Kraft</font> (@AdaptiveForceRatio*100@&nbsp;% deiner <keywordMajor>Verfluchten Macht</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -3778,10 +3810,10 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "Breakpoint1": 5.0,
+                "Breakpoint1": 4.0,
                 "OnHitDamage": 40.0,
                 "SlowResistValue": 1.0,
-                "TotalASValue": 0.25
+                "TotalASValue": 0.20000000298023224
             },
             "desc": "Du erhältst <attackSpeed>@TotalASValue*100@&nbsp;% Gesamtangriffstempo</attackSpeed>. <br><br>Bei @Breakpoint1@&nbsp;<attackSpeed>Angriffen pro Sekunde</attackSpeed> erhältst du <magicDamage>&nbsp;magischen Schaden zusätzlich</magicDamage> {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",

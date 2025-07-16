@@ -2339,7 +2339,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Varus/Skins/Base/Particles/varuscurls3.dds",
+                "texture": "ASSETS/Characters/Varus/Skins/Base/Particles/varuscurls3.tex",
                 "numFrames": 4,
                 "texDiv": [
                     2.0,
@@ -2791,7 +2791,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Maps/Particles/TFT/FlareBuilding.TFT_Set14.tex",
+                "texture": "ASSETS/Maps/Particles/TFT/FlareBuilding.TFT_Set15.tex",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -3365,7 +3365,7 @@
                 "primitive": {
                     "__type": "VfxPrimitiveBeam"
                 },
-                "particleColorTexture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_color-rampup.dds",
+                "particleColorTexture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_color-rampup.tex",
                 "color": {
                     "constantValue": [
                         1.0,
@@ -3490,7 +3490,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Varus/Skins/Base/Particles/varus_arrow_glow.dds",
+                "texture": "ASSETS/Characters/Varus/Skins/Base/Particles/varus_arrow_glow.tex",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -3517,7 +3517,7 @@
                     },
                     "__type": "VfxPrimitivePlanarProjection"
                 },
-                "particleColorTexture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_color-rampup.dds",
+                "particleColorTexture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_color-rampup.tex",
                 "meshRenderFlags": 0,
                 "particleIsLocalOrientation": 1,
                 "isUniformScale": 1,
@@ -3551,7 +3551,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_red-light.dds",
+                "texture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_red-light.tex",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -3599,7 +3599,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "particleColorTexture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_color-bellcurve.dds",
+                "particleColorTexture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_color-bellcurve.tex",
                 "blendMode": 4,
                 "color": {
                     "constantValue": [
@@ -3847,7 +3847,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Shared/Particles/bigglow02.AprilFools2025.dds",
+                "texture": "ASSETS/Shared/Particles/bigglow02.TFT_Set15.dds",
                 "__type": "VfxEmitterDefinitionData"
             }
         ],
@@ -3881,7 +3881,7 @@
                     },
                     "__type": "VfxPrimitiveBeam"
                 },
-                "particleColorTexture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_color-hold.dds",
+                "particleColorTexture": "ASSETS/Characters/Varus/Skins/Base/Particles/Varus_color-hold.tex",
                 "blendMode": 1,
                 "pass": 1,
                 "particleIsLocalOrientation": 1,
@@ -3893,7 +3893,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Varus/Skins/Base/Particles/varus_arrow_glow.dds",
+                "texture": "ASSETS/Characters/Varus/Skins/Base/Particles/varus_arrow_glow.tex",
                 "__type": "VfxEmitterDefinitionData"
             }
         ],
@@ -3929,6 +3929,20 @@
             }
         ],
         "paramValues": [
+            {
+                "name": "IntensityStrength",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DisableColorCorrect",
+                "__type": "StaticMaterialShaderParamDef"
+            },
             {
                 "name": "Color_Rim",
                 "value": [
@@ -4445,10 +4459,28 @@
                         "__type": "BlendingSwitchMaterialDriver"
                     },
                     "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "DisableColorCorrect",
+                    "driver": {
+                        "value": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "add": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "{5b2fdd66}"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
                 }
             ],
             "__type": "DynamicMaterialDef"
         },
         "__type": "StaticMaterialDef"
-    }
+    },
+    "__linked": [
+        "Characters/TFTTutorial_Varus",
+        "DATA/Characters/TFTTutorial_Varus/Animations/Skin0.bin"
+    ]
 }

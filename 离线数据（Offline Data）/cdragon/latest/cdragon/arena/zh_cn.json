@@ -2510,6 +2510,38 @@
             "tooltip": "每@BaseCooldown@秒朝着一个附近的敌人<keywordMajor>自动施放</keywordMajor>投掷一个回力镖，对命中的敌人们造成@Damage@自适应伤害。<br><br>这个回合已造成的伤害：@f1@<br>已造成伤害的总和：@f2@"
         },
         {
+            "apiName": "Quest_ThreeSacredTreasures",
+            "calculations": {
+                "Calc_Magic_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "Calc_Physical_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.75
+                        }
+                    ]
+                }
+            },
+            "dataValues": {},
+            "desc": "需求：持有【无尽之刃】、【困惑】和【海克斯科技枪刃】。<br><br>奖励：芸阿娜的攻击被替换为造成混合伤害的激光。",
+            "iconLarge": "assets/ux/cherry/augments/icons/threesacredtreasures_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threesacredtreasures_small.png",
+            "id": 319,
+            "name": "任务：三圣宝",
+            "rarity": 1,
+            "tooltip": "需求：持有【无尽之刃】、【困惑】和【海克斯科技枪刃】。<br><br>奖励：芸阿娜的攻击被替换为激光，造成<physicalDamage>@Calc_Physical_Damage@物理伤害</physicalDamage> + <magicDamage>@Calc_Magic_Damage@魔法伤害</magicDamage>并施加两次<OnHit>%i:OnHit%攻击特效</OnHit>。"
+        },
+        {
             "apiName": "JuiceBox",
             "calculations": {},
             "dataValues": {},
@@ -2664,7 +2696,7 @@
                 }
             },
             "dataValues": {
-                "ADAmp": 0.10000000149011612,
+                "ADAmp": 0.15000000596046448,
                 "ConversionRate": 0.6000000238418579,
                 "InverseRate": 1.666659951210022
             },
@@ -2711,19 +2743,19 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.5,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": " 用一个技能命中一个英雄，可为你提供永久的<keywordMajor>诅咒能量</keywordMajor>。获得基于你的<keywordMajor>诅咒能量</keywordMajor>的<font color = '#8347ff'>适应之力</font>。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
+            "desc": "用技能命中敌方英雄会为你提供永久的<keywordMajor>诅咒能量</keywordMajor>。获得基于你的<keywordMajor>诅咒能量</keywordMajor>的<font color = '#8347ff'>适应之力</font>。<br><br>你每回合可以获得的最大<keywordMajor>诅咒能量</keywordMajor>会随着你和你的友军的<keywordMajor>诅咒</keywordMajor>来源总和而增长。",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "末日预言者",
             "rarity": 2,
-            "tooltip": " 用一个技能命中一个英雄，可为你提供永久的@CurseCounter@<keywordMajor>诅咒能量</keywordMajor>。<br><br>获得@f1@<font color = '#8347ff'>适应之力</font> (你的@AdaptiveForceRatio*100@%<keywordMajor>诅咒能量</keywordMajor>)。<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "用技能命中敌方英雄会为你提供@CurseCounter@<keywordMajor>诅咒能量</keywordMajor>。<br><br>获得@f1@<font color = '#8347ff'>适应之力 </font>(你的@AdaptiveForceRatio*100@%<keywordMajor>诅咒能量</keywordMajor>)。<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -3778,10 +3810,10 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "Breakpoint1": 5.0,
+                "Breakpoint1": 4.0,
                 "OnHitDamage": 40.0,
                 "SlowResistValue": 1.0,
-                "TotalASValue": 0.25
+                "TotalASValue": 0.20000000298023224
             },
             "desc": "获得<attackSpeed>@TotalASValue*100@%总攻击速度</attackSpeed>。<br><br>在@Breakpoint1@<attackSpeed>攻击次数/秒</attackSpeed>时，造成额外的<magicDamage>魔法伤害</magicDamage> {{ Item_Keyword_OnHit }}。",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",

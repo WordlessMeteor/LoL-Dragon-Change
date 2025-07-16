@@ -2510,6 +2510,38 @@
             "tooltip": "<keywordMajor>Conjura automaticamente</keywordMajor> um bumerangue arremessado em um inimigo próximo a cada @BaseCooldown@s, causando @Damage@ de Dano Adaptativo a inimigos atingidos.<br><br>Dano causado nesta rodada: @f1@<br>Total de dano causado: @f2@"
         },
         {
+            "apiName": "Quest_ThreeSacredTreasures",
+            "calculations": {
+                "Calc_Magic_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "Calc_Physical_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.75
+                        }
+                    ]
+                }
+            },
+            "dataValues": {},
+            "desc": "Requisito: ter Gume do Infinito, Perplexidade e Pistola Laminar Hextec.<br><br>Recompensa: os Ataques de Yunara são substituídos por lasers que causam Dano Misto.",
+            "iconLarge": "assets/ux/cherry/augments/icons/threesacredtreasures_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threesacredtreasures_small.png",
+            "id": 319,
+            "name": "Missão: Três Tesouros Sagrados",
+            "rarity": 1,
+            "tooltip": "Requisito: ter Gume do Infinito, Perplexidade e Pistola Laminar Hextec.<br><br>Recompensa: os Ataques de Yunara são substituídos por lasers que causam <physicalDamage>@Calc_Physical_Damage@ de Dano Físico</physicalDamage> + <magicDamage>@Calc_Magic_Damage@ de Dano Mágico</magicDamage> e aplicam efeitos <OnHit>%i:OnHit% ao contato</OnHit> duas vezes."
+        },
+        {
             "apiName": "JuiceBox",
             "calculations": {},
             "dataValues": {},
@@ -2664,7 +2696,7 @@
                 }
             },
             "dataValues": {
-                "ADAmp": 0.10000000149011612,
+                "ADAmp": 0.15000000596046448,
                 "ConversionRate": 0.6000000238418579,
                 "InverseRate": 1.666659951210022
             },
@@ -2711,19 +2743,19 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.5,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Acertar um Campeão inimigo com uma Habilidade concede a você <keywordMajor>Poder Amaldiçoado</keywordMajor> permanente. Recebe <font color = '#8347ff'>Força Adaptativa</font> com base no seu <keywordMajor>Poder Amaldiçoado</keywordMajor>.<br><br>O máximo de <keywordMajor>Poder Amaldiçoado</keywordMajor> que você pode receber por rodada escala com o total de fontes de <keywordMajor>Maldição</keywordMajor> entre você e seu aliado.",
+            "desc": "Acertar Campeões inimigos com habilidades concede a você <keywordMajor>Poder Amaldiçoado</keywordMajor> permanente. Recebe <font color = '#8347ff'>Força Adaptativa</font> com base no seu <keywordMajor>Poder Amaldiçoado</keywordMajor>.<br><br>O máximo de <keywordMajor>Poder Amaldiçoado</keywordMajor> que você pode receber por rodada escala com o total de fontes de <keywordMajor>Maldição</keywordMajor> entre você e seu aliado.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Agouro",
             "rarity": 2,
-            "tooltip": "Acertar um Campeão inimigo com uma Habilidade concede a você @CurseCounter@ de <keywordMajor>Poder Amaldiçoado</keywordMajor>.<br><br>Recebe @f1@ de <font color = '#8347ff'>Força Adaptativa</font> (@AdaptiveForceRatio*100@% do seu <keywordMajor>Poder Amaldiçoado</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Acertar Campeões inimigos com habilidades concede a você @CurseCounter@ de <keywordMajor>Poder Amaldiçoado</keywordMajor>.<br><br>Recebe @f1@ de <font color = '#8347ff'>Força Adaptativa</font> (@AdaptiveForceRatio*100@% do seu <keywordMajor>Poder Amaldiçoado</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -3778,10 +3810,10 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "Breakpoint1": 5.0,
+                "Breakpoint1": 4.0,
                 "OnHitDamage": 40.0,
                 "SlowResistValue": 1.0,
-                "TotalASValue": 0.25
+                "TotalASValue": 0.20000000298023224
             },
             "desc": "Recebe <attackSpeed>@TotalASValue*100@% de Velocidade de Ataque total</attackSpeed>. <br><br>Com @Breakpoint1@ <attackSpeed>Ataques por segundo</attackSpeed>, causa <magicDamage>Dano Mágico</magicDamage> adicional {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",

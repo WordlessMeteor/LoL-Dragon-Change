@@ -2510,6 +2510,38 @@
             "tooltip": "Toutes les @BaseCooldown@ sec, vous lancez <keywordMajor>automatiquement</keywordMajor> un boomerang sur un ennemi proche, infligeant @Damage@ pts de dégâts adaptatifs aux ennemis touchés.<br><br>Dégâts infligés lors de cette manche : @f1@.<br>Total des dégâts infligés : @f2@."
         },
         {
+            "apiName": "Quest_ThreeSacredTreasures",
+            "calculations": {
+                "Calc_Magic_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "Calc_Physical_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.75
+                        }
+                    ]
+                }
+            },
+            "dataValues": {},
+            "desc": "Conditions : Posséder une Lame d'infini, une Perplexité et une Pistolame Hextech.<br><br>Récompense : Les attaques de Yunara sont remplacées par des lasers qui infligent des dégâts mixtes.",
+            "iconLarge": "assets/ux/cherry/augments/icons/threesacredtreasures_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threesacredtreasures_small.png",
+            "id": 319,
+            "name": "Quête : Les trois trésors sacrés",
+            "rarity": 1,
+            "tooltip": "Conditions : Posséder une Lame d'infini, une Perplexité et une Pistolame Hextech.<br><br>Récompense : Les attaques de Yunara sont remplacées par des lasers qui infligent <physicalDamage>@Calc_Physical_Damage@ pts de dégâts physiques</physicalDamage> + <magicDamage>@Calc_Magic_Damage@ pts de dégâts magiques</magicDamage> et appliquent les <OnHit>%i:OnHit% effets à l'impact</OnHit> deux fois."
+        },
+        {
             "apiName": "JuiceBox",
             "calculations": {},
             "dataValues": {},
@@ -2664,7 +2696,7 @@
                 }
             },
             "dataValues": {
-                "ADAmp": 0.10000000149011612,
+                "ADAmp": 0.15000000596046448,
                 "ConversionRate": 0.6000000238418579,
                 "InverseRate": 1.666659951210022
             },
@@ -2711,19 +2743,19 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.5,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Quand vous touchez un champion ennemi avec une compétence, vous gagnez définitivement de la <keywordMajor>Puissance maudite</keywordMajor>. Vous gagnez de la <font color = '#8347ff'>force adaptative</font> en fonction de votre <keywordMajor>Puissance maudite</keywordMajor>.<br><br>Le maximum de <keywordMajor>Puissance maudite</keywordMajor> que vous pouvez gagner par manche dépend du nombre total de sources de <keywordMajor>Malédiction</keywordMajor> pour vous et votre allié.",
+            "desc": "Toucher des champions ennemis avec des compétences vous confère définitivement de la <keywordMajor>Puissance maudite</keywordMajor>. Vous gagnez de la <font color = '#8347ff'>force adaptative</font> en fonction de votre <keywordMajor>Puissance maudite</keywordMajor>.<br><br>Le maximum de <keywordMajor>Puissance maudite</keywordMajor> que vous pouvez gagner par manche dépend du nombre total de sources de <keywordMajor>Malédiction</keywordMajor> pour vous et votre allié.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Imprécateur",
             "rarity": 2,
-            "tooltip": "Toucher un champion avec une compétence vous confère @CurseCounter@ effets de <keywordMajor>Puissance maudite</keywordMajor>.<br><br>Vous gagnez @f1@ <font color = '#8347ff'>de force adaptative</font> (@AdaptiveForceRatio*100@% de votre <keywordMajor>Puissance maudite</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Toucher des champions ennemis avec des compétences vous confère @CurseCounter@ <keywordMajor>Puissance maudite</keywordMajor>.<br><br>Vous gagnez @f1@ <font color = '#8347ff'>de force adaptative</font> (@AdaptiveForceRatio*100@% de votre <keywordMajor>Puissance maudite</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -3778,10 +3810,10 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "Breakpoint1": 5.0,
+                "Breakpoint1": 4.0,
                 "OnHitDamage": 40.0,
                 "SlowResistValue": 1.0,
-                "TotalASValue": 0.25
+                "TotalASValue": 0.20000000298023224
             },
             "desc": "Vous gagnez <attackSpeed>+@TotalASValue*100@% de vitesse d'attaque totale</attackSpeed>. <br><br>À @Breakpoint1@ <attackSpeed>attaques par seconde</attackSpeed>, vous infligez <magicDamage>des dégâts magiques supplémentaires</magicDamage> {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",

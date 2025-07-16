@@ -9328,6 +9328,40 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
+                "name": "FlowIntensity",
+                "data": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "FlowIntensity",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "FlowScale",
+                "data": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "FlowScale",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
                 "name": "Gradient_Speed",
                 "data": [
                     1.0,
@@ -17458,7 +17492,7 @@
         "textures": [
             {
                 "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Characters/Shen/Skins/Skin16/Shen_Skin16_TX_CM.dds",
+                "defaultTexturePath": "ASSETS/Characters/Shen/Skins/Skin16/Shen_Skin16_TX_CM.tex",
                 "__type": "ShaderTexture"
             },
             {
@@ -19314,6 +19348,23 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
+                "name": "FlowmapSpeed",
+                "data": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "FlowmapSpeed",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
                 "name": "FlowSpeed",
                 "data": [
                     -0.10000000149011612,
@@ -19881,6 +19932,17 @@
                 "logicalParameters": [
                     {
                         "name": "MinAlpha",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "AdditiveScroll_SoftEdge",
+                "logicalParameters": [
+                    {
+                        "name": "AdditiveScroll_SoftEdge",
                         "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     }
@@ -27235,6 +27297,10 @@
                 "__type": "ShaderStaticSwitch"
             },
             {
+                "name": "OUTLINE_MASK_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "OUTLINE_ON",
                 "onByDefault": true,
                 "__type": "ShaderStaticSwitch"
@@ -27280,6 +27346,10 @@
                 "__type": "ShaderStaticSwitch"
             },
             {
+                "name": "BLOOM_MASK_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "BLOOM_ON",
                 "__type": "ShaderStaticSwitch"
             }
@@ -27298,6 +27368,11 @@
             {
                 "name": "ScreenSpaceTex",
                 "defaultTexturePath": "ASSETS/Shared/Materials/RK_NoiseMask.dds",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "Outline_Bloom_Mask",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.dds",
                 "__type": "ShaderTexture"
             },
             {
@@ -44535,200 +44610,6 @@
             }
         ],
         "objectPath": "Shaders/SkinnedMesh/ScrollingUVs_MultiLayer",
-        "__type": "CustomShaderDef"
-    },
-    "Shaders/SkinnedMesh/Hologram": {
-        "ShadingModel": "{baebc346}",
-        "parameters": [
-            {
-                "name": "Base_color",
-                "data": [
-                    0.4745098054409027,
-                    1.0,
-                    0.8078431487083435,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Base_color",
-                        "fields": 15,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "ScanLine_minmax",
-                "data": [
-                    -4.0,
-                    4.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "ScanLine_minmax",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "ScanLine_rate",
-                "data": [
-                    0.10000000149011612,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "ScanLine_rate",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "ScanLine_amount",
-                "data": [
-                    200.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "ScanLine_amount",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Flicker_rate",
-                "data": [
-                    4.199999809265137,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Flicker_rate",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Flicker_amp",
-                "data": [
-                    0.1420000046491623,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Flicker_amp",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Flicker_offset",
-                "data": [
-                    0.8399999737739563,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Flicker_offset",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Final_Alpha",
-                "data": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Final_Alpha",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Emissive_Intensity",
-                "data": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Emissive_Intensity",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Bloom_Intensity",
-                "data": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Bloom_Intensity",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            }
-        ],
-        "staticSwitches": [
-            {
-                "name": "USE_COLOR",
-                "__type": "ShaderStaticSwitch"
-            }
-        ],
-        "textures": [
-            {
-                "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Materials/Material_01.dds",
-                "__type": "ShaderTexture"
-            }
-        ],
-        "featureDefines": {
-            "FEATURE_BLOOM": "1"
-        },
-        "featureMask": 1,
-        "objectPath": "Shaders/SkinnedMesh/Hologram",
         "__type": "CustomShaderDef"
     },
     "Shaders/SkinnedMesh/MultiMask_Panner_Bloom_Fresnel": {

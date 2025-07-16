@@ -2510,6 +2510,38 @@
             "tooltip": "يتسبب <keywordMajor>الإلقاء التلقائي</keywordMajor> برمي بومرانغ على بطل معادٍ في الجوار كل @BaseCooldown@ث ملحقًا @Damage@ ضرر متكيف بالأعداء المصابين.<br><br>الضرر الملحق هذه الجولة: @f1@<br>إجمالي الضرر الملحق: @f2@"
         },
         {
+            "apiName": "Quest_ThreeSacredTreasures",
+            "calculations": {
+                "Calc_Magic_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "Calc_Physical_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.75
+                        }
+                    ]
+                }
+            },
+            "dataValues": {},
+            "desc": "الشرط: امتلك السيف الأبدي والحيرة وسكين سلاح الهيكستيك.<br><br>الجائزة: يتم استبدال هجمات يونارا بأشعة ليزر تلحق ضررًا مختلطًا.",
+            "iconLarge": "assets/ux/cherry/augments/icons/threesacredtreasures_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threesacredtreasures_small.png",
+            "id": 319,
+            "name": "المهمة: الكنوز الثلاثة المقدسة",
+            "rarity": 1,
+            "tooltip": "الشرط: امتلك السيف الأبدي والحيرة وسكين سلاح الهيكستيك.<br><br>الجائزة: يتم استبدال هجمات يونارا بأشعة ليزر تلحق <physicalDamage>@Calc_Physical_Damage@ ضرر مادي</physicalDamage> + <magicDamage>@Calc_Magic_Damage@ ضرر سحر</magicDamage> وتطبق تأثيرات <OnHit>%i:OnHit% الإصابة</OnHit> مرتين."
+        },
+        {
             "apiName": "JuiceBox",
             "calculations": {},
             "dataValues": {},
@@ -2664,7 +2696,7 @@
                 }
             },
             "dataValues": {
-                "ADAmp": 0.10000000149011612,
+                "ADAmp": 0.15000000596046448,
                 "ConversionRate": 0.6000000238418579,
                 "InverseRate": 1.666659951210022
             },
@@ -2711,19 +2743,19 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.5,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "تمنحك إصابة بطلٍ معادٍ باستخدام إحدى القدرات <keywordMajor>قوة ملعونة</keywordMajor> دائمة. تكسب <font color = '#8347ff'>قوة متكيفة</font> بناءً على <keywordMajor>القوة الملعونة</keywordMajor> لديك.<br><br>يعتمد الحد الأقصى من <keywordMajor>القوة الملعونة</keywordMajor> التي يمكنك كسبها في كل جولة على إجمالي مصادر <keywordMajor>اللعنة</keywordMajor> بينك وبين حليفك.",
+            "desc": "تمنحك إصابة أبطال العدو بالقدرات <keywordMajor>قوة ملعونة</keywordMajor> دائمة. تكسب <font color = '#8347ff'>قوة متكيفة</font> بناءً على <keywordMajor>القوة الملعونة</keywordMajor> لديك.<br><br>يعتمد الحد الأقصى من <keywordMajor>القوة الملعونة</keywordMajor> التي يمكنك كسبها في كل جولة على إجمالي مصادر <keywordMajor>اللعنة</keywordMajor> بينك وبين حليفك.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "نذير الشؤم",
             "rarity": 2,
-            "tooltip": "تمنحك إصابة بطلٍ معادٍ بإحدى القدرات @CurseCounter@ <keywordMajor>قوة ملعونة</keywordMajor>.<br><br>تكسب @f1@ <font color = '#8347ff'>قوة متكيفة</font> (@AdaptiveForceRatio*100@% من <keywordMajor>القوة الملعونة</keywordMajor> لديك).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "تمنحك إصابة أبطال العدو بالقدرات @CurseCounter@ <keywordMajor>قوة ملعونة</keywordMajor>.<br><br>تكسب @f1@ <font color = '#8347ff'>قوة متكيفة</font> (@AdaptiveForceRatio*100@% من <keywordMajor>القوة الملعونة</keywordMajor> لديك).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -3778,10 +3810,10 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "Breakpoint1": 5.0,
+                "Breakpoint1": 4.0,
                 "OnHitDamage": 40.0,
                 "SlowResistValue": 1.0,
-                "TotalASValue": 0.25
+                "TotalASValue": 0.20000000298023224
             },
             "desc": "تكسب <attackSpeed>@TotalASValue*100@% إجمالي سرعة هجوم</attackSpeed>. <br><br>عند بلوغ عتبة @Breakpoint1@ <attackSpeed>من الهجمات في الثانية</attackSpeed>، تلحق <magicDamage>ضرر سحر</magicDamage> إضافي {{ Item_Keyword_OnHit }}",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",

@@ -5350,7 +5350,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Urgot/Skins/Base/Particles/Urgot_Base_Z_BrightSpark.dds",
+                "texture": "ASSETS/Characters/Urgot/Skins/Base/Particles/Urgot_Base_Z_BrightSpark.tex",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -5410,7 +5410,7 @@
                     },
                     "__type": "VfxPrimitiveCameraTrail"
                 },
-                "particleColorTexture": "ASSETS/Characters/Urgot/Skins/Base/Particles/Urgot_Base_Z_RandomRampdown.dds",
+                "particleColorTexture": "ASSETS/Characters/Urgot/Skins/Base/Particles/Urgot_Base_Z_RandomRampdown.tex",
                 "blendMode": 1,
                 "birthColor": {
                     "constantValue": [
@@ -11940,6 +11940,20 @@
         ],
         "paramValues": [
             {
+                "name": "IntensityStrength",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DisableColorCorrect",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
                 "name": "Color_Rim",
                 "value": [
                     0.8313725590705872,
@@ -12455,6 +12469,20 @@
                         "__type": "BlendingSwitchMaterialDriver"
                     },
                     "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "DisableColorCorrect",
+                    "driver": {
+                        "value": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "add": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "{5b2fdd66}"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
                 }
             ],
             "__type": "DynamicMaterialDef"
@@ -12474,5 +12502,9 @@
             "TFT3_Urgot_BA_mis2": "Characters/TFT3_Urgot/Skins/Skin0/Particles/TFT3_Urgot_Base_BA_mis2"
         },
         "__type": "ResourceResolver"
-    }
+    },
+    "__linked": [
+        "Characters/TFT3_Urgot",
+        "DATA/Characters/TFT3_Urgot/Animations/Skin0.bin"
+    ]
 }

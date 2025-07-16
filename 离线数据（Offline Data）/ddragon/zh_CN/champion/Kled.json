@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.13.1",
+    "version": "15.14.1",
     "data": {
         "Kled": {
             "id": "Kled",
@@ -98,7 +98,7 @@
                     "id": "KledQ",
                     "name": "飞索捕熊器",
                     "description": "克烈投掷一个捕熊器，钩住一个敌人并造成伤害。如果短时间内牵引没有被打破，那么目标会受到额外物理伤害并被拽向克烈。<br><br>当处于非骑乘状态下时，这个技能会被替换为【随身手枪】——一个远程枪击技能，可将克烈击退并回复勇气值。",
-                    "tooltip": "<keywordMajor>骑乘状态：</keywordMajor>克烈扔出一个捕熊器来钩住第一个命中的敌方英雄或大型野怪并造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>。<br /><br />如果克烈在一名被钩住的敌人附近呆{{ e3 }}秒，那么他就会将该敌人拽向他，并造成<physicalDamage>{{ totalyankdamage }} 物理伤害</physicalDamage>，<status>拉拽</status>该敌人，造成持续{{ slowduration }}秒的{{ slowamount*-100 }}%<status>减速</status>，并施加持续{{ grievousduration }}秒的{{ grievousamount*100 }}%重伤。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>骑乘状态：</keywordMajor>克烈扔出一个捕熊器来钩住第一个命中的敌方英雄或大型野怪并造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>。<br /><br />如果克烈在一名被钩住的敌人附近呆{{ tetherpoptime }}秒，那么他就会将该敌人拽向他，并造成<physicalDamage>{{ totalyankdamage }}物理伤害</physicalDamage>，<status>拉拽</status>该敌人，造成持续{{ slowduration }}秒的{{ slowamount*-100 }}%<status>减速</status>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "投掷伤害",
@@ -107,9 +107,9 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
-                            "{{ effect1amount*2.000000 }} -> {{ effect1amountnl*2.000000 }}",
-                            "{{ e5 }}% -> {{ e5NL }}%",
+                            "{{ firsthitbasedamage }} -> {{ firsthitbasedamageNL }}",
+                            "{{ firsthitbasedamage*2.000000 }} -> {{ firsthitbasedamagenl*2.000000 }}",
+                            "{{ slowamount*-100.000000 }}% -> {{ slowamountnl*-100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -134,53 +134,53 @@
                     "effect": [
                         null,
                         [
-                            30,
-                            55,
-                            80,
-                            105,
-                            130
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            0.65,
-                            0.65,
-                            0.65,
-                            0.65,
-                            0.65
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.75,
-                            1.75,
-                            1.75,
-                            1.75,
-                            1.75
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            2,
-                            2,
-                            2,
-                            2,
-                            2
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            40,
-                            45,
-                            50,
-                            55,
-                            60
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            9,
-                            8.5,
-                            8,
-                            7.5,
-                            7
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -206,13 +206,13 @@
                     ],
                     "effectBurn": [
                         null,
-                        "30/55/80/105/130",
-                        "0.65",
-                        "1.75",
-                        "2",
-                        "40/45/50/55/60",
-                        "9/8.5/8/7.5/7",
-                        "1.5",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0"
@@ -243,7 +243,7 @@
                     "id": "KledW",
                     "name": "暴烈秉性",
                     "description": "克烈获得持续4次攻击的巨幅攻速加成。第四次攻击会造成更多伤害。",
-                    "tooltip": "<spellPassive>被动：</spellPassive>克烈的下次攻击会提供<attackSpeed>{{ e2 }}%攻击速度</attackSpeed>，持续4次攻击或{{ e6 }}秒。<br /><br />第四击造成额外的<physicalDamage>{{ e4 }}外加{{ percentdamage }}最大生命值的物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<spellPassive>被动：</spellPassive>克烈的下次攻击会提供<attackSpeed>{{ attackspeed*100 }}%攻击速度</attackSpeed>，持续4次攻击或{{ activeduration }}秒。<br /><br />第四击造成额外的<physicalDamage>{{ baseflatdamage }}外加{{ percentdamage }}最大生命值的物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "固定伤害",
@@ -251,20 +251,20 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e4 }} -> {{ e4NL }}",
-                            "{{ e1 }}% -> {{ e1NL }}%",
+                            "{{ baseflatdamage }} -> {{ baseflatdamageNL }}",
+                            "{{ 4hitmaxhealthdamage }}% -> {{ 4hitmaxhealthdamageNL }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        13,
+                        12,
                         11,
-                        9.5,
-                        8,
-                        6.5,
-                        5
+                        10,
+                        9
                     ],
-                    "cooldownBurn": "11/9.5/8/6.5/5",
+                    "cooldownBurn": "13/12/11/10/9",
                     "cost": [
                         0,
                         0,
@@ -277,53 +277,53 @@
                     "effect": [
                         null,
                         [
-                            4.5,
-                            5,
-                            5.5,
-                            6,
-                            6.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            150,
-                            150,
-                            150,
-                            150,
-                            150
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            20,
-                            20,
-                            20,
-                            20,
-                            20
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            20,
-                            30,
-                            40,
-                            50,
-                            60
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            15,
-                            30,
-                            45,
-                            60,
-                            75
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            4,
-                            4,
-                            4,
-                            4,
-                            4
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            200,
-                            200,
-                            200,
-                            200,
-                            200
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -349,13 +349,13 @@
                     ],
                     "effectBurn": [
                         null,
-                        "4.5/5/5.5/6/6.5",
-                        "150",
-                        "20",
-                        "20/30/40/50/60",
-                        "15/30/45/60/75",
-                        "4",
-                        "200",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0",
                         "0"
@@ -386,14 +386,14 @@
                     "id": "KledE",
                     "name": "比武",
                     "description": "克烈发起突进，造成物理伤害并短暂获得爆发性移速加成。克烈可以再次施放这个技能来回身突进，穿过初始目标，同时造成等额伤害。",
-                    "tooltip": "克烈进行冲刺，对途经的敌人们造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>，同时将小兵和小型野怪拉向他。<br /><br />如果这个技能命中了一名敌方英雄或大型野怪，那么克烈会获得持续{{ e4 }}秒的<speed>{{ e5 }}%移动速度</speed>并能在{{ e6 }}秒内<recast>再次施放</recast>这个技能来冲刺并穿过相同目标。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "克烈进行冲刺，对途经的敌人们造成<physicalDamage>{{ totaldamage }}物理伤害</physicalDamage>，同时将小兵和小型野怪拉向他。<br /><br />如果这个技能命中了一名敌方英雄或大型野怪，那么克烈会获得持续{{ movespeedduration }}秒的<speed>{{ movespeed*100 }}%移动速度</speed>并能在{{ recastwindow }}秒内<recast>再次施放</recast>这个技能来冲刺并穿过相同目标。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e1 }} -> {{ e1NL }}",
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -418,11 +418,11 @@
                     "effect": [
                         null,
                         [
-                            35,
-                            60,
-                            85,
-                            110,
-                            135
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -432,46 +432,46 @@
                             0
                         ],
                         [
-                            350,
-                            350,
-                            350,
-                            350,
-                            350
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1,
-                            1,
-                            1,
-                            1,
-                            1
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            50,
-                            50,
-                            50,
-                            50,
-                            50
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3,
-                            3,
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            600,
-                            600,
-                            600,
-                            600,
-                            600
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            700,
-                            700,
-                            700,
-                            700,
-                            700
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -490,14 +490,14 @@
                     ],
                     "effectBurn": [
                         null,
-                        "35/60/85/110/135",
                         "0",
-                        "350",
-                        "1",
-                        "50",
-                        "3",
-                        "600",
-                        "700",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "0",
                         "0"
                     ],
@@ -527,7 +527,7 @@
                     "id": "KledR",
                     "name": "冲啊——！！",
                     "description": "克烈和斯嘎尔朝着一个位置发起冲锋，同时在身后留下一条提供加速效果的轨迹，并为自己构建一个护盾。斯嘎尔会在遭遇首个敌方英雄时将其锁定并发起撞击。",
-                    "tooltip": "克烈冲向一个区域，留下一条路径，该路径可为友军们提供不断提升的<speed>移动速度</speed>。在开始冲锋后的2秒里，克烈会至多获得<shield>{{ maximumshield }}护盾值</shield>。斯嘎尔会撞击遇到的首个敌方英雄，造成<physicalDamage>{{ minimumdamagetooltip }}</physicalDamage>到<physicalDamage>{{ maximumchargedamage }}最大生命值的物理伤害</physicalDamage>(基于已移动的距离)和短暂的<status>击退</status>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "克烈冲向一个区域，留下一条路径，该路径可为友军们提供不断提升的<speed>移动速度</speed>。在开始冲锋后的2秒里，克烈会至多获得<shield>{{ maximumshield }}护盾值</shield>。斯嘎尔会撞击遇到的首个敌方英雄，造成<magicDamage>{{ minimumdamagetooltip }}</magicDamage>到<magicDamage>{{ maximumchargedamage }}最大生命值的魔法伤害</magicDamage>(基于已移动的距离)和短暂的<status>击退</status>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "最大伤害",
@@ -536,9 +536,9 @@
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ effect1amount*3.000000 }}% -> {{ effect1amountnl*3.000000 }}%",
-                            "{{ e4 }} -> {{ e4NL }}",
-                            "{{ e0 }} -> {{ e0NL }}",
+                            "{{ percenthpbase*3.000000 }}% -> {{ percenthpbasenl*3.000000 }}%",
+                            "{{ shieldcapbase }} -> {{ shieldcapbaseNL }}",
+                            "{{ tooltiprange }} -> {{ tooltiprangeNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -559,33 +559,13 @@
                     "effect": [
                         null,
                         [
-                            4,
-                            5,
-                            6
-                        ],
-                        [
-                            4,
-                            4,
-                            4
-                        ],
-                        [
                             0,
                             0,
                             0
                         ],
                         [
-                            200,
-                            300,
-                            400
-                        ],
-                        [
-                            3,
-                            3,
-                            3
-                        ],
-                        [
-                            100,
-                            150,
+                            0,
+                            0,
                             0
                         ],
                         [
@@ -594,33 +574,53 @@
                             0
                         ],
                         [
-                            150,
+                            0,
                             0,
                             0
                         ],
                         [
-                            3,
-                            3,
-                            3
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            3500,
-                            4000,
-                            4500
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0
+                        ],
+                        [
+                            0,
+                            0,
+                            0
                         ]
                     ],
                     "effectBurn": [
                         null,
-                        "4/5/6",
-                        "4",
                         "0",
-                        "200/300/400",
-                        "3",
-                        "100/150/0",
                         "0",
-                        "150/0/0",
-                        "3",
-                        "3500/4000/4500"
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0"
                     ],
                     "vars": [],
                     "costType": "无消耗",

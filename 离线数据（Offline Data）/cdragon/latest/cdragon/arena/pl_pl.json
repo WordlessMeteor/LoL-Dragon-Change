@@ -2510,6 +2510,38 @@
             "tooltip": "<keywordMajor>Automatycznie</keywordMajor> ciskasz bumerangiem w pobliskiego wroga co @BaseCooldown@ sek., zadając @Damage@ pkt. obrażeń adaptacyjnych trafionym wrogom.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
+            "apiName": "Quest_ThreeSacredTreasures",
+            "calculations": {
+                "Calc_Magic_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "Calc_Physical_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.75
+                        }
+                    ]
+                }
+            },
+            "dataValues": {},
+            "desc": "Wymaganie: Posiadaj Ostrze Nieskończoności, Konsternację i Miecz-Pistolet Hextech.<br><br>Nagroda: Ataki Yunary zostają zastąpione laserami, które zadają obrażenia mieszane.",
+            "iconLarge": "assets/ux/cherry/augments/icons/threesacredtreasures_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threesacredtreasures_small.png",
+            "id": 319,
+            "name": "Zadanie: Trzy Święte Skarby",
+            "rarity": 1,
+            "tooltip": "Wymaganie: Posiadaj Ostrze Nieskończoności, Konsternację i Miecz-Pistolet Hextech.<br><br>Nagroda: Ataki Yunary zostają zastąpione laserami, które zadają <physicalDamage>@Calc_Physical_Damage@ pkt. obrażeń fizycznych</physicalDamage> + <magicDamage>@Calc_Magic_Damage@ pkt. obrażeń magicznych</magicDamage> i nakładają efekty <OnHit>%i:OnHit% przy trafieniu</OnHit> dwukrotnie."
+        },
+        {
             "apiName": "JuiceBox",
             "calculations": {},
             "dataValues": {},
@@ -2664,7 +2696,7 @@
                 }
             },
             "dataValues": {
-                "ADAmp": 0.10000000149011612,
+                "ADAmp": 0.15000000596046448,
                 "ConversionRate": 0.6000000238418579,
                 "InverseRate": 1.666659951210022
             },
@@ -2711,19 +2743,19 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.5,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Trafienia wrogich bohaterów umiejętnościami zapewniają ci stałą <keywordMajor>Przeklętą Moc</keywordMajor>. Zyskujesz <font color = '#8347ff'>siłę adaptacyjną</font> zależną od twojej <keywordMajor>Przeklętej Mocy</keywordMajor>.<br><br>Maksymalna <keywordMajor>Przeklęta Moc</keywordMajor>, jaką możesz zyskać w danej rundzie, skaluje się z całkowitą liczbą źródeł <keywordMajor>Klątwy</keywordMajor> między tobą a twoim sojusznikiem.",
+            "desc": "Trafienie wrogiego bohatera umiejętnościami zapewnia ci stałą <keywordMajor>Przeklętą Moc</keywordMajor>. Zyskujesz <font color = '#8347ff'>siłę adaptacyjną</font> zależną od twojej <keywordMajor>Przeklętej Mocy</keywordMajor>.<br><br>Maksymalna <keywordMajor>Przeklęta Moc</keywordMajor>, jaką możesz zyskać w danej rundzie, skaluje się z całkowitą liczbą źródeł <keywordMajor>Klątwy</keywordMajor> między tobą a twoim sojusznikiem.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Wieszczenie Zagłady",
             "rarity": 2,
-            "tooltip": "Trafienia wrogich bohaterów umiejętnościami zapewniają ci następującą liczbę ładunków <keywordMajor>Przeklętej Mocy</keywordMajor>: @CurseCounter@.<br><br>Zyskujesz @f1@ pkt. <font color = '#8347ff'>siły adaptacyjnej</font> (@AdaptiveForceRatio*100@% twojej <keywordMajor>Przeklętej Mocy</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Trafienie wrogiego bohatera umiejętnościami zapewnia ci następującą liczbę ładunków <keywordMajor>Przeklętej Mocy</keywordMajor>: @CurseCounter@.<br><br>Zyskujesz @f1@ pkt. <font color = '#8347ff'>siły adaptacyjnej</font> (@AdaptiveForceRatio*100@% twojej <keywordMajor>Przeklętej Mocy</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -3778,10 +3810,10 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "Breakpoint1": 5.0,
+                "Breakpoint1": 4.0,
                 "OnHitDamage": 40.0,
                 "SlowResistValue": 1.0,
-                "TotalASValue": 0.25
+                "TotalASValue": 0.20000000298023224
             },
             "desc": "Zyskujesz <attackSpeed>@TotalASValue*100@% całkowitej prędkości ataku</attackSpeed>.<br><br>Przy @Breakpoint1@ <attackSpeed>atakach na sekundę</attackSpeed> zadajesz dodatkowe <magicDamage>obrażenia magiczne</magicDamage> {{ Item_Keyword_OnHit }}.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",

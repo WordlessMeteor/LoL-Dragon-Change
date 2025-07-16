@@ -2510,6 +2510,38 @@
             "tooltip": "V pravidelném intervalu @BaseCooldown@&nbsp;sek. <keywordMajor>automatickým sesláním</keywordMajor> hodíš po nedalekém nepříteli bumerang, který zasaženým protivníkům způsobí @Damage@ bodů adaptivního poškození.<br><br>Poškození způsobené v tomto kole: @f1@<br>Celkové způsobené poškození: @f2@"
         },
         {
+            "apiName": "Quest_ThreeSacredTreasures",
+            "calculations": {
+                "Calc_Magic_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2
+                        }
+                    ]
+                },
+                "Calc_Physical_Damage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 0.75
+                        }
+                    ]
+                }
+            },
+            "dataValues": {},
+            "desc": "Požadavek: Vlastni Ostří nekonečna, Zmatenost a Magitechnickou puškočepel.<br><br>Odměna: Yunařiny útoky se nahradí lasery, které způsobují smíšené poškození.",
+            "iconLarge": "assets/ux/cherry/augments/icons/threesacredtreasures_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/threesacredtreasures_small.png",
+            "id": 319,
+            "name": "Úkol: Tři posvátné poklady",
+            "rarity": 1,
+            "tooltip": "Požadavek: Vlastni Ostří nekonečna, Zmatenost a Magitechnickou puškočepel.<br><br>Odměna: Yunařiny útoky se nahradí lasery, které způsobují <physicalDamage>@Calc_Physical_Damage@ bodů fyzického poškození</physicalDamage> + <magicDamage>@Calc_Magic_Damage@ bodů magického poškození</magicDamage> a aplikují <OnHit>%i:OnHit% zásahové</OnHit> efekty dvakrát."
+        },
+        {
             "apiName": "JuiceBox",
             "calculations": {},
             "dataValues": {},
@@ -2664,7 +2696,7 @@
                 }
             },
             "dataValues": {
-                "ADAmp": 0.10000000149011612,
+                "ADAmp": 0.15000000596046448,
                 "ConversionRate": 0.6000000238418579,
                 "InverseRate": 1.666659951210022
             },
@@ -2711,19 +2743,19 @@
             "apiName": "Doomsayer",
             "calculations": {},
             "dataValues": {
-                "AdaptiveForceRatio": 1.5,
+                "AdaptiveForceRatio": 1.25,
                 "BleedDuration": 5.0,
                 "Cooldown": 3.0,
                 "CurseCounter": 2.0,
                 "PercentMaxHPDamagePer5Seconds": 0.029999999329447746
             },
-            "desc": "Zásahy nepřátelských šampionů schopnostmi ti trvale zvyšují <keywordMajor>Prokletou moc</keywordMajor>. Získáš bonus k <font color = '#8347ff'>adaptivní síle</font>, který se odvíjí od tvé <keywordMajor>Prokleté moci</keywordMajor>.<br><br>Maximální výše <keywordMajor>Prokleté moci</keywordMajor>, kterou můžeš v kole obdržet, se zvyšuje v závislosti na celkovém počtu zdrojů <keywordMajor>kleteb</keywordMajor> mezi tebou a tvým spojencem.",
+            "desc": "Zasahováním nepřátelských šampionů schopnostmi si trvale zvyšuješ <keywordMajor>Prokletou moc</keywordMajor>. Získáš bonus k <font color = '#8347ff'>adaptivní síle</font>, který se odvíjí od tvé <keywordMajor>Prokleté moci</keywordMajor>.<br><br>Maximální výše <keywordMajor>Prokleté moci</keywordMajor>, kterou můžeš v kole obdržet, se zvyšuje v závislosti na celkovém počtu zdrojů <keywordMajor>kleteb</keywordMajor> mezi tebou a tvým spojencem.",
             "iconLarge": "assets/ux/cherry/augments/icons/doomsayer_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/doomsayer_small.png",
             "id": 219,
             "name": "Zvěstovatel zkázy",
             "rarity": 2,
-            "tooltip": "Zásahy nepřátelských šampionů schopnostmi ti udělují +@CurseCounter@ k <keywordMajor>Prokleté moci</keywordMajor>.<br><br>Získáš @f1@ k <font color = '#8347ff'>adaptivní síle</font> (@AdaptiveForceRatio*100@&nbsp;% tvé <keywordMajor>Prokleté moci</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
+            "tooltip": "Zasahováním nepřátelských šampionů schopnostmi získáš +@CurseCounter@ k <keywordMajor>Prokleté moci</keywordMajor>.<br><br>Získáš @f1@ k <font color = '#8347ff'>adaptivní síle</font> (@AdaptiveForceRatio*100@&nbsp;% tvé <keywordMajor>Prokleté moci</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
             "apiName": "Flashy",
@@ -3778,10 +3810,10 @@
             "apiName": "LightningStrikes",
             "calculations": {},
             "dataValues": {
-                "Breakpoint1": 5.0,
+                "Breakpoint1": 4.0,
                 "OnHitDamage": 40.0,
                 "SlowResistValue": 1.0,
-                "TotalASValue": 0.25
+                "TotalASValue": 0.20000000298023224
             },
             "desc": "Získáš <attackSpeed>@TotalASValue*100@&nbsp;% k celkové rychlosti útoků</attackSpeed>. <br><br>Při @Breakpoint1@ <attackSpeed>útocích za sekundu</attackSpeed> způsobíš {{ Item_Keyword_OnHit }} dodatečné <magicDamage>magické poškození</magicDamage>.",
             "iconLarge": "assets/ux/cherry/augments/icons/lightningstrikes_large.png",
