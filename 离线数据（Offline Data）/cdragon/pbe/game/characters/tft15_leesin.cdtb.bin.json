@@ -1,5 +1,5 @@
 {
-    "{04ead349}": {
+    "Characters/TFT15_LeeSin/Spells/TFT15_LeeSinBasicAttack2": {
         "ObjectName": "TFT15_LeeSinBasicAttack2",
         "mScriptName": "TFT15_LeeSinBasicAttack2",
         "mSpell": {
@@ -178,7 +178,7 @@
                             "mSubparts": [
                                 {
                                     "mSubpart": {
-                                        "mDataValue": "{1bbbaf7f}",
+                                        "mDataValue": "BaseStrikeDamage",
                                         "__type": "NamedDataValueCalculationPart"
                                     },
                                     "mRatio": 1.0,
@@ -187,7 +187,7 @@
                                 },
                                 {
                                     "mSubpart": {
-                                        "mDataValue": "{d8e78fab}",
+                                        "mDataValue": "APStrikeDamage",
                                         "__type": "NamedDataValueCalculationPart"
                                     },
                                     "mRatio": 0.009999999776482582,
@@ -204,7 +204,7 @@
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "{af8f3c9a}",
+                                "mDataValue": "BaseAoEDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 1.0,
@@ -214,12 +214,12 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{86e56ecc}": {
+                "ModifiedShockwaveDamage": {
                     "mSimpleTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "{150b9efa}",
+                                "mDataValue": "ShockwaveAoEDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 1.0,
@@ -311,12 +311,71 @@
         },
         "__type": "SpellObject"
     },
-    "{37c95101}": {
+    "Characters/TFT15_LeeSin/Spells/TFT15_LeeSinBasicAttack": {
         "ObjectName": "TFT15_LeeSinBasicAttack",
         "mScriptName": "TFT15_LeeSinBasicAttack",
         "mSpell": {
             "mAffectsTypeFlags": 5327,
             "mAlternateName": "LeeSinBasicAttack",
+            "cooldownTime": [
+                -100.0,
+                -100.0,
+                -100.0,
+                -100.0,
+                -100.0,
+                -100.0,
+                -100.0
+            ],
+            "delayCastOffsetPercent": -0.17569999396800995,
+            "bHaveHitEffect": true,
+            "castRange": [
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 9.0,
+            "missileSpeed": 0.0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "SpellEventToAudioEventSuffix": {
+                "12": "Play_sfx_LeeSin_LeeSinBasicAttack_OnCast",
+                "13": "Play_sfx_LeeSin_LeeSinBasicAttack_OnHit"
+            },
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{701ae80f}": {
+        "ObjectName": "TFT15_LeeSinBasicAttack_3StarTankStance",
+        "mScriptName": "TFT15_LeeSinBasicAttack_3StarTankStance",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "LeeSinBasicAttack",
+            "mAnimationName": "TankSpell_Sequencer",
             "cooldownTime": [
                 -100.0,
                 -100.0,
@@ -485,14 +544,14 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{5566cda4}": {
+                "ModifiedNumClones": {
                     "mFormulaParts": [
                         {
                             "mSubparts": [
                                 {
                                     "mPart1": {
                                         "part1": {
-                                            "mDataValue": "{be0e7ea0}",
+                                            "mDataValue": "BonusASPerClone",
                                             "__type": "NamedDataValueCalculationPart"
                                         },
                                         "part2": {
@@ -516,7 +575,7 @@
                                     "__type": "ProductOfSubPartsCalculationPart"
                                 },
                                 {
-                                    "mDataValue": "{60d399c1}",
+                                    "mDataValue": "NumClones",
                                     "__type": "NamedDataValueCalculationPart"
                                 }
                             ],
@@ -525,14 +584,14 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{25f0af16}": {
+                "ModifiedCloneDamage": {
                     "mSimpleTooltipCalculationDisplay": 5,
                     "mExpandedTooltipCalculationDisplay": 5,
                     "StaticTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "{66b901d0}",
+                                "mDataValue": "BaseCloneDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 1.0,
@@ -542,14 +601,14 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{f946f235}": {
+                "ModifiedPassiveCloneDamage": {
                     "mSimpleTooltipCalculationDisplay": 5,
                     "mExpandedTooltipCalculationDisplay": 5,
                     "StaticTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "{e95d2c9a}",
+                                "mDataValue": "PassiveCloneDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 1.0,
@@ -709,7 +768,7 @@
                 "__type": "MissileSpecification"
             },
             "mCastType": 1,
-            "mHitEffectKey": "{0fdb16fb}",
+            "mHitEffectKey": "TFT15_LeeSin_W_FighterStance_Punch_Tar",
             "bHaveHitBone": true,
             "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
             "selectionPriority": 1,
@@ -742,8 +801,8 @@
                         2.5,
                         450.0,
                         675.0,
-                        675.0,
-                        9001.0,
+                        50000.0,
+                        50000.0,
                         2.5,
                         2.5
                     ],
@@ -755,8 +814,8 @@
                         0.0,
                         50.0,
                         75.0,
-                        75.0,
-                        9001.0,
+                        999.0,
+                        999.0,
                         0.0,
                         0.0
                     ],
@@ -768,8 +827,8 @@
                         0.6000000238418579,
                         0.6000000238418579,
                         0.6000000238418579,
-                        0.8999999761581421,
-                        0.8999999761581421,
+                        0.9900000095367432,
+                        0.9900000095367432,
                         0.6000000238418579,
                         0.6000000238418579
                     ],
@@ -781,7 +840,7 @@
                         1.0,
                         200.0,
                         300.0,
-                        300.0,
+                        9001.0,
                         9001.0,
                         1.0,
                         1.0
@@ -831,7 +890,7 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{c29b39fb}": {
+                "ModifiedFinalDamage": {
                     "mSimpleTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
@@ -846,12 +905,12 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{0c8f50ee}": {
+                "ModifiedAllEnemiesDamage": {
                     "mSimpleTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "{3fd1fa2d}",
+                                "mDataValue": "AllEnemiesDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 1.0,
@@ -951,7 +1010,7 @@
         },
         "__type": "SpellObject"
     },
-    "{f26bf3dd}": {
+    "Characters/TFT15_LeeSin/Spells/TFT15_LeeSinSpell": {
         "ObjectName": "TFT15_LeeSinSpell",
         "mScriptName": "TFT15_LeeSinSpell",
         "mSpell": {
@@ -1145,7 +1204,7 @@
         },
         "__type": "SpellObject"
     },
-    "{fdba60f1}": {
+    "Characters/TFT15_LeeSin/Spells/TFT15_LeeSinCritAttack": {
         "ObjectName": "TFT15_LeeSinCritAttack",
         "mScriptName": "TFT15_LeeSinCritAttack",
         "mSpell": {
@@ -1204,7 +1263,7 @@
         },
         "__type": "SpellObject"
     },
-    "{86c931a8}": {
+    "Characters/TFT15_LeeSin/CharacterRecords/Root": {
         "mCharacterName": "TFT15_LeeSin",
         "baseHP": 1200.0,
         "baseStaticHPRegen": 0.0,
@@ -1250,7 +1309,7 @@
             ""
         ],
         "spells": [
-            "{f26bf3dd}",
+            "Characters/TFT15_LeeSin/Spells/TFT15_LeeSinSpell",
             "{00000000}",
             "{00000000}",
             "{00000000}"
@@ -1274,7 +1333,7 @@
         "mManaPerAttack": 5.0,
         "__type": "TFTCharacterRecord"
     },
-    "{ea78cdae}": {
+    "Characters/TFT15_LeeSin/Skins/Meta": {
         "__type": "SkinCharacterMetaDataProperties"
     },
     "__linked": []

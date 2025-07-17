@@ -5565,5 +5565,25 @@
 				DDragon: 15.13.1 -> 15.14.1
 			</td>
 		</tr>
+		<tr>
+			<td style="text-align:center;">2025-07-17 11-00-22</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.15.696.3147 -> 15.15.696.6604</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-07-17 11-00-56</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.15.696.3147 -> 15.15.696.6604</li>
+					</ul>
+			</td>
+		</tr>
 	</tbody>
 </table>
