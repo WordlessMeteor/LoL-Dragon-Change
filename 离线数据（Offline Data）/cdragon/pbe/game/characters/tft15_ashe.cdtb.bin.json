@@ -1,5 +1,5 @@
 {
-    "{07be746d}": {
+    "Characters/TFT15_Ashe/Spells/TFT15_AsheCritAttack": {
         "ObjectName": "TFT15_AsheCritAttack",
         "mScriptName": "TFT15_AsheCritAttack",
         "mSpell": {
@@ -68,7 +68,7 @@
             "mCastType": 1,
             "castFrame": 9.0,
             "missileSpeed": 2500.0,
-            "mMissileEffectKey": "{8a8b7ca1}",
+            "mMissileEffectKey": "TFT15_Ashe_BA_mis",
             "mHitEffectKey": "TFT_Global_BA_Crit",
             "bHaveHitBone": true,
             "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
@@ -84,7 +84,7 @@
         },
         "__type": "SpellObject"
     },
-    "{07f3398d}": {
+    "Characters/TFT15_Ashe/Spells/TFT15_AsheBasicAttack2": {
         "ObjectName": "TFT15_AsheBasicAttack2",
         "mScriptName": "TFT15_AsheBasicAttack2",
         "mSpell": {
@@ -154,7 +154,7 @@
             "mCastType": 1,
             "castFrame": 8.0,
             "missileSpeed": 2500.0,
-            "mMissileEffectKey": "{8a8b7ca1}",
+            "mMissileEffectKey": "TFT15_Ashe_BA_mis",
             "mHitEffectKey": "TFT_Global_BA_Hit",
             "bHaveHitBone": true,
             "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
@@ -241,8 +241,8 @@
             "mCastType": 1,
             "castFrame": 2.0,
             "missileSpeed": 2500.0,
-            "mMissileEffectKey": "{bdc70d8a}",
-            "mHitEffectKey": "{47d4fab6}",
+            "mMissileEffectKey": "TFT15_Ashe_EmpoweredAttack_Mis",
+            "mHitEffectKey": "TFT15_Ashe_EmpoweredAttack_Tar",
             "bHaveHitBone": true,
             "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
             "mClientData": {
@@ -327,7 +327,7 @@
             "mCastType": 1,
             "castFrame": 9.0,
             "missileSpeed": 2500.0,
-            "mMissileEffectKey": "{bdc70d8a}",
+            "mMissileEffectKey": "TFT15_Ashe_EmpoweredAttack_Mis",
             "bHaveHitBone": true,
             "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
             "mClientData": {
@@ -415,7 +415,7 @@
             "mCastType": 1,
             "castFrame": 1.0,
             "missileSpeed": 2500.0,
-            "mMissileEffectKey": "{bdc70d8a}",
+            "mMissileEffectKey": "TFT15_Ashe_EmpoweredAttack_Mis",
             "bHaveHitBone": true,
             "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
             "mClientData": {
@@ -430,7 +430,7 @@
         },
         "__type": "SpellObject"
     },
-    "{a75bdb91}": {
+    "Characters/TFT15_Ashe/Spells/TFT15_AsheSpell": {
         "ObjectName": "TFT15_AsheSpell",
         "mScriptName": "TFT15_AsheSpell",
         "mSpell": {
@@ -441,8 +441,8 @@
                     "mName": "DamagePerArrow",
                     "mValues": [
                         1.0,
-                        14.0,
-                        21.0,
+                        13.0,
+                        20.0,
                         75.0,
                         90.0,
                         2.0,
@@ -488,15 +488,28 @@
                         8.0
                     ],
                     "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "APDamagePerArrow",
+                    "mValues": [
+                        0.0,
+                        1.0,
+                        2.0,
+                        10.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
                 }
             ],
             "mSpellCalculations": {
-                "{820c5597}": {
+                "TotalArrows": {
                     "mSimpleTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "{e0d33c66}",
+                                "mDataValue": "BaseArrows",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 0.4000000059604645,
@@ -514,11 +527,19 @@
                     "mFormulaParts": [
                         {
                             "mSubpart": {
-                                "mDataValue": "{0167aec4}",
+                                "mDataValue": "DamagePerArrow",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 1.0,
                             "mStat": 3,
+                            "__type": "SubPartScaledProportionalToStat"
+                        },
+                        {
+                            "mSubpart": {
+                                "mDataValue": "{788a6fc5}",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
                             "__type": "SubPartScaledProportionalToStat"
                         }
                     ],
@@ -535,10 +556,43 @@
                                 "__type": "{f3cbe7b2}"
                             },
                             "mPart2": {
-                                "mSpellCalculationKey": "{820c5597}",
+                                "mSpellCalculationKey": "TotalArrows",
                                 "__type": "{f3cbe7b2}"
                             },
                             "__type": "ProductOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "{984623e6}": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "{788a6fc5}",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "{828a94f3}": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "DamagePerArrow",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 1.0,
+                            "mStat": 3,
+                            "__type": "SubPartScaledProportionalToStat"
                         }
                     ],
                     "__type": "GameCalculation"
@@ -609,6 +663,11 @@
                                     "__type": "TooltipInstanceListElement"
                                 },
                                 {
+                                    "type": "APDamagePerArrow",
+                                    "nameOverride": "TFT_AP_Damage_NoCalculation",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
                                     "type": "DamagePerArrow",
                                     "nameOverride": "Spell_TFT15_Ashe_DamagePerArrow",
                                     "__type": "TooltipInstanceListElement"
@@ -625,7 +684,7 @@
         },
         "__type": "SpellObject"
     },
-    "{ae794c6d}": {
+    "Characters/TFT15_Ashe/Spells/TFT15_AsheBasicAttack": {
         "ObjectName": "TFT15_AsheBasicAttack",
         "mScriptName": "TFT15_AsheBasicAttack",
         "mSpell": {
@@ -694,7 +753,7 @@
             "mCastType": 1,
             "castFrame": 8.0,
             "missileSpeed": 2500.0,
-            "mMissileEffectKey": "{8a8b7ca1}",
+            "mMissileEffectKey": "TFT15_Ashe_BA_mis",
             "mHitEffectKey": "TFT_Global_BA_Hit",
             "bHaveHitBone": true,
             "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
@@ -711,7 +770,7 @@
         },
         "__type": "SpellObject"
     },
-    "{53060887}": {
+    "Characters/TFT15_Ashe/CharacterRecords/Root": {
         "mCharacterName": "TFT15_Ashe",
         "baseHP": 850.0,
         "baseStaticHPRegen": 0.0,
@@ -758,7 +817,7 @@
             ""
         ],
         "spells": [
-            "{a75bdb91}",
+            "Characters/TFT15_Ashe/Spells/TFT15_AsheSpell",
             "{00000000}",
             "{00000000}",
             "{00000000}"
@@ -786,7 +845,7 @@
         "mManaPerAttack": 5.0,
         "__type": "TFTCharacterRecord"
     },
-    "{634dfd8b}": {
+    "Characters/TFT15_Ashe/Skins/Meta": {
         "__type": "SkinCharacterMetaDataProperties"
     },
     "__linked": []
