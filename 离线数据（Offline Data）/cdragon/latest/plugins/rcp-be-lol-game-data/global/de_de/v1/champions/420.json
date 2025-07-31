@@ -4,6 +4,7 @@
     "alias": "Illaoi",
     "title": "die Krakenpriesterin",
     "shortBio": "Illaois kräftige Erscheinung wird nur von ihrem unerschütterlichen Glauben in den Schatten gestellt. Als Prophetin des Großen Kraken setzt sie ein riesiges, goldenes Götzenbild ein, um die Seelen ihrer Widersacher von ihren Leibern zu trennen und ihre Wahrnehmung der Wirklichkeit zunichte zu machen. Jeder, der die Verkünderin der Wahrheit Nagakabouros' herausfordert, stellt schnell fest, dass Illaoi nie allein in den Kampf zieht – der Gott der Schlangeninseln kämpft an ihrer Seite.",
+    "isVisibleInClient": true,
     "tacticalInfo": {
         "style": 7,
         "difficulty": 2,
@@ -803,7 +804,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@&nbsp;s %i:cooldown%",
             "description": "Erhöht den von Tentakeln veursachten Schaden. Wenn die Fähigkeit aktiviert wird, lässt Illaoi einen Tentakel ausschlagen, der normalen Schaden verursacht.",
-            "dynamicDescription": "<passive>Passiv:</passive> Der <keywordMajor>Schlagschaden</keywordMajor> wird um <physicalDamage>@TentacleDamageAmp*100@&nbsp;%</physicalDamage> erhöht (aktuell <physicalDamage>@f1@&nbsp;normaler Schaden</physicalDamage>).<br><br><active>Aktiv:</active> Illaoi schwingt ihren Götzen und lässt dabei einen Tentakel nach vorne <keywordMajor>schlagen</keywordMajor>.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<passive>Passiv:</passive> Der <keywordMajor>Schlagschaden</keywordMajor> wird um <physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@&nbsp;%</physicalDamage> erhöht (aktuell <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@&nbsp;normaler Schaden</physicalDamage>).<br><br><active>Aktiv:</active> Illaoi schwingt ihren Götzen und lässt einen Tentakel nach vorne <keywordMajor>schlagen</keywordMajor>.@SpellModifierDescriptionAppend@",
             "range": [
                 850.0,
                 850.0,
@@ -843,22 +844,22 @@
                     10.0
                 ],
                 "Effect2Amount": [
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
                     12.0,
@@ -879,13 +880,13 @@
                     5.0
                 ],
                 "Effect6Amount": [
-                    0.1,
-                    0.1,
-                    0.15,
-                    0.2,
-                    0.25,
-                    0.3,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
                     1.2,
@@ -1103,7 +1104,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@&nbsp;s %i:cooldown%",
             "description": "Illaoi entreißt dem Leib eines Widersachers dessen Seele und zwingt diese, sich vor ihr aufzurichten. Seelen lassen einen Prozentsatz des Schadens, den sie erleiden, am ursprünglichen Ziel widerhallen. Wird die Seele getötet oder gerät das Ziel außer Reichweite der Seele, wird das Ziel zum <font color='#669900'>Gefäß</font> und beginnt, Tentakel erwachsen zu lassen.",
-            "dynamicDescription": "Illaoi zieht die Seele aus dem Leib eines gegnerischen Champions und hält sie @SpiritDuration@&nbsp;Sekunden lang fest. Die Seele kann wie ein Champion Schaden erleiden, wobei ihr Besitzer @EchoPercentTooltipOnly@ des erlittenen Schadens erleidet.<br><br>Stirbt die Seele oder gerät das Ziel außer Reichweite, wird das Ziel @VesselDuration@&nbsp;Sekunden lang markiert und @SlowDuration@&nbsp;Sekunden lang um @SlowAmount*100@&nbsp;% <status>verlangsamt</status>. Markierte Gegner lassen alle <scaleLevel>@f1@</scaleLevel>&nbsp;Sekunden einen Tentakel erwachsen.<br><br>Tentakel <keywordMajor>schlagen</keywordMajor> alle @TimeBetweenVesselTentacleSlams@&nbsp;Sekunden nach Seelen und markierten Gegnern aus.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Illaoi zieht die Seele aus dem Leib eines gegnerischen Champions und hält sie @SpiritDuration@&nbsp;Sekunden lang fest. Die Seele kann wie ein Champion Schaden erleiden, wobei ihr Besitzer @EchoPercent@ des erlittenen Schaden erleidet.<br><br>Stirbt die Seele oder gerät das Ziel außer Reichweite, wird das Ziel @VesselDuration@&nbsp;Sekunden lang markiert und @SlowDuration@&nbsp;Sekunden lang um @SlowAmount*100@&nbsp;% <status>verlangsamt</status>. Markierte Gegner lassen nach Möglichkeit Tentakel erscheinen.<br><br>Tentakel <keywordMajor>schlagen</keywordMajor> alle @TimeBetweenVesselTentacleSlams@&nbsp;Sekunden nach Seelen und markierten Gegnern aus.@SpellModifierDescriptionAppend@",
             "range": [
                 900.0,
                 900.0,
@@ -1129,54 +1130,54 @@
                 11.0
             ],
             "coefficients": {
-                "coefficient1": 0.08,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     3.0,
@@ -1197,13 +1198,13 @@
                     0.0
                 ],
                 "Effect8Amount": [
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     8.0,
@@ -1215,9 +1216,9 @@
                     8.0
                 ],
                 "Effect10Amount": [
-                    5.0,
-                    4.0,
-                    3.0,
+                    0.0,
+                    0.0,
+                    0.0,
                     0.0,
                     0.0,
                     0.0,

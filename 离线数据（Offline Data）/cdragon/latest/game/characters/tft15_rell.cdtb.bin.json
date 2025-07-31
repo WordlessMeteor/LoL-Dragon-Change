@@ -1,0 +1,300 @@
+{
+    "Characters/TFT15_Rell/Spells/TFT15_RellSpell": {
+        "ObjectName": "TFT15_RellSpell",
+        "mScriptName": "TFT15_RellSpell",
+        "mSpell": {
+            "mAffectsTypeFlags": 7183,
+            "mDataValues": [
+                {
+                    "mName": "Damage",
+                    "mValues": [
+                        300.0,
+                        130.0,
+                        195.0,
+                        295.0,
+                        395.0,
+                        300.0,
+                        300.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BuffDuration",
+                    "mValues": [
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "FlatDR",
+                    "mValues": [
+                        25.0,
+                        20.0,
+                        30.0,
+                        45.0,
+                        60.0,
+                        25.0,
+                        25.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "Damage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedFlatDamageReduction": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "FlatDR",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3999999761581421,
+            "delayTotalTimePercent": -0.5,
+            "mIgnoreRangeCheck": true,
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT15_RellSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT15_RellSpell_Name",
+                        "keyTooltip": "Spell_TFT15_RellSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "elements": [
+                                {
+                                    "type": "Damage",
+                                    "nameOverride": "TFT_AP_MagicDamage",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "FlatDR",
+                                    "nameOverride": "Spell_TFT15_RellSpell_FlatDR",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT15_Rell/Spells/TFT15_RellCritAttack": {
+        "ObjectName": "TFT15_RellCritAttack",
+        "mScriptName": "TFT15_RellCritAttack",
+        "mSpell": {
+            "mAffectsStatusFlags": 8,
+            "mAnimationName": "Crit",
+            "mPreCastLockoutDeltaTimeData": {
+                "mSpellLockDeltaTimeCalculation": {
+                    "mFormulaParts": [
+                        {
+                            "mStartValue": 0.15000000596046448,
+                            "mEndValue": 0.10000000149011612,
+                            "__type": "ByCharLevelInterpolationCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "__type": "SpellLockDeltaTimeData"
+            },
+            "mApplyAttackDamage": true,
+            "alwaysSnapFacing": true,
+            "bHaveHitEffect": true,
+            "castFrame": 8.0,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT15_Rell/Spells/TFT15_RellBasicAttack2": {
+        "ObjectName": "TFT15_RellBasicAttack2",
+        "mScriptName": "TFT15_RellBasicAttack2",
+        "mSpell": {
+            "mAffectsStatusFlags": 8,
+            "mAnimationName": "Attack2",
+            "mPreCastLockoutDeltaTimeData": {
+                "mSpellLockDeltaTimeCalculation": {
+                    "mFormulaParts": [
+                        {
+                            "mStartValue": 0.15000000596046448,
+                            "mEndValue": 0.10000000149011612,
+                            "__type": "ByCharLevelInterpolationCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "__type": "SpellLockDeltaTimeData"
+            },
+            "mApplyAttackDamage": true,
+            "bHaveHitEffect": true,
+            "mTurnSpeedScalar": 1.5,
+            "castFrame": 8.0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT15_Rell/Spells/TFT15_RellBasicAttack": {
+        "ObjectName": "TFT15_RellBasicAttack",
+        "mScriptName": "TFT15_RellBasicAttack",
+        "mSpell": {
+            "mAffectsStatusFlags": 8,
+            "mPreCastLockoutDeltaTimeData": {
+                "mSpellLockDeltaTimeCalculation": {
+                    "mFormulaParts": [
+                        {
+                            "mStartValue": 0.15000000596046448,
+                            "mEndValue": 0.10000000149011612,
+                            "__type": "ByCharLevelInterpolationCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "__type": "SpellLockDeltaTimeData"
+            },
+            "mApplyAttackDamage": true,
+            "bHaveHitEffect": true,
+            "mTurnSpeedScalar": 1.5,
+            "castFrame": 8.0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT15_Rell/Skins/Meta": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "Characters/TFT15_Rell/CharacterRecords/Root": {
+        "mCharacterName": "TFT15_Rell",
+        "baseHP": 750.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 200.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 40.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 50.0,
+        "baseArmor": 40.0,
+        "baseSpellBlock": 40.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.6000000238418579,
+        "attackSpeedRatio": 0.699999988079071,
+        "basicAttack": {
+            "mAttackName": "TFT15_RellBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT15_RellBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT15_RellCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT15_RellSpell",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "Characters/TFT15_Rell/Spells/TFT15_RellSpell",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446664,
+        "tier": 1,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{661e184f}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{46b87d70}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{2ccf900f}",
+        "mMoveInterval": -0.10000000149011612,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mShopData": "{7ff96653}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "__linked": []
+}

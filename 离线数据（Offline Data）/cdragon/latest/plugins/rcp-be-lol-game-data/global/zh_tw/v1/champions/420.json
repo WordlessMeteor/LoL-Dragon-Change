@@ -4,6 +4,7 @@
     "alias": "Illaoi",
     "title": "海妖祭司",
     "shortBio": "能比過伊羅旖強健體魄的只有她那不可動搖的意志。身為偉大海妖的神使，她使用一尊巨大的金色神像來從敵人身體中撕扯出靈魂，粉碎他們對於現實的感知。所有膽敢挑戰「娜葛卡布爾真傳之人」的無知分子，很快就會發現伊羅旖從來不是隻身作戰——毒蛇群島之神常伴她左右。",
+    "isVisibleInClient": true,
     "tacticalInfo": {
         "style": 7,
         "difficulty": 2,
@@ -803,7 +804,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "提高觸手造成的傷害。當啟動時，伊羅旖砸下一隻觸手並造成物理傷害。",
-            "dynamicDescription": "<passive>被動：</passive><keywordMajor>鞭打</keywordMajor>傷害提升 <physicalDamage>@TentacleDamageAmp*100@% </physicalDamage>（當前 <physicalDamage>@f1@ 物理傷害</physicalDamage>）。<br><br><active>主動：</active>羅旖揮舞她的石球，召喚一隻觸手向前<keywordMajor>鞭打</keywordMajor>。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<passive>被動：</passive><keywordMajor>鞭打</keywordMajor>傷害增加<physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage>(目前為<physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@物理傷害</physicalDamage>)。<br><br><active>主動：</active>伊羅旖揮舞她的石球，召喚一隻觸手向前<keywordMajor>鞭打</keywordMajor>。@SpellModifierDescriptionAppend@",
             "range": [
                 850.0,
                 850.0,
@@ -843,22 +844,22 @@
                     10.0
                 ],
                 "Effect2Amount": [
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
                     12.0,
@@ -879,13 +880,13 @@
                     5.0
                 ],
                 "Effect6Amount": [
-                    0.1,
-                    0.1,
-                    0.15,
-                    0.2,
-                    0.25,
-                    0.3,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
                     1.2,
@@ -1103,7 +1104,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ 秒 %i:cooldown%",
             "description": "伊羅旖將靈魂從敵人身體中撕裂，使之立於她前方。靈魂所受的傷害會以一定百分比轉嫁給主人。如果靈魂被擊殺，或主人距離靈魂太遠，目標將會變為 <font color='#669900'>宿主</font> 並會在附近生出觸手。",
-            "dynamicDescription": "伊羅旖將靈魂從敵方英雄的軀體中抽出 @SpiritDuration@ 秒。靈魂可以如英雄般承受傷害，且其受到的 @EchoPercentTooltipOnly@ 傷害將會反映在該英雄身上。<br><br>若靈魂死亡或該英雄離開範圍，則該英雄將被標記 @VesselDuration@ 秒，並且被<status>緩速</status> @SlowAmount*100@% ，持續 @SlowDuration@ 秒。被標記的敵人每 <scaleLevel>@f1@</scaleLevel> 秒召喚出一隻觸手。<br><br>觸手每 @TimeBetweenVesselTentacleSlams@ 秒會自動 <keywordMajor>鞭打</keywordMajor> 靈魂和被標記的敵人。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "伊羅旖抽出一名敵方英雄的靈魂，持續@SpiritDuration@秒。靈魂與英雄一樣會受到傷害，其所受傷害的@EchoPercent@會轉嫁給宿主。<br><br>若靈魂消亡或目標離開範圍，目標會遭標記@VesselDuration@秒，並<status>緩速</status>@SlowAmount*100@%@SlowDuration@秒。受標記的敵軍可生出觸手。<br><br>每@TimeBetweenVesselTentacleSlams@秒，觸手會<keywordMajor>鞭打</keywordMajor>靈魂和受標記的敵軍一次。@SpellModifierDescriptionAppend@",
             "range": [
                 900.0,
                 900.0,
@@ -1129,54 +1130,54 @@
                 11.0
             ],
             "coefficients": {
-                "coefficient1": 0.08,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     3.0,
@@ -1197,13 +1198,13 @@
                     0.0
                 ],
                 "Effect8Amount": [
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     8.0,
@@ -1215,9 +1216,9 @@
                     8.0
                 ],
                 "Effect10Amount": [
-                    5.0,
-                    4.0,
-                    3.0,
+                    0.0,
+                    0.0,
+                    0.0,
                     0.0,
                     0.0,
                     0.0,

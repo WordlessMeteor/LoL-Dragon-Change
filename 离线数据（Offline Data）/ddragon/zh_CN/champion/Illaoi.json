@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.14.1",
+    "version": "15.15.1",
     "data": {
         "Illaoi": {
             "id": "Illaoi",
@@ -107,7 +107,7 @@
                     "id": "IllaoiQ",
                     "name": "触手猛击",
                     "description": "提升触手造成的伤害。在激活时，俄洛伊会挥出一条触手来造成物理伤害。",
-                    "tooltip": "<passive>被动：</passive><keywordMajor>猛击</keywordMajor>伤害提升<physicalDamage>{{ tentacledamageamp*100 }}%</physicalDamage>(当前<physicalDamage>{{ f1 }}物理伤害</physicalDamage>)。<br /><br /><active>主动：</active>俄洛伊挥舞她的神像，使一条触手向前<keywordMajor>猛击</keywordMajor>。\t{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<passive>被动：</passive><keywordMajor>猛击</keywordMajor>伤害提升<physicalDamage>{{ spell.illaoiq:tentacledamageamp*100 }}%</physicalDamage>(当前<physicalDamage>{{ spell.illaoiq:tentacledamagetotal }}物理伤害</physicalDamage>)。<br /><br /><active>主动：</active>俄洛伊挥舞她的神像，使一条触手向前<keywordMajor>猛击</keywordMajor>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "猛击加成",
@@ -148,18 +148,18 @@
                             10
                         ],
                         [
-                            200,
-                            200,
-                            200,
-                            200,
-                            200
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            800,
-                            800,
-                            800,
-                            800,
-                            800
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             10,
@@ -176,11 +176,11 @@
                             5
                         ],
                         [
-                            0.1,
-                            0.15,
-                            0.2,
-                            0.25,
-                            0.3
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             1.2,
@@ -214,11 +214,11 @@
                     "effectBurn": [
                         null,
                         "10",
-                        "200",
-                        "800",
+                        "0",
+                        "0",
                         "10/8/6/4/2",
                         "5",
-                        "0.1/0.15/0.2/0.25/0.3",
+                        "0",
                         "1.2",
                         "-0.3/-0.35/-0.4/-0.45/-0.5",
                         "1.5",
@@ -391,7 +391,7 @@
                     "id": "IllaoiE",
                     "name": "灵魂试炼",
                     "description": "俄洛伊把灵魂从一名敌人的肉身中扯出，强迫它站在她面前。 灵魂会将其所受的一部分伤害传递到本体上。如果灵魂被击杀，或者本体离灵魂过远，那么本体就会成为一个<font color='#669900'>躯壳</font>并且开始生成触手。",
-                    "tooltip": "俄洛伊从一名敌方英雄身上扯出灵魂，持续{{ spiritduration }}秒。灵魂能像英雄一样被攻击，并且所受的{{ echopercenttooltiponly }}伤害会传递给本体。<br /><br />如果灵魂死亡或者离本体过远，那么目标会被标记{{ vesselduration }}秒，并被<status>减速</status>{{ slowamount*100 }}%，持续{{ slowduration }}秒。被标记的敌人将每<scaleLevel>{{ f1 }}</scaleLevel>秒生成一条触手。<br /><br />触手会每{{ timebetweenvesseltentacleslams }}秒自动<keywordMajor>猛击</keywordMajor>一次灵魂和被标记的敌人。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "俄洛伊从一名敌方英雄身上扯出灵魂，持续{{ spiritduration }}秒。灵魂能像英雄一样被攻击，并且所受的 {{ echopercent }}伤害会传递给本体。<br /><br />如果灵魂死亡或者离本体过远，那么目标会被标记{{ vesselduration }}秒，并被<status>减速</status>{{ slowamount*100 }}%，持续{{ slowduration }}秒。被标记的敌人会尽可能地生成触手。<br /><br />触手会每{{ timebetweenvesseltentacleslams }}秒自动<keywordMajor>猛击</keywordMajor>一次灵魂和被标记的敌人。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害回响",
@@ -399,7 +399,7 @@
                             "@AbilityResourceName@消耗"
                         ],
                         "effect": [
-                            "{{ e1 }}% -> {{ e1NL }}%",
+                            "{{ basedamagetransferpercent*100.000000 }}% -> {{ basedamagetransferpercentnl*100.000000 }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ cost }} -> {{ costNL }}"
                         ]
@@ -425,39 +425,39 @@
                     "effect": [
                         null,
                         [
-                            25,
-                            30,
-                            35,
-                            40,
-                            45
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            10,
-                            10,
-                            10,
-                            10,
-                            10
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            7,
-                            7,
-                            7,
-                            7,
-                            7
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1500,
-                            1500,
-                            1500,
-                            1500,
-                            1500
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5,
-                            1.5
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             3,
@@ -474,11 +474,11 @@
                             0
                         ],
                         [
-                            80,
-                            80,
-                            80,
-                            80,
-                            80
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             8,
@@ -488,8 +488,8 @@
                             8
                         ],
                         [
-                            4,
-                            3,
+                            0,
+                            0,
                             0,
                             0,
                             0
@@ -497,16 +497,16 @@
                     ],
                     "effectBurn": [
                         null,
-                        "25/30/35/40/45",
-                        "10",
-                        "7",
-                        "1500",
-                        "1.5",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
+                        "0",
                         "3",
                         "0",
-                        "80",
+                        "0",
                         "8",
-                        "4/3/0/0/0"
+                        "0"
                     ],
                     "vars": [],
                     "costType": " {{ abilityresourcename }}",

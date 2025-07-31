@@ -13129,7 +13129,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Characters/Warwick/Skins/Skin10/Particles/color-hold.dds",
+                "particleColorTexture": "ASSETS/Characters/Warwick/Skins/Skin10/Particles/color-hold.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -13280,7 +13280,7 @@
                     },
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Warwick/Skins/Skin10/Particles/color-hold.dds",
+                "texture": "ASSETS/Characters/Warwick/Skins/Skin10/Particles/color-hold.tex",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -18045,7 +18045,7 @@
                     -1.0
                 ],
                 "isUniformScale": 1,
-                "texture": "ASSETS/Characters/Warwick/Skins/Skin15/Particles/Warwick_Skin15_Z_Charged.dds",
+                "texture": "ASSETS/Characters/Warwick/Skins/Skin15/Particles/Warwick_Skin15_Z_Charged.tex",
                 "textureMult": {
                     "textureMult": "ASSETS/Characters/TFT4_Warwick/Skins/Base/Particles/TFT4_Warwick_Base_E_Charged_Mult.tex",
                     "__type": "VfxTextureMultDefinitionData"
@@ -18360,6 +18360,20 @@
             }
         ],
         "paramValues": [
+            {
+                "name": "IntensityStrength",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DisableColorCorrect",
+                "__type": "StaticMaterialShaderParamDef"
+            },
             {
                 "name": "Color_Rim",
                 "value": [
@@ -18876,6 +18890,20 @@
                         "__type": "BlendingSwitchMaterialDriver"
                     },
                     "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "DisableColorCorrect",
+                    "driver": {
+                        "value": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "add": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "{5b2fdd66}"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
                 }
             ],
             "__type": "DynamicMaterialDef"
@@ -18898,5 +18926,9 @@
             "TFT4_Warwick_P_haste": "Characters/TFT4_Warwick/Skins/Skin0/Particles/TFT4_Warwick_Base_P_haste"
         },
         "__type": "ResourceResolver"
-    }
+    },
+    "__linked": [
+        "Characters/TFT4_Warwick",
+        "DATA/Characters/TFT4_Warwick/Animations/Skin0.bin"
+    ]
 }

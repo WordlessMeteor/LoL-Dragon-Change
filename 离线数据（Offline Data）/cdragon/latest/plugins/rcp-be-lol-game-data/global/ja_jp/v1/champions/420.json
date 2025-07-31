@@ -4,6 +4,7 @@
     "alias": "Illaoi",
     "title": "海の女司祭",
     "shortBio": "イラオイは頑強な巨体の持ち主だが、その不屈の信仰心はそれ以上に大きい。「大いなるクラーケン」の預言者である彼女は、巨大な黄金の偶像を使って敵の魂を肉体から引き剥がし、現実の知覚を打ち砕く。「ナーガケイボロスの真実の担い手」に挑むものは、すぐさまイラオイは一人で戦っているのではないということを思い知るだろう。そう──サーペントアイルの名状しがたい神が彼女とともにあり、戦うのだということを。",
+    "isVisibleInClient": true,
     "tacticalInfo": {
         "style": 7,
         "difficulty": 2,
@@ -803,7 +804,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "触手の与ダメージが増加する。発動すると、触手を叩きつけて物理ダメージを与える。",
-            "dynamicDescription": "<passive>自動効果:</passive> <keywordMajor>「叩きつけ」</keywordMajor>のダメージが<physicalDamage>@TentacleDamageAmp*100@%</physicalDamage>増加する(現在<physicalDamage>@f1@の物理ダメージ</physicalDamage>)。<br><br><active>発動効果:</active> 偶像を振って、触手が前方に<keywordMajor>「叩きつけ」</keywordMajor>を行う。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<passive>自動効果:</passive> <keywordMajor>「叩きつけ」</keywordMajor>のダメージが<physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage>増加する(現在は<physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@の物理ダメージ</physicalDamage>)。<br><br><active>発動効果:</active> 偶像を振って、触手が前方に<keywordMajor>「叩きつけ」</keywordMajor>を行う。@SpellModifierDescriptionAppend@",
             "range": [
                 850.0,
                 850.0,
@@ -843,22 +844,22 @@
                     10.0
                 ],
                 "Effect2Amount": [
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
                     12.0,
@@ -879,13 +880,13 @@
                     5.0
                 ],
                 "Effect6Amount": [
-                    0.1,
-                    0.1,
-                    0.15,
-                    0.2,
-                    0.25,
-                    0.3,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
                     1.2,
@@ -1103,7 +1104,7 @@
             "cost": "@Cost@@AbilityResourceName@",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "偶像から触手を伸ばし、敵の肉体から魂を引きずり出して、自身の前に立たせる。魂は受けたダメージから一定の割合を、本体に反映させる。魂がキルされるか本体が遠く離れた場合、対象は<font color='#669900'>「器」</font>となり、その周囲に触手が発生するようになる。",
-            "dynamicDescription": "指定方向に偶像から触手をのばし、最初に触れた敵チャンピオンから@SpiritDuration@秒間、魂を引きずり出す。この魂を攻撃すると、魂が受けたダメージのうち@EchoPercentTooltipOnly@が本体に反映される。<br><br>魂が倒されるか対象が魂から遠く離れた場合、対象は@VesselDuration@秒間マークされ、@SlowDuration@秒間@SlowAmount*100@%の<status>スロウ効果</status>を受ける。マークされた敵は<scaleLevel>@f1@</scaleLevel>秒ごとに触手を発生させる。<br><br>触手は@TimeBetweenVesselTentacleSlams@秒ごとに自動的に魂とマークされた敵に<keywordMajor>「叩きつけ」</keywordMajor>を行う。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "イラオイが敵チャンピオンから@SpiritDuration@秒間、魂を引きずり出す。この魂を攻撃すると、魂が受けたダメージのうち@EchoPercent@が本体に反映される。<br><br>魂が倒されるか対象が魂から遠く離れた場合、対象は@VesselDuration@秒間マークされ、@SlowDuration@秒間@SlowAmount*100@%の<status>スロウ状態</status>となる。マークされた敵は、可能であれば触手を発生させる。<br><br>触手は魂とマークされた敵に@TimeBetweenVesselTentacleSlams@秒ごとに自動的に<keywordMajor>「叩きつけ」</keywordMajor>を行う。@SpellModifierDescriptionAppend@",
             "range": [
                 900.0,
                 900.0,
@@ -1129,54 +1130,54 @@
                 11.0
             ],
             "coefficients": {
-                "coefficient1": 0.08,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     3.0,
@@ -1197,13 +1198,13 @@
                     0.0
                 ],
                 "Effect8Amount": [
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     8.0,
@@ -1215,9 +1216,9 @@
                     8.0
                 ],
                 "Effect10Amount": [
-                    5.0,
-                    4.0,
-                    3.0,
+                    0.0,
+                    0.0,
+                    0.0,
                     0.0,
                     0.0,
                     0.0,

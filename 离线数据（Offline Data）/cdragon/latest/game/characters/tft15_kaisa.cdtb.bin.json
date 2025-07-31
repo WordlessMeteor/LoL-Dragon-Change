@@ -1,0 +1,1449 @@
+{
+    "Characters/TFT15_KaiSa/Spells/TFT15_KaiSaBasicAttack": {
+        "ObjectName": "TFT15_KaiSaBasicAttack",
+        "mScriptName": "TFT15_KaiSaBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "KaisaBasicAttack",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "mApplyAttackDamage": true,
+            "bHaveHitEffect": true,
+            "castRange": [
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                554.0999755859375
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "luaOnMissileUpdateDistanceInterval": 51.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mSpeed": 2000.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 8.0,
+            "missileSpeed": 2000.0,
+            "mMissileEffectKey": "TFT15_KaiSa_BA_mis",
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "Root",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT15_KaiSa/Spells/TFT15_KaiSaSpell": {
+        "ObjectName": "TFT15_KaiSaSpell",
+        "mScriptName": "TFT15_KaiSaSpell",
+        "mSpell": {
+            "mAffectsTypeFlags": 14346,
+            "mAffectsStatusFlags": 32,
+            "mDataValues": [
+                {
+                    "mName": "ADDamage",
+                    "mValues": [
+                        0.699999988079071,
+                        35.0,
+                        55.0,
+                        80.0,
+                        105.0,
+                        2.0,
+                        2.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "APDamage",
+                    "mValues": [
+                        8.0,
+                        6.0,
+                        8.0,
+                        14.0,
+                        20.0,
+                        8.0,
+                        8.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "MissilesToFire",
+                    "mValues": [
+                        8.0,
+                        8.0,
+                        8.0,
+                        8.0,
+                        8.0,
+                        8.0,
+                        8.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "PerMissileDelay",
+                    "mValues": [
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ADPerKill",
+                    "mValues": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "TotalDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "StaticTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "ADDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 1.0,
+                                    "mStat": 3,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "APDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "Spell",
+            "mCastTime": 0.25,
+            "cooldownTime": [
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "delayCastOffsetPercent": -0.5,
+            "delayTotalTimePercent": -0.5,
+            "canCastOrQueueWhileCasting": true,
+            "mCantCancelWhileWindingUp": true,
+            "bHaveHitEffect": true,
+            "castRange": [
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "root",
+                    "mSpeed": 3000.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "missileSpeed": 1400.0,
+            "mMissileEffectKey": "Summoner_Snowball_Mis",
+            "mHitEffectOrientType": 0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+            ],
+            "selectionPriority": 2,
+            "mCastingBreaksStealth": true,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT15_KaiSaSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT15_KaiSaSpell_Name",
+                        "keyTooltip": "Spell_TFT15_KaiSaSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "elements": [
+                                {
+                                    "type": "APDamage",
+                                    "nameOverride": "TFT_AP_Damage_NoCalculation",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "ADDamage",
+                                    "nameOverride": "TFT_ADAP_PhysicalDamage",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{a96f3c18}": {
+        "ObjectName": "TFT15_KaiSaSpell_RightMissile2",
+        "mScriptName": "TFT15_KaiSaSpell_RightMissile2",
+        "mSpell": {
+            "flags": 4194304,
+            "mAffectsTypeFlags": 6154,
+            "mEffectAmount": [
+                {
+                    "value": [
+                        0.0,
+                        80.0,
+                        110.0,
+                        140.0,
+                        170.0,
+                        200.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "value": [
+                        0.0,
+                        12.0,
+                        11.0,
+                        10.0,
+                        9.0,
+                        8.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                }
+            ],
+            "mCoefficient": 0.6000000238418579,
+            "mAnimationName": "Spell3",
+            "cooldownTime": [
+                0.0,
+                12.0,
+                11.0,
+                10.0,
+                9.0,
+                8.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "mCantCancelWhileWindingUp": true,
+            "mCantCancelWhileChanneling": true,
+            "mIsDisabledWhileDead": false,
+            "bHaveHitEffect": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mStartBoneName": "R_Buffbone_Engine",
+                    "mTargetBoneName": "C_Buffbone_Glb_Center_Loc",
+                    "mSplineInfo": {
+                        "mControlPoint1": [
+                            2.064129114151001,
+                            0.0,
+                            -0.6813449859619141
+                        ],
+                        "mControlPoint2": [
+                            1.384055733680725,
+                            0.0,
+                            1.5277516841888428
+                        ],
+                        "__type": "HermiteSplineInfo"
+                    },
+                    "mTravelTime": 0.30000001192092896,
+                    "__type": "FixedTimeSplineMovement"
+                },
+                "heightSolver": {
+                    "mAmplitude": 50.0,
+                    "mNumberOfPeriods": 0.699999988079071,
+                    "__type": "SinusoidalHeightSolver"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "{91fd0920}"
+                    },
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 14.800000190734863,
+            "missileSpeed": 3600.0,
+            "mLineWidth": 120.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT15_KaiSa_Q_tar",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_Buffbone_Glb_Center_Loc",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{aa6f3dab}": {
+        "ObjectName": "TFT15_KaiSaSpell_RightMissile3",
+        "mScriptName": "TFT15_KaiSaSpell_RightMissile3",
+        "mSpell": {
+            "flags": 4194304,
+            "mAffectsTypeFlags": 6154,
+            "mEffectAmount": [
+                {
+                    "value": [
+                        0.0,
+                        80.0,
+                        110.0,
+                        140.0,
+                        170.0,
+                        200.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "value": [
+                        0.0,
+                        12.0,
+                        11.0,
+                        10.0,
+                        9.0,
+                        8.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                }
+            ],
+            "mCoefficient": 0.6000000238418579,
+            "mAnimationName": "Spell3",
+            "cooldownTime": [
+                0.0,
+                12.0,
+                11.0,
+                10.0,
+                9.0,
+                8.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "mCantCancelWhileWindingUp": true,
+            "mCantCancelWhileChanneling": true,
+            "mIsDisabledWhileDead": false,
+            "bHaveHitEffect": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 20.0,
+                    "mStartBoneName": "R_Buffbone_Engine",
+                    "mTargetBoneName": "C_Buffbone_Glb_Center_Loc",
+                    "mSplineInfo": {
+                        "mControlPoint1": [
+                            1.3443927764892578,
+                            0.0,
+                            -0.5502891540527344
+                        ],
+                        "mControlPoint2": [
+                            -0.5711554288864136,
+                            0.0,
+                            1.4214903116226196
+                        ],
+                        "__type": "HermiteSplineInfo"
+                    },
+                    "mTravelTime": 0.30000001192092896,
+                    "__type": "FixedTimeSplineMovement"
+                },
+                "heightSolver": {
+                    "mAmplitude": 60.0,
+                    "mNumberOfPeriods": 0.800000011920929,
+                    "__type": "SinusoidalHeightSolver"
+                },
+                "verticalFacing": {
+                    "__type": "VerticalFacingFaceTarget"
+                },
+                "behaviors": [
+                    {
+                        "__type": "{91fd0920}"
+                    },
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 14.800000190734863,
+            "missileSpeed": 1800.0,
+            "mMissileEffectKey": "TFT15_KaiSa_Q_Flashbang_Mis",
+            "mLineWidth": 120.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT15_KaiSa_Q_tar",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_Buffbone_Glb_Center_Loc",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{ac6f40d1}": {
+        "ObjectName": "TFT15_KaiSaSpell_RightMissile1",
+        "mScriptName": "TFT15_KaiSaSpell_RightMissile1",
+        "mSpell": {
+            "flags": 4194304,
+            "mAffectsTypeFlags": 6154,
+            "mEffectAmount": [
+                {
+                    "value": [
+                        0.0,
+                        80.0,
+                        110.0,
+                        140.0,
+                        170.0,
+                        200.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "value": [
+                        0.0,
+                        12.0,
+                        11.0,
+                        10.0,
+                        9.0,
+                        8.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                }
+            ],
+            "mCoefficient": 0.6000000238418579,
+            "mAnimationName": "Spell3",
+            "cooldownTime": [
+                0.0,
+                12.0,
+                11.0,
+                10.0,
+                9.0,
+                8.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "mCantCancelWhileWindingUp": true,
+            "mCantCancelWhileChanneling": true,
+            "mIsDisabledWhileDead": false,
+            "bHaveHitEffect": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mStartBoneName": "R_Buffbone_Engine",
+                    "mTargetBoneName": "C_Buffbone_Glb_Center_Loc",
+                    "mSplineInfo": {
+                        "mControlPoint1": [
+                            0.8228718638420105,
+                            0.0,
+                            -0.2872997522354126
+                        ],
+                        "mControlPoint2": [
+                            -0.8469558954238892,
+                            0.0,
+                            2.1486918926239014
+                        ],
+                        "__type": "HermiteSplineInfo"
+                    },
+                    "mTravelTime": 0.30000001192092896,
+                    "__type": "FixedTimeSplineMovement"
+                },
+                "heightSolver": {
+                    "mAmplitude": 50.0,
+                    "mNumberOfPeriods": 0.699999988079071,
+                    "__type": "SinusoidalHeightSolver"
+                },
+                "verticalFacing": {
+                    "__type": "VerticalFacingFaceTarget"
+                },
+                "behaviors": [
+                    {
+                        "__type": "{91fd0920}"
+                    },
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 14.800000190734863,
+            "missileSpeed": 3600.0,
+            "mMissileEffectKey": "TFT15_KaiSa_Q_Flashbang_Mis",
+            "mLineWidth": 120.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT15_KaiSa_Q_tar",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_Buffbone_Glb_Center_Loc",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT15_KaiSa/Spells/TFT15_KaiSaCritAttack": {
+        "ObjectName": "TFT15_KaiSaCritAttack",
+        "mScriptName": "TFT15_KaiSaCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "KaisaCritAttack",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "bHaveHitEffect": true,
+            "castRange": [
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "luaOnMissileUpdateDistanceInterval": 51.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mSpeed": 2000.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 8.0,
+            "missileSpeed": 2000.0,
+            "mMissileEffectKey": "TFT15_KaiSa_BA_mis",
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "Root",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT15_KaiSa/Spells/TFT15_KaiSaBasicAttack2": {
+        "ObjectName": "TFT15_KaiSaBasicAttack2",
+        "mScriptName": "TFT15_KaiSaBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "KaisaBasicAttack",
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "mApplyAttackDamage": true,
+            "bHaveHitEffect": true,
+            "mUseAutoattackCastTimeData": {
+                "__type": "UseAutoattackCastTimeData"
+            },
+            "castRange": [
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                552.0999755859375,
+                554.0999755859375
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "luaOnMissileUpdateDistanceInterval": 51.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "L_Hand",
+                    "mSpeed": 2000.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 8.0,
+            "missileSpeed": 2000.0,
+            "mMissileEffectKey": "TFT15_KaiSa_BA_mis",
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "Root",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{e7f9c660}": {
+        "ObjectName": "TFT15_KaiSaSpell_LeftMissile3",
+        "mScriptName": "TFT15_KaiSaSpell_LeftMissile3",
+        "mSpell": {
+            "flags": 4194304,
+            "mAffectsTypeFlags": 6154,
+            "mEffectAmount": [
+                {
+                    "value": [
+                        0.0,
+                        80.0,
+                        110.0,
+                        140.0,
+                        170.0,
+                        200.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "value": [
+                        0.0,
+                        12.0,
+                        11.0,
+                        10.0,
+                        9.0,
+                        8.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                }
+            ],
+            "mCoefficient": 0.6000000238418579,
+            "mAnimationName": "Spell3",
+            "cooldownTime": [
+                0.0,
+                12.0,
+                11.0,
+                10.0,
+                9.0,
+                8.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "mCantCancelWhileWindingUp": true,
+            "mCantCancelWhileChanneling": true,
+            "mIsDisabledWhileDead": false,
+            "bHaveHitEffect": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 30.0,
+                    "mStartBoneName": "L_Buffbone_Engine",
+                    "mTargetBoneName": "C_Buffbone_Glb_Center_Loc",
+                    "mSplineInfo": {
+                        "mControlPoint1": [
+                            -1.5712682008743286,
+                            0.0,
+                            -0.6178234815597534
+                        ],
+                        "mControlPoint2": [
+                            0.9185358285903931,
+                            0.0,
+                            1.42377507686615
+                        ],
+                        "__type": "HermiteSplineInfo"
+                    },
+                    "mTravelTime": 0.30000001192092896,
+                    "__type": "FixedTimeSplineMovement"
+                },
+                "heightSolver": {
+                    "mAmplitude": 60.0,
+                    "mNumberOfPeriods": 0.800000011920929,
+                    "__type": "SinusoidalHeightSolver"
+                },
+                "verticalFacing": {
+                    "__type": "VerticalFacingFaceTarget"
+                },
+                "behaviors": [
+                    {
+                        "__type": "{91fd0920}"
+                    },
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 14.800000190734863,
+            "missileSpeed": 3600.0,
+            "mMissileEffectKey": "TFT15_KaiSa_Q_Flashbang_Mis",
+            "mLineWidth": 120.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT15_KaiSa_Q_tar",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_Buffbone_Glb_Center_Loc",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{e8f9c7f3}": {
+        "ObjectName": "TFT15_KaiSaSpell_LeftMissile2",
+        "mScriptName": "TFT15_KaiSaSpell_LeftMissile2",
+        "mSpell": {
+            "flags": 4194304,
+            "mAffectsTypeFlags": 6154,
+            "mEffectAmount": [
+                {
+                    "value": [
+                        0.0,
+                        80.0,
+                        110.0,
+                        140.0,
+                        170.0,
+                        200.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "value": [
+                        0.0,
+                        12.0,
+                        11.0,
+                        10.0,
+                        9.0,
+                        8.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                }
+            ],
+            "mCoefficient": 0.6000000238418579,
+            "mAnimationName": "Spell3",
+            "cooldownTime": [
+                0.0,
+                12.0,
+                11.0,
+                10.0,
+                9.0,
+                8.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "mCantCancelWhileWindingUp": true,
+            "mCantCancelWhileChanneling": true,
+            "mIsDisabledWhileDead": false,
+            "bHaveHitEffect": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 25.0,
+                    "mStartBoneName": "L_Buffbone_Engine",
+                    "mTargetBoneName": "C_Buffbone_Glb_Center_Loc",
+                    "mSplineInfo": {
+                        "mControlPoint1": [
+                            -1.544555902481079,
+                            0.0,
+                            -0.4418768286705017
+                        ],
+                        "mControlPoint2": [
+                            -1.13383948802948,
+                            0.0,
+                            1.1535013914108276
+                        ],
+                        "__type": "HermiteSplineInfo"
+                    },
+                    "mTravelTime": 0.30000001192092896,
+                    "__type": "FixedTimeSplineMovement"
+                },
+                "heightSolver": {
+                    "mAmplitude": -60.0,
+                    "mNumberOfPeriods": 0.30000001192092896,
+                    "__type": "SinusoidalHeightSolver"
+                },
+                "verticalFacing": {
+                    "__type": "VerticalFacingFaceTarget"
+                },
+                "behaviors": [
+                    {
+                        "__type": "{91fd0920}"
+                    },
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 14.800000190734863,
+            "missileSpeed": 3600.0,
+            "mMissileEffectKey": "TFT15_KaiSa_Q_Flashbang_Mis",
+            "mLineWidth": 120.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT15_KaiSa_Q_tar",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_Buffbone_Glb_Center_Loc",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{e9f9c986}": {
+        "ObjectName": "TFT15_KaiSaSpell_LeftMissile1",
+        "mScriptName": "TFT15_KaiSaSpell_LeftMissile1",
+        "mSpell": {
+            "flags": 4194304,
+            "mAffectsTypeFlags": 6154,
+            "mEffectAmount": [
+                {
+                    "value": [
+                        0.0,
+                        80.0,
+                        110.0,
+                        140.0,
+                        170.0,
+                        200.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "value": [
+                        0.0,
+                        12.0,
+                        11.0,
+                        10.0,
+                        9.0,
+                        8.0,
+                        0.0
+                    ],
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                },
+                {
+                    "__type": "SpellEffectAmount"
+                }
+            ],
+            "mCoefficient": 0.6000000238418579,
+            "mAnimationName": "Spell3",
+            "cooldownTime": [
+                0.0,
+                12.0,
+                11.0,
+                10.0,
+                9.0,
+                8.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "mCantCancelWhileWindingUp": true,
+            "mCantCancelWhileChanneling": true,
+            "mIsDisabledWhileDead": false,
+            "bHaveHitEffect": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0,
+                210.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mStartBoneName": "L_Buffbone_Engine",
+                    "mTargetBoneName": "C_Buffbone_Glb_Center_Loc",
+                    "mSplineInfo": {
+                        "mControlPoint1": [
+                            -1.171246886253357,
+                            -0.49999988079071045,
+                            -0.5080956220626831
+                        ],
+                        "mControlPoint2": [
+                            0.08420729637145996,
+                            -0.9999997615814209,
+                            1.268193244934082
+                        ],
+                        "__type": "HermiteSplineInfo"
+                    },
+                    "mTravelTime": 0.30000001192092896,
+                    "__type": "FixedTimeSplineMovement"
+                },
+                "heightSolver": {
+                    "mAmplitude": 50.0,
+                    "mNumberOfPeriods": 0.699999988079071,
+                    "__type": "SinusoidalHeightSolver"
+                },
+                "verticalFacing": {
+                    "__type": "VerticalFacingFaceTarget"
+                },
+                "behaviors": [
+                    {
+                        "__type": "{91fd0920}"
+                    },
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 14.800000190734863,
+            "missileSpeed": 3600.0,
+            "mMissileEffectKey": "TFT15_KaiSa_Q_Flashbang_Mis",
+            "mLineWidth": 120.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT15_KaiSa_Q_tar",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_Buffbone_Glb_Center_Loc",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT15_KaiSa/CharacterRecords/Root": {
+        "mCharacterName": "TFT15_KaiSa",
+        "baseHP": 550.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 220.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 50.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 45.0,
+        "baseArmor": 25.0,
+        "baseSpellBlock": 25.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 890.0,
+        "attackSpeed": 0.699999988079071,
+        "attackSpeedRatio": 0.699999988079071,
+        "basicAttack": {
+            "mAttackName": "TFT15_KaiSaBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT15_KaiSaBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT15_KaiSaCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT15_KaiSaSpell",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "Characters/TFT15_KaiSa/Spells/TFT15_KaiSaSpell",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446656,
+        "tier": 2,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{2ed020ac}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{1f20af6a}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{34ed6daa}",
+        "mMoveInterval": -0.10000000149011612,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mShopData": "{a3f22e4d}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "Characters/TFT15_KaiSa/Skins/Meta": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "__linked": []
+}

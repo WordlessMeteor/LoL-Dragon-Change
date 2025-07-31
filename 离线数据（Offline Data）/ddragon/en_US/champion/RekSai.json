@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.14.1",
+    "version": "15.15.1",
     "data": {
         "RekSai": {
             "id": "RekSai",
@@ -84,8 +84,8 @@
                 "mp": 100,
                 "mpperlevel": 0,
                 "movespeed": 340,
-                "armor": 36,
-                "armorperlevel": 4.95,
+                "armor": 35,
+                "armorperlevel": 4.5,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 175,
@@ -252,10 +252,12 @@
                     "leveltip": {
                         "label": [
                             "Unburrow Damage",
+                            "Knock Up Immunity",
                             "Burrowed Move Speed"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ knockupimmunity }} -> {{ knockupimmunityNL }}",
                             "{{ burrowedmovespeed }} -> {{ burrowedmovespeedNL }}"
                         ]
                     },
@@ -287,11 +289,11 @@
                             1500
                         ],
                         [
-                            50,
-                            85,
-                            120,
-                            155,
-                            190
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -353,7 +355,7 @@
                     "effectBurn": [
                         null,
                         "1500",
-                        "50/85/120/155/190",
+                        "0",
                         "0",
                         "0",
                         "1",
@@ -389,28 +391,30 @@
                     "id": "RekSaiE",
                     "name": "Furious Bite / Tunnel",
                     "description": "Rek'Sai bites her target, dealing bonus damage if she has max Fury.<br><br>While Burrowed, Rek'Sai creates a re-usable, long lasting tunnel. Enemies can destroy it by standing on top of either entrance.",
-                    "tooltip": "<scaleAD>Unburrowed:</scaleAD> Rek'Sai bites a target, dealing <physicalDamage>{{ spell.reksaie:basedamagetooltip }} physical damage</physicalDamage>. At max <keywordMajor>Fury</keywordMajor>, the bite deals an additional <physicalDamage>{{ spell.reksaie:furymaxhealthdamage*100 }}% max Health physical damage</physicalDamage>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>Unburrowed:</keywordMajor> Rek'Sai bites a target, dealing <physicalDamage>{{ spell.reksaie:basedamage }} physical damage</physicalDamage>. At max <keywordMajor>Fury</keywordMajor>, the bite deals <trueDamage>{{ spell.reksaie:empowereddamage }} true damage</trueDamage> instead.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "Max Health %",
+                            "Base Damage",
+                            "Empowered Damage",
                             "Tunnel Cast Cooldown",
                             "Tunnel Use Cooldown"
                         ],
                         "effect": [
-                            "{{ furymaxhealthdamage*100.000000 }}% -> {{ furymaxhealthdamagenl*100.000000 }}%",
+                            "{{ empoweredbasedamage*0.800000 }} -> {{ empoweredbasedamagenl*0.800000 }}",
+                            "{{ empoweredbasedamage }} -> {{ empoweredbasedamageNL }}",
                             "{{ dashcooldown }} -> {{ dashcooldownNL }}",
                             "{{ tunnelreusecooldown }} -> {{ tunnelreusecooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        10,
-                        10,
-                        10,
-                        10,
-                        10
+                        6,
+                        6,
+                        6,
+                        6,
+                        6
                     ],
-                    "cooldownBurn": "10",
+                    "cooldownBurn": "6",
                     "cost": [
                         0,
                         0,
@@ -531,27 +535,27 @@
                 {
                     "id": "RekSaiR",
                     "name": "Void Rush",
-                    "description": "Rek'Sai passively marks targets by damaging them. She can activate this ability to become briefly untargetable and lunge at a marked target for heavy damage based on their missing health.",
-                    "tooltip": "Rek'Sai targets an enemy damaged by her in the last {{ preymarkduration }} seconds and then dives underground, becoming Untargetable. Moments later, she leaps unstoppably at her target, dealing <physicalDamage>{{ rbasedamagecalc }} plus {{ percentmissinghealthdamage }}% missing Health physical damage</physicalDamage>.{{ spellmodifierdescriptionappend }}",
+                    "description": "Rek'Sai passively marks targets by damaging them. She can activate this ability to become briefly untargetable and lunge at a marked target for heavy damage based on their maximum health.",
+                    "tooltip": "Rek'Sai targets an enemy damaged by her in the last {{ preymarkduration }} seconds and then dives underground, becoming Untargetable. Moments later, she leaps unstoppably at her target, dealing <physicalDamage>{{ rbasedamagecalc }} plus {{ percenthealthdamage }}% max Health physical damage</physicalDamage>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
-                            "Percent Missing Health Damage",
+                            "% Health damage",
                             "Cooldown"
                         ],
                         "effect": [
                             "{{ rbasedamage }} -> {{ rbasedamageNL }}",
-                            "{{ percentmissinghealthdamage }} -> {{ percentmissinghealthdamageNL }}",
+                            "{{ percenthealthdamage }}% -> {{ percenthealthdamageNL }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 3,
                     "cooldown": [
+                        120,
                         100,
-                        90,
                         80
                     ],
-                    "cooldownBurn": "100/90/80",
+                    "cooldownBurn": "120/100/80",
                     "cost": [
                         0,
                         0,

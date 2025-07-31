@@ -149,7 +149,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "texture": "ASSETS/Characters/Udyr/Skins/Skin05/Particles/Udyr_Skin05_Glow2.dds",
+                "texture": "ASSETS/Characters/Udyr/Skins/Skin05/Particles/Udyr_Skin05_Glow2.tex",
                 "__type": "VfxEmitterDefinitionData"
             },
             {
@@ -524,6 +524,20 @@
             }
         ],
         "paramValues": [
+            {
+                "name": "IntensityStrength",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DisableColorCorrect",
+                "__type": "StaticMaterialShaderParamDef"
+            },
             {
                 "name": "Color_Rim",
                 "value": [
@@ -1040,6 +1054,20 @@
                         "__type": "BlendingSwitchMaterialDriver"
                     },
                     "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "DisableColorCorrect",
+                    "driver": {
+                        "value": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "add": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "{5b2fdd66}"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
                 }
             ],
             "__type": "DynamicMaterialDef"
@@ -1051,5 +1079,9 @@
             "TFT5_Udyr_TurtleIdle": "Characters/TFT5_Udyr/Skins/Skin0/Particles/TFT5_Udyr_Base_TurtleIdle"
         },
         "__type": "ResourceResolver"
-    }
+    },
+    "__linked": [
+        "DATA/Characters/TFT5_Udyr/Animations/Skin0.bin",
+        "Characters/TFT5_Udyr"
+    ]
 }

@@ -4,6 +4,7 @@
     "alias": "Illaoi",
     "title": "นักบวชหญิงคราเค่น",
     "shortBio": "สิ่งเดียวที่เหนือกว่าร่างกายอันทรงพลังของ Illaoi ก็คือศรัทธาอันแรงกล้าของนาง Illaoi คือศาสดาพยากรณ์แห่งเทพีคราเคน นางใช้รูปปั้นหัวงูทองคำขนาดใหญ่ดึงจิตวิญญาณของศัตรูออกจากร่างแล้วทำลายการรับรู้ความจริงของพวกเขา ใครก็ตามที่ท้าทาย \"ผู้กุมสัจธรรมแห่ง Nagakabouros\" ในไม่ช้าก็จะพบว่า Illaoi นั้นไม่เคยต่อสู้เพียงลำพัง แต่มีเทพแห่งหมู่เกาะอสรพิษต่อสู้อยู่เคียงข้างนางเสมอ",
+    "isVisibleInClient": true,
     "tacticalInfo": {
         "style": 7,
         "difficulty": 2,
@@ -803,7 +804,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ วินาที %i:cooldown%",
             "description": "เพิ่มความเสียหายที่สร้างโดยหนวดหมึก และเมื่อกดใช้ Illaoi จะทำการฟาดลงมาด้วยหนวดหมึก ซึ่งจะสร้างความเสียหายกายภาพให้แก่ศัตรู",
-            "dynamicDescription": "<passive>ติดตัว:</passive> ความเสียหายของการ<keywordMajor>ฟาด</keywordMajor>จะเพิ่มขึ้น <physicalDamage>@TentacleDamageAmp*100@%</physicalDamage> (<physicalDamage>ความเสียหายกายภาพ @f1@ หน่วย</physicalDamage>ในปัจจุบัน)<br><br><active>กดใช้:</active> Illaoi เหวี่ยงเทวรูป ทำให้หนวดหมึก<keywordMajor>ฟาด</keywordMajor>ลงมาด้านหน้า@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<passive>ติดตัว:</passive> ความเสียหายของการ<keywordMajor>ฟาด</keywordMajor>จะเพิ่มขึ้น <physicalDamage>@spell.IllaoiQ:TentacleDamageAmp*100@%</physicalDamage><br>(ในตอนนี้ <physicalDamage>ความเสียหายกายภาพ @spell.IllaoiQ:TentacleDamageTotal@ หน่วย</physicalDamage>)<br><br><active>กดใช้:</active> Illaoi เหวี่ยงเทวรูป ทำให้หนวดหมึก<keywordMajor>ฟาด</keywordMajor>ลงมาด้านหน้า@SpellModifierDescriptionAppend@",
             "range": [
                 850.0,
                 850.0,
@@ -843,22 +844,22 @@
                     10.0
                 ],
                 "Effect2Amount": [
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
                     12.0,
@@ -879,13 +880,13 @@
                     5.0
                 ],
                 "Effect6Amount": [
-                    0.1,
-                    0.1,
-                    0.15,
-                    0.2,
-                    0.25,
-                    0.3,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
                     1.2,
@@ -1103,7 +1104,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ วินาที %i:cooldown%",
             "description": "Illaoi กระชากวิญญาณออกจากร่างศัตรู แล้วบังคับให้มายืนอยู่ตรงหน้าเธอ โดยวิญญาณจะส่งความเสียหายที่ได้รับไปหาร่างจริง ถ้าหากวิญญาณถูกทำลาย หรือเป้าหมายออกห่างจากระยะของวิญญาณ เป้าหมายจะกลายเป็น<font color='#669900'>ร่างทรง</font> และเริ่มทำให้หนวดหมึกออกมาใกล้ ๆ",
-            "dynamicDescription": "Illaoi ดึงวิญญาณออกจากแชมเปี้ยนศัตรูเป็นเวลา @SpiritDuration@ วินาที วิญญาณจะสามารถถูกโจมตีได้ปกติเหมือนแชมเปี้ยน @EchoPercentTooltipOnly@ จากความเสียหายที่ได้รับจะถูกส่งต่อไปยังเจ้าของ<br><br>หากวิญญาณตายหรือเป้าหมายออกจะระยะของมัน เป้าหมายจะถูกทำเครื่องหมายไว้เป็นเวลา @VesselDuration@ วินาที และถูก<status>สโลว์</status> @SlowAmount*100@% เป็นเวลา @SlowDuration@ วินาที ศัตรูที่ถูกทำเครื่องหมายจะให้กำเนิดหนวดหมึก ทุก&nbsp;ๆ <scaleLevel>@f1@</scaleLevel> วินาที<br><br>หนวดหมึกจะ<keywordMajor>ฟาด</keywordMajor>ลงไปยังวิญญาณและศัตรูที่ถูกทำเครื่องหมายเอาไว้ทุก ๆ @TimeBetweenVesselTentacleSlams@ วินาที@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Illaoi ดึงวิญญาณออกจากแชมเปี้ยนศัตรูเป็นเวลา @SpiritDuration@ วินาที วิญญาณสามารถได้รับความเสียหายเหมือนกับแชมเปี้ยน โดย @EchoPercent@ ของความเสียหายที่เกิดขึ้น จะถูกส่งต่อไปยังเจ้าของวิญญาณ<br><br>หากวิญญาณตายหรือเป้าหมายออกจะระยะของมัน เป้าหมายจะถูกทำเครื่องหมายไว้เป็นเวลา @VesselDuration@&nbsp;วินาที และถูก<status>สโลว์</status> @SlowAmount*100@% เป็นเวลา @SlowDuration@ วินาที ศัตรูที่ถูกทำเครื่องหมายจะสร้างหนวดหมึกขึ้นมาหากทำได้<br><br>หนวดหมึกจะ<keywordMajor>ฟาด</keywordMajor>ใส่วิญญาณและศัตรูที่ถูกทำเครื่องหมายเอาไว้โดยอัตโนมัติทุก ๆ @TimeBetweenVesselTentacleSlams@ วินาที@SpellModifierDescriptionAppend@",
             "range": [
                 900.0,
                 900.0,
@@ -1129,54 +1130,54 @@
                 11.0
             ],
             "coefficients": {
-                "coefficient1": 0.08,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     3.0,
@@ -1197,13 +1198,13 @@
                     0.0
                 ],
                 "Effect8Amount": [
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     8.0,
@@ -1215,9 +1216,9 @@
                     8.0
                 ],
                 "Effect10Amount": [
-                    5.0,
-                    4.0,
-                    3.0,
+                    0.0,
+                    0.0,
+                    0.0,
                     0.0,
                     0.0,
                     0.0,

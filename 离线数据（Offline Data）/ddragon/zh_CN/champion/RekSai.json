@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.14.1",
+    "version": "15.15.1",
     "data": {
         "RekSai": {
             "id": "RekSai",
@@ -84,8 +84,8 @@
                 "mp": 100,
                 "mpperlevel": 0,
                 "movespeed": 340,
-                "armor": 36,
-                "armorperlevel": 4.95,
+                "armor": 35,
+                "armorperlevel": 4.5,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
                 "attackrange": 175,
@@ -252,10 +252,12 @@
                     "leveltip": {
                         "label": [
                             "破土而出 伤害",
+                            "击飞免疫",
                             "遁地  移动速度"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ knockupimmunity }} -> {{ knockupimmunityNL }}",
                             "{{ burrowedmovespeed }} -> {{ burrowedmovespeedNL }}"
                         ]
                     },
@@ -287,11 +289,11 @@
                             1500
                         ],
                         [
-                            50,
-                            85,
-                            120,
-                            155,
-                            190
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -353,7 +355,7 @@
                     "effectBurn": [
                         null,
                         "1500",
-                        "50/85/120/155/190",
+                        "0",
                         "0",
                         "0",
                         "1",
@@ -389,28 +391,30 @@
                     "id": "RekSaiE",
                     "name": "狂野之噬 / 挖掘隧道",
                     "description": "雷克塞噬咬她的目标，可在满怒时造成额外伤害。<br><br>在地底时，雷克塞挖掘出一个可重复使用、长期存在的隧道。敌人可以通过踩在任一入口上来摧毁整条隧道。",
-                    "tooltip": "<scaleAD>位于地表：</scaleAD>雷克塞撕咬一个目标，造成<physicalDamage>{{ spell.reksaie:basedamagetooltip }}物理伤害</physicalDamage>。在满额<keywordMajor>怒气</keywordMajor>时，这次撕咬会造成额外的<physicalDamage>{{ spell.reksaie:furymaxhealthdamage*100 }}%最大生命值物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "<keywordMajor>位于地表：</keywordMajor>雷克塞撕咬一个目标，造成<physicalDamage>{{ spell.reksaie:basedamage }}物理伤害</physicalDamage>。在满额<keywordMajor>怒气</keywordMajor>时，这次撕咬会转而造成<trueDamage>{{ spell.reksaie:empowereddamage }}真实伤害</trueDamage>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "最大生命值百分比",
+                            "基础伤害",
+                            "强化伤害",
                             "隧道施放 冷却时间",
                             "隧道使用 冷却时间"
                         ],
                         "effect": [
-                            "{{ furymaxhealthdamage*100.000000 }}% -> {{ furymaxhealthdamagenl*100.000000 }}%",
+                            "{{ empoweredbasedamage*0.800000 }} -> {{ empoweredbasedamagenl*0.800000 }}",
+                            "{{ empoweredbasedamage }} -> {{ empoweredbasedamageNL }}",
                             "{{ dashcooldown }} -> {{ dashcooldownNL }}",
                             "{{ tunnelreusecooldown }} -> {{ tunnelreusecooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        10,
-                        10,
-                        10,
-                        10,
-                        10
+                        6,
+                        6,
+                        6,
+                        6,
+                        6
                     ],
-                    "cooldownBurn": "10",
+                    "cooldownBurn": "6",
                     "cost": [
                         0,
                         0,
@@ -531,27 +535,27 @@
                 {
                     "id": "RekSaiR",
                     "name": "虚空猛冲",
-                    "description": "雷克塞可通过伤害目标来将其标记。她可以激活这个技能，暂时变成不可被选取状态，并扑向一个被标记的目标，并基于其已损失生命值造成重度伤害。",
-                    "tooltip": "雷克塞将一个在之前的{{ preymarkduration }}秒内被她造成过伤害的敌人选为目标，随后会遁入地下，变得无法被选取。片刻之后，她会不可阻挡地跃向目标，造成<physicalDamage>{{ rbasedamagecalc }}加上{{ percentmissinghealthdamage }}%已损失生命值的物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
+                    "description": "雷克塞对目标造成伤害即可将其标记。她可以激活这个技能，暂时变成不可被选取状态，并扑向一个被标记的目标，并基于其最大生命值造成大量伤害。",
+                    "tooltip": "雷克塞将一个之前{{ preymarkduration }}秒内被她造成过伤害的敌人选为目标，随后遁入地下，进入不可选取状态。片刻之后，她会不可阻挡地跃向目标，造成<physicalDamage>{{ rbasedamagecalc }}加上{{ percenthealthdamage }}%最大生命值的物理伤害</physicalDamage>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "百分比已损失生命值伤害",
+                            "%生命值伤害",
                             "冷却时间"
                         ],
                         "effect": [
                             "{{ rbasedamage }} -> {{ rbasedamageNL }}",
-                            "{{ percentmissinghealthdamage }} -> {{ percentmissinghealthdamageNL }}",
+                            "{{ percenthealthdamage }}% -> {{ percenthealthdamageNL }}%",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 3,
                     "cooldown": [
+                        120,
                         100,
-                        90,
                         80
                     ],
-                    "cooldownBurn": "100/90/80",
+                    "cooldownBurn": "120/100/80",
                     "cost": [
                         0,
                         0,

@@ -4,9 +4,10 @@
     "alias": "RekSai",
     "title": "地底の恐怖",
     "shortBio": "頂点捕食者であるレク＝サイは地中を移動し、獲物を奇襲して貪り食う無情なヴォイドの生物だ。かつて栄華を誇ったシュリーマ帝国があった一帯は、今や彼女の飽くなき食欲の犠牲となって荒廃している。行商や貿易商、武装隊商ですら、彼女とその子供たちの狩場を避けるために、わざわざ数百キロもの回り道をする。地平線にレク＝サイの姿が見えた時、足元から訪れる死から逃れられる者はいない。",
+    "isVisibleInClient": true,
     "tacticalInfo": {
         "style": 4,
-        "difficulty": 2,
+        "difficulty": 3,
         "damageType": "kPhysical",
         "attackType": "melee"
     },
@@ -19,7 +20,7 @@
     },
     "championTagInfo": {
         "championTagPrimary": "機動性",
-        "championTagSecondary": "デュエリスト"
+        "championTagSecondary": "ダイブ"
     },
     "squarePortraitPath": "/lol-game-data/assets/v1/champion-icons/421.png",
     "stingerSfxPath": "/lol-game-data/assets/v1/champion-sfx-audios/421.ogg",
@@ -938,13 +939,13 @@
                     1500.0
                 ],
                 "Effect2Amount": [
-                    50.0,
-                    50.0,
-                    85.0,
-                    120.0,
-                    155.0,
-                    190.0,
-                    190.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
                     0.0,
@@ -1048,7 +1049,7 @@
             "cost": "コスト無し",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
             "description": "対象に噛み付く。この時「フューリー」が最大なら追加ダメージを与える。<br><br>「潜伏」を発動すると、長時間持続し、何度も使用することができるトンネルを作る。敵は、このトンネルの開口部の上に立つことで、これを崩壊させることができる。",
-            "dynamicDescription": "<scaleAD>地上出現中:</scaleAD> 指定した対象に噛み付き、<physicalDamage>@spell.RekSaiE:BaseDamageTooltip@の物理ダメージ</physicalDamage>を与える。<keywordMajor>フューリー</keywordMajor>が最大の場合は、追加で<physicalDamage>最大体力の@spell.RekSaiE:FuryMaxHealthDamage*100@%にあたる物理ダメージ</physicalDamage>を与える。@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<keywordMajor>地上出現中:</keywordMajor> 指定した対象に噛み付き、<physicalDamage>@spell.RekSaiE:BaseDamage@の物理ダメージ</physicalDamage>を与える。<keywordMajor>「フューリー」</keywordMajor>が最大の場合は、代わりに<trueDamage>@spell.RekSaiE:EmpoweredDamage@の確定ダメージ</trueDamage>を与える。@SpellModifierDescriptionAppend@",
             "range": [
                 250.0,
                 250.0,
@@ -1066,12 +1067,12 @@
                 0.0
             ],
             "cooldownCoefficients": [
-                10.0,
-                10.0,
-                10.0,
-                10.0,
-                10.0,
-                10.0
+                6.0,
+                6.0,
+                6.0,
+                6.0,
+                6.0,
+                6.0
             ],
             "coefficients": {
                 "coefficient1": 0.0,
@@ -1197,8 +1198,8 @@
             "abilityVideoImagePath": "champion-abilities/0421/ability_0421_R1.jpg",
             "cost": "コスト無し",
             "cooldown": "@Cooldown@秒 %i:cooldown%",
-            "description": "ダメージを与えた対象を自動的にマークする。このスキルを発動させると、少しの間対象指定不可になり、マークした対象に突進して、相手の減少体力に応じた大ダメージを与える。",
-            "dynamicDescription": "発動直前の@PreyMarkDuration@秒前までに自身がダメージを与えた敵1体に狙いを定め、地中に潜って対象指定不可状態になる。その後、少ししてから対象に向かって阻止不能状態でリープし、<physicalDamage>@RBaseDamageCalc@(+減少体力の@PercentMissingHealthDamage@%)の物理ダメージ</physicalDamage>を与える。@SpellModifierDescriptionAppend@",
+            "description": "ダメージを与えた対象を自動的にマークする。このスキルを発動させると、少しの間対象指定不可になり、マークした対象に突進して、相手の最大体力に応じた大ダメージを与える。",
+            "dynamicDescription": "@PreyMarkDuration@秒前までに自身がダメージを与えた敵1体に狙いを定め、地中に潜って対象指定不可状態になる。その後、少ししてから対象に向かって阻止不能状態でリープし、<physicalDamage>@RBaseDamageCalc@に最大体力の@PercentHealthDamage@%を加えた物理ダメージ</physicalDamage>を与える。@SpellModifierDescriptionAppend@",
             "range": [
                 1500.0,
                 1500.0,
@@ -1216,8 +1217,8 @@
                 0.0
             ],
             "cooldownCoefficients": [
+                120.0,
                 100.0,
-                90.0,
                 80.0,
                 80.0,
                 80.0,
@@ -1225,7 +1226,7 @@
             ],
             "coefficients": {
                 "coefficient1": 0.0,
-                "coefficient2": 2.0
+                "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [

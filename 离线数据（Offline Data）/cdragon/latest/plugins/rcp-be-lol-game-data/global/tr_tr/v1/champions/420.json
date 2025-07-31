@@ -4,6 +4,7 @@
     "alias": "Illaoi",
     "title": "Ruhani Rehber",
     "shortBio": "Illaoi'nin cüssesini gölgede bırakabilecek bir şey varsa, o da sarsılmaz inancıdır. Büyük Kraken'in elçisi olarak kullandığı devasa, altın idolle rakiplerinin ruhlarını bedenlerinden koparıp alır ve gerçeklik algılarını yerle bir eder. ''Nagakabouros'un Sözcüsü''ne meydan okuyanlar, çok geçmeden Illaoi'nin hiçbir zaman yalnız dövüşmediğini görür; zira Yılan Adalar'ın ilahı her daim onunla omuz omuza çarpışır.",
+    "isVisibleInClient": true,
     "tacticalInfo": {
         "style": 7,
         "difficulty": 2,
@@ -803,7 +804,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sn. %i:cooldown%",
             "description": "Dokunaçların verdiği hasarı arttırır. Etkinleştirildiğinde, Illaoi fiziksel hasar veren bir Dokunaç ile darbe indirir.",
-            "dynamicDescription": "<passive>Pasif:</passive> <keywordMajor>Darbe</keywordMajor> hasarı <physicalDamage>%@TentacleDamageAmp*100@</physicalDamage> artar (şu anda <physicalDamage>@f1@ Fiziksel Hasar</physicalDamage>).<br><br><active>Aktif:</active> Illaoi idolünü savurarak bir dokunacın ileri <keywordMajor>Darbe</keywordMajor> indirmesini sağlar.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "<passive>Pasif:</passive> <keywordMajor>Darbe</keywordMajor> hasarı <physicalDamage>%@spell.IllaoiQ:TentacleDamageAmp*100@</physicalDamage> artar (Mevcut: <physicalDamage>@spell.IllaoiQ:TentacleDamageTotal@ Fiziksel Hasar</physicalDamage>).<br><br><active>Aktif:</active> Illaoi idolünü savurarak bir dokunacın ileri <keywordMajor>Darbe</keywordMajor> indirmesini sağlar.@SpellModifierDescriptionAppend@",
             "range": [
                 850.0,
                 850.0,
@@ -843,22 +844,22 @@
                     10.0
                 ],
                 "Effect2Amount": [
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0,
-                    200.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0,
-                    800.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
                     12.0,
@@ -879,13 +880,13 @@
                     5.0
                 ],
                 "Effect6Amount": [
-                    0.1,
-                    0.1,
-                    0.15,
-                    0.2,
-                    0.25,
-                    0.3,
-                    0.35
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect7Amount": [
                     1.2,
@@ -1103,7 +1104,7 @@
             "cost": "@Cost@ @AbilityResourceName@",
             "cooldown": "@Cooldown@ sn. %i:cooldown%",
             "description": "Illaoi rakibinin bedeninden söküp aldığı ruhu, önünde durmaya zorlar. Ruhlar, aldıkları hasarın belli bir oranını asıl hedefe yansıtır. Ruh katledilir ya da asıl hedef ruhtan fazla uzaklaşırsa, asıl hedef <font color='#669900'>Kabuk</font> haline gelir ve Dokunaçlar ortaya çıkarmaya başlar.",
-            "dynamicDescription": "Illaoi bir rakip şampiyonun ruhunu @SpiritDuration@ saniyeliğine söküp alır. Ruh bir şampiyonmuşçasına hasar görebilir ve aldığı hasarın %@EchoPercentTooltipOnly@ kadarını sahibine yansıtır.<br><br>Ruh katledilir veya asıl hedef ruhun menzili dışına çıkarsa, asıl hedef @VesselDuration@ saniyeliğine işaretlenir ve @SlowDuration@ saniyeliğine %@SlowAmount*100@ <status>yavaşlar</status>. İşaretlenen rakipler her <scaleLevel>@f1@</scaleLevel> saniyede bir dokunaç ortaya çıkarır.<br><br>Dokunaçlar otomatik olarak her @TimeBetweenVesselTentacleSlams@ saniyede bir ruhlara ve işaretlenmiş rakiplere <keywordMajor>Darbe</keywordMajor> indirir.@SpellModifierDescriptionAppend@",
+            "dynamicDescription": "Illaoi bir rakip şampiyonun ruhunu @SpiritDuration@ saniyeliğine söküp alır. Ruh bir şampiyonmuşçasına hasar görebilir ve aldığı hasarın @EchoPercent@ kadarını sahibine yansıtır.<br><br>Ruh katledilir veya hedef ruhun menzili dışına çıkarsa hedef @VesselDuration@ saniyeliğine işaretlenir ve @SlowDuration@ saniyeliğine %@SlowAmount*100@ <status>yavaşlar</status>. İşaretlenen rakipler mümkünse dokunaç ortaya çıkarır.<br><br>Dokunaçlar otomatik olarak her @TimeBetweenVesselTentacleSlams@ saniyede bir ruhlara ve işaretlenmiş rakiplere <keywordMajor>Darbe</keywordMajor> indirir.@SpellModifierDescriptionAppend@",
             "range": [
                 900.0,
                 900.0,
@@ -1129,54 +1130,54 @@
                 11.0
             ],
             "coefficients": {
-                "coefficient1": 0.08,
+                "coefficient1": 0.0,
                 "coefficient2": 0.0
             },
             "effectAmounts": {
                 "Effect1Amount": [
-                    20.0,
-                    25.0,
-                    30.0,
-                    35.0,
-                    40.0,
-                    45.0,
-                    50.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect2Amount": [
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0,
-                    10.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect3Amount": [
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0,
-                    7.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect4Amount": [
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0,
-                    1500.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect5Amount": [
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5,
-                    1.5
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect6Amount": [
                     3.0,
@@ -1197,13 +1198,13 @@
                     0.0
                 ],
                 "Effect8Amount": [
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0,
-                    80.0
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "Effect9Amount": [
                     8.0,
@@ -1215,9 +1216,9 @@
                     8.0
                 ],
                 "Effect10Amount": [
-                    5.0,
-                    4.0,
-                    3.0,
+                    0.0,
+                    0.0,
+                    0.0,
                     0.0,
                     0.0,
                     0.0,

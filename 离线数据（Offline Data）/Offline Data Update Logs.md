@@ -5777,5 +5777,27 @@
 					</ul>
 			</td>
 		</tr>
+		<tr>
+			<td style="text-align:center;">2025-07-31 14-36-42</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.14.697.2104 -> 15.15.699.7589</li>
+					</ul>
+				DDragon: 15.14.1 -> 15.15.1
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-07-31 14-36-47</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.14.697.2104 -> 15.15.699.7589</li>
+					</ul>
+				DDragon: 15.14.1 -> 15.15.1
+			</td>
+		</tr>
 	</tbody>
 </table>
