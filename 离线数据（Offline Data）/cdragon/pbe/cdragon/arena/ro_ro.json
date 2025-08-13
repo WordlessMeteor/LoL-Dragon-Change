@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Primești runele esențiale <spellName>''Ploaie de tăișuri''</spellName> și <spellName>''Asalt neîntrerupt''</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Cerber",
+            "rarity": 2,
+            "tooltip": "Primești runele esențiale <spellName>''Ploaie de tăișuri''</spellName> și <spellName>''Asalt neîntrerupt''</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Temnicerul luminii",
             "rarity": 1,
             "tooltip": "La fiecare @Cooldown@ secunde, <keywordMajor>lansezi automat</keywordMajor> o lumină protectoare spre aliatul tău. Tu și aliații tăi prin care trece lumina primiți un <shield>scut de @TotalShield@</shield>. Apoi lumina revine, repetând efectul și la întoarcere."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Cerință: poartă @QuestThreshold@ pălării deodată.<br><br>Recompensă: primești <scaleAF>@AFPerHat@ forță adaptivă</scaleAF>, @ArmorMRPerHat@ <scaleArmor>armură</scaleArmor> și <scaleMR>rezistență la magie</scaleMR>, @TenacityPerHat*100@% tenacitate și <speed>@MSPerHat@ viteză de mișcare</speed> per pălărie.<br><br><rules>Când pierzi o rundă, pierzi jumătate din pălării.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Misiune: Pălărierul nebun",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Acum oferă: <scaleAF>@f1@ forță adaptivă</scaleAF>, @f2@ <scaleArmor>armură</scaleArmor> și <scaleMR>rezistență la magie</scaleMR>, @f3*100@% tenacitate și <speed>@f4@ viteză de mișcare</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@% din daunele suferite de tine sunt provocate în schimb de-a lungul a @BleedDuration@ secunde (@RangedReduction*100@% pentru campionii care atacă la distanță)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Crești daunele provocate de augmentările și obiectele tale cu @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Putere augmentată",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Creștere daune în această rundă: @f1@<br>Creștere daune în total: @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Primești ''Sufletul Dragonului oceanelor'', oferindu-ți regenerare crescută a <healing>vieții</healing> și <scaleMana>manei</scaleMana> după ce le provoci daune inamicilor.<br><br>Vindecare efectuată în această rundă: @f1@<br>Vindecare efectuată în total: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Când folosești o năpustire, o deplasare instantanee sau o teleportare, primești un <shield>scut</shield> timp de @ShieldDuration@ secunde. Acest scut le este oferit și aliaților prin care treci. Puterea <shield>scutului</shield> depinde de timpii de reactivare de bază ai abilităților tale la nivelul 1.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Gardă de corp",
+            "rarity": 1,
+            "tooltip": "Când folosești o năpustire, o deplasare instantanee sau o teleportare, primești un <shield>scut în valoare de @MinShieldPerLevel@, valoare ce crește până la @MaxShieldPerLevel@</shield>, în funcție de timpii de reactivare de bază ai abilităților la nivelul 1, timp de @ShieldDuration@ secunde. Acest scut le este oferit și aliaților prin care treci.<br><br><rules>Scuturile ating valoarea maximă în cazul abilităților cu un timp de reactivare de cel puțin @MaxCDCheck@ sec.</rules><br><br>Daune prevenite în această rundă: @f1@<br>Daune prevenite în total: @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Năpustirile, săriturile, deplasările instantanee și teleportările lasă în urmă o dâră care se detonează după 1 secundă.",
+            "desc": "Năpustirile, deplasările instantanee și teleportările lasă în urmă o dâră care se detonează după 1 secundă.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "În fiecare rundă, aceasta suferă o mutație într-una dintre augmentările aliatului tău, selectată aleatoriu. <br><br><rules>Se transformă doar în augmentări pe care le-ai putea alege.</rules>",
+            "desc": "În fiecare rundă, aceasta suferă o <keyword>mutație</keyword> într-una dintre augmentările aliatului tău.<br><br><rules>Se transformă doar în augmentări pe care le-ai putea alege.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Mutație simbiotică",
             "rarity": 1,
-            "tooltip": "În fiecare rundă, aceasta suferă o mutație într-una dintre augmentările aliatului tău, selectată aleatoriu. <br><br><rules>Se transformă doar în augmentări pe care le-ai putea alege.</rules>"
+            "tooltip": "În fiecare rundă, aceasta suferă o <keyword>mutație</keyword> într-una dintre augmentările aliatului tău.<br><br><rules>Se transformă doar în augmentări pe care le-ai putea alege.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Corp ceresc",
             "rarity": 1,
             "tooltip": "Primești <scaleHealth>@Health@ viață</scaleHealth>, dar provoci cu @DamageReduction*100@% mai puține daune."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Crești ofertele viitoare de augmentări cu @tierValueIncrease@ categorie. Dacă augmentările erau deja prismatice, primești @GoldAmount@ aur bonus.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Cel mai curajos dintre curajoși",
+            "rarity": 0,
+            "tooltip": "Crești ofertele viitoare de augmentări cu @tierValueIncrease@ categorie. Dacă augmentările erau deja prismatice, primești @GoldAmount@ aur bonus."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Revărsare",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Vrăjile tale care necesită <scaleMana>mană</scaleMana> costă dublu. <healing>Vindecările</healing>, <shield>scuturile</shield> și daunele abilității tale sunt cu <scaleMana>@ManaCalc@</scaleMana> mai eficiente."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "După folosirea năpustirilor, săriturilor, deplasărilor instantanee și teleportărilor, primești <scaleArmor>@ResistsPerStack@ armură</scaleArmor> și <scaleMR>rezistență la magie</scaleMR>, până la @MaxResistTooltipOnly@ la @MaxStacks@ cumuluri.",
+            "desc": "După folosirea năpustirilor, a deplasărilor instantanee și a teleportărilor, primești <scaleArmor>@ResistsPerStack@ armură</scaleArmor> și <scaleMR>rezistență la magie</scaleMR>, până la @MaxResistTooltipOnly@ la @MaxStacks@ cumuluri.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "De netrecut",
             "rarity": 1,
             "tooltip": "Primești runele esențiale <spellName>''Replică''</spellName> și <spellName>''Augmentare glacială''</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Toate augmentările tale se transformă în augmentări prismatice aleatorii.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Cutia Pandorei",
+            "rarity": 2,
+            "tooltip": "Toate augmentările tale se transformă în augmentări prismatice aleatorii."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "La fiecare @TickCadence@ sec., primești @CurseStacksPerTick@ <keywordMajor>putere blestemată</keywordMajor> per campion inamic din apropiere.<br><br>Primești <scaleHealth>@f1@ viață</scaleHealth> (@MaxHealthRatio*100@% din <keywordMajor>puterea blestemată</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 4.0
+            },
+            "desc": "Nu mai poți reîncărca.<br><br>Selectezi o augmentare aurie. Dacă ai consumat cel puțin @PrismaticThreshold@ augmentări, îmbunătățești selecția într-una prismatică.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Risc calculat",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Primești @SizeIncrement*100@% creștere în dimensiune și <scaleHealth>@MaxHPIncrement*100@% viață maximă</scaleHealth> per doborâre.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Motor de tanc",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Primești @SizeIncrement*100@% creștere în dimensiune și <scaleHealth>@f2@ viață bonus</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> per doborâre).<br><br>Doborâri: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "În fiecare rundă, aceasta suferă o mutație într-una dintre augmentările inamicului tău, selectată aleatoriu.<br><br><rules>Se transformă doar în augmentări pe care le-ai putea alege.</rules>",
+            "desc": "În fiecare rundă, aceasta suferă o <keyword>mutație</keyword> într-una dintre augmentările inamicului tău.<br><br><rules>Se transformă doar în augmentări pe care le-ai putea alege.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Mutație parazitară",
             "rarity": 0,
-            "tooltip": "În fiecare rundă, aceasta suferă o mutație într-una dintre augmentările inamicului tău, selectată aleatoriu."
+            "tooltip": "În fiecare rundă, aceasta suferă o <keyword>mutație</keyword> într-una dintre augmentările inamicului tău.<br><br><rules>Se transformă doar în augmentări pe care le-ai putea alege.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Primești instantaneu @HatsToGrant@ pălării, iar prețul ''Sucului Cappa'' scade cu @HatTrickPriceReduction@.<br><br>Când suferi daune care ți-ar reduce nivelul de viață sub @LowHealthThreshold*100@%, primești <speed>@MoveSpeedBoostPercent*100@% viteză de mișcare</speed> și un <shield>scut de @ShieldHealth@</shield> timp de @ShieldDuration@, dar pierzi o pălărie. Timp de reactivare: @Cooldown@: sec.",
+            "desc": "Primești instantaneu @HatsToGrant@ pălării, iar prețul ''Sucului Cappa'' scade cu @HatTrickPriceReduction@.<br>Când suferi daune care ți-ar reduce nivelul de viață sub @LowHealthThreshold*100@%, primești <speed>@MoveSpeedBoostPercent*100@% viteză de mișcare</speed> și un <shield>scut de @ShieldHealth@</shield> timp de @ShieldDuration@, dar pierzi o pălărie. Timp de reactivare: @Cooldown@: sec.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Pălării magice",
             "rarity": 1,
-            "tooltip": "Primești instantaneu @HatsToGrant@ pălării, iar prețul ''Sucului Cappa'' scade cu @HatTrickPriceReduction@.<br><br>Când suferi daune care ți-ar reduce nivelul de viață sub @LowHealthThreshold*100@%, primești <speed>@MoveSpeedBoostPercent*100@% viteză de mișcare</speed> și un <shield>scut de @ShieldHealth@</shield> timp de @ShieldDuration@, dar pierzi o pălărie. Timp de reactivare: @Cooldown@: sec."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Nu mai pierzi pălării când mori.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "Creezi un laser în direcția în care privești, provocând <magicDamage>@LaserEyesTooltip@ daune magice</magicDamage> pe secundă.<br><br>Daune provocate în această rundă: @f1@<br>Daune provocate în total: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Primești puterea vindecărilor și a scuturilor, valoare ce crește când ai viața scăzută. Când îți folosești suprema, dublezi puterea vindecărilor și a scuturilor.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Infuzie spirituală",
+            "rarity": 0,
+            "tooltip": "Primești <healing>@FlatHS*100@% putere a vindecărilor și a scuturilor</healing>.<br><br>Când îți folosești suprema, crești <healing>puterea vindecărilor și a scuturilor</healing> cu @AmpAmount*100@% timp de @HSDuration@ sec. (timp de reactivare: @Cooldown@ sec.)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "''Fuga invocatorului'' este înlocuită cu <spellName>''Chemarea sorții''</spellName>.<br><br><rules><spellName>''Chemarea sorții''</spellName> îți face partenerul imposibil de țintit timp de până la 4 secunde. Partenerul se poate auto-lansa, <status>aruncând în spate</status> inamicii.</rules><br>",
+            "desc": "''Fuga invocatorului'' este înlocuită cu <spellName>''Chemarea sorții''</spellName>.<br><br><rules><spellName>''Chemarea sorții''</spellName> îți face aliatul imposibil de țintit timp de până la 4 secunde. Aliatul tău se poate lansa, <status>aruncând în spate</status> inamicii.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Legământ sufletesc",
             "rarity": 1,
-            "tooltip": "''Fuga invocatorului'' este înlocuită cu <spellName>''Chemarea sorții''</spellName>.<br><br><rules><spellName>''Chemarea sorții''</spellName> îți face partenerul imposibil de țintit timp de până la 4 secunde. Partenerul se poate auto-lansa, <status>aruncând în spate</status> inamicii.</rules><br>"
+            "tooltip": "''Fuga invocatorului'' este înlocuită cu <spellName>''Chemarea sorții''</spellName>.<br><br><rules><spellName>''Chemarea sorții''</spellName> îți face aliatul imposibil de țintit timp de până la 4 secunde. Aliatul tău se poate lansa, <status>aruncând în spate</status> inamicii.</rules>"
         },
         {
             "apiName": "Flashbang",

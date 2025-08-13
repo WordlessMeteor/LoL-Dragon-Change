@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Damage Dealt this round: @f1@<br>Damage Dealt total: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Gain the <spellName>Hail of Blades</spellName> and <spellName>Press the Attack</spellName> Keystone Runes.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Cerberus",
+            "rarity": 2,
+            "tooltip": "Gain the <spellName>Hail of Blades</spellName> and <spellName>Press the Attack</spellName> Keystone Runes."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Light Warden",
             "rarity": 1,
             "tooltip": "Every @Cooldown@ seconds, <keywordMajor>Autocast</keywordMajor> a warding light towards your ally, granting <shield>@TotalShield@ Shield</shield> to yourself and allies it passes through. It then returns, repeating the effect on its return."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Requirement: Wear @QuestThreshold@ hats at once.<br><br>Reward: Gain <scaleAF>@AFPerHat@ Adaptive Force</scaleAF>, @ArmorMRPerHat@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, @TenacityPerHat*100@% Tenacity, and <speed>@MSPerHat@ Movement Speed</speed> per hat.<br><br><rules>Lose half of your hats when you lose a round.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Quest: Mad Hatter",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Currently Granting: <scaleAF>@f1@ Adaptive Force</scaleAF>, @f2@ <scaleArmor>Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR>, @f3*100@% Tenacity, and <speed>@f4@ Movement Speed</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@% of damage you take instead happens over @BleedDuration@ seconds (@RangedReduction*100@% for ranged champions)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Increase the damage done by your augments and items by @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Augmented Power",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Damage increase this round: @f1@<br>Total damage increased: @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Gain the Ocean Soul, granting high <healing>Health</healing> and <scaleMana>Mana</scaleMana> regen after damaging enemies.<br><br>Healing Done This Round: @f1@<br>Healing Done Total: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Using a dash, blink, or teleport grants yourself a <shield>shield</shield> for @ShieldDuration@ seconds, this shield is also granted to any allies you pass through. The strength of this <shield>shield</shield> depends on your abilities base cooldown at level 1.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Bodyguard",
+            "rarity": 1,
+            "tooltip": "Using a dash, blink, or teleport grants yourself a <shield>@MinShieldPerLevel@ shield, increased up to @MaxShieldPerLevel@</shield> based on the abilities base cooldown at level 1, lasting for @ShieldDuration@ seconds, this shield is also granted to any allies you pass through.<br><br><rules>Shields reach their maximum on abilities with at least a @MaxCDCheck@ second cooldown.</rules><br><br>Damage prevented this round: @f1@<br>Total damage prevented: @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Your dash, leap, blink, or teleport Abilities leave behind a trail that detonates after 1 second.",
+            "desc": "Your dash, blink, or teleport Abilities leave behind a trail that detonates after 1 second.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Every round this mutates into one of your ally's Augments, randomly selected. <br><br><rules>Only mutates into Augments you could roll.</rules>",
+            "desc": "Every round this <keyword>mutates</keyword> into one of your ally's augments.<br><br><rules>Only mutates into augments you could roll.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Symbiotic Mutation",
             "rarity": 1,
-            "tooltip": "Every round this mutates into one of your ally's Augments, randomly selected. <br><br><rules>Only mutates into Augments you could roll.</rules>"
+            "tooltip": "Every round this <keyword>mutates</keyword> into one of your ally's augments.<br><br><rules>Only mutates into augments you could roll.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Celestial Body",
             "rarity": 1,
             "tooltip": "Gain <scaleHealth>@Health@ Health</scaleHealth>, but you deal @DamageReduction*100@% less damage."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Increase future augment offerings by @tierValueIncrease@ tier. If the augments were already Prismatic tier, gain a bonus @GoldAmount@ gold.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Bravest of the Brave",
+            "rarity": 0,
+            "tooltip": "Increase future augment offerings by @tierValueIncrease@ tier. If the augments were already Prismatic tier, gain a bonus @GoldAmount@ gold."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Overflow",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Your <scaleMana>Mana</scaleMana> costs double. Your Ability <healing>Heals</healing>, <shield>Shields</shield>, and damage are <scaleMana>@ManaCalc@</scaleMana> more effective."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "After using a dash, leap, blink, or teleport Ability you gain <scaleArmor>@ResistsPerStack@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> up to @MaxResistTooltipOnly@ at @MaxStacks@ stacks.",
+            "desc": "After using a dash, blink, or teleport you gain <scaleArmor>@ResistsPerStack@ Armor</scaleArmor> and <scaleMR>Magic Resist</scaleMR> up to @MaxResistTooltipOnly@ at @MaxStacks@ stacks.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Impassable",
             "rarity": 1,
             "tooltip": "Gain the <spellName>Aftershock</spellName> and <spellName>Glacial Augment</spellName> Keystone Runes."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Transmute all of your augments into random Prismatic augments.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Pandora's Box",
+            "rarity": 2,
+            "tooltip": "Transmute all of your augments into random Prismatic augments."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Every @TickCadence@ second, gain @CurseStacksPerTick@ <keywordMajor>Cursed Power</keywordMajor> per nearby enemy champion.<br><br>Gain <scaleHealth>@f1@ Health</scaleHealth> (@MaxHealthRatio*100@% of your <keywordMajor>Cursed Power</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 4.0
+            },
+            "desc": "You can no longer reroll.<br><br>Select a Gold Augment, if at least @PrismaticThreshold@ rerolls were consumed, empower this to select a Prismatic Augment instead.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Calculated Risk",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Gain @SizeIncrement*100@% increase in size and <scaleHealth>@MaxHPIncrement*100@% max Health</scaleHealth> per takedown.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Tank Engine",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Gain @SizeIncrement*100@% increase in size and <scaleHealth>@f2@ Bonus Health</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> per takedown).<br><br>Takedowns: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Every round this mutates into one of your opponent's Augments, randomly selected.<br><br><rules>Only mutates into Augments you could roll.</rules>",
+            "desc": "Every round this <keyword>mutates</keyword> into one of your opponent's augments.<br><br><rules>Only mutates into augments you could roll.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Parasitic Mutation",
             "rarity": 0,
-            "tooltip": "Every round this mutates into one of your opponent's Augments, randomly selected."
+            "tooltip": "Every round this <keyword>mutates</keyword> into one of your opponent's augments.<br><br><rules>Only mutates into augments you could roll.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Instantly gain @HatsToGrant@ hats, and reduce the price of Cappa Juice by @HatTrickPriceReduction@.<br><br>Taking damage that would reduce your Health below @LowHealthThreshold*100@% gain <speed>@MoveSpeedBoostPercent*100@% Move Speed</speed> and a <shield>@ShieldHealth@ shield</shield> for @ShieldDuration@, but lose one hat. @Cooldown@ second Cooldown.",
+            "desc": "Instantly gain @HatsToGrant@ hats, and reduce the price of Cappa Juice by @HatTrickPriceReduction@.<br>Taking damage that would reduce your Health below @LowHealthThreshold*100@% gain <speed>@MoveSpeedBoostPercent*100@% Move Speed</speed> and a <shield>@ShieldHealth@ shield</shield> for @ShieldDuration@, but lose one hat. @Cooldown@ second Cooldown.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Hat Trick",
             "rarity": 1,
-            "tooltip": "Instantly gain @HatsToGrant@ hats, and reduce the price of Cappa Juice by @HatTrickPriceReduction@.<br><br>Taking damage that would reduce your Health below @LowHealthThreshold*100@% gain <speed>@MoveSpeedBoostPercent*100@% Move Speed</speed> and a <shield>@ShieldHealth@ shield</shield> for @ShieldDuration@, but lose one hat. @Cooldown@ second Cooldown."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>You no longer lose hats on death.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "There is a laser in the direction you are facing that deals <magicDamage>@LaserEyesTooltip@ magic damage</magicDamage> per second.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Gain Heal and Shield Power, increased when low Health. On Ultimate cast, double your Heal and Shield Power.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Spirit Infusion",
+            "rarity": 0,
+            "tooltip": "Gain <healing>@FlatHS*100@% Heal and Shield Power</healing>.<br><br>On Ultimate cast, increase your <healing>Heal and Shield Power</healing> by @AmpAmount*100@% for @HSDuration@s(@Cooldown@s cooldown)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Replace Summoner Flee with <spellName>Fate's Call</spellName>.<br><br><rules><spellName>Fate's Call</spellName> making your partner Untargetable for up to 4 seconds. The partner can launch themself out, <status>Knocking Back</status> enemies.</rules><br>",
+            "desc": "Replace Summoner Flee with <spellName>Fate's Call</spellName>.<br><br><rules><spellName>Fate's Call</spellName> making your ally Untargetable for up to 4 seconds. your ally can launch themself out, <status>Knocking Back</status> enemies.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Oathsworn",
             "rarity": 1,
-            "tooltip": "Replace Summoner Flee with <spellName>Fate's Call</spellName>.<br><br><rules><spellName>Fate's Call</spellName> making your partner Untargetable for up to 4 seconds. The partner can launch themself out, <status>Knocking Back</status> enemies.</rules><br>"
+            "tooltip": "Replace Summoner Flee with <spellName>Fate's Call</spellName>.<br><br><rules><spellName>Fate's Call</spellName> making your ally Untargetable for up to 4 seconds. your ally can launch themself out, <status>Knocking Back</status> enemies.</rules>"
         },
         {
             "apiName": "Flashbang",

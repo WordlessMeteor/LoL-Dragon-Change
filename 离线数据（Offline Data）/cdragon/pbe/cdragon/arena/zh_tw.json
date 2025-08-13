@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "獲得<spellName>刀鋒之雹</spellName>及<spellName>強攻</spellName>關鍵符文。",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "地獄三頭犬",
+            "rarity": 2,
+            "tooltip": "獲得<spellName>刀鋒之雹</spellName>及<spellName>強攻</spellName>關鍵符文。"
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "光之守衛",
             "rarity": 1,
             "tooltip": "每@Cooldown@秒，<keywordMajor>自動朝友軍施放</keywordMajor>一道守護之光，賦予自身與穿過的友軍<shield>@TotalShield@護盾</shield>。然後守護之光會折返，重複發動效果。"
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "資格：一次裝備@QuestThreshold@頂帽子。<br><br>獎勵：每頂帽子賦予<scaleAF>@AFPerHat@適性之力</scaleAF>，@ArmorMRPerHat@ <scaleArmor>物防</scaleArmor>及<scaleMR>魔防</scaleMR>，@TenacityPerHat*100@%韌性及<speed>@MSPerHat@跑速</speed>。<br><br><rules>當回合落敗時會失去半數帽子。</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "任務：瘋狂帽匠",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>目前增加量：每頂帽子賦予<scaleAF>@f1@適性之力</scaleAF>，@f2@ <scaleArmor>物防</scaleArmor>及<scaleMR>魔防</scaleMR>，@f3*100@%韌性及<speed>@f4@跑速</speed>。"
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@%受到的傷害會在@BleedDuration@秒內發生(遠程英雄為@RangedReduction*100@%)。"
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "增幅裝置及道具造成的傷害提升@DamageAmp@。",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "增幅之力",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>本回合提升的傷害：@f1@<br>提升總傷害：@f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "獲得海洋之魂，對敵軍造成傷害後可增加大量<healing>生命</healing>及<scaleMana>魔力</scaleMana>回復。<br><br>本回合治療量：@f1@<br>總治療量：@f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "使用衝刺、閃現或傳送時，會賦予自身持續@ShieldDuration@秒的<shield>護盾</shield>，移動時穿越的所有友軍也會獲得相同護盾。此<shield>護盾</shield>的強度取決於你1級時技能的基礎冷卻時間。",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "保鑣",
+            "rarity": 1,
+            "tooltip": "使用衝刺、閃現或傳送時，會賦予自身持續@ShieldDuration@秒的<shield>@MinShieldPerLevel@護盾，護盾最大值為@MaxShieldPerLevel@</shield>，強度取決於你技能1級時的基礎冷卻時間，移動時穿越的所有友軍也會獲得相同護盾。<br><br><rules>技能的冷卻時間低於@MaxCDCheck@秒，護盾就會達到最大值。</rules><br><br>本回合阻擋傷害：@f1@<br>總阻擋傷害：@f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "施放衝刺、跳躍、閃現或傳送技能後會留下軌跡，軌跡會在1秒後引爆。",
+            "desc": "施放衝刺、閃現或傳送技能後會留下軌跡，軌跡會在1秒後引爆。",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "每回合隨機突變為你友軍的一件增幅裝置。<br><br><rules>只會突變為能夠刷新到的增幅裝置。</rules>",
+            "desc": "每回合<keyword>突變</keyword>為友軍的一件增幅裝置。<br><br><rules>只會突變為能夠刷新到的增幅裝置。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "共生突變",
             "rarity": 1,
-            "tooltip": "每回合隨機突變為你友軍的一件增幅裝置。<br><br><rules>只會突變為能夠刷新到的增幅裝置。</rules>"
+            "tooltip": "每回合<keyword>突變</keyword>為友軍的一件增幅裝置。<br><br><rules>只會突變為能夠刷新到的增幅裝置。</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "天界之身",
             "rarity": 1,
             "tooltip": "增加<scaleHealth>@Health@生命</scaleHealth>，但造成的傷害降低@DamageReduction*100@%。"
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "提升未來增幅裝置祭品階級@tierValueIncrease@級。若增幅裝置已為稜鏡級，則獲得額外@GoldAmount@金錢。",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "勇者中的勇者",
+            "rarity": 0,
+            "tooltip": "提升未來增幅裝置祭品階級@tierValueIncrease@級。若增幅裝置已為稜鏡級，則獲得額外@GoldAmount@金錢。"
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "溢流",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "技能的<scaleMana>魔力</scaleMana>消耗加倍。技能的<healing>治療</healing>、<shield>護盾</shield>及傷害效果增強<scaleMana>@ManaCalc@</scaleMana>。"
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "使用衝刺、跳躍、閃現或傳送技能後，增加<scaleArmor>@ResistsPerStack@物防</scaleArmor>和<scaleMR>魔防</scaleMR>，達@MaxStacks@層時，最高可達@MaxResistTooltipOnly@。",
+            "desc": "使用衝刺、閃現或傳送後，增加<scaleArmor>@ResistsPerStack@物防</scaleArmor>和<scaleMR>魔防</scaleMR>，達@MaxStacks@層時，最高可達@MaxResistTooltipOnly@。",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "不可通行",
             "rarity": 1,
             "tooltip": "獲得<spellName>裂地衝擊</spellName>與<spellName>冰川增幅</spellName>關鍵符文。"
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "將所有的增幅裝置物轉化為隨機稜鏡增幅裝置。",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "潘朵拉的寶盒",
+            "rarity": 2,
+            "tooltip": "將所有的增幅裝置物轉化為隨機稜鏡增幅裝置。"
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "每@TickCadence@秒從每位鄰近敵方英雄身上獲得@CurseStacksPerTick@<keywordMajor>詛咒之力</keywordMajor>。<br><br>增加<scaleHealth>@f1@生命</scaleHealth>(相當於自身@MaxHealthRatio*100@%<keywordMajor>詛咒之力</keywordMajor>)。<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 4.0
+            },
+            "desc": "你無法再進行重抽。<br><br>選擇一件金級增幅裝置；若已花費至少@PrismaticThreshold@次重抽，則可升級為選擇一件稜鏡級增幅裝置。",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "風險計算",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "每次參與擊殺，體型增加@SizeIncrement*100@%並獲得<scaleHealth>@MaxHPIncrement*100@%最大生命</scaleHealth>。",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "坦克引擎",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "體型增加@SizeIncrement*100@%，增加<scaleHealth>@f2@額外生命</scaleHealth>(每次參與擊殺增加<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth>)。<br><br>參與擊殺：@f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "每回合隨機突變為你對手的一件增幅裝置。<br><br><rules>只會突變為能夠刷新到的增幅裝置。</rules>",
+            "desc": "每回合<keyword>突變</keyword>為對手的一件增幅裝置。<br><br><rules>只會突變為能夠刷新到的增幅裝置。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "寄生突變",
             "rarity": 0,
-            "tooltip": "每回合隨機突變為你對手的一件增幅裝置。"
+            "tooltip": "每回合<keyword>突變</keyword>為對手的一件增幅裝置。<br><br><rules>只會突變為能夠刷新到的增幅裝置。</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "立即獲得@HatsToGrant@頂帽子，並降低帽帽果汁的價格@HatTrickPriceReduction@。<br><br>受到會將你的生命降至@LowHealthThreshold*100@%以下的傷害時，獲得<speed>@MoveSpeedBoostPercent*100@%跑速</speed>和一個持續@ShieldDuration@秒的<shield>@ShieldHealth@護盾</shield>，但失去一頂帽子。冷卻時間@Cooldown@秒。",
+            "desc": "立即獲得@HatsToGrant@頂帽子，並降低帽帽果汁的價格@HatTrickPriceReduction@。<br>受到會將你的生命降至@LowHealthThreshold*100@%以下的傷害時，獲得<speed>@MoveSpeedBoostPercent*100@%跑速</speed>和一道持續@ShieldDuration@秒的<shield>@ShieldHealth@護盾</shield>，但失去一頂帽子。冷卻時間@Cooldown@秒。",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "帽子戲法",
             "rarity": 1,
-            "tooltip": "立即獲得@HatsToGrant@頂帽子，並降低帽帽果汁的價格@HatTrickPriceReduction@。<br><br>受到會將你的生命降至@LowHealthThreshold*100@%以下的傷害時，獲得<speed>@MoveSpeedBoostPercent*100@%跑速</speed>和一個持續@ShieldDuration@秒的<shield>@ShieldHealth@護盾</shield>，但失去一頂帽子。冷卻時間@Cooldown@秒。"
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>死亡時不再失去帽子。</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "你會對面對的方向發射雷射，每秒造成<magicDamage>@LaserEyesTooltip@魔法傷害</magicDamage>。<br><br>本回合造成傷害：@f1@<br>總輸出傷害：@f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "生命值過低時可提升治療和護盾量。施放大絕時治療和護盾量翻倍。",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "靈魂注入",
+            "rarity": 0,
+            "tooltip": "增加<healing>@FlatHS*100@%治療與護盾量</healing>。<br><br>施放大絕時<healing>治療和護盾量</healing> 提升@AmpAmount*100@%，持續@HSDuration@秒（@Cooldown@秒冷卻時間）。"
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "將召喚師技能「逃亡」換為「<spellName>命運呼喚</spellName>」。<br><br><rules>「<spellName>命運呼喚</spellName>」使你的搭檔進入無法被指定的狀態，最多持續4秒。搭檔可以將自己投射出去，<status>擊退</status>敵軍。</rules><br>",
+            "desc": "將召喚師技能「逃亡」換為「<spellName>命運呼喚</spellName>」。<br><br><rules><spellName>命運呼喚</spellName>使友軍進入無法被指定的狀態，最多持續4秒。友軍可釋放自身，<status>擊退</status>敵軍。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "血誓同盟",
             "rarity": 1,
-            "tooltip": "將召喚師技能「逃亡」換為「<spellName>命運呼喚</spellName>」。<br><br><rules>「<spellName>命運呼喚</spellName>」使你的搭檔進入無法被指定的狀態，最多持續4秒。搭檔可以將自己投射出去，<status>擊退</status>敵軍。</rules><br>"
+            "tooltip": "將召喚師技能「逃亡」換為「<spellName>命運呼喚</spellName>」。<br><br><rules><spellName>命運呼喚</spellName>使友軍進入無法被指定的狀態，最多持續4秒。友軍可釋放自身，<status>擊退</status>敵軍。</rules>"
         },
         {
             "apiName": "Flashbang",

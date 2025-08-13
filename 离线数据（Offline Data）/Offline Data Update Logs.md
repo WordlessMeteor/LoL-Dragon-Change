@@ -5980,5 +5980,26 @@
 			<td style="text-align:center;">CDragon: 4/2/1</td>
 			<td>No changes</td>
 		</tr>
+		<tr>
+			<td style="text-align:center;">2025-08-13 12-58-35</td>
+			<td style="text-align:center;">CDragon: 1/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>Latest: 15.15.701.6241 -> 15.16.702.7993</li>
+						<li>PBE: 15.16.702.7993 -> 15.17.703.8394</li>
+					</ul>
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align:center;">2025-08-13 12-58-43</td>
+			<td style="text-align:center;">CDragon: 4/2/1</td>
+			<td>
+				CDragon: <br>
+					<ul style="list-style-type: disc; margin-left: 20px;">
+						<li>PBE: 15.16.702.7993 -> 15.17.703.8394</li>
+					</ul>
+			</td>
+		</tr>
 	</tbody>
 </table>

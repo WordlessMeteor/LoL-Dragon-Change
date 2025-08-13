@@ -4,6 +4,16 @@
         "championSkinName": "XayahSkin06",
         "skinParent": 4,
         "metaDataTags": "faction:ionia,gender:female,race:vastaya,thememusic:starguardian2019,skinline:starguardian",
+        "{c3a944e7}": {
+            "{7dd33afb}": 14,
+            "{a2cb8e03}": {
+                "riot": 1
+            },
+            "{c19c58be}": {
+                "riot": "chroma_description_498006"
+            },
+            "__type": "{e7ee4f28}"
+        },
         "loadscreen": {
             "image": "ASSETS/Characters/Xayah/Skins/Skin04/XayahLoadscreen_4.tex",
             "__type": "CensoredImage"
@@ -319,7 +329,7 @@
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 },
                 {
-                    "material": "Characters/Xayah/Skins/Skin6/Materials/HomeguardWings_inst",
+                    "material": "Characters/Xayah/Skins/Skin6/Materials/AlphaBlend_Additive_Scroll_Packed_inst",
                     "submesh": "Ult_Wing_Mat",
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 },
@@ -866,35 +876,45 @@
         },
         "__type": "StaticMaterialDef"
     },
-    "Characters/Xayah/Skins/Skin6/Materials/HomeguardWings_inst": {
-        "name": "Characters/Xayah/Skins/Skin6/Materials/HomeguardWings_inst",
+    "Characters/Xayah/Skins/Skin6/Materials/AlphaBlend_Additive_Scroll_Packed_inst": {
+        "name": "Characters/Xayah/Skins/Skin6/Materials/AlphaBlend_Additive_Scroll_Packed_inst",
         "samplerValues": [
             {
+                "textureName": "MatCap_Tex",
+                "texturePath": "ASSETS/Shared/Materials/white.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "MatCap_Mask",
+                "texturePath": "ASSETS/Shared/Materials/white.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
                 "textureName": "Diffuse_Texture",
+                "texturePath": "ASSETS/Characters/Xayah/Skins/Skin04/Xayah_Skin04_Mask.tex",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Main_Texture",
                 "texturePath": "ASSETS/Characters/Xayah/Skins/Skin06/Xayah_Skin06_Ult_Wing_TX_CM.tex",
-                "addressU": 1,
-                "addressV": 1,
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "Bottom_Texture",
-                "texturePath": "ASSETS/Characters/Xayah/Skins/Skin04/Particles/Xayah_Skin04_Dance_Einstein_01_mult.tex",
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "textureName": "Alpha_Mask",
+                "textureName": "OutlineMask_Texture",
                 "texturePath": "ASSETS/Characters/Xayah/Skins/Skin04/Particles/Xayah_Skin04_Homeguard_Wings_Alpha.tex",
-                "addressW": 1,
+                "addressU": 2,
+                "addressV": 2,
+                "addressW": 2,
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
             {
-                "name": "Bloom_Intensity",
+                "name": "VColor_G_Mask_Discard_Size",
                 "value": [
-                    4.0,
+                    100.0,
                     0.0,
                     0.0,
                     0.0
@@ -902,7 +922,21 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Bottom_Texture_Scale",
+                "name": "VColor_G_Mask_Discard_Value",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "VColor_G_Mask_Discard_Location",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Distortion_Diffuse_Tex_B_Control",
                 "value": [
                     1.0,
                     1.0,
@@ -912,7 +946,57 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Bottom_ScrollSpeed",
+                "name": "Distortion_Diffuse_Tex_RG_Control",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Distortion_Main_Tex_Control",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "MatCap_TintColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "MatCap_Control",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineMask_Texture_B_UV",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ScrollSpeedBase",
                 "value": [
                     0.0,
                     0.30000001192092896,
@@ -920,6 +1004,283 @@
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ScrollSpeedBlend",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TintColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Base_Tile",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Blend_Tile",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BaseMat_Tint",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.4139925241470337,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BlendMat_Tint",
+                "value": [
+                    0.0,
+                    0.7589989900588989,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "MaskStrength",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BloomValue",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineColor",
+                "value": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "MainTex_TintColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineControl",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineMask_Strength",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WaveController",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "WaveStrength",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AlphaClipValue",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AlphaClipNoiseStrength",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_TintColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "NoiseUV",
+                "value": [
+                    5.0,
+                    5.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "ScrollSpeedMainTex",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "MainTex_Tile",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Control",
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "VCOLOR_G_MASK_DIFFUSE_W_DISCARD",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "VCOLOR_G_MASK_OUTLINE_W_DISCARD",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "VCOLOR_G_MASK_DIFFUSE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "VCOLOR_G_MASK_OUTLINE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ALPHA_MAIN_SCROLL_OUTLINE_ADD",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DISTORTION_DIFFUSE_TEX_RG",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DISTORTION_DIFFUSE_TEX_B",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DISTORTION_MAIN_TEX",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "MATCAP_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_OUTLINEMASK_B_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "BLENDCOLOR_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ADDITIVEALPHA_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "MASK_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "MAINTEX_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OUTLINE_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OUTLINE_MASK_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ALPHABLEND_MAIN",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_MAINTEXCOLOR",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DEFORM_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "TWO_D_DEFORM_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_MAINTEXALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ALPHACLIP_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "BLOOM_TINTCOLOR_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SCROLL_MAIN_TEX",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
@@ -930,7 +1291,7 @@
                 "name": "normal",
                 "passes": [
                     {
-                        "shader": "Shaders/SkinnedMesh/ScrollingUVs_Alpha_Bloom",
+                        "shader": "Shaders/SkinnedMesh/AlphaBlend_Additive_Scroll_Packed",
                         "blendEnable": true,
                         "srcColorBlendFactor": 6,
                         "srcAlphaBlendFactor": 6,
@@ -989,13 +1350,13 @@
             },
             {
                 "textureName": "Mask1",
-                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.dds",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
                 "textureName": "FresnelColor",
-                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.dds",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,
@@ -1003,7 +1364,7 @@
             },
             {
                 "textureName": "FresnelColor_2",
-                "texturePath": "ASSETS/Shared/Materials/gradient_x4.dds",
+                "texturePath": "ASSETS/Shared/Materials/gradient_x4.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -1343,7 +1704,7 @@
                     },
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -1485,7 +1846,7 @@
                     },
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -1627,7 +1988,7 @@
                     },
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 1,
                 "birthColor": {
                     "constantValue": [
@@ -1756,7 +2117,7 @@
                     },
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -1873,7 +2234,7 @@
                     },
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -2219,7 +2580,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "color": {
                     "dynamics": {
@@ -2382,7 +2743,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -2594,7 +2955,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 1,
                 "color": {
                     "constantValue": [
@@ -2680,7 +3041,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -2804,7 +3165,7 @@
                     ],
                     "__type": "{ee39916f}"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "color": {
                     "dynamics": {
@@ -3218,7 +3579,7 @@
                     ],
                     "__type": "VfxShapeLegacy"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -3362,7 +3723,7 @@
                 "primitive": {
                     "__type": "VfxPrimitiveArbitraryQuad"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -3511,7 +3872,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 1,
                 "birthColor": {
                     "constantValue": [
@@ -4317,7 +4678,7 @@
                 "lifetime": 0.019999999552965164,
                 "emitterName": "CastGlow",
                 "importance": 2,
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "birthColor": {
                     "constantValue": [
                         1.0,
@@ -4430,7 +4791,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "birthColor": {
                     "constantValue": [
                         1.0,
@@ -4595,7 +4956,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -4772,7 +5133,7 @@
                     ],
                     "__type": "ValueVector3"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -4958,7 +5319,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "birthColor": {
                     "constantValue": [
                         1.0,
@@ -5091,7 +5452,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -5221,7 +5582,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -5361,7 +5722,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 1,
                 "birthColor": {
                     "constantValue": [
@@ -5508,7 +5869,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -5655,7 +6016,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -5802,7 +6163,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -5949,7 +6310,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -6096,7 +6457,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -6243,7 +6604,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -6390,7 +6751,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -6726,7 +7087,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -7136,7 +7497,7 @@
                     },
                     "__type": "VfxPrimitiveMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -7334,7 +7695,7 @@
                     },
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 1,
                 "birthColor": {
                     "constantValue": [
@@ -7459,7 +7820,7 @@
                     },
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -7596,7 +7957,7 @@
                     },
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -7733,7 +8094,7 @@
                     },
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -8755,7 +9116,7 @@
                     },
                     "__type": "VfxPrimitiveCameraTrail"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 1,
                 "birthColor": {
                     "constantValue": [
@@ -8927,7 +9288,7 @@
                     },
                     "__type": "VfxPrimitiveCameraTrail"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [
@@ -9378,7 +9739,7 @@
                     "constantValue": 1.0,
                     "__type": "ValueFloat"
                 },
-                "particleColorTexture": "ASSETS/Shared/Particles/color-hold.TFT_Set15.dds",
+                "particleColorTexture": "ASSETS/Shared/Particles/color-hold_2.TFT_Set15.tex",
                 "blendMode": 4,
                 "birthColor": {
                     "constantValue": [

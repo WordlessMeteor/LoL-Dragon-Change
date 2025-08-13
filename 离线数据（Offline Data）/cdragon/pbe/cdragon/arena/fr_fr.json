@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Dégâts infligés lors de cette manche : @f1@<br>Total des dégâts infligés : @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Gagnez les runes fondamentales <spellName>Déluge de lames</spellName> et <spellName>Attaque soutenue</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Cerbère",
+            "rarity": 2,
+            "tooltip": "Gagnez les runes fondamentales <spellName>Déluge de lames</spellName> et <spellName>Attaque soutenue</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Bouclier de lumière",
             "rarity": 1,
             "tooltip": "Toutes les @Cooldown@ sec, vous projetez <keywordMajor>automatiquement</keywordMajor> une vague de lumière protectrice vers votre allié, ce qui octroie un <shield>bouclier de @TotalShield@ PV</shield> aux alliés qu'elle traverse et à vous-même. La vague de lumière revient alors vers vous, ce qui répète ses effets."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Conditions : portez @QuestThreshold@ chapeaux à la fois.<br><br>Récompense : vous gagnez <scaleAF>+@AFPerHat@ force adaptative</scaleAF>, @ArmorMRPerHat@ <scaleArmor> armure</scaleArmor> et <scaleMR>résistance magique</scaleMR>, +@TenacityPerHat*100@% de ténacité, et <speed>@MSPerHat@ de vitesse de déplacement</speed> par chapeau.<br><br><rules>Vous perdez la moitié de vos chapeaux lorsque vous perdez une manche.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Quête : Chapelier fou",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Octroie actuellement : <scaleAF>+@f1@ de force adaptative</scaleAF>, +@f2@ <scaleArmor>armure</scaleArmor> et <scaleMR>résistance magique</scaleMR>, +@f3*100@% de ténacité, et <speed>+@f4@ de vitesse de déplacement</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@% des dégâts que vous subissez surviennent en @BleedDuration@ sec (@RangedReduction*100@% pour les champions à distance)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Augmente les dégâts de vos optimisations et de vos objets de @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Optimisation optimisée",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Augmentation des dégâts lors de cette manche : @f1@<br>Augmentation totale des dégâts : @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Vous gagnez l'Âme des océans, ce qui vous octroie une grande régénération de <healing>PV</healing> et de <scaleMana>mana</scaleMana> après avoir infligé des dégâts à un ennemi.<br><br>PV rendus lors de cette manche : @f1@<br>Total des PV rendus : @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Utiliser une ruée, un saut instantané ou une téléportation vous octroie un <shield>bouclier</shield> pendant @ShieldDuration@ secondes ; ce bouclier est également octroyé aux alliés que vous traversez. Les PV de ce <shield>bouclier</shield> dépendent du délai de récupération de vos compétences au niveau 1.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Garde du corps",
+            "rarity": 1,
+            "tooltip": "Utiliser une ruée, un saut instantané ou une téléportation vous octroie un <shield>bouclier de @MinShieldPerLevel@ PV, renforcé jusqu'à @MaxShieldPerLevel@ PV</shield> en fonction du délai de récupération de vos compétences au niveau 1, pendant @ShieldDuration@ secondes ; ce bouclier est également octroyé aux alliés que vous traversez.<br><br><rules>Les boucliers atteignent leur maximum sur les compétences avec un délai de récupération d'au moins @MaxCDCheck@ secondes.</rules><br><br>Dégâts évités lors de cette manche : @f1@<br>Total des dégâts évités : @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Vos compétences de ruée, de bond, de saut instantané ou de téléportation laissent une traînée qui explose après 1 sec.",
+            "desc": "Vos compétences de ruée, de saut instantané ou de téléportation laissent une traînée qui explose après 1 sec.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "À chaque manche, cette optimisation se transforme en l'une des optimisations (sélection aléatoire) de votre allié. <br><br><rules>Se transforme uniquement en optimisations que vous auriez pu avoir.</rules>",
+            "desc": "À chaque manche, cette optimisation se <keyword>transforme</keyword> en l'une des optimisations de votre allié.<br><br><rules>Se transforme uniquement en optimisations que vous auriez pu avoir.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Mutation symbiotique",
             "rarity": 1,
-            "tooltip": "À chaque manche, cette optimisation se transforme en l'une des optimisations (sélection aléatoire) de votre allié. <br><br><rules>Se transforme uniquement en optimisations que vous auriez pu avoir.</rules>"
+            "tooltip": "À chaque manche, cette optimisation se <keyword>transforme</keyword> en l'une des optimisations de votre allié.<br><br><rules>Se transforme uniquement en optimisations que vous auriez pu avoir.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Corps céleste",
             "rarity": 1,
             "tooltip": "Vous gagnez <scaleHealth>+@Health@ PV</scaleHealth>, mais vous infligez @DamageReduction*100@% de dégâts en moins."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Augmente les futures offres d'optimisations de @tierValueIncrease@ palier. Si les optimisations étaient déjà de palier Prismatique, vous gagnez @GoldAmount@ PO bonus.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Courage sans faille",
+            "rarity": 0,
+            "tooltip": "Augmente les futures offres d'optimisations de @tierValueIncrease@ palier. Si les optimisations étaient déjà de palier Prismatique, vous gagnez @GoldAmount@ PO bonus."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Surcharge",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Votre <scaleMana>mana</scaleMana> coûte le double. Votre compétence octroie des <healing>soins</healing> et des <shield>boucliers</shield>. Les dégâts sont plus effectifs de <scaleMana>@ManaCalc@</scaleMana>."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Après avoir utilisé une compétence de ruée, de bond, de saut instantané ou de téléportation, vous gagnez <scaleArmor>+@ResistsPerStack@ armure</scaleArmor> et <scaleMR>résistance magique</scaleMR> jusqu'à un maximum de @MaxResistTooltipOnly@ à @MaxStacks@ effets cumulés.",
+            "desc": "Après avoir réalisé une ruée, un saut instantané ou une téléportation, vous gagnez <scaleArmor>+@ResistsPerStack@ armure</scaleArmor> et <scaleMR>résistance magique</scaleMR> jusqu'à un maximum de @MaxResistTooltipOnly@ à @MaxStacks@ effets cumulés.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Après-glacial",
             "rarity": 1,
             "tooltip": "Vous obtenez les runes fondamentales <spellName>Après-coup</spellName> et <spellName>Optimisation glaciale</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Transformez toutes vos optimisations en optimisations Prismatiques aléatoires.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Boîte de Pandore",
+            "rarity": 2,
+            "tooltip": "Transformez toutes vos optimisations en optimisations Prismatiques aléatoires."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Toutes les @TickCadence@ sec, les champions ennemis proches vous octroient @CurseStacksPerTick@ effet(s) de <keywordMajor>Puissance maudite</keywordMajor>.<br><br>Vous gagnez <scaleHealth>@f1@ PV</scaleHealth> (@MaxHealthRatio*100@% de votre <keywordMajor>Puissance maudite</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 4.0
+            },
+            "desc": "Vous ne pouvez plus effectuer de relance.<br><br>Sélectionnez une optimisation Or, et si au moins @PrismaticThreshold@ relances ont été consommées, sélectionnez une optimisation Prismatique à la place.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Risque calculé",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Le porteur grandit de +@SizeIncrement*100@% et gagne <scaleHealth>+@MaxHPIncrement*100@% de PV max</scaleHealth> par élimination.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Moteur de tank",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Le porteur grandit de +@SizeIncrement*100@% et gagne <scaleHealth>+@f2@% de PV bonus</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> par élimination).<br><br>Éliminations : @f3@."
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "À chaque manche, cette optimisation se transforme en l'une des optimisations (sélection aléatoire) de votre adversaire.<br><br><rules>Se transforme uniquement en optimisations que vous auriez pu avoir.</rules>",
+            "desc": "À chaque manche, cette optimisation se <keyword>transforme</keyword> en l'une des optimisations de votre adversaire.<br><br><rules>Se transforme uniquement en optimisations que vous auriez pu avoir.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Mutation parasitaire",
             "rarity": 0,
-            "tooltip": "À chaque manche, cette optimisation se transforme en l'une des optimisations (sélection aléatoire) de votre adversaire."
+            "tooltip": "À chaque manche, cette optimisation se <keyword>transforme</keyword> en l'une des optimisations de votre adversaire.<br><br><rules>Se transforme uniquement en optimisations que vous auriez pu avoir.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Vous gagnez instantanément @HatsToGrant@ chapeaux et le prix du Jus chapi-chapo est réduit de @HatTrickPriceReduction@.<br><br>Si des dégâts sont censés vous laisser moins de @LowHealthThreshold*100@% de vos PV, vous gagnez au préalable <speed>+@MoveSpeedBoostPercent*100@% de vitesse de déplacement</speed> et un <shield>bouclier de @ShieldHealth@ PV</shield> pendant @ShieldDuration@ sec, mais vous perdez un chapeau. (@Cooldown@ sec de récupération.)",
+            "desc": "Vous gagnez instantanément @HatsToGrant@ chapeaux et le prix du Jus chapi-chapo est réduit de @HatTrickPriceReduction@.<br>Si des dégâts sont censés vous laisser moins de @LowHealthThreshold*100@% de vos PV, vous gagnez au préalable <speed>@MoveSpeedBoostPercent*100@% de vitesse de déplacement</speed> et un <shield>bouclier de @ShieldHealth@ PV</shield> pendant @ShieldDuration@ sec, mais vous perdez un chapeau. (@Cooldown@ sec de récupération.)",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Coup du chapeau",
             "rarity": 1,
-            "tooltip": "Vous gagnez instantanément @HatsToGrant@ chapeaux et le prix du Jus chapi-chapo est réduit de @HatTrickPriceReduction@.<br><br>Si des dégâts sont censés vous laisser moins de @LowHealthThreshold*100@% de vos PV, vous gagnez au préalable <speed>+@MoveSpeedBoostPercent*100@% de vitesse de déplacement</speed> et un <shield>bouclier de @ShieldHealth@ PV</shield> pendant @ShieldDuration@ sec, mais vous perdez un chapeau. (@Cooldown@ sec de récupération.)"
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Vous ne perdez plus de chapeaux à votre mort.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "Dans la direction à laquelle vous faites face, un laser inflige <magicDamage>@LaserEyesTooltip@ pts de dégâts magiques</magicDamage> par sec.<br><br>Dégâts infligés lors de cette manche : @f1@<br>Total des dégâts infligés : @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Gagnez de l'efficacité des soins et boucliers, augmentée lorsque vos PV sont bas. Lorsque vous lancez votre ultime, l'efficacité des soins et boucliers est doublée.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Infusion spirituelle",
+            "rarity": 0,
+            "tooltip": "Vous gagnez <healing>@FlatHS*100@% d'efficacité des soins et boucliers</healing>.<br><br>Lorsque vous lancez votre ultime, augmente <healing>l'efficacité des soins et boucliers</healing> de @AmpAmount*100@% pendant @HSDuration@ sec (@Cooldown@ sec de récupération)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Vous remplacez Fuite par <spellName>Appel du destin</spellName>.<br><br><rules><spellName>Appel du destin</spellName> rend votre partenaire impossible à cibler pour une durée pouvant aller jusqu'à 4 sec. Votre partenaire peut se projeter et <status>repousser</status> les ennemis.</rules><br>",
+            "desc": "Vous remplacez Fuite par <spellName>Appel du destin</spellName>.<br><br><rules><spellName>Appel du destin</spellName> rend votre allié impossible à cibler pour une durée pouvant aller jusqu'à 4 sec. Votre allié peut se projeter et <status>repousser</status> les ennemis.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Pacte",
             "rarity": 1,
-            "tooltip": "Vous remplacez Fuite par <spellName>Appel du destin</spellName>.<br><br><rules><spellName>Appel du destin</spellName> rend votre partenaire impossible à cibler pour une durée pouvant aller jusqu'à 4 sec. Votre partenaire peut se projeter et <status>repousser</status> les ennemis.</rules><br>"
+            "tooltip": "Vous remplacez Fuite par <spellName>Appel du destin</spellName>.<br><br><rules><spellName>Appel du destin</spellName> rend votre allié impossible à cibler pour une durée pouvant aller jusqu'à 4 sec. Votre allié peut se projeter et <status>repousser</status> les ennemis.</rules>"
         },
         {
             "apiName": "Flashbang",

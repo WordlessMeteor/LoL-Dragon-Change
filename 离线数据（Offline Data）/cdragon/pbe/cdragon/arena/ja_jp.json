@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>このラウンド中に与えたダメージ量: @f1@<br>与えたダメージ量の合計: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Cherry_Cerberus_Summary",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Cherry_Cerberus_Name",
+            "rarity": 2,
+            "tooltip": "Cherry_Cerberus_Tooltip"
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "ライトワーデン",
             "rarity": 1,
             "tooltip": "@Cooldown@秒ごとに、<keywordMajor>自動発動</keywordMajor>で味方に向かって護りの光を送り、自身と通過した味方に<shield>耐久値@TotalShield@のシールド</shield>を付与する。その後、光はその効果を繰り返しながら戻る。"
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Cherry_Quest_MadHatter_Summary",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Cherry_Quest_MadHatter_Name",
+            "rarity": 1,
+            "tooltip": "Cherry_Quest_MadHatter_Tooltip"
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "受けたダメージの@MeleeReduction*100@%を代わりに@BleedDuration@秒かけて受ける(遠隔チャンピオンは@RangedReduction*100@%)。"
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Cherry_AugmentedPower_Summary",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Cherry_AugmentedPower_Name",
+            "rarity": 0,
+            "tooltip": "Cherry_AugmentedPower_Tooltip"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "「オーシャンソウル」を獲得し、敵にダメージを与えると<healing>体力</healing>および<scaleMana>マナ</scaleMana>の自動回復量が増加する。<br><br>このラウンド中の体力回復量: @f1@<br>回復した体力の合計: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Cherry_Bodyguard_Summary",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Cherry_Bodyguard_Name",
+            "rarity": 1,
+            "tooltip": "Cherry_Bodyguard_Tooltip"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "ダッシュ、リープ、ブリンク、またはテレポートを行うスキルを使用すると軌跡が残る。軌跡は1秒後に爆発する。",
+            "desc": "Cherry_Earthwake_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "毎ラウンド、味方のオーグメントのうちランダムに選ばれた1種に突然変異する。<br><br><rules>変異の対象は抽選可能なオーグメントのみ。</rules>",
+            "desc": "Cherry_SymbioticMutation_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "共生的変異",
             "rarity": 1,
-            "tooltip": "毎ラウンド、味方のオーグメントのうちランダムに選ばれた1種に突然変異する。<br><br><rules>変異の対象は抽選可能なオーグメントのみ。</rules>"
+            "tooltip": "Cherry_SymbioticMutation_Tooltip"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "聖体",
             "rarity": 1,
             "tooltip": "<scaleHealth>体力が@Health@</scaleHealth>増加する代わりに、与えるダメージが@DamageReduction*100@%低下する。"
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Cherry_BravestoftheBrave_Summary",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Cherry_BravestoftheBrave_Name",
+            "rarity": 0,
+            "tooltip": "Cherry_BravestoftheBrave_Tooltip"
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "オーバーフロー",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "自身の<scaleMana>マナ</scaleMana>コストが2倍になる。スキルの<healing>回復</healing>、<shield>シールド</shield>、およびダメージの効果が<scaleMana>@ManaCalc@</scaleMana>増加する。"
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "ダッシュ、リープ、ブリンク、またはテレポートを行うスキルを使用すると、<scaleArmor>物理防御</scaleArmor>と<scaleMR>魔法防御が@ResistsPerStack@</scaleMR>増加する。この効果は最大@MaxStacks@回、@MaxResistTooltipOnly@までスタックする。",
+            "desc": "Cherry_OutlawsGrit_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "通行不可",
             "rarity": 1,
             "tooltip": "キーストーンルーンの<spellName>「アフターショック」</spellName>と<spellName>「グレイシャルオーグメント」</spellName>を獲得する。"
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Cherry_PandorasBox_Summary",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Cherry_PandorasBox_Name",
+            "rarity": 2,
+            "tooltip": "Cherry_PandorasBox_Summary"
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "@TickCadence@秒ごとに、周囲の敵チャンピオン1体につき<keywordMajor>「呪われし力」</keywordMajor>を@CurseStacksPerTick@獲得する。<br><br><scaleHealth>体力が@f1@</scaleHealth>(<keywordMajor>「呪われし力」</keywordMajor>の@MaxHealthRatio*100@%)増加する。<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 4.0
+            },
+            "desc": "Cherry_CalculatedRisk_Summary",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Cherry_CalculatedRisk_Name",
+            "rarity": 0,
+            "tooltip": "Cherry_CalculatedRisk_Tooltip"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "キルまたはアシストを奪うごとにサイズが@SizeIncrement*100@%、<scaleHealth>最大体力が@MaxHPIncrement*100@%</scaleHealth>増加する。",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "タンクエンジン",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "サイズが@SizeIncrement*100@%、<scaleHealth>増加体力が@f2@%</scaleHealth>増加する(キルまたはアシストを奪うごとに<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth>)。<br><br>キルまたはアシスト: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "毎ラウンド、対戦相手のオーグメントのうちランダムに選ばれた1種に突然変異する。<br><br><rules>変異の対象は抽選可能なオーグメントのみ。</rules>",
+            "desc": "Cherry_ParasiticMutation_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "寄生的変異",
             "rarity": 0,
-            "tooltip": "毎ラウンド、対戦相手のオーグメントのうちランダムに選ばれた1種に突然変異する。"
+            "tooltip": "Cherry_ParasiticMutation_Tooltip"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "直ちに帽子を@HatsToGrant@個獲得し、「帽子ジュース」の価格が@HatTrickPriceReduction@低下する。<br><br>体力が@LowHealthThreshold*100@%以下に低下するダメージを受けると@ShieldDuration@秒間、<speed>移動速度が@MoveSpeedBoostPercent*100@%</speed>増加して、<shield>耐久値@ShieldHealth@のシールド</shield>を獲得するが、帽子を1つ失う。クールダウン@Cooldown@秒。",
+            "desc": "Cherry_HatTrick_Summary",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "ハットトリック",
             "rarity": 1,
-            "tooltip": "直ちに帽子を@HatsToGrant@個獲得し、「帽子ジュース」の価格が@HatTrickPriceReduction@低下する。<br><br>体力が@LowHealthThreshold*100@%以下に低下するダメージを受けると@ShieldDuration@秒間、<speed>移動速度が@MoveSpeedBoostPercent*100@%</speed>増加して、<shield>耐久値@ShieldHealth@のシールド</shield>を獲得するが、帽子を1つ失う。クールダウン@Cooldown@秒。"
+            "tooltip": "Cherry_HatTrick_Tooltip"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "進行方向にレーザーが射出され、毎秒<magicDamage>@LaserEyesTooltip@の魔法ダメージ</magicDamage>を与える。<br><br>このラウンドで与えたダメージ量: @f1@<br>与えたダメージ量の合計: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Cherry_SpiritInfusion_Summary",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Cherry_SpiritInfusion_Name",
+            "rarity": 0,
+            "tooltip": "Cherry_SpiritInfusion_Tooltip"
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "サモナースペルの「逃亡」を<spellName>「宿命の呼び声」</spellName>に置き換える。<br><br><rules><spellName>「宿命の呼び声」</spellName>は、最大4秒間パートナーを対象指定不可にする。パートナーは突撃することができ、敵を<status>ノックバック</status>する。</rules><br>",
+            "desc": "Cherry_Oathsworn_Tooltip",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "魂盟の同志",
             "rarity": 1,
-            "tooltip": "サモナースペルの「逃亡」を<spellName>「宿命の呼び声」</spellName>に置き換える。<br><br><rules><spellName>「宿命の呼び声」</spellName>は、最大4秒間パートナーを対象指定不可にする。パートナーは突撃することができ、敵を<status>ノックバック</status>する。</rules><br>"
+            "tooltip": "Cherry_Oathsworn_Tooltip"
         },
         {
             "apiName": "Flashbang",

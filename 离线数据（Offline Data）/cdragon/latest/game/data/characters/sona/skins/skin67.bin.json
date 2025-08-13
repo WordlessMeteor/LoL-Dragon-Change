@@ -161,7 +161,7 @@
                 255
             ],
             "initialSubmeshToHide": "RecallLegs WaterFall",
-            "submeshRenderOrder": "Hair Body Bra Cloud Scarf PosedLegs Water Ducks Leaves Weapon WeaponCloud RecallLegs WaterFall Strings",
+            "submeshRenderOrder": "Body Weapon Cloud PosedLegs Water Ducks Leaves RecallLegs Hair Bra Scarf Strings WeaponCloud WaterFall",
             "materialOverride": [
                 {
                     "material": "Characters/Sona/Skins/Skin67/Materials/Cloud",
@@ -387,15 +387,11 @@
             },
             {
                 "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
-            {
-                "name": "UX_temp8",
-                "__type": "StaticMaterialShaderParamDef"
-            },
             {
                 "name": "AllFeatureOpener",
                 "value": [
@@ -585,10 +581,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp3",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "SurfaceAreaFeatureStrength",
                 "value": [
                     1.0,
@@ -679,10 +671,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp6",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -727,10 +715,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp4",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "BloomIntensity",
                 "value": [
                     0.5,
@@ -761,10 +745,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp5",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "FlowmapIntensity",
                 "value": [
                     1.0,
@@ -782,10 +762,6 @@
                     0.0,
                     0.0
                 ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "UX_temp7",
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -807,10 +783,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp9",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Inside_Color",
                 "value": [
                     0.699999988079071,
@@ -824,34 +796,41 @@
         "switches": [
             {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_VERTEX_DEFORM",
+                "Group": "Vertex Deform Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
+                "Group": "Flow Map Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_BLOOM",
+                "Group": "Bloom Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "IS_SWIRL",
                 "on": false,
+                "Group": "Swirls Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "INSIDE_COLOR",
                 "on": false,
+                "Group": "Inside Face Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "DEBUG_HIDE",
                 "on": false,
+                "Group": "Others",
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
@@ -883,7 +862,7 @@
         "samplerValues": [
             {
                 "textureName": "FlowMap",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
@@ -893,7 +872,7 @@
             },
             {
                 "textureName": "Mask",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -1049,6 +1028,11 @@
             {
                 "name": "APPLY_FLOWMAP_TO_ALPHA",
                 "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWDIRECTIONSWITCH",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
@@ -1089,12 +1073,12 @@
                         "mElements": [
                             {
                                 "mCondition": {
-                                    "Spell": "{16177004}",
+                                    "Spell": "Shared/Spells/ZhonyasRingShield",
                                     "__type": "HasBuffDynamicMaterialBoolDriver"
                                 },
                                 "mValue": {
                                     "driver": {
-                                        "Spell": "{16177004}",
+                                        "Spell": "Shared/Spells/ZhonyasRingShield",
                                         "__type": "HasBuffDynamicMaterialBoolDriver"
                                     },
                                     "graph": {
@@ -1213,15 +1197,11 @@
             },
             {
                 "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
-            {
-                "name": "UX_temp8",
-                "__type": "StaticMaterialShaderParamDef"
-            },
             {
                 "name": "AllFeatureOpener",
                 "value": [
@@ -1411,10 +1391,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp3",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "SurfaceAreaFeatureStrength",
                 "value": [
                     1.0,
@@ -1505,10 +1481,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp6",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -1553,10 +1525,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp4",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "BloomIntensity",
                 "value": [
                     0.5,
@@ -1587,10 +1555,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp5",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "FlowmapIntensity",
                 "value": [
                     1.0,
@@ -1608,10 +1572,6 @@
                     0.0,
                     0.0
                 ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "UX_temp7",
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -1633,10 +1593,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp9",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Inside_Color",
                 "value": [
                     0.699999988079071,
@@ -1650,34 +1606,41 @@
         "switches": [
             {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_VERTEX_DEFORM",
+                "Group": "Vertex Deform Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
+                "Group": "Flow Map Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_BLOOM",
+                "Group": "Bloom Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "IS_SWIRL",
                 "on": false,
+                "Group": "Swirls Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "INSIDE_COLOR",
                 "on": false,
+                "Group": "Inside Face Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "DEBUG_HIDE",
                 "on": false,
+                "Group": "Others",
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
@@ -1763,15 +1726,11 @@
             },
             {
                 "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
-            {
-                "name": "UX_temp8",
-                "__type": "StaticMaterialShaderParamDef"
-            },
             {
                 "name": "AllFeatureOpener",
                 "value": [
@@ -1949,10 +1908,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp3",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "SurfaceAreaFeatureStrength",
                 "value": [
                     0.5,
@@ -2037,10 +1992,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp6",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     0.5,
@@ -2085,10 +2036,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp4",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "BloomIntensity",
                 "value": [
                     1.0,
@@ -2119,10 +2066,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp5",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "FlowmapIntensity",
                 "value": [
                     0.10000000149011612,
@@ -2140,10 +2083,6 @@
                     0.0,
                     0.0
                 ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "UX_temp7",
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -2165,10 +2104,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp9",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Inside_Color",
                 "value": [
                     0.699999988079071,
@@ -2182,34 +2117,41 @@
         "switches": [
             {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_VERTEX_DEFORM",
+                "Group": "Vertex Deform Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
+                "Group": "Flow Map Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_BLOOM",
+                "Group": "Bloom Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "IS_SWIRL",
                 "on": false,
+                "Group": "Swirls Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "INSIDE_COLOR",
                 "on": false,
+                "Group": "Inside Face Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "DEBUG_HIDE",
                 "on": false,
+                "Group": "Others",
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
@@ -2373,20 +2315,16 @@
             },
             {
                 "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
                 "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
-            {
-                "name": "UX_temp8",
-                "__type": "StaticMaterialShaderParamDef"
-            },
             {
                 "name": "AllFeatureOpener",
                 "value": [
@@ -2576,10 +2514,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp3",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "SurfaceAreaFeatureStrength",
                 "value": [
                     1.0,
@@ -2664,10 +2598,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp6",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -2712,10 +2642,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp4",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "BloomIntensity",
                 "value": [
                     0.20000000298023224,
@@ -2746,10 +2672,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp5",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "FlowmapIntensity",
                 "value": [
                     0.10000000149011612,
@@ -2767,10 +2689,6 @@
                     0.0,
                     0.0
                 ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "UX_temp7",
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -2792,10 +2710,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp9",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Inside_Color",
                 "value": [
                     0.699999988079071,
@@ -2809,35 +2723,42 @@
         "switches": [
             {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_VERTEX_DEFORM",
                 "on": false,
+                "Group": "Vertex Deform Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
+                "Group": "Flow Map Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_BLOOM",
+                "Group": "Bloom Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "IS_SWIRL",
                 "on": false,
+                "Group": "Swirls Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "INSIDE_COLOR",
                 "on": false,
+                "Group": "Inside Face Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "DEBUG_HIDE",
                 "on": false,
+                "Group": "Others",
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
@@ -2918,20 +2839,16 @@
             },
             {
                 "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
                 "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
-            {
-                "name": "UX_temp8",
-                "__type": "StaticMaterialShaderParamDef"
-            },
             {
                 "name": "AllFeatureOpener",
                 "value": [
@@ -3115,10 +3032,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp3",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "SurfaceAreaFeatureStrength",
                 "value": [
                     1.0,
@@ -3203,10 +3116,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp6",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -3251,10 +3160,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp4",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "BloomIntensity",
                 "value": [
                     0.20000000298023224,
@@ -3285,10 +3190,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp5",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "FlowmapIntensity",
                 "value": [
                     0.10000000149011612,
@@ -3306,10 +3207,6 @@
                     0.0,
                     0.0
                 ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "UX_temp7",
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -3331,10 +3228,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp9",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Inside_Color",
                 "value": [
                     0.699999988079071,
@@ -3348,36 +3241,43 @@
         "switches": [
             {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_VERTEX_DEFORM",
                 "on": false,
+                "Group": "Vertex Deform Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
+                "Group": "Flow Map Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_BLOOM",
                 "on": false,
+                "Group": "Bloom Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "IS_SWIRL",
                 "on": false,
+                "Group": "Swirls Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "INSIDE_COLOR",
                 "on": false,
+                "Group": "Inside Face Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "DEBUG_HIDE",
                 "on": false,
+                "Group": "Others",
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
@@ -3463,15 +3363,11 @@
             },
             {
                 "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
-            {
-                "name": "UX_temp8",
-                "__type": "StaticMaterialShaderParamDef"
-            },
             {
                 "name": "AllFeatureOpener",
                 "value": [
@@ -3649,10 +3545,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp3",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "SurfaceAreaFeatureStrength",
                 "value": [
                     0.6000000238418579,
@@ -3743,10 +3635,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp6",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -3797,10 +3685,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp4",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "BloomIntensity",
                 "value": [
                     0.1850000023841858,
@@ -3831,10 +3715,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp5",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "FlowmapIntensity",
                 "value": [
                     1.0,
@@ -3852,10 +3732,6 @@
                     0.0,
                     0.0
                 ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "UX_temp7",
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -3877,10 +3753,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp9",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Inside_Color",
                 "value": [
                     0.699999988079071,
@@ -3894,34 +3766,41 @@
         "switches": [
             {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_VERTEX_DEFORM",
+                "Group": "Vertex Deform Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
+                "Group": "Flow Map Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_BLOOM",
+                "Group": "Bloom Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "IS_SWIRL",
                 "on": false,
+                "Group": "Swirls Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "INSIDE_COLOR",
                 "on": false,
+                "Group": "Inside Face Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "DEBUG_HIDE",
                 "on": false,
+                "Group": "Others",
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
@@ -3977,12 +3856,12 @@
             },
             {
                 "textureName": "AdditiveScroll_Mask",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
                 "textureName": "AdditiveScrollTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/BC_TestTexture.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/BC_TestTexture.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
@@ -4002,20 +3881,16 @@
             },
             {
                 "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
                 "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.dds",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
-            {
-                "name": "UX_temp8",
-                "__type": "StaticMaterialShaderParamDef"
-            },
             {
                 "name": "AllFeatureOpener",
                 "value": [
@@ -4193,10 +4068,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp3",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "SurfaceAreaFeatureStrength",
                 "value": [
                     1.0,
@@ -4275,10 +4146,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp6",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -4323,10 +4190,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp4",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "BloomIntensity",
                 "value": [
                     0.8999999761581421,
@@ -4357,10 +4220,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp5",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "FlowmapIntensity",
                 "value": [
                     0.10000000149011612,
@@ -4378,10 +4237,6 @@
                     0.0,
                     0.0
                 ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "UX_temp7",
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
@@ -4403,10 +4258,6 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UX_temp9",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
                 "name": "Inside_Color",
                 "value": [
                     0.699999988079071,
@@ -4421,34 +4272,41 @@
             {
                 "name": "SURFACE_SCROLLING",
                 "on": false,
+                "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_VERTEX_DEFORM",
+                "Group": "Vertex Deform Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
+                "Group": "Flow Map Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "FEATURE_BLOOM",
+                "Group": "Bloom Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "IS_SWIRL",
                 "on": false,
+                "Group": "Swirls Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "INSIDE_COLOR",
                 "on": false,
+                "Group": "Inside Face Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
                 "name": "DEBUG_HIDE",
                 "on": false,
+                "Group": "Others",
                 "__type": "StaticMaterialSwitchDef"
             }
         ],

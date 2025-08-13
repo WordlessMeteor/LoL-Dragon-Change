@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Ζημιά που προκλήθηκε σε αυτόν τον γύρο: @f1@<br>Συνολική Ζημιά που προκλήθηκε: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Αποκτάτε τους Θεμελιώδεις Ρούνους <spellName>Χαλάζι από Λεπίδες</spellName> και <spellName>Διαρκής Επίθεση</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Κέρβερος",
+            "rarity": 2,
+            "tooltip": "Αποκτάτε τους Θεμελιώδεις Ρούνους <spellName>Χαλάζι από Λεπίδες</spellName> και <spellName>Διαρκής Επίθεση</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Υπερασπιστής του Φωτός",
             "rarity": 1,
             "tooltip": "Κάθε @Cooldown@ δευτερόλεπτα, κάντε <keywordMajor>Αυτόματη Χρήση</keywordMajor> μιας προστατευτικής δέσμης φως προς τον σύμμαχό σας, η οποία δίνει <shield>@TotalShield@ Ασπίδα</shield> σε εσάς και σε όσους συμμάχους διαπεράσει. Έπειτα, επιστρέφει και δίνει ξανά την επίδραση."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Προϋπόθεση: Φορέστε @QuestThreshold@ καπέλα ταυτόχρονα.<br><br>Ανταμοιβή: Αποκτήστε <scaleAF>@AFPerHat@ Ευέλικτη Ισχύ</scaleAF>, @ArmorMRPerHat@ <scaleArmor>Θωράκιση</scaleArmor> και <scaleMR>Αντίσταση Μαγείας</scaleMR>, @TenacityPerHat*100@% Εμμονή και <speed>@MSPerHat@ Ταχύτητα Κίνησης</speed> ανά καπέλο.<br><br><rules>Χάνετε τα μισά καπέλα σας όταν χάνετε έναν γύρο.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Αποστολή: Τρελοκαπελάς",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Αυτή τη στιγμή δίνει: <scaleAF>@f1@ Ευέλικτη Ισχύ</scaleAF>, @f2@ <scaleArmor>Θωράκιση</scaleArmor> και <scaleMR>Αντίσταση Μαγείας</scaleMR>, @f3*100@% Εμμονή και <speed>@f4@ Ταχύτητα Κίνησης</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "Το @MeleeReduction*100@% της ζημιάς που δέχεστε λαμβάνει χώρα επί @BleedDuration@ δευτ. (@RangedReduction*100@% για Ήρωες που μάχονται από απόσταση)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Αυξάνεται η ζημιά που προκαλείται από τις Ενισχύσεις και αντικείμενα κατά @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Ενισχυμένη Ισχύς",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Ζημιά που αυξήθηκε σε αυτόν τον γύρο: @f1@<br>Αύξηση συνολικής Ζημιάς: @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Αποκτάτε την Ψυχή του Ωκεανού, λαμβάνοντας υψηλή αναπλήρωση <healing>Ζωής</healing> και <scaleMana>Μάνα</scaleMana> μετά την πρόκληση ζημιάς στους εχθρούς.<br><br>Θεραπεία που έγινε σε αυτόν τον γύρο: @f1@<br>Συνολική θεραπεία που έγινε: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Η χρήση μιας εφόρμησης ή τηλεμεταφοράς σάς δίνει μία <shield>Ασπίδα</shield> για @ShieldDuration@ δευτερόλεπτα, και η Ασπίδα αυτή δίνεται επίσης σε οποιουσδήποτε Συμμάχους που διαπερνάτε. Η ισχύς αυτής της <shield>Ασπίδας</shield> εξαρτάται από τον βασικό Χρόνο Επαναφόρτισης των ικανοτήτων σας στο επίπεδο 1.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Σωματοφύλακας",
+            "rarity": 1,
+            "tooltip": "Η χρήση μιας εφόρμησης ή τηλεμεταφοράς σάς δίνει <shield>@MinShieldPerLevel@ Ασπίδα, που αυξάνεται έως @MaxShieldPerLevel@</shield> με βάση τον Χρόνο Επαναφόρτισης των ικανοτήτων σας στο επίπεδο 1, που διαρκεί για @ShieldDuration@ δευτ. και η Ασπίδα αυτή δίνεται επίσης σε οποιουσδήποτε Συμμάχους που διαπερνάτε.<br><br><rules>Οι Ασπίδες φτάνουν στο μέγιστο με ικανότητες με Χρόνο Επαναφόρτισης τουλάχιστον @MaxCDCheck@ δευτ.</rules><br><br>Ζημιά που αποτράπηκε σε αυτόν τον γύρο: @f1@<br>Συνολική ζημιά που αποτράπηκε: @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Οι Ικανότητες εφόρμησης, άλματος ή τηλεμεταφοράς σας αφήνουν πίσω τους ένα ίχνος που εκρήγνυται μετά από 1 δευτερόλεπτο.",
+            "desc": "Οι ικανότητες εφόρμησης ή τηλεμεταφοράς σας αφήνουν πίσω τους ένα ίχνος που εκρήγνυται μετά από 1 δευτερόλεπτο.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Σε κάθε γύρο, μεταλλάσσεται σε μια από τις Ενισχύσεις του συμμάχου σας, με τυχαία επιλογή. <br><br><rules>Μεταλλάσσεται μόνο σε Ενισχύσεις που μπορείτε να ανανεώσετε.</rules>",
+            "desc": "Σε κάθε γύρο, <keyword>μεταλλάσσεται</keyword> σε μια από τις Ενισχύσεις του συμμάχου σας.<br><br><rules>Μεταλλάσσεται μόνο σε Ενισχύσεις που μπορείτε να ανανεώσετε.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Συμβιωτική Μετάλλαξη",
             "rarity": 1,
-            "tooltip": "Σε κάθε γύρο, μεταλλάσσεται σε μια από τις Ενισχύσεις του συμμάχου σας, με τυχαία επιλογή. <br><br><rules>Μεταλλάσσεται μόνο σε Ενισχύσεις που μπορείτε να ανανεώσετε.</rules>"
+            "tooltip": "Σε κάθε γύρο, <keyword>μεταλλάσσεται</keyword> σε μια από τις Ενισχύσεις του συμμάχου σας.<br><br><rules>Μεταλλάσσεται μόνο σε Ενισχύσεις που μπορείτε να ανανεώσετε.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Ουράνιο Σώμα",
             "rarity": 1,
             "tooltip": "Αποκτάτε <scaleHealth>@Health@ Ζωή</scaleHealth>, αλλά προκαλείτε @DamageReduction*100@% λιγότερη ζημιά."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Αυξήστε τις μελλοντικές προσφορές Ενίσχυσής σας ανά @tierValueIncrease@ βαθμίδα. Αν οι Ενισχύσεις ήταν ήδη Πρισματικής βαθμίδας, αποκτάτε μπόνους @GoldAmount@ Χρυσό.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Ο Γενναιότερος των Γενναίων",
+            "rarity": 0,
+            "tooltip": "Αυξήστε τις μελλοντικές προσφορές Ενίσχυσής σας ανά @tierValueIncrease@ βαθμίδα. Αν οι Ενισχύσεις ήταν ήδη Πρισματικής βαθμίδας, αποκτάτε μπόνους @GoldAmount@ Χρυσό."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Υπερχείλιση",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Το κόστος σας σε <scaleMana>Μάνα</scaleMana> διπλασιάζεται. Η <healing>Θεραπεία</healing>, η <shield>Ασπίδα</shield> και η ζημιά από τις ικανότητές σας είναι <scaleMana>@ManaCalc@</scaleMana> πιο αποτελεσματικές."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Μετά τη χρήση μιας ικανότητας εφόρμησης, άλματος ή τηλεμεταφοράς αποκτάτε <scaleArmor>@ResistsPerStack@ Θωράκιση</scaleArmor> και <scaleMR>Αντίσταση Μαγείας</scaleMR> έως @MaxResistTooltipOnly@ στις @MaxStacks@ στοίβες.",
+            "desc": "Μετά τη χρήση μιας εφόρμησης ή τηλεμεταφοράς αποκτάτε <scaleArmor>@ResistsPerStack@ Θωράκιση</scaleArmor> και <scaleMR>Αντίσταση Μαγείας</scaleMR> έως @MaxResistTooltipOnly@ στις @MaxStacks@ στοίβες.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Αδιαπέραστο Εμπόδιο",
             "rarity": 1,
             "tooltip": "Αποκτάτε τους Θεμελιώδεις Ρούνους <spellName>Μετασεισμός</spellName> και <spellName>Παγωμένη Ενίσχυση</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Μεταστοιχειώστε όλες τις Ενισχύσεις σε τυχαίες Πρισματικές Ενισχύσεις.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Το Κουτί της Πανδώρας",
+            "rarity": 2,
+            "tooltip": "Μεταστοιχειώστε όλες τις Ενισχύσεις σε τυχαίες Πρισματικές Ενισχύσεις."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Κάθε @TickCadence@ δευτ., αποκτάτε @CurseStacksPerTick@ <keywordMajor>Καταραμένη Δύναμη</keywordMajor> ανά κοντινό αντίπαλο Ήρωα.<br><br>Αποκτήστε <scaleHealth>@f1@ Ζωή</scaleHealth> (@MaxHealthRatio*100@% με βάση την <keywordMajor>Καταραμένη Δύναμή</keywordMajor> σας.<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 4.0
+            },
+            "desc": "Δεν μπορείτε πλέον να κάνετε ανανέωση.<br><br>Επιλέξτε μια Χρυσή Ενίσχυση, αν καταναλώθηκαν τουλάχιστον @PrismaticThreshold@ Ανανεώσεις, ενδυναμώνοντάς τη για να επιλέξετε μια Πρισματική Ενίσχυση.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Λελογισμένο Ρίσκο",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Το μέγεθος του Ήρωα αυξάνεται κατά @SizeIncrement*100@% και αποκτά <scaleHealth>@MaxHPIncrement*100@% μέγιστη Ζωή</scaleHealth> με κάθε εξόντωση.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Κινητήρας Τανκ",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Το μέγεθος του Ήρωα αυξάνεται κατά @SizeIncrement*100@% και αποκτά <scaleHealth>@f2@ Μπόνους Ζωή</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> με κάθε εξόντωση.<br><br>Εξοντώσεις: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Σε κάθε γύρο, μεταλλάσσεται σε μια από τις Ενισχύσεις των αντιπάλων σας, με τυχαία επιλογή.<br><br><rules>Μεταλλάσσεται μόνο σε Ενισχύσεις που μπορείτε να ανανεώσετε.</rules>",
+            "desc": "Σε κάθε γύρο, <keyword>μεταλλάσσεται</keyword> σε μια από τις Ενισχύσεις των αντιπάλων σας.<br><br><rules>Μεταλλάσσεται μόνο σε Ενισχύσεις που μπορείτε να ανανεώσετε.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Παρασιτική Μετάλλαξη",
             "rarity": 0,
-            "tooltip": "Σε κάθε γύρο, μεταλλάσσεται σε μια από τις Ενισχύσεις των αντιπάλων σας, με τυχαία επιλογή."
+            "tooltip": "Σε κάθε γύρο, <keyword>μεταλλάσσεται</keyword> σε μια από τις Ενισχύσεις των αντιπάλων σας.<br><br><rules>Μεταλλάσσεται μόνο σε Ενισχύσεις που μπορείτε να ανανεώσετε.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Αποκτάτε αμέσως @HatsToGrant@ καπέλα και η τιμή του Χυμού Κάπα μειώνεται κατά @HatTrickPriceReduction@.<br><br>Αν δεχτείτε ζημιά που θα μείωνε τη Ζωή σας κάτω από @LowHealthThreshold*100@%, αποκτάτε <speed>@MoveSpeedBoostPercent*100@% Ταχύτητα Κίνησης</speed> και μια <shield>Ασπίδα με αντοχή @ShieldHealth@</shield> για @ShieldDuration@, αλλά χάνετε ένα καπέλο. Χρόνος Επαναφόρτισης @Cooldown@ δευτ.",
+            "desc": "Αποκτάτε αμέσως @HatsToGrant@ καπέλα και η τιμή του Χυμού Κάπα μειώνεται κατά @HatTrickPriceReduction@.<br>Αν δεχτείτε ζημιά που θα μείωνε τη Ζωή σας κάτω από @LowHealthThreshold*100@%, αποκτάτε <speed>@MoveSpeedBoostPercent*100@% Ταχύτητα Κίνησης</speed> και μια <shield>Ασπίδα με αντοχή @ShieldHealth@</shield> για @ShieldDuration@, αλλά χάνετε ένα καπέλο. Χρόνος Επαναφόρτισης @Cooldown@ δευτ.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Καπέλωμα",
             "rarity": 1,
-            "tooltip": "Αποκτάτε αμέσως @HatsToGrant@ καπέλα και η τιμή του Χυμού Κάπα μειώνεται κατά @HatTrickPriceReduction@.<br><br>Αν δεχτείτε ζημιά που θα μείωνε τη Ζωή σας κάτω από @LowHealthThreshold*100@%, αποκτάτε <speed>@MoveSpeedBoostPercent*100@% Ταχύτητα Κίνησης</speed> και μια <shield>Ασπίδα με αντοχή @ShieldHealth@</shield> για @ShieldDuration@, αλλά χάνετε ένα καπέλο. Χρόνος Επαναφόρτισης @Cooldown@ δευτ."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Δεν χάνετε πλέον καπέλα όταν πεθαίνετε.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "Εξαπολύετε μια ακτίνα λέιζερ στην κατεύθυνση που κοιτάζετε η οποία προκαλεί <magicDamage>@LaserEyesTooltip@ Μαγική Ζημιά</magicDamage> το δευτερόλεπτο.<br><br>Ζημιά που προκλήθηκε σε αυτόν τον γύρο: @f1@<br>Ζημιά που προκλήθηκε συνολικά:@f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Αποκτάτε Ισχύ Θεραπείας και Ασπίδων, που αυξάνεται όταν έχετε χαμηλή Ζωή. Κατά τη χρήση της Υπέρτατης, διπλασιάστε την Ισχύ Θεραπείας και Ασπίδων.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Εμφύσηση Πνεύματος",
+            "rarity": 0,
+            "tooltip": "Αποκτάτε <healing>@FlatHS*100@% Ισχύ Θεραπείας και Ασπίδων</healing>.<br><br>Στη χρήση της Υπέρτατης, αυξήστε την <healing>Ισχύ Θεραπείας και Ασπίδων</healing> κατά @AmpAmount*100@% για @HSDuration@δευτ. (Χρόνος Επαναφόρτισης@Cooldown@δευτ.)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Αντικαθιστά την Υποχώρηση Επικαλεστή με το <spellName>Κάλεσμα της Μοίρας</spellName>.<br><br><rules>Το <spellName>Κάλεσμα της Μοίρας</spellName> δεν επιτρέπει τη στόχευση του συμπαίκτη σας για έως 4 δευτ. Ο συμπαίκτης σας μπορεί να εκτοξευτεί, <status>Απωθώντας</status> εχθρούς.</rules><br>",
+            "desc": "Αντικαθιστά την Υποχώρηση Επικαλεστή με το <spellName>Κάλεσμα της Μοίρας</spellName>.<br><br><rules><spellName>Το Κάλεσμα της Μοίρας</spellName> δεν επιτρέπει τη στόχευση του συμμάχου σας για έως 4 δευτερόλεπτα. Ο σύμμαχός σας μπορεί να εκτοξευτεί, <status>Αποθώντας</status> τους αντιπάλους.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Ορκισμένος Σύντροφος",
             "rarity": 1,
-            "tooltip": "Αντικαθιστά την Υποχώρηση Επικαλεστή με το <spellName>Κάλεσμα της Μοίρας</spellName>.<br><br><rules>Το <spellName>Κάλεσμα της Μοίρας</spellName> δεν επιτρέπει τη στόχευση του συμπαίκτη σας για έως 4 δευτ. Ο συμπαίκτης σας μπορεί να εκτοξευτεί, <status>Απωθώντας</status> εχθρούς.</rules><br>"
+            "tooltip": "Αντικαθιστά την Υποχώρηση Επικαλεστή με το <spellName>Κάλεσμα της Μοίρας</spellName>.<br><br><rules><spellName>Το Κάλεσμα της Μοίρας</spellName> δεν επιτρέπει τη στόχευση του συμμάχου σας για έως 4 δευτερόλεπτα. Ο σύμμαχός σας μπορεί να εκτοξευτεί, <status>Αποθώντας</status> τους αντιπάλους.</rules>"
         },
         {
             "apiName": "Flashbang",

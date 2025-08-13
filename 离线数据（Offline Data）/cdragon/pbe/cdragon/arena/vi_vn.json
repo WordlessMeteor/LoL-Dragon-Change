@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Nhận Ngọc Siêu Cấp <spellName>Mưa Kiếm</spellName> và <spellName>Sẵn Sàng Tấn Công</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Địa Ngục Khuyển",
+            "rarity": 2,
+            "tooltip": "Nhận Ngọc Siêu Cấp <spellName>Mưa Kiếm</spellName> và <spellName>Sẵn Sàng Tấn Công</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Ánh Sáng Hộ Vệ",
             "rarity": 1,
             "tooltip": "Mỗi @Cooldown@ giây, <keywordMajor>Tự Động Thi Triển</keywordMajor> một ánh sáng bảo hộ về phía đồng minh, ban <shield>@TotalShield@ Lá Chắn</shield> cho bản thân và những đồng đội nó đi qua. Sau đó nó vòng về, lặp lại các hiệu ứng trên đường trở lại."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Yêu Cầu: Đội @QuestThreshold@ mũ cùng một lúc.<br><br>Phần Thưởng: Nhận <scaleAF>@AFPerHat@ Sức Mạnh Thích Ứng</scaleAF>, @ArmorMRPerHat@ <scaleArmor>Giáp</scaleArmor> và <scaleMR>Kháng Phép</scaleMR>, @TenacityPerHat*100@% Kháng Hiệu Ứng và <speed>@MSPerHat@ Tốc Độ Di Chuyển</speed> với mỗi mũ đang mang.<br><br><rules>Mất một nửa số mũ của bạn khi thua vòng đấu.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Nhiệm Vụ: Chúa Mũ",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Hiện Đang Tăng: <scaleAF>@f1@ Sức Mạnh Thích Ứng</scaleAF>, @f2@ <scaleArmor>Giáp</scaleArmor> và <scaleMR>Kháng Phép</scaleMR>, @f3*100@% Kháng Hiệu Ứng và <speed>@f4@ Tốc Độ Di Chuyển</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@% sát thương bạn phải chịu ngay sẽ gây thương tổn dần dần trong @BleedDuration@ giây (@RangedReduction*100@% với tướng đánh xa)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Tăng sát thương gây ra bởi các nâng cấp và trang bị của bạn thêm @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Nâng Tầm Uy Lực",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Tăng sát thương trong vòng này: @f1@<br>Tổng sát thương đã gia tăng: @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Nhận Linh Hồn Rồng Nước, cho lượng hồi phục <healing>Máu</healing> và <scaleMana>Năng Lượng</scaleMana> lớn sau khi gây sát thương lên kẻ địch.<br><br>Lượng Hồi Phục Trong Vòng Này: @f1@<br>Tổng Lượng Hồi Phục: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Sử dụng lướt, nhảy hoặc dịch chuyển sẽ ban cho bạn một <shield>lá chắn</shield> trong @ShieldDuration@ giây, lá chắn này cũng được cấp cho những đồng minh bạn lướt qua. Sức mạnh của <shield>lá chắn</shield> này phụ thuộc vào hồi chiêu cơ bản của kỹ năng ở cấp 1.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Vệ Sĩ",
+            "rarity": 1,
+            "tooltip": "Sử dụng lướt, nhảy hoặc dịch chuyển sẽ ban cho bạn <shield>@MinShieldPerLevel@ lá chắn, tăng lên tới @MaxShieldPerLevel@</shield> dựa trên hồi chiêu cơ bản của kỹ năng ở cấp 1, duy trì trong @ShieldDuration@ giây, lá chắn này cũng được cấp cho những đồng minh bạn lướt qua.<br><br><rules>Lá chắn đạt mức tối đa với các kỹ năng có hồi chiêu tối thiểu là @MaxCDCheck@ giây.</rules><br><br>Sát thương đã chặn trong vòng này: @f1@<br>Tổng sát thương đã chặn: @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Kỹ Năng lướt, nhảy hoặc dịch chuyển của bạn sẽ để lại một vệt phía sau, vệt này sẽ phát nổ sau 1 giây.",
+            "desc": "Kỹ năng lướt, nhảy hoặc dịch chuyển của bạn sẽ để lại một vệt phía sau, vệt này sẽ phát nổ sau 1 giây.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Mỗi vòng đấu, nó sẽ ngẫu nhiên đột biến thành một trong các Nâng Cấp của đồng đội. <br><br><rules>Chỉ có thể đột biến thành các Nâng Cấp bạn có thể nhận được.</rules>",
+            "desc": "Mỗi vòng đấu, nâng cấp này sẽ <keyword>đột biến</keyword> thành một trong các nâng cấp của đồng đội.<br><br><rules>Chỉ biến thành các nâng cấp mà bạn có thể đổi.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Đột Biến Cộng Sinh",
             "rarity": 1,
-            "tooltip": "Mỗi vòng đấu, nó sẽ ngẫu nhiên đột biến thành một trong các Nâng Cấp của đồng đội. <br><br><rules>Chỉ có thể đột biến thành các Nâng Cấp bạn có thể nhận được.</rules>"
+            "tooltip": "Mỗi vòng đấu, nâng cấp này sẽ <keyword>đột biến</keyword> thành một trong các nâng cấp của đồng đội.<br><br><rules>Chỉ biến thành các nâng cấp mà bạn có thể đổi.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Cơ Thể Thượng Nhân",
             "rarity": 1,
             "tooltip": "Nhận thêm <scaleHealth>@Health@ Máu</scaleHealth>, nhưng bạn bị giảm @DamageReduction*100@% sát thương gây ra."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Tăng cho các lựa chọn nâng cấp trong tương lai thêm @tierValueIncrease@ bậc. Nếu các nâng cấp đã ở bậc Kim Cương, nhận thêm @GoldAmount@ vàng.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Dũng Cảm Vô Song",
+            "rarity": 0,
+            "tooltip": "Tăng cho các lựa chọn nâng cấp trong tương lai thêm @tierValueIncrease@ bậc. Nếu các nâng cấp đã ở bậc Kim Cương, nhận thêm @GoldAmount@ vàng."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Tràn Trề",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "<scaleMana>Năng Lượng tiêu hao</scaleMana> của bạn tăng gấp đôi. <healing>Hồi Máu</healing>, <shield>Lá Chắn</shield> và sát thương từ Kỹ Năng của bạn được tăng <scaleMana>@ManaCalc@</scaleMana> hiệu lực."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Sau khi sử dụng Kỹ Năng lướt, nhảy hoặc dịch chuyển, bạn sẽ nhận được <scaleArmor>@ResistsPerStack@ Giáp</scaleArmor> và <scaleMR>Kháng Phép</scaleMR>, tối đa @MaxResistTooltipOnly@ khi đạt @MaxStacks@ cộng dồn.",
+            "desc": "Sau khỉ sử dụng lướt, nhảy hoặc dịch chuyển, bạn sẽ nhận được <scaleArmor>@ResistsPerStack@ Giáp</scaleArmor> và <scaleMR>Kháng Phép</scaleMR>, tăng lên tới @MaxResistTooltipOnly@ khi đạt @MaxStacks@ cộng dồn.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Không Thể Vượt Qua",
             "rarity": 1,
             "tooltip": "Nhận Ngọc Siêu Cấp <spellName>Dư Chấn</spellName> và <spellName>Nâng Cấp Băng Giá</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Chuyển hóa tất cả các nâng cấp của bạn thành nâng cấp Kim Cương ngẫu nhiên.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Hộp Pandora",
+            "rarity": 2,
+            "tooltip": "Chuyển hóa tất cả các nâng cấp của bạn thành nâng cấp Kim Cương ngẫu nhiên."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Mỗi @TickCadence@ giây, nhận @CurseStacksPerTick@ <keywordMajor>Nguyền Rủa</keywordMajor> từ mỗi tướng địch ở gần.<br><br>Nhận <scaleHealth>@f1@ Máu</scaleHealth> (@MaxHealthRatio*100@% <keywordMajor>Sức Mạnh Nguyền Rủa</keywordMajor> của bạn).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 4.0
+            },
+            "desc": "Bạn không thể đổi lại nữa.<br><br>Chọn một Nâng Cấp Vàng, nếu ít nhất @PrismaticThreshold@ lượt đổi đã được sử dụng, cường hóa nó để chọn một Nâng Cấp Kim Cương thay thế.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Rủi Ro Có Tính Toán",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Nhận @SizeIncrement*100@% kích cỡ gia tăng và <scaleHealth>@MaxHPIncrement*100@% Máu tối đa</scaleHealth> cho mỗi mạng hạ gục.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Động Cơ Đỡ Đòn",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Nhận @SizeIncrement*100@% kích cỡ gia tăng và <scaleHealth>@f2@ Máu Cộng Thêm</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> cho mỗi mạng hạ gục).<br><br>Mạng Hạ Gục: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Mỗi vòng đấu, nó sẽ ngẫu nhiên đột biến thành một trong các Nâng Cấp của đối thủ.<br><br><rules>Chỉ có thể đột biến thành các Nâng Cấp bạn có thể nhận được.</rules>",
+            "desc": "Mỗi vòng đấu, nó sẽ <keyword>đột biến</keyword> thành một trong các nâng cấp của đối thủ.<br><br><rules>Chỉ biến thành các nâng cấp mà bạn có thể đổi.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Đột Biến Ký Sinh",
             "rarity": 0,
-            "tooltip": "Mỗi vòng đấu, nó sẽ ngẫu nhiên đột biến thành một trong các Nâng Cấp của đối thủ."
+            "tooltip": "Mỗi vòng đấu, nó sẽ <keyword>đột biến</keyword> thành một trong các nâng cấp của đối thủ.<br><br><rules>Chỉ biến thành các nâng cấp mà bạn có thể đổi.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Lập tức nhận thêm @HatsToGrant@ mũ và giảm giá bán của Nước Cappa đi @HatTrickPriceReduction@.<br><br>Nhận sát thương khiến Máu của bạn giảm xuống dưới @LowHealthThreshold*100@% sẽ cho bạn <speed>@MoveSpeedBoostPercent*100@% Tốc Độ Di Chuyển</speed> và <shield>@ShieldHealth@ Lá Chắn</shield> trong @ShieldDuration@ giây, nhưng sẽ mất đi 1 mũ. @Cooldown@ giây hồi chiêu.",
+            "desc": "Ngay lập tức nhận được @HatsToGrant@ mũ, và giảm giá Nước Cappa đi @HatTrickPriceReduction@.<br>Nhận sát thương khiến Máu của bạn giảm xuống dưới @LowHealthThreshold*100@% sẽ cho bạn <speed>@MoveSpeedBoostPercent*100@% Tốc Độ Di Chuyển</speed> và <shield>@ShieldHealth@ Lá Chắn</shield> trong @ShieldDuration@ giây, nhưng sẽ mất đi 1 mũ. @Cooldown@ giây hồi chiêu.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Ăn Ba",
             "rarity": 1,
-            "tooltip": "Lập tức nhận thêm @HatsToGrant@ mũ và giảm giá bán của Nước Cappa đi @HatTrickPriceReduction@.<br><br>Nhận sát thương khiến Máu của bạn giảm xuống dưới @LowHealthThreshold*100@% sẽ cho bạn <speed>@MoveSpeedBoostPercent*100@% Tốc Độ Di Chuyển</speed> và <shield>@ShieldHealth@ Lá Chắn</shield> trong @ShieldDuration@ giây, nhưng sẽ mất đi 1 mũ. @Cooldown@ giây hồi chiêu."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Bạn không còn mất mũ khi bị hạ gục.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "Chiếu một tia laser về phía bạn đang hướng về, gây <magicDamage>@LaserEyesTooltip@ sát thương phép</magicDamage> mỗi giây.<br><br>Sát Thương Gây Ra Trong Vòng Này: @f1@<br>Tổng Sát Thương Gây Ra: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Nhận Sức Mạnh Lá Chắn và Hồi Máu, tăng thêm khi còn thấp Máu. Khi thi triển Chiêu Cuối, nhân đôi Sức Mạnh Lá Chắn và Hồi Máu của bạn.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Linh Hồn Hộ Mệnh",
+            "rarity": 0,
+            "tooltip": "Nhận <healing>@FlatHS*100@% Sức Mạnh Lá Chắn và Hồi Máu</healing>.<br><br>Khi thi triển chiêu cuối, tăng <healing>Sức Mạnh Lá Chắn và Hồi Máu</healing> của bạn thêm @AmpAmount*100@% trong @HSDuration@ giây (@Cooldown@ giây hồi chiêu)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Thay thế phép bổ trợ Vọt Lẹ bằng <spellName>Định Mệnh Vẫy Gọi</spellName>.<br><br><rules><spellName>Định Mệnh Vẫy Gọi</spellName> khiến đồng đội bắt cặp của bạn Không Thể Bị Chỉ Định trong 4 giây. Đồng đội có thể phóng bản thân ra xa, <status>Đẩy Lùi</status> kẻ địch.</rules><br>",
+            "desc": "Thay thế phép bổ trợ Vọt Lẹ bằng <spellName>Định Mệnh Vẫy Gọi</spellName>.<br><br><rules><spellName>Định Mệnh Vẫy Gọi</spellName> giúp đồng minh của bạn trở nên Không Thể Bị Chỉ Định trong tối đa 4 giây. Đồng minh của bạn có thể tự mình phóng ra, khiến kẻ địch bị <status>Đẩy Lùi</status>.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Thệ Ước",
             "rarity": 1,
-            "tooltip": "Thay thế phép bổ trợ Vọt Lẹ bằng <spellName>Định Mệnh Vẫy Gọi</spellName>.<br><br><rules><spellName>Định Mệnh Vẫy Gọi</spellName> khiến đồng đội bắt cặp của bạn Không Thể Bị Chỉ Định trong 4 giây. Đồng đội có thể phóng bản thân ra xa, <status>Đẩy Lùi</status> kẻ địch.</rules><br>"
+            "tooltip": "Thay thế phép bổ trợ Vọt Lẹ bằng <spellName>Định Mệnh Vẫy Gọi</spellName>.<br><br><rules><spellName>Định Mệnh Vẫy Gọi</spellName> giúp đồng minh của bạn trở nên Không Thể Bị Chỉ Định trong tối đa 4 giây. Đồng minh của bạn có thể tự mình phóng ra, khiến kẻ địch bị <status>Đẩy Lùi</status>.</rules>"
         },
         {
             "apiName": "Flashbang",

@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Verursachter Schaden in dieser Runde: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Du erhältst die Schlüsselrunen <spellName>„Klingenhagel“</spellName> und <spellName>„Fokussierter Angriff“</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Zerberus",
+            "rarity": 2,
+            "tooltip": "Du erhältst die Schlüsselrunen <spellName>„Klingenhagel“</spellName> und <spellName>„Fokussierter Angriff“</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Lichtwächter",
             "rarity": 1,
             "tooltip": "Alle @Cooldown@&nbsp;Sekunden feuerst du <keywordMajor>automatisch</keywordMajor> ein beschützendes Licht in Richtung deines Verbündeten. Du und davon getroffene Verbündete erhalten einen <shield>Schild in Höhe von @TotalShield@</shield>. Das Licht kehrt dann zu dir zurück und wiederholt den Effekt auf dem Rückweg."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Voraussetzung: Trage @QuestThreshold@ Hüte auf einmal.<br><br>Belohnung: Du erhältst <scaleAF>@AFPerHat@ adaptive Kraft</scaleAF>, @ArmorMRPerHat@ <scaleArmor>Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>, @TenacityPerHat*100@&nbsp;% Zähigkeit und <speed>@MSPerHat@ Lauftempo</speed> pro Hut.<br><br><rules>Du verlierst die Hälfte deiner Hüte, wenn du eine Runde verlierst.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Quest: Verrückter Hutmacher",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Aktuelle Boni: <scaleAF>@f1@ adaptive Kraft</scaleAF>, @f2@ <scaleArmor>Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>, @f3*100@&nbsp;% Zähigkeit und <speed>@f4@ Lauftempo</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@&nbsp;% des Schadens, den du erleidest, erleidest du stattdessen im Verlauf von @BleedDuration@&nbsp;Sekunden (@RangedReduction*100@&nbsp;% im Fall von Fernkampf-Champions)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Erhöht den verursachten Schaden deiner Augmentierungen und Gegenstände um @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Augmentierte Macht",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Erhöhter Schaden in dieser Runde: @f1@<br>Erhöhter Schaden insgesamt: @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Du erhältst die Meeresdrachenseele, die dir hohe <healing>Lebens-</healing> und <scaleMana>Mana</scaleMana>regeneration gewährt, nachdem du Gegnern Schaden zugefügt hast.<br><br>Gewirkte Heilung in dieser Runde: @f1@<br>Gewirkte Heilung insgesamt: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Nach einem Sprung, Blinzeln oder Teleport erhältst du @ShieldDuration@ Sekunden lang einen <shield>Schild</shield>. Verbündete, die du dabei durchquerst, erhalten diesen Schild ebenfalls. Die Stärke des <shield>Schildes</shield> hängt vom Grundwert der Abklingzeiten deiner Fähigkeiten auf Stufe 1 ab.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Leibwache",
+            "rarity": 1,
+            "tooltip": "Nach einem Sprung, Blinzeln oder Teleport erhältst du @ShieldDuration@ Sekunden lang einen <shield>Schild in Höhe von @MinShieldPerLevel@, der sich auf bis zu @MaxShieldPerLevel@ erhöht</shield> (abhängig vom Grundwert der Abklingzeiten der Fähigkeiten auf Stufe 1). Verbündete, die du dabei durchquerst, erhalten diesen Schild ebenfalls.<br><br><rules>Schilde erreichen ihr Maximum bei Fähigkeiten, die eine Abklingzeit von mindestens @MaxCDCheck@ Sekunden haben.</rules><br><br>Verhinderter Schaden in dieser Runde: @f1@<br>Verhinderter Schaden insgesamt: @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Deine Sprint-, Spring-, und Teleportationsfähigkeiten hinterlassen eine Spur, die nach 1&nbsp;Sekunde explodiert.",
+            "desc": "Deine Sprung-, Blinzel- und Teleportationsfähigkeiten hinterlassen eine Spur, die nach 1&nbsp;Sekunde explodiert.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Verwandelt sich jede Runde in eine zufällig ausgewählte Augmentierung deines Verbündeten. <br><br><rules>Verwandelt sich nur in Augmentierungen, die du erhalten könntest.</rules>",
+            "desc": "<keyword>Verwandelt sich</keyword> jede Runde in eine Augmentierung deines Verbündeten.<br><br><rules>Verwandelt sich nur in Augmentierungen, die du erhalten könntest.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Symbiotische Mutation",
             "rarity": 1,
-            "tooltip": "Verwandelt sich jede Runde in eine zufällig ausgewählte Augmentierung deines Verbündeten. <br><br><rules>Verwandelt sich nur in Augmentierungen, die du erhalten könntest.</rules>"
+            "tooltip": "<keyword>Verwandelt sich</keyword> jede Runde in eine Augmentierung deines Verbündeten.<br><br><rules>Verwandelt sich nur in Augmentierungen, die du erhalten könntest.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Himmelskörper",
             "rarity": 1,
             "tooltip": "Du erhältst <scaleHealth>@Health@&nbsp;Leben</scaleHealth>, verursachst aber @DamageReduction*100@&nbsp;% weniger Schaden."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Erhöht die zukünftig angebotenen Augmentierungen um @tierValueIncrease@ Stufe. Wenn die Augmentierungen bereits prismatisch sind, erhältst du @GoldAmount@ zusätzliches Gold.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Der Tapferste der Tapferen",
+            "rarity": 0,
+            "tooltip": "Erhöht die zukünftig angebotenen Augmentierungen um @tierValueIncrease@ Stufe. Wenn die Augmentierungen bereits prismatisch sind, erhältst du @GoldAmount@ zusätzliches Gold."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Überfluss",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Deine <scaleMana>Manakosten</scaleMana> werden verdoppelt. Deine <healing>Heilung</healing>, deine <shield>Schilde</shield> und dein Schaden durch Fähigkeiten sind <scaleMana>@ManaCalc@</scaleMana> effektiver."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Nachdem du eine Sprint-, Spring-, oder Teleportationsfähigkeit eingesetzt hast, erhältst du <scaleArmor>@ResistsPerStack@&nbsp;Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR>, bis zu @MaxResistTooltipOnly@ bei @MaxStacks@&nbsp;Steigerungen.",
+            "desc": "Nachdem du eine Sprung-, Blinzel- oder Teleportationsfähigkeit eingesetzt hast, erhältst du <scaleArmor>@ResistsPerStack@&nbsp;Rüstung</scaleArmor> und <scaleMR>Magieresistenz</scaleMR> bis zu einem Wert von@MaxResistTooltipOnly@ bei @MaxStacks@&nbsp;Steigerungen.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Unpassierbar",
             "rarity": 1,
             "tooltip": "Du erhältst die Schlüsselrunen <spellName>Nachbeben</spellName> und <spellName>Eiszeit</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "All deine Augmentierungen werden sofort zu zufälligen prismatischen Augmentierungen.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Die Büchse der Pandora",
+            "rarity": 2,
+            "tooltip": "All deine Augmentierungen werden sofort zu zufälligen prismatischen Augmentierungen."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Du erhältst alle @TickCadence@&nbsp;Sek. @CurseStacksPerTick@&nbsp;<keywordMajor>Verfluchte Macht</keywordMajor> pro gegnerischem Champion in der Nähe.<br><br>Du erhältst <scaleHealth>@f1@&nbsp;Leben</scaleHealth> (@MaxHealthRatio*100@&nbsp;% deiner <keywordMajor>Verfluchten Macht</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 4.0
+            },
+            "desc": "Du kannst nicht mehr aktualisieren.<br><br>Wähle eine goldene Augmentierung. Wenn mindestens @PrismaticThreshold@ Aktualisierungen verbraucht wurden, verstärkt sich der Effekt und du wählst stattdessen eine prismatische Augmentierung.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Berechnetes Risiko",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Du wirst bei jedem Kill, an dem du beteiligt bist, um @SizeIncrement*100@&nbsp;% größer und erhältst <scaleHealth>@MaxHPIncrement*100@&nbsp;% maximales Leben</scaleHealth>.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Tank-Maschine",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Du erhältst @SizeIncrement*100@&nbsp;% mehr Größe und <scaleHealth>@f2@ zusätzliches Leben</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@&nbsp;% (@f1@) </scaleHealth> pro Kill/Unterstützung).<br><br>Kills/Unterstützungen: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Verwandelt sich jede Runde in eine zufällig ausgewählte Augmentierung deines Gegners.<br><br><rules>Verwandelt sich nur in Augmentierungen, die du erhalten könntest.</rules>",
+            "desc": "<keyword>Verwandelt sich</keyword> jede Runde in eine Augmentierung deines Gegners.<br><br><rules>Verwandelt sich nur in Augmentierungen, die du erhalten könntest.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Parasitäre Mutation",
             "rarity": 0,
-            "tooltip": "Verwandelt sich jede Runde in eine zufällig ausgewählte Augmentierung deines Gegners."
+            "tooltip": "<keyword>Verwandelt sich</keyword> jede Runde in eine Augmentierung deines Gegners.<br><br><rules>Verwandelt sich nur in Augmentierungen, die du erhalten könntest.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Gewinne sofort @HatsToGrant@ Hüte, und verringere den Preis von Cappa-Tränken um @HatTrickPriceReduction@.<br><br>Wenn du Schaden nimmst, der dein Leben unter @LowHealthThreshold*100@&nbsp;% sinken lassen würde, erhältst du <speed>@MoveSpeedBoostPercent*100@&nbsp;% Lauftempo</speed> und einen <shield>@ShieldHealth@ Schild</shield> für @ShieldDuration@, verlierst aber einen Hut. Abklingzeit: @Cooldown@&nbsp;Sekunden.",
+            "desc": "Erhalte sofort @HatsToGrant@ Hüte und verringere den Preis von Cappa-Tränken um @HatTrickPriceReduction@.<br>Wenn du Schaden erleidest, der dein Leben unter @LowHealthThreshold*100@&nbsp;% sinken lassen würde, erhältst du <speed>@MoveSpeedBoostPercent*100@&nbsp;% Lauftempo</speed> und einen <shield>Schild in Höhe von @ShieldHealth@</shield> für @ShieldDuration@, verlierst aber einen Hut. Abklingzeit: @Cooldown@&nbsp;Sekunden.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Hutspieler-Trick",
             "rarity": 1,
-            "tooltip": "Gewinne sofort @HatsToGrant@ Hüte, und verringere den Preis von Cappa-Tränken um @HatTrickPriceReduction@.<br><br>Wenn du Schaden nimmst, der dein Leben unter @LowHealthThreshold*100@&nbsp;% sinken lassen würde, erhältst du <speed>@MoveSpeedBoostPercent*100@&nbsp;% Lauftempo</speed> und einen <shield>@ShieldHealth@ Schild</shield> für @ShieldDuration@, verlierst aber einen Hut. Abklingzeit: @Cooldown@&nbsp;Sekunden."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Du verlierst keine Hüte mehr, wenn du stirbst.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "Sendet einen Laserstrahl in deine Blickrichtung aus, der <magicDamage>@LaserEyesTooltip@&nbsp;magischen Schaden</magicDamage> pro Sekunde verursacht.<br><br>Verursachter Schaden in dieser Runde: @f1@<br>Verursachter Gesamtschaden: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Du erhältst Heil- und Schildkraft, die bei niedrigem Leben erhöht wird. Beim Wirken deiner ultimativen Fähigkeit wird deine Heil- und Schildkraft verdoppelt.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Geisterinfusion",
+            "rarity": 0,
+            "tooltip": "Du erhältst <healing>@FlatHS*100@&nbsp;% Heil- und Schildkraft</healing>.<br><br>Beim Wirken deiner ultimativen Fähigkeit wird deine <healing>Heil- und Schildkraft</healing> für @HSDuration@&nbsp;Sekunden (Abklingzeit: @Cooldown@&nbsp;Sekunden) um @AmpAmount*100@&nbsp;% erhöht."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Du ersetzt „Beschwörerflucht“ durch <spellName>Ruf des Schicksals</spellName>.<br><br><rules><spellName>Ruf des Schicksals</spellName> sorgt dafür, dass dein Partner bis zu 4&nbsp;Sekunden lang nicht anvisiert werden kann. Der Partner kann sich selbst herausschleudern, um Gegner <status>zurückzustoßen</status>.</rules><br>",
+            "desc": "Du ersetzt „Beschwörerflucht“ durch <spellName>Ruf des Schicksals</spellName>.<br><br><rules><spellName>Ruf des Schicksals</spellName> sorgt dafür, dass dein Partner bis zu 4&nbsp;Sekunden lang nicht anvisiert werden kann. Dein Verbündeter kann sich selbst herausschleudern, um Gegner <status>zurückzustoßen</status>.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Eidgeschworen",
             "rarity": 1,
-            "tooltip": "Du ersetzt „Beschwörerflucht“ durch <spellName>Ruf des Schicksals</spellName>.<br><br><rules><spellName>Ruf des Schicksals</spellName> sorgt dafür, dass dein Partner bis zu 4&nbsp;Sekunden lang nicht anvisiert werden kann. Der Partner kann sich selbst herausschleudern, um Gegner <status>zurückzustoßen</status>.</rules><br>"
+            "tooltip": "Du ersetzt „Beschwörerflucht“ durch <spellName>Ruf des Schicksals</spellName>.<br><br><rules><spellName>Ruf des Schicksals</spellName> sorgt dafür, dass dein Partner bis zu 4&nbsp;Sekunden lang nicht anvisiert werden kann. Dein Verbündeter kann sich selbst herausschleudern, um Gegner <status>zurückzustoßen</status>.</rules>"
         },
         {
             "apiName": "Flashbang",

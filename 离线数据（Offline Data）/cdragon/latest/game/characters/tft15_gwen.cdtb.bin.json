@@ -71,6 +71,7 @@
         "mMoveRange": 250.0,
         "mMoveHeight": 0.0,
         "mShopData": "{362d3067}",
+        "MobileHealthBarHeightOverride": 170.0,
         "mManaPerAttack": 5.0,
         "__type": "TFTCharacterRecord"
     },
@@ -84,8 +85,8 @@
                     "mName": "BaseConeDamage",
                     "mValues": [
                         2.0,
-                        30.0,
-                        45.0,
+                        10.0,
+                        15.0,
                         400.0,
                         400.0,
                         2.0,
@@ -157,6 +158,19 @@
                         0.10000000149011612
                     ],
                     "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ConeSplitDamage",
+                    "mValues": [
+                        0.0,
+                        40.0,
+                        60.0,
+                        1000.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
                 }
             ],
             "mSpellCalculations": {
@@ -208,6 +222,19 @@
                         {
                             "mSubpart": {
                                 "mDataValue": "BaseDividedDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedConeSplitDamage": {
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "ConeSplitDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 0.009999999776482582,
@@ -281,6 +308,11 @@
                                 {
                                     "type": "BaseConeDamage",
                                     "nameOverride": "Spell_TFT15_GwenSpell_ConeDamage",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "ConeSplitDamage",
+                                    "nameOverride": "Spell_TFT15_Gwen_ConeSplitDamage",
                                     "__type": "TooltipInstanceListElement"
                                 },
                                 {

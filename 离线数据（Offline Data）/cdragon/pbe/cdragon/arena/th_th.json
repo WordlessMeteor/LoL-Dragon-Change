@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>ความเสียหายที่ทำได้รอบนี้: @f1@ หน่วย<br>ความเสียหายทั้งหมดที่ทำได้: @f2@ หน่วย"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "ได้รับรูนคีย์สโตน <spellName>Hail of Blades</spellName> และ <spellName>Press the Attack</spellName>",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Cerberus",
+            "rarity": 2,
+            "tooltip": "ได้รับรูนคีย์สโตน <spellName>Hail of Blades</spellName> และ <spellName>Press the Attack</spellName>"
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Light Warden",
             "rarity": 1,
             "tooltip": "ทุก @Cooldown@ วินาที <keywordMajor>ร่ายอัตโนมัติ</keywordMajor>แสงแห่งการปกปักษ์แก่พันธมิตร มอบ<shield>โล่ป้องกันความเสียหาย @TotalShield@&nbsp;หน่วย</shield>ให้กับตัวคุณและพันธมิตรที่มันทะลุผ่าน จากนั้นมันจะวนกลับมา และได้รับเอฟเฟกต์อีกครั้ง"
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "เงื่อนไข: สวมใส่หมวก @QuestThreshold@ ใบในครั้งเดียว<br><br>รางวัล: ได้รับ <scaleAF>Adaptive Force @AFPerHat@ หน่วย</scaleAF>, <scaleArmor>เกราะ</scaleArmor>และ<scaleMR>ต้านทานเวท</scaleMR> @ArmorMRPerHat@ หน่วย, Tenacity @TenacityPerHat*100@% และ<speed>ความเร็วเคลื่อนที่ @MSPerHat@ หน่วย</speed>ต่อหมวกหนึ่งใบ<br><br><rules>สูญเสียหมวกครึ่งหนึ่งหากพ่ายแพ้รอบ</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Quest: Mad Hatter",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>ค่าพลังที่มอบให้ตอนนี้: <scaleAF>Adaptive Force @f1@ หน่วย</scaleAF>, <scaleArmor>เกราะ</scaleArmor>และ<scaleMR>ต้านทานเวท</scaleMR> @f2@ หน่วย, Tenacity @f3*100@% และ<speed>ความเร็วเคลื่อนที่ @f4@ หน่วย</speed>"
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@% ของความเสียหายที่คุณได้รับจะค่อย ๆ เกิดขึ้นในช่วงระยะเวลา @BleedDuration@ วินาทีแทน (@RangedReduction*100@% สำหรับแชมเปี้ยนระยะไกล)"
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "เพิ่มความเสียหายจาก Augment และไอเทมขึ้น @DamageAmp@ หน่วย",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Augmented Power",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>เพิ่มความเสียหายในรอบนี้: @f1@ หน่วย<br>ความเสียหายเพิ่มขึ้นทั้งหมด: @f2@ หน่วย"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "ได้รับ Ocean Soul และมอบค่าฟื้นฟู<healing>พลังชีวิต</healing>และ<scaleMana>มานา</scaleMana>ขั้นสูงหลังสร้างความเสียหายให้ศัตรูได้<br><br>ฮีลในรอบนี้: @f1@ หน่วย<br>ฮีลทั้งหมด: @f2@ หน่วย"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "การพุ่งตัว วาร์ป หรือเทเลพอร์ตจะมอบ<shield>โล่ป้องกัน</shield>ให้กับคุณเป็นเวลา @ShieldDuration@ วินาที อีกทั้งมอบโล่ป้องกันนี้ให้กับเพื่อนร่วมทีมทั้งหมดที่พุ่งผ่านด้วย โดยความแข็งแกร่งของ<shield>โล่ป้องกัน</shield>จะขึ้นอยู่กับคูลดาวน์พื้นฐานของสกิลที่เลเวล 1",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Bodyguard",
+            "rarity": 1,
+            "tooltip": "การพุ่งตัว วาร์ป หรือเทเลพอร์ตจะมอบ<shield>โล่ป้องกัน @MinShieldPerLevel@ หน่วยให้กับคุณ เพิ่มขึ้นสูงสุด @MaxShieldPerLevel@ หน่วย</shield>ขึ้นอยู่กับคูลดาวน์พื้นฐานของสกิลที่เลเวล 1 และคงอยู่เป็นเวลา @ShieldDuration@ วินาที อีกทั้งมอบโล่ป้องกันนี้ให้กับเพื่อนร่วมทีมทั้งหมดที่พุ่งผ่านด้วย<br><br><rules>โล่ป้องกันเพิ่มขึ้นสูงสุดกับสกิลที่มีคูลดาวน์อย่างน้อย @MaxCDCheck@ วินาที</rules><br><br>ความเสียหายที่ป้องกันในรอบนี้: @f1@ หน่วย<br>ป้องกันความเสียหายทั้งหมด: @f2@ หน่วย"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "สกิลประเภทพุ่ง, กระโจน, วาร์ป หรือเทเลพอร์ตของคุณจะทิ้งรอยเอาไว้ ซึ่งจะระเบิดหลังจากผ่านไป 1 วินาที",
+            "desc": "สกิลพุ่ง วาร์ป หรือเทเลพอร์ตของคุณจะทิ้งร่องรอยเอาไว้ ซึ่งระเบิดหลังผ่านไป 1 วินาที",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "สิ่งนี้จะสุ่มกลายร่างเป็นหนึ่งใน Augment ที่เพื่อนร่วมทีมของคุณมีในทุก ๆ รอบ<br><br><rules>จะกลายร่างเป็น Augment ที่คุณมีสิทธิ์จะได้รับเท่านั้น</rules>",
+            "desc": "<keyword>กลายร่าง</keyword>เป็นหนึ่งใน Augment ของเพื่อนร่วมทีมในทุก ๆ รอบ<br><br><rules>สามารถกลายเป็น Augment ที่คุณมีสิทธิ์สุ่มได้เท่านั้น</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Symbiotic Mutation",
             "rarity": 1,
-            "tooltip": "สิ่งนี้จะสุ่มกลายร่างเป็นหนึ่งใน Augment ที่เพื่อนร่วมทีมของคุณมีในทุก ๆ รอบ<br><br><rules>จะกลายร่างเป็น Augment ที่คุณมีสิทธิ์จะได้รับเท่านั้น</rules>"
+            "tooltip": "<keyword>กลายร่าง</keyword>เป็นหนึ่งใน Augment ของเพื่อนร่วมทีมในทุก ๆ รอบ<br><br><rules>สามารถกลายเป็น Augment ที่คุณมีสิทธิ์สุ่มได้เท่านั้น</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Celestial Body",
             "rarity": 1,
             "tooltip": "ได้รับ<scaleHealth>พลังชีวิต @Health@ หน่วย</scaleHealth> แต่สร้างความเสียหายได้น้อยลง @DamageReduction*100@%"
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "เพิ่มระดับตัวเลือก Augment ในอนาคตขึ้น @tierValueIncrease@ ระดับ หากเป็นระดับ Prismatic อยู่แล้ว ได้รับทองเพิ่มเติม @GoldAmount@ ทองแทน",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Bravest of the Brave",
+            "rarity": 0,
+            "tooltip": "เพิ่มระดับตัวเลือก Augment ในอนาคตขึ้น @tierValueIncrease@ ระดับ หากเป็นระดับ Prismatic อยู่แล้ว ได้รับทองเพิ่มเติม @GoldAmount@ ทองแทน"
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Overflow",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "คุณใช้<scaleMana>มานา</scaleMana>เพิ่มขึ้นสองเท่า <healing>ฮีล</healing> <shield>โล่ป้องกัน</shield> และความเสียหายของสกิลของคุณจะมีประสิทธิภาพมากขึ้น <scaleMana>@ManaCalc@</scaleMana>"
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "หลังจากใช้สกิลพุ่ง กระโดด วาร์ป หรือเทเลพอร์ต คุณจะได้รับ<scaleArmor>เกราะ</scaleArmor>และ<scaleMR>ต้านทานเวท @ResistsPerStack@ หน่วย</scaleMR> สูงสุด @MaxResistTooltipOnly@ หน่วย ที่ @MaxStacks@ สแตค",
+            "desc": "หลังจากใช้สกิลพุ่ง วาร์ป หรือเทเลพอร์ต ได้รับ<scaleArmor>เกราะ</scaleArmor>และ<scaleMR>ต้านทานเวท</scaleMR> @ResistsPerStack@ หน่วย สูงสุด @MaxResistTooltipOnly@ หน่วยที่ @MaxStacks@ สแตค",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Impassable",
             "rarity": 1,
             "tooltip": "ได้รับรูนคีย์สโตน <spellName>Aftershock</spellName> และ <spellName>Glacial Augment</spellName>"
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "แปลงร่าง Augment ทั้งหมดของคุณให้กลายเป็น Augment ระดับ Prismatic แบบสุ่ม",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Pandora's Box",
+            "rarity": 2,
+            "tooltip": "แปลงร่าง Augment ทั้งหมดของคุณให้กลายเป็น Augment ระดับ Prismatic แบบสุ่ม"
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "ทุก ๆ @TickCadence@ วินาที จะได้รับ <keywordMajor>Cursed Power</keywordMajor> @CurseStacksPerTick@ สแตค ต่อแชมเปี้ยนศัตรูที่อยู่ใกล้เคียง<br><br>ได้รับ<scaleHealth>พลังชีวิต @f1@ หน่วย</scaleHealth> (@MaxHealthRatio*100@% ของสแตค <keywordMajor>Cursed Power</keywordMajor> ที่คุณมี)<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 4.0
+            },
+            "desc": "ไม่สามารถสุ่มใหม่ได้อีกต่อไป<br><br>และได้เลือก Augment ระดับ Gold หนึ่งชิ้น โดยหากสูญเสียแต้มสุ่มใหม่อย่างน้อย @PrismaticThreshold@ ครั้ง จะได้เลือก Augment ระดับ Prismatic แทน",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Calculated Risk",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "ได้รับขนาดตัวเพิ่มขึ้น @SizeIncrement*100@% และ<scaleHealth>พลังชีวิตสูงสุด @MaxHPIncrement*100@%</scaleHealth> ต่อการโค่นล้มแต่ละครั้ง",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Tank Engine",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "ได้รับขนาดตัวเพิ่มขึ้น @SizeIncrement*100@% และ<scaleHealth>โบนัสพลังชีวิต @f2@ หน่วย</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@ หน่วย)</scaleHealth> ต่อการโค่นล้มหนึ่งครั้ง)<br><br>โค่นล้มไป: @f3@ ครั้ง"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "สิ่งนี้จะสุ่มกลายร่างเป็นหนึ่งใน Augment ที่ศัตรูมีในทุก ๆ รอบ<br><br><rules>จะกลายร่างเป็น Augment ที่คุณมีสิทธิ์จะได้รับเท่านั้น</rules>",
+            "desc": "<keyword>กลายร่าง</keyword>เป็นหนึ่งใน Augment ของศัตรูในทุก ๆ รอบ<br><br><rules>สามารถกลายเป็น Augment ที่คุณมีสิทธิ์สุ่มได้เท่านั้น</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Parasitic Mutation",
             "rarity": 0,
-            "tooltip": "สิ่งนี้จะสุ่มกลายร่างเป็นหนึ่งใน Augment ที่ศัตรูมีในทุก ๆ รอบ"
+            "tooltip": "<keyword>กลายร่าง</keyword>เป็นหนึ่งใน Augment ของศัตรูในทุก ๆ รอบ<br><br><rules>สามารถกลายเป็น Augment ที่คุณมีสิทธิ์สุ่มได้เท่านั้น</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "ได้รับหมวกทันที @HatsToGrant@ ใบ และลดราคาของ Cappa Juice ลง @HatTrickPriceReduction@ ทอง<br><br>เมื่อได้รับความเสียหายที่ทำให้พลังชีวิตของคุณ เหลือต่ำกว่า @LowHealthThreshold*100@% จะได้รับ<speed>ความเร็วเคลื่อนที่ @MoveSpeedBoostPercent*100@%</speed> และได้รับ<shield>โล่ป้องกัน @ShieldHealth@ หน่วย</shield> เป็นเวลา @ShieldDuration@ วินาที แต่คุณจะเสียหมวกหนึ่งใบ มีคูลดาวน์ @Cooldown@&nbsp;วินาที",
+            "desc": "ได้รับหมวก @HatsToGrant@ ใบในทันที และลดราคาของ Cappa Juice ลง @HatTrickPriceReduction@ ทอง<br>อีกทั้งเมื่อได้รับความเสียหายที่ทำให้พลังชีวิตเหลือต่ำกว่า @LowHealthThreshold*100@% จะได้รับ<speed>ความเร็วเคลื่อนที่ @MoveSpeedBoostPercent*100@%</speed> และ<shield>โล่ป้องกัน @ShieldHealth@ หน่วย</shield>เป็นเวลา @ShieldDuration@ วินาที แต่สูญเสียหมวกหนึ่งใบ คูลดาวน์ @Cooldown@ วินาที",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Hat Trick",
             "rarity": 1,
-            "tooltip": "ได้รับหมวกทันที @HatsToGrant@ ใบ และลดราคาของ Cappa Juice ลง @HatTrickPriceReduction@ ทอง<br><br>เมื่อได้รับความเสียหายที่ทำให้พลังชีวิตของคุณ เหลือต่ำกว่า @LowHealthThreshold*100@% จะได้รับ<speed>ความเร็วเคลื่อนที่ @MoveSpeedBoostPercent*100@%</speed> และได้รับ<shield>โล่ป้องกัน @ShieldHealth@ หน่วย</shield> เป็นเวลา @ShieldDuration@ วินาที แต่คุณจะเสียหมวกหนึ่งใบ มีคูลดาวน์ @Cooldown@&nbsp;วินาที"
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>ไม่สูญเสียหมวกเมื่อถูกสังหารอีกต่อไป</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "ปล่อยเลเซอร์ออกไปในทิศทางที่คุณหันหน้า สร้าง<magicDamage>ความเสียหายเวท @LaserEyesTooltip@ หน่วย</magicDamage>ต่อวินาที<br><br>ความเสียหายที่ทำได้ในรอบนี้: @f1@ หน่วย<br>ความเสียหายทั้งหมดที่ทำได้: @f2@ หน่วย"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "ได้รับพลังการฮีลและโล่ป้องกัน เพิ่มขึ้นอีกเมื่อพลังชีวิตเหลือน้อย อีกทั้งเพิ่มพลังการฮีลและโล่ป้องกันขึ้นสองเท่าเมื่อร่ายสกิลอัลติเมท",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Spirit Infusion",
+            "rarity": 0,
+            "tooltip": "ได้รับ<healing>พลังการฮีลและโล่ป้องกัน @FlatHS*100@%</healing><br><br>อีกทั้งเมื่อร่ายสกิลอัลติเมท เพิ่ม<healing>พลังการฮีลและโล่ป้องกัน</healing>ขึ้น @AmpAmount*100@% เป็นเวลา @HSDuration@ วินาที (คูลดาวน์ @Cooldown@ วินาที)"
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "แทนที่เวทซัมมอนเนอร์ Flee ด้วย <spellName>Fate's Call</spellName><br><br><rules><spellName>Fate's Call</spellName> จะทำให้คู่หูของคุณไม่ตกเป็นเป้าหมายได้สูงสุดที่ 4 วินาที คู่หูของคุณสามารถขยับให้ตัวเองหลุดออกไป เพื่อ<status>กระแทก</status>ศัตรูกลับไป</rules><br>",
+            "desc": "แทนที่เวทซัมมอนเนอร์ Flee ด้วย <spellName>Fate's Call</spellName><br><br><rules>โดย <spellName>Fate's Call</spellName> จะทำให้เพื่อนร่วมทีมของคุณไม่ตกเป็นเป้าหมายได้สูงสุด 4 วินาที จากนั้นพวกเขาสามารถเลือกปล่อยตัวเองออกไป และ<status>กระแทก</status>ศัตรูไปด้านหลัง</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Oathsworn",
             "rarity": 1,
-            "tooltip": "แทนที่เวทซัมมอนเนอร์ Flee ด้วย <spellName>Fate's Call</spellName><br><br><rules><spellName>Fate's Call</spellName> จะทำให้คู่หูของคุณไม่ตกเป็นเป้าหมายได้สูงสุดที่ 4 วินาที คู่หูของคุณสามารถขยับให้ตัวเองหลุดออกไป เพื่อ<status>กระแทก</status>ศัตรูกลับไป</rules><br>"
+            "tooltip": "แทนที่เวทซัมมอนเนอร์ Flee ด้วย <spellName>Fate's Call</spellName><br><br><rules>โดย <spellName>Fate's Call</spellName> จะทำให้เพื่อนร่วมทีมของคุณไม่ตกเป็นเป้าหมายได้สูงสุด 4 วินาที จากนั้นพวกเขาสามารถเลือกปล่อยตัวเองออกไป และ<status>กระแทก</status>ศัตรูไปด้านหลัง</rules>"
         },
         {
             "apiName": "Flashbang",
