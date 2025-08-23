@@ -526,25 +526,32 @@
             "__type": "BuffData"
         },
         "BotData": {
-            "DamageTag": 0,
+            "DamageTag": 1,
             "{6d548702}": {
                 "mFormulaParts": [
                     {
-                        "mSubparts": [
-                            {
-                                "mSpellCalculationKey": "InitialDamage",
-                                "__type": "{f3cbe7b2}"
-                            },
-                            {
-                                "mNumber": 300.0,
-                                "__type": "NumberCalculationPart"
-                            }
-                        ],
-                        "__type": "SumOfSubPartsCalculationPart"
+                        "mSpellCalculationKey": "InitialDamage",
+                        "__type": "{f3cbe7b2}"
                     }
                 ],
                 "__type": "GameCalculation"
             },
+            "{ec17e271}": [
+                {
+                    "EffectTag": 1,
+                    "EffectCalculation": {
+                        "mFormulaParts": [
+                            {
+                                "mDataValue": "SlowDuration",
+                                "__type": "NamedDataValueCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                }
+            ],
+            "{591f8423}": 600.0,
             "__type": "BotsSpellData"
         },
         "__type": "SpellObject"
@@ -717,6 +724,31 @@
                 "__type": "SpellDataResourceClient"
             },
             "__type": "SpellDataResource"
+        },
+        "BotData": {
+            "DamageTag": 0,
+            "{6d548702}": {
+                "mConditionalCalculationRequirements": {
+                    "{d6b6109c}": "Characters/Ruby_LeeSin/Spells/Ruby_LeeSinEOneAbility/Ruby_LeeSinEOne",
+                    "__type": "HasBuffCastRequirement"
+                },
+                "__type": "GameCalculationConditional"
+            },
+            "{ec17e271}": [
+                {
+                    "EffectTag": 1,
+                    "EffectCalculation": {
+                        "mMultiplier": {
+                            "{5e7e5a06}": "Characters/Ruby_LeeSin/Spells/Ruby_LeeSinEOneAbility/Ruby_LeeSinEOne",
+                            "{137cf12a}": "SlowDuration",
+                            "__type": "{9e9e2e5c}"
+                        },
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                }
+            ],
+            "__type": "BotsSpellData"
         },
         "__type": "SpellObject"
     },
@@ -1041,6 +1073,26 @@
                                 "__type": "{f3cbe7b2}"
                             }
                         ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                },
+                {
+                    "EffectTag": 262144,
+                    "EffectCalculation": {
+                        "mFormulaParts": [
+                            {
+                                "mSpellCalculationKey": "ShieldValue",
+                                "__type": "{f3cbe7b2}"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                },
+                {
+                    "EffectTag": 512,
+                    "EffectCalculation": {
                         "__type": "GameCalculation"
                     },
                     "__type": "{b09016f6}"
@@ -1707,27 +1759,12 @@
             "{6d548702}": {
                 "mFormulaParts": [
                     {
-                        "mSpellCalculationKey": "Q1BaseDamage",
+                        "mSpellCalculationKey": "InitialDamage",
                         "__type": "{f3cbe7b2}"
                     }
                 ],
                 "__type": "GameCalculation"
             },
-            "{ec17e271}": [
-                {
-                    "EffectTag": 1073741824,
-                    "EffectCalculation": {
-                        "mFormulaParts": [
-                            {
-                                "mNumber": 100.0,
-                                "__type": "NumberCalculationPart"
-                            }
-                        ],
-                        "__type": "GameCalculation"
-                    },
-                    "__type": "{b09016f6}"
-                }
-            ],
             "__type": "BotsSpellData"
         },
         "__type": "SpellObject"
@@ -1836,8 +1873,22 @@
             "{6d548702}": {
                 "mFormulaParts": [
                     {
-                        "mNumber": 1000.0,
-                        "__type": "NumberCalculationPart"
+                        "mSubparts": [
+                            {
+                                "{5e7e5a06}": "Characters/Ruby_LeeSin/Spells/Ruby_LeeSinQOneAbility/Ruby_LeeSinQOne",
+                                "{137cf12a}": "Q2BaseDamage",
+                                "__type": "{9e9e2e5c}"
+                            },
+                            {
+                                "mStat": 2,
+                                "mStatFormula": 2,
+                                "statType": 8,
+                                "{137cf12a}": "Q2ADRatio",
+                                "{5e7e5a06}": "Characters/Ruby_LeeSin/Spells/Ruby_LeeSinQOneAbility/Ruby_LeeSinQOne",
+                                "__type": "{1d452085}"
+                            }
+                        ],
+                        "__type": "SumOfSubPartsCalculationPart"
                     }
                 ],
                 "__type": "GameCalculation"
@@ -2514,6 +2565,59 @@
                 }
             ],
             "__type": "BuffData"
+        },
+        "BotData": {
+            "DamageTag": 0,
+            "{6d548702}": {
+                "mFormulaParts": [
+                    {
+                        "mSpellCalculationKey": "Damage",
+                        "__type": "{f3cbe7b2}"
+                    }
+                ],
+                "__type": "GameCalculation"
+            },
+            "{ec17e271}": [
+                {
+                    "EffectTag": 4194304,
+                    "EffectCalculation": {
+                        "mFormulaParts": [
+                            {
+                                "mNumber": 1.0,
+                                "__type": "NumberCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                },
+                {
+                    "EffectTag": 16777216,
+                    "EffectCalculation": {
+                        "mFormulaParts": [
+                            {
+                                "mNumber": 1.0,
+                                "__type": "NumberCalculationPart"
+                            }
+                        ],
+                        "__type": "GameCalculation"
+                    },
+                    "__type": "{b09016f6}"
+                }
+            ],
+            "{38382c53}": [
+                {
+                    "{e38f54f7}": 4096,
+                    "{0717e686}": false,
+                    "__type": "{150d1b92}"
+                },
+                {
+                    "{e38f54f7}": 4096,
+                    "{0717e686}": false,
+                    "__type": "{150d1b92}"
+                }
+            ],
+            "__type": "BotsSpellData"
         },
         "__type": "SpellObject"
     },
