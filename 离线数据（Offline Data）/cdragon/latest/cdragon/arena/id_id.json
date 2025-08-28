@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Mendapatkan Rune Keystone <spellName>Hail of Blades</spellName> dan <spellName>Press the Attack</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Cerberus",
+            "rarity": 2,
+            "tooltip": "Mendapatkan Rune Keystone <spellName>Hail of Blades</spellName> dan <spellName>Press the Attack</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Light Warden",
             "rarity": 1,
             "tooltip": "Setiap @Cooldown@ detik, <keywordMajor>Autocast</keywordMajor> warding light ke arah sekutumu, memberikan <shield>@TotalShield@ Shield</shield> ke dirimu sendiri dan sekutu yang dilewatinya. Dan akan kembali, mengulangi efeknya."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Persyaratan: Pakai @QuestThreshold@ topi sekaligus.<br><br>Reward: Mendapatkan <scaleAF>@AFPerHat@ Adaptive Force</scaleAF>, @ArmorMRPerHat@ <scaleArmor>Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR>, @TenacityPerHat*100@% Tenacity, serta <speed>@MSPerHat@ Movement Speed</speed> per topi.<br><br><rules>Kehilangan setengah topi saat kamu kalah dalam satu ronde.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Quest: Mad Hatter",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Saat Ini Memberikan: <scaleAF>@f1@ Adaptive Force</scaleAF>, @f2@ <scaleArmor>Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR>, @f3*100@% Tenacity, serta <speed>@f4@ Movement Speed</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@% dari damage yang kamu terima berlangsung selama @BleedDuration@ detik (@RangedReduction*100@% untuk champion ranged)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Meningkatkan damage yang diberikan oleh augment dan itemmu sebesar @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Augmented Power",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Damage meningkat ronde ini: @f1@<br>Total peningkatan damage: @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Mendapatkan Ocean Soul, memberikan <healing>Health</healing> tinggi dan <scaleMana>Mana</scaleMana> regen setelah menghasilkan damage ke musuh.<br><br>Heal Diberikan Ronde Ini: @f1@<br>Total Heal Diberikan: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Menggunakan dash, blink, atau teleport akan memberimu <shield>shield</shield> selama @ShieldDuration@ detik. Shield ini juga diberikan pada sekutu yang kamu lewati. Kekuatan <shield>shield</shield> ini bergantung pada cooldown dasar ability di level 1.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Bodyguard",
+            "rarity": 1,
+            "tooltip": "Menggunakan dash, blink, atau teleport akan memberimu <shield>@MinShieldPerLevel@ shield, yang bertambah hingga @MaxShieldPerLevel@</shield> bergantung pada cooldown dasar ability di level 1, yang berlangsung selama @ShieldDuration@ detik. Shield ini juga diberikan pada sekutu yang kamu lewati.<br><br><rules>Shield mencapai ability maksimum dengan waktu cooldown minimal @MaxCDCheck@ detik.</rules><br><br>Damage yang dicegah di ronde ini: @f1@<br>Total damage dicegah: @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Ability dash, leap, blink, atau teleport meninggalkan jejak yang meledak setelah 1 detik.",
+            "desc": "Ability dash, blink, atau teleport meninggalkan jejak yang meledak setelah 1 detik.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Bermutasi menjadi salah satu Augment sekutumu di tiap ronde, dipilih random. <br><br><rules>Hanya bermutasi menjadi Augment yang bisa kamu roll.</rules>",
+            "desc": "Setiap ronde, ini <keyword>bermutasi</keyword> menjadi salah satu augment sekutumu.<br><br><rules>Hanya bermutasi menjadi augment yang bisa kamu roll.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Symbiotic Mutation",
             "rarity": 1,
-            "tooltip": "Bermutasi menjadi salah satu Augment sekutumu di tiap ronde, dipilih random. <br><br><rules>Hanya bermutasi menjadi Augment yang bisa kamu roll.</rules>"
+            "tooltip": "Setiap ronde, ini <keyword>bermutasi</keyword> menjadi salah satu augment sekutumu.<br><br><rules>Hanya bermutasi menjadi augment yang bisa kamu roll.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Celestial Body",
             "rarity": 1,
             "tooltip": "Mendapatkan <scaleHealth>@Health@ Health</scaleHealth>, tetapi kamu menghasilkan @DamageReduction*100@% lebih sedikit damage."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Meningkatkan penawaran augment mendatang sebesar @tierValueIncrease@ tier. Jika augment itu sudah ada di tier Prismatic, kamu mendapatkan bonus @GoldAmount@ gold",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Bravest of the Brave",
+            "rarity": 0,
+            "tooltip": "Meningkatkan penawaran augment mendatang sebesar @tierValueIncrease@ tier. Jika augment itu sudah ada di tier Prismatic, kamu mendapatkan bonus @GoldAmount@ gold"
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Overflow",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Biaya <scaleMana>Mana</scaleMana>-mu digandakan. <healing>Heal</healing>, <shield>Shield</shield>, dan damage Ability-mu <scaleMana>@ManaCalc@</scaleMana> lebih efektif."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Setelah menggunakan Ability dash, leap, blink, atau teleport, kamu mendapatkan <scaleArmor>@ResistsPerStack@ Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR> hingga @MaxResistTooltipOnly@ pada @MaxStacks@ stack.",
+            "desc": "Setelah menggunakan dash, blink, atau teleport, kamu mendapatkan <scaleArmor>@ResistsPerStack@ Armor</scaleArmor> dan <scaleMR>Magic Resist</scaleMR> hingga @MaxResistTooltipOnly@ pada @MaxStacks@ stack.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Impassable",
             "rarity": 1,
             "tooltip": "Mendapatkan Rune Keystone <spellName>Aftershock</spellName> dan <spellName>Glacial Augment</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Transmute semua augment kamu langsung menjadi augment Prismatic random.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Pandora's Box",
+            "rarity": 2,
+            "tooltip": "Transmute semua augment kamu langsung menjadi augment Prismatic random."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Tiap @TickCadence@ detik, mendapatkan @CurseStacksPerTick@ <keywordMajor>Cursed Power</keywordMajor> per champion musuh di sekitar.<br><br>Mendapatkan <scaleHealth>@f1@ Health</scaleHealth> (@MaxHealthRatio*100@% dari <keywordMajor>Cursed Power</keywordMajor>-mu).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 5.0
+            },
+            "desc": "Kamu sudah tidak bisa reroll.<br><br>Pilih Augment Gold, jika menggunakan minimal @PrismaticThreshold@ reroll, perkuat ini untuk memilih Augment Prismatic.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Calculated Risk",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Ukuran bertambah @SizeIncrement*100@% dan mendapatkan <scaleHealth>@MaxHPIncrement*100@% Health maksimum</scaleHealth> per takedown.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Tank Engine",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Ukuran bertambah @SizeIncrement*100@% dan mendapatkan <scaleHealth>@f2@% Health Bonus</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> per takedown).<br><br>Takedown: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "Bermutasi menjadi salah satu Augment lawanmu di setiap ronde, dipilih random.<br><br><rules>Hanya bermutasi menjadi Augment yang bisa kamu roll.</rules>",
+            "desc": "Setiap ronde, ini <keyword>bermutasi</keyword> menjadi salah satu Augment lawanmu.<br><br><rules>Hanya bermutasi menjadi augment yang bisa kamu roll.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Parasitic Mutation",
             "rarity": 0,
-            "tooltip": "Bermutasi menjadi salah satu Augment lawanmu di setiap ronde, dipilih random."
+            "tooltip": "Setiap ronde, ini <keyword>bermutasi</keyword> menjadi salah satu Augment lawanmu.<br><br><rules>Hanya bermutasi menjadi augment yang bisa kamu roll.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Langsung mendapatkan @HatsToGrant@ topi dan pengurangan harga Cappa Juice sebanyak @HatTrickPriceReduction@.<br><br>Menerima damage yang akan mengurangi Health-mu ke bawah @LowHealthThreshold*100@% memberimu <speed>@MoveSpeedBoostPercent*100@% Move Speed</speed> dan <shield>@ShieldHealth@ shield</shield> selama @ShieldDuration@, tetapi kehilangan satu topi. Cooldown @Cooldown@ detik.",
+            "desc": "Langsung mendapatkan @HatsToGrant@ topi dan mengurangi harga Cappa Juice sebesar @HatTrickPriceReduction@.<br>Menerima damage yang akan mengurangi Health-mu ke bawah @LowHealthThreshold*100@% memberimu <speed>@MoveSpeedBoostPercent*100@% Move Speed</speed> dan <shield>@ShieldHealth@ shield</shield> selama @ShieldDuration@, tetapi kehilangan satu topi. Cooldown @Cooldown@ detik.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Hat Trick",
             "rarity": 1,
-            "tooltip": "Langsung mendapatkan @HatsToGrant@ topi dan pengurangan harga Cappa Juice sebanyak @HatTrickPriceReduction@.<br><br>Menerima damage yang akan mengurangi Health-mu ke bawah @LowHealthThreshold*100@% memberimu <speed>@MoveSpeedBoostPercent*100@% Move Speed</speed> dan <shield>@ShieldHealth@ shield</shield> selama @ShieldDuration@, tetapi kehilangan satu topi. Cooldown @Cooldown@ detik."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Kamu tidak akan kehilangan topi saat mati.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "Ada laser ke arahmu menghadap yang menghasilkan <magicDamage>@LaserEyesTooltip@ magic damage</magicDamage> per detik.<br><br>Damage Dihasilkan Ronde Ini: @f1@<br>Total Damage Dihasilkan: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Mendapatkan Kekuatan Heal dan Shield, meningkat saat Health rendah. Saat casting Ultima, Kekuatan Heal dan Shield kamu menjadi dua kali lipat.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Spirit Infusion",
+            "rarity": 0,
+            "tooltip": "Mendapatkan <healing>@FlatHS*100@% Kekuatan Heal dan Shield</healing>.<br><br>Saat casting Ultima, <healing>Kekuatan Heal dan Shield kamu</healing> meningkat sebesar @AmpAmount*100@% selama @HSDuration@ detik (Cooldown @Cooldown@ detik)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Menggantikan Summoner Flee dengan <spellName>Fate's Call</spellName>.<br><br><rules><spellName>Fate's Call</spellName> membuat partnermu tidak bisa ditarget selama hingga 4 detik. Partnermu bisa melontarkan diri sendiri, <status>Knock Back</status> musuh.</rules><br>",
+            "desc": "Menggantikan Summoner Flee dengan <spellName>Fate's Call</spellName>.<br><br><rules><spellName>Fate's Call</spellName> membuat sekutumu tidak bisa ditarget selama hingga 4 detik. Sekutumu bisa melontarkan diri sendiri, <status>Knock Back</status> musuh.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Oathsworn",
             "rarity": 1,
-            "tooltip": "Menggantikan Summoner Flee dengan <spellName>Fate's Call</spellName>.<br><br><rules><spellName>Fate's Call</spellName> membuat partnermu tidak bisa ditarget selama hingga 4 detik. Partnermu bisa melontarkan diri sendiri, <status>Knock Back</status> musuh.</rules><br>"
+            "tooltip": "Menggantikan Summoner Flee dengan <spellName>Fate's Call</spellName>.<br><br><rules><spellName>Fate's Call</spellName> membuat sekutumu tidak bisa ditarget selama hingga 4 detik. Sekutumu bisa melontarkan diri sendiri, <status>Knock Back</status> musuh.</rules>"
         },
         {
             "apiName": "Flashbang",

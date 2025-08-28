@@ -73439,7 +73439,7 @@
                     "erosionFeatherIn": 0.25,
                     "erosionFeatherOut": 0.25,
                     "erosionSliceWidth": 1.7000000476837158,
-                    "erosionMapName": "ASSETS/Shared/Particles/Base_SmokeErode.TFT_Set15.tex",
+                    "erosionMapName": "ASSETS/Shared/Particles/Base_SmokeErode.Ruby.tex",
                     "erosionMapChannelMixer": {
                         "constantValue": [
                             1.0,
@@ -81215,6 +81215,22 @@
                 "__type": "TftCutsceneCinematicBarsClip"
             },
             {
+                "priority": 3,
+                "duration": 3.0,
+                "BlackboardGameObjectName": "AnimProp1Proxy",
+                "Animation": "Intro1",
+                "PauseOnEnd": true,
+                "__type": "TftCutsceneAnimClip"
+            },
+            {
+                "priority": 2,
+                "duration": 3.0,
+                "BlackboardGameObjectName": "AnimProp2Proxy",
+                "Animation": "Intro2",
+                "PauseOnEnd": true,
+                "__type": "TftCutsceneAnimClip"
+            },
+            {
                 "TriggerTime": 4.0,
                 "duration": 0.800000011920929,
                 "BlackboardCameraBone": "CameraData",
@@ -81232,6 +81248,39 @@
                 "__type": "TftCutsceneSetPositionAction"
             },
             {
+                "TriggerTime": 1.399999976158142,
+                "GameObjectBlackboardName": "AnimProp1Proxy",
+                "PositionBlackboardName": "ArenaPos",
+                "__type": "TftCutsceneSetPositionAction"
+            },
+            {
+                "TriggerTime": 1.399999976158142,
+                "priority": 1,
+                "GameObjectBlackboardName": "AnimProp2Proxy",
+                "PositionBlackboardName": "ArenaPos",
+                "__type": "TftCutsceneSetPositionAction"
+            },
+            {
+                "duration": 5.0,
+                "StartAudioEvent": "Play_mus_map22_stinger_Set13_TheLastDrop_Trans_intro",
+                "StopAudioEvent": "Stop_mus_map22_stinger_Set13_TheLastDrop_Trans_intro",
+                "BlackboardAssociatedPlayers": [
+                    "Player",
+                    "PlayerTarget"
+                ],
+                "__type": "TftCutsceneCamSfxClip"
+            },
+            {
+                "duration": 7.0,
+                "StartAudioEvent": "Play_sfx_tft_env_thelastdrop_intro",
+                "StopAudioEvent": "Stop_sfx_tft_env_thelastdrop_intro",
+                "BlackboardAssociatedPlayers": [
+                    "Player",
+                    "PlayerTarget"
+                ],
+                "__type": "TftCutsceneCamSfxClip"
+            },
+            {
                 "TriggerTime": 3.9000000953674316,
                 "duration": 0.6000000238418579,
                 "BlackboardAssociatedPlayers": [
@@ -81247,6 +81296,31 @@
                     255
                 ],
                 "__type": "TftCutsceneColorFxClip"
+            },
+            {
+                "priority": 11,
+                "duration": 3.0,
+                "BlackboardGameObjectOriginal": "AnimProp1",
+                "BlackboardGameObjectProxy": "AnimProp1Proxy",
+                "__type": "TftCutsceneProxyClip"
+            },
+            {
+                "priority": 10,
+                "duration": 3.0,
+                "BlackboardGameObjectOriginal": "AnimProp2",
+                "BlackboardGameObjectProxy": "AnimProp2Proxy",
+                "__type": "TftCutsceneProxyClip"
+            },
+            {
+                "GameObjectBlackboardName": "AnimProp1Proxy",
+                "PositionBlackboardName": "IntroPos",
+                "__type": "TftCutsceneSetPositionAction"
+            },
+            {
+                "priority": 1,
+                "GameObjectBlackboardName": "AnimProp2Proxy",
+                "PositionBlackboardName": "IntroPos",
+                "__type": "TftCutsceneSetPositionAction"
             }
         ],
         "initializer": {
@@ -81259,6 +81333,16 @@
                 {
                     "MapPropName": "IntroProp",
                     "BlackboardName": "IntroProp",
+                    "__type": "TftCutsceneAddMapProp"
+                },
+                {
+                    "MapPropName": "AnimProp1",
+                    "BlackboardName": "AnimProp1",
+                    "__type": "TftCutsceneAddMapProp"
+                },
+                {
+                    "MapPropName": "AnimProp2",
+                    "BlackboardName": "AnimProp2",
                     "__type": "TftCutsceneAddMapProp"
                 }
             ],

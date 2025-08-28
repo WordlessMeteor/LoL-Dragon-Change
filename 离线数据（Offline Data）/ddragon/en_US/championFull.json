@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "15.16.1",
+    "version": "15.17.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -689,7 +689,7 @@
             ],
             "passive": {
                 "name": "Deathbringer Stance",
-                "description": "Periodically, Aatrox's next basic attack deals bonus <physicalDamage>physical damage</physicalDamage> and heals him, based on the target's max health. ",
+                "description": "Periodically, Aatrox's next basic attack deals bonus <magicDamage>magic damage</magicDamage> and heals him, based on the target's max health. ",
                 "image": {
                     "full": "Aatrox_Passive.png",
                     "sprite": "passive0.png",
@@ -2947,6 +2947,12 @@
                     "num": 29,
                     "name": "Lunar Beast Alistar",
                     "chromas": true
+                },
+                {
+                    "id": "12040",
+                    "num": 40,
+                    "name": "Elderwood Alistar",
+                    "chromas": false
                 }
             ],
             "lore": "Always a mighty warrior with a fearsome reputation, Alistar seeks revenge for the death of his clan at the hands of the Noxian empire. Though he was enslaved and forced into the life of a gladiator, his unbreakable will was what kept him from truly becoming a beast. Now, free of the chains of his former masters, he fights in the name of the downtrodden and the disadvantaged, his rage as much a weapon as his horns, hooves and fists.",
@@ -7997,18 +8003,18 @@
                         "effect": [
                             "{{ truedamagebonus*100.000000 }}% -> {{ truedamagebonusnl*100.000000 }}%",
                             "{{ cost }} -> {{ costNL }}",
-                            "{{ cd }} -> {{ cdNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        0,
-                        0,
-                        0,
-                        0,
-                        0
+                        22,
+                        20.5,
+                        19,
+                        17.5,
+                        16
                     ],
-                    "cooldownBurn": "0",
+                    "cooldownBurn": "22/20.5/19/17.5/16",
                     "cost": [
                         50,
                         55,
@@ -8895,7 +8901,7 @@
                     "id": "AuroraR",
                     "name": "Between Worlds",
                     "description": "Aurora leaps in a direction of her choosing, releasing a shockwave that damages and slows any enemies it hits. Afterward, she creates an area that slows enemies within it and allows Aurora to teleport from one side of the area to the other.",
-                    "tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> and <status>Slows</status> enemies hit by {{ slowpercent*-100 }}% for 2 seconds.<br /><br />The area of convergence stays active for {{ areaduration }} seconds, granting Aurora <keywordMajor>Realm Hopper</keywordMajor> and allowing her to jump from one edge of the area to another.<br /><br />Enemies attempting to enter or leave the area are <status>Slowed</status> by {{ exitslowpercent*-100 }}% for {{ stunduration }} seconds.<br /><br />Aurora can <recast>Recast</recast> this Ability to end the effect early.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Leap in a direction. Upon landing, Aurora converges the realms, sending out a pulse of spirit energy that deals <magicDamage>{{ damagecalc }} magic damage</magicDamage> and <status>Slows</status> enemies hit by {{ slowpercent*-100 }}% for 2 seconds.<br /><br />The area of convergence stays active for {{ areaduration }} seconds, granting Aurora <keywordMajor>Realm Hopper</keywordMajor> for the same duration and allowing her to jump from one edge of the area to another.<br /><br />Enemies attempting to enter or leave the area are <status>Slowed</status> by {{ exitslowpercent*-100 }}% for {{ stunduration }} seconds.<br /><br />Aurora can <recast>Recast</recast> this Ability to end the effect early.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -26571,6 +26577,12 @@
                     "num": 44,
                     "name": "Fallen God-King Garen",
                     "chromas": false
+                },
+                {
+                    "id": "86046",
+                    "num": 46,
+                    "name": "Visions of the Fallen Garen",
+                    "chromas": false
                 }
             ],
             "lore": "A proud and noble warrior, Garen fights as one of the Dauntless Vanguard. He is popular among his fellows, and respected well enough by his enemies—not least as a scion of the prestigious Crownguard family, entrusted with defending Demacia and its ideals. Clad in magic-resistant armor and bearing a mighty broadsword, Garen stands ready to confront mages and sorcerers on the field of battle, in a veritable whirlwind of righteous steel.",
@@ -29358,7 +29370,7 @@
                 "mp": 330,
                 "mpperlevel": 40,
                 "movespeed": 340,
-                "armor": 36,
+                "armor": 33,
                 "armorperlevel": 4.9,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -29371,7 +29383,7 @@
                 "critperlevel": 0,
                 "attackdamage": 63,
                 "attackdamageperlevel": 3,
-                "attackspeedperlevel": 2.25,
+                "attackspeedperlevel": 2.5,
                 "attackspeed": 0.69
             },
             "spells": [
@@ -29806,11 +29818,13 @@
                     "leveltip": {
                         "label": [
                             "Cooldown",
-                            "Base Damage"
+                            "Base Damage",
+                            "Slow"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
-                            "{{ basedamage }} -> {{ basedamageNL }}"
+                            "{{ basedamage }} -> {{ basedamageNL }}",
+                            "{{ initialslow*-100.000000 }}% -> {{ initialslownl*-100.000000 }}%"
                         ]
                     },
                     "maxrank": 3,
@@ -33099,12 +33113,12 @@
                     "maxrank": 5,
                     "cooldown": [
                         16,
-                        15,
-                        14,
+                        14.5,
                         13,
-                        12
+                        11.5,
+                        10
                     ],
-                    "cooldownBurn": "16/15/14/13/12",
+                    "cooldownBurn": "16/14.5/13/11.5/10",
                     "cost": [
                         50,
                         50,
@@ -34850,6 +34864,12 @@
                     "id": "59044",
                     "num": 44,
                     "name": "Mythmaker Jarvan IV",
+                    "chromas": false
+                },
+                {
+                    "id": "59054",
+                    "num": 54,
+                    "name": "Prestige Visions of the Fallen Jarvan IV",
                     "chromas": false
                 }
             ],
@@ -36967,6 +36987,12 @@
                     "id": "202047",
                     "num": 47,
                     "name": "Mythmaker Jhin",
+                    "chromas": false
+                },
+                {
+                    "id": "202055",
+                    "num": 55,
+                    "name": "Arcana Jhin",
                     "chromas": false
                 }
             ],
@@ -43377,13 +43403,13 @@
                     ],
                     "cooldownBurn": "7/6.5/6/5.5/5",
                     "cost": [
-                        50,
-                        50,
-                        50,
-                        50,
-                        50
+                        40,
+                        40,
+                        40,
+                        40,
+                        40
                     ],
-                    "costBurn": "50",
+                    "costBurn": "40",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -43520,13 +43546,13 @@
                     ],
                     "cooldownBurn": "13/12/11/10/9",
                     "cost": [
-                        60,
-                        65,
-                        70,
-                        75,
-                        80
+                        40,
+                        45,
+                        50,
+                        55,
+                        60
                     ],
-                    "costBurn": "60/65/70/75/80",
+                    "costBurn": "40/45/50/55/60",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -47189,12 +47215,14 @@
                         "label": [
                             "Damage",
                             "Range",
-                            "Cooldown"
+                            "Cooldown",
+                            "Total AP Ratio"
                         ],
                         "effect": [
                             "{{ damage }} -> {{ damageNL }}",
                             "{{ castrange }} -> {{ castrangeNL }}",
-                            "{{ cooldown }} -> {{ cooldownNL }}"
+                            "{{ cooldown }} -> {{ cooldownNL }}",
+                            "{{ apratio*100.000000 }}% -> {{ aprationl*100.000000 }}%"
                         ]
                     },
                     "maxrank": 3,
@@ -52267,6 +52295,12 @@
                     "num": 46,
                     "name": "Cafe Cuties Lulu",
                     "chromas": true
+                },
+                {
+                    "id": "117055",
+                    "num": 55,
+                    "name": "Arcana Lulu",
+                    "chromas": false
                 }
             ],
             "lore": "The yordle mage Lulu is known for conjuring dreamlike illusions and fanciful creatures as she roams Runeterra with her fairy companion Pix. Lulu shapes reality on a whim, warping the fabric of the world, and what she views as the constraints of this mundane, physical realm. While others might consider her magic at best unnatural, and at worst dangerous, she believes everyone could use a touch of enchantment.",
@@ -55889,7 +55923,7 @@
                 "difficulty": 4
             },
             "stats": {
-                "hp": 669,
+                "hp": 655,
                 "hpperlevel": 105,
                 "mp": 251,
                 "mpperlevel": 42,
@@ -57948,7 +57982,7 @@
                 "mpregenperlevel": 0.8,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 53,
+                "attackdamage": 55,
                 "attackdamageperlevel": 2.4,
                 "attackspeedperlevel": 3,
                 "attackspeed": 0.656
@@ -60217,12 +60251,12 @@
                     "cooldownBurn": "12",
                     "cost": [
                         70,
-                        85,
+                        80,
+                        90,
                         100,
-                        115,
-                        130
+                        110
                     ],
-                    "costBurn": "70/85/100/115/130",
+                    "costBurn": "70/80/90/100/110",
                     "datavalues": {},
                     "effect": [
                         null,
@@ -80598,7 +80632,7 @@
                 "critperlevel": 0,
                 "attackdamage": 50,
                 "attackdamageperlevel": 0,
-                "attackspeedperlevel": 2,
+                "attackspeedperlevel": 3,
                 "attackspeed": 0.625
             },
             "spells": [
@@ -97178,6 +97212,12 @@
                     "num": 27,
                     "name": "Victorious Tryndamere",
                     "chromas": true
+                },
+                {
+                    "id": "23037",
+                    "num": 37,
+                    "name": "Visions of the Fallen Tryndamere",
+                    "chromas": true
                 }
             ],
             "lore": "Fueled by unbridled fury and rage, Tryndamere once carved his way through the Freljord, openly challenging the greatest warriors of the north to prepare himself for even darker days ahead. The wrathful barbarian has long sought revenge for the annihilation of his clan, though more recently he has found companionship with Ashe, the Avarosan warmother, and a home with her people. His almost inhuman strength and fortitude is legendary, and has delivered him and his new allies countless victories against the greatest of odds.",
@@ -101669,11 +101709,13 @@
                     "leveltip": {
                         "label": [
                             "True Damage %",
-                            "Minimum Damage"
+                            "Minimum Damage",
+                            "Monster Damage"
                         ],
                         "effect": [
                             "{{ maxhealthratio*100.000000 }}% -> {{ maxhealthrationl*100.000000 }}%",
-                            "{{ damagefloor }} -> {{ damagefloorNL }}"
+                            "{{ damagefloor }} -> {{ damagefloorNL }}",
+                            "{{ damagevsmonsters }} -> {{ damagevsmonstersNL }}"
                         ]
                     },
                     "maxrank": 5,
@@ -105571,7 +105613,7 @@
                     "id": "ViktorQ",
                     "name": "Siphon Power",
                     "description": "Viktor blasts an enemy unit with magic damage, which grants him a shield and empowers his next basic attack.<br><br>Augment: Siphon Power's shield is increased by 60% and Viktor gains bonus move speed after casting the Ability.<br>",
-                    "tooltip": "Viktor blasts an enemy, dealing <magicDamage>{{ totalmissiledamage }} magic damage</magicDamage> and granting Viktor <shield>{{ shieldlevelscaling }} Shield</shield> for {{ buffduration }} seconds.<br /><br />Viktor's next Attack within 3.5 seconds deals <magicDamage>{{ attacktotaldmg }} magic damage</magicDamage>.<br /><br /><keywordMajor>Upgraded:</keywordMajor> Grants <shield>{{ totalaugmentedshieldvalue }} Shield</shield> and Viktor additionally gains <speed>{{ augmentmovespeedbonus }}% Move Speed</speed> for {{ buffduration }} seconds.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Viktor blasts an enemy, dealing <magicDamage>{{ totalmissiledamage }} magic damage</magicDamage> and granting Viktor <shield>{{ shieldlevelscaling }} Shield</shield> for {{ buffduration }} seconds.<br /><br />Viktor's next Attack within 4 seconds deals <magicDamage>{{ attacktotaldmg }} magic damage</magicDamage>.<br /><br /><keywordMajor>Upgraded:</keywordMajor> Grants <shield>{{ totalaugmentedshieldvalue }} Shield</shield> and Viktor additionally gains <speed>{{ augmentmovespeedbonus }}% Move Speed</speed> for {{ buffduration }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Cooldown",
@@ -109884,7 +109926,7 @@
                     "id": "XinZhaoW",
                     "name": "Wind Becomes Lightning",
                     "description": "Xin Zhao slashes in front of himself with his spear, then thrusts it forward, slowing affected enemies and marking them as Challenged.",
-                    "tooltip": "Xin Zhao slashes, dealing <physicalDamage>{{ slashdamage }}</physicalDamage> physical damage, then thrusts, dealing <physicalDamage>{{ thrustdamage }}</physicalDamage>. Enemies hit by the thrust are <status>Slowed</status> by {{ e6 }}% for {{ e7 }} seconds. <br /><br />Champions and Large Monsters hit by the thrust are marked as <keywordMajor>Challenged</keywordMajor> for {{ markduration }} seconds and revealed unless <keywordStealth>stealthed</keywordStealth>.{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "Xin Zhao slashes, dealing <physicalDamage>{{ slashdamage }} physical damage</physicalDamage>, then thrusts, dealing <physicalDamage>{{ thrustdamage }}</physicalDamage>. Enemies hit by the thrust are <status>Slowed</status> by {{ e6 }}% for {{ e7 }} seconds. <br /><br />Champions and Large Monsters hit by the thrust are marked as <keywordMajor>Challenged</keywordMajor> for {{ markduration }} seconds and revealed unless <keywordStealth>Stealthed</keywordStealth>.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Slash Damage",
@@ -110028,8 +110070,8 @@
                 {
                     "id": "XinZhaoE",
                     "name": "Audacious Charge",
-                    "description": "Xin Zhao charges to an enemy, gaining increased Attack Speed and dealing damage to all enemies in the area, slowing them briefly. Audacious Charge gains increased range against Challenged targets.",
-                    "tooltip": "Xin Zhao charges an enemy, dealing <magicDamage>{{ chargedamage }} magic damage</magicDamage> to nearby enemies and <status>Slowing</status> them by {{ baseslowamount }}% for {{ e6 }} seconds.<br /><br />Xin Zhao also grants himself <attackSpeed>{{ e3 }}% Attack Speed</attackSpeed> for {{ e4 }} seconds.<br /><br /><spellName>Audacious Charge's</spellName> range is increased on enemies that are <keywordMajor>Challenged</keywordMajor>. <br />{{ spellmodifierdescriptionappend }}",
+                    "description": "Xin Zhao charges to an enemy, gaining increased Attack Speed and dealing damage to all enemies in the area, slowing them briefly. This Ability gains increased range against Challenged targets.",
+                    "tooltip": "Xin Zhao charges an enemy, dealing <magicDamage>{{ chargedamage }} magic damage</magicDamage> to nearby enemies and <status>Slowing</status> them by {{ baseslowamount }}% for {{ e6 }} seconds.<br /><br />Xin Zhao also grants himself <attackSpeed>{{ e3 }}% Attack Speed</attackSpeed> for {{ e4 }} seconds.<br /><br />This Ability's range is increased on enemies that are <keywordMajor>Challenged</keywordMajor>. <br />{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -110169,8 +110211,8 @@
                 {
                     "id": "XinZhaoR",
                     "name": "Crescent Guard",
-                    "description": "Xin Zhao challenges an enemy he damaged recently. Xin Zhao deals damage to nearby enemies based on their current Health and knocks non-challenged targets back, becoming impervious to damage dealt by champions outside of the circle created.",
-                    "tooltip": "The last champion Xin Zhao damaged with an Attack or <spellName>Audacious Charge</spellName> is <keywordMajor>Challenged</keywordMajor> for {{ markduration }} seconds.<br /><br />Xin Zhao unleashes a sweep around him that deals <physicalDamage>{{ totaldamage }} plus {{ percentcurrenthealthdamage*100 }}% current Health physical damage</physicalDamage> and <status>Knocks Back</status> all <keywordMajor>non-Challenged</keywordMajor> enemies. <br />  <br />Afterwards, Xin Zhao becomes immune to damage from enemies outside the sweep range for {{ missiledefensebaseduration }} seconds. {{ spellmodifierdescriptionappend }}",
+                    "description": "Xin Zhao passively challenges an enemy he damaged recently. When activated, Xin Zhao deals damage to nearby enemies based on their current Health and knocks non-challenged targets back, becoming impervious to damage dealt by champions outside of the circle created.",
+                    "tooltip": "<spellPassive>Passive:</spellPassive> The last champion Xin Zhao damaged with an Attack or <spellName>Audacious Charge</spellName> is <keywordMajor>Challenged</keywordMajor> for {{ markduration }} seconds.<br /><br /><spellActive>Active:</spellActive> Xin Zhao unleashes a sweep around him that deals <physicalDamage>{{ totaldamage }} plus {{ percentcurrenthealthdamage*100 }}% current Health physical damage</physicalDamage> and <status>Knocks Back</status> all <keywordMajor>non-Challenged</keywordMajor> enemies. <br />  <br />Afterwards, Xin Zhao becomes immune to damage from enemies outside the sweep range for {{ missiledefensebaseduration }} seconds. {{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Damage",
@@ -110286,7 +110328,7 @@
                 "name": "Determination",
                 "description": "Every third attack deals bonus damage and heals Xin Zhao.",
                 "image": {
-                    "full": "XinZhaoP.png",
+                    "full": "XinZhaoReworkP.XinZhaoRework.png",
                     "sprite": "passive5.png",
                     "group": "passive",
                     "x": 384,

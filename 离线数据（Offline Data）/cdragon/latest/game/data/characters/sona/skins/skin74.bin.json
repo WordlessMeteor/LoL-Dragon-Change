@@ -432,6 +432,11 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
+                "textureName": "FlowmapTex",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
                 "textureName": "AdditiveScroll_Mask",
                 "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Mask_LegsHands.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
@@ -457,13 +462,13 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.tex",
+                "textureName": "Mask_Swirls",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
+                "textureName": "HighLightShape",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -533,6 +538,16 @@
                     0.4099946618080139,
                     0.6599984765052795,
                     1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TopArea_FresnelRage",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
@@ -741,6 +756,36 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
+                "name": "FlowmapTilling_Scrolling",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_Scrolling",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapSpeed_Scrolling",
+                "value": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -861,11 +906,99 @@
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightDir",
+                "value": [
+                    0.20000000298023224,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "HighLightColorTint",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightIntensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Mul",
+                "value": [
+                    7.050000190734863,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Offset",
+                "value": [
+                    -1.7999999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_HighLight",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Speed_HighLight",
+                "value": [
+                    -0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
+                "name": "STYLIZEDHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWMAPHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SURFACE_SCROLLING_FLOWMAP",
+                "on": false,
                 "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
@@ -878,7 +1011,7 @@
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
-                "Group": "Flow Map Feature",
+                "Group": "Flow Map Feature for Diffuse Tex",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
@@ -956,6 +1089,11 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
+                "textureName": "FlowmapTex",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
                 "textureName": "AdditiveScroll_Mask",
                 "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Mask_LegsHands.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
@@ -981,13 +1119,13 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.tex",
+                "textureName": "Mask_Swirls",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
+                "textureName": "HighLightShape",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -1057,6 +1195,16 @@
                     0.4099946618080139,
                     0.6599984765052795,
                     1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TopArea_FresnelRage",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
@@ -1259,6 +1407,36 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
+                "name": "FlowmapTilling_Scrolling",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_Scrolling",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapSpeed_Scrolling",
+                "value": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -1379,11 +1557,99 @@
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightDir",
+                "value": [
+                    0.20000000298023224,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "HighLightColorTint",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightIntensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Mul",
+                "value": [
+                    7.050000190734863,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Offset",
+                "value": [
+                    -1.7999999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_HighLight",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Speed_HighLight",
+                "value": [
+                    -0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
+                "name": "STYLIZEDHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWMAPHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SURFACE_SCROLLING_FLOWMAP",
+                "on": false,
                 "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
@@ -1396,7 +1662,7 @@
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
-                "Group": "Flow Map Feature",
+                "Group": "Flow Map Feature for Diffuse Tex",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
@@ -1463,9 +1729,38 @@
                 "textureName": "Mask",
                 "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Specular_Mask",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
+            {
+                "name": "SpecularColor",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "MaxSpec",
+                "value": [
+                    64.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LQ_Lighting_Intensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
             {
                 "name": "Anim_Scale_Intensity",
                 "__type": "StaticMaterialShaderParamDef"
@@ -1622,6 +1917,11 @@
                 "name": "FLOWDIRECTIONSWITCH",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SPECULAR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
@@ -1755,6 +2055,11 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
+                "textureName": "FlowmapTex",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_flowmap_weapon01.SKINS_Sona_Skin66.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
                 "textureName": "AdditiveScroll_Mask",
                 "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_red.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
@@ -1780,13 +2085,13 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_flowmap_weapon01.SKINS_Sona_Skin66.tex",
+                "textureName": "Mask_Swirls",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
+                "textureName": "HighLightShape",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -1850,6 +2155,16 @@
                     0.8588998317718506,
                     0.9094834923744202,
                     1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TopArea_FresnelRage",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
@@ -2058,6 +2373,36 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
+                "name": "FlowmapTilling_Scrolling",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_Scrolling",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapSpeed_Scrolling",
+                "value": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -2184,11 +2529,99 @@
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightDir",
+                "value": [
+                    0.20000000298023224,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "HighLightColorTint",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightIntensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Mul",
+                "value": [
+                    7.050000190734863,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Offset",
+                "value": [
+                    -1.7999999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_HighLight",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Speed_HighLight",
+                "value": [
+                    -0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
+                "name": "STYLIZEDHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWMAPHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SURFACE_SCROLLING_FLOWMAP",
+                "on": false,
                 "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
@@ -2200,7 +2633,7 @@
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
-                "Group": "Flow Map Feature",
+                "Group": "Flow Map Feature for Diffuse Tex",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
@@ -2278,6 +2711,11 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
+                "textureName": "FlowmapTex",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Scarf_Flowmap.SKINS_Sona_Skin66.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
                 "textureName": "AdditiveScroll_Mask",
                 "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Mask_LegsHands.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
@@ -2303,13 +2741,13 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Scarf_Flowmap.SKINS_Sona_Skin66.tex",
+                "textureName": "Mask_Swirls",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
+                "textureName": "HighLightShape",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -2373,6 +2811,16 @@
                     0.4117647111415863,
                     0.658823549747467,
                     1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TopArea_FresnelRage",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
@@ -2593,6 +3041,36 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
+                "name": "FlowmapTilling_Scrolling",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_Scrolling",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapSpeed_Scrolling",
+                "value": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -2713,11 +3191,99 @@
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightDir",
+                "value": [
+                    0.20000000298023224,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "HighLightColorTint",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightIntensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Mul",
+                "value": [
+                    7.050000190734863,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Offset",
+                "value": [
+                    -1.7999999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_HighLight",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Speed_HighLight",
+                "value": [
+                    -0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
+                "name": "STYLIZEDHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWMAPHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SURFACE_SCROLLING_FLOWMAP",
+                "on": false,
                 "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
@@ -2729,7 +3295,7 @@
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
-                "Group": "Flow Map Feature",
+                "Group": "Flow Map Feature for Diffuse Tex",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
@@ -2807,6 +3373,11 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
+                "textureName": "FlowmapTex",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Scarf_Flowmap.SKINS_Sona_Skin66.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
                 "textureName": "AdditiveScroll_Mask",
                 "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Scarf_Mask02.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
@@ -2832,13 +3403,13 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Scarf_Flowmap.SKINS_Sona_Skin66.tex",
+                "textureName": "Mask_Swirls",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
+                "textureName": "HighLightShape",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -2902,6 +3473,16 @@
                     0.4117647111415863,
                     0.658823549747467,
                     1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TopArea_FresnelRage",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
@@ -3122,6 +3703,36 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
+                "name": "FlowmapTilling_Scrolling",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_Scrolling",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapSpeed_Scrolling",
+                "value": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -3242,11 +3853,99 @@
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightDir",
+                "value": [
+                    0.20000000298023224,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "HighLightColorTint",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightIntensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Mul",
+                "value": [
+                    7.050000190734863,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Offset",
+                "value": [
+                    -1.7999999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_HighLight",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Speed_HighLight",
+                "value": [
+                    -0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
+                "name": "STYLIZEDHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWMAPHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SURFACE_SCROLLING_FLOWMAP",
+                "on": false,
                 "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
@@ -3258,7 +3957,7 @@
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
-                "Group": "Flow Map Feature",
+                "Group": "Flow Map Feature for Diffuse Tex",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
@@ -3420,6 +4119,11 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
+                "textureName": "FlowmapTex",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Bra_Mask_Deform.SKINS_Sona_Skin66.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
                 "textureName": "AdditiveScroll_Mask",
                 "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Green.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
@@ -3445,13 +4149,13 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/Particles/Sona_Skin66_Bra_Mask_Deform.SKINS_Sona_Skin66.tex",
+                "textureName": "Mask_Swirls",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
+                "textureName": "HighLightShape",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -3515,6 +4219,16 @@
                     0.09019608050584793,
                     0.23546196520328522,
                     1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TopArea_FresnelRage",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
@@ -3717,6 +4431,36 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
+                "name": "FlowmapTilling_Scrolling",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_Scrolling",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapSpeed_Scrolling",
+                "value": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     0.5,
@@ -3837,11 +4581,99 @@
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightDir",
+                "value": [
+                    0.20000000298023224,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "HighLightColorTint",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightIntensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Mul",
+                "value": [
+                    7.050000190734863,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Offset",
+                "value": [
+                    -1.7999999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_HighLight",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Speed_HighLight",
+                "value": [
+                    -0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
+                "name": "STYLIZEDHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWMAPHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "SURFACE_SCROLLING",
+                "Group": "Surface Scrolling Feature",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SURFACE_SCROLLING_FLOWMAP",
+                "on": false,
                 "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
             },
@@ -3853,7 +4685,7 @@
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
-                "Group": "Flow Map Feature",
+                "Group": "Flow Map Feature for Diffuse Tex",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
@@ -3931,6 +4763,11 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
+                "textureName": "FlowmapTex",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
                 "textureName": "AdditiveScroll_Mask",
                 "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
@@ -3956,13 +4793,13 @@
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "FlowmapTex",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/flowmap.SKINS_Sona_Skin66.tex",
+                "textureName": "Mask_Swirls",
+                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "Mask_Swirls",
-                "texturePath": "ASSETS/Characters/Sona/Skins/Skin66/black.SKINS_Sona_Skin66.tex",
+                "textureName": "HighLightShape",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
@@ -4026,6 +4863,16 @@
                     0.4099946618080139,
                     0.6599984765052795,
                     1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TopArea_FresnelRage",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
@@ -4222,6 +5069,36 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
+                "name": "FlowmapTilling_Scrolling",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_Scrolling",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapSpeed_Scrolling",
+                "value": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
                 "name": "VertexDeformFeatureStrength",
                 "value": [
                     1.0,
@@ -4342,11 +5219,99 @@
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightDir",
+                "value": [
+                    0.20000000298023224,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "HighLightColorTint",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "LightIntensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Mul",
+                "value": [
+                    7.050000190734863,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Shift_Offset",
+                "value": [
+                    -1.7999999523162842,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlowmapIntensity_HighLight",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Speed_HighLight",
+                "value": [
+                    -0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
+                "name": "STYLIZEDHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FLOWMAPHIGHLIGHT",
+                "on": false,
+                "Group": "Stylized Highlight",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
                 "name": "SURFACE_SCROLLING",
+                "on": false,
+                "Group": "Surface Scrolling Feature",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SURFACE_SCROLLING_FLOWMAP",
                 "on": false,
                 "Group": "Surface Scrolling Feature",
                 "__type": "StaticMaterialSwitchDef"
@@ -4359,7 +5324,7 @@
             {
                 "name": "USE_FLOW_MAP",
                 "on": false,
-                "Group": "Flow Map Feature",
+                "Group": "Flow Map Feature for Diffuse Tex",
                 "__type": "StaticMaterialSwitchDef"
             },
             {

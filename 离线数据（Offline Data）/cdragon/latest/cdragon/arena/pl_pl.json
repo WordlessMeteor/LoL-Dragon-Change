@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Zyskujesz runy kluczowe <spellName>Nawałnica Mieczy</spellName> i <spellName>Do Ataku</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Cerberus",
+            "rarity": 2,
+            "tooltip": "Zyskujesz runy kluczowe <spellName>Nawałnica Mieczy</spellName> i <spellName>Do Ataku</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Świetlisty Wartownik",
             "rarity": 1,
             "tooltip": "Co @Cooldown@ sek. <keywordMajor>automatycznie</keywordMajor> wysyłasz w kierunku sojusznika ochronne światło, nakładając <shield>tarczę o wytrzymałości @TotalShield@ pkt.</shield> na siebie i sojuszników, przez których światło przeniknie. Światło następnie powraca, ponownie nakładając swój efekt."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Wymaganie: Nosisz jednocześnie kapelusze w liczbie: @QuestThreshold@.<br><br>Nagroda: Zyskujesz <scaleAF>@AFPerHat@ pkt. siły adaptacyjnej</scaleAF>, @ArmorMRPerHat@ pkt. <scaleArmor>pancerza</scaleArmor> i <scaleMR>odporności na magię</scaleMR>, @TenacityPerHat*100@% nieustępliwości i <speed>@MSPerHat@ jedn. prędkości ruchu</speed> za każdy kapelusz.<br><br><rules>Tracisz połowę kapeluszy, gdy przegrywasz rundę.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Zadanie: Szalony Kapelusznik",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Obecnie przyznaje: <scaleAF>@f1@ pkt. siły adaptacyjnej</scaleAF>, @f2@ pkt. <scaleArmor>pancerza</scaleArmor> i <scaleMR>odporności na magię</scaleMR>, @f3*100@% nieustępliwości i <speed>@f4@ jedn. prędkości ruchu</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@% otrzymywanych przez ciebie obrażeń zostaje rozłożonych na obrażenia w czasie, które otrzymujesz przez @BleedDuration@ sek. (@RangedReduction*100@% w przypadku bohaterów walczących z dystansu)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Zwiększa obrażenia twoich ulepszeń i przedmiotów o @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Ulepszona Moc",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Zwiększenie obrażeń w tej rundzie: @f1@ pkt.<br>Zwiększenie całkowitych obrażeń: @f2@ pkt."
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Zyskujesz Oceaniczną Duszę, która zapewnia ci regenerację <healing>zdrowia</healing> i <scaleMana>many</scaleMana> po zadaniu obrażeń wrogom.<br><br>Leczenie w tej rundzie: @f1@ pkt.<br>Całkowite leczenie: @f2@ pkt."
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Użycie doskoku, mignięcia lub teleportacji zapewnia ci <shield>tarczę</shield> na @ShieldDuration@ sek. Ta tarcza jest również przyznawana wszystkim sojusznikom, przez których przenikniesz. Siła tej <shield>tarczy</shield> zależy od podstawowego czasu odnowienia twoich umiejętności na poziomie 1.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Ochroniarz",
+            "rarity": 1,
+            "tooltip": "Użycie doskoku, mignięcia lub teleportacji zapewnia ci <shield>tarczę o wytrzymałości @MinShieldPerLevel@ pkt., zwiększonej do @MaxShieldPerLevel@ pkt.</shield> w zależności od podstawowego czasu odnowienia umiejętności na poziomie 1. Utrzymuje się przez @ShieldDuration@ sek. Ta tarcza jest również przyznawana wszystkim sojusznikom, przez których przenikniesz.<br><br><rules>Tarcze osiągają maksymalny poziom wytrzymałości przy umiejętnościach, których czas odnowienia wynosi co najmniej @MaxCDCheck@ sek.</rules><br><br>Obrażenia powstrzymane w tej rundzie: @f1@ pkt.<br>Całkowite powstrzymane obrażenia: @f2@ pkt."
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Twoje umiejętności doskoku, skoku, mignięcia i teleportacji pozostawiają ślad, który wybucha po 1 sek.",
+            "desc": "Twoje umiejętności doskoku, mignięcia i teleportacji pozostawiają ślad, który wybucha po 1 sek.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "W każdej rundzie ewoluuje w jedno z losowo wybranych ulepszeń sojusznika.<br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>",
+            "desc": "W każdej rundzie <keyword>ewoluuje</keyword> w jedno z ulepszeń sojusznika.<br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Symbiotyczna Mutacja",
             "rarity": 1,
-            "tooltip": "W każdej rundzie ewoluuje w jedno z losowo wybranych ulepszeń sojusznika.<br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>"
+            "tooltip": "W każdej rundzie <keyword>ewoluuje</keyword> w jedno z ulepszeń sojusznika.<br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Ciało Astralne",
             "rarity": 1,
             "tooltip": "Zyskujesz <scaleHealth>@Health@ pkt. zdrowia</scaleHealth>, ale zadajesz o @DamageReduction*100@% mniej obrażeń."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Zwiększa kategorię przyszłych ofert ulepszeń o @tierValueIncrease@. Jeśli ulepszenia były już pryzmatyczne, zdobywasz dodatkowo @GoldAmount@ szt. złota.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Niesłychana Odwaga",
+            "rarity": 0,
+            "tooltip": "Zwiększa kategorię przyszłych ofert ulepszeń o @tierValueIncrease@. Jeśli ulepszenia były już pryzmatyczne, zdobywasz dodatkowo @GoldAmount@ szt. złota."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Przesyt",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Twoje koszty <scaleMana>many</scaleMana> zostają podwojone. <healing>Leczenie</healing>, <shield>tarcze</shield> oraz obrażenia zadawane przez twoje umiejętności są o <scaleMana>@ManaCalc@</scaleMana> skuteczniejsze."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Po użyciu umiejętności doskoku, skoku, mignięcia lub teleportacji zyskujesz <scaleArmor>@ResistsPerStack@ pkt. pancerza</scaleArmor> i <scaleMR>odporności ma magię</scaleMR>, maks. @MaxResistTooltipOnly@ pkt. przy @MaxStacks@ ładunkach.",
+            "desc": "Po użyciu umiejętności doskoku, mignięcia lub teleportacji zyskujesz <scaleArmor>@ResistsPerStack@ pkt. pancerza</scaleArmor> i <scaleMR>odporności ma magię</scaleMR>, maks. @MaxResistTooltipOnly@ pkt. przy @MaxStacks@ ładunkach.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Nie do Przeskoczenia",
             "rarity": 1,
             "tooltip": "Zyskujesz runy kluczowe: <spellName>Wstrząs Wtórny</spellName> i <spellName>Lodowcowe Ulepszenie</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Transmutuj wszystkie swoje ulepszenia w losowe ulepszenia pryzmatyczne.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Pudełko Pandory",
+            "rarity": 2,
+            "tooltip": "Transmutuj wszystkie swoje ulepszenia w losowe ulepszenia pryzmatyczne."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Co @TickCadence@ sek. zyskujesz następującą liczbę ładunków <keywordMajor>Przeklętej Mocy</keywordMajor>: @CurseStacksPerTick@ za każdego pobliskiego wrogiego bohatera.<br><br>Zyskujesz <scaleHealth>@f1@ pkt. zdrowia</scaleHealth> (@MaxHealthRatio*100@% twojej <keywordMajor>Przeklętej Mocy</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 5.0
+            },
+            "desc": "Nie możesz już dokonać wymiany.<br><br>Wybierz złote ulepszenie, jeśli zużyjesz następującą liczbę przemian: @PrismaticThreshold@. Wzmocnij, aby wybrać ulepszenie pryzmatyczne.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Wkalkulowane Ryzyko",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Zwiększasz swój rozmiar o @SizeIncrement*100@% i zyskujesz <scaleHealth>@MaxHPIncrement*100@% maksymalnego zdrowia</scaleHealth> za każdy udział w zabójstwie.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Taran",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Zwiększasz swój rozmiar o @SizeIncrement*100@% i zyskujesz <scaleHealth>@f2@% maksymalnego zdrowia</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@ pkt.)</scaleHealth> za każdy udział w zabójstwie).<br><br>Udziały w zabójstwach: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "W każdej rundzie ewoluuje w jedno z losowo wybranych ulepszeń przeciwnika.<br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>",
+            "desc": "W każdej rundzie <keyword>ewoluuje</keyword> w jedno z ulepszeń przeciwnika.<br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Pasożytnicza Mutacja",
             "rarity": 0,
-            "tooltip": "W każdej rundzie ewoluuje w jedno z losowo wybranych ulepszeń przeciwnika."
+            "tooltip": "W każdej rundzie <keyword>ewoluuje</keyword> w jedno z ulepszeń przeciwnika.<br><br><rules>Może wyewoluować jedynie w dostępne dla ciebie ulepszenia.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Natychmiast zyskujesz następującą liczbę kapeluszy: @HatsToGrant@. Cena Soku Cappa spada o @HatTrickPriceReduction@.<br><br>Przy otrzymaniu obrażeń, które zmniejszyłyby poziom twojego zdrowia poniżej @LowHealthThreshold*100@%, zyskujesz <speed>@MoveSpeedBoostPercent*100@% prędkości ruchu</speed> oraz <shield>tarczę o wytrzymałości @ShieldHealth@ pkt.</shield> na @ShieldDuration@ sek., ale tracisz 1 kapelusz. @Cooldown@ sek. odnowienia.",
+            "desc": "Natychmiast zyskujesz następującą liczbę kapeluszy: @HatsToGrant@. Cena Soku Cappa spada o @HatTrickPriceReduction@.<br>Przy otrzymaniu obrażeń, które zmniejszyłyby poziom twojego zdrowia poniżej @LowHealthThreshold*100@%, zyskujesz <speed>@MoveSpeedBoostPercent*100@% prędkości ruchu</speed> oraz <shield>tarczę o wytrzymałości @ShieldHealth@ pkt.</shield> na @ShieldDuration@ sek., ale tracisz 1 kapelusz. @Cooldown@ sek. odnowienia.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Sztuczka z Kapeluszem",
             "rarity": 1,
-            "tooltip": "Natychmiast zyskujesz następującą liczbę kapeluszy: @HatsToGrant@. Cena Soku Cappa spada o @HatTrickPriceReduction@.<br><br>Przy otrzymaniu obrażeń, które zmniejszyłyby poziom twojego zdrowia poniżej @LowHealthThreshold*100@%, zyskujesz <speed>@MoveSpeedBoostPercent*100@% prędkości ruchu</speed> oraz <shield>tarczę o wytrzymałości @ShieldHealth@ pkt.</shield> na @ShieldDuration@ sek., ale tracisz 1 kapelusz. @Cooldown@ sek. odnowienia."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Nie tracisz już kapeluszy po śmierci.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "W kierunku, w którym patrzysz, strzela laser, który zadaje <magicDamage>@LaserEyesTooltip@ pkt. obrażeń magicznych</magicDamage> na sekundę.<br><br>Obrażenia zadane w tej rundzie: @f1@ pkt.<br>Całkowite zadane obrażenia: @f2@ pkt."
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Zyskujesz siłę leczenia i tarcz, która rośnie, gdy masz mało zdrowia. Przy rzuceniu superumiejętności podwajasz swoją siłę leczenia i tarcz.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Infuzja Ducha",
+            "rarity": 0,
+            "tooltip": "Zyskujesz <healing>@FlatHS*100@% siły leczenia i tarcz</healing>.<br><br>Przy rzuceniu superumiejętności zwiększasz swoją <healing>siłę leczenia i tarcz</healing> o @AmpAmount*100@% na @HSDuration@ sek. (@Cooldown@ sek. czasu odnowienia)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Zastępuje Ucieczkę Przywoływacza <spellName>Zewem Przeznaczenia</spellName>.<br><br><rules><spellName>Zew Przeznaczenia</spellName> sprawia, że twój partner staje się niemożliwy do obrania za cel na maks. 4 sek. Partner może się wystrzelić, <status>odrzucając</status> wrogów.</rules><br>",
+            "desc": "Zastępuje Ucieczkę Przywoływacza <spellName>Zewem Przeznaczenia</spellName>.<br><br><rules><spellName>Zew Przeznaczenia</spellName> sprawia, że twój sojusznik staje się niemożliwy do obrania za cel na maks. 4 sek. Sojusznik może się wystrzelić, <status>odrzucając</status> wrogów.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Przysięga",
             "rarity": 1,
-            "tooltip": "Zastępuje Ucieczkę Przywoływacza <spellName>Zewem Przeznaczenia</spellName>.<br><br><rules><spellName>Zew Przeznaczenia</spellName> sprawia, że twój partner staje się niemożliwy do obrania za cel na maks. 4 sek. Partner może się wystrzelić, <status>odrzucając</status> wrogów.</rules><br>"
+            "tooltip": "Zastępuje Ucieczkę Przywoływacza <spellName>Zewem Przeznaczenia</spellName>.<br><br><rules><spellName>Zew Przeznaczenia</spellName> sprawia, że twój sojusznik staje się niemożliwy do obrania za cel na maks. 4 sek. Sojusznik może się wystrzelić, <status>odrzucając</status> wrogów.</rules>"
         },
         {
             "apiName": "Flashbang",

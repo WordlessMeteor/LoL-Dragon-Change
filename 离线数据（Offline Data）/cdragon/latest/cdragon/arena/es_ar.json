@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Daño infligido esta ronda: @f1@<br>Daño total infligido: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Obtienes las runas clave <spellName>Lluvia de Espadas</spellName> y <spellName>Estrategia Ofensiva</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Cerbero",
+            "rarity": 2,
+            "tooltip": "Obtienes las runas clave <spellName>Lluvia de Espadas</spellName> y <spellName>Estrategia Ofensiva</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Guardián de la Luz",
             "rarity": 1,
             "tooltip": "Cada @Cooldown@ seg, <keywordMajor>lanzas automáticamente</keywordMajor> una luz protectora hacia tu aliado, lo que les otorga <shield>@TotalShield@ de escudo</shield> a ti y a los aliados que atraviese. Luego, repite su efecto al regresar."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Requisito: Usa @QuestThreshold@ sombreros a la vez.<br><br>Recompensa: Obtienes <scaleAF>@AFPerHat@ de fuerza adaptable</scaleAF>, @ArmorMRPerHat@ de <scaleArmor>Armadura</scaleArmor> y <scaleMR>Resistencia Mágica</scaleMR>, @TenacityPerHat*100@% de Tenacidad y <speed>@MSPerHat@ de Velocidad de Movimiento</speed> por sombrero.<br><br><rules>Pierdes la mitad de tus sombreros cuando pierdes una ronda.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Misión: Sombrerero Loco",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Actualmente otorga: <scaleAF>@f1@ de fuerza adaptable</scaleAF>, @f2@ de <scaleArmor>Armadura</scaleArmor> y <scaleMR>Resistencia Mágica</scaleMR>, @f3*100@% de Tenacidad y <speed>@f4@ de Velocidad de Movimiento</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "Un @MeleeReduction*100@% del daño que recibes se distribuye a lo largo de @BleedDuration@ seg (un @RangedReduction*100@% para campeones a distancia)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Aumenta el daño causado por tus Aumentos y objetos en un @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Poder Mejorado",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Aumento de daño en esta ronda: @f1@<br>Daño total aumentado: @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Obtienes el Alma de los Océanos, la cual te otorga una gran regeneración de <healing>vida</healing> y <scaleMana>maná</scaleMana> tras infligir daño a los enemigos.<br><br>Curación este round: @f1@<br>Curación total: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Al usar desplazamiento, un salto o teleportación, obtienes un <shield>escudo</shield> durante @ShieldDuration@ segundos, que también se le otorga a cualquier aliado que alcances. La fuerza de este <shield>escudo</shield> depende del enfriamiento básico de tus habilidades en el nivel 1.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Guardaespaldas",
+            "rarity": 1,
+            "tooltip": "Al usar desplazamiento, un salto o teleportación, obtienes un escudo de <shield>@MinShieldPerLevel@ que aumenta hasta @MaxShieldPerLevel@</shield> según el enfriamiento básico de la habilidad en el nivel 1, con una duración de @ShieldDuration@ segundos. Este escudo también se le otorga a cualquier aliado que alcances.<br><br><rules>Los escudos alcanzan su máximo en habilidades con al menos @MaxCDCheck@ segundos de enfriamiento.</rules><br><br>Daño evitado en esta ronda: @f1@<br>Daño total evitado: @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Tus habilidades de desplazamiento, salto o teletransportación dejan una estela que detona después de 1 seg.",
+            "desc": "Tus habilidades de desplazamiento, salto o teleportación dejan una estela que detona después de 1 seg.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "En cada ronda, este Aumento muta en uno de los Aumentos de tu aliado al azar. <br><br><rules>Solo se transforma en Aumentos que puedas activar.</rules>",
+            "desc": "Cada ronda, esto <keyword>muta</keyword> en uno de los Aumentos de tu aliado.<br><br><rules>Solo muta en aumentos que puedas activar.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Mutación Simbiótica",
             "rarity": 1,
-            "tooltip": "En cada ronda, este Aumento muta en uno de los Aumentos de tu aliado al azar. <br><br><rules>Solo se transforma en Aumentos que puedas activar.</rules>"
+            "tooltip": "Cada ronda, esto <keyword>muta</keyword> en uno de los Aumentos de tu aliado.<br><br><rules>Solo muta en aumentos que puedas activar.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Cuerpo Celestial",
             "rarity": 1,
             "tooltip": "Obtienes <scaleHealth>@Health@ de Vida</scaleHealth>, pero infliges un @DamageReduction*100@% menos de daño."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Aumenta las ofertas futuras de Aumentos en @tierValueIncrease@ nivel. Si los Aumentos ya eran de nivel Prismático, obtén @GoldAmount@ de oro adicional.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Valor de los Valientes",
+            "rarity": 0,
+            "tooltip": "Aumenta las ofertas futuras de Aumentos en @tierValueIncrease@ nivel. Si los Aumentos ya eran de nivel Prismático, obtén @GoldAmount@ de oro adicional."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Sobrecarga",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Tu <scaleMana>maná</scaleMana> cuesta el doble. Las <healing>curaciones</healing>, <shield>escudos</shield> y daño de tu habilidad son más efectivos en <scaleMana>@ManaCalc@</scaleMana>."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Tras usar una habilidad de desplazamiento, salto o teletransportación, obtienes <scaleArmor>@ResistsPerStack@ de Armadura</scaleArmor> y <scaleMR>de Resistencia Mágica</scaleMR>, que aumenta hasta un máximo de @MaxResistTooltipOnly@ al alcanzar las @MaxStacks@ acumulaciones.",
+            "desc": "Tras usar desplazamiento, salto o teleportación, obtienes <scaleArmor>@ResistsPerStack@ de Armadura</scaleArmor> y <scaleMR>Resistencia Mágica</scaleMR>, que aumenta hasta un máximo de @MaxResistTooltipOnly@ al alcanzar las @MaxStacks@ acumulaciones.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Infranqueable",
             "rarity": 1,
             "tooltip": "Obtienes los efectos de las runas clave <spellName>Réplica</spellName> y <spellName>Aumento Glacial</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Transmuta todos tus Aumentos en Aumentos Prismáticos aleatorios.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Caja de Pandora",
+            "rarity": 2,
+            "tooltip": "Transmuta todos tus Aumentos en Aumentos Prismáticos aleatorios."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Cada @TickCadence@ seg, obtienes @CurseStacksPerTick@ de <keywordMajor>Poder Maldito</keywordMajor> por cada campeón enemigo cercano.<br><br>Obtienes <scaleHealth>@f1@ de Vida</scaleHealth> (un @MaxHealthRatio*100@% de tu <keywordMajor>Poder Maldito</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 5.0
+            },
+            "desc": "Ya no puedes rerrolear.<br><br>Selecciona un Aumento de Oro; si se consumieron al menos @PrismaticThreshold@ rerroleos, potencia esto para seleccionar un Aumento Prismático en su lugar.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Riesgo calculado",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Obtienes un @SizeIncrement*100@% de aumento de tamaño y un <scaleHealth>@MaxHPIncrement*100@% de Vida Máxima</scaleHealth> por derribo.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Locomotora",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Obtienes un @SizeIncrement*100@% de aumento de tamaño y <scaleHealth>@f2@ de Vida adicional</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> por cada derribo).<br><br>Derribos: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "En cada ronda, este Aumento muta en uno de los Aumentos de tu oponente al azar.<br><br><rules>Solo se transforma en Aumentos que puedas activar.</rules>",
+            "desc": "En cada ronda, esto <keyword>muta</keyword> en uno de los Aumentos de tu oponente.<br><br><rules>Solo muta en aumentos que puedas activar.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Mutación Parasitaria",
             "rarity": 0,
-            "tooltip": "En cada ronda, este Aumento muta en uno de los Aumentos de tu oponente al azar."
+            "tooltip": "En cada ronda, esto <keyword>muta</keyword> en uno de los Aumentos de tu oponente.<br><br><rules>Solo muta en aumentos que puedas activar.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Obtienes @HatsToGrant@ sombreros al instante, y se reduce el precio del Juguito de Gorrito en @HatTrickPriceReduction@.<br><br>Al recibir daño que reduciría tu Vida por debajo de un @LowHealthThreshold*100@%, obtienes <speed>@MoveSpeedBoostPercent*100@% de Velocidad de Movimiento</speed> y un <shield>@ShieldHealth@ de escudo</shield> durante @ShieldDuration@ seg, pero pierdes un sombrero. Este efecto tiene @Cooldown@ seg de enfriamiento.",
+            "desc": "Obtienes @HatsToGrant@ sombreros al instante, y el precio del Juguito de Gorrito se reduce en @HatTrickPriceReduction@.<br>Al recibir daño que reduciría tu Vida por debajo de un @LowHealthThreshold*100@%, obtienes <speed>@MoveSpeedBoostPercent*100@% de Velocidad de Movimiento</speed> y <shield>@ShieldHealth@ de escudo</shield> durante @ShieldDuration@, pero pierdes un sombrero. Este efecto tiene @Cooldown@ seg de enfriamiento.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Truco Bajo el Sombrero",
             "rarity": 1,
-            "tooltip": "Obtienes @HatsToGrant@ sombreros al instante, y se reduce el precio del Juguito de Gorrito en @HatTrickPriceReduction@.<br><br>Al recibir daño que reduciría tu Vida por debajo de un @LowHealthThreshold*100@%, obtienes <speed>@MoveSpeedBoostPercent*100@% de Velocidad de Movimiento</speed> y un <shield>@ShieldHealth@ de escudo</shield> durante @ShieldDuration@ seg, pero pierdes un sombrero. Este efecto tiene @Cooldown@ seg de enfriamiento."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Ya no perderás sombreros al morir.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "Hay un láser en la dirección a la que estés mirando que inflige <magicDamage>@LaserEyesTooltip@ de daño mágico</magicDamage> por segundo. <br><br>Daño infligido esta ronda: @f1@<br>Daño infligido en total: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Obtienes Poder de curaciones y escudos, que aumenta cuando tienes poca Vida. Al lanzar la definitiva, aumenta al doble tu Poder de curaciones y escudos.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Infusión Espiritual",
+            "rarity": 0,
+            "tooltip": "Obtienes <healing>@FlatHS*100@% de Poder de curaciones y escudos</healing>.<br><br>Al lanzar la definitiva, aumenta tu <healing>Poder de curaciones y escudos</healing> en un @AmpAmount*100@% durante @HSDuration@ seg (@Cooldown@ seg de enfriamiento)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Reemplaza Huida del Invocador con <spellName>Llamada del Destino</spellName>.<br><br><rules><spellName>Llamada del Destino</spellName> hace que tu compañero se vuelva inalcanzable durante un máximo de 4 seg. El compañero puede lanzarse a sí mismo para <status>empujar hacia atrás</status> a los enemigos.</rules><br>",
+            "desc": "Reemplaza Huida del Invocador con <spellName>Llamada del Destino</spellName>.<br><br><rules><spellName>Llamada del Destino</spellName> hace que tu aliado se vuelva inalcanzable por hasta 4 seg. Tu aliado puede lanzarse y <status>lanza a los enemigos hacia atrás</status>.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Juramentados",
             "rarity": 1,
-            "tooltip": "Reemplaza Huida del Invocador con <spellName>Llamada del Destino</spellName>.<br><br><rules><spellName>Llamada del Destino</spellName> hace que tu compañero se vuelva inalcanzable durante un máximo de 4 seg. El compañero puede lanzarse a sí mismo para <status>empujar hacia atrás</status> a los enemigos.</rules><br>"
+            "tooltip": "Reemplaza Huida del Invocador con <spellName>Llamada del Destino</spellName>.<br><br><rules><spellName>Llamada del Destino</spellName> hace que tu aliado se vuelva inalcanzable por hasta 4 seg. Tu aliado puede lanzarse y <status>lanza a los enemigos hacia atrás</status>.</rules>"
         },
         {
             "apiName": "Flashbang",

@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "<spellName>칼날비</spellName>와 <spellName>집중 공격</spellName> 핵심 룬을 얻습니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "케르베로스",
+            "rarity": 2,
+            "tooltip": "<spellName>칼날비</spellName>와 <spellName>집중 공격</spellName> 핵심 룬을 얻습니다."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "빛의 파수꾼",
             "rarity": 1,
             "tooltip": "아군이 있는 방향으로 @Cooldown@초마다 공격을 막는 빛을 <keywordMajor>자동 사용</keywordMajor>하여 빛을 통과하는 아군과 자신에게 <shield>@TotalShield@의 피해를 흡수하는 보호막</shield>을 부여합니다. 이후 빛이 돌아오며 같은 효과를 반복합니다."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "조건: 동시에 모자 @QuestThreshold@개를 착용해야 합니다.<br><br>보상: 모자 1개당 <scaleAF>적응형 능력치를 @AFPerHat@</scaleAF>, <scaleArmor>방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 @ArmorMRPerHat@, 강인함을 @TenacityPerHat*100@%, <speed>이동 속도를@MSPerHat@</speed> 얻습니다.<br><br><rules>라운드에서 패배하면 모자의 절반을 잃습니다.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "퀘스트: 미치광이 모자장수",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>현재 부여 중인 능력치: <scaleAF>적응형 능력치 @f1@</scaleAF>, <scaleArmor>방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR> @f2@, 강인함 @f3*100@%, <speed>이동 속도 @f4@</speed>"
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "받는 피해의 @MeleeReduction*100@%를 @BleedDuration@초에 걸쳐 받습니다. (원거리 챔피언의 경우 @RangedReduction*100@%)"
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "내 증강 및 아이템의 피해량이 @DamageAmp@ 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "증강된 힘",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>이번 라운드 피해량 증가: @f1@<br>피해량 증가: 총 @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "적에게 피해를 입힌 후 높은 <healing>체력</healing> 및 <scaleMana>마나</scaleMana> 재생 효과를 얻는 바다의 영혼을 획득합니다.<br><br>이번 라운드 체력 회복량: @f1@<br>총 체력 회복량: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "돌진, 점멸 또는 순간이동 시 @ShieldDuration@초 동안 <shield>보호막</shield>을 얻습니다. 이동 경로에 있는 아군 또한 동일한 보호막을 얻습니다. 이 보호막의 <shield>흡수량</shield>은 1레벨 스킬 기본 재사용 대기시간에 따라 달라집니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "경호대",
+            "rarity": 1,
+            "tooltip": "돌진, 점멸 또는 순간이동 시 @ShieldDuration@초 동안 <shield>@MinShieldPerLevel@~@MaxShieldPerLevel@의 보호막</shield>을 얻습니다. 보호막 흡수량은 1레벨 스킬 기본 재사용 대기시간에 따라 달라집니다. 이동 경로에 있는 아군 또한 동일한 보호막을 얻습니다.<br><br><rules>보호막 흡수량은 스킬의 재사용 대기시간이 @MaxCDCheck@초 이상일 때 최대치에 도달합니다.</rules><br><br>이번 라운드 막은 피해량: @f1@<br>막은 피해량: 총 @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "돌진, 도약, 점멸, 순간이동 스킬이 1초 후에 폭발하는 흔적을 남깁니다.",
+            "desc": "돌진, 점멸, 순간이동 스킬이 1초 후에 폭발하는 흔적을 남깁니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "라운드마다 무작위로 선택된 아군의 증강 중 하나로 변이합니다. <br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>",
+            "desc": "라운드마다 아군의 증강 중 <keyword>하나</keyword>로 변이합니다.<br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "공생 돌연변이",
             "rarity": 1,
-            "tooltip": "라운드마다 무작위로 선택된 아군의 증강 중 하나로 변이합니다.<br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>"
+            "tooltip": "라운드마다 아군의 증강 중 <keyword>하나</keyword>로 변이합니다.<br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "천상의 신체",
             "rarity": 1,
             "tooltip": "<scaleHealth>@Health@의 체력</scaleHealth>을 얻지만, 피해량이 @DamageReduction*100@% 감소합니다."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "다음 증강 제안이 @tierValueIncrease@단계 상승합니다. 증강이 이미 프리즘 단계일 경우, 추가로 @GoldAmount@골드를 획득합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "용자 중의 용자",
+            "rarity": 0,
+            "tooltip": "다음 증강 제안이 @tierValueIncrease@단계 상승합니다. 증강이 이미 프리즘 단계일 경우, 추가로 @GoldAmount@골드를 획득합니다."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "범람",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "<scaleMana>마나</scaleMana> 소모량이 2배가 됩니다. 스킬의 <healing>체력 회복량</healing>, <shield>보호막 흡수량</shield> 및 피해량이 <scaleMana>@ManaCalc@</scaleMana> 증가합니다."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "돌진, 도약, 점멸, 순간이동 스킬을 사용한 후 <scaleArmor>@ResistsPerStack@의 방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 얻습니다. 최대 @MaxStacks@회 중첩되어 @MaxResistTooltipOnly@까지 증가합니다.",
+            "desc": "돌진, 점멸, 순간이동 후 <scaleArmor>@ResistsPerStack@의 방어력</scaleArmor> 및 <scaleMR>마법 저항력</scaleMR>을 얻습니다. 최대 @MaxStacks@회 중첩되어 @MaxResistTooltipOnly@까지 증가합니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "넘을 수 없는 벽",
             "rarity": 1,
             "tooltip": "<spellName>여진</spellName>과 <spellName>빙결 강화</spellName> 핵심 룬을 얻습니다."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "모든 증강을 무작위 프리즘 증강으로 전환합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "판도라의 상자",
+            "rarity": 2,
+            "tooltip": "모든 증강을 무작위 프리즘 증강으로 전환합니다."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "주변 적 챔피언 하나당 @TickCadence@초마다 @CurseStacksPerTick@의 <keywordMajor>저주받은 힘</keywordMajor>을 얻습니다.<br><br><scaleHealth>@f1@의 체력</scaleHealth>을 얻습니다. (<keywordMajor>저주받은 힘</keywordMajor>의 @MaxHealthRatio*100@%).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 5.0
+            },
+            "desc": "더 이상 새로고침할 수 없습니다.<br><br>골드 증강 1개를 선택합니다. 새로고침을 @PrismaticThreshold@회 이상 사용했을 경우 선택지가 프리즘 증강으로 강화됩니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "계산된 위험",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "처치 관여마다 크기가 @SizeIncrement*100@% 커지고 <scaleHealth>최대 체력이 @MaxHPIncrement*100@%</scaleHealth> 증가합니다.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "탱크 엔진",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "크기가 @SizeIncrement*100@% 커지고 <scaleHealth>@f2@의 추가 체력</scaleHealth>을 얻습니다. (처치 관여당 <scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth>)<br><br>처치 관여: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "라운드마다 무작위로 선택된 상대의 증강 중 하나로 변이합니다.<br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>",
+            "desc": "라운드마다 상대의 증강 중 하나로 <keyword>변이</keyword>합니다.<br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "기생 돌연변이",
             "rarity": 0,
-            "tooltip": "라운드마다 무작위로 선택된 상대의 증강 중 하나로 변이합니다."
+            "tooltip": "라운드마다 상대의 증강 중 하나로 <keyword>변이</keyword>합니다.<br><br><rules>내가 뽑을 수 있는 증강으로만 변이합니다.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "즉시 모자 @HatsToGrant@개를 얻고 카파 주스의 가격이 @HatTrickPriceReduction@ 감소합니다.<br><br>체력이 @LowHealthThreshold*100@% 밑으로 떨어질 만큼 피해를 받으면 @ShieldDuration@초 동안 <speed>@MoveSpeedBoostPercent*100@%의 이동 속도</speed>와 <shield>@ShieldHealth@의 피해를 흡수하는 보호막</shield>을 얻지만 모자를 하나 잃습니다. @Cooldown@초의 재사용 대기시간이 적용됩니다.",
+            "desc": "즉시 모자 @HatsToGrant@개를 얻고 카파 주스의 가격이 @HatTrickPriceReduction@ 감소합니다.<br>체력이 @LowHealthThreshold*100@% 밑으로 떨어질 만큼 피해를 받으면 @ShieldDuration@초 동안 <speed>@MoveSpeedBoostPercent*100@%의 이동 속도</speed>와 <shield>@ShieldHealth@의 피해를 흡수하는 보호막</shield>을 얻지만 모자를 하나 잃습니다. @Cooldown@초의 재사용 대기시간이 적용됩니다.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "해트트릭",
             "rarity": 1,
-            "tooltip": "즉시 모자 @HatsToGrant@개를 얻고 카파 주스의 가격이 @HatTrickPriceReduction@ 감소합니다.<br><br>체력이 @LowHealthThreshold*100@% 밑으로 떨어질 만큼 피해를 받으면 @ShieldDuration@초 동안 <speed>@MoveSpeedBoostPercent*100@%의 이동 속도</speed>와 <shield>@ShieldHealth@의 피해를 흡수하는 보호막</shield>을 얻지만 모자를 하나 잃습니다. @Cooldown@초의 재사용 대기시간이 적용됩니다."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>이제 사망 시 모자를 잃지 않습니다.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "내가 바라보는 방향으로 광선을 발사해 매초 <magicDamage>@LaserEyesTooltip@의 마법 피해</magicDamage>를 입힙니다.<br><br>이 라운드에 입힌 피해량: @f1@<br>입힌 총 피해량: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "체력 회복 및 보호막 효과를 얻습니다. 체력이 낮을 때 수치가 증가합니다. 궁극기 사용 시 체력 회복 및 보호막 효과가 두 배로 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "영혼 주입",
+            "rarity": 0,
+            "tooltip": "<healing>@FlatHS*100@%의 체력 회복 및 보호막 효과</healing>를 얻습니다.<br><br>궁극기 사용 시 @HSDuration@초 동안 <healing>체력 회복 및 보호막 효과</healing>가 @AmpAmount*100@% 증가합니다. (재사용 대기시간 @Cooldown@초)"
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "소환사 질주를 <spellName>운명의 부름</spellName>으로 교체합니다.<br><br><rules><spellName>운명의 부름</spellName>으로 동료가 최대 4초 동안 대상으로 지정할 수 없는 상태가 됩니다. 동료는 직접 날아가 적을 <status>밀어낼 수 있습니다</status>.</rules><br>",
+            "desc": "소환사 질주를 <spellName>운명의 부름</spellName>으로 교체합니다.<br><br><rules><spellName>운명의 부름</spellName>으로 아군이 최대 4초 동안 대상으로 지정할 수 없는 상태가 됩니다. 아군은 직접 날아가 적을 <status>밀어낼 수 있습니다</status>.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "계약",
             "rarity": 1,
-            "tooltip": "소환사 질주를 <spellName>운명의 부름</spellName>으로 교체합니다.<br><br><rules><spellName>운명의 부름</spellName>으로 동료가 최대 4초 동안 대상으로 지정할 수 없는 상태가 됩니다. 동료는 직접 날아가 적을 <status>밀어낼 수 있습니다</status>.</rules><br>"
+            "tooltip": "소환사 질주를 <spellName>운명의 부름</spellName>으로 교체합니다.<br><br><rules><spellName>운명의 부름</spellName>으로 아군이 최대 4초 동안 대상으로 지정할 수 없는 상태가 됩니다. 아군은 직접 날아가 적을 <status>밀어낼 수 있습니다</status>.</rules>"
         },
         {
             "apiName": "Flashbang",

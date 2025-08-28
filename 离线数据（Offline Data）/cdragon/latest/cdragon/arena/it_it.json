@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Danni inflitti in questo turno: @f1@<br>Totale danni inflitti: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Ottieni le rune chiave <spellName>Pioggia di lame</spellName> e <spellName>Attacco sostenuto</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Cerbero",
+            "rarity": 2,
+            "tooltip": "Ottieni le rune chiave <spellName>Pioggia di lame</spellName> e <spellName>Attacco sostenuto</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Guardiano di luce",
             "rarity": 1,
             "tooltip": "Ogni @Cooldown@ secondi, <keywordMajor>lanci automaticamente</keywordMajor> verso il tuo alleato una luce guardiana, conferendo uno <shield>scudo da @TotalShield@</shield> a te e agli alleati che attraversa. Poi la luce torna indietro, replicando l'effetto lungo il percorso."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Requisiti: indossa @QuestThreshold@ cappelli contemporaneamente.<br><br>Ricompensa: ottieni <scaleAF>@AFPerHat@ forza adattiva</scaleAF>, @ArmorMRPerHat@ <scaleArmor>armatura</scaleArmor> e <scaleMR>resistenza magica</scaleMR>, @TenacityPerHat*100@% Tenacia e <speed>@MSPerHat@ velocità di movimento</speed> per cappello.<br><br><rules>Perdi metà dei cappelli quando perdi un turno.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Missione: Cappellaio matto",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Al momento conferisce: <scaleAF>@f1@ forza adattiva</scaleAF>, @f2@ <scaleArmor>armatura</scaleArmor> e <scaleMR>resistenza magica</scaleMR>, @f3*100@% Tenacia e <speed>@f4@ velocità di movimento</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "Un @MeleeReduction*100@% dei danni subiti si concretizza invece nell'arco di @BleedDuration@ secondi (@RangedReduction*100@% per i campioni a distanza)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Aumenta di @DamageAmp@ i danni inflitti dai tuoi Impianti e dai tuoi oggetti.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Potere dell'Impianto",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Aumento danni in questo turno: @f1@<br>Danni totali aumentati: @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Ottieni Anima dell'oceano, che garantisce la rigenerazione di <healing>salute</healing> e <scaleMana>mana</scaleMana> dopo aver inflitto danni ai nemici.<br><br>Guarigione effettuata in questo turno: @f1@<br>Totale guarigione effettuata: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "Usare uno scatto, un teletrasporto o un teletrasporto lungo ti conferisce uno <shield>scudo</shield> per @ShieldDuration@ secondi. Lo scudo viene conferito anche a eventuali alleati che attraversi. La forza dello <shield>scudo</shield> dipende dalla ricarica base delle tue abilità al livello 1.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Guardia del corpo",
+            "rarity": 1,
+            "tooltip": "Usare uno scatto, un teletrasporto o un teletrasporto lungo ti conferisce uno <shield>scudo da @MinShieldPerLevel@, che aumenta fino a @MaxShieldPerLevel@</shield> a seconda della ricarica base delle abilità al livello 1 e dura @ShieldDuration@ secondi. Lo scudo viene conferito anche a eventuali alleati che attraversi.<br><br><rules>Gli scudi ottengono il massimo dalle abilità con una ricarica di almeno @MaxCDCheck@ secondo/i.</rules><br><br>Danni prevenuti in questo turno: @f1@<br>Danni prevenuti totali: @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Le tue abilità di scatto, balzo, teletrasporto o teletrasporto lungo lasciano una scia che esplode dopo 1 secondo.",
+            "desc": "Le tue abilità di scatto, teletrasporto o teletrasporto lungo lasciano una scia che esplode dopo 1 secondo.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "A ogni turno, si trasforma in un Impianto casuale dell'alleato. <br><br><rules>Si trasforma solo in Impianti che potresti ricevere.</rules>",
+            "desc": "A ogni turno, si <keyword>trasforma</keyword> in uno degli Impianti dell'alleato.<br><br><rules>Si trasforma solo in Impianti che potresti ricevere.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Mutazione simbiotica",
             "rarity": 1,
-            "tooltip": "A ogni turno, si trasforma in un Impianto casuale dell'alleato. <br><br><rules>Si trasforma solo in Impianti che potresti ricevere.</rules>"
+            "tooltip": "A ogni turno, si <keyword>trasforma</keyword> in uno degli Impianti dell'alleato.<br><br><rules>Si trasforma solo in Impianti che potresti ricevere.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Corpo celeste",
             "rarity": 1,
             "tooltip": "Ottieni <scaleHealth>@Health@ salute</scaleHealth>, ma infliggi un @DamageReduction*100@% di danni in meno."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Aumenta di @tierValueIncrease@ livello/i i prossimi Impianti che ti vengono offerti. Se gli Impianti sono già di livello Prismatico, ottieni @GoldAmount@ oro bonus.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Il più audace tra gli audaci",
+            "rarity": 0,
+            "tooltip": "Aumenta di @tierValueIncrease@ livello/i i prossimi Impianti che ti vengono offerti. Se gli Impianti sono già di livello Prismatico, ottieni @GoldAmount@ oro bonus."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Esubero",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "I tuoi costi in <scaleMana>mana</scaleMana> raddoppiano. La tua abilità <healing>cura</healing>, <shield>protegge</shield> e i danni sono <scaleMana>@ManaCalc@</scaleMana> più efficaci."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "Dopo aver usato un'abilità di scatto, balzo, teletrasporto o teletrasporto lungo, ottieni <scaleArmor>@ResistsPerStack@ armatura</scaleArmor> e <scaleMR>resistenza magica</scaleMR> fino a @MaxResistTooltipOnly@ a @MaxStacks@ cariche.",
+            "desc": "Dopo aver usato uno scatto, un teletrasporto o un teletrasporto lungo, ottieni <scaleArmor>@ResistsPerStack@ armatura</scaleArmor> e <scaleMR>resistenza magica</scaleMR> fino a @MaxResistTooltipOnly@ a @MaxStacks@ cariche.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Invalicabile",
             "rarity": 1,
             "tooltip": "Ottieni le Rune chiave <spellName>Scossa di assestamento</spellName> e <spellName>Potenziamento glaciale</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Trasmuta tutti i tuoi Impianti in Impianti Prismatici casuali.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Vaso di Pandora",
+            "rarity": 2,
+            "tooltip": "Trasmuta tutti i tuoi Impianti in Impianti Prismatici casuali."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Ogni @TickCadence@ secondo, ottieni @CurseStacksPerTick@ <keywordMajor>Potere maledetto</keywordMajor> per ogni campione nemico nelle vicinanze.<br><br>Ottieni <scaleHealth>@f1@ salute</scaleHealth> (@MaxHealthRatio*100@% del tuo <keywordMajor>Potere maledetto</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 5.0
+            },
+            "desc": "Non puoi più effettuare aggiornamenti.<br><br>Seleziona un Impianto oro, se vengono consumati almeno @PrismaticThreshold@ aggiornamenti, potenzialo selezionando al suo posto un Impianto Prismatico.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Rischio calcolato",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "Le tue dimensioni aumentano di un @SizeIncrement*100@% e ottieni un <scaleHealth>@MaxHPIncrement*100@% di salute massima</scaleHealth> per eliminazione.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Motore corazzato",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Le tue dimensioni aumentano di un @SizeIncrement*100@% e ottieni <scaleHealth>@f2@ bonus</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> per eliminazione).<br><br>Eliminazioni: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "A ogni turno, si trasforma in un Impianto casuale dell'avversario.<br><br><rules>Si trasforma solo in Impianti che potresti ricevere.</rules>",
+            "desc": "A ogni turno, si <keyword>trasforma</keyword> in uno degli Impianti dell'avversario.<br><br><rules>Si trasforma solo in Impianti che potresti ricevere.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Mutazione parassitica",
             "rarity": 0,
-            "tooltip": "A ogni turno, si trasforma in un Impianto casuale dell'avversario."
+            "tooltip": "A ogni turno, si <keyword>trasforma</keyword> in uno degli Impianti dell'avversario.<br><br><rules>Si trasforma solo in Impianti che potresti ricevere.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Ottieni immediatamente @HatsToGrant@ cappelli e riduci di @HatTrickPriceReduction@ il prezzo del Succo Cappa.<br><br>Quando subisci danni che porterebbero la tua salute sotto un @LowHealthThreshold*100@%, ottieni un <speed>@MoveSpeedBoostPercent*100@% di velocità di movimento</speed> e uno <shield>@ShieldHealth@ scudo</shield> per @ShieldDuration@, ma perdi un cappello. Ricarica: @Cooldown@ secondi.",
+            "desc": "Ottieni istantaneamente @HatsToGrant@ cappelli, e riduci di @HatTrickPriceReduction@ il prezzo del Succo Cappa.<br>Quando subisci danni che porterebbero la tua salute sotto un @LowHealthThreshold*100@%, ottieni un <speed>@MoveSpeedBoostPercent*100@% di velocità di movimento</speed> e uno <shield>scudo da @ShieldHealth@</shield> per @ShieldDuration@, ma perdi un cappello. Ricarica: @Cooldown@ secondo/i.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Gioco di cappelli",
             "rarity": 1,
-            "tooltip": "Ottieni immediatamente @HatsToGrant@ cappelli e riduci di @HatTrickPriceReduction@ il prezzo del Succo Cappa.<br><br>Quando subisci danni che porterebbero la tua salute sotto un @LowHealthThreshold*100@%, ottieni un <speed>@MoveSpeedBoostPercent*100@% di velocità di movimento</speed> e uno <shield>@ShieldHealth@ scudo</shield> per @ShieldDuration@, ma perdi un cappello. Ricarica: @Cooldown@ secondi."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Alla morte non perdi più i cappelli.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "Un laser puntato nella tua stessa direzione infligge <magicDamage>@LaserEyesTooltip@ danni magici</magicDamage> al secondo.<br><br>Danni inflitti in questo turno: @f1@<br>Totale danni inflitti: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Ottieni guarigione e potere scudo, che aumentano quando la salute è bassa. Al lancio della suprema, la tua guarigione e il tuo potere scudo raddoppiano.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Infusione spirituale",
+            "rarity": 0,
+            "tooltip": "Ottieni <healing>@FlatHS*100@% guarigione e potere scudo</healing>.<br><br>Al lancio della suprema, la tua <healing>guarigione e il tuo potere scudo</healing> aumentano di un @AmpAmount*100@% per @HSDuration@ secondo/i (@Cooldown@ secondo/i di ricarica)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Sostituisci Fuga dell'evocatore con <spellName>Chiamata del fato</spellName>.<br>Con <br><rules><spellName>Chiamata del fato</spellName>, il tuo partner non è bersagliabile per un massimo di 4 secondi. Il partner può muoversi per lanciarsi verso una posizione, <status>respingendo</status> i nemici.</rules><br>",
+            "desc": "Sostituisci Fuga dell'evocatore con <spellName>Chiamata del fato</spellName>.<br><br><rules><spellName>Chiamata del fato</spellName>, il tuo alleato non è bersagliabile per un massimo di 4 secondi. L'alleato può uscirne, lanciandosi verso una posizione, <status>respingendo</status> i nemici.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Patto",
             "rarity": 1,
-            "tooltip": "Sostituisci Fuga dell'evocatore con <spellName>Chiamata del fato</spellName>.<br>Con <br><rules><spellName>Chiamata del fato</spellName>, il tuo partner non è bersagliabile per un massimo di 4 secondi. Il partner può muoversi per lanciarsi verso una posizione, <status>respingendo</status> i nemici.</rules><br>"
+            "tooltip": "Sostituisci Fuga dell'evocatore con <spellName>Chiamata del fato</spellName>.<br><br><rules><spellName>Chiamata del fato</spellName>, il tuo alleato non è bersagliabile per un massimo di 4 secondi. L'alleato può uscirne, lanciandosi verso una posizione, <status>respingendo</status> i nemici.</rules>"
         },
         {
             "apiName": "Flashbang",

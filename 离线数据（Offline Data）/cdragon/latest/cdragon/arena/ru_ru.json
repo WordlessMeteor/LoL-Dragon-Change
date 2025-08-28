@@ -45,6 +45,38 @@
             "tooltip": "{{Cherry_ChainLightning_Summary}}<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
         },
         {
+            "apiName": "Cerberus",
+            "calculations": {},
+            "dataValues": {
+                "APRatio": 0,
+                "ASBoostMax": 1.399999976158142,
+                "ASBoostMin": 1.399999976158142,
+                "ASBoostRanged": 0.800000011920929,
+                "AmpDuration": 5.0,
+                "AmpPotencyMaxOthers": 0.15000000596046448,
+                "AmpPotencyMaxSelf": 0.15000000596046448,
+                "AmpPotencyStartOthers": 0.15000000596046448,
+                "AmpPotencyStartSelf": 0.15000000596046448,
+                "BonusADRatio": 0,
+                "BonusPercentDamage": 0.15000000596046448,
+                "Cooldown": 6.0,
+                "Duration": 3.0,
+                "HitsRequired": 3.0,
+                "MaxDamage": 360.0,
+                "MinDamage": 120.0,
+                "NumHits": 3.0,
+                "OutOfCombatTimer": 5.0,
+                "TimeBetweenHits": 4.0
+            },
+            "desc": "Вы получаете ключевые руны <spellName>Град клинков</spellName> и <spellName>Решительное наступление</spellName>.",
+            "iconLarge": "assets/ux/cherry/augments/icons/cerberus_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/cerberus_small.png",
+            "id": 323,
+            "name": "Цербер",
+            "rarity": 2,
+            "tooltip": "Вы получаете ключевые руны <spellName>Град клинков</spellName> и <spellName>Решительное наступление</spellName>."
+        },
+        {
             "apiName": "Typhoon",
             "calculations": {
                 "Damage": {
@@ -359,6 +391,26 @@
             "name": "Сияющий оберег",
             "rarity": 1,
             "tooltip": "<keywordMajor>Автоматически</keywordMajor>: раз в @Cooldown@ сек. вы отправляете к своему союзнику огонек, который дает вам и союзникам, которых он коснулся, <shield>щит прочностью @TotalShield@</shield>. Затем огонек возвращается, на обратном пути снова накладывая щиты."
+        },
+        {
+            "apiName": "Quest_MadHatter",
+            "calculations": {},
+            "dataValues": {
+                "AFPerHat": 12.0,
+                "ArmorMRPerHat": 8.0,
+                "HatGrowDelay": 0.05000000074505806,
+                "MSPerHat": 4.0,
+                "PercentHatsLostOnRoundLoss": 0.5,
+                "QuestThreshold": 10.0,
+                "TenacityPerHat": 0.009999999776482582
+            },
+            "desc": "Требование: иметь определенное количество шляп (@QuestThreshold@).<br><br>Награда: вы получаете <scaleAF>@AFPerHat@ адаптивной силы</scaleAF>, @ArmorMRPerHat@ <scaleArmor>брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>, @TenacityPerHat*100@% стойкости и <speed>@MSPerHat@ скорости передвижения</speed> за шляпу.<br><br><rules>Потерпев поражение в раунде, вы лишитесь половины шляп.</rules>",
+            "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
+            "id": 318,
+            "name": "Задание ''Безумный шляпник''",
+            "rarity": 1,
+            "tooltip": "{{ Cherry_Quest_MadHatter_Summary }}<br><br>Текущий бонус: <scaleAF>@f1@ адаптивной силы</scaleAF>, @f2@ <scaleArmor>брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>, @f3*100@% стойкости и <speed>@f4@ скорости передвижения</speed>."
         },
         {
             "apiName": "BladeWaltz",
@@ -1061,6 +1113,44 @@
             "tooltip": "@MeleeReduction*100@% от полученного вами урона наносится в течение @BleedDuration@ сек. (@RangedReduction*100@% для чемпионов дальнего боя)."
         },
         {
+            "apiName": "AugmentedPower",
+            "calculations": {
+                "DamageAmp": {
+                    "__type": "GameCalculation",
+                    "mDisplayAsPercent": true,
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamageAmp"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "APRatio"
+                        },
+                        {
+                            "__type": "StatByNamedDataValueCalculationPart",
+                            "mDataValue": "BonusADRatio",
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "APRatio": 9.999999747378752e-05,
+                "BaseDamageAmp": 0.20000000298023224,
+                "BaseDamageAmpTooltip": 0.20000000298023224,
+                "BonusADRatio": 9.999999747378752e-05
+            },
+            "desc": "Повышает урон от аугментаций и предметов на @DamageAmp@.",
+            "iconLarge": "assets/ux/cherry/augments/icons/augmented_power_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/augmented_power_small.png",
+            "id": 322,
+            "name": "Аугментированная сила",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_AugmentedPower_Summary }}<br><br>Повышение урона в этом раунде: @f1@<br>Общее повышение урона: @f2@"
+        },
+        {
             "apiName": "MadScientist",
             "calculations": {},
             "dataValues": {
@@ -1368,6 +1458,50 @@
             "tooltip": "Вы получаете морскую душу. После нанесения урона врагам у вас начинают быстро восстанавливаться <healing>здоровье</healing> и <scaleMana>мана</scaleMana>.<br><br>Эффективность лечения в этом раунде: @f1@<br>Общая эффективность лечения: @f2@"
         },
         {
+            "apiName": "Bodyguard",
+            "calculations": {
+                "{6b2ab42d}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 200.0,
+                            "mStartValue": 50.0
+                        }
+                    ]
+                },
+                "{e43a1d83}": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "ByCharLevelInterpolationCalculationPart",
+                            "mEndValue": 500.0,
+                            "mStartValue": 200.0
+                        }
+                    ]
+                }
+            },
+            "dataValues": {
+                "HealthScalar": 0.05000000074505806,
+                "MaxCDCheck": 12.0,
+                "MaxStacks": 5.0,
+                "MinCDCheck": 1.0,
+                "PerSpellSlotCD": 0.10000000149011612,
+                "ShieldBaseValue": 25.0,
+                "ShieldDuration": 2.5,
+                "ShieldMaxValue": 250.0,
+                "ShieldRadius": 350.0,
+                "SpellIDCD": 3.0
+            },
+            "desc": "При использовании рывка или телепортации вы и союзники, через которых вы перемещаетесь, получаете <shield>щит</shield> на @ShieldDuration@ сек. Прочность <shield>щита</shield> зависит от базового времени перезарядки ваших умений на 1-м уровне.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bodyguard_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bodyguard_small.png",
+            "id": 321,
+            "name": "Телохранитель",
+            "rarity": 1,
+            "tooltip": "При использовании рывка или телепортации вы и союзники, через которых вы перемещаетесь, получаете <shield>щит прочностью @MinShieldPerLevel@–@MaxShieldPerLevel@</shield> на @ShieldDuration@ сек. Прочность щита зависит от базового времени перезарядки ваших умений на 1-м уровне.<br><br><rules>Максимальная прочность щита достигается в случае, если время перезарядки умения составляет не менее @MaxCDCheck@ сек.</rules><br><br>Заблокировано урона в этом раунде: @f1@<br>Всего заблокировано урона: @f2@"
+        },
+        {
             "apiName": "CircleofDeath",
             "calculations": {},
             "dataValues": {
@@ -1425,7 +1559,7 @@
                 "ExplosionRadius": 300.0,
                 "PerwaveDamageCD": 0.5
             },
-            "desc": "Применяя умения с рывками, прыжками и телепортацией, вы оставляете за собой след, который взрывается через 1 сек.",
+            "desc": "Применяя умения с рывками или телепортацией, вы оставляете за собой след, который взрывается через 1 секунду.",
             "iconLarge": "assets/ux/cherry/augments/icons/earthwake_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/earthwake_small.png",
             "id": 27,
@@ -1524,13 +1658,13 @@
             "apiName": "SymbioticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "В каждом раунде это превращается в случайную аугментацию союзника.<br><br><rules>Может превратиться только в доступную вам аугментацию.</rules>",
+            "desc": "В каждом раунде это <keyword>превращается</keyword> в одну из аугментаций союзника.<br><br><rules>Может превратиться только в доступную вам аугментацию.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/symbioticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/symbioticmutation_small.png",
             "id": 239,
             "name": "Симбиотическая мутация",
             "rarity": 1,
-            "tooltip": "В каждом раунде это превращается в случайную аугментацию союзника.<br><br><rules>Может превратиться только в доступную вам аугментацию.</rules>"
+            "tooltip": "В каждом раунде это <keyword>превращается</keyword> в одну из аугментаций союзника.<br><br><rules>Может превратиться только в доступную вам аугментацию.</rules>"
         },
         {
             "apiName": "CelestialBody",
@@ -1546,6 +1680,21 @@
             "name": "Небесное тело",
             "rarity": 1,
             "tooltip": "Вы получаете <scaleHealth>@Health@ здоровья</scaleHealth>, но наносите на @DamageReduction*100@% меньше урона."
+        },
+        {
+            "apiName": "BravestoftheBrave",
+            "calculations": {},
+            "dataValues": {
+                "GoldAmount": 500.0,
+                "tierValueIncrease": 1.0
+            },
+            "desc": "Повышает ранг будущих аугментаций на @tierValueIncrease@. Если аугментации уже были призматическими, вы дополнительно получаете @GoldAmount@ золота.",
+            "iconLarge": "assets/ux/cherry/augments/icons/bravestofthebrave_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/bravestofthebrave_small.png",
+            "id": 324,
+            "name": "Несравненная храбрость",
+            "rarity": 0,
+            "tooltip": "Повышает ранг будущих аугментаций на @tierValueIncrease@. Если аугментации уже были призматическими, вы дополнительно получаете @GoldAmount@ золота."
         },
         {
             "apiName": "BreadAndJam",
@@ -1678,7 +1827,7 @@
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Переполнение",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Ваши затраты <scaleMana>маны</scaleMana> удваиваются. Урон, <healing>лечение</healing> и <shield>прочность щитов</shield> от ваших умений повышаются на <scaleMana>@ManaCalc@</scaleMana>."
         },
         {
@@ -1834,7 +1983,7 @@
                 "MaxStacks": 5.0,
                 "ResistsPerStack": 12.0
             },
-            "desc": "После применения умений с рывками, прыжками и телепортацией вы получаете <scaleArmor>@ResistsPerStack@ брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>. Максимум – @MaxResistTooltipOnly@ при @MaxStacks@ зар.",
+            "desc": "После применения умений с рывками или телепортацией вы получаете <scaleArmor>@ResistsPerStack@ брони</scaleArmor> и <scaleMR>сопротивления магии</scaleMR>. Максимум – @MaxResistTooltipOnly@ при @MaxStacks@ зар.",
             "iconLarge": "assets/ux/cherry/augments/icons/outlawsgrit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/outlawsgrit_small.png",
             "id": 63,
@@ -2194,6 +2343,18 @@
             "name": "Сама невозмутимость",
             "rarity": 1,
             "tooltip": "Вы получаете ключевые руны <spellName>Дрожь земли</spellName> и <spellName>Ледяной нарост</spellName>."
+        },
+        {
+            "apiName": "PandorasBox",
+            "calculations": {},
+            "dataValues": {},
+            "desc": "Все ваши аугментации заменяются случайными призматическими аугментациями.",
+            "iconLarge": "assets/ux/cherry/augments/icons/pandoras_box_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/pandoras_box_small.png",
+            "id": 317,
+            "name": "Ящик Пандоры",
+            "rarity": 2,
+            "tooltip": "Все ваши аугментации заменяются случайными призматическими аугментациями."
         },
         {
             "apiName": "ExtendoArm",
@@ -2668,6 +2829,20 @@
             "tooltip": "Раз в @TickCadence@ сек. вы получаете @CurseStacksPerTick@ ед. <keywordMajor>Проклятой силы</keywordMajor> за каждого вражеского чемпиона поблизости.<br><br>Вы получаете <scaleHealth>@f1@ здоровья</scaleHealth> (@MaxHealthRatio*100@% от вашей <keywordMajor>Проклятой силы</keywordMajor>).<br><br>{{ Cherry_CurseShared }}"
         },
         {
+            "apiName": "CalculatedRisk",
+            "calculations": {},
+            "dataValues": {
+                "PrismaticThreshold": 5.0
+            },
+            "desc": "Вам больше не доступны перевыборы.<br><br>Выберите золотую аугментацию. Если количество потраченных перевыборов равно или превышает @PrismaticThreshold@, вместо этого выберите призматическую аугментацию.",
+            "iconLarge": "assets/ux/cherry/augments/icons/calculated_risk_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/calculated_risk_small.png",
+            "id": 320,
+            "name": "Обдуманный риск",
+            "rarity": 0,
+            "tooltip": "{{ Cherry_CalculatedRisk_Summary }}"
+        },
+        {
             "apiName": "StackosaurusRex",
             "calculations": {},
             "dataValues": {
@@ -2895,11 +3070,11 @@
                 "SizeIncrement": 0.15000000596046448
             },
             "desc": "За каждое участие в убийстве вы увеличиваетесь в размере на @SizeIncrement*100@% и получаете <scaleHealth>максимальный запас здоровья в размере @MaxHPIncrement*100@%</scaleHealth>.",
-            "iconLarge": "assets/ux/cherry/augments/icons/tankengine_large.png",
-            "iconSmall": "assets/ux/cherry/augments/icons/tankengine_small.png",
+            "iconLarge": "assets/ux/cherry/augments/icons/tank_engine_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/tank_engine_small.png",
             "id": 310,
             "name": "Танковый движок",
-            "rarity": 0,
+            "rarity": 1,
             "tooltip": "Вы увеличиваетесь в размере на @SizeIncrement*100@% и получаете <scaleHealth>@f2@ дополнительного здоровья</scaleHealth> (<scaleHealth>@MaxHPIncrement*100@% (@f1@)</scaleHealth> за каждое участие в убийстве).<br><br>Участия в убийствах: @f3@"
         },
         {
@@ -3112,13 +3287,13 @@
             "apiName": "ParasiticMutation",
             "calculations": {},
             "dataValues": {},
-            "desc": "В каждом раунде это превращается в случайную аугментацию противника.<br><br><rules>Может превратиться только в доступную вам аугментацию.</rules>",
+            "desc": "В каждом раунде это <keyword>превращается</keyword> в одну из аугментаций противника.<br><br><rules>Может превратиться только в доступную вам аугментацию.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/parasiticmutation_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/parasiticmutation_small.png",
             "id": 240,
             "name": "Паразитическая мутация",
             "rarity": 0,
-            "tooltip": "В каждом раунде это превращается в случайную аугментацию противника."
+            "tooltip": "В каждом раунде это <keyword>превращается</keyword> в одну из аугментаций противника.<br><br><rules>Может превратиться только в доступную вам аугментацию.</rules>"
         },
         {
             "apiName": "CantTouchThis",
@@ -3474,13 +3649,13 @@
                 "MovespeedShieldPercent": 0.75,
                 "ShieldDuration": 3.0
             },
-            "desc": "Вы сразу получаете дополнительные шляпы (@HatsToGrant@ шт.), а стоимость Шапучего напитка снижается на @HatTrickPriceReduction@.<br><br>Когда вы получаете урон, который должен опустить уровень здоровья ниже @LowHealthThreshold*100@%, ваша <speed>скорость передвижения увеличивается на @MoveSpeedBoostPercent*100@%</speed> и на вас накладывается <shield>щит прочностью @ShieldHealth@</shield> на @ShieldDuration@ сек., но вы теряете одну шляпу. Перезарядка – @Cooldown@ сек.",
+            "desc": "Вы сразу получаете дополнительные шляпы (@HatsToGrant@ шт.), а стоимость Шапучего напитка снижается на @HatTrickPriceReduction@.<br>Когда вы получаете урон, который должен опустить уровень здоровья ниже @LowHealthThreshold*100@%, ваша <speed>скорость передвижения повышается на @MoveSpeedBoostPercent*100@%</speed>, и на вас накладывается <shield>щит прочностью @ShieldHealth@</shield> на @ShieldDuration@ сек., но вы теряете одну шляпу. Перезарядка – @Cooldown@ сек.",
             "iconLarge": "assets/ux/cherry/augments/icons/hattrick_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/hattrick_small.png",
             "id": 241,
             "name": "Дело в шляпе",
             "rarity": 1,
-            "tooltip": "Вы сразу получаете дополнительные шляпы (@HatsToGrant@ шт.), а стоимость Шапучего напитка снижается на @HatTrickPriceReduction@.<br><br>Когда вы получаете урон, который должен опустить уровень здоровья ниже @LowHealthThreshold*100@%, ваша <speed>скорость передвижения увеличивается на @MoveSpeedBoostPercent*100@%</speed> и на вас накладывается <shield>щит прочностью @ShieldHealth@</shield> на @ShieldDuration@ сек., но вы теряете одну шляпу. Перезарядка – @Cooldown@ сек."
+            "tooltip": "{{ Cherry_HatTrick_Summary }}<br><br><rules>Вы больше не теряете шляпы после смерти.</rules>"
         },
         {
             "apiName": "HeavyHitter",
@@ -3763,6 +3938,23 @@
             "tooltip": "Ваш чемпион стреляет перед собой лазерным лучом, который наносит <magicDamage>@LaserEyesTooltip@ магического урона</magicDamage> в секунду.<br><br>Урон, нанесенный в этом раунде: @f1@<br>Общий нанесенный урон: @f2@"
         },
         {
+            "apiName": "SpiritInfusion",
+            "calculations": {},
+            "dataValues": {
+                "AmpAmount": 0.5,
+                "Cooldown": 10.0,
+                "FlatHS": 0.10000000149011612,
+                "HSDuration": 10.0
+            },
+            "desc": "Эффективность лечения и щитов повышается, увеличивается дополнительно при низком запасе здоровья и удваивается при использовании абсолютного умения.",
+            "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
+            "id": 326,
+            "name": "Прилив силы духа",
+            "rarity": 0,
+            "tooltip": "<healing>Эффективность лечения и щитов повышается на @FlatHS*100@%</healing>.<br><br>При использовании абсолютного умения <healing>эффективность лечения и щитов</healing> повышается на @AmpAmount*100@% на @HSDuration@ сек. (перезарядка – @Cooldown@ сек.)."
+        },
+        {
             "apiName": "StatsOnStats",
             "calculations": {},
             "dataValues": {
@@ -3985,13 +4177,13 @@
             "apiName": "Oathsworn",
             "calculations": {},
             "dataValues": {},
-            "desc": "Ваше заклинание призывателя Бегство заменяется <spellName>Зовом судьбы</spellName>.<br><br><rules><spellName>Зов судьбы</spellName> делает вашего союзника недосягаемым на период до 4 сек. Союзник может броситься в выбранное место, <status>отбрасывая</status> врагов.</rules><br>",
+            "desc": "Ваше заклинание призывателя Бегство заменяется <spellName>Зовом судьбы</spellName>.<br><br><rules><spellName>Зов судьбы</spellName> дает вашему союзнику недосягаемость на период до 4 секунд. Союзник может броситься в выбранное место, <status>отбрасывая</status> врагов.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/oathsworn_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/oathsworn_small.png",
             "id": 109,
             "name": "Клятва верности",
             "rarity": 1,
-            "tooltip": "Ваше заклинание призывателя Бегство заменяется <spellName>Зовом судьбы</spellName>.<br><br><rules><spellName>Зов судьбы</spellName> делает вашего союзника недосягаемым на период до 4 сек. Союзник может броситься в выбранное место, <status>отбрасывая</status> врагов.</rules><br>"
+            "tooltip": "Ваше заклинание призывателя Бегство заменяется <spellName>Зовом судьбы</spellName>.<br><br><rules><spellName>Зов судьбы</spellName> дает вашему союзнику недосягаемость на период до 4 секунд. Союзник может броситься в выбранное место, <status>отбрасывая</status> врагов.</rules>"
         },
         {
             "apiName": "Flashbang",

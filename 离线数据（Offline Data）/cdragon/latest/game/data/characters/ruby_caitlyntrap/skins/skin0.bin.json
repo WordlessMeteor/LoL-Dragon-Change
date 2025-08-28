@@ -1,0 +1,283 @@
+{
+    "Characters/Ruby_CaitlynTrap/Skins/Skin0": {
+        "championSkinName": "Ruby_CaitlynTrapBase",
+        "skinAudioProperties": {
+            "tagEventList": [
+                "Ruby_Caitlyn"
+            ],
+            "__type": "SkinAudioProperties"
+        },
+        "skinAnimationProperties": {
+            "animationGraphData": "Characters/Ruby_CaitlynTrap/Animations/Skin0",
+            "__type": "SkinAnimationProperties"
+        },
+        "skinMeshProperties": {
+            "skeleton": "ASSETS/Characters/Ruby_CaitlynTrap/Skins/Base/Ruby_CaitlynTrap_Base.Ruby.skl",
+            "simpleSkin": "ASSETS/Characters/Ruby_CaitlynTrap/Skins/Base/Ruby_CaitlynTrap_Base.Ruby.skn",
+            "texture": "ASSETS/Characters/Ruby_CaitlynTrap/Skins/Base/Ruby_CaitlynTrap_Base_TX_CM.Ruby.tex",
+            "skinScale": 2.0,
+            "selfIllumination": 0.699999988079071,
+            "brushAlphaOverride": 0.6000000238418579,
+            "reflectionFresnelColor": [
+                0,
+                0,
+                0,
+                255
+            ],
+            "materialOverride": [
+                {
+                    "material": "Characters/Ruby_CaitlynTrap/Skins/Skin0/Materials/Cait_Trap_Dissolve_inst",
+                    "submesh": "riotRig:lambert2",
+                    "__type": "SkinMeshDataProperties_MaterialOverride"
+                }
+            ],
+            "__type": "SkinMeshDataProperties"
+        },
+        "mResourceResolver": "Characters/Ruby_CaitlynTrap/Skins/Skin0/Resources",
+        "__type": "SkinCharacterDataProperties"
+    },
+    "Characters/Ruby_CaitlynTrap/Skins/Skin0/Materials/Cait_Trap_Dissolve_inst": {
+        "name": "Characters/Ruby_CaitlynTrap/Skins/Skin0/Materials/Cait_Trap_Dissolve_inst",
+        "samplerValues": [
+            {
+                "textureName": "Diffuse_Texture",
+                "texturePath": "ASSETS/Characters/Ruby_CaitlynTrap/Skins/Base/caitlyn_base_TX_CM_v01.Ruby.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Dissolve_Texture",
+                "texturePath": "ASSETS/Characters/Rakan/Skins/Skin05/Particles/Rakan_Skin05_Character_Dissolve.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Alt_Diffuse_Texture",
+                "texturePath": "ASSETS/Characters/Ruby_CaitlynTrap/Skins/Base/caitlyn_base_TX_CM_v01.Ruby.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "DissolveIntensity",
+                "value": [
+                    10.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DissolveBias",
+                "value": [
+                    0.8525000214576721,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Emissive_Factor",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Lighting_Intensity",
+                "value": [
+                    1.5,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dissolve_Color",
+                "value": [
+                    0.04313725605607033,
+                    0.5529412031173706,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "value": [
+                    0.20000000298023224,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "DissolveWidth",
+                "value": [
+                    0.10000000149011612,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "DEBUG_VIEW_DISSOLVE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_POST_LIGHT",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DISSOLVE_OUT_ALPHA",
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/Dissolve_Diffuse_Or_Alpha",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "DissolveBias",
+                    "driver": {
+                        "mDrivers": [
+                            {
+                                "driver": {
+                                    "mBoolDriver": {
+                                        "mAnimationNames": [
+                                            "Spell1"
+                                        ],
+                                        "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                    },
+                                    "mOnValue": -0.30000001192092896,
+                                    "mOffValue": 1.0,
+                                    "mTurnOnTimeSec": 2.0,
+                                    "mTurnOffTimeSec": 0.0,
+                                    "__type": "LerpMaterialDriver"
+                                },
+                                "graph": {
+                                    "times": [
+                                        0.0,
+                                        0.9878048896789551,
+                                        0.9878048896789551
+                                    ],
+                                    "values": [
+                                        1.0,
+                                        0.08849557489156723,
+                                        1.0
+                                    ],
+                                    "__type": "VfxAnimatedFloatVariableData"
+                                },
+                                "__type": "FloatGraphMaterialDriver"
+                            }
+                        ],
+                        "__type": "MinMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
+    },
+    "Characters/Ruby_CaitlynTrap/Skins/Skin0/Resources": {
+        "resourceMap": {
+            "Caitlyn_P_mis": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_P_mis",
+            "Caitlyn_P_Ready_idle": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_P_Ready_idle",
+            "Caitlyn_P_Ready_Weapon_indicator": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_P_Ready_Weapon_indicator",
+            "Caitlyn_P_headshot_tar": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_P_headshot_tar",
+            "caitlyn_BA_Cas": "Characters/Caitlyn/Skins/Skin0/Particles/caitlyn_Base_BA_Cas",
+            "Caitlyn_Crit_Mis": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_BA_Crit_Mis",
+            "Caitlyn_BA_mis": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_BA_mis",
+            "caitlyn_BA_tar": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_BA_tar",
+            "Caitlyn_BA_Crit_tar": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_BA_Crit_tar",
+            "caitlyn_Q_cas": "Characters/Caitlyn/Skins/Skin0/Particles/caitlyn_Base_Q_cas",
+            "Caitlyn_Q_mis": "Characters/Caitlyn/Skins/Skin0/Particles/caitlyn_Base_Q_mis",
+            "Caitlyn_Q_mis2": "Characters/Caitlyn/Skins/Skin0/Particles/caitlyn_Base_Q_mis2",
+            "Caitlyn_Q_tar": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Q_tar",
+            "Caitlyn_Q_tar_minion": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Q_tar_minion",
+            "Caitlyn_W_trap_set": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_trap_set",
+            "Caitlyn_W_Trap_Trigger": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_Trap_Trigger",
+            "Caitlyn_W_Trap_trigger_sound": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_Trap_trigger_sound",
+            "Caitlyn_W_Trap_trigger_SoundPersonal": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_Trap_trigger_SoundPersonal",
+            "Caitlyn_W_Indicator_SizeRing": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_Indicator_SizeRing",
+            "Caitlyn_W_trap_idle_ally": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_trap_idle_ally",
+            "Caitlyn_W_Trap_idle_ally_inbrush": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_Trap_idle_ally_inbrush",
+            "Caitlyn_W_Trap_idle_enemy": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_Trap_idle_enemy",
+            "Caitlyn_W_Trap_idle_enemy_inbrush": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_Trap_idle_enemy_inbrush",
+            "Caitlyn_W_tar_debuf": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_tar_debuf",
+            "Caitlyn_W_tar_slow": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_tar_slow",
+            "Caitlyn_E_cas": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_E_cas",
+            "Caitlyn_E_Range_Indicator": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_E_Range_Indicator",
+            "Caitlyn_E_mis": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_E_mis",
+            "caitlyn_E_Tar": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_E_tar",
+            "Caitlyn_E_Child": "{00000000}",
+            "Caitlyn_E_ChildTrail": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_E_ChildTrail",
+            "Caitlyn_W_E_Tar_Headshot_Beam": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_W_E_Tar_Headshot_Beam",
+            "Caitlyn_R_targetting_beam": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_targetting_beam",
+            "Caitlyn_R_mis": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_mis",
+            "Caitlyn_R_Tar_Indicator_Floor": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_Tar_Indicator_Floor",
+            "Caitlyn_R_Tar_Indicator_Overhead": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_Tar_Indicator_Overhead",
+            "Caitlyn_R_tar": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_tar",
+            "Caitlyn_R_mis_child": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_mis_child",
+            "Caitlyn_Q_2_tar": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Q_2_tar",
+            "Caitlyn_R_Scope_Hologram": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_Scope_Hologram",
+            "caitlyn_P_Cas": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_P_cas",
+            "Caitlyn_E_Range_Indicator_Enemy": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_E_Range_Indicator_Enemy",
+            "Caitlyn_R_Tar_Indicator_Floor_Enemy": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_Tar_Indicator_Floor_Enemy",
+            "Caitlyn_R_Tar_Indicator_Overhead_Enemy": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_Tar_Indicator_Overhead_Enemy",
+            "Caitlyn_R_targetting_beam_Enemy": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_R_targetting_beam_Enemy",
+            "Caitlyn_Z_Shell_Parent": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Z_Shell_Parent",
+            "Caitlyn_Z_Shell_Child": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Z_Shell_Child",
+            "Caitlyn_Z_Shell_GroundBounce": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Z_Shell_GroundBounce",
+            "Caitlyn_Recall_Tea_Steam": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Recall_Tea_Steam",
+            "Caitlyn_Emote_Joke_Confetti": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Emote_Joke_Confetti",
+            "Caitlyn_Emote_Dance_Spin_1": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Emote_Dance_Spin_1",
+            "Caitlyn_Emote_Recall_Spin_1": "Characters/Caitlyn/Skins/Skin0/Particles/Caitlyn_Base_Emote_Recall_Spin_1"
+        },
+        "__type": "ResourceResolver"
+    },
+    "__linked": [
+        "DATA/Characters/Ruby_CaitlynTrap/Ruby_CaitlynTrap.bin",
+        "DATA/Characters/Ruby_CaitlynTrap/Animations/Skin0.bin"
+    ]
+}
