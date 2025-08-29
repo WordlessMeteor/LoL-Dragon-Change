@@ -24047,12 +24047,14 @@
             "apiName": "TFT5_Item_RunaansHurricaneRadiant",
             "associatedTraits": [],
             "composition": [],
-            "desc": "Attacks grant <TFTRadiantItemBonus>@ADOnAttack*100@%</TFTRadiantItemBonus> stacking Attack Damage.",
+            "desc": "Attacks grant <TFTRadiantItemBonus>@ADOnAttack*100@%</TFTRadiantItemBonus> stacking Attack Damage, up to @MaxStacks@ attacks. After @MaxStacks@ attacks, gain <TFTRadiantItemBonus>@ASCapstone*100@%</TFTRadiantItemBonus> Attack Speed.",
             "effects": {
                 "AD": 0.30000001192092896,
                 "ADOnAttack": 0.05999999865889549,
                 "AS": 25.0,
-                "MagicResist": 20.0
+                "MagicResist": 20.0,
+                "MaxStacks": 20.0,
+                "{c4322300}": 0.800000011920929
             },
             "from": null,
             "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_KrakenSlayerRadiant.TFT_TFT14_5.tex",
@@ -38501,12 +38503,14 @@
                 "TFT_Item_NegatronCloak",
                 "TFT_Item_RecurveBow"
             ],
-            "desc": "Attacks grant @ADOnAttack*100@% stacking Attack Damage.",
+            "desc": "Attacks grant @ADOnAttack*100@% stacking Attack Damage, up to @MaxStacks@ attacks. After @MaxStacks@ attacks, gain @ASCapstone*100@% Attack Speed.",
             "effects": {
                 "AD": 0.20000000298023224,
                 "ADOnAttack": 0.029999999329447746,
-                "AS": 10.0,
-                "MagicResist": 20.0
+                "AS": 15.0,
+                "MagicResist": 20.0,
+                "MaxStacks": 20.0,
+                "{c4322300}": 0.4000000059604645
             },
             "from": null,
             "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_KrakenSlayer.TFT_TFT14_5.tex",
@@ -39098,7 +39102,7 @@
             "apiName": "TFT9_Item_CrownOfDemacia",
             "associatedTraits": [],
             "composition": [],
-            "desc": "If the holder begins combat in the front 2 rows, regenerate @HealingPercentPerTickPerStage@-@HealingPercentPerTickPerStage*7@% maximum Health every @HealTickRate@ seconds (based on stage). If they start in the back 2 rows, gain @ADandAPPerTick@% %i:scaleAD% Attack Damage and %i:scaleAP% Ability Power every @HealTickRate@ seconds instead. <br><br>If the holder of this item dies, you instantly lose the fight.<br><br><tftitemrules>You can remove this item by benching the holder.</tftitemrules><br><br>",
+            "desc": "If the holder is a Tank, regenerate @HealingPercentPerTickPerStage@-@HealingPercentPerTickPerStage*7@% maximum Health every @HealTickRate@ seconds (based on stage). Otherwise, gain @ADandAPPerTick@% %i:scaleAD% Attack Damage and %i:scaleAP% Ability Power every @HealTickRate@ seconds instead. <br><br>If the holder of this item dies, you instantly lose the fight.<br><br><tftitemrules>You can remove this item by benching the holder.</tftitemrules><br><br>",
             "effects": {
                 "ADandAPPerTick": 10.0,
                 "AS": 30.0,
@@ -95109,7 +95113,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "Gain <TFTBonus>@ModifiedShield@&nbsp;(%i:scaleAP%)</TFTBonus> Shield for @ShieldDuration@ seconds. When it breaks, deal <physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>  physical&nbsp;damage to the target and <physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage> physical&nbsp;damage to other enemies in a 1-hex radius centered on the target. The target is <TFTKeyword>Stunned</TFTKeyword> for <TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus> seconds based on how long the shield held, and other enemies are briefly <TFTKeyword>Stunned</TFTKeyword>.",
+                        "desc": "Gain <TFTBonus>@ModifiedShield@&nbsp;(%i:scaleHealth%%i:scaleAP%)</TFTBonus> Shield for @ShieldDuration@ seconds. When it breaks, deal <physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleAD%)</physicalDamage>  physical&nbsp;damage to the target and <physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleAD%)</physicalDamage> physical&nbsp;damage to other enemies in a 1-hex radius centered on the target. The target is <TFTKeyword>Stunned</TFTKeyword> for <TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus> seconds based on how long the shield held, and other enemies are briefly <TFTKeyword>Stunned</TFTKeyword>.",
                         "icon": "ASSETS/Characters/TFT15_Poppy/HUD/Icons2D/TFT15_Poppy_R.TFT_Set15.tex",
                         "name": "Spinning Galaxy Hammer",
                         "variables": [
@@ -100682,7 +100686,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_ShineBrighter",
-                    "desc": "Lux's spell now explodes in a 2-hex radius, and splits @Percent*100@% more damage between targets.",
+                    "desc": "Every other cast, Lux's spell explodes in a 2-hex radius, and deals @Percent*100@% more damage.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -100717,7 +100721,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_10TonSlam",
-                    "desc": "On cast, the primary target is stunned for @Duration@ seconds and takes bonus physical damage equal to @Percent*100@ of Jayce's Max Health.",
+                    "desc": "On cast, the primary target is Stunned for @Duration@ second and takes bonus physical damage equal to @Percent*100@% of Jayce's Max Health.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -100725,7 +100729,7 @@
                             "style": 1,
                             "variables": {
                                 "Duration": 1.0,
-                                "percent": 0.15000000596046448
+                                "percent": 0.11999999731779099
                             }
                         }
                     ],
@@ -100816,8 +100820,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Stats": 0.20000000298023224,
-                                "{1d279a19}": 0.05000000074505806
+                                "Stats": 0.3499999940395355,
+                                "{1d279a19}": 0.03999999910593033
                             }
                         }
                     ],
@@ -101344,7 +101348,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_DriftDuo",
-                    "desc": "Senna and Lucian both gain @Regen@ mana regen. If both are 3-star, gain +1 Mighty Mech.",
+                    "desc": "Senna and Lucian both gain @ManaRegen@ Mana Regen. If both are 3-Star, gain +1 Mighty Mech.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -102984,7 +102988,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_GoldenGloves",
-                    "desc": "Whenever you gain interest, permanently gain @AD@% Attack Damage per gold collected.",
+                    "desc": "Whenever you gain interest, permanently gain @AD*100@% Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@%&nbsp;%i:scaleAD%)",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -103068,16 +103072,15 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_SoulSurvivor",
-                    "desc": "On cast, gain @AD*100@ Attack Damage, @AS*100@% Attack Speed, and @Vamp*100@% Omnivamp until the end of combat.",
+                    "desc": "On cast, gain @AD*100@% Attack Damage and @AS*100@% Attack Speed.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "AD": 0.10000000149011612,
-                                "AS": 0.20000000298023224,
-                                "{49c7c2ed}": 0.019999999552965164
+                                "AD": 0.20000000298023224,
+                                "AS": 0.4000000059604645
                             }
                         }
                     ],
@@ -103192,15 +103195,15 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_SupremeSurge",
-                    "desc": "Whenever an enemy is executed by a Supreme Cell, heal @Percent*100@% missing health and gain @mana@ mana.",
+                    "desc": "Whenever an enemy is executed by a Supreme Cell, heal @Percent*100@% max health and gain @mana@ mana.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Mana": 5.0,
-                                "percent": 0.25
+                                "Mana": 15.0,
+                                "percent": 0.15000000596046448
                             }
                         }
                     ],
@@ -103450,7 +103453,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_StarryKnight",
-                    "desc": "Gain @Health*100@% Health and @AP@ Ability Power for every 1-cost fielded, doubled if they're 3-star.",
+                    "desc": "Gain @Health*100@% Health and @AP@ Ability Power for every 1-cost fielded, doubled if they're 3-Star.",
                     "effects": [
                         {
                             "maxUnits": 1,
@@ -103458,7 +103461,7 @@
                             "style": 1,
                             "variables": {
                                 "AP": 10.0,
-                                "Health": 0.054999999701976776,
+                                "Health": 0.05000000074505806,
                                 "Mult": 2.0
                             }
                         }
@@ -152712,7 +152715,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "Gain <TFTBonus>@ModifiedShield@&nbsp;(%i:scaleAP%)</TFTBonus> Shield for @ShieldDuration@ seconds. When it breaks, deal <physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>  physical&nbsp;damage to the target and <physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage> physical&nbsp;damage to other enemies in a 1-hex radius centered on the target. The target is <TFTKeyword>Stunned</TFTKeyword> for <TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus> seconds based on how long the shield held, and other enemies are briefly <TFTKeyword>Stunned</TFTKeyword>.",
+                        "desc": "Gain <TFTBonus>@ModifiedShield@&nbsp;(%i:scaleHealth%%i:scaleAP%)</TFTBonus> Shield for @ShieldDuration@ seconds. When it breaks, deal <physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleAD%)</physicalDamage>  physical&nbsp;damage to the target and <physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleAD%)</physicalDamage> physical&nbsp;damage to other enemies in a 1-hex radius centered on the target. The target is <TFTKeyword>Stunned</TFTKeyword> for <TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus> seconds based on how long the shield held, and other enemies are briefly <TFTKeyword>Stunned</TFTKeyword>.",
                         "icon": "ASSETS/Characters/TFT15_Poppy/HUD/Icons2D/TFT15_Poppy_R.TFT_Set15.tex",
                         "name": "Spinning Galaxy Hammer",
                         "variables": [
@@ -158282,7 +158285,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_ShineBrighter",
-                    "desc": "Lux's spell now explodes in a 2-hex radius, and splits @Percent*100@% more damage between targets.",
+                    "desc": "Every other cast, Lux's spell explodes in a 2-hex radius, and deals @Percent*100@% more damage.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -158317,7 +158320,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_10TonSlam",
-                    "desc": "On cast, the primary target is stunned for @Duration@ seconds and takes bonus physical damage equal to @Percent*100@ of Jayce's Max Health.",
+                    "desc": "On cast, the primary target is Stunned for @Duration@ second and takes bonus physical damage equal to @Percent*100@% of Jayce's Max Health.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -158325,7 +158328,7 @@
                             "style": 1,
                             "variables": {
                                 "Duration": 1.0,
-                                "percent": 0.15000000596046448
+                                "percent": 0.11999999731779099
                             }
                         }
                     ],
@@ -158416,8 +158419,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Stats": 0.20000000298023224,
-                                "{1d279a19}": 0.05000000074505806
+                                "Stats": 0.3499999940395355,
+                                "{1d279a19}": 0.03999999910593033
                             }
                         }
                     ],
@@ -158944,7 +158947,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_DriftDuo",
-                    "desc": "Senna and Lucian both gain @Regen@ mana regen. If both are 3-star, gain +1 Mighty Mech.",
+                    "desc": "Senna and Lucian both gain @ManaRegen@ Mana Regen. If both are 3-Star, gain +1 Mighty Mech.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -160584,7 +160587,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_GoldenGloves",
-                    "desc": "Whenever you gain interest, permanently gain @AD@% Attack Damage per gold collected.",
+                    "desc": "Whenever you gain interest, permanently gain @AD*100@% Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@%&nbsp;%i:scaleAD%)",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -160668,16 +160671,15 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_SoulSurvivor",
-                    "desc": "On cast, gain @AD*100@ Attack Damage, @AS*100@% Attack Speed, and @Vamp*100@% Omnivamp until the end of combat.",
+                    "desc": "On cast, gain @AD*100@% Attack Damage and @AS*100@% Attack Speed.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "AD": 0.10000000149011612,
-                                "AS": 0.20000000298023224,
-                                "{49c7c2ed}": 0.019999999552965164
+                                "AD": 0.20000000298023224,
+                                "AS": 0.4000000059604645
                             }
                         }
                     ],
@@ -160792,15 +160794,15 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_SupremeSurge",
-                    "desc": "Whenever an enemy is executed by a Supreme Cell, heal @Percent*100@% missing health and gain @mana@ mana.",
+                    "desc": "Whenever an enemy is executed by a Supreme Cell, heal @Percent*100@% max health and gain @mana@ mana.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Mana": 5.0,
-                                "percent": 0.25
+                                "Mana": 15.0,
+                                "percent": 0.15000000596046448
                             }
                         }
                     ],
@@ -161050,7 +161052,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_StarryKnight",
-                    "desc": "Gain @Health*100@% Health and @AP@ Ability Power for every 1-cost fielded, doubled if they're 3-star.",
+                    "desc": "Gain @Health*100@% Health and @AP@ Ability Power for every 1-cost fielded, doubled if they're 3-Star.",
                     "effects": [
                         {
                             "maxUnits": 1,
@@ -161058,7 +161060,7 @@
                             "style": 1,
                             "variables": {
                                 "AP": 10.0,
-                                "Health": 0.054999999701976776,
+                                "Health": 0.05000000074505806,
                                 "Mult": 2.0
                             }
                         }
@@ -275324,7 +275326,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "Gain <TFTBonus>@ModifiedShield@&nbsp;(%i:scaleAP%)</TFTBonus> Shield for @ShieldDuration@ seconds. When it breaks, deal <physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>  physical&nbsp;damage to the target and <physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage> physical&nbsp;damage to other enemies in a 1-hex radius centered on the target. The target is <TFTKeyword>Stunned</TFTKeyword> for <TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus> seconds based on how long the shield held, and other enemies are briefly <TFTKeyword>Stunned</TFTKeyword>.",
+                        "desc": "Gain <TFTBonus>@ModifiedShield@&nbsp;(%i:scaleHealth%%i:scaleAP%)</TFTBonus> Shield for @ShieldDuration@ seconds. When it breaks, deal <physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleAD%)</physicalDamage>  physical&nbsp;damage to the target and <physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleAD%)</physicalDamage> physical&nbsp;damage to other enemies in a 1-hex radius centered on the target. The target is <TFTKeyword>Stunned</TFTKeyword> for <TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus> seconds based on how long the shield held, and other enemies are briefly <TFTKeyword>Stunned</TFTKeyword>.",
                         "icon": "ASSETS/Characters/TFT15_Poppy/HUD/Icons2D/TFT15_Poppy_R.TFT_Set15.tex",
                         "name": "Spinning Galaxy Hammer",
                         "variables": [
@@ -280927,7 +280929,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_ShineBrighter",
-                    "desc": "Lux's spell now explodes in a 2-hex radius, and splits @Percent*100@% more damage between targets.",
+                    "desc": "Every other cast, Lux's spell explodes in a 2-hex radius, and deals @Percent*100@% more damage.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -280962,7 +280964,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_10TonSlam",
-                    "desc": "On cast, the primary target is stunned for @Duration@ seconds and takes bonus physical damage equal to @Percent*100@ of Jayce's Max Health.",
+                    "desc": "On cast, the primary target is Stunned for @Duration@ second and takes bonus physical damage equal to @Percent*100@% of Jayce's Max Health.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -280970,7 +280972,7 @@
                             "style": 1,
                             "variables": {
                                 "Duration": 1.0,
-                                "percent": 0.15000000596046448
+                                "percent": 0.11999999731779099
                             }
                         }
                     ],
@@ -281061,8 +281063,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Stats": 0.20000000298023224,
-                                "{1d279a19}": 0.05000000074505806
+                                "Stats": 0.3499999940395355,
+                                "{1d279a19}": 0.03999999910593033
                             }
                         }
                     ],
@@ -281589,7 +281591,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_DriftDuo",
-                    "desc": "Senna and Lucian both gain @Regen@ mana regen. If both are 3-star, gain +1 Mighty Mech.",
+                    "desc": "Senna and Lucian both gain @ManaRegen@ Mana Regen. If both are 3-Star, gain +1 Mighty Mech.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -283229,7 +283231,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_GoldenGloves",
-                    "desc": "Whenever you gain interest, permanently gain @AD@% Attack Damage per gold collected.",
+                    "desc": "Whenever you gain interest, permanently gain @AD*100@% Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@%&nbsp;%i:scaleAD%)",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -283313,16 +283315,15 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_SoulSurvivor",
-                    "desc": "On cast, gain @AD*100@ Attack Damage, @AS*100@% Attack Speed, and @Vamp*100@% Omnivamp until the end of combat.",
+                    "desc": "On cast, gain @AD*100@% Attack Damage and @AS*100@% Attack Speed.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "AD": 0.10000000149011612,
-                                "AS": 0.20000000298023224,
-                                "{49c7c2ed}": 0.019999999552965164
+                                "AD": 0.20000000298023224,
+                                "AS": 0.4000000059604645
                             }
                         }
                     ],
@@ -283437,15 +283438,15 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_SupremeSurge",
-                    "desc": "Whenever an enemy is executed by a Supreme Cell, heal @Percent*100@% missing health and gain @mana@ mana.",
+                    "desc": "Whenever an enemy is executed by a Supreme Cell, heal @Percent*100@% max health and gain @mana@ mana.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Mana": 5.0,
-                                "percent": 0.25
+                                "Mana": 15.0,
+                                "percent": 0.15000000596046448
                             }
                         }
                     ],
@@ -283695,7 +283696,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_StarryKnight",
-                    "desc": "Gain @Health*100@% Health and @AP@ Ability Power for every 1-cost fielded, doubled if they're 3-star.",
+                    "desc": "Gain @Health*100@% Health and @AP@ Ability Power for every 1-cost fielded, doubled if they're 3-Star.",
                     "effects": [
                         {
                             "maxUnits": 1,
@@ -283703,7 +283704,7 @@
                             "style": 1,
                             "variables": {
                                 "AP": 10.0,
-                                "Health": 0.054999999701976776,
+                                "Health": 0.05000000074505806,
                                 "Mult": 2.0
                             }
                         }
@@ -416757,7 +416758,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "Gain <TFTBonus>@ModifiedShield@&nbsp;(%i:scaleAP%)</TFTBonus> Shield for @ShieldDuration@ seconds. When it breaks, deal <physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>  physical&nbsp;damage to the target and <physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage> physical&nbsp;damage to other enemies in a 1-hex radius centered on the target. The target is <TFTKeyword>Stunned</TFTKeyword> for <TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus> seconds based on how long the shield held, and other enemies are briefly <TFTKeyword>Stunned</TFTKeyword>.",
+                        "desc": "Gain <TFTBonus>@ModifiedShield@&nbsp;(%i:scaleHealth%%i:scaleAP%)</TFTBonus> Shield for @ShieldDuration@ seconds. When it breaks, deal <physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleAD%)</physicalDamage>  physical&nbsp;damage to the target and <physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleAD%)</physicalDamage> physical&nbsp;damage to other enemies in a 1-hex radius centered on the target. The target is <TFTKeyword>Stunned</TFTKeyword> for <TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus> seconds based on how long the shield held, and other enemies are briefly <TFTKeyword>Stunned</TFTKeyword>.",
                         "icon": "ASSETS/Characters/TFT15_Poppy/HUD/Icons2D/TFT15_Poppy_R.TFT_Set15.tex",
                         "name": "Spinning Galaxy Hammer",
                         "variables": [
@@ -421966,7 +421967,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_ShineBrighter",
-                    "desc": "Lux's spell now explodes in a 2-hex radius, and splits @Percent*100@% more damage between targets.",
+                    "desc": "Every other cast, Lux's spell explodes in a 2-hex radius, and deals @Percent*100@% more damage.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -422001,7 +422002,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_10TonSlam",
-                    "desc": "On cast, the primary target is stunned for @Duration@ seconds and takes bonus physical damage equal to @Percent*100@ of Jayce's Max Health.",
+                    "desc": "On cast, the primary target is Stunned for @Duration@ second and takes bonus physical damage equal to @Percent*100@% of Jayce's Max Health.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -422009,7 +422010,7 @@
                             "style": 1,
                             "variables": {
                                 "Duration": 1.0,
-                                "percent": 0.15000000596046448
+                                "percent": 0.11999999731779099
                             }
                         }
                     ],
@@ -422100,8 +422101,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Stats": 0.20000000298023224,
-                                "{1d279a19}": 0.05000000074505806
+                                "Stats": 0.3499999940395355,
+                                "{1d279a19}": 0.03999999910593033
                             }
                         }
                     ],
@@ -422628,7 +422629,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_DriftDuo",
-                    "desc": "Senna and Lucian both gain @Regen@ mana regen. If both are 3-star, gain +1 Mighty Mech.",
+                    "desc": "Senna and Lucian both gain @ManaRegen@ Mana Regen. If both are 3-Star, gain +1 Mighty Mech.",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -424268,7 +424269,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_GoldenGloves",
-                    "desc": "Whenever you gain interest, permanently gain @AD@% Attack Damage per gold collected.",
+                    "desc": "Whenever you gain interest, permanently gain @AD*100@% Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@%&nbsp;%i:scaleAD%)",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -424352,16 +424353,15 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_SoulSurvivor",
-                    "desc": "On cast, gain @AD*100@ Attack Damage, @AS*100@% Attack Speed, and @Vamp*100@% Omnivamp until the end of combat.",
+                    "desc": "On cast, gain @AD*100@% Attack Damage and @AS*100@% Attack Speed.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "AD": 0.10000000149011612,
-                                "AS": 0.20000000298023224,
-                                "{49c7c2ed}": 0.019999999552965164
+                                "AD": 0.20000000298023224,
+                                "AS": 0.4000000059604645
                             }
                         }
                     ],
@@ -424476,15 +424476,15 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_SupremeSurge",
-                    "desc": "Whenever an enemy is executed by a Supreme Cell, heal @Percent*100@% missing health and gain @mana@ mana.",
+                    "desc": "Whenever an enemy is executed by a Supreme Cell, heal @Percent*100@% max health and gain @mana@ mana.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Mana": 5.0,
-                                "percent": 0.25
+                                "Mana": 15.0,
+                                "percent": 0.15000000596046448
                             }
                         }
                     ],
@@ -424734,7 +424734,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_StarryKnight",
-                    "desc": "Gain @Health*100@% Health and @AP@ Ability Power for every 1-cost fielded, doubled if they're 3-star.",
+                    "desc": "Gain @Health*100@% Health and @AP@ Ability Power for every 1-cost fielded, doubled if they're 3-Star.",
                     "effects": [
                         {
                             "maxUnits": 1,
@@ -424742,7 +424742,7 @@
                             "style": 1,
                             "variables": {
                                 "AP": 10.0,
-                                "Health": 0.054999999701976776,
+                                "Health": 0.05000000074505806,
                                 "Mult": 2.0
                             }
                         }

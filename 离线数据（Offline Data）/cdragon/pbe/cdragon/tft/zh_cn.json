@@ -23809,7 +23809,7 @@
             "apiName": "TFT5_Item_QuicksilverRadiant",
             "associatedTraits": [],
             "composition": [],
-            "desc": "战斗开始时：战斗开始时：获得持续<TFTRadiantItemBonus>@SpellShieldDuration@</TFTRadiantItemBonus>秒的控制免疫效果。<br><br>每秒获得<TFTRadiantItemBonus>@ProcAttackSpeed*100@%</TFTRadiantItemBonus>可叠加的攻击速度。",
+            "desc": "战斗开始时：获得持续<TFTRadiantItemBonus>@SpellShieldDuration@</TFTRadiantItemBonus>秒的控制免疫效果。<br><br>每秒获得<TFTRadiantItemBonus>@ProcAttackSpeed*100@%</TFTRadiantItemBonus>可叠加的攻击速度。",
             "effects": {
                 "AS": 25.0,
                 "CritChance": 40.0,
@@ -24047,12 +24047,14 @@
             "apiName": "TFT5_Item_RunaansHurricaneRadiant",
             "associatedTraits": [],
             "composition": [],
-            "desc": "攻击提供<TFTRadiantItemBonus>@ADOnAttack*100@%</TFTRadiantItemBonus>可叠加的物理加成。",
+            "desc": "tft_item_description_RunaansHurricaneRadiant",
             "effects": {
                 "AD": 0.30000001192092896,
                 "ADOnAttack": 0.05999999865889549,
                 "AS": 25.0,
-                "MagicResist": 20.0
+                "MagicResist": 20.0,
+                "MaxStacks": 20.0,
+                "{c4322300}": 0.800000011920929
             },
             "from": null,
             "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_KrakenSlayerRadiant.TFT_TFT14_5.tex",
@@ -38501,12 +38503,14 @@
                 "TFT_Item_NegatronCloak",
                 "TFT_Item_RecurveBow"
             ],
-            "desc": "攻击提供@ADOnAttack*100@%可叠加的物理加成。",
+            "desc": "TFT_item_description_RunaansHurricane",
             "effects": {
                 "AD": 0.20000000298023224,
                 "ADOnAttack": 0.029999999329447746,
-                "AS": 10.0,
-                "MagicResist": 20.0
+                "AS": 15.0,
+                "MagicResist": 20.0,
+                "MaxStacks": 20.0,
+                "{c4322300}": 0.4000000059604645
             },
             "from": null,
             "icon": "ASSETS/Maps/TFT/Icons/Items/Hexcore/TFT_Item_KrakenSlayer.TFT_TFT14_5.tex",
@@ -39098,7 +39102,7 @@
             "apiName": "TFT9_Item_CrownOfDemacia",
             "associatedTraits": [],
             "composition": [],
-            "desc": "如果携带者在开战时处于前2排，则每@HealTickRate@秒回复@HealingPercentPerTickPerStage@-@HealingPercentPerTickPerStage*7@%最大生命值(基于阶段)。如果在开战时处于后2排，则转而每@HealTickRate@秒获得@ADandAPPerTick@% %i:scaleAD%物理加成和%i:scaleAP%法术加成。<br><br>如果这件装备的携带者阵亡，那么你会立刻输掉战斗。<br><br><tftitemrules>你可以通过将携带者移到备战席来移除这个装备。</tftitemrules><br><br>",
+            "desc": "如果携带者是一个【坦克】，则每@HealTickRate@秒回复@HealingPercentPerTickPerStage@-@HealingPercentPerTickPerStage*7@%最大生命值(基于阶段)。如果不是，则转而每@HealTickRate@秒获得@ADandAPPerTick@% %i:scaleAD%攻击力和%i:scaleAP%法术强度。<br><br>如果这件装备的携带者阵亡，那么你会立刻输掉战斗。<br><br><tftitemrules>你可以通过将携带者移到备战席来移除这个装备。</tftitemrules><br><br>",
             "effects": {
                 "ADandAPPerTick": 10.0,
                 "AS": 30.0,
@@ -40237,7 +40241,7 @@
                 "TFT_Item_SparringGloves",
                 "TFT_Item_NegatronCloak"
             ],
-            "desc": "战斗开始时：战斗开始时：获得持续@SpellShieldDuration@秒的控制免疫效果。<br><br>每秒获得@ProcAttackSpeed*100@%可叠加的攻击速度。",
+            "desc": "战斗开始时：获得持续@SpellShieldDuration@秒的控制免疫效果。<br><br>每秒获得@ProcAttackSpeed*100@%可叠加的攻击速度。",
             "effects": {
                 "AS": 10.0,
                 "CritChance": 20.0,
@@ -95109,7 +95113,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "获得持续@ShieldDuration@秒的<TFTBonus>@ModifiedShield@&nbsp;(%i:scaleAP%)</TFTBonus>护盾值。在护盾被打破时，对目标造成<physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>物理伤害并对以目标为中心的半径1格内的其他敌人们造成<physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>物理伤害。目标被<TFTKeyword>晕眩</TFTKeyword><TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus>秒，时长基于护盾的存留时间，而其他敌人则被短暂<TFTKeyword>晕眩</TFTKeyword>。",
+                        "desc": "获得持续@ShieldDuration@秒的<TFTBonus>@ModifiedShield@(%i:scaleHealth%%i:scaleAP%)</TFTBonus>护盾值。在护盾被打破时，对目标造成<physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleAD%)</physicalDamage>物理伤害并对以目标为中心的半径1格内的其他敌人们造成<physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleAD%)</physicalDamage>物理伤害。目标被<TFTKeyword>晕眩</TFTKeyword><TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus>秒，时长基于护盾的存留时间，而其他敌人则被短暂<TFTKeyword>晕眩</TFTKeyword>。",
                         "icon": "ASSETS/Characters/TFT15_Poppy/HUD/Icons2D/TFT15_Poppy_R.TFT_Set15.tex",
                         "name": "旋舞星系大锤",
                         "variables": [
@@ -100717,7 +100721,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_10TonSlam",
-                    "desc": "施放时，主要目标被晕眩@Duration@秒并收到相当于【杰斯】@Percent*100@最大生命值的额外物理伤害。",
+                    "desc": "施放时，主要目标被晕眩@Duration@秒并受到相当于【杰斯】@Percent*100@最大生命值的额外物理伤害。",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -100725,7 +100729,7 @@
                             "style": 1,
                             "variables": {
                                 "Duration": 1.0,
-                                "percent": 0.15000000596046448
+                                "percent": 0.11999999731779099
                             }
                         }
                     ],
@@ -100816,8 +100820,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Stats": 0.20000000298023224,
-                                "{1d279a19}": 0.05000000074505806
+                                "Stats": 0.3499999940395355,
+                                "{1d279a19}": 0.03999999910593033
                             }
                         }
                     ],
@@ -103075,9 +103079,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "AD": 0.10000000149011612,
-                                "AS": 0.20000000298023224,
-                                "{49c7c2ed}": 0.019999999552965164
+                                "AD": 0.20000000298023224,
+                                "AS": 0.4000000059604645
                             }
                         }
                     ],
@@ -103199,8 +103202,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Mana": 5.0,
-                                "percent": 0.25
+                                "Mana": 15.0,
+                                "percent": 0.15000000596046448
                             }
                         }
                     ],
@@ -103458,7 +103461,7 @@
                             "style": 1,
                             "variables": {
                                 "AP": 10.0,
-                                "Health": 0.054999999701976776,
+                                "Health": 0.05000000074505806,
                                 "Mult": 2.0
                             }
                         }
@@ -152712,7 +152715,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "获得持续@ShieldDuration@秒的<TFTBonus>@ModifiedShield@&nbsp;(%i:scaleAP%)</TFTBonus>护盾值。在护盾被打破时，对目标造成<physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>物理伤害并对以目标为中心的半径1格内的其他敌人们造成<physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>物理伤害。目标被<TFTKeyword>晕眩</TFTKeyword><TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus>秒，时长基于护盾的存留时间，而其他敌人则被短暂<TFTKeyword>晕眩</TFTKeyword>。",
+                        "desc": "获得持续@ShieldDuration@秒的<TFTBonus>@ModifiedShield@(%i:scaleHealth%%i:scaleAP%)</TFTBonus>护盾值。在护盾被打破时，对目标造成<physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleAD%)</physicalDamage>物理伤害并对以目标为中心的半径1格内的其他敌人们造成<physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleAD%)</physicalDamage>物理伤害。目标被<TFTKeyword>晕眩</TFTKeyword><TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus>秒，时长基于护盾的存留时间，而其他敌人则被短暂<TFTKeyword>晕眩</TFTKeyword>。",
                         "icon": "ASSETS/Characters/TFT15_Poppy/HUD/Icons2D/TFT15_Poppy_R.TFT_Set15.tex",
                         "name": "旋舞星系大锤",
                         "variables": [
@@ -158317,7 +158320,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_10TonSlam",
-                    "desc": "施放时，主要目标被晕眩@Duration@秒并收到相当于【杰斯】@Percent*100@最大生命值的额外物理伤害。",
+                    "desc": "施放时，主要目标被晕眩@Duration@秒并受到相当于【杰斯】@Percent*100@最大生命值的额外物理伤害。",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -158325,7 +158328,7 @@
                             "style": 1,
                             "variables": {
                                 "Duration": 1.0,
-                                "percent": 0.15000000596046448
+                                "percent": 0.11999999731779099
                             }
                         }
                     ],
@@ -158416,8 +158419,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Stats": 0.20000000298023224,
-                                "{1d279a19}": 0.05000000074505806
+                                "Stats": 0.3499999940395355,
+                                "{1d279a19}": 0.03999999910593033
                             }
                         }
                     ],
@@ -160675,9 +160678,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "AD": 0.10000000149011612,
-                                "AS": 0.20000000298023224,
-                                "{49c7c2ed}": 0.019999999552965164
+                                "AD": 0.20000000298023224,
+                                "AS": 0.4000000059604645
                             }
                         }
                     ],
@@ -160799,8 +160801,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Mana": 5.0,
-                                "percent": 0.25
+                                "Mana": 15.0,
+                                "percent": 0.15000000596046448
                             }
                         }
                     ],
@@ -161058,7 +161060,7 @@
                             "style": 1,
                             "variables": {
                                 "AP": 10.0,
-                                "Health": 0.054999999701976776,
+                                "Health": 0.05000000074505806,
                                 "Mult": 2.0
                             }
                         }
@@ -275324,7 +275326,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "获得持续@ShieldDuration@秒的<TFTBonus>@ModifiedShield@&nbsp;(%i:scaleAP%)</TFTBonus>护盾值。在护盾被打破时，对目标造成<physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>物理伤害并对以目标为中心的半径1格内的其他敌人们造成<physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>物理伤害。目标被<TFTKeyword>晕眩</TFTKeyword><TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus>秒，时长基于护盾的存留时间，而其他敌人则被短暂<TFTKeyword>晕眩</TFTKeyword>。",
+                        "desc": "获得持续@ShieldDuration@秒的<TFTBonus>@ModifiedShield@(%i:scaleHealth%%i:scaleAP%)</TFTBonus>护盾值。在护盾被打破时，对目标造成<physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleAD%)</physicalDamage>物理伤害并对以目标为中心的半径1格内的其他敌人们造成<physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleAD%)</physicalDamage>物理伤害。目标被<TFTKeyword>晕眩</TFTKeyword><TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus>秒，时长基于护盾的存留时间，而其他敌人则被短暂<TFTKeyword>晕眩</TFTKeyword>。",
                         "icon": "ASSETS/Characters/TFT15_Poppy/HUD/Icons2D/TFT15_Poppy_R.TFT_Set15.tex",
                         "name": "旋舞星系大锤",
                         "variables": [
@@ -280962,7 +280964,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_10TonSlam",
-                    "desc": "施放时，主要目标被晕眩@Duration@秒并收到相当于【杰斯】@Percent*100@最大生命值的额外物理伤害。",
+                    "desc": "施放时，主要目标被晕眩@Duration@秒并受到相当于【杰斯】@Percent*100@最大生命值的额外物理伤害。",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -280970,7 +280972,7 @@
                             "style": 1,
                             "variables": {
                                 "Duration": 1.0,
-                                "percent": 0.15000000596046448
+                                "percent": 0.11999999731779099
                             }
                         }
                     ],
@@ -281061,8 +281063,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Stats": 0.20000000298023224,
-                                "{1d279a19}": 0.05000000074505806
+                                "Stats": 0.3499999940395355,
+                                "{1d279a19}": 0.03999999910593033
                             }
                         }
                     ],
@@ -283320,9 +283322,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "AD": 0.10000000149011612,
-                                "AS": 0.20000000298023224,
-                                "{49c7c2ed}": 0.019999999552965164
+                                "AD": 0.20000000298023224,
+                                "AS": 0.4000000059604645
                             }
                         }
                     ],
@@ -283444,8 +283445,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Mana": 5.0,
-                                "percent": 0.25
+                                "Mana": 15.0,
+                                "percent": 0.15000000596046448
                             }
                         }
                     ],
@@ -283703,7 +283704,7 @@
                             "style": 1,
                             "variables": {
                                 "AP": 10.0,
-                                "Health": 0.054999999701976776,
+                                "Health": 0.05000000074505806,
                                 "Mult": 2.0
                             }
                         }
@@ -416757,7 +416758,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "获得持续@ShieldDuration@秒的<TFTBonus>@ModifiedShield@&nbsp;(%i:scaleAP%)</TFTBonus>护盾值。在护盾被打破时，对目标造成<physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>物理伤害并对以目标为中心的半径1格内的其他敌人们造成<physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleHealth%%i:scaleAD%)</physicalDamage>物理伤害。目标被<TFTKeyword>晕眩</TFTKeyword><TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus>秒，时长基于护盾的存留时间，而其他敌人则被短暂<TFTKeyword>晕眩</TFTKeyword>。",
+                        "desc": "获得持续@ShieldDuration@秒的<TFTBonus>@ModifiedShield@(%i:scaleHealth%%i:scaleAP%)</TFTBonus>护盾值。在护盾被打破时，对目标造成<physicalDamage>@ModifiedDamage@&nbsp;(%i:scaleAD%)</physicalDamage>物理伤害并对以目标为中心的半径1格内的其他敌人们造成<physicalDamage>@SecondaryDamage@&nbsp;(%i:scaleAD%)</physicalDamage>物理伤害。目标被<TFTKeyword>晕眩</TFTKeyword><TFTBonus>@StunDuration@-@MaxStunDuration@</TFTBonus>秒，时长基于护盾的存留时间，而其他敌人则被短暂<TFTKeyword>晕眩</TFTKeyword>。",
                         "icon": "ASSETS/Characters/TFT15_Poppy/HUD/Icons2D/TFT15_Poppy_R.TFT_Set15.tex",
                         "name": "旋舞星系大锤",
                         "variables": [
@@ -422001,7 +422002,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_10TonSlam",
-                    "desc": "施放时，主要目标被晕眩@Duration@秒并收到相当于【杰斯】@Percent*100@最大生命值的额外物理伤害。",
+                    "desc": "施放时，主要目标被晕眩@Duration@秒并受到相当于【杰斯】@Percent*100@最大生命值的额外物理伤害。",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -422009,7 +422010,7 @@
                             "style": 1,
                             "variables": {
                                 "Duration": 1.0,
-                                "percent": 0.15000000596046448
+                                "percent": 0.11999999731779099
                             }
                         }
                     ],
@@ -422100,8 +422101,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Stats": 0.20000000298023224,
-                                "{1d279a19}": 0.05000000074505806
+                                "Stats": 0.3499999940395355,
+                                "{1d279a19}": 0.03999999910593033
                             }
                         }
                     ],
@@ -424359,9 +424360,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "AD": 0.10000000149011612,
-                                "AS": 0.20000000298023224,
-                                "{49c7c2ed}": 0.019999999552965164
+                                "AD": 0.20000000298023224,
+                                "AS": 0.4000000059604645
                             }
                         }
                     ],
@@ -424483,8 +424483,8 @@
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "Mana": 5.0,
-                                "percent": 0.25
+                                "Mana": 15.0,
+                                "percent": 0.15000000596046448
                             }
                         }
                     ],
@@ -424742,7 +424742,7 @@
                             "style": 1,
                             "variables": {
                                 "AP": 10.0,
-                                "Health": 0.054999999701976776,
+                                "Health": 0.05000000074505806,
                                 "Mult": 2.0
                             }
                         }
