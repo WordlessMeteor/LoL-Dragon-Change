@@ -7,7 +7,7 @@ import os
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/04/13
+# 更新（Last update）：     2025/08/27
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -23,7 +23,7 @@ connector = Connector()
 # 获得召唤师数据（Get access to summoner data）
 #-----------------------------------------------------------------------------
 async def get_summoner_data(connection):
-    data = await connection.request('GET', '/lol-summoner/v1/current-summoner')
+    data = await connection.request("GET", "/lol-summoner/v1/current-summoner")
     summoner = await data.json()
     print("displayName:    %s" %(summoner["gameName"] + "#" + summoner["tagLine"]))
     print("summonerId:     %s" %(summoner["summonerId"]))
@@ -60,22 +60,28 @@ async def get_lockfile(connection):
 #-----------------------------------------------------------------------------
 async def create_custom_lobby(connection):
     custom = {
-        'customGameLobby': {
-            'configuration': {
-                'gameMode': 'CLASSIC',
-                'gameMutator': '',
-                'gameServerRegion': '',
-                'mapId': 21,
-                'mutators': {'id': 1},
-                'spectatorPolicy': 'AllAllowed',
-                'teamSize': 5
-              },
-          'lobbyName': "WordlessMeteor's Lobby",
-          'lobbyPassword': ''
-        },
-        'isCustom': True
+        "queueId": 3140,
+        "isCustom": True,
+        "customGameLobby": {
+            "lobbyName": "WordlessMeteor's Lobby",
+            "lobbyPassword": "",
+            "configuration": {
+                "mapId": 11,
+                "gameMode": "PRACTICETOOL",
+                "gameTypeConfig": {
+                    "id": 1
+                },
+                "spectatorPolicy": "AllAllowed",
+                "teamSize": 5,
+                "maxPlayerCount": 0,
+                "gameServerRegion": "",
+                "spectatorDelayEnabled": False,
+                "hidePublicly": False
+            }
+        }
     }
-    print(await connection.request('POST', '/lol-lobby/v2/lobby', data = custom))
+    response = await (await connection.request("POST", "/lol-lobby/v2/lobby", data = custom)).json()
+    print(response)
 
 #-----------------------------------------------------------------------------
 # websocket

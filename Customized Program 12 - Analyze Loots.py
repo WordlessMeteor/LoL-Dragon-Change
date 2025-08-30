@@ -7,7 +7,7 @@ import os, pandas, json, time
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/06/09
+# 更新（Last update）：     2025/08/23
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -136,7 +136,7 @@ async def analyze_player_loots(connection): #导出玩家目前含有的战利�
     lootCategories = {"": "其它", "CHAMPION": "英雄", "CHEST": "宝箱", "COMPANION": "小小英雄", "EMOTE": "表情", "ETERNALS": "永恒星碑", "SKIN": "皮肤", "SUMMONERICON": "图标", "WARDSKIN": "守卫皮肤"}
     itemStatus_dict = {"NONE": "未拥有", "RENTAL": "租借中", "OWNED": "已拥有"}
     rarities = {"": "无", "DEFAULT": "经典", "EPIC": "史诗", "LEGENDARY": "传说", "MYTHIC": "神话", "RARE": "稀有", "ULTIMATE": "终极", "EXALTED": "圣者至尊", "TRANSCENDANT": "超凡"}
-    redeemableStatus_dict = {"ALREADY_OWNED": "已拥有", "CHAMPION_NOT_OWNED": "英雄未拥有", "NOT_REDEEMABLE": "不可解锁", "REDEEMABLE": "可解锁", "REDEEMABLE_RENTAL": "可激活租借"}
+    redeemableStatus_dict = {"ALREADY_OWNED": "已拥有", "ALREADY_RENTED": "已租赁", "CHAMPION_NOT_OWNED": "英雄未拥有", "NOT_REDEEMABLE": "不可解锁", "REDEEMABLE": "可解锁", "REDEEMABLE_RENTAL": "可激活租借"}
     lootTypes = {"": "其它", "BOOST": "加成道具", "CHAMPION": "永久英雄", "CHAMPION_RENTAL": "英雄碎片", "CHAMPION_TOKEN": "成就代币", "CHEST": "宝箱", "COMPANION": "小小英雄", "CURRENCY": "货币", "EMOTE": "永久表情", "EMOTE_RENTAL": "表情碎片", "MATERIAL": "材料", "NEXUS_FINISHER": "终结特效", "SKIN": "永久皮肤", "SKIN_RENTAL": "皮肤碎片", "STATSTONE": "永久永恒星碑", "STATSTONE_SHARD": "永恒星碑碎片", "SUMMONERICON": "召唤师图标", "TFT_MAP_SKIN": "云顶之弈棋盘皮肤", "TOURNAMENTLOGO": "冠军杯赛图标", "WARDSKIN": "永久守卫皮肤", "WARDSKIN_RENTAL": "守卫皮肤碎片"}
     for i in range(len(player_loot_header_keys)):
         key = player_loot_header_keys[i]

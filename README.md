@@ -29,12 +29,13 @@ The following explanations only apply to the current branch. For other details (
 	- 电脑玩家添加脚本允许用户在已经创建好的房间内添加电脑玩家而不覆盖原房间。仅此文件允许访问**非官方**电脑玩家数据。
 2. 本程序集中的`check_available_gameMode.py`提供检查可用游戏模式的功能。
 	- **请勿在程序运行过程中创建自定义房间**，否则可能输出实际不可创建的房间信息。
-		- 国服正式服可创建自定义房间参数（游戏模式，地图序号）：
+		- 国服艾欧尼亚大区可创建自定义房间参数（游戏模式，地图序号）：
 			- ("CLASSIC", 11)
 			- ("CLASSIC", 12)
 			- ("CLASSIC", 21)
 			- ("CLASSIC", 22)
 			- ("ARAM", 12)
+			- ("PRACTICETOOL", 11)
 			- ("TUTORIAL", 11)
 			- ("TUTORIAL", 12)
 			- ("TUTORIAL", 21)
@@ -685,7 +686,7 @@ The following explanations only apply to the current branch. For other details (
 		- 由于该脚本仅用于校正术语，其涉及的数据资源仅用于开发程序，而不适用于发行版。因此建议用户在存储库，而不是由发行版压缩包解压得到的文件夹中运行该脚本。
 	- 自定义脚本<ins>05、11、13、16、19、20和21</ins>在运行过程中可以**将终端呈现的内容保存到本地日志中**。见主目录下的“<ins>日志（Logs）</ins>”文件夹。
 	- 为方便理解**自定义脚本中一些大型数据框的结构**，在主目录中添加了一个工作簿`Customized Program Main Dataframe Structure.xlsx`，以解释其生成过程。
-		- 下面对查战绩脚本中的`LoLGame_info_df`、自定义脚本11和聊天服务脚本中的`recent_LoLPlayers_df`和自定义脚本20中的`LoLGame_stat_header`的结构进行说明，以便说明一些设定。一些设定在后续解释中不再赘述。
+		- 下面对查战绩脚本和自定义脚本20中的`LoLGame_info_df`、自定义脚本11和聊天服务脚本中的`recent_LoLPlayers_df`和自定义脚本20中的`LoLGame_stat_header`的结构进行说明，以便说明一些设定。一些设定在后续解释中不再赘述。
 			- 工作表`05 - LoLGame_info_header`、`11 - LoLGame_info_header`、`16 - LoLGame_info_header`和`20 - LoLGame_stat_header`共有6列，其中前3列是**主要数据区域**。
 				- `Index`代表`LoLGame_info_data`的键的索引。
 				- `Key`代表`LoLGame_info_data`的键。
@@ -701,6 +702,7 @@ The following explanations only apply to the current branch. For other details (
 				- 深绿色代表`Key`可以作为`LoLGame_info["participants"][participantId]`的索引。
 				- 橙色代表`Key`可以作为`LoLGame_info["participants"][participantId]["stats"]`的索引。
 				- 紫色代表`Key`来自`LoLGame_info["teams"][teamId]["bans"]`的索引。
+					- 注意到其中不包含任何可直接作为索引的键。
 				- 黄色代表`Key`可以直接作为`LoLGame_info["participants"][participantId]["timeline"]`的索引。
 				- 粉色代表`Key`不作为LCU API中任何变量的索引。
 					- 目前粉红色区域只包含`ally?`，表示查询的玩家是否是主玩家的队友。在导出的工作表中，打勾表示该玩家是主玩家的队友。
@@ -709,41 +711,37 @@ The following explanations only apply to the current branch. For other details (
 			- 一些键被标记为无填充。这样的键不作为LCU API中任何变量的索引，但仍来自其填充色所代表的变量的索引。如`gameModeName`不曾出现在对局信息的json对象中，但是实际上来自`LoLGame_info`，对应的是键`"gameMode"`。
 			- <b>要获取各个呈现顺序列表，只需要将表格以`OutputOrder`或`DisplayOrder`作升序排列，然后复制`Index`列的单元格内容即可。</b>
 		- 下面对查英雄脚本和游戏状态管理脚本中的`LoLChampions_df`的结构进行说明。
-			- 工作表`04 - LoLChampions_header (LCU)`和`21 - LoLChampions_header`的主要数据区域设置了6种颜色。
+			- 工作表`04 - LoLChampions_header (LCU)`和`21 - LoLChampions_header`的主要数据区域设置了8种颜色。
 				- 无填充代表`Key`可以直接作为`LoLChampions[championId]`的索引。
 				- 浅蓝色代表`Key`来自`LoLChampions[championId]["ownership"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
-				- 蓝色代表`Key`来自`LoLChampions[championId]["ownership"]["rental"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
-				- 绿色代表`Key`来自`LoLChampions[championId]["roles"]`。
-					- 注意到其中不包含任何可直接作为索引的键。
+				- 深蓝色代表`Key`来自`LoLChampions[championId]["ownership"]["rental"]`的索引。
+				- 浅绿色代表`Key`来自`LoLChampions[championId]["roles"]`的索引。
 				- 橙色代表`Key`来自`LoLChampions[championId]["tacticalInfo"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
+				- 粉色代表`Key`来自`LoLChampions[championId]["passive"]`的索引。
+				- 深绿色代表`Key`来自`LoLChampions[championId]["spells"][spell_index]`的索引。
 				- 黄色代表`Key`来自`/lol-perks/v1/recommended-champion-positions`接口。
-					- 注意到其中不包含任何可直接作为索引的键。
-			- 工作表`04 - LoLChampions_header (ddr)`的主要数据区域设置了4种颜色。
+			- 工作表`04 - LoLChampions_header (ddr)`的主要数据区域设置了7种颜色。
 				- 无填充代表`Key`可以直接作为`LoLChampions[championId]`的索引。
-				- 浅蓝色代表`Key`来自`LoLChampions[championId]["info"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
-				- 浅绿色代表`Key`来自`LoLChampions[championId]["tags"]`。
-					- 注意到其中不包含任何可直接作为索引的键。
+				- 浅蓝色代表`Key`来自`LoLChampions[championId]["image"]`的索引。
+				- 浅绿色代表`Key`来自`LoLChampions[championId]["tags"]`的索引。
+				- 深蓝色代表`Key`来自`LoLChampions[championId]["info"]`的索引。
 				- 橙色代表`Key`可以作为`LoLChampions[championId]["stats"]`的索引。
-			- 工作表`04 - LoLChampions_header (cdr)`的主要数据区域设置了4种颜色。
+				- 粉色代表`Key`来自`LoLChampions[championId]["spells"][spell_index]`的索引。
+				- 深绿色代表`Key`来自`LoLChampions[championId]["passive"]`的索引。
+			- 工作表`04 - LoLChampions_header (cdr)`的主要数据区域设置了7种颜色。
 				- 无填充代表`Key`可以直接作为`LoLChampions[championId]`的索引。
 				- 浅蓝色代表`Key`来自`LoLChampions[championId]["tacticalInfo"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
 				- 浅绿色代表`Key`来自`LoLChampions[championId]["playStyleInfo"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
-				- 橙色代表`Key`来自`LoLChampions[championId]["roles"]`。
-					- 注意到其中不包含任何可直接作为索引的键。
+				- 深蓝色代表`Key`来自`LoLChampions[championId]["championTagInfo"]`的索引。
+				- 深绿色代表`Key`来自`LoLChampions[championId]["roles"]`的索引。
+				- 橙色代表`Key`来自`LoLChampions[championId]["passive"]`的索引。
+				- 粉色代表`Key`来自`LoLChampions[championId]["spells"][spell_index]`的索引。
 		- 下面对查战绩脚本中的`mastery_df`的结构进行说明。
 			- 工作表`05 - mastery_header`的主要数据区域设置了4种颜色。
 				- 蓝色代表`Key`可以直接作为`mastery[champion_iter]`的索引。
 					- 白字只包含`champion`和`alias`，分别表示英雄的称号和名字。LCU API只提供了英雄序号。
 				- 浅绿色代表`Key`来自`mastery[champion_iter]["nextSeasonMilestone"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
 				- 深紫色代表`Key`来自`mastery[champion_iter]["nextSeasonMilestone"]["rewardConfig"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
 		- 下面对查战绩脚本中的`ranked_df`的结构进行说明。
 			- 工作表`05 - ranked_header`的`Key`都可作为`ranked["queues"][Id]`的索引。
 			- 注意到`OutputOrder`列存在重复数据。造成这个现象的根本原因是云顶之弈狂暴模式的段位和其它排位模式的段位被记录在两个变量中，但是输出表格时期望输出在一列中，所以有一些原键的输出顺序相同。
@@ -806,15 +804,16 @@ The following explanations only apply to the current branch. For other details (
 				- 绿色代表`Key`可以直接作为`queues[id]`的索引。
 				- 橙色代表`Key`可以作为`queues[id]["gameTypeConfig"]`的索引。
 				- 蓝色代表`Key`可以作为`queues[id]["queueRewards"]`的索引。
+		- 下面对自定义脚本11中的`recent_players_metaDf`的结构进行说明。
+			- 工作表`11 - recent_players_metadata_he`（`11 - recent_players_metadata_header`）的主要数据区域设置为无填充。
+				- `Key`可以直接作为`recent_players_metadata_list`的索引。
 		- 下面对整理战利品脚本中的`player_loot_df`的结构进行说明。
 			- 工作表`12 - player_loot_header`的主要数据区域未设置颜色，因为这些键都可作为`player_loot[i]`的索引。
 		- 下面对查天梯脚本中的`splits_info_df`的结构进行说明。
 			- 工作表`13 - splits_info_header`的主要数据区域设置了4种颜色。
 				- 青绿色代表`Key`可以作为`splitsConfig["splits"][splitId]`的索引。
 				- 浅绿色代表`Key`来自`splitsConfig["splits"][splitId]["victoriousSkinRewardGroup"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
 				- 橙色代表`Key`来自`splitsConfig["splits"][splitId]["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonTier"]`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
 		- 下面对查天梯脚本中的`rewardTrack_df`的结构进行说明。
 			- 工作表`13 - rewardTrack_header`的主要数据区域设置了3种颜色。
 				- 浅蓝色代表`Key`可以直接作为`splitsConfig["splits"][splitId]`的索引。
@@ -862,7 +861,6 @@ The following explanations only apply to the current branch. For other details (
 				- 蓝色代表`Key`可以直接作为`party`的索引。
 				- 浅绿色代表`Key`的后半部分可以直接作为`queues[party["queueId"]]`的索引。
 				- 橙色代表`Key`来自`party`的索引。
-					- 注意到其中不包含任何可直接作为索引的键。
 				- 黄色代表`Key`不作为LCU API中任何变量的索引。
 					- 目前黄色区域只包含`full?`，表示小队是否满员。在导出的工作表中，打勾表示小队已经满员。
 		- 下面对聊天脚本和游戏状态管理脚本中的`invid_df`的结构进行说明。
@@ -876,7 +874,7 @@ The following explanations only apply to the current branch. For other details (
 					- 5之前的键可以直接作为`muted_player`的索引。
 					- 5及以后的键通过`get_info`函数得到。
 		- 下面对聊天脚本中的`champSelect_team_df`和游戏状态管理脚本中的`players_df`的结构进行说明。
-			- 工作表`16 - champSelect_team_header`和`21 - players_header`的主要数据区域设置为无填充。`player`是`players`中的任意一个值。
+			- 工作表`16 - champSelect_team_header`、`20 - champSelect_players_header`和`21 - champSelect_players_header`的主要数据区域设置为无填充。`player`是`players`中的任意一个值。
 				- `Key`可以作为`player`的索引。
 		- 下面对聊天脚本中的`captureDevices_df`的结构进行说明。
 			- 工作表`16 - captureDevices_header`的主要数据区域设置为无填充。`device`是`captureDevices`中的任意一个值。
@@ -926,6 +924,10 @@ The following explanations only apply to the current branch. For other details (
 				- 无填充代表`Key`可以作为`page`的索引。
 				- 蓝色代表`Key`的后半部分可以直接作为`page["pageKeystone"]`的索引。
 				- 绿色代表`Key`来自`page["uiPerks"][pageId]`的索引。
+		- 下面对自定义脚本20中的`inGame_players_df`的结构进行说明。
+			- 工作表`20 - inGame_players_header`的主要数据区域设置了2种颜色。`player`是`teamOne + teamTwo`中的任意一个元素。`loadout`是`player`的赛前配置。
+				- 无填充代表`Key`可以作为`player`的索引。
+				- 蓝色代表`Key`可以作为`loadout`的索引。
 		- 下面对自定义脚本20中的`process_df`的结构进行说明。
 			- 工作表`20 - process_header`的主要数据区域设置了2种颜色。
 				- 无填充代表`Key`不作为任何变量的索引。
@@ -1051,12 +1053,13 @@ For details about customized programs that is beyond the scope of creating a cus
 	- The bot adding program allows users to add bot players to already created lobbies, instead of recreating another lobby and **clearing all players**. Only this file is allowed to visit **unofficial** bot player information.
 2. In this program set, `check_available_bots.py` and `check_available_gameMode.py` provide the functions of checking available bot players and game modes, respectively.
 	- **Please don't create any custom lobby while the program is running**, in case unavailable lobbies may be output.
-		- Available custom lobby parameters on Chinese Live servers (gameMode, mapId):
+		- Available custom lobby parameters on Chinese Ionia server (gameMode, mapId):
 			- ("CLASSIC", 11)
 			- ("CLASSIC", 12)
 			- ("CLASSIC", 21)
 			- ("CLASSIC", 22)
 			- ("ARAM", 12)
+			- ("PRACTICETOOL", 11)
 			- ("TUTORIAL", 11)
 			- ("TUTORIAL", 12)
 			- ("TUTORIAL", 21)
@@ -1707,7 +1710,7 @@ For details about customized programs that is beyond the scope of creating a cus
 		- Since this program is only intended to correct the terms, the involved data resources are only used for program development, instead of the release. So, it's highly recommended that users run this program in the cloned repository folder, instead of the folder extracted from compressed files in Release.
 	- Customized Programs <ins>05, 11, 13, 16, 19, 20 and 21</ins> **save content displayed in terminal into local logs** while running. You can check them under the "<ins>日志（Logs）</ins>" folder.
 	- To let user **understand the structure of the large dataframes**, a workbook `Customized Program Main Dataframe Structure.xlsx` is added in the home directory to illustrate how the dataframes are organized.
-		- The following is the illustration on the structure of `LoLGame_info_df` in Customized Program 05, `recent_LoLPlayers_df` in Customized Programs 11 and 16 and `LoLGame_stat_header` in Customized Program 20, to explain some settings, which won't be repeated in the following context:
+		- The following is the illustration on the structure of `LoLGame_info_df` in Customized Programs 05 and 20, `recent_LoLPlayers_df` in Customized Programs 11 and 16 and `LoLGame_stat_header` in Customized Program 20, to explain some settings, which won't be repeated in the following context:
 			- There're 6 columns in the sheets `05 - LoLGame_info_header`, `11 - LoLGame_info_header`, `16 - LoLGame_info_header` and `20 - LoLGame_stat_header`, and the first 3 columns are the **main data area**.
 				- `Index` represents the index of the keys of the dictionary variable `LoLGame_info_data`.
 				- `Key` represents the keys of the dictionary variable `LoLGame_info_data`.
@@ -1723,6 +1726,7 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the dark green area mean `Key` is the index of `LoLGame_info["participants"][participantId]`.
 				- Data in the orange area mean `Key` is the index of `LoLGame_info["participants"][participantId]["stats"]`.
 				- Data in the purple area mean `Key` comes from `LoLGame_info["teams"][teamId]["bans"]`.
+					- Note that no key in this area exists to be the direct index.
 				- Data in the yellow area mean `Key` is the direct index of `LoLGame_info["participants"][participantId]["timeline"]`.
 				- Data in the pink area mean `Key` doesn't serve as the index of any variables of LCU API.
 					- Currently, the purple area only contains `ally?`, a judgement whether the queried player is an ally of the main player. In the exported sheet, a tick means the queried player is the ally of the main player.
@@ -1731,41 +1735,37 @@ For details about customized programs that is beyond the scope of creating a cus
 			- Some keys are colored white. These keys don't belong to the indices of any variable in LCU API, but actually come from them. For example, `gameModeName` never occurs in the json object of the game information, but actually originates from `LoLGame_info` and corresponds to the key `"gameMode"`.
 			- <b>To obtain the output/display order lists, users need only arrange the table according to the ascending order of `OutputOrder` or `DisplayOrder` and then copy the cells in `Index` column.</b>
 		- `LoLChampions_df` in Customized Programs 04 and 21:
-			- 6 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (LCU)` and `21 - LoLChampions_header`:
+			- 8 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (LCU)` and `21 - LoLChampions_header`:
 				- Data not filled with any color mean `Key` is the direct index of `LoLChampions[championId]`.
 				- Data in the light blue area mean `Key` comes from `LoLChampions[championId]["ownership"]`.
-					- Note that no key in this area exists to be the direct index.
-				- Data in the blue area mean `Key` comes from `LoLChampions[championId]["ownership"]["rental"]`.
-					- Note that no key in this area exists to be the direct index.
-				- Data in the green area mean `Key` comes from `LoLChampions[championId]["roles"]`.
-					- Note that no key in this area exists to be the direct index.
+				- Data in the deep blue area mean `Key` comes from `LoLChampions[championId]["ownership"]["rental"]`.
+				- Data in the light green area mean `Key` comes from `LoLChampions[championId]["roles"]`.
 				- Data in the orange area mean `Key` comes from `LoLChampions[championId]["tacticalInfo"]`.
-					- Note that no key in this area exists to be the direct index.
+				- Data in the pink area mean `Key` comes from `LoLChampions[championId]["passive"]`.
+				- Data in the deep green area mean `Key` comes from `LoLChampions[championId]["spells"][spell_index]`.
 				- Data in the yellow area mean `Key` comes from the endpoint `/lol-perks/v1/recommended-champion-positions`.
-					- Note that no key in this area exists to be the direct index.
-			- 4 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (ddr)`.
+			- 7 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (ddr)`.
 				- Data not filled with any color mean `Key` is the direct index of `LoLChampions[championId]`.
-				- Data in the light blue area mean `Key` comes from `LoLChampions[championId]["info"]`.
-					- Note that no key in this area exists to be the direct index.
+				- Data in the light blue area mean `Key` comes from `LoLChampions[championId]["image"]`.
 				- Data in the light green area mean `Key` comes from `LoLChampions[championId]["tags"]`.
-					- Note that no key in this area exists to be the direct index.
+				- Data in the deep blue area mean `Key` comes from `LoLChampions[championId]["stats"]`.
 				- Data in the orange area mean `Key` is the index of `LoLChampions[championId]["stats"]`.
-			- 4 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (cdr)`.
+				- Data in the pink area mean `Key` comes from `LoLChampions[championId]["spells"][spell_index]`.
+				- Data in the deep green area mean `Key` comes from `LoLChampions[championId]["passive"]`.
+			- 7 colors are used to divide the main data area in the sheet `04 - LoLChampions_header (cdr)`.
 				- Data not filled with any color mean `Key` is the direct index of `LoLChampions[championId]`.
 				- Data in the light blue area mean `Key` comes from `LoLChampions[championId]["tacticalInfo"]`.
-					- Note that no key in this area exists to be the direct index.
 				- Data in the light green area mean `Key` comes from `LoLChampions[championId]["playStyleInfo"]`.
-					- Note that no key in this area exists to be the direct index.
-				- Data in the orange area mean `Key` comes from `LoLChampions[championId]["roles"]`.
-					- Note that no key in this area exists to be the direct index.
+				- Data in the deep blue area mean `Key` comes from `LoLChampions[championId]["info"]`.
+				- Data in the deep green area mean `Key` comes from `LoLChampions[championId]["roles"]`.
+				- Data in the orange area mean `Key` comes from `LoLChampions[championId]["passive"]`.
+				- Data in the pink area mean `Key` comes from `LoLChampions[championId]["spells"][spell_index]`.
 		- `mastery_df` in Customized Program 05:
 			- 3 colors are used to divide the main data area in the sheet `05 - mastery_header`.
 				- Data in the blue area mean `Key` is the direct index of the variable `mastery[champion_iter]`.
 					- Keys in white only include `champion` and `alias`, representing the titles and aliases of champions, respectively. Only championIds are provided in LCU API.
 				- Data in the light green area mean `Key` comes from `mastery[champion_iter]["nextSeasonMilestone"]`.
-					- Note that no key in this area exists to be the direct index.
 				- Data in the deep purple area mean `Key` comes from `mastery[champion_iter]["nextSeasonMilestone"]["rewardConfig"]`.
-					- Note that no key in this area exists to be the direct index.
 		- `ranked_df` in Customized Program 05:
 			- `Key` in the sheet `05 - ranked_header` can all be the index of `ranked["queues"][id]`.
 			- Note that redundancy exists in the `OutputOrder` column. The essential reason for this is that the tier of TFT turbo and that of other rank modes are recorded into 2 variables separately, while the two tiers are expected to be stored in a single column. Therefore, the `OutputOrder` of some keys are the same.
@@ -1824,15 +1824,16 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the blue area mean `Key` is the direct index of the variable `queues[id]`.
 				- Data in the orange area mean `Key` is the index of the variable `queues[id]["gameTypeConfig"]`.
 				- Data in the blue area mean `Key` is the index of the variable `queues[id]["queueRewards"]`.
+		- `recent_players_metaDf` in Customized Program 11:
+			- The main data area in the sheet `11 - recent_players_metadata_he` (`11 - recent_players_metadata_header`) isn't filled with any color.
+				- `Key` is the direct index of the variable `recent_players_metadata_list`.
 		- `player_loot_df` in Customized Program 12:
 			- No color is used to divide the main data area in the sheet `12 - player_loot_header`, because these keys are all indices of `player_loot[i]`.
 		- `splits_info_df` in Customized Program 13:
 			- 4 colors are used to divide the main data area in the sheet `13 - splits_info_header`.
 				- Data in the blue green area mean `Key` comes from `splitsConfig["splits"][splitId]`.
 				- Data in the light green area mean `Key` comes from `splitsConfig["splits"][splitId]["victoriousSkinRewardGroup"]`.
-					- Note that no key in this area exists to be the direct index.
 				- Data in the orange area mean `Key` comes from `splitsConfig["splits"][splitId]["victoriousSkinRewardGroup"]["splitPointsByHighestSeasonTier"]`
-					- Note that no key in this area exists to be the direct index.
 		- `rewardTrack_df` in Customized Program 13:
 			- 3 colors are used to divide the main data area in the sheet `13 - rewardTrack_header`.
 				- Data in the light blue area mean `Key` is the index of `splitsConfig["splits"][splitId]`.
@@ -1880,7 +1881,6 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data in the blue area mean `Key` is the direct index of the variable `party`.
 				- Data in the light green area mean the second half of `Key` is the direct index of `queues[party["queueId"]]`.
 				- Data in the orange area mean `Key` comes from `party`.
-					- Note that no key in this area exists to be the direct index.
 				- Data in the yellow area mean `Key` doesn't serve as the index of any variables of LCU API.
 					- Currently, the purple area only contains `full?`, a judgement whether the party is full. In the exported sheet, a tick means the party is full.
 		- `invid_df` in Customized Programs 16 and 21:
@@ -1894,7 +1894,7 @@ For details about customized programs that is beyond the scope of creating a cus
 					- `Key` whose index is less than 5 is the direct index of the variable `muted_player`.
 					- `Key` whose index is greater than or equal to 5 comes from `get_info` function.
 		- `champSelect_team_df` in Customized Program 16 and `players_df` in Customized Program 21:
-			- The main data area in the sheets `16 - champSelect_team_header` and `21 - players_header` isn't filled with any color. `player` denodes any element in `players`.
+			- The main data area in the sheets `16 - champSelect_team_header`, `20 - champSelect_players_header` and `21 - champSelect_players_header` isn't filled with any color. `player` denodes any element in `players`.
 				- `Key` is the index of the variable `player`.
 		- `captureDevices_df` in Customized Program 16:
 			- The main data area in the sheet `16 - captureDevices_header` isn't filled with any color. `device` denotes any value in `captureDevices`.
@@ -1944,6 +1944,10 @@ For details about customized programs that is beyond the scope of creating a cus
 				- Data not filled with any color mean `Key` is the index of `page`.
 				- Data in the blue area mean the second half of `Key` is the direct index of `page["pageKeystone"]`.
 				- Data in the green area mean `Key` comes from `page["uiPerks"][pageId]`.
+		- `inGame_players_df` in Customized Program 20:
+			- 2 colors are used to divide the main data area in the sheet `20 - inGame_players_header`. `player` denotes any element in `teamOne + teamTwo`. `loadout` denotes `player`'s loadout.
+				- Data not filled with any color mean `Key` is the index of `player`.
+				- Data in the blue area mean `Key` is the index of `loadout`.
 		- `process_df` in Customized Program 20:
 			- 2 colors are used to divide the main data area in the sheet `20 - process_header`.
 				- Data not filled with any color mean `Key` doesn't serve as the index of any variables.

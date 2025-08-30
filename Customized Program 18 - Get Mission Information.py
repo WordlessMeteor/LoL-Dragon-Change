@@ -9,7 +9,7 @@ from openpyxl import load_workbook
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/06/21
+# 更新（Last update）：     2025/08/28
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -63,6 +63,7 @@ def rm_ctrl_char(s: str): #移除一个字符串中的所有C0和C1字符（Remo
     return "".join(ch for ch in s if unicodedata.category(ch) != "Cc")
 
 def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+    df = df.copy(deep = True)
     old_index = df.index
     df.index = range(start_index, len(df) + start_index)
     maxLens = {}
@@ -70,7 +71,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
     fields = df.columns.tolist()
     for field in fields:
         maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(rm_ctrl_char(str(x))), df[field])), wcswidth(rm_ctrl_char(field))) + 2
-    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+    index_len = 0 if len(df) == 0 else max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
@@ -213,46 +214,42 @@ async def get_mission_info(connection):
     #定义常量字典（Define constant dictionaries）
     celebrationTypes = {"NONE": "无", "TOAST": "干杯", "VIGNETTE": "花饰", "VIGNETTE_LARGE_REWARDS_ONLY": "高等奖励专用花饰", "VIGNETTE_REWARDS_ONLY": "奖励专用花饰"}
     clientNotifyLevels = {"ALWAYS": "总是", "NONE": "从不"}
-    displayTypes = {"AFTER_COMPLETION": "完成后显示", "ALWAYS": "总是显示", "CELEBRATION_ONLY": "仅在庆祝时显示", "TUTORIAL_ONLY": "仅新手教程显示"}
+    displayTypes = {"AFTER_COMPLETION": "完成后显示", "ALWAYS": "总是显示", "CELEBRATION_ONLY": "仅在庆祝时显示", "NONE": "不显示", "TUTORIAL_ONLY": "仅新手教程显示"}
     missionTypes = {"ONETIME": "一次性", "REPEATING": "可重复"}
     metadataMissionTypes = {"": "", "always": "永久"}
     objectiveStatus_dict = {"DUMMY": "占位", "ELIGIBLE": "具备资格"}
     objectiveTypes = {"": "", "CHAMPION_MASTERY": "英雄成就", "EOGDATA": "对局数据", "INGEST": "新手学习", "LEGS": "英雄联盟传统玩法", "SERIES_COMPLETION": "任务系列", "TFT_ELIMINATION": "云顶之弈淘汰任务"}
     rewardGroupStrategies = {"": "", "ALL_GROUPS": "所有分组", "SELECT_GROUPS": "选定分组"}
-    rewardTypes = {"BLUE_ESSENCE": "蓝色精萃", "CHAMPION_SHARD": "英雄碎片", "CHAMPION_SKIN_SHARD": "皮肤碎片", "CHAMPION_TOKEN": "永久英雄", "CLIENT_FEATURE": "游戏模式", "GAME_QUEUE": "游戏队列", "HEXTECH_CHEST": "海克斯科技宝箱", "HEXTECH_KEY": "海克斯科技钥匙", "HEXTECH_KEY_SHARD": "海克斯科技钥匙碎片", "MISSION_PROGRESS": "其它任务完成进度", "ORANGE_ESSENCE": "橙色精粹", "PROGRESSION": "通行证进度", "REWARD_GROUP": "多重奖励", "RIOT_POINTS": "点券", "SPELL_BOOK_PAGE": "符文页", "SUMMONER_ICON": "召唤师图标", "SUMMONER_SPELL": "召唤师技能", "WARD_SKIN_SHARD": "守卫皮肤碎片", "XP": "召唤师等级经验值"}
+    rewardTypes = {"BLUE_ESSENCE": "蓝色精萃", "BUNDLE": "道具包", "CHAMPION": "英雄", "CHAMPION_SHARD": "英雄碎片", "CHAMPION_SKIN_SHARD": "皮肤碎片", "CHAMPION_TOKEN": "永久英雄", "CLIENT_FEATURE": "游戏模式", "EMOTE": "表情", "GAME_QUEUE": "游戏队列", "HEXTECH_CHEST": "海克斯科技宝箱", "HEXTECH_KEY": "海克斯科技钥匙", "HEXTECH_KEY_SHARD": "海克斯科技钥匙碎片", "MISSION_PROGRESS": "其它任务完成进度", "ORANGE_ESSENCE": "橙色精粹", "PROGRESSION": "通行证进度", "REWARD_GROUP": "多重奖励", "RIOT_POINTS": "点券", "SPELL_BOOK_PAGE": "符文页", "SUMMONER_ICON": "召唤师图标", "SUMMONER_SPELL": "召唤师技能", "WARD_SKIN_SHARD": "守卫皮肤碎片", "XP": "召唤师等级经验值"}
     missionStatus_dict = {"COMPLETED": "已完成", "DUMMY": "用于测试", "PENDING": "未完成", "SELECT_REWARDS": "选择奖励", "UPCOMING": "未激活"}
     gameTypes = {"lol": "英雄联盟", "tft": "云顶之弈"}
     objectivesTypes = {"kNonPooledObjectives": "非池化目标", "kPooledObjectives": "池化目标"}
+    categoryTypes = {"kNonPass": "非通行证", "kEventHubConfiguration": "事件通行证", "kTFTPassData": "云顶之弈通行证"}
+    lolEventHubTypes = {"NON_PASS": "无", "SEASON_PASS": "赛季通行证"}
+    objectiveCategoryFilter_dict = {"kNone": "无", "kNPE": "新玩家"}
+    tftPassTypes = {"kUnknown": "无", "kBattlePass": "战斗通行证"}
     #获取数据资源（Get data resources）
     missions = await (await connection.request("GET", "/lol-missions/v1/missions")).json()
     lolObjectives = await (await connection.request("GET", "/lol-objectives/v1/objectives/lol")).json() #该列表中的两个字典的“objectives”键的值相同（Values of the "objectives" key of both dictionaries in this list are the same）
-    lolObjectives_active = []
-    if len(lolObjectives) > 1:
-        current_time = time.time() * 1000
-        for objective in lolObjectives:
-            if not (objective["startDate"] < current_time - time.localtime().tm_gmtoff < objective["endDate"]):
-                lolObjectives_active.append(objective)
-    lolObjective = lolObjectives[0] if len(lolObjectives_active) == 0 else lolObjectives_active[0]
     tftObjectives = await (await connection.request("GET", "/lol-objectives/v1/objectives/tft")).json()
-    tftObjectives_active = []
-    if len(tftObjectives) > 1:
-        current_time = time.time() * 1000
-        for objective in tftObjectives:
-            if not (objective["startDate"] < current_time - time.localtime().tm_gmtoff < objective["endDate"]):
-                tftObjectives_active.append(objective)
-    tftObjective = tftObjectives[0] if len(tftObjectives_active) == 0 else tftObjectives_active[0]
-    objectives = [lolObjective, tftObjective]
+    objectives = lolObjectives + tftObjectives
+    objectiveGroup_objectiveCategory_map = {}
+    objectiveCategoryId_order = {} #用于后续目标分组数据框排序——第一关键字（Used as the first keyword for the subsequent objective group dataframe sorting）
     mission_objectiveGroup_map = {}
-    objectiveGroupId_order = {} #用于后续数据框排序——第一关键字（Used as the first keyword for the subsequent dataframe sorting）
-    weight = 0
+    objectiveGroupId_order = {} #用于后续任务数据框排序——第一关键字（Used as the first keyword for the subsequent mission dataframe sorting）
+    weight1 = weight2 = 0
     for objective in objectives:
-        for objectiveGroup in objective["objectives"]:
-            objectiveGroupId_order[objectiveGroup["id"]] = weight
-            weight += 1
-            for mission in objectiveGroup["missions"]:
-                mission_objectiveGroup_map[(mission["id"], mission["sequence"])] = {"id": objectiveGroup["id"], "localizedTag": objectiveGroup["localizedTag"], "localizedTitle": objectiveGroup["localizedTitle"]}
+        for objectiveCategory in objective["objectivesCategories"]:
+            objectiveCategoryId_order[objectiveCategory["id"]] = weight1
+            weight1 += 1
+            for objectiveGroup in objectiveCategory["objectives"]:
+                objectiveGroup_objectiveCategory_map[objectiveGroup["id"]] = {"id": objectiveCategory["id"], "categoryName": objectiveCategory["categoryName"]}
+                objectiveGroupId_order[objectiveGroup["id"]] = weight2
+                weight2 += 1
+                for mission in objectiveGroup["missions"]: #任务所属目标信息在`/lol-missions/v1/missions`接口中无法体现，因此需要提前准备这方面数据（Belonging objective of a mission isn't reflected by the endpoint `/lol-missions/v1/missions`, so this information needs preparing in advance）
+                    mission_objectiveGroup_map[(mission["id"], mission["sequence"])] = {"id": objectiveGroup["id"], "localizedTag": objectiveGroup["localizedTag"], "localizedTitle": objectiveGroup["localizedTitle"]}
     #整理数据（Sort out data）
-    mission_header = {"backgroundImageUrl": "任务背景图片链接", "celebrationType": "庆祝类型", "clientNotifyLevel": "客户端通知类型", "completedDate": "任务完成时间戳", "completionExpression": "任务完成方法", "cooldownTimeMillis": "任务刷新间隔时间（毫秒）", "description": "任务描述", "displayType": "任务显示类型", "earnedDate": "任务获取时间戳", "endTime": "任务结束时间戳", "expiringWarnings": "过期警告", "helperText": "任务附加说明", "iconImageUrl": "任务图标链接", "id": "任务序号", "internalName": "任务内置名", "isNew": "新任务", "lastUpdatedTimestamp": "上次更新任务时间戳", "locale": "语言", "media": "媒体信息", "missionLineText": "任务标题文本", "missionType": "任务类型", "requirements": "任务激活要求", "rewards": "任务奖励详细信息", "sequence": "任务序列号", "seriesName": "任务系列名称", "startTime": "任务开始时间戳", "status": "任务状态", "title": "任务标题", "viewed": "已查看", "completedTime": "任务完成时间", "earnedTime": "任务获取时间", "endDateTime": "任务结束时间", "lastUpdatedTime": "上次更新任务时间", "startDateTime": "任务开始时间", "rewardDescriptions": "任务奖励描述", "display attributes": "任务显示属性", "display locations": "任务显示位置", "metadata chain": "元数据：羁绊", "metadata chainSize": "元数据：羁绊任务数量", "metadata missionType": "元数据：任务类型", "metadata order": "元数据：顺序", "metadata weekNum": "元数据：周次", "metadata xpReward": "元数据：经验值奖励", "metadata npeRewardPack index": "元数据：新玩家奖励序号", "metadata npeRewardPack majorReward": "元数据：新玩家奖励：主要奖励", "metadata npeRewardPack minorRewards": "元数据：新玩家奖励：次要奖励", "metadata npeRewardPack premiumReward": "元数据：新玩家奖励：高级奖励已激活", "metadata npeRewardPack rewardKey": "元数据：新玩家奖励：奖励代码", "metadata tutorial displayRewards": "元数据：新手教程：显示奖励", "metadata tutorial queueId": "元数据：新手教程：队列序号", "metadata tutorial stepNumber": "元数据：新手教程：步骤", "metadata tutorial useChosenChampion": "元数据：新手教程：使用给定英雄", "metadata tutorial useQuickSearchMatchmaking": "元数据：新手教程：使用快速模式匹配系统", "rewardStrategy groupStrategy": "任务奖励分组", "rewardStrategy selectMaxGroupCount": "任务奖励分组序号上限", "rewardStrategy selectMinGroupCount": "任务奖励分组序号下限", "objective description": "目标描述", "objective hasObjectiveBasedReward": "目标特定奖励", "objective requirements": "目标激活要求", "objective rewardGroups": "目标奖励分组", "objective sequence": "目标序列号", "objective status": "目标状态", "objective type": "目标类型", "objective progress currentProgress": "目标当前进度", "objective progress lastViewedProgress": "目标上次查看时进度", "objective progress totalCount": "目标完成所需进度", "objectiveGroup id": "目标分组序号", "objectiveGroup localizedTag": "目标分组标签", "objectiveGroup localizedTitle": "目标分组标题"}
+    mission_header = {"backgroundImageUrl": "任务背景图片链接", "celebrationType": "庆祝类型", "clientNotifyLevel": "客户端通知类型", "completedDate": "任务完成时间戳", "completionExpression": "任务完成方法", "cooldownTimeMillis": "任务刷新间隔时间（毫秒）", "description": "任务描述", "displayType": "任务显示类型", "earnedDate": "任务获取时间戳", "endTime": "任务结束时间戳", "expiringWarnings": "过期警告", "helperText": "任务附加说明", "iconImageUrl": "任务图标链接", "id": "任务序号", "internalName": "任务内置名", "isNew": "新任务", "lastUpdatedTimestamp": "上次更新任务时间戳", "locale": "语言", "media": "媒体信息", "missionLineText": "任务标题文本", "missionType": "任务类型", "requirements": "任务激活要求", "rewards": "任务奖励详细信息", "sequence": "任务序列号", "seriesName": "任务系列名称", "startTime": "任务开始时间戳", "status": "任务状态", "title": "任务标题", "viewed": "已查看", "completedTime": "任务完成时间", "earnedTime": "任务获取时间", "endDateTime": "任务结束时间", "lastUpdatedTime": "上次更新任务时间", "startDateTime": "任务开始时间", "rewardDescriptions": "任务奖励描述", "display attributes": "任务显示属性", "display locations": "任务显示位置", "metadata chain": "元数据：羁绊", "metadata chainSize": "元数据：羁绊任务数量", "metadata minRequired": "元数据：激活所需游玩时间（分钟）", "metadata missionType": "元数据：任务类型", "metadata objectiveMetadataMap": "元数据：对应关系", "metadata order": "元数据：顺序", "metadata weekNum": "元数据：周次", "metadata xpReward": "元数据：经验值奖励", "metadata npeRewardPack index": "元数据：新玩家奖励序号", "metadata npeRewardPack majorReward": "元数据：新玩家奖励：主要奖励", "metadata npeRewardPack minorRewards": "元数据：新玩家奖励：次要奖励", "metadata npeRewardPack premiumReward": "元数据：新玩家奖励：高级奖励已激活", "metadata npeRewardPack rewardKey": "元数据：新玩家奖励：奖励代码", "metadata tutorial displayRewards": "元数据：新手教程：显示奖励", "metadata tutorial queueId": "元数据：新手教程：队列序号", "metadata tutorial stepNumber": "元数据：新手教程：步骤", "metadata tutorial useChosenChampion": "元数据：新手教程：使用给定英雄", "metadata tutorial useQuickSearchMatchmaking": "元数据：新手教程：使用快速模式匹配系统", "rewardStrategy groupStrategy": "任务奖励分组", "rewardStrategy selectMaxGroupCount": "任务奖励分组序号上限", "rewardStrategy selectMinGroupCount": "任务奖励分组序号下限", "objective description": "目标描述", "objective hasObjectiveBasedReward": "目标特定奖励", "objective requirements": "目标激活要求", "objective rewardGroups": "目标奖励分组", "objective sequence": "目标序列号", "objective status": "目标状态", "objective type": "目标类型", "objective progress currentProgress": "目标当前进度", "objective progress lastViewedProgress": "目标上次查看时进度", "objective progress totalCount": "目标完成所需进度", "objectiveGroup id": "目标代码", "objectiveGroup localizedTag": "目标标签", "objectiveGroup localizedTitle": "目标标题"}
     mission_header_keys = list(mission_header.keys())
     mission_data = {}
     for i in range(len(mission_header_keys)):
@@ -264,15 +261,15 @@ async def get_mission_info(connection):
                 key = mission_header_keys[i]
                 if i <= 34:
                     if i == 1: #庆祝类型（`celebrationType`）
-                        mission_data[key].append(celebrationTypes[mission[key]])
+                        mission_data[key].append(celebrationTypes[mission["celebrationType"]])
                     elif i == 2: #客户端通知类型（`clientNotifyLevel`）
-                        mission_data[key].append(clientNotifyLevels[mission[key]])
+                        mission_data[key].append(clientNotifyLevels[mission["clientNotifyLevel"]])
                     elif i == 7: #显示类型（`displayType`）
-                        mission_data[key].append(displayTypes[mission[key]])
-                    elif i == 20: #任务类型（`missionTypes`）
-                        mission_data[key].append(missionTypes[mission[key]])
+                        mission_data[key].append(displayTypes[mission["displayType"]])
+                    elif i == 20: #任务类型（`missionType`）
+                        mission_data[key].append(missionTypes[mission["missionType"]])
                     elif i == 26: #状态（`status`）
-                        mission_data[key].append(missionStatus_dict[mission[key]])
+                        mission_data[key].append(missionStatus_dict[mission["status"]])
                     elif i >= 29 and i <= 33: #时间类键（Time-type keys）
                         subkey_dict = {29: "completedDate", 30: "earnedDate", 31: "endTime", 32: "lastUpdatedTimestamp", 33: "startTime"}
                         try:
@@ -288,23 +285,23 @@ async def get_mission_info(connection):
                         mission_data[key].append(rewardDescriptions)
                     else:
                         mission_data[key].append(mission[key])
-                elif i <= 55: #该代码框架适用于纯嵌套字典类型的值（This code frame applies to pure nested dictionary-type values）
+                elif i <= 57: #该代码框架适用于纯嵌套字典类型的值（This code frame applies to pure nested dictionary-type values）
                     tmpObj_ptr = mission
                     for subkey_iter in key.split():
                         tmpObj_ptr = tmpObj_ptr[subkey_iter]
-                    if i == 39: #元数据：任务类型（`metadata missionType`）
+                    if i == 40: #元数据：任务类型（`metadata missionType`）
                         mission_data[key].append(metadataMissionTypes[tmpObj_ptr])
-                    elif i == 53: #奖励分组（`rewardStrategy groupStrategy`）
+                    elif i == 55: #任务奖励分组（`rewardStrategy groupStrategy`）
                         mission_data[key].append(rewardGroupStrategies[tmpObj_ptr])
                     else:
                         mission_data[key].append(tmpObj_ptr)
-                elif i <= 65:
+                elif i <= 67:
                     tmpObj_ptr = objective
                     for j in range(1, len(key.split())):
                         tmpObj_ptr = tmpObj_ptr[key.split()[j]]
-                    if i == 61: #目标状态（`objective status`）
+                    if i == 63: #目标状态（`objective status`）
                         mission_data[key].append(objectiveStatus_dict[tmpObj_ptr])
-                    elif i == 62: #目标类型（`objective type`）
+                    elif i == 64: #目标类型（`objective type`）
                         mission_data[key].append(objectiveTypes[tmpObj_ptr])
                     else:
                         mission_data[key].append(tmpObj_ptr)
@@ -314,35 +311,59 @@ async def get_mission_info(connection):
                         mission_data[key].append(mission_objectiveGroup_map[(mission["id"], mission["sequence"])][subkey])
                     else:
                         mission_data[key].append("")
-    objective_group_header = {"backgroundImage": "目标背景图片链接", "endDate": "目标结束时间戳", "gameType": "游戏类型", "isActive": "可用性", "objectivesCategories": "目标分类", "startDate": "目标开始时间戳", "uuid": "通用唯一识别码", "endTime": "目标结束时间", "startTime": "目标开始时间", "objectiveGroup backgroundImage": "目标分组背景图片链接", "objectiveGroup endDate": "目标分组结束时间戳", "objectiveGroup id": "目标分组序号", "objectiveGroup isEnabled": "目标分组可用性", "objectiveGroup isPooledMission": "目标分组池化任务", "objectiveGroup localizedTag": "目标分组标签", "objectiveGroup localizedTitle": "目标分组标题", "objectiveGroup maxRefresh": "目标分组最大刷新次数", "objectiveGroup objectivesType": "目标分组类型", "objectiveGroup priority": "目标分组排列顺序", "objectiveGroup refreshInterval": "目标分组刷新间隔（分钟）", "objectiveGroup startDate": "目标分组开始时间戳", "objectiveGroup tag": "目标分组标签", "objectiveGroup endTime": "目标分组结束时间", "objectiveGroup startTime": "目标分组开始时间"}
+    objective_group_header = {"backgroundImage": "背景图片链接", "endDate": "结束时间戳", "id": "识别码", "isEnabled": "可用性", "isPooledMission": "池化任务", "localizedTag": "标签", "localizedTitle": "标题", "maxRefresh": "最大刷新次数", "objectivesType": "类型", "priority": "排列顺序", "refreshInterval": "刷新间隔（秒）", "startDate": "开始时间戳", "tag": "标签", "endTime": "结束时间", "startTime": "开始时间", "objectiveCategory id": "目标分组识别码", "objectiveCategory categoryName": "目标分组标签"}
     objective_group_header_keys = list(objective_group_header.keys())
     objective_group_data = {}
     for i in range(len(objective_group_header_keys)):
         key = objective_group_header_keys[i]
         objective_group_data[key] = []
+    objective_category_header = {"gameType": "适用游戏类型", "categoryName": "名称", "categorySectionImage": "分组标识图", "categoryType": "类型", "endDate": "结束时间戳", "id": "识别码", "lolEventHubType": "英雄联盟活动专题类型", "objectiveCategoryFilter": "大类", "overrideBackgroundImage": "重载背景图片", "progressEndDate": "进度停止计算时间戳", "startDate": "开始时间戳", "tftPassType": "云顶之弈通行证类型", "endTime": "结束时间", "progressEndTime": "进度停止计算时间", "startTime": "开始时间"}
+    objective_category_header_keys = list(objective_category_header.keys())
+    objective_category_data = {}
+    for i in range(len(objective_category_header_keys)):
+        key = objective_category_header_keys[i]
+        objective_category_data[key] = []
     for objective in objectives:
-        for objectiveGroup in objective["objectives"]:
-            for i in range(len(objective_group_header_keys)):
-                key = objective_group_header_keys[i]
-                if i <= 8:
-                    if i == 2: #游戏类型（`gameType`）
-                        objective_group_data[key].append(gameTypes[objective[key]])
-                    elif i >= 7: #时间类键（Time-type keys）
-                        subkey_dict = {7: "endDate", 8: "startDate"}
-                        timeStr = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(objective[subkey_dict[i]] // 1000))
-                        objective_group_data[key].append(timeStr)
-                    else:
-                        objective_group_data[key].append(objective[key])
+        for objectiveCategory in objective["objectivesCategories"]:
+            for i in range(len(objective_category_header_keys)):
+                key = objective_category_header_keys[i]
+                if i == 0: #游戏类型（`gameType`）
+                    objective_category_data[key].append(gameTypes[objective["gameType"]])
                 else:
-                    if i >= 22: #时间类键（Time-type keys）
-                        subkey_dict = {22: "endDate", 23: "startDate"}
-                        timeStr = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(objectiveGroup[subkey_dict[i]] // 1000))
-                        objective_group_data[key].append(timeStr)
+                    if i == 3: #类型（`categoryType`）
+                        objective_category_data[key].append(categoryTypes[objectiveCategory["categoryType"]])
+                    elif i == 6: #英雄联盟活动专题类型（`lolEventHubType`）
+                        objective_category_data[key].append(lolEventHubTypes[objectiveCategory["lolEventHubType"]])
+                    elif i == 7: #大类（`objectiveCategoryFilter`）
+                        objective_category_data[key].append(objectiveCategoryFilter_dict[objectiveCategory["objectiveCategoryFilter"]])
+                    elif i == 11: #云顶之弈通行证类型（`tftPassType`）
+                        objective_category_data[key].append(tftPassTypes[objectiveCategory["tftPassType"]])
+                    elif i >= 12: #时间类键（Time-type keys）
+                        subkey_dict = {12: "endDate", 13: "progressEndDate", 14: "startDate"}
+                        timeStr = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(objectiveCategory[subkey_dict[i]] // 1000))
+                        objective_category_data[key].append(timeStr)
+                    else:
+                        objective_category_data[key].append(objectiveCategory[key])
+            for objectiveGroup in objectiveCategory["objectives"]:
+                for i in range(len(objective_group_header_keys)):
+                    key = objective_group_header_keys[i]
+                    if i <= 14:
+                        if i == 8: #类型（`objectivesType`）
+                            objective_group_data[key].append(objectivesTypes[objectiveGroup["objectivesType"]])
+                        elif i >= 13: #时间类键（Time-type keys）
+                            subkey_dict = {13: "endDate", 14: "startDate"}
+                            timeStr = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(objectiveGroup[subkey_dict[i]] // 1000))
+                            objective_group_data[key].append(timeStr)
+                        else:
+                            objective_group_data[key].append(objectiveGroup[key])
                     else:
                         subkey = key.split()[1]
-                        objective_group_data[key].append(objectiveGroup[subkey])
+                        if objectiveGroup["id"] in objectiveGroup_objectiveCategory_map:
+                            objective_group_data[key].append(objectiveGroup_objectiveCategory_map[objectiveGroup["id"]][subkey])
+                        else:
+                            objective_group_data[key].append("")
     #数据框列序整理（Dataframe column ordering）
-    mission_statistics_output_order = [68, 67, 66, 13, 27, 14, 6, 19, 11, 24, 23, 21, 35, 36, 56, 60, 58, 62, 64, 63, 65, 61, 57, 59, 26, 34, 22, 53, 54, 55, 33, 31, 32, 30, 4, 29, 5, 20, 7, 1, 2, 15, 28, 18, 10, 0, 12, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52]
+    mission_statistics_output_order = [70, 69, 68, 13, 27, 14, 6, 19, 11, 24, 23, 21, 35, 36, 58, 62, 60, 64, 66, 65, 67, 63, 59, 61, 26, 34, 22, 55, 56, 57, 33, 31, 32, 30, 4, 29, 5, 20, 7, 1, 2, 15, 28, 18, 10, 0, 12, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
     mission_data_organized = {}
     for i in mission_statistics_output_order:
         key = mission_header_keys[i]
@@ -354,7 +375,7 @@ async def get_mission_info(connection):
             for i in range(len(mission_df)):
                 mission_df.loc[i, column] = "√" if mission_df[column][i] == "True" else ""
     mission_df = pandas.concat([pandas.DataFrame([mission_header])[mission_df.columns], mission_df], ignore_index = True)
-    objective_group_statistics_output_order = [2, 6, 3, 4, 7, 8, 15, 14, 21, 11, 18, 17, 12, 13, 23, 22, 19, 16, 9, 0]
+    objective_group_statistics_output_order = [16, 15, 6, 5, 2, 9, 8, 3, 4, 14, 13, 10, 7, 0]
     objective_group_data_organized = {}
     for i in objective_group_statistics_output_order:
         key = objective_group_header_keys[i]
@@ -366,10 +387,25 @@ async def get_mission_info(connection):
             for i in range(len(objective_group_df)):
                 objective_group_df.loc[i, column] = "√" if objective_group_df[column][i] == "True" else ""
     objective_group_df = pandas.concat([pandas.DataFrame([objective_group_header])[objective_group_df.columns], objective_group_df], ignore_index = True)
+    objective_category_statistics_output_order = [0, 1, 5, 7, 3, 2, 6, 11, 14, 13, 12, 8]
+    objective_category_data_organized = {}
+    for i in objective_category_statistics_output_order:
+        key = objective_category_header_keys[i]
+        objective_category_data_organized[key] = objective_category_data[key]
+    objective_category_df = pandas.DataFrame(data = objective_category_data_organized)
+    for column in objective_category_df:
+        if objective_category_df[column].dtype == "bool":
+            objective_category_df[column] = objective_category_df[column].astype(str)
+            for i in range(len(objective_category_df)):
+                objective_category_df.loc[i, column] = "√" if objective_category_df[column][i] == "True" else ""
+    objective_category_df = pandas.concat([pandas.DataFrame([objective_category_header])[objective_category_df.columns], objective_category_df], ignore_index = True)
     #数据框排序（Dataframe sorting）
     mission_df_data = mission_df.loc[1:, :]
     mission_df_data_sorted = mission_df_data.sort_values(by = "objectiveGroup id", key = lambda x: x.map(objectiveGroupId_order), ascending = True)
     mission_df_sorted = pandas.concat([mission_df.iloc[:1, :], mission_df_data_sorted])
+    objective_group_df_data = objective_group_df.loc[1:, :]
+    objective_group_df_data_sorted = objective_group_df_data.sort_values(by = "objectiveCategory id", key = lambda x: x.map(objectiveCategoryId_order), ascending = True)
+    objective_group_df_sorted = pandas.concat([objective_group_df.iloc[:1, :], objective_group_df_data_sorted])
     #保存文件（Save the files）
     excel_name = f"Player Mission - {displayName}.xlsx" 
     excel_name_sorted = f"Player Mission - {displayName} (sorted).xlsx"
@@ -379,7 +415,8 @@ async def get_mission_info(connection):
             with pandas.ExcelWriter(path = os.path.join(folder, excel_name), mode = "a", if_sheet_exists = "replace") as writer:
                 currentTime = time.strftime("%Y-%m-%d", time.localtime(time.time()))
                 mission_df_sorted.to_excel(excel_writer = writer, sheet_name = "Missions - " + currentTime + "_" + platformId)
-                objective_group_df.to_excel(excel_writer = writer, sheet_name = "Objectives - " + currentTime + "_" + platformId)
+                objective_group_df_sorted.to_excel(excel_writer = writer, sheet_name = "Objectives - " + currentTime + "_" + platformId)
+                objective_category_df.to_excel(excel_writer = writer, sheet_name = "Categories - " + currentTime + "_" + platformId)
             print('玩家目标和任务信息已保存为“%s”！\nPlayer objective and mission information is saved as "%s"!' %(os.path.join(folder, excel_name), os.path.join(folder, excel_name)))
         except PermissionError:
             print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
@@ -390,7 +427,8 @@ async def get_mission_info(connection):
             with pandas.ExcelWriter(path = os.path.join(folder, excel_name)) as writer:
                 currentTime = time.strftime("%Y-%m-%d", time.localtime(time.time()))
                 mission_df_sorted.to_excel(excel_writer = writer, sheet_name = "Missions - " + currentTime + "_" + platformId)
-                objective_group_df.to_excel(excel_writer = writer, sheet_name = "Objectives - " + currentTime + "_" + platformId)
+                objective_group_df_sorted.to_excel(excel_writer = writer, sheet_name = "Objectives - " + currentTime + "_" + platformId)
+                objective_category_df.to_excel(excel_writer = writer, sheet_name = "Categories - " + currentTime + "_" + platformId)
             print('玩家目标和任务信息已保存为“%s”！\nPlayer objective and mission information is saved as "%s"!' %(os.path.join(folder, excel_name), os.path.join(folder, excel_name)))
             break
         else:
@@ -473,7 +511,7 @@ async def check_repeating_missions(connection):
                     cooldown_remaining_minute = cooldown_remaining % 3600 // 60
                     cooldown_remaining_second = cooldown_remaining % 60
                     cooldown_remaining_str = "%d:%02d:%02d" %(cooldown_remaining_hour, cooldown_remaining_minute, cooldown_remaining_second) #剩余时间（Cooldown remaining）
-                    missionData_simple = {"项目": ["标题", "序号", "序列号", "描述", "奖励", "完成时间", "刷新间隔", "刷新时间", "剩余时间"], "Items": ["title", "id", "sequence", "description", "rewards", "completedTime", "cooldown", "refreshTime", "cooldownRemaining"], "值": [mission["title"], mission["id"], mission["sequence"], mission["description"], rewardDescriptions, completedTime, cooldown_str, refreshTime, cooldown_remaining_str]}
+                    missionData_simple = {"项目": ["标题", "识别码", "序列号", "描述", "奖励", "完成时间", "刷新间隔", "刷新时间", "剩余时间"], "Items": ["title", "id", "sequence", "description", "rewards", "completedTime", "cooldown", "refreshTime", "cooldownRemaining"], "值": [mission["title"], mission["id"], mission["sequence"], mission["description"], rewardDescriptions, completedTime, cooldown_str, refreshTime, cooldown_remaining_str]}
                     #print("标题（Title）： %s\n序号（Id）： %s\n序列号（Sequence）： %d\n描述（Description）： %s\n奖励（Reward）： %s\n完成时间（Completed time）： %s\n刷新间隔（Cooldown）： %s\n刷新时间（Refresh time）： %s\n剩余时间：（Cooldown remaining）： %s\n" %(mission["title"], mission["id"], mission["sequence"], mission["description"], rewardDescriptions, completedTime, cooldown_str, refreshTime, cooldown_remaining_str))
                     missionDf_simple = pandas.DataFrame(data = missionData_simple)
                     print(format_df(missionDf_simple, print_index = True, header_align = "^", align = "^^>")[0], end = "\n\n")
@@ -484,7 +522,7 @@ async def check_repeating_missions(connection):
                     for reward in mission["rewards"]:
                         if not reward["description"] in rewardDescriptions:
                             rewardDescriptions.append(reward["description"]) #奖励（Reward）
-                    missionData_simple = {"项目": ["标题", "序号", "序列号", "描述", "奖励"], "Items": ["title", "id", "sequence", "description", "rewards"], "值": [mission["title"], mission["id"], mission["sequence"], mission["description"], rewardDescriptions]}
+                    missionData_simple = {"项目": ["标题", "识别码", "序列号", "描述", "奖励"], "Items": ["title", "id", "sequence", "description", "rewards"], "值": [mission["title"], mission["id"], mission["sequence"], mission["description"], rewardDescriptions]}
                     #print("标题（Title）： %s\n序号（Id）： %s\n序列号（Sequence）： %d\n描述（Description）： %s\n奖励（Reward）： %s\n" %(mission["title"], mission["id"], mission["sequence"], mission["description"], rewardDescriptions))
                     missionDf_simple = pandas.DataFrame(data = missionData_simple)
                     print(format_df(missionDf_simple, print_index = True, header_align = "^", align = "^^>")[0], end = "\n\n")

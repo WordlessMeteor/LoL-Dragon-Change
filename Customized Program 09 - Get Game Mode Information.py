@@ -8,7 +8,7 @@ import os, pandas, time, unicodedata, shutil
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/06/29
+# 更新（Last update）：     2025/08/28
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -62,6 +62,7 @@ def rm_ctrl_char(s: str): #移除一个字符串中的所有C0和C1字符（Remo
     return "".join(ch for ch in s if unicodedata.category(ch) != "Cc")
 
 def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+    df = df.copy(deep = True)
     old_index = df.index
     df.index = range(start_index, len(df) + start_index)
     maxLens = {}
@@ -69,7 +70,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
     fields = df.columns.tolist()
     for field in fields:
         maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(rm_ctrl_char(str(x))), df[field])), wcswidth(rm_ctrl_char(field))) + 2
-    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+    index_len = 0 if len(df) == 0 else max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
@@ -192,7 +193,7 @@ def lcuTimestamp(timestamp): #根据队列开放和关闭时间戳返回对局�
 async def gamemode(connection):
     queues = await (await connection.request("GET", "/lol-game-queues/v1/queues")).json()
     # 以前含有"最大召唤师等级"参数（There was previously a parameter: maxLevel）
-    queues_header = {"allowablePremadeSizes": "可用预组队规模", "areFreeChampionsAllowed": "允许使用周免英雄", "assetMutator": "游戏模式配置", "category": "对局类型", "championsRequiredToPlay": "需要英雄数量", "description": "游戏模式描述", "detailedDescription": "补充描述", "gameMode": "游戏模式", "gameSelectCategory": "游戏选择类别", "gameSelectModeGroup": "游戏模式分组", "gameSelectPriority": "游戏选择优先级", "hidePlayerPosition": "隐藏玩家位置", "id": "队列序号", "isCustom": "自定义对局", "isRanked": "排位赛", "isSkillTreeQueue": "技巧加成队列", "isTeamBuilderManaged": "服从阵容匹配机制", "isVisible": "客户端可见性", "lastToggledOffTime": "上次关闭时间戳", "lastToggledOnTime": "上次开放时间戳", "mapId": "地图序号", "maxDivisionForPremadeSize2": "双排最高分级限制", "maxLobbySpectatorCount": "房间最大观战者数量", "maxTierForPremadeSize2": "双排最高段位限制", "maximumParticipantListSize": "最大玩家数量", "minLevel": "最低召唤师等级", "minimumParticipantListSize": "最小玩家数量", "name": "游戏模式名称", "numPlayersPerTeam": "队伍规模", "numberOfTeamsInLobby": "房间内队伍数量", "queueAvailability": "队列可用性", "removalFromGameAllowed": "允许退出游戏", "removalFromGameDelayMinutes": "允许退出游戏时间（分钟）", "shortName": "游戏模式简称", "showPositionSelector": "呈现位置指示器", "showQuickPlaySlotSelection": "呈现快速模式偏好英雄选择界面", "spectatorEnabled": "允许观战", "type": "游戏类型", "lastToggledOffDate": "上次关闭时间", "lastToggledOnDate": "上次开放时间", "advancedLearningQuests": "进阶教程", "allowTrades": "允许交换", "banMode": "禁用模式", "banTimerDuration": "禁用时间限制（秒）", "battleBoost": "战斗加成", "crossTeamChampionPool": "跨队伍英雄共享", "deathMatch": "团体竞赛", "doNotRemove": "禁止退出游戏", "duplicatePick": "克隆选择", "exclusivePick": "唯一选择", "gameModeOverride": "游戏类型重写来源", "typeId": "游戏类型序号", "learningQuests": "新手教程", "mainPickTimerDuration": "盲选时间限制（秒）", "maxAllowableBans": "最大禁用数量", "typeName": "英雄选择策略", "numPlayersPerTeamOverride": "队伍规模重写历史", "onboardCoopBeginner": "人机对战引导模式", "pickMode": "英雄选择模式", "postPickTimerDuration": "符文和皮肤选择时间限制（秒）", "reroll": "允许重随", "teamChampionPool": "队伍英雄共享", "isChampionPointsEnabled": "队列奖励：英雄成就点数", "isIpEnabled": "队列奖励：成就", "isXpEnabled": "队列奖励：经验点数", "partySizeIpRewards": "组队额外成就奖励"}
+    queues_header = {"allowablePremadeSizes": "可用预组队规模", "areFreeChampionsAllowed": "允许使用周免英雄", "assetMutator": "游戏模式配置", "category": "对局类型", "championsRequiredToPlay": "需要英雄数量", "description": "游戏模式描述", "detailedDescription": "补充描述", "gameMode": "游戏模式", "gameSelectCategory": "游戏选择类别", "gameSelectModeGroup": "游戏模式分组", "gameSelectPriority": "游戏选择优先级", "hidePlayerPosition": "隐藏玩家位置", "id": "队列序号", "isBotHonoringAllowed": "允许赞誉电脑玩家", "isCustom": "自定义对局", "isRanked": "排位赛", "isSkillTreeQueue": "技巧加成队列", "isTeamBuilderManaged": "服从阵容匹配机制", "isVisible": "客户端可见性", "lastToggledOffTime": "上次关闭时间戳", "lastToggledOnTime": "上次开放时间戳", "mapId": "地图序号", "maxDivisionForPremadeSize2": "双排最高分级限制", "maxLobbySpectatorCount": "房间最大观战者数量", "maxTierForPremadeSize2": "双排最高段位限制", "maximumParticipantListSize": "最大玩家数量", "minLevel": "最低召唤师等级", "minimumParticipantListSize": "最小玩家数量", "name": "游戏模式名称", "numPlayersPerTeam": "队伍规模", "numberOfTeamsInLobby": "房间内队伍数量", "queueAvailability": "队列可用性", "removalFromGameAllowed": "允许退出游戏", "removalFromGameDelayMinutes": "允许退出游戏时间（分钟）", "shortName": "游戏模式简称", "showPositionSelector": "呈现位置指示器", "showQuickPlaySlotSelection": "呈现快速模式偏好英雄选择界面", "spectatorEnabled": "允许观战", "type": "游戏类型", "lastToggledOffDate": "上次关闭时间", "lastToggledOnDate": "上次开放时间", "advancedLearningQuests": "进阶教程", "allowTrades": "允许交换", "banMode": "禁用模式", "banTimerDuration": "禁用时间限制（秒）", "battleBoost": "战斗加成", "crossTeamChampionPool": "跨队伍英雄共享", "deathMatch": "团体竞赛", "doNotRemove": "禁止退出游戏", "duplicatePick": "克隆选择", "exclusivePick": "唯一选择", "gameModeOverride": "游戏类型重写来源", "typeId": "游戏类型序号", "learningQuests": "新手教程", "mainPickTimerDuration": "盲选时间限制（秒）", "maxAllowableBans": "最大禁用数量", "typeName": "英雄选择策略", "numPlayersPerTeamOverride": "队伍规模重写历史", "onboardCoopBeginner": "人机对战引导模式", "pickMode": "英雄选择模式", "postPickTimerDuration": "符文和皮肤选择时间限制（秒）", "reroll": "允许重随", "teamChampionPool": "队伍英雄共享", "isChampionPointsEnabled": "队列奖励：英雄成就点数", "isIpEnabled": "队列奖励：成就", "isXpEnabled": "队列奖励：经验点数", "partySizeIpRewards": "组队额外成就奖励"}
     queues_data = {}
     queues_header_keys = list(queues_header.keys())
     # 下面定义的字典对导出的Excel结果进行优化（The following defined dictionaries optimizes the results in Excel）
@@ -209,37 +210,37 @@ async def gamemode(connection):
     for queue in queues:
         for i in range(len(queues_header_keys)):
             key = queues_header_keys[i]
-            if i <= 39:
+            if i <= 40:
                 if i == 3: #对局类型（`category`）
                     queues_data[key].append(categories[queue[key]])
                 elif i == 8: #游戏选择类别（`gameSelectCategory`）
                     queues_data[key].append(gameSelectCategories[queue[key]])
                 elif i == 9: #游戏模式分组（`gameSelectModeGroup`）
                     queues_data[key].append(gameSelectModeGroups[queue[key]])
-                elif i == 23: #双排最高段位限制（`maxTierForPremadeSize2`）
+                elif i == 24: #双排最高段位限制（`maxTierForPremadeSize2`）
                     queues_data[key].append(tiers[queue[key]])
-                elif i == 30: #队列可用性（`queueAvailability`）
+                elif i == 31: #队列可用性（`queueAvailability`）
                     queues_data[key].append(queueAvailability_dict[queue[key]])
-                elif i == 38 or i == 39: #上次关闭时间和上次开放时间（`lastToggledOffDate` and `lastToggledOnDate`）
-                    subkey = "lastToggledOffTime" if i == 38 else "lastToggledOnTime"
+                elif i == 39 or i == 40: #上次关闭时间和上次开放时间（`lastToggledOffDate` and `lastToggledOnDate`）
+                    subkey = "lastToggledOffTime" if i == 39 else "lastToggledOnTime"
                     standard_time = time.strftime("%Y年%m月%d日%H:%M:%S", time.localtime(queue[subkey] / 1000))
                     queues_data[key].append(standard_time)
                 else:
                     queues_data[key].append(queue[key])
-            elif i <= 61:
-                if i == 42: #禁用模式（`banMode`）
+            elif i <= 62:
+                if i == 43: #禁用模式（`banMode`）
                     queues_data[key].append(banModes[queue["gameTypeConfig"][key]])
-                elif i == 51: #游戏类型序号（`typeId`）
+                elif i == 52: #游戏类型序号（`typeId`）
                     queues_data[key].append(queue["gameTypeConfig"]["id"])
-                elif i == 55: #英雄选择策略（`typeName`）
+                elif i == 56: #英雄选择策略（`typeName`）
                     queues_data[key].append(queue["gameTypeConfig"]["name"])
-                elif i == 58: #英雄选择模式（`pickMode`）
+                elif i == 59: #英雄选择模式（`pickMode`）
                     queues_data[key].append(pickModes[queue["gameTypeConfig"][key]])
                 else:
                     queues_data[key].append(queue["gameTypeConfig"][key])
             else:
                 queues_data[key].append(queue["queueRewards"][key])
-    queues_output_order = [12, 30, 17, 7, 27, 5, 6, 20, 51, 3, 37, 2, 8, 9, 10, 0, 55, 13, 14, 15, 42, 58, 38, 39, 28, 23, 21, 25, 4, 29, 26, 24, 54, 36, 22, 34, 35, 16, 49, 60, 44, 48, 1, 61, 45, 11, 43, 53, 59, 31, 32, 47, 52, 40, 41, 57, 46, 62, 63, 64]
+    queues_output_order = [12, 31, 18, 7, 28, 5, 6, 21, 52, 3, 38, 2, 8, 9, 10, 0, 56, 14, 15, 16, 43, 59, 39, 40, 29, 24, 22, 26, 4, 30, 27, 25, 55, 37, 23, 35, 36, 17, 50, 61, 45, 49, 1, 62, 46, 11, 44, 54, 60, 32, 33, 48, 53, 41, 42, 58, 47, 63, 64, 65, 13]
     queues_data_organized = {}
     sort_index = [i for i, v in sorted(enumerate(queues_data["id"]), key = lambda x: x[1])] # 此处指定按照队列序号排序（Here the DataFrame is sorted by queueId）
     for i in queues_output_order:

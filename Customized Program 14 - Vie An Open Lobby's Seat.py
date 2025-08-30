@@ -8,7 +8,7 @@ import ctypes, copy, os, pickle, time
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/06/14
+# 更新（Last update）：     2025/07/26
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -123,7 +123,7 @@ async def seatVie(connection):
                 #联网校验（Online verification）
                 switch_summoner = False
                 LoLHistory_get = True
-                LoLHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/lol/{current_info["puuid"]}/matches")).json() #这里之所以不把对局索引上界设置为500，是为了让用户有机可乘：用户可以通过不断开训练模式并且秒退，使最近20局全是训练模式，从而丢失和主播的对局信息（Here the upper limit of matchIDs could haven been set as 500, but a loophole is given: the user can keep starting a practice tool game and quitting once he/she enters the game, so that the recent 20 matches will all be custom games, and hence the match with the streamer will be lost）
+                LoLHistory = await (await connection.request("GET", "/lol-match-history/v1/products/lol/%s/matches" %(current_info["puuid"]))).json() #这里之所以不把对局索引上界设置为500，是为了让用户有机可乘：用户可以通过不断开训练模式并且秒退，使最近20局全是训练模式，从而丢失和主播的对局信息（Here the upper limit of matchIDs could haven been set as 500, but a loophole is given: the user can keep starting a practice tool game and quitting once he/she enters the game, so that the recent 20 matches will all be custom games, and hence the match with the streamer will be lost）
                 error_occurred = False
                 count = 0
                 if "errorCode" in LoLHistory:
@@ -134,7 +134,7 @@ async def seatVie(connection):
                         while "errorCode" in LoLHistory and "500 Internal Server Error" in LoLHistory["message"] and count <= 3:
                             count += 1
                             print("正在进行第%d次尝试……\nTimes trying: No. %d ..." %(count, count))
-                            LoLHistory = await (connection.request("GET", f"/lol-match-history/v1/products/lol/{current_info["puuid"]}/matches")).json()
+                            LoLHistory = await (connection.request("GET", "/lol-match-history/v1/products/lol/%s/matches" %(current_info["puuid"]))).json()
                     elif "body was empty" in LoLHistory["message"]:
                         LoLHistory_get = False
                         print("您从5月1日起就没有进行过任何英雄联盟对局。请先进行一场对局再运行本脚本。\nThis summoner hasn't played any LoL game yet since May 1st. Please run this program after you've played a game.")
@@ -155,7 +155,7 @@ async def seatVie(connection):
                                 error_occurred = True
                             while "errorCode" in LoLGame_info and "500 Internal Server Error" in LoLGame_info["message"] and count <= 3:
                                 count += 1
-                                print("正在第%d次尝试获取对局%s信息……\nTimes trying to capture Match %s: No. %d ..." %(count, matchID, matchID, count))
+                                print("正在第%d次尝试获取对局%d信息……\nTimes trying to capture Match %d: No. %d ..." %(count, matchID, matchID, count))
                                 LoLGame_info = await (await connection.request("GET", "/lol-match-history/v1/games/" + matchID)).json()
                         elif "Connection timed out after " in LoLGame_info["message"]:
                             fetched_info = False
@@ -166,11 +166,11 @@ async def seatVie(connection):
                                 error_occurred = True
                             while "errorCode" in LoLGame_info and "Service Unavailable - Connection retries limit exceeded. Response timed out" in LoLGame_info["message"] and count <= 3:
                                 count += 1
-                                print("正在第%d次尝试获取对局%s信息……\nTimes trying to capture Match %s: No. %d ..." %(count, matchID, matchID, count))
+                                print("正在第%d次尝试获取对局%d信息……\nTimes trying to capture Match %d: No. %d ..." %(count, matchID, matchID, count))
                                 LoLGame_info = await (await connection.request("GET", "/lol-match-history/v1/games/" + matchID)).json()
                         if count > 3:
                             fetched_info = False
-                            print("对局%s信息获取失败！程序即将退出。\nMatch %s information capture failure! The program will exit now." %(matchID, matchID))
+                            print("对局%d信息获取失败！程序即将退出。\nMatch %d information capture failure! The program will exit now." %(matchID, matchID))
                             time.sleep(3)
                             return 1
                     participant_puuids = list(map(lambda x: x["player"]["puuid"], LoLGame_info["participantIdentities"]))

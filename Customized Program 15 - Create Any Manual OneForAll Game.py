@@ -7,7 +7,7 @@ import os, time
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/06/09
+# 更新（Last update）：     2025/08/23
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -91,16 +91,32 @@ async def autoPick(connection):
                 print("请输入正整数！\nPlease enter a positive integer!")
         if championId == -1:
             break
-        print("请选择行为类型。\nPlease select an action type.\n1\t禁（Ban）\n2\t选（Pick）") #自动禁用的一个有用的地方是斗魂竞技场：通过抢先选中要禁的英雄，用户可以查看是否这名英雄会被其它人禁用。如果被别人抢先禁用了，在用户视角下可能就看不出来有没有被禁用了（A useful case of autoban is Arena: by selecting a champion to ban, the user can know whether this champion is banned by another player. If someone bans this champion before this champion is selected to be banned by the user, then in the user's vision, it can't be inferred accurately whether this champion has been banned）
-        s = input()
-        ban = s != "" and s[0] == "1"
+        print("请选择行为类型。\nPlease select an action type.\n1\t禁（Ban）\n2\t选（Pick）\n3\t投票（Vote）") #自动禁用的一个有用的地方是斗魂竞技场：通过抢先选中要禁的英雄，用户可以查看是否这名英雄会被其它人禁用。如果被别人抢先禁用了，在用户视角下可能就看不出来有没有被禁用了（A useful case of autoban is Arena: by selecting a champion to ban, the user can know whether this champion is banned by another player. If someone bans this champion before this champion is selected to be banned by the user, then in the user's vision, it can't be inferred accurately whether this champion has been banned）
+        while True:
+            ban = pick = vote = False
+            s = input()
+            if s == "":
+                continue
+            elif s[0] == "1":
+                ban = True
+                break
+            elif s[0] == "2":
+                pick = True
+                break
+            elif s[0] == "3":
+                vote = True
+                break
+            else:
+                print("您的输入有误！请重新输入。\nERROR input! Please try again.")
         print("是否直接锁定选择？（输入任意键直接锁定，否则不锁定。）\nDo you want to lock in? (Submit any non-empty string to lock in, or null to refuse locking in.)")
         complete = bool(input())
         #先确保用户进入英雄选择阶段（First, make sure the user is during champ select stage）
         if ban:
             print("等待进入英雄选择阶段的禁英雄阶段……\nWaiting for the banning stage of the champ select stage ...")
-        else:
+        if pick:
             print("等待进入英雄选择阶段的选英雄阶段……\nWaiting for the picking stage of the champ select stage ...")
+        if vote:
+            print("等待进入英雄选择阶段的投票阶段……\nWaiting for the voting stage of the champ select stage ...")
         gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json()
         spectateWarningPrinted = False
         while True:
@@ -123,7 +139,8 @@ async def autoPick(connection):
         action_found = False
         selfKey_pick = str(localPlayerCellId) + " pick" #只选择类型为“选英雄”的行为（Only do operations on a pick action）
         selfKey_ban = str(localPlayerCellId) + " ban" #只选择类型为“禁英雄”的行为（Only do operations on a ban action）
-        selfKey = selfKey_ban if ban else selfKey_pick
+        selfKey_vote = str(localPlayerCellId) + " vote" #只选择类型为“投票”的行为（Only do operations on a vote action）
+        selfKey = selfKey_ban if ban else selfKey_pick if pick else selfKey_vote
         while not action_found:
             gameflow_phase = await (await connection.request("GET", "/lol-gameflow/v1/gameflow-phase")).json()
             if gameflow_phase == "ChampSelect":

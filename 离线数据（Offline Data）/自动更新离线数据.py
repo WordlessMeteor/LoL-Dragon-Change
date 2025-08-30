@@ -38,6 +38,7 @@ def logPrint(s: str = "", log: _io.TextIOWrapper = log, end: str = "\n", print_t
             log.write("%s%s" %(str(s), "\n" if end == "\r" else end))
 
 def format_df(df: pd.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+    df = df.copy(deep = True)
     old_index = df.index
     df.index = range(start_index, len(df) + start_index)
     maxLens = {}
@@ -45,7 +46,7 @@ def format_df(df: pd.DataFrame, width_exceed_ask: bool = True, direct_print: boo
     fields = df.columns.tolist()
     for field in fields:
         maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(rm_ctrl_char(str(x))), df[field])), wcswidth(rm_ctrl_char(field))) + 2
-    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+    index_len = 0 if len(df) == 0 else max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
@@ -534,7 +535,7 @@ while True:
         for root, dirs, files in os.walk(src_folder):
             for file in files:
                 update = added = False
-                if mode == "1" and file.endswith(".json") or mode == "2" and file == "champion.json":
+                if mode == "1" and file.endswith(".json") or mode == "2" and file == "championFull.json":
                     src_path = os.path.join(root, file).replace("\\", "/")
                     relative_path = os.path.relpath(root, src_folder).replace("\\", "/")
                     dst_path = os.path.join(dst_folder, relative_path, file).replace("\\", "/")

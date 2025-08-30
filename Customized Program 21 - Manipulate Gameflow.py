@@ -9,7 +9,7 @@ from wcwidth import wcswidth
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/07/01
+# 更新（Last update）：     2025/08/23
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -184,12 +184,13 @@ async def prepare_data_resources(connection):
     for skin in wardSkins_source:
         wardSkins[skin["id"]] = skin
     ##藏品数据框（Collection dataframe）
+    os.makedirs("cache", exist_ok = True)
     logPrint("正在加载藏品信息……\nLoading collections ...")
     collection_df_json_exist = os.path.exists(collection_df_json_relpath)
     if collection_df_json_exist: #下面的注释适用于皮肤数据的获取，下文不再赘述（The following comments apply to skin data acquisition and won't be repeated below）
         with open(collection_df_json_relpath, "rb") as fp: #如果本地缓存存在，首先加载缓存（If the local cache exists, load it first）
             collection_df_json = pickle.load(fp)
-        if platformId in collection_df_json and current_info["puuid"] in collection_df_json[platformId] and isinstance(collection_df_json[platformId][current_info["puuid"]]["data"], pandas.DataFrame) and collection_df_json[platformId][current_info["puuid"]]["timestamp"] <= time.time() + 86400: #本地缓存格式检查（Local cache format check）
+        if platformId in collection_df_json and current_info["puuid"] in collection_df_json[platformId] and isinstance(collection_df_json[platformId][current_info["puuid"]]["data"], pandas.DataFrame) and collection_df_json[platformId][current_info["puuid"]]["timestamp"] > time.time() - 86400: #本地缓存格式检查（Local cache format check）
             collection_df = collection_df_json[platformId][current_info["puuid"]]["data"] #严格地讲，这里应该设置一个数据框格式校验（Strictly speaking, here needs a dataframe format check）
         else: #如果本地缓存的上次更新日期是一天前，或者本地缓存格式不正确，则需要重新获取数据（If the local cache was updated over a day ago, or the format isn't correct, it needs to be refreshed）
             collection_df_refresh = True
@@ -215,7 +216,7 @@ async def prepare_data_resources(connection):
     if skins_df_json_exist:
         with open(skins_df_json_relpath, "rb") as fp:
             skins_df_json = pickle.load(fp)
-        if platformId in skins_df_json and current_info["puuid"] in skins_df_json[platformId] and isinstance(skins_df_json[platformId][current_info["puuid"]]["data"], pandas.DataFrame) and skins_df_json[platformId][current_info["puuid"]]["timestamp"] <= time.time() + 86400:
+        if platformId in skins_df_json and current_info["puuid"] in skins_df_json[platformId] and isinstance(skins_df_json[platformId][current_info["puuid"]]["data"], pandas.DataFrame) and skins_df_json[platformId][current_info["puuid"]]["timestamp"] > time.time() - 86400:
             skins_df = skins_df_json[platformId][current_info["puuid"]]["data"]
         else:
             skins_df_refresh = True
@@ -251,7 +252,7 @@ async def define_global_variables(connection):
     team_colors_str = {"0": "", "1": "蓝方", "2": "红方", "100": "蓝方", "200": "红方"}
     subteam_color = {0: "", 1: "魄罗", 2: "小兵", 3: "迅捷蟹", 4: "石甲虫", 5: "锋喙鸟", 6: "哨卫", 7: "狼", 8: "魔沼蛙"} #仅用于斗魂竞技场（Only for Arena mode）
     #subteam_color = {0: "", 1: "Poro", 2: "Minion", 3: "Scuttle", 4: "Krug", 5: "Raptor", 6: "Sentinel", 7: "Wolf", 8: "Gromp"}
-    spectatorPolicies = {"LOBBYONLY": "只允许房间内玩家", "DROPINONLY": "只允许好友", "ALL": "所有人", "NONE": "无"}
+    spectatorPolicies = {"LOBBYONLY": "只允许房间内玩家", "DROPINONLY": "只允许好友", "DROPIN": "只允许好友", "ALL": "所有人", "NONE": "无"}
     rarities = {"Default": "默认", "Common": "常规", "Epic": "史诗", "Legacy": "限定", "Legendary": "传说", "Mythic": "神话", "Rare": "稀有", "Ultimate": "终极", "Exalted": "圣者至尊", "Transcendant": "超凡"}
     krarities = {"kNoRarity": "其它", "kExalted": "圣堂级", "kEpic": "史诗", "kLegendary": "传说", "kMythic": "神话", "kRare": "稀有", "kUltimate": "终极", "kTranscendent": "卓越"}
     augment_rarity = {0: "白银", 1: "黄金", 2: "棱彩", 4: "黄金", 8: "棱彩", "kBronze": "青铜", "kSilver": "白银", "kGold": "黄金", "kPrismatic": "棱彩"}
@@ -274,19 +275,20 @@ async def define_global_variables(connection):
     # honorType_tooltip_bodies = {"COOL": "Tilt-proof, chill", "SHOTCALLER": "Leadership, strategy", "HEART": "Team player, friendly"}
     zoom_scale_dict = {0.8: "1024 × 576", 1.0: "1280 × 720", 1.25: "1600 × 900", 1.5: "1920 × 1080"}
     #定义常量（Define constant values）
-    global GLOBAL_RESPONSE_LAG, QUIT_UX_WARNING, message_hint_printed, ballot_endpoint_notavailable_hint_printed, collection_df_json_relpath, skins_df_json_relpath, collection_df_refresh, collection_df_json_exist, skins_df_refresh, skins_df_json_exist, botDifficulty_list, players_header, players_header_keys, LoLChampions_header, LoLChampions_header_keys, custom_lobby_header, custom_lobby_header_keys, skins_header, skins_header_keys, conversation_header, conversation_header_keys, grid_champion_header, grid_champion_header_keys, muted_players_header, muted_players_header_keys, invid_header, invid_header_keys, perkPage_header, perkPage_header_keys, social_leaderboard_header, social_leaderboard_header_keys, availableBot_header, availableBot_header_keys, member_header, member_header_keys, ballot_player_header, ballot_player_header_keys, eog_mastery_update_header, eog_mastery_update_header_keys, eog_stat_metadata_lol_header, eog_stat_metadata_lol_header_keys, eog_teamstat_data_lol_header, eog_teamstat_data_lol_header_keys, eog_playerstat_data_lol_header, eog_playerstat_data_lol_header_keys, eog_stat_metadata_tft_header, eog_stat_metadata_tft_header_keys, eog_stat_data_tft_header, eog_stat_data_tft_header_keys
+    global GLOBAL_RESPONSE_LAG, QUIT_UX_WARNING, message_hint_printed, ballot_endpoint_notavailable_hint_printed, expand_matchHistory_hint_printed, collection_df_json_relpath, skins_df_json_relpath, collection_df_refresh, collection_df_json_exist, skins_df_refresh, skins_df_json_exist, botDifficulty_list, champSelect_players_header, champSelect_players_header_keys, LoLChampions_header, LoLChampions_header_keys, custom_lobby_header, custom_lobby_header_keys, skins_header, skins_header_keys, conversation_header, conversation_header_keys, grid_champion_header, grid_champion_header_keys, muted_players_header, muted_players_header_keys, invid_header, invid_header_keys, perkPage_header, perkPage_header_keys, social_leaderboard_header, social_leaderboard_header_keys, availableBot_header, availableBot_header_keys, member_header, member_header_keys, ballot_player_header, ballot_player_header_keys, eog_mastery_update_header, eog_mastery_update_header_keys, eog_stat_metadata_lol_header, eog_stat_metadata_lol_header_keys, eog_teamstat_data_lol_header, eog_teamstat_data_lol_header_keys, eog_playerstat_data_lol_header, eog_playerstat_data_lol_header_keys, eog_stat_metadata_tft_header, eog_stat_metadata_tft_header_keys, eog_stat_data_tft_header, eog_stat_data_tft_header_keys
     GLOBAL_RESPONSE_LAG = 0.2
     QUIT_UX_WARNING = '''警告：此操作将彻底清除与本次会话相关的英雄联盟客户端进程。（正在进行中的游戏不受影响。）这个操作是不可逆的。您确定要继续吗？（输入“quit”以继续，否则取消本次操作。）\nWarning: This operation will terminate all League Client processes related to this session. (On-going games won't be affected.) This operation is irreversible. Do you really want to continue? (Submit "quit" to continue, otherwise cancel this operation.)'''
     message_hint_printed = False
     ballot_endpoint_notavailable_hint_printed = False
+    expand_matchHistory_hint_printed = False
     collection_df_json_relpath = "cache/collection_df_json.pkl"
     skins_df_json_relpath = "cache/skins_df_json.pkl"
     collection_df_refresh = collection_df_json_exist = False
     skins_df_refresh = skins_df_json_exist = False
     botDifficulty_list = ["NONE", "TUTORIAL", "INTRO", "EASY", "MEDIUM", "HARD", "UBER", "RSWARMINTRO", "RSINTRO", "RSBEGINNER", "RSINTERMEDIATE"]
-    players_header = {"assignedPosition": "分配路线", "cellId": "槽位序号", "championId": "选用英雄序号", "championPickIntent": "声明英雄序号", "gameName": "玩家昵称", "internalName": "内置名", "isHumanoid": "电脑玩家", "nameVisibilityType": "信息可见性", "obfuscatedPuuid": "隐藏识别码", "obfuscatedSummonerId": "隐藏召唤师序号", "pickMode": "选用模式", "pickTurn": "选用顺序", "playerAlias": "玩家代号", "playerType": "玩家类型", "puuid": "玩家通用唯一识别码", "selectedSkinId": "选用皮肤序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "summonerId": "召唤师序号", "tagLine": "昵称编号", "team": "阵营", "wardSkinId": "饰品序号", "team_color": "阵营名称", "champion name": "选用英雄名称", "champion alias": "选用英雄代号", "championPickIntent name": "声明英雄名称", "championPickIntent alias": "声明英雄代号", "selectedSkin contentId": "选用（炫彩）皮肤商品编号", "selectedSkin name": "选用（炫彩）皮肤名称", "selectedSkin splashPath": "选用（炫彩）皮肤插画", "selectedSkin uncenteredSplashPath": "选用（炫彩）皮肤原画", "selectedSkin tilePath": "选用（炫彩）皮肤方块图像", "selectedSkin loadScreenPath": "选用（炫彩）皮肤经典加载界面", "selectedSkin loadScreenVintagePath": "选用（炫彩）皮肤带边框加载界面", "selectedSkin rarity": "选用（炫彩）皮肤品质", "selectedSkin splashVideoPath": "选用（炫彩）皮肤视频", "selectedSkin chromaPath": "选用（炫彩）皮肤炫彩", "spell1 name": "召唤师技能1名称", "spell1 iconPath": "召唤师技能1图标", "spell2 name": "召唤师技能2名称", "spell2 iconPath": "召唤师技能2图标", "wardSkin name": "饰品名称", "wardSkin description": "饰品简介", "wardSkin wardImagePath": "饰品图标", "wardSkin wardShadowImagePath": "饰品阴影", "wardSkin isLegacy": "限定饰品", "wardSkin rarity": "饰品品质"}
-    players_header_keys = list(players_header.keys())
-    LoLChampions_header = {"active": "可用性", "alias": "英雄代号", "banVoPath": "禁用台词路径", "baseLoadScreenPath": "加载界面图像路径", "baseSplashPath": "英雄封面路径", "botEnabled": "电脑模型激活情况", "chooseVoPath": "锁定台词路径", "disabledQueues": "禁用队列", "freeToPlay": "允许免费使用", "id": "英雄序号", "name": "称号", "purchased": "购买日期", "rankedPlayEnabled": "排位许可", "squarePortraitPath": "方格头像路径", "stingerSfxPath": "锁定音效路径", "title": "名称", "ownership: loyaltyReward": "获取方式：排位赛段奖励", "ownership: owned": "已拥有", "ownership: xboxGPReward": "获取方式：Xbox Game Pass奖励", "ownership: rental: endDate": "租借截止日期", "ownership: rental: purchaseDate": "购买日期", "ownership: rental: rented": "已租借", "ownership: rental: winCountRemaining": "租借可用胜场数", "role: assassin": "角色定位：刺客", "role: fighter": "角色定位：战士", "role: mage": "角色定位：法师", "role: marksman": "角色定位：射手", "role: support": "角色定位：辅助", "role: tank": "角色定位：坦克", "tacticalInfo: damageType": "战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】", "tacticalInfo: difficulty": "战略信息：难度（英雄的使用难度）", "tacticalInfo: style": "战略信息：风格【表明英雄的伤害输出方式的倾向（普攻vs技能）】", "recommendedPosition: TOP": "推荐路线：上路", "recommendedPosition: JUNGLE": "推荐路线：打野", "recommendedPosition: MIDDLE": "推荐路线：中路", "recommendedPosition: BOTTOM": "推荐路线：下路", "recommendedPosition: UTILITY": "推荐路线：辅助"}
+    champSelect_players_header = {"assignedPosition": "分配路线", "cellId": "槽位序号", "championId": "选用英雄序号", "championPickIntent": "声明英雄序号", "gameName": "玩家昵称", "internalName": "内置名", "isHumanoid": "电脑玩家", "nameVisibilityType": "信息可见性", "obfuscatedPuuid": "隐藏识别码", "obfuscatedSummonerId": "隐藏召唤师序号", "pickMode": "选用模式", "pickTurn": "选用顺序", "playerAlias": "玩家代号", "playerType": "玩家类型", "puuid": "玩家通用唯一识别码", "selectedSkinId": "选用皮肤序号", "spell1Id": "召唤师技能1序号", "spell2Id": "召唤师技能2序号", "summonerId": "召唤师序号", "tagLine": "昵称编号", "team": "阵营", "wardSkinId": "饰品序号", "team_color": "阵营名称", "champion name": "选用英雄名称", "champion alias": "选用英雄代号", "championPickIntent name": "声明英雄名称", "championPickIntent alias": "声明英雄代号", "selectedSkin contentId": "选用（炫彩）皮肤商品编号", "selectedSkin name": "选用（炫彩）皮肤名称", "selectedSkin splashPath": "选用（炫彩）皮肤插画", "selectedSkin uncenteredSplashPath": "选用（炫彩）皮肤原画", "selectedSkin tilePath": "选用（炫彩）皮肤方块图像", "selectedSkin loadScreenPath": "选用（炫彩）皮肤经典加载界面", "selectedSkin loadScreenVintagePath": "选用（炫彩）皮肤带边框加载界面", "selectedSkin rarity": "选用（炫彩）皮肤品质", "selectedSkin splashVideoPath": "选用（炫彩）皮肤视频", "selectedSkin chromaPath": "选用（炫彩）皮肤炫彩", "spell1 name": "召唤师技能1名称", "spell1 iconPath": "召唤师技能1图标", "spell2 name": "召唤师技能2名称", "spell2 iconPath": "召唤师技能2图标", "wardSkin name": "饰品名称", "wardSkin description": "饰品简介", "wardSkin wardImagePath": "饰品图标", "wardSkin wardShadowImagePath": "饰品阴影", "wardSkin isLegacy": "限定饰品", "wardSkin rarity": "饰品品质"}
+    champSelect_players_header_keys = list(champSelect_players_header.keys())
+    LoLChampions_header = {"active": "可用性", "alias": "英雄代号", "banVoPath": "禁用台词路径", "baseLoadScreenPath": "加载界面图像路径", "baseSplashPath": "英雄封面路径", "botEnabled": "电脑模型激活情况", "chooseVoPath": "锁定台词路径", "disabledQueues": "禁用队列", "freeToPlay": "允许免费使用", "id": "英雄序号", "isVisibleInClient": "藏品可见性", "name": "称号", "purchased": "购买时间戳", "rankedPlayEnabled": "取得排位许可", "squarePortraitPath": "方格头像路径", "stingerSfxPath": "锁定音效路径", "title": "名称", "purchaseDate": "购买日期", "ownership: loyaltyReward": "获取方式：排位赛段奖励", "ownership: owned": "已拥有", "ownership: xboxGPReward": "获取方式：Xbox Game Pass奖励", "ownership: rental: endDate": "租借截止时间戳", "ownership: rental: purchaseDate": "租借时间戳", "ownership: rental: rented": "已租借", "ownership: rented: winCountRemaining": "租借可用胜场数", "ownership: rental: endTime": "租借截止日期", "ownership: rental: purchaseTime": "租借日期", "role: assassin": "角色定位：刺客", "role: fighter": "角色定位：战士", "role: mage": "角色定位：法师", "role: marksman": "角色定位：射手", "role: support": "角色定位：辅助", "role: tank": "角色定位：坦克", "tacticalInfo: damageType": "战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】", "tacticalInfo: difficulty": "战略信息：难度（英雄的使用难度）", "tacticalInfo: style": "战略信息：风格【表明英雄的伤害输出方式的倾向（普攻vs技能）】", "passive: description": "被动技能简介", "passive: name": "被动技能名称", "spell1: description": "技能1简介", "spell1: name": "技能1名称", "spell2: description": "技能2简介", "spell2: name": "技能2名称", "spell3: description": "技能3简介", "spell3: name": "技能3名称", "spell4: description": "技能4简介", "spell4: name": "技能4名称", "recommendedPosition: TOP": "推荐路线：上路", "recommendedPosition: JUNGLE": "推荐路线：打野", "recommendedPosition: MIDDLE": "推荐路线：中路", "recommendedPosition: BOTTOM": "推荐路线：下路", "recommendedPosition: UTILITY": "推荐路线：辅助"}
     LoLChampions_header_keys = list(LoLChampions_header.keys())
     custom_lobby_header = {"filledPlayerSlots": "玩家数量", "filledSpectatorSlots": "观战者数量", "gameType": "游戏类型", "hasPassword": "密码验证", "id": "房间代码", "lobbyName": "房间名", "mapId": "地图序号", "maxPlayerSlots": "最大玩家数量", "maxSpectatorSlots": "最大观战者数量", "ownerDisplayName": "房主显示名", "partyId": "小队序号", "passbackUrl": "回调网址", "spectatorPolicy": "观战策略", "mapName": "地图名称", "filledPlayerRatio": "玩家比例", "filledSpectatorRatio": "观战者比例"}
     custom_lobby_header_keys = list(custom_lobby_header.keys())
@@ -330,6 +332,7 @@ def rm_ctrl_char(s: str): #移除一个字符串中的所有C0和C1字符（Remo
     return "".join(ch for ch in s if unicodedata.category(ch) != "Cc")
 
 def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+    df = df.copy(deep = True)
     old_index = df.index
     df.index = range(start_index, len(df) + start_index)
     maxLens = {}
@@ -337,7 +340,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
     fields = df.columns.tolist()
     for field in fields:
         maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(rm_ctrl_char(str(x))), df[field])), wcswidth(rm_ctrl_char(field))) + 2
-    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+    index_len = 0 if len(df) == 0 else max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
@@ -1122,8 +1125,8 @@ async def chat(connection):
                     messages = await (await connection.request("GET", f"/lol-chat/v1/conversations/{chatId}/messages")).json()
                     if "errorCode" in messages and messages["httpStatus"] == 404:
                         logPrint("该对话尚未激活。请在客户端右边的好友列表中点击该好友，或者直接发送一条聊天类消息，以激活对话。\nThis conversation hasn't been activated yet. Please click this friend in the friend list at the right side of the client, or send a chat message directly to activate the conversation.")
-                    mTypeDict = {"1": "groupchat", "2": "system", "3": "information", "4": "celebration"}
-                    logPrint("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Groupchat）\n2\t系统（System）\n3\t通知（Information）\n4\t庆祝语（Celebration）\n5\t自定义（custom）")
+                    mTypeDict = {"1": "chat", "2": "groupchat", "3": "system", "4": "information", "5": "celebration"}
+                    logPrint("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Chat）\n2\t小队聊天（Groupchat）\n3\t系统（System）\n4\t通知（Information）\n5\t庆祝语（Celebration）\n6\t自定义（custom）")
                     while True:
                         mType = logInput()
                         if mType == "":
@@ -1132,7 +1135,7 @@ async def chat(connection):
                             break
                         elif mType[0] in mTypeDict:
                             messageType = mTypeDict[mType[0]]
-                        elif mType[0] == "5":
+                        elif mType[0] == "6":
                             logPrint("请输入您要发送的消息类型：\nPlease input the type of the message you want to send:")
                             while True:
                                 messageType = logInput()
@@ -1162,7 +1165,7 @@ async def chat(connection):
                             if text.endswith(chr(4) * 2):
                                 continue
                             elif text == "" or text.endswith(chr(4)):
-                                logPrint("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Groupchat）\n2\t系统（System）\n3\t通知（Information）\n4\t庆祝语（Celebration）\n5\t自定义（custom）")
+                                logPrint("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Chat）\n2\t小队聊天（Groupchat）\n3\t系统（System）\n4\t通知（Information）\n5\t庆祝语（Celebration）\n6\t自定义（custom）")
                                 break
                             else:
                                 body = {"type": messageType, "body": text}
@@ -1181,6 +1184,127 @@ async def chat(connection):
             back = True
         if back:
             break
+
+async def toggle_nonfriend_game_invite(connection):
+    lol_notifications = await (await connection.request("GET", "/lol-settings/v2/account/LCUPreferences/lol-notifications")).json()
+    nonfriend_invitation_blocked = isinstance(lol_notifications, dict) and "blockNonFriendGameInvites" in lol_notifications["data"] and lol_notifications["data"]["blockNonFriendGameInvites"]
+    if nonfriend_invitation_blocked:
+        logPrint('''您已勾选“只接受好友邀请”选项。是否取消该选项以接受所有人邀请？（输入任意键以修改设置，否则保持原设置。）\nYou've checked the "Allow game invites only from friends" option. Do you want to uncheck this, so that you'll receive any other's invitation? (Submit any non-empty string to change the setting, or null to reserve it.)''')
+    else:
+        logPrint('''您未勾选“只接受好友邀请”选项。是否勾选该选项以只接受好友邀请？（输入任意键以修改设置，否则保持原设置。）\nYou've unchecked the "Allow game invites only from friends" option. Do you want to check this, so that you'll receive only your friends' invitation? (Submit any non-empty string to change the setting, or null to reserve it.)''')
+    settings_change_str = logInput()
+    settings_change = bool(settings_change_str)
+    if settings_change:
+        body = {"data": {"blockNonFriendGameInvites": not nonfriend_invitation_blocked}, "schemaVersion": lol_notifications["schemaVersion"]} #注意：schemaVersion一旦增加就不可减少（Warning: Once schemaVersion increases, it can't be decreased）
+        response = await (await connection.request("PATCH", "/lol-settings/v2/account/LCUPreferences/lol-notifications", data = body)).json()
+        logPrint(response)
+        if nonfriend_invitation_blocked:
+            logPrint('已禁用“只接受好友游戏邀请”选项。您现在应当能够收到来自陌生人的游戏邀请了。\nDisabled "Allow game invites only from friends" option. You should be able to receive an invitation from a stranger.')
+        else:
+            logPrint('''已启用“只接受好友游戏邀请”选项。您将屏蔽所有来自陌生人的游戏邀请。\nEnabled "Allow game invites only from friends" option. You'll block any invitation from strangers.''')
+
+async def expand_match_history(connection):
+    global expand_matchHistory_hint_printed
+    if not expand_matchHistory_hint_printed:
+        logPrint("请确保您从未点击过要查询的玩家的对局记录。如果您已经点击过，则程序只能获取到目前客户端接收到的对局，请等待该信息过期后再重新使用此功能。\nPlease make sure you haven't clicked the MATCH HISTORY tab of the summoner you want to search for. If you happen to have clicked it, then the program can only get the matches already received, and you need to wait for that information to expire and then use this function.\n")
+        expand_matchHistory_hint_printed = True
+    current_info = await (await connection.request("GET", "/lol-summoner/v1/current-summoner")).json()
+    logPrint('请输入要查询的召唤师名称，退出请输入“0”：\nPlease input the summoner name to be searched. Submit "0" to exit.')
+    while True:
+        summoner_name = logInput()
+        if summoner_name == "":
+            continue
+        elif summoner_name == "0":
+            break
+        elif summoner_name == "current-summoner":
+            info = {"searchType": "current-summoner", "endpoint": "/lol-summoner/v1/current-summoner", "info_got": True, "network_error": False, "body": current_info.copy(), "message": "", "selfInfo": True}
+        else:
+            info = await get_info(connection, summoner_name)
+        if info["info_got"]:
+            info_body = info["body"]
+            displayName = get_info_name(info_body)
+            current_puuid = info_body["puuid"]
+            logPrint("开始获取英雄联盟对局记录。\nBegin to get the LoL match history.")
+            LoLHistory_get = False
+            while True:
+                LoLHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/lol/{current_puuid}/matches?begIndex=0&endIndex=500")).json()
+                count = 0
+                if "errorCode" in LoLHistory:
+                    logPrint(LoLHistory)
+                    if "500 Internal Server Error" in LoLHistory["message"]:
+                        logPrint("您所在大区的对局记录服务异常。尝试重新获取数据……\nThe match history service provided on your server isn't in place. Trying to recapture the history data ...")
+                        while "errorCode" in LoLHistory and "500 Internal Server Error" in LoLHistory["message"] and count <= 3:
+                            logPrint("正在进行第%d次尝试……\nTimes trying: No. %d ..." %(count, count))
+                            LoLHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/lol/{current_puuid}/matches?begIndex=0&endIndex=500")).json()
+                    elif "body was empty" in LoLHistory["message"]:
+                        logPrint("这位召唤师从5月1日起就没有进行过任何英雄联盟对局。\nThis summoner hasn't played any LoL game yet since May 1st.")
+                        break
+                    elif "Error getting match list for summoner" in LoLHistory["message"]:
+                        LoLHistory_url = "%s/lol-match-history/v1/products/lol/%s/matches?begIndex=0&endIndex=200" %(connection.address, info_body["puuid"])
+                        logPrint("请打开以下网址，输入如下所示的用户名和密码，打开后在命令行中按回车键继续（Please open the following website, type in the username and password accordingly and press Enter to continue）：\n网址（URL）：\t\t%s\n用户名（Username）：\triot\n密码（Password）：\t%s\n或者输入空格分隔的两个自然数以重新指定对局索引下限和上限。\nOr submit two nonnegative integers split by space to respecify the begIndex and endIndex." %(LoLHistory_url, connection.auth_key))
+                        cont = logInput()
+                        if cont == "":
+                            continue
+                        else:
+                            try:
+                                begIndex_get, endIndex_get = map(int, cont.split())
+                            except:
+                                break
+                            else:
+                                continue
+                else:
+                    LoLHistory_get = True
+                    break
+            if LoLHistory_get:
+                gameCount = LoLHistory["games"]["gameCount"]
+                if gameCount <= 20:
+                    logPrint(f"程序只获取到{displayName}的{gameCount}场英雄联盟对局。这可能是因为您之前点击过该玩家的对局记录页签，或者该玩家近期只进行过少于20场英雄联盟对局。\nThe program only gets {displayName}'s {gameCount} LoL match(es). Maybe this is because you clicked this summoner's MATCH HISTORY tab before, or this player has played fewer than 20 LoL matches.")
+                else:
+                    logPrint(f"已经将{displayName}的英雄联盟对局记录扩展到{gameCount}场对局。请点击该玩家的对局记录页签查看。\nExpanded {displayName}'s LoL match history to {gameCount} matches. Please click this summoner's MATCH HISTORY tab to check it out.")
+            else:
+                logPrint("{displayName}的英雄联盟对局记录获取失败。\nThe program failed to get {displayName}'s LoL match history.")
+            logPrint("开始获取云顶之弈对局记录。\nBegin to get the TFT match history.")
+            TFTHistory_get = False
+            while True:
+                TFTHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/tft/{current_puuid}/matches?begin=0&count=500")).json()
+                count = 0
+                if "errorCode" in TFTHistory:
+                    logPrint(TFTHistory)
+                    if "500 Internal Server Error" in TFTHistory["message"]:
+                        logPrint("您所在大区的对局记录服务异常。尝试重新获取数据……\nThe match history service provided on your server isn't in place. Trying to recapture the history data ...")
+                        while "errorCode" in TFTHistory and "500 Internal Server Error" in TFTHistory["message"] and count <= 3:
+                            logPrint("正在进行第%d次尝试……\nTimes trying: No. %d ..." %(count, count))
+                            TFTHistory = await (await connection.request("GET", f"/lol-match-history/v1/products/tft/{current_puuid}/matches?begin=0&count=500")).json()
+                    elif "body was empty" in TFTHistory["message"]:
+                        logPrint("这位召唤师从5月1日起就没有进行过任何英雄联盟对局。\nThis summoner hasn't played any TFT game yet since May 1st.")
+                        break
+                    elif "Error getting match list for summoner" in TFTHistory["message"]:
+                        TFTHistory_url = "%s/lol-match-history/v1/products/lol/%s/matches?begin=0&count=200" %(connection.address, info_body["puuid"])
+                        logPrint("请打开以下网址，输入如下所示的用户名和密码，打开后在命令行中按回车键继续，或输入任意字符以切换召唤师（Please open the following website, type in the username and password accordingly and press Enter to continue or input anything to switch to another summoner）：\n网址（URL）：\t\t%s\n用户名（Username）：\triot\n密码（Password）：\t%s\n或者输入空格分隔的两个自然数以重新指定对局索引下限和对局数。\nOr submit two nonnegative integers split by space to respecify the begin and count." %(TFTHistory_url, connection.auth_key))
+                        cont = logInput()
+                        if cont == "":
+                            continue
+                        else:
+                            try:
+                                begin, count = map(int, cont.split())
+                            except:
+                                break
+                            else:
+                                continue
+                else:
+                    TFTHistory_get = True
+                    break
+            if TFTHistory_get:
+                gameCount = len(TFTHistory["games"])
+                if gameCount <= 20:
+                    logPrint(f"程序只获取到{displayName}的{gameCount}场云顶之弈对局。这可能是因为您之前点击过该玩家的对局记录页签，或者该玩家近期只进行过少于20场云顶之弈对局。\nThe program only gets {displayName}'s {gameCount} TFT match(es). Maybe this is because you clicked this summoner's MATCH HISTORY tab before, or this player has played fewer than 20 TFT matches.")
+                else:
+                    logPrint(f"已经将{displayName}的云顶之弈对局记录扩展到{gameCount}场对局。请点击该玩家的对局记录页签查看。\nExpanded {displayName}'s TFT match history to {gameCount} matches. Please click this summoner's MATCH HISTORY tab to check it out.")
+            else:
+                logPrint("{displayName}的云顶之弈对局记录获取失败。\nThe program failed to get {displayName}'s TFT match history.")
+        else:
+            logPrint(info["message"])
+        logPrint('请输入要查询的召唤师名称，退出请输入“0”：\nPlease input the summoner name to be searched. Submit "0" to exit.')
 
 #-----------------------------------------------------------------------------
 # 未登录状态（Unlogged state）
@@ -1226,6 +1350,10 @@ async def check_available_queue(connection):
     return available_queue_df
 
 async def create_queue_lobby(connection): #返回值为0代表请求正确发送，为1代表返回异常请求，为2代表中途退出。自定义房间创建函数同理（The returned value is 0 if the request is sent properly, 1 if an error message is returned and 2 if the user exits the function halfway. So as `create_custom_lobby` function）
+    queues_source = await (await connection.request("GET", "/lol-game-queues/v1/queues")).json()
+    queues = {}
+    for queue in queues_source:
+        queues[queue["id"]] = queue
     enabled_queueIds = await (await connection.request("GET", "/lol-platform-config/v1/namespaces/ClientSystemStates/enabledQueueIdsList")).json()
     for i in range(len(enabled_queueIds)):
         enabled_queueIds[i] = int(enabled_queueIds[i])
@@ -1261,12 +1389,36 @@ async def create_queue_lobby(connection): #返回值为0代表请求正确发送
                     return 2
                 else:
                     break
+    region_locale = await (await connection.request("GET", "/riotclient/region-locale")).json()
+    custom_game_setup_name_default_dict = {"ar_AE": "مباراة {{summonerName}}", "cs_CZ": "Hra uživatele {{summonerName}}", "el_GR": "Παιχνίδι του {{summonerName}}", "pl_PL": "Rozgrywka gracza {{summonerName}}", "ro_RO": "Jocul lui {{summonerName}}", "hu_HU": "{{summonerName}} játéka", "en_GB": "{{summonerName}}'s Game", "de_DE": "Spiel von {{summonerName}}", "es_ES": "Partida de {{summonerName}}", "it_IT": "Partita di {{summonerName}}", "fr_FR": "Partie de {{summonerName}}", "ja_JP": "{{summonerName}}の試合", "ko_KR": "{{summonerName}} 님의 게임", "es_MX": "Partida de {{summonerName}}", "es_AR": "Partida de {{summonerName}}", "pt_BR": "Partida de {{summonerName}}", "en_US": "{{summonerName}}'s Game", "en_AU": "{{summonerName}}'s Game", "ru_RU": "Игра {{summonerName}}", "tr_TR": "{{summonerName}} oyunu", "en_PH": "{{summonerName}}'s Game", "en_SG": "{{summonerName}}'s Game", "th_TH": "เกมของ {{summonerName}}", "vi_VN": "Trận của {{summonerName}}", "id_ID": "Game {{summonerName}}", "zh_MY": "{{summonerName}} 的房间", "zh_CN": "{{summonerName}}的对局", "zh_TW": "{{summonerName}} 的房間"} #来自（From）：plugins/rcp-fe-lol-parties/global/{locale}/trans.json
+    lobbyName = custom_game_setup_name_default_dict.get(region_locale["locale"], "{{summonerName}}的对局").replace("{{summonerName}}", current_info["gameName"])
     lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
-    if "gameConfig" in lobby_information and not lobby_information["gameConfig"]["isCustom"]:
+    queue = {
+        "queueId": queueId,
+        "isCustom": False,
+        "customGameLobby": {
+            "lobbyName": lobbyName,
+            "lobbyPassword": "",
+            "configuration": {
+                "mapId": 0,
+                "gameMode": "",
+                "gameMutator": "",
+                "mutators": {
+                    "id": 0
+                },
+                "spectatorPolicy": "AllAllowed",
+                "teamSize": 5,
+                "maxPlayerCount": 0,
+                "gameServerRegion": "",
+                "spectatorDelayEnabled": True,
+                "hidePublicly": False
+            }
+        }
+    }
+    if "gameConfig" in lobby_information and not queues[queueId]["isCustom"]:
         response = await (await connection.request("PUT", "/lol-lobby/v1/parties/queue", data = str(queueId))).json()
         logPrint(response)
     else:
-        queue = {"queueId": queueId}
         response = await (await connection.request("POST", "/lol-lobby/v2/lobby", data = queue)).json()
         logPrint(response)
     if isinstance(response, dict) and "errorCode" in response:
@@ -1280,7 +1432,6 @@ async def create_queue_lobby(connection): #返回值为0代表请求正确发送
             create_party_str = logInput()
             create_party = bool(create_party_str)
             if create_party:
-                queue = {"queueId": queueId}
                 response = await (await connection.request("DELETE", "/lol-lobby/v2/lobby")).json()
                 response = await (await connection.request("POST", "/lol-lobby/v2/lobby", data = queue)).json()
                 lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
@@ -1307,36 +1458,40 @@ async def create_custom_lobby(connection):
     practiceGameTypeConfigIds = sorted(map(int, practiceGameTypeConfigIds))
     gameTypeConfigs = await (await connection.request("GET", "/lol-platform-config/v1/namespaces/LoginDataPacket/gameTypeConfigs")).json()
     gameTypeConfigs = {int(config["id"]): config for config in gameTypeConfigs}
-    gamemodes = ["CLASSIC", "ARAM", "PRACTICETOOL", "NEXUSBLITZ", "GAMEMODEX", "TUTORIAL"]
-    gamemaps = {8: "水晶之痕（Crystal Scar）", 10: "扭曲丛林（Twisted Treeline）", 11: "召唤师峡谷（Summoner's Rift）", 12: "嚎哭深渊（Howling Abyss）", 14: "屠夫之桥（Butcher's Bridge）", 16: "星界废墟（Cosmic Ruins）", 18: "瓦洛兰城市公园（Valoran City Park）", 19: "第43区（Substructure 43）", 20: "飞船坠落点（Crash Site）", 21: "百合与莲花的神庙（Temple of Lily and Lotus）", 22: "聚点危机（Convergence）", 30: "怒火角斗场（Rings of Wrath）", 33: "最终都市（Final City）", 35: "班德尔之森（The Bandlewood）"}
-    gameTypes_zh = {"GAME_CFG_PICK_BLIND": "自选模式（自定义）", "GAME_CFG_DRAFT_STD": "征召模式（自定义）", "GAME_CFG_DRAFT_NOBAN": "轮选模式", "GAME_CFG_PICK_RANDOM": "全随机模式（自定义）", "GAME_CFG_PICK_SIMUL": "同选模式", "GAME_CFG_DRAFT_TOURNAMENT": "竞技征召模式（自定义）", "GAME_CFG_PICK_SIMUL_TD": "计时征召", "GAME_CFG_BASIC_TUTORIAL": "基础教程", "GAME_CFG_ADV_TUTORIAL": "进阶教程", "GAME_CFG_CAP": "无选模式", "GAME_CFG_BLIND_RANDOM": "盲选随机", "GAME_CFG_BLIND_DUPE": "克隆选择（自定义）", "GAME_CFG_CROSS_DUPE": "全队克隆", "GAME_CFG_BLIND_DRAFT_ST": "自选征召模式（自定义）", "GAME_CFG_COUNTER_PICK": "互选模式（自定义）", "GAME_CFG_TEAM_BUILDER_DRAFT": "征召模式", "GAME_CFG_TEAM_BUILDER_BLIND": "自选模式", "GAME_CFG_TEAM_BUILDER_BLIND_DRAFT": "自选征召", "GAME_CFG_TEAM_BUILDER_RANDOM": "全随机模式", "GAME_CFG_TEAM_BUILDER_BLIND_DUPE": "克隆选择", "GAME_CFG_TEAM_BUILDER_QUICKPLAY": "快速匹配"}
+    enabledModes = await (await connection.request("GET", "/lol-platform-config/v1/namespaces/Mutators/EnabledModes")).json()
+    gamemodes_zh = {"ARAM": "极地大乱斗", "ARAM_BOT": "极地大乱斗 5v5 人机", "ARAM_UNRANKED_5x5": "极地大乱斗", "ARSR": "峡谷大乱斗", "ASCENSION": "飞升争夺战", "ASSASSINATE": "红月决", "BILGEWATER": "佣兵大作战", "BOT": "人机对战", "BOT_3x3": "人机对战 扭曲丛林", "BRAWL": "神木之门", "CHERRY": "斗魂竞技场", "CHERRY_UNRANKED": "斗魂竞技场", "CHONCC_TREASURE_TFT": "云顶之弈 (恭喜发财)", "CLASH": "冠军杯赛", "CLASSIC": "召唤师峡谷", "COUNTER_PICK": "互选征召赛", "DARKSTAR": "暗星：奇点", "DOOMBOTSTEEMO": "末日人工智能", "FIRSTBLOOD": "大对决", "FIRSTBLOOD_1x1": "大对决 1v1", "FIRSTBLOOD_2x2": "大对决 2v2", "FIVE_YEAR_ANNIVERSARY_TFT": "6周年时光机", "GAMEMODEX": "极限闪击", "HEXAKILL": "六杀争夺战 扭曲丛林", "KINGPORO": "魄罗大乱斗", "KING_PORO": "魄罗大乱斗", "LNY23_TFT": "云顶之弈 (恭喜发财)", "LNY24_TFT": "云顶之弈 (恭喜发财)", "LNY25_TFT": "云顶之弈 (恭喜发财)", "NEXUSBLITZ": "极限闪击", "NIGHTMARE_BOT": "末日人工智能", "NORMAL": "匹配模式", "NORMAL_3x3": "匹配模式 3v3", "NORMAL_TFT": "云顶之弈（匹配模式）", "ODIN": "统治战场", "ODIN_UNRANKED": "统治战场", "ODYSSEY": "奥德赛", "ONEFORALL": "克隆大作战", "ONEFORALL_5x5": "克隆大作战 5v5", "PRACTICETOOL": "训练模式", "PROJECT": "超频行动", "PVE_PUZZLE_TFT": "发条鸟的试炼", "RANKED_FLEX_SR": "排位赛 灵活排位", "RANKED_FLEX_SR_5x5": "排位赛 灵活排位 5v5", "RANKED_FLEX_TT": "排位赛 灵活排位 扭曲丛林", "RANKED_PREMADE-3x3": "排位赛 预组队 3v3", "RANKED_SOLO_5x5": "排位赛 单排/双排", "RANKED_TEAM_3x3": "排位赛 战队 扭曲丛林", "RANKED_TEAM_5x5": "排位赛 战队 召唤师峡谷", "RANKED_TFT": "云顶之弈 (排位赛)", "RANKED_TFT_DOUBLE_UP": "云顶之弈 (双人作战)", "RANKED_TFT_PAIRS": "云顶之弈 (双人作战)", "RANKED_TFT_TURBO": "云顶之弈(狂暴模式)", "RIOTSCRIPT_BOT": "人机对战", "SET_REVIVAL_5_5_TFT": "回归赛季：英雄之黎明重现", "SET_REVIVAL_TFT": "回归赛季：瑞兽再闹新春", "SF_TFT": "云顶之弈 (斗魂锦标赛)", "SIEGE": "枢纽攻防战", "SNOWURF": "冰雪无限火力", "SOLO_DUO_RANKED_5x5": "排位赛 单排/双排", "SR_6x6": "六杀争夺战 召唤师峡谷", "STARGUARDIAN": "怪兽入侵", "STRAWBERRY": "无尽狂潮", "SWIFTPLAY": "快速模式", "TFT": "云顶之弈（匹配模式）", "TUTORIAL": "新手教程", "TUTORIAL_MODULE_1": "新手教程 第一部分", "TUTORIAL_MODULE_2": "新手教程 第二部分", "TUTORIAL_MODULE_3": "新手教程 第三部分", "ULTBOOK": "终极魔典", "URF": "无限火力", "URF_BOT": "无限火力 人机对战"}
+    gamemodes_en = {"ARAM": "ARAM", "ARAM_BOT": "ARAM 5v5 Bots", "ARAM_UNRANKED_5x5": "ARAM", "ARSR": "All Random Summoner's Rift", "ASCENSION": "Ascension", "ASSASSINATE": "Hunt of the Blood Moon", "BILGEWATER": "Black Market Brawlers", "BOT": "Co-op vs. Ai", "BOT_3x3": "Co-op vs. Ai Twisted Treeline", "BRAWL": "Brawl", "CHERRY": "Arena", "CHERRY_UNRANKED": "Arena", "CHONCC_TREASURE_TFT": "Choncc's Treasure", "CLASH": "Clash", "CLASSIC": "Summoner's Rift", "COUNTER_PICK": "Nemesis Draft", "DARKSTAR": "Dark Star: Singularity", "DOOMBOTSTEEMO": "Doom Bots", "FIRSTBLOOD": "Showdown", "FIRSTBLOOD_1x1": "Showdown 1v1", "FIRSTBLOOD_2x2": "Showdown 2v2", "FIVE_YEAR_ANNIVERSARY_TFT": "Pengu's Party", "GAMEMODEX": "Nexus Blitz (Pre-release)", "HEXAKILL": "Hexakill Twisted Treeline", "KINGPORO": "Legend of the Poro King", "KING_PORO": "Legend of the Poro King", "LNY23_TFT": "Choncc's Treasure", "LNY24_TFT": "Choncc's Treasure", "LNY25_TFT": "Choncc's Treasure", "NEXUSBLITZ": "Nexus Blitz", "NIGHTMARE_BOT": "Doom Bots", "NORMAL": "Normal", "NORMAL_3x3": "Normal 3v3", "NORMAL_TFT": "Normal (TFT)", "ODIN": "Dominion", "ODIN_UNRANKED": "Dominion", "ODYSSEY": "Odyssey: Extraction", "ONEFORALL": "One for All", "ONEFORALL_5x5": "One for All 5v5", "PRACTICETOOL": "Practice Tool", "PROJECT": "Overcharge", "PVE_PUZZLE_TFT": "Tocker's Trials", "RANKED_FLEX_SR": "Ranked Flex", "RANKED_FLEX_SR_5x5": "Ranked Flex 5v5", "RANKED_FLEX_TT": "Ranked Flex Twisted Treeline", "RANKED_PREMADE-3x3": "Ranked Premade 3v3", "RANKED_SOLO_5x5": "Ranked Solo/Duo", "RANKED_TEAM_3x3": "Ranked Team 3v3", "RANKED_TEAM_5x5": "Ranked Team 5v5", "RANKED_TFT": "Teamfight Tactics (Ranked)", "RANKED_TFT_DOUBLE_UP": "Teamfight Tactics (Double Up)", "RANKED_TFT_PAIRS": "Teamfight Tactics (Double Up)", "RANKED_TFT_TURBO": "Teamfight Tactics (Hyper Roll)", "RIOTSCRIPT_BOT": "Co-op vs. Ai", "SET_REVIVAL_5_5_TFT": "Revival: Dawn of Heroes", "SET_REVIVAL_TFT": "Revival: Festival of Beasts", "SF_TFT": "Teamfight Tactics (Soul Brawl)", "SIEGE": "Nexus Siege", "SNOWURF": "Snow Battle ARURF", "SOLO_DUO_RANKED_5x5": "Ranked Solo/Duo", "SR_6x6": "Hexakill Summoner's Rift", "STARGUARDIAN": "Invasion", "STRAWBERRY": "Swarm", "SWIFTPLAY": "Swiftplay", "TFT": "Normal (TFT)", "TUTORIAL": "Tutorial", "TUTORIAL_MODULE_1": "Tutorial Part 1", "TUTORIAL_MODULE_2": "Tutorial Part 2", "TUTORIAL_MODULE_3": "Tutorial Part 3", "ULTBOOK": "Ultimate Spellbook", "URF": "Ultra Rapid Fire", "URF_BOT": "Ultra Rapid Fire Bots 5v5"}
+    gamemaps_zh = {1: "召唤师峡谷 夏季怀旧版", 2: "召唤师峡谷 万圣节怀旧版", 3: "试炼之地", 4: "熔岩大厅", 7: "召唤师峡谷", 8: "水晶之痕", 10: "扭曲丛林", 11: "召唤师峡谷", 12: "嚎哭深渊", 13: "召唤师峡谷", 14: "屠夫之桥", 16: "星界废墟", 18: "瓦洛兰城市公园", 19: "第43区", 20: "飞船坠落点", 21: "百合与莲花的神庙", 22: "聚点危机", 30: "怒火角斗场", 33: "最终都市", 35: "班德尔之森", 90: "第五赛季季前赛测试地图"}
+    gamemaps_en = {1: "Summoner's Rift Original Summoner Variant", 2: "Summoner's Rift Original Autumn (Harrowing) Variant", 3: "The Proving Grounds", 4: "Magma Chamber", 7: "Summoner's Rift", 8: "Crystal Scar", 10: "Twisted Treeline", 11: "Summoner's Rift", 12: "Howling Abyss", 13: "Summoner's Rift", 14: "Butcher's Bridge", 16: "Cosmic Ruins", 18: "Valoran City Park", 19: "Substructure 43", 20: "Crash Site", 21: "Temple of Lily and Lotus", 22: "Convergence", 30: "Rings of Wrath", 33: "Final City", 35: "The Bandlewood", 90: "Pre-Season 5 Testing Map"}
+    availableMapIds = {"ARAM": [12], "ARAM_BOT": [12], "ARAM_UNRANKED_5x5": [12], "ARSR": [11], "ASCENSION": [8], "ASSASSINATE": [11], "BILGEWATER": [11], "BOT": [11], "BOT_3x3": [10], "BRAWL": [35], "CHERRY": [30], "CHERRY_UNRANKED": [30], "CHONCC_TREASURE_TFT": [22], "CLASH": [11], "CLASSIC": [11, 12, 21, 22], "COUNTER_PICK": [11], "DARKSTAR": [16], "DOOMBOTSTEEMO": [11], "FIRSTBLOOD": [4], "FIRSTBLOOD_1x1": [4], "FIRSTBLOOD_2x2": [4], "FIVE_YEAR_ANNIVERSARY_TFT": [22], "GAMEMODEX": [21, 11, 12, 22], "HEXAKILL": [10], "KINGPORO": [12], "KING_PORO": [12], "LNY23_TFT": [22], "LNY24_TFT": [22], "LNY25_TFT": [22], "NEXUSBLITZ": [21], "NIGHTMARE_BOT": [11], "NORMAL": [11], "NORMAL_3x3": [11], "NORMAL_TFT": [22], "ODIN": [8], "ODIN_UNRANKED": [8], "ODYSSEY": [20], "ONEFORALL": [11], "ONEFORALL_5x5": [11], "PRACTICETOOL": [11], "PROJECT": [19], "PVE_PUZZLE_TFT": [22], "RANKED_FLEX_SR": [11], "RANKED_FLEX_SR_5x5": [11], "RANKED_FLEX_TT": [11], "RANKED_PREMADE-3x3": [10], "RANKED_SOLO_5x5": [11], "RANKED_TEAM_3x3": [10], "RANKED_TEAM_5x5": [11], "RANKED_TFT": [22], "RANKED_TFT_DOUBLE_UP": [22], "RANKED_TFT_PAIRS": [22], "RANKED_TFT_TURBO": [22], "RIOTSCRIPT_BOT": [11], "SET_REVIVAL_5_5_TFT": [22], "SET_REVIVAL_TFT": [22], "SF_TFT": [22], "SIEGE": [11], "SNOWURF": [11], "SOLO_DUO_RANKED_5x5": [11], "SR_6x6": [11], "STARGUARDIAN": [18], "STRAWBERRY": [33], "SWIFTPLAY": [11], "TFT": [22], "TUTORIAL": [11, 12, 21, 22], "TUTORIAL_MODULE_1": [11], "TUTORIAL_MODULE_2": [11], "TUTORIAL_MODULE_3": [11], "ULTBOOK": [11], "URF": [11], "URF_BOT": [11]}
+    gameTypes_zh = {"GAME_CFG_PICK_BLIND": "自选模式（自定义）", "GAME_CFG_DRAFT_STD": "征召模式（自定义）", "GAME_CFG_DRAFT_NOBAN": "轮选模式", "GAME_CFG_PICK_RANDOM": "全随机模式（自定义）", "GAME_CFG_PICK_SIMUL": "同选模式", "GAME_CFG_DRAFT_TOURNAMENT": "竞技征召模式（自定义）", "GAME_CFG_PICK_SIMUL_TD": "计时征召", "GAME_CFG_BASIC_TUTORIAL": "基础教程", "GAME_CFG_ADV_TUTORIAL": "进阶教程", "GAME_CFG_CAP": "最终教程", "GAME_CFG_BLIND_RANDOM": "盲选随机", "GAME_CFG_BLIND_DUPE": "克隆选择（自定义）", "GAME_CFG_CROSS_DUPE": "全队克隆", "GAME_CFG_BLIND_DRAFT_ST": "自选征召模式（自定义）", "GAME_CFG_COUNTER_PICK": "互选模式（自定义）", "GAME_CFG_TEAM_BUILDER_DRAFT": "征召模式", "GAME_CFG_TEAM_BUILDER_BLIND": "自选模式", "GAME_CFG_TEAM_BUILDER_BLIND_DRAFT": "自选征召", "GAME_CFG_TEAM_BUILDER_RANDOM": "全随机模式", "GAME_CFG_TEAM_BUILDER_BLIND_DUPE": "克隆选择", "GAME_CFG_TEAM_BUILDER_QUICKPLAY": "快速匹配"}
     gameTypes_en = {"GAME_CFG_PICK_BLIND": "Blind Pick (custom)", "GAME_CFG_DRAFT_STD": "Draft Mode (custom)", "GAME_CFG_DRAFT_NOBAN": "Draft Noban (custom)", "GAME_CFG_PICK_RANDOM": "All Random (custom)", "GAME_CFG_PICK_SIMUL": "Simultaneous Pick (custom)", "GAME_CFG_DRAFT_TOURNAMENT": "Tournament Draft (custom)", "GAME_CFG_PICK_SIMUL_TD": "Timed Draft (custom)", "GAME_CFG_BASIC_TUTORIAL": "Basic Tutorial", "GAME_CFG_ADV_TUTORIAL": "Advanced Tutorial", "GAME_CFG_CAP": "Capstone Tutorial", "GAME_CFG_BLIND_RANDOM": "Blind Random (custom)", "GAME_CFG_BLIND_DUPE": "All for one (custom)", "GAME_CFG_CROSS_DUPE": "All for one (cross-team)", "GAME_CFG_BLIND_DRAFT_ST": "Blind Draft Pick (custom)", "GAME_CFG_COUNTER_PICK": "Nemesis Draft (custom)", "GAME_CFG_TEAM_BUILDER_DRAFT": "Draft Pick", "GAME_CFG_TEAM_BUILDER_BLIND": "Blind Pick", "GAME_CFG_TEAM_BUILDER_BLIND_DRAFT": "Blind Draft Pick", "GAME_CFG_TEAM_BUILDER_RANDOM": "All Random", "GAME_CFG_TEAM_BUILDER_BLIND_DUPE": "All for one", "GAME_CFG_TEAM_BUILDER_QUICKPLAY": "Quickplay"}
     spectatorPolicy = ["LobbyAllowed", "FriendsAllowed", "AllAllowed", "NotAllowed"]
-    defaultMapId = {"CLASSIC": 11, "ARAM": 12, "PRACTICETOOL": 11, "NEXUSBLITZ": 21, "GAMEMODEX": 21}
-    logPrint("请选择自定义房间的游戏模式：\nPlease select a game mode of the lobby:\n1\t召唤师峡谷（Summoner's Rift）\n2\t嚎哭深渊（Howling Abyss）\n3\t训练模式（Practice Tool）\n4\t极限闪击（不可用）【Nexus Blitz (Unavailable)】\n5\t极限闪击（Nexus Blitz）")
+    logPrint("请选择自定义房间的游戏模式：\nPlease select a game mode of the lobby:")
+    for i in range(len(enabledModes)):
+        logPrint("%d\t%s%s%s%s" %(i + 1, gamemodes_zh[enabledModes[i].upper()], "【" if "(" in gamemodes_en[enabledModes[i].upper()] else "（", gamemodes_en[enabledModes[i].upper()], "】" if "(" in gamemodes_en[enabledModes[i].upper()] else "）"), write_time = False)
     while True:
         gameModeTypeNumber = logInput()
         if gameModeTypeNumber == "":
             continue
-        elif gameModeTypeNumber[0] == "0":
+        elif gameModeTypeNumber == "0":
             return 2
-        elif gameModeTypeNumber[0] in list(map(str, range(1, 7))):
-            gameModeTypeNumber = int(gameModeTypeNumber[0])
+        elif gameModeTypeNumber in list(map(str, range(1, len(enabledModes) + 1))):
+            selectedMode = enabledModes[int(gameModeTypeNumber) - 1].upper()
             break
         else:
             logPrint("游戏模式输入错误！请重新输入：\nError input of game mode! Please try again:")
     logPrint("请输入地图序号：\nPlease enter a mapID:")
-    for i in sorted(gamemaps.keys()):
-        logPrint("%d\t%s" %(i, gamemaps[i]))
+    for i in sorted(gamemaps_zh.keys()):
+        logPrint("%s%d\t%s%s%s%s" %("☆" if i in availableMapIds[selectedMode] else "", i, gamemaps_zh[i], "【" if "(" in gamemaps_en[i] else "（", gamemaps_en[i], "】" if "(" in gamemaps_en[i] else "）"), write_time = False)
     while True:
         mapId = logInput()
-        if mapId == "":
-            if gamemodes[gameModeTypeNumber - 1] in defaultMapId:
-                mapId = defaultMapId[gamemodes[gameModeTypeNumber - 1]]
-                break
+        if mapId == "" and len(availableMapIds[selectedMode]) > 0:
+            mapId = availableMapIds[selectedMode][0]
+            break
         elif mapId == "0":
             return 2
-        elif mapId in set(map(str, gamemaps.keys())):
+        elif mapId in list(map(str, gamemaps_zh.keys())):
             mapId = int(mapId)
             break
         else:
@@ -1394,24 +1549,26 @@ async def create_custom_lobby(connection):
     spectatorDelayEnabled_str = logInput()
     spectatorDelayEnabled = bool(spectatorDelayEnabled_str)
     custom = {
+        "queueId": 0,
+        "isCustom": True,
         "customGameLobby": {
+            "lobbyName": lobbyName,
+            "lobbyPassword": lobbyPassword,
             "configuration": {
-                "gameMode": gamemodes[gameModeTypeNumber - 1],
-                "gameMutator": "",
-                "gameServerRegion": "",
                 "mapId": mapId,
+                "gameMode": selectedMode,
+                "gameMutator": "",
                 "gameTypeConfig": {
                     "id": mutatorId
                 },
                 "spectatorPolicy": spectatorPolicy[customSpectatorPolicyTypeNumber - 1],
+                "teamSize": teamsize,
+                "maxPlayerCount": 0,
+                "gameServerRegion": "",
                 "spectatorDelayEnabled": spectatorDelayEnabled,
-                "teamSize": teamsize
-            },
-            "lobbyName": lobbyName,
-            "lobbyPassword": lobbyPassword
-        },
-        "isCustom": True,
-        "queueId": 0
+                "hidePublicly": False
+            }
+        }
     }
     response = await (await connection.request("POST", "/lol-lobby/v2/lobby", data = custom)).json()
     logPrint(response)
@@ -1585,7 +1742,7 @@ async def sort_received_invitations(connection):
 
 async def gameflow_phase_transition(connection):
     while True:
-        logPrint("请选择一个操作：\nPlease select an operation:\n1\t创建房间（Create a lobby）\n2\t处理邀请（Handle invitations）\n3\t加入小队或自定义房间（Join party/lobby）\n4\t观战（Spectate a game）\n5\t聊天（Chat）\n6\t客户端任务管理（Manage the League Client task）")
+        logPrint("请选择一个操作：\nPlease select an operation:\n1\t创建房间（Create a lobby）\n2\t处理邀请（Handle invitations）\n3\t加入小队或自定义房间（Join party/lobby）\n4\t观战（Spectate a game）\n5\t聊天（Chat）\n6\t其它（Others）\n7\t客户端任务管理（Manage the League Client task）")
         option = logInput()
         if option == "":
             continue
@@ -1652,6 +1809,22 @@ async def gameflow_phase_transition(connection):
         elif option[0] == "5":
             await chat(connection)
         elif option[0] == "6":
+            logPrint('请选择一个子操作：\nPlease select a suboption:\n0\t返回上一层（Return to the last step）\n1\t更改“只接受好友邀请”选项（Toggle "allow game invites only from friends"）\n2\t扩展对局记录（Expand match history）')
+            while True:
+                suboption = logInput()
+                if suboption == "":
+                    continue
+                elif suboption[0] == "0":
+                    break
+                elif suboption[0] == "1":
+                    await toggle_nonfriend_game_invite(connection)
+                elif suboption[0] == "2":
+                    await expand_match_history(connection)
+                else:
+                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                    continue
+                logPrint('请选择一个子操作：\nPlease select a suboption:\n0\t返回上一层（Return to the last step）\n1\t更改“只接受好友邀请”选项（Toggle "allow game invites only from friends"）\n2\t扩展对局记录（Expand match history）')
+        elif option[0] == "7":
             await manage_ux(connection)
 
 #-----------------------------------------------------------------------------
@@ -2151,7 +2324,7 @@ async def sort_lobby_members(connection):
 
 async def lobby_simulation(connection):
     while True:
-        logPrint("请选择一个操作：\nPlease select an operation:\n1\t管理小队（Manage a party）\n2\t管理自定义房间（Manage a custom lobby）\n3\t邀请玩家（Invite to game）\n4\t聊天（Chat）\n5\t成员管理（Manage members）\n6\t输出房间信息（Print lobby information）\n7\t处理邀请（Handle invitations）\n8\t加入小队或自定义房间（Join party/lobby）\n9\t退出房间（Exit the party/lobby）\n10\t客户端任务管理（Manage the League Client task）")
+        logPrint("请选择一个操作：\nPlease select an operation:\n1\t管理小队（Manage a party）\n2\t管理自定义房间（Manage a custom lobby）\n3\t邀请玩家（Invite to game）\n4\t聊天（Chat）\n5\t成员管理（Manage members）\n6\t输出房间信息（Print lobby information）\n7\t处理邀请（Handle invitations）\n8\t加入小队或自定义房间（Join party/lobby）\n9\t退出房间（Exit the party/lobby）\n10\t其它（Others）\n11\t客户端任务管理（Manage the League Client task）")
         option = logInput()
         if option == "":
             continue
@@ -2565,7 +2738,7 @@ async def lobby_simulation(connection):
                     logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
         elif option == "0":
             break
-        elif option in ["1", "2", "3", "5", "6", "9"]:
+        elif option in ["1", "2", "3", "5", "9"]:
             gameflow_phase = await get_gameflow_phase(connection) #每一个操作都需要保证房间信息是可用的（Each operation requires the lobby information to be available）
             if gameflow_phase == "Lobby":
                 lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
@@ -2593,8 +2766,8 @@ async def lobby_simulation(connection):
                                         if gameflow_phase == "Lobby":
                                             lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
                                             if lobby_information["gameConfig"]["showPositionSelector"]:
-                                                slotPositions = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY", "FILL", "LANE"]
-                                                logPrint("请选择首选位置：\nPlease select your primary position:\n1\t上路（Top）\n2\t打野（Jungle）\n3\t中路（Middle）\n4\t下路（Bottom）\n5\t辅助（Support）\n6\t补位（Fill）\n7\t线上（仅极限闪击）【Lane (Nexus Blitz only)】")
+                                                slotPositions = ["TOP", "JUNGLE", "MIDDLE", "BOTTOM", "UTILITY", "FILL"]
+                                                logPrint("请选择首选位置：\nPlease select your primary position:\n1\t上路（Top）\n2\t打野（Jungle）\n3\t中路（Middle）\n4\t下路/线上（Bottom/Lane）\n5\t辅助（Support）\n6\t补位（Fill）")
                                                 back = False
                                                 while True:
                                                     position_index = logInput()
@@ -2604,7 +2777,7 @@ async def lobby_simulation(connection):
                                                     elif position_index == "-1":
                                                         firstPreference = "UNSELECTED" #这里也可以是空字符串（An empty string also works here）
                                                         break
-                                                    elif position_index[0] in list(map(str, range(1, 8))):
+                                                    elif position_index[0] in list(map(str, range(1, 7))):
                                                         position_index = int(position_index[0])
                                                         firstPreference = slotPositions[position_index - 1] #这里也可以是`str(position_index - 1)`（`str(position_index - 1)` also works here）
                                                         break
@@ -2613,7 +2786,7 @@ async def lobby_simulation(connection):
                                                 if back:
                                                     logPrint("请选择一项个人配置：\nPlease select a personal configuration to change:\n1\t选择位置（Select positions）\n2\t设置快速模式英雄选择（Configure quickplay slot）\n3\t设置子阵营（Configure subteam data）\n4\t切换就绪状态（Toggle ready）\n5\t云顶之弈赛前配置（TFT loadouts）")
                                                     continue
-                                                logPrint("请选择次选位置：\nPlease select your secondary position:\n1\t上路（Top）\n2\t打野（Jungle）\n3\t中路（Middle）\n4\t下路（Bottom）\n5\t辅助（Support）\n6\t补位（Fill）\n7\t线上（仅极限闪击）【Lane (Nexus Blitz only)】")
+                                                logPrint("请选择次选位置：\nPlease select your secondary position:\n1\t上路（Top）\n2\t打野（Jungle）\n3\t中路（Middle）\n4\t下路/线上（Bottom/Lane）\n5\t辅助（Support）\n6\t补位（Fill）")
                                                 while True:
                                                     position_index = logInput()
                                                     if position_index[0] == "0":
@@ -2622,7 +2795,7 @@ async def lobby_simulation(connection):
                                                     elif position_index == "-1":
                                                         secondPreference = "UNSELECTED"
                                                         break
-                                                    elif position_index[0] in list(map(str, range(1, 8))):
+                                                    elif position_index[0] in list(map(str, range(1, 7))):
                                                         position_index = int(position_index[0])
                                                         secondPreference = slotPositions[position_index - 1]
                                                         break
@@ -3005,15 +3178,16 @@ async def lobby_simulation(connection):
                                         gameflow_phase = await get_gameflow_phase(connection)
                                         if gameflow_phase == "Lobby":
                                             lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
-                                            logPrint("请选择一个操作：\nPlease select an operation:\n%s1\t准备就绪（Toggle ready）\n%s2\t取消就绪（Toggle not ready）" %("☆" if lobby_information["localMember"]["memberData"] == {} else "", "☆" if lobby_information["localMember"]["memberData"] != {} else ""))
+                                            ready = isinstance(lobby_information["localMember"]["memberData"], dict) and lobby_information["localMember"]["memberData"].get("isPlayerReady", "") == "true"
+                                            logPrint("请选择一个操作：\nPlease select an operation:\n%s1\t准备就绪（Toggle ready）\n%s2\t取消就绪（Toggle not ready）" %("☆" if not ready else "", "☆" if ready else ""))
                                             while True:
                                                 operation = logInput()
                                                 if operation == "":
-                                                    operation = "1" if lobby_information["localMember"]["memberData"] == {} else "2"
+                                                    operation = "2" if ready else "1"
                                                 if operation[0] == "0":
                                                     break
                                                 elif operation[0] in {"1", "2"}:
-                                                    body = {"isPlayerReady": "true" if lobby_information["localMember"]["memberData"] == {} else ""}
+                                                    body = {"isPlayerReady": "true" if operation[0] == "1" else ""}
                                                     response = await (await connection.request("PUT", "/lol-lobby/v2/lobby/memberData", data = body)).json()
                                                     logPrint(response)
                                                     if isinstance(response, dict) and "errorCode" in response:
@@ -3031,17 +3205,18 @@ async def lobby_simulation(connection):
                                                             else:
                                                                 logPrint("您的房间状态出现未知异常。\nAn unknown error occurred to your lobby status.")
                                                         else:
-                                                            if operation[0] == "1" and lobby_information["localMember"]["memberData"].get("isPlayerReady", "") == "true":
+                                                            ready = isinstance(lobby_information["localMember"]["memberData"], dict) and lobby_information["localMember"]["memberData"].get("isPlayerReady", "") == "true"
+                                                            if operation[0] == "1" and ready:
                                                                 logPrint("您已准备就绪。\nYou're ready.")
                                                                 break
-                                                            elif operation[0] == "2" and lobby_information["localMember"]["memberData"].get("isPlayerReady", "") == "":
+                                                            elif operation[0] == "2" and not ready:
                                                                 logPrint("您已取消就绪。\nYou've toggled unready.")
                                                                 break
                                                             else:
                                                                 logPrint("就绪状态切换失败。\nReadiness toggle failed.")
                                                 else:
                                                     logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
-                                                logPrint("请选择一个操作：\nPlease select an operation:\n%s1\t准备就绪（Toggle ready）\n%s2\t取消就绪（Toggle not ready）" %("☆" if lobby_information["localMember"]["memberData"] == {} else "", "☆" if lobby_information["localMember"]["memberData"] != {} else ""))
+                                                logPrint("请选择一个操作：\nPlease select an operation:\n%s1\t准备就绪（Toggle ready）\n%s2\t取消就绪（Toggle not ready）" %("☆" if not ready else "", "☆" if ready else ""))
                                         else:
                                             logPrint("您目前不在房间内，或者正处于队列中或英雄选择阶段。\nYou're currently not in a party/lobby, in queue or during a champ select stage.")
                                     elif config[0] == "5":
@@ -3117,7 +3292,7 @@ async def lobby_simulation(connection):
                                                             continue
                                                         logPrint("请选择一项赛前配置：\nPlease select a loadout:\n1\t小小英雄（Tacticians）\n2\t进攻特效（Booms）\n3\t棋盘皮肤（Arena skins）\n4\t传送门（Portals）")
                                             else:
-                                                logPrint("当前游戏模式不是云顶之弈。请切换到云顶之弈模式并重试。\nThe current game mode isn't TFT. Please switch a TFT party and try again.")
+                                                logPrint("当前游戏模式不是云顶之弈。请切换到云顶之弈模式并重试。\nThe current game mode isn't TFT. Please switch to a TFT party and try again.")
                                         else:
                                             logPrint("您目前不在房间内，或者正处于队列中或英雄选择阶段。\nYou're currently not in a party/lobby, in queue or during a champ select stage.")
                                     else:
@@ -3982,11 +4157,6 @@ async def lobby_simulation(connection):
                                     logPrint("请选择一项操作：\nPlease select an operation:\n0\t返回上一层（Return to the last step）\n1\t晋升为小队拥有者（Promote to party owner）\n2\t将玩家移出小队（Kick player from party）\n3\t更改邀请权限（Change invite priviledge）")
                     else:
                         logPrint("您不是小队拥有者，无法进行此操作。\nYou're not the party/lobby owner and thus can't perform this operation.")
-                elif option == "6":
-                    logPrint(lobby_information)
-                    with open("lobby-information.json", "w", encoding = "utf-8") as fp:
-                        json.dump(lobby_information, fp, indent = 4, ensure_ascii = False)
-                    logPrint('房间信息已导出到同目录下的“lobby-information.json”。\nLobby information has been exported into "lobby-information.json" under the same directory.')
                 elif option == "9":
                     response = await (await connection.request("DELETE", "/lol-lobby/v2/lobby")).json()
                     logPrint(response)
@@ -4007,11 +4177,33 @@ async def lobby_simulation(connection):
                 logPrint("您目前不在房间内，或者正处于队列中或英雄选择阶段。\nYou're currently not in a party/lobby, in queue or during a champ select stage.")
         elif option == "4":
             await chat(connection)
+        elif option == "6":
+            lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+            logPrint(lobby_information)
+            with open("lobby-information.json", "w", encoding = "utf-8") as fp:
+                json.dump(lobby_information, fp, indent = 4, ensure_ascii = False)
+            logPrint('房间信息已导出到同目录下的“lobby-information.json”。\nLobby information has been exported into "lobby-information.json" under the same directory.')
         elif option == "7":
             await handle_invitations(connection)
         elif option == "8":
             await join_game(connection)
         elif option == "10":
+            logPrint('请选择一个子操作：\nPlease select a suboption:\n0\t返回上一层（Return to the last step）\n1\t更改“只接受好友邀请”选项（Toggle "allow game invites only from friends"）\n2\t扩展对局记录（Expand match history）')
+            while True:
+                suboption = logInput()
+                if suboption == "":
+                    continue
+                elif suboption[0] == "0":
+                    break
+                elif suboption[0] == "1":
+                    await toggle_nonfriend_game_invite(connection)
+                elif suboption[0] == "2":
+                    await expand_match_history(connection)
+                else:
+                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                    continue
+                logPrint('请选择一个子操作：\nPlease select a suboption:\n0\t返回上一层（Return to the last step）\n1\t更改“只接受好友邀请”选项（Toggle "allow game invites only from friends"）\n2\t扩展对局记录（Expand match history）')
+        elif option == "11":
             await manage_ux(connection)
 
 #-----------------------------------------------------------------------------
@@ -4019,7 +4211,7 @@ async def lobby_simulation(connection):
 #-----------------------------------------------------------------------------
 async def inQueue_simulation(connection):
     while True:
-        logPrint("请选择一个操作：\nPlease select an operation:\n1\t输出寻找对局信息（Print matchmaking information）\n2\t聊天（Chat）\n3\t处理邀请（Handle invitations）\n4\t加入小队或自定义房间（Join party/lobby）\n5\t退出队列（Quit the queue）\n6\t客户端任务管理（Manage the League Client task）")
+        logPrint("请选择一个操作：\nPlease select an operation:\n1\t输出寻找对局信息（Print matchmaking information）\n2\t聊天（Chat）\n3\t处理邀请（Handle invitations）\n4\t加入小队或自定义房间（Join party/lobby）\n5\t退出队列（Quit the queue）\n6\t其它（Others）\n7\t客户端任务管理（Manage the League Client task）")
         option = logInput()
         if option == "":
             continue
@@ -4105,6 +4297,22 @@ async def inQueue_simulation(connection):
             else:
                 logPrint("您目前不在队列中，或者已经找到对局。\nYou're currently not in a matchmaking queue, or a match is found.")
         elif option[0] == "6":
+            logPrint('请选择一个子操作：\nPlease select a suboption:\n0\t返回上一层（Return to the last step）\n1\t更改“只接受好友邀请”选项（Toggle "allow game invites only from friends"）\n2\t扩展对局记录（Expand match history）')
+            while True:
+                suboption = logInput()
+                if suboption == "":
+                    continue
+                elif suboption[0] == "0":
+                    break
+                elif suboption[0] == "1":
+                    await toggle_nonfriend_game_invite(connection)
+                elif suboption[0] == "2":
+                    await expand_match_history(connection)
+                else:
+                    logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
+                    continue
+                logPrint('请选择一个子操作：\nPlease select a suboption:\n0\t返回上一层（Return to the last step）\n1\t更改“只接受好友邀请”选项（Toggle "allow game invites only from friends"）\n2\t扩展对局记录（Expand match history）')
+        elif option[0] == "7":
             await manage_ux(connection)
 
 #-----------------------------------------------------------------------------
@@ -4183,10 +4391,10 @@ async def get_current_player(connection) -> dict:
 async def sort_ChampSelect_players(connection, playerMode: int = 1) -> pandas.DataFrame: #以下代码来自聊天服务脚本（The following code come from Customized Program 16）
     #所需数据初始化（Initialization of needed data）
     champ_select_session = await (await connection.request("GET", "/lol-champ-select/v1/session")).json()
-    players_data = {}
-    for i in range(len(players_header_keys)):
-        key = players_header_keys[i]
-        players_data[key] = []
+    champSelect_players_data = {}
+    for i in range(len(champSelect_players_header_keys)):
+        key = champSelect_players_header_keys[i]
+        champSelect_players_data[key] = []
     if playerMode == 1:
         players = champ_select_session["myTeam"] + champ_select_session["theirTeam"]
     elif playerMode == 2:
@@ -4208,75 +4416,75 @@ async def sort_ChampSelect_players(connection, playerMode: int = 1) -> pandas.Da
             if not player_info["info_got"]:
                 logPrint(player_info["message"])
                 logPrint("槽位序号为%d的玩家信息（玩家通用唯一识别码：%s）获取失败！\nInformation of player (puuid: %s, cellId: %d) capture failed!" %(player["cellId"], player["puuid"], player["puuid"], player["cellId"]))
-        for i in range(len(players_header_keys)):
-            key = players_header_keys[i]
+        for i in range(len(champSelect_players_header_keys)):
+            key = champSelect_players_header_keys[i]
             if i <= 21:
                 if i in {4, 5, 19}: #召唤师信息相关键（Summoner information-related keys）
-                    players_data[key].append(player[key] if player[key] != "" else player_info["body"][key] if player_info["info_got"] else "")
+                    champSelect_players_data[key].append(player[key] if player["nameVisibilityType"] == "HIDDEN" else player_info["body"][key] if player_info["info_got"] else "")
                 else:
-                    players_data[key].append(player[key])
+                    champSelect_players_data[key].append(player[key])
             else:
                 if i == 22: #阵营名称（`team_color`）
-                    players_data[key].append(team_colors_int[player["team"]])
+                    champSelect_players_data[key].append(team_colors_int[player["team"]])
                 elif i <= 24: #选用英雄相关键（Champion-related keys）
-                    players_data[key].append(LoLChampions[player["championId"]][key.split()[1]] if player["championId"] in LoLChampions else "")
+                    champSelect_players_data[key].append(LoLChampions[player["championId"]][key.split()[1]] if player["championId"] in LoLChampions else "")
                 elif i <= 26: #声明英雄相关键（Champion pick intent-related keys）
-                    players_data[key].append(LoLChampions[player["championPickIntent"]][key.split()[1]] if player["championPickIntent"] in LoLChampions else "")
+                    champSelect_players_data[key].append(LoLChampions[player["championPickIntent"]][key.split()[1]] if player["championPickIntent"] in LoLChampions else "")
                 elif i <= 36: #选用皮肤相关键（selected skin-related keys）
                     selectedSkinId = player["selectedSkinId"]
                     if selectedSkinId in championSkins and key.split()[1] in championSkins[selectedSkinId]:
                         if i == 27 or i == 28:
-                            players_data[key].append(championSkins[selectedSkinId][key.split()[1]])
+                            champSelect_players_data[key].append(championSkins[selectedSkinId][key.split()[1]])
                         elif i == 34:
-                            players_data[key].append(krarities[championSkins[selectedSkinId][key.split()[1]]])
+                            champSelect_players_data[key].append(krarities[championSkins[selectedSkinId][key.split()[1]]])
                         else:
                             iconPath = championSkins[selectedSkinId][key.split()[1]]
-                            players_data[key].append("" if iconPath == "" else urljoin(connection.address, iconPath))
+                            champSelect_players_data[key].append("" if iconPath == "" else urljoin(connection.address, iconPath))
                     else:
-                        players_data[key].append("")
+                        champSelect_players_data[key].append("")
                 elif i <= 38: #召唤师技能1相关键（Summoner spell 1-related keys）
                     if player["spell1Id"] in spells:
                         if i == 37:
-                            players_data[key].append(spells[player["spell1Id"]][key.split()[1]])
+                            champSelect_players_data[key].append(spells[player["spell1Id"]][key.split()[1]])
                         else:
                             iconPath = spells[player["spell1Id"]][key.split()[1]]
-                            players_data[key].append("" if iconPath == "" else urljoin(connection.address, iconPath))
+                            champSelect_players_data[key].append("" if iconPath == "" else urljoin(connection.address, iconPath))
                     else:
-                        players_data[key].append("")
+                        champSelect_players_data[key].append("")
                 elif i <= 40: #召唤师技能2相关键（Summoner spell 2-related keys）
                     if player["spell2Id"] in spells:
                         if i == 39:
-                            players_data[key].append(spells[player["spell2Id"]][key.split()[1]])
+                            champSelect_players_data[key].append(spells[player["spell2Id"]][key.split()[1]])
                         else:
                             iconPath = spells[player["spell2Id"]][key.split()[1]]
-                            players_data[key].append("" if iconPath == "" else urljoin(connection.address, iconPath))
+                            champSelect_players_data[key].append("" if iconPath == "" else urljoin(connection.address, iconPath))
                     else:
-                        players_data[key].append("")
+                        champSelect_players_data[key].append("")
                 else: #饰品相关键（Ward-related keys）
                     if player["wardSkinId"] in wardSkins:
                         if i == 43 or i == 44:
                             iconPath = wardSkins[player["wardSkinId"]][key.split()[1]]
-                            players_data[key].append("" if iconPath == "" else urljoin(connection.address, iconPath))
+                            champSelect_players_data[key].append("" if iconPath == "" else urljoin(connection.address, iconPath))
                         elif i == 46:
-                            players_data[key].append(wardSkins[player["wardSkinId"]]["rarities"][0]["rarity"])
+                            champSelect_players_data[key].append(wardSkins[player["wardSkinId"]]["rarities"][0]["rarity"])
                         else:
-                            players_data[key].append(wardSkins[player["wardSkinId"]][key.split()[1]])
+                            champSelect_players_data[key].append(wardSkins[player["wardSkinId"]][key.split()[1]])
                     else:
-                        players_data[key].append("")
+                        champSelect_players_data[key].append("")
     #数据框列序整理（Dataframe column ordering）
-    players_statistics_output_order = [1, 4, 19, 5, 12, 18, 14, 9, 8, 7, 20, 22, 0, 2, 23, 24, 3, 25, 26, 16, 37, 38, 17, 39, 40, 15, 27, 28, 34, 29, 30, 31, 32, 33, 35, 36, 21, 41, 42, 46, 45, 43, 44, 6, 13, 10, 11]
-    players_data_organized = {}
-    for i in players_statistics_output_order:
-        key = players_header_keys[i]
-        players_data_organized[key] = players_data[key]
-    players_df = pandas.DataFrame(data = players_data_organized)
-    for column in players_df:
-        if players_df[column].dtype == "bool":
-            players_df[column] = players_df[column].astype(str)
-            for i in range(len(players_df)):
-                players_df.loc[i, column] = "√" if players_df[column][i] == "True" else ""
-    players_df = pandas.concat([pandas.DataFrame([players_header])[players_df.columns], players_df], ignore_index = True)
-    return players_df
+    champSelect_players_statistics_output_order = [20, 22, 1, 4, 19, 5, 12, 18, 14, 9, 8, 7, 6, 0, 2, 23, 24, 3, 25, 26, 16, 37, 38, 17, 39, 40, 15, 27, 28, 34, 29, 30, 31, 32, 33, 35, 36, 21, 41, 42, 46, 45, 43, 44, 13, 10, 11]
+    champSelect_players_data_organized = {}
+    for i in champSelect_players_statistics_output_order:
+        key = champSelect_players_header_keys[i]
+        champSelect_players_data_organized[key] = champSelect_players_data[key]
+    champSelect_players_df = pandas.DataFrame(data = champSelect_players_data_organized)
+    for column in champSelect_players_df:
+        if champSelect_players_df[column].dtype == "bool":
+            champSelect_players_df[column] = champSelect_players_df[column].astype(str)
+            for i in range(len(champSelect_players_df)):
+                champSelect_players_df.loc[i, column] = "√" if champSelect_players_df[column][i] == "True" else ""
+    champSelect_players_df = pandas.concat([pandas.DataFrame([champSelect_players_header])[champSelect_players_df.columns], champSelect_players_df], ignore_index = True)
+    return champSelect_players_df
 
 async def get_LoLChampions(connection) -> pandas.DataFrame: #以下代码来自查英雄脚本（The following code are from Customized Program 04）
     LoLChampions_data = {}
@@ -4288,49 +4496,54 @@ async def get_LoLChampions(connection) -> pandas.DataFrame: #以下代码来自�
         champion = LoLChampions[i]
         for j in range(len(LoLChampions_header_keys)):
             key = LoLChampions_header_keys[j]
-            if j <= 15:
-                if j == 11:
-                    if champion[key] == 0:
+            if j <= 17:
+                if j == 17: #购买日期（`purchased`）
+                    if champion["purchased"] == 0:
                         LoLChampions_data[key].append("")
                     else:
                         try:
-                            LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion[key] // 1000)))
+                            LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion["purchased"] // 1000)))
                         except OSError: #出现了购买时间戳为18446744073709550616的英雄（There's a champion with the purchased timestamp 18446744073709550616）
                             LoLChampions_data[key].append("")
                 else:
                     LoLChampions_data[key].append(champion[key])
-            elif j <= 22:
-                if j <= 18:
-                    LoLChampions_data[key].append(champion["ownership"][key[11:]])
+            elif j <= 26: #拥有权子键（`ownership`'s subkeys）
+                if j <= 20:
+                    LoLChampions_data[key].append(champion["ownership"][key.split(": ")[1]])
                 else:
-                    if j == 19 or j == 20:
-                        if champion["ownership"]["rental"][key[19:]] == 0:
+                    if j == 25 or j == 26:
+                        if champion["ownership"]["rental"][key.split(": ")[2].replace("Time", "Date")] == 0:
                             LoLChampions_data[key].append("")
                         else:
                             try:
-                                LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion["ownership"]["rental"][key[19:]] // 1000)))
-                            except OSError: #出现了购买时间戳为18446744073709550616的英雄（There's a champion with the rented timestamp 18446744073709550616）
+                                LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion["ownership"]["rental"][key.split(": ")[2].replace("Time", "Date")] // 1000)))
+                            except OSError: #出现了租借时间戳为18446744073709550616的英雄（There's a champion with the rented timestamp 18446744073709550616）
                                 LoLChampions_data[key].append("")
                     else:
-                        LoLChampions_data[key].append(champion["ownership"]["rental"][key[19:]])
-            elif j <= 28:
-                if key[6:] in champion["roles"]:
-                    LoLChampions_data[key].append(True)
+                        LoLChampions_data[key].append(champion["ownership"]["rental"][key.split(": ")[2]])
+            elif j <= 32: #角色定位相关键（Role related keys）
+                LoLChampions_data[key].append(key.split(": ")[1] in champion["roles"])
+            elif j <= 35: #战略信息子键（`tacticalInfo`'s subkeys）
+                if j == 33: #战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】（`tacticalInfo: damageType`）
+                    LoLChampions_data[key].append(damageTypes[champion["tacticalInfo"][key.split(": ")[1]]])
                 else:
-                    LoLChampions_data[key].append(False)
-            elif j <= 31:
-                if j == 29:
-                    LoLChampions_data[key].append(damageTypes[champion["tacticalInfo"][key[14:]]])
+                    LoLChampions_data[key].append(champion["tacticalInfo"][key.split(": ")[1]])
+            elif j <= 37: #被动技能子键（`passive`'s subkeys）
+                LoLChampions_data[key].append(champion["passive"][key.split(": ")[1]])
+            elif j <= 45: #技能相关键（Spell related keys）
+                spell_index = int(key[5:6]) - 1
+                if spell_index < len(champion["spells"]):
+                    LoLChampions_data[key].append(champion["spells"][spell_index][key.split(": ")[1]])
                 else:
-                    LoLChampions_data[key].append(champion["tacticalInfo"][key[14:]])
+                    LoLChampions_data[key].append("")
             else:
-                if i == -1:
+                if champion["id"] == -1:
                     LoLChampions_data[key].append(False)
-                elif key[21:] in recommended_position_for_champion[str(i)]["recommendedPositions"]:
+                elif key.split(": ")[1] in recommended_position_for_champion[str(champion["id"])]["recommendedPositions"]:
                     LoLChampions_data[key].append(True)
                 else:
                     LoLChampions_data[key].append(False)
-    LoLChampions_statistics_output_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
+    LoLChampions_statistics_output_order = [9, 11, 16, 1, 10, 5, 27, 28, 29, 30, 31, 32, 46, 47, 48, 49, 50, 33, 35, 34, 19, 17, 18, 20, 8, 23, 26, 25, 24, 13, 7, 14, 3, 4, 15, 6, 2, 37, 39, 41, 43, 45]
     LoLChampions_data_organized = {}
     for i in LoLChampions_statistics_output_order:
         key = LoLChampions_header_keys[i]
@@ -4420,7 +4633,7 @@ async def sort_skin_data(connection) -> pandas.DataFrame:
         key = skins_header_keys[i]
         skins_data[key] = []
     logPrint("[sort_skin_data]正在整理数据…… | Sorting data ...", print_time = True)
-    skinIds = list(championSkins.keys())
+    skinIds = sorted(set(championSkins.keys()) & set(skins_flat.keys())) #在2025年8月15日，美测服在`/lol-champions/v1/inventories/{summonerId}/champions`接口中删除了德邦总管 赵信及其所有皮肤信息，导致下面出现键错误。考虑到当天有玩家反馈无法选用赵信，所以这里取`championSkins`和`skins_flat`的键的交集（On Aug. 15th, 2025, Xin Zhao is removed from the response body of the endpoint `lol-champions/v1/inventories/{summonerId}/champions`. Considering some player reported that Xin Zhao can't be selected on that day, here we take the intersection of the keys of `championSkins` and `skins_flat`）
     for skin_index in range(len(skinIds)):
         skinId = skinIds[skin_index]
         # logPrint("数据整理进度（Data sorting process）：%d/%d" %(skin_index + 1, len(skinIds)), end = "\r", print_time = True)
@@ -4900,7 +5113,7 @@ async def champ_select_simulation(connection):
                     continue
                 logPrint("请选择交换对象：\nPlease select an object to swap:\n1\t选用顺序（Pick order）\n2\t分路（Position）\n3\t队友英雄（Ally champions）\n4\t可用英雄池（替补席）【Available champion pool (Bench)】")
         elif option[0] == "2": #这部分代码来自克隆脚本（This part of code come from Customized Program 15）
-            logPrint("请选择行为类型：\nPlease select an action:\n1\t声明（不可用）【Decalre intent (unavailable)】\n2\t禁用（Ban）\n3\t选择（Pick）\n4\t重随（Reroll）")
+            logPrint("请选择行为类型：\nPlease select an action:\n1\t声明（不可用）【Declare intent (unavailable)】\n2\t禁用（Ban）\n3\t选择（Pick）\n4\t重随（Reroll）\n5\t投票（Vote）")
             while True:
                 action = logInput()
                 if action == "":
@@ -4909,96 +5122,104 @@ async def champ_select_simulation(connection):
                     break
                 elif action[0] == "1":
                     logPrint("目前无法通过接口来声明英雄。请尝试在客户端的声明阶段点击一名英雄来声明你想玩的英雄。\nDeclaring an intent champion isn't supported currently through LCU API. Please try clicking a champion in the League Client to declare a champion you want to play instead during PLANNING phase.")
-                elif action[0] == "2" or action[0] == "3":
-                    action_type = "ban" if action[0] == "2" else "pick"
-                    if action_type == "ban":
-                        selectable_champion_ids = await (await connection.request("GET", "/lol-champ-select/v1/bannable-champion-ids")).json()
-                    else:
-                        selectable_champion_ids = await (await connection.request("GET", "/lol-lobby-team-builder/champ-select/v1/subset-champion-list")).json()
-                        if isinstance(selectable_champion_ids, dict) and "errorCode" in selectable_champion_ids or isinstance(selectable_champion_ids, list) and len(selectable_champion_ids) == 0:
-                            selectable_champion_ids = await (await connection.request("GET", "/lol-champ-select/v1/pickable-champion-ids")).json()
-                    logPrint("请输入英雄序号：\nPlease enter a champion id:") #这部分代码复制于符文脚本（This part of code is copied from Customized Program 19）
-                    LoLChampions_df = await get_LoLChampions(connection)
-                    LoLChampions_fields_to_print = ["id", "name", "title", "alias"]
-                    LoLChampions_df_selected = pandas.concat([LoLChampions_df.iloc[:1, :], LoLChampions_df[LoLChampions_df["id"].isin(selectable_champion_ids)]], ignore_index = True)
-                    LoLChampions_df_query = LoLChampions_df.loc[:, LoLChampions_fields_to_print]
-                    LoLChampions_df_query["id"] = LoLChampions_df["id"].astype(str) #方便检索（For convenience of retrieval）
-                    LoLChampions_df_query = LoLChampions_df_query.map(lambda x: x.lower() if isinstance(x, str) else x)
-                    print(format_df(LoLChampions_df_selected.loc[:, LoLChampions_fields_to_print])[0]) #虽然输出的是筛选后的表格，但实际上用户仍然可以尝试选择不可用的英雄（Although the selected table is output, users can still try choosing unavailable champions）
-                    log.write(format_df(LoLChampions_df_selected.loc[:, LoLChampions_fields_to_print], width_exceed_ask = False, direct_print = False)[0] + "\n")
-                    back = False
-                    while True:
-                        champion_queryStr = logInput()
-                        if champion_queryStr == "":
-                            continue
-                        elif champion_queryStr == "0":
-                            back = True
-                            break
-                        elif champion_queryStr == "-3":
-                            pick_championId = -3
-                            break
-                        else:
-                            query_positions = numpy.where(LoLChampions_df_query == champion_queryStr.lower()) #使用numpy.where检索的前提是数据框中每个单元格的值都不一样（The premise of query by `numpy.where` is that no two cells are the same）
-                            if len(query_positions[0]) == 0:
-                                logPrint("没有找到该英雄。请重新输入。\nChampion not found. Please try again.")
-                            else:
-                                resultRow = query_positions[0]
-                                result_champion_df = LoLChampions_df.loc[resultRow, LoLChampions_fields_to_print].reset_index(drop = True)
-                                pick_championId = LoLChampions_df.loc[resultRow[0], "id"]
-                                logPrint("您选择了以下英雄：\nYou selected the following champion:")
-                                print(format_df(result_champion_df)[0])
-                                log.write(format_df(result_champion_df, width_exceed_ask = False, direct_print = False)[0] + "\n")
-                                break
-                    if back:
-                        logPrint("请选择行为类型：\nPlease select an action:\n1\t声明（不可用）【Decalre intent (unavailable)】\n2\t禁用（Ban）\n3\t选择（Pick）\n4\t重随（Reroll）")
-                        continue
-                    logPrint("是否直接锁定选择？（输入任意键直接锁定，否则不锁定。）\nDo you want to lock in? (Submit any non-empty string to lock in, or null to refuse locking in.)")
-                    complete_str = logInput()
-                    complete = bool(complete_str)
+                elif action[0] in {"2", "3", "5"}:
                     gameflow_phase = await get_gameflow_phase(connection)
                     if gameflow_phase == "ChampSelect":
                         champ_select_session = await (await connection.request("GET", "/lol-champ-select/v1/session")).json()
-                        if champ_select_session["isSpectating"]:
-                            logPrint("您正在观战。请自行开启一把对局。\nYou're spectating. Please start a game by yourself.")
+                        action_type = "ban" if action[0] == "2" else "pick" if action[0] == "3" else "vote"
+                        if action_type == "ban":
+                            selectable_champion_ids = await (await connection.request("GET", "/lol-champ-select/v1/bannable-champion-ids")).json()
                         else:
-                            #首先获取用户的槽位序号（First, get the user's cellId）
-                            localPlayerCellId = champ_select_session["localPlayerCellId"]
-                            #下面获取用户选英雄时的行为序号（Get the user's actionId when he/she's picking a champion）
-                            selfKey_pick = str(localPlayerCellId) + " pick" #只选择类型为“选英雄”的行为（Only do operations on a pick action）
-                            selfKey_ban = str(localPlayerCellId) + " ban" #只选择类型为“禁英雄”的行为（Only do operations on a ban action）
-                            selfKey = selfKey_ban if action_type == "ban" else selfKey_pick
-                            actions = {}
-                            for stage in champ_select_session["actions"]:
-                                for action in stage:
-                                    key = str(action["actorCellId"]) + " " + action["type"]
-                                    # if key in actions and action["type"] != "ban": #在旧版征召模式中，由同一个人来禁英雄，因此在禁用期间，这个人的行为的槽位序号和行为类型是一样的。这样的键重复无关紧要，因为后面的禁用行为序号一定比前面的禁用行为序号大，所以程序总是能追踪到最新的禁用行为（In old draft mode, one player bans multiple champions, so during the ban phase, the actorCellIds and types are both the same among this player's actions. In this case, the key duplicate doesn't matter, for the id of the later ban action is always greater than that of the earlier ban action, which means the program will always track the latest ban action）
-                                    #     logPrint("检测到重复键（%s）。请修改代码。\nDetected the same key (%s). Please fix the code." %(key, key))
-                                    actions[key] = action
-                            if selfKey in actions:
-                                current_actionId = actions[selfKey]["id"]
-                                #下面通过LCU API选择英雄（Pick a champion through LCU API)
-                                body = {"id": current_actionId, "actorCellId": localPlayerCellId, "championId": pick_championId, "type": "pick", "completed": complete, "isAllyAction": True, "isInProgress": True, "pickTurn": 0}
-                                logPrint(body)
-                                response = await (await connection.request("PATCH", f"/lol-champ-select/v1/session/actions/{current_actionId}", data = body)).json()
-                                logPrint(response)
-                                if isinstance(response, dict) and "errorCode" in response:
-                                    logPrint("选择失败！\nPick failed.")
-                                else:
-                                    time.sleep(GLOBAL_RESPONSE_LAG)
-                                    champ_select_session = await (await connection.request("GET", "/lol-champ-select/v1/session")).json()
-                                    current_actions = {}
-                                    for stage in champ_select_session["actions"]:
-                                        for action in stage:
-                                            current_actions[action["id"]] = action
-                                    if current_actionId in current_actions:
-                                        if current_actions[current_actionId]["championId"] == pick_championId:
-                                            logPrint("选择成功！\nPick succeeded.")
-                                        else:
-                                            logPrint("选择失败！\nPick failed.")
-                                    else:
-                                        logPrint("没有找到匹配的行为。请稍后再试。\nNo matched action found. Please try again later.")
+                            if champ_select_session["allowSubsetChampionPicks"]:
+                                selectable_champion_ids = await (await connection.request("GET", "/lol-lobby-team-builder/champ-select/v1/subset-champion-list")).json()
                             else:
-                                logPrint("没有找到匹配的行为。请稍后再试。\nNo matched action found. Please try again later.")
+                                selectable_champion_ids = await (await connection.request("GET", "/lol-champ-select/v1/pickable-champion-ids")).json()
+                        logPrint("请输入英雄序号：\nPlease enter a champion id:") #这部分代码复制于符文脚本（This part of code is copied from Customized Program 19）
+                        LoLChampions_df = await get_LoLChampions(connection)
+                        LoLChampions_fields_to_print = ["id", "name", "title", "alias"]
+                        LoLChampions_df_selected = pandas.concat([LoLChampions_df.iloc[:1, :], LoLChampions_df[LoLChampions_df["id"].isin(selectable_champion_ids)]], ignore_index = True)
+                        LoLChampions_df_query = LoLChampions_df.loc[:, LoLChampions_fields_to_print]
+                        LoLChampions_df_query["id"] = LoLChampions_df["id"].astype(str) #方便检索（For convenience of retrieval）
+                        LoLChampions_df_query = LoLChampions_df_query.map(lambda x: x.lower() if isinstance(x, str) else x)
+                        print(format_df(LoLChampions_df_selected.loc[:, LoLChampions_fields_to_print])[0]) #虽然输出的是筛选后的表格，但实际上用户仍然可以尝试选择不可用的英雄（Although the selected table is output, users can still try choosing unavailable champions）
+                        log.write(format_df(LoLChampions_df_selected.loc[:, LoLChampions_fields_to_print], width_exceed_ask = False, direct_print = False)[0] + "\n")
+                        back = False
+                        while True:
+                            champion_queryStr = logInput()
+                            if champion_queryStr == "":
+                                continue
+                            elif champion_queryStr == "0":
+                                back = True
+                                break
+                            elif champion_queryStr == "-3":
+                                pick_championId = -3
+                                break
+                            else:
+                                query_positions = numpy.where(LoLChampions_df_query == champion_queryStr.lower()) #使用numpy.where检索的前提是数据框中每个单元格的值都不一样（The premise of query by `numpy.where` is that no two cells are the same）
+                                if len(query_positions[0]) == 0:
+                                    logPrint("没有找到该英雄。请重新输入。\nChampion not found. Please try again.")
+                                else:
+                                    resultRow = query_positions[0]
+                                    result_champion_df = LoLChampions_df.loc[resultRow, LoLChampions_fields_to_print].reset_index(drop = True)
+                                    pick_championId = LoLChampions_df.loc[resultRow[0], "id"] #如果碰巧有多个单元格匹配用户的输入，取第一个。请向作者汇报该问题（If multiple cells happen to match the user input, the first cell is taken. Please report this issue to the author）
+                                    logPrint("您选择了以下英雄：\nYou selected the following champion:")
+                                    print(format_df(result_champion_df)[0])
+                                    log.write(format_df(result_champion_df, width_exceed_ask = False, direct_print = False)[0] + "\n")
+                                    break
+                        if back:
+                            logPrint("请选择行为类型：\nPlease select an action:\n1\t声明（不可用）【Declare intent (unavailable)】\n2\t禁用（Ban）\n3\t选择（Pick）\n4\t重随（Reroll）\n5\t投票（Vote）")
+                            continue
+                        logPrint("是否直接锁定选择？（输入任意键直接锁定，否则不锁定。）\nDo you want to lock in? (Submit any non-empty string to lock in, or null to refuse locking in.)")
+                        complete_str = logInput()
+                        complete = bool(complete_str)
+                        gameflow_phase = await get_gameflow_phase(connection)
+                        if gameflow_phase == "ChampSelect":
+                            champ_select_session = await (await connection.request("GET", "/lol-champ-select/v1/session")).json()
+                            if champ_select_session["isSpectating"]:
+                                logPrint("您正在观战。请自行开启一把对局。\nYou're spectating. Please start a game by yourself.")
+                            else:
+                                #首先获取用户的槽位序号（First, get the user's cellId）
+                                localPlayerCellId = champ_select_session["localPlayerCellId"]
+                                #下面获取用户选英雄时的行为序号（Get the user's actionId when he/she's picking a champion）
+                                selfKey_pick = str(localPlayerCellId) + " pick" #只选择类型为“选英雄”的行为（Only do operations on a pick action）
+                                selfKey_ban = str(localPlayerCellId) + " ban" #只选择类型为“禁英雄”的行为（Only do operations on a ban action）
+                                selfKey_vote = str(localPlayerCellId) + " vote" #只选择类型为“投票”的行为（Only do operations on a vote action）
+                                selfKey = selfKey_ban if action_type == "ban" else selfKey_pick if action_type == "pick" else selfKey_vote
+                                actions = {}
+                                for stage in champ_select_session["actions"]:
+                                    for action in stage:
+                                        key = str(action["actorCellId"]) + " " + action["type"]
+                                        # if key in actions and action["type"] != "ban": #在旧版征召模式中，由同一个人来禁英雄，因此在禁用期间，这个人的行为的槽位序号和行为类型是一样的。这样的键重复无关紧要，因为后面的禁用行为序号一定比前面的禁用行为序号大，所以程序总是能追踪到最新的禁用行为（In old draft mode, one player bans multiple champions, so during the ban phase, the actorCellIds and types are both the same among this player's actions. In this case, the key duplicate doesn't matter, for the id of the later ban action is always greater than that of the earlier ban action, which means the program will always track the latest ban action）
+                                        #     logPrint("检测到重复键（%s）。请修改代码。\nDetected the same key (%s). Please fix the code." %(key, key))
+                                        actions[key] = action
+                                if selfKey in actions:
+                                    current_actionId = actions[selfKey]["id"]
+                                    #下面通过LCU API选择英雄（Pick a champion through LCU API)
+                                    body = {"id": current_actionId, "actorCellId": localPlayerCellId, "championId": pick_championId, "type": action_type, "completed": complete, "isAllyAction": True, "isInProgress": True, "pickTurn": 0}
+                                    logPrint(body)
+                                    response = await (await connection.request("PATCH", f"/lol-champ-select/v1/session/actions/{current_actionId}", data = body)).json()
+                                    logPrint(response)
+                                    if isinstance(response, dict) and "errorCode" in response:
+                                        logPrint("选择失败！\nPick failed.")
+                                    else:
+                                        time.sleep(GLOBAL_RESPONSE_LAG)
+                                        champ_select_session = await (await connection.request("GET", "/lol-champ-select/v1/session")).json()
+                                        current_actions = {}
+                                        for stage in champ_select_session["actions"]:
+                                            for action in stage:
+                                                current_actions[action["id"]] = action
+                                        if current_actionId in current_actions:
+                                            if current_actions[current_actionId]["championId"] == pick_championId:
+                                                logPrint("选择成功！\nPick succeeded.")
+                                            else:
+                                                logPrint("选择失败！\nPick failed.")
+                                        else:
+                                            logPrint("没有找到匹配的行为。请稍后再试。\nNo matched action found. Please try again later.")
+                                else:
+                                    logPrint("没有找到匹配的行为。请稍后再试。\nNo matched action found. Please try again later.")
+                        else:
+                            logPrint("您目前不在英雄选择阶段。\nYou're not during a champ select stage.")
+                            break
                     else:
                         logPrint("您目前不在英雄选择阶段。\nYou're not during a champ select stage.")
                         break
@@ -5031,7 +5252,7 @@ async def champ_select_simulation(connection):
                 else:
                     logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                     continue
-                logPrint("请选择行为类型：\nPlease select an action:\n1\t声明（不可用）【Decalre intent (unavailable)】\n2\t禁用（Ban）\n3\t选择（Pick）\n4\t重随（Reroll）")
+                logPrint("请选择行为类型：\nPlease select an action:\n1\t声明（不可用）【Declare intent (unavailable)】\n2\t禁用（Ban）\n3\t选择（Pick）\n4\t重随（Reroll）\n5\t投票（Vote）")
         elif option[0] == "3":
             collection_df_fields_to_print = ["inventoryType", "itemId", "name", "ownershipType"]
             skins_df_fields_to_print = ["id", "name"]
@@ -6038,7 +6259,9 @@ async def sort_eog_playerstat_lol_data(connection):
                         elif i >= 169 and i <= 186: #强化符文相关键（Augment-related keys）
                             if key.split()[1] in stats:
                                 playerAugmentId = stats[key.split()[1]]
-                                if playerAugmentId in CherryAugments:
+                                if playerAugmentId == 0:
+                                    eog_playerstat_data_lol[key].append("")
+                                elif playerAugmentId in CherryAugments:
                                     if i >= 181:
                                         eog_playerstat_data_lol[key].append(augment_rarity[CherryAugments[playerAugmentId][key.split()[2]]])
                                     else:

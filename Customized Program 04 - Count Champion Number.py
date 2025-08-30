@@ -8,7 +8,7 @@ from wcwidth import wcswidth
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/06/25
+# 更新（Last update）：     2025/08/20
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -114,6 +114,7 @@ def rm_ctrl_char(s: str): #移除一个字符串中的所有C0和C1字符（Remo
     return "".join(ch for ch in s if unicodedata.category(ch) != "Cc") #该表达式等价于（This expression is equivalent to）`re.sub(r"[\x00-\x1F\x7F-\x9F]", "", s)`
 
 def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+    df = df.copy(deep = True)
     old_index = df.index
     df.index = range(start_index, len(df) + start_index)
     maxLens = {}
@@ -121,7 +122,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
     fields = df.columns.tolist()
     for field in fields:
         maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(rm_ctrl_char(str(x))), df[field])), wcswidth(rm_ctrl_char(field))) + 2
-    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+    index_len = 0 if len(df) == 0 else max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
@@ -204,7 +205,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
         print("排列方式参数错误！请传入字符串。\nAlignment parameter ERROR! Please pass a string instead.")
     return (result, maxLens)
 
-def sort_ddragon_champions() -> pandas.DataFrame:
+def get_ddragon_champions() -> dict:
     src, status = getUrl(patches_url)
     if status != 0:
         if status == 1:
@@ -246,7 +247,7 @@ def sort_ddragon_champions() -> pandas.DataFrame:
         if patch_in_url == "":
             patch_in_url = patches[0]
         if patch_in_url in patches[:-98]:
-            champion_url = "http://ddragon.leagueoflegends.com/cdn/%s/data/%s/champion.json" %(patch_in_url, language_code)
+            champion_url = "http://ddragon.leagueoflegends.com/cdn/%s/data/%s/championFull.json" %(patch_in_url, language_code)
             break
         else:
             print("版本输入有误！请重新输入。\nERROR input of patch! Please try again!")
@@ -265,7 +266,7 @@ def sort_ddragon_champions() -> pandas.DataFrame:
                 try:
                     with open(champion_local, "r", encoding = "utf-8") as fp:
                         LoLChampion = json.load(fp)
-                    if isinstance(LoLChampion, dict) and all(i in LoLChampion for i in ["type", "format", "version", "data"]) and LoLChampion["type"] == "champion" and all(j in LoLChampion["data"][i] for i in LoLChampion["data"] for j in ["version", "id", "key", "name", "title", "blurb", "info", "image", "tags", "partype", "stats"]):
+                    if isinstance(LoLChampion, dict) and all(i in LoLChampion for i in ["type", "format", "version", "data"]) and LoLChampion["type"] == "champion" and all(j in LoLChampion["data"][i] for i in LoLChampion["data"] for j in ["id", "key", "name", "title", "image", "skins", "lore", "blurb", "allytips", "enemytips", "tags", "partype", "info", "stats", "speklls", "passive", "recommended"]):
                         break
                     else:
                         print("数据格式错误！请选择一个符合DataDragon数据库中记录的英雄数据格式（%s）的数据文件！\nData format mismatched! Please select a data file that corresponds to the format of the champion data archived in DataDragon database (%s)!" %(champion_url, champion_url))
@@ -281,11 +282,14 @@ def sort_ddragon_champions() -> pandas.DataFrame:
                     continue
     else:
         LoLChampion = src.json()
+    return LoLChampion
+        
+def sort_ddragon_champions(LoLChampion: dict) -> pandas.DataFrame:
     #下面按照程序需求对数据资源进行一定的整理（The following code sort out the data resource according to the program's need）
     LoLChampions = {}
     for champion in LoLChampion["data"].values():
         LoLChampions[int(champion["key"])] = champion
-    LoLChampions_header = {"version": "版本", "id": "英雄代码", "key": "英雄序号", "name": "称号", "title": "名称", "blurb": "背景介绍", "partype": "施法资源属性", "info: attack": "伤害属性得分", "info: defense": "强韧属性得分", "info: magic": "法术属性得分", "info: difficulty": "使用难度系数", "tag: Assassin": "角色定位：刺客", "tag: Fighter": "角色定位：战士", "tag: Mage": "角色定位：法师", "tag: Marksman": "角色定位：射手", "tag: Support": "角色定位：辅助", "tag: Tank": "角色定位：坦克", "hp": "基础生命值", "hpperlevel": "生命值成长", "mp": "基础法力/能量值", "mpperlevel": "法力/能量值成长", "movespeed": "移动速度", "armor": "护甲", "armorperlevel": "护甲成长", "spellblock": "魔法抗性", "spellblockperlevel": "魔法抗性成长", "attackrange": "攻击距离", "hpregen": "生命回复", "hpregenperlevel": "生命回复成长", "mpregen": "施法资源回复", "mpregenperlevel": "法力/能量回复成长", "crit": "暴击率", "critperlevel": "暴击率成长", "attackdamage": "攻击力", "attackdamageperlevel": "攻击力成长", "attackspeedperlevel": "攻击速度成长", "attackspeed": "攻击速度", "lvl18hp": "18级生命值", "lvl30hp": "30级生命值", "lvl18mp": "18级法力/能量值", "lvl30mp": "30级法力/能量值", "lvl18attackdamage": "18级攻击力", "lvl30attackdamage": "30级攻击力", "lvl18armor": "18级护甲", "lvl30armor": "30级护甲", "lvl18spellblock": "18级魔法抗性", "lvl30spellblock": "30级魔法抗性", "lvl18attackspeed": "18级攻击速度", "lvl30attackspeed": "30级攻击速度", "lvl18hpregen": "18级生命回复", "lvl30hpregen": "30级生命回复", "lvl18mpregen": "18级施法资源回复", "lvl30mpregen": "30级施法资源回复"}
+    LoLChampions_header = {"id": "英雄代码", "key": "英雄序号", "name": "称号", "title": "名称", "skins": "皮肤", "lore": "故事", "blurb": "背景介绍", "allytips": "游玩提示", "enemytips": "对抗提示", "partype": "施法资源属性", "recommended": "推荐配置", "image: full": "完整图像名", "image: sprite": "精灵图像名", "image: group": "图像组别", "image: x": "图像锚点横坐标", "image: y": "图像锚点纵坐标", "image: w": "图像宽度", "image: h": "图像高度", "tag: Assassin": "角色定位：刺客", "tag: Fighter": "角色定位：战士", "tag: Mage": "角色定位：法师", "tag: Marksman": "角色定位：射手", "tag: Support": "角色定位：辅助", "tag: Tank": "角色定位：坦克", "info: attack": "伤害属性得分", "info: defense": "强韧属性得分", "info: magic": "法术属性得分", "info: difficulty": "使用难度系数", "hp": "基础生命值", "hpperlevel": "生命值成长", "mp": "基础法力/能量值", "mpperlevel": "法力/能量值成长", "movespeed": "移动速度", "armor": "护甲", "armorperlevel": "护甲成长", "spellblock": "魔法抗性", "spellblockperlevel": "魔法抗性成长", "attackrange": "攻击距离", "hpregen": "生命回复", "hpregenperlevel": "生命回复成长", "mpregen": "施法资源回复", "mpregenperlevel": "法力/能量回复成长", "crit": "暴击率", "critperlevel": "暴击率成长", "attackdamage": "攻击力", "attackdamageperlevel": "攻击力成长", "attackspeedperlevel": "攻击速度成长", "attackspeed": "攻击速度", "lvl18hp": "18级生命值", "lvl30hp": "30级生命值", "lvl18mp": "18级法力/能量值", "lvl30mp": "30级法力/能量值", "lvl18attackdamage": "18级攻击力", "lvl30attackdamage": "30级攻击力", "lvl18armor": "18级护甲", "lvl30armor": "30级护甲", "lvl18spellblock": "18级魔法抗性", "lvl30spellblock": "30级魔法抗性", "lvl18attackspeed": "18级攻击速度", "lvl30attackspeed": "30级攻击速度", "lvl18hpregen": "18级生命回复", "lvl30hpregen": "30级生命回复", "lvl18mpregen": "18级施法资源回复", "lvl30mpregen": "30级施法资源回复", "spell1: id": "技能1编号", "spell1: name": "技能1名称", "spell1: description": "技能1简介", "spell1: tooltip": "技能1详细信息", "spell1: maxrank": "技能1最大等级", "spell1: cooldown": "技能1冷却时间", "spell1: cooldownBurn": "技能1冷却时间简化表示", "spell1: cost": "技能1消耗", "spell1: costBurn": "技能1消耗简化表示", "spell1: datavalues": "技能1具体数值", "spell1: effect": "技能1效果参数", "spell1: effectBurn": "技能1效果参数简化表示", "spell1: vars": "技能1变量", "spell1: costType": "技能1施法资源", "spell1: maxammo": "技能1最大充能数", "spell1: range": "技能1施法距离", "spell1: rangeBurn": "技能1施法距离简化表示", "spell1: resource": "技能1施法资源描述", "spell1: leveltip: label": "技能1升级对象", "spell1: leveltip: effect": "技能1升级效果", "spell1: image: full": "技能1完整图像名", "spell1: image: sprite": "技能1精灵图", "spell1: image: group": "技能1图像组别", "spell1: image: x": "技能1图像锚点横坐标", "spell1: image: y": "技能1图像锚点纵坐标", "spell1: image: w": "技能1图像宽度", "spell1: image: h": "技能1图像高度", "spell2: id": "技能2编号", "spell2: name": "技能2名称", "spell2: description": "技能2简介", "spell2: tooltip": "技能2详细信息", "spell2: maxrank": "技能2最大等级", "spell2: cooldown": "技能2冷却时间", "spell2: cooldownBurn": "技能2冷却时间简化表示", "spell2: cost": "技能2消耗", "spell2: costBurn": "技能2消耗简化表示", "spell2: datavalues": "技能2具体数值", "spell2: effect": "技能2效果参数", "spell2: effectBurn": "技能2效果参数简化表示", "spell2: vars": "技能2变量", "spell2: costType": "技能2施法资源", "spell2: maxammo": "技能2最大充能数", "spell2: range": "技能2施法距离", "spell2: rangeBurn": "技能2施法距离简化表示", "spell2: resource": "技能2施法资源描述", "spell2: leveltip: label": "技能2升级对象", "spell2: leveltip: effect": "技能2升级效果", "spell2: image: full": "技能2完整图像名", "spell2: image: sprite": "技能2精灵图", "spell2: image: group": "技能2图像组别", "spell2: image: x": "技能2图像锚点横坐标", "spell2: image: y": "技能2图像锚点纵坐标", "spell2: image: w": "技能2图像宽度", "spell2: image: h": "技能2图像高度", "spell3: id": "技能3编号", "spell3: name": "技能3名称", "spell3: description": "技能3简介", "spell3: tooltip": "技能3详细信息", "spell3: maxrank": "技能3最大等级", "spell3: cooldown": "技能3冷却时间", "spell3: cooldownBurn": "技能3冷却时间简化表示", "spell3: cost": "技能3消耗", "spell3: costBurn": "技能3消耗简化表示", "spell3: datavalues": "技能3具体数值", "spell3: effect": "技能3效果参数", "spell3: effectBurn": "技能3效果参数简化表示", "spell3: vars": "技能3变量", "spell3: costType": "技能3施法资源", "spell3: maxammo": "技能3最大充能数", "spell3: range": "技能3施法距离", "spell3: rangeBurn": "技能3施法距离简化表示", "spell3: resource": "技能3施法资源描述", "spell3: leveltip: label": "技能3升级对象", "spell3: leveltip: effect": "技能3升级效果", "spell3: image: full": "技能3完整图像名", "spell3: image: sprite": "技能3精灵图", "spell3: image: group": "技能3图像组别", "spell3: image: x": "技能3图像锚点横坐标", "spell3: image: y": "技能3图像锚点纵坐标", "spell3: image: w": "技能3图像宽度", "spell3: image: h": "技能3图像高度", "spell4: id": "技能4编号", "spell4: name": "技能4名称", "spell4: description": "技能4简介", "spell4: tooltip": "技能4详细信息", "spell4: maxrank": "技能4最大等级", "spell4: cooldown": "技能4冷却时间", "spell4: cooldownBurn": "技能4冷却时间简化表示", "spell4: cost": "技能4消耗", "spell4: costBurn": "技能4消耗简化表示", "spell4: datavalues": "技能4具体数值", "spell4: effect": "技能4效果参数", "spell4: effectBurn": "技能4效果参数简化表示", "spell4: vars": "技能4变量", "spell4: costType": "技能4施法资源", "spell4: maxammo": "技能4最大充能数", "spell4: range": "技能4施法距离", "spell4: rangeBurn": "技能4施法距离简化表示", "spell4: resource": "技能4施法资源描述", "spell4: leveltip: label": "技能4升级对象", "spell4: leveltip: effect": "技能4升级效果", "spell4: image: full": "技能4完整图像名", "spell4: image: sprite": "技能4精灵图", "spell4: image: group": "技能4图像组别", "spell4: image: x": "技能4图像锚点横坐标", "spell4: image: y": "技能4图像锚点纵坐标", "spell4: image: w": "技能4图像宽度", "spell4: image: h": "技能4图像高度", "passive: name": "被动技能名称", "passive: description": "被动技能简介", "passive: image: full": "被动技能完整图像名", "passive: image: sprite": "被动技能精灵图", "passive: image: group": "被动技能图像组别", "passive: image: x": "被动技能图像锚点横坐标", "passive: image: y": "被动技能图像锚点纵坐标", "passive: image: w": "被动技能图像宽度", "passive: image: h": "被动技能图像高度"}
     LoLChampions_header_keys = list(LoLChampions_header.keys())
     LoLChampions_data = {}
     for i in range(len(LoLChampions_header_keys)):
@@ -300,25 +304,37 @@ def sort_ddragon_champions() -> pandas.DataFrame:
             count += 1
         for j in range(len(LoLChampions_header_keys)):
             key = LoLChampions_header_keys[j]
-            if j <= 6:
-                if j == 2: #DataDragon数据库中存储的英雄序号为字符串（ChampionIds stored in DataDragon database are of string type）
+            if j <= 10:
+                if j == 1: #DataDragon数据库中存储的英雄序号为字符串（ChampionIds stored in DataDragon database are of string type）
                     LoLChampions_data[key].append(int(champion[key]))
                 else:
                     LoLChampions_data[key].append(champion[key])
-            elif j <= 10:
-                LoLChampions_data[key].append(champion["info"][key[6:]])
-            elif j <= 16:
-                if key[5:] in champion["tags"]:
+            elif j <= 17: #英雄图像相关键（Champion image related keys）
+                LoLChampions_data[key].append(champion["image"][key.split(": ")[1]])
+            elif j <= 23: #标签（Tags）
+                if key.split(": ")[1] in champion["tags"]:
                     LoLChampions_data[key].append("√")
                 else:
                     LoLChampions_data[key].append("")
-            elif j <= 36:
+            elif j <= 27: #英雄信息相关键（Champion info related keys）
+                LoLChampions_data[key].append(champion["info"][key.split(": ")[1]])
+            elif j <= 47: #英雄属性相关键（Stats related keys）
                 LoLChampions_data[key].append(champion["stats"][key])
-            else:
+            elif j <= 63: #英雄属性成长相关键（Stats growth related keys）
                 level, subkey = int(key[3:5]), key[5:]
                 result = champion["stats"][subkey] + (level - 1) * champion["stats"][subkey + "perlevel"] * (0.01 if subkey == "attackspeed" else 1) #攻击速度成长是百分比（`attackspeedperlevel` is a percentage）
-    LoLChampions_statistics_output_order = [2, 3, 4, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 33, 34, 22, 23, 24, 25, 36, 35, 31, 32, 21, 27, 28, 29, 30, 26]
-    #LoLChampions_statistics_output_order = [2, 3, 4, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 37, 38, 19, 20, 39, 40, 33, 34, 41, 42, 22, 23, 43, 44, 24, 25, 45, 46, 36, 35, 47, 48, 31, 32, 21, 27, 28, 49, 50, 29, 30, 51, 52, 26] #带成长数值（With leveling up stats）
+            else: #技能相关键（Spell related keys）
+                spell = champion["spells"][int(key[5:6]) - 1] if j <= 171 else champion["passive"]
+                subkey_list = key.split(": ")[1:]
+                value = spell
+                for subkey in subkey_list:
+                    if j <= 171 and spell["id"] == "JayceStanceHtG" and subkey == "leveltip": #杰斯的R技能没有升级提示（Jayce's R doesn't have leveltips）
+                        value = ""
+                        break
+                    value = value[subkey]
+                LoLChampions_data[key].append(value)
+    LoLChampions_statistics_output_order = [1, 2, 3, 0, 6, 9, 24, 25, 26, 27, 18, 19, 20, 21, 22, 23, 28, 29, 30, 31, 44, 45, 33, 34, 35, 36, 47, 46, 42, 43, 32, 38, 39, 40, 41, 37, 172, 65, 92, 119, 146]
+    #LoLChampions_statistics_output_order = [1, 2, 3, 0, 6, 9, 24, 25, 26, 27, 18, 19, 20, 21, 22, 23, 28, 29, 48, 49, 30, 31, 50, 51, 44, 45, 52, 53, 33, 34, 54, 55, 35, 36, 56, 57, 47, 46, 58, 59, 42, 43, 32, 38, 39, 60, 61, 40, 41, 62, 63, 37] #带成长数值（With leveling up stats）
     LoLChampions_data_organized = {}
     for i in LoLChampions_statistics_output_order:
         key = LoLChampions_header_keys[i]
@@ -327,7 +343,7 @@ def sort_ddragon_champions() -> pandas.DataFrame:
     LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
     return LoLChampions_df
 
-def sort_cdragon_champions():
+def get_cdragon_champions() -> dict:
     print("请输入您想要获取的版本。输入空字符串以获取最新版本英雄信息。\nPlease input the patch you want to search from. Submit an empty string to get the latest champion data. Examples: ")
     src, status = getUrl("https://raw.communitydragon.org/") #对应于DataDragon数据库的版本，下面从CommunityDragons数据库主页的源代码获取可用版本（Corresponding to getting patches DataDragon database, the following code crawl the available patches in CommunityDragon database through its homepage）
     if status != 0:
@@ -393,6 +409,7 @@ def sort_cdragon_champions():
     champion_local_default = cdragon_champion_local_default
     champion_files_ready = False
     LoLChampion = []
+    #注释以下代码以直接离线加载数据资源（Comment out the following code to load offline data resources directly）
     for i in range(len(champion_urls)):
         champion_url = champion_urls[i]
         src, status = getUrl(champion_url)
@@ -404,6 +421,7 @@ def sort_cdragon_champions():
         print("获取进度（Capturing process）：%d/%d" %(i + 1, len(champion_urls)))
     else:
         champion_files_ready = True #任何一个文件获取失败都会导致程序进入离线加载模式（Any file that failed to be loaded will cause to program to load all data again offline）
+    #注释以上代码以直接离线加载数据资源（Comment out the above code to load offline data resources directly）
     if not champion_files_ready:
         print('英雄信息获取超时！正在尝试离线加载数据……\nChampion information capture timeout! Trying loading offline data ...\n请输入英雄Json数据文件夹路径。输入空字符以使用默认相对引用路径“%s”。输入“0”以退出程序。\nPlease enter the champion Json data folder path. Enter an empty string to use the default relative path: "%s". Submit "0" to exit.' %(champion_local_default, champion_local_default))
         while True:
@@ -435,11 +453,13 @@ def sort_cdragon_champions():
                 continue
             else:
                 break
-    #下面按照程序需求对数据资源进行一定的整理（The following code sort out the data resource according to the program's need）
+    return LoLChampion
+
+def sort_cdragon_champions(LoLChampion: dict) -> pandas.DataFrame:
     LoLChampions = {}
     for champion in LoLChampion:
         LoLChampions[champion["id"]] = champion
-    LoLChampions_header = {"id": "英雄序号", "name": "称号", "alias": "英雄代号", "title": "名称", "shortBio": "背景简介", "squarePortraitPath": "方格头像路径", "stingerSfxPath": "锁定音效路径", "chooseVoPath": "锁定台词路径", "banVoPath": "禁用台词路径", "tacticalInfo: style": "战略信息：风格【表明英雄的伤害输出方式的倾向（普攻vs技能）】", "tacticalInfo: difficulty": "战略信息：难度（英雄的使用难度）", "tacticalInfo: damageType": "战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】", "tacticalInfo: attackType": "战略信息：攻击方式", "playStyleInfo: damage": "玩法雷达图：伤害（用来对敌方英雄造成伤害的英雄技能）得分", "playStyleInfo: durability": "玩法雷达图：强韧（用来吸收来自敌方英雄伤害的英雄技能）得分", "playStyleInfo: crowdControl": "玩法雷达图：控制（用来对敌方英雄施加诸如减速和晕眩的有害效果的英雄技能）得分", "playStyleInfo: mobility": "玩法雷达图：机动（通过使用闪现或位移来快速在地图四处移动的英雄技能）得分", "playStyleInfo: utility": "玩法雷达图：功能（用来对友军提供护盾、治疗或移动速度等有益效果的英雄技能）得分", "championTagInfo: championTagPrimary": "英雄标签信息：第一标签", "championTagInfo: championTagSecondary": "英雄标签信息：第二标签", "role: assassin": "角色定位：刺客", "role: fighter": "角色定位：战士", "role: mage": "角色定位：法师", "role: marksman": "角色定位：射手", "role: support": "角色定位：辅助", "role: tank": "角色定位：坦克"}
+    LoLChampions_header = {"id": "英雄序号", "name": "称号", "alias": "英雄代号", "title": "名称", "shortBio": "背景简介", "squarePortraitPath": "方格头像路径", "stingerSfxPath": "锁定音效路径", "chooseVoPath": "锁定台词路径", "banVoPath": "禁用台词路径", "recommendedItemDefaults": "默认推荐装备序号列表", "tacticalInfo: style": "战略信息：风格【表明英雄的伤害输出方式的倾向（普攻vs技能）】", "tacticalInfo: difficulty": "战略信息：难度（英雄的使用难度）", "tacticalInfo: damageType": "战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】", "tacticalInfo: attackType": "战略信息：攻击方式", "playStyleInfo: damage": "玩法雷达图：伤害（用来对敌方英雄造成伤害的英雄技能）得分", "playStyleInfo: durability": "玩法雷达图：强韧（用来吸收来自敌方英雄伤害的英雄技能）得分", "playStyleInfo: crowdControl": "玩法雷达图：控制（用来对敌方英雄施加诸如减速和晕眩的有害效果的英雄技能）得分", "playStyleInfo: mobility": "玩法雷达图：机动（通过使用闪现或位移来快速在地图四处移动的英雄技能）得分", "playStyleInfo: utility": "玩法雷达图：功能（用来对友军提供护盾、治疗或移动速度等有益效果的英雄技能）得分", "championTagInfo: championTagPrimary": "英雄标签信息：第一标签", "championTagInfo: championTagSecondary": "英雄标签信息：第二标签", "role: assassin": "角色定位：刺客", "role: fighter": "角色定位：战士", "role: mage": "角色定位：法师", "role: marksman": "角色定位：射手", "role: support": "角色定位：辅助", "role: tank": "角色定位：坦克", "passive: name": "被动技能名称", "passive: abilityIconPath": "被动技能图标路径", "passive: abilityVideoPath": "被动技能动画视频路径", "passive: abilityVideoImagePath": "被动技能动画预览图路径", "passive: description": "被动技能简述", "spell1: spellKey": "技能1热键", "spell1: name": "技能1名称", "spell1: abilityIconPath": "技能1图标路径", "spell1: abilityVideoPath": "技能1动画视频路径", "spell1: abilityVideoImagePath": "技能1动画预览图路径", "spell1: cost": "技能1消耗计算方式", "spell1: cooldown": "技能1冷却时间计算方式", "spell1: description": "技能1简述", "spell1: dynamicDescription": "技能1详细信息", "spell1: range": "技能1施法距离", "spell1: costCoefficients": "技能1施法资源系数", "spell1: cooldownCoefficients": "技能1冷却时间系数", "spell1: maxLevel": "技能1最大等级", "spell1: coefficients: coefficient1": "技能1系数1", "spell1: coefficients: coefficient2": "技能1系数2", "spell1: effectAmounts: Effect1Amount": "技能1效应因子1", "spell1: effectAmounts: Effect2Amount": "技能1效应因子2", "spell1: effectAmounts: Effect3Amount": "技能1效应因子3", "spell1: effectAmounts: Effect4Amount": "技能1效应因子4", "spell1: effectAmounts: Effect5Amount": "技能1效应因子5", "spell1: effectAmounts: Effect6Amount": "技能1效应因子6", "spell1: effectAmounts: Effect7Amount": "技能1效应因子7", "spell1: effectAmounts: Effect8Amount": "技能1效应因子8", "spell1: effectAmounts: Effect9Amount": "技能1效应因子9", "spell1: effectAmounts: Effect10Amount": "技能1效应因子10", "spell1: ammo: ammoRechargeTime": "技能1充能时间", "spell1: ammo: maxAmmo": "技能1最大充能数", "spell2: spellKey": "技能2热键", "spell2: name": "技能2名称", "spell2: abilityIconPath": "技能2图标路径", "spell2: abilityVideoPath": "技能2动画视频路径", "spell2: abilityVideoImagePath": "技能2动画预览图路径", "spell2: cost": "技能2消耗计算方式", "spell2: cooldown": "技能2冷却时间计算方式", "spell2: description": "技能2简述", "spell2: dynamicDescription": "技能2详细信息", "spell2: range": "技能2施法距离", "spell2: costCoefficients": "技能2施法资源系数", "spell2: cooldownCoefficients": "技能2冷却时间系数", "spell2: maxLevel": "技能2最大等级", "spell2: coefficients: coefficient1": "技能2系数1", "spell2: coefficients: coefficient2": "技能2系数2", "spell2: effectAmounts: Effect1Amount": "技能2效应因子1", "spell2: effectAmounts: Effect2Amount": "技能2效应因子2", "spell2: effectAmounts: Effect3Amount": "技能2效应因子3", "spell2: effectAmounts: Effect4Amount": "技能2效应因子4", "spell2: effectAmounts: Effect5Amount": "技能2效应因子5", "spell2: effectAmounts: Effect6Amount": "技能2效应因子6", "spell2: effectAmounts: Effect7Amount": "技能2效应因子7", "spell2: effectAmounts: Effect8Amount": "技能2效应因子8", "spell2: effectAmounts: Effect9Amount": "技能2效应因子9", "spell2: effectAmounts: Effect10Amount": "技能2效应因子10", "spell2: ammo: ammoRechargeTime": "技能2充能时间", "spell2: ammo: maxAmmo": "技能2最大充能数", "spell3: spellKey": "技能3热键", "spell3: name": "技能3名称", "spell3: abilityIconPath": "技能3图标路径", "spell3: abilityVideoPath": "技能3动画视频路径", "spell3: abilityVideoImagePath": "技能3动画预览图路径", "spell3: cost": "技能3消耗计算方式", "spell3: cooldown": "技能3冷却时间计算方式", "spell3: description": "技能3简述", "spell3: dynamicDescription": "技能3详细信息", "spell3: range": "技能3施法距离", "spell3: costCoefficients": "技能3施法资源系数", "spell3: cooldownCoefficients": "技能3冷却时间系数", "spell3: maxLevel": "技能3最大等级", "spell3: coefficients: coefficient1": "技能3系数1", "spell3: coefficients: coefficient2": "技能3系数2", "spell3: effectAmounts: Effect1Amount": "技能3效应因子1", "spell3: effectAmounts: Effect2Amount": "技能3效应因子2", "spell3: effectAmounts: Effect3Amount": "技能3效应因子3", "spell3: effectAmounts: Effect4Amount": "技能3效应因子4", "spell3: effectAmounts: Effect5Amount": "技能3效应因子5", "spell3: effectAmounts: Effect6Amount": "技能3效应因子6", "spell3: effectAmounts: Effect7Amount": "技能3效应因子7", "spell3: effectAmounts: Effect8Amount": "技能3效应因子8", "spell3: effectAmounts: Effect9Amount": "技能3效应因子9", "spell3: effectAmounts: Effect10Amount": "技能3效应因子10", "spell3: ammo: ammoRechargeTime": "技能3充能时间", "spell3: ammo: maxAmmo": "技能3最大充能数", "spell4: spellKey": "技能4热键", "spell4: name": "技能4名称", "spell4: abilityIconPath": "技能4图标路径", "spell4: abilityVideoPath": "技能4动画视频路径", "spell4: abilityVideoImagePath": "技能4动画预览图路径", "spell4: cost": "技能4消耗计算方式", "spell4: cooldown": "技能4冷却时间计算方式", "spell4: description": "技能4简述", "spell4: dynamicDescription": "技能4详细信息", "spell4: range": "技能4施法距离", "spell4: costCoefficients": "技能4施法资源系数", "spell4: cooldownCoefficients": "技能4冷却时间系数", "spell4: maxLevel": "技能4最大等级", "spell4: coefficients: coefficient1": "技能4系数1", "spell4: coefficients: coefficient2": "技能4系数2", "spell4: effectAmounts: Effect1Amount": "技能4效应因子1", "spell4: effectAmounts: Effect2Amount": "技能4效应因子2", "spell4: effectAmounts: Effect3Amount": "技能4效应因子3", "spell4: effectAmounts: Effect4Amount": "技能4效应因子4", "spell4: effectAmounts: Effect5Amount": "技能4效应因子5", "spell4: effectAmounts: Effect6Amount": "技能4效应因子6", "spell4: effectAmounts: Effect7Amount": "技能4效应因子7", "spell4: effectAmounts: Effect8Amount": "技能4效应因子8", "spell4: effectAmounts: Effect9Amount": "技能4效应因子9", "spell4: effectAmounts: Effect10Amount": "技能4效应因子10", "spell4: ammo: ammoRechargeTime": "技能4充能时间", "spell4: ammo: maxAmmo": "技能4最大充能数"}
     LoLChampions_header_keys = list(LoLChampions_header.keys())
     LoLChampions_data = {}
     damageTypes = {"kPhysical": "物理伤害", "kMagic": "魔法伤害", "kMixed": "混合伤害"}
@@ -457,25 +477,38 @@ def sort_cdragon_champions():
             count += 1
         for j in range(len(LoLChampions_header_keys)):
             key = LoLChampions_header_keys[j]
-            if j <= 8:
+            if j <= 9:
                 LoLChampions_data[key].append(champion[key])
-            elif j <= 12: #战略信息子键（`tacticalInfo`'s subkeys）
-                if j == 11: #战略信息：伤害（`tacticalInfo: damageType`）
-                    LoLChampions_data[key].append(damageTypes[champion["tacticalInfo"][key[14:]]])
-                elif j == 12: #战略信息：攻击方式（`tacticalInfo: attackType`）
-                    LoLChampions_data[key].append(attackTypes[champion["tacticalInfo"][key[14:]]])
+            elif j <= 13: #战略信息子键（`tacticalInfo`'s subkeys）
+                if j == 12: #战略信息：伤害（`tacticalInfo: damageType`）
+                    LoLChampions_data[key].append(damageTypes[champion["tacticalInfo"][key.split(": ")[1]]])
+                elif j == 13: #战略信息：攻击方式（`tacticalInfo: attackType`）
+                    LoLChampions_data[key].append(attackTypes[champion["tacticalInfo"][key.split(": ")[1]]])
                 else:
-                    LoLChampions_data[key].append(champion["tacticalInfo"][key[14:]])
-            elif j <= 17: #玩法雷达图子键（`playStyleInfo`'s subkeys）
-                LoLChampions_data[key].append(champion["playstyleInfo"][key[15:]])
-            elif j <= 19: #英雄标签信息子键（`championTagInfo`'s subkeys）
-                LoLChampions_data[key].append(champion["championTagInfo"][key[17:]])
-            else:
-                if key[6:] in champion["roles"]:
+                    LoLChampions_data[key].append(champion["tacticalInfo"][key.split(": ")[1]])
+            elif j <= 18: #玩法雷达图子键（`playStyleInfo`'s subkeys）
+                LoLChampions_data[key].append(champion["playstyleInfo"][key.split(": ")[1]])
+            elif j <= 20: #英雄标签信息子键（`championTagInfo`'s subkeys）
+                LoLChampions_data[key].append(champion["championTagInfo"][key.split(": ")[1]])
+            elif j <= 26: #角色定位子键（`role`'s subkeys）
+                if key.split(": ")[1] in champion["roles"]:
                     LoLChampions_data[key].append("√")
                 else:
                     LoLChampions_data[key].append("")
-    LoLChampions_statistics_output_order = [0, 1, 3, 2, 20, 21, 22, 23, 24, 25, 11, 9, 10, 12, 18, 19, 13, 14, 15, 16, 17, 4, 5, 6, 7, 8]
+            elif j <= 31: #被动技能子键（`passive`'s subkeys）
+                LoLChampions_data[key].append(champion["passive"][key.split(": ")[1]])
+            else: #技能相关键（Spell related keys）
+                spell_index = int(key[5:6]) - 1
+                if spell_index < len(champion["spells"]):
+                    spell = champion["spells"][spell_index]
+                    subkey_list = key.split(": ")[1:]
+                    value = spell
+                    for subkey in subkey_list:
+                        value = value[subkey]
+                    LoLChampions_data[key].append(value)
+                else:
+                    LoLChampions_data[key].append("")
+    LoLChampions_statistics_output_order = [0, 1, 3, 2, 21, 22, 23, 24, 25, 26, 12, 10, 11, 13, 19, 20, 14, 15, 16, 17, 18, 4, 5, 6, 7, 8, 27, 33, 60, 87, 114]
     LoLChampions_data_organized = {}
     for i in LoLChampions_statistics_output_order:
         key = LoLChampions_header_keys[i]
@@ -483,6 +516,19 @@ def sort_cdragon_champions():
     LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
     LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
     return LoLChampions_df
+
+async def get_plugin_champions(connection):
+    champion_summary = await (await connection.request("GET", "/lol-game-data/assets/v1/champion-summary.json")).json()
+    championIds = [champion["id"] for champion in champion_summary]
+    LoLChampion = []
+    for i in range(len(championIds)):
+        championId = championIds[i]
+        champion_uri = f"/lol-game-data/assets/v1/champions/{championId}.json"
+        champion = await (await connection.request("GET", champion_uri)).json() #插件从本地读取，因此一般不需要设置异常处理（Plugins are read locally, so exception handling isn't needed here）
+        LoLChampion.append(champion)
+        print("[%s]" %(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())), end = "")
+        print("获取进度（Capturing process）：%d/%d" %(i + 1, len(championIds)))
+    return LoLChampion
 
 language_ddragon = {1: {"CODE": "ar_AE", "LANGUAGE (EN)": "Arabic (United Arab Emirates)", "LANGUAGE (ZH)": "阿拉伯语（阿拉伯联合酋长国）", "Applicable CDragon Data Patches": "9.20～10.1, 13.20+"}, 2: {"CODE": "cs_CZ", "LANGUAGE (EN)": "Czech (Czech Republic)", "LANGUAGE (ZH)": "捷克语（捷克共和国）", "Applicable CDragon Data Patches": "7.1+"}, 3: {"CODE": "el_GR", "LANGUAGE (EN)": "Greek (Greece)", "LANGUAGE (ZH)": "希腊语（希腊）", "Applicable CDragon Data Patches": "9.1+"}, 4: {"CODE": "pl_PL", "LANGUAGE (EN)": "Polish (Poland)", "LANGUAGE (ZH)": "波兰语（波兰）", "Applicable CDragon Data Patches": "9.1+"}, 5: {"CODE": "ro_RO", "LANGUAGE (EN)": "Romanian (Romania)", "LANGUAGE (ZH)": "罗马尼亚语（罗马尼亚）", "Applicable CDragon Data Patches": "9.1+"}, 6: {"CODE": "hu_HU", "LANGUAGE (EN)": "Hungarian (Hungary)", "LANGUAGE (ZH)": "匈牙利语（匈牙利）", "Applicable CDragon Data Patches": "9.1+"}, 7: {"CODE": "en_GB", "LANGUAGE (EN)": "English (United Kingdom)", "LANGUAGE (ZH)": "英语（英国）", "Applicable CDragon Data Patches": "9.1+"}, 8: {"CODE": "de_DE", "LANGUAGE (EN)": "German (Germany)", "LANGUAGE (ZH)": "德语（德国）", "Applicable CDragon Data Patches": "7.1+"}, 9: {"CODE": "es_ES", "LANGUAGE (EN)": "Spanish (Spain)", "LANGUAGE (ZH)": "西班牙语（西班牙）", "Applicable CDragon Data Patches": "9.1+"}, 10: {"CODE": "it_IT", "LANGUAGE (EN)": "Italian (Italy)", "LANGUAGE (ZH)": "意大利语（意大利）", "Applicable CDragon Data Patches": "9.1+"}, 11: {"CODE": "fr_FR", "LANGUAGE (EN)": "French (France)", "LANGUAGE (ZH)": "法语（法国）", "Applicable CDragon Data Patches": "9.1+"}, 12: {"CODE": "ja_JP", "LANGUAGE (EN)": "Japanese (Japan)", "LANGUAGE (ZH)": "日语（日本）", "Applicable CDragon Data Patches": "9.1+"}, 13: {"CODE": "ko_KR", "LANGUAGE (EN)": "Korean (Korea)", "LANGUAGE (ZH)": "朝鲜语（韩国）", "Applicable CDragon Data Patches": "9.7+"}, 14: {"CODE": "es_MX", "LANGUAGE (EN)": "Spanish (Mexico)", "LANGUAGE (ZH)": "西班牙语（墨西哥）", "Applicable CDragon Data Patches": "9.1+"}, 15: {"CODE": "es_AR", "LANGUAGE (EN)": "Spanish (Argentina)", "LANGUAGE (ZH)": "西班牙语（阿根廷）", "Applicable CDragon Data Patches": "9.7+"}, 16: {"CODE": "pt_BR", "LANGUAGE (EN)": "Portuguese (Brazil)", "LANGUAGE (ZH)": "葡萄牙语（巴西）", "Applicable CDragon Data Patches": "9.1+"}, 17: {"CODE": "en_US", "LANGUAGE (EN)": "English (United States)", "LANGUAGE (ZH)": "英语（美国）", "Applicable CDragon Data Patches": "9.1+"}, 18: {"CODE": "en_AU", "LANGUAGE (EN)": "English (Australia)", "LANGUAGE (ZH)": "英语（澳大利亚）", "Applicable CDragon Data Patches": "9.1+"}, 19: {"CODE": "ru_RU", "LANGUAGE (EN)": "Russian (Russia)", "LANGUAGE (ZH)": "俄语（俄罗斯）", "Applicable CDragon Data Patches": "9.1+"}, 20: {"CODE": "tr_TR", "LANGUAGE (EN)": "Turkish (Turkey)", "LANGUAGE (ZH)": "土耳其语（土耳其）", "Applicable CDragon Data Patches": "9.1+"}, 21: {"CODE": "ms_MY", "LANGUAGE (EN)": "Malay (Malaysia)", "LANGUAGE (ZH)": "马来语（马来西亚）", "Applicable CDragon Data Patches": ""}, 22: {"CODE": "en_PH", "LANGUAGE (EN)": "English (Republic of the Philippines)", "LANGUAGE (ZH)": "英语（菲律宾共和国）", "Applicable CDragon Data Patches": "10.5+"}, 23: {"CODE": "en_SG", "LANGUAGE (EN)": "English (Singapore)", "LANGUAGE (ZH)": "英语（新加坡）", "Applicable CDragon Data Patches": "10.5+"}, 24: {"CODE": "th_TH", "LANGUAGE (EN)": "Thai (Thailand)", "LANGUAGE (ZH)": "泰语（泰国）", "Applicable CDragon Data Patches": "9.7+"}, 25: {"CODE": "vn_VN", "LANGUAGE (EN)": "Vietnamese (Viet Nam)", "LANGUAGE (ZH)": "越南语（越南）", "Applicable CDragon Data Patches": "9.7～13.9"}, 26: {"CODE": "vi_VN", "LANGUAGE (EN)": "Vietnamese (Viet Nam)", "LANGUAGE (ZH)": "越南语（越南）", "Applicable CDragon Data Patches": "12.17+"}, 27: {"CODE": "id_ID", "LANGUAGE (EN)": "Indonesian (Indonesia)", "LANGUAGE (ZH)": "印度尼西亚语（印度尼西亚）", "Applicable CDragon Data Patches": ""}, 28: {"CODE": "zh_MY", "LANGUAGE (EN)": "Chinese (Malaysia)", "LANGUAGE (ZH)": "中文（马来西亚）", "Applicable CDragon Data Patches": "10.5+"}, 29: {"CODE": "zh_CN", "LANGUAGE (EN)": "Chinese (China)", "LANGUAGE (ZH)": "中文（中国）", "Applicable CDragon Data Patches": "9.7+"}, 30: {"CODE": "zh_TW", "LANGUAGE (EN)": "Chinese (Taiwan)", "LANGUAGE (ZH)": "中文（台湾）", "Applicable CDragon Data Patches": "9.7+"}}
 language_cdragon = {}
@@ -535,7 +581,8 @@ if source != "" and (source[0] == "0" or source[0] == "2" or source[0] == "3"):
         input()
         exit() #执行到此，程序结束（Here the program terminates）
     else:
-        LoLChampions_df = sort_cdragon_champions()
+        LoLChampion = get_cdragon_champions()
+        LoLChampions_df = sort_cdragon_champions(LoLChampion)
         count = len(LoLChampions_df) - 2
         while True:
             try:
@@ -596,349 +643,280 @@ async def get_lockfile(connection):
 #-----------------------------------------------------------------------------
 async def create_custom_lobby(connection):
     custom = {
+        "queueId": 3140,
+        "isCustom": True,
         "customGameLobby": {
+            "lobbyName": "可用电脑英雄测试（程序结束前请勿退出）",
+            "lobbyPassword": "",
             "configuration": {
+                "mapId": 11,
                 "gameMode": "PRACTICETOOL",
                 "gameMutator": "",
-                "gameServerRegion": "",
-                "mapId": 11,
                 "mutators": {
                     "id": 1
                 },
-            "spectatorPolicy": "AllAllowed",
-            "teamSize": 5
-            },
-            "lobbyName": "可用电脑英雄测试（程序结束前请勿退出）",
-            "lobbyPassword": ""
-        },
-        "isCustom": True
+                "spectatorPolicy": "AllAllowed",
+                "teamSize": 5,
+                "maxPlayerCount": 0,
+                "gameServerRegion": "",
+                "spectatorDelayEnabled": False,
+                "hidePublicly": False
+            }
+        }
     }
-    await connection.request("POST", "/lol-lobby/v2/lobby", data=custom)
+    response = await connection.request("POST", "/lol-lobby/v2/lobby", data = custom)
 
 #-----------------------------------------------------------------------------
-# 统计英雄数量（Count all champions）
+# 统计英雄数量（Count champions）
 #-----------------------------------------------------------------------------
-async def count_all_champions(connection):
-    LoLChampion = await (await connection.request("GET", "/lol-champions/v1/inventories/%s/champions" %summoner["summonerId"])).json()
-    LoLChampions = {}
-    for champion in LoLChampion:
-        LoLChampions[champion["id"]] = champion
-    LoLChampions_header = {"active": "可用性", "alias": "英雄代号", "banVoPath": "禁用台词路径", "baseLoadScreenPath": "加载界面图像路径", "baseSplashPath": "英雄封面路径", "botEnabled": "电脑模型激活情况", "chooseVoPath": "锁定台词路径", "disabledQueues": "禁用队列", "freeToPlay": "允许免费使用", "id": "英雄序号", "name": "称号", "purchased": "购买日期", "rankedPlayEnabled": "排位许可", "squarePortraitPath": "方格头像路径", "stingerSfxPath": "锁定音效路径", "title": "名称", "ownership: loyaltyReward": "获取方式：排位赛段奖励", "ownership: owned": "已拥有", "ownership: xboxGPReward": "获取方式：Xbox Game Pass奖励", "ownership: rental: endDate": "租借截止日期", "ownership: rental: purchaseDate": "租借日期", "ownership: rental: rented": "已租借", "ownership: rental: winCountRemaining": "租借可用胜场数", "role: assassin": "角色定位：刺客", "role: fighter": "角色定位：战士", "role: mage": "角色定位：法师", "role: marksman": "角色定位：射手", "role: support": "角色定位：辅助", "role: tank": "角色定位：坦克", "tacticalInfo: damageType": "战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】", "tacticalInfo: difficulty": "战略信息：难度（英雄的使用难度）", "tacticalInfo: style": "战略信息：风格【表明英雄的伤害输出方式的倾向（普攻vs技能）】", "recommendedPosition: TOP": "推荐路线：上路", "recommendedPosition: JUNGLE": "推荐路线：打野", "recommendedPosition: MIDDLE": "推荐路线：中路", "recommendedPosition: BOTTOM": "推荐路线：下路", "recommendedPosition: UTILITY": "推荐路线：辅助"}
-    LoLChampions_header_keys = list(LoLChampions_header.keys())
-    LoLChampions_data = {}
-    recommended_position_for_champion = await (await connection.request("GET", "/lol-perks/v1/recommended-champion-positions")).json()
-    damageTypes = {"kPhysical": "物理伤害", "kMagic": "魔法伤害", "kMixed": "混合伤害"}
-    #damageTypes = {"kPhysical": "Physical", "kMagic": "Magic", "kMixed": "Mixed"}
-    for i in range(len(LoLChampions_header_keys)):
-        key = LoLChampions_header_keys[i]
-        LoLChampions_data[key] = []
-    print("championId\tname\ttitle\talias")
-    count = 0
-    for i in sorted(LoLChampions.keys()):
-        champion = LoLChampions[i]
-        print("%d\t%s\t%s\t%s" %(champion["id"], champion["name"], champion["title"], champion["alias"]))
-        if champion["id"] != -1: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
-            count += 1
-        for j in range(len(LoLChampions_header_keys)):
-            key = LoLChampions_header_keys[j]
-            if j <= 15:
-                if j == 11:
-                    if champion[key] == 0:
-                        LoLChampions_data[key].append("")
-                    else:
-                        try:
-                            LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion[key] // 1000)))
-                        except OSError: #出现了购买时间戳为18446744073709550616的英雄（There's a champion with the purchased timestamp 18446744073709550616）
-                            LoLChampions_data[key].append("")
-                else:
-                    LoLChampions_data[key].append(champion[key])
-            elif j <= 22:
-                if j <= 18:
-                    LoLChampions_data[key].append(champion["ownership"][key[11:]])
-                else:
-                    if j == 19 or j == 20:
-                        if champion["ownership"]["rental"][key[19:]] == 0:
-                            LoLChampions_data[key].append("")
-                        else:
-                            try:
-                                LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion["ownership"]["rental"][key[19:]] // 1000)))
-                            except OSError: #出现了租借时间戳为18446744073709550616的英雄（There's a champion with the rented timestamp 18446744073709550616）
-                                LoLChampions_data[key].append("")
-                    else:
-                        LoLChampions_data[key].append(champion["ownership"]["rental"][key[19:]])
-            elif j <= 28:
-                if key[6:] in champion["roles"]:
-                    LoLChampions_data[key].append(True)
-                else:
-                    LoLChampions_data[key].append(False)
-            elif j <= 31:
-                if j == 29:
-                    LoLChampions_data[key].append(damageTypes[champion["tacticalInfo"][key[14:]]])
-                else:
-                    LoLChampions_data[key].append(champion["tacticalInfo"][key[14:]])
-            else:
-                if i == -1:
-                    LoLChampions_data[key].append(False)
-                elif key[21:] in recommended_position_for_champion[str(i)]["recommendedPositions"]:
-                    LoLChampions_data[key].append(True)
-                else:
-                    LoLChampions_data[key].append(False)
-    LoLChampions_statistics_output_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
-    LoLChampions_data_organized = {}
-    for i in LoLChampions_statistics_output_order:
-        key = LoLChampions_header_keys[i]
-        LoLChampions_data_organized[key] = LoLChampions_data[key]
-    LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
-    print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
-    for column in LoLChampions_df:
-        if LoLChampions_df[column].dtype == "bool":
-            LoLChampions_df[column] = LoLChampions_df[column].astype(str)
-            for i in range(len(LoLChampions_df)):
-                LoLChampions_df.loc[i, column] = "√" if LoLChampions_df[column][i] == "True" else ""
-    print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
-    LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
+async def count_champions(connection):
+    print("请选择英雄数据类型：\nPlease a champion data type:\n1\t个人所有（Personal inventory）\n2\t插件（Plugins）")
     while True:
-        try:
-            with pandas.ExcelWriter(path = "available-bots.xlsx", mode = "a", if_sheet_exists = "replace") as writer:
-                LoLChampions_df.to_excel(excel_writer = writer, sheet_name = "Sheet3")
-        except PermissionError:
-            print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
-            input()
-        except FileNotFoundError:
-            with open(path = "available-bots.xlsx") as writer:
-                LoLChampions_df.to_excel(excel_writer = writer, sheet_name = "Sheet3")
+        data_type = input()
+        if data_type == "":
+            continue
+        elif data_type[0] == "0":
+            return 1
+        elif data_type[0] == "1":
+            LoLChampion = await (await connection.request("GET", "/lol-champions/v1/inventories/%s/champions" %summoner["summonerId"])).json()
+            break
+        elif data_type[0] == "2":
+            LoLChampion = await get_plugin_champions(connection)
             break
         else:
-            print("\n统计完毕，共%d名英雄。请输入任意键退出。\nCount finished! There're %d champions in total. Please press any key to exit." %(count, count))
-            break
-    input()
-
-#-----------------------------------------------------------------------------
-# 统计电脑英雄数量（Count all bot champions）
-#-----------------------------------------------------------------------------
-async def count_all_bots(connection):
-    LoLChampion = await (await connection.request("GET", "/lol-champions/v1/inventories/%s/champions" %summoner["summonerId"])).json()
+            print("您的输入有误，请重新输入！\nERROR input! Please try again!")
     LoLChampions = {}
-    print("正在统计具有电脑模型的英雄……请勿退出房间！\nCounting botEnabled champions ... Please don't exit the lobby!\n")
-    await create_custom_lobby(connection)
-    print("championId\tname\ttitle\talias")
-    count = 0
-    for champion in LoLChampion:
-        botUuid = str(uuid.uuid4())
-        bot = {"championId": champion["id"], "botDifficulty": "RSINTERMEDIATE", "teamId": "200", "position": "TOP", "botUuid": botUuid}
-        response = await (await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)).json()
-        if response == None: #这里认为当返回内容为空时，电脑玩家被添加（Here the principle is, once the response body is empty, the bot player is definitely added）
-            # start = time.time()
-            LoLChampions[champion["id"]] = champion
-            print("%d\t%s\t%s\t%s" %(champion["id"], champion["name"], champion["title"], champion["alias"]))
-            if champion["id"] != -1: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
-                count += 1
-            #接下来反复获取房间信息，直到从房间信息中获取到添加的电脑玩家信息（Next, repeatedly get the lobby information, until the added bot information can be found）
-            lobby = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
-            while not botUuid in list(map(lambda x: x["botUuid"], lobby["gameConfig"]["customTeam200"])):
-                lobby = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
-            # end = time.time()
-            # cost = end - start
-            # print("从添加电脑玩家到房间信息刷新所花费的时间【Time interval (seconds) between a bot is added and lobby information is refreshed】：%f" %(cost))
-            botId_uuid_dict = {bot["botUuid"]: bot["botId"] for bot in lobby["gameConfig"]["customTeam200"]}
-            response = await (await connection.request("DELETE", "/lol-lobby/v1/lobby/custom/bots/%s/%s/200" %(botId_uuid_dict[botUuid], botUuid))).json()
-    print("\n统计完毕，共%d名英雄。\nCount finished! There're %d champions in total." %(count, count))
+    print("请选择统计类型：\nPlease select which type of champions to count:\n1\t所有英雄（All champions）\n2\t所有电脑英雄（All bot champions）\n3\t当前房间可用电脑英雄（Available bot champions in this lobby）")
+    while True: #分类讨论确定`LoLChampions`（Discuss and determine `LoLChampions`）
+        mode = input()
+        if mode == "":
+            continue
+        elif mode[0] == "0":
+            return 2
+        elif mode[0] == "1":
+            for champion in LoLChampion:
+                LoLChampions[champion["id"]] = champion
+            sheet_name = "Sheet3"
+            break
+        elif mode[0] == "2":
+            print("正在统计具有电脑模型的英雄……请勿退出房间！\nCounting botEnabled champions ... Please don't exit the lobby!\n")
+            await create_custom_lobby(connection)
+            print("championId\tname\ttitle\talias")
+            count = 0
+            for champion in LoLChampion:
+                botUuid = str(uuid.uuid4())
+                bot = {"championId": champion["id"], "botDifficulty": "RSINTERMEDIATE", "teamId": "200", "position": "TOP", "botUuid": botUuid}
+                response = await (await connection.request("POST", "/lol-lobby/v1/lobby/custom/bots", data = bot)).json()
+                if response == None: #这里认为当返回内容为空时，电脑玩家被添加（Here the principle is, once the response body is empty, the bot player is definitely added）
+                    # start = time.time()
+                    LoLChampions[champion["id"]] = champion
+                    print("%d\t%s\t%s\t%s" %(champion["id"], champion["name"], champion["title"], champion["alias"]))
+                    if champion["id"] != -1: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
+                        count += 1
+                    #接下来反复获取房间信息，直到从房间信息中获取到添加的电脑玩家信息（Next, repeatedly get the lobby information, until the added bot information can be found）
+                    lobby = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+                    while not champion["id"] in list(map(lambda x: x["botChampionId"], lobby["gameConfig"]["customTeam200"])):
+                        lobby = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+                    # end = time.time()
+                    # cost = end - start
+                    # print("从添加电脑玩家到房间信息刷新所花费的时间【Time interval (seconds) between a bot is added and lobby information is refreshed】：%f" %(cost))
+                    botId_uuid_dict = {bot["botUuid"]: bot["botId"] for bot in lobby["gameConfig"]["customTeam200"]}
+                    for bot in lobby["gameConfig"]["customTeam200"]: #从25.16版本开始，电脑玩家通用唯一识别码不再能由用户决定。因此，过往通过电脑玩家通用唯一识别码来判断电脑是否被添加的办法失效了（Since Patch 25.16, botUuid can never be decided by the user. Therefore, the original way to judge by botUuid whether a bot player is added no longer works）
+                        if bot["botChampionId"] == champion["id"]:
+                            botUuid = bot["botUuid"]
+                            break
+                    else:
+                        botUuid = lobby["gameConfig"]["customTeam200"][0]["botUuid"] #保护机制，防止下面在引用botUuid时出现问题（A protection from an error occurring when the program refers to `botUuid` below）
+                    response = await (await connection.request("DELETE", "/lol-lobby/v1/lobby/custom/bots/%s/%s/200" %(botId_uuid_dict[botUuid], botUuid))).json()
+            print("\n统计完毕，共%d名英雄。\nCount finished! There're %d champions in total." %(count, count))
+            sheet_name = "Sheet2"
+            break
+        elif mode[0] == "3":
+            lobby_information = await (await connection.request("GET", "/lol-lobby/v2/lobby")).json()
+            if "errorCode" in lobby_information and lobby_information["message"] == "LOBBY_NOT_FOUND":
+                print("请确保您正在房间内！程序即将退出！\nPlease make sure you're in a lobby! The program will exit soon!")
+                time.sleep(3)
+                exit()
+            bots_enabled = await (await connection.request("GET", "/lol-lobby/v2/lobby/custom/bots-enabled")).json()
+            if not bots_enabled:
+                print("该房间无可用电脑玩家。请输入任意键退出。\nThere're no available bot champions in this lobby. Please press any key to exit.")
+                input()
+                return 0
+            available_bots = await (await connection.request("GET", "/lol-lobby/v2/lobby/custom/available-bots")).json()
+            available_botIds = list(map(lambda x: x["id"], available_bots))
+            for champion in LoLChampion:
+                if champion["id"] in available_botIds:
+                    LoLChampions[champion["id"]] = champion
+            sheet_name = "Sheet1"
+            break
+        else:
+            print("您的输入有误，请重新输入！\nERROR input! Please try again!")
     #下面按照程序需求对数据资源进行一定的整理（The following code sort out the data resource according to the program's need）
-    print("正在整理数据……\nSorting out the data ...")
-    LoLChampions_header = {"active": "可用性", "alias": "英雄代号", "banVoPath": "禁用台词路径", "baseLoadScreenPath": "加载界面图像路径", "baseSplashPath": "英雄封面路径", "botEnabled": "电脑模型激活情况", "chooseVoPath": "锁定台词路径", "disabledQueues": "禁用队列", "freeToPlay": "允许免费使用", "id": "英雄序号", "name": "称号", "purchased": "购买日期", "rankedPlayEnabled": "排位许可", "squarePortraitPath": "方格头像路径", "stingerSfxPath": "锁定音效路径", "title": "名称", "ownership: loyaltyReward": "获取方式：排位赛段奖励", "ownership: owned": "已拥有", "ownership: xboxGPReward": "获取方式：Xbox Game Pass奖励", "ownership: rental: endDate": "租借截止日期", "ownership: rental: purchaseDate": "租借日期", "ownership: rental: rented": "已租借", "ownership: rental: winCountRemaining": "租借可用胜场数", "role: assassin": "角色定位：刺客", "role: fighter": "角色定位：战士", "role: mage": "角色定位：法师", "role: marksman": "角色定位：射手", "role: support": "角色定位：辅助", "role: tank": "角色定位：坦克", "tacticalInfo: damageType": "战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】", "tacticalInfo: difficulty": "战略信息：难度（英雄的使用难度）", "tacticalInfo: style": "战略信息：风格【表明英雄的伤害输出方式的倾向（普攻vs技能）】", "recommendedPosition: TOP": "推荐路线：上路", "recommendedPosition: JUNGLE": "推荐路线：打野", "recommendedPosition: MIDDLE": "推荐路线：中路", "recommendedPosition: BOTTOM": "推荐路线：下路", "recommendedPosition: UTILITY": "推荐路线：辅助"}
-    LoLChampions_header_keys = list(LoLChampions_header.keys())
-    LoLChampions_data = {}
-    recommended_position_for_champion = await (await connection.request("GET", "/lol-perks/v1/recommended-champion-positions")).json()
-    damageTypes = {"kPhysical": "物理伤害", "kMagic": "魔法伤害", "kMixed": "混合伤害"}
-    #damageTypes = {"kPhysical": "Physical", "kMagic": "Magic", "kMixed": "Mixed"}
-    for i in range(len(LoLChampions_header_keys)):
-        key = LoLChampions_header_keys[i]
-        LoLChampions_data[key] = []
-    for i in sorted(LoLChampions.keys()):
-        champion = LoLChampions[i]
-        for j in range(len(LoLChampions_header_keys)):
-            key = LoLChampions_header_keys[j]
-            if j <= 15:
-                if j == 11:
-                    if champion[key] == 0:
-                        LoLChampions_data[key].append("")
-                    else:
-                        try:
-                            LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion[key] // 1000)))
-                        except OSError: #出现了购买时间戳为18446744073709550616的英雄（There's a champion with the purchased timestamp 18446744073709550616）
-                            LoLChampions_data[key].append("")
-                else:
-                    LoLChampions_data[key].append(champion[key])
-            elif j <= 22:
-                if j <= 18:
-                    LoLChampions_data[key].append(champion["ownership"][key[11:]])
-                else:
-                    if j == 19 or j == 20:
-                        if champion["ownership"]["rental"][key[19:]] == 0:
+    if mode[0] == "1" or mode[0] == "3":
+        print("championId\tname\ttitle\talias")
+        count = 0
+    else:
+        print("正在整理数据……\nSorting out the data ...")
+    if data_type[0] == "1":
+        LoLChampions_header = {"active": "可用性", "alias": "英雄代号", "banVoPath": "禁用台词路径", "baseLoadScreenPath": "加载界面图像路径", "baseSplashPath": "英雄封面路径", "botEnabled": "电脑模型激活情况", "chooseVoPath": "锁定台词路径", "disabledQueues": "禁用队列", "freeToPlay": "允许免费使用", "id": "英雄序号", "isVisibleInClient": "藏品可见性", "name": "称号", "purchased": "购买时间戳", "rankedPlayEnabled": "取得排位许可", "squarePortraitPath": "方格头像路径", "stingerSfxPath": "锁定音效路径", "title": "名称", "purchaseDate": "购买日期", "ownership: loyaltyReward": "获取方式：排位赛段奖励", "ownership: owned": "已拥有", "ownership: xboxGPReward": "获取方式：Xbox Game Pass奖励", "ownership: rental: endDate": "租借截止时间戳", "ownership: rental: purchaseDate": "租借时间戳", "ownership: rental: rented": "已租借", "ownership: rented: winCountRemaining": "租借可用胜场数", "ownership: rental: endTime": "租借截止日期", "ownership: rental: purchaseTime": "租借日期", "role: assassin": "角色定位：刺客", "role: fighter": "角色定位：战士", "role: mage": "角色定位：法师", "role: marksman": "角色定位：射手", "role: support": "角色定位：辅助", "role: tank": "角色定位：坦克", "tacticalInfo: damageType": "战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】", "tacticalInfo: difficulty": "战略信息：难度（英雄的使用难度）", "tacticalInfo: style": "战略信息：风格【表明英雄的伤害输出方式的倾向（普攻vs技能）】", "passive: description": "被动技能简介", "passive: name": "被动技能名称", "spell1: description": "技能1简介", "spell1: name": "技能1名称", "spell2: description": "技能2简介", "spell2: name": "技能2名称", "spell3: description": "技能3简介", "spell3: name": "技能3名称", "spell4: description": "技能4简介", "spell4: name": "技能4名称", "recommendedPosition: TOP": "推荐路线：上路", "recommendedPosition: JUNGLE": "推荐路线：打野", "recommendedPosition: MIDDLE": "推荐路线：中路", "recommendedPosition: BOTTOM": "推荐路线：下路", "recommendedPosition: UTILITY": "推荐路线：辅助"}
+        LoLChampions_header_keys = list(LoLChampions_header.keys())
+        LoLChampions_data = {}
+        recommended_position_for_champion = await (await connection.request("GET", "/lol-perks/v1/recommended-champion-positions")).json()
+        damageTypes = {"kPhysical": "物理伤害", "kMagic": "魔法伤害", "kMixed": "混合伤害"}
+        #damageTypes = {"kPhysical": "Physical", "kMagic": "Magic", "kMixed": "Mixed"}
+        for i in range(len(LoLChampions_header_keys)):
+            key = LoLChampions_header_keys[i]
+            LoLChampions_data[key] = []
+        for i in sorted(LoLChampions.keys()):
+            champion = LoLChampions[i]
+            if mode[0] == "1" or mode[0] == "3":
+                print("%d\t%s\t%s\t%s" %(champion["id"], champion["name"], champion["title"], champion["alias"]))
+                if champion["id"] != -1: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
+                    count += 1
+            for j in range(len(LoLChampions_header_keys)):
+                key = LoLChampions_header_keys[j]
+                if j <= 17:
+                    if j == 17: #购买日期（`purchased`）
+                        if champion["purchased"] == 0:
                             LoLChampions_data[key].append("")
                         else:
                             try:
-                                LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion["ownership"]["rental"][key[19:]] // 1000)))
-                            except OSError: #出现了租借时间戳为18446744073709550616的英雄（There's a champion with the rented timestamp 18446744073709550616）
+                                LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion["purchased"] // 1000)))
+                            except OSError: #出现了购买时间戳为18446744073709550616的英雄（There's a champion with the purchased timestamp 18446744073709550616）
                                 LoLChampions_data[key].append("")
                     else:
-                        LoLChampions_data[key].append(champion["ownership"]["rental"][key[19:]])
-            elif j <= 28:
-                if key[6:] in champion["roles"]:
-                    LoLChampions_data[key].append(True)
+                        LoLChampions_data[key].append(champion[key])
+                elif j <= 26: #拥有权子键（`ownership`'s subkeys）
+                    if j <= 20:
+                        LoLChampions_data[key].append(champion["ownership"][key.split(": ")[1]])
+                    else:
+                        if j == 25 or j == 26:
+                            if champion["ownership"]["rental"][key.split(": ")[2].replace("Time", "Date")] == 0:
+                                LoLChampions_data[key].append("")
+                            else:
+                                try:
+                                    LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion["ownership"]["rental"][key.split(": ")[2].replace("Time", "Date")] // 1000)))
+                                except OSError: #出现了租借时间戳为18446744073709550616的英雄（There's a champion with the rented timestamp 18446744073709550616）
+                                    LoLChampions_data[key].append("")
+                        else:
+                            LoLChampions_data[key].append(champion["ownership"]["rental"][key.split(": ")[2]])
+                elif j <= 32: #角色定位相关键（Role related keys）
+                    LoLChampions_data[key].append(key.split(": ")[1] in champion["roles"])
+                elif j <= 35: #战略信息子键（`tacticalInfo`'s subkeys）
+                    if j == 33: #战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】（`tacticalInfo: damageType`）
+                        LoLChampions_data[key].append(damageTypes[champion["tacticalInfo"][key.split(": ")[1]]])
+                    else:
+                        LoLChampions_data[key].append(champion["tacticalInfo"][key.split(": ")[1]])
+                elif j <= 37: #被动技能子键（`passive`'s subkeys）
+                    LoLChampions_data[key].append(champion["passive"][key.split(": ")[1]])
+                elif j <= 45: #技能相关键（Spell related keys）
+                    spell_index = int(key[5:6]) - 1
+                    if spell_index < len(champion["spells"]):
+                        LoLChampions_data[key].append(champion["spells"][spell_index][key.split(": ")[1]])
+                    else:
+                        LoLChampions_data[key].append("")
                 else:
-                    LoLChampions_data[key].append(False)
-            elif j <= 31:
-                if j == 29:
-                    LoLChampions_data[key].append(damageTypes[champion["tacticalInfo"][key[14:]]])
-                else:
-                    LoLChampions_data[key].append(champion["tacticalInfo"][key[14:]])
-            else:
-                if i == -1:
-                    LoLChampions_data[key].append(False)
-                elif key[21:] in recommended_position_for_champion[str(i)]["recommendedPositions"]:
-                    LoLChampions_data[key].append(True)
-                else:
-                    LoLChampions_data[key].append(False)
-    LoLChampions_statistics_output_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
-    LoLChampions_data_organized = {}
-    for i in LoLChampions_statistics_output_order:
-        key = LoLChampions_header_keys[i]
-        LoLChampions_data_organized[key] = LoLChampions_data[key]
-    LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
-    print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
-    for column in LoLChampions_df:
-        if LoLChampions_df[column].dtype == "bool":
-            LoLChampions_df[column] = LoLChampions_df[column].astype(str)
-            for i in range(len(LoLChampions_df)):
-                LoLChampions_df.loc[i, column] = "√" if LoLChampions_df[column][i] == "True" else ""
-    print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
-    LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
+                    if champion["id"] == -1:
+                        LoLChampions_data[key].append(False)
+                    elif key.split(": ")[1] in recommended_position_for_champion[str(champion["id"])]["recommendedPositions"]:
+                        LoLChampions_data[key].append(True)
+                    else:
+                        LoLChampions_data[key].append(False)
+        LoLChampions_statistics_output_order = [9, 11, 16, 1, 10, 5, 27, 28, 29, 30, 31, 32, 46, 47, 48, 49, 50, 33, 35, 34, 19, 17, 18, 20, 8, 23, 26, 25, 24, 13, 7, 14, 3, 4, 15, 6, 2, 37, 39, 41, 43, 45]
+        LoLChampions_data_organized = {}
+        for i in LoLChampions_statistics_output_order:
+            key = LoLChampions_header_keys[i]
+            LoLChampions_data_organized[key] = LoLChampions_data[key]
+        LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
+        print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
+        for column in LoLChampions_df:
+            if LoLChampions_df[column].dtype == "bool":
+                LoLChampions_df[column] = LoLChampions_df[column].astype(str)
+                for i in range(len(LoLChampions_df)):
+                    LoLChampions_df.loc[i, column] = "√" if LoLChampions_df[column][i] == "True" else ""
+        print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+        LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
+    elif data_type[0] == "2":
+        #下面按照程序需求对数据资源进行一定的整理（The following code sort out the data resource according to the program's need）
+        LoLChampions_header = {"id": "英雄序号", "name": "称号", "alias": "英雄代号", "title": "名称", "shortBio": "背景简介", "isVisibleInClient": "客户端可见性", "squarePortraitPath": "方格头像路径", "stingerSfxPath": "锁定音效路径", "chooseVoPath": "锁定台词路径", "banVoPath": "禁用台词路径", "recommendedItemDefaults": "默认推荐装备序号列表", "tacticalInfo: style": "战略信息：风格【表明英雄的伤害输出方式的倾向（普攻vs技能）】", "tacticalInfo: difficulty": "战略信息：难度（英雄的使用难度）", "tacticalInfo: damageType": "战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】", "tacticalInfo: attackType": "战略信息：攻击方式", "playStyleInfo: damage": "玩法雷达图：伤害（用来对敌方英雄造成伤害的英雄技能）得分", "playStyleInfo: durability": "玩法雷达图：强韧（用来吸收来自敌方英雄伤害的英雄技能）得分", "playStyleInfo: crowdControl": "玩法雷达图：控制（用来对敌方英雄施加诸如减速和晕眩的有害效果的英雄技能）得分", "playStyleInfo: mobility": "玩法雷达图：机动（通过使用闪现或位移来快速在地图四处移动的英雄技能）得分", "playStyleInfo: utility": "玩法雷达图：功能（用来对友军提供护盾、治疗或移动速度等有益效果的英雄技能）得分", "championTagInfo: championTagPrimary": "英雄标签信息：第一标签", "championTagInfo: championTagSecondary": "英雄标签信息：第二标签", "role: assassin": "角色定位：刺客", "role: fighter": "角色定位：战士", "role: mage": "角色定位：法师", "role: marksman": "角色定位：射手", "role: support": "角色定位：辅助", "role: tank": "角色定位：坦克", "passive: name": "被动技能名称", "passive: abilityIconPath": "被动技能图标路径", "passive: abilityVideoPath": "被动技能动画视频路径", "passive: abilityVideoImagePath": "被动技能动画预览图路径", "passive: description": "被动技能简述", "spell1: spellKey": "技能1热键", "spell1: name": "技能1名称", "spell1: abilityIconPath": "技能1图标路径", "spell1: abilityVideoPath": "技能1动画视频路径", "spell1: abilityVideoImagePath": "技能1动画预览图路径", "spell1: cost": "技能1消耗计算方式", "spell1: cooldown": "技能1冷却时间计算方式", "spell1: description": "技能1简述", "spell1: dynamicDescription": "技能1详细信息", "spell1: range": "技能1施法距离", "spell1: costCoefficients": "技能1施法资源系数", "spell1: cooldownCoefficients": "技能1冷却时间系数", "spell1: maxLevel": "技能1最大等级", "spell1: coefficients: coefficient1": "技能1系数1", "spell1: coefficients: coefficient2": "技能1系数2", "spell1: effectAmounts: Effect1Amount": "技能1效应因子1", "spell1: effectAmounts: Effect2Amount": "技能1效应因子2", "spell1: effectAmounts: Effect3Amount": "技能1效应因子3", "spell1: effectAmounts: Effect4Amount": "技能1效应因子4", "spell1: effectAmounts: Effect5Amount": "技能1效应因子5", "spell1: effectAmounts: Effect6Amount": "技能1效应因子6", "spell1: effectAmounts: Effect7Amount": "技能1效应因子7", "spell1: effectAmounts: Effect8Amount": "技能1效应因子8", "spell1: effectAmounts: Effect9Amount": "技能1效应因子9", "spell1: effectAmounts: Effect10Amount": "技能1效应因子10", "spell1: ammo: ammoRechargeTime": "技能1充能时间", "spell1: ammo: maxAmmo": "技能1最大充能数", "spell2: spellKey": "技能2热键", "spell2: name": "技能2名称", "spell2: abilityIconPath": "技能2图标路径", "spell2: abilityVideoPath": "技能2动画视频路径", "spell2: abilityVideoImagePath": "技能2动画预览图路径", "spell2: cost": "技能2消耗计算方式", "spell2: cooldown": "技能2冷却时间计算方式", "spell2: description": "技能2简述", "spell2: dynamicDescription": "技能2详细信息", "spell2: range": "技能2施法距离", "spell2: costCoefficients": "技能2施法资源系数", "spell2: cooldownCoefficients": "技能2冷却时间系数", "spell2: maxLevel": "技能2最大等级", "spell2: coefficients: coefficient1": "技能2系数1", "spell2: coefficients: coefficient2": "技能2系数2", "spell2: effectAmounts: Effect1Amount": "技能2效应因子1", "spell2: effectAmounts: Effect2Amount": "技能2效应因子2", "spell2: effectAmounts: Effect3Amount": "技能2效应因子3", "spell2: effectAmounts: Effect4Amount": "技能2效应因子4", "spell2: effectAmounts: Effect5Amount": "技能2效应因子5", "spell2: effectAmounts: Effect6Amount": "技能2效应因子6", "spell2: effectAmounts: Effect7Amount": "技能2效应因子7", "spell2: effectAmounts: Effect8Amount": "技能2效应因子8", "spell2: effectAmounts: Effect9Amount": "技能2效应因子9", "spell2: effectAmounts: Effect10Amount": "技能2效应因子10", "spell2: ammo: ammoRechargeTime": "技能2充能时间", "spell2: ammo: maxAmmo": "技能2最大充能数", "spell3: spellKey": "技能3热键", "spell3: name": "技能3名称", "spell3: abilityIconPath": "技能3图标路径", "spell3: abilityVideoPath": "技能3动画视频路径", "spell3: abilityVideoImagePath": "技能3动画预览图路径", "spell3: cost": "技能3消耗计算方式", "spell3: cooldown": "技能3冷却时间计算方式", "spell3: description": "技能3简述", "spell3: dynamicDescription": "技能3详细信息", "spell3: range": "技能3施法距离", "spell3: costCoefficients": "技能3施法资源系数", "spell3: cooldownCoefficients": "技能3冷却时间系数", "spell3: maxLevel": "技能3最大等级", "spell3: coefficients: coefficient1": "技能3系数1", "spell3: coefficients: coefficient2": "技能3系数2", "spell3: effectAmounts: Effect1Amount": "技能3效应因子1", "spell3: effectAmounts: Effect2Amount": "技能3效应因子2", "spell3: effectAmounts: Effect3Amount": "技能3效应因子3", "spell3: effectAmounts: Effect4Amount": "技能3效应因子4", "spell3: effectAmounts: Effect5Amount": "技能3效应因子5", "spell3: effectAmounts: Effect6Amount": "技能3效应因子6", "spell3: effectAmounts: Effect7Amount": "技能3效应因子7", "spell3: effectAmounts: Effect8Amount": "技能3效应因子8", "spell3: effectAmounts: Effect9Amount": "技能3效应因子9", "spell3: effectAmounts: Effect10Amount": "技能3效应因子10", "spell3: ammo: ammoRechargeTime": "技能3充能时间", "spell3: ammo: maxAmmo": "技能3最大充能数", "spell4: spellKey": "技能4热键", "spell4: name": "技能4名称", "spell4: abilityIconPath": "技能4图标路径", "spell4: abilityVideoPath": "技能4动画视频路径", "spell4: abilityVideoImagePath": "技能4动画预览图路径", "spell4: cost": "技能4消耗计算方式", "spell4: cooldown": "技能4冷却时间计算方式", "spell4: description": "技能4简述", "spell4: dynamicDescription": "技能4详细信息", "spell4: range": "技能4施法距离", "spell4: costCoefficients": "技能4施法资源系数", "spell4: cooldownCoefficients": "技能4冷却时间系数", "spell4: maxLevel": "技能4最大等级", "spell4: coefficients: coefficient1": "技能4系数1", "spell4: coefficients: coefficient2": "技能4系数2", "spell4: effectAmounts: Effect1Amount": "技能4效应因子1", "spell4: effectAmounts: Effect2Amount": "技能4效应因子2", "spell4: effectAmounts: Effect3Amount": "技能4效应因子3", "spell4: effectAmounts: Effect4Amount": "技能4效应因子4", "spell4: effectAmounts: Effect5Amount": "技能4效应因子5", "spell4: effectAmounts: Effect6Amount": "技能4效应因子6", "spell4: effectAmounts: Effect7Amount": "技能4效应因子7", "spell4: effectAmounts: Effect8Amount": "技能4效应因子8", "spell4: effectAmounts: Effect9Amount": "技能4效应因子9", "spell4: effectAmounts: Effect10Amount": "技能4效应因子10", "spell4: ammo: ammoRechargeTime": "技能4充能时间", "spell4: ammo: maxAmmo": "技能4最大充能数"}
+        LoLChampions_header_keys = list(LoLChampions_header.keys())
+        LoLChampions_data = {}
+        damageTypes = {"kPhysical": "物理伤害", "kMagic": "魔法伤害", "kMixed": "混合伤害"}
+        #damageTypes = {"kPhysical": "Physical", "kMagic": "Magic", "kMixed": "Mixed"}
+        attackTypes = {"melee": "近战", "ranged": "远程"}
+        for i in range(len(LoLChampions_header_keys)):
+            key = LoLChampions_header_keys[i]
+            LoLChampions_data[key] = []
+        count = 0
+        for i in sorted(LoLChampions.keys()):
+            champion = LoLChampions[i]
+            if mode[0] == "1" or mode[0] == "3":
+                print("%s\t%s\t%s\t%s" %(champion["id"], champion["name"], champion["title"], champion["alias"]))
+                if champion["id"] != -1: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
+                    count += 1
+            for j in range(len(LoLChampions_header_keys)):
+                key = LoLChampions_header_keys[j]
+                if j <= 10:
+                    LoLChampions_data[key].append(champion[key])
+                elif j <= 14: #战略信息子键（`tacticalInfo`'s subkeys）
+                    if j == 13: #战略信息：伤害（`tacticalInfo: damageType`）
+                        LoLChampions_data[key].append(damageTypes[champion["tacticalInfo"][key.split(": ")[1]]])
+                    elif j == 14: #战略信息：攻击方式（`tacticalInfo: attackType`）
+                        LoLChampions_data[key].append(attackTypes[champion["tacticalInfo"][key.split(": ")[1]]])
+                    else:
+                        LoLChampions_data[key].append(champion["tacticalInfo"][key.split(": ")[1]])
+                elif j <= 19: #玩法雷达图子键（`playStyleInfo`'s subkeys）
+                    LoLChampions_data[key].append(champion["playstyleInfo"][key.split(": ")[1]])
+                elif j <= 21: #英雄标签信息子键（`championTagInfo`'s subkeys）
+                    LoLChampions_data[key].append(champion["championTagInfo"][key.split(": ")[1]])
+                elif j <= 27: #角色定位子键（`role`'s subkeys）
+                    if key.split(": ")[1] in champion["roles"]:
+                        LoLChampions_data[key].append("√")
+                    else:
+                        LoLChampions_data[key].append("")
+                elif j <= 32: #被动技能子键（`passive`'s subkeys）
+                    LoLChampions_data[key].append(champion["passive"][key.split(": ")[1]])
+                else: #技能相关键（Spell related keys）
+                    spell_index = int(key[5:6]) - 1
+                    if spell_index < len(champion["spells"]):
+                        spell = champion["spells"][spell_index]
+                        subkey_list = key.split(": ")[1:]
+                        value = spell
+                        for subkey in subkey_list:
+                            value = value[subkey]
+                        LoLChampions_data[key].append(value)
+                    else:
+                        LoLChampions_data[key].append("")
+        LoLChampions_statistics_output_order = [0, 1, 3, 2, 5, 22, 23, 24, 25, 26, 27, 13, 11, 12, 14, 20, 21, 15, 16, 17, 18, 19, 4, 6, 7, 8, 9, 28, 34, 61, 88, 115]
+        LoLChampions_data_organized = {}
+        for i in LoLChampions_statistics_output_order:
+            key = LoLChampions_header_keys[i]
+            LoLChampions_data_organized[key] = LoLChampions_data[key]
+        LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
+        print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
+        for column in LoLChampions_df:
+            if LoLChampions_df[column].dtype == "bool":
+                LoLChampions_df[column] = LoLChampions_df[column].astype(str)
+                for i in range(len(LoLChampions_df)):
+                    LoLChampions_df.loc[i, column] = "√" if LoLChampions_df[column][i] == "True" else ""
+        print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
+        LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
     while True:
         try:
             with pandas.ExcelWriter(path = "available-bots.xlsx", mode = "a", if_sheet_exists = "replace") as writer:
-                LoLChampions_df.to_excel(excel_writer = writer, sheet_name = "Sheet2")
+                LoLChampions_df.to_excel(excel_writer = writer, sheet_name = sheet_name)
         except PermissionError:
             print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
             input()
         except FileNotFoundError:
             with open(path = "available-bots.xlsx") as writer:
-                LoLChampions_df.to_excel(excel_writer = writer, sheet_name = "Sheet2")
+                LoLChampions_df.to_excel(excel_writer = writer, sheet_name = sheet_name)
             break
         else:
-            print("英雄数据导出完成！请输入任意键退出。\nChampion data exported! Please press any key to exit.")
-            break
-    input()
-
-#-----------------------------------------------------------------------------
-# 统计当前房间可用电脑英雄数量（Count available bots in the current lobby）
-#-----------------------------------------------------------------------------
-async def count_available_bots(connection):
-    lobby = await(await connection.request("GET", "/lol-lobby/v2/lobby")).json()
-    if "errorCode" in lobby and lobby["message"] == "LOBBY_NOT_FOUND":
-        print("请确保您正在房间内！程序即将退出！\nPlease make sure you're in a lobby! The program will exit soon!")
-        time.sleep(3)
-        exit()
-    bots_enabled = await (await connection.request("GET", "/lol-lobby/v2/lobby/custom/bots-enabled")).json()
-    if not bots_enabled:
-        print("该房间无可用电脑玩家。请输入任意键退出。\nThere're no available bot champions in this lobby. Please press any key to exit.")
-        input()
-        return 0
-    available_bots = await (await connection.request("GET", "/lol-lobby/v2/lobby/custom/available-bots")).json()
-    available_botIds = list(map(lambda x: x["id"], available_bots))
-    LoLChampion = await (await connection.request("GET", "/lol-champions/v1/inventories/%s/champions" %summoner["summonerId"])).json()
-    LoLChampions = {}
-    for champion in LoLChampion:
-        if champion["id"] in available_botIds:
-            LoLChampions[champion["id"]] = champion
-    #下面按照程序需求对数据资源进行一定的整理（The following code sort out the data resource according to the program's need）
-    LoLChampions_header = {"active": "可用性", "alias": "英雄代号", "banVoPath": "禁用台词路径", "baseLoadScreenPath": "加载界面图像路径", "baseSplashPath": "英雄封面路径", "botEnabled": "电脑模型激活情况", "chooseVoPath": "锁定台词路径", "disabledQueues": "禁用队列", "freeToPlay": "允许免费使用", "id": "英雄序号", "name": "称号", "purchased": "购买日期", "rankedPlayEnabled": "排位许可", "squarePortraitPath": "方格头像路径", "stingerSfxPath": "锁定音效路径", "title": "名称", "ownership: loyaltyReward": "获取方式：排位赛段奖励", "ownership: owned": "已拥有", "ownership: xboxGPReward": "获取方式：Xbox Game Pass奖励", "ownership: rental: endDate": "租借截止日期", "ownership: rental: purchaseDate": "租借日期", "ownership: rental: rented": "已租借", "ownership: rental: winCountRemaining": "租借可用胜场数", "role: assassin": "角色定位：刺客", "role: fighter": "角色定位：战士", "role: mage": "角色定位：法师", "role: marksman": "角色定位：射手", "role: support": "角色定位：辅助", "role: tank": "角色定位：坦克", "tacticalInfo: damageType": "战略信息：伤害【表明英雄的伤害类型的倾向（物理伤害、魔法伤害或者混合伤害）】", "tacticalInfo: difficulty": "战略信息：难度（英雄的使用难度）", "tacticalInfo: style": "战略信息：风格【表明英雄的伤害输出方式的倾向（普攻vs技能）】", "recommendedPosition: TOP": "推荐路线：上路", "recommendedPosition: JUNGLE": "推荐路线：打野", "recommendedPosition: MIDDLE": "推荐路线：中路", "recommendedPosition: BOTTOM": "推荐路线：下路", "recommendedPosition: UTILITY": "推荐路线：辅助"}
-    LoLChampions_header_keys = list(LoLChampions_header.keys())
-    LoLChampions_data = {}
-    recommended_position_for_champion = await (await connection.request("GET", "/lol-perks/v1/recommended-champion-positions")).json()
-    damageTypes = {"kPhysical": "物理伤害", "kMagic": "魔法伤害", "kMixed": "混合伤害"}
-    #damageTypes = {"kPhysical": "Physical", "kMagic": "Magic", "kMixed": "Mixed"}
-    for i in range(len(LoLChampions_header_keys)):
-        key = LoLChampions_header_keys[i]
-        LoLChampions_data[key] = []
-    print("championId\tname\ttitle\talias")
-    count = 0
-    for i in sorted(LoLChampions.keys()):
-        champion = LoLChampions[i]
-        print("%d\t%s\t%s\t%s" %(champion["id"], champion["name"], champion["title"], champion["alias"]))
-        if champion["id"] != -1: #API中存在一个id为-1的英雄。该英雄不计入英雄个数（There's a champion with the id -1 in API. It won't be counted)
-            count += 1
-        for j in range(len(LoLChampions_header_keys)):
-            key = LoLChampions_header_keys[j]
-            if j <= 15:
-                if j == 11:
-                    if champion[key] == 0:
-                        LoLChampions_data[key].append("")
-                    else:
-                        try:
-                            LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion[key] // 1000)))
-                        except OSError: #出现了购买时间戳为18446744073709550616的英雄（There's a champion with the purchased timestamp 18446744073709550616）
-                            LoLChampions_data[key].append("")
-                else:
-                    LoLChampions_data[key].append(champion[key])
-            elif j <= 22:
-                if j <= 18:
-                    LoLChampions_data[key].append(champion["ownership"][key[11:]])
-                else:
-                    if j == 19 or j == 20:
-                        if champion["ownership"]["rental"][key[19:]] == 0:
-                            LoLChampions_data[key].append("")
-                        else:
-                            try:
-                                LoLChampions_data[key].append(time.strftime("%Y-%m-%d %H-%M-%S", time.localtime(champion["ownership"]["rental"][key[19:]] // 1000)))
-                            except OSError: #出现了租借时间戳为18446744073709550616的英雄（There's a champion with the rented timestamp 18446744073709550616）
-                                LoLChampions_data[key].append("")
-                    else:
-                        LoLChampions_data[key].append(champion["ownership"]["rental"][key[19:]])
-            elif j <= 28:
-                if key[6:] in champion["roles"]:
-                    LoLChampions_data[key].append(True)
-                else:
-                    LoLChampions_data[key].append(False)
-            elif j <= 31:
-                if j == 29:
-                    LoLChampions_data[key].append(damageTypes[champion["tacticalInfo"][key[14:]]])
-                else:
-                    LoLChampions_data[key].append(champion["tacticalInfo"][key[14:]])
+            if mode[0] == "1" or mode[0] == "3":
+                print("\n统计完毕，共%d名英雄。请输入任意键退出。\nCount finished! There're %d champions in total. Please press any key to exit." %(count, count))
             else:
-                if i == -1:
-                    LoLChampions_data[key].append(False)
-                elif key[21:] in recommended_position_for_champion[str(i)]["recommendedPositions"]:
-                    LoLChampions_data[key].append(True)
-                else:
-                    LoLChampions_data[key].append(False)
-    LoLChampions_statistics_output_order = [9, 10, 15, 1, 5, 23, 24, 25, 26, 27, 28, 32, 33, 34, 35, 36, 29, 31, 30, 17, 11, 16, 18, 8, 20, 21, 19, 22, 12, 7, 13, 3, 4, 14, 6, 2]
-    LoLChampions_data_organized = {}
-    for i in LoLChampions_statistics_output_order:
-        key = LoLChampions_header_keys[i]
-        LoLChampions_data_organized[key] = LoLChampions_data[key]
-    LoLChampions_df = pandas.DataFrame(data = LoLChampions_data_organized)
-    print("正在优化逻辑值显示……\nOptimizing the display of boolean values ...")
-    for column in LoLChampions_df:
-        if LoLChampions_df[column].dtype == "bool":
-            LoLChampions_df[column] = LoLChampions_df[column].astype(str)
-            for i in range(len(LoLChampions_df)):
-                LoLChampions_df.loc[i, column] = "√" if LoLChampions_df[column][i] == "True" else ""
-    print("逻辑值显示优化完成！\nBoolean value display optimization finished!")
-    LoLChampions_df = pandas.concat([pandas.DataFrame([LoLChampions_header])[LoLChampions_df.columns], LoLChampions_df], ignore_index = True)
-    while True:
-        try:
-            with pandas.ExcelWriter(path = "available-bots.xlsx", mode = "a", if_sheet_exists = "replace") as writer:
-                LoLChampions_df.to_excel(excel_writer = writer, sheet_name = "Sheet1")
-        except PermissionError:
-            print("无写入权限！请确保文件未被打开且非只读状态！输入任意键以重试。\nPermission denied! Please ensure the file isn't opened right now or read-only! Press any key to try again.")
-            input()
-        except FileNotFoundError:
-            with open(path = "available-bots.xlsx") as writer:
-                LoLChampions_df.to_excel(excel_writer = writer, sheet_name = "Sheet1")
-            break
-        else:
-            print("\n统计完毕，共%d名英雄。请输入任意键退出。\nCount finished! There're %d champions in total. Please press any key to exit." %(count, count))
+                print("英雄数据导出完成！请输入任意键退出。\nChampion data exported! Please press any key to exit.")
             break
     input()
 
@@ -948,22 +926,7 @@ async def count_available_bots(connection):
 @connector.ready
 async def connect(connection):
     await get_summoner_data(connection)
-    print("请选择统计类型：\nPlease select which type of champions to count:\n1\t所有英雄（All champions）\n2\t所有电脑英雄（All bot champions）\n3\t当前房间可用电脑英雄（Available bot champions in this lobby）")
-    while True:
-        mode = input()
-        if mode == "":
-            continue
-        elif mode[0] == "1":
-            await count_all_champions(connection)
-            break
-        elif mode[0] == "2":
-            await count_all_bots(connection)
-            break
-        elif mode[0] == "3":
-            await count_available_bots(connection)
-            break
-        else:
-            print("您的输入有误，请重新输入！\nERROR input! Please try again!")
+    await count_champions(connection)
 
 #-----------------------------------------------------------------------------
 # Main

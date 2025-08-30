@@ -9,7 +9,7 @@ from urllib.parse import quote, unquote
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/07/01
+# 更新（Last update）：     2025/07/31
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -88,7 +88,7 @@ def format_runtime(seconds: int):
     result = []
     for unit_name, unit_seconds in units:
         if seconds >= unit_seconds:
-            unit_value = int(seconds // unit_seconds)
+            unit_value = round(seconds // unit_seconds)
             seconds %= unit_seconds
             result.append(f"{unit_value}{unit_name}")
     

@@ -9,7 +9,7 @@ from wcwidth import wcswidth
 # 作者（Author）：          WordlessMeteor
 # 主页（Home page）：       https://github.com/WordlessMeteor/LoL-DIY-Programs/
 # 鸣谢（Acknowledgement）： XHXIAIEIN
-# 更新（Last update）：     2025/07/06
+# 更新（Last update）：     2025/08/20
 #=============================================================================
 
 #-----------------------------------------------------------------------------
@@ -93,6 +93,7 @@ def rm_ctrl_char(s: str): #移除一个字符串中的所有C0和C1字符（Remo
     return "".join(ch for ch in s if unicodedata.category(ch) != "Cc")
 
 def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print: bool = False, print_header: bool = True, print_index: bool = False, reserve_index = False, start_index = 0, header_align: str = "^", align: str = "^", align_replicate_rule: str = "all"): #按照每列最长字符串的命令行宽度加上2，再根据每个数据的中文字符数量决定最终格式化输出的字符串宽度（Get the width of the longest string of each column, add it by 2, and substract it by the number of each cell string's Chinese characters to get the final width for each cell to print using `format` function）
+    df = df.copy(deep = True)
     old_index = df.index
     df.index = range(start_index, len(df) + start_index)
     maxLens = {}
@@ -100,7 +101,7 @@ def format_df(df: pandas.DataFrame, width_exceed_ask: bool = True, direct_print:
     fields = df.columns.tolist()
     for field in fields:
         maxLens[field] = max(0 if len(df) == 0 else max(map(lambda x: wcswidth(rm_ctrl_char(str(x))), df[field])), wcswidth(rm_ctrl_char(field))) + 2
-    index_len = max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
+    index_len = 0 if len(df) == 0 else max(map(lambda x: len(str(x)), old_index)) if reserve_index else max(len(str(start_index)), len(str(start_index + len(df) - 1)))
     if sum(maxLens.values()) + 2 * (len(fields) - 1) > maxWidth or print_index and index_len + sum(maxLens.values()) + 2 * len(fields) > maxWidth:
         if width_exceed_ask:
             print("单行数据字符串输出宽度超过当前终端窗口宽度！是否继续？（输入任意键继续，否则直接打印该数据框。）\nThe output width of each record string exceeds the current width of the terminal window! Continue? (Input anything to continue, or null to directly print this dataframe.)")
@@ -976,7 +977,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                     elif j == 11: #持续时长（`gameDuration_norm`）
                                         LoLGame_info_data[key].append(str(LoLGame_info["gameDuration"] // 60) + ":" + "%02d" %(LoLGame_info["gameDuration"] % 60))
                                     elif j == 12: #游戏模式名称（`gameModeName`）
-                                        LoLGame_info_data[key].append("自定义" if LoLGame_info["queueId"] == 0 else gamemodes[LoLGame_info["queueId"]]["name"])
+                                        LoLGame_info_data[key].append("自定义" if LoLGame_info["queueId"] == 0 else gamemodes[LoLGame_info["queueId"]]["name"] if LoLGame_info["queueId"] in gamemodes else "")
                                     else:
                                         LoLGame_info_data[key].append(LoLGame_info[key])
                                 elif j == 13: #玩家序号（`participantId`）
@@ -1316,7 +1317,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                 elif j == 6: #对局版本（`game_version`）
                                     TFTHistory_data[key].append(TFTGameVersion)
                                 elif j == 8: #游戏类型（`tft_game_type`）
-                                    TFTHistory_data[key].append(gamemodes[TFTHistoryJson["queue_id"]]["description"])
+                                    TFTHistory_data[key].append(gamemodes[TFTHistoryJson["queue_id"]]["description"] if TFTHistoryJson["queue_id"] in gamemodes else "")
                                 elif j == 9: #数据版本名称（`tft_set_core_name`）
                                     TFTHistory_data[key].append(TFTHistoryJson.get("tft_set_core_name", "")) #在云顶之弈第7赛季之前，TFTHistoryJson中无tft_set_core_name这一键（Before TFTSet7, tft_set_core_name isn't present as a key of `TFTHistoryJson`）
                                 elif j == 11: #对局创建时间（`gameCreationDate`）
@@ -1477,7 +1478,7 @@ async def get_recent_players(connection, search_mode: int = 2):
                                         #TFTChampion_keys_lower = list(map(lambda x: x.lower(), list(TFTChampions.keys())))
                                         if TFTChampionId in TFTChampions:
                                             to_append = TFTChampions[TFTChampionId][key.split()[-1]]
-                                        elif TFTChampionId.lower() in map(lambda x: x.lower(), TFTChampions.keys()): #在获取艾欧尼亚对局序号为8390690410的英雄信息时，由于雷克塞的英雄序号大小写的原因，会引发键异常（KeyError is caused due to the case of "RekSai" string when the program is getting data from an Ionia match with matchID 8390690410）
+                                        elif TFTChampionId.lower() in set(map(lambda x: x.lower(), TFTChampions.keys())): #在获取艾欧尼亚对局序号为8390690410的英雄信息时，由于雷克塞的英雄序号大小写的原因，会引发键异常（KeyError is caused due to the case of "RekSai" string when the program is getting data from an Ionia match with matchID 8390690410）
                                             TFTChampion_index = list(map(lambda x: x.lower(), TFTChampions.keys())).index(TFTChampionId.lower())
                                             to_append = list(TFTChampions.values())[TFTChampion_index][key.split()[-1]]
                                         else:
@@ -1930,7 +1931,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
         option = logInput()
         if option == "":
             continue
-        elif not option in map(str, range(1, 11)):
+        elif not option in set(map(str, range(1, 11))):
             break
         elif option == "1":
             friend_hovercard_df = await sort_friend_hovercard(connection)
@@ -2030,7 +2031,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     continue
                                 elif groupId.startswith("-1"):
                                     break
-                                elif groupId in map(str, friend_groupIds):
+                                elif groupId in set(map(str, friend_groupIds)):
                                     group = await (await connection.request("GET", f"/lol-chat/v1/friend-groups/{groupId}")).json()
                                     if "errorCode" in group and group["httpStatus"] == 404:
                                         logPrint("操作失败！请检查分组是否存在。\nAction failed! Please check if the folder is still there.")
@@ -2066,7 +2067,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                             continue
                         elif groupId.startswith("-1"):
                             break
-                        elif groupId in map(str, friend_groupIds):
+                        elif groupId in set(map(str, friend_groupIds)):
                             group = await (await connection.request("GET", f"/lol-chat/v1/friend-groups/{groupId}")).json()
                             if groupId == "0":
                                 logPrint("无法重命名默认分组。请换一个分组重试。\nCan't rename the default folder. Please change another folder and try again.") #重命名默认分组返回的状态值是403（The httpStatus returned by renaming the default folder is 403）
@@ -2149,7 +2150,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 continue
                             elif groupId.startswith("-1"):
                                 break
-                            elif groupId in map(str, friend_groupIds):
+                            elif groupId in set(map(str, friend_groupIds)):
                                 group = await (await connection.request("GET", f"/lol-chat/v1/friend-groups/{groupId}")).json()
                                 if groupId == "0":
                                     logPrint("无法删除默认分组。\nYou can't remove the default folder.")
@@ -2227,7 +2228,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 elif conversationIndex[0] == "0":
                                     back = True
                                     break
-                                elif conversationIndex in map(str, list(range(1, len(conversations) + 1))):
+                                elif conversationIndex in set(map(str, list(range(1, len(conversations) + 1)))):
                                     conversations_to_export = [conversations[int(conversationIndex) - 1]]
                                     break
                                 else:
@@ -2420,22 +2421,22 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                         logPrint("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
                     else:
                         logPrint("请选择对话：\nPlease select a conversation:")
+                        print(format_df(conversation_df.iloc[1:], print_index = True, start_index = 1)[0])
+                        log.write(format_df(conversation_df.iloc[1:], width_exceed_ask = False, direct_print = False, print_index = True, start_index = 1)[0] + "\n")
                         while True:
-                            print(format_df(conversation_df.iloc[1:], print_index = True, start_index = 1)[0])
-                            log.write(format_df(conversation_df.iloc[1:], width_exceed_ask = False, direct_print = False, print_index = True, start_index = 1)[0] + "\n")
                             conversation_index = logInput()
                             if conversation_index == "":
                                 continue
                             elif conversation_index == "0":
                                 logPrint("请选择聊天场合：\nPlease select a chat situation:\n0\t返回上一层（Return to the last step）\n1\t好友聊天（Friend chat）\n2\t活动对话（Active conversation）\n3\t指定社交代码（Specify pid）")
                                 break
-                            elif conversation_index in map(str, range(len(conversation_df))):
+                            elif conversation_index in set(map(str, range(len(conversation_df)))):
                                 chatId = conversation_df.loc[int(conversation_index), "id"]
                                 messages = await (await connection.request("GET", f"/lol-chat/v1/conversations/{chatId}/messages")).json()
                                 if "errorCode" in messages and messages["httpStatus"] == 404:
                                     logPrint("该对话尚未激活。请在客户端右边的好友列表中点击该好友，或者直接发送一条聊天类消息，以激活对话。\nThis conversation hasn't been activated yet. Please click this friend in the friend list at the right side of the client, or send a chat message directly to activate the conversation.")
-                                mTypeDict = {"1": "groupchat", "2": "system", "3": "information", "4": "celebration"}
-                                logPrint("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Groupchat）\n2\t系统（System）\n3\t通知（Information）\n4\t庆祝语（Celebration）\n5\t自定义（custom）")
+                                mTypeDict = {"1": "chat", "2": "groupchat", "3": "system", "4": "information", "5": "celebration"}
+                                logPrint("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Chat）\n2\t小队聊天（Groupchat）\n3\t系统（System）\n4\t通知（Information）\n5\t庆祝语（Celebration）\n6\t自定义（custom）")
                                 while True:
                                     mType = logInput()
                                     if mType == "":
@@ -2444,7 +2445,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         break
                                     elif mType[0] in mTypeDict:
                                         messageType = mTypeDict[mType[0]]
-                                    elif mType[0] == "5":
+                                    elif mType[0] == "6":
                                         logPrint("请输入您要发送的消息类型：\nPlease input the type of the message you want to send:")
                                         while True:
                                             messageType = logInput()
@@ -2474,7 +2475,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                         if text.endswith(chr(4) * 2):
                                             continue
                                         elif text == "" or text.endswith(chr(4)):
-                                            logPrint("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Groupchat）\n2\t系统（System）\n3\t通知（Information）\n4\t庆祝语（Celebration）\n5\t自定义（custom）")
+                                            logPrint("请选择您要发送的消息类型：\nPlease select the type of the message you want to send:\n0\t返回上一层（Return to the last step）\n1\t聊天（Chat）\n2\t小队聊天（Groupchat）\n3\t系统（System）\n4\t通知（Information）\n5\t庆祝语（Celebration）\n6\t自定义（custom）")
                                             break
                                         else:
                                             body = {"type": messageType, "body": text}
@@ -2493,6 +2494,8 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     break
                                 else:
                                     logPrint("请选择对话：\nPlease select a conversation:")
+                                    print(format_df(conversation_df.iloc[1:], print_index = True, start_index = 1)[0])
+                                    log.write(format_df(conversation_df.iloc[1:], width_exceed_ask = False, direct_print = False, print_index = True, start_index = 1)[0] + "\n")
                             else:
                                 logPrint("您的输入有误！请重新输入。\nERROR input! Please try again.")
                 elif situation[0] == "3":
@@ -2654,7 +2657,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             continue
                                         elif handle_input == "0":
                                             break
-                                        elif handle_input in map(str, range(1, len(friend_request_df))):
+                                        elif handle_input in set(map(str, range(1, len(friend_request_df)))):
                                             handle_indices = [int(handle_input)]
                                             index_got = True
                                             break
@@ -2821,7 +2824,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             friend_summonerName = move_input
                                             if friend_summonerName in friend_summonerNames:
                                                 friend_index = friend_summonerNames.index(friend_summonerName)
-                                            elif friend_summonerName in map(str, friend_summonerIds):
+                                            elif friend_summonerName in set(map(str, friend_summonerIds)):
                                                 friend_index = friend_summonerIds.index(int(friend_summonerName))
                                             elif friend_summonerName in friend_puuids:
                                                 friend_index = friend_puuids.index(friend_summonerName)
@@ -2926,7 +2929,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                         friend_index = friend_summonerNames.index(friend_summonerName)
                                                     elif friend_summonerName in friend_summonerIds:
                                                         friend_index = friend_summonerIds.index(friend_summonerName)
-                                                    elif friend_summonerName in map(str, friend_summonerIds):
+                                                    elif friend_summonerName in set(map(str, friend_summonerIds)):
                                                         friend_index = friend_summonerIds.index(int(friend_summonerName))
                                                     elif friend_summonerName in friend_puuids:
                                                         friend_index = friend_puuids.index(friend_summonerName)
@@ -2964,7 +2967,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     elif target_groupId == "-1":
                                         logPrint("已取消本次移动。\nThis move has been cancelled.")
                                         break
-                                    elif target_groupId in map(str, friend_groups_df.loc[1:, "id"]):
+                                    elif target_groupId in set(map(str, friend_groups_df.loc[1:, "id"])):
                                         for friend_index in sorted(set(move_indices)):
                                             group = await (await connection.request("GET", f"/lol-chat/v1/friend-groups/{target_groupId}")).json()
                                             move_summonerName = friend_summonerNames[friend_index]
@@ -3026,7 +3029,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     friend_summonerName = noteChange_input
                                     if friend_summonerName in friend_summonerNames:
                                         friend_index = friend_summonerNames.index(friend_summonerName)
-                                    elif friend_summonerName in map(str, friend_summonerIds):
+                                    elif friend_summonerName in set(map(str, friend_summonerIds)):
                                         friend_index = friend_summonerIds.index(int(friend_summonerName))
                                     elif friend_summonerName in friend_puuids:
                                         friend_index = friend_puuids.index(friend_summonerName)
@@ -3101,7 +3104,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             friend_summonerName = unfriend_input
                                             if friend_summonerName in friend_summonerNames:
                                                 friend_index = friend_summonerNames.index(friend_summonerName)
-                                            elif friend_summonerName in map(str, friend_summonerIds):
+                                            elif friend_summonerName in set(map(str, friend_summonerIds)):
                                                 friend_index = friend_summonerIds.index(int(friend_summonerName))
                                             elif friend_summonerName in friend_puuids:
                                                 friend_index = friend_puuids.index(friend_summonerName)
@@ -3206,7 +3209,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                         friend_index = friend_summonerNames.index(friend_summonerName)
                                                     elif friend_summonerName in friend_summonerIds:
                                                         friend_index = friend_summonerIds.index(friend_summonerName)
-                                                    elif friend_summonerName in map(str, friend_summonerIds):
+                                                    elif friend_summonerName in set(map(str, friend_summonerIds)):
                                                         friend_index = friend_summonerIds.index(int(friend_summonerName))
                                                     elif friend_summonerName in friend_puuids:
                                                         friend_index = friend_puuids.index(friend_summonerName)
@@ -3298,7 +3301,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                             friend_summonerName = block_input
                                             if friend_summonerName in friend_summonerNames:
                                                 friend_index = friend_summonerNames.index(friend_summonerName)
-                                            elif friend_summonerName in map(str, friend_summonerIds):
+                                            elif friend_summonerName in set(map(str, friend_summonerIds)):
                                                 friend_index = friend_summonerIds.index(int(friend_summonerName))
                                             elif friend_summonerName in friend_puuids:
                                                 friend_index = friend_puuids.index(friend_summonerName)
@@ -3403,7 +3406,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                         friend_index = friend_summonerNames.index(friend_summonerName)
                                                     elif friend_summonerName in friend_summonerIds:
                                                         friend_index = friend_summonerIds.index(friend_summonerName)
-                                                    elif friend_summonerName in map(str, friend_summonerIds):
+                                                    elif friend_summonerName in set(map(str, friend_summonerIds)):
                                                         friend_index = friend_summonerIds.index(int(friend_summonerName))
                                                     elif friend_summonerName in friend_puuids:
                                                         friend_index = friend_puuids.index(friend_summonerName)
@@ -3966,7 +3969,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                 continue
                             elif partyIndex == "0":
                                 break
-                            elif partyIndex in map(str, range(1, len(parties) + 1)):
+                            elif partyIndex in set(map(str, range(1, len(parties) + 1))):
                                 partyId = parties[int(partyIndex) - 1]["partyId"]
                                 response = await (await connection.request("POST", f"/lol-lobby/v2/party/{partyId}/join")).json()
                                 logPrint(response)
@@ -4035,7 +4038,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                     elif invitationIndex == "0":
                                         logPrint("请选择邀请处理方式：\nPlease select a method of handling the invitation(s):\n0\t返回上一层（Return to the last step）\n1\t接受（Accept）\n2\t拒绝（Decline）")
                                         break
-                                    elif invitationIndex in map(str, range(1, len(invid_df))):
+                                    elif invitationIndex in set(map(str, range(1, len(invid_df)))):
                                         invitationId = invid_df.loc[int(invitationIndex), "invitationId"] #注意到邀请序号和小队序号的获取方式有所不同。小队序号是从原始的小队数据中获取的，因为小队数据作为静态数据传入小队信息整理函数中，而邀请信息没有传入邀请信息整理函数中，在程序运行前后邀请信息会频繁更新，可能导致原始邀请信息和邀请信息数据框中的内容不符（邀请信息数据框整理过程中的邀请信息和这里的邀请信息不在同一个作用域中）【Note that it differs between getting invitationId and getting partyId. PartyId is obtained from the original party data, in that party data are passed into `sort_party_data` function as static data, while invitation data aren't passed into `sort_received_invitations` function. As a result, invitation information may be frequently updated, which causes the original invitation data not in accordance with data in the invitation dataframe (invitation data here don't belong to the same scope of those during sorting out the invitation dataframe)】
                                         invid_owner = invid_df.loc[int(invitationIndex), "fromSummonerName"]
                                         response = await (await connection.request("POST", f"/lol-lobby/v2/received-invitations/{invitationId}/accept")).json()
@@ -4083,7 +4086,7 @@ async def friend_behavior_simulation(connection): #在本函数中可以看到�
                                                 continue
                                             elif decline_input == "0":
                                                 break
-                                            elif decline_input in map(str, range(1, len(invid_df))):
+                                            elif decline_input in set(map(str, range(1, len(invid_df)))):
                                                 decline_indices = [int(decline_input)]
                                                 index_got = True
                                                 break
@@ -5688,7 +5691,7 @@ async def blacklist_behavior_simulation(connection):
                                         player_summonerName = unblock_input
                                         if player_summonerName in player_summonerNames:
                                             player_index = player_summonerNames.index(player_summonerName)
-                                        elif player_summonerName in map(str, player_summonerIds):
+                                        elif player_summonerName in set(map(str, player_summonerIds)):
                                             player_index = player_summonerIds.index(int(player_summonerName))
                                         elif player_summonerName in player_puuids:
                                             player_index = player_puuids.index(player_summonerName)
@@ -5789,7 +5792,7 @@ async def blacklist_behavior_simulation(connection):
                                             for player_summonerName in player_summonerName_list:
                                                 if player_summonerName in player_summonerNames:
                                                     player_index = player_summonerNames.index(player_summonerName)
-                                                elif player_summonerName in map(str, player_summonerIds):
+                                                elif player_summonerName in set(map(str, player_summonerIds)):
                                                     player_index = player_summonerIds.index(int(player_summonerName))
                                                 elif player_summonerName in player_puuids:
                                                     player_index = player_puuids.index(player_summonerName)
