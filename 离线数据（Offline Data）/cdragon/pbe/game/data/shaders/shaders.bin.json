@@ -4634,6 +4634,34 @@
                     }
                 ],
                 "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "BloomValue",
+                "logicalParameters": [
+                    {
+                        "name": "BloomValue",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Bloom_Color",
+                "data": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Bloom_Color",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
             }
         ],
         "staticSwitches": [
@@ -4673,6 +4701,10 @@
             {
                 "name": "OUTLINE_ON",
                 "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "BLOOM_ON",
+                "__type": "ShaderStaticSwitch"
             }
         ],
         "textures": [
@@ -4695,15 +4727,21 @@
                 "name": "iridescentTex",
                 "defaultTexturePath": "ASSETS/Shared/Materials/Default_Gradient.tex",
                 "__type": "ShaderTexture"
+            },
+            {
+                "name": "BloomMask_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.tex",
+                "__type": "ShaderTexture"
             }
         ],
         "featureDefines": {
+            "FEATURE_BLOOM": "1",
             "FEATURE_DISPLACEMENT": "1",
             "FEATURE_VERTEX_COLOR_VS": "1",
             "FEATURE_WORLD_NORMAL": "1",
             "FEATURE_WORLD_POSITION": "1"
         },
-        "featureMask": 36,
+        "featureMask": 37,
         "objectPath": "Shaders/SkinnedMesh/Outline_MatCap_RMA_VertexDeform",
         "__type": "CustomShaderDef"
     },
