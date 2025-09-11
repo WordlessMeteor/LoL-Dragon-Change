@@ -697,12 +697,13 @@
                 "__type": "AtomicClipData"
             },
             "Run": {
-                "mFlags": 2,
-                "mClipNameList": [
-                    "Run_In",
-                    "Run_Base"
-                ],
-                "__type": "SequencerClipData"
+                "Updater": {
+                    "__type": "IsHomeguardParametricUpdater"
+                },
+                "mChangeAnimationMidPlay": true,
+                "mTrueConditionClipName": "{f636cdf6}",
+                "mFalseConditionClipName": "{f636cdf6}",
+                "__type": "ConditionBoolClipData"
             },
             "{41472d6f}": {
                 "mFlags": 2,
@@ -1216,6 +1217,47 @@
                     "{d3c83562}"
                 ],
                 "__type": "ParallelClipData"
+            },
+            "Run_Normal": {
+                "mFlags": 2,
+                "mClipNameList": [
+                    "Run_In",
+                    "Run_Base"
+                ],
+                "__type": "SequencerClipData"
+            },
+            "{bc1ef3fb}": {
+                "mFlags": 2,
+                "mConditionFloatPairDataList": [
+                    {
+                        "mClipName": "Run_Normal",
+                        "mValue": 330.0,
+                        "__type": "ConditionFloatPairData"
+                    },
+                    {
+                        "mClipName": "Run_Fast",
+                        "mValue": 375.0,
+                        "__type": "ConditionFloatPairData"
+                    }
+                ],
+                "Updater": {
+                    "__type": "MoveSpeedParametricUpdater"
+                },
+                "mChangeAnimationMidPlay": true,
+                "__type": "ConditionFloatClipData"
+            },
+            "{f636cdf6}": {
+                "Updater": {
+                    "driver": {
+                        "BuffType": 15,
+                        "__type": "HasBuffOfTypeBoolDriver"
+                    },
+                    "__type": "LogicDriverBoolParametricUpdater"
+                },
+                "mChangeAnimationMidPlay": true,
+                "mTrueConditionClipName": "Run_Haste",
+                "mFalseConditionClipName": "{bc1ef3fb}",
+                "__type": "ConditionBoolClipData"
             },
             "Recall": {
                 "mTrackDataName": "Recall",
@@ -2951,6 +2993,14 @@
             },
             "18016295751040490018": {
                 "mTime": 0.5,
+                "__type": "TimeBlendData"
+            },
+            "16902268717640498509": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
+            "13555540190967676237": {
+                "mTime": 0.0,
                 "__type": "TimeBlendData"
             },
             "11490697228965598558": {

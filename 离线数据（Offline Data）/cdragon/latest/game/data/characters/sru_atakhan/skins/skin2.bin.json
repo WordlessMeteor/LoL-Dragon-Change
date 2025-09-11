@@ -84,6 +84,7 @@
                 300.0,
                 300.0
             ],
+            "material": "Characters/SRU_Atakhan/Skins/Skin2/Materials/Body_Dissolver",
             "boundingCylinderRadius": 125.0,
             "reflectionFresnelColor": [
                 0,
@@ -98,7 +99,7 @@
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 },
                 {
-                    "material": "Characters/SRU_Atakhan/Skins/Skin2/Materials/VFX_Weapon_inst",
+                    "material": "Characters/SRU_Atakhan/Skins/Skin2/Materials/Body_Dissolver",
                     "submesh": "Body",
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 }
@@ -141,30 +142,37 @@
         "idleParticlesEffects": [
             {
                 "effectKey": "SRU_Atakhan_Idle_Back_Glow",
+                "boneName": "C_Buffbone_Glb_Center_Loc",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
                 "effectKey": "SRU_Atakhan_Idle_Back_Smoke",
+                "boneName": "C_UpCloak_Main",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
                 "effectKey": "{9e6a4ecb}",
+                "boneName": "C_UpCloak_Main",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
                 "effectKey": "{7f717866}",
+                "boneName": "Halo",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
                 "effectKey": "{9e6a4ecb}",
+                "boneName": "R_UpperBuffbone_Glb_Ablility_Loc",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
                 "effectKey": "{9e6a4ecb}",
+                "boneName": "L_UpperBuffbone_Glb_Ablility_Loc",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
                 "effectKey": "SRU_Atakhan_Idle_Cloak",
+                "boneName": "Root",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             },
             {
@@ -586,7 +594,7 @@
                     "meshName": "ASSETS/Characters/SRU_Atakhan/Skins/Base/SRU_Atakhan_Base.SRT_2025_Split1_SolKimLayer.skn",
                     "skeletonName": "ASSETS/Characters/SRU_Atakhan/Skins/Skin02/SRU_Atakhan_Skin02.2025_S3_Atakhan.skl",
                     "animationName": "ASSETS/Characters/SRU_Atakhan/Skins/Skin02/Animations/Death.SRT_2025_S2_MegaLayer.anm",
-                    "useAvatarPose": true,
+                    "{21af2f43}": 1,
                     "Submeshes": [
                         "BODY",
                         "Cloak"
@@ -3741,6 +3749,223 @@
                     "__type": "ValueVector3"
                 },
                 "texture": "ASSETS/Characters/SRU_Atakhan/Skins/Skin02/Particles/SRU_Atakhan_Skin02_Mask_eyes.2025_S3_Atakhan.tex",
+                "__type": "VfxEmitterDefinitionData"
+            },
+            {
+                "rate": {
+                    "constantValue": 0.75,
+                    "__type": "ValueFloat"
+                },
+                "particleLifetime": {
+                    "constantValue": 5.0,
+                    "__type": "ValueFloat"
+                },
+                "emitterName": "pulsingMesh",
+                "primitive": {
+                    "mMesh": {
+                        "mSubmeshesToDrawAlways": [
+                            "BODY"
+                        ],
+                        "mLockMeshToAttachment": true,
+                        "__type": "VfxMeshDefinitionData"
+                    },
+                    "__type": "VfxPrimitiveAttachedMesh"
+                },
+                "blendMode": 4,
+                "birthColor": {
+                    "constantValue": [
+                        0.7300068736076355,
+                        0.0,
+                        0.0,
+                        0.8500038385391235
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.6499999761581421,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.7300068736076355,
+                                0.0,
+                                0.0,
+                                0.8500038385391235
+                            ]
+                        ],
+                        "__type": "VfxAnimatedColorVariableData"
+                    },
+                    "__type": "ValueColor"
+                },
+                "alphaRef": 0,
+                "alphaErosionDefinition": {
+                    "erosionDriveCurve": {
+                        "dynamics": {
+                            "times": [
+                                0.0,
+                                1.0
+                            ],
+                            "values": [
+                                1.0,
+                                -1.0
+                            ],
+                            "__type": "VfxAnimatedFloatVariableData"
+                        },
+                        "__type": "ValueFloat"
+                    },
+                    "erosionFeatherIn": 0.25,
+                    "erosionFeatherOut": 0.25,
+                    "erosionSliceWidth": 0.20000000298023224,
+                    "erosionMapName": "ASSETS/Shared/Particles/Ashe_Base_ErosionPack01.tex",
+                    "erosionMapChannelMixer": {
+                        "constantValue": [
+                            0.0,
+                            0.0,
+                            1.0,
+                            0.0
+                        ],
+                        "__type": "ValueColor"
+                    },
+                    "erosionMapAddressMode": 0,
+                    "__type": "VfxAlphaErosionDefinitionData"
+                },
+                "{cb13aff1}": -15.0,
+                "texture": "ASSETS/Shared/Particles/Brand_Base_Q_SmokeErode.tex",
+                "birthUvScrollRate": {
+                    "constantValue": [
+                        0.0,
+                        0.30000001192092896
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.25,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                0.0,
+                                0.30000001192092896
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "birthUVOffset": {
+                    "constantValue": [
+                        1.0,
+                        1.0
+                    ],
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            },
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            [
+                                1.0,
+                                1.0
+                            ]
+                        ],
+                        "__type": "VfxAnimatedVector2fVariableData"
+                    },
+                    "__type": "ValueVector2"
+                },
+                "uvScale": {
+                    "constantValue": [
+                        7.0,
+                        7.0
+                    ],
+                    "__type": "ValueVector2"
+                },
+                "uvRotation": {
+                    "constantValue": 20.0,
+                    "dynamics": {
+                        "probabilityTables": [
+                            {
+                                "keyTimes": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "keyValues": [
+                                    0.0,
+                                    1.0
+                                ],
+                                "__type": "VfxProbabilityTableData"
+                            }
+                        ],
+                        "times": [
+                            0.0
+                        ],
+                        "values": [
+                            20.0
+                        ],
+                        "__type": "VfxAnimatedFloatVariableData"
+                    },
+                    "__type": "ValueFloat"
+                },
+                "textureMult": {
+                    "textureMult": "ASSETS/Characters/SRU_Atakhan/Skins/Skin02/Particles/SRU_Atakhan_Skin02_Mask_Material.2025_S3_Atakhan.tex",
+                    "__type": "VfxTextureMultDefinitionData"
+                },
                 "__type": "VfxEmitterDefinitionData"
             }
         ],
@@ -13202,63 +13427,32 @@
         },
         "__type": "StaticMaterialDef"
     },
-    "Characters/SRU_Atakhan/Skins/Skin2/Materials/VFX_Weapon_inst": {
-        "name": "Characters/SRU_Atakhan/Skins/Skin2/Materials/VFX_Weapon_inst",
+    "Characters/SRU_Atakhan/Skins/Skin2/Materials/Body_Dissolver": {
+        "name": "Characters/SRU_Atakhan/Skins/Skin2/Materials/Body_Dissolver",
         "samplerValues": [
             {
-                "textureName": "MatCap_Tex",
-                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "textureName": "Color_Mask_Texture",
-                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
+                "textureName": "Dissolve_Texture",
+                "texturePath": "ASSETS/Shared/Particles/Nilah_Base_SmokeErode.StrawberryRebuild.tex",
+                "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
                 "textureName": "Diffuse_Texture",
                 "texturePath": "ASSETS/Characters/SRU_Atakhan/Skins/Skin02/SRU_Atakhan_Skin02_TX_CM.2025_S3_Atakhan.tex",
-                "addressU": 1,
-                "addressV": 1,
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "iridescentTex",
-                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "textureName": "AdditiveScrollTex",
-                "texturePath": "ASSETS/Shared/Particles/Ashe_Base_ErosionPack01.tex",
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "textureName": "AdditiveScroll_Mask",
-                "texturePath": "ASSETS/Characters/SRU_Atakhan/Skins/Skin02/Particles/SRU_Atakhan_Skin02_Mask_Material.2025_S3_Atakhan.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
-                "__type": "StaticMaterialShaderSamplerDef"
-            },
-            {
-                "textureName": "Diffuse_Texture2",
-                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Ivern_Skin30.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
+                "textureName": "Alt_Diffuse_Texture",
+                "texturePath": "ASSETS/Maps/Particles/SR/URF_Global_Summoner_Recall_Lines.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
             {
-                "name": "Iridescence_Pulse_Speed_Min",
+                "name": "DissolveWidth",
                 "value": [
-                    1.0,
+                    0.25,
                     0.0,
                     0.0,
                     0.0
@@ -13266,9 +13460,9 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Diffuse_Fade_Mask_Value",
+                "name": "DissolveBias",
                 "value": [
-                    1.0,
+                    1.2000000476837158,
                     0.0,
                     0.0,
                     0.0
@@ -13276,252 +13470,72 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "SpecularControl",
+                "name": "Diffuse_AlphaClip",
                 "value": [
+                    0.05000000074505806,
                     0.0,
-                    1.0,
                     0.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "SpecularColor",
+                "name": "Emissive_Factor",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Dissolve_Color",
                 "value": [
-                    1.0,
-                    1.0,
-                    1.0,
+                    0.062745101749897,
+                    0.7176470756530762,
+                    0.7411764860153198,
                     1.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Exclude_Mask_from_TintColor_Value",
+                "name": "DissolveIntensity",
                 "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "OutlineColor",
-                "value": [
-                    0.9960784316062927,
-                    0.1882352977991104,
-                    0.12941177189350128,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "OutlineThickness",
-                "value": [
-                    0.20000000298023224,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "OutlineSoftness",
-                "value": [
-                    1.0,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveTexTile",
-                "value": [
-                    8.0,
                     5.0,
                     0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "IridescentControl",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveStrength_R",
-                "value": [
-                    2.0,
-                    0.0,
                     0.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "TintColor",
+                "name": "Lighting_Intensity",
                 "value": [
                     1.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveScroll_ColorTint_R",
-                "value": [
-                    0.95686274766922,
-                    0.6466773748397827,
                     0.0,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveTexScrollSpeed_R",
-                "value": [
                     0.0,
-                    0.30000001192092896,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveTexScrollSpeed_G",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveScroll_ColorTint_G",
-                "value": [
-                    0.4129854142665863,
-                    0.2078278809785843,
-                    0.3544518053531647,
-                    1.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveStrength_G",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Diffuse_Tex_BlendVlue",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveTexScrollSpeed_A",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveScroll_ColorTint_A",
-                "value": [
-                    0.686274528503418,
-                    0.4470588266849518,
-                    0.34117648005485535,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "AdditiveStrength_A",
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Bloom_Color",
-                "value": [
-                    0.9960784316062927,
-                    0.10196078568696976,
-                    0.14509804546833038,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
                 "name": "Bloom_Intensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
                 "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
-                "name": "BLOOM_SCROLLTEX_ONLY",
+                "name": "DISSOLVE_OUT_ALPHA",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DEBUG_VIEW_DISSOLVE",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
             },
             {
-                "name": "ADDITIVESCROLLTEX_R_SCREENSPACE",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "ADDITIVESCROLLTEX_G_SCREENSPACE",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "IRIDESCENCE_PULSE",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "FADE_DIFFUSE_ONLY_W_MASK",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "FADE_DIFFUSE_ONLY",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "SCROLL_TEXTURE_ONLY",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "ADDITIVE_ALPHA",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "ALPHA_BLEND_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "SPECULAR_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "EXCLUDE_MASK_FROM_TINTCOLOR",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "OUTLINE_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "IRIDESCENCE_OUTLINE",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "DIFFUSE_LERP_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "OUTLINE_MASK_ON",
-                "on": false,
-                "__type": "StaticMaterialSwitchDef"
-            },
-            {
-                "name": "INVERT_BLOOM_FRESNEL",
+                "name": "USE_POST_LIGHT",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
             }
@@ -13534,7 +13548,7 @@
                 "name": "normal",
                 "passes": [
                     {
-                        "shader": "Shaders/SkinnedMesh/Outline_Iridescent_Add_Scroll",
+                        "shader": "Shaders/SkinnedMesh/Dissolve_Diffuse_Or_Alpha_MultDiffuseAlpha",
                         "blendEnable": true,
                         "srcColorBlendFactor": 6,
                         "srcAlphaBlendFactor": 6,
@@ -13557,6 +13571,106 @@
             }
         ],
         "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "DissolveBias",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "{e4cb0f58}"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "driver": {
+                                        "mBoolDriver": {
+                                            "mAnimationNames": [
+                                                "{e4cb0f58}"
+                                            ],
+                                            "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                        },
+                                        "mTurnOnTimeSec": 4.199999809265137,
+                                        "mTurnOffTimeSec": 0.0,
+                                        "__type": "LerpMaterialDriver"
+                                    },
+                                    "graph": {
+                                        "times": [
+                                            0.29645273089408875,
+                                            0.4398614168167114,
+                                            0.5440101623535156,
+                                            0.6221500039100647,
+                                            0.7079133987426758,
+                                            0.8263806700706482,
+                                            1.0
+                                        ],
+                                        "values": [
+                                            -0.29512882232666016,
+                                            -0.20686818659305573,
+                                            0.04046771675348282,
+                                            0.391348272562027,
+                                            0.7210431694984436,
+                                            0.9379943609237671,
+                                            1.0
+                                        ],
+                                        "__type": "VfxAnimatedFloatVariableData"
+                                    },
+                                    "__type": "FloatGraphMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            },
+                            {
+                                "mCondition": {
+                                    "__type": "IsDeadDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mBoolDriver": {
+                                        "__type": "IsDeadDynamicMaterialBoolDriver"
+                                    },
+                                    "mOnValue": -0.25,
+                                    "mOffValue": 1.0,
+                                    "mTurnOnTimeSec": 4.0,
+                                    "mTurnOffTimeSec": 0.0,
+                                    "__type": "LerpMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": 1.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                },
+                {
+                    "name": "Dissolve_Color",
+                    "driver": {
+                        "mBoolDriver": {
+                            "mAnimationNames": [
+                                "{44b395cc}"
+                            ],
+                            "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                        },
+                        "mColorOn": [
+                            0.062745101749897,
+                            0.7176470756530762,
+                            0.7411764860153198,
+                            0.0
+                        ],
+                        "mColorOff": [
+                            0.8392156958580017,
+                            0.05882352963089943,
+                            0.12156862765550613,
+                            0.0
+                        ],
+                        "__type": "ColorChooserMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
             "__type": "DynamicMaterialDef"
         },
         "__type": "StaticMaterialDef"

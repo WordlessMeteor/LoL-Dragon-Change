@@ -235,17 +235,17 @@
             "calculations": {},
             "dataValues": {
                 "FFHealAPRatio": 0.20000000298023224,
-                "FFHealBase": 10.0,
+                "FFHealBase": 20.0,
                 "FFHealBonusADRatio": 0.30000001192092896,
                 "FFHealCritMod": 0,
-                "FFHealMax": 100.0,
+                "FFHealMax": 150.0,
                 "FFMSBuff": 0.20000000298023224,
                 "FFMSBuffMelee": 0.20000000298023224,
                 "FFMSDuration": 1.0,
                 "GRMaxHealthPerProc": 7.0,
                 "GRMeleeFlatHeal": 3.0,
                 "GRPercentHealthDamage": 3.5,
-                "GRPercentHealthHeal": 0.012000000104308128,
+                "GRPercentHealthHeal": 0.05000000074505806,
                 "GRRangedHealthPerProc": 4.0,
                 "GRRangedPenaltyMod": 0.4000000059604645,
                 "GRTriggerTime": 4.0,
@@ -784,6 +784,7 @@
                 }
             },
             "dataValues": {
+                "MaxHPDamage": 0.029999999329447746,
                 "ProcCooldown": 0.75
             },
             "desc": "技能會標記敵軍，隊友的下一次普攻或技能會對其額外造成<magicDamage>魔法傷害</magicDamage>。",
@@ -792,7 +793,7 @@
             "id": 72,
             "name": "灼熱黎明",
             "rarity": 1,
-            "tooltip": "技能會標記敵軍，隊友的下一次普攻或技能會對其額外造成<magicDamage>@Damage@魔法傷害</magicDamage>。<br><br>本回合造成傷害：@f1@<br>總傷害量：@f2@"
+            "tooltip": "技能會標記敵軍，隊友的下一次普攻或技能會對其造成額外<magicDamage>@Damage@ + @MaxHPDamage*100@%最大生命的魔法傷害</magicDamage>。<br><br>本回合造成的傷害：@f1@<br>造成傷害總計：@f2@"
         },
         {
             "apiName": "SlapAround",
@@ -1266,7 +1267,7 @@
             },
             "dataValues": {
                 "ASMultiplier": 75.0,
-                "StaticRatio": 0.625
+                "StaticRatio": 1.0
             },
             "desc": "我方<speed>攻速</speed>變為@StaticRatio@。所有額外<speed>攻速</speed>轉換為<scaleAD>物攻</scaleAD>。(每<speed>1%攻速</speed>轉換為<scaleAD>@ADPerAS@物攻</scaleAD>)。<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/slowandsteady_large.png",
@@ -1466,7 +1467,7 @@
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
-                            "mStartValue": 50.0
+                            "mStartValue": 25.0
                         }
                     ]
                 },
@@ -1475,8 +1476,8 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 500.0,
-                            "mStartValue": 200.0
+                            "mEndValue": 400.0,
+                            "mStartValue": 100.0
                         }
                     ]
                 }
@@ -2244,9 +2245,9 @@
                 "GoldBonus": 1000.0,
                 "LegendaryCostReduction": -500.0,
                 "LegendaryGoldBasisDiscount": 1000.0,
-                "PrismaticCostReduction": -1000.0,
+                "PrismaticCostReduction": -1500.0,
                 "PrismaticGoldBasisDiscount": 1250.0,
-                "StatCostReduction": -100.0
+                "StatCostReduction": -250.0
             },
             "desc": "獲得@GoldBonus@金錢，並降低所有鐵砧的價格<br>。<br>稜鏡鐵砧：@PrismaticCostReduction@<br>傳說鐵砧：@LegendaryCostReduction@<br>能力值鐵砧：@StatCostReduction@<br><br><rules>從鐵砧獲得的物品轉售價格減少500金錢。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",

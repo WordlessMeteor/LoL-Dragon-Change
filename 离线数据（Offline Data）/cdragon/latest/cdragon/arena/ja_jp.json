@@ -235,17 +235,17 @@
             "calculations": {},
             "dataValues": {
                 "FFHealAPRatio": 0.20000000298023224,
-                "FFHealBase": 10.0,
+                "FFHealBase": 20.0,
                 "FFHealBonusADRatio": 0.30000001192092896,
                 "FFHealCritMod": 0,
-                "FFHealMax": 100.0,
+                "FFHealMax": 150.0,
                 "FFMSBuff": 0.20000000298023224,
                 "FFMSBuffMelee": 0.20000000298023224,
                 "FFMSDuration": 1.0,
                 "GRMaxHealthPerProc": 7.0,
                 "GRMeleeFlatHeal": 3.0,
                 "GRPercentHealthDamage": 3.5,
-                "GRPercentHealthHeal": 0.012000000104308128,
+                "GRPercentHealthHeal": 0.05000000074505806,
                 "GRRangedHealthPerProc": 4.0,
                 "GRRangedPenaltyMod": 0.4000000059604645,
                 "GRTriggerTime": 4.0,
@@ -784,6 +784,7 @@
                 }
             },
             "dataValues": {
+                "MaxHPDamage": 0.029999999329447746,
                 "ProcCooldown": 0.75
             },
             "desc": "スキルが敵をマークする。味方はマークされた敵に対し、次の通常攻撃またはスキルで追加<magicDamage>魔法ダメージ</magicDamage>を与える。",
@@ -792,7 +793,7 @@
             "id": 72,
             "name": "灼熱の夜明け",
             "rarity": 1,
-            "tooltip": "スキルが敵をマークする。味方はマークされた敵に対し、次の通常攻撃またはスキルで<magicDamage>@Damage@の魔法ダメージ</magicDamage>を追加で与える。<br><br>このラウンド中に与えたダメージ量: @f1@<br>与えたダメージ量の合計: @f2@"
+            "tooltip": "スキルが敵をマークする。味方はマークされた敵に対し、次の通常攻撃またはスキルで<magicDamage>@Damage@ + 最大体力の@MaxHPDamage*100@%の追加魔法ダメージ</magicDamage>を与える。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "SlapAround",
@@ -1266,7 +1267,7 @@
             },
             "dataValues": {
                 "ASMultiplier": 75.0,
-                "StaticRatio": 0.625
+                "StaticRatio": 1.0
             },
             "desc": "自身の<speed>攻撃速度</speed>が@StaticRatio@になる。すべての追加の<speed>攻撃速度</speed>が<scaleAD>攻撃力</scaleAD>に変換される。(<speed>攻撃速度1%</speed>ごとに<scaleAD>攻撃力@ADPerAS@</scaleAD>)。<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/slowandsteady_large.png",
@@ -1466,7 +1467,7 @@
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
-                            "mStartValue": 50.0
+                            "mStartValue": 25.0
                         }
                     ]
                 },
@@ -1475,8 +1476,8 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 500.0,
-                            "mStartValue": 200.0
+                            "mEndValue": 400.0,
+                            "mStartValue": 100.0
                         }
                     ]
                 }
@@ -2244,9 +2245,9 @@
                 "GoldBonus": 1000.0,
                 "LegendaryCostReduction": -500.0,
                 "LegendaryGoldBasisDiscount": 1000.0,
-                "PrismaticCostReduction": -1000.0,
+                "PrismaticCostReduction": -1500.0,
                 "PrismaticGoldBasisDiscount": 1250.0,
-                "StatCostReduction": -100.0
+                "StatCostReduction": -250.0
             },
             "desc": "@GoldBonus@ゴールドを獲得し、すべての金床の価格が低下する。<br><br>プリズムの金床: @PrismaticCostReduction@<br>レジェンダリーの金床: @LegendaryCostReduction@<br>ステータスの金床: @StatCostReduction@<br><br><rules>金床から獲得したアイテムの売却価格が500ゴールド低下する。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
@@ -2627,13 +2628,13 @@
             "dataValues": {
                 "HealShieldAmp": 0.20000000298023224
             },
-            "desc": "<healing>体力回復およびシールド効果が@HealShieldAmp*100@%</healing>増加する。",
+            "desc": "<healing>体力回復量とシールド量が@HealShieldAmp*100@%</healing>増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/firstaidkit_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/firstaidkit_small.png",
             "id": 37,
             "name": "救急セット",
             "rarity": 0,
-            "tooltip": "<healing>体力回復およびシールド効果が@HealShieldAmp*100@%</healing>増加する。"
+            "tooltip": "<healing>体力回復量とシールド量が@HealShieldAmp*100@%</healing>増加する。"
         },
         {
             "apiName": "OkBoomerang",
@@ -3946,13 +3947,13 @@
                 "FlatHS": 0.10000000149011612,
                 "HSDuration": 10.0
             },
-            "desc": "体力回復およびシールド効果が増加する。体力が低下するとさらに増加する。アルティメットスキルを使用すると、回復効果およびシールド量が2倍増加する。",
+            "desc": "体力回復とシールド効果が増加する。体力が低下するとさらに増加する。アルティメットスキルを使用すると、回復効果とシールド量が2倍増加する。",
             "iconLarge": "assets/ux/cherry/augments/icons/spirit_infusion_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/spirit_infusion_small.png",
             "id": 326,
             "name": "精霊の力",
             "rarity": 0,
-            "tooltip": "<healing>体力回復およびシールド効果が@FlatHS*100@%</healing>増加する。<br><br>アルティメットスキルを使用すると@HSDuration@秒間、<healing>回復効果およびシールド量</healing>が@AmpAmount*100@%増加する(クールダウン@Cooldown@秒)。"
+            "tooltip": "<healing>体力回復とシールド効果が@FlatHS*100@%</healing>増加する。<br><br>アルティメットスキルを使用すると@HSDuration@秒間、<healing>回復効果とシールド量</healing>が@AmpAmount*100@%増加する(クールダウン@Cooldown@秒)。"
         },
         {
             "apiName": "StatsOnStats",
