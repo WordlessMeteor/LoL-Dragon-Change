@@ -22685,6 +22685,51 @@
         "ShadingModel": "{baebc346}",
         "parameters": [
             {
+                "name": "MatCap_Strength",
+                "data": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "MatCap_Strength",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "MatCapTintColor",
+                "logicalParameters": [
+                    {
+                        "name": "MatCapTintColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "SpecularPower",
+                "data": [
+                    2.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "SpecularPower",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
                 "name": "ToonShadePower",
                 "data": [
                     2.0,
@@ -22730,6 +22775,28 @@
                     {
                         "name": "ToonRimControl",
                         "fields": 7,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "SunDirection_Override_Yaw",
+                "logicalParameters": [
+                    {
+                        "name": "SunDirection_Override_Yaw",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "SunDirection_Override_Pitch",
+                "logicalParameters": [
+                    {
+                        "name": "SunDirection_Override_Pitch",
+                        "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
@@ -22804,6 +22871,56 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
+                "name": "ScrollTexTile",
+                "data": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "ScrollTexTile",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "ScrollSpeed_R",
+                "logicalParameters": [
+                    {
+                        "name": "ScrollSpeed_R",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Scroll_Color_Tint_R",
+                "logicalParameters": [
+                    {
+                        "name": "Scroll_Color_Tint_R",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "ScrollStrength_R",
+                "logicalParameters": [
+                    {
+                        "name": "ScrollStrength_R",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
                 "name": "Rim_Color_Strength",
                 "data": [
                     1.0,
@@ -22823,6 +22940,14 @@
         ],
         "staticSwitches": [
             {
+                "name": "MATCAP_MASK_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "USE_SPHERICAL_SUN_DIRECTION",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "OVERRIDE_SUN_DIRECTION",
                 "__type": "ShaderStaticSwitch"
             },
@@ -22832,12 +22957,26 @@
                 "__type": "ShaderStaticSwitch"
             },
             {
+                "name": "MATCAP_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "RIM_COLOR_ON",
                 "onByDefault": true,
                 "__type": "ShaderStaticSwitch"
             }
         ],
         "textures": [
+            {
+                "name": "MatCap_Mask",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.tex",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "MatCap_Tex",
+                "defaultTexturePath": "ASSETS/Shared/Materials/MatCap_ToonPlastic.tex",
+                "__type": "ShaderTexture"
+            },
             {
                 "name": "Diffuse_Texture",
                 "defaultTexturePath": "ASSETS/Shared/Materials/rock_texture.tex",
@@ -22856,6 +22995,16 @@
             {
                 "name": "ToonShadingRimTex",
                 "defaultTexturePath": "ASSETS/Shared/Materials/RimToneMap.tex",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "Scroll_Tex",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.tex",
+                "__type": "ShaderTexture"
+            },
+            {
+                "name": "Scroll_Tex_Mask",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.tex",
                 "__type": "ShaderTexture"
             }
         ],
@@ -50147,6 +50296,102 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
+                "name": "CausticsColor",
+                "logicalParameters": [
+                    {
+                        "name": "CausticsColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "DistortAmount",
+                "data": [
+                    0.30000001192092896,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "DistortAmount",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "NoiseScrollSpeed",
+                "data": [
+                    -0.10000000149011612,
+                    -0.20000000298023224,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "NoiseScrollSpeed",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "NoiseScale",
+                "data": [
+                    2.0,
+                    2.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "NoiseScale",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "NoiseScrollSpeed2",
+                "data": [
+                    -0.10000000149011612,
+                    -0.20000000298023224,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "NoiseScrollSpeed2",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "NoiseScale2",
+                "data": [
+                    2.0,
+                    2.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "NoiseScale2",
+                        "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
                 "name": "Color",
                 "data": [
                     0.24313725531101227,
@@ -50215,57 +50460,6 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
-                "name": "DistortAmount",
-                "data": [
-                    0.30000001192092896,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "DistortAmount",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "DistortScrollSpeed2",
-                "data": [
-                    -0.10000000149011612,
-                    -0.20000000298023224,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "DistortScrollSpeed2",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "NoiseScale",
-                "data": [
-                    2.0,
-                    2.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "NoiseScale",
-                        "fields": 3,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
                 "name": "AlphaBias",
                 "logicalParameters": [
                     {
@@ -50287,6 +50481,34 @@
                 "logicalParameters": [
                     {
                         "name": "FinalAlpha",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "BloomColor",
+                "logicalParameters": [
+                    {
+                        "name": "BloomColor",
+                        "fields": 15,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "BloomIntensity",
+                "data": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "BloomIntensity",
                         "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     }
@@ -50332,9 +50554,22 @@
             {
                 "name": "USE_EFFECT",
                 "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "FAKE_CAUSTICS",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
+                "name": "BLOOM_ON",
+                "__type": "ShaderStaticSwitch"
             }
         ],
         "textures": [
+            {
+                "name": "Diffuse_Texture",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.tex",
+                "__type": "ShaderTexture"
+            },
             {
                 "name": "DistortionTexture",
                 "defaultTexturePath": "ASSETS/Shared/Materials/velvet_Nrm.tex",
@@ -50346,18 +50581,19 @@
                 "__type": "ShaderTexture"
             },
             {
-                "name": "Diffuse_Texture",
+                "name": "BloomMask_Texture",
                 "defaultTexturePath": "ASSETS/Shared/Materials/black.tex",
                 "__type": "ShaderTexture"
             }
         ],
         "featureDefines": {
+            "FEATURE_BLOOM": "1",
             "FEATURE_DISPLACEMENT": "1",
             "FEATURE_VERTEX_COLOR_VS": "1",
             "FEATURE_WORLD_NORMAL": "1",
             "FEATURE_WORLD_POSITION": "1"
         },
-        "featureMask": 36,
+        "featureMask": 37,
         "objectPath": "Shaders/SkinnedMesh/WaterClone",
         "__type": "CustomShaderDef"
     },

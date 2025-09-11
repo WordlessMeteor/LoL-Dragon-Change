@@ -235,17 +235,17 @@
             "calculations": {},
             "dataValues": {
                 "FFHealAPRatio": 0.20000000298023224,
-                "FFHealBase": 10.0,
+                "FFHealBase": 20.0,
                 "FFHealBonusADRatio": 0.30000001192092896,
                 "FFHealCritMod": 0,
-                "FFHealMax": 100.0,
+                "FFHealMax": 150.0,
                 "FFMSBuff": 0.20000000298023224,
                 "FFMSBuffMelee": 0.20000000298023224,
                 "FFMSDuration": 1.0,
                 "GRMaxHealthPerProc": 7.0,
                 "GRMeleeFlatHeal": 3.0,
                 "GRPercentHealthDamage": 3.5,
-                "GRPercentHealthHeal": 0.012000000104308128,
+                "GRPercentHealthHeal": 0.05000000074505806,
                 "GRRangedHealthPerProc": 4.0,
                 "GRRangedPenaltyMod": 0.4000000059604645,
                 "GRTriggerTime": 4.0,
@@ -784,6 +784,7 @@
                 }
             },
             "dataValues": {
+                "MaxHPDamage": 0.029999999329447746,
                 "ProcCooldown": 0.75
             },
             "desc": "Your Abilities mark enemies, causing them to take extra <magicDamage>magic damage</magicDamage> from your ally's next Attack or Ability.",
@@ -792,7 +793,7 @@
             "id": 72,
             "name": "Searing Dawn",
             "rarity": 1,
-            "tooltip": "Your Abilities mark enemies, causing them to take an additional <magicDamage>@Damage@ magic damage</magicDamage> from your ally's next Attack or Ability.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
+            "tooltip": "Your Abilities mark enemies, causing them to take an additional <magicDamage>@Damage@ + @MaxHPDamage*100@% max HP magic damage </magicDamage> from your ally's next Attack or Ability.<br><br>Damage Dealt This Round: @f1@<br>Damage Dealt Total: @f2@"
         },
         {
             "apiName": "SlapAround",
@@ -1266,7 +1267,7 @@
             },
             "dataValues": {
                 "ASMultiplier": 75.0,
-                "StaticRatio": 0.625
+                "StaticRatio": 1.0
             },
             "desc": "Your <speed>Attack Speed</speed> becomes @StaticRatio@. All Bonus <speed>Attack Speed</speed> is converted to <scaleAD>Attack Damage</scaleAD>. (<scaleAD>@ADPerAS@AD</scaleAD> per <speed>1% AS</speed>).<br>",
             "iconLarge": "assets/ux/cherry/augments/icons/slowandsteady_large.png",
@@ -1466,7 +1467,7 @@
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
                             "mEndValue": 200.0,
-                            "mStartValue": 50.0
+                            "mStartValue": 25.0
                         }
                     ]
                 },
@@ -1475,8 +1476,8 @@
                     "mFormulaParts": [
                         {
                             "__type": "ByCharLevelInterpolationCalculationPart",
-                            "mEndValue": 500.0,
-                            "mStartValue": 200.0
+                            "mEndValue": 400.0,
+                            "mStartValue": 100.0
                         }
                     ]
                 }
@@ -2244,9 +2245,9 @@
                 "GoldBonus": 1000.0,
                 "LegendaryCostReduction": -500.0,
                 "LegendaryGoldBasisDiscount": 1000.0,
-                "PrismaticCostReduction": -1000.0,
+                "PrismaticCostReduction": -1500.0,
                 "PrismaticGoldBasisDiscount": 1250.0,
-                "StatCostReduction": -100.0
+                "StatCostReduction": -250.0
             },
             "desc": "Gain @GoldBonus@ gold and reduce the price of all anvils.<br><br>Prismatic Anvils: @PrismaticCostReduction@<br>Legendary Anvils: @LegendaryCostReduction@<br>Stat Anvils: @StatCostReduction@<br><br><rules>Items acquired from anvils resell for 500 gold less.</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
