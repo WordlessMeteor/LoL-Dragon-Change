@@ -8134,7 +8134,7 @@
             "composition": [],
             "desc": "The <TFT_Event_PM_EnemyCelestialChallenge>enemy</TFT_Event_PM_EnemyCelestialChallenge> gains a powerful Elder Dragon.<br><br>The Elder Dragon has @ElderDragonHealth@ Health and @ElderDragonAD@ Attack Damage.",
             "effects": {
-                "{680187b6}": 4000.0,
+                "{680187b6}": 5000.0,
                 "{ae4f59c5}": 450.0
             },
             "from": null,
@@ -30905,7 +30905,7 @@
             "apiName": "TFT5_Item_TitansResolveRadiant",
             "associatedTraits": [],
             "composition": [],
-            "desc": "Gain <TFTRadiantItemBonus>@StackingAD*100@%</TFTRadiantItemBonus> Attack Damage and <TFTRadiantItemBonus>@StackingSP@</TFTRadiantItemBonus> Ability Power when attacking or taking damage, stacking up to @StackCap@ times.<br><br>At full stacks, gain <TFTRadiantItemBonus>@BonusResistsAtStackCap@</TFTRadiantItemBonus> Armor and <TFTRadiantItemBonus>@BonusResistsAtStackCap@</TFTRadiantItemBonus> Magic Resist, and gain immunity to crowd control.",
+            "desc": "Gain <TFTRadiantItemBonus>@StackingAD*100@%</TFTRadiantItemBonus> Attack Damage and <TFTRadiantItemBonus>@StackingSP@</TFTRadiantItemBonus> Ability Power when attacking or taking damage, stacking up to @StackCap@ times.<br><br>At full stacks, gain <TFTRadiantItemBonus>@StackedAmp*100@%</TFTRadiantItemBonus> Damage Amp and gain immunity to crowd control.",
             "effects": {
                 "AS": 30.0,
                 "Armor": 35.0,
@@ -44136,7 +44136,7 @@
                 "TFT_Item_ChainVest",
                 "TFT_Item_RecurveBow"
             ],
-            "desc": "Gain @StackingAD*100@% Attack Damage and @StackingSP@ Ability Power when attacking or taking damage, stacking up to @StackCap@ times.  <br><br>At full stacks, gain @BonusResistsAtStackCap@ Armor and @BonusResistsAtStackCap@ Magic Resist, and gain immunity to crowd control.",
+            "desc": "Gain @StackingAD*100@% Attack Damage and @StackingSP@ Ability Power when attacking or taking damage, stacking up to @StackCap@ times.  <br><br>At full stacks, gain @StackedAmp*100@% Damage Amp and gain immunity to crowd control.",
             "effects": {
                 "AS": 10.0,
                 "Armor": 20.0,
@@ -69478,14 +69478,14 @@
                     "role": "APTank",
                     "squareIcon": "ASSETS/Characters/TFTEventPM_Buddy_Soraka_Golem/Skins/Base/Images/TFTEventPM_Buddy_Soraka_Golem_Mobile.TFT_Event_PM.tex",
                     "stats": {
-                        "armor": 75.0,
-                        "attackSpeed": 0.550000011920929,
+                        "armor": 65.0,
+                        "attackSpeed": 0.5,
                         "critChance": 0.25,
                         "critMultiplier": 1.399999976158142,
-                        "damage": 80.0,
+                        "damage": 70.0,
                         "hp": 1000.0,
                         "initialMana": 30.0,
-                        "magicResist": 75.0,
+                        "magicResist": 65.0,
                         "mana": 100,
                         "range": 1.0
                     },
@@ -69606,7 +69606,7 @@
                 },
                 {
                     "ability": {
-                        "desc": "Passive: Every takedown permanently grants 25 maximum health, 1 Attack Damage and 1 Ability Power.<br>Yasuo becomes 2 Star at 25 takedowns and 3 Star at 40 takedowns.<br><rules>(Takedowns:&nbsp;@TFTUnitProperty.unit:TFT_EventPM_Buddy_Yasuo_YasuoStacks@)</rules><br><br>Strike forward 2 hexes, dealing <physicalDamage>@ModifiedPhysicalDamage@ (%i:scaleAD%)</physicalDamage> physical damage and <magicDamage>@ModifiedMagicDamage@ (%i:scaleAP%)</magicDamage> magic damage to enemies hit. If 2 enemies wouldn't be hit by this, attempt to dash to a better position.",
+                        "desc": "Passive: Every takedown permanently grants @TakedownHP@ maximum health, @TakedownAD*100@ Attack Damage and @TakedownAD*100@ Ability Power.<br>Yasuo becomes 2 Star at @ScriptData.PM_Buddy_Yasuo_Data:NumTakedownsFor2Star@ takedowns and 3 Star at @ScriptData.PM_Buddy_Yasuo_Data:NumTakedownsFor3Star@ takedowns.<br><rules>(Takedowns:&nbsp;@TFTUnitProperty.unit:TFT_EventPM_Buddy_Yasuo_YasuoStacks@)</rules><br><br>Strike forward @HexRange@ hexes, dealing <physicalDamage>@ModifiedPhysicalDamage@ (%i:scaleAD%)</physicalDamage> physical damage and <magicDamage>@ModifiedMagicDamage@ (%i:scaleAP%)</magicDamage> magic damage to enemies hit. If 2 enemies wouldn't be hit by this, attempt to dash to a better position.",
                         "icon": "ASSETS/Characters/TFTEventPM_Buddy_Yasuo_Unit/HUD/Icons2D/TFTEventPM_Buddy_Yasuo_Unit_Q3.TFT_Event_PM.tex",
                         "name": "Spirit Blade",
                         "variables": [
@@ -73576,7 +73576,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_GoldenGloves",
-                    "desc": "Whenever you gain interest, permanently gain @AD*100@ Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@&nbsp;%i:scaleAD%)",
+                    "desc": "Whenever you gain interest, permanently gain @AD*100@% Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@%&nbsp;%i:scaleAD%)",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -73872,18 +73872,18 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_Socialite",
-                    "desc": "Combat start: Mark adjacent hexes for @NumRounds@ rounds. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
+                    "desc": "Combat start: Mark adjacent hexes. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "DamageAmp": 0.10000000149011612,
-                                "Health": 120,
+                                "DamageAmp": 0.05999999865889549,
+                                "Health": 60,
                                 "ManaPerSecond": null,
-                                "NumRounds": 4,
-                                "PercentIncrease": 2.0
+                                "NumRounds": 99,
+                                "PercentIncrease": 3.0
                             }
                         }
                     ],
@@ -119903,7 +119903,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_GoldenGloves",
-                    "desc": "Whenever you gain interest, permanently gain @AD*100@ Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@&nbsp;%i:scaleAD%)",
+                    "desc": "Whenever you gain interest, permanently gain @AD*100@% Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@%&nbsp;%i:scaleAD%)",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -120199,18 +120199,18 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_Socialite",
-                    "desc": "Combat start: Mark adjacent hexes for @NumRounds@ rounds. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
+                    "desc": "Combat start: Mark adjacent hexes. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "DamageAmp": 0.10000000149011612,
-                                "Health": 120,
+                                "DamageAmp": 0.05999999865889549,
+                                "Health": 60,
                                 "ManaPerSecond": null,
-                                "NumRounds": 4,
-                                "PercentIncrease": 2.0
+                                "NumRounds": 99,
+                                "PercentIncrease": 3.0
                             }
                         }
                     ],
@@ -177436,7 +177436,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_GoldenGloves",
-                    "desc": "Whenever you gain interest, permanently gain @AD*100@ Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@&nbsp;%i:scaleAD%)",
+                    "desc": "Whenever you gain interest, permanently gain @AD*100@% Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@%&nbsp;%i:scaleAD%)",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -177732,18 +177732,18 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_Socialite",
-                    "desc": "Combat start: Mark adjacent hexes for @NumRounds@ rounds. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
+                    "desc": "Combat start: Mark adjacent hexes. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "DamageAmp": 0.10000000149011612,
-                                "Health": 120,
+                                "DamageAmp": 0.05999999865889549,
+                                "Health": 60,
                                 "ManaPerSecond": null,
-                                "NumRounds": 4,
-                                "PercentIncrease": 2.0
+                                "NumRounds": 99,
+                                "PercentIncrease": 3.0
                             }
                         }
                     ],
@@ -300010,7 +300010,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_GoldenGloves",
-                    "desc": "Whenever you gain interest, permanently gain @AD*100@ Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@&nbsp;%i:scaleAD%)",
+                    "desc": "Whenever you gain interest, permanently gain @AD*100@% Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@%&nbsp;%i:scaleAD%)",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -300306,18 +300306,18 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_Socialite",
-                    "desc": "Combat start: Mark adjacent hexes for @NumRounds@ rounds. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
+                    "desc": "Combat start: Mark adjacent hexes. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "DamageAmp": 0.10000000149011612,
-                                "Health": 120,
+                                "DamageAmp": 0.05999999865889549,
+                                "Health": 60,
                                 "ManaPerSecond": null,
-                                "NumRounds": 4,
-                                "PercentIncrease": 2.0
+                                "NumRounds": 99,
+                                "PercentIncrease": 3.0
                             }
                         }
                     ],
@@ -440977,7 +440977,7 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_GoldenGloves",
-                    "desc": "Whenever you gain interest, permanently gain @AD*100@ Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@&nbsp;%i:scaleAD%)",
+                    "desc": "Whenever you gain interest, permanently gain @AD*100@% Attack Damage per gold collected. (Current Bonus: @TFTUnitProperty.trait:TFT15_SetMechanic_GoldenGlovesStacks*100@%&nbsp;%i:scaleAD%)",
                     "effects": [
                         {
                             "maxUnits": 25000,
@@ -441273,18 +441273,18 @@
                 },
                 {
                     "apiName": "TFT15_MechanicTrait_Socialite",
-                    "desc": "Combat start: Mark adjacent hexes for @NumRounds@ rounds. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
+                    "desc": "Combat start: Mark adjacent hexes. Allies in marked hexes gain @DamageAmp*100@% Damage Amp and @Health@ Health. This champion gains @PercentIncrease*100@% of the bonus.",
                     "effects": [
                         {
                             "maxUnits": 25000,
                             "minUnits": 1,
                             "style": 1,
                             "variables": {
-                                "DamageAmp": 0.10000000149011612,
-                                "Health": 120,
+                                "DamageAmp": 0.05999999865889549,
+                                "Health": 60,
                                 "ManaPerSecond": null,
-                                "NumRounds": 4,
-                                "PercentIncrease": 2.0
+                                "NumRounds": 99,
+                                "PercentIncrease": 3.0
                             }
                         }
                     ],
