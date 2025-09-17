@@ -101,6 +101,11 @@
             "texture": "ASSETS/Characters/Zilean/Skins/Skin31/Zilean_Skin31_TX_CM.Chroma_Zilean_Arcana.tex",
             "skinScale": 1.5,
             "selfIllumination": 0.699999988079071,
+            "overrideBoundingBox": [
+                95.33000183105469,
+                138.66000366210938,
+                95.33000183105469
+            ],
             "reflectionFresnelColor": [
                 0,
                 0,
@@ -108,7 +113,11 @@
                 255
             ],
             "initialSubmeshToHide": "RecallTarot Circle Back",
-            "submeshRenderOrder": "Body Clock Rotate Hair Circle Long_VFX Flow_VFX Hair_VFX Back RecallTarot",
+            "initialSubmeshShadowsToHide": "Long_VFX",
+            "initialSubmeshMouseOversToHide": "Long_VFX",
+            "InitialSubmeshAvatarToHide": "Long_VFX",
+            "EmitterSubmeshAvatarToHide": "Long_VFX",
+            "submeshRenderOrder": "Clock Rotate Hide Hair Circle Back Hair_VFX Recall Body Flow_VFX Long_VFX RecallTarot",
             "materialOverride": [
                 {
                     "material": "Characters/Zilean/Skins/Skin31/Materials/ZileanSkin24_Rotate_inst",
@@ -152,11 +161,6 @@
             {
                 "effectKey": "{c9df2ff9}",
                 "boneName": "C_BUFFBONE_GLB_HEAD_LOC",
-                "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
-            },
-            {
-                "effectKey": "{c8df2e66}",
-                "boneName": "BackPartB",
                 "__type": "SkinCharacterDataProperties_CharacterIdleEffect"
             }
         ],
@@ -23410,6 +23414,34 @@
             }
         ],
         "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "Rotation_Speed",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mAnimationNames": [
+                                        "Death"
+                                    ],
+                                    "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "mValue": -5.0,
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "mBlendTime": 0.0,
+                        "__type": "BlendingSwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
             "__type": "DynamicMaterialDef"
         },
         "__type": "StaticMaterialDef"
@@ -23661,6 +23693,7 @@
                         "srcAlphaBlendFactor": 6,
                         "dstColorBlendFactor": 7,
                         "dstAlphaBlendFactor": 7,
+                        "writeMask": 15,
                         "__type": "StaticMaterialPassDef"
                     }
                 ],
@@ -23678,22 +23711,6 @@
             }
         ],
         "dynamicMaterial": {
-            "textures": [
-                {
-                    "name": "Diffuse_Texture",
-                    "options": [
-                        {
-                            "driver": {
-                                "mScriptName": "AatroxR",
-                                "__type": "HasBuffDynamicMaterialBoolDriver"
-                            },
-                            "textureName": "ASSETS/Characters/Aatrox/Skins/Skin11/Aatrox_Skin11_TX_CM_Ult.tex",
-                            "__type": "DynamicMaterialTextureSwapOption"
-                        }
-                    ],
-                    "__type": "DynamicMaterialTextureSwapDef"
-                }
-            ],
             "__type": "DynamicMaterialDef"
         },
         "__type": "StaticMaterialDef"
