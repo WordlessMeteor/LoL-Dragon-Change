@@ -497,6 +497,28 @@
             "{a65c6f83}": {
                 "mFlags": 1,
                 "mTrackDataName": "Default",
+                "mEventDataMap": {
+                    "{1ce6ffdf}": {
+                        "mEffectKey": "Thresh_Q_Cast",
+                        "mParticleEventDataPairList": [
+                            {
+                                "mBoneName": "C_Buffbone_GLB_Layout_Loc",
+                                "__type": "ParticleEventDataPair"
+                            }
+                        ],
+                        "__type": "ParticleEventData"
+                    },
+                    "{34c79190}": {
+                        "mEffectKey": "Thresh_Q_Blade_Cast",
+                        "mParticleEventDataPairList": [
+                            {
+                                "mBoneName": "Buffbone_Cstm_Weapon_3",
+                                "__type": "ParticleEventDataPair"
+                            }
+                        ],
+                        "__type": "ParticleEventData"
+                    }
+                },
                 "mAnimationResourceData": {
                     "mAnimationFilePath": "ASSETS/Characters/Thresh/Skins/Base/Animations/Thresh_spell1_in.anm",
                     "__type": "AnimationResourceData"
@@ -674,12 +696,13 @@
                 "__type": "AtomicClipData"
             },
             "Run": {
-                "mFlags": 2,
-                "mClipNameList": [
-                    "Run_In",
-                    "Run_Base"
-                ],
-                "__type": "SequencerClipData"
+                "Updater": {
+                    "__type": "IsHomeguardParametricUpdater"
+                },
+                "mChangeAnimationMidPlay": true,
+                "mTrueConditionClipName": "{f636cdf6}",
+                "mFalseConditionClipName": "{f636cdf6}",
+                "__type": "ConditionBoolClipData"
             },
             "{41472d6f}": {
                 "mFlags": 2,
@@ -765,6 +788,41 @@
                     "Dance_Loop"
                 ],
                 "__type": "SequencerClipData"
+            },
+            "Recall": {
+                "mTrackDataName": "Default",
+                "mEventDataMap": {
+                    "Lantern": {
+                        "mName": "Lantern",
+                        "mStartFrame": 46.0,
+                        "mShowSubmeshList": [
+                            "Recall"
+                        ],
+                        "__type": "SubmeshVisibilityEventData"
+                    },
+                    "{c329a156}": {
+                        "mName": "{c329a156}",
+                        "mStartFrame": 45.0,
+                        "mEffectKey": "Thresh_Recall_01",
+                        "mParticleEventDataPairList": [
+                            {
+                                "mBoneName": "Cup",
+                                "__type": "ParticleEventDataPair"
+                            }
+                        ],
+                        "__type": "ParticleEventData"
+                    },
+                    "{584a6a6f}": {
+                        "mName": "audio_recall_leadin",
+                        "mSoundName": "Play_sfx_Thresh_Recall3D_buffactivate",
+                        "__type": "SoundEventData"
+                    }
+                },
+                "mAnimationResourceData": {
+                    "mAnimationFilePath": "ASSETS/Characters/Thresh/Skins/Skin04/Animations/Thresh_Skin04_Recall.anm",
+                    "__type": "AnimationResourceData"
+                },
+                "__type": "AtomicClipData"
             },
             "Taunt": {
                 "mClipNameList": [
@@ -1177,43 +1235,46 @@
                 ],
                 "__type": "ParallelClipData"
             },
-            "Recall": {
-                "mTrackDataName": "Default",
-                "mEventDataMap": {
-                    "Lantern": {
-                        "mName": "Lantern",
-                        "mStartFrame": 46.0,
-                        "mShowSubmeshList": [
-                            "Recall"
-                        ],
-                        "__type": "SubmeshVisibilityEventData"
+            "Run_Normal": {
+                "mFlags": 2,
+                "mClipNameList": [
+                    "Run_In",
+                    "Run_Base"
+                ],
+                "__type": "SequencerClipData"
+            },
+            "{bc1ef3fb}": {
+                "mFlags": 2,
+                "mConditionFloatPairDataList": [
+                    {
+                        "mClipName": "Run_Normal",
+                        "mValue": 330.0,
+                        "__type": "ConditionFloatPairData"
                     },
-                    "{c329a156}": {
-                        "mName": "{c329a156}",
-                        "mStartFrame": 45.0,
-                        "mEffectKey": "Thresh_Recall_01",
-                        "mParticleEventDataPairList": [
-                            {
-                                "mBoneName": "Cup",
-                                "__type": "ParticleEventDataPair"
-                            }
-                        ],
-                        "mIsLoop": false,
-                        "mIsKillEvent": false,
-                        "__type": "ParticleEventData"
-                    },
-                    "{584a6a6f}": {
-                        "mName": "audio_recall_leadin",
-                        "mSoundName": "Play_sfx_Thresh_Recall3D_buffactivate",
-                        "mIsLoop": false,
-                        "__type": "SoundEventData"
+                    {
+                        "mClipName": "Run_Fast",
+                        "mValue": 375.0,
+                        "__type": "ConditionFloatPairData"
                     }
+                ],
+                "Updater": {
+                    "__type": "MoveSpeedParametricUpdater"
                 },
-                "mAnimationResourceData": {
-                    "mAnimationFilePath": "ASSETS/Characters/Thresh/Skins/Skin04/Animations/Thresh_Skin04_Recall.anm",
-                    "__type": "AnimationResourceData"
+                "mChangeAnimationMidPlay": true,
+                "__type": "ConditionFloatClipData"
+            },
+            "{f636cdf6}": {
+                "Updater": {
+                    "driver": {
+                        "BuffType": 15,
+                        "__type": "HasBuffOfTypeBoolDriver"
+                    },
+                    "__type": "LogicDriverBoolParametricUpdater"
                 },
-                "__type": "AtomicClipData"
+                "mChangeAnimationMidPlay": true,
+                "mTrueConditionClipName": "Run_Haste",
+                "mFalseConditionClipName": "{bc1ef3fb}",
+                "__type": "ConditionBoolClipData"
             },
             "Recall_Leadout": {
                 "mTrackDataName": "Default",
@@ -1228,7 +1289,6 @@
                     "{1a66b7e0}": {
                         "mName": "audio_recall_leadout",
                         "mSoundName": "Play_sfx_Thresh_Winddown3D_buffactivate",
-                        "mIsLoop": false,
                         "__type": "SoundEventData"
                     }
                 },
@@ -1778,6 +1838,14 @@
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
             },
+            "1764563415242161485": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
+            "1764563416248605218": {
+                "mTime": 0.5,
+                "__type": "TimeBlendData"
+            },
             "2075725347636690253": {
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
@@ -1926,6 +1994,10 @@
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
             },
+            "6521702302194646349": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
             "6688552139442666829": {
                 "mTime": 0.0,
                 "__type": "TimeBlendData"
@@ -1995,6 +2067,14 @@
                 "__type": "TimeBlendData"
             },
             "10686364483328530978": {
+                "mTime": 0.5,
+                "__type": "TimeBlendData"
+            },
+            "10687648892291956045": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
+            "10687648893298399778": {
                 "mTime": 0.5,
                 "__type": "TimeBlendData"
             },
@@ -2302,6 +2382,10 @@
                 "mTime": 0.5,
                 "__type": "TimeBlendData"
             },
+            "17952995329556938003": {
+                "mTime": 0.5,
+                "__type": "TimeBlendData"
+            },
             "17952995329629386036": {
                 "mTime": 0.5,
                 "__type": "TimeBlendData"
@@ -2387,6 +2471,10 @@
                 "__type": "TimeBlendData"
             },
             "17952995331634206688": {
+                "mTime": 0.5,
+                "__type": "TimeBlendData"
+            },
+            "17952995331634505738": {
                 "mTime": 0.5,
                 "__type": "TimeBlendData"
             },
@@ -2504,6 +2592,14 @@
             },
             "18016295751040490018": {
                 "mTime": 0.5,
+                "__type": "TimeBlendData"
+            },
+            "16902268717640498509": {
+                "mTime": 0.0,
+                "__type": "TimeBlendData"
+            },
+            "13555540190967676237": {
+                "mTime": 0.0,
                 "__type": "TimeBlendData"
             }
         },

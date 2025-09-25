@@ -172,7 +172,7 @@
             "initialSubmeshToHide": "Skin07_Recall_Mat, Skin07_Crystal_Mat, Skin07_Shards_Mat",
             "materialOverride": [
                 {
-                    "material": "Characters/Varus/Skins/Skin9/Materials/Varus_Skin09_QW_inst",
+                    "material": "Characters/Varus/Skins/Skin9/Materials/Outline_Iridescent_Add_Scroll_inst",
                     "submesh": "Varus_Skin09_Weapon_MD_Mat",
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 }
@@ -1484,20 +1484,17 @@
         "particlePath": "Characters/Varus/Skins/Skin9/Particles/Varus_Skin09_Passive",
         "__type": "VfxSystemDefinitionData"
     },
-    "Characters/Varus/Skins/Skin9/Materials/Varus_Skin09_QW_inst": {
-        "name": "Characters/Varus/Skins/Skin9/Materials/Varus_Skin09_QW_inst",
+    "Characters/Varus/Skins/Skin9/Materials/Outline_Iridescent_Add_Scroll_inst": {
+        "name": "Characters/Varus/Skins/Skin9/Materials/Outline_Iridescent_Add_Scroll_inst",
         "samplerValues": [
             {
-                "textureName": "Burnning_Bow2",
-                "texturePath": "ASSETS/Characters/Varus/Skins/Skin09/Particles/Varus_Skin09_BurningBow.tex",
-                "addressU": 1,
-                "addressV": 1,
-                "addressW": 1,
+                "textureName": "MatCap_Tex",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Sylas_Skin53.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
-                "textureName": "ScreenSpaceTexture",
-                "texturePath": "ASSETS/Characters/Varus/Skins/Skin09/Particles/Varus_Skin09_Idle_Cowel_04.tex",
+                "textureName": "Color_Mask_Texture",
+                "texturePath": "ASSETS/Shared/Materials/black.SKINS_Sylas_Skin53.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             },
             {
@@ -1507,13 +1504,43 @@
                 "addressV": 1,
                 "addressW": 1,
                 "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "iridescentTex",
+                "texturePath": "ASSETS/Shared/Materials/Default_Gradient.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "AdditiveScrollTex",
+                "texturePath": "ASSETS/Shared/Particles/Gradient_Diagonal.tex",
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "AdditiveScroll_Mask",
+                "texturePath": "ASSETS/Characters/Varus/Skins/Skin09/Varus_Skin09_BurningBow_Mask.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "textureName": "Diffuse_Texture2",
+                "texturePath": "ASSETS/Characters/Varus/Skins/Skin09/Particles/Varus_Skin09_BurningBow.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
             {
-                "name": "ColorFresnelSize",
+                "name": "Diffuse_Alpha_Override",
                 "value": [
-                    1.2000000476837158,
+                    1.0,
                     0.0,
                     0.0,
                     0.0
@@ -1521,19 +1548,9 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "UVNoiseScale",
+                "name": "Iridescence_Pulse_Speed_Min",
                 "value": [
                     1.0,
-                    1.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Intensity",
-                "value": [
-                    3.3907248973846436,
                     0.0,
                     0.0,
                     0.0
@@ -1541,9 +1558,49 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Color_Fresnel_color",
+                "name": "Diffuse_Fade_Mask_Value",
                 "value": [
                     1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SpecularControl",
+                "value": [
+                    0.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SpecularColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Exclude_Mask_from_TintColor_Value",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineColor",
+                "value": [
+                    0.0,
                     0.0,
                     0.0,
                     1.0
@@ -1551,7 +1608,59 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "NoiseScrollSpeed",
+                "name": "OutlineThickness",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineSoftness",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AdditiveTexTile",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "IridescentControl",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AdditiveStrength_R",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TintColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AdditiveScroll_ColorTint_R",
+                "value": [
+                    0.9904173612594604,
+                    0.35869383811950684,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AdditiveTexScrollSpeed_R",
                 "value": [
                     0.0,
                     2.0,
@@ -1561,72 +1670,147 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "SSFresnelSize",
+                "name": "AdditiveTexScrollSpeed_G",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AdditiveScroll_ColorTint_G",
                 "value": [
-                    1.5348999500274658,
-                    0.0,
-                    0.0,
+                    1.0,
+                    1.0,
+                    1.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Master_Blend",
-                "value": [
-                    0.41999998688697815,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
+                "name": "AdditiveStrength_G",
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "BloomColorFresnelSize",
-                "value": [
-                    0.009999999776482582,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "BloomIntensity",
-                "value": [
-                    0.6212749481201172,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Bloom_Color_Fresnel_color",
+                "name": "Diffuse_Tex_BlendVlue",
                 "value": [
                     1.0,
                     0.0,
                     0.0,
-                    1.0
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AdditiveTexScrollSpeed_A",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AdditiveScroll_ColorTint_A",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "AdditiveStrength_A",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Color",
+                "value": [
+                    1.0,
+                    0.11468680948019028,
+                    0.00021362630650401115,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Intensity",
+                "value": [
+                    1.5,
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             }
         ],
         "switches": [
             {
-                "name": "INVERT_BLOOM_FRESNEL",
+                "name": "OVERRIDE_DIFFUSE_ALPHA",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
-                "name": "INVERT_COLOR_FRESNEL",
+                "name": "BLOOM_SCROLLTEX_ONLY",
                 "__type": "StaticMaterialSwitchDef"
             },
             {
-                "name": "INVERT_SS_FRESNEL",
+                "name": "ADDITIVESCROLLTEX_R_SCREENSPACE",
                 "on": false,
                 "__type": "StaticMaterialSwitchDef"
             },
             {
-                "name": "SWTICH_BOW_QW",
+                "name": "ADDITIVESCROLLTEX_G_SCREENSPACE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "IRIDESCENCE_PULSE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FADE_DIFFUSE_ONLY_W_MASK",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "FADE_DIFFUSE_ONLY",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SCROLL_TEXTURE_ONLY",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ADDITIVE_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ALPHA_BLEND_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "SPECULAR_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "EXCLUDE_MASK_FROM_TINTCOLOR",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OUTLINE_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "IRIDESCENCE_OUTLINE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DIFFUSE_LERP_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OUTLINE_MASK_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "INVERT_BLOOM_FRESNEL",
+                "on": false,
                 "__type": "StaticMaterialSwitchDef"
             }
         ],
@@ -1638,7 +1822,7 @@
                 "name": "normal",
                 "passes": [
                     {
-                        "shader": "Shaders/SkinnedMesh/Varus_Skin09_QW",
+                        "shader": "Shaders/SkinnedMesh/Outline_Iridescent_Add_Scroll",
                         "blendEnable": true,
                         "srcColorBlendFactor": 6,
                         "srcAlphaBlendFactor": 6,
@@ -1661,8 +1845,33 @@
             }
         ],
         "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "AdditiveStrength_R",
+                    "driver": {
+                        "mElements": [
+                            {
+                                "mCondition": {
+                                    "mScriptName": "VarusQwithWMaterial",
+                                    "__type": "HasBuffDynamicMaterialBoolDriver"
+                                },
+                                "mValue": {
+                                    "mValue": 1.0,
+                                    "__type": "FloatLiteralMaterialDriver"
+                                },
+                                "__type": "SwitchMaterialDriverElement"
+                            }
+                        ],
+                        "mDefaultValue": {
+                            "__type": "FloatLiteralMaterialDriver"
+                        },
+                        "__type": "SwitchMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
             "staticSwitch": {
-                "name": "SWTICH_BOW_QW",
+                "name": "DIFFUSE_LERP_ON",
                 "driver": {
                     "mScriptName": "VarusQwithWMaterial",
                     "__type": "HasBuffDynamicMaterialBoolDriver"
