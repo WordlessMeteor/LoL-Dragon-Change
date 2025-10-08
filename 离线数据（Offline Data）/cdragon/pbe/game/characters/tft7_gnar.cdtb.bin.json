@@ -1,0 +1,621 @@
+{
+    "Characters/TFT7_Gnar/Spells/TFT7_GnarPTransform": {
+        "ObjectName": "TFT7_GnarPTransform",
+        "mScriptName": "TFT7_GnarPTransform",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 8192,
+            "mAffectsStatusFlags": 176,
+            "DataValues": [
+                {
+                    "mName": "AttackDamage",
+                    "mValues": [
+                        0.0,
+                        50.0,
+                        90.0,
+                        135.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "Armor",
+                    "mValues": [
+                        0.0,
+                        40.0,
+                        50.0,
+                        75.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedAD": {
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "AttackDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "mStyleTag": "noScale",
+                            "mStyleTagIfScaled": "scaleAP",
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedArmor": {
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "Armor",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "mStyleTag": "noScale",
+                            "mStyleTagIfScaled": "scaleAP",
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "cannotBeSuppressed": true,
+            "canCastWhileDisabled": true,
+            "canCastOrQueueWhileCasting": true,
+            "mIsDisabledWhileDead": false,
+            "castRange": [
+                5000.0,
+                5000.0,
+                5000.0,
+                5000.0,
+                5000.0,
+                5000.0,
+                5000.0
+            ],
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT7_GnarPTransform",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT7_GnarP_Name",
+                        "keyTooltip": "Spell_TFT7_GnarP_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "elements": [
+                                {
+                                    "type": "AttackDamage",
+                                    "nameOverride": "Spell_ListType_AttackDamageBonus",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Armor",
+                                    "nameOverride": "Spell_ListType_Armor",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT7_Gnar/Spells/TFT7_GnarCritAttack": {
+        "ObjectName": "TFT7_GnarCritAttack",
+        "mScriptName": "TFT7_GnarCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 24527,
+            "mAnimationName": "Crit",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "bHaveHitEffect": true,
+            "castRange": [
+                387.5,
+                387.5,
+                387.5,
+                387.5,
+                387.5,
+                387.5,
+                387.5
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "R_BUFFBONE_GLB_HAND_LOC",
+                    "mSpeed": 1500.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 8.0,
+            "missileSpeed": 1500.0,
+            "mMissileEffectKey": "{f5337fcf}",
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "selectionPriority": 1,
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT7_Gnar/Spells/TFT7_GnarBasicAttack": {
+        "ObjectName": "TFT7_GnarBasicAttack",
+        "mScriptName": "TFT7_GnarBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 24527,
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "bHaveHitEffect": true,
+            "castRange": [
+                387.5,
+                387.5,
+                387.5,
+                387.5,
+                387.5,
+                387.5,
+                387.5
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "L_BUFFBONE_GLB_HAND_LOC",
+                    "mSpeed": 1500.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 8.0,
+            "missileSpeed": 1500.0,
+            "mMissileEffectKey": "{f5337fcf}",
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "selectionPriority": 1,
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT7_Gnar/Spells/TFT7_GnarBasicAttack2": {
+        "ObjectName": "TFT7_GnarBasicAttack2",
+        "mScriptName": "TFT7_GnarBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 24527,
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "bHaveHitEffect": true,
+            "castRange": [
+                387.5,
+                387.5,
+                387.5,
+                387.5,
+                387.5,
+                387.5,
+                387.5
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "R_BUFFBONE_GLB_HAND_LOC",
+                    "mSpeed": 1500.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 8.0,
+            "missileSpeed": 1500.0,
+            "mMissileEffectKey": "{f5337fcf}",
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "selectionPriority": 1,
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT7_Gnar/Spells/TFT7_GnarP": {
+        "ObjectName": "TFT7_GnarP",
+        "mScriptName": "TFT7_GnarP",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 8192,
+            "DataValues": [
+                {
+                    "mName": "AttackDamage",
+                    "mValues": [
+                        0.0,
+                        0.949999988079071,
+                        1.0499999523162842,
+                        1.149999976158142,
+                        1.25,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "Armor",
+                    "mValues": [
+                        0.0,
+                        40.0,
+                        60.0,
+                        90.0,
+                        120.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "StunDuration",
+                    "mValues": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedAD": {
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "AttackDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "mStyleTag": "noScale",
+                            "mStyleTagIfScaled": "scaleAP",
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedArmor": {
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "Armor",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "mStyleTag": "noScale",
+                            "mStyleTagIfScaled": "scaleAP",
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "castRange": [
+                5000.0,
+                5000.0,
+                5000.0,
+                5000.0,
+                5000.0,
+                5000.0,
+                5000.0
+            ],
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT7_GnarP",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT7_GnarP_Name",
+                        "keyTooltip": "Spell_TFT7_GnarP_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "elements": [
+                                {
+                                    "type": "AttackDamage",
+                                    "multiplier": 100.0,
+                                    "nameOverride": "Spell_ListType_AttackDamageBonus",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Armor",
+                                    "nameOverride": "Spell_ListType_Armor",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "Characters/TFT7_Gnar/CharacterRecords/Root": {
+        "mCharacterName": "TFT7_Gnar",
+        "baseHP": 850.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 170.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 40.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 50.0,
+        "baseArmor": 50.0,
+        "baseSpellBlock": 50.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.2999999523162842,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 420.0,
+        "attackSpeed": 0.800000011920929,
+        "attackSpeedRatio": 0.699999988079071,
+        "basicAttack": {
+            "mAttackProbability": 0.5,
+            "mAttackName": "TFT7_GnarBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackProbability": 0.5,
+                "mAttackName": "TFT7_GnarBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT7_GnarCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT7_GnarP",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "Characters/TFT7_Gnar/Spells/TFT7_GnarP",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "extraSpells": [
+            "TFT7_GnarPTransform",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "{c1984296}": [
+            "Characters/TFT7_Gnar/Spells/TFT7_GnarPTransform",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "tier": 2,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{be620fb9}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{ac45cc87}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{53d104ac}",
+        "mMoveInterval": -0.10000000149011612,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mShopData": "{62ce959c}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "Characters/TFT7_Gnar/Skins/Meta": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "__linked": []
+}
