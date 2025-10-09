@@ -396,15 +396,15 @@
             "apiName": "Quest_MadHatter",
             "calculations": {},
             "dataValues": {
-                "AFPerHat": 12.0,
-                "ArmorMRPerHat": 8.0,
+                "AFPerHat": 10.0,
+                "ArmorMRPerHat": 4.0,
                 "HatGrowDelay": 0.05000000074505806,
-                "MSPerHat": 4.0,
+                "MSPerHat": 2.0,
                 "PercentHatsLostOnRoundLoss": 0.5,
                 "QuestThreshold": 10.0,
-                "TenacityPerHat": 0.009999999776482582
+                "TenacityPerHat": 0.004999999888241291
             },
-            "desc": "条件: 同時に@QuestThreshold@個の帽子を被る。<br><br>報酬: 帽子1個ごとに<scaleAF>アダプティブフォースが@AFPerHat@</scaleAF>、<scaleArmor>物理防御</scaleArmor>と<scaleMR>魔法防御</scaleMR>が@ArmorMRPerHat@、行動妨害耐性が@TenacityPerHat*100@%、<speed>移動速度が@MSPerHat@</speed>増加する。<br><br><rules>ラウンドに敗北すると帽子を半分失う。</rules>",
+            "desc": "条件: 戦闘終了時に帽子を@QuestThreshold@個被る。<br><br>報酬: 帽子1個ごとに<scaleAF>アダプティブフォースが@AFPerHat@</scaleAF>、<scaleArmor>物理防御</scaleArmor>と<scaleMR>魔法防御</scaleMR>が@ArmorMRPerHat@、行動妨害耐性が@TenacityPerHat*100@%、<speed>移動速度が@MSPerHat@</speed>増加する。<br><br><rules>ラウンドに敗北すると帽子を半分失う。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/mad_hatter_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mad_hatter_small.png",
             "id": 318,
@@ -708,13 +708,13 @@
                 }
             },
             "dataValues": {},
-            "desc": "通常攻撃で<scaleAP>魔力</scaleAP>の増加スタック、スキルで<scaleAD>攻撃力</scaleAD>の増加スタックを獲得する。",
+            "desc": "通常攻撃で<scaleAP>魔力</scaleAP>が {{ Item_Keyword_OnHit }}、スキルで<scaleAD>攻撃力</scaleAD>が増加する。この効果はラウンド終了まで無限にスタックする。",
             "iconLarge": "assets/ux/cherry/augments/icons/masterofduality_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/masterofduality_small.png",
             "id": 54,
             "name": "文武両道",
             "rarity": 2,
-            "tooltip": "通常攻撃で<scaleAP>魔力が@APGained@</scaleAP>、スキルで<scaleAD>攻撃力が@ADGained@</scaleAD>増加する。この効果はラウンド終了まで無限にスタックする。"
+            "tooltip": "通常攻撃で<scaleAP>魔力が@APGained@</scaleAP>{{ Item_Keyword_OnHit }}、スキルで<scaleAD>攻撃力が@ADGained@</scaleAD>増加する。この効果はラウンド終了まで無限にスタックする。"
         },
         {
             "apiName": "LightemUp",
@@ -761,13 +761,13 @@
                 }
             },
             "dataValues": {},
-            "desc": "通常攻撃4回ごとに<magicDamage>魔法ダメージ</magicDamage>を追加で与える。",
+            "desc": "通常攻撃4回ごとに<magicDamage>魔法ダメージ</magicDamage>{{ Item_Keyword_OnHit }}を追加で与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/lightemup_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/lightemup_small.png",
             "id": 51,
             "name": "撃て！",
             "rarity": 0,
-            "tooltip": "通常攻撃4回ごとに<magicDamage>@TOOLTIPONLYDamage@魔法ダメージ</magicDamage>を追加で与える。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
+            "tooltip": "通常攻撃4回ごとに<magicDamage>@TOOLTIPONLYDamage@魔法ダメージ</magicDamage>{{ Item_Keyword_OnHit }}を追加で与える。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "SearingDawn",
@@ -2247,7 +2247,7 @@
                 "LegendaryGoldBasisDiscount": 1000.0,
                 "PrismaticCostReduction": -1500.0,
                 "PrismaticGoldBasisDiscount": 1250.0,
-                "StatCostReduction": -250.0
+                "StatCostReduction": -100.0
             },
             "desc": "@GoldBonus@ゴールドを獲得し、すべての金床の価格が低下する。<br><br>プリズムの金床: @PrismaticCostReduction@<br>レジェンダリーの金床: @LegendaryCostReduction@<br>ステータスの金床: @StatCostReduction@<br><br><rules>金床から獲得したアイテムの売却価格が500ゴールド低下する。</rules>",
             "iconLarge": "assets/ux/cherry/augments/icons/thiefsgloves_large.png",
@@ -2905,13 +2905,13 @@
                 "BleedDuration": 5.0,
                 "PercentMaxHPDamagePer5Seconds": 0.019999999552965164
             },
-            "desc": "通常攻撃が無限にスタック可能な<keywordMajor>炎上</keywordMajor>を付与し、継続ダメージを与える。",
+            "desc": "通常攻撃が無限にスタック可能な<keywordMajor>炎上</keywordMajor>{{ Item_Keyword_OnHit }}を付与し、継続ダメージを与える。",
             "iconLarge": "assets/ux/cherry/augments/icons/firebrand_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/firebrand_small.png",
             "id": 36,
             "name": "火付け役",
             "rarity": 1,
-            "tooltip": "通常攻撃が敵を@BleedDuration@秒間<keywordMajor>炎上</keywordMajor>させて、毎秒<magicDamage>最大体力の@PercentMaxHPDamagePer5Seconds*20@%にあたる魔法ダメージ</magicDamage>を与える。<keywordMajor>炎上</keywordMajor>は無限にスタックする。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
+            "tooltip": "通常攻撃が敵を@BleedDuration@秒間<keywordMajor>炎上</keywordMajor>させて{{ Item_Keyword_OnHit }}、毎秒<magicDamage>最大体力の@PercentMaxHPDamagePer5Seconds*20@%にあたる魔法ダメージ</magicDamage>を与える。<keywordMajor>炎上</keywordMajor>は無限にスタックする。<br><br>このラウンドで与えたダメージ: @f1@<br>与えたダメージの合計: @f2@"
         },
         {
             "apiName": "Doomsayer",
@@ -3467,7 +3467,7 @@
             "apiName": "JuicePress",
             "calculations": {},
             "dataValues": {
-                "BonusHats": 2.0,
+                "BonusHats": 1.0,
                 "JuiceAmp": 0.5,
                 "PowerJuicePercentPen": 0.15000000596046448,
                 "PriceReduction": 0.5,
@@ -3578,16 +3578,16 @@
             "apiName": "MysticPunch",
             "calculations": {},
             "dataValues": {
-                "CooldownRefund": 0.15000000596046448,
+                "CooldownRefund": 0.20000000298023224,
                 "MinCDR": 0.5
             },
-            "desc": "{{ Item_Keyword_OnHit }}で残りクールダウンの@CooldownRefund*100@%分クールダウンが短縮される。",
+            "desc": "{{ Item_Keyword_OnHit }}で残りクールダウンの@CooldownRefund*100@%分、通常スキルのクールダウンが短縮される。",
             "iconLarge": "assets/ux/cherry/augments/icons/mysticpunch_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/mysticpunch_small.png",
             "id": 58,
             "name": "神秘の鉄拳",
             "rarity": 2,
-            "tooltip": "{{ Item_Keyword_OnHit }}で残りクールダウンの@CooldownRefund*100@%分クールダウンが短縮される。"
+            "tooltip": "{{ Item_Keyword_OnHit }}で残りクールダウンの@CooldownRefund*100@%分、通常スキルのクールダウンが短縮される。"
         },
         {
             "apiName": "Homeguard",

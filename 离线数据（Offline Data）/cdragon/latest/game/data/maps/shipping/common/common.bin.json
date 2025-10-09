@@ -992,23 +992,100 @@
             "{906070fc}": {
                 "blocks": [
                     {
-                        "{d851ffa3}": "6f384a50-9a82-4887-88d1-f7dff025ddb6",
-                        "Target": {
-                            "Table": {
-                                "__type": "InstanceVars"
+                        "{d851ffa3}": "2d60833a-8f9a-46b2-9bea-c22ad99f04ac",
+                        "Condition": {
+                            "Value1": {
+                                "Table": {
+                                    "__type": "InstanceVars"
+                                },
+                                "Var": "{fc1930cf}",
+                                "__type": "ScriptTableGet"
                             },
-                            "Var": "{647b2d6e}",
-                            "__type": "{132b63da}"
+                            "Value2": {
+                                "value": true,
+                                "__type": "BoolGet"
+                            },
+                            "__type": "ComparisonScriptCondition"
                         },
-                        "callback": {
-                            "Script": "{72460051}",
-                            "FunctionName": "{d10e1f44}",
-                            "__type": "{f6e1bec7}"
+                        "Sequence": {
+                            "blocks": [
+                                {
+                                    "{d851ffa3}": "6f384a50-9a82-4887-88d1-f7dff025ddb6",
+                                    "Target": {
+                                        "Table": {
+                                            "__type": "InstanceVars"
+                                        },
+                                        "Var": "{647b2d6e}",
+                                        "__type": "{132b63da}"
+                                    },
+                                    "callback": {
+                                        "Script": "{72460051}",
+                                        "FunctionName": "{d10e1f44}",
+                                        "__type": "{f6e1bec7}"
+                                    },
+                                    "__type": "{6c93a1b4}"
+                                }
+                            ],
+                            "__type": "ScriptSequence"
                         },
-                        "__type": "{6c93a1b4}"
+                        "__type": "{e524b2fc}"
                     }
                 ],
                 "__type": "RootScriptSequence"
+            },
+            "GameEntityOnActivate": {
+                "blocks": [
+                    {
+                        "{d851ffa3}": "41237b13-55c8-4002-a21b-646f2fd65376",
+                        "Src": {
+                            "value": true,
+                            "__type": "BoolGet"
+                        },
+                        "Dest": {
+                            "Table": {
+                                "__type": "InstanceVars"
+                            },
+                            "Var": "EnableScuttleDeathHandling",
+                            "__type": "ScriptTableSet"
+                        },
+                        "__type": "SetVarInTableBlock"
+                    }
+                ],
+                "__type": "RootScriptSequence"
+            }
+        },
+        "functions": {
+            "{899970f1}": {
+                "blocks": [
+                    {
+                        "{d851ffa3}": "224a1d90-d22e-460f-bf44-37b315e6968f",
+                        "Src": {
+                            "Var": "{af8bb8ce}",
+                            "__type": "ScriptTableGet"
+                        },
+                        "Dest": {
+                            "Table": {
+                                "__type": "InstanceVars"
+                            },
+                            "Var": "EnableScuttleDeathHandling",
+                            "__type": "ScriptTableSet"
+                        },
+                        "__type": "SetVarInTableBlock"
+                    }
+                ],
+                "FunctionDef": {
+                    "{8c54e274}": [
+                        {
+                            "Input": {
+                                "Var": "Enable",
+                                "__type": "BoolTableSet"
+                            },
+                            "__type": "{2330a302}"
+                        }
+                    ],
+                    "__type": "{eca2da9a}"
+                },
+                "__type": "ScriptFunction"
             }
         },
         "{ee26c73f}": {
@@ -1646,6 +1723,21 @@
                         "__type": "SetVarInTableBlock"
                     },
                     {
+                        "{d851ffa3}": "520327bb-9829-46a6-8674-00dc4ffa4619",
+                        "Src": {
+                            "Table": {
+                                "__type": "InstanceVars"
+                            },
+                            "Var": "{29072dad}",
+                            "__type": "ScriptTableGet"
+                        },
+                        "Dest": {
+                            "Var": "CrabCampEntity",
+                            "__type": "ScriptTableSet"
+                        },
+                        "__type": "SetVarInTableBlock"
+                    },
+                    {
                         "{d851ffa3}": "d9c5424d-eb10-4579-a3e9-832dee33bfc6",
                         "Src": {
                             "__type": "FloatGet"
@@ -1880,6 +1972,21 @@
                                                 },
                                                 "Dest": {
                                                     "Var": "CRAB_NEW_LOCATION",
+                                                    "__type": "ScriptTableSet"
+                                                },
+                                                "__type": "SetVarInTableBlock"
+                                            },
+                                            {
+                                                "{d851ffa3}": "5e15a50a-8976-4c95-bcec-bec7a1a500bb",
+                                                "Src": {
+                                                    "Table": {
+                                                        "__type": "InstanceVars"
+                                                    },
+                                                    "Var": "{5e812e02}",
+                                                    "__type": "ScriptTableGet"
+                                                },
+                                                "Dest": {
+                                                    "Var": "CrabCampEntity",
                                                     "__type": "ScriptTableSet"
                                                 },
                                                 "__type": "SetVarInTableBlock"
@@ -2158,7 +2265,7 @@
                     },
                     {
                         "name": "Play_mus_map11_location_jungle",
-                        "color": [
+                        "Color": [
                             0,
                             0,
                             255,
@@ -2168,7 +2275,7 @@
                     },
                     {
                         "name": "Play_mus_map11_location_baron",
-                        "color": [
+                        "Color": [
                             255,
                             0,
                             0,
@@ -2178,7 +2285,7 @@
                     },
                     {
                         "name": "mus_map11_location_enter_baron_river",
-                        "color": [
+                        "Color": [
                             0,
                             255,
                             255,
@@ -2188,7 +2295,7 @@
                     },
                     {
                         "name": "mus_map11_location_enter_dragon_pit",
-                        "color": [
+                        "Color": [
                             0,
                             255,
                             0,
@@ -2198,7 +2305,7 @@
                     },
                     {
                         "name": "mus_map11_location_enter_dragon_river",
-                        "color": [
+                        "Color": [
                             255,
                             255,
                             0,
@@ -2208,7 +2315,7 @@
                     },
                     {
                         "name": "Play_mus_map11_SEASONAL_location_base",
-                        "color": [
+                        "Color": [
                             255,
                             255,
                             255,
@@ -2218,7 +2325,7 @@
                     },
                     {
                         "name": "Play_mus_map11_SEASONAL_location_jungle",
-                        "color": [
+                        "Color": [
                             0,
                             0,
                             155,
@@ -2228,7 +2335,7 @@
                     },
                     {
                         "name": "Play_mus_map11_SEASONAL_location_baron",
-                        "color": [
+                        "Color": [
                             155,
                             0,
                             0,
@@ -2249,7 +2356,7 @@
                     },
                     {
                         "name": "Stone",
-                        "color": [
+                        "Color": [
                             0,
                             255,
                             0,
@@ -2259,7 +2366,7 @@
                     },
                     {
                         "name": "Dirt",
-                        "color": [
+                        "Color": [
                             0,
                             0,
                             255,
@@ -2269,7 +2376,7 @@
                     },
                     {
                         "name": "Grass",
-                        "color": [
+                        "Color": [
                             255,
                             255,
                             0,
@@ -2279,7 +2386,7 @@
                     },
                     {
                         "name": "WaterShallow",
-                        "color": [
+                        "Color": [
                             255,
                             128,
                             0,
@@ -2289,7 +2396,7 @@
                     },
                     {
                         "name": "Water",
-                        "color": [
+                        "Color": [
                             255,
                             0,
                             0,
@@ -2299,7 +2406,7 @@
                     },
                     {
                         "name": "Void",
-                        "color": [
+                        "Color": [
                             255,
                             0,
                             255,
@@ -2319,7 +2426,7 @@
                     },
                     {
                         "name": "Play_sfx_Env_Map11_AmbienceNWJungle",
-                        "color": [
+                        "Color": [
                             0,
                             0,
                             255,
@@ -2329,7 +2436,7 @@
                     },
                     {
                         "name": "Play_sfx_Env_Map11_AmbienceNEJungle",
-                        "color": [
+                        "Color": [
                             255,
                             0,
                             0,
@@ -2339,7 +2446,7 @@
                     },
                     {
                         "name": "Play_sfx_Env_Map11_AmbienceSWJungle",
-                        "color": [
+                        "Color": [
                             0,
                             255,
                             255,
@@ -2349,7 +2456,7 @@
                     },
                     {
                         "name": "Play_sfx_Env_Map11_AmbienceSEJungle",
-                        "color": [
+                        "Color": [
                             255,
                             255,
                             0,
@@ -2370,7 +2477,7 @@
                     },
                     {
                         "name": "AREA_Base",
-                        "color": [
+                        "Color": [
                             255,
                             255,
                             255,
@@ -2380,7 +2487,7 @@
                     },
                     {
                         "name": "AREA_Lane_Top",
-                        "color": [
+                        "Color": [
                             0,
                             120,
                             255,
@@ -2390,7 +2497,7 @@
                     },
                     {
                         "name": "AREA_Lane_Mid",
-                        "color": [
+                        "Color": [
                             0,
                             0,
                             255,
@@ -2400,7 +2507,7 @@
                     },
                     {
                         "name": "AREA_Lane_Bot",
-                        "color": [
+                        "Color": [
                             120,
                             0,
                             255,
@@ -2410,7 +2517,7 @@
                     },
                     {
                         "name": "AREA_Jungle_Top",
-                        "color": [
+                        "Color": [
                             0,
                             255,
                             120,
@@ -2420,7 +2527,7 @@
                     },
                     {
                         "name": "AREA_Jungle_Bot",
-                        "color": [
+                        "Color": [
                             120,
                             255,
                             0,
@@ -2430,7 +2537,7 @@
                     },
                     {
                         "name": "AREA_River_Top",
-                        "color": [
+                        "Color": [
                             255,
                             0,
                             120,
@@ -2440,7 +2547,7 @@
                     },
                     {
                         "name": "AREA_River_Bot",
-                        "color": [
+                        "Color": [
                             255,
                             120,
                             0,
@@ -2450,7 +2557,7 @@
                     },
                     {
                         "name": "AREA_BasePerimeter_Top",
-                        "color": [
+                        "Color": [
                             1,
                             1,
                             120,
@@ -2460,7 +2567,7 @@
                     },
                     {
                         "name": "AREA_BasePerimeter_Bot",
-                        "color": [
+                        "Color": [
                             120,
                             1,
                             1,
@@ -2470,7 +2577,7 @@
                     },
                     {
                         "name": "AREA_Alcove_Top",
-                        "color": [
+                        "Color": [
                             0,
                             75,
                             200,
@@ -2480,7 +2587,7 @@
                     },
                     {
                         "name": "AREA_Alcove_Bot",
-                        "color": [
+                        "Color": [
                             100,
                             0,
                             210,
@@ -2497,7 +2604,7 @@
                 "tags": [
                     {
                         "name": "LANE_Top_Order",
-                        "color": [
+                        "Color": [
                             255,
                             220,
                             0,
@@ -2507,7 +2614,7 @@
                     },
                     {
                         "name": "LANE_Mid_Order",
-                        "color": [
+                        "Color": [
                             255,
                             110,
                             0,
@@ -2517,7 +2624,7 @@
                     },
                     {
                         "name": "LANE_Bot_Order",
-                        "color": [
+                        "Color": [
                             255,
                             0,
                             0,
@@ -2527,7 +2634,7 @@
                     },
                     {
                         "name": "LANE_Top_Chaos",
-                        "color": [
+                        "Color": [
                             0,
                             220,
                             255,
@@ -2537,7 +2644,7 @@
                     },
                     {
                         "name": "LANE_Mid_Chaos",
-                        "color": [
+                        "Color": [
                             0,
                             110,
                             255,
@@ -2547,7 +2654,7 @@
                     },
                     {
                         "name": "LANE_Bot_Chaos",
-                        "color": [
+                        "Color": [
                             0,
                             0,
                             255,
@@ -2557,7 +2664,7 @@
                     },
                     {
                         "name": "LANE_Neutral_Top_Order",
-                        "color": [
+                        "Color": [
                             207,
                             196,
                             131,
@@ -2567,7 +2674,7 @@
                     },
                     {
                         "name": "LANE_Neutral_Mid_Order",
-                        "color": [
+                        "Color": [
                             207,
                             163,
                             131,
@@ -2577,7 +2684,7 @@
                     },
                     {
                         "name": "LANE_Neutral_Bot_Order",
-                        "color": [
+                        "Color": [
                             207,
                             131,
                             131,
@@ -2587,7 +2694,7 @@
                     },
                     {
                         "name": "LANE_Neutral_Top_Chaos",
-                        "color": [
+                        "Color": [
                             131,
                             196,
                             207,
@@ -2597,7 +2704,7 @@
                     },
                     {
                         "name": "LANE_Neutral_Mid_Chaos",
-                        "color": [
+                        "Color": [
                             131,
                             163,
                             207,
@@ -2607,7 +2714,7 @@
                     },
                     {
                         "name": "LANE_Neutral_Bot_Chaos",
-                        "color": [
+                        "Color": [
                             131,
                             131,
                             207,
@@ -2628,7 +2735,7 @@
                     },
                     {
                         "name": "POI_Near_Turret",
-                        "color": [
+                        "Color": [
                             255,
                             255,
                             255,
@@ -2638,7 +2745,7 @@
                     },
                     {
                         "name": "POI_SRX_Cloud_Zone",
-                        "color": [
+                        "Color": [
                             255,
                             255,
                             175,
@@ -2648,7 +2755,7 @@
                     },
                     {
                         "name": "POI_SRX_Chemtech_Zone",
-                        "color": [
+                        "Color": [
                             225,
                             0,
                             175,
@@ -2658,7 +2765,7 @@
                     },
                     {
                         "name": "POI_Pit_Dragon",
-                        "color": [
+                        "Color": [
                             11,
                             11,
                             69,
@@ -2668,7 +2775,7 @@
                     },
                     {
                         "name": "POI_Camp_Red",
-                        "color": [
+                        "Color": [
                             0,
                             0,
                             172,
@@ -2678,7 +2785,7 @@
                     },
                     {
                         "name": "POI_Camp_Blue",
-                        "color": [
+                        "Color": [
                             212,
                             75,
                             0,
@@ -2688,7 +2795,7 @@
                     },
                     {
                         "name": "POI_Camp_Gromp",
-                        "color": [
+                        "Color": [
                             251,
                             29,
                             128,
@@ -2698,7 +2805,7 @@
                     },
                     {
                         "name": "POI_Camp_Krugs",
-                        "color": [
+                        "Color": [
                             48,
                             103,
                             166,
@@ -2708,7 +2815,7 @@
                     },
                     {
                         "name": "POI_Camp_Razorbeaks",
-                        "color": [
+                        "Color": [
                             0,
                             215,
                             207,
@@ -2718,7 +2825,7 @@
                     },
                     {
                         "name": "POI_Camp_Murkwolves",
-                        "color": [
+                        "Color": [
                             5,
                             212,
                             0,
@@ -2728,7 +2835,7 @@
                     },
                     {
                         "name": "POI_Base_Gates",
-                        "color": [
+                        "Color": [
                             185,
                             212,
                             92,
@@ -2738,7 +2845,7 @@
                     },
                     {
                         "name": "POI_Pit_Baron",
-                        "color": [
+                        "Color": [
                             69,
                             20,
                             43,
@@ -2754,7 +2861,7 @@
                 "tags": [
                     {
                         "name": "Line_Order_Nexus",
-                        "color": [
+                        "Color": [
                             255,
                             217,
                             210,
@@ -2764,7 +2871,7 @@
                     },
                     {
                         "name": "Line_Order_Base",
-                        "color": [
+                        "Color": [
                             255,
                             180,
                             165,
@@ -2774,7 +2881,7 @@
                     },
                     {
                         "name": "Line_Order_Inner",
-                        "color": [
+                        "Color": [
                             255,
                             131,
                             107,
@@ -2784,7 +2891,7 @@
                     },
                     {
                         "name": "Line_Order_Outer",
-                        "color": [
+                        "Color": [
                             255,
                             90,
                             58,
@@ -2794,7 +2901,7 @@
                     },
                     {
                         "name": "Line_Order_River",
-                        "color": [
+                        "Color": [
                             255,
                             42,
                             0,
@@ -2804,7 +2911,7 @@
                     },
                     {
                         "name": "Line_Chaos_Nexus",
-                        "color": [
+                        "Color": [
                             248,
                             248,
                             255,
@@ -2814,7 +2921,7 @@
                     },
                     {
                         "name": "Line_Chaos_Base",
-                        "color": [
+                        "Color": [
                             222,
                             222,
                             255,
@@ -2824,7 +2931,7 @@
                     },
                     {
                         "name": "Line_Chaos_Inner",
-                        "color": [
+                        "Color": [
                             173,
                             173,
                             255,
@@ -2834,7 +2941,7 @@
                     },
                     {
                         "name": "Line_Chaos_Outer",
-                        "color": [
+                        "Color": [
                             105,
                             105,
                             255,
@@ -2844,7 +2951,7 @@
                     },
                     {
                         "name": "Line_Chaos_River",
-                        "color": [
+                        "Color": [
                             0,
                             0,
                             255,
@@ -2862,7 +2969,7 @@
         "tags": [
             {
                 "name": "{ecaf27d0}",
-                "color": [
+                "Color": [
                     0,
                     255,
                     0,
@@ -2877,7 +2984,7 @@
             },
             {
                 "name": "{54acfa09}",
-                "color": [
+                "Color": [
                     250,
                     250,
                     250,
@@ -2888,7 +2995,7 @@
             },
             {
                 "name": "Grass",
-                "color": [
+                "Color": [
                     0,
                     255,
                     255,
@@ -2899,7 +3006,7 @@
             },
             {
                 "name": "{74036ad3}",
-                "color": [
+                "Color": [
                     255,
                     255,
                     0,
@@ -2910,7 +3017,7 @@
             },
             {
                 "name": "{5e70f23d}",
-                "color": [
+                "Color": [
                     0,
                     0,
                     255,
@@ -2921,7 +3028,7 @@
             },
             {
                 "name": "{0643baee}",
-                "color": [
+                "Color": [
                     64,
                     0,
                     0,
@@ -2932,7 +3039,7 @@
             },
             {
                 "name": "{b0a72c1e}",
-                "color": [
+                "Color": [
                     128,
                     64,
                     64,
@@ -2943,7 +3050,7 @@
             },
             {
                 "name": "{9f421ace}",
-                "color": [
+                "Color": [
                     128,
                     64,
                     128,
@@ -2954,7 +3061,7 @@
             },
             {
                 "name": "{d4db86a6}",
-                "color": [
+                "Color": [
                     128,
                     16,
                     16,
@@ -2965,7 +3072,7 @@
             },
             {
                 "name": "{8e825d26}",
-                "color": [
+                "Color": [
                     96,
                     80,
                     80,
@@ -2976,7 +3083,7 @@
             },
             {
                 "name": "{6114e217}",
-                "color": [
+                "Color": [
                     255,
                     192,
                     192,
@@ -2987,7 +3094,7 @@
             },
             {
                 "name": "{9db5a967}",
-                "color": [
+                "Color": [
                     255,
                     192,
                     255,
@@ -2998,7 +3105,7 @@
             },
             {
                 "name": "{c7066f0d}",
-                "color": [
+                "Color": [
                     128,
                     255,
                     255,
@@ -7006,6 +7113,177 @@
                     "ASSETS/Sounds/Wwise2016/SFX/Shared/MISC_Gameplay_KillStreak_SFX_events.bnk"
                 ],
                 "__type": "BankUnit"
+            },
+            {
+                "name": "MISC_Emotes_EW_SFX",
+                "bankPath": [
+                    "ASSETS/Sounds/Wwise2016/SFX/Shared/MISC_Emotes_EW_SFX_audio.bnk",
+                    "ASSETS/Sounds/Wwise2016/SFX/Shared/MISC_Emotes_EW_SFX_events.bnk",
+                    "ASSETS/Sounds/Wwise2016/SFX/Shared/MISC_Emotes_EW_SFX_audio.wpk"
+                ],
+                "events": [
+                    "Play_sfx_Emotes_EW_Affectionate_01",
+                    "Play_sfx_Emotes_EW_Affectionate_02",
+                    "Play_sfx_Emotes_EW_Affectionate_03",
+                    "Play_sfx_Emotes_EW_Affectionate_04",
+                    "Play_sfx_Emotes_EW_Amazed_01",
+                    "Play_sfx_Emotes_EW_Amazed_02",
+                    "Play_sfx_Emotes_EW_Amazed_03",
+                    "Play_sfx_Emotes_EW_Cheerful_01",
+                    "Play_sfx_Emotes_EW_Confused_01",
+                    "Play_sfx_Emotes_EW_Confused_02",
+                    "Play_sfx_Emotes_EW_Confused_03",
+                    "Play_sfx_Emotes_EW_Confused_04",
+                    "Play_sfx_Emotes_EW_Confused_05",
+                    "Play_sfx_Emotes_EW_Confused_06",
+                    "Play_sfx_Emotes_EW_Content_01",
+                    "Play_sfx_Emotes_EW_Content_02",
+                    "Play_sfx_Emotes_EW_Content_03",
+                    "Play_sfx_Emotes_EW_Desire_01",
+                    "Play_sfx_Emotes_EW_Desire_02",
+                    "Play_sfx_Emotes_EW_Despair_01",
+                    "Play_sfx_Emotes_EW_Despair_02",
+                    "Play_sfx_Emotes_EW_Disappointed_01",
+                    "Play_sfx_Emotes_EW_Disappointed_02",
+                    "Play_sfx_Emotes_EW_Disappointed_03",
+                    "Play_sfx_Emotes_EW_Enthusiastic_01",
+                    "Play_sfx_Emotes_EW_Enthusiastic_02",
+                    "Play_sfx_Emotes_EW_Enthusiastic_03",
+                    "Play_sfx_Emotes_EW_Exasperated_01",
+                    "Play_sfx_Emotes_EW_Exasperated_02",
+                    "Play_sfx_Emotes_EW_Happy_01",
+                    "Play_sfx_Emotes_EW_Happy_02",
+                    "Play_sfx_Emotes_EW_Happy_03",
+                    "Play_sfx_Emotes_EW_Happy_04",
+                    "Play_sfx_Emotes_EW_Hopeful_01",
+                    "Play_sfx_Emotes_EW_Horror_01",
+                    "Play_sfx_Emotes_EW_Horror_02",
+                    "Play_sfx_Emotes_EW_Horror_03",
+                    "Play_sfx_Emotes_EW_Horror_04",
+                    "Play_sfx_Emotes_EW_Horror_05",
+                    "Play_sfx_Emotes_EW_Insecure_01",
+                    "Play_sfx_Emotes_EW_Insecure_02",
+                    "Play_sfx_Emotes_EW_Irritable_01",
+                    "Play_sfx_Emotes_EW_Irritable_02",
+                    "Play_sfx_Emotes_EW_Irritable_03",
+                    "Play_sfx_Emotes_EW_Moved_01",
+                    "Play_sfx_Emotes_EW_Neglectful_01",
+                    "Play_sfx_Emotes_EW_Neglectful_02",
+                    "Play_sfx_Emotes_EW_Nervous_01",
+                    "Play_sfx_Emotes_EW_Nervous_02",
+                    "Play_sfx_Emotes_EW_Nervous_03",
+                    "Play_sfx_Emotes_EW_Overcome_01",
+                    "Play_sfx_Emotes_EW_Peaceful_01",
+                    "Play_sfx_Emotes_EW_Peaceful_02",
+                    "Play_sfx_Emotes_EW_Proud_01",
+                    "Play_sfx_Emotes_EW_Proud_02",
+                    "Play_sfx_Emotes_EW_Rage_01",
+                    "Play_sfx_Emotes_EW_Rage_02",
+                    "Play_sfx_Emotes_EW_Rage_03",
+                    "Play_sfx_Emotes_EW_Sadness_01",
+                    "Play_sfx_Emotes_EW_Sadness_02",
+                    "Play_sfx_Emotes_EW_Sadness_03",
+                    "Play_sfx_Emotes_EW_Sadness_04",
+                    "Play_sfx_Emotes_EW_Scared_01",
+                    "Play_sfx_Emotes_EW_Scared_02",
+                    "Play_sfx_Emotes_EW_Scared_03",
+                    "Play_sfx_Emotes_EW_Shameful_01",
+                    "Play_sfx_Emotes_EW_Shameful_02",
+                    "Play_sfx_Emotes_EW_Shameful_03",
+                    "Play_sfx_Emotes_EW_Stunned_01",
+                    "Play_sfx_Emotes_EW_Stunned_02",
+                    "Play_sfx_Emotes_EW_Stunned_03",
+                    "Play_sfx_Emotes_EW_Stunned_04",
+                    "Play_sfx_Emotes_EW_Suffering_01",
+                    "Play_sfx_Emotes_EW_Suffering_02",
+                    "Play_sfx_Emotes_EW_Tenderness_01",
+                    "Play_sfx_Emotes_EW_Terror_01",
+                    "Play_sfx_Emotes_EW_Terror_02",
+                    "Play_sfx_Emotes_Happy_Poro_01",
+                    "Play_sfx_Emotes_Happy_Poro_02",
+                    "Play_sfx_Emotes_Taunt_Poro_01",
+                    "Play_sfx_Emotes_EW_Affectionate_01",
+                    "Play_sfx_Emotes_EW_Affectionate_02",
+                    "Play_sfx_Emotes_EW_Affectionate_03",
+                    "Play_sfx_Emotes_EW_Affectionate_04",
+                    "Play_sfx_Emotes_EW_Amazed_01",
+                    "Play_sfx_Emotes_EW_Amazed_02",
+                    "Play_sfx_Emotes_EW_Amazed_03",
+                    "Play_sfx_Emotes_EW_Cheerful_01",
+                    "Play_sfx_Emotes_EW_Confused_01",
+                    "Play_sfx_Emotes_EW_Confused_02",
+                    "Play_sfx_Emotes_EW_Confused_03",
+                    "Play_sfx_Emotes_EW_Confused_04",
+                    "Play_sfx_Emotes_EW_Confused_05",
+                    "Play_sfx_Emotes_EW_Confused_06",
+                    "Play_sfx_Emotes_EW_Content_01",
+                    "Play_sfx_Emotes_EW_Content_02",
+                    "Play_sfx_Emotes_EW_Content_03",
+                    "Play_sfx_Emotes_EW_Desire_01",
+                    "Play_sfx_Emotes_EW_Desire_02",
+                    "Play_sfx_Emotes_EW_Despair_01",
+                    "Play_sfx_Emotes_EW_Despair_02",
+                    "Play_sfx_Emotes_EW_Disappointed_01",
+                    "Play_sfx_Emotes_EW_Disappointed_02",
+                    "Play_sfx_Emotes_EW_Disappointed_03",
+                    "Play_sfx_Emotes_EW_Enthusiastic_01",
+                    "Play_sfx_Emotes_EW_Enthusiastic_02",
+                    "Play_sfx_Emotes_EW_Enthusiastic_03",
+                    "Play_sfx_Emotes_EW_Exasperated_01",
+                    "Play_sfx_Emotes_EW_Exasperated_02",
+                    "Play_sfx_Emotes_EW_Happy_01",
+                    "Play_sfx_Emotes_EW_Happy_02",
+                    "Play_sfx_Emotes_EW_Happy_03",
+                    "Play_sfx_Emotes_EW_Happy_04",
+                    "Play_sfx_Emotes_EW_Hopeful_01",
+                    "Play_sfx_Emotes_EW_Horror_01",
+                    "Play_sfx_Emotes_EW_Horror_02",
+                    "Play_sfx_Emotes_EW_Horror_03",
+                    "Play_sfx_Emotes_EW_Horror_04",
+                    "Play_sfx_Emotes_EW_Horror_05",
+                    "Play_sfx_Emotes_EW_Insecure_01",
+                    "Play_sfx_Emotes_EW_Insecure_02",
+                    "Play_sfx_Emotes_EW_Irritable_01",
+                    "Play_sfx_Emotes_EW_Irritable_02",
+                    "Play_sfx_Emotes_EW_Irritable_03",
+                    "Play_sfx_Emotes_EW_Moved_01",
+                    "Play_sfx_Emotes_EW_Neglectful_01",
+                    "Play_sfx_Emotes_EW_Neglectful_02",
+                    "Play_sfx_Emotes_EW_Nervous_01",
+                    "Play_sfx_Emotes_EW_Nervous_02",
+                    "Play_sfx_Emotes_EW_Nervous_03",
+                    "Play_sfx_Emotes_EW_Overcome_01",
+                    "Play_sfx_Emotes_EW_Peaceful_01",
+                    "Play_sfx_Emotes_EW_Peaceful_02",
+                    "Play_sfx_Emotes_EW_Proud_01",
+                    "Play_sfx_Emotes_EW_Proud_02",
+                    "Play_sfx_Emotes_EW_Rage_01",
+                    "Play_sfx_Emotes_EW_Rage_02",
+                    "Play_sfx_Emotes_EW_Rage_03",
+                    "Play_sfx_Emotes_EW_Sadness_01",
+                    "Play_sfx_Emotes_EW_Sadness_02",
+                    "Play_sfx_Emotes_EW_Sadness_03",
+                    "Play_sfx_Emotes_EW_Sadness_04",
+                    "Play_sfx_Emotes_EW_Scared_01",
+                    "Play_sfx_Emotes_EW_Scared_02",
+                    "Play_sfx_Emotes_EW_Scared_03",
+                    "Play_sfx_Emotes_EW_Shameful_01",
+                    "Play_sfx_Emotes_EW_Shameful_02",
+                    "Play_sfx_Emotes_EW_Shameful_03",
+                    "Play_sfx_Emotes_EW_Stunned_01",
+                    "Play_sfx_Emotes_EW_Stunned_02",
+                    "Play_sfx_Emotes_EW_Stunned_03",
+                    "Play_sfx_Emotes_EW_Stunned_04",
+                    "Play_sfx_Emotes_EW_Suffering_01",
+                    "Play_sfx_Emotes_EW_Suffering_02",
+                    "Play_sfx_Emotes_EW_Tenderness_01",
+                    "Play_sfx_Emotes_EW_Terror_01",
+                    "Play_sfx_Emotes_EW_Terror_02",
+                    "Play_sfx_Emotes_Happy_Poro_01",
+                    "Play_sfx_Emotes_Happy_Poro_02",
+                    "Play_sfx_Emotes_Taunt_Poro_01"
+                ],
+                "__type": "BankUnit"
             }
         ],
         "PcMixEvent": "Set_State_TFT_Mix_PC",
@@ -7717,7 +7995,7 @@
     "{3c580728}": {
         "TextField": "ClientStates/Gameplay/UX/AnnouncementBanners/ClassicBase/BannerScene/Common/Text/MinorAnnouncementText",
         "OnHideTransitionData": {
-            "transitionTime": 0.20000000298023224,
+            "TransitionTime": 0.20000000298023224,
             "__type": "HudMenuTransitionData"
         },
         "__type": "AnnouncementStyleBasic"
@@ -7736,7 +8014,7 @@
     "{bbc7a80c}": {
         "TextField": "ClientStates/Gameplay/UX/AnnouncementBanners/ClassicBase/BannerScene/Common/Text/MajorAnnouncementText",
         "OnHideTransitionData": {
-            "transitionTime": 0.20000000298023224,
+            "TransitionTime": 0.20000000298023224,
             "__type": "HudMenuTransitionData"
         },
         "__type": "AnnouncementStyleBasic"
@@ -7744,11 +8022,11 @@
     "{c22feeab}": {
         "TextField": "ClientStates/Gameplay/UX/AnnouncementBanners/ClassicBase/BannerScene/Common/Text/PentakillAnnouncementText",
         "OnShowTransitionData": {
-            "transitionTime": 0.25,
+            "TransitionTime": 0.25,
             "__type": "HudMenuTransitionData"
         },
         "OnHideTransitionData": {
-            "transitionTime": 0.25,
+            "TransitionTime": 0.25,
             "__type": "HudMenuTransitionData"
         },
         "SourceIcon": "{e96ce6c0}",
@@ -7762,7 +8040,7 @@
     "{d8f1d3b8}": {
         "TextField": "ClientStates/Gameplay/UX/AnnouncementBanners/ClassicBase/BannerScene/Common/Text/EpicAnnouncementText",
         "OnHideTransitionData": {
-            "transitionTime": 0.20000000298023224,
+            "TransitionTime": 0.20000000298023224,
             "__type": "HudMenuTransitionData"
         },
         "__type": "AnnouncementStyleBasic"
@@ -7770,11 +8048,11 @@
     "{fa08bea1}": {
         "TextField": "ClientStates/Gameplay/UX/AnnouncementBanners/ClassicBase/BannerScene/Common/Text/TencentAnnouncementText",
         "OnShowTransitionData": {
-            "transitionTime": 0.20000000298023224,
+            "TransitionTime": 0.20000000298023224,
             "__type": "HudMenuTransitionData"
         },
         "OnHideTransitionData": {
-            "transitionTime": 0.20000000298023224,
+            "TransitionTime": 0.20000000298023224,
             "__type": "HudMenuTransitionData"
         },
         "__type": "AnnouncementStyleBasic"
