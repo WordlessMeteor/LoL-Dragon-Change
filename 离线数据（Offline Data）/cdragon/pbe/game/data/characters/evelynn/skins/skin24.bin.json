@@ -272,7 +272,7 @@
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 },
                 {
-                    "material": "{13cec501}",
+                    "Material": "{13cec501}",
                     "submesh": "Evelynn_Lashers_Mask_Mat",
                     "__type": "SkinMeshDataProperties_MaterialOverride"
                 }
@@ -298,6 +298,143 @@
         ],
         "mResourceResolver": "Characters/Evelynn/Skins/Skin24/Resources",
         "__type": "SkinCharacterDataProperties"
+    },
+    "{13cec501}": {
+        "name": "Characters/Evelynn/Skins/Skin24/Materials/EvelynnSkin24_Bloom_inst",
+        "samplerValues": [
+            {
+                "TextureName": "Diffuse_Texture",
+                "texturePath": "ASSETS/Characters/Evelynn/Skins/Skin24/Evelynn_Skin24_TX_CM.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "TextureName": "Mask_Texture_red",
+                "texturePath": "ASSETS/Characters/Evelynn/Skins/Skin24/Particles/Evelynn_Skin24_Z_color-hold.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            }
+        ],
+        "paramValues": [
+            {
+                "name": "Bloom_Intensity",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Bloom_Color",
+                "value": [
+                    1.0,
+                    0.20000000298023224,
+                    0.11000228673219681,
+                    0.4000000059604645
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Alpha_Bias",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "USE_ALPHA",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            }
+        ],
+        "shaderMacros": {
+            "NUM_BLEND_WEIGHTS": "4"
+        },
+        "techniques": [
+            {
+                "name": "normal",
+                "passes": [
+                    {
+                        "shader": "Shaders/SkinnedMesh/Diffuse_Bloom",
+                        "blendEnable": true,
+                        "srcColorBlendFactor": 6,
+                        "srcAlphaBlendFactor": 6,
+                        "dstColorBlendFactor": 7,
+                        "dstAlphaBlendFactor": 7,
+                        "__type": "StaticMaterialPassDef"
+                    }
+                ],
+                "__type": "StaticMaterialTechniqueDef"
+            }
+        ],
+        "childTechniques": [
+            {
+                "name": "transition",
+                "parentName": "normal",
+                "shaderMacros": {
+                    "TRANSITION": "1"
+                },
+                "__type": "StaticMaterialChildTechniqueDef"
+            }
+        ],
+        "dynamicMaterial": {
+            "parameters": [
+                {
+                    "name": "Bloom_Intensity",
+                    "driver": {
+                        "mBoolDriver": {
+                            "Spell": "Characters/Evelynn/Spells/EvelynnEAbility/EvelynnE",
+                            "__type": "HasBuffDynamicMaterialBoolDriver"
+                        },
+                        "mOffValue": 0.30000001192092896,
+                        "mTurnOnTimeSec": 0.0,
+                        "mTurnOffTimeSec": 0.0,
+                        "__type": "LerpMaterialDriver"
+                    },
+                    "__type": "DynamicMaterialParameterDef"
+                }
+            ],
+            "textures": [
+                {
+                    "name": "Diffuse_Texture",
+                    "options": [
+                        {
+                            "driver": {
+                                "mDrivers": [
+                                    {
+                                        "Spell": "Characters/Evelynn/Spells/EvelynnStealthRing",
+                                        "__type": "HasBuffDynamicMaterialBoolDriver"
+                                    },
+                                    {
+                                        "mAnimationNames": [
+                                            "Spell4"
+                                        ],
+                                        "__type": "IsAnimationPlayingDynamicMaterialBoolDriver"
+                                    }
+                                ],
+                                "__type": "OneTrueMaterialDriver"
+                            },
+                            "TextureName": "ASSETS/Characters/Evelynn/Skins/Skin52/Evelynn_Skin52_Shadow_TX_CM.tex",
+                            "__type": "DynamicMaterialTextureSwapOption"
+                        }
+                    ],
+                    "__type": "DynamicMaterialTextureSwapDef"
+                }
+            ],
+            "__type": "DynamicMaterialDef"
+        },
+        "__type": "StaticMaterialDef"
     },
     "Characters/Evelynn/Skins/Skin24/Resources": {
         "resourceMap": {
@@ -454,7 +591,7 @@
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
                 "blendMode": 4,
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         0.0,
@@ -655,7 +792,7 @@
                     "__type": "VfxPrimitiveArbitraryQuad"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         0.0,
@@ -765,7 +902,7 @@
                     "__type": "VfxPrimitiveArbitraryQuad"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         0.0,
@@ -923,7 +1060,7 @@
                     },
                     "__type": "ValueColor"
                 },
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.5,
@@ -1219,7 +1356,7 @@
                     ],
                     "__type": "ValueColor"
                 },
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         1.0,
@@ -1469,7 +1606,7 @@
                     },
                     "__type": "ValueColor"
                 },
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.0,
@@ -1741,7 +1878,7 @@
                     "__type": "VfxPrimitiveMesh"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.0,
@@ -2190,7 +2327,7 @@
                     "__type": "VfxPrimitiveMesh"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.0,
@@ -2673,7 +2810,7 @@
                     "__type": "VfxPrimitiveMesh"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.0,
@@ -2989,7 +3126,7 @@
                     },
                     "__type": "ValueColor"
                 },
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.5,
@@ -3152,7 +3289,7 @@
                     },
                     "__type": "ValueColor"
                 },
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.5,
@@ -3307,7 +3444,7 @@
                     },
                     "__type": "ValueColor"
                 },
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.5,
@@ -3413,7 +3550,7 @@
                     "__type": "VfxPrimitiveArbitraryQuad"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         0.0,
@@ -3498,7 +3635,7 @@
                     "__type": "VfxPrimitiveArbitraryQuad"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         0.0,
@@ -3611,7 +3748,7 @@
                     "__type": "VfxPrimitiveArbitraryQuad"
                 },
                 "blendMode": 4,
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         0.0,
@@ -3941,7 +4078,7 @@
                     "__type": "VfxPrimitiveMesh"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.0,
@@ -4319,7 +4456,7 @@
                     "__type": "VfxShapeLegacy"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "dynamics": {
                         "times": [
                             0.0,
@@ -4562,7 +4699,7 @@
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         0.0,
@@ -4641,7 +4778,7 @@
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
                 "blendMode": 1,
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         0.0,
@@ -4720,7 +4857,7 @@
                     "__type": "VfxPrimitiveAttachedMesh"
                 },
                 "blendMode": 4,
-                "color": {
+                "Color": {
                     "constantValue": [
                         1.0,
                         0.0,

@@ -611,7 +611,7 @@
         "objectPath": "Shaders/StaticMesh/DefaultEnv_Glow",
         "__type": "CustomShaderDef"
     },
-    "{02cd24ec}": {
+    "Shaders/SkinnedMesh/Aspect": {
         "ShadingModel": "{baebc346}",
         "parameters": [
             {
@@ -33036,7 +33036,7 @@
         "objectPath": "Shaders/SkinnedMesh/HKG_Basic_Fresnel_Bloom",
         "__type": "CustomShaderDef"
     },
-    "{7230f8ab}": {
+    "Shaders/SkinnedMesh/TFT_AstralAugment": {
         "ShadingModel": "{baebc346}",
         "parameters": [
             {
@@ -63014,6 +63014,23 @@
                 "__type": "ShaderPhysicalParameter"
             },
             {
+                "name": "Mask_Fresnel_Size",
+                "data": [
+                    3.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "logicalParameters": [
+                    {
+                        "name": "Mask_Fresnel_Size",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
                 "name": "Colorize_Opacity",
                 "logicalParameters": [
                     {
@@ -63052,6 +63069,17 @@
                 "logicalParameters": [
                     {
                         "name": "Light_FX_Opacity",
+                        "fields": 1,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Bloom_Multiplier",
+                "logicalParameters": [
+                    {
+                        "name": "Bloom_Multiplier",
                         "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     }
@@ -63105,6 +63133,10 @@
                 "__type": "ShaderStaticSwitch"
             },
             {
+                "name": "MULTIPLY_FRESNEL_TO_MASK",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "TINT_DIFFUSE",
                 "__type": "ShaderStaticSwitch"
             },
@@ -63151,11 +63183,12 @@
             }
         ],
         "featureDefines": {
+            "FEATURE_BLOOM": "1",
             "FEATURE_SHADOW": "1",
             "FEATURE_WORLD_NORMAL": "1",
             "FEATURE_WORLD_POSITION": "1"
         },
-        "featureMask": 16,
+        "featureMask": 17,
         "objectPath": "Shaders/SkinnedMesh/TFT_ScollingUVs_ChampTiers",
         "__type": "CustomShaderDef"
     },
