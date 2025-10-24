@@ -17,21 +17,26 @@
             "{5c978103}",
             "{cfa1808e}",
             "{6f972b25}",
-            "{10db8e46}",
-            "{eb05a125}",
             "{b35f4f89}",
             "{80b187e0}",
             "{ccb1550b}",
             "{5bd59755}",
             "{b9b5c7df}",
             "{5d21b392}",
-            "{d243ecdb}"
+            "{d243ecdb}",
+            "{8eddc9c2}"
         ],
         "textures": [
             {
                 "name": "sDepthTexture",
                 "IsCurrentFramebufferDepthRead": true,
                 "{ec5a120e}": 1,
+                "DefaultValue": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
                 "__type": "X3DSharedTextureDef"
             },
             {
@@ -81,6 +86,12 @@
             },
             {
                 "name": "SHADOW_MAP",
+                "DefaultValue": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
                 "__type": "X3DSharedTextureDef"
             },
             {
@@ -91,6 +102,12 @@
                 "name": "SHADOW_MAP_DEPTH_PCF",
                 "type": 3,
                 "register": 12,
+                "DefaultValue": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
                 "__type": "X3DSharedTextureDef"
             },
             {
@@ -143,12 +160,24 @@
             {
                 "name": "SPOT_SHADOW_MAP_DEPTH_PCF",
                 "type": 3,
+                "DefaultValue": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
                 "__type": "X3DSharedTextureDef"
             },
             {
                 "name": "POINT_SHADOW_MAP_DEPTH_PCF",
                 "type": 4,
                 "PlatformMask": 26,
+                "DefaultValue": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
                 "__type": "X3DSharedTextureDef"
             },
             {
@@ -158,11 +187,23 @@
             {
                 "name": "SSAO_TEXTURE",
                 "SAMPLER": "{a6bded4f}",
+                "DefaultValue": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
                 "__type": "X3DSharedTextureDef"
             },
             {
                 "name": "ENV_EFFECTOR_TEXTURE",
                 "BindLocation": 0,
+                "DefaultValue": [
+                    0.5,
+                    0.5,
+                    0.5,
+                    0.0
+                ],
                 "__type": "X3DSharedTextureDef"
             },
             {
@@ -188,8 +229,27 @@
                 "__type": "X3DSharedTextureDef"
             },
             {
+                "name": "TERRAIN_BLEND_VS",
+                "BindLocation": 0,
+                "SAMPLER": "{a6bded4f}",
+                "__type": "X3DSharedTextureDef"
+            },
+            {
                 "name": "DYNAMIC_PER_PARTICLE_INST",
                 "frequency": 2,
+                "SAMPLER": "{a6bded4f}",
+                "__type": "X3DSharedTextureDef"
+            },
+            {
+                "name": "CLUSTER_MAP",
+                "type": 1,
+                "{67542274}": 1,
+                "{ec5a120e}": 1,
+                "SAMPLER": "{a6bded4f}",
+                "__type": "X3DSharedTextureDef"
+            },
+            {
+                "name": "CLUSTER_DATA",
                 "SAMPLER": "{a6bded4f}",
                 "__type": "X3DSharedTextureDef"
             }
@@ -248,34 +308,12 @@
         "objectPath": "{fefebb19}",
         "__type": "SkinnedPbrShadingModel"
     },
-    "{10db8e46}": {
-        "name": "DynamicLightingSkinnedPS",
-        "type": 1,
-        "frequency": 2,
-        "constants": [
-            {
-                "name": "DynamicLightDataSkinned",
-                "type": 3,
-                "Count": 64,
-                "PlatformMask": 3,
-                "__type": "X3DSharedConstantDef"
-            },
-            {
-                "name": "DynamicLightDataSkinned",
-                "type": 3,
-                "Count": 256,
-                "PlatformMask": 56,
-                "__type": "X3DSharedConstantDef"
-            }
-        ],
-        "__type": "X3DSharedConstantBufferDef"
-    },
     "{2fa9e31a}": {
         "name": "PerFrameVertexCB",
         "constants": [
             {
                 "name": "mProj",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
@@ -295,17 +333,17 @@
             },
             {
                 "name": "VIEW_PROJECTION_MATRIX",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
                 "name": "SHADOW_PROJECTION_MATRIX",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
                 "name": "SCREEN_MATRIX",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
@@ -341,12 +379,12 @@
             },
             {
                 "name": "mView",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
                 "name": "mViewInv",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             }
         ],
@@ -371,7 +409,7 @@
         "constants": [
             {
                 "name": "LightRegionInfo",
-                "type": 6,
+                "type": 10,
                 "{9d17b3be}": "{f15a89f3}",
                 "Count": 11,
                 "__type": "X3DSharedConstantDef"
@@ -383,7 +421,7 @@
             },
             {
                 "name": "EnvEffectorInfo",
-                "type": 6,
+                "type": 10,
                 "{9d17b3be}": "{b5cc9d24}",
                 "Count": 64,
                 "__type": "X3DSharedConstantDef"
@@ -420,7 +458,7 @@
         "constants": [
             {
                 "name": "UI_ELEMENT_MATRIX",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
@@ -538,7 +576,7 @@
             },
             {
                 "name": "mView",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
@@ -567,7 +605,7 @@
             },
             {
                 "name": "mViewInv",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             }
         ],
@@ -635,17 +673,34 @@
         "constants": [
             {
                 "name": "DECAL_WORLD_MATRIX",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
                 "name": "DECAL_WORLD_TO_UV_MATRIX",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
                 "name": "DECAL_PROJECTION_Y_RANGE",
                 "type": 3,
+                "__type": "X3DSharedConstantDef"
+            }
+        ],
+        "__type": "X3DSharedConstantBufferDef"
+    },
+    "{8eddc9c2}": {
+        "name": "ClusterData",
+        "type": 1,
+        "constants": [
+            {
+                "name": "WORLD_TO_CLUSTER_TRANSFORM",
+                "type": 9,
+                "__type": "X3DSharedConstantDef"
+            },
+            {
+                "name": "CLUSTER_MAX_CLAMP",
+                "type": 2,
                 "__type": "X3DSharedConstantDef"
             }
         ],
@@ -680,6 +735,21 @@
                 "name": "DYNAMIC_MESH_CENTER",
                 "type": 2,
                 "__type": "X3DSharedConstantDef"
+            },
+            {
+                "name": "mWorld",
+                "type": 9,
+                "__type": "X3DSharedConstantDef"
+            },
+            {
+                "name": "mWorldInv",
+                "type": 9,
+                "__type": "X3DSharedConstantDef"
+            },
+            {
+                "name": "LIGHTING_MASK",
+                "type": 4,
+                "__type": "X3DSharedConstantDef"
             }
         ],
         "__type": "X3DSharedConstantBufferDef"
@@ -690,7 +760,7 @@
         "constants": [
             {
                 "name": "mWorld",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             },
             {
@@ -706,7 +776,7 @@
             },
             {
                 "name": "mWorldInv",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             }
         ],
@@ -761,7 +831,7 @@
         "constants": [
             {
                 "name": "mShadowProj",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             }
         ],
@@ -787,7 +857,7 @@
         "constants": [
             {
                 "name": "FONT_MATRIX",
-                "type": 5,
+                "type": 9,
                 "__type": "X3DSharedConstantDef"
             }
         ],
@@ -856,7 +926,7 @@
         "constants": [
             {
                 "name": "BONES",
-                "type": 4,
+                "type": 8,
                 "Count": 68,
                 "register": 0,
                 "SetManually": true,
@@ -865,7 +935,7 @@
             },
             {
                 "name": "BONES",
-                "type": 4,
+                "type": 8,
                 "Count": 256,
                 "register": 0,
                 "SetManually": true,
@@ -874,28 +944,6 @@
             }
         ],
         "register": 0,
-        "__type": "X3DSharedConstantBufferDef"
-    },
-    "{eb05a125}": {
-        "name": "DynamicLightingEnvPS",
-        "type": 1,
-        "frequency": 2,
-        "constants": [
-            {
-                "name": "DynamicLightDataEnv",
-                "type": 3,
-                "Count": 64,
-                "PlatformMask": 3,
-                "__type": "X3DSharedConstantDef"
-            },
-            {
-                "name": "DynamicLightDataEnv",
-                "type": 3,
-                "Count": 256,
-                "PlatformMask": 56,
-                "__type": "X3DSharedConstantDef"
-            }
-        ],
         "__type": "X3DSharedConstantBufferDef"
     },
     "{a6bded4f}": {

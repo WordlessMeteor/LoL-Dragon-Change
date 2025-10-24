@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.20.1",
+    "version": "15.21.1",
     "data": {
         "Graves": {
             "id": "Graves",
@@ -131,8 +131,8 @@
                 "movespeed": 340,
                 "armor": 33,
                 "armorperlevel": 4.6,
-                "spellblock": 32,
-                "spellblockperlevel": 2.05,
+                "spellblock": 30,
+                "spellblockperlevel": 1.3,
                 "attackrange": 425,
                 "hpregen": 8,
                 "hpregenperlevel": 0.7,
@@ -437,15 +437,17 @@
                 {
                     "id": "GravesMove",
                     "name": "快速拔枪",
-                    "description": "格雷福斯向前冲刺，获得一层持续数秒的护甲加成。如果格雷福斯朝着一名敌方英雄冲刺，则会获得两层纯爷们效果。格雷福斯的每次未被闪避的普通攻击，都会减少这个技能的冷却时间并刷新防御属性加成。",
-                    "tooltip": "格雷福斯突进并装填一颗<keywordMajor>子弹</keywordMajor>进他的霰弹枪中。他还会获得一层持续4秒的效果(最多{{ e0 }}层)或是在朝着敌人突进时获得2层效果。每层效果为他提供<scaleArmor>{{ e5 }}护甲</scaleArmor>。层数会在对非小兵单位造成伤害时刷新。<br /><br />格雷福斯的攻击每有一颗弹丸命中敌人，就会使这个技能缩短{{ e4 }}秒冷却时间。<br />{{ spellmodifierdescriptionappend }}",
+                    "description": "格雷福斯向前冲刺，获得一层持续数秒的护甲和魔法抗性加成。如果格雷福斯朝着一名敌方英雄冲刺，则会获得两层纯爷们效果。格雷福斯的每次未被闪避的普通攻击，都会减少这个技能的冷却时间并刷新该防御属性加成。",
+                    "tooltip": "格雷福斯冲刺并装填一颗<keywordMajor>子弹</keywordMajor>进他的霰弹枪中。他还会获得一层持续{{ buffduration }}秒的效果(最多{{ maxstacks }}层)或是在朝着敌人突进时获得2层效果。每层效果为他提供<scaleArmor>{{ armorperstack }}护甲</scaleArmor>和<scaleMR>{{ mrgrant }}魔法抗性</scaleMR>。层数会在对非小兵单位造成伤害时刷新。<br /><br />格雷福斯的攻击每有一颗弹丸命中敌人，就会使这个技能缩短{{ cooldownperhit }}秒冷却时间。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "护甲",
+                            "魔法抗性",
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e5 }} -> {{ e5NL }}",
+                            "{{ armorperstack }} -> {{ armorperstackNL }}",
+                            "{{ armorperstack*0.500000 }} -> {{ armorperstacknl*0.500000 }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -498,11 +500,11 @@
                             0.5
                         ],
                         [
-                            4,
-                            7,
-                            10,
-                            13,
-                            16
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             750,
@@ -546,7 +548,7 @@
                         "4",
                         "20/25/30/35/40",
                         "0.5",
-                        "4/7/10/13/16",
+                        "0",
                         "750",
                         "375",
                         "275",

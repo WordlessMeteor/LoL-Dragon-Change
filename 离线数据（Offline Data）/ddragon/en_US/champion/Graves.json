@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "standAloneComplex",
-    "version": "15.20.1",
+    "version": "15.21.1",
     "data": {
         "Graves": {
             "id": "Graves",
@@ -131,8 +131,8 @@
                 "movespeed": 340,
                 "armor": 33,
                 "armorperlevel": 4.6,
-                "spellblock": 32,
-                "spellblockperlevel": 2.05,
+                "spellblock": 30,
+                "spellblockperlevel": 1.3,
                 "attackrange": 425,
                 "hpregen": 8,
                 "hpregenperlevel": 0.7,
@@ -437,15 +437,17 @@
                 {
                     "id": "GravesMove",
                     "name": "Quickdraw",
-                    "description": "Graves dashes forward gaining an Armor boost for several seconds. If Graves dashes towards an enemy champion, gain two stacks of True Grit instead. Hitting enemies with basic attacks lowers the cooldown of this skill and refreshes the resistance boost.",
-                    "tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for 4 seconds (max {{ e0 }} stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>{{ e5 }} Armor</scaleArmor>. Stacks are refreshed when damaging a non-minion.<br /><br />Each bullet hit from Graves' Attacks reduces this Ability's Cooldown by {{ e4 }} seconds.<br />{{ spellmodifierdescriptionappend }}",
+                    "description": "Graves dashes forward gaining an Armor and Magic Resist boost for several seconds. If Graves dashes towards an enemy champion, gain two stacks of True Grit instead. Hitting enemies with basic attacks lowers the cooldown of this skill and refreshes the resistance boost.",
+                    "tooltip": "Graves dashes and reloads one <keywordMajor>Shell</keywordMajor> into his shotgun. He also gains a stack for {{ buffduration }} seconds (max {{ maxstacks }} stacks) or two stacks if he dashes towards an enemy champion. Stacks grant him <scaleArmor>{{ armorperstack }} Armor</scaleArmor> and <scaleMR>{{ mrgrant }} Magic Resist</scaleMR>. Stacks are refreshed when damaging a non-minion.<br /><br />Each bullet hit from Graves' Attacks reduces this Ability's Cooldown by {{ cooldownperhit }} seconds.{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "Armor",
+                            "Magic Resist",
                             "Cooldown"
                         ],
                         "effect": [
-                            "{{ e5 }} -> {{ e5NL }}",
+                            "{{ armorperstack }} -> {{ armorperstackNL }}",
+                            "{{ armorperstack*0.500000 }} -> {{ armorperstacknl*0.500000 }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -498,11 +500,11 @@
                             0.5
                         ],
                         [
-                            4,
-                            7,
-                            10,
-                            13,
-                            16
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             750,
@@ -546,7 +548,7 @@
                         "4",
                         "20/25/30/35/40",
                         "0.5",
-                        "4/7/10/13/16",
+                        "0",
                         "750",
                         "375",
                         "275",

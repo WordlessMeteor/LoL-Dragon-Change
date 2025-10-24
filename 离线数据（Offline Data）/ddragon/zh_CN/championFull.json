@@ -1,7 +1,7 @@
 {
     "type": "champion",
     "format": "full",
-    "version": "15.20.1",
+    "version": "15.21.1",
     "data": {
         "Aatrox": {
             "id": "Aatrox",
@@ -9982,8 +9982,8 @@
                             "移动速度"
                         ],
                         "effect": [
-                            "{{ e5 }} -> {{ e5NL }}",
-                            "{{ e6 }} -> {{ e6NL }}",
+                            "{{ minimumheal }} -> {{ minimumhealNL }}",
+                            "{{ maximumheal }} -> {{ maximumhealNL }}",
                             "{{ movespeed_base*100.000000 }}% -> {{ movespeed_basenl*100.000000 }}%"
                         ]
                     },
@@ -10036,18 +10036,18 @@
                             0
                         ],
                         [
-                            25,
-                            50,
-                            75,
-                            100,
-                            125
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
-                            50,
-                            87.5,
-                            125,
-                            162.5,
-                            200
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             0,
@@ -10084,8 +10084,8 @@
                         "0",
                         "3",
                         "0",
-                        "25/50/75/100/125",
-                        "50/87.5/125/162.5/200",
+                        "0",
+                        "0",
                         "0",
                         "5",
                         "0",
@@ -18725,7 +18725,7 @@
                 {
                     "id": "119013",
                     "num": 13,
-                    "name": "王国机神青龙 德莱文",
+                    "name": "机神青龙 德莱文",
                     "chromas": true
                 },
                 {
@@ -19481,7 +19481,7 @@
                 "mpperlevel": 0,
                 "movespeed": 345,
                 "armor": 32,
-                "armorperlevel": 3.7,
+                "armorperlevel": 4.5,
                 "spellblock": 29,
                 "spellblockperlevel": 2.3,
                 "attackrange": 125,
@@ -22395,7 +22395,7 @@
                 "crit": 0,
                 "critperlevel": 0,
                 "attackdamage": 60,
-                "attackdamageperlevel": 2.75,
+                "attackdamageperlevel": 3.25,
                 "attackspeedperlevel": 2.5,
                 "attackspeed": 0.625
             },
@@ -26561,13 +26561,13 @@
                 {
                     "id": "86022",
                     "num": 22,
-                    "name": "王国机神玄武 盖伦",
+                    "name": "机神玄武 盖伦",
                     "chromas": false
                 },
                 {
                     "id": "86023",
                     "num": 23,
-                    "name": "至臻 王国机神玄武 盖伦",
+                    "name": "至臻 机神玄武 盖伦",
                     "chromas": false
                 },
                 {
@@ -28735,8 +28735,8 @@
                 "movespeed": 340,
                 "armor": 33,
                 "armorperlevel": 4.6,
-                "spellblock": 32,
-                "spellblockperlevel": 2.05,
+                "spellblock": 30,
+                "spellblockperlevel": 1.3,
                 "attackrange": 425,
                 "hpregen": 8,
                 "hpregenperlevel": 0.7,
@@ -29041,15 +29041,17 @@
                 {
                     "id": "GravesMove",
                     "name": "快速拔枪",
-                    "description": "格雷福斯向前冲刺，获得一层持续数秒的护甲加成。如果格雷福斯朝着一名敌方英雄冲刺，则会获得两层纯爷们效果。格雷福斯的每次未被闪避的普通攻击，都会减少这个技能的冷却时间并刷新防御属性加成。",
-                    "tooltip": "格雷福斯突进并装填一颗<keywordMajor>子弹</keywordMajor>进他的霰弹枪中。他还会获得一层持续4秒的效果(最多{{ e0 }}层)或是在朝着敌人突进时获得2层效果。每层效果为他提供<scaleArmor>{{ e5 }}护甲</scaleArmor>。层数会在对非小兵单位造成伤害时刷新。<br /><br />格雷福斯的攻击每有一颗弹丸命中敌人，就会使这个技能缩短{{ e4 }}秒冷却时间。<br />{{ spellmodifierdescriptionappend }}",
+                    "description": "格雷福斯向前冲刺，获得一层持续数秒的护甲和魔法抗性加成。如果格雷福斯朝着一名敌方英雄冲刺，则会获得两层纯爷们效果。格雷福斯的每次未被闪避的普通攻击，都会减少这个技能的冷却时间并刷新该防御属性加成。",
+                    "tooltip": "格雷福斯冲刺并装填一颗<keywordMajor>子弹</keywordMajor>进他的霰弹枪中。他还会获得一层持续{{ buffduration }}秒的效果(最多{{ maxstacks }}层)或是在朝着敌人突进时获得2层效果。每层效果为他提供<scaleArmor>{{ armorperstack }}护甲</scaleArmor>和<scaleMR>{{ mrgrant }}魔法抗性</scaleMR>。层数会在对非小兵单位造成伤害时刷新。<br /><br />格雷福斯的攻击每有一颗弹丸命中敌人，就会使这个技能缩短{{ cooldownperhit }}秒冷却时间。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
                             "护甲",
+                            "魔法抗性",
                             "冷却时间"
                         ],
                         "effect": [
-                            "{{ e5 }} -> {{ e5NL }}",
+                            "{{ armorperstack }} -> {{ armorperstackNL }}",
+                            "{{ armorperstack*0.500000 }} -> {{ armorperstacknl*0.500000 }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
@@ -29102,11 +29104,11 @@
                             0.5
                         ],
                         [
-                            4,
-                            7,
-                            10,
-                            13,
-                            16
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
                         ],
                         [
                             750,
@@ -29150,7 +29152,7 @@
                         "4",
                         "20/25/30/35/40",
                         "0.5",
-                        "4/7/10/13/16",
+                        "0",
                         "750",
                         "375",
                         "275",
@@ -29381,12 +29383,12 @@
                 "difficulty": 5
             },
             "stats": {
-                "hp": 600,
-                "hpperlevel": 110,
+                "hp": 620,
+                "hpperlevel": 115,
                 "mp": 330,
                 "mpperlevel": 40,
                 "movespeed": 340,
-                "armor": 33,
+                "armor": 39,
                 "armorperlevel": 4.9,
                 "spellblock": 32,
                 "spellblockperlevel": 2.05,
@@ -29399,7 +29401,7 @@
                 "critperlevel": 0,
                 "attackdamage": 63,
                 "attackdamageperlevel": 3,
-                "attackspeedperlevel": 2.5,
+                "attackspeedperlevel": 2.25,
                 "attackspeed": 0.69
             },
             "spells": [
@@ -29551,21 +29553,23 @@
                     "tooltip": "格温召唤圣霭结界，使她对结界之外的所有敌人(防御塔除外)来说处于无法被选取状态，持续{{ zoneduration }}秒或直到她离开结界为止。在结界中，格温获得{{ totalresists }}<scaleArmor>护甲</scaleArmor>和<scaleMR>魔法抗性</scaleMR>。<br /><br />格温可以<recast>再次施放</recast>这个技能，来将结界召唤到她所在的位置，但只有1次机会。格温在第一次尝试离开结界时会自动进行<recast>再次施放</recast>。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
+                            "额外双抗",
                             "冷却时间"
                         ],
                         "effect": [
+                            "{{ baseresists }} -> {{ baseresistsNL }}",
                             "{{ cooldown }} -> {{ cooldownNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        24,
-                        22.5,
+                        22,
                         21,
-                        19.5,
+                        20,
+                        19,
                         18
                     ],
-                    "cooldownBurn": "24/22.5/21/19.5/18",
+                    "cooldownBurn": "22/21/20/19/18",
                     "cost": [
                         60,
                         60,
@@ -29692,23 +29696,23 @@
                         "label": [
                             "冷却时间",
                             "攻击速度",
-                            "命中附伤"
+                            "冷却缩减返还"
                         ],
                         "effect": [
                             "{{ cooldown }} -> {{ cooldownNL }}",
                             "{{ baseattackspeed }}% -> {{ baseattackspeedNL }}%",
-                            "{{ basedamage }} -> {{ basedamageNL }}"
+                            "{{ cdrefund }} -> {{ cdrefundNL }}"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
+                        13,
+                        12.5,
                         12,
-                        11,
-                        10,
-                        9,
-                        8
+                        11.5,
+                        11
                     ],
-                    "cooldownBurn": "12/11/10/9/8",
+                    "cooldownBurn": "13/12.5/12/11.5/11",
                     "cost": [
                         35,
                         35,
@@ -35579,7 +35583,7 @@
                 {
                     "id": "24014",
                     "num": 14,
-                    "name": "王国机神白虎 贾克斯",
+                    "name": "机神白虎 贾克斯",
                     "chromas": true
                 },
                 {
@@ -39148,7 +39152,7 @@
                 "crit": 0,
                 "critperlevel": 0,
                 "attackdamage": 57,
-                "attackdamageperlevel": 4.25,
+                "attackdamageperlevel": 4.75,
                 "attackspeedperlevel": 4.5,
                 "attackspeed": 0.694
             },
@@ -49531,7 +49535,7 @@
                 {
                     "id": "89012",
                     "num": 12,
-                    "name": "王国机神朱雀 蕾欧娜",
+                    "name": "机神朱雀 蕾欧娜",
                     "chromas": true
                 },
                 {
@@ -60093,7 +60097,7 @@
                 "mpperlevel": 60,
                 "movespeed": 335,
                 "armor": 25,
-                "armorperlevel": 5,
+                "armorperlevel": 4.2,
                 "spellblock": 30,
                 "spellblockperlevel": 1.3,
                 "attackrange": 450,
@@ -63487,6 +63491,12 @@
                     "num": 40,
                     "name": "超级COSPLAY粉丝 妮蔻",
                     "chromas": true
+                },
+                {
+                    "id": "518049",
+                    "num": 49,
+                    "name": "小蜜蜂 妮蔻",
+                    "chromas": false
                 }
             ],
             "lore": "妮蔻来自一个早已迷失的瓦斯塔亚部落。她可以借用别人的外表来伪装自己，融入人群，甚至通过影响别人的情绪状态，一瞬间就能化敌为友。没人知道妮蔻到底在哪儿——或者到底是谁，但是想要为难她的人会立刻见识到她的本色，感受原始的精神魔法倾泻在自己身上的痛苦。",
@@ -64932,7 +64942,7 @@
                     "leveltip": {
                         "label": [
                             "伤害",
-                            "攻击力百分比"
+                            "伤害：<physicalDamage>@TargetDamage@</physicalDamage> = <scaleLevel>@PercentAD*100@% (%i:scaleAD%)</scaleLevel>"
                         ],
                         "effect": [
                             "{{ basedamage }} -> {{ basedamageNL }}",
@@ -71117,7 +71127,7 @@
             },
             "stats": {
                 "hp": 590,
-                "hpperlevel": 124,
+                "hpperlevel": 121,
                 "mp": 375,
                 "mpperlevel": 60,
                 "movespeed": 335,
@@ -72238,10 +72248,12 @@
                     "tooltip": "奎因召唤华洛，在引导2秒后进行合体，获得<speed>{{ movementspeedmod*100 }}%移动速度</speed>并允许她<recast>再次施放</recast>这个技能。攻击或使用<spellName>炫目攻势</spellName>或<spellName>旋翔掠杀</spellName>都会自动地<recast>再次施放</recast>这个技能。<br /><br /><recast>再次施放</recast>：奎因和华洛表演一次空中特技，造成<physicalDamage>{{ damage }}物理伤害</physicalDamage>、将英雄们标记为<keywordMajor>易损</keywordMajor>并结束这个技能。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
+                            "伤害",
                             "移动速度",
                             "法力消耗"
                         ],
                         "effect": [
+                            "{{ basedamage }} -> {{ basedamageNL }}",
                             "{{ movementspeedmod*100.000000 }}% -> {{ movementspeedmodnl*100.000000 }}%",
                             "{{ basecost }} -> {{ basecostNL }}"
                         ]
@@ -81937,7 +81949,7 @@
                 {
                     "id": "875001",
                     "num": 1,
-                    "name": "王国机神苍狼 瑟提",
+                    "name": "机神苍狼 瑟提",
                     "chromas": true
                 },
                 {
@@ -86867,6 +86879,12 @@
                     "num": 5,
                     "name": "天蝎星神 斯卡纳",
                     "chromas": true
+                },
+                {
+                    "id": "72014",
+                    "num": 14,
+                    "name": "机神 斯卡纳",
+                    "chromas": false
                 }
             ],
             "lore": "作为以绪塔尔统治阶层——育恩塔尔的初创成员之一，古老而庞大的壳人斯卡纳在这里深受景仰。他一心致力于保护这个国度免受外界所害，为此，斯卡纳栖息在以绪奥肯地下的密室中，聆听着大地的震动，只为了觉察潜在的威胁。但随着育恩塔尔越来越多的成员开始质疑他们与世隔离的做法，斯卡纳也变得越发偏执和猜疑。为了保护以绪塔尔和他的人民，他愿意不惜一切代价——无论这个代价意味着什么。",
@@ -111245,7 +111263,7 @@
                 "mpregenperlevel": 0,
                 "crit": 0,
                 "critperlevel": 0,
-                "attackdamage": 60,
+                "attackdamage": 62,
                 "attackdamageperlevel": 2,
                 "attackspeedperlevel": 3.5,
                 "attackspeed": 0.625
@@ -112711,7 +112729,7 @@
                         ],
                         "effect": [
                             "{{ damage }} -> {{ damageNL }}",
-                            "{{ damage_per_second }} -> {{ damage_per_secondNL }}"
+                            "{{ damage*0.600000 }} -> {{ damagenl*0.600000 }}"
                         ]
                     },
                     "maxrank": 5,
@@ -112844,24 +112862,26 @@
                     "id": "YunaraE",
                     "name": "明踪步 | 夜影翻",
                     "description": "芸阿娜获得持续衰减的移动速度并进入幽灵状态。在她处于超凡形态期间，她转而朝着一个方向冲刺。",
-                    "tooltip": "芸阿娜获得<speed>{{ calc_move_speed }}移动速度</speed>，并且在朝着一个敌人移动提升至<speed>{{ calc_move_speed_enhanced }}移动速度</speed>，在{{ buff_duration }}秒里持续衰减。<br /><br /><keywordMajor>超凡形态 - 夜影翻</keywordMajor>：芸阿娜朝一个方向进行冲刺。{{ spellmodifierdescriptionappend }}",
+                    "tooltip": "芸阿娜获得<speed>{{ calc_move_speed }}移动速度</speed>，并且在朝着一个敌方英雄移动时提升至<speed>{{ calc_move_speed_enhanced }}移动速度</speed>，持续{{ buff_duration }}秒。<br /><br /><keywordMajor>超凡形态 - 夜影翻</keywordMajor>：芸阿娜朝一个方向进行冲刺。{{ spellmodifierdescriptionappend }}",
                     "leveltip": {
                         "label": [
-                            "移动速度"
+                            "移动速度",
+                            "最大移动速度"
                         ],
                         "effect": [
-                            "{{ move_speed*100.000000 }}% -> {{ move_speednl*100.000000 }}%"
+                            "{{ move_speed*100.000000 }}% -> {{ move_speednl*100.000000 }}%",
+                            "{{ move_speed*150.000000 }}% -> {{ move_speednl*150.000000 }}%"
                         ]
                     },
                     "maxrank": 5,
                     "cooldown": [
-                        7.5,
-                        7.5,
-                        7.5,
-                        7.5,
-                        7.5
+                        9,
+                        9,
+                        9,
+                        9,
+                        9
                     ],
-                    "cooldownBurn": "7.5",
+                    "cooldownBurn": "9",
                     "cost": [
                         40,
                         40,
@@ -117265,6 +117285,12 @@
                     "id": "142033",
                     "num": 33,
                     "name": "暗星 佐伊",
+                    "chromas": true
+                },
+                {
+                    "id": "142043",
+                    "num": 43,
+                    "name": "至臻 永恒星灵 佐伊",
                     "chromas": true
                 }
             ],
