@@ -155,15 +155,17 @@
     "{3934db3f}": {
         "ObjectName": "Augment_VeilOfWarding_Cooldown",
         "mScriptName": "Augment_VeilOfWarding_Cooldown",
-        "mSpell": {
-            "mImgIconName": [
-                "ASSETS/Spells/Icons2D/FakeFlash.dds"
-            ],
-            "Loadable": "Maps/ModeSpecificData/Augments/VeilOfWarding/Loadable",
-            "mResourceResolvers": [
-                "{54945a7e}"
-            ],
-            "__type": "SpellDataResource"
+        "mBuff": {
+            "mTooltipData": {
+                "mObjectName": "Augment_VeilOfWarding_Cooldown",
+                "mFormat": "{b34f999a}",
+                "mLocKeys": {
+                    "keyName": "Kiwi_VeilOfWarding_Name",
+                    "keyTooltip": "Kiwi_GeneralAugmentCooldown_BuffBar"
+                },
+                "__type": "TooltipInstanceBuff"
+            },
+            "__type": "BuffData"
         },
         "__type": "SpellObject"
     },
@@ -324,13 +326,13 @@
                 {
                     "mName": "Breakpoint1",
                     "mValues": [
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5,
+                        3.5
                     ],
                     "__type": "SpellDataValue"
                 }
@@ -2022,7 +2024,7 @@
                 }
             ],
             "mSpellCalculations": {
-                "{b941f48b}": {
+                "AdaptiveAmp": {
                     "mFormulaParts": [
                         {
                             "mStartValue": 40.0,
@@ -6276,7 +6278,7 @@
                     ],
                     "__type": "GameCalculation"
                 },
-                "{0a2ff76d}": {
+                "TotalGoldPerProcTooltip": {
                     "mMultiplier": {
                         "mDataValue": "GoldPerProc",
                         "__type": "NamedDataValueCalculationPart"
@@ -7279,7 +7281,7 @@
                 }
             ],
             "mSpellCalculations": {
-                "{f6c8d27f}": {
+                "MSFromBasePen": {
                     "mFormulaParts": [
                         {
                             "mStat": 29,
@@ -10464,8 +10466,8 @@
     "Maps/ModeSpecificData/Augments/ARAM_Repulsor": {
         "AugmentNameId": "ARAM_Repulsor",
         "NameTra": "Kiwi_ARAM_Repulsor_Name",
-        "DescriptionTra": "Cherry_Repulsor_Summary",
-        "AugmentTooltipTra": "Cherry_Repulsor_Summary",
+        "DescriptionTra": "Kiwi_Repulsor_Summary",
+        "AugmentTooltipTra": "Kiwi_Repulsor_Tooltip",
         "RootSpell": "{7c3c4355}",
         "AugmentLargeIconPath": "ASSETS/UX/Cherry/Augments/Icons/Repulsor_large.tex",
         "AugmentSmallIconPath": "ASSETS/UX/Cherry/Augments/Icons/Repulsor_small.tex",
@@ -10679,6 +10681,7 @@
         "DescriptionTra": "Kiwi_SelfDestruct_Summary",
         "AugmentTooltipTra": "Kiwi_SelfDestruct_Tooltip",
         "RootSpell": "{ef107fb5}",
+        "mBuildTags": 258,
         "AugmentLargeIconPath": "ASSETS/UX/Cherry/Augments/Icons/SelfDestruct_large.tex",
         "AugmentSmallIconPath": "ASSETS/UX/Cherry/Augments/Icons/SelfDestruct_small.tex",
         "AugmentDisplayTags": [
@@ -10853,7 +10856,7 @@
                 }
             ],
             "mSpellCalculations": {
-                "{6b0ce672}": {
+                "SnowballDamage": {
                     "mFormulaParts": [
                         {
                             "mStartValue": 200.0,
@@ -11192,7 +11195,7 @@
                 "MeleeItemCalcValue": {
                     "mFormulaParts": [
                         {
-                            "mDataValue": "{047e803b}",
+                            "mDataValue": "PSDamageMelee",
                             "__type": "NamedDataValueCalculationPart"
                         }
                     ],
@@ -14444,7 +14447,7 @@
                     "mFormulaParts": [
                         {
                             "mStat": 12,
-                            "mDataValue": "{a6ae9076}",
+                            "mDataValue": "HPReductionPerc",
                             "__type": "StatByNamedDataValueCalculationPart"
                         }
                     ],
@@ -15282,7 +15285,7 @@
                 }
             ],
             "mSpellCalculations": {
-                "{4c69247b}": {
+                "APPerLevel": {
                     "mFormulaParts": [
                         {
                             "mStartValue": 75.0,
@@ -15440,28 +15443,54 @@
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "HealthThreshold1",
+                    "mName": "HealthThreshold",
                     "mValues": [
-                        0.6000000238418579,
-                        0.6000000238418579,
-                        0.6000000238418579,
-                        0.6000000238418579,
-                        0.6000000238418579,
-                        0.6000000238418579,
-                        0.6000000238418579
+                        0.3499999940395355,
+                        0.3499999940395355,
+                        0.3499999940395355,
+                        0.3499999940395355,
+                        0.3499999940395355,
+                        0.3499999940395355,
+                        0.3499999940395355
                     ],
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "HealthThreshold2",
+                    "mName": "Cooldown",
                     "mValues": [
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896,
-                        0.30000001192092896
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "SlowAmount",
+                    "mValues": [
+                        0.8999999761581421,
+                        0.8999999761581421,
+                        0.8999999761581421,
+                        0.8999999761581421,
+                        0.8999999761581421,
+                        0.8999999761581421,
+                        0.8999999761581421
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "SlowDuration",
+                    "mValues": [
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5
                     ],
                     "__type": "SpellDataValue"
                 }
@@ -15482,6 +15511,23 @@
         "mScriptName": "Augment_ARAM_Repulsor_Knockback",
         "mBuff": {
             "mDescription": "Cherry_AugmentBuff_BlankTooltip",
+            "__type": "BuffData"
+        },
+        "__type": "SpellObject"
+    },
+    "{d7345116}": {
+        "ObjectName": "Augment_ARAM_Repulsor_Cooldown",
+        "mScriptName": "Augment_ARAM_Repulsor_Cooldown",
+        "mBuff": {
+            "mTooltipData": {
+                "mObjectName": "Augment_ARAM_Repulsor_Cooldown",
+                "mFormat": "{b34f999a}",
+                "mLocKeys": {
+                    "keyName": "Kiwi_ARAM_Repulsor_Name",
+                    "keyTooltip": "Kiwi_GeneralAugmentCooldown_BuffBar"
+                },
+                "__type": "TooltipInstanceBuff"
+            },
             "__type": "BuffData"
         },
         "__type": "SpellObject"
@@ -16197,6 +16243,19 @@
                         0.75
                     ],
                     "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BaseCooldown",
+                    "mValues": [
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0,
+                        25.0
+                    ],
+                    "__type": "SpellDataValue"
                 }
             ],
             "mImgIconName": [
@@ -16219,6 +16278,23 @@
                 "__type": "SpellDataResourceClient"
             },
             "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{9c7cea9c}": {
+        "ObjectName": "Augment_ARAM_SelfDestruct_Cooldown",
+        "mScriptName": "Augment_ARAM_SelfDestruct_Cooldown",
+        "mBuff": {
+            "mTooltipData": {
+                "mObjectName": "Augment_ARAM_SelfDestruct_Cooldown",
+                "mFormat": "{b34f999a}",
+                "mLocKeys": {
+                    "keyName": "Cherry_SelfDestruct_Name",
+                    "keyTooltip": "Kiwi_GeneralAugmentCooldown_BuffBar"
+                },
+                "__type": "TooltipInstanceBuff"
+            },
+            "__type": "BuffData"
         },
         "__type": "SpellObject"
     },
@@ -16323,7 +16399,7 @@
                 }
             ],
             "mSpellCalculations": {
-                "{eaa67113}": {
+                "ResistsPerLevel": {
                     "mFormulaParts": [
                         {
                             "mStartValue": 2.0,
@@ -18152,13 +18228,13 @@
                 {
                     "mName": "ADAmp",
                     "mValues": [
-                        0.15000000596046448,
-                        0.15000000596046448,
-                        0.15000000596046448,
-                        0.15000000596046448,
-                        0.15000000596046448,
-                        0.15000000596046448,
-                        0.15000000596046448
+                        0.20000000298023224,
+                        0.20000000298023224,
+                        0.20000000298023224,
+                        0.20000000298023224,
+                        0.20000000298023224,
+                        0.20000000298023224,
+                        0.20000000298023224
                     ],
                     "__type": "SpellDataValue"
                 }
@@ -18695,7 +18771,7 @@
                 }
             ],
             "mSpellCalculations": {
-                "{3fb4d6d6}": {
+                "BonusHSPower": {
                     "mFormulaParts": [
                         {
                             "mStat": 1,
