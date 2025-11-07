@@ -5636,6 +5636,10 @@
                 "__type": "ShaderStaticSwitch"
             },
             {
+                "name": "VERTEX_DEFORM_TEX_ON",
+                "__type": "ShaderStaticSwitch"
+            },
+            {
                 "name": "USE_R_MASK_ON_DEFORM",
                 "__type": "ShaderStaticSwitch"
             },
@@ -5674,6 +5678,11 @@
             }
         ],
         "textures": [
+            {
+                "name": "Vertex_Deform_Tex",
+                "defaultTexturePath": "ASSETS/Shared/Materials/black.tex",
+                "__type": "ShaderTexture"
+            },
             {
                 "name": "OutlineMask_Texture",
                 "defaultTexturePath": "ASSETS/Shared/Materials/Atlast_Test.tex",
@@ -35714,79 +35723,6 @@
         "objectPath": "Shaders/SkinnedMesh/Sylas_Base_Mat",
         "__type": "CustomShaderDef"
     },
-    "Shaders/SkinnedMesh/HKG_FakeSpec_CloakAnim": {
-        "ShadingModel": "{baebc346}",
-        "parameters": [
-            {
-                "name": "Cloak_Anim_Speed",
-                "data": [
-                    0.550000011920929,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Cloak_Anim_Speed",
-                        "fields": 1,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Cloak_VA_Intensity",
-                "data": [
-                    0.0,
-                    35.0,
-                    -30.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Cloak_VA_Intensity",
-                        "fields": 7,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            },
-            {
-                "name": "Cloak_VA_Offset",
-                "data": [
-                    0.0,
-                    10.0,
-                    -15.0,
-                    0.0
-                ],
-                "logicalParameters": [
-                    {
-                        "name": "Cloak_VA_Offset",
-                        "fields": 7,
-                        "__type": "ShaderLogicalParameter"
-                    }
-                ],
-                "__type": "ShaderPhysicalParameter"
-            }
-        ],
-        "textures": [
-            {
-                "name": "Diffuse_Texture",
-                "defaultTexturePath": "ASSETS/Shared/Materials/black.tex",
-                "__type": "ShaderTexture"
-            }
-        ],
-        "featureDefines": {
-            "FEATURE_DISPLACEMENT": "1",
-            "FEATURE_VERTEX_COLOR": "1",
-            "FEATURE_VERTEX_COLOR_VS": "1",
-            "FEATURE_WORLD_NORMAL": "1",
-            "FEATURE_WORLD_POSITION": "1"
-        },
-        "featureMask": 36,
-        "objectPath": "Shaders/SkinnedMesh/HKG_FakeSpec_CloakAnim",
-        "__type": "CustomShaderDef"
-    },
     "Shaders/SkinnedMesh/ScreenSpace_FresnelMasked_AlphaMult_ShadowClip": {
         "ShadingModel": "{baebc346}",
         "parameters": [
@@ -59237,6 +59173,17 @@
                     {
                         "name": "OutlineMask_Texture_B_UV",
                         "fields": 3,
+                        "__type": "ShaderLogicalParameter"
+                    }
+                ],
+                "__type": "ShaderPhysicalParameter"
+            },
+            {
+                "name": "Maintex_Alpha_Strength",
+                "logicalParameters": [
+                    {
+                        "name": "Maintex_Alpha_Strength",
+                        "fields": 1,
                         "__type": "ShaderLogicalParameter"
                     }
                 ],
