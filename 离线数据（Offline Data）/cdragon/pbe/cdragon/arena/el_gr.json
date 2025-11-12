@@ -153,6 +153,46 @@
             "tooltip": "Κάθε γύρο, την πρώτη φορά που κανονικά θα έπρεπε να πεθάνετε, επιστρέφετε στο παιχνίδι με πλήρη Ζωή, η οποία μειώνεται σταδιακά μέσα σε @DecayDuration@ δευτερόλεπτα. Αν εξοντώσετε έναν αντίπαλο Ήρωα ενώ μειώνεται η Ζωή σας σταματά τη μείωση και επαναφέρει τη Ζωή σας στο <healing>@TriumphPercent@% της μέγιστης Ζωής σας</healing>."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Αφότου αναστηθεί με την Καλλιέργεια του Πολέμου, ο Ζάαχεν προκαλεί ζημιά στους κοντινούς εχθρούς ανάλογα με την τρέχουσα Ζωή τους και απωθεί όλους τους στόχους προς τα πίσω, ενώ είναι άτρωτος σε ζημιά που προκαλείται από Ήρωες έξω από τον κύκλο που δημιουργεί και αποκτά αυξημένη Ταχύτητα Κίνησης για ένα σύντομο χρονικό διάστημα.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Αθάνατος Φρουρός",
+            "rarity": 1,
+            "tooltip": "Αφότου ενεργοποιήσει την ανάσταση από την <spell>Καλλιέργεια του Πολέμου</spell>, ο Ζάαχεν εξαπολύει γύρω του ένα σαρωτικό χτύπημα που προκαλεί <physicalDamage>@TotalDamage@ Σωματική Ζημιά συν το @PercentCurrentHealthDamage*100@% της τρέχουσας Ζωής</physicalDamage> και <status>Απωθεί</status> όλους τους εχθρούς. <br>  <br>Στη συνέχεια, ο Ζάαχεν γίνεται <status>Άτρωτος</status> στη ζημιά από εχθρούς που βρίσκονται εκτός της εμβέλειας του σαρωτικού χτυπήματος και αποκτά <speed>@MovementSpeedBoost*100@% Ταχύτητα Κίνησης</speed> για @MissileDefenseBaseDuration@ δευτ. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

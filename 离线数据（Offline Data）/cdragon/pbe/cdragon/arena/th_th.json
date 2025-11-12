@@ -153,6 +153,46 @@
             "tooltip": "ในแต่ละรอบที่คุณจะตายเป็นครั้งแรก คุณจะกลับมามีพลังชีวิตเต็มหลอดที่จะค่อย ๆ ลดลงเป็นเวลา @DecayDuration@ วินาที การสังหารแชมเปี้ยนศัตรูได้ ขณะที่พลังชีวิตของคุณค่อย ๆ ลดลง จะเป็นการหยุดการลดพลังชีวิต และจะทำให้พลังชีวิตของคุณกลับอยู่ที่ <healing>@TriumphPercent@% ของพลังชีวิตสูงสุด</healing>"
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "หลังจาก Zaahen ฟื้นคืนชีพด้วย Cultivation of War เขาจะสร้างความเสียหายแก่ศัตรูรอบตัว ตามพลังชีวิตปัจจุบันของศัตรู และผลักศัตรูทั้งหมดให้กระเด็นออกไป จากนั้นไม่ได้รับความเสียหาย จากแชมเปี้ยนที่อยู่นอกวงที่เขาสร้างขึ้น และได้รับความเร็วเคลื่อนที่ชั่วครู่",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Undying Guard",
+            "rarity": 1,
+            "tooltip": "หลังเอฟเฟกต์ฟื้นคืนชีพของ <spell>Cultivation of War</spell> ทำงาน Zaahen จะโจมตีกวาดรอบตัว สร้างความเสียหายกายภาพ <physicalDamage>@TotalDamage@ หน่วย บวกด้วย @PercentCurrentHealthDamage*100@% จากพลังชีวิตปัจจุบัน</physicalDamage> และ<status>กระแทก</status>ศัตรูทั้งหมดไปด้านหลัง <br>  <br>จากนั้น Zaahen จะ<status>ไม่ได้รับความเสียหาย</status>จากศัตรูที่อยู่นอกวง และได้รับ<speed>ความเร็วเคลื่อนที่ @MovementSpeedBoost*100@%</speed> เป็นเวลา @MissileDefenseBaseDuration@ วินาที "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

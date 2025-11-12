@@ -153,6 +153,46 @@
             "tooltip": "各ラウンドで初めて倒された際、体力が最大まで回復し、@DecayDuration@秒かけて減衰していく。体力減衰中に敵チャンピオンからキルまたはアシストを獲得すると、その時点で減衰が止まり、体力が<healing>最大体力の@TriumphPercent@%</healing>になる。"
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "「戦威修養」で復活する時、周囲にいる敵に対象の現在体力に応じたダメージを与え、すべての対象をノックバックさせる。発生した円の外にいる敵チャンピオンからはダメージを受けなくなり、少しの間移動速度が上昇する。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "不死の衛兵",
+            "rarity": 1,
+            "tooltip": "<spell>「戦威修養」</spell>で復活する時、周囲を槍で薙ぎ払い<physicalDamage>@TotalDamage@ + 現在体力の@PercentCurrentHealthDamage*100@%の物理ダメージ</physicalDamage>を与え、すべての敵を<status>ノックバック</status>させる。<br><br>その後@MissileDefenseBaseDuration@秒間、薙ぎ払いの範囲外にいる敵からのダメージを<status>無効化</status>し、<speed>@MovementSpeedBoost*100@%の移動速度</speed>を獲得する。 "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

@@ -153,6 +153,46 @@
             "tooltip": "The first time you would die each round, instead return to full Health, decaying over @DecayDuration@ seconds. Taking down an enemy champion while your Health is decaying stops the decay and sets your Health to <healing>@TriumphPercent@% max Health</healing>."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Upon reviving with Cultivation of War, Zaahen deals damage to nearby enemies based on their current Health and knocks all targets back, becoming impervious to damage dealt by champions outside of the circle created and gains a brief burst of movement speed.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Undying Guard",
+            "rarity": 1,
+            "tooltip": "Upon activating <spell>Cultivation of War</spell>'s revive, Zaahen unleashes a sweep around him that deals <physicalDamage>@TotalDamage@ plus @PercentCurrentHealthDamage*100@% current Health physical damage</physicalDamage> and <status>Knocks Back</status> all enemies. <br>  <br>Afterwards, Zaahen becomes <status>Immune</status> to damage from enemies outside the sweep range and gains <speed>@MovementSpeedBoost*100@% Movement Speed</speed> for @MissileDefenseBaseDuration@ seconds. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

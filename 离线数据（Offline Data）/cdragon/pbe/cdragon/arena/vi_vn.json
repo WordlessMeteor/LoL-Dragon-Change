@@ -153,6 +153,46 @@
             "tooltip": "Lần đầu tiên hy sinh mỗi vòng đấu, bạn trở lại với đầy Máu nhưng Máu giảm dần trong @DecayDuration@ giây. Tham gia hạ gục tướng địch khi Máu đang giảm sẽ dừng nó lại, đồng thời đặt Máu của bạn thành <healing>@TriumphPercent@% Máu tối đa</healing>."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Sau khi hồi sinh bằng Kết Tinh Chiến Ý, Zaahen gây sát thương lên các kẻ địch gần đó dựa theo máu hiện tại của chúng và đẩy lùi tất cả mục tiêu, trở nên miễn nhiễm sát thương từ các tướng đứng ngoài vòng tròn được tạo ra và tăng tốc độ di chuyển trong thoáng chốc.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Thế Thủ Bất Hoại",
+            "rarity": 1,
+            "tooltip": "Khi kích hoạt hiệu ứng hồi sinh từ <spell>Kết Tinh Chiến Ý</spell>, Zaahen tung ra một cú quét xung quanh bản thân, gây <physicalDamage>@TotalDamage@ + @PercentCurrentHealthDamage*100@% Máu hiện tại thành sát thương vật lý</physicalDamage> và <status>Đẩy Lùi</status> tất cả kẻ địch. <br>  <br>Sau đó, Zaahen trở nên <status>Miễn Nhiễm</status> sát thương từ kẻ địch bên ngoài phạm vi cú quét và tăng <speed>@MovementSpeedBoost*100@% Tốc Độ Di Chuyển</speed> trong @MissileDefenseBaseDuration@ giây. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

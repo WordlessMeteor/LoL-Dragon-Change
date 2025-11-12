@@ -153,6 +153,46 @@
             "tooltip": "Kali pertama kamu mati di tiap ronde, Health-mu akan kembali penuh, yang berkurang dalam kurun waktu @DecayDuration@ detik. Takedown champion musuh saat Health-mu berkurang akan menghentikan pengurangan tersebut dan menetapkan Health-mu ke <healing>@TriumphPercent@% Health maksimum</healing>."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Saat hidup kembali dengan Cultivation of War, Zaahen menghasilkan damage pada musuh di sekitar berdasarkan Health mereka saat ini dan knock back semua target, menjadi kebal terhadap damage dari champion di luar lingkaran yang dibuat, dan mendapatkan burst movement speed singkat.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Undying Guard",
+            "rarity": 1,
+            "tooltip": "Saat mengaktifkan Revive dari <spell>Cultivation of War</spell>, Zaahen melepaskan sapuan ke sekelilingnya yang menghasilkan <physicalDamage>@TotalDamage@ ditambah @PercentCurrentHealthDamage*100@% dari Health saat ini sebagai physical damage</physicalDamage> dan menyebabkan <status>Knock Back</status> pada semua musuh. <br>  <br>Setelah itu, Zaahen menjadi <status>Immune</status> terhadap damage dari musuh di luar jangkauan sapuan dan mendapatkan <speed>@MovementSpeedBoost*100@% Movement Speed</speed> selama @MissileDefenseBaseDuration@ detik. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

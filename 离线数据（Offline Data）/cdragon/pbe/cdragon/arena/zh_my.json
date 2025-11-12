@@ -153,6 +153,46 @@
             "tooltip": "每回合首次濒临死亡时，你的生命值会恢复到全满，并在@DecayDuration@秒内持续衰减。生命值衰减期间击杀敌方英雄会停止衰减，并将你的生命值设定为<healing>@TriumphPercent@%最大生命值</healing>。"
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "当以“战火铸魂”复活时，扎罕对附近敌人造成基于其当前生命值的伤害，击退目标，并免疫来自区域外英雄的所有伤害，并获得短暂的移动速度爆发。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "不灭守卫",
+            "rarity": 1,
+            "tooltip": "激活<spell>战火铸魂</spell>的复活效果时，扎罕围绕自身释放一次横扫，造成<physicalDamage>@TotalDamage@外加@PercentCurrentHealthDamage*100@%当前生命值的物理伤害</physicalDamage>，并<status>击退</status>所有敌人。<br> <br>随后，扎罕会<status>免疫</status>来自横扫范围外侧敌人的伤害，获得<speed>@MovementSpeedBoost*100@%移动速度</speed>，持续@MissileDefenseBaseDuration@秒。 "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

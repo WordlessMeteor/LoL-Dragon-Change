@@ -153,6 +153,46 @@
             "tooltip": "W każdej rundzie za pierwszym razem, gdy ma nastąpić twoja śmierć, odzyskujesz całe zdrowie, które zanika w ciągu @DecayDuration@ sek. Udział w zabójstwie wrogiego bohatera, gdy twoje zdrowie zanika, zatrzymuje proces zanikania, a twoje zdrowie znajdzie się na poziomie <healing>@TriumphPercent@% maksymalnego zdrowia</healing>."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Po wskrzeszeniu przez Rozwijanie Sztuki Wojennej zadaje pobliskim wrogom obrażenia zależne od ich aktualnego zdrowia i odrzuca wszystkie cele do tyłu, jednocześnie zyskując niewrażliwość na obrażenia zadawane przez wrogów spoza stworzonego okręgu i krótką premię do prędkości ruchu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Nieumierająca Gwardia",
+            "rarity": 1,
+            "tooltip": "Po aktywowaniu wskrzeszenia z <spell>Rozwijania Sztuki Wojennej</spell> Zaahen wykonuje zamaszysty cios, który zadaje <physicalDamage>obrażenia fizyczne równe @TotalDamage@ pkt. plus @PercentCurrentHealthDamage*100@% aktualnego zdrowia celu</physicalDamage> i <status>odrzuca</status> wszystkich wrogów. <br><br>Następnie Zaahen staje się <status>niewrażliwy</status> na obrażenia otrzymywane od wrogów, którzy znajdują się poza zasięgiem tego ciosu, i zyskuje <speed>@MovementSpeedBoost*100@% prędkości ruchu</speed> na @MissileDefenseBaseDuration@ sek. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

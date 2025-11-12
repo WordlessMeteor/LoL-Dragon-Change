@@ -153,6 +153,46 @@
             "tooltip": "Когда вы погибаете первый раз за раунд, то возрождаетесь с 100% здоровья, но теряете его в течение @DecayDuration@ сек. При участии в убийстве вражеского чемпиона ваш запас здоровья становится равен <healing>@TriumphPercent@% от максимального</healing>, и вы перестаете его терять."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Возродившись с помощью Закалки воинственности, Заахен наносит врагам поблизости урон, который зависит от их текущего здоровья, и отбрасывает цели. Кроме того, он неуязвим к урону, который наносят чемпионы вне созданного круга, и ненадолго получает скорость передвижения.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Вечная стража",
+            "rarity": 1,
+            "tooltip": "Возродившись с помощью <spell>Закалки воинственности</spell>, Заахен взмахивает глефой, нанося врагам вокруг себя <physicalDamage>физический урон в размере @TotalDamage@ ед. плюс @PercentCurrentHealthDamage*100@% от текущего здоровья цели</physicalDamage> и <status>отбрасывает</status> всех пораженных врагов. <br>  <br>После этого Заахен получает <status>неуязвимость</status> к урону, который наносят чемпионы вне области действия эффекта, а также <speed>@MovementSpeedBoost*100@% скорости передвижения</speed> на @MissileDefenseBaseDuration@ сек. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

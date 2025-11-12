@@ -153,6 +153,46 @@
             "tooltip": "Místo první smrti v každém kole se ti plně obnoví zdraví, které ti během @DecayDuration@&nbsp;sek. postupně ubývá. Pokud během této doby zlikviduješ nějakého šampiona, ubývání zdraví se zastaví a jeho hodnota se ti nastaví na <healing>@TriumphPercent@&nbsp;% maximálního zdraví</healing>."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Když se Zaahen oživí prostřednictvím Válečného rozvoje, způsobí okolním nepřátelům poškození, jehož výše se odvíjí od jejich aktuálního zdraví, všechny cíle od sebe odhodí, stane se imunním vůči poškození způsobenému šampiony, kteří se nacházejí mimo vytvořenou kruhovou oblast, a získá na chvíli výrazný bonus k rychlosti pohybu.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Nesmrtelný strážce",
+            "rarity": 1,
+            "tooltip": "Po aktivaci oživení z <spell>Válečného rozvoje</spell>kolem sebe Zaahen máchne zbraní, způsobí tak <physicalDamage>fyzické poškození ve výši @TotalDamage@ bodů plus @PercentCurrentHealthDamage*100@&nbsp;% aktuálního zdraví</physicalDamage> a všechny nepřátele <status>odhodí</status>. <br> <br>Poté se Zaahen stane na @MissileDefenseBaseDuration@&nbsp;sek. <status>imunním</status> vůči poškození od nepřátel, kteří se nacházejí mimo dosah jeho máchnutí, a získá <speed>@MovementSpeedBoost*100@&nbsp;% k rychlosti pohybu</speed>. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

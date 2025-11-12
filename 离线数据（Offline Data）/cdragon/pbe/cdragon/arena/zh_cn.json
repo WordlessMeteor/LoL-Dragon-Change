@@ -153,6 +153,46 @@
             "tooltip": "在你每回合第一次即将阵亡时，转而回满生命值并在@DecayDuration@秒里持续衰减。在你的生命值正在衰减的状态下，参与击杀一名敌方英雄后，会使衰减停止并将你的生命值设置为<healing>@TriumphPercent@%最大生命值</healing>。"
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "在通过【不落之志】复活时，亚恒对附近的敌人造成基于目标当前生命值的伤害，并击退所有目标，同时自身不会受到来自生成圆环之外的敌人所造成的伤害并且获得短暂的爆发性移动速度。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "不灭守护",
+            "rarity": 1,
+            "tooltip": "在激活<spell>不落之志</spell>的复活时，亚恒环绕他自身进行横扫，造成<physicalDamage>@TotalDamage@外加@PercentCurrentHealthDamage*100@%当前生命值的物理伤害</physicalDamage>并<status>击退</status>所有敌人。<br>  <br>随后，亚恒变得<status>免疫</status>来自横扫范围外敌人造成的伤害并获得<speed>@MovementSpeedBoost*100@%移动速度</speed>，持续@MissileDefenseBaseDuration@秒。 "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

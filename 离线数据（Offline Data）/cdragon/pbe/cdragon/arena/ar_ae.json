@@ -153,6 +153,46 @@
             "tooltip": "في المرة الأولى التي تموت فيها في كل جولة، ستعود بدلاً من ذلك بصحة كاملة، وتتلاشى لمدة @DecayDuration@ث. إن القضاء على بطل عدو أثناء تلاشي صحتك يوقف التلاشي ويضبط صحتك بنسبة <healing>@TriumphPercent@% من الصحة القصوى</healing>."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "عند إنعاشه باستخدام تنمية الحرب، يلحق زاهان الضرر بالأعداء القريبين حسب صحتهم الحالية، ويطيح بجميع الأهداف إلى الخلف، فيصبح عصيًا على الضرر الذي يلحقه الأبطال خارج الحلقة التي تم إنشاؤها، ويكسب دفقة وجيزة من سرعة الحركة.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "الحارس الخالد",
+            "rarity": 1,
+            "tooltip": "عند تفعيل تأثير الإنعاش عبر <spell>تنمية الحرب</spell>، ينفذ زاهان ضربةً دائرية حوله تلحق <physicalDamage>@TotalDamage@ بالإضافة إلى @PercentCurrentHealthDamage*100@% من الصحة الحالية على شكل ضرر مادي</physicalDamage> كما <status>يطيح إلى الخلف</status> بجميع الأعداء. <br>  <br>ثم يصبح زاهان <status>منيعًا</status> ضد الضرر الذي يلحقه الأعداء خارج نطاق الضربة ويكسب <speed>@MovementSpeedBoost*100@% سرعة حركة</speed> لمدة @MissileDefenseBaseDuration@ث. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {
