@@ -1,0 +1,445 @@
+{
+    "{2fd0cfbd}": {
+        "ObjectName": "TFT16_PantheonSpell",
+        "mScriptName": "TFT16_PantheonSpell",
+        "mSpell": {
+            "mAffectsTypeFlags": 7183,
+            "mAffectsStatusFlags": 32,
+            "DataValues": [
+                {
+                    "mName": "PercentArmor",
+                    "mValues": [
+                        0.0,
+                        1.5,
+                        1.75,
+                        2.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "StunDuration",
+                    "mValues": [
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "PassiveArmor",
+                    "mValues": [
+                        50.0,
+                        50.0,
+                        70.0,
+                        120.0,
+                        150.0,
+                        150.0,
+                        50.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BonusDamage",
+                    "mValues": [
+                        25.0,
+                        30.0,
+                        50.0,
+                        80.0,
+                        125.0,
+                        150.0,
+                        175.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedBonusDamage": {
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "BonusDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "mStyleTag": "noScale",
+                            "mStyleTagIfScaled": "scaleAP",
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "TotalDamage": {
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mStat": 1,
+                                    "mSubpart": {
+                                        "mDataValue": "PercentArmor",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "__type": "StatBySubPartCalculationPart"
+                                },
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "BonusDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "mCastTime": 0.25,
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "canCastOrQueueWhileCasting": true,
+            "mCantCancelWhileWindingUp": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castConeDistance": 100.0,
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "selectionPriority": 1,
+            "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT16_PantheonSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT16_PantheonSpell_Name",
+                        "keyTooltip": "Spell_TFT16_PantheonSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "Elements": [
+                                {
+                                    "type": "PassiveArmor",
+                                    "typeIndex": 2,
+                                    "nameOverride": "Spell_ListType_Armor",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "PercentArmor",
+                                    "multiplier": 100.0,
+                                    "nameOverride": "Spell_TFT16_PantheonSpell_Armor",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "BonusDamage",
+                                    "nameOverride": "Spell_TFT16_PantheonSpell_BonusDamageScale",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{85680029}": {
+        "ObjectName": "TFT16_PantheonBasicAttack2",
+        "mScriptName": "TFT16_PantheonBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "PantheonUpdateBasicAttack",
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.30000001192092896,
+            "mCantCancelWhileChanneling": true,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "mTurnSpeedScalar": 3.0,
+            "castRange": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 7.800000190734863,
+            "missileSpeed": 0.0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{fae29851}": {
+        "ObjectName": "TFT16_PantheonCritAttack",
+        "mScriptName": "TFT16_PantheonCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAnimationName": "Crit",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.30000001192092896,
+            "mCantCancelWhileChanneling": true,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "castRange": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 7.360000133514404,
+            "missileSpeed": 0.0,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{fbfefce1}": {
+        "ObjectName": "TFT16_PantheonBasicAttack",
+        "mScriptName": "TFT16_PantheonBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "PantheonUpdateBasicAttack",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.30000001192092896,
+            "mCantCancelWhileChanneling": true,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "mTurnSpeedScalar": 3.0,
+            "castRange": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 8.970000267028809,
+            "missileSpeed": 20.0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{351ccdfa}": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "{614c928c}": {
+        "mCharacterName": "TFT16_Pantheon",
+        "baseHP": 800.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 200.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 120.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 75.0,
+        "baseArmor": 50.0,
+        "baseSpellBlock": 50.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.699999988079071,
+        "attackSpeedRatio": 0.699999988079071,
+        "basicAttack": {
+            "mAttackName": "TFT16_PantheonBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT16_PantheonBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT16_PantheonCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT16_PantheonSpell",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "{2fd0cfbd}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446664,
+        "tier": 3,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{1a9e81ce}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{d5823aeb}",
+        "mMoveInterval": -0.25,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mInitialMana": 60.0,
+        "mShopData": "{243da6fb}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "__linked": []
+}

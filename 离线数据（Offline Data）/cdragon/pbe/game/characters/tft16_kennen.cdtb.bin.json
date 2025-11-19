@@ -1,0 +1,556 @@
+{
+    "{32d9c295}": {
+        "ObjectName": "TFT16_KennenBasicAttack",
+        "mScriptName": "TFT16_KennenBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 4234,
+            "mAlternateName": "KennenBasicAttack",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "bHaveHitEffect": true,
+            "castRange": [
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "BUFFBONE__HAND_R",
+                    "mSpeed": 1700.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 14.0,
+            "missileSpeed": 1700.0,
+            "mMissileEffectKey": "{81f4c318}",
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{a2e80d59}": {
+        "ObjectName": "TFT16_KennenSpell",
+        "mScriptName": "TFT16_KennenSpell",
+        "mSpell": {
+            "mAffectsTypeFlags": 7183,
+            "mAffectsStatusFlags": 32,
+            "DataValues": [
+                {
+                    "mName": "Shield",
+                    "mValues": [
+                        200.0,
+                        600.0,
+                        700.0,
+                        900.0,
+                        1100.0,
+                        200.0,
+                        200.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "Damage",
+                    "mValues": [
+                        250.0,
+                        120.0,
+                        180.0,
+                        290.0,
+                        400.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "Duration",
+                    "mValues": [
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "NumBolts",
+                    "mValues": [
+                        6.0,
+                        6.0,
+                        6.0,
+                        6.0,
+                        6.0,
+                        6.0,
+                        6.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BoltLimit",
+                    "mValues": [
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "MaxStuns",
+                    "mValues": [
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "StunDuration",
+                    "mValues": [
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5,
+                        1.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "DuplicateStunReduction",
+                    "mValues": [
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "HexRadius",
+                    "mValues": [
+                        2.5,
+                        2.5,
+                        2.5,
+                        2.5,
+                        2.5,
+                        2.5,
+                        2.5
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "Damage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedShield": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "Shield",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "mCastTime": 0.33000001311302185,
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "canCastOrQueueWhileCasting": true,
+            "mCantCancelWhileWindingUp": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castConeDistance": 100.0,
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "selectionPriority": 1,
+            "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT16_KennenSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT16_KennenSpell_Name",
+                        "keyTooltip": "Spell_TFT16_KennenSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "Elements": [
+                                {
+                                    "type": "Shield",
+                                    "nameOverride": "TFT_AP_Shield",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "Damage",
+                                    "typeIndex": 2,
+                                    "nameOverride": "TFT_AP_MagicDamage",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{b3cd6ce5}": {
+        "ObjectName": "TFT16_KennenBasicAttack2",
+        "mScriptName": "TFT16_KennenBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 4234,
+            "mAlternateName": "KennenBasicAttack2",
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "bHaveHitEffect": true,
+            "castRange": [
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "BUFFBONE__HAND_R",
+                    "mSpeed": 1700.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 12.0,
+            "missileSpeed": 1700.0,
+            "mMissileEffectKey": "{81f4c318}",
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{d11a6a65}": {
+        "ObjectName": "TFT16_KennenCritAttack",
+        "mScriptName": "TFT16_KennenCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 4234,
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "bHaveHitEffect": true,
+            "castRange": [
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "R_hand",
+                    "mSpeed": 1700.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 14.0,
+            "missileSpeed": 1700.0,
+            "mMissileEffectKey": "{81f4c318}",
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{364b542a}": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "{b3c70cbc}": {
+        "mCharacterName": "TFT16_Kennen",
+        "baseHP": 900.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 130.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 125.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 50.0,
+        "baseArmor": 50.0,
+        "baseSpellBlock": 50.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.6499999761581421,
+        "attackSpeedRatio": 0.699999988079071,
+        "basicAttack": {
+            "mAttackName": "TFT16_KennenBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT16_KennenBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT16_KennenCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT16_KennenSpell",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "{a2e80d59}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446656,
+        "tier": 3,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{35864475}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{716e7966}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{64228678}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{2ccf900f}",
+        "mMoveInterval": -0.25,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mInitialMana": 70.0,
+        "mShopData": "{3f7a398b}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "__linked": []
+}

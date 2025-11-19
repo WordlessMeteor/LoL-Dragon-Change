@@ -1,0 +1,479 @@
+{
+    "{093acfb3}": {
+        "ObjectName": "TFT16_AmbessaBasicAttack2",
+        "mScriptName": "TFT16_AmbessaBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 4234,
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3500000238418579,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "mTurnSpeedScalar": 5.0,
+            "castRange": [
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 8.0,
+            "missileSpeed": 467.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "SpellEventToAudioEventSuffix": {
+                "12": "Play_sfx_Ambessa_AmbessaBasicAttack_OnCast",
+                "13": "Play_sfx_Ambessa_AmbessaBasicAttack_OnHit"
+            },
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{39c67407}": {
+        "ObjectName": "TFT16_AmbessaSpell",
+        "mScriptName": "TFT16_AmbessaSpell",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 15365,
+            "mAffectsStatusFlags": 32,
+            "DataValues": [
+                {
+                    "mName": "APDamage",
+                    "mValues": [
+                        0.0,
+                        5.0,
+                        10.0,
+                        25.0,
+                        50.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ADDamage",
+                    "mValues": [
+                        0.0,
+                        45.0,
+                        65.0,
+                        300.0,
+                        300.0,
+                        1.350000023841858,
+                        1.350000023841858
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "SlamDamageMultiplier",
+                    "mValues": [
+                        2.75,
+                        2.75,
+                        2.75,
+                        2.75,
+                        2.75,
+                        2.75,
+                        2.75
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "MaxDamagePercentBasedOnMissingHealth",
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "DamageFalloff",
+                    "mValues": [
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "TotalDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "ADDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 1.0,
+                                    "mStat": 3,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "APDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedDamage": {
+                    "mMultiplier": {
+                        "mDataValue": "{502b58c6}",
+                        "__type": "NamedDataValueCalculationPart"
+                    },
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "ADDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 1.0,
+                                    "mStat": 3,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "APDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "canCastOrQueueWhileCasting": true,
+            "mCantCancelWhileWindingUp": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castConeDistance": 100.0,
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "selectionPriority": 2,
+            "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT16_AmbessaSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT16_AmbessaSpell_Name",
+                        "keyTooltip": "Spell_TFT16_AmbessaSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "Elements": [
+                                {
+                                    "type": "APDamage",
+                                    "nameOverride": "TFT_AP_Damage_NoCalculation",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "ADDamage",
+                                    "nameOverride": "TFT_ADAP_PhysicalDamage",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "SlamDamageMultiplier",
+                                    "nameOverride": "Spell_TFT16_AmbessaSpell_SlamDamage",
+                                    "Style": 2,
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{d5db4d53}": {
+        "ObjectName": "TFT16_AmbessaBasicAttack",
+        "mScriptName": "TFT16_AmbessaBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 4234,
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3500000238418579,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "mTurnSpeedScalar": 5.0,
+            "castRange": [
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 8.0,
+            "missileSpeed": 467.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "SpellEventToAudioEventSuffix": {
+                "12": "Play_sfx_Ambessa_AmbessaBasicAttack_OnCast",
+                "13": "Play_sfx_Ambessa_AmbessaBasicAttack_OnHit"
+            },
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{f309493b}": {
+        "ObjectName": "TFT16_AmbessaCritAttack",
+        "mScriptName": "TFT16_AmbessaCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 4234,
+            "mAnimationName": "Crit",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3506999909877777,
+            "useAnimatorFramerate": true,
+            "bHaveHitEffect": true,
+            "castRange": [
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0,
+                125.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 8.0,
+            "missileSpeed": 467.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "SpellEventToAudioEventSuffix": {
+                "12": "Play_sfx_Ambessa_AmbessaCritAttack_OnCast",
+                "13": "Play_sfx_Ambessa_AmbessaCritAttack_OnHit"
+            },
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{ccc2f493}": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "{f2d9bb5f}": {
+        "mCharacterName": "TFT16_Ambessa",
+        "baseHP": 1100.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 200.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 20.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 50.0,
+        "baseArmor": 60.0,
+        "baseSpellBlock": 60.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.8999999761581421,
+        "attackSpeedRatio": 0.75,
+        "basicAttack": {
+            "mAttackName": "TFT16_AmbessaBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT16_AmbessaBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT16_AmbessaCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT16_AmbessaSpell",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "{39c67407}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446664,
+        "tier": 4,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{9a77dae0}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{7edf3d8d}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{53d104ac}",
+        "mMoveInterval": -0.25,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mShopData": "{88db4354}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "__linked": []
+}

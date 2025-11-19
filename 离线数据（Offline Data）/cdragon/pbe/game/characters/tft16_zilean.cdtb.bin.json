@@ -1,0 +1,471 @@
+{
+    "{1fa17a1d}": {
+        "ObjectName": "TFT16_ZileanBasicAttack",
+        "mScriptName": "TFT16_ZileanBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 6154,
+            "delayCastOffsetPercent": -0.4180000126361847,
+            "bHaveHitEffect": true,
+            "castRange": [
+                550.0,
+                550.0,
+                550.0,
+                550.0,
+                550.0,
+                550.0,
+                550.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "R_Buffbone_Glb_Hand_Loc",
+                    "mSpeed": 1500.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 7.5,
+            "missileSpeed": 1200.0,
+            "mMissileEffectKey": "{53f06028}",
+            "mHitEffectOrientType": 3,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{691fdf45}": {
+        "ObjectName": "TFT16_ZileanSpell_Mis",
+        "mScriptName": "TFT16_ZileanSpell_Mis",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 6154,
+            "mAnimationName": "",
+            "castRange": [
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0
+            ],
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mStartBoneName": "R_BUFFBONE_GLB_HAND_LOC",
+                    "mTargetBoneName": "C_Buffbone_Glb_Center_Loc",
+                    "mSpeed": 1800.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "heightSolver": {
+                    "mVerticalOffset": 50.0,
+                    "mAmplitude": 250.0,
+                    "mNumberOfPeriods": 0.5,
+                    "__type": "SinusoidalHeightSolver"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    },
+                    {
+                        "__type": "{91fd0920}"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "mMissileEffectKey": "{3aad2a7e}",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{85385a21}": {
+        "ObjectName": "TFT16_ZileanSpell",
+        "mScriptName": "TFT16_ZileanSpell",
+        "mSpell": {
+            "mAffectsTypeFlags": 6154,
+            "mAffectsStatusFlags": 32,
+            "DataValues": [
+                {
+                    "mName": "MagicDamage",
+                    "mValues": [
+                        0.0,
+                        75.0,
+                        115.0,
+                        1000.0,
+                        1000.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ExplosionDamage",
+                    "mValues": [
+                        0.0,
+                        150.0,
+                        225.0,
+                        4000.0,
+                        4000.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ManaOnKill",
+                    "mValues": [
+                        15.0,
+                        15.0,
+                        15.0,
+                        15.0,
+                        15.0,
+                        15.0,
+                        15.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "MaxDurationBeforeKill",
+                    "mValues": [
+                        12.0,
+                        18.0,
+                        16.0,
+                        1.0,
+                        1.0,
+                        12.0,
+                        12.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "MagicDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedSecondaryDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "ExplosionDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "Spell",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.10000002384185791,
+            "delayTotalTimePercent": -0.5,
+            "canCastOrQueueWhileCasting": true,
+            "mCantCancelWhileWindingUp": true,
+            "castRange": [
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0,
+                2500.0
+            ],
+            "castRadius": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 10.0,
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "selectionPriority": 1,
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT16_ZileanSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT16_ZileanSpell_Name",
+                        "keyTooltip": "Spell_TFT16_ZileanSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "Elements": [
+                                {
+                                    "type": "MagicDamage",
+                                    "nameOverride": "TFT_AP_MagicDamage",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "ExplosionDamage",
+                                    "nameOverride": "TFT_AP_MagicDamage2",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "MaxDurationBeforeKill",
+                                    "nameOverride": "Spell_TFT16_ZileanSpell_TimeBeforeDeath",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{8c1d52dd}": {
+        "ObjectName": "TFT16_ZileanCritAttack",
+        "mScriptName": "TFT16_ZileanCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 6154,
+            "mAnimationName": "Attack2",
+            "delayCastOffsetPercent": -0.4180000126361847,
+            "bHaveHitEffect": true,
+            "castRange": [
+                550.0,
+                550.0,
+                550.0,
+                550.0,
+                550.0,
+                550.0,
+                550.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mSpeed": 1500.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 18.0,
+            "missileSpeed": 1200.0,
+            "mMissileEffectKey": "{53f06028}",
+            "mHitEffectOrientType": 3,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{fa3357fd}": {
+        "ObjectName": "TFT16_ZileanBasicAttack2",
+        "mScriptName": "TFT16_ZileanBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 6154,
+            "mAnimationName": "Attack2",
+            "delayCastOffsetPercent": -0.4180000126361847,
+            "bHaveHitEffect": true,
+            "castRange": [
+                550.0,
+                550.0,
+                550.0,
+                550.0,
+                550.0,
+                550.0,
+                550.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "L_Buffbone_Glb_Hand_Loc",
+                    "mSpeed": 1500.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 7.5,
+            "missileSpeed": 1200.0,
+            "mMissileEffectKey": "{53f06028}",
+            "mHitEffectOrientType": 3,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{41dc91f8}": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "{e6e73e6e}": {
+        "mCharacterName": "TFT16_Zilean",
+        "baseHP": 900.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 200.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 40.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 40.0,
+        "baseArmor": 30.0,
+        "baseSpellBlock": 30.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 890.0,
+        "attackSpeed": 0.8999999761581421,
+        "attackSpeedRatio": 0.8999999761581421,
+        "basicAttack": {
+            "mAttackName": "TFT16_ZileanBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT16_ZileanBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT16_ZileanCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT16_ZileanSpell",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "{85385a21}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446656,
+        "tier": 5,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{2e9397ee}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{e57ef247}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{32cdc033}",
+        "mMoveInterval": -0.25,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mShopData": "{127b321d}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "__linked": []
+}

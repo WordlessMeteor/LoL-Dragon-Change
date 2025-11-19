@@ -1,0 +1,488 @@
+{
+    "{3bc2e7d5}": {
+        "ObjectName": "TFT16_GarenBasicAttack",
+        "mScriptName": "TFT16_GarenBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "GarenBasicAttack",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3677999973297119,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "castRange": [
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 10.0,
+            "missileSpeed": 347.79998779296875,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{77186c99}": {
+        "ObjectName": "TFT16_GarenSpell",
+        "mScriptName": "TFT16_GarenSpell",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 7183,
+            "mAffectsStatusFlags": 32,
+            "DataValues": [
+                {
+                    "mName": "SpinDuration",
+                    "mValues": [
+                        0.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        0.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "Durability",
+                    "mValues": [
+                        0.5,
+                        0.5,
+                        0.5,
+                        0.8999999761581421,
+                        0.8999999761581421,
+                        0.5,
+                        0.5
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ADDamage",
+                    "mValues": [
+                        0.0,
+                        100.0,
+                        150.0,
+                        1700.0,
+                        2635.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ArmorMRReduction",
+                    "mValues": [
+                        5.0,
+                        5.0,
+                        5.0,
+                        5.0,
+                        5.0,
+                        5.0,
+                        5.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "PercentofHealImmediately",
+                    "mValues": [
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "APHeal",
+                    "mValues": [
+                        0.0,
+                        300.0,
+                        350.0,
+                        1000.0,
+                        2000.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "PercentHealthHeal",
+                    "mValues": [
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "ADDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 1.0,
+                            "mStat": 3,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedHeal": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "APHeal",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mStat": 12,
+                                    "mDataValue": "PercentHealthHeal",
+                                    "__type": "StatByNamedDataValueCalculationPart"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.800000011920929,
+            "delayTotalTimePercent": -0.949999988079071,
+            "canCastOrQueueWhileCasting": true,
+            "mCantCancelWhileWindingUp": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castConeDistance": 100.0,
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "selectionPriority": 1,
+            "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT16_GarenSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT16_GarenSpell_Name",
+                        "keyTooltip": "Spell_TFT16_GarenSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "Elements": [
+                                {
+                                    "type": "Durability",
+                                    "typeIndex": 2,
+                                    "multiplier": 100.0,
+                                    "nameOverride": "TFT_Durability",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "APHeal",
+                                    "nameOverride": "TFT_Health_Heal",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "ADDamage",
+                                    "nameOverride": "TFT_AD_PhysicalDamage_Scale",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{91d4cda5}": {
+        "ObjectName": "TFT16_GarenCritAttack",
+        "mScriptName": "TFT16_GarenCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3677999973297119,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "castRange": [
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 8.0,
+            "missileSpeed": 347.79998779296875,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{fad310a5}": {
+        "ObjectName": "TFT16_GarenBasicAttack2",
+        "mScriptName": "TFT16_GarenBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "GarenBasicAttack2",
+            "mAnimationName": "Attack2",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.3677999973297119,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "castRange": [
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0,
+                200.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 10.0,
+            "missileSpeed": 347.79998779296875,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{c4ea113c}": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "{ce8cefda}": {
+        "mCharacterName": "TFT16_Garen",
+        "baseHP": 1200.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 167.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 120.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 65.0,
+        "baseArmor": 60.0,
+        "baseSpellBlock": 60.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.6000000238418579,
+        "attackSpeedRatio": 0.75,
+        "basicAttack": {
+            "mAttackName": "TFT16_GarenBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT16_GarenBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT16_GarenCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT16_GarenSpell",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "{77186c99}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446664,
+        "tier": 4,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{9b68e849}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{64228678}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{d5823aeb}",
+        "mMoveInterval": -0.25,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mInitialMana": 50.0,
+        "mShopData": "{8d8e32a9}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "__linked": []
+}

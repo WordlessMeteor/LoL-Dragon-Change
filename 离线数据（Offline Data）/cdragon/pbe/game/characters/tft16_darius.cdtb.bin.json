@@ -1,0 +1,510 @@
+{
+    "{2bbff341}": {
+        "ObjectName": "TFT16_DariusBasicAttack",
+        "mScriptName": "TFT16_DariusBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "RenektonBasicAttack",
+            "mCastTime": 0.3666999936103821,
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.30000001192092896,
+            "mCantCancelWhileChanneling": true,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "castRange": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 11.0,
+            "missileSpeed": 0.0,
+            "mHitEffectOrientType": 2,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{41308a1d}": {
+        "ObjectName": "TFT16_DariusSpell",
+        "mScriptName": "TFT16_DariusSpell",
+        "mSpell": {
+            "mAffectsTypeFlags": 7183,
+            "mAffectsStatusFlags": 32,
+            "DataValues": [
+                {
+                    "mName": "PercentMaximumHealthHealing",
+                    "mValues": [
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612,
+                        0.10000000149011612
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "APHealing",
+                    "mValues": [
+                        0.0,
+                        160.0,
+                        190.0,
+                        220.0,
+                        250.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ADDamage",
+                    "mValues": [
+                        70.0,
+                        90.0,
+                        135.0,
+                        210.0,
+                        285.0,
+                        330.0,
+                        330.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "PhysicalDamagePerSecond",
+                    "mValues": [
+                        0.0,
+                        15.0,
+                        25.0,
+                        40.0,
+                        55.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ExecutePercentPerHemorrhage",
+                    "mValues": [
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066,
+                        0.07999999821186066
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "SecondaryExecutePercentPerHemorrhage",
+                    "mValues": [
+                        0.05000000074505806,
+                        0.05000000074505806,
+                        0.05000000074505806,
+                        0.05000000074505806,
+                        0.05000000074505806,
+                        0.05000000074505806,
+                        0.05000000074505806
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "GoldPerExecute",
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "BleedDuration",
+                    "mValues": [
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0,
+                        4.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "ModifiedDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "ADDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 1.0,
+                            "mStat": 3,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "TotalHealing": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "APHealing",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mStat": 12,
+                                    "mDataValue": "PercentMaximumHealthHealing",
+                                    "__type": "StatByNamedDataValueCalculationPart"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedSecondaryDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "PhysicalDamagePerSecond",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 1.0,
+                            "mStat": 3,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayTotalTimePercent": -0.625,
+            "canCastOrQueueWhileCasting": true,
+            "mCantCancelWhileWindingUp": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castConeDistance": 100.0,
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "selectionPriority": 1,
+            "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT16_DariusSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT16_DariusSpell_Name",
+                        "keyTooltip": "Spell_TFT16_DariusSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "Elements": [
+                                {
+                                    "type": "APHealing",
+                                    "typeIndex": 2,
+                                    "nameOverride": "TFT_APHP_Heal",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "ADDamage",
+                                    "nameOverride": "TFT_AD_PhysicalDamage_Scale",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "PhysicalDamagePerSecond",
+                                    "nameOverride": "Spell_TFT16_DariusSpell_DamagePerSecond",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{522c3e09}": {
+        "ObjectName": "TFT16_DariusBasicAttack2",
+        "mScriptName": "TFT16_DariusBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "RenektonBasicAttack2",
+            "mAnimationName": "Attack2",
+            "mCastTime": 0.30000001192092896,
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.30000001192092896,
+            "mCantCancelWhileChanneling": true,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "mUpdateRotationWhenCasting": true,
+            "castRange": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 9.0,
+            "missileSpeed": 0.0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{d34ddc31}": {
+        "ObjectName": "TFT16_DariusCritAttack",
+        "mScriptName": "TFT16_DariusCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "RenektonCritAttack",
+            "mAnimationName": "Attack2",
+            "mCastTime": 0.30000001192092896,
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -0.30000001192092896,
+            "mCantCancelWhileChanneling": true,
+            "bHaveHitEffect": true,
+            "castRange": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castRadius": [
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0,
+                100.0
+            ],
+            "castConeDistance": 100.0,
+            "castFrame": 9.0,
+            "missileSpeed": 0.0,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "bHaveHitBone": true,
+            "mHitBoneName": "C_BUFFBONE_GLB_CHEST_LOC",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{5c86207d}": {
+        "mCharacterName": "TFT16_Darius",
+        "baseHP": 900.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 210.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 75.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 50.0,
+        "baseArmor": 50.0,
+        "baseSpellBlock": 50.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.6499999761581421,
+        "attackSpeedRatio": 0.699999988079071,
+        "basicAttack": {
+            "mAttackName": "TFT16_DariusBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT16_DariusBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT16_DariusCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT16_DariusSpell",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "{41308a1d}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446664,
+        "tier": 3,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{9a77dae0}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{64228678}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{d5823aeb}",
+        "mMoveInterval": -0.25,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mInitialMana": 15.0,
+        "mShopData": "{4b9fcde2}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "{84c060a5}": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "__linked": []
+}

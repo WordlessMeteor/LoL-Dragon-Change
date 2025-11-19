@@ -1,0 +1,401 @@
+{
+    "{07f06cb9}": {
+        "ObjectName": "TFT16_RekSaiSpellAttack",
+        "mScriptName": "TFT16_RekSaiSpellAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "KhazixBasicAttack",
+            "mAnimationName": "SpellAttack",
+            "delayCastOffsetPercent": -0.3077000081539154,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "mRollForCriticalHit": true,
+            "castConeDistance": 100.0,
+            "castFrame": 10.0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{2843899d}": {
+        "ObjectName": "TFT16_RekSaiCritAttack",
+        "mScriptName": "TFT16_RekSaiCritAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "KhazixCritAttack",
+            "mAnimationName": "Crit",
+            "delayCastOffsetPercent": -0.3077000081539154,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "castConeDistance": 100.0,
+            "castFrame": 10.0,
+            "mHitEffectKey": "TFT_Global_BA_Crit",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{ad3565e1}": {
+        "ObjectName": "TFT16_RekSaiSpell",
+        "mScriptName": "TFT16_RekSaiSpell",
+        "mSpell": {
+            "flags": 4,
+            "mAffectsTypeFlags": 15375,
+            "mAffectsStatusFlags": 32,
+            "DataValues": [
+                {
+                    "mName": "APDamage",
+                    "mValues": [
+                        0.0,
+                        20.0,
+                        30.0,
+                        45.0,
+                        60.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "ADDamage",
+                    "mValues": [
+                        0.0,
+                        140.0,
+                        210.0,
+                        315.0,
+                        420.0,
+                        200.0,
+                        240.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "SpellAttackDamage",
+                    "mValues": [
+                        0.0,
+                        110.0,
+                        165.0,
+                        260.0,
+                        355.0,
+                        0.0,
+                        0.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "NumAttacks",
+                    "mValues": [
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "SpellDataValue"
+                },
+                {
+                    "mName": "EnemySearchDistance",
+                    "mValues": [
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0
+                    ],
+                    "__type": "SpellDataValue"
+                }
+            ],
+            "mSpellCalculations": {
+                "TotalDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubparts": [
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "ADDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 1.0,
+                                    "mStat": 3,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                },
+                                {
+                                    "mSubpart": {
+                                        "mDataValue": "APDamage",
+                                        "__type": "NamedDataValueCalculationPart"
+                                    },
+                                    "mRatio": 0.009999999776482582,
+                                    "__type": "SubPartScaledProportionalToStat"
+                                }
+                            ],
+                            "__type": "SumOfSubPartsCalculationPart"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedSecondaryDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "{a423883c}",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 1.0,
+                            "mStat": 3,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                }
+            },
+            "mAnimationName": "",
+            "cooldownTime": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+            ],
+            "delayCastOffsetPercent": -1.0,
+            "delayTotalTimePercent": -1.0,
+            "canCastOrQueueWhileCasting": true,
+            "mCantCancelWhileWindingUp": true,
+            "castRange": [
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0,
+                25000.0
+            ],
+            "castRadius": [
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0,
+                20.0
+            ],
+            "castConeDistance": 100.0,
+            "mFloatVarsDecimals": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "selectionPriority": 1,
+            "mTargetingTypeData": {
+                "__type": "Self"
+            },
+            "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mClientData": {
+                "mTooltipData": {
+                    "mObjectName": "TFT16_RekSaiSpell",
+                    "mFormat": "{fffee0e7}",
+                    "mLocKeys": {
+                        "keyName": "Spell_TFT16_RekSaiSpell_Name",
+                        "keyTooltip": "Spell_TFT16_RekSaiSpell_Tooltip"
+                    },
+                    "mLists": {
+                        "LevelUp": {
+                            "levelCount": 3,
+                            "Elements": [
+                                {
+                                    "type": "APDamage",
+                                    "nameOverride": "TFT_AP_Damage_NoCalculation",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "ADDamage",
+                                    "typeIndex": 2,
+                                    "nameOverride": "TFT_ADAP_PhysicalDamage",
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "SpellAttackDamage",
+                                    "nameOverride": "Spell_TFT16_RekSaiSpell_BonusDamage",
+                                    "__type": "TooltipInstanceListElement"
+                                }
+                            ],
+                            "__type": "TooltipInstanceList"
+                        }
+                    },
+                    "__type": "TooltipInstanceSpell"
+                },
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{b565633d}": {
+        "ObjectName": "TFT16_RekSaiBasicAttack2",
+        "mScriptName": "TFT16_RekSaiBasicAttack2",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "KhazixBasicAttack2",
+            "mAnimationName": "Attack2",
+            "delayCastOffsetPercent": -0.3077000081539154,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "castConeDistance": 100.0,
+            "castFrame": 10.0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{dceb49dd}": {
+        "ObjectName": "TFT16_RekSaiBasicAttack",
+        "mScriptName": "TFT16_RekSaiBasicAttack",
+        "mSpell": {
+            "mAffectsTypeFlags": 5327,
+            "mAlternateName": "KhazixBasicAttack",
+            "delayCastOffsetPercent": -0.3077000081539154,
+            "mApplyMaterialOnHitSound": true,
+            "bHaveHitEffect": true,
+            "castConeDistance": 100.0,
+            "castFrame": 10.0,
+            "mHitEffectKey": "TFT_Global_BA_Hit",
+            "mClientData": {
+                "mTargeterDefinitions": [
+                    {
+                        "useCasterBoundingBox": false,
+                        "__type": "TargeterDefinitionRange"
+                    }
+                ],
+                "__type": "SpellDataResourceClient"
+            },
+            "__type": "SpellDataResource"
+        },
+        "__type": "SpellObject"
+    },
+    "{1685f55c}": {
+        "__type": "SkinCharacterMetaDataProperties"
+    },
+    "{6a26aafa}": {
+        "mCharacterName": "TFT16_RekSai",
+        "baseHP": 750.0,
+        "baseStaticHPRegen": 0.0,
+        "healthBarHeight": 200.0,
+        "healthBarFullParallax": true,
+        "primaryAbilityResource": {
+            "arType": 0,
+            "arBase": 30.0,
+            "arBaseStaticRegen": 0.0,
+            "arAllowMaxValueToBeOverridden": true,
+            "__type": "AbilityResourceSlotInfo"
+        },
+        "baseDamage": 50.0,
+        "baseArmor": 45.0,
+        "baseSpellBlock": 45.0,
+        "baseCritChance": 0.25,
+        "critDamageMultiplier": 1.399999976158142,
+        "baseMoveSpeed": 500.0,
+        "attackRange": 180.0,
+        "attackSpeed": 0.800000011920929,
+        "attackSpeedRatio": 0.6000000238418579,
+        "basicAttack": {
+            "mAttackName": "TFT16_RekSaiBasicAttack",
+            "__type": "AttackSlotData"
+        },
+        "extraAttacks": [
+            {
+                "mAttackName": "TFT16_RekSaiBasicAttack2",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "critAttacks": [
+            {
+                "mAttackName": "TFT16_RekSaiCritAttack",
+                "__type": "AttackSlotData"
+            }
+        ],
+        "expGivenOnDeath": 0.0,
+        "goldGivenOnDeath": 0.0,
+        "spellNames": [
+            "TFT16_RekSaiSpell",
+            "",
+            "",
+            ""
+        ],
+        "spells": [
+            "{ad3565e1}",
+            "{00000000}",
+            "{00000000}",
+            "{00000000}"
+        ],
+        "selectionRadius": 150.0,
+        "unitTagsString": "Champion",
+        "flags": 9446664,
+        "tier": 2,
+        "mLinkedTraits": [
+            {
+                "TraitData": "{f3d770c1}",
+                "__type": "TFTTraitContributionData"
+            },
+            {
+                "TraitData": "{7edf3d8d}",
+                "__type": "TFTTraitContributionData"
+            }
+        ],
+        "CharacterRole": "{14a36a9c}",
+        "mMoveInterval": -0.25,
+        "mMoveProximity": 180.0,
+        "mMoveRange": 250.0,
+        "mMoveHeight": 0.0,
+        "mShopData": "{8cd8f329}",
+        "mManaPerAttack": 5.0,
+        "__type": "TFTCharacterRecord"
+    },
+    "__linked": []
+}
