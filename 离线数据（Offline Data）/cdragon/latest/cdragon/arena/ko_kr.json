@@ -153,6 +153,47 @@
             "tooltip": "라운드마다 처음으로 사망할 때 체력을 완전히 회복하고, @DecayDuration@초에 걸쳐 회복된 체력이 점차 줄어듭니다. 체력이 줄어드는 동안 적 챔피언 처치에 관여하면 체력 감소가 중단되고 체력이 <healing>최대 체력의 @TriumphPercent@%</healing>로 설정됩니다."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6,
+                    "{72c5c2a8}": 0
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "전쟁 단련으로 부활 시 자헨이 주위 적들에게 각 유닛의 현재 체력에 비례한 피해를 입히고 모든 대상을 뒤로 밀어내며 일정 거리 밖에 있는 적 챔피언에게 피해를 받지 않는 상태가 됩니다. 또한 이동 속도가 잠시 동안 크게 증가합니다.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "불멸의 경계",
+            "rarity": 1,
+            "tooltip": "<spell>전쟁 단련</spell>이 발동되어 부활하면 자헨이 글레이브를 휘둘러 <physicalDamage>@TotalDamage@+적 현재 체력의 @PercentCurrentHealthDamage*100@%에 해당하는 물리 피해</physicalDamage>를 입히고 모든 적을 <status>뒤로 밀어냅니다</status>. <br>  <br>이후 자헨이 @MissileDefenseBaseDuration@초 동안 글레이브가 닿는 거리 밖에 있는 적의 공격으로부터 <status>면역</status> 상태가 되며 <speed>이동 속도가 @MovementSpeedBoost*100@%</speed> 증가합니다. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

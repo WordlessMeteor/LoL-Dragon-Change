@@ -149,7 +149,7 @@
         "skinMeshProperties": {
             "skeleton": "ASSETS/Characters/Tristana/Skins/Skin33/Tristana_Skin33.skl",
             "simpleSkin": "ASSETS/Characters/Tristana/Skins/Skin33/Tristana_Skin33.skn",
-            "texture": "ASSETS/Characters/Tristana/Skins/Skin36/Tristana_Skin36_TX_CM.tex",
+            "texture": "ASSETS/Characters/Tristana/Skins/Skin36/Tristana_Skin36_TX_Diffuse.tex",
             "skinScale": 0.949999988079071,
             "selfIllumination": 0.699999988079071,
             "initialSubmeshToHide": "Tristana_Penguin_MAT",
@@ -199,19 +199,101 @@
         "name": "Characters/Tristana/Skins/Skin36/Materials/HKG_FakeSpec_CloakAnim_inst",
         "samplerValues": [
             {
-                "TextureName": "Diffuse_Texture",
-                "texturePath": "ASSETS/Characters/Tristana/Skins/Skin36/Tristana_Skin36_TX_CM.tex",
+                "TextureName": "Vertex_Deform_Tex",
+                "texturePath": "ASSETS/Characters/Tristana/Skins/Skin33/Tristana_Skin33_TX_Deform_Mask.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "TextureName": "BloomMask_Texture",
+                "texturePath": "ASSETS/Shared/Materials/white.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "TextureName": "MatCap_Tex",
+                "texturePath": "ASSETS/Characters/Tristana/Skins/Skin33/Particles/bigglow02.tex",
                 "addressU": 1,
                 "addressV": 1,
                 "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "TextureName": "Diffuse_Texture",
+                "texturePath": "ASSETS/Characters/Tristana/Skins/Skin36/Tristana_Skin36_TX_Diffuse.tex",
+                "addressU": 1,
+                "addressV": 1,
+                "addressW": 1,
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "TextureName": "OutlineMask_Texture",
+                "texturePath": "ASSETS/Characters/Tristana/Skins/Skin33/Tristana_Skin33_TX_MatCap_Mask.tex",
+                "__type": "StaticMaterialShaderSamplerDef"
+            },
+            {
+                "TextureName": "iridescentTex",
+                "texturePath": "ASSETS/Shared/Materials/white.tex",
                 "__type": "StaticMaterialShaderSamplerDef"
             }
         ],
         "paramValues": [
             {
-                "name": "Cloak_Anim_Speed",
+                "name": "Bloom_Color",
                 "value": [
-                    0.699999988079071,
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "BloomValue",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "TintColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SpecularTintColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineController",
+                "value": [
+                    0.10000000149011612,
+                    0.5,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SpecularPower",
+                "value": [
+                    3.0,
                     0.0,
                     0.0,
                     0.0
@@ -219,24 +301,139 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Cloak_VA_Intensity",
+                "name": "WaveController",
                 "value": [
-                    15.0,
-                    45.0,
-                    -30.0,
+                    0.20000000298023224,
+                    6.0,
+                    1.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Cloak_VA_Offset",
+                "name": "WaveStrength",
                 "value": [
-                    0.0,
-                    10.0,
-                    -30.0,
+                    4.0,
+                    6.0,
+                    4.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "MainTexUV_Tile",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "FlipbookSize",
+                "value": [
+                    1.0,
+                    1.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Flipbook_NumberSpeed",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "MatCap_Strength",
+                "value": [
+                    2.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineBlendValue",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "EmissionValue",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "OutlineMask_Strength",
+                "value": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "IridescentControl",
+                "value": [
+                    1.0,
+                    0.5,
+                    1.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "VERTEX_DEFORM_TEX_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "BLOOM_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "MATCAP_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OUTLINE_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "DEFORM_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "TWO_D_DEFORM_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "ANIMATION_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "OUTLINE_MASK_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "MATCAP_MASK_ON",
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "IRIDESCENCE_ON",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
+            },
+            {
+                "name": "USE_R_MASK_ON_DEFORM",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
@@ -247,7 +444,7 @@
                 "name": "normal",
                 "passes": [
                     {
-                        "shader": "Shaders/SkinnedMesh/HKG_FakeSpec_CloakAnim",
+                        "shader": "Shaders/SkinnedMesh/Outline_MatCap_RMA_VertexDeform",
                         "blendEnable": true,
                         "srcColorBlendFactor": 6,
                         "srcAlphaBlendFactor": 6,
@@ -272,22 +469,27 @@
         "dynamicMaterial": {
             "parameters": [
                 {
-                    "name": "Cloak_Anim_Speed",
+                    "name": "WaveController",
                     "driver": {
-                        "mDrivers": [
-                            {
-                                "mBoolDriver": {
-                                    "mScriptName": "ZhonyasRingShield",
-                                    "__type": "HasBuffDynamicMaterialBoolDriver"
-                                },
-                                "mOnValue": 0.0,
-                                "mOffValue": 0.699999988079071,
-                                "mTurnOnTimeSec": 0.0,
-                                "mTurnOffTimeSec": 0.0,
-                                "__type": "LerpMaterialDriver"
-                            }
+                        "BoolDriver": {
+                            "mScriptName": "ZhonyasRingShield",
+                            "__type": "HasBuffDynamicMaterialBoolDriver"
+                        },
+                        "OnValue": [
+                            0.20000000298023224,
+                            0.0,
+                            0.0,
+                            0.0
                         ],
-                        "__type": "MaxMaterialDriver"
+                        "OffValue": [
+                            0.20000000298023224,
+                            6.0,
+                            1.0,
+                            0.0
+                        ],
+                        "TurnOnTimeSec": 0.0,
+                        "TurnOffTimeSec": 0.0,
+                        "__type": "LerpVec4LogicDriver"
                     },
                     "__type": "DynamicMaterialParameterDef"
                 }
@@ -3354,7 +3556,7 @@
     "__linked": [
         "DATA/Characters/Tristana/Tristana.bin",
         "DATA/Characters/Tristana/Animations/Skin33.bin",
-        "DATA/Tristana_Skins_Root_Skins_Skin0_Skins_Skin1_Skins_Skin11_Skins_Skin12_Skins_Skin13_Skins_Skin14_Skins_Skin15_Skins_Skin16_Skins_Skin17_Skins_Skin2_Skins_Skin24_Skins_Skin25_Skins_Skin26_Skins_Skin27_Skins_Skin28_Skins_Skin29_Skins_Skin3_Skins_Skin30_Skins_Skin31_Skins_Skin32_Skins_Skin33_Skins_Skin34_Skins_Skin35_Skins_Skin36_Skins_Skin37_Skins_Skin38_Skins_Skin39_Skins_Skin4_Skins_Skin40_Skins_Skin41_Skins_Skin42_Skins_Skin43_Skins_Skin44_Skins_Skin45_Skins_Skin46_Skins_Skin47_Skins_Skin48_Skins_Skin49_Skins_Skin5_Skins_Skin50_Skins_Skin51_Skins_Skin52_Skins_Skin53_Skins_Skin54_Skins_Skin55_Skins_Skin56_Skins_Skin57_Skins_Skin58_Skins_Skin59_Skins_Skin6_Skins_Skin60_Skins_Skin61_Skins_Skin62_Skins_Skin63_Skins_Skin64_Skins_Skin65_Skins_Skin66_Skins_Skin67_Skins_Skin68_Skins_Skin69_Skins_Skin7_Skins_Skin8_Skins_Skin9.bin",
+        "DATA/Tristana_Skins_Root_Skins_Skin0_Skins_Skin1_Skins_Skin11_Skins_Skin12_Skins_Skin13_Skins_Skin14_Skins_Skin15_Skins_Skin16_Skins_Skin17_Skins_Skin2_Skins_Skin24_Skins_Skin25_Skins_Skin26_Skins_Skin27_Skins_Skin28_Skins_Skin29_Skins_Skin3_Skins_Skin30_Skins_Skin31_Skins_Skin32_Skins_Skin33_Skins_Skin34_Skins_Skin35_Skins_Skin36_Skins_Skin37_Skins_Skin38_Skins_Skin39_Skins_Skin4_Skins_Skin40_Skins_Skin41_Skins_Skin42_Skins_Skin43_Skins_Skin44_Skins_Skin45_Skins_Skin46_Skins_Skin47_Skins_Skin48_Skins_Skin49_Skins_Skin5_Skins_Skin50_Skins_Skin51_Skins_Skin52_Skins_Skin53_Skins_Skin54_Skins_Skin55_Skins_Skin56_Skins_Skin57_Skins_Skin58_Skins_Skin59_Skins_Skin6_Skins_Skin60_Skins_Skin61_Skins_Skin62_Skins_Skin63_Skins_Skin64_Skins_Skin65_Skins_Skin66_Skins_Skin67_Skins_Skin68_Skins_Skin69_Skins_Skin7_Skins_Skin70_Skins_Skin71_Skins_Skin72_Skins_Skin73_Skins_Skin74_Skins_Skin75_Skins_Skin76_Skins_Skin77_Skins_Skin78_Skins_Skin8_Skins_Skin9.bin",
         "DATA/Tristana_Skins_Skin0_Skins_Skin1_Skins_Skin11_Skins_Skin12_Skins_Skin13_Skins_Skin14_Skins_Skin15_Skins_Skin16_Skins_Skin17_Skins_Skin2_Skins_Skin33_Skins_Skin34_Skins_Skin35_Skins_Skin36_Skins_Skin37_Skins_Skin38_Skins_Skin39_Skins_Skin4_Skins_Skin5_Skins_Skin6_Skins_Skin7_Skins_Skin8_Skins_Skin9.bin",
         "DATA/Tristana_Skins_Skin0_Skins_Skin1_Skins_Skin10_Skins_Skin11_Skins_Skin12_Skins_Skin13_Skins_Skin14_Skins_Skin15_Skins_Skin16_Skins_Skin17_Skins_Skin18_Skins_Skin19_Skins_Skin2_Skins_Skin20_Skins_Skin21_Skins_Skin22_Skins_Skin23_Skins_Skin24_Skins_Skin25_Skins_Skin26_Skins_Skin27_Skins_Skin28_Skins_Skin29_Skins_Skin30_Skins_Skin31_Skins_Skin32_Skins_Skin33_Skins_Skin34_Skins_Skin35_Skins_Skin36_Skins_Skin37_Skins_Skin38_Skins_Skin39_Skins_Skin4_Skins_Skin5_Skins_Skin51_Skins_Skin52_Skins_Skin53_Skins_Skin54_Skins_Skin55_Skins_Skin56_Skins_Skin57_Skins_Skin58_Skins_Skin59_Skins_Skin6_Skins_Skin60_Skins_Skin7_Skins_Skin8_Skins_Skin9.bin",
         "DATA/Tristana_Skins_Skin0_Skins_Skin1_Skins_Skin10_Skins_Skin11_Skins_Skin12_Skins_Skin13_Skins_Skin14_Skins_Skin15_Skins_Skin16_Skins_Skin17_Skins_Skin18_Skins_Skin19_Skins_Skin2_Skins_Skin20_Skins_Skin21_Skins_Skin22_Skins_Skin23_Skins_Skin24_Skins_Skin25_Skins_Skin26_Skins_Skin27_Skins_Skin28_Skins_Skin29_Skins_Skin3_Skins_Skin30_Skins_Skin31_Skins_Skin32_Skins_Skin33_Skins_Skin34_Skins_Skin35_Skins_Skin36_Skins_Skin37_Skins_Skin38_Skins_Skin39_Skins_Skin4_Skins_Skin40_Skins_Skin5_Skins_Skin51_Skins_Skin52_Skins_Skin53_Skins_Skin54_Skins_Skin55_Skins_Skin56_Skins_Skin57_Skins_Skin58_Skins_Skin59_Skins_Skin6_Skins_Skin60_Skins_Skin7_Skins_Skin8_Skins_Skin9.bin",

@@ -153,6 +153,47 @@
             "tooltip": "每回合第一次死亡時，改為回滿生命並在@DecayDuration@秒內衰減至零。生命衰減時擊殺敵方英雄可停止衰減，並將生命設為<healing>@TriumphPercent@%最大生命</healing>。"
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6,
+                    "{72c5c2a8}": 0
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "使用「邪心修真」復活時，薩亨對鄰近敵軍造成傷害，傷害值取決於目標的當前生命，同時擊退所有目標。薩亨可以抵擋所有來自領域外英雄的傷害，並短暫大幅提升跑速。",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "不朽守衛",
+            "rarity": 1,
+            "tooltip": "啟動「<spell>邪心修真</spell>」復活時，薩亨揮舞大刀橫掃周圍敵軍，造成<physicalDamage>@TotalDamage@ + @PercentCurrentHealthDamage*100@%當前生命的物理傷害</physicalDamage>，並<status>擊退</status>所有敵軍。<br>  <br>隨後，薩亨對所有來自掃擊範圍外敵軍的傷害<status>免疫</status>，並增加<speed>@MovementSpeedBoost*100@%跑速</speed>，持續@MissileDefenseBaseDuration@秒。 "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {
@@ -2453,13 +2494,13 @@
                 "OnHitMod": 0.4000000059604645,
                 "SecondMissileDelay": 0.15000000596046448
             },
-            "desc": "普攻時，發射一支額外箭矢，會造成較低的@AttackReduction*100@%傷害並觸發@OnHitMod*100@%的{{ Item_Keyword_OnHit }}效果。增加<attackSpeed>@AttackSpeed*100@%總攻速</attackSpeed>。",
+            "desc": "普攻時，發射一支額外箭矢，會造成較低的@AttackReduction*100@%傷害並觸發@OnHitMod*100@%的{{ Item_Keyword_OnHit }}。增加<attackSpeed>@AttackSpeed*100@%總攻速</attackSpeed>。",
             "iconLarge": "assets/ux/cherry/augments/icons/dualwield_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/dualwield_small.png",
             "id": 225,
             "name": "雙刀流",
             "rarity": 2,
-            "tooltip": "普攻時，發射一支額外箭矢，會造成較低的@AttackReduction*100@%傷害並觸發@OnHitMod*100@%的{{ Item_Keyword_OnHit }}效果。增加<attackSpeed>@AttackSpeed*100@%總攻速</attackSpeed>。"
+            "tooltip": "普攻時，發射一支額外箭矢，會造成較低的@AttackReduction*100@%傷害並觸發@OnHitMod*100@%的{{ Item_Keyword_OnHit }}。增加<attackSpeed>@AttackSpeed*100@%總攻速</attackSpeed>。"
         },
         {
             "apiName": "Augment405",

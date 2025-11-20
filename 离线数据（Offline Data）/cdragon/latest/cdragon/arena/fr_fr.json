@@ -153,6 +153,47 @@
             "tooltip": "À chaque manche, la première fois que vous devriez mourir, vous récupérez tous vos PV, mais vous les perdez ensuite en @DecayDuration@ sec. Dans cet état, participer à l'élimination d'un champion ennemi fixe vos PV à <healing>@TriumphPercent@% de leur maximum</healing> et arrête la perte progressive."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6,
+                    "{72c5c2a8}": 0
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Lorsque Zaahen revient à la vie grâce à Guerrier immortel, il inflige des dégâts aux ennemis proches en fonction de leurs PV actuels et repousse toutes les cibles. Il est ensuite immunisé contre les dégâts infligés par les champions hors du cercle créé et gagne un bref bonus en vitesse de déplacement.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Garde immortel",
+            "rarity": 1,
+            "tooltip": "Lorsque la résurrection de <spell>Guerrier immortel</spell> se déclenche, Zaahen effectue un balayage autour de lui, infligeant <physicalDamage>@TotalDamage@ plus @PercentCurrentHealthDamage*100@% des PV actuels en dégâts physiques</physicalDamage> et <status>repoussant</status> tous les ennemis. <br>  <br>Ensuite, pendant @MissileDefenseBaseDuration@ sec, Zaahen devient <status>immunisé</status> contre les dégâts qui viennent d'ennemis se trouvant hors de la zone balayée et il gagne <speed>@MovementSpeedBoost*100@%</speed> de vitesse de déplacement. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {
@@ -1823,13 +1864,13 @@
             "dataValues": {
                 "InitialAmpPercent": 10.0
             },
-            "desc": "Votre <scaleMana>mana</scaleMana> coûte le double. Votre compétence octroie des <healing>soins</healing> et des <shield>boucliers</shield>. Les dégâts augmentent en fonction de votre <scaleMana>mana max</scaleMana>.",
+            "desc": "Votre <scaleMana>mana</scaleMana> coûte le double. Vos <healing>soins</healing>, <shield>boucliers</shield> et dégâts de compétence augmentent en fonction de votre <scaleMana>mana max</scaleMana>.",
             "iconLarge": "assets/ux/cherry/augments/icons/overflow_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/overflow_small.png",
             "id": 311,
             "name": "Surcharge",
             "rarity": 1,
-            "tooltip": "Votre <scaleMana>mana</scaleMana> coûte le double. Votre compétence octroie des <healing>soins</healing> et des <shield>boucliers</shield>. Les dégâts sont plus effectifs de <scaleMana>@ManaCalc@</scaleMana>."
+            "tooltip": "Votre <scaleMana>mana</scaleMana> coûte le double. Votre <healing>soins</healing>, <shield>boucliers</shield> et dégâts de compétence sont renforcés de <scaleMana>@ManaCalc@</scaleMana>."
         },
         {
             "apiName": "FeeltheBurn",
@@ -4570,7 +4611,7 @@
                 "CritConverRatio": 0.00044999999227002263,
                 "CritDamage": 1.649999976158142
             },
-            "desc": "Vos capacités peuvent infliger des coups critiques. Vous gagnez +@CritChance*100@% de chances de coup critique.",
+            "desc": "Vos compétences peuvent infliger des coups critiques. Vous gagnez +@CritChance*100@% de chances de coup critique.",
             "iconLarge": "assets/ux/cherry/augments/icons/jeweledgauntlet_large.png",
             "iconSmall": "assets/ux/cherry/augments/icons/jeweledgauntlet_small.png",
             "id": 48,

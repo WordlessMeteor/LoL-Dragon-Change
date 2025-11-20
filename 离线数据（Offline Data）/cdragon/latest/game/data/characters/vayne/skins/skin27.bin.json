@@ -316,6 +316,10 @@
         ],
         "paramValues": [
             {
+                "name": "Maintex_Alpha_Strength",
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
                 "name": "VColor_G_Mask_Discard_Size",
                 "value": [
                     100.0,
@@ -719,68 +723,31 @@
     },
     "Characters/Vayne/Skins/Skin27/Materials/VayneSkin27_Glass_inst": {
         "name": "Characters/Vayne/Skins/Skin27/Materials/VayneSkin27_Glass_inst",
-        "samplerValues": [
-            {
-                "TextureName": "Mask_Texture",
-                "texturePath": "ASSETS/Shared/Materials/white.tex",
-                "__type": "StaticMaterialShaderSamplerDef"
-            }
-        ],
         "paramValues": [
             {
-                "name": "Fresnel_Color",
+                "name": "Glass_Color1",
                 "value": [
-                    0.364705890417099,
-                    0.5647059082984924,
+                    0.13232624530792236,
+                    0.40239566564559937,
                     0.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Sim_Lit_Dir",
+                "name": "Glass_Color2",
                 "value": [
-                    -1.0,
-                    2.0,
-                    1.0,
+                    0.686518669128418,
+                    0.7982909679412842,
+                    0.5992217659950256,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Translucent",
+                "name": "Fresnel_Size_Inner",
                 "value": [
-                    0.5,
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Inside_Color",
-                "value": [
-                    0.07058823853731155,
-                    0.6823529601097107,
-                    0.05882352963089943,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Spec_Offset",
-                "value": [
-                    -10.0,
-                    -20.0,
-                    10.0,
-                    0.0
-                ],
-                "__type": "StaticMaterialShaderParamDef"
-            },
-            {
-                "name": "Spec_01",
-                "value": [
-                    12.800000190734863,
+                    64.0,
                     0.0,
                     0.0,
                     0.0
@@ -788,24 +755,85 @@
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
-                "name": "Spec_02",
+                "name": "Fresnel_Size_Outer",
                 "value": [
-                    2.559999942779541,
+                    0.8098750114440918,
                     0.0,
                     0.0,
                     0.0
                 ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Glass_Roughness",
                 "__type": "StaticMaterialShaderParamDef"
             },
             {
                 "name": "Alpha_Bias",
                 "value": [
+                    0.41499999165534973,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "SunColor",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Light_Intensity",
+                "value": [
+                    2.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Gradient_Bias",
+                "value": [
                     1.0,
                     0.0,
                     0.0,
                     0.0
                 ],
                 "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Style2_Color1",
+                "value": [
+                    1.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            },
+            {
+                "name": "Style2_Color2",
+                "value": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "__type": "StaticMaterialShaderParamDef"
+            }
+        ],
+        "switches": [
+            {
+                "name": "DIFFERENT_STYLE",
+                "on": false,
+                "__type": "StaticMaterialSwitchDef"
             }
         ],
         "shaderMacros": {
@@ -816,7 +844,7 @@
                 "name": "normal",
                 "passes": [
                     {
-                        "shader": "Shaders/SkinnedMesh/HKG_FakeSpec_Translucent",
+                        "shader": "Shaders/SkinnedMesh/Glass",
                         "blendEnable": true,
                         "srcColorBlendFactor": 6,
                         "srcAlphaBlendFactor": 6,

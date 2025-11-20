@@ -153,6 +153,47 @@
             "tooltip": "Wenn du das erste Mal in jeder Runde sterben würdest, erhältst du stattdessen wieder volles Leben, das über @DecayDuration@&nbsp;Sekunden hinweg abfällt. Wenn du in diesem Zustand am Kill eines gegnerischen Champions beteiligt bist, fällt dein Leben nicht weiter ab und wird auf <healing>@TriumphPercent@&nbsp;% deines maximalen Lebens</healing> gesetzt."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6,
+                    "{72c5c2a8}": 0
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Zaahen verursacht bei der Wiederbelebung durch Kultivierung des Krieges an Gegnern in der Nähe Schaden abhängig von ihrem aktuellem Leben und stößt alle Ziele zurück. Er wird immun gegenüber Schaden, den Champions außerhalb des erschaffenen Kreises verursachen, und erhält einen kurzzeitigen Lauftemposchub.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Unsterbliche Wache",
+            "rarity": 1,
+            "tooltip": "Zaahen führt bei der Aktivierung von <spell>Kultivierung des Krieges</spell> einen Schwung um sich herum aus und verursacht normalen Schaden in Höhe von <physicalDamage>@TotalDamage@ plus @PercentCurrentHealthDamage*100@&nbsp;% seines aktuellen Lebens.</physicalDamage> Dabei werden alle Gegner <status>zurückgestoßen</status>. <br>  <br>Danach ist Zaahen @MissileDefenseBaseDuration@&nbsp;Sekunden lang <status>immun</status> gegen Schaden von Gegnern, die sich außerhalb der Reichweite seines Schwungs befinden, und erhält <speed>@MovementSpeedBoost*100@&nbsp;% Lauftempo</speed>. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {

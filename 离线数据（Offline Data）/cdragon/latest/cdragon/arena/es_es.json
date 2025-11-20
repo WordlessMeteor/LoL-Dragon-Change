@@ -153,6 +153,47 @@
             "tooltip": "La primera vez que fueras a morir cada ronda, vuelves al campo de batalla con la vida al máximo, la cual disminuye a lo largo de @DecayDuration@ s. Al eliminar a un campeón enemigo, tu vida deja de disminuir y esta se convierte en un <healing>@TriumphPercent@% de tu vida máxima</healing>."
         },
         {
+            "apiName": "UndyingGuard",
+            "calculations": {
+                "TotalDamage": {
+                    "__type": "GameCalculation",
+                    "mFormulaParts": [
+                        {
+                            "__type": "NamedDataValueCalculationPart",
+                            "mDataValue": "BaseDamage"
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.0,
+                            "mStat": 2,
+                            "mStatFormula": 2
+                        },
+                        {
+                            "__type": "StatByCoefficientCalculationPart",
+                            "mCoefficient": 1.100000023841858
+                        }
+                    ],
+                    "mSimpleTooltipCalculationDisplay": 6,
+                    "{72c5c2a8}": 0
+                }
+            },
+            "dataValues": {
+                "BaseDamage": -25.0,
+                "MarkDuration": 3.0,
+                "MissileDefenseBaseDuration": 4.0,
+                "MissileDefenseRadius": 450.0,
+                "MovementSpeedBoost": 0.30000001192092896,
+                "PercentCurrentHealthDamage": 0.15000000596046448
+            },
+            "desc": "Tras revivir con Florescencia de la guerra, Zaahen inflige daño a los enemigos cercanos según la vida que tengan, empuja a todos los objetivos, se vuelve inmune al daño que infligen los campeones fuera del círculo creado y obtiene velocidad de movimiento adicional brevemente.",
+            "iconLarge": "assets/ux/cherry/augments/icons/dawnbringersresolve_large.png",
+            "iconSmall": "assets/ux/cherry/augments/icons/dawnbringersresolve_small.png",
+            "id": 327,
+            "name": "Guardia inmortal",
+            "rarity": 1,
+            "tooltip": "Al activar la resurrección de <spell>Florescencia de la guerra</spell>, Zaahen realiza un barrido a su alrededor que inflige <physicalDamage>@TotalDamage@ + @PercentCurrentHealthDamage*100@% de la vida actual como daño físico</physicalDamage> y <status>empuja hacia atrás</status> a todos los enemigos. <br>  <br>Después, Zaahen se vuelve <status>inmune</status> al daño de los enemigos que estén fuera del alcance del barrido y obtiene un <speed>@MovementSpeedBoost*100@% de velocidad de movimiento</speed> durante @MissileDefenseBaseDuration@ s. "
+        },
+        {
             "apiName": "QuantumComputing",
             "calculations": {
                 "BaseDamageTotal": {
