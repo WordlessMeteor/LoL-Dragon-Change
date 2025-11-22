@@ -16531,14 +16531,22 @@
         "trait_id": "TFT16_AurelionSolUnique",
         "set": "TFTSet16",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_16_StarForger.TFT_Set16.png",
-        "tooltip_text": "Aurelion Sol gains @BonusStardustPer*100@% increased Stardust for each other unique Targonian fielded in combat.<br><br><rules>Current Bonus:&nbsp;@TFTUnitProperty.:TFT16_AurelionSol_StarMod@%</rules>",
+        "tooltip_text": "Aurelion Sol gains @BonusStardustPerOneStar*100@/@BonusStardustPerTwoStar*100@/@BonusStardustPerThreeStar*100@% increased Stardust for each other unique Targonian fielded in combat.<br><br><rules>Current Bonus:&nbsp;@TFTUnitProperty.:TFT16_AurelionSol_StarMod@%</rules>",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
                 "constants": [
                     {
-                        "name": "BonusStardustPer",
-                        "value": 0.4
+                        "name": "BonusStardustPerOneStar",
+                        "value": 0.25
+                    },
+                    {
+                        "name": "BonusStardustPerThreeStar",
+                        "value": 1.0
+                    },
+                    {
+                        "name": "BonusStardustPerTwoStar",
+                        "value": 0.5
                     }
                 ],
                 "min_units": 1,
@@ -17027,7 +17035,7 @@
         "trait_id": "TFT16_Demacia",
         "set": "TFTSet16",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_16_Demacia.TFT_Set16.png",
-        "tooltip_text": "Each time your team loses @MaxHealthLost*100@% max Health, Demacians rally, reducing their Mana cost by @ManaReductionPct*100@%. Demacians gain Armor and Magic Resist.<br><br><row>(@MinUnits@) @ArmorMR@&nbsp;%i:scaleArmor%%i:scaleMR%</row><br><row>(@MinUnits@) @ArmorMR@&nbsp;%i:scaleArmor%%i:scaleMR%</row><br><row>(@MinUnits@) @ArmorMR@&nbsp;%i:scaleArmor%%i:scaleMR%. On rally, smite enemies for @EnemyTrueDamage*100@% of their max&nbsp;Health.</row><br><row>(@MinUnits@) @ArmorMR@&nbsp;%i:scaleArmor%%i:scaleMR%. BATTLE FOR&nbsp;DEMACIA!</row><br>",
+        "tooltip_text": "Each time your team loses @MaxHealthLost*100@% max Health, Demacians Rally, reducing their Mana cost by @ManaReductionPct*100@%. Demacians gain Armor and Magic Resist.<br><br><row>(@MinUnits@) @ArmorMR@&nbsp;%i:scaleArmor%%i:scaleMR%</row><br><row>(@MinUnits@) @ArmorMR@&nbsp;%i:scaleArmor%%i:scaleMR%</row><br><row>(@MinUnits@) @ArmorMR@&nbsp;%i:scaleArmor%%i:scaleMR%. On Rally, smite enemies for @EnemyTrueDamage*100@% of their max&nbsp;Health.</row><br><row>(@MinUnits@) @ArmorMR@&nbsp;%i:scaleArmor%%i:scaleMR%. BATTLE FOR&nbsp;DEMACIA!</row><br>",
         "innate_trait_sets": [
             {
                 "constants": [
@@ -17053,7 +17061,7 @@
                     },
                     {
                         "name": "PrismaticDamageAmp",
-                        "value": 0.12
+                        "value": 0.5
                     },
                     {
                         "name": "PrismaticShield",
@@ -17067,7 +17075,7 @@
                 "constants": [
                     {
                         "name": "ArmorMR",
-                        "value": 12.0
+                        "value": 8.0
                     }
                 ],
                 "min_units": 3,
@@ -17079,7 +17087,7 @@
                 "constants": [
                     {
                         "name": "ArmorMR",
-                        "value": 25.0
+                        "value": 20.0
                     }
                 ],
                 "min_units": 5,
@@ -17091,7 +17099,7 @@
                 "constants": [
                     {
                         "name": "ArmorMR",
-                        "value": 25.0
+                        "value": 20.0
                     }
                 ],
                 "min_units": 7,
@@ -17404,10 +17412,14 @@
         "trait_id": "TFT16_Heroic",
         "set": "TFTSet16",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_16_Heroic.TFT_Set16.png",
-        "tooltip_text": "Galio cannot be fielded in combat. Instead, his traits count from the bench and when Demacians Rally, he joins the fight. <br><br>On landing, he creates a 3-hex shockwave that deals @PercentMaxHP*100@% of his max Health as magic damage. Enemies hit are knocked up for @KnockupDuration@ seconds, reduced by distance from the center.",
+        "tooltip_text": "Galio cannot be fielded in combat. Instead, his traits count from the bench and when Demacians Rally, he joins the fight. <br><br>On landing, he creates a @HexRadius@-hex shockwave that deals @PercentMaxHP*100@% of his max Health as magic damage. Enemies hit are knocked up for @KnockupDuration@ seconds, reduced by distance from the center.",
         "innate_trait_sets": [
             {
                 "constants": [
+                    {
+                        "name": "HexRadius",
+                        "value": 3.0
+                    },
                     {
                         "name": "KnockupDuration",
                         "value": 1.0
@@ -17936,7 +17948,7 @@
                 "constants": [
                     {
                         "name": "BaseDamageAmp",
-                        "value": 0.2
+                        "value": 0.24
                     },
                     {
                         "name": "PercentDamageIncrease",
@@ -17952,7 +17964,7 @@
                 "constants": [
                     {
                         "name": "BaseDamageAmp",
-                        "value": 0.24
+                        "value": 0.28
                     },
                     {
                         "name": "PercentDamageIncrease",
@@ -17968,7 +17980,7 @@
                 "constants": [
                     {
                         "name": "BaseDamageAmp",
-                        "value": 0.3
+                        "value": 0.32
                     },
                     {
                         "name": "PercentDamageIncrease",
@@ -18550,7 +18562,7 @@
         "trait_id": "TFT16_Sorcerer",
         "set": "TFTSet16",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_6_Arcanist.png",
-        "tooltip_text": "Your team gains Ability Power, Arcanists gain more.<br><br><expandRow>(@MinUnits@) @AllyAP@ %i:scaleAP%, @BonusAP@ %i:scaleAP% for Arcanists</expandRow>",
+        "tooltip_text": "Your team gains Ability Power, Arcanists gain more.<br><br><expandRow>(@MinUnits@) @AllyAP@% %i:scaleAP%, @BonusAP@% %i:scaleAP% for Arcanists</expandRow>",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -18740,7 +18752,7 @@
                 "constants": [
                     {
                         "name": "JarvanResistDamage",
-                        "value": 3.0
+                        "value": 2.5
                     },
                     {
                         "name": "JarvanShieldShare",
@@ -19174,7 +19186,7 @@
                     },
                     {
                         "name": "PrismaticHugifyHealth",
-                        "value": 1000.0
+                        "value": 800.0
                     },
                     {
                         "name": "PrismaticHugifySizeMod",
@@ -19182,7 +19194,7 @@
                     },
                     {
                         "name": "PrismaticMushroomDamage",
-                        "value": 750.0
+                        "value": 700.0
                     },
                     {
                         "name": "PrismaticToHit",

@@ -16531,14 +16531,22 @@
         "trait_id": "TFT16_AurelionSolUnique",
         "set": "TFTSet16",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_16_StarForger.TFT_Set16.png",
-        "tooltip_text": "每有一个其他的独特【巨神峰】弈子在战斗中登场，【奥瑞利安·索尔】就会获得@BonusStardustPer*100@%星尘层数加成。<br><br><rules>当前加成：@TFTUnitProperty.:TFT16_AurelionSol_StarMod@%</rules>",
+        "tooltip_text": "每有一个其他的独特【巨神峰】弈子在战斗中登场，【奥瑞利安·索尔】就会获得@BonusStardustPerOneStar*100@/@BonusStardustPerTwoStar*100@/@BonusStardustPerThreeStar*100@%星尘层数加成。<br><br><rules>当前加成：@TFTUnitProperty.:TFT16_AurelionSol_StarMod@%</rules>",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
                 "constants": [
                     {
-                        "name": "BonusStardustPer",
-                        "value": 0.4
+                        "name": "BonusStardustPerOneStar",
+                        "value": 0.25
+                    },
+                    {
+                        "name": "BonusStardustPerThreeStar",
+                        "value": 1.0
+                    },
+                    {
+                        "name": "BonusStardustPerTwoStar",
+                        "value": 0.5
                     }
                 ],
                 "min_units": 1,
@@ -17053,7 +17061,7 @@
                     },
                     {
                         "name": "PrismaticDamageAmp",
-                        "value": 0.12
+                        "value": 0.5
                     },
                     {
                         "name": "PrismaticShield",
@@ -17067,7 +17075,7 @@
                 "constants": [
                     {
                         "name": "ArmorMR",
-                        "value": 12.0
+                        "value": 8.0
                     }
                 ],
                 "min_units": 3,
@@ -17079,7 +17087,7 @@
                 "constants": [
                     {
                         "name": "ArmorMR",
-                        "value": 25.0
+                        "value": 20.0
                     }
                 ],
                 "min_units": 5,
@@ -17091,7 +17099,7 @@
                 "constants": [
                     {
                         "name": "ArmorMR",
-                        "value": 25.0
+                        "value": 20.0
                     }
                 ],
                 "min_units": 7,
@@ -17133,7 +17141,7 @@
         "trait_id": "TFT16_Explorer",
         "set": "TFTSet16",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_16_Ixtal.TFT_Set16.png",
-        "tooltip_text": "<row>(@MinUnits@) 完成探险以赚取【太阳碎片】(%i:Set16Ixtal%)，【太阳碎片】可以用来购买战利品！</row><br><row>(@MinUnits@) 在每场玩家对战回合开始时，回复2点玩家生命值。</row><br><row>(@MinUnits@) 在赢下对战回合后，找到@BonusClues@ %i:Set16Ixtal%并挖掘出额外战利品。</row><br><br><rules>完成一次探险后，会在下个回合开始时为你提供一个新的探险。</rules>",
+        "tooltip_text": "<row>(@MinUnits@) 完成探险以赚取【太阳碎片】(%i:Set16Ixtal%)，【太阳碎片】可以用来购买战利品！</row><br><row>(@MinUnits@) 在每场玩家对战回合开始时，回复2点玩家生命值。</row><br><row>(@MinUnits@) 在赢下对战回合后，找到@BonusClues@ %i:Set16Ixtal%并挖掘出额外战利品。</row><br><br><rules>在战斗结束之前完成一次探险，会在下个回合开始时为你提供一个新的探险。</rules>",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -17404,10 +17412,14 @@
         "trait_id": "TFT16_Heroic",
         "set": "TFTSet16",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_16_Heroic.TFT_Set16.png",
-        "tooltip_text": "【加里奥】无法被放置在战场上。取而代之的是，他可以在备战区提供他的羁绊计数，并且当【德玛西亚】弈子重振旗鼓时，他会加入战斗。<br><br>在着陆时，他会产生3格的冲击波，造成相当于他@PercentMaxHP*100@%最大生命值的魔法伤害。击中敌人时会将其击飞@KnockupDuration@秒，距离着陆中心越远的敌人被击飞的时长越短。",
+        "tooltip_text": "【加里奥】无法被放置在战场上。取而代之的是，他可以在备战区提供他的羁绊计数，并且当【德玛西亚】弈子重振旗鼓时，他会加入战斗。<br><br>在着陆时，他会产生@HexRadius@格的冲击波，造成相当于他@PercentMaxHP*100@%最大生命值的魔法伤害。命中敌人时会将其击飞@KnockupDuration@秒，距离着陆中心越远的敌人被击飞的时长越短。",
         "innate_trait_sets": [
             {
                 "constants": [
+                    {
+                        "name": "HexRadius",
+                        "value": 3.0
+                    },
                     {
                         "name": "KnockupDuration",
                         "value": 1.0
@@ -17526,7 +17538,7 @@
         "trait_id": "TFT16_Huntress",
         "set": "TFTSet16",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_16_Huntress.TFT_Set16.png",
-        "tooltip_text": "当你最强大的那个【妮蔻】存活时，你最强大的那个【奈德丽】不会成为敌人的目标。",
+        "tooltip_text": "当你最强大的那个【妮蔻】存活时，你最强大的那个【奈德丽】不会成为普通攻击的目标并且获得@Durability*100@%伤害减免。",
         "innate_trait_sets": [],
         "conditional_trait_sets": [
             {
@@ -17936,7 +17948,7 @@
                 "constants": [
                     {
                         "name": "BaseDamageAmp",
-                        "value": 0.2
+                        "value": 0.24
                     },
                     {
                         "name": "PercentDamageIncrease",
@@ -17952,7 +17964,7 @@
                 "constants": [
                     {
                         "name": "BaseDamageAmp",
-                        "value": 0.24
+                        "value": 0.28
                     },
                     {
                         "name": "PercentDamageIncrease",
@@ -17968,7 +17980,7 @@
                 "constants": [
                     {
                         "name": "BaseDamageAmp",
-                        "value": 0.3
+                        "value": 0.32
                     },
                     {
                         "name": "PercentDamageIncrease",
@@ -18740,7 +18752,7 @@
                 "constants": [
                     {
                         "name": "JarvanResistDamage",
-                        "value": 3.0
+                        "value": 2.5
                     },
                     {
                         "name": "JarvanShieldShare",
@@ -19152,7 +19164,7 @@
         "trait_id": "TFT16_Yordle",
         "set": "TFTSet16",
         "icon_path": "/lol-game-data/assets/ASSETS/UX/TraitIcons/Trait_Icon_16_Yordle.TFT_Set16.png",
-        "tooltip_text": "<row>(@MinUnits@) 每登场一个【约德尔人】弈子，【约德尔人】弈子获得@BonusHealth@生命值和@AS*100@%攻击速度。3星【约德尔人】弈子额外提供@BonusMultiplier*100@%！</row><br><row>(@MinUnits@) 并且每回合的第一个商店都会刷新一个【约德尔人】弈子！</row><br><row>(@MinUnits@) 并且每回合获得@FreeRerolls@次免费刷新！</row><br><row>(@MinUnits@) 并且每回合获得一个【约德尔人】福袋！</row>",
+        "tooltip_text": "<row>(@MinUnits@) 每登场一个独特的【约德尔人】弈子，【约德尔人】弈子获得@BonusHealth@生命值和@AS*100@%攻击速度。3星【约德尔人】弈子额外提供@BonusMultiplier*100@%！</row><br><row>(@MinUnits@) 并且每回合的第一个商店都会刷新一个【约德尔人】弈子！</row><br><row>(@MinUnits@) 并且每回合获得@FreeRerolls@次免费刷新！</row><br><row>(@MinUnits@) 并且每回合获得一个【约德尔人】福袋！</row>",
         "innate_trait_sets": [
             {
                 "constants": [
@@ -19174,7 +19186,7 @@
                     },
                     {
                         "name": "PrismaticHugifyHealth",
-                        "value": 1000.0
+                        "value": 800.0
                     },
                     {
                         "name": "PrismaticHugifySizeMod",
@@ -19182,7 +19194,7 @@
                     },
                     {
                         "name": "PrismaticMushroomDamage",
-                        "value": 750.0
+                        "value": 700.0
                     },
                     {
                         "name": "PrismaticToHit",
