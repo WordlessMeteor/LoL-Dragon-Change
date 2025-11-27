@@ -483,11 +483,11 @@
         "ObjectName": "TFT14_PoppySpellHero",
         "mScriptName": "TFT14_PoppySpellHero",
         "mSpell": {
-            "mAffectsTypeFlags": 11333,
-            "mAffectsStatusFlags": 32,
+            "mAffectsTypeFlags": 6154,
+            "mAffectsStatusFlags": 160,
             "DataValues": [
                 {
-                    "mName": "Shield",
+                    "mName": "PercentArmorDamage",
                     "mValues": [
                         250.0,
                         275.0,
@@ -500,33 +500,33 @@
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "Duration",
+                    "mName": "ShieldAmount",
                     "mValues": [
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0,
-                        4.0
+                        100.0,
+                        425.0,
+                        500.0,
+                        600.0,
+                        700.0,
+                        600.0,
+                        700.0
                     ],
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "ADRatio",
+                    "mName": "ShieldDuration",
                     "mValues": [
-                        4.75,
-                        4.75,
-                        4.75,
-                        4.75,
-                        4.75,
-                        4.75,
-                        4.75
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0,
+                        3.0
                     ],
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "HERODamageRatio",
+                    "mName": "BaseDamage",
                     "mValues": [
                         0.75,
                         0.75,
@@ -539,15 +539,15 @@
                     "__type": "SpellDataValue"
                 },
                 {
-                    "mName": "HERONumHits",
+                    "mName": "ReducedDamage",
                     "mValues": [
-                        3.0,
-                        3.0,
-                        3.0,
-                        3.0,
-                        3.0,
-                        3.0,
-                        3.0
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645,
+                        0.4000000059604645
                     ],
                     "__type": "SpellDataValue"
                 },
@@ -597,12 +597,65 @@
                     "mExpandedTooltipCalculationDisplay": 5,
                     "mFormulaParts": [
                         {
+                            "mStat": 1,
+                            "mSubpart": {
+                                "mDataValue": "PercentArmorDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "__type": "StatBySubPartCalculationPart"
+                        },
+                        {
                             "mSubpart": {
                                 "mDataValue": "BaseDamage",
                                 "__type": "NamedDataValueCalculationPart"
                             },
                             "mRatio": 0.009999999776482582,
                             "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "ModifiedShield": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "ShieldAmount",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "TooltipAPDamage": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mSubpart": {
+                                "mDataValue": "BaseDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "mRatio": 0.009999999776482582,
+                            "__type": "SubPartScaledProportionalToStat"
+                        }
+                    ],
+                    "__type": "GameCalculation"
+                },
+                "{3564c6b6}": {
+                    "mSimpleTooltipCalculationDisplay": 5,
+                    "mExpandedTooltipCalculationDisplay": 5,
+                    "mFormulaParts": [
+                        {
+                            "mStat": 1,
+                            "mSubpart": {
+                                "mDataValue": "PercentArmorDamage",
+                                "__type": "NamedDataValueCalculationPart"
+                            },
+                            "__type": "StatBySubPartCalculationPart"
                         }
                     ],
                     "__type": "GameCalculation"
@@ -626,8 +679,8 @@
                     "__type": "GameCalculation"
                 }
             },
-            "mAnimationName": "",
-            "mCastTime": 1.0,
+            "mAnimationName": "Passive_Attack",
+            "mCastTime": 0.10000000149011612,
             "cooldownTime": [
                 0.0,
                 0.0,
@@ -637,7 +690,10 @@
                 0.0,
                 0.0
             ],
+            "delayCastOffsetPercent": -0.5,
+            "delayTotalTimePercent": -0.5,
             "canCastOrQueueWhileCasting": true,
+            "mCantCancelWhileWindingUp": true,
             "castRange": [
                 25000.0,
                 25000.0,
@@ -647,16 +703,55 @@
                 25000.0,
                 25000.0
             ],
+            "castRadius": [
+                710.0,
+                710.0,
+                710.0,
+                710.0,
+                710.0,
+                710.0,
+                710.0
+            ],
+            "castConeDistance": 100.0,
+            "mMissileSpec": {
+                "movementComponent": {
+                    "mTargetHeightAugment": 100.0,
+                    "mOffsetInitialTargetHeight": 100.0,
+                    "mStartBoneName": "L_hand",
+                    "mTargetBoneName": "C_Buffbone_Glb_Chest_Loc",
+                    "mSpeed": 2500.0,
+                    "__type": "FixedSpeedMovement"
+                },
+                "verticalFacing": {
+                    "__type": "VeritcalFacingMatchVelocity"
+                },
+                "behaviors": [
+                    {
+                        "__type": "CastOnMovementComplete"
+                    },
+                    {
+                        "__type": "DestroyOnMovementComplete"
+                    },
+                    {
+                        "__type": "{91fd0920}"
+                    }
+                ],
+                "__type": "MissileSpecification"
+            },
+            "mCastType": 1,
+            "castFrame": 8.5,
+            "missileSpeed": 1400.0,
+            "mMissileEffectKey": "{d7155ae8}",
             "{abe507b9}": "ClientStates/Gameplay/UX/TFT/UiMaterials/Augments/Set14/Hexcore/ButtonMash_I",
             "mFloatVarsDecimals": [
                 0,
+                1,
+                0,
+                2,
+                0,
+                1,
                 0,
                 0,
-                2,
-                2,
-                2,
-                2,
-                2,
                 2,
                 2,
                 2,
@@ -666,30 +761,55 @@
                 2,
                 2
             ],
-            "mTargetingTypeData": {
-                "__type": "Self"
-            },
+            "selectionPriority": 1,
             "SpellEventToAudioEventSuffix": {
                 "12": "Play_sfx_tft14_PoppySpellHero_OnCast",
                 "13": "Play_sfx_tft14_PoppySpellHero_OnHit"
             },
             "mSpellCooldownOrSealedQueueThreshold": 0.5,
+            "mCastingBreaksStealth": true,
             "mClientData": {
                 "mTooltipData": {
                     "mObjectName": "TFT14_PoppySpellHero",
                     "mFormat": "{fffee0e7}",
                     "mLocKeys": {
-                        "keyName": "Spell_TFT14_PoppySpell_Augment_Name",
-                        "keyTooltip": "Spell_TFT14_PoppySpell_Augment_Description"
+                        "keyName": "Spell_TFT14_PoppySpell_Name",
+                        "keyTooltip": "Spell_TFT14_PoppySpell_Tooltip"
                     },
                     "mLists": {
                         "LevelUp": {
                             "levelCount": 3,
                             "Elements": [
                                 {
+                                    "type": "PercentArmorDamage",
+                                    "multiplier": 100.0,
+                                    "nameOverride": "Spell_TFT14_PoppySpell_ArmorDamage",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
                                     "type": "BaseDamage",
                                     "nameOverride": "Spell_TFT14_PoppySpell_BaseDamage",
                                     "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "PercentArmorDamage",
+                                    "multiplier": 100.0,
+                                    "nameOverride": "Spell_TFT14_PoppySpell_DamageCalc",
+                                    "Style": 2,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "ShieldAmount",
+                                    "nameOverride": "TFT_AP_Shield",
+                                    "Style": 1,
+                                    "__type": "TooltipInstanceListElement"
+                                },
+                                {
+                                    "type": "ReducedDamage",
+                                    "nameOverride": "Spell_TFT14_PoppySpell_FinalForm_Damage",
+                                    "Style": 2,
                                     "__type": "TooltipInstanceListElement"
                                 }
                             ],
