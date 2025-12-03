@@ -1,4 +1,20 @@
-该存储库存储了CommunityDragon和DataDragon数据库中的所有**文本类型**的数据资源，用以呈现各版本的详细变化。CommunityDragon数据库的数据资源将跟随<ins>美测服的每一次调整</ins>而更新，更新周期以**天**计；DataDragon数据库的数据资源将跟随<ins>正式服的每一次停机更新</ins>而更新，更新周期以**半个月**计。\
+# 公告
+随着提交数量的逐渐增加，整个存储库的空间占用也在不断增大。为了避免后续查看提交时克隆存储库过于麻烦（时间上和空间上），从测试服的26.01版本开始，对英雄联盟游戏数据变更存储库系列做以下变更：
+1. 每个存储库按照<ins>赛季序号</ins>命名。例如，2026赛季的英雄联盟游戏数据变更存储库命名为“LoL-Dragon-Change<b>-S16</b>”。
+2. 以测试服开启新赛季伊始，新建一个存储库。**旧存储库在新存储库提交后7日内进行适当收尾工作，并作存档处理。**
+
+注意，[英雄联盟版本更新存储库](https://github.com/WordlessMeteor/LoL-Dragon-Change)不受影响。
+
+----
+# Announcement
+As the number of commits increases, the size of the whole repository becomes increasingly large. In case it would be too troublesome to fork one repository for commit checking (considering both time cost and space taken up), from PBE Patch 26.01, we'll perform changes to the organization of series of LoL-Dragon-Change repositories:
+1. Each repository's name will contain <ins>the season number</ins>. For example, the repository for game data change of League of Legends in Season 2026 should be named as "LoL-Dragon-Change<b>-S16</b>".
+2. Once a new season is launched on PBE, a new repository will be created. **The predecessor repository will be properly winded down and then archived.**
+
+Note that [LoL-Dragon-Change repository](https://github.com/WordlessMeteor/LoL-Dragon-Change) won't be affected.
+
+----
+该存储库存储了CommunityDragon和DataDragon数据库中的所有**文本类型**的数据资源，用以呈现**第14赛季后半部分和第15赛季**各版本的详细变化。CommunityDragon数据库的数据资源将跟随<ins>美测服的每一次调整</ins>而更新，更新周期以**天**计；DataDragon数据库的数据资源将跟随<ins>正式服的每一次停机更新</ins>而更新，更新周期以**半个月**计。\
 数据资源更新是通过主目录下的离线数据更新脚本来进行的。
 - 在更新CommunityDragon数据库的数据资源时，程序提供了五个选项和两种模式：
     - 选项（范围）
@@ -24,16 +40,14 @@
 1. 访问或克隆[英雄联盟版本更新存储库](https://github.com/WordlessMeteor/LoL-Patch-Change)以*在线*查看**主要**更新内容。
 2. 将[本仓库](https://github.com/WordlessMeteor/LoL-Dragon-Change)克隆到本地，并查看标题为“<ins>离线数据资源更新</ins>”的提交，以*离线*查看**完整**更新内容。
     - 克隆该存储库需要占用大约<ins>42.5 GB</ins>的本地空间。请保证您的磁盘有足够的空间。
-        - 该选项为默认选项。输入空字符串即选择默认选项。
     - 对于包含较多数据资源的更新的提交，本地加载仍然需要几分钟时间，请耐心等待。
-        - 在[程序集](https://github.com/WordlessMeteor/LoL-DIY-Programs)中，该选项为默认选项。
 
 程序集已迁移至[新的存储库](https://github.com/WordlessMeteor/LoL-DIY-Programs)。
 
 ----
 (The following content is the English version of README.)
 
-This repository stores all data resources **of text type** in CommunityDragon and DataDragon databases for patch change. The update of data resources in CommunityDragon database will follow <ins>each adjustment of PBE</ins> **daily**, and the update of data resources in DataDragon database will follow <ins>each patch mainteinance of live servers</ins> **about every fortnight**.\
+This repository stores all data resources **of text type** in CommunityDragon and DataDragon databases for patch change **in the latter half of Season 14 and the whole run of Season 2025**. The update of data resources in CommunityDragon database will follow <ins>each adjustment of PBE</ins> **daily**, and the update of data resources in DataDragon database will follow <ins>each patch mainteinance of live servers</ins> **about every fortnight**.\
 Data resource update is performed by Offline Data Updating Program under the home directory.
 - While updating CommunityDragon data resources, the program provides five options and two modes:
     - Options (Ranges)
